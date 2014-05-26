@@ -1,39 +1,65 @@
 % Jeshua Kracht and Jacob Petrovic
 
-\documentclass{acm_proc_article-sp}
-\makeindex
+\documentclass[conference]{IEEEtran}
+%\makeindex
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage[cmex10]{amsmath}
+\usepackage{eqparbox}
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+\usepackage{url}
 \usepackage{mathtools}
+\usepackage[pdftex]{graphicx}
+ 
 \begin{document}
 
 \title{Comparing the Quality of Automatically Generated and Manually Written Test Suites}
 % \subtitle{[Extended Abstract]}
 
-\numberofauthors{4} 
-\author{
-\alignauthor
-Jeshua Kracht\\
-       \affaddr{Department of Computer Science}\\
-       \affaddr{ University of Colorado at Colorado Springs}\\
-       \email{jkracht@uccs.edu}
-\alignauthor
-Jacob Z. Petrovic\\
-       \affaddr{Department of Computer Science}\\
-       \affaddr{ University of Colorado at Colorado Springs}\\
-       \email{jpetrovi@uccs.edu}
-\alignauthor
-Kristen Walcott-Justice\\
-       \affaddr{Department of Computer Science}\\
-       \affaddr{ University of Colorado at Colorado Springs}\\
-       \email{kjustice@uccs.edu}
+\author{\IEEEauthorblockN{Jeshua Kracht, Jacob Z. Petrovic, Kristen R. Walcott-Justice}
+\IEEEauthorblockA{Department of Computer Science\\
+University of Colorado at Colorado Springs\\
+Email: \{jkracht, jpetrovi, kjustice\}@uccs.edu}
+%\and
+%\IEEEauthorblockN{Jacob Z. Petrovic}
+%\IEEEauthorblockA{Department of Computer Science\\
+%University of Colorado at Colorado Springs\\
+%Email: jpetrovi@uccs.edu}
+%\and
+%\IEEEauthorblockN{Kristen R. Walcott-Justice}
+%\IEEEauthorblockA{Department of Computer Science\\
+%University of Colorado at Colorado Springs\\
+%Email: kjustice@uccs.edu}
 \and
-\alignauthor
-Gregory M. Kapfhammer\\
-       \affaddr{Department of Computer Science}\\
-       \affaddr{Allegheny College}\\
-       \email{gkapfham@allegheny.edu}
+\IEEEauthorblockN{Gregory M. Kapfhammer}
+\IEEEauthorblockA{Department of Computer Science\\
+Allegheny College\\
+Email: gkapfham@allegheny.edu}
 }
 
-\date{5 May 2014}
+%\author{\IEEEauthorblockN{Jeshua Krachtl\IEEEauthorrefmark{1},
+%Jacob Z. Petrovic\IEEEauthorrefmark{2},
+%Kristen R. Walcott-Justice\IEEEauthorrefmark{4}, and
+%Gregory M. Kapfhammer\IEEEauthorrefmark{3}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science\\
+%University of Colorado Colorado Springs\\
+%Email: jkracht@uccs.edu}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Science\\
+%University of Colorado Colorado Springs\\
+%Email: jpetrovi@uccs.edu}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Department of Computer Science\\
+%University of Colorado Colorado Springs\\
+%Email: kjustice@uccs.edu}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Computer Science\\
+%Alleghent College\\
+%Email: gkapfham@allegheny.edu}}
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
 
 \maketitle
 \begin{abstract}
@@ -47,12 +73,12 @@ Gregory M. Kapfhammer\\
 
 % A category with the (minimum) three required fields
 %What categories do we include?
-\category{D.2.5}{Software Engineering}{Testing and Debugging}{Testing tools}
-\categore{D.2.8}{Software Engineering}{Software Metrics}{Performance measures}
+%\category{D.2.5}{Software Engineering}{Testing and Debugging}{Testing tools}
+%\category{D.2.8}{Software Engineering}{Software Metrics}{Performance measures}
 
-\terms{Measurement, Experimentation}
+%\terms{Measurement, Experimentation}
 
-\keywords{Mutation Testing, Test Suite, Mutation Score, Test Generation, Source Code, Mutant Operators, Infect, Code Coverage, Equivalent Mutants} % not required for Proceedings
+%\keywords{Mutation Testing, Test Suite, Mutation Score, Test Generation, Source Code, Mutant Operators, Infect, Code Coverage, Equivalent Mutants} % not required for Proceedings
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Introduction}
@@ -131,16 +157,18 @@ Because Evosuite uses a genetic algorithm to generate unit tests, we generated t
 %Do we need a table of results for the R^2 values?
 For our graphs, we attempted to find the best fit line to accurately represent to results. It is difficult to find a truly best fit line that gives an overall statistical overlook of the data. This is due to the varying nature of both Evosuite and the manually written tests. Evosuite uses a genetic algorithm, which results in varied results for each iteration. This is why as mentioned before, we run ten generations of the test suites and calculate an average for the standard deviation. Manually written test suites are written by different developers. These varying factors result in low  R2 scores, which correlate to how well the best fit line actually represents the data. However, CodePro generated a mutation score of 0 in some cases. We removed these results for CodePro results because it skewed the data in a way that was not graphically indicative of the trends we discovered with CodePro. 
 
-\begin{table}
+\begin{table}[!t]
+\centering
  \caption{Programs}
  \label{tbl:program_table}
  \includegraphics[width=\linewidth]{program_table}
 \end{table}
 
-\begin{figure}
-  \caption{Test and Mutation Process}
-  \label{fig:process_diagram}
+\begin{figure}[!t]
+\centering
   \includegraphics[width=\linewidth]{proccess_diagram}
+    \caption{Test and Mutation Process}
+  \label{fig:process_diagram}
 \end{figure}
 
 
@@ -150,24 +178,27 @@ For our graphs, we attempted to find the best fit line to accurately represent t
 
 In our experiments, we first evaluated the time to create each test suite in comparison between Evosuite and CodePro. As shown in figure ~\ref{fig:Time}, CodePro generated test suites much more quickly than Evosuite did. Although Evosuite consistently takes longer to generate tests regardless of number lines of code and the complexity of the test suite. However, once we compare the complexity of the source code to the time to generate and the complexity of the test suites themselves, there is a clear trade off between time and complexity.
 
-\begin{figure}
-  \caption{Time to Generate Test Suite}
-  \label{fig:Time}
+\begin{figure}[!t]
+\centering
   \includegraphics[width=\linewidth]{Time}
+    \caption{Time to Generate Test Suite}
+  \label{fig:Time}
 \end{figure}
 
-\begin{figure*}
-  \caption{Cyclomatic Complexity of Test Suites and Source Code}
-  \label{fig:Complexity}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\linewidth]{Complexity}
+   \caption{Cyclomatic Complexity of Test Suites and Source Code}
+  \label{fig:Complexity}
 \end{figure*}
 
 In figure~\ref{fig:Complexity}, we list the complexities of the source code of the program, and the generated test suites from manual, Evosuite, and Codepro. Note that more complex tests can be more difficult to maintain. The Evosuite test suites are generally more complex than the other two, whereas CodePro is consistently at a lower complexity level. Due to increased complexity of the test suites, it can take more time create and run them~\cite{alspaugh:2007}. As evidenced by figure~\ref{fig:Time_Complexity}, this indeed seems to be the case. In this data set, it would seem that the more complex the source code is, the more complex the tests are. Furthermore, the more complex the tests are, the longer the test generation takes to complete. This figure displays the complexity of the test suite versus the time it took to generate the test suite. 
 
-\begin{figure*}
-  \caption{Time to Generate vs. Test Suite Cyclomatic Complexity}
-  \label{fig:Time_Complexity}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{Time_Complexity}
+    \caption{Time to Generate vs. Test Suite Cyclomatic Complexity}
+  \label{fig:Time_Complexity}
 \end{figure*}
 
 
@@ -175,20 +206,22 @@ CodePro maintains a low complexity level, but in doing so, this may lead to an i
 
 Using mutation scores as a measurement for quality of the tests, we then observe the overall mutation scores given to manual, Evosuite, and CodePro test suites in figure~\ref{fig:Mutation_Score}. Manual tests generate higher mutation scores in four of the programs, whereas Evosuite also receives higher mutations scores for half of the programs. CodePro receives the highest mutation score for one of the programs by a small margin, but for the rest of the test suites, the scores are the lowest by a large gap. Only in Diebierse did Evosuite vary greatly in the scores received. This indicates that although the average mutation score for Evosuite is within a more unpredictable range of results in one case, on average Evosuite can match the mutation score and quality of the manually written tests.
 
-\begin{figure*}
-  \caption{Mutation Score}
-  \label{fig:Mutation_Score}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{Mutation_Score}
+    \caption{Mutation Score}
+  \label{fig:Mutation_Score}
 \end{figure*}
 
 To further examine the cause of this, we look at figure~\ref{fig:Complexity_Mutation}, which describes the relationships between the mutation score of the test suites and the complexities of the source code. Notice that the manually written tests retain the highest mutation score overall at first. As the complexity of the program increases over time, the the mutation score begins to drop. Around a cyclomatic complexity of 2.3, we find that Evosuite's retains a higher mutation score than manually written tests. CodePro overall receives abysmal mutation scores, and as the cyclomatic complexity of the program increases, the mutation score drops to 0.
 
 This graph is an eye opener to the reality of capturing deeper test cases. Up until a certain point human beings can write deeper test cases to more complex functions. Once the programs become complex, it may be too difficult for a person to cover complex parts of code that require deeper test cases. Evosuite may be at an advantage with its learning algorithm that modifies itself over time to improve the mutation score. With Evosuite seeming to edge out the other two methods in terms of depth, one must also examine the breadth each of the tools can cover as well.
 
-\begin{figure*}
-  \caption{LOC vs. Mutation Score}
-  \label{fig:LOC_Mutation}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{LOC_Mutation}
+    \caption{LOC vs. Mutation Score}
+  \label{fig:LOC_Mutation}
 \end{figure*}
 
 
@@ -196,19 +229,21 @@ In figure~\ref{fig:LOC_Mutation} the relationship between lines of code of the t
 
 Although at first glance one may assume that CodePro lacks any usefulness because the quality of tests are low, one could also say that the templates provided by CodePro may give developers the flexibility of modifying and improving the test suite. Evosuite tests are much more complex, and could be conceivably difficult to maintain if the developers wished to evolve the test suite on their own. The trade off between automated and manually written tests could be an argument of modifiability in this case. Although Evosuite scores close to manually written tests when it comes to quality, how would one go about improving the test suites to meet that level depth that manual tests cover in larger programs? The tests would need to be modifiable from a human perspective, which in this case, could be an issue with tests suites like Evosuite.
 
-\begin{figure*}
-  \caption{Mutation Score vs. Complexity}
-  \label{fig:Complexity_Mutation}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{Complexity_Mutation}
+    \caption{Mutation Score vs. Complexity}
+  \label{fig:Complexity_Mutation}
 \end{figure*}
 
 
 Depth is important when evaluating the quality of tests, but breadth is an area one must consider when quantifying quality as well, as a test suite that deeply covers just one function will result in little breadth. In figure~\ref{fig:Coverage}, we find an extreme diversity of branch coverage amongst the three evaluated test suites. Overall, CodePro actually scores higher in branch coverage for four of the programs that were tested. Evosuite and the manually generated tests are tied for three programs in scoring the highest branch coverage. For the automated test generators, the branch coverages are closer on average, but manually written test suite scores seem to vary greatly. Again, this is probably due to the inconsistencies in different developers writing their test suites. For example, the developers on Lavalamp could have focused on a TDD philosophy in development, which would predictably yield higher test coverage. However, the developers for Netweaver may have only been concerned with testing one part of their code, and thus branch coverage remained low. In fact, unit tests for only complex parts of the code are common in development, and thus this chart alone only reveals the inconsistent nature of how developers write unit tests. One must look further at the mutation the branch coverage to reach a more definitive 
 
-\begin{figure*}
-  \caption{Coverage}
-  \label{fig:Coverage}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{Coverage}
+    \caption{Coverage}
+  \label{fig:Coverage}
 \end{figure*}
 
 Finally we arrive at the center piece of the results, in comparing our evaluation of mutation scores and branch coverage. In figure~\ref{fig:Coverage_Mutation}, we compare the mutation score (depth) to the branch coverage (breadth) of the test suites. CodePro falls short in the mutation scores, but does have higher branch coverage coverage scores. As the branch coverage increases however, the mutation score in CodePro dips drastically. Understanding that the mutation score was never good to begin with in CodePro, this leads us back to the discussion in perhaps using CodePro as template tool rather than a upfront ready-to-go test suite. Although the mutation scores are low, the coverage is high, providing a large amount of tests for developers to look at and fill over time. 
@@ -217,10 +252,11 @@ More interesting are the similar trends between manual and Evosuite generated te
 
 
 
-\begin{figure*}
-  \caption{Coverage vs. Mutation}
-  \label{fig:Coverage_Mutation}
+\begin{figure*}[!t]
+\centering
   \includegraphics[width=\textwidth]{Coverage_Mutation}
+    \caption{Coverage vs. Mutation}
+  \label{fig:Coverage_Mutation}
 \end{figure*}
 
 
@@ -228,7 +264,7 @@ More interesting are the similar trends between manual and Evosuite generated te
 
 
 
-\subsection{Threats}
+\subsection{Threats to Validity}
 Measurements in quality of software tests is a subjective measurement. Although mutation score is one way to measure the quality of a test suite, ignoring the human elements of tests are nigh impossible. Developers may need to view tests in order to diagnose faults in the code, and if a developer cannot understand the test they are reading, then the cost of time and effort could be increased on the human part.
 
 The statistical analysis also may be a threat to validity, as the inconsistency in how both Evosuite and manually written tests are created. Also, CodePro generated some test suites with a mutation score of 0, which could mislead one to believing that CodePro has no use for creating quality tests. For this reason we remove these results to give a better impression of the trend CodePro test suites.
