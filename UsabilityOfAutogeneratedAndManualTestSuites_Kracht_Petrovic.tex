@@ -17,7 +17,7 @@
 \title{Comparing the Quality of Automatically Generated and Manually Written Test Suites}
 % \subtitle{[Extended Abstract]}
 
-\author{\IEEEauthorblockN{Jeshua Kracht, Jacob Z. Petrovic, Kristen R. Walcott-Justice}
+\author{\IEEEauthorblockN{Jeshua Kracht, Jacob Z. Petrovic, \\Kristen R. Walcott-Justice}
 \IEEEauthorblockA{Department of Computer Science\\
 University of Colorado at Colorado Springs\\
 Email: \{jkracht, jpetrovi, kjustice\}@uccs.edu}
@@ -31,6 +31,11 @@ Email: \{jkracht, jpetrovi, kjustice\}@uccs.edu}
 %\IEEEauthorblockA{Department of Computer Science\\
 %University of Colorado at Colorado Springs\\
 %Email: kjustice@uccs.edu}
+\and
+\IEEEauthorblockN{Ren\'{e} Just}
+\IEEEauthorblockA{Computer Science \& Engineering\\
+University of Washington\\
+Email: rjust@cs.washington.edu}
 \and
 \IEEEauthorblockN{Gregory M. Kapfhammer}
 \IEEEauthorblockA{Department of Computer Science\\
@@ -86,15 +91,15 @@ Email: gkapfham@allegheny.edu}
 In Software Engineering, testing the code is one of the most important parts of the development cycle. Often the quality of the tests dictate the quality of the software. (Need Reference) Test suites are created through a number of different methods. In most instances the test engineer will manually write the test cases. However, manual creation of test cases requires large amounts of time and effort. Although this gives developers the control over the quality of the tests, the cost of the time and effort required to produce these test suites can be too high to implement on established projects. In recent years, researchers have looked into a new way to reduce the cost and automate this process for developers. A new alternative has arisen as a potential solution to this issue -- auto-generated test suites. 
 
 %Manual Generated Tests -  benefits vs drawbacks
-Manually generated test suites allow developers to spend more time and effort on improving the quality of a test to insure it captures the full depth of the code. With a focus on the quality of tests, the work needed to generate a high coverage with a large number of test cases becomes expensive. As programs become more complex, so do the test suites that test them. As the program complexity rises, manually written test cases can become expensive and labor intensive when applied to highly complex features .~\cite{clarke1998automated}.
+Manually generated test suites allow developers to spend more time and effort on improving the quality of a test to insure it captures the full depth of the code. With a focus on the quality of tests, the work needed to generate a high coverage with a large number of test cases becomes expensive. As programs become more complex, so do the test suites that test them. As the program complexity rises, manually written test cases can become expensive and labor intensive when applied to highly complex features~\cite{clarke1998automated}.
 
 Additionally, there is no standard for writing test cases. This can lead to inconsistent and subjective methods of writing test cases. The cost of time and effort put into writing test cases leaves less resources for developers to invest into increasing the coverage of the test suite.
 
 %Talk about auto generated test suites - benefits vs drawbacks
-Auto-generated test suites have one goal in mind: reduce the cost of time and effort to write tests. The test suites themselves are generated from many different automated test suite generators ~\cite{Fraser:2011:EAT:2025113.2025179, Zhang:2011:PHA:1985793.1986036, Marinov:2001:TNF:872023.872551}. These programs use a consistent standards to produce test cases, removing the subjectivity and styles one may find in manually generated tests. Automated test generation also reduces the time and effort of creating large amounts of test cases to increase the breadth of code coverage. This allows test suites to be built faster without the effort of a developer. However, with the developer removed from the test case generation, the quality may be lost in the creation of the test cases. If the quality of test cases are shallow, then certain special cases may be missed, despite a large code coverage.
+Auto-generated test suites have one goal in mind: reduce the cost of time and effort to write tests. The test suites themselves are generated from many different automated test suite generators~\cite{Fraser:2011:EAT:2025113.2025179, Zhang:2011:PHA:1985793.1986036, Marinov:2001:TNF:872023.872551}. These programs use a consistent standards to produce test cases, removing the subjectivity and styles one may find in manually generated tests. Automated test generation also reduces the time and effort of creating large amounts of test cases to increase the breadth of code coverage. This allows test suites to be built faster without the effort of a developer. However, with the developer removed from the test case generation, the quality may be lost in the creation of the test cases. If the quality of test cases are shallow, then certain special cases may be missed, despite a large code coverage.
 
 %Compare Automated vs Manual
-Every developer's desire would be to have a faster, consistent, and cost effective way of testing their code. Most importantly though, an assurance that the tests cases still maintain a high quality received from manually written tests. The two choices developers have in testing is either manual or auto-generated test cases. When comparing automated and manual testing, automated tests are good at breadth but much less at depth ~\cite{4076909}.The question that engineers must ask then is whether or not the auto-generated test suites produce the same quality of test cases as those written manually by a test engineer. The quality of a test suite can be measured by its depth and breadth of coverage. Although the breadth, measured in terms of coverage may be extensive, more intricate and complicated test cases may not be covered by many available programs. It becomes difficult to determine what metrics can be used to establish the true definition of ``depth" and ``breadth". Mutation scores are traditionally used to assess the quality of test suites by inserting artificial defects (mutations) into programs ~\cite{Fraser:2010:MGU:1831708.1831728}. Based on the mutation score given by a mutation test suite, testers will determine the quality of the tests covering their code. However, when comparing automated and manually written tests, we need additional metrics to compare the two processes. For instance, what is the difference in creation time and execution time for an auto-generated versus a manually written test suite? If test creation takes less time, but produces poor quality test cases, then the cost of using these tools in terms of quality may outweigh the benefits received in time. If the automated generated tests has higher code coverage but the execution time is long, then the cost of time may be too high. We also consider code coverage as producing more tests may increase the overall code coverage. Yet there is a possibility that more tests may be produced, but the coverage is small because the tests are redundant. In evaluating the time to create tests, time to execute tests, code coverage, code complexity, and mutation score, we can compare the quality, time, and effort between manual and automated test suites.
+Every developer's desire would be to have a faster, consistent, and cost effective way of testing their code. Most importantly though, an assurance that the tests cases still maintain a high quality received from manually written tests. The two choices developers have in testing is either manual or auto-generated test cases. When comparing automated and manual testing, automated tests are good at breadth but much less at depth~\cite{4076909}.The question that engineers must ask then is whether or not the auto-generated test suites produce the same quality of test cases as those written manually by a test engineer. The quality of a test suite can be measured by its depth and breadth of coverage. Although the breadth, measured in terms of coverage may be extensive, more intricate and complicated test cases may not be covered by many available programs. It becomes difficult to determine what metrics can be used to establish the true definition of ``depth" and ``breadth". Mutation scores are traditionally used to assess the quality of test suites by inserting artificial defects (mutations) into programs~\cite{Fraser:2010:MGU:1831708.1831728}. Based on the mutation score given by a mutation test suite, testers will determine the quality of the tests covering their code. However, when comparing automated and manually written tests, we need additional metrics to compare the two processes. For instance, what is the difference in creation time and execution time for an auto-generated versus a manually written test suite? If test creation takes less time, but produces poor quality test cases, then the cost of using these tools in terms of quality may outweigh the benefits received in time. If the automated generated tests has higher code coverage but the execution time is long, then the cost of time may be too high. We also consider code coverage as producing more tests may increase the overall code coverage. Yet there is a possibility that more tests may be produced, but the coverage is small because the tests are redundant. In evaluating the time to create tests, time to execute tests, code coverage, code complexity, and mutation score, we can compare the quality, time, and effort between manual and automated test suites.
 
 In this research we will observe whether the selected automated tools maintain the needed quality and coverage of manually written test suites. First impressions of auto-generated tests may leave more to be desired in their simplistic and current underdeveloped state. 
 
@@ -159,10 +164,25 @@ For our graphs, we attempted to find the best fit line to accurately represent t
 
 \begin{table}[!t]
 \centering
- \caption{Programs}
+ \caption{Benchmark Programs and their Properties}
  \label{tbl:program_table}
- \includegraphics[width=\linewidth]{program_table}
+ \begin{tabular}{ | l | c | c | }
+ \hline
+  \textbf{Program} & \textbf{LOC} & \textbf{Cyclomatic Complexity} \\ \hline
+  Netweaver & 17953 & 2.83 \\ \hline
+  Inspirento & 1769 & 1.76 \\ \hline
+  Jsecurity & 9470 & 2.05\\ \hline
+  Saxpath & 1441 & 2.10 \\ \hline
+  Jni-inchi & 783 & 2.05 \\ \hline
+  Xisemele & 1399 & 1.29 \\ \hline
+  Diebierse & 1539 & 1.74 \\ \hline
+  Lagoon & 6060 & 3.52 \\ \hline
+  Lavalamp & 1039 & 1.50 \\ \hline
+  Jnfe & 1294 & 1.38 \\ \hline
+\end{tabular}
+% \includegraphics[width=\linewidth]{program_table}
 \end{table}
+%JACOB: Put in the text, not the table: "Physical lines of code calculated by JavaNCSS
 
 \begin{figure}[!t]
 \centering
