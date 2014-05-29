@@ -170,10 +170,10 @@ Because Evosuite uses a genetic algorithm to generate unit tests, we generated t
 For the graphs, we attempted to find the best fit line to accurately represent to results. It is difficult to find a truly best fit line that gives an overall statistical overlook of the data. This is due to the varying nature of both Evosuite and the manually written tests. Evosuite uses a genetic algorithm, which results in varied results for each iteration. This is why as mentioned before, we run ten generations of the test suites and calculate an average for the standard deviation. Manually written test suites are written by different developers. These varying factors result in low  R2 scores, which correlate to how well the best fit line actually represents the data. However, CodePro generated a mutation score of 0 in some cases. We removed these results for CodePro results because it skewed the data in a way that was not graphically indicative of the trends we discovered with CodePro. 
 
 \begin{table}[!t]
-\caption{Programs}
+\caption{Benchmark Programs and their Properties}
 \label{tbl:program_table}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{|l|l|l|}
+\begin{tabular}{|l|c|c|}
 \hline
 \multicolumn{1}{|c|}{\textbf{Program}} & \multicolumn{1}{c|}{\textbf{*LOC}} & \multicolumn{1}{c|}{\textbf{Cyclomatic Complexity}} \\ \hline
 Netweaver                              & 17953                              & 2.82                                                \\ \hline
@@ -186,17 +186,16 @@ Diebierse                              & 1539                               & 1.
 Lagoon                                 & 6060                               & 3.52                                                \\ \hline
 Lavalamp                               & 1039                               & 1.50                                                \\ \hline
 Jnfe                                   & 1294                               & 1.38                                                \\ \hline
-\end{tabular}%
+\end{tabular}
 }
-\vspace{2 mm}
-\caption{*Physical lines of code calculated by Java NCSS.}
 \end{table}
+%JACOB: Put in the text, not the table: "Physical lines of code calculated by JavaNCSS
 
 
 \begin{figure}[!t]
 \centering
 \captionsetup{justification=centering}
-  \includegraphics[width=\linewidth]{proccess_diagram}
+  \includegraphics[width=\linewidth]{proccess_diagram.pdf}
     \caption{Test and Mutation Process}
   \label{fig:process_diagram}
 \end{figure}
