@@ -1,0 +1,65 @@
+Kendall Test information:
+
+coverageScoresCodepro = c(7, 7, 48, 67, 21, 18, 44, 29, 49, 27)
+coverageScoresEvosuite = c(7.2, 34.1, 23.4, 64.9, 36.3, 17.5, 47.3, 1.4, 54.4, 32.1)
+coverageScoresMaual = c(0, 13, 11, 29, 11, 18, 91, 2, 56, 84)
+mutationScoresCodepro = c(1.5, 41.3, 19.2, 4.7, 8.5, 0, 5.9, 11.6, 0, 0)
+mutationScoresEvosuite = c(28.2, 29.2, 28.7, 27, 34.3, 33.7, 46.5, 36.2, 58, 77.1)
+mutationScoresManual = c(43.2, 37.1, 51.1, 76.2, 52.1, 18.3, 30.4, 12.7, 43.8, 56.5)
+
+> out<-Kendall(coverageScoresCodepro, mutationScoresCodepro)
+> summary(out)
+Score =  -3 , Var(Score) = 120.4
+denominator =  42.98837
+tau = -0.0698, 2-sided pvalue =0.85537
+
+> out2<-Kendall(coverageScoresEvosuite, mutationScoresEvosuite)
+> summary(out2)
+Score =  5 , Var(Score) = 125
+denominator =  45
+tau = 0.111, 2-sided pvalue =0.72051
+
+> out3<-Kendall(coverageScoresMaual, mutationScoresManual)
+> summary(out3)
+Score =  6 , Var(Score) = 124
+denominator =  44.49719
+tau = 0.135, 2-sided pvalue =0.65342
+
+> cor.test(coverageScoresCodepro, mutationScoresCodepro)
+
+	Pearson's product-moment correlation
+
+data:  coverageScoresCodepro and mutationScoresCodepro
+t = -0.8099, df = 8, p-value = 0.4414
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.7712332  0.4286401
+sample estimates:
+       cor 
+-0.2752795 
+
+> cor.test(coverageScoresEvosuite, mutationScoresEvosuite)
+
+	Pearson's product-moment correlation
+
+data:  coverageScoresEvosuite and mutationScoresEvosuite
+t = 0.615, df = 8, p-value = 0.5556
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.4815715  0.7427409
+sample estimates:
+      cor 
+0.2124813 
+
+> cor.test(coverageScoresMaual, mutationScoresManual)
+
+	Pearson's product-moment correlation
+
+data:  coverageScoresMaual and mutationScoresManual
+t = 0.4427, df = 8, p-value = 0.6697
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.5262319  0.7146745
+sample estimates:
+      cor 
+0.1546268 
