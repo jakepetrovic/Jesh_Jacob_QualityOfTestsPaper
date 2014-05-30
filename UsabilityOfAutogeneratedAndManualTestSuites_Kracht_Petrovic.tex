@@ -14,7 +14,7 @@
 \usepackage{caption}
 \begin{document}
 
-\title{Comparing the Quality of Automatically Generated and Manually Written Test Suites}
+\title{Empirically Comparing the Quality of Automatically Generated and Manually Written Test Suites}
 % \subtitle{[Extended Abstract]}
 
 \author{\IEEEauthorblockN{Jeshua Kracht, Jacob Z. Petrovic, \\Kristen R. Walcott-Justice}
@@ -88,7 +88,7 @@ Email: gkapfham@allegheny.edu}
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Introduction}
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-In Software Engineering, testing the code is one of the most important parts of the development cycle. Often the quality of the tests dictate the quality of the software. (Need Reference) Test suites are created through a number of different methods. In most instances the test engineer will manually write the test cases. However, manual creation of test cases requires large amounts of time and effort. Although this gives developers the control over the quality of the tests, the cost of the time and effort required to produce these test suites can be too high to implement on established projects. In recent years, researchers have looked into a new way to reduce the cost and automate this process for developers. A new alternative has arisen as a potential solution to this issue -- auto-generated test suites. 
+In software engineering, testing the code is one of the most important parts of the development cycle. Often the quality of the tests dictate the quality of the software. Test suites are created through a number of different methods. In most instances the test engineer will manually write the test cases. However, manual creation of test cases requires large amounts of time and effort. Although this gives developers the control over the quality of the tests, the cost of the time and effort required to produce these test suites can be too high to implement on established projects. In recent years, researchers have looked into a new way to reduce the cost and automate this process for developers. A new alternative has arisen as a potential solution to this issue -- auto-generated test suites. 
 
 %Manual Generated Tests -  benefits vs drawbacks
 Manually generated test suites allow developers to spend more time and effort on improving the quality of a test to insure it captures the full depth of the code. With a focus on the quality of tests, the work needed to generate a high coverage with a large number of test cases becomes expensive. As programs become more complex, so do the test suites that test them. As the program complexity rises, manually written test cases can become expensive and labor intensive when applied to highly complex features .~\cite{clarke1998automated}.
@@ -110,7 +110,7 @@ This paper observes whether the selected automated tools maintain the needed qua
 Measuring with mutation score, code coverage, complexity, and time to generate the test suite, this paper addresses how auto-generated tests differ from manually generated test cases, and if relying on these tools can retain the standard of quality that manually written test suites produce. Furthermore, the paperl compares metrics acquired from auto-generated tests to manually written tests to determine if auto-generated tests provide any advantages over to manually written test suites.
 
 %main contribution
-The main contribution of this paper is to reveal the differences and techniques used among different automated test suites. With these results, this paper remarks the benefits and drawbacks may occur when relying on automated generated test suites. This paper evaluates Evosuite and CodePro, two free automated-test tools that will generate the JUnit test suites. In Section~\ref{sec:background}, the paper first establishes the fundamentals of automated test generation, mutation analysis, and genetic algorithms. In Section~\ref{sec:evaluation}, the paper describes process for the evaluation each of these programs in comparison to manually written test suites, and in comparison together. The paper compares the test suites by mutation score, code coverage, complexity, and the time it takes to create the test suite. In Section~\ref{sec:related_work}, the paper compares other related work and research to this study. Finally, in Section~\ref{sec:conclusion}, the paper concludes the results and discusses future work possibilities.
+The main contribution of this paper is to reveal the differences and techniques used among different automated test suites. With these results, this paper remarks the benefits and drawbacks may occur when relying on automated generated test suites. This paper evaluates Evosuite and CodePro, two free automated-test tools that will generate the JUnit test suites. In Section~\ref{sec:background}, the paper first establishes the fundamentals of automated test generation, mutation analysis, and genetic algorithms. In Section~\ref{sec:evaluation}, the paper describes process for the evaluation each of these programs in comparison to manually written test suites, and in comparison together. The paper compares the test suites by mutation score, code coverage, complexity, and the time it takes to create the test suite. In Section~\ref{sec:related_work}, the paper compares other related work and research to this study. In Section~\ref{sec:conclusion}, the paper concludes the results and discusses future work possibilities. Finally, in Section~\ref{sec:Acknowledgments} we recognize those who provided help and information in our research.
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \section{Background}
@@ -124,7 +124,7 @@ Software testing has evolved into a separate branch of software engineering, wit
 
 New tools arrived in he 2000's to mitigate this difficulty with the arrival of automated test generators. Unfortunately, these test suite generators were in an early and underdeveloped state upon their arrival, and were largely ignored by the software engineering industry. As time has passed, the automated test suite generators have matured much past their initial states.
 
-Automated test suite generators are usually a plugin to an IDE or a command line tool. Tests are generated by evaluating the source code, and writing new test suite files that can be run to test the program.  Tests can be generated deterministically or non-deterministically. CodePro for example, generates the same set of tests for programs, whereas Evosuite may generate a slightly different test suite if ran multiple times. The deterministic nature of test suites can make them reliable and consistent, whereas the non-deterministic generation will seek to cover more edge cases in code, which may pose NFE incomplete problems. In the case of Evosuite, tests are evolve using Mutation-based assertion, incorporating a genetic algorithm to dynamically generate tests ~\cite{Fraser:2011:EAT:2025113.2025179}. 
+Automated test suite generators are usually a plugin to an IDE or a command line tool. Tests are generated by evaluating the source code, and writing new test suite files that can be run to test the program.  Tests can be generated deterministically or non-deterministically. CodePro for example, generates the same set of tests for programs, whereas Evosuite may generate a slightly different test suite if ran multiple times. The deterministic nature of test suites can make them reliable and consistent, whereas the non-deterministic generation will seek to cover more edge cases in code, which may pose NFE incomplete problems. In the case of Evosuite, tests are evolve using mutation-based assertion, incorporating a genetic algorithm to dynamically generate tests ~\cite{Fraser:2011:EAT:2025113.2025179}. 
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Mutation Analysis}
@@ -155,16 +155,16 @@ We are interested in the following research questions.
 
 \textbf{Q3.} Can developers learn to manually write JUnit tests better with the help of automated generated suites?
 
-\textbf{Q4.} Do Mutation scores and Coverage correlate in any way?
+\textbf{Q4.} Do mutation scores and Coverage correlate in any way?
 
 \subsection{Experiment Design}
 
-%I stuck to using "we" here because this is the process "we" executed. Is this okay to leave this way?
+%GREG- I stuck to using "we" here because this is the process "we" executed. Is this okay to leave this way?
 All experiments were performed on GNU/Linux workstations with kernel 3.2.0-44, a 2 GHzIntel Corporation Xeon E5/Core i7 processor and  15.6 GB of main memory. The unit tests were generated in the Java programming language, for both manual and automated tests. Figure ~\ref{fig:process_diagram}  provides an overview of the test generation implementation with edges between interacting components. First we identified ten programs in the SF110 that have manually written tests. Table ~\ref{tbl:program_table} provides a list of the selected SF110 programs with their respective lines of code and cyclomatic complexity.  After identifying these programs, we use the automated test tools Evosuite and Codepro to generate test suites. We then took the manual and automated generated test suites and used several different tools to collect the metrics. MAJOR is used find the mutation score of the program, Jacoco is used to attain the branch coverage, and JavaNCSS measures the lines of code and the cyclic complexity of the programs. Time to create the tests was also recorded manually to compare Evosuite and Codepro. Time to create the manual tests was available with the SF110.
 
 Because Evosuite uses a genetic algorithm to generate unit tests, we generated the tests for Evosuite ten times for each program. With multiple datasets, we can more accurate results with the standard deviation between mutation score, coverage, and time. Codepro uses a deterministc algorithm to generate the tests, so multiple test suite generations were not needed. With results gathered from Evosuite, Codepro, and the manually written tests, we then compared the scores based upon complexity, time to generate test suite, mutation score, lines of code, and branch coverage.
 
-%Here we talk about the graphs and error in statistical analysis. Power symbol ^ is not working for me.
+%GREG\KRISTEN - Here we talk about the graphs and error in statistical analysis. Power symbol ^ is not working for me.
 %I'm assuming also we are going to want to include equations for how we calculate R^2 values and the best fit line.
 %Do we need a table of results for the R^2 values?
 For the graphs, we attempted to find the best fit line to accurately represent to results. It is difficult to find a truly best fit line that gives an overall statistical overlook of the data. This is due to the varying nature of both Evosuite and the manually written tests. Evosuite uses a genetic algorithm, which results in varied results for each iteration. This is why as mentioned before, we run ten generations of the test suites and calculate an average for the standard deviation. Manually written test suites are written by different developers. These varying factors result in low  R2 scores, which correlate to how well the best fit line actually represents the data. However, CodePro generated a mutation score of 0 in some cases. We removed these results for CodePro results because it skewed the data in a way that was not graphically indicative of the trends we discovered with CodePro. 
@@ -313,11 +313,17 @@ Secondly, what is the future of genetic algorithm based tools such as Evosuite? 
 
 Finally, the paper identifies the inconsistencies between manually generated tests. There is no way one can say with certainty that the goal of each of the developers for each of the projects was to achieve a high mutation score or high branch coverage. Perhaps developers only care to test one function of the code in depth, or rather they would seek to achieve a high branch coverage. Either way, the intentions of achieving the quality standards outlined in this paper may not be ideal for every developer. 
 
-%Will we need something like this?
+%GREG\KRISTEN - Will we need something like this?
 In order to reproduce this study and further research in software testing, please reference our material in the github repository:
 
 www.github.com
 
+%GREG\KRISTEN - Should we have an acknowledgement section to notice Sai Zhang for his willingness to help with Palus, although we didn't end up using the tool?
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Acknowledgments}
+\label{sec:Acknowledgments}
+%----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+We would like to thank Sai Zhang for his help and information on his tool Palus during our evaluation of different test automation tools.
 
 
 \bibliographystyle{abbrv}
