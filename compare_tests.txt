@@ -1,0 +1,46 @@
+############
+CODEPRO: Builds Empty Object and Expects User to finish it.
+############
+
+EditorImpl fixture = new EditorImpl(new WriterEditorImpl(new FactoryImpl(new FormatterProviderImpl()), new FormatterProviderImpl(), (Document) null));
+String name = "";
+Object value = new Object();
+
+Editor result = fixture.attribute(name, value);
+
+// add additional test code here
+assertNotNull(result);
+
+############
+EVOSUITE: Focuses on all possible null pointers no “happy path” test
+############
+
+EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
+// Undeclared exception!
+try {
+  editorImpl0.removeChild("");
+  fail("Expecting exception: NullPointerException");
+} catch(NullPointerException e) {
+}
+
+############
+MANUAL: Tests real data after the creation of an Editor object and provides valuable feedback.
+############
+
+String xml =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+"<root>" +
+"<a>" +
+"<c/>" +
+"</a>" +
+"<b/>" +
+"</root>";
+      
+Editor editor = XisemeleFactory.newXisemele().createEditor(xml);
+      
+assertTrue(editor.containsElement("root"));
+assertTrue(editor.containsElement("root/a"));
+assertTrue(editor.containsElement("root/a/c"));
+assertTrue(editor.containsElement("root/b"));
+      
+assertFalse(editor.containsElement("root/c"));
