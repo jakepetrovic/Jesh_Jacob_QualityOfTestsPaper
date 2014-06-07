@@ -67,7 +67,7 @@ r2 = format(summary(m)$r.squared, digits = 3)))
 as.character(as.expression(eq))
 }
 
-p5_line <- p4_line + annotate("text", x=.5, y=12000 label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_line <- p4_line + annotate("text", x=.5, y=12000, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 p5_poly <- p4_poly + annotate("text", x=.5, y=12000, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()

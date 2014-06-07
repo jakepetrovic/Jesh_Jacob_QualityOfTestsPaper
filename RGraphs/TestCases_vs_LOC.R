@@ -5,7 +5,7 @@ data <- DoubleChecksoniTrust
 # CodePro ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=CPTestCases, y=CPLOC))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="Number of Test Cases versus LOC- CodePro", x = "Number of Generated Test Cases", y="Number of LOC")
+p3 <- p2 + labs(title="LOC versus Number of Test Cases- CodePro", x = "Number of Generated Test Cases", y="Number of LOC")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -41,7 +41,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Manual ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=MTestCases, y=MLOC))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="Number of Test Cases versus LOC- Manual", x = "Number of Written Test Cases", y="Number of LOC")
+p3 <- p2 + labs(title="LOC versus Number of Test Cases- Manual", x = "Number of Written Test Cases", y="Number of LOC")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -78,7 +78,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Evosuite ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=ETestCases, y=ELOC))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="Number of Test Cases versus LOC- Evosuite", x = "Number of Generated Test Cases", y="Number of LOC")
+p3 <- p2 + labs(title="LOC versus Number of Test Cases- Evosuite", x = "Number of Generated Test Cases", y="Number of LOC")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
