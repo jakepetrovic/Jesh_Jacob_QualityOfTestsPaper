@@ -1,7 +1,7 @@
 %!TEX root=qsic2014.tex
 % mainfile: qsic2014.tex
 
-\section{Test Case Generation Techiques}
+\section{Test Case Generation Techniques}
 \label{sec:background}
 In this section, the processes of writing test cases manually and using automatic test case generation tools are discussed.  We also describe the automatic test case generation tools that are used in 
 
@@ -14,15 +14,14 @@ Due to the high cost and inconsistencies introduced when developing test suites 
 While many different techniques have been used to automatically generate tests, they can be divided into two key categories: Deterministic and Learning-Based.
 
 \subsubsection{Deterministic}
+Deterministic automatic test case generators generally analyze method parameters and basic paths to create unit tests.  The simplest of these tools statically analyze the basic source code paths alone and create skeletons of  needed tests.  For example, JUnitDoclet \cite{JUnitDoclet} uses Javadoc to parse the source code of the application classes. From the collected information, JUnitDoclet writes TestCases and TestSuites where there is a TestSuite for each Java package, a TestCase for each public, non-abstract class, and a skeleton test method for each public method. %The compiler will additionally guide the developer to challenging code segments such as classes that do not have a public constructor, classes that have no default constructors, and accessors for double or float values that need some epsilon when comparing two values.
 
-CODEPRO  Given an input class, the tool creates a corresponding test class complete with multiple test methods for each input class method. The tool analyzes each method and input argument with the goal of generating test cases that exercise each line of code (the CodePro Code Coverage facility can provide feedback on how good your test cases are).
+While these test skeletons are helpful, more sophisticated tools have been developed that create fuller tests by taking the method parameters into consideration. CoView~\cite{CoView}, for example, is a commercial Eclipse plug-in tool that analyzes Java source code and calculates the number of data-driven and cyclomatic paths in a method. Each path is one that should be verified via a unit test. CoView then analyzes existing JUnit tests to determine which paths are being tested and which paths are not tested. This determination is made using instrumented byte code to determine path and branch coverage. CoView then creates missing JUnit test cases for the developer. The developer will have to modify parts of the tests such as the assertions, but the tool can help the developer by identifying the minimum number of unit tests that should be created given parameter options and paths.
 
-\cite{xie2009}
+Other tools are capable of generating fully executable tests that require no modification.  In this research, CodePro Analytix is used.  CodePro~\cite{CodePro1} is an Eclipse plug-in tool with many powerful code analysis features and metrics.  Given an input class, the tool creates a corresponding test class complete with multiple test methods for each input class method. The tool analyzes each method and input argument with the goal of generating test cases that exercise each line of code using a combination of both static code analysis and by dynamically executing the code to be tested in order to observe the behavior of the code~\cite{CodePro2}.  CodePro was a Jolt Award finalist and has been analyzed in terms of the types of test cases it can write compared to other tools~\cite{xie2009}.  However, to the best of our knowledge, no work has compared the overall quality of the test cases it creates.
 
 \subsubsection{Learning-Based}
+Another set of automatic test case generation tools use learning algorithms to improve the overall quality of the generated test suites.  The two top-ranked tools in this area are Randoop and Evosuite~\cite{fraser2013a}.  Randoop~\cite{pacheco2007feedback} automatically creates unit tests for Java classes in JUnit format using feedback-directed random test generation. This technique randomly generates sequences of methods and constructor invocations for the classes under test and uses the sequences to create tests. Randoop then executes the sequences it creates and uses the results of the execution to create more assertions with the goal of avoiding redundant and illegal inputs while guiding towards generation of tests that lead to new object states. 
 
+Evosuite~\cite{fraser:2011:eat:2025113.2025179} , which is used in this research, ranked first in SBST 2013 Tool Competition~\cite{fraser2013a} and similarly uses a learning algorithm to generate a full, executable test suite.  The tool's evolutionary search approach evolves whole test suites with respect to both coverage and mutation scores.  Optimization with respect to a coverage criterion rather than individual coverage goals helps the algorithm to not be adversely influenced by difficulty of infeasibility of individual coverage goals.  Repeated mutation testing is used to produce a reduced set of assertions that maximizes the number of seeded defects in a class that are revealed by the test cases.
 
-Randoop~\cite{pacheco2007feedback} is another automatic unit test generator for Java that automatically creates unit tests for Java classes, in JUnit format.  Randoop generates unit tests using feedback-directed random test generation. This technique randomly generates sequences of methods and constructor invocations for the classes under test and uses
-the sequences to create tests. Randoop then executes the sequences it creates and uses the results of the execution to create more assertions with the goal of avoiding redundant and illegal inputs while guiding towards generation of tests that lead to new object states. 
-
-Evosuite
