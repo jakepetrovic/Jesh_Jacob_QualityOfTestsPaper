@@ -28,29 +28,19 @@ Although there are tutorials that explain how to write JUnit test suites (e.g., 
 % While goals, company policy, and/or community standards may influence a developer's choice to test certain
 % code segments, the ability of test suites to find bugs is not frequently analyzed.
 
-Automatic test case generation tools use both deterministic (e.g., rules that act on the output of regular expressions)
-and learning-based algorithms to produce test cases based on particular goals, removing the subjectivity and styles one
-may find in manually generated tests.  They also significantly reduce the amount of time and effort required of the
-developer to create the test suite.  However, the quality of the test suites is also of vital concern.  
+Automatic test case generation tools use both deterministic (e.g., hard-coded rules and regular expressions) and
+learning-based (e.g., randomized or evolutionary) algorithms to produce test cases based on particular strategies,
+thereby avoiding the subjectivity and wide variation in styles commonly found in manually generated tests.  Test suite
+generators also have the potential to significantly reduce the amount of human time and effort required of the developer
+to create the test suite.  
 
-Test suite quality is frequently measured based on the amount of code covered and on the fault-finding ability of the
-test suite.  Code coverage is a structure-based criterion that requires the exercising of certain control structures and
-variables within program~\cite{kapfhammer-testing-handbook}. Fault-based test adequacy criterion, on the other hand,
-attempts to ensure that the program does not contain the types of faults that are commonly introduced into software
-systems by programmers~\cite{demillo1978hints, zhu1997software}.  One of the most common types of test quality
-evaluation in both industry and academic work is based on structurally-based criterion which is commonly analyzed in
-terms of statement or branch coverage~\cite{weyuker1988evaluation}.
+% However, the quality of the test suites is also of vital concern.  
 
-In recent years, mutation testing/scores have been used as another method for evaluating test suite quality. Mutation
-testing is a fault-based technique which measures the fault-finding effectiveness of test suites on the basis of induced
-faults~\cite{demillo1978hints, hamlet1977testing}. Mutation testing is a well-known technique to design a new software
-tests or to evaluate the quality of existing software tests and test suites. The idea of using mutants to measure test
-suite adequacy was originally proposed by DeMillo et al.~\cite{demillo1978hints}. Mutation testing involves seeding
-faults in the source program. Each altered version of the source is called a mutant. When a test reveals the mutant then
-the mutant said to be killed. The ratio of killed mutants/generated mutants is known as the mutation score. In mutation
-testing, in a simple statement such as  \texttt{if (a < b)}, the \texttt{<} sign will be replaced with all other
-possible relational operators such as \texttt{>, <=, >= , ==, !=}. The use of mutation operators yields results in the
-empirical assessment of quality for current testing techniques~\cite{andrews2005mutation}.  
+While goals, company policy, and/or community standards may influence the quality of manually implemented test suites, automatically generated ones are similiarly affected by both the choice of the tool and the configuration of the tool's parameters.  Test suite quality is frequently measured based on the amount of code covered and on the fault-finding ability of the test suite.  Code coverage is a structure-based criterion that requires the exercising of certain control structures and variables within program~\cite{kapfhammer-testing-handbook}. Fault-based test adequacy criterion, on the other hand, attempts to ensure that the program does not contain the types of faults that are commonly introduced into by programmers software systems~\cite{demillo1978hints, zhu1997software}.  
+
+% There is a such thing as coverage and mutation and we will tell you a little about them
+
+A common type of test quality evaluation, in both industrial and academic work, leverages structurally-based criteria that require the execution of a statement or branch in a program~\cite{weyuker1988evaluation}.  Alternatively, mutation testing is a fault-based technique which measures the fault-finding effectiveness of test suites on the basis of induced faults~\cite{demillo1978hints, hamlet1977testing}.  Mutation testing is a well-known technique to design a new software tests or to evaluate the quality of existing software tests and test suites. The idea of using mutants to measure test suite adequacy was originally proposed by DeMillo et al.~\cite{demillo1978hints}. Mutation testing involves seeding faults in the source program. Each altered version of the source is called a mutant. When a test reveals the mutant then the mutant said to be killed. The ratio of killed mutants/generated mutants is known as the mutation score. In mutation testing, in a simple statement such as \texttt{if (a < b)}, the \texttt{<} sign will be replaced with all other possible relational operators such as \texttt{>, <=, >= , ==, !=}. The use of mutation operators yields results in the empirical assessment of quality for current testing techniques~\cite{andrews2005mutation}.  
 
 %What we do
 
