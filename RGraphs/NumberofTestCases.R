@@ -4,5 +4,9 @@ DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/
 data <- DoubleChecksoniTrust
 
 dm.molten <- melt (data, na.rm= TRUE, variable.name="tested")
-ggplot(data=dm.molten, aes(x=variable, y=value, fill=program)) + geom_bar(stat="identity", position=position_dodge())+ theme_minimal()+labs(title="Number of JUnit Test Cases", x = "Programs", y="Number of Test Cases")+guides(fill=guide_legend(title="Generation Tools"))
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TestCasesGenerated.pdf")
+p = (ggplot(data=dm.molten, aes(x=variable, y=value, fill=program)) + geom_bar(stat="identity", position=position_dodge())+ theme_minimal()+labs(title="Number of JUnit Test Cases", x = "Programs", y="Number of Test Cases"))
+p = p + guides(fill=guide_legend(title="Generation Tools"))
+(p = p + scale_fill_grey(start = 0, end = .9))
+p = p +theme_bw()
+
+ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TestCasesGenerated.pdf", height = 7, width = 11)
