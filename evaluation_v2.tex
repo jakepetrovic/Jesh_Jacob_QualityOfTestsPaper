@@ -63,8 +63,29 @@ All tests are written or generated in JUnit form.  The time to generate test cas
 Following the automatic generation of test cases, Jacoco~\cite{jacoco} is used to calculate branch coverage of the tests.  Jacoco calculates branch coverage by instrumenting all branches at the byte code level through ASM, an all purpose Java bytecode manipulation and analysis framework. We also use MAJOR~\cite{just2011} to calculate fault-based mutation scores given the case study and associated tests. MAJOR is a Java compiler-integrated mutator that serves as a mutation analysis back-end for JUnit tests.  It provides a domain specific language to configure the mutation process, although we used its default values for our experiments.
 
 \subsection{Experiments and Results}
-Experiments were run to 
+Experiments were run to \textcolor{red}{DO STUFF}
 
+\subsubsection{Generating Test Suites }
+Time to generate
+# of tests
+Time to Execute
 
+\subsubsection{Comparing Generated Tests to Case Studies}
+LOC (source)
+Complexity (source)
+
+\subsubsection{Quality: Manual versus Generated}
+Branch Cov
+Mutation Score
 
 \subsection{Threats to Validity}
+\noindent \textbf{Internal Validity}
+Threats to internal validity include the 
+
+Measurements in quality of software tests is a subjective measurement. Although mutation score is one way to measure the quality of a test suite, ignoring the human elements of tests are nigh impossible. Developers may need to view tests in order to diagnose faults in the code, and if a developer cannot understand the test they are reading, then the cost of time and effort could be increased on the human part.
+
+The statistical analysis also may be a threat to validity, as the inconsistency in how both Evosuite and manually written tests are created. Also, CodePro generated some test suites with a mutation score of 0, which could mislead one to believing that CodePro has no use for creating quality tests. For this reason we removed these results to give a better impression of the trend CodePro test suites.
+
+\noindent \textbf{External Validity}
+
+\noindent \textbf{Construct Validity}
