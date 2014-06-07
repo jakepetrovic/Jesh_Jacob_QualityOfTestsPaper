@@ -1,14 +1,14 @@
 library("ggplot2")
 library(reshape2)
 DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Time.csv")
-data <- DoubleChecksoniTrust
+mydata <- DoubleChecksoniTrust
 
-dm.molten <- melt (data, na.rm= TRUE, variable.name="tested")
-ggplot(data=dm.molten, aes(x=variable, y=value, fill=Program)) + geom_bar(stat="identity", position=position_dodge())+ theme_minimal()+labs(title="Time of Test Case Generation", x = "Programs", y="Time to Generate (s)")
-#+guides(fill=guide_legend(title="Generation Tools"))+ 
-#    geom_bar(position=position_dodge(), stat="identity") +
-#    geom_errorbar(aes(ymin=len-se, ymax=len+se),
-#                  width=.2,                    # Width of the error bars
-#                  position=position_dodge(.9))
+limits <- aes(ymax = mydata$upper, ymin = mydata$lower)
+p = (ggplot(data = mydata, aes(x = variable, fill = Program, y = value)) + geom_bar(position = "dodge", 
+    stat = "identity") + geom_errorbar(limits, width = 0.9, position = "dodge")+ theme_minimal()+labs(title="Time of Test Generation", x = "Programs", y="Time for Generation (s)"))
 
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TestCasesGenerated.pdf")
+p = p + guides(fill=guide_legend(title="Generation Tools"))
+(p = p + scale_fill_grey(start = 0, end = .9))
+p = p +theme_bw()
+
+ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TestCasesGenerated.pdf", height = 7, width = 11)
