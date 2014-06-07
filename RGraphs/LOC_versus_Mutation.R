@@ -1,5 +1,6 @@
 library("ggplot2")
-DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC_versus_Mutation.csv")
+#DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC_versus_Mutation.csv")
+DoubleChecksoniTrust <- read.csv("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC_versus_Mutation.csv")
 data <- DoubleChecksoniTrust
 
 # CodePro ---------------------------------------------------------
@@ -34,9 +35,9 @@ p5_line <- p4_line + annotate("text", x=.5, y=50, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=50, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_LOC_versus_Mutation_line.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_LOC_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_LOC_versus_Mutation_poly.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_LOC_versus_Mutation_poly.pdf")
 
 # Manual ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=MLOC, y=MMutation))
@@ -70,9 +71,9 @@ p5_line <- p4_line + annotate("text", x=.5, y=80, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=80, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_LOC_versus_Mutation_line.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_LOC_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_LOC_versus_Mutation_poly.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_LOC_versus_Mutation_poly.pdf")
 
 
 # Evosuite ---------------------------------------------------------
@@ -107,6 +108,6 @@ p5_line <- p4_line + annotate("text", x=.5, y=85, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=85, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_LOC_versus_Mutation_line.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_LOC_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_LOC_versus_Mutation_poly.pdf")
+ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_LOC_versus_Mutation_poly.pdf")
