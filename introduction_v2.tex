@@ -7,15 +7,23 @@
 
 Since the release of low quality software has serious economic and social consequences~\cite{tassey2002}, software testing is commonly used throughout the software development lifecycle to identify defects and establish a confidence in program correctness. In fact, Kochhar et al.'s recent investigation of over 20,000 GitHub projects revealed that over 61\% of them include test cases~\cite{kochhar2013}.  However, even though testing is both valuable and prevalent, the creation, execution, and maintenance of tests is also one of the most expensive aspects of developing software, often comprising 40\% of the total budget for an information technology department~\cite{vizard2013}.  
 
+% Manual and automated testing, and the lack of clarity about the quality of test suites
+
 Traditionally, test cases are written manually by software developers and/or members of a quality assurance team.  Unfortunately, manual creation of a high quality test suite requires substantial amounts of human thought, time, and effort.  Although manual creation gives developers control over what code they test and how thoroughly they test it, the time and effort required to produce these test suites can be prohibitively high in large projects that often necessitate the most test cases~\cite{kochhar2013}.  As an alternative to manually writing test cases, many automatic test case generation tools (e.g.,~\cite{fraser:2011:eat:2025113.2025179,pacheco2007feedback,csallner2004}) are now available to help developers test their software.  However, the quality of the test suites produced by these tools varies~\cite{bacchelli2008,fraser2013c,fraser2013a}, and it is unclear how the test suites of automatic test generation tools compare to those that are manually developed.
 
-%Manual Generated Tests -  benefits vs drawbacks
+% Manual Generated Tests -  benefits vs drawbacks
 
 When given sufficient time and resources, developers can often manually implement a high quality test suite that exercises the majority of the application's features and covers its source code.  Yet, the focus of the test cases may vary depending on the software developer, the goals of the project, and/or the standards of the company or open-source community~\cite{kochhar2013}.  Some developers may write tests with the goal of increasing the coverage of the code, particularly in terms of statements or branches.  Others may focus tests on code that is likely to fail, most commonly executed, or ``important'' according to other standards~\cite{mockus2009}. In any case, as the size and complexity of a program increases, manually writing test cases can become expensive, thus requiring additional human thought and labor when applied to highly complex features~\cite{clarke1998automated}.
 
-An additional challenge in developing test suites is that there is no strict standard or guideline for writing test cases.  Without a standard, test cases are often written inconsistently or subjectively.  While goals or company policy may drive the sections of code that developers attempt to test, the ability of test suites to find bugs is not frequently analyzed.
+% The lack of standards for test suites
 
-%Talk about auto generated test suites - benefits vs drawbacks
+Although there are tutorials that explain how to write JUnit test suites (e.g., \cite{vogella2013}), there is no
+well-established standard or guideline for writing test cases, thus making the testing process even more challenging for
+developers.  While goals or company policy may drive the sections of code that developers attempt to test, the ability
+of test suites to find bugs is not frequently analyzed.
+
+% Talk about auto generated test suites - benefits vs drawbacks
+
 On the other hand, automatic test case generation tools have been developed to reduce the time and cost of developing a
 test suite, and some algorithms, in theory, can be used to help improve particular business goals such as coverage or
 bug finding ability.  Many automatic test suite generators currently exist.  Some are extremely basic, setting up a
@@ -24,7 +32,11 @@ simple skeleton for methods such as \textcolor{red}{`getters' and `setters' alon
 Palus, TestEra, and \textsc{EvoSuite} can generate full, executable test suites that need no modification prior to execution~\cite{fraser:2011:eat:2025113.2025179, Zhang:2011:PHA:1985793.1986036, Marinov:2001:TNF:872023.872551, codepro}.  
 
 %Compare Automated vs Manual
-Automatic test case generation tools use both deterministic and learning-based algorithms to produce test cases based on particular goals, removing the subjectivity and styles one may find in manually generated tests.  They also significantly reduce the amount of time and effort required of the developer to create the test suite.  However, the quality of the test suites is also of vital concern.  
+
+Automatic test case generation tools use both deterministic and learning-based algorithms to produce test cases based on
+particular goals, removing the subjectivity and styles one may find in manually generated tests.  They also
+significantly reduce the amount of time and effort required of the developer to create the test suite.  However, the
+quality of the test suites is also of vital concern.  
 
 Test suite quality is frequently measured based on the amount of code covered and on the fault-finding ability of the test suite.  Code coverage is a structure-based criterion that requires the exercising of certain control structures and variables within program~\cite{kapfhammer-testing-handbook}. Fault-based test adequacy criterion, on the other hand, attempts to ensure that the program does not contain the types of faults that are commonly introduced into software systems by programmers~\cite{demillo1978hints, zhu1997software}.  One of the most common types of test quality evaluation in both industry and academic work is based on structurally-based criterion which is commonly analyzed in terms of statement or branch coverage~\cite{weyuker1988evaluation}.
 
