@@ -24,9 +24,12 @@ The goals of the experiments are as follows:
 
 \subsection{Experiment Design and Metrics}
 All experiments were performed on GNU/Linux workstations with kernel 3.2.0-44, a 2 GHz Intel Corporation Xeon E5/Core i7 processor and  15.6 GB of main memory. 
-Ten programs were identified from the SF110 code suite~\cite{fraser:2012}.  The case study applications were selected due to their size, the existence of associated manually developed JUnit test cases, and their use in tuning EvoSuite parameters for mutation and test generation, one of our test suite generation tools.  Table~\ref{tbl:program_table} provides a list of the selected SF110 programs with their respective lines of code (LOC) and average cyclomatic complexity per method.  LOC and Cyclomatic complexity were measured using JavaNCSS~\cite{leejavancss}.  
 
-Netweaver is the largest program under consideration with nearly 18K lines of code.  Netweaver has an average Cyclomatic Complexity ($CC$) of 2.82 across all methods, which implies that for a specific method $M$, 1) $CC_M$ is an upper bound for the number of test cases that are necessary to achieve a complete branch coverage within the method $M$, and 2) $CC_M$ is a lower bound for the number of paths through the control flow graph. Assuming each test case takes one path, the number of cases needed to achieve path coverage is equal to the number of paths that can actually be taken, ignoring infeasible paths.  The smallest, Jni-inchi has around 800 lines of code with an average cyclomatic complexity of 2.05.  
+\noindent \textbf{Case Study Applications:}  
+
+Ten programs were identified from the SF110 code suite~\cite{fraser:2012}.  The case study applications were selected due to their size, the existence of associated manually developed JUnit test cases, and their use in tuning EvoSuite parameters for mutation and test generation, one of our test suite generation tools.  Table~\ref{tbl:program_table} provides a list of the selected SF110 programs with their respective lines of code (LOC) and average cyclomatic complexity per method.  LOC and cyclomatic complexity were measured using JavaNCSS~\cite{leejavancss}.  
+
+Netweaver is the largest program under consideration with nearly 18K lines of code.  Netweaver has an average Cyclomatic Complexity ($CC$) of 2.82 across all methods, which implies that for a specific method $M$, 1) $CC_M$ is an upper bound for the number of test cases that are necessary to achieve a complete branch coverage within the method $M$, and 2) $CC_M$ is a lower bound for the number of paths through the control flow graph. Assuming each test case takes one path, the number of cases needed to achieve path coverage is equal to the number of paths that can actually be taken, ignoring infeasible paths.  The smallest program, Jni-inchi has around 800 lines of code with an average cyclomatic complexity of 2.05.  
 
 \begin{table}[!t]
 \caption{Benchmark Programs and their Properties}
@@ -49,16 +52,19 @@ Jnfe                                   & 1294                               & 1.
 }
 \end{table}
 
-After the case study applications were identified and analyzed, automated test tools EvoSuite and Codepro were used to generate test suites. As EvoSuite is non-deterministic, ten sets of tests were generated for evaluation.  
+After the case study applications were identified and analyzed, automated test tools EvoSuite and Codepro were used to generate test suites~\cite{CodePro1, fraser:2011:eat:2025113.2025179}. As EvoSuite is non-deterministic and learning-based, ten sets of tests were generated for evaluation, and the standard deviation is given across the ten test generations for all EvoSuite related results.  
 
-\subsubsection{Evaluation Metrics}
-We then took the manual and automated generated test suites and used several different tools to
-collect the metrics. MAJOR is used find the mutation score of the program, JaCoCo is used to attain the branch coverage,
-and JavaNCSS measures the lines of code and the cyclic complexity of the programs. Time to create the tests was also
-recorded manually to compare Evosuite and CodePro. Time to create the manual tests was available with the SF110.
+\noindent \textbf{Evaluation Metrics:}
 
-Because Evosuite uses a genetic algorithm to generate unit tests, we generated the tests for Evosuite ten times for each program. With multiple datasets, we can more accurate results with the standard deviation between mutation score, coverage, and time. CodePro uses a deterministic algorithm to generate the tests, so multiple test suite generations were not needed. With results gathered from Evosuite, CodePro, and the manually written tests, we then compared the scores based upon complexity, time to generate test suite, mutation score, lines of code, and branch coverage.
+The manually written test suites and automatically generated test suites are compared based upon the time to generate test suites, the number of test cases generated, the time to execute generated tests, lines of code in the benchmark application, complexity of the benchmark application, branch coverage of generated suites, and the mutation score of generated suites. To perform these evaluations, three tools are used.
+
+All tests are written or generated in JUnit form.  The time to generate test cases, number of test cases generated, and the time to execute the test suite are measured using the JUnit tool.  We also measure the non-commented LOC from the source code of the benchmark applications through JavaNCSS~\cite{leejavancss}.  
+
+Following the automatic generation of test cases, Jacoco~\cite{jacoco} is used to calculate branch coverage of the tests.  Jacoco calculates branch coverage by instrumenting all branches at the byte code level through ASM, an all purpose Java bytecode manipulation and analysis framework. We also use MAJOR~\cite{just2011} to calculate fault-based mutation scores given the case study and associated tests. MAJOR is a Java compiler-integrated mutator that serves as a mutation analysis back-end for JUnit tests.  It provides a domain specific language to configure the mutation process, although we used its default values for our experiments.
 
 \subsection{Experiments and Results}
+Experiments were run to 
+
+
 
 \subsection{Threats to Validity}
