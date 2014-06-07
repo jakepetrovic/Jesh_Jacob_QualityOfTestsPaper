@@ -5,7 +5,7 @@ data <- DoubleChecksoniTrust
 # CodePro ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=CPLOC, y=CPBranchCov))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- CodePro", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Branch Coverage versus LOC- CodePro", x = "LOC", y="Branch Coverage (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -41,7 +41,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Manual ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=MLOC, y=MBranchCov))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- Manual", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Branch Coverage versus LOC- Manual", x = "LOC", y="Branch Coverage (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -78,7 +78,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Evosuite ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=ELOC, y=EBranchCov))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- Evosuite", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Branch Coverage versus LOC- Evosuite", x = "LOC", y="Branch Coverage (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))

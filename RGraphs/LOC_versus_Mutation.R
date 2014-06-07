@@ -5,7 +5,7 @@ data <- DoubleChecksoniTrust
 # CodePro ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=CPLOC, y=CPMutation))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- CodePro", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Mutation Score versus LOC- CodePro", x = "LOC", y="Mutation Score (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -30,8 +30,8 @@ r2 = format(summary(m)$r.squared, digits = 3)))
 as.character(as.expression(eq))
 }
 
-p5_line <- p4_line + annotate("text", x=.5, y=75, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
-p5_poly <- p4_poly + annotate("text", x=.5, y=75, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_line <- p4_line + annotate("text", x=.5, y=50, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_poly <- p4_poly + annotate("text", x=.5, y=50, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
 ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_LOC_versus_Mutation_line.pdf")
@@ -41,7 +41,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Manual ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=MLOC, y=MMutation))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- Manual", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Mutation Score versus LOC- Manual", x = "LOC", y="Mutation Score (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -66,8 +66,8 @@ r2 = format(summary(m)$r.squared, digits = 3)))
 as.character(as.expression(eq))
 }
 
-p5_line <- p4_line + annotate("text", x=.5, y=100, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
-p5_poly <- p4_poly + annotate("text", x=.5, y=100, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_line <- p4_line + annotate("text", x=.5, y=80, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_poly <- p4_poly + annotate("text", x=.5, y=80, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
 ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_LOC_versus_Mutation_line.pdf")
@@ -78,7 +78,7 @@ ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsP
 # Evosuite ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=ELOC, y=EMutation))
 p2 <- p1 + theme_bw()
-p3 <- p2 + labs(title="LOC versus Branch Coverage- Evosuite", x = "LOC", y="Branch Coverage (%)")
+p3 <- p2 + labs(title="Mutation Score versus LOC- Evosuite", x = "LOC", y="Mutation Score (%)")
 
 p4_line <- p3 + geom_smooth(method="lm",formula = y~ x)
 p4_poly <- p3 + geom_smooth(method="lm",formula = y~ poly(x,2))
@@ -103,8 +103,8 @@ r2 = format(summary(m)$r.squared, digits = 3)))
 as.character(as.expression(eq))
 }
 
-p5_line <- p4_line + annotate("text", x=.5, y=75, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
-p5_poly <- p4_poly + annotate("text", x=.5, y=75, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_line <- p4_line + annotate("text", x=.5, y=85, label=lm_line_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
+p5_poly <- p4_poly + annotate("text", x=.5, y=85, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
 ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_LOC_versus_Mutation_line.pdf")
