@@ -3,7 +3,23 @@
 
 \section{Introduction}
 
-Software testing is a vital task throughout the software development lifecycle for helping to create quality software.  However, the creation and execution of tests is also one of the most expensive components of software development, \textcolor{red}{often comprising of  to \% of the total lifecycle}~\cite{}.  Traditionally, test cases are written manually by the code developers or a quality assurance team.  Unfortunately, manual creation of a high quality test suite requires large amounts of thought, time, and effort. Although manual creation gives developers control over what code is tested and how thoroughly different sections of code is tested,  the cost of the time and effort required to produce these test suites can be extremely high in large projects.  As an alternative to manually writing test cases, many automatic test case generation tools are now available to assist developers in testing code.  However, the quality of the test suites produced by these tools varies, and it is unclear how the test suites of automatic test generation tools compare to those that are manually developed.
+% Software testing is a vital task throughout the software development lifecycle for helping to create quality software.
+
+Since the release of low quality software has serious economic and social consequences \cite{tassey2002}, software
+testing is commonly used throughout the software development lifecycle to identify defects and establish a confidence in
+program correctness.
+
+
+
+However, the creation and execution of tests is also one of the most expensive components of software development,
+\textcolor{red}{often comprising of  to \% of the total lifecycle}~\cite{}.  Traditionally, test cases are written
+manually by the code developers or a quality assurance team.  Unfortunately, manual creation of a high quality test
+suite requires large amounts of human thought, time, and effort. Although manual creation gives developers control over what
+code is tested and how thoroughly different sections of code is tested,  the cost of the time and effort required to
+produce these test suites can be extremely high in large projects.  As an alternative to manually writing test cases,
+many automatic test case generation tools are now available to assist developers in testing code.  However, the quality
+of the test suites produced by these tools varies, and it is unclear how the test suites of automatic test generation
+tools compare to those that are manually developed.
 
 %Manual Generated Tests -  benefits vs drawbacks
 When manually generating test cases, developers, given time, are able to spend more effort to improve the quality of a test suite to ensure it captures the full depth of the code.  Test focus may vary depending on the developer and project goals/business rules.  Some developers may write tests with the goal of increasing the code coverage, particularly in terms of statements or branches.  Others may focus tests on ``important'' code or code that they expect will be most commonly executed.   In either case, as the program complexity rises, manually writing test cases can become expensive, requiring more thought and labor, when applied to highly complex features~\cite{clarke1998automated}.
@@ -11,7 +27,12 @@ When manually generating test cases, developers, given time, are able to spend m
 An additional challenge in developing test suites is that there is no strict standard or guideline for writing test cases.  Without a standard, test cases are often written inconsistently or subjectively.  While goals or company policy may drive the sections of code that developers attempt to test, the ability of test suites to find bugs is not frequently analyzed.
 
 %Talk about auto generated test suites - benefits vs drawbacks
-On the other hand, automatic test case generation tools have been developed to reduce the time and cost of developing a test suite, and some algorithms, in theory, can be used to help improve particular business goals such as coverage or bug finding ability.  Many automatic test suite generators currently exist.  Some are extremely basic, setting up a simple skeleton for methods such as \textcolor{red}{`getters' and `setters' alone}\cite{}.  \textcolor{red}{Others will create slightly more sophisticated skeletons for tests (describe and cite).}  Finally, tools such as CodePro AnalytiX, Palus, TestEra, and Evosuite can generate full, executable test suites that need no modification prior to execution~\cite{fraser:2011:eat:2025113.2025179, Zhang:2011:PHA:1985793.1986036, Marinov:2001:TNF:872023.872551, codepro}.  
+On the other hand, automatic test case generation tools have been developed to reduce the time and cost of developing a
+test suite, and some algorithms, in theory, can be used to help improve particular business goals such as coverage or
+bug finding ability.  Many automatic test suite generators currently exist.  Some are extremely basic, setting up a
+simple skeleton for methods such as \textcolor{red}{`getters' and `setters' alone}\cite{}.  \textcolor{red}{Others will
+  create slightly more sophisticated skeletons for tests (describe and cite).}  Finally, tools such as CodePro AnalytiX,
+Palus, TestEra, and \textsc{EvoSuite} can generate full, executable test suites that need no modification prior to execution~\cite{fraser:2011:eat:2025113.2025179, Zhang:2011:PHA:1985793.1986036, Marinov:2001:TNF:872023.872551, codepro}.  
 
 %Compare Automated vs Manual
 Automatic test case generation tools use both deterministic and learning-based algorithms to produce test cases based on particular goals, removing the subjectivity and styles one may find in manually generated tests.  They also significantly reduce the amount of time and effort required of the developer to create the test suite.  However, the quality of the test suites is also of vital concern.  
@@ -21,7 +42,8 @@ Test suite quality is frequently measured based on the amount of code covered an
 In recent years, mutation testing/scores have been used as another method for evaluating test suite quality. Mutation testing is a fault-based technique which measures the fault-finding effectiveness of test suites on the basis of induced faults~\cite{demillo1978hints, hamlet1977testing}. Mutation testing is a well-known technique to design a new software tests or to evaluate the quality of existing software tests and test suites. The idea of using mutants to measure test suite adequacy was originally proposed by DeMillo et al.~\cite{demillo1978hints}. Mutation testing involves seeding faults in the source program. Each altered version of the source is called a mutant. When a test reveals the mutant then the mutant said to be killed. The ratio of killed mutants/generated mutants is known as the mutation score. In mutation testing, in a simple statement such as  \texttt{if (a < b)}, the \texttt{<} sign will be replaced with all other possible relational operators such as \texttt{>, <=, >= , ==, !=}. The use of mutation operators yields results in the empirical assessment of quality for current testing techniques~\cite{andrews2005mutation}.  
 
 %What we do
-In this paper, we analyze existing manually written test suites of open source applications and compare these to test suites that are generated using a two automatic test case generation tools, CodePro and Evosuite, to identify benefits and drawbacks of using automated test suite generation tools.  The three sets of test suites are compared based on the time required to create the test suite, the statement and branch coverage of each test suite, and the mutation score of each test suite.  Although automatic test generation requires far less time and effort than manual test generation, this improvement may not be worthwhile if the quality of the resulting test suites is low in terms of coverage or fault-finding ability.  We additionally examine how the code complexity and lines of code in the original program relate to the code complexity and the lines of code in the tests and the number of test cases generated. Finally, we discuss the overall impact of using automated tools instead of manual test creation.
+In this paper, we analyze existing manually written test suites of open source applications and compare these to test
+suites that are generated using a two automatic test case generation tools, CodePro and \textsc{EvoSuite}, to identify benefits and drawbacks of using automated test suite generation tools.  The three sets of test suites are compared based on the time required to create the test suite, the statement and branch coverage of each test suite, and the mutation score of each test suite.  Although automatic test generation requires far less time and effort than manual test generation, this improvement may not be worthwhile if the quality of the resulting test suites is low in terms of coverage or fault-finding ability.  We additionally examine how the code complexity and lines of code in the original program relate to the code complexity and the lines of code in the tests and the number of test cases generated. Finally, we discuss the overall impact of using automated tools instead of manual test creation.
 
 %Evaluation results
 The results indicate stuff.
