@@ -21,11 +21,24 @@ It is important to note that all of the aforementioned related work focuses of t
 
 In contrast to our focus on manually and automatically generated test suites for real-world open-source applications, other related work has considered coverage and mutation scores for test suites written by students. For instance, Aaltonen et al.\ observe that automated grading programs may reward students for high-coverage test suites that actually have poor defect-revealing potential~\cite{aaltonen:2010:mav:1869542.1869567}, concluding that a combination of coverage and mutation scores may be the best way to give students accurate feedback on the quality of their test cases.  In addition, Shams and Edwards experimentally observe that mutation scores are lower than coverage values for student-implemented test suites~\cite{shams2013}---a result that corresponds to what we found for open-source programs.
 
-There are a wide variety of past empirical studies that compare different coverage criteria; due to space constraints we briefly review select prior work that is both related and representative. For instance, Frankl et al.\ experimentally compare the all-uses dataflow criterion to mutation adequacy, finding that, although mutation testing is more expensive that dataflow testing, neither approach was obviously better than the other~\cite{frankl1997}. As an additional example, Gligoric et al.\ also use mutation testing to empirically compare the effectiveness of non-adequate test suites that aim to fulfill different adequacy criteria, revealing that branch coverage and intra-procedural acyclic path coverage are the best~\cite{gligoric2013}. Namin and Andrews report on an experimental investigation of test suite effectiveness, concluding that only non-linear relationships exist between test suite size, code coverage, and test effectiveness~\cite{namin2009}, thus motivating us to search for non-linear fits in our own analyses. 
+There are a wide variety of past empirical studies that compare different coverage criteria; due to space constraints we
+briefly review select prior work that is both related and representative. For instance, Frankl et al.\ experimentally
+compare the all-uses dataflow criterion to mutation adequacy, finding that, although mutation testing is more expensive
+that dataflow testing, neither approach was obviously better than the other~\cite{frankl1997}. As an additional example,
+Gligoric et al.\ also use mutation testing to empirically compare the effectiveness of non-adequate test suites that aim
+to fulfill different adequacy criteria, revealing that branch coverage and intra-procedural acyclic path coverage are
+the best~\cite{gligoric2013}. Namin and Andrews report on an experimental investigation of test suite effectiveness,
+concluding that only non-linear relationships exist between test suite size, code coverage, and test
+effectiveness~\cite{namin2009}, thus motivating us to search for non-linear fits in our own analyses. Finally, Li et al.
+compare four test adequacy criteria, finding that mutation testing is the best at finding seeded faults and minimizing
+the number of test required to ensure adequacy \cite{li2009}.
 
 % Another paper compares measuring quality between faults detection and mutation scores~\cite{just2014}. The research
 % statistically proves that mutation score can be used as a test of quality of test suites in place of fault detections.
 % The paper uses automated test suites to validate this research, and unlike this paper's research, the author's do not
 % compare mutation score, branch coverage, and cyclomatic complexity as joint measurements of quality. 
+
+In addition to the aforementioned study by Just et al.~\cite{just2014}, there have been several papers that examine the
+role that mutation testing should play in experimental evaluation of testing strategies.
 
 There is research comparing multiple mutation analysis tools~\cite{ComparingAutomatedMutationTools:2013}. This paper differs from this research in specifically comparing mutation analysis tools for Java. MAJOR was recommended as one one of the premier tools, and was thus used for the evaluation.
