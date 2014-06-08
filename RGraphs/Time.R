@@ -11,4 +11,4 @@ p = p + guides(fill=guide_legend(title="Generation Tools"))
 (p = p + scale_fill_grey(start = 0, end = .9))
 p = p +theme_bw()
 
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TestCasesGenerated.pdf", height = 7, width = 11)
+ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/TimeofGeneration.pdf", height = 7, width = 11)
