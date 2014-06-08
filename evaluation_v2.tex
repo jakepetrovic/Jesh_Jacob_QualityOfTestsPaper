@@ -11,7 +11,7 @@
 
 \section{Empirical Evaluation}
 \label{sec:evaluation}
-Given the many different techniques for generating test suites, the primary goal of this paper's empirical study is to compare the quality and complexity of the resulting test suites.  We implemented the empirical evaluation approach as shown in Figure~\ref{fig:process_diagram}.  As can be seen in the figure, existing programs are fed into automatic test suite generators to create executable test suites.  These test suites are then compared to the programs' associated, manually written test suites based on \textcolor{red}{SOME NUMBER} metrics.   
+Given the many different techniques for generating test suites, the primary goal of this paper's empirical study is to compare the quality and complexity of the resulting test suites.  We implemented the empirical evaluation approach as shown in Figure~\ref{fig:process_diagram}.  As can be seen in the figure, existing programs are fed into automatic test suite generators to create executable test suites.  These test suites are then compared to the programs' associated, manually written test suites based on 6 different metrics.   
 
 The goals of the experiments are as follows:
 \squishlist
@@ -187,12 +187,12 @@ Measurements in quality of software tests is a subjective measurement. Although 
 The statistical analysis also may be a threat to validity, as the inconsistency in how both \textsc{EvoSuite} and manually written tests are created. Also, CodePro generated some test suites with a mutation score of 0, which could mislead one to believing that CodePro has no use for creating quality tests. For this reason we removed these results to give a better impression of the trend CodePro test suites.
 
 
-\noindent \textbf{External Validity}
+%\noindent \textbf{External Validity}
 
-\noindent \textbf{Construct Validity}
+%\noindent \textbf{Construct Validity}
 
 
-\subsubsection{Discussion}
+\section{Discussion}
 
 In comparison with LOC and the number of Test Cases, it would seem that the higher proportion of Test Cases to the original application code does not necessarily imply that either or both the mutation score and branch coverage will be high.  Especially in the case of CodePro, in which many tests are produced in a skeleton-like fashion, the mutation scores and branch coverage are much lower than  \textsc{EvoSuite} and manual tests. However, as indicated earlier, the skeleton approach to generation gives developers a template to easily modify and implement. With the quick generation that covers a large scope of the application, developers are not required to spend time or effort looking for where the test should be, but rather enhancing them later. This feature could be more desirable to those who would like the higher coverage from an automated test suite like  \textsc{EvoSuite}, but have the flexibility to write the quality of tests relieved from manually generated tests.
 
