@@ -25,9 +25,6 @@ Although there are tutorials that explain how to write JUnit test suites (e.g., 
 
 % This has to be connected to empirical studies that compare both automated and manual?
 
-% While goals, company policy, and/or community standards may influence a developer's choice to test certain
-% code segments, the ability of test suites to find bugs is not frequently analyzed.
-
 Automatic test case generation tools use both deterministic (e.g., hard-coded rules and regular expressions) and
 learning-based (e.g., randomized or evolutionary) algorithms to produce test cases based on particular strategies,
 thereby avoiding the subjectivity and wide variation in styles commonly found in manually generated tests.  Test suite
@@ -36,33 +33,31 @@ to create the test suite.
 
 % However, the quality of the test suites is also of vital concern.  
 
-While goals, company policy, and/or community standards may influence the quality of manually implemented test suites, automatically generated ones are similiarly affected by both the choice of the tool and the configuration of the tool's parameters.  Test suite quality is frequently measured based on the amount of code covered and on the fault-finding ability of the test suite.  Code coverage is a structure-based criterion that requires the exercising of certain control structures and variables within program~\cite{kapfhammer-testing-handbook}. Fault-based test adequacy criterion, on the other hand, attempts to ensure that the program does not contain the types of faults that are commonly introduced into by programmers software systems~\cite{demillo1978hints, zhu1997software}.  
+While goals, company policy, and/or community standards may influence the quality of manually implemented test suites, automatically generated ones are similarly affected by both the choice of the tool and the configuration of the tool's parameters.  Test suite quality is frequently measured based on the amount of code covered and on the fault-finding ability of the test suite.  Code coverage is a structure-based criterion that requires the exercising of certain control structures and variables within program~\cite{kapfhammer-testing-handbook}. A fault-based test adequacy criterion, on the other hand, attempts to ensure that the program does not contain the types of faults that are commonly introduced into by programmers software systems~\cite{demillo1978hints, zhu1997software}.  
 
 % There is a such thing as coverage and mutation and we will tell you a little about them
 
-A common type of test quality evaluation, in both industrial and academic work, leverages structurally-based criteria that require the execution of a statement or branch in a program~\cite{weyuker1988evaluation}.  Alternatively, mutation testing is a fault-based technique that measures the fault-finding effectiveness of test suites on the basis of induced faults~\cite{demillo1978hints, hamlet1977testing}.  Originally proposed by DeMillo et al.~\cite{demillo1978hints}, mutation testing is a well-known technique that evaluates the quality of tests by seeding faults into the program under test; each altered version containing a seeded fault is called a mutant. When the results of a test case vary if it is executed against the mutant instead of the original program, the mutant is said to be killed and the ratio of killed mutants to generated mutants is known as the higher-is-better mutation score. In mutation testing, in a conditional statement such as \texttt{if (a < b)}, the \texttt{<} sign will be replaced with all other possible relational operators such as \texttt{>, <=, >= , ==}, and \texttt{!=}. Previous studies have used mutation adequacy to experimentally gauge the effectiveness of different testing strategies~\cite{andrews2005mutation,andrews2006,do2006,just2014}.  
+A common type of test quality evaluation, in both industrial and academic work, leverages structurally-based criteria that require the execution of a statement or branch in a program~\cite{weyuker1988evaluation}.  Alternatively, mutation testing is a fault-based technique that measures the fault-finding effectiveness of test suites on the basis of induced faults~\cite{demillo1978hints, hamlet1977testing}.  Originally proposed by DeMillo et al.~\cite{demillo1978hints}, mutation testing is a well-known technique that evaluates the quality of tests by seeding faults into the program under test; each altered version containing a seeded fault is called a mutant. When the output of a test case varies if it is executed against the mutant instead of the original program, the mutant is said to be killed; the ratio of killed mutants to generated mutants is known as the higher-is-better mutation score. During mutation testing, a conditional statement such as \texttt{if (a < b)} will result in mutants where the \texttt{<} sign is replaced with all other possible relational operators such as \texttt{>, <=, >= , ==}, and \texttt{!=}. Prior studies have used mutation adequacy to experimentally gauge the effectiveness of different testing strategies~\cite{andrews2005mutation,andrews2006,do2006,just2014}.  
 
 % What we do
 
-When confronted with the wide variety of non-standardized manual testing strategies and complex automated test
-generation tools, real-world software developers face the challenge of defining a strategy for developing quality
-software.  Through an empirical study of automatically and manually generated test suites for ten real-world open-source
-programs (e.g., NetWeaver and JSecurity), this paper characterizes and compares the tests, providing useful insights for
-both researchers and practitioners. With a focus on the time required to automatically create the test suite and the
-statement, branch, and mutation scores of the tests, the experiments compare the manually created tests with those that
-are automatically generated by two automated tools, CodePro and \textsc{EvoSuite}.  
+When confronted with the wide variety of non-standardized manual testing strategies and complex automated test generation tools, real-world software developers face the challenge of defining a strategy for developing quality software.  Through an empirical study of automatically and manually generated test suites for ten real-world open-source programs (e.g., Netweaver and Jsecurity), this paper characterizes and compares the tests, providing useful insights for both researchers and practitioners. With a focus on the time required to automatically create the test suite and the statement, branch, and mutation scores of the tests, the experiments compare the manually created tests with those that are automatically generated by two tools, CodePro and \textsc{EvoSuite}.  
 
-Although automatic test generation requires far less time and effort than manual test generation, this time savings may
-not be worthwhile if the quality of the resulting test suites is poor in terms of coverage or fault-finding capability.
-Alternatively, automatically generated tests may not be as useful as manually implemented ones if they are too complex
-or difficult to maintain.  Therefore, this paper's study additionally examines how the code complexity and lines of code
-in the original program relate to the code complexity and the lines of code in the tests and the number of test cases
-generated.  Finally, we discuss the overall impact of using automated tools instead of manual test creation.
+% What we do
 
-%Evaluation results
-The results indicate stuff.
+Although automatic test generation requires far less human time and effort than manual test generation, this time savings may not be worthwhile if the quality of the resulting test suites is poor in terms of coverage or fault-finding capability.  Alternatively, automatically generated tests may not be as useful as manually implemented ones if they are too complex or difficult to maintain.  So, this paper additionally examines the complexity and size of the original program and both automatically and manually generated test.  Finally, we point out the practical benefits and challenges associated with using automatically generated tests instead of manually created ones.
 
-%contributions
+% Compare to the more related paper and then set the state for our empirical results
+
+While it is true that this paper is similar to an experimental study by Bacchelli et al.~\cite{bacchelli2008}, it is important to note that there are key distinctions between our work and this prior paper.  Briefly, the experiments in this paper incorporate ten real-world programs (instead of individual classes from one program), include tests manually implemented by open-source developers (instead of the authors), use state-of-the-art test suite generators (rather than tools known to be less effective), and leverage a mutation testing tool that creates mutants known to be representative of real faults (instead of using a tool with less empirical validation).  These, and other, advantages allow this paper to make the following empirical observations:
+
+% how the code complexity and lines of code in the original program relate to these same metrics for the test suites and
+% the number of test cases generated.  Finally, we discuss the overall impact of using automated tools instead of manual
+% test creation.
+
+% Evaluation results
+
+% Summary of the important contributions
 In summary, the main contributions of this paper are as follows:
 \squishlist 
 \item An examination of the techniques used in sophisticated automatic test case generation tools.
