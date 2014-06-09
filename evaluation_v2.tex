@@ -11,7 +11,7 @@
 
 \section{Empirical Evaluation}
 \label{sec:evaluation}
-Given the many different techniques for generating test suites, the primary goal of this paper's empirical study is to compare the quality and complexity of the resulting test suites.  We implemented the empirical evaluation approach as shown in Figure~\ref{fig:process_diagram}.  As can be seen in the figure, existing programs are fed into automatic test suite generators to create executable test suites.  These test suites are then compared to the programs' associated, manually written test suites based on 6 different metrics.   
+Given the many different techniques for generating test suites, the primary goal of this paper's empirical study is to compare the quality and complexity of the resulting test suites.  We implemented the empirical evaluation approach as shown in Figure~\ref{fig:process_diagram}.  As can be seen in the figure, existing programs are fed into automatic test suite generators to create executable test suites.  These test suites are then compared to the programs' associated, manually written test suites based on six metrics.   
 
 The goals of the experiments are as follows:
 \squishlist
@@ -21,7 +21,6 @@ The goals of the experiments are as follows:
 \item Are branch coverage and mutation scores always the best indicators that a test suite reduces cost and effort?
 \squishend
 
-
 \subsection{Experiment Design and Metrics}
 All experiments were performed on GNU/Linux workstations with kernel 3.2.0-44, a 2 GHz Intel Corporation Xeon E5/Core i7 processor and  15.6 GB of main memory. 
 
@@ -30,12 +29,13 @@ All experiments were performed on GNU/Linux workstations with kernel 3.2.0-44, a
 Ten programs were identified from the SF110 code suite~\cite{fraser:2012}.  The case study applications were selected due to their size, the existence of associated manually developed JUnit test cases, and their use in tuning \textsc{EvoSuite} parameters for mutation and test generation, one of our test suite generation tools.  Table~\ref{tbl:program_table} provides a list of the selected SF110 programs with their respective lines of code (LOC) and average cyclomatic complexity per method.  LOC and cyclomatic complexity were measured using JavaNCSS~\cite{leejavancss}.  
 
 %Can cut from this paragraph
-Netweaver is the largest program under consideration with nearly 18K lines of code.  Netweaver has an average Cyclomatic Complexity ($CC$) of 2.82 across all methods, which implies that for a specific method $M$, 1) $CC_M$ is an upper bound for the number of test cases that are necessary to achieve a complete branch coverage within the method $M$, and 2) $CC_M$ is a lower bound for the number of paths through the control flow graph. Assuming each test case takes one path, the number of cases needed to achieve path coverage is equal to the number of paths that can actually be taken, ignoring infeasible paths.  The smallest program, Jni-inchi has around 800 lines of code with an average cyclomatic complexity of 2.05.  
+Netweaver is the largest program under consideration with nearly 18K lines of code.  Netweaver has an average Cyclomatic Complexity ($CC$) of 2.82 across all methods, which implies that for a specific method $M$, 1) $CC_M$ is an upper bound for the number of test cases that are necessary to achieve a complete branch coverage within the method $M$, and 2) $CC_M$ is a lower bound for the number of paths through the control flow graph. Assuming each test case takes one path, the number of cases needed to achieve path coverage is equal to the number of paths that can actually be taken, ignoring infeasible paths.  The smallest program, Jni-inchi has 783 lines of code with an average cyclomatic complexity of 2.05.  
 
 \begin{table}[!t]
+\centering
 \caption{Benchmark Programs and their Properties}
 \label{tbl:program_table}
-\resizebox{\columnwidth}{!}{%
+%\resizebox{\columnwidth}{!}{%
 \begin{tabular}{|l|c|c|}
 \hline
 \textbf{Program} & \textbf{LOC} &\textbf{Cyclomatic Complexity} \\ \hline
@@ -50,10 +50,10 @@ Lagoon                                 & 6060                               & 3.
 Lavalamp                               & 1039                               & 1.50                                                \\ \hline
 Jnfe                                   & 1294                               & 1.38                                                \\ \hline
 \end{tabular}
-}
+%}
 \end{table}
 
-After the case study applications were identified and analyzed, automated test tools \textsc{EvoSuite} and Codepro were used to generate test suites~\cite{CodePro1, fraser:2011:eat:2025113.2025179}. As \textsc{EvoSuite} is non-deterministic and learning-based, ten sets of tests were generated for evaluation, and the standard deviation is given across the ten test generations for all \textsc{EvoSuite} related results.  
+After the case study applications were identified and analyzed, automated test tools \textsc{EvoSuite} and Codepro were used to generate test suites~\cite{CodePro1, fraser:2011:eat:2025113.2025179}. As \textsc{EvoSuite} is non-deterministic and learning-based, ten sets of tests were generated for evaluation, and the standard deviation is given across the ten test generations for all \textsc{EvoSuite} related results.  \textsc{EvoSuite} was configured using its default values~\cite{arcuri2013}.
 
 \noindent \textbf{Evaluation Metrics:}
 
@@ -87,7 +87,7 @@ Next, the number of test cases generated per method was analyzed.  Figure~\ref{f
 \end{figure*}
 
 %Execution time
-The time to execute the generated test suites was also evaluated. Figure~\ref{fig:TestExecTime} reveals that the execution time between manual, \textsc{EvoSuite}, and CodePro test suites, the execution times low ranging between 2.1 to 25.5 seconds to execute. In comparison to Figure~\ref{fig:NumTests}, the netweaver test suite contains the the most test cases. However, the netweaver CodePro test suite does not take the longest to execute, rather, the second largest test suite for jsecurity by \textsc{EvoSuite} does. This may be the result of skeleton-like test cases that CodePro produces. CodePro's skeleton-like test cases provide comments for developers to find where to write test cases, forming a hybrid approach to the automated and manual world of testing.\footnote{ For more information on the composition of these test cases, please reference our material at this web page: http://cs.uccs.edu/~kjustice/QSIC2014/} 
+The time to execute the generated test suites was also evaluated. Figure~\ref{fig:TestExecTime} reveals that the execution time between manual, \textsc{EvoSuite}, and CodePro test suites, with test execution times ranging from between 2.1 to 25.5 seconds. In comparison to Figure~\ref{fig:NumTests}, the netweaver test suite contains the the most test cases. However, the netweaver CodePro test suite does not take the longest to execute.  Rather, the second largest test suite, jsecurity by \textsc{EvoSuite}, does. This may be the result of skeleton-like test cases that CodePro produces. CodePro's skeleton-like test cases provide comments for developers to find where to write test cases, forming a hybrid approach to the automated and manual world of testing.\footnote{ For more information on the composition of these test cases, please reference our material at this web page: http://cs.uccs.edu/~kjustice/QSIC2014/} 
 
 %Time of Execution
 \begin{figure*}[!t]
@@ -127,7 +127,7 @@ The LOC for the generated test suites and the application source code were also 
 In this study, both branch coverage and mutation scores were measured for each of the generation test suites. The branch coverage for manually test suites varied greatly, but was the only method  able to attain a score over 70\% with Lavalamp and Xisemele. Both applications contained the least number of test cases with manual as evidenced by  Figure~\ref{fig:NumTests}. Overall CodePro had higher branch coverage scores than \textsc{EvoSuite} or manual. This could indicate a direct relationship between the number of tests and the branch coverage. 
 
 %Number of Tests vs Branch Coverage%
-The relationship between the number of tests and the branch coverage for each test generated suite was furthermore examined. In comparing Figure~\ref{fig:NumTests} and the branch coverage, manual test suites increased in branch coverage as the number of test cases increased. When evaluating \textsc{EvoSuite}, the trend line has a low  $R^2$ value at 0.184, but begins in a similar trend to manual and CodePro, and actually drops in branch coverage for the two larger test suites. The branch coverage in comparison with the number of tests indicates that CodePro branch coverage drops as the number of generated test cases increases. Larger applications may require more tests to be written to increase the branch coverage. 
+The relationship between the number of tests and the branch coverage for each test generated suite was furthermore examined. In comparing Figure~\ref{fig:NumTests} and the branch coverage, manual test suites increased in branch coverage as the number of test cases increased. When evaluating \textsc{EvoSuite}, the trend line has a low  $R^2$ value at 0.184, but begins in a similar trend to manual and CodePro, and actually drops in branch coverage for the two larger test suites. The branch coverage in comparison with the number of tests indicates that CodePro branch coverage drops as the number of generated test cases increases. Larger, more complex applications may require more tests to be written to increase the branch coverage. 
 
 %\begin{figure}[!t]
 %\centering
@@ -136,12 +136,8 @@ The relationship between the number of tests and the branch coverage for each te
  % \label{fig:NumTestsvsBranchCov}
 %\end{figure}
 
-
-
-
-
 %LOC vs Branch Coverage%	
-The research evaluated the relationship between LOC and Branch coverage for each of the generated test suites.  \textsc{EvoSuite}, CodePro, and manual test suites in Figure a similar trend in the decrease of Branch Coverage as the LOC of the application code increased. Only CodePro displays a larger increase in branch coverage by at least 27\%  more for the largest program netweaver in comparison with  \textsc{EvoSuite} and manual. Despite generating more tests in proportion to the application source code size,  CodePro did not meet the quality of the tests generated by \textsc{EvoSuite} and the manual written test suites.
+This experiment evaluates the relationship between LOC and Branch coverage for each of the generated test suites.  \textsc{EvoSuite}, CodePro, and manual test suites in Figure a similar trend in the decrease of Branch Coverage as the LOC of the application code increased. Only CodePro displays a larger increase in branch coverage by at least 27\%  more for the largest program netweaver in comparison with  \textsc{EvoSuite} and manual. Despite generating more tests in proportion to the application source code size,  CodePro did not meet the quality of the tests generated by \textsc{EvoSuite} and the manual written test suites.
 
 \begin{figure}[!htbp]
 \centering
@@ -154,7 +150,7 @@ For the mutation score, \textsc{EvoSuite} attained the highest scores for five o
 
 
 %Branch Coverage vs Mutation%
-This research compared the branch coverage to the mutation scores of the generated test suites. In Figures ~\ref{fig:manual_branch_mutation} and ~\ref{fig:Evo_branch_mutation}, the mutation score increased as the branch coverage increased as the mutation score increased.  Figure ~\ref{fig:CP_branch_mutation} displays a much lower $R^2$ value at 0.137, but the data indicates overall that the mutation score neither increases nor decreases with higher branch coverage. This can be explained because the mutation scores were all much lower than manual and  \textsc{EvoSuite} scores. With exception to the out-lier of a 40\% mutation score, the trend would otherwise indicate that the mutation score increases as the branch coverage increases.
+This experiment compares the branch coverage to the mutation scores of the generated test suites. In Figures ~\ref{fig:manual_branch_mutation} and ~\ref{fig:Evo_branch_mutation}, the mutation score increased as the branch coverage increased as the mutation score increased.  Figure ~\ref{fig:CP_branch_mutation} displays a much lower $R^2$ value at 0.137, but the data indicates overall that the mutation score neither increases nor decreases with higher branch coverage. This can be explained because the mutation scores were all much lower than manual and  \textsc{EvoSuite} scores. With exception to the out-lier of a 40\% mutation score, the trend would otherwise indicate that the mutation score increases as the branch coverage increases.
 
 
 %Complexity vs Mutation%
@@ -180,9 +176,12 @@ For further results from our evaluations related to LOC of the generated test su
 
 \subsection{Threats to Validity}
 %\noindent \textbf{Internal Validity}
-Measurements in quality of software tests is a subjective measurement. Although mutation score is one way to measure the quality of a test suite, ignoring the human elements of tests are nigh impossible. Developers may need to view tests in order to diagnose faults in the code, and if a developer cannot understand the test they are reading, then the cost of time and effort could be increased on the human part.
+There are several threats to the validity of this work.
+First, \textsc{EvoSuite} was used to generate test suites using its default configuration values. While tuning can have impact on the performance of a search algorithm, in the context of test data generation, it is difficult to find good settings that significantly outperform the ``default'' values suggested in the literature~\cite{arcuri2013}.  Thus, the default values were used.  Presented results in this paper represent ten test suites generated by \textsc{EvoSuite}.  Although more test suites were generated for a subset of the applications, the average and standard deviation remained the same given more executions of \textsc{EvoSuite}, and thus, ten generations can be viewed as sufficient.
 
-The tools used for coverage and mutation analysis also lead to a potential internal threat to validity.  Jacoco was used for all coverage analysis, and MAJOR was used for mutation analysis.  Jacoco is a well-founded tool for analyzing Java programs, based on Emma.  This is a standard tool for analyzing Java programs~\cite{jacoco}.  MAJOR~\cite{just2011} is a mutation tool that has been built into the Java compiler. However, other options such as PIT~\cite{ pit2014} could be used for comparison. 
+Second, the determination of the quality of software tests can be considered a subjective measurement. Although mutation score and coverage are two ways to measure test suite quality, that does not consider the readability of the test cases. If developers need to view tests in order to diagnose bugs but cannot understand what the test does, then the cost of time and effort could be increased on the human part.
+
+Third, the tools used for coverage and mutation analysis also lead to a potential internal threat to validity.  Jacoco was used for all coverage analysis, and MAJOR was used for mutation analysis.  Jacoco is a well-founded tool for analyzing Java programs, based on Emma.  This is a standard tool for analyzing Java programs~\cite{jacoco}.  MAJOR~\cite{just2011} is a mutation tool that has been built into the Java compiler. However, other options such as PIT~\cite{ pit2014} could be used for comparison. 
 %The statistical analysis also may be a threat to validity, as the inconsistency in how both \textsc{EvoSuite} and manually written tests are created. Also, CodePro generated some test suites with a mutation score of 0, which could mislead one to believing that CodePro has no use for creating quality tests. For this reason we removed these results to give a better impression of the trend CodePro test suites.
 
 %\noindent \textbf{External Validity}
@@ -190,6 +189,6 @@ The tools used for coverage and mutation analysis also lead to a potential inter
 %\noindent \textbf{Construct Validity}
 \section{Discussion}
 \label{sec:discussion}
-In comparison with LOC and the number of Test Cases, it would seem that the higher proportion of Test Cases to the original application code does not necessarily imply that either or both the mutation score and branch coverage will be high.  Especially in the case of CodePro, in which many tests are produced in a skeleton-like fashion, the mutation scores and branch coverage are much lower than  \textsc{EvoSuite} and manual tests. However, as indicated earlier, the skeleton approach to generation gives developers a template to easily modify and implement. With the quick generation that covers a large scope of the application, developers are not required to spend time or effort looking for where the test should be, but rather enhancing them later. This feature could be more desirable to those who would like the higher coverage from an automated test suite like  \textsc{EvoSuite}, but have the flexibility to write the quality of tests relieved from manually generated tests.
+In comparing LOC and number of test cases, we learn that higher proportions of test cases compared to original application code does not necessarily imply that either mutation score or branch coverage will be high.  Especially in the case of CodePro, in which many tests are produced in a skeleton-like fashion, the mutation scores and branch coverage are much lower than  \textsc{EvoSuite} and manual tests. However, as indicated earlier, the skeleton approach to generation gives developers a template to easily modify and implement. Automated test suite generation can aide the developer in covering a large scope of the application, allowing developers to reduce the time and effort spent in identifying source code to be covered by tests and then enhance the tests later.  This feature could be desirable for developers who would like help in achieving higher coverage but with more manual effort compared to fully automated test generation tools such as \textsc{EvoSuite}.
 
 From a pure comparison of quality between \textsc{EvoSuite}, CodePro, and manually written test suites, manual test suites have the potential for attaining the highest coverage and mutation scores. Potential can only be measured by the individual writer of the tests, and could be one of the reasons the data relating to the manual test suites are less consistent than that of \textsc{EvoSuite} and CodePro. \textsc{EvoSuite} almost retains the same quality as Manual tests, achieving an average of only one percent less in total for mutation score of \textsc{EvoSuite} at 39.8\%  and manual with 40.3\%. \textsc{EvoSuite} would reduce the time and cost of implementing the tests in comparison to manual tests. Also \textsc{EvoSuite} can maintain the relative quality as manual tests, but provide little modifiability of the tests, as the genetic algorithm changes the test suite every time.
