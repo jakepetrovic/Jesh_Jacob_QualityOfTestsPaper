@@ -29,19 +29,7 @@ Other tools are capable of generating fully executable tests that require no mod
 
 \subsubsection{Learning-Based}
 
-Another set of automatic test case generation tools use learning algorithms to improve the overall quality of the
-generated test suites.  The two top-ranked tools in this area are Randoop and \textsc{EvoSuite}~\cite{fraser2013a}.
-Randoop~\cite{pacheco2007feedback} automatically creates unit tests for Java classes in JUnit format using
-feedback-directed random test generation. This technique randomly generates sequences of methods and constructor
-invocations for the classes under test and uses the sequences to create tests. Randoop then executes the sequences it
-creates and uses the results of the execution to create more assertions, attempting to  avoid redundant and illegal
-inputs while guiding towards generation of tests that lead to new object states. 
+Another set of automatic test case generation tools use learning algorithms to improve the overall quality of the generated test suites.  The two top-ranked tools in this area are Randoop and \textsc{EvoSuite}~\cite{fraser2013a}.  Using feedback-directed random test generation, Randoop automatically creates tests for Java classes in JUnit format~\cite{pacheco2007feedback}. This technique randomly generates sequences of methods and constructor invocations for the classes under test and uses the sequences to create tests. Randoop then executes the sequences it creates and uses the results of the execution to create more assertions, attempting to  avoid redundant and illegal inputs while guiding towards generation of tests that lead to new object states. 
 
-\textsc{EvoSuite}~\cite{fraser:2011:eat:2025113.2025179}, which is used in this paper, ranked first in SBST 2013 Tool
-Competition~\cite{fraser2013a} and similarly uses a learning algorithm to generate a full, executable test suite.  The
-tool's evolutionary search approach evolves whole test suites with respect to both coverage and mutation scores.
-Optimization with respect to a coverage criterion rather than individual coverage goals helps the algorithm to not be
-adversely influenced by difficulty of infeasibility of individual coverage goals.  Repeated mutation testing is used to
-produce a reduced set of assertions that maximizes the number of seeded defects in a class that are revealed by the test
-cases.
+\textsc{EvoSuite}~\cite{fraser:2011:eat:2025113.2025179}, which is used in this paper, ranked first in SBST 2013 Tool Competition~\cite{fraser2013a} and similarly uses a learning algorithm to generate a full, executable test suite.  The tool's evolutionary search approach evolves whole test suites with respect to both coverage and mutation scores.  Optimization with respect to a coverage criterion rather than individual coverage goals helps the algorithm to not be adversely influenced by difficulty of infeasibility of individual coverage goals.  Repeated mutation testing is used to produce a reduced set of assertions that maximizes the number of seeded defects in a class that are revealed by the generated test cases.
 
