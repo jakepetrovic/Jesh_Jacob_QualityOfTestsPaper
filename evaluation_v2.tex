@@ -69,7 +69,7 @@ Netweaver is the largest program under consideration with nearly 18K lines of co
   \label{fig:NumTests}
 \end{figure*}
 
-After the case study applications were identified and analyzed, automated test tools \textsc{EvoSuite} and Codepro were used to generate test suites~\cite{CodePro1, fraser:2011:eat:2025113.2025179}. As \textsc{EvoSuite} is non-deterministic and learning-based, ten sets of tests were generated for evaluation, and the standard deviation is given across the ten test generations for all \textsc{EvoSuite} related results.  \textsc{EvoSuite} was configured using its default values~\cite{arcuri2013}.
+After the case study applications were identified and analyzed, automated test tools \textsc{EvoSuite} and CodePro were used to generate test suites~\cite{CodePro1, fraser:2011:eat:2025113.2025179}. As \textsc{EvoSuite} is non-deterministic and learning-based, ten sets of tests were generated for evaluation, and the standard deviation is given across the ten test generations for all \textsc{EvoSuite} related results.  \textsc{EvoSuite} was configured using its default values~\cite{arcuri2013}.
 
 \noindent \textbf{Evaluation Metrics:}
 
@@ -90,7 +90,7 @@ In the first set of experiments, we tracked the time required to generate the te
 Next, the number of test cases generated per method was analyzed.  Figure~\ref{fig:NumTests} shows the number of tests generated.  For the ten case study applications, CodePro produced an average of  5\% more test cases than \textsc{EvoSuite} and 16.4 \% more than were written manually.  \textsc{EvoSuite} produced, on average, 4\% than were created manually. 
 
 %Execution time
-The time to execute the generated test suites was also evaluated. Figure~\ref{fig:TestExecTime} reveals that the execution time between manual, \textsc{EvoSuite}, and CodePro test suites, with test execution times ranging from between 2.1 to 25.5 seconds. In comparison to Figure~\ref{fig:NumTests}, the netweaver test suite contains the the most test cases. However, the netweaver CodePro test suite does not take the longest to execute.  Rather, the second largest test suite, jsecurity by \textsc{EvoSuite}, does. This may be the result of skeleton-like test cases that CodePro produces. CodePro's skeleton-like test cases provide comments for developers to find where to write test cases, forming a hybrid approach to the automated and manual world of testing.%\footnote{ For more information on the composition of these test cases, please reference our material at this web page: http://cs.uccs.edu/~kjustice/QSIC2014/} 
+The time to execute the generated test suites was also evaluated. Figure~\ref{fig:TestExecTime} reveals that the execution time between manual, \textsc{EvoSuite}, and CodePro test suites, with test execution times ranging from between 2.1 to 25.5 seconds. In comparison to Figure~\ref{fig:NumTests}, the Netweaver test suite contains the the most test cases. However, the Netweaver CodePro test suite does not take the longest to execute.  Rather, the second largest test suite, Jsecurity by \textsc{EvoSuite}, does. This may be the result of skeleton-like test cases that CodePro produces. CodePro's skeleton-like test cases provide comments for developers to find where to write test cases, forming a hybrid approach to the automated and manual world of testing.%\footnote{ For more information on the composition of these test cases, please reference our material at this web page: http://cs.uccs.edu/~kjustice/QSIC2014/} 
 
 %Time of Execution
 \begin{figure*}[!t]
@@ -109,7 +109,7 @@ The time to execute the generated test suites was also evaluated. Figure~\ref{fi
 
 
 %LOC
-The LOC for the generated test suites and the application source code were also compared. Figure~\ref{fig:LOC} shows that CodePro generates more LOC than either manual or \textsc{EvoSuite} test suites. As shown in Figure~\ref{fig:NumTests}, CodePro generated the most tests out of the automated test generators. In a comparison between the two graphs, a close correlation can be seen between the LOC and the number of tests. For example, netweaver contains 17953 LOC, and CodePro produces 3513 test cases for the application. Likewise, the other applications and their tests suites share this same trend. As the size of the application increases, the number of tests will increase as well. In proportion to the original lines of code, the number of test cases are greatest with CodePro, then \textsc{EvoSuite}, and then manual. 
+The LOC for the generated test suites and the application source code were also compared. Figure~\ref{fig:LOC} shows that CodePro generates more LOC than either manual or \textsc{EvoSuite} test suites. As shown in Figure~\ref{fig:NumTests}, CodePro generated the most tests out of the automated test generators. In a comparison between the two graphs, a close correlation can be seen between the LOC and the number of tests. For example, Netweaver contains 17953 LOC, and CodePro produces 3513 test cases for the application. Likewise, the other applications and their tests suites share this same trend. As the size of the application increases, the number of tests will increase as well. In proportion to the original lines of code, the number of test cases are greatest with CodePro, then \textsc{EvoSuite}, and then manual. 
  
 %Branch Cov
 %Mutation Score
@@ -140,7 +140,7 @@ The relationship between the number of tests and the branch coverage for each te
 %\end{figure}
 
 %LOC vs Branch Coverage%	
-Our next experiment evaluates the relationship between LOC and Branch coverage for each of the generated test suites.  \textsc{EvoSuite}, CodePro, and manual test suites demonstrated a similar trend in the decrease of Branch Coverage as the LOC of the application code increased. Only CodePro displays a larger increase in branch coverage by at least 27\%  more for the largest program, netweaver, in comparison with  \textsc{EvoSuite} and manual. Despite generating more tests in proportion to the application source code size,  CodePro did not meet the quality of the tests generated by \textsc{EvoSuite} or the manually written test suites.
+Our next experiment evaluates the relationship between LOC and Branch coverage for each of the generated test suites.  \textsc{EvoSuite}, CodePro, and manual test suites demonstrated a similar trend in the decrease of Branch Coverage as the LOC of the application code increased. Only CodePro displays a larger increase in branch coverage by at least 27\%  more for the largest program, Netweaver, in comparison with  \textsc{EvoSuite} and manual. Despite generating more tests in proportion to the application source code size,  CodePro did not meet the quality of the tests generated by \textsc{EvoSuite} or the manually written test suites.
 
 \begin{figure}[!t]
 \centering
@@ -149,7 +149,7 @@ Our next experiment evaluates the relationship between LOC and Branch coverage f
   \label{fig:CP_branch_mutation}
 \end{figure}
 %Mutation score%
-For the mutation score, \textsc{EvoSuite} attained the highest scores for five of ten applications. However, dieberse scores ranged dramatically between 18\% and 40\%.  CodePro resulted in the worst mutation scores, acquiring a  0\% mutation score for lagoon, saxpath, and xisemele. This is due to the skeleton-like tests that CodePro often creates.  While these tests can lead to the execution of branching behavior due to the tool's goal of generating test cases that exercise each line of code, the oracles, if they exist, are often poorer than \textsc{EvoSuite}'s intelligent oracles and thus miss capturing faults. \textsc{EvoSuite}, on the other hand, was able to generate test suites averaging between 33.7\% and 77.1\% for these applications. Manual tests remained between 18.3\% and 56.5\%  mutation scores between the applications, while CodePro's mutation scores ranged between 0\% and 41.3\%. 
+For the mutation score, \textsc{EvoSuite} attained the highest scores for five of ten applications. However, Diebierse scores ranged dramatically between 18\% and 40\%.  CodePro resulted in the worst mutation scores, acquiring a  0\% mutation score for lagoon, Saxpath, and Xisemele. This is due to the skeleton-like tests that CodePro often creates.  While these tests can lead to the execution of branching behavior due to the tool's goal of generating test cases that exercise each line of code, the oracles, if they exist, are often poorer than \textsc{EvoSuite}'s intelligent oracles and thus miss capturing faults. \textsc{EvoSuite}, on the other hand, was able to generate test suites averaging between 33.7\% and 77.1\% for these applications. Manual tests remained between 18.3\% and 56.5\%  mutation scores between the applications, while CodePro's mutation scores ranged between 0\% and 41.3\%. 
 
 %Branch Coverage vs Mutation%
 % ~\ref{fig:manual_branch_mutation},~\ref{fig:Evo_branch_mutation}, and ~\ref{fig:CP_branch_mutation} compares the
@@ -165,7 +165,7 @@ The Kendall $\tau$ measurement of correlation, calculated in {\tt R}, falls betw
 \begin{figure}[!t]
 \centering
   \includegraphics[width=\linewidth]{RGraphs/Evosuite_BranchCov_versus_Mutation_poly.pdf}
-    \caption{Mutation Score compared to Branch Coverage for test suites generated by Evosuite.}
+    \caption{Mutation Score compared to Branch Coverage for test suites generated by EvoSuite.}
   \label{fig:Evo_branch_mutation}
 \end{figure}
 \begin{figure}[!t]
