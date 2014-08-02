@@ -1,0 +1,775 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+org.jsecurity.util.StringUtils
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: org.jsecurity.util.StringUtils: 96.34%</ul><ul>
+<li>9418 fitness evaluations, 190 generations, 115671 statements, 6267 tests.
+<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>Coverage: 73/76 branches, 14/14 methods, 79/82 total goals
+<li>Mutation score: 23%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>StringUtils stringUtils0 = new StringUtils();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringUtils0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot;No valid key could be found in line [&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot; &quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasLength((String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase((String) null, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;which the split location could be determined.&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;No valid key could be found in line [&quot;, (String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;No valid key could be found in line [&quot;, &quot;-$Z`Je'E?&lt;qu&amp;*zC&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = StringUtils.clean((String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;&quot;, '[', '\\', 'v', true, true);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray((String) null, (String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;No valid key could be found in line [&quot;, &quot;MU6KKeB%nTM&quot;, true, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;]&quot;, &quot;&quot;, false, true);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot; &quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.toStringArray((Collection) null);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;No&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * Unable to determine Key/Value pair from line [No].  There is no space from which the split location could be determined.
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;=ndRUi\&quot;8=&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * No valid key could be found in line [=ndRUi\&quot;8=] to form a key/value pair.
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot;{s. =-div[~A/WOD)&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No valid key could be found in line [&quot;, 'E', 'n', 'c', true, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 22</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;=ndRUi\&quot;8=&quot;, ' ', '=', 'x');
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 23</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No valid key could be found in line [&quot;, 'U', '2', 'n', true, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 24</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;bL=L:BR`BV6&quot;, 'j', 'j', ':');
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 25</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;Tf|3,J!,&quot;, '|', 's', '.', false, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 26</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;8{.S/XUQ-aRnDJ-J&quot;, 'D', 'Q');
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;7jzhL+,mNETp&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> * Licensed to the Apache Software Foundation (ASF) under one
+<span class="nocode"><a name="3">  3: </a></span> * or more contributor license agreements.  See the NOTICE file
+<span class="nocode"><a name="4">  4: </a></span> * distributed with this work for additional information
+<span class="nocode"><a name="5">  5: </a></span> * regarding copyright ownership.  The ASF licenses this file
+<span class="nocode"><a name="6">  6: </a></span> * to you under the Apache License, Version 2.0 (the
+<span class="nocode"><a name="7">  7: </a></span> * &quot;License&quot;); you may not use this file except in compliance
+<span class="nocode"><a name="8">  8: </a></span> * with the License.  You may obtain a copy of the License at
+<span class="nocode"><a name="9">  9: </a></span> *
+<span class="nocode"><a name="10"> 10: </a></span> *     http://www.apache.org/licenses/LICENSE-2.0
+<span class="nocode"><a name="11"> 11: </a></span> *
+<span class="nocode"><a name="12"> 12: </a></span> * Unless required by applicable law or agreed to in writing,
+<span class="nocode"><a name="13"> 13: </a></span> * software distributed under the License is distributed on an
+<span class="nocode"><a name="14"> 14: </a></span> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+<span class="nocode"><a name="15"> 15: </a></span> * KIND, either express or implied.  See the License for the
+<span class="nocode"><a name="16"> 16: </a></span> * specific language governing permissions and limitations
+<span class="nocode"><a name="17"> 17: </a></span> * under the License.
+<span class="nocode"><a name="18"> 18: </a></span> */
+<span class="nocode"><a name="19"> 19: </a></span>package org.jsecurity.util;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>import java.text.ParseException;
+<span class="nocode"><a name="22"> 22: </a></span>import java.util.ArrayList;
+<span class="nocode"><a name="23"> 23: </a></span>import java.util.Collection;
+<span class="nocode"><a name="24"> 24: </a></span>import java.util.List;
+<span class="nocode"><a name="25"> 25: </a></span>import java.util.StringTokenizer;
+<span class="nocode"><a name="26"> 26: </a></span>
+<span class="nocode"><a name="27"> 27: </a></span>/**
+<span class="nocode"><a name="28"> 28: </a></span> * &lt;p&gt;Simple utility class for String operations useful across the framework.
+<span class="nocode"><a name="29"> 29: </a></span> *
+<span class="nocode"><a name="30"> 30: </a></span> * &lt;p&gt;Some methods in this class were copied from the Spring Framework so we didn't have to re-invent the wheel,
+<span class="nocode"><a name="31"> 31: </a></span> * and in these cases, we have retained all license, copyright and author information.
+<span class="nocode"><a name="32"> 32: </a></span> *
+<span class="nocode"><a name="33"> 33: </a></span> * @author Les Hazlewood
+<span class="nocode"><a name="34"> 34: </a></span> * @author Rod Johnson
+<span class="nocode"><a name="35"> 35: </a></span> * @author Juergen Hoeller
+<span class="nocode"><a name="36"> 36: </a></span> * @author Keith Donald
+<span class="nocode"><a name="37"> 37: </a></span> * @author Rob Harrop
+<span class="nocode"><a name="38"> 38: </a></span> * @since 0.9
+<span class="nocode"><a name="39"> 39: </a></span> */
+<span class="nocode"><a name="40"> 40: </a></span>public class StringUtils {
+<span class="nocode"><a name="41"> 41: </a></span>
+<span class="nocode"><a name="42"> 42: </a></span>    //TODO - complete JavaDoc
+<span class="nocode"><a name="43"> 43: </a></span>
+<span class="nocode"><a name="44"> 44: </a></span>    /** Constant representing the empty string, equal to &amp;quot;&amp;quot; */
+<span class="nocode"><a name="45"> 45: </a></span>    public static final String EMPTY_STRING = &quot;&quot;;
+<span class="nocode"><a name="46"> 46: </a></span>
+<span class="nocode"><a name="47"> 47: </a></span>    /** Constant representing the default delimiter character (comma), equal to &lt;code&gt;','&lt;/code&gt; */
+<span class="nocode"><a name="48"> 48: </a></span>    public static final char DEFAULT_DELIMITER_CHAR = ',';
+<span class="nocode"><a name="49"> 49: </a></span>
+<span class="nocode"><a name="50"> 50: </a></span>    /** Constant representing the default quote character (double quote), equal to '&amp;quot;'&lt;/code&gt; */
+<span class="nocode"><a name="51"> 51: </a></span>    public static final char DEFAULT_QUOTE_CHAR = '&quot;';
+<span class="nocode"><a name="52"> 52: </a></span>
+<span class="nocode"><a name="53"> 53: </a></span>    /**
+<span class="nocode"><a name="54"> 54: </a></span>     * Check whether the given String has actual text.
+<span class="nocode"><a name="55"> 55: </a></span>     * More specifically, returns &lt;code&gt;true&lt;/code&gt; if the string not &lt;code&gt;null&lt;/code&gt;,
+<span class="nocode"><a name="56"> 56: </a></span>     * its length is greater than 0, and it contains at least one non-whitespace character.
+<span class="nocode"><a name="57"> 57: </a></span>     * &lt;p/&gt;
+<span class="nocode"><a name="58"> 58: </a></span>     * &lt;code&gt;StringUtils.hasText(null) == false&lt;br/&gt;
+<span class="nocode"><a name="59"> 59: </a></span>     * StringUtils.hasText(&quot;&quot;) == false&lt;br/&gt;
+<span class="nocode"><a name="60"> 60: </a></span>     * StringUtils.hasText(&quot; &quot;) == false&lt;br/&gt;
+<span class="nocode"><a name="61"> 61: </a></span>     * StringUtils.hasText(&quot;12345&quot;) == true&lt;br/&gt;
+<span class="nocode"><a name="62"> 62: </a></span>     * StringUtils.hasText(&quot; 12345 &quot;) == true&lt;/code&gt;
+<span class="nocode"><a name="63"> 63: </a></span>     *
+<span class="nocode"><a name="64"> 64: </a></span>     * &lt;p&gt;Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="65"> 65: </a></span>     *
+<span class="nocode"><a name="66"> 66: </a></span>     * @param str the String to check (may be &lt;code&gt;null&lt;/code&gt;)
+<span class="nocode"><a name="67"> 67: </a></span>     * @return &lt;code&gt;true&lt;/code&gt; if the String is not &lt;code&gt;null&lt;/code&gt;, its length is
+<span class="nocode"><a name="68"> 68: </a></span>     *         greater than 0, and it does not contain whitespace only
+<span class="nocode"><a name="69"> 69: </a></span>     * @see java.lang.Character#isWhitespace
+<span class="nocode"><a name="70"> 70: </a></span>     */
+<span class="nocode"><a name="71"> 71: </a></span>    public static boolean hasText(String str) {
+<span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">        if (!hasLength(str)) {</span>
+<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">            return false;</span>
+<span class="nocode"><a name="74"> 74: </a></span>        }
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        int strLen = str.length();</span>
+<span class="nocode"><a name="76"> 76: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; strLen; i++) {</span>
+<span class="nocode"><a name="77"> 77: </a></span><span style="background-color: #ffffcc">            if (!Character.isWhitespace(str.charAt(i))) {</span>
+<span class="nocode"><a name="78"> 78: </a></span><span style="background-color: #ffffcc">                return true;</span>
+<span class="nocode"><a name="79"> 79: </a></span>            }
+<span class="nocode"><a name="80"> 80: </a></span>        }
+<span class="nocode"><a name="81"> 81: </a></span><span style="background-color: #ffffcc">        return false;</span>
+<span class="nocode"><a name="82"> 82: </a></span>    }
+<span class="nocode"><a name="83"> 83: </a></span>
+<span class="nocode"><a name="84"> 84: </a></span>    /**
+<span class="nocode"><a name="85"> 85: </a></span>     * Check that the given String is neither &lt;code&gt;null&lt;/code&gt; nor of length 0.
+<span class="nocode"><a name="86"> 86: </a></span>     * Note: Will return &lt;code&gt;true&lt;/code&gt; for a String that purely consists of whitespace.
+<span class="nocode"><a name="87"> 87: </a></span>     * &lt;p/&gt;
+<span class="nocode"><a name="88"> 88: </a></span>     * &lt;code&gt;StringUtils.hasLength(null) == false&lt;br/&gt;
+<span class="nocode"><a name="89"> 89: </a></span>     * StringUtils.hasLength(&quot;&quot;) == false&lt;br/&gt;
+<span class="nocode"><a name="90"> 90: </a></span>     * StringUtils.hasLength(&quot; &quot;) == true&lt;br/&gt;
+<span class="nocode"><a name="91"> 91: </a></span>     * StringUtils.hasLength(&quot;Hello&quot;) == true&lt;/code&gt;
+<span class="nocode"><a name="92"> 92: </a></span>     * &lt;p/&gt;
+<span class="nocode"><a name="93"> 93: </a></span>     * Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="94"> 94: </a></span>     *
+<span class="nocode"><a name="95"> 95: </a></span>     * @param str the String to check (may be &lt;code&gt;null&lt;/code&gt;)
+<span class="nocode"><a name="96"> 96: </a></span>     * @return &lt;code&gt;true&lt;/code&gt; if the String is not null and has length
+<span class="nocode"><a name="97"> 97: </a></span>     * @see #hasText(String)
+<span class="nocode"><a name="98"> 98: </a></span>     */
+<span class="nocode"><a name="99"> 99: </a></span>    public static boolean hasLength(String str) {
+<span class="nocode"><a name="100">100: </a></span><span style="background-color: #ffffcc">        return (str != null &amp;&amp; str.length() &gt; 0);</span>
+<span class="nocode"><a name="101">101: </a></span>    }
+<span class="nocode"><a name="102">102: </a></span>
+<span class="nocode"><a name="103">103: </a></span>
+<span class="nocode"><a name="104">104: </a></span>    /**
+<span class="nocode"><a name="105">105: </a></span>     * Test if the given String starts with the specified prefix,
+<span class="nocode"><a name="106">106: </a></span>     * ignoring upper/lower case.
+<span class="nocode"><a name="107">107: </a></span>     *
+<span class="nocode"><a name="108">108: </a></span>     * &lt;p&gt;Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="109">109: </a></span>     *
+<span class="nocode"><a name="110">110: </a></span>     * @param str    the String to check
+<span class="nocode"><a name="111">111: </a></span>     * @param prefix the prefix to look for
+<span class="nocode"><a name="112">112: </a></span>     * @return &lt;code&gt;true&lt;/code&gt; starts with the specified prefix (ignoring case), &lt;code&gt;false&lt;/code&gt; if it does not.
+<span class="nocode"><a name="113">113: </a></span>     * @see java.lang.String#startsWith
+<span class="nocode"><a name="114">114: </a></span>     */
+<span class="nocode"><a name="115">115: </a></span>    public static boolean startsWithIgnoreCase(String str, String prefix) {
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">        if (str == null || prefix == null) {</span>
+<span class="nocode"><a name="117">117: </a></span><span style="background-color: #ffffcc">            return false;</span>
+<span class="nocode"><a name="118">118: </a></span>        }
+<span class="nocode"><a name="119">119: </a></span><span style="background-color: #ffffcc">        if (str.startsWith(prefix)) {</span>
+<span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="121">121: </a></span>        }
+<span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">        if (str.length() &lt; prefix.length()) {</span>
+<span class="nocode"><a name="123">123: </a></span>            return false;
+<span class="nocode"><a name="124">124: </a></span>        }
+<span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">        String lcStr = str.substring(0, prefix.length()).toLowerCase();</span>
+<span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">        String lcPrefix = prefix.toLowerCase();</span>
+<span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">        return lcStr.equals(lcPrefix);</span>
+<span class="nocode"><a name="128">128: </a></span>    }
+<span class="nocode"><a name="129">129: </a></span>
+<span class="nocode"><a name="130">130: </a></span>    /**
+<span class="nocode"><a name="131">131: </a></span>     * Returns a 'cleaned' representation of the specified argument.  'Cleaned' is defined as the following:
+<span class="nocode"><a name="132">132: </a></span>     *
+<span class="nocode"><a name="133">133: </a></span>     * &lt;ol&gt;
+<span class="nocode"><a name="134">134: </a></span>     * &lt;li&gt;If the specified &lt;code&gt;String&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, return &lt;code&gt;null&lt;/code&gt;&lt;/li&gt;
+<span class="nocode"><a name="135">135: </a></span>     * &lt;li&gt;If not &lt;code&gt;null&lt;/code&gt;, {@link String#trim() trim()} it.&lt;/li&gt;
+<span class="nocode"><a name="136">136: </a></span>     * &lt;li&gt;If the trimmed string is equal to the empty String (i.e. &amp;quot;&amp;quot;), return &lt;code&gt;null&lt;/code&gt;&lt;/li&gt;
+<span class="nocode"><a name="137">137: </a></span>     * &lt;li&gt;If the trimmed string is not the empty string, return the trimmed version&lt;/li&gt;.
+<span class="nocode"><a name="138">138: </a></span>     * &lt;/ol&gt;
+<span class="nocode"><a name="139">139: </a></span>     *
+<span class="nocode"><a name="140">140: </a></span>     * Therefore this method always ensures that any given string has trimmed text, and if it doesn't, &lt;code&gt;null&lt;/code&gt;
+<span class="nocode"><a name="141">141: </a></span>     * is returned.
+<span class="nocode"><a name="142">142: </a></span>     *
+<span class="nocode"><a name="143">143: </a></span>     * @param in the input String to clean.
+<span class="nocode"><a name="144">144: </a></span>     * @return a populated-but-trimmed String or &lt;code&gt;null&lt;/code&gt; otherwise
+<span class="nocode"><a name="145">145: </a></span>     */
+<span class="nocode"><a name="146">146: </a></span>    public static String clean(String in) {
+<span class="nocode"><a name="147">147: </a></span><span style="background-color: #ffffcc">        String out = in;</span>
+<span class="nocode"><a name="148">148: </a></span>
+<span class="nocode"><a name="149">149: </a></span><span style="background-color: #ffffcc">        if (in != null) {</span>
+<span class="nocode"><a name="150">150: </a></span><span style="background-color: #ffffcc">            out = in.trim();</span>
+<span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">            if (out.equals(EMPTY_STRING)) {</span>
+<span class="nocode"><a name="152">152: </a></span><span style="background-color: #ffffcc">                out = null;</span>
+<span class="nocode"><a name="153">153: </a></span>            }
+<span class="nocode"><a name="154">154: </a></span>        }
+<span class="nocode"><a name="155">155: </a></span>
+<span class="nocode"><a name="156">156: </a></span><span style="background-color: #ffffcc">        return out;</span>
+<span class="nocode"><a name="157">157: </a></span>    }
+<span class="nocode"><a name="158">158: </a></span>
+<span class="nocode"><a name="159">159: </a></span>    /**
+<span class="nocode"><a name="160">160: </a></span>     * Tokenize the given String into a String array via a StringTokenizer.
+<span class="nocode"><a name="161">161: </a></span>     * Trims tokens and omits empty tokens.
+<span class="nocode"><a name="162">162: </a></span>     * &lt;p&gt;The given delimiters string is supposed to consist of any number of
+<span class="nocode"><a name="163">163: </a></span>     * delimiter characters. Each of those characters can be used to separate
+<span class="nocode"><a name="164">164: </a></span>     * tokens. A delimiter is always a single character; for multi-character
+<span class="nocode"><a name="165">165: </a></span>     * delimiters, consider using &lt;code&gt;delimitedListToStringArray&lt;/code&gt;
+<span class="nocode"><a name="166">166: </a></span>     *
+<span class="nocode"><a name="167">167: </a></span>     * &lt;p&gt;Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="168">168: </a></span>     *
+<span class="nocode"><a name="169">169: </a></span>     * @param str        the String to tokenize
+<span class="nocode"><a name="170">170: </a></span>     * @param delimiters the delimiter characters, assembled as String
+<span class="nocode"><a name="171">171: </a></span>     *                   (each of those characters is individually considered as delimiter).
+<span class="nocode"><a name="172">172: </a></span>     * @return an array of the tokens
+<span class="nocode"><a name="173">173: </a></span>     * @see java.util.StringTokenizer
+<span class="nocode"><a name="174">174: </a></span>     * @see java.lang.String#trim()
+<span class="nocode"><a name="175">175: </a></span>     */
+<span class="nocode"><a name="176">176: </a></span>    public static String[] tokenizeToStringArray(String str, String delimiters) {
+<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">        return tokenizeToStringArray(str, delimiters, true, true);</span>
+<span class="nocode"><a name="178">178: </a></span>    }
+<span class="nocode"><a name="179">179: </a></span>
+<span class="nocode"><a name="180">180: </a></span>    /**
+<span class="nocode"><a name="181">181: </a></span>     * Tokenize the given String into a String array via a StringTokenizer.
+<span class="nocode"><a name="182">182: </a></span>     * &lt;p&gt;The given delimiters string is supposed to consist of any number of
+<span class="nocode"><a name="183">183: </a></span>     * delimiter characters. Each of those characters can be used to separate
+<span class="nocode"><a name="184">184: </a></span>     * tokens. A delimiter is always a single character; for multi-character
+<span class="nocode"><a name="185">185: </a></span>     * delimiters, consider using &lt;code&gt;delimitedListToStringArray&lt;/code&gt;
+<span class="nocode"><a name="186">186: </a></span>     *
+<span class="nocode"><a name="187">187: </a></span>     * &lt;p&gt;Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="188">188: </a></span>     *
+<span class="nocode"><a name="189">189: </a></span>     * @param str               the String to tokenize
+<span class="nocode"><a name="190">190: </a></span>     * @param delimiters        the delimiter characters, assembled as String
+<span class="nocode"><a name="191">191: </a></span>     *                          (each of those characters is individually considered as delimiter)
+<span class="nocode"><a name="192">192: </a></span>     * @param trimTokens        trim the tokens via String's &lt;code&gt;trim&lt;/code&gt;
+<span class="nocode"><a name="193">193: </a></span>     * @param ignoreEmptyTokens omit empty tokens from the result array
+<span class="nocode"><a name="194">194: </a></span>     *                          (only applies to tokens that are empty after trimming; StringTokenizer
+<span class="nocode"><a name="195">195: </a></span>     *                          will not consider subsequent delimiters as token in the first place).
+<span class="nocode"><a name="196">196: </a></span>     * @return an array of the tokens (&lt;code&gt;null&lt;/code&gt; if the input String
+<span class="nocode"><a name="197">197: </a></span>     *         was &lt;code&gt;null&lt;/code&gt;)
+<span class="nocode"><a name="198">198: </a></span>     * @see java.util.StringTokenizer
+<span class="nocode"><a name="199">199: </a></span>     * @see java.lang.String#trim()
+<span class="nocode"><a name="200">200: </a></span>     */
+<span class="nocode"><a name="201">201: </a></span>    @SuppressWarnings({&quot;unchecked&quot;})
+<span class="nocode"><a name="202">202: </a></span>    public static String[] tokenizeToStringArray(
+<span class="nocode"><a name="203">203: </a></span>            String str, String delimiters, boolean trimTokens, boolean ignoreEmptyTokens) {
+<span class="nocode"><a name="204">204: </a></span>
+<span class="nocode"><a name="205">205: </a></span><span style="background-color: #ffffcc">        if (str == null) {</span>
+<span class="nocode"><a name="206">206: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="207">207: </a></span>        }
+<span class="nocode"><a name="208">208: </a></span><span style="background-color: #ffffcc">        StringTokenizer st = new StringTokenizer(str, delimiters);</span>
+<span class="nocode"><a name="209">209: </a></span><span style="background-color: #ffffcc">        List tokens = new ArrayList();</span>
+<span class="nocode"><a name="210">210: </a></span><span style="background-color: #ffffcc">        while (st.hasMoreTokens()) {</span>
+<span class="nocode"><a name="211">211: </a></span><span style="background-color: #ffffcc">            String token = st.nextToken();</span>
+<span class="nocode"><a name="212">212: </a></span><span style="background-color: #ffffcc">            if (trimTokens) {</span>
+<span class="nocode"><a name="213">213: </a></span><span style="background-color: #ffffcc">                token = token.trim();</span>
+<span class="nocode"><a name="214">214: </a></span>            }
+<span class="nocode"><a name="215">215: </a></span><span style="background-color: #ffffcc">            if (!ignoreEmptyTokens || token.length() &gt; 0) {</span>
+<span class="nocode"><a name="216">216: </a></span><span style="background-color: #ffffcc">                tokens.add(token);</span>
+<span class="nocode"><a name="217">217: </a></span>            }
+<span class="nocode"><a name="218">218: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="219">219: </a></span><span style="background-color: #ffffcc">        return toStringArray(tokens);</span>
+<span class="nocode"><a name="220">220: </a></span>    }
+<span class="nocode"><a name="221">221: </a></span>
+<span class="nocode"><a name="222">222: </a></span>    /**
+<span class="nocode"><a name="223">223: </a></span>     * Copy the given Collection into a String array.
+<span class="nocode"><a name="224">224: </a></span>     * The Collection must contain String elements only.
+<span class="nocode"><a name="225">225: </a></span>     *
+<span class="nocode"><a name="226">226: </a></span>     * &lt;p&gt;Copied from the Spring Framework while retaining all license, copyright and author information.
+<span class="nocode"><a name="227">227: </a></span>     *
+<span class="nocode"><a name="228">228: </a></span>     * @param collection the Collection to copy
+<span class="nocode"><a name="229">229: </a></span>     * @return the String array (&lt;code&gt;null&lt;/code&gt; if the passed-in
+<span class="nocode"><a name="230">230: </a></span>     *         Collection was &lt;code&gt;null&lt;/code&gt;)
+<span class="nocode"><a name="231">231: </a></span>     */
+<span class="nocode"><a name="232">232: </a></span>    @SuppressWarnings({&quot;unchecked&quot;})
+<span class="nocode"><a name="233">233: </a></span>    public static String[] toStringArray(Collection collection) {
+<span class="nocode"><a name="234">234: </a></span><span style="background-color: #ffffcc">        if (collection == null) {</span>
+<span class="nocode"><a name="235">235: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="236">236: </a></span>        }
+<span class="nocode"><a name="237">237: </a></span><span style="background-color: #ffffcc">        return (String[]) collection.toArray(new String[collection.size()]);</span>
+<span class="nocode"><a name="238">238: </a></span>    }
+<span class="nocode"><a name="239">239: </a></span>
+<span class="nocode"><a name="240">240: </a></span>    public static String[] splitKeyValue(String aLine) throws ParseException {
+<span class="nocode"><a name="241">241: </a></span><span style="background-color: #ffffcc">        String line = clean(aLine);</span>
+<span class="nocode"><a name="242">242: </a></span><span style="background-color: #ffffcc">        if (line == null) {</span>
+<span class="nocode"><a name="243">243: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="244">244: </a></span>        }
+<span class="nocode"><a name="245">245: </a></span><span style="background-color: #ffffcc">        String[] split = line.split(&quot; &quot;, 2);</span>
+<span class="nocode"><a name="246">246: </a></span><span style="background-color: #ffffcc">        if (split.length != 2) {</span>
+<span class="nocode"><a name="247">247: </a></span>            //fallback to checking for an equals sign
+<span class="nocode"><a name="248">248: </a></span><span style="background-color: #ffffcc">            split = line.split(&quot;=&quot;, 2);</span>
+<span class="nocode"><a name="249">249: </a></span><span style="background-color: #ffffcc">            if (split.length != 2) {</span>
+<span class="nocode"><a name="250">250: </a></span><span style="background-color: #ffffcc">                String msg = &quot;Unable to determine Key/Value pair from line [&quot; + line + &quot;].  There is no space from &quot; +</span>
+<span class="nocode"><a name="251">251: </a></span>                        &quot;which the split location could be determined.&quot;;
+<span class="nocode"><a name="252">252: </a></span><span style="background-color: #ffffcc">                throw new ParseException(msg, 0);</span>
+<span class="nocode"><a name="253">253: </a></span>            }
+<span class="nocode"><a name="254">254: </a></span>
+<span class="nocode"><a name="255">255: </a></span>        }
+<span class="nocode"><a name="256">256: </a></span>
+<span class="nocode"><a name="257">257: </a></span><span style="background-color: #ffffcc">        split[0] = clean(split[0]);</span>
+<span class="nocode"><a name="258">258: </a></span><span style="background-color: #ffffcc">        split[1] = clean(split[1]);</span>
+<span class="nocode"><a name="259">259: </a></span><span style="background-color: #ffffcc">        if (split[1].startsWith(&quot;=&quot;)) {</span>
+<span class="nocode"><a name="260">260: </a></span>            //they used spaces followed by an equals followed by zero or more spaces to split the key/value pair, so
+<span class="nocode"><a name="261">261: </a></span>            //remove the equals sign to result in only the key and values in the
+<span class="nocode"><a name="262">262: </a></span><span style="background-color: #ffffcc">            split[1] = clean(split[1].substring(1));</span>
+<span class="nocode"><a name="263">263: </a></span>        }
+<span class="nocode"><a name="264">264: </a></span>
+<span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        if (split[0] == null) {</span>
+<span class="nocode"><a name="266">266: </a></span><span style="background-color: #ffffcc">            String msg = &quot;No valid key could be found in line [&quot; + line + &quot;] to form a key/value pair.&quot;;</span>
+<span class="nocode"><a name="267">267: </a></span><span style="background-color: #ffffcc">            throw new ParseException(msg, 0);</span>
+<span class="nocode"><a name="268">268: </a></span>        }
+<span class="nocode"><a name="269">269: </a></span><span style="background-color: #ffffcc">        if (split[1] == null) {</span>
+<span class="nocode"><a name="270">270: </a></span>            String msg = &quot;No corresponding value could be found in line [&quot; + line + &quot;] for key [&quot; + split[0] + &quot;]&quot;;
+<span class="nocode"><a name="271">271: </a></span>            throw new ParseException(msg, 0);
+<span class="nocode"><a name="272">272: </a></span>        }
+<span class="nocode"><a name="273">273: </a></span>
+<span class="nocode"><a name="274">274: </a></span><span style="background-color: #ffffcc">        return split;</span>
+<span class="nocode"><a name="275">275: </a></span>    }
+<span class="nocode"><a name="276">276: </a></span>
+<span class="nocode"><a name="277">277: </a></span>    public static String[] split(String line) {
+<span class="nocode"><a name="278">278: </a></span><span style="background-color: #ffffcc">        return split(line, DEFAULT_DELIMITER_CHAR);</span>
+<span class="nocode"><a name="279">279: </a></span>    }
+<span class="nocode"><a name="280">280: </a></span>
+<span class="nocode"><a name="281">281: </a></span>    public static String[] split(String line, char delimiter) {
+<span class="nocode"><a name="282">282: </a></span><span style="background-color: #ffffcc">        return split(line, delimiter, DEFAULT_QUOTE_CHAR);</span>
+<span class="nocode"><a name="283">283: </a></span>    }
+<span class="nocode"><a name="284">284: </a></span>
+<span class="nocode"><a name="285">285: </a></span>    public static String[] split(String line, char delimiter, char quoteChar) {
+<span class="nocode"><a name="286">286: </a></span><span style="background-color: #ffffcc">        return split(line, delimiter, quoteChar, quoteChar);</span>
+<span class="nocode"><a name="287">287: </a></span>    }
+<span class="nocode"><a name="288">288: </a></span>
+<span class="nocode"><a name="289">289: </a></span>    public static String[] split(String line, char delimiter, char beginQuoteChar, char endQuoteChar) {
+<span class="nocode"><a name="290">290: </a></span><span style="background-color: #ffffcc">        return split(line, delimiter, beginQuoteChar, endQuoteChar, false, true);</span>
+<span class="nocode"><a name="291">291: </a></span>    }
+<span class="nocode"><a name="292">292: </a></span>
+<span class="nocode"><a name="293">293: </a></span>    /**
+<span class="nocode"><a name="294">294: </a></span>     * Splits the specified delimited String into tokens, supporting quoted tokens so that quoted strings themselves
+<span class="nocode"><a name="295">295: </a></span>     * won't be tokenized.
+<span class="nocode"><a name="296">296: </a></span>     *
+<span class="nocode"><a name="297">297: </a></span>     * &lt;p&gt;This method's implementation is very loosely based (with significant modifications) on
+<span class="nocode"><a name="298">298: </a></span>     * &lt;a href=&quot;http://blogs.bytecode.com.au/glen&quot;&gt;Glen Smith&lt;/a&gt;'s open-source
+<span class="nocode"><a name="299">299: </a></span>     * &lt;a href=&quot;http://opencsv.svn.sourceforge.net/viewvc/opencsv/trunk/src/au/com/bytecode/opencsv/CSVReader.java?&amp;view=markup&quot;&gt;CSVReader.java&lt;/a&gt;
+<span class="nocode"><a name="300">300: </a></span>     * file.
+<span class="nocode"><a name="301">301: </a></span>     *
+<span class="nocode"><a name="302">302: </a></span>     * &lt;p&gt;That file is Apache 2.0 licensed as well, making Glen's code a great starting point for us to modify to
+<span class="nocode"><a name="303">303: </a></span>     * our needs.
+<span class="nocode"><a name="304">304: </a></span>     *
+<span class="nocode"><a name="305">305: </a></span>     * @param aLine          the String to parse
+<span class="nocode"><a name="306">306: </a></span>     * @param delimiter      the delimiter by which the &lt;tt&gt;line&lt;/tt&gt; argument is to be split
+<span class="nocode"><a name="307">307: </a></span>     * @param beginQuoteChar the character signifying the start of quoted text (so the quoted text will not be split)
+<span class="nocode"><a name="308">308: </a></span>     * @param endQuoteChar   the character signifying the end of quoted text
+<span class="nocode"><a name="309">309: </a></span>     * @param retainQuotes   if the quotes themselves should be retained when constructing the corresponding token
+<span class="nocode"><a name="310">310: </a></span>     * @param trimTokens     if leading and trailing whitespace should be trimmed from discovered tokens.
+<span class="nocode"><a name="311">311: </a></span>     * @return the tokens discovered from parsing the given delimited &lt;tt&gt;line&lt;/tt&gt;.
+<span class="nocode"><a name="312">312: </a></span>     */
+<span class="nocode"><a name="313">313: </a></span>    public static String[] split(String aLine, char delimiter, char beginQuoteChar, char endQuoteChar,
+<span class="nocode"><a name="314">314: </a></span>                                 boolean retainQuotes, boolean trimTokens) {
+<span class="nocode"><a name="315">315: </a></span><span style="background-color: #ffffcc">        String line = clean(aLine);</span>
+<span class="nocode"><a name="316">316: </a></span><span style="background-color: #ffffcc">        if (line == null) {</span>
+<span class="nocode"><a name="317">317: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="318">318: </a></span>        }
+<span class="nocode"><a name="319">319: </a></span>
+<span class="nocode"><a name="320">320: </a></span><span style="background-color: #ffffcc">        List&lt;String&gt; tokens = new ArrayList&lt;String&gt;();</span>
+<span class="nocode"><a name="321">321: </a></span><span style="background-color: #ffffcc">        StringBuffer sb = new StringBuffer();</span>
+<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">        boolean inQuotes = false;</span>
+<span class="nocode"><a name="323">323: </a></span>
+<span class="nocode"><a name="324">324: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; line.length(); i++) {</span>
+<span class="nocode"><a name="325">325: </a></span>
+<span class="nocode"><a name="326">326: </a></span><span style="background-color: #ffffcc">            char c = line.charAt(i);</span>
+<span class="nocode"><a name="327">327: </a></span><span style="background-color: #ffffcc">            if (c == beginQuoteChar) {</span>
+<span class="nocode"><a name="328">328: </a></span>                // this gets complex... the quote may end a quoted block, or escape another quote.
+<span class="nocode"><a name="329">329: </a></span>                // do a 1-char lookahead:
+<span class="nocode"><a name="330">330: </a></span><span style="background-color: #ffffcc">                if (inQuotes  // we are in quotes, therefore there can be escaped quotes in here.</span>
+<span class="nocode"><a name="331">331: </a></span>                        &amp;&amp; line.length() &gt; (i + 1)  // there is indeed another character to check.
+<span class="nocode"><a name="332">332: </a></span>                        &amp;&amp; line.charAt(i + 1) == beginQuoteChar) { // ..and that char. is a quote also.
+<span class="nocode"><a name="333">333: </a></span>                    // we have two quote chars in a row == one quote char, so consume them both and
+<span class="nocode"><a name="334">334: </a></span>                    // put one on the token. we do *not* exit the quoted text.
+<span class="nocode"><a name="335">335: </a></span>                    sb.append(line.charAt(i + 1));
+<span class="nocode"><a name="336">336: </a></span>                    i++;
+<span class="nocode"><a name="337">337: </a></span>                } else {
+<span class="nocode"><a name="338">338: </a></span><span style="background-color: #ffffcc">                    inQuotes = !inQuotes;</span>
+<span class="nocode"><a name="339">339: </a></span><span style="background-color: #ffffcc">                    if (retainQuotes) {</span>
+<span class="nocode"><a name="340">340: </a></span><span style="background-color: #ffffcc">                        sb.append(c);</span>
+<span class="nocode"><a name="341">341: </a></span>                    }
+<span class="nocode"><a name="342">342: </a></span>                }
+<span class="nocode"><a name="343">343: </a></span><span style="background-color: #ffffcc">            } else if (c == endQuoteChar) {</span>
+<span class="nocode"><a name="344">344: </a></span><span style="background-color: #ffffcc">                inQuotes = !inQuotes;</span>
+<span class="nocode"><a name="345">345: </a></span><span style="background-color: #ffffcc">                if (retainQuotes) {</span>
+<span class="nocode"><a name="346">346: </a></span><span style="background-color: #ffffcc">                    sb.append(c);</span>
+<span class="nocode"><a name="347">347: </a></span>                }
+<span class="nocode"><a name="348">348: </a></span><span style="background-color: #ffffcc">            } else if (c == delimiter &amp;&amp; !inQuotes) {</span>
+<span class="nocode"><a name="349">349: </a></span><span style="background-color: #ffffcc">                String s = sb.toString();</span>
+<span class="nocode"><a name="350">350: </a></span><span style="background-color: #ffffcc">                if (trimTokens) {</span>
+<span class="nocode"><a name="351">351: </a></span><span style="background-color: #ffffcc">                    s = s.trim();</span>
+<span class="nocode"><a name="352">352: </a></span>                }
+<span class="nocode"><a name="353">353: </a></span><span style="background-color: #ffffcc">                tokens.add(s);</span>
+<span class="nocode"><a name="354">354: </a></span><span style="background-color: #ffffcc">                sb = new StringBuffer(); // start work on next token</span>
+<span class="nocode"><a name="355">355: </a></span><span style="background-color: #ffffcc">            } else {</span>
+<span class="nocode"><a name="356">356: </a></span><span style="background-color: #ffffcc">                sb.append(c);</span>
+<span class="nocode"><a name="357">357: </a></span>            }
+<span class="nocode"><a name="358">358: </a></span>        }
+<span class="nocode"><a name="359">359: </a></span><span style="background-color: #ffffcc">        String s = sb.toString();</span>
+<span class="nocode"><a name="360">360: </a></span><span style="background-color: #ffffcc">        if (trimTokens) {</span>
+<span class="nocode"><a name="361">361: </a></span><span style="background-color: #ffffcc">            s = s.trim();</span>
+<span class="nocode"><a name="362">362: </a></span>        }
+<span class="nocode"><a name="363">363: </a></span><span style="background-color: #ffffcc">        tokens.add(s);</span>
+<span class="nocode"><a name="364">364: </a></span><span style="background-color: #ffffcc">        return tokens.toArray(new String[tokens.size()]);</span>
+<span class="nocode"><a name="365">365: </a></span>    }
+<span class="nocode"><a name="366">366: </a></span>
+<span class="nocode"><a name="367">367: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 15413
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: org
+<li>TARGET_CLASS: org.jsecurity.util.StringUtils
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/18_jsecurity/jsecurity.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+org.jsecurity.subject.AbstractRememberMeManager
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: org.jsecurity.subject.AbstractRememberMeManager: 73.08%</ul><ul>
+<li>9172 fitness evaluations, 185 generations, 74997 statements, 5865 tests.
+<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>Coverage: 12/26 branches, 31/33 methods, 38/52 total goals
+<li>Mutation score: 11%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[8];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  webRememberMeManager0.onFailedLogin((AuthenticationToken) usernamePasswordToken0, (AuthenticationException) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;2CoafZ$TQ&quot;, &quot;2CoafZ$TQ&quot;, (InetAddress) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.rememberIdentity((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setEncryptionCipherKeyBase64(&quot;[ENV] Security setting prevent interrogation of system classpaths.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipherKeyBase64(&quot;QEV5{)5a3$&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = webRememberMeManager0.getCipherKey();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(byteArray0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) simplePrincipalCollection0, object0, &quot;org.apache.commons.logging.impl.LogFactoryImpl&quot;);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  webRememberMeManager0.rememberIdentity((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setDecryptionCipherKeyBase64(&quot;'u6DOa;P&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, webRememberMeManager0.isCookieSecure());
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.setEncryptionCipherKeyHex(&quot;P &gt;3b:PU32~OW^&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.deserialize(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SerializationException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SerializationException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unable to deserialze argument byte array.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.setDecryptionCipherKeyHex(&quot;Terminating logging for this context. &quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Illegal hexadecimal charcter T at index 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.onLogout((PrincipalCollection) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>DefaultSerializer defaultSerializer0 = (DefaultSerializer)webRememberMeManager0.getSerializer();
+<span class="nocode"><a name="3">  3: </a></span>webRememberMeManager0.setSerializer((Serializer) defaultSerializer0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.setCipherKeyHex(&quot;[BAD CL TREE] &quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Illegal hexadecimal charcter [ at index 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, (InetAddress) null);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;t[5ZW&quot;, &quot;&quot;, true, (InetAddress) null);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount(object0, object0, &quot;org.apache.commons.logging.impl.LogFactoryImpl&quot;);
+<span class="nocode"><a name="4">  4: </a></span>webRememberMeManager0.rememberIdentity((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.onRememberedPrincipalFailure((Exception) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="3">  3: </a></span>webRememberMeManager0.setCipher((Cipher) null);
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray1 = webRememberMeManager0.encrypt(byteArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertSame(byteArray1, byteArray0);
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="3">  3: </a></span>webRememberMeManager0.setCipher((Cipher) null);
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray1 = webRememberMeManager0.decrypt(byteArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertSame(byteArray1, byteArray0);
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.decrypt(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unable to crypt bytes with cipher [javax.crypto.Cipher@109d64b3].
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> * Licensed to the Apache Software Foundation (ASF) under one
+<span class="nocode"><a name="3">  3: </a></span> * or more contributor license agreements.  See the NOTICE file
+<span class="nocode"><a name="4">  4: </a></span> * distributed with this work for additional information
+<span class="nocode"><a name="5">  5: </a></span> * regarding copyright ownership.  The ASF licenses this file
+<span class="nocode"><a name="6">  6: </a></span> * to you under the Apache License, Version 2.0 (the
+<span class="nocode"><a name="7">  7: </a></span> * &quot;License&quot;); you may not use this file except in compliance
+<span class="nocode"><a name="8">  8: </a></span> * with the License.  You may obtain a copy of the License at
+<span class="nocode"><a name="9">  9: </a></span> *
+<span class="nocode"><a name="10"> 10: </a></span> *     http://www.apache.org/licenses/LICENSE-2.0
+<span class="nocode"><a name="11"> 11: </a></span> *
+<span class="nocode"><a name="12"> 12: </a></span> * Unless required by applicable law or agreed to in writing,
+<span class="nocode"><a name="13"> 13: </a></span> * software distributed under the License is distributed on an
+<span class="nocode"><a name="14"> 14: </a></span> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+<span class="nocode"><a name="15"> 15: </a></span> * KIND, either express or implied.  See the License for the
+<span class="nocode"><a name="16"> 16: </a></span> * specific language governing permissions and limitations
+<span class="nocode"><a name="17"> 17: </a></span> * under the License.
+<span class="nocode"><a name="18"> 18: </a></span> */
+<span class="nocode"><a name="19"> 19: </a></span>package org.jsecurity.subject;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>import org.apache.commons.logging.Log;
+<span class="nocode"><a name="22"> 22: </a></span>import org.apache.commons.logging.LogFactory;
+<span class="nocode"><a name="23"> 23: </a></span>import org.jsecurity.authc.AuthenticationException;
+<span class="nocode"><a name="24"> 24: </a></span>import org.jsecurity.authc.AuthenticationInfo;
+<span class="nocode"><a name="25"> 25: </a></span>import org.jsecurity.authc.AuthenticationToken;
+<span class="nocode"><a name="26"> 26: </a></span>import org.jsecurity.authc.RememberMeAuthenticationToken;
+<span class="nocode"><a name="27"> 27: </a></span>import org.jsecurity.codec.Base64;
+<span class="nocode"><a name="28"> 28: </a></span>import org.jsecurity.codec.Hex;
+<span class="nocode"><a name="29"> 29: </a></span>import org.jsecurity.crypto.BlowfishCipher;
+<span class="nocode"><a name="30"> 30: </a></span>import org.jsecurity.crypto.Cipher;
+<span class="nocode"><a name="31"> 31: </a></span>import org.jsecurity.io.DefaultSerializer;
+<span class="nocode"><a name="32"> 32: </a></span>import org.jsecurity.io.SerializationException;
+<span class="nocode"><a name="33"> 33: </a></span>import org.jsecurity.io.Serializer;
+<span class="nocode"><a name="34"> 34: </a></span>
+<span class="nocode"><a name="35"> 35: </a></span>/**
+<span class="nocode"><a name="36"> 36: </a></span> * Abstract implementation of the &lt;code&gt;RememberMeManager&lt;/code&gt; interface that handles
+<span class="nocode"><a name="37"> 37: </a></span> * {@link #setSerializer(org.jsecurity.io.Serializer) serialization} and
+<span class="nocode"><a name="38"> 38: </a></span> * {@link #setCipher(org.jsecurity.crypto.Cipher) encryption} of the remembered user identity.
+<span class="nocode"><a name="39"> 39: </a></span> * &lt;p/&gt;
+<span class="nocode"><a name="40"> 40: </a></span> * The remembered identity storage location is implementation-specific.
+<span class="nocode"><a name="41"> 41: </a></span> *
+<span class="nocode"><a name="42"> 42: </a></span> * @author Les Hazlewood
+<span class="nocode"><a name="43"> 43: </a></span> * @author Jeremy Haile
+<span class="nocode"><a name="44"> 44: </a></span> * @since 0.9
+<span class="nocode"><a name="45"> 45: </a></span> */
+<span class="nocode"><a name="46"> 46: </a></span>public abstract class AbstractRememberMeManager implements RememberMeManager {
+<span class="nocode"><a name="47"> 47: </a></span>
+<span class="nocode"><a name="48"> 48: </a></span>    //TODO - complete JavaDoc
+<span class="nocode"><a name="49"> 49: </a></span>
+<span class="nocode"><a name="50"> 50: </a></span>    /** private inner log instance. */
+<span class="nocode"><a name="51"> 51: </a></span>    private static final Log log = LogFactory.getLog(AbstractRememberMeManager.class);
+<span class="nocode"><a name="52"> 52: </a></span>
+<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">    private Serializer serializer = new DefaultSerializer();</span>
+<span class="nocode"><a name="54"> 54: </a></span><span style="background-color: #ffffcc">    private Cipher cipher = new BlowfishCipher();</span>
+<span class="nocode"><a name="55"> 55: </a></span><span style="background-color: #ffffcc">    private byte[] encryptionCipherKey = null;</span>
+<span class="nocode"><a name="56"> 56: </a></span><span style="background-color: #ffffcc">    private byte[] decryptionCipherKey = null;</span>
+<span class="nocode"><a name="57"> 57: </a></span>
+<span class="nocode"><a name="58"> 58: </a></span>    public AbstractRememberMeManager() {
+<span class="nocode"><a name="59"> 59: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="60"> 60: </a></span>
+<span class="nocode"><a name="61"> 61: </a></span>    public Serializer getSerializer() {
+<span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">        return serializer;</span>
+<span class="nocode"><a name="63"> 63: </a></span>    }
+<span class="nocode"><a name="64"> 64: </a></span>
+<span class="nocode"><a name="65"> 65: </a></span>    public void setSerializer(Serializer serializer) {
+<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">        this.serializer = serializer;</span>
+<span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="68"> 68: </a></span>
+<span class="nocode"><a name="69"> 69: </a></span>    public Cipher getCipher() {
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">        return cipher;</span>
+<span class="nocode"><a name="71"> 71: </a></span>    }
+<span class="nocode"><a name="72"> 72: </a></span>
+<span class="nocode"><a name="73"> 73: </a></span>    public void setCipher(Cipher cipher) {
+<span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">        this.cipher = cipher;</span>
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="76"> 76: </a></span>
+<span class="nocode"><a name="77"> 77: </a></span>    public byte[] getEncryptionCipherKey() {
+<span class="nocode"><a name="78"> 78: </a></span><span style="background-color: #ffffcc">        return encryptionCipherKey;</span>
+<span class="nocode"><a name="79"> 79: </a></span>    }
+<span class="nocode"><a name="80"> 80: </a></span>
+<span class="nocode"><a name="81"> 81: </a></span>    public void setEncryptionCipherKey(byte[] encryptionCipherKey) {
+<span class="nocode"><a name="82"> 82: </a></span><span style="background-color: #ffffcc">        this.encryptionCipherKey = encryptionCipherKey;</span>
+<span class="nocode"><a name="83"> 83: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="84"> 84: </a></span>
+<span class="nocode"><a name="85"> 85: </a></span>    public void setEncryptionCipherKeyHex(String hex) {
+<span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">        setEncryptionCipherKey(Hex.decode(hex));</span>
+<span class="nocode"><a name="87"> 87: </a></span>    }
+<span class="nocode"><a name="88"> 88: </a></span>
+<span class="nocode"><a name="89"> 89: </a></span>    public void setEncryptionCipherKeyBase64(String base64) {
+<span class="nocode"><a name="90"> 90: </a></span><span style="background-color: #ffffcc">        setEncryptionCipherKey(Base64.decode(base64));</span>
+<span class="nocode"><a name="91"> 91: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="92"> 92: </a></span>
+<span class="nocode"><a name="93"> 93: </a></span>    public byte[] getDecryptionCipherKey() {
+<span class="nocode"><a name="94"> 94: </a></span><span style="background-color: #ffffcc">        return decryptionCipherKey;</span>
+<span class="nocode"><a name="95"> 95: </a></span>    }
+<span class="nocode"><a name="96"> 96: </a></span>
+<span class="nocode"><a name="97"> 97: </a></span>    public void setDecryptionCipherKey(byte[] decryptionCipherKey) {
+<span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">        this.decryptionCipherKey = decryptionCipherKey;</span>
+<span class="nocode"><a name="99"> 99: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="100">100: </a></span>
+<span class="nocode"><a name="101">101: </a></span>    public void setDecryptionCipherKeyHex(String hex) {
+<span class="nocode"><a name="102">102: </a></span><span style="background-color: #ffffcc">        setDecryptionCipherKey(Hex.decode(hex));</span>
+<span class="nocode"><a name="103">103: </a></span>    }
+<span class="nocode"><a name="104">104: </a></span>
+<span class="nocode"><a name="105">105: </a></span>    public void setDecryptionCipherKeyBase64(String base64) {
+<span class="nocode"><a name="106">106: </a></span><span style="background-color: #ffffcc">        setDecryptionCipherKey(Base64.decode(base64));</span>
+<span class="nocode"><a name="107">107: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="108">108: </a></span>
+<span class="nocode"><a name="109">109: </a></span>    public byte[] getCipherKey() {
+<span class="nocode"><a name="110">110: </a></span>        //Since this method should only be used with symmetric ciphers
+<span class="nocode"><a name="111">111: </a></span>        //(where the enc and dec keys are the same), either is fine, just return one of them:
+<span class="nocode"><a name="112">112: </a></span><span style="background-color: #ffffcc">        return getEncryptionCipherKey();</span>
+<span class="nocode"><a name="113">113: </a></span>    }
+<span class="nocode"><a name="114">114: </a></span>
+<span class="nocode"><a name="115">115: </a></span>    public void setCipherKey(byte[] cipherKey) {
+<span class="nocode"><a name="116">116: </a></span>        //Since this method should only be used in symmetric ciphers
+<span class="nocode"><a name="117">117: </a></span>        //(where the enc and dec keys are the same), set it on both:
+<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">        setEncryptionCipherKey(cipherKey);</span>
+<span class="nocode"><a name="119">119: </a></span><span style="background-color: #ffffcc">        setDecryptionCipherKey(cipherKey);</span>
+<span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="121">121: </a></span>
+<span class="nocode"><a name="122">122: </a></span>    public void setCipherKeyHex(String hex) {
+<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">        setCipherKey(Hex.decode(hex));</span>
+<span class="nocode"><a name="124">124: </a></span>    }
+<span class="nocode"><a name="125">125: </a></span>
+<span class="nocode"><a name="126">126: </a></span>    public void setCipherKeyBase64(String base64) {
+<span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">        setCipherKey(Base64.decode(base64));</span>
+<span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="129">129: </a></span>
+<span class="nocode"><a name="130">130: </a></span>    // Abstract methods to be implemented by subclasses
+<span class="nocode"><a name="131">131: </a></span>    protected abstract void rememberSerializedIdentity(byte[] serialized);
+<span class="nocode"><a name="132">132: </a></span>
+<span class="nocode"><a name="133">133: </a></span>    protected abstract byte[] getSerializedRememberedIdentity();
+<span class="nocode"><a name="134">134: </a></span>
+<span class="nocode"><a name="135">135: </a></span>    protected abstract void forgetIdentity();
+<span class="nocode"><a name="136">136: </a></span>
+<span class="nocode"><a name="137">137: </a></span>
+<span class="nocode"><a name="138">138: </a></span>    protected boolean isRememberMe(AuthenticationToken token) {
+<span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">        return token != null &amp;&amp; (token instanceof RememberMeAuthenticationToken) &amp;&amp;</span>
+<span class="nocode"><a name="140">140: </a></span>                ((RememberMeAuthenticationToken) token).isRememberMe();
+<span class="nocode"><a name="141">141: </a></span>    }
+<span class="nocode"><a name="142">142: </a></span>
+<span class="nocode"><a name="143">143: </a></span>    public void onSuccessfulLogin(AuthenticationToken token, AuthenticationInfo info) {
+<span class="nocode"><a name="144">144: </a></span>        //always clear any previous identity:
+<span class="nocode"><a name="145">145: </a></span>        forgetIdentity(token);
+<span class="nocode"><a name="146">146: </a></span>
+<span class="nocode"><a name="147">147: </a></span>        //reset it if necessary:
+<span class="nocode"><a name="148">148: </a></span>        if (isRememberMe(token)) {
+<span class="nocode"><a name="149">149: </a></span>            rememberIdentity(token, info);
+<span class="nocode"><a name="150">150: </a></span>        } else {
+<span class="nocode"><a name="151">151: </a></span>            if (log.isDebugEnabled()) {
+<span class="nocode"><a name="152">152: </a></span>                log.debug(&quot;AuthenticationToken did not indicate RememberMe is requested.  &quot; +
+<span class="nocode"><a name="153">153: </a></span>                        &quot;RememberMe functionality will not be executed for corresponding account.&quot;);
+<span class="nocode"><a name="154">154: </a></span>            }
+<span class="nocode"><a name="155">155: </a></span>        }
+<span class="nocode"><a name="156">156: </a></span>    }
+<span class="nocode"><a name="157">157: </a></span>
+<span class="nocode"><a name="158">158: </a></span>    public void rememberIdentity(AuthenticationToken submittedToken, AuthenticationInfo successfullyAuthenticated) {
+<span class="nocode"><a name="159">159: </a></span><span style="background-color: #ffffcc">        rememberIdentity(successfullyAuthenticated);</span>
+<span class="nocode"><a name="160">160: </a></span>    }
+<span class="nocode"><a name="161">161: </a></span>
+<span class="nocode"><a name="162">162: </a></span>    public void rememberIdentity(AuthenticationInfo successfullyAuthenticated) {
+<span class="nocode"><a name="163">163: </a></span><span style="background-color: #ffffcc">        PrincipalCollection principals = getIdentityToRemember(successfullyAuthenticated);</span>
+<span class="nocode"><a name="164">164: </a></span><span style="background-color: #ffffcc">        rememberIdentity(principals);</span>
+<span class="nocode"><a name="165">165: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="166">166: </a></span>
+<span class="nocode"><a name="167">167: </a></span>    protected PrincipalCollection getIdentityToRemember(AuthenticationInfo info) {
+<span class="nocode"><a name="168">168: </a></span><span style="background-color: #ffffcc">        return info.getPrincipals();</span>
+<span class="nocode"><a name="169">169: </a></span>    }
+<span class="nocode"><a name="170">170: </a></span>
+<span class="nocode"><a name="171">171: </a></span>    protected void rememberIdentity(PrincipalCollection accountPrincipals) {
+<span class="nocode"><a name="172">172: </a></span>        try {
+<span class="nocode"><a name="173">173: </a></span><span style="background-color: #ffffcc">            byte[] bytes = serialize(accountPrincipals);</span>
+<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">            if (getCipher() != null) {</span>
+<span class="nocode"><a name="175">175: </a></span><span style="background-color: #ffffcc">                bytes = encrypt(bytes);</span>
+<span class="nocode"><a name="176">176: </a></span>            }
+<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">            rememberSerializedIdentity(bytes);</span>
+<span class="nocode"><a name="178">178: </a></span><span style="background-color: #ffffcc">        } catch (SerializationException se) {</span>
+<span class="nocode"><a name="179">179: </a></span><span style="background-color: #ffffcc">            if (log.isWarnEnabled()) {</span>
+<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">                log.warn(&quot;Unable to serialize account principals [&quot; + accountPrincipals + &quot;].  Identity &quot; +</span>
+<span class="nocode"><a name="181">181: </a></span>                        &quot;cannot be remembered!  This is a non fatal exception as RememberMe identity services &quot; +
+<span class="nocode"><a name="182">182: </a></span>                        &quot;are not considered critical and execution can continue as normal.  But please &quot; +
+<span class="nocode"><a name="183">183: </a></span>                        &quot;investigate and resolve to prevent seeing this message again.&quot;, se);
+<span class="nocode"><a name="184">184: </a></span>            }
+<span class="nocode"><a name="185">185: </a></span>        }
+<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="187">187: </a></span>
+<span class="nocode"><a name="188">188: </a></span>    public PrincipalCollection getRememberedPrincipals() {
+<span class="nocode"><a name="189">189: </a></span>        try {
+<span class="nocode"><a name="190">190: </a></span>
+<span class="nocode"><a name="191">191: </a></span>            PrincipalCollection principals = null;
+<span class="nocode"><a name="192">192: </a></span>            byte[] bytes = getSerializedRememberedIdentity();
+<span class="nocode"><a name="193">193: </a></span>            if (bytes != null) {
+<span class="nocode"><a name="194">194: </a></span>                if (getCipher() != null) {
+<span class="nocode"><a name="195">195: </a></span>                    bytes = decrypt(bytes);
+<span class="nocode"><a name="196">196: </a></span>                }
+<span class="nocode"><a name="197">197: </a></span>                try {
+<span class="nocode"><a name="198">198: </a></span>                    principals = deserialize(bytes);
+<span class="nocode"><a name="199">199: </a></span>                } catch (SerializationException e) {
+<span class="nocode"><a name="200">200: </a></span>                    if (log.isWarnEnabled()) {
+<span class="nocode"><a name="201">201: </a></span>                        log.warn(&quot;Unable to deserialize stored identity byte array.  Remembered identity &quot; +
+<span class="nocode"><a name="202">202: </a></span>                                &quot;cannot be reconstituted!  This is a non fatal exception as RememberMe identity services &quot; +
+<span class="nocode"><a name="203">203: </a></span>                                &quot;are not considered critical and execution can continue as normal, but please &quot; +
+<span class="nocode"><a name="204">204: </a></span>                                &quot;investigate and resolve to prevent seeing this message again.&quot;, e);
+<span class="nocode"><a name="205">205: </a></span>                    }
+<span class="nocode"><a name="206">206: </a></span>                }
+<span class="nocode"><a name="207">207: </a></span>            }
+<span class="nocode"><a name="208">208: </a></span>            return principals;
+<span class="nocode"><a name="209">209: </a></span>
+<span class="nocode"><a name="210">210: </a></span>        } catch( Exception e ) {
+<span class="nocode"><a name="211">211: </a></span>            return onRememberedPrincipalFailure( e );
+<span class="nocode"><a name="212">212: </a></span>        }
+<span class="nocode"><a name="213">213: </a></span>    }
+<span class="nocode"><a name="214">214: </a></span>
+<span class="nocode"><a name="215">215: </a></span>    /**
+<span class="nocode"><a name="216">216: </a></span>     * Called when an exception is thrown while trying to retrieve principals.  The default implementation logs a
+<span class="nocode"><a name="217">217: </a></span>     * warning and forgets the problem identity.  This most commonly would occur when an encryption key is
+<span class="nocode"><a name="218">218: </a></span>     * updated and old principals are retrieved that have been encrypted with the previous key.
+<span class="nocode"><a name="219">219: </a></span>     * @param e the exception that was thrown.
+<span class="nocode"><a name="220">220: </a></span>     * @return the principal collection to be returned.
+<span class="nocode"><a name="221">221: </a></span>     */
+<span class="nocode"><a name="222">222: </a></span>    protected PrincipalCollection onRememberedPrincipalFailure(Exception e) {
+<span class="nocode"><a name="223">223: </a></span><span style="background-color: #ffffcc">        if(log.isWarnEnabled() ) {</span>
+<span class="nocode"><a name="224">224: </a></span><span style="background-color: #ffffcc">            log.warn(&quot;There was a failure while trying to retrieve remembered principals.  This could be due to a &quot; +</span>
+<span class="nocode"><a name="225">225: </a></span>                    &quot;configuration problem or corrupted principals.  This could also be due to a recently &quot; +
+<span class="nocode"><a name="226">226: </a></span>                    &quot;changed encryption key.  The remembered identity will be forgotten and not used for this &quot; +
+<span class="nocode"><a name="227">227: </a></span>                    &quot;request.&quot;, e);
+<span class="nocode"><a name="228">228: </a></span>        }
+<span class="nocode"><a name="229">229: </a></span><span style="background-color: #ffffcc">        forgetIdentity();</span>
+<span class="nocode"><a name="230">230: </a></span>        return null;
+<span class="nocode"><a name="231">231: </a></span>    }
+<span class="nocode"><a name="232">232: </a></span>
+<span class="nocode"><a name="233">233: </a></span>    protected byte[] encrypt(byte[] serialized) {
+<span class="nocode"><a name="234">234: </a></span><span style="background-color: #ffffcc">        byte[] value = serialized;</span>
+<span class="nocode"><a name="235">235: </a></span><span style="background-color: #ffffcc">        Cipher cipher = getCipher();</span>
+<span class="nocode"><a name="236">236: </a></span><span style="background-color: #ffffcc">        if (cipher != null) {</span>
+<span class="nocode"><a name="237">237: </a></span><span style="background-color: #ffffcc">            value = cipher.encrypt(serialized, getEncryptionCipherKey());</span>
+<span class="nocode"><a name="238">238: </a></span>        }
+<span class="nocode"><a name="239">239: </a></span><span style="background-color: #ffffcc">        return value;</span>
+<span class="nocode"><a name="240">240: </a></span>    }
+<span class="nocode"><a name="241">241: </a></span>
+<span class="nocode"><a name="242">242: </a></span>    protected byte[] decrypt(byte[] encrypted) {
+<span class="nocode"><a name="243">243: </a></span><span style="background-color: #ffffcc">        byte[] serialized = encrypted;</span>
+<span class="nocode"><a name="244">244: </a></span><span style="background-color: #ffffcc">        Cipher cipher = getCipher();</span>
+<span class="nocode"><a name="245">245: </a></span><span style="background-color: #ffffcc">        if (cipher != null) {</span>
+<span class="nocode"><a name="246">246: </a></span><span style="background-color: #ffffcc">            serialized = cipher.decrypt(encrypted, getDecryptionCipherKey());</span>
+<span class="nocode"><a name="247">247: </a></span>        }
+<span class="nocode"><a name="248">248: </a></span><span style="background-color: #ffffcc">        return serialized;</span>
+<span class="nocode"><a name="249">249: </a></span>    }
+<span class="nocode"><a name="250">250: </a></span>
+<span class="nocode"><a name="251">251: </a></span>
+<span class="nocode"><a name="252">252: </a></span>    protected byte[] serialize(PrincipalCollection principals) {
+<span class="nocode"><a name="253">253: </a></span><span style="background-color: #ffffcc">        return getSerializer().serialize(principals);</span>
+<span class="nocode"><a name="254">254: </a></span>    }
+<span class="nocode"><a name="255">255: </a></span>
+<span class="nocode"><a name="256">256: </a></span>    protected PrincipalCollection deserialize(byte[] serializedIdentity) {
+<span class="nocode"><a name="257">257: </a></span><span style="background-color: #ffffcc">        return (PrincipalCollection) getSerializer().deserialize(serializedIdentity);</span>
+<span class="nocode"><a name="258">258: </a></span>    }
+<span class="nocode"><a name="259">259: </a></span>
+<span class="nocode"><a name="260">260: </a></span>    public void onFailedLogin(AuthenticationToken token, AuthenticationException ae) {
+<span class="nocode"><a name="261">261: </a></span><span style="background-color: #ffffcc">        forgetIdentity(token, ae);</span>
+<span class="nocode"><a name="262">262: </a></span>    }
+<span class="nocode"><a name="263">263: </a></span>
+<span class="nocode"><a name="264">264: </a></span>    public void onLogout(PrincipalCollection subjectPrincipals) {
+<span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        forgetIdentity();</span>
+<span class="nocode"><a name="266">266: </a></span>    }
+<span class="nocode"><a name="267">267: </a></span>
+<span class="nocode"><a name="268">268: </a></span>    protected void forgetIdentity(AuthenticationToken token, AuthenticationException ae) {
+<span class="nocode"><a name="269">269: </a></span><span style="background-color: #ffffcc">        forgetIdentity(token);</span>
+<span class="nocode"><a name="270">270: </a></span>    }
+<span class="nocode"><a name="271">271: </a></span>
+<span class="nocode"><a name="272">272: </a></span>    protected void forgetIdentity(AuthenticationToken token) {
+<span class="nocode"><a name="273">273: </a></span><span style="background-color: #ffffcc">        forgetIdentity();</span>
+<span class="nocode"><a name="274">274: </a></span>    }
+<span class="nocode"><a name="275">275: </a></span>
+<span class="nocode"><a name="276">276: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 11510
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: org
+<li>TARGET_CLASS: org.jsecurity.subject.AbstractRememberMeManager
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/18_jsecurity/jsecurity.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

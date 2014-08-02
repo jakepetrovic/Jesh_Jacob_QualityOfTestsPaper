@@ -1,0 +1,875 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+org.jsecurity.codec.Base64
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: org.jsecurity.codec.Base64: 82.83%</ul><ul>
+<li>13140 fitness evaluations, 264 generations, 196809 statements, 8766 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 75/92 branches, 13/13 methods, 82/99 total goals
+<li>Mutation score: 57%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Base64 base64_0 = new Base64();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(base64_0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encodeChunked(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = Base64.isBase64(byteArray1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Base64.decodeToString(&quot;AA==&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\u0000&quot;, string0);
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = Base64.decode(&quot;this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String &quot;);
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encode(byteArray1, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray2);
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[1] = (byte) (-48);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = Base64.decodeToString(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, string0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.discardNonBase64(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = Base64.isBase64(byteArray1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte)9;
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = Base64.isBase64(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[6] = (byte)32;
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = Base64.isBase64(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
+<span class="nocode"><a name="2">  2: </a></span>String string0 = Base64.encodeToString(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;AAAAAAAAAAA=&quot;, string0);
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[6] = (byte) (-2);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encodeChunked(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[2];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte) (-91);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray1, byteArray0);
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[2];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[1] = (byte) (-94);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray1, byteArray0);
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encode(byteArray1, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray2, byteArray1);
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[5] = (byte)61;
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[1];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>byteArray1[2] = (byte)43;
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray2 = Base64.decode(byteArray1);
+<span class="nocode"><a name="5">  5: </a></span>assertNotSame(byteArray1, byteArray2);
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> * Licensed to the Apache Software Foundation (ASF) under one
+<span class="nocode"><a name="3">  3: </a></span> * or more contributor license agreements.  See the NOTICE file
+<span class="nocode"><a name="4">  4: </a></span> * distributed with this work for additional information
+<span class="nocode"><a name="5">  5: </a></span> * regarding copyright ownership.  The ASF licenses this file
+<span class="nocode"><a name="6">  6: </a></span> * to you under the Apache License, Version 2.0 (the
+<span class="nocode"><a name="7">  7: </a></span> * &quot;License&quot;); you may not use this file except in compliance
+<span class="nocode"><a name="8">  8: </a></span> * with the License.  You may obtain a copy of the License at
+<span class="nocode"><a name="9">  9: </a></span> *
+<span class="nocode"><a name="10"> 10: </a></span> *     http://www.apache.org/licenses/LICENSE-2.0
+<span class="nocode"><a name="11"> 11: </a></span> *
+<span class="nocode"><a name="12"> 12: </a></span> * Unless required by applicable law or agreed to in writing,
+<span class="nocode"><a name="13"> 13: </a></span> * software distributed under the License is distributed on an
+<span class="nocode"><a name="14"> 14: </a></span> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+<span class="nocode"><a name="15"> 15: </a></span> * KIND, either express or implied.  See the License for the
+<span class="nocode"><a name="16"> 16: </a></span> * specific language governing permissions and limitations
+<span class="nocode"><a name="17"> 17: </a></span> * under the License.
+<span class="nocode"><a name="18"> 18: </a></span> */
+<span class="nocode"><a name="19"> 19: </a></span>package org.jsecurity.codec;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>/**
+<span class="nocode"><a name="22"> 22: </a></span> * Provides Base64 encoding and decoding as defined by RFC 2045.
+<span class="nocode"><a name="23"> 23: </a></span> *
+<span class="nocode"><a name="24"> 24: </a></span> * &lt;p&gt;
+<span class="nocode"><a name="25"> 25: </a></span> * This class implements section &lt;cite&gt;6.8. Base64 Content-Transfer-Encoding&lt;/cite&gt; from RFC 2045 &lt;cite&gt;Multipurpose
+<span class="nocode"><a name="26"> 26: </a></span> * Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies&lt;/cite&gt; by Freed and Borenstein.
+<span class="nocode"><a name="27"> 27: </a></span> * &lt;/p&gt;
+<span class="nocode"><a name="28"> 28: </a></span> *
+<span class="nocode"><a name="29"> 29: </a></span> * &lt;p&gt;This class was borrowed from Apache Commons Codec SVN repository (rev. 618419) with modifications
+<span class="nocode"><a name="30"> 30: </a></span> * to enable Base64 conversion without a full dependecny on Commons Codec.  We didn't want to reinvent the wheel of
+<span class="nocode"><a name="31"> 31: </a></span> * great work they've done, but also didn't want to force every JSecurity user to depend on the commons-codec.jar&lt;/p&gt;
+<span class="nocode"><a name="32"> 32: </a></span> *
+<span class="nocode"><a name="33"> 33: </a></span> * &lt;p&gt;As per the Apache 2.0 license, the original copyright notice and all author and copyright information have
+<span class="nocode"><a name="34"> 34: </a></span> * remained in tact.&lt;/p&gt;
+<span class="nocode"><a name="35"> 35: </a></span> *
+<span class="nocode"><a name="36"> 36: </a></span> * @author Apache Software Foundation
+<span class="nocode"><a name="37"> 37: </a></span> * @author Les Hazlewood
+<span class="nocode"><a name="38"> 38: </a></span> * @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc2045.txt&quot;&gt;RFC 2045&lt;/a&gt;
+<span class="nocode"><a name="39"> 39: </a></span> * @since 0.9
+<span class="nocode"><a name="40"> 40: </a></span> */
+<span class="nocode"><a name="41"> 41: </a></span>public class Base64 {
+<span class="nocode"><a name="42"> 42: </a></span>
+<span class="nocode"><a name="43"> 43: </a></span>    /**
+<span class="nocode"><a name="44"> 44: </a></span>     * Chunk size per RFC 2045 section 6.8.
+<span class="nocode"><a name="45"> 45: </a></span>     *
+<span class="nocode"><a name="46"> 46: </a></span>     * &lt;p&gt;The character limit does not count the trailing CRLF, but counts all other characters, including any
+<span class="nocode"><a name="47"> 47: </a></span>     * equal signs.&lt;/p&gt;
+<span class="nocode"><a name="48"> 48: </a></span>     *
+<span class="nocode"><a name="49"> 49: </a></span>     * @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc2045.txt&quot;&gt;RFC 2045 section 6.8&lt;/a&gt;
+<span class="nocode"><a name="50"> 50: </a></span>     */
+<span class="nocode"><a name="51"> 51: </a></span>    static final int CHUNK_SIZE = 76;
+<span class="nocode"><a name="52"> 52: </a></span>
+<span class="nocode"><a name="53"> 53: </a></span>    /**
+<span class="nocode"><a name="54"> 54: </a></span>     * Chunk separator per RFC 2045 section 2.1.
+<span class="nocode"><a name="55"> 55: </a></span>     *
+<span class="nocode"><a name="56"> 56: </a></span>     * @see &lt;a href=&quot;http://www.ietf.org/rfc/rfc2045.txt&quot;&gt;RFC 2045 section 2.1&lt;/a&gt;
+<span class="nocode"><a name="57"> 57: </a></span>     */
+<span class="nocode"><a name="58"> 58: </a></span>    static final byte[] CHUNK_SEPARATOR = &quot;\r\n&quot;.getBytes();
+<span class="nocode"><a name="59"> 59: </a></span>
+<span class="nocode"><a name="60"> 60: </a></span>    /**
+<span class="nocode"><a name="61"> 61: </a></span>     * The base length.
+<span class="nocode"><a name="62"> 62: </a></span>     */
+<span class="nocode"><a name="63"> 63: </a></span>    private static final int BASELENGTH = 255;
+<span class="nocode"><a name="64"> 64: </a></span>
+<span class="nocode"><a name="65"> 65: </a></span>    /**
+<span class="nocode"><a name="66"> 66: </a></span>     * Lookup length.
+<span class="nocode"><a name="67"> 67: </a></span>     */
+<span class="nocode"><a name="68"> 68: </a></span>    private static final int LOOKUPLENGTH = 64;
+<span class="nocode"><a name="69"> 69: </a></span>
+<span class="nocode"><a name="70"> 70: </a></span>    /**
+<span class="nocode"><a name="71"> 71: </a></span>     * Used to calculate the number of bits in a byte.
+<span class="nocode"><a name="72"> 72: </a></span>     */
+<span class="nocode"><a name="73"> 73: </a></span>    private static final int EIGHTBIT = 8;
+<span class="nocode"><a name="74"> 74: </a></span>
+<span class="nocode"><a name="75"> 75: </a></span>    /**
+<span class="nocode"><a name="76"> 76: </a></span>     * Used when encoding something which has fewer than 24 bits.
+<span class="nocode"><a name="77"> 77: </a></span>     */
+<span class="nocode"><a name="78"> 78: </a></span>    private static final int SIXTEENBIT = 16;
+<span class="nocode"><a name="79"> 79: </a></span>
+<span class="nocode"><a name="80"> 80: </a></span>    /**
+<span class="nocode"><a name="81"> 81: </a></span>     * Used to determine how many bits data contains.
+<span class="nocode"><a name="82"> 82: </a></span>     */
+<span class="nocode"><a name="83"> 83: </a></span>    private static final int TWENTYFOURBITGROUP = 24;
+<span class="nocode"><a name="84"> 84: </a></span>
+<span class="nocode"><a name="85"> 85: </a></span>    /**
+<span class="nocode"><a name="86"> 86: </a></span>     * Used to get the number of Quadruples.
+<span class="nocode"><a name="87"> 87: </a></span>     */
+<span class="nocode"><a name="88"> 88: </a></span>    private static final int FOURBYTE = 4;
+<span class="nocode"><a name="89"> 89: </a></span>
+<span class="nocode"><a name="90"> 90: </a></span>    /**
+<span class="nocode"><a name="91"> 91: </a></span>     * Used to test the sign of a byte.
+<span class="nocode"><a name="92"> 92: </a></span>     */
+<span class="nocode"><a name="93"> 93: </a></span>    private static final int SIGN = -128;
+<span class="nocode"><a name="94"> 94: </a></span>
+<span class="nocode"><a name="95"> 95: </a></span>    /**
+<span class="nocode"><a name="96"> 96: </a></span>     * Byte used to pad output.
+<span class="nocode"><a name="97"> 97: </a></span>     */
+<span class="nocode"><a name="98"> 98: </a></span>    private static final byte PAD = (byte) '=';
+<span class="nocode"><a name="99"> 99: </a></span>
+<span class="nocode"><a name="100">100: </a></span>    /**
+<span class="nocode"><a name="101">101: </a></span>     * Contains the Base64 values &lt;code&gt;0&lt;/code&gt; through &lt;code&gt;63&lt;/code&gt; accessed by using character encodings as
+<span class="nocode"><a name="102">102: </a></span>     * indices.
+<span class="nocode"><a name="103">103: </a></span>     *
+<span class="nocode"><a name="104">104: </a></span>     * &lt;p&gt;For example, &lt;code&gt;base64Alphabet['+']&lt;/code&gt; returns &lt;code&gt;62&lt;/code&gt;.&lt;/p&gt;
+<span class="nocode"><a name="105">105: </a></span>     *
+<span class="nocode"><a name="106">106: </a></span>     * &lt;p&gt;The value of undefined encodings is &lt;code&gt;-1&lt;/code&gt;.&lt;/p&gt;
+<span class="nocode"><a name="107">107: </a></span>     */
+<span class="nocode"><a name="108">108: </a></span>    private static final byte[] base64Alphabet = new byte[BASELENGTH];
+<span class="nocode"><a name="109">109: </a></span>
+<span class="nocode"><a name="110">110: </a></span>    /**
+<span class="nocode"><a name="111">111: </a></span>     * &lt;p&gt;Contains the Base64 encodings &lt;code&gt;A&lt;/code&gt; through &lt;code&gt;Z&lt;/code&gt;, followed by &lt;code&gt;a&lt;/code&gt; through
+<span class="nocode"><a name="112">112: </a></span>     * &lt;code&gt;z&lt;/code&gt;, followed by &lt;code&gt;0&lt;/code&gt; through &lt;code&gt;9&lt;/code&gt;, followed by &lt;code&gt;+&lt;/code&gt;, and
+<span class="nocode"><a name="113">113: </a></span>     * &lt;code&gt;/&lt;/code&gt;.&lt;/p&gt;
+<span class="nocode"><a name="114">114: </a></span>     *
+<span class="nocode"><a name="115">115: </a></span>     * &lt;p&gt;This array is accessed by using character values as indices.&lt;/p&gt;
+<span class="nocode"><a name="116">116: </a></span>     *
+<span class="nocode"><a name="117">117: </a></span>     * &lt;p&gt;For example, &lt;code&gt;lookUpBase64Alphabet[62] &lt;/code&gt; returns &lt;code&gt;'+'&lt;/code&gt;.&lt;/p&gt;
+<span class="nocode"><a name="118">118: </a></span>     */
+<span class="nocode"><a name="119">119: </a></span>    private static final byte[] lookUpBase64Alphabet = new byte[LOOKUPLENGTH];
+<span class="nocode"><a name="120">120: </a></span>
+<span class="nocode"><a name="121">121: </a></span>    // Populating the lookup and character arrays
+<span class="nocode"><a name="122">122: </a></span>    static {
+<span class="nocode"><a name="123">123: </a></span>        for (int i = 0; i &lt; BASELENGTH; i++) {
+<span class="nocode"><a name="124">124: </a></span>            base64Alphabet[i] = (byte) -1;
+<span class="nocode"><a name="125">125: </a></span>        }
+<span class="nocode"><a name="126">126: </a></span>        for (int i = 'Z'; i &gt;= 'A'; i--) {
+<span class="nocode"><a name="127">127: </a></span>            base64Alphabet[i] = (byte) (i - 'A');
+<span class="nocode"><a name="128">128: </a></span>        }
+<span class="nocode"><a name="129">129: </a></span>        for (int i = 'z'; i &gt;= 'a'; i--) {
+<span class="nocode"><a name="130">130: </a></span>            base64Alphabet[i] = (byte) (i - 'a' + 26);
+<span class="nocode"><a name="131">131: </a></span>        }
+<span class="nocode"><a name="132">132: </a></span>        for (int i = '9'; i &gt;= '0'; i--) {
+<span class="nocode"><a name="133">133: </a></span>            base64Alphabet[i] = (byte) (i - '0' + 52);
+<span class="nocode"><a name="134">134: </a></span>        }
+<span class="nocode"><a name="135">135: </a></span>
+<span class="nocode"><a name="136">136: </a></span>        base64Alphabet['+'] = 62;
+<span class="nocode"><a name="137">137: </a></span>        base64Alphabet['/'] = 63;
+<span class="nocode"><a name="138">138: </a></span>
+<span class="nocode"><a name="139">139: </a></span>        for (int i = 0; i &lt;= 25; i++) {
+<span class="nocode"><a name="140">140: </a></span>            lookUpBase64Alphabet[i] = (byte) ('A' + i);
+<span class="nocode"><a name="141">141: </a></span>        }
+<span class="nocode"><a name="142">142: </a></span>
+<span class="nocode"><a name="143">143: </a></span>        for (int i = 26, j = 0; i &lt;= 51; i++, j++) {
+<span class="nocode"><a name="144">144: </a></span>            lookUpBase64Alphabet[i] = (byte) ('a' + j);
+<span class="nocode"><a name="145">145: </a></span>        }
+<span class="nocode"><a name="146">146: </a></span>
+<span class="nocode"><a name="147">147: </a></span>        for (int i = 52, j = 0; i &lt;= 61; i++, j++) {
+<span class="nocode"><a name="148">148: </a></span>            lookUpBase64Alphabet[i] = (byte) ('0' + j);
+<span class="nocode"><a name="149">149: </a></span>        }
+<span class="nocode"><a name="150">150: </a></span>
+<span class="nocode"><a name="151">151: </a></span>        lookUpBase64Alphabet[62] = (byte) '+';
+<span class="nocode"><a name="152">152: </a></span>        lookUpBase64Alphabet[63] = (byte) '/';
+<span class="nocode"><a name="153">153: </a></span>    }
+<span class="nocode"><a name="154">154: </a></span>
+<span class="nocode"><a name="155">155: </a></span>    /**
+<span class="nocode"><a name="156">156: </a></span>     * Returns whether or not the &lt;code&gt;octect&lt;/code&gt; is in the base 64 alphabet.
+<span class="nocode"><a name="157">157: </a></span>     *
+<span class="nocode"><a name="158">158: </a></span>     * @param octect The value to test
+<span class="nocode"><a name="159">159: </a></span>     * @return &lt;code&gt;true&lt;/code&gt; if the value is defined in the the base 64 alphabet, &lt;code&gt;false&lt;/code&gt; otherwise.
+<span class="nocode"><a name="160">160: </a></span>     */
+<span class="nocode"><a name="161">161: </a></span>    private static boolean isBase64(byte octect) {
+<span class="nocode"><a name="162">162: </a></span><span style="background-color: #ffffcc">        if (octect == PAD) {</span>
+<span class="nocode"><a name="163">163: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="164">164: </a></span><span style="background-color: #ffffcc">        } else if (octect &lt; 0 || base64Alphabet[octect] == -1) {</span>
+<span class="nocode"><a name="165">165: </a></span><span style="background-color: #ffffcc">            return false;</span>
+<span class="nocode"><a name="166">166: </a></span>        } else {
+<span class="nocode"><a name="167">167: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="168">168: </a></span>        }
+<span class="nocode"><a name="169">169: </a></span>    }
+<span class="nocode"><a name="170">170: </a></span>
+<span class="nocode"><a name="171">171: </a></span>    /**
+<span class="nocode"><a name="172">172: </a></span>     * Tests a given byte array to see if it contains only valid characters within the Base64 alphabet.
+<span class="nocode"><a name="173">173: </a></span>     *
+<span class="nocode"><a name="174">174: </a></span>     * @param arrayOctect byte array to test
+<span class="nocode"><a name="175">175: </a></span>     * @return &lt;code&gt;true&lt;/code&gt; if all bytes are valid characters in the Base64 alphabet or if the byte array is
+<span class="nocode"><a name="176">176: </a></span>     *         empty; false, otherwise
+<span class="nocode"><a name="177">177: </a></span>     */
+<span class="nocode"><a name="178">178: </a></span>    public static boolean isBase64(byte[] arrayOctect) {
+<span class="nocode"><a name="179">179: </a></span>
+<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">        arrayOctect = discardWhitespace(arrayOctect);</span>
+<span class="nocode"><a name="181">181: </a></span>
+<span class="nocode"><a name="182">182: </a></span><span style="background-color: #ffffcc">        int length = arrayOctect.length;</span>
+<span class="nocode"><a name="183">183: </a></span><span style="background-color: #ffffcc">        if (length == 0) {</span>
+<span class="nocode"><a name="184">184: </a></span>            // shouldn't a 0 length array be valid base64 data?
+<span class="nocode"><a name="185">185: </a></span>            // return false;
+<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="187">187: </a></span>        }
+<span class="nocode"><a name="188">188: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="nocode"><a name="189">189: </a></span><span style="background-color: #ffffcc">            if (!isBase64(arrayOctect[i])) {</span>
+<span class="nocode"><a name="190">190: </a></span><span style="background-color: #ffffcc">                return false;</span>
+<span class="nocode"><a name="191">191: </a></span>            }
+<span class="nocode"><a name="192">192: </a></span>        }
+<span class="nocode"><a name="193">193: </a></span><span style="background-color: #ffffcc">        return true;</span>
+<span class="nocode"><a name="194">194: </a></span>    }
+<span class="nocode"><a name="195">195: </a></span>
+<span class="nocode"><a name="196">196: </a></span>    /**
+<span class="nocode"><a name="197">197: </a></span>     * Discards any whitespace from a base-64 encoded block.
+<span class="nocode"><a name="198">198: </a></span>     *
+<span class="nocode"><a name="199">199: </a></span>     * @param data The base-64 encoded data to discard the whitespace from.
+<span class="nocode"><a name="200">200: </a></span>     * @return The data, less whitespace (see RFC 2045).
+<span class="nocode"><a name="201">201: </a></span>     */
+<span class="nocode"><a name="202">202: </a></span>    static byte[] discardWhitespace(byte[] data) {
+<span class="nocode"><a name="203">203: </a></span><span style="background-color: #ffffcc">        byte groomedData[] = new byte[data.length];</span>
+<span class="nocode"><a name="204">204: </a></span><span style="background-color: #ffffcc">        int bytesCopied = 0;</span>
+<span class="nocode"><a name="205">205: </a></span>
+<span class="nocode"><a name="206">206: </a></span><span style="background-color: #ffffcc">        for (byte aByte : data) {</span>
+<span class="nocode"><a name="207">207: </a></span><span style="background-color: #ffffcc">            switch (aByte) {</span>
+<span class="nocode"><a name="208">208: </a></span>                case (byte) ' ':
+<span class="nocode"><a name="209">209: </a></span>                case (byte) '\n':
+<span class="nocode"><a name="210">210: </a></span>                case (byte) '\r':
+<span class="nocode"><a name="211">211: </a></span>                case (byte) '\t':
+<span class="nocode"><a name="212">212: </a></span><span style="background-color: #ffffcc">                    break;</span>
+<span class="nocode"><a name="213">213: </a></span>                default:
+<span class="nocode"><a name="214">214: </a></span><span style="background-color: #ffffcc">                    groomedData[bytesCopied++] = aByte;</span>
+<span class="nocode"><a name="215">215: </a></span>            }
+<span class="nocode"><a name="216">216: </a></span>        }
+<span class="nocode"><a name="217">217: </a></span>
+<span class="nocode"><a name="218">218: </a></span><span style="background-color: #ffffcc">        byte packedData[] = new byte[bytesCopied];</span>
+<span class="nocode"><a name="219">219: </a></span>
+<span class="nocode"><a name="220">220: </a></span><span style="background-color: #ffffcc">        System.arraycopy(groomedData, 0, packedData, 0, bytesCopied);</span>
+<span class="nocode"><a name="221">221: </a></span>
+<span class="nocode"><a name="222">222: </a></span><span style="background-color: #ffffcc">        return packedData;</span>
+<span class="nocode"><a name="223">223: </a></span>    }
+<span class="nocode"><a name="224">224: </a></span>
+<span class="nocode"><a name="225">225: </a></span>    /**
+<span class="nocode"><a name="226">226: </a></span>     * Base64 encodes the specified byte array and then encodes it as a String using JSecurity's preferred character
+<span class="nocode"><a name="227">227: </a></span>     * encoding (UTF-8).
+<span class="nocode"><a name="228">228: </a></span>     *
+<span class="nocode"><a name="229">229: </a></span>     * @param bytes the byte array to Base64 encode.
+<span class="nocode"><a name="230">230: </a></span>     * @return a UTF-8 encoded String of the resulting Base64 encoded byte array.
+<span class="nocode"><a name="231">231: </a></span>     */
+<span class="nocode"><a name="232">232: </a></span>    public static String encodeToString(byte[] bytes) {
+<span class="nocode"><a name="233">233: </a></span><span style="background-color: #ffffcc">        byte[] encoded = encode(bytes);</span>
+<span class="nocode"><a name="234">234: </a></span><span style="background-color: #ffffcc">        return CodecSupport.toString(encoded);</span>
+<span class="nocode"><a name="235">235: </a></span>    }
+<span class="nocode"><a name="236">236: </a></span>
+<span class="nocode"><a name="237">237: </a></span>    /**
+<span class="nocode"><a name="238">238: </a></span>     * Encodes binary data using the base64 algorithm and chunks the encoded output into 76 character blocks
+<span class="nocode"><a name="239">239: </a></span>     *
+<span class="nocode"><a name="240">240: </a></span>     * @param binaryData binary data to encodeToChars
+<span class="nocode"><a name="241">241: </a></span>     * @return Base64 characters chunked in 76 character blocks
+<span class="nocode"><a name="242">242: </a></span>     */
+<span class="nocode"><a name="243">243: </a></span>    public static byte[] encodeChunked(byte[] binaryData) {
+<span class="nocode"><a name="244">244: </a></span><span style="background-color: #ffffcc">        return encode(binaryData, true);</span>
+<span class="nocode"><a name="245">245: </a></span>    }
+<span class="nocode"><a name="246">246: </a></span>
+<span class="nocode"><a name="247">247: </a></span>    /**
+<span class="nocode"><a name="248">248: </a></span>     * Encodes a byte[] containing binary data, into a byte[] containing characters in the Base64 alphabet.
+<span class="nocode"><a name="249">249: </a></span>     *
+<span class="nocode"><a name="250">250: </a></span>     * @param pArray a byte array containing binary data
+<span class="nocode"><a name="251">251: </a></span>     * @return A byte array containing only Base64 character data
+<span class="nocode"><a name="252">252: </a></span>     */
+<span class="nocode"><a name="253">253: </a></span>    public static byte[] encode(byte[] pArray) {
+<span class="nocode"><a name="254">254: </a></span><span style="background-color: #ffffcc">        return encode(pArray, false);</span>
+<span class="nocode"><a name="255">255: </a></span>    }
+<span class="nocode"><a name="256">256: </a></span>
+<span class="nocode"><a name="257">257: </a></span>    /**
+<span class="nocode"><a name="258">258: </a></span>     * Encodes binary data using the base64 algorithm, optionally chunking the output into 76 character blocks.
+<span class="nocode"><a name="259">259: </a></span>     *
+<span class="nocode"><a name="260">260: </a></span>     * @param binaryData Array containing binary data to encodeToChars.
+<span class="nocode"><a name="261">261: </a></span>     * @param isChunked  if &lt;code&gt;true&lt;/code&gt; this encoder will chunk the base64 output into 76 character blocks
+<span class="nocode"><a name="262">262: </a></span>     * @return Base64-encoded data.
+<span class="nocode"><a name="263">263: </a></span>     * @throws IllegalArgumentException Thrown when the input array needs an output array bigger than {@link Integer#MAX_VALUE}
+<span class="nocode"><a name="264">264: </a></span>     */
+<span class="nocode"><a name="265">265: </a></span>    public static byte[] encode(byte[] binaryData, boolean isChunked) {
+<span class="nocode"><a name="266">266: </a></span><span style="background-color: #ffffcc">        long binaryDataLength = binaryData.length;</span>
+<span class="nocode"><a name="267">267: </a></span><span style="background-color: #ffffcc">        long lengthDataBits = binaryDataLength * EIGHTBIT;</span>
+<span class="nocode"><a name="268">268: </a></span><span style="background-color: #ffffcc">        long fewerThan24bits = lengthDataBits % TWENTYFOURBITGROUP;</span>
+<span class="nocode"><a name="269">269: </a></span><span style="background-color: #ffffcc">        long tripletCount = lengthDataBits / TWENTYFOURBITGROUP;</span>
+<span class="nocode"><a name="270">270: </a></span><span style="background-color: #ffffcc">        long encodedDataLengthLong = 0;</span>
+<span class="nocode"><a name="271">271: </a></span><span style="background-color: #ffffcc">        int chunckCount = 0;</span>
+<span class="nocode"><a name="272">272: </a></span>
+<span class="nocode"><a name="273">273: </a></span><span style="background-color: #ffffcc">        if (fewerThan24bits != 0) {</span>
+<span class="nocode"><a name="274">274: </a></span>            // data not divisible by 24 bit
+<span class="nocode"><a name="275">275: </a></span><span style="background-color: #ffffcc">            encodedDataLengthLong = (tripletCount + 1) * 4;</span>
+<span class="nocode"><a name="276">276: </a></span>        } else {
+<span class="nocode"><a name="277">277: </a></span>            // 16 or 8 bit
+<span class="nocode"><a name="278">278: </a></span><span style="background-color: #ffffcc">            encodedDataLengthLong = tripletCount * 4;</span>
+<span class="nocode"><a name="279">279: </a></span>        }
+<span class="nocode"><a name="280">280: </a></span>
+<span class="nocode"><a name="281">281: </a></span>        // If the output is to be &quot;chunked&quot; into 76 character sections,
+<span class="nocode"><a name="282">282: </a></span>        // for compliance with RFC 2045 MIME, then it is important to
+<span class="nocode"><a name="283">283: </a></span>        // allow for extra length to account for the separator(s)
+<span class="nocode"><a name="284">284: </a></span><span style="background-color: #ffffcc">        if (isChunked) {</span>
+<span class="nocode"><a name="285">285: </a></span>
+<span class="nocode"><a name="286">286: </a></span><span style="background-color: #ffffcc">            chunckCount = (CHUNK_SEPARATOR.length == 0 ? 0 : (int) Math</span>
+<span class="nocode"><a name="287">287: </a></span>                    .ceil((float) encodedDataLengthLong / CHUNK_SIZE));
+<span class="nocode"><a name="288">288: </a></span><span style="background-color: #ffffcc">            encodedDataLengthLong += chunckCount * CHUNK_SEPARATOR.length;</span>
+<span class="nocode"><a name="289">289: </a></span>        }
+<span class="nocode"><a name="290">290: </a></span>
+<span class="nocode"><a name="291">291: </a></span><span style="background-color: #ffffcc">        if (encodedDataLengthLong &gt; Integer.MAX_VALUE) {</span>
+<span class="nocode"><a name="292">292: </a></span>            throw new IllegalArgumentException(
+<span class="nocode"><a name="293">293: </a></span>                    &quot;Input array too big, output array would be bigger than Integer.MAX_VALUE=&quot; + Integer.MAX_VALUE);
+<span class="nocode"><a name="294">294: </a></span>        }
+<span class="nocode"><a name="295">295: </a></span><span style="background-color: #ffffcc">        int encodedDataLength = (int) encodedDataLengthLong;</span>
+<span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">        byte encodedData[] = new byte[encodedDataLength];</span>
+<span class="nocode"><a name="297">297: </a></span>
+<span class="nocode"><a name="298">298: </a></span><span style="background-color: #ffffcc">        byte k = 0, l = 0, b1 = 0, b2 = 0, b3 = 0;</span>
+<span class="nocode"><a name="299">299: </a></span>
+<span class="nocode"><a name="300">300: </a></span><span style="background-color: #ffffcc">        int encodedIndex = 0;</span>
+<span class="nocode"><a name="301">301: </a></span><span style="background-color: #ffffcc">        int dataIndex = 0;</span>
+<span class="nocode"><a name="302">302: </a></span><span style="background-color: #ffffcc">        int i = 0;</span>
+<span class="nocode"><a name="303">303: </a></span><span style="background-color: #ffffcc">        int nextSeparatorIndex = CHUNK_SIZE;</span>
+<span class="nocode"><a name="304">304: </a></span><span style="background-color: #ffffcc">        int chunksSoFar = 0;</span>
+<span class="nocode"><a name="305">305: </a></span>
+<span class="nocode"><a name="306">306: </a></span>        // log.debug(&quot;number of triplets = &quot; + numberTriplets);
+<span class="nocode"><a name="307">307: </a></span><span style="background-color: #ffffcc">        for (i = 0; i &lt; tripletCount; i++) {</span>
+<span class="nocode"><a name="308">308: </a></span><span style="background-color: #ffffcc">            dataIndex = i * 3;</span>
+<span class="nocode"><a name="309">309: </a></span><span style="background-color: #ffffcc">            b1 = binaryData[dataIndex];</span>
+<span class="nocode"><a name="310">310: </a></span><span style="background-color: #ffffcc">            b2 = binaryData[dataIndex + 1];</span>
+<span class="nocode"><a name="311">311: </a></span><span style="background-color: #ffffcc">            b3 = binaryData[dataIndex + 2];</span>
+<span class="nocode"><a name="312">312: </a></span>
+<span class="nocode"><a name="313">313: </a></span>            // log.debug(&quot;b1= &quot; + b1 +&quot;, b2= &quot; + b2 + &quot;, b3= &quot; + b3);
+<span class="nocode"><a name="314">314: </a></span>
+<span class="nocode"><a name="315">315: </a></span><span style="background-color: #ffffcc">            l = (byte) (b2 &amp; 0x0f);</span>
+<span class="nocode"><a name="316">316: </a></span><span style="background-color: #ffffcc">            k = (byte) (b1 &amp; 0x03);</span>
+<span class="nocode"><a name="317">317: </a></span>
+<span class="nocode"><a name="318">318: </a></span><span style="background-color: #ffffcc">            byte val1 = ((b1 &amp; SIGN) == 0) ? (byte) (b1 &gt;&gt; 2) : (byte) ((b1) &gt;&gt; 2 ^ 0xc0);</span>
+<span class="nocode"><a name="319">319: </a></span><span style="background-color: #ffffcc">            byte val2 = ((b2 &amp; SIGN) == 0) ? (byte) (b2 &gt;&gt; 4) : (byte) ((b2) &gt;&gt; 4 ^ 0xf0);</span>
+<span class="nocode"><a name="320">320: </a></span><span style="background-color: #ffffcc">            byte val3 = ((b3 &amp; SIGN) == 0) ? (byte) (b3 &gt;&gt; 6) : (byte) ((b3) &gt;&gt; 6 ^ 0xfc);</span>
+<span class="nocode"><a name="321">321: </a></span>
+<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex] = lookUpBase64Alphabet[val1];</span>
+<span class="nocode"><a name="323">323: </a></span>            // log.debug( &quot;val2 = &quot; + val2 );
+<span class="nocode"><a name="324">324: </a></span>            // log.debug( &quot;k4 = &quot; + (k&lt;&lt;4) );
+<span class="nocode"><a name="325">325: </a></span>            // log.debug( &quot;vak = &quot; + (val2 | (k&lt;&lt;4)) );
+<span class="nocode"><a name="326">326: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 | (k &lt;&lt; 4)];</span>
+<span class="nocode"><a name="327">327: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 2] = lookUpBase64Alphabet[(l &lt;&lt; 2) | val3];</span>
+<span class="nocode"><a name="328">328: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 3] = lookUpBase64Alphabet[b3 &amp; 0x3f];</span>
+<span class="nocode"><a name="329">329: </a></span>
+<span class="nocode"><a name="330">330: </a></span><span style="background-color: #ffffcc">            encodedIndex += 4;</span>
+<span class="nocode"><a name="331">331: </a></span>
+<span class="nocode"><a name="332">332: </a></span>            // If we are chunking, let's put a chunk separator down.
+<span class="nocode"><a name="333">333: </a></span><span style="background-color: #ffffcc">            if (isChunked) {</span>
+<span class="nocode"><a name="334">334: </a></span>                // this assumes that CHUNK_SIZE % 4 == 0
+<span class="nocode"><a name="335">335: </a></span><span style="background-color: #ffffcc">                if (encodedIndex == nextSeparatorIndex) {</span>
+<span class="nocode"><a name="336">336: </a></span><span style="background-color: #ffffcc">                    System.arraycopy(CHUNK_SEPARATOR, 0, encodedData, encodedIndex, CHUNK_SEPARATOR.length);</span>
+<span class="nocode"><a name="337">337: </a></span><span style="background-color: #ffffcc">                    chunksSoFar++;</span>
+<span class="nocode"><a name="338">338: </a></span><span style="background-color: #ffffcc">                    nextSeparatorIndex = (CHUNK_SIZE * (chunksSoFar + 1)) + (chunksSoFar * CHUNK_SEPARATOR.length);</span>
+<span class="nocode"><a name="339">339: </a></span><span style="background-color: #ffffcc">                    encodedIndex += CHUNK_SEPARATOR.length;</span>
+<span class="nocode"><a name="340">340: </a></span>                }
+<span class="nocode"><a name="341">341: </a></span>            }
+<span class="nocode"><a name="342">342: </a></span>        }
+<span class="nocode"><a name="343">343: </a></span>
+<span class="nocode"><a name="344">344: </a></span>        // form integral number of 6-bit groups
+<span class="nocode"><a name="345">345: </a></span><span style="background-color: #ffffcc">        dataIndex = i * 3;</span>
+<span class="nocode"><a name="346">346: </a></span>
+<span class="nocode"><a name="347">347: </a></span><span style="background-color: #ffffcc">        if (fewerThan24bits == EIGHTBIT) {</span>
+<span class="nocode"><a name="348">348: </a></span><span style="background-color: #ffffcc">            b1 = binaryData[dataIndex];</span>
+<span class="nocode"><a name="349">349: </a></span><span style="background-color: #ffffcc">            k = (byte) (b1 &amp; 0x03);</span>
+<span class="nocode"><a name="350">350: </a></span>            // log.debug(&quot;b1=&quot; + b1);
+<span class="nocode"><a name="351">351: </a></span>            // log.debug(&quot;b1&lt;&lt;2 = &quot; + (b1&gt;&gt;2) );
+<span class="nocode"><a name="352">352: </a></span><span style="background-color: #ffffcc">            byte val1 = ((b1 &amp; SIGN) == 0) ? (byte) (b1 &gt;&gt; 2) : (byte) ((b1) &gt;&gt; 2 ^ 0xc0);</span>
+<span class="nocode"><a name="353">353: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex] = lookUpBase64Alphabet[val1];</span>
+<span class="nocode"><a name="354">354: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 1] = lookUpBase64Alphabet[k &lt;&lt; 4];</span>
+<span class="nocode"><a name="355">355: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 2] = PAD;</span>
+<span class="nocode"><a name="356">356: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 3] = PAD;</span>
+<span class="nocode"><a name="357">357: </a></span><span style="background-color: #ffffcc">        } else if (fewerThan24bits == SIXTEENBIT) {</span>
+<span class="nocode"><a name="358">358: </a></span>
+<span class="nocode"><a name="359">359: </a></span><span style="background-color: #ffffcc">            b1 = binaryData[dataIndex];</span>
+<span class="nocode"><a name="360">360: </a></span><span style="background-color: #ffffcc">            b2 = binaryData[dataIndex + 1];</span>
+<span class="nocode"><a name="361">361: </a></span><span style="background-color: #ffffcc">            l = (byte) (b2 &amp; 0x0f);</span>
+<span class="nocode"><a name="362">362: </a></span><span style="background-color: #ffffcc">            k = (byte) (b1 &amp; 0x03);</span>
+<span class="nocode"><a name="363">363: </a></span>
+<span class="nocode"><a name="364">364: </a></span><span style="background-color: #ffffcc">            byte val1 = ((b1 &amp; SIGN) == 0) ? (byte) (b1 &gt;&gt; 2) : (byte) ((b1) &gt;&gt; 2 ^ 0xc0);</span>
+<span class="nocode"><a name="365">365: </a></span><span style="background-color: #ffffcc">            byte val2 = ((b2 &amp; SIGN) == 0) ? (byte) (b2 &gt;&gt; 4) : (byte) ((b2) &gt;&gt; 4 ^ 0xf0);</span>
+<span class="nocode"><a name="366">366: </a></span>
+<span class="nocode"><a name="367">367: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex] = lookUpBase64Alphabet[val1];</span>
+<span class="nocode"><a name="368">368: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 1] = lookUpBase64Alphabet[val2 | (k &lt;&lt; 4)];</span>
+<span class="nocode"><a name="369">369: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 2] = lookUpBase64Alphabet[l &lt;&lt; 2];</span>
+<span class="nocode"><a name="370">370: </a></span><span style="background-color: #ffffcc">            encodedData[encodedIndex + 3] = PAD;</span>
+<span class="nocode"><a name="371">371: </a></span>        }
+<span class="nocode"><a name="372">372: </a></span>
+<span class="nocode"><a name="373">373: </a></span><span style="background-color: #ffffcc">        if (isChunked) {</span>
+<span class="nocode"><a name="374">374: </a></span>            // we also add a separator to the end of the final chunk.
+<span class="nocode"><a name="375">375: </a></span><span style="background-color: #ffffcc">            if (chunksSoFar &lt; chunckCount) {</span>
+<span class="nocode"><a name="376">376: </a></span><span style="background-color: #ffffcc">                System.arraycopy(CHUNK_SEPARATOR, 0, encodedData, encodedDataLength - CHUNK_SEPARATOR.length,</span>
+<span class="nocode"><a name="377">377: </a></span>                        CHUNK_SEPARATOR.length);
+<span class="nocode"><a name="378">378: </a></span>            }
+<span class="nocode"><a name="379">379: </a></span>        }
+<span class="nocode"><a name="380">380: </a></span>
+<span class="nocode"><a name="381">381: </a></span><span style="background-color: #ffffcc">        return encodedData;</span>
+<span class="nocode"><a name="382">382: </a></span>    }
+<span class="nocode"><a name="383">383: </a></span>
+<span class="nocode"><a name="384">384: </a></span>    /**
+<span class="nocode"><a name="385">385: </a></span>     * Converts the specified UTF-8 Base64 encoded String and decodes it to a resultant UTF-8 encoded string.
+<span class="nocode"><a name="386">386: </a></span>     *
+<span class="nocode"><a name="387">387: </a></span>     * @param base64Encoded a UTF-8 Base64 encoded String
+<span class="nocode"><a name="388">388: </a></span>     * @return the decoded String, UTF-8 encoded.
+<span class="nocode"><a name="389">389: </a></span>     */
+<span class="nocode"><a name="390">390: </a></span>    public static String decodeToString(String base64Encoded) {
+<span class="nocode"><a name="391">391: </a></span><span style="background-color: #ffffcc">        byte[] encodedBytes = CodecSupport.toBytes(base64Encoded);</span>
+<span class="nocode"><a name="392">392: </a></span><span style="background-color: #ffffcc">        return decodeToString(encodedBytes);</span>
+<span class="nocode"><a name="393">393: </a></span>    }
+<span class="nocode"><a name="394">394: </a></span>
+<span class="nocode"><a name="395">395: </a></span>    /**
+<span class="nocode"><a name="396">396: </a></span>     * Decodes the specified Base64 encoded byte array and returns the decoded result as a UTF-8 encoded.
+<span class="nocode"><a name="397">397: </a></span>     *
+<span class="nocode"><a name="398">398: </a></span>     * @param base64Encoded a Base64 encoded byte array
+<span class="nocode"><a name="399">399: </a></span>     * @return the decoded String, UTF-8 encoded.
+<span class="nocode"><a name="400">400: </a></span>     */
+<span class="nocode"><a name="401">401: </a></span>    public static String decodeToString(byte[] base64Encoded) {
+<span class="nocode"><a name="402">402: </a></span><span style="background-color: #ffffcc">        byte[] decoded = decode(base64Encoded);</span>
+<span class="nocode"><a name="403">403: </a></span><span style="background-color: #ffffcc">        return CodecSupport.toString(decoded);</span>
+<span class="nocode"><a name="404">404: </a></span>    }
+<span class="nocode"><a name="405">405: </a></span>
+<span class="nocode"><a name="406">406: </a></span>    /**
+<span class="nocode"><a name="407">407: </a></span>     * Converts the specified UTF-8 Base64 encoded String and decodes it to a raw Base64 decoded byte array.
+<span class="nocode"><a name="408">408: </a></span>     *
+<span class="nocode"><a name="409">409: </a></span>     * @param base64Encoded a UTF-8 Base64 encoded String
+<span class="nocode"><a name="410">410: </a></span>     * @return the raw Base64 decoded byte array.
+<span class="nocode"><a name="411">411: </a></span>     */
+<span class="nocode"><a name="412">412: </a></span>    public static byte[] decode(String base64Encoded) {
+<span class="nocode"><a name="413">413: </a></span><span style="background-color: #ffffcc">        byte[] bytes = CodecSupport.toBytes(base64Encoded);</span>
+<span class="nocode"><a name="414">414: </a></span><span style="background-color: #ffffcc">        return decode(bytes);</span>
+<span class="nocode"><a name="415">415: </a></span>    }
+<span class="nocode"><a name="416">416: </a></span>
+<span class="nocode"><a name="417">417: </a></span>    /**
+<span class="nocode"><a name="418">418: </a></span>     * Decodes Base64 data into octects
+<span class="nocode"><a name="419">419: </a></span>     *
+<span class="nocode"><a name="420">420: </a></span>     * @param base64Data Byte array containing Base64 data
+<span class="nocode"><a name="421">421: </a></span>     * @return Array containing decoded data.
+<span class="nocode"><a name="422">422: </a></span>     */
+<span class="nocode"><a name="423">423: </a></span>    public static byte[] decode(byte[] base64Data) {
+<span class="nocode"><a name="424">424: </a></span>        // RFC 2045 requires that we discard ALL non-Base64 characters
+<span class="nocode"><a name="425">425: </a></span><span style="background-color: #ffffcc">        base64Data = discardNonBase64(base64Data);</span>
+<span class="nocode"><a name="426">426: </a></span>
+<span class="nocode"><a name="427">427: </a></span>        // handle the edge case, so we don't have to worry about it later
+<span class="nocode"><a name="428">428: </a></span><span style="background-color: #ffffcc">        if (base64Data.length == 0) {</span>
+<span class="nocode"><a name="429">429: </a></span><span style="background-color: #ffffcc">            return new byte[0];</span>
+<span class="nocode"><a name="430">430: </a></span>        }
+<span class="nocode"><a name="431">431: </a></span>
+<span class="nocode"><a name="432">432: </a></span><span style="background-color: #ffffcc">        int numberQuadruple = base64Data.length / FOURBYTE;</span>
+<span class="nocode"><a name="433">433: </a></span><span style="background-color: #ffffcc">        byte decodedData[] = null;</span>
+<span class="nocode"><a name="434">434: </a></span><span style="background-color: #ffffcc">        byte b1 = 0, b2 = 0, b3 = 0, b4 = 0, marker0 = 0, marker1 = 0;</span>
+<span class="nocode"><a name="435">435: </a></span>
+<span class="nocode"><a name="436">436: </a></span>        // Throw away anything not in base64Data
+<span class="nocode"><a name="437">437: </a></span>
+<span class="nocode"><a name="438">438: </a></span><span style="background-color: #ffffcc">        int encodedIndex = 0;</span>
+<span class="nocode"><a name="439">439: </a></span><span style="background-color: #ffffcc">        int dataIndex = 0;</span>
+<span class="nocode"><a name="440">440: </a></span>        {
+<span class="nocode"><a name="441">441: </a></span>            // this sizes the output array properly - rlw
+<span class="nocode"><a name="442">442: </a></span><span style="background-color: #ffffcc">            int lastData = base64Data.length;</span>
+<span class="nocode"><a name="443">443: </a></span>            // ignore the '=' padding
+<span class="nocode"><a name="444">444: </a></span><span style="background-color: #ffffcc">            while (base64Data[lastData - 1] == PAD) {</span>
+<span class="nocode"><a name="445">445: </a></span><span style="background-color: #ffffcc">                if (--lastData == 0) {</span>
+<span class="nocode"><a name="446">446: </a></span><span style="background-color: #ffffcc">                    return new byte[0];</span>
+<span class="nocode"><a name="447">447: </a></span>                }
+<span class="nocode"><a name="448">448: </a></span>            }
+<span class="nocode"><a name="449">449: </a></span><span style="background-color: #ffffcc">            decodedData = new byte[lastData - numberQuadruple];</span>
+<span class="nocode"><a name="450">450: </a></span>        }
+<span class="nocode"><a name="451">451: </a></span>
+<span class="nocode"><a name="452">452: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; numberQuadruple; i++) {</span>
+<span class="nocode"><a name="453">453: </a></span><span style="background-color: #ffffcc">            dataIndex = i * 4;</span>
+<span class="nocode"><a name="454">454: </a></span><span style="background-color: #ffffcc">            marker0 = base64Data[dataIndex + 2];</span>
+<span class="nocode"><a name="455">455: </a></span><span style="background-color: #ffffcc">            marker1 = base64Data[dataIndex + 3];</span>
+<span class="nocode"><a name="456">456: </a></span>
+<span class="nocode"><a name="457">457: </a></span><span style="background-color: #ffffcc">            b1 = base64Alphabet[base64Data[dataIndex]];</span>
+<span class="nocode"><a name="458">458: </a></span><span style="background-color: #ffffcc">            b2 = base64Alphabet[base64Data[dataIndex + 1]];</span>
+<span class="nocode"><a name="459">459: </a></span>
+<span class="nocode"><a name="460">460: </a></span><span style="background-color: #ffffcc">            if (marker0 != PAD &amp;&amp; marker1 != PAD) {</span>
+<span class="nocode"><a name="461">461: </a></span>                // No PAD e.g 3cQl
+<span class="nocode"><a name="462">462: </a></span><span style="background-color: #ffffcc">                b3 = base64Alphabet[marker0];</span>
+<span class="nocode"><a name="463">463: </a></span><span style="background-color: #ffffcc">                b4 = base64Alphabet[marker1];</span>
+<span class="nocode"><a name="464">464: </a></span>
+<span class="nocode"><a name="465">465: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex] = (byte) (b1 &lt;&lt; 2 | b2 &gt;&gt; 4);</span>
+<span class="nocode"><a name="466">466: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex + 1] = (byte) (((b2 &amp; 0xf) &lt;&lt; 4) | ((b3 &gt;&gt; 2) &amp; 0xf));</span>
+<span class="nocode"><a name="467">467: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex + 2] = (byte) (b3 &lt;&lt; 6 | b4);</span>
+<span class="nocode"><a name="468">468: </a></span><span style="background-color: #ffffcc">            } else if (marker0 == PAD) {</span>
+<span class="nocode"><a name="469">469: </a></span>                // Two PAD e.g. 3c[Pad][Pad]
+<span class="nocode"><a name="470">470: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex] = (byte) (b1 &lt;&lt; 2 | b2 &gt;&gt; 4);</span>
+<span class="nocode"><a name="471">471: </a></span><span style="background-color: #ffffcc">            } else if (marker1 == PAD) {</span>
+<span class="nocode"><a name="472">472: </a></span>                // One PAD e.g. 3cQ[Pad]
+<span class="nocode"><a name="473">473: </a></span><span style="background-color: #ffffcc">                b3 = base64Alphabet[marker0];</span>
+<span class="nocode"><a name="474">474: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex] = (byte) (b1 &lt;&lt; 2 | b2 &gt;&gt; 4);</span>
+<span class="nocode"><a name="475">475: </a></span><span style="background-color: #ffffcc">                decodedData[encodedIndex + 1] = (byte) (((b2 &amp; 0xf) &lt;&lt; 4) | ((b3 &gt;&gt; 2) &amp; 0xf));</span>
+<span class="nocode"><a name="476">476: </a></span>            }
+<span class="nocode"><a name="477">477: </a></span><span style="background-color: #ffffcc">            encodedIndex += 3;</span>
+<span class="nocode"><a name="478">478: </a></span>        }
+<span class="nocode"><a name="479">479: </a></span><span style="background-color: #ffffcc">        return decodedData;</span>
+<span class="nocode"><a name="480">480: </a></span>    }
+<span class="nocode"><a name="481">481: </a></span>
+<span class="nocode"><a name="482">482: </a></span>    /**
+<span class="nocode"><a name="483">483: </a></span>     * Discards any characters outside of the base64 alphabet, per the requirements on page 25 of RFC 2045 - &quot;Any
+<span class="nocode"><a name="484">484: </a></span>     * characters outside of the base64 alphabet are to be ignored in base64 encoded data.&quot;
+<span class="nocode"><a name="485">485: </a></span>     *
+<span class="nocode"><a name="486">486: </a></span>     * @param data The base-64 encoded data to groom
+<span class="nocode"><a name="487">487: </a></span>     * @return The data, less non-base64 characters (see RFC 2045).
+<span class="nocode"><a name="488">488: </a></span>     */
+<span class="nocode"><a name="489">489: </a></span>    static byte[] discardNonBase64(byte[] data) {
+<span class="nocode"><a name="490">490: </a></span><span style="background-color: #ffffcc">        byte groomedData[] = new byte[data.length];</span>
+<span class="nocode"><a name="491">491: </a></span><span style="background-color: #ffffcc">        int bytesCopied = 0;</span>
+<span class="nocode"><a name="492">492: </a></span>
+<span class="nocode"><a name="493">493: </a></span><span style="background-color: #ffffcc">        for (byte aByte : data) {</span>
+<span class="nocode"><a name="494">494: </a></span><span style="background-color: #ffffcc">            if (isBase64(aByte)) {</span>
+<span class="nocode"><a name="495">495: </a></span><span style="background-color: #ffffcc">                groomedData[bytesCopied++] = aByte;</span>
+<span class="nocode"><a name="496">496: </a></span>            }
+<span class="nocode"><a name="497">497: </a></span>        }
+<span class="nocode"><a name="498">498: </a></span>
+<span class="nocode"><a name="499">499: </a></span><span style="background-color: #ffffcc">        byte packedData[] = new byte[bytesCopied];</span>
+<span class="nocode"><a name="500">500: </a></span>
+<span class="nocode"><a name="501">501: </a></span><span style="background-color: #ffffcc">        System.arraycopy(groomedData, 0, packedData, 0, bytesCopied);</span>
+<span class="nocode"><a name="502">502: </a></span>
+<span class="nocode"><a name="503">503: </a></span><span style="background-color: #ffffcc">        return packedData;</span>
+<span class="nocode"><a name="504">504: </a></span>    }
+<span class="nocode"><a name="505">505: </a></span>
+<span class="nocode"><a name="506">506: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 4189
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: org
+<li>TARGET_CLASS: org.jsecurity.codec.Base64
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/18_jsecurity/jsecurity.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

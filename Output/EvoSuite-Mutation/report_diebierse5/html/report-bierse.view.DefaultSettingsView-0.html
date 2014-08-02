@@ -1,0 +1,685 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+bierse.view.DefaultSettingsView
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: bierse.view.DefaultSettingsView: 0.00%</ul><ul>
+<li>1482 fitness evaluations, 31 generations, 742 statements, 1146 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 0/20 branches, 0/24 methods, 0/41 total goals
+<li>Mutation score: 100%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.view;
+<span class="nocode"><a name="2">  2: </a></span>
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>import java.awt.BorderLayout;
+<span class="nocode"><a name="5">  5: </a></span>import java.awt.FlowLayout;
+<span class="nocode"><a name="6">  6: </a></span>import java.awt.GridLayout;
+<span class="nocode"><a name="7">  7: </a></span>import java.awt.event.ActionListener;
+<span class="nocode"><a name="8">  8: </a></span>import java.awt.event.KeyEvent;
+<span class="nocode"><a name="9">  9: </a></span>import java.awt.event.KeyListener;
+<span class="nocode"><a name="10"> 10: </a></span>import java.util.Vector;
+<span class="nocode"><a name="11"> 11: </a></span>
+<span class="nocode"><a name="12"> 12: </a></span>import javax.swing.ButtonGroup;
+<span class="nocode"><a name="13"> 13: </a></span>import javax.swing.JButton;
+<span class="nocode"><a name="14"> 14: </a></span>import javax.swing.JCheckBox;
+<span class="nocode"><a name="15"> 15: </a></span>import javax.swing.JComboBox;
+<span class="nocode"><a name="16"> 16: </a></span>import javax.swing.JDialog;
+<span class="nocode"><a name="17"> 17: </a></span>import javax.swing.JFileChooser;
+<span class="nocode"><a name="18"> 18: </a></span>import javax.swing.JFrame;
+<span class="nocode"><a name="19"> 19: </a></span>import javax.swing.JLabel;
+<span class="nocode"><a name="20"> 20: </a></span>import javax.swing.JPanel;
+<span class="nocode"><a name="21"> 21: </a></span>import javax.swing.JRadioButton;
+<span class="nocode"><a name="22"> 22: </a></span>import javax.swing.JScrollPane;
+<span class="nocode"><a name="23"> 23: </a></span>import javax.swing.JSlider;
+<span class="nocode"><a name="24"> 24: </a></span>import javax.swing.JTabbedPane;
+<span class="nocode"><a name="25"> 25: </a></span>import javax.swing.JTextField;
+<span class="nocode"><a name="26"> 26: </a></span>
+<span class="nocode"><a name="27"> 27: </a></span>import bierse.view.ISettingsView;
+<span class="nocode"><a name="28"> 28: </a></span>import bierse.model.Drink;
+<span class="nocode"><a name="29"> 29: </a></span>import bierse.model.Model;
+<span class="nocode"><a name="30"> 30: </a></span>
+<span class="nocode"><a name="31"> 31: </a></span>public class DefaultSettingsView extends JFrame  implements ISettingsView, IDrinkSettingsView {
+<span class="nocode"><a name="32"> 32: </a></span>
+<span class="nocode"><a name="33"> 33: </a></span>	private static final long serialVersionUID = -1160952914735227669L;
+<span class="nocode"><a name="34"> 34: </a></span>
+<span class="nocode"><a name="35"> 35: </a></span>	JButton okButton;
+<span class="nocode"><a name="36"> 36: </a></span>	JButton cancelButton;
+<span class="nocode"><a name="37"> 37: </a></span>	
+<span class="nocode"><a name="38"> 38: </a></span>	JTextField timeIntervalTextField;
+<span class="nocode"><a name="39"> 39: </a></span>	JTextField currencyTextField;
+<span class="nocode"><a name="40"> 40: </a></span>	JRadioButton priceStep5RadioButton;
+<span class="nocode"><a name="41"> 41: </a></span>	JRadioButton priceStep10RadioButton;
+<span class="nocode"><a name="42"> 42: </a></span>	JRadioButton priceStep20RadioButton;
+<span class="nocode"><a name="43"> 43: </a></span>	JRadioButton priceStep50RadioButton;
+<span class="nocode"><a name="44"> 44: </a></span>	JCheckBox standardLogicCheckBox;
+<span class="nocode"><a name="45"> 45: </a></span>	JTextField backgroundFilePathtextField;
+<span class="nocode"><a name="46"> 46: </a></span>	JButton fileChooserButton;
+<span class="nocode"><a name="47"> 47: </a></span>	JTextField runningMessageTextField;
+<span class="nocode"><a name="48"> 48: </a></span>	JSlider runningMessageSpeedSlider;
+<span class="nocode"><a name="49"> 49: </a></span>	
+<span class="nocode"><a name="50"> 50: </a></span>	
+<span class="nocode"><a name="51"> 51: </a></span>	JPanel drinkSettingsPanel;
+<span class="nocode"><a name="52"> 52: </a></span>	
+<span class="nocode"><a name="53"> 53: </a></span>	JComboBox drinkComboBox;
+<span class="nocode"><a name="54"> 54: </a></span>	JTextField drinkNameTextField;
+<span class="nocode"><a name="55"> 55: </a></span>	JComboBox drinkKeyComboBox;
+<span class="nocode"><a name="56"> 56: </a></span>	JTextField drinkStartPriceTextField;
+<span class="nocode"><a name="57"> 57: </a></span>	JTextField drinkMinPriceTextField;
+<span class="nocode"><a name="58"> 58: </a></span>	JTextField drinkMaxPriceTextField;
+<span class="nocode"><a name="59"> 59: </a></span>	JTextField drinkMaxStepTextField;
+<span class="nocode"><a name="60"> 60: </a></span>	JTextField drinkTargetAmountTextField;
+<span class="nocode"><a name="61"> 61: </a></span>	JTextField drinkDeltaAmountTextField;
+<span class="nocode"><a name="62"> 62: </a></span>	JCheckBox drinkIsUsedCheckBox;
+<span class="nocode"><a name="63"> 63: </a></span>	
+<span class="nocode"><a name="64"> 64: </a></span>	private Model model;
+<span class="nocode"><a name="65"> 65: </a></span>	private Drink drink;
+<span class="nocode"><a name="66"> 66: </a></span>
+<span class="nocode"><a name="67"> 67: </a></span>	public DefaultSettingsView(Model model) {
+<span class="nocode"><a name="68"> 68: </a></span>		super(&quot;Einstellungen&quot;);
+<span class="nocode"><a name="69"> 69: </a></span>		this.model = model;
+<span class="nocode"><a name="70"> 70: </a></span>		JTabbedPane tabbedPane = new JTabbedPane();
+<span class="nocode"><a name="71"> 71: </a></span>		
+<span class="nocode"><a name="72"> 72: </a></span>		JPanel mainPanel = new JPanel();
+<span class="nocode"><a name="73"> 73: </a></span>		mainPanel.setLayout(new BorderLayout());
+<span class="nocode"><a name="74"> 74: </a></span>		mainPanel.add(tabbedPane, BorderLayout.CENTER);
+<span class="nocode"><a name="75"> 75: </a></span>		getContentPane().add(mainPanel);
+<span class="nocode"><a name="76"> 76: </a></span>		
+<span class="nocode"><a name="77"> 77: </a></span>		JPanel mainSettingsPanel = new JPanel();
+<span class="nocode"><a name="78"> 78: </a></span>		mainSettingsPanel.setLayout(new GridLayout(1, 1));
+<span class="nocode"><a name="79"> 79: </a></span>		JScrollPane settingsScrollPane = new JScrollPane(mainSettingsPanel);
+<span class="nocode"><a name="80"> 80: </a></span>		mainSettingsPanel.add(createSettingsPanel());
+<span class="nocode"><a name="81"> 81: </a></span>		
+<span class="nocode"><a name="82"> 82: </a></span>		drinkSettingsPanel = new JPanel();
+<span class="nocode"><a name="83"> 83: </a></span>		drinkSettingsPanel.setLayout(new BorderLayout());
+<span class="nocode"><a name="84"> 84: </a></span>		JScrollPane drinkSettingsScrollPane = new JScrollPane(drinkSettingsPanel);
+<span class="nocode"><a name="85"> 85: </a></span>		Drink newDrink = new Drink(Drink.NEW_DRINK_NAME, model);
+<span class="nocode"><a name="86"> 86: </a></span>		if (!model.getLstDrinks().contains(newDrink)) {
+<span class="nocode"><a name="87"> 87: </a></span>			model.getLstDrinks().add(newDrink);
+<span class="nocode"><a name="88"> 88: </a></span>		}
+<span class="nocode"><a name="89"> 89: </a></span>		
+<span class="nocode"><a name="90"> 90: </a></span>		if(model.getLstDrinks().size() &gt; 0) {
+<span class="nocode"><a name="91"> 91: </a></span>			drink = model.getLstDrinks().get(0);
+<span class="nocode"><a name="92"> 92: </a></span>		} else {
+<span class="nocode"><a name="93"> 93: </a></span>			drink = newDrink;
+<span class="nocode"><a name="94"> 94: </a></span>		}
+<span class="nocode"><a name="95"> 95: </a></span>		
+<span class="nocode"><a name="96"> 96: </a></span>		drinkComboBox = new JComboBox(model.getLstDrinks());
+<span class="nocode"><a name="97"> 97: </a></span>		drinkComboBox.setActionCommand(ISettingsView.SETTINGS_ACTION_DRINK_SELECTED);
+<span class="nocode"><a name="98"> 98: </a></span>		drinkSettingsPanel.add(drinkComboBox, BorderLayout.NORTH);
+<span class="nocode"><a name="99"> 99: </a></span>		drinkSettingsPanel.add(createDrinkSettingsPanel(drink), BorderLayout.CENTER);
+<span class="nocode"><a name="100">100: </a></span>		
+<span class="nocode"><a name="101">101: </a></span>		JPanel buttonPanel = new JPanel();
+<span class="nocode"><a name="102">102: </a></span>		buttonPanel.setLayout(new GridLayout(1, 2));
+<span class="nocode"><a name="103">103: </a></span>		okButton = new JButton(&quot;OK&quot;);
+<span class="nocode"><a name="104">104: </a></span>		okButton.setMnemonic(KeyEvent.VK_O);
+<span class="nocode"><a name="105">105: </a></span>		okButton.setActionCommand(ISettingsView.SETTINGS_ACTION_OK);
+<span class="nocode"><a name="106">106: </a></span>		buttonPanel.add(okButton);
+<span class="nocode"><a name="107">107: </a></span>		cancelButton = new JButton(&quot;Abbrechen&quot;);
+<span class="nocode"><a name="108">108: </a></span>		cancelButton.setMnemonic(KeyEvent.VK_A);
+<span class="nocode"><a name="109">109: </a></span>		cancelButton.setActionCommand(ISettingsView.SETTINGS_ACTION_CANCEL);
+<span class="nocode"><a name="110">110: </a></span>		buttonPanel.add(cancelButton);
+<span class="nocode"><a name="111">111: </a></span>		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+<span class="nocode"><a name="112">112: </a></span>	// Add settings panel to tabbed pane
+<span class="nocode"><a name="113">113: </a></span>		tabbedPane.addTab(&quot;Einstellungen&quot;, settingsScrollPane);
+<span class="nocode"><a name="114">114: </a></span>		tabbedPane.addTab(&quot;Drink Einstellungen&quot;, drinkSettingsScrollPane);
+<span class="nocode"><a name="115">115: </a></span>		
+<span class="nocode"><a name="116">116: </a></span>		pack();
+<span class="nocode"><a name="117">117: </a></span>		setVisible(true);
+<span class="nocode"><a name="118">118: </a></span>	}
+<span class="nocode"><a name="119">119: </a></span>	
+<span class="nocode"><a name="120">120: </a></span>	private JPanel createDrinkSettingsPanel(Drink drink) {
+<span class="nocode"><a name="121">121: </a></span>		JPanel drinkSettings = new JPanel();
+<span class="nocode"><a name="122">122: </a></span>		drinkSettings.setLayout(new GridLayout(0, 2));
+<span class="nocode"><a name="123">123: </a></span>		JLabel drinkNameLabel = new JLabel(&quot;Name&quot;);
+<span class="nocode"><a name="124">124: </a></span>		drinkSettings.add(drinkNameLabel);
+<span class="nocode"><a name="125">125: </a></span>		drinkNameTextField = new JTextField(drink.getName());
+<span class="nocode"><a name="126">126: </a></span>		drinkSettings.add(drinkNameTextField);
+<span class="nocode"><a name="127">127: </a></span>		JLabel drinkKeyLabel = new JLabel(&quot;Taste&quot;);
+<span class="nocode"><a name="128">128: </a></span>		drinkSettings.add(drinkKeyLabel);
+<span class="nocode"><a name="129">129: </a></span>		drinkKeyComboBox = new JComboBox(new KeyMapComboBoxModel());
+<span class="nocode"><a name="130">130: </a></span>		drinkKeyComboBox.setSelectedItem(KeyMapComboBoxModel.getMyKeyMapForKeyCode(drink.getKey()));
+<span class="nocode"><a name="131">131: </a></span>		drinkSettings.add(drinkKeyComboBox);
+<span class="nocode"><a name="132">132: </a></span>		JLabel drinkStartPriceLabel = new JLabel(&quot;Start Preis&quot;);
+<span class="nocode"><a name="133">133: </a></span>		drinkSettings.add(drinkStartPriceLabel);
+<span class="nocode"><a name="134">134: </a></span>		drinkStartPriceTextField = new JTextField(String.valueOf(drink.getStartPrice()));
+<span class="nocode"><a name="135">135: </a></span>		drinkSettings.add(drinkStartPriceTextField);
+<span class="nocode"><a name="136">136: </a></span>		JLabel drinkMinPriceLabel = new JLabel(&quot;Minimum Preis&quot;);
+<span class="nocode"><a name="137">137: </a></span>		drinkSettings.add(drinkMinPriceLabel);
+<span class="nocode"><a name="138">138: </a></span>		drinkMinPriceTextField = new JTextField(String.valueOf(drink.getMinPrice()));
+<span class="nocode"><a name="139">139: </a></span>		drinkSettings.add(drinkMinPriceTextField);
+<span class="nocode"><a name="140">140: </a></span>		JLabel drinkMaxPriceLabel = new JLabel(&quot;Maximum Preis&quot;);
+<span class="nocode"><a name="141">141: </a></span>		drinkSettings.add(drinkMaxPriceLabel);
+<span class="nocode"><a name="142">142: </a></span>		drinkMaxPriceTextField = new JTextField(String.valueOf(drink.getMaxPrice()));
+<span class="nocode"><a name="143">143: </a></span>		drinkSettings.add(drinkMaxPriceTextField);
+<span class="nocode"><a name="144">144: </a></span>		JLabel drinkMaxStep = new JLabel(&quot;Maximum Preisschritt&quot;);
+<span class="nocode"><a name="145">145: </a></span>		drinkSettings.add(drinkMaxStep);
+<span class="nocode"><a name="146">146: </a></span>		drinkMaxStepTextField = new JTextField(String.valueOf(drink.getMaxStep()));
+<span class="nocode"><a name="147">147: </a></span>		drinkSettings.add(drinkMaxStepTextField);
+<span class="nocode"><a name="148">148: </a></span>		JLabel drinkTargetAmountLabel = new JLabel(&quot;Verkauf-Soll&quot;);
+<span class="nocode"><a name="149">149: </a></span>		drinkSettings.add(drinkTargetAmountLabel);
+<span class="nocode"><a name="150">150: </a></span>		drinkTargetAmountTextField = new JTextField(String.valueOf(drink.getTargetAmount()));
+<span class="nocode"><a name="151">151: </a></span>		drinkSettings.add(drinkTargetAmountTextField);
+<span class="nocode"><a name="152">152: </a></span>		JLabel drinkDeltaAmountLabel = new JLabel(&quot;VerkaufDifferenz&quot;);
+<span class="nocode"><a name="153">153: </a></span>		drinkSettings.add(drinkDeltaAmountLabel);
+<span class="nocode"><a name="154">154: </a></span>		drinkDeltaAmountTextField = new JTextField(String.valueOf(drink.getDeltaAmount()));
+<span class="nocode"><a name="155">155: </a></span>		drinkSettings.add(drinkDeltaAmountTextField);
+<span class="nocode"><a name="156">156: </a></span>		drinkIsUsedCheckBox = new JCheckBox(&quot;Aktiv&quot;);
+<span class="nocode"><a name="157">157: </a></span>		drinkIsUsedCheckBox.setSelected(drink.isUsed());
+<span class="nocode"><a name="158">158: </a></span>		drinkSettings.add(drinkIsUsedCheckBox);
+<span class="nocode"><a name="159">159: </a></span>		
+<span class="nocode"><a name="160">160: </a></span>		return drinkSettings;
+<span class="nocode"><a name="161">161: </a></span>	}
+<span class="nocode"><a name="162">162: </a></span>	
+<span class="nocode"><a name="163">163: </a></span>	private JPanel createSettingsPanel() {
+<span class="nocode"><a name="164">164: </a></span>	// Create settings panel
+<span class="nocode"><a name="165">165: </a></span>		JPanel settingsPanel = new JPanel();
+<span class="nocode"><a name="166">166: </a></span>		settingsPanel.setLayout(new BorderLayout(10, 10));
+<span class="nocode"><a name="167">167: </a></span>		
+<span class="nocode"><a name="168">168: </a></span>		
+<span class="nocode"><a name="169">169: </a></span>	// Create panel containing the labels
+<span class="nocode"><a name="170">170: </a></span>		JPanel labelPanel = new JPanel();
+<span class="nocode"><a name="171">171: </a></span>		labelPanel.setLayout(new GridLayout(0,1));
+<span class="nocode"><a name="172">172: </a></span>		
+<span class="nocode"><a name="173">173: </a></span>	// Create panel containing the values
+<span class="nocode"><a name="174">174: </a></span>		JPanel valuePanel = new JPanel();
+<span class="nocode"><a name="175">175: </a></span>		valuePanel.setLayout(new GridLayout(0,1));
+<span class="nocode"><a name="176">176: </a></span>		
+<span class="nocode"><a name="177">177: </a></span>	// Setting for time interval 
+<span class="nocode"><a name="178">178: </a></span>		JLabel timeIntervalLabel = new JLabel(&quot;Zeitinterval&quot;);
+<span class="nocode"><a name="179">179: </a></span>		labelPanel.add(timeIntervalLabel);
+<span class="nocode"><a name="180">180: </a></span>		timeIntervalTextField = new JTextField(String.valueOf(model.getSettings().getTimeInterval()));
+<span class="nocode"><a name="181">181: </a></span>		valuePanel.add(timeIntervalTextField);
+<span class="nocode"><a name="182">182: </a></span>		
+<span class="nocode"><a name="183">183: </a></span>	// Setting for price steps
+<span class="nocode"><a name="184">184: </a></span>		JLabel priceStepsLabel = new JLabel(&quot;Preisschritte&quot;);
+<span class="nocode"><a name="185">185: </a></span>		labelPanel.add(priceStepsLabel);
+<span class="nocode"><a name="186">186: </a></span>	// Create panel for price steps radio buttons
+<span class="nocode"><a name="187">187: </a></span>		JPanel buttonGroupPanel = new JPanel();
+<span class="nocode"><a name="188">188: </a></span>		buttonGroupPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+<span class="nocode"><a name="189">189: </a></span>		ButtonGroup priceStepsButtonGroup = new ButtonGroup();
+<span class="nocode"><a name="190">190: </a></span>		priceStep5RadioButton = new JRadioButton(&quot;5&quot;);
+<span class="nocode"><a name="191">191: </a></span>		priceStepsButtonGroup.add(priceStep5RadioButton);
+<span class="nocode"><a name="192">192: </a></span>		buttonGroupPanel.add(priceStep5RadioButton);
+<span class="nocode"><a name="193">193: </a></span>		priceStep10RadioButton = new JRadioButton(&quot;10&quot;);
+<span class="nocode"><a name="194">194: </a></span>		buttonGroupPanel.add(priceStep10RadioButton);
+<span class="nocode"><a name="195">195: </a></span>		priceStepsButtonGroup.add(priceStep10RadioButton);
+<span class="nocode"><a name="196">196: </a></span>		priceStep20RadioButton = new JRadioButton(&quot;20&quot;);
+<span class="nocode"><a name="197">197: </a></span>		buttonGroupPanel.add(priceStep20RadioButton);
+<span class="nocode"><a name="198">198: </a></span>		priceStepsButtonGroup.add(priceStep20RadioButton);
+<span class="nocode"><a name="199">199: </a></span>		priceStep50RadioButton = new JRadioButton(&quot;50&quot;);
+<span class="nocode"><a name="200">200: </a></span>		buttonGroupPanel.add(priceStep50RadioButton);
+<span class="nocode"><a name="201">201: </a></span>		priceStepsButtonGroup.add(priceStep50RadioButton);
+<span class="nocode"><a name="202">202: </a></span>		if(model.getSettings().getPriceSteps() == 5) {
+<span class="nocode"><a name="203">203: </a></span>			priceStep5RadioButton.setSelected(true);
+<span class="nocode"><a name="204">204: </a></span>		} else if(model.getSettings().getPriceSteps() == 10) {
+<span class="nocode"><a name="205">205: </a></span>			priceStep10RadioButton.setSelected(true);
+<span class="nocode"><a name="206">206: </a></span>		} else if(model.getSettings().getPriceSteps() == 20) {
+<span class="nocode"><a name="207">207: </a></span>			priceStep20RadioButton.setSelected(true);
+<span class="nocode"><a name="208">208: </a></span>		} else if(model.getSettings().getPriceSteps() == 50) {
+<span class="nocode"><a name="209">209: </a></span>			priceStep50RadioButton.setSelected(true);
+<span class="nocode"><a name="210">210: </a></span>		}
+<span class="nocode"><a name="211">211: </a></span>		valuePanel.add(buttonGroupPanel);
+<span class="nocode"><a name="212">212: </a></span>
+<span class="nocode"><a name="213">213: </a></span>	// Setting for Currency
+<span class="nocode"><a name="214">214: </a></span>		JLabel currencyLabel = new JLabel(&quot;W�hrung&quot;);
+<span class="nocode"><a name="215">215: </a></span>		labelPanel.add(currencyLabel);
+<span class="nocode"><a name="216">216: </a></span>		currencyTextField = new JTextField(model.getSettings().getCurrency());
+<span class="nocode"><a name="217">217: </a></span>		valuePanel.add(currencyTextField);
+<span class="nocode"><a name="218">218: </a></span>		
+<span class="nocode"><a name="219">219: </a></span>	// Setting for background image
+<span class="nocode"><a name="220">220: </a></span>		JLabel backgroundFileLabel = new JLabel(&quot;Hintergrundbild&quot;);
+<span class="nocode"><a name="221">221: </a></span>		labelPanel.add(backgroundFileLabel);
+<span class="nocode"><a name="222">222: </a></span>		JPanel backgroundImageChooserPanel = new JPanel();
+<span class="nocode"><a name="223">223: </a></span>		backgroundImageChooserPanel.setLayout(new BorderLayout());
+<span class="nocode"><a name="224">224: </a></span>		backgroundFilePathtextField = new JTextField(model.getSettings().getBackgroundImagePath());
+<span class="nocode"><a name="225">225: </a></span>		backgroundImageChooserPanel.add(backgroundFilePathtextField, BorderLayout.CENTER);
+<span class="nocode"><a name="226">226: </a></span>		fileChooserButton = new JButton(&quot;...&quot;);
+<span class="nocode"><a name="227">227: </a></span>		fileChooserButton.setActionCommand(ISettingsView.SETTINGS_ACTION_CHOOSE_BACKGROUND);
+<span class="nocode"><a name="228">228: </a></span>		backgroundImageChooserPanel.add(fileChooserButton, BorderLayout.EAST);
+<span class="nocode"><a name="229">229: </a></span>		valuePanel.add(backgroundImageChooserPanel);
+<span class="nocode"><a name="230">230: </a></span>		
+<span class="nocode"><a name="231">231: </a></span>	// Setting for standard logic
+<span class="nocode"><a name="232">232: </a></span>		JLabel standardLogicLabel = new JLabel();
+<span class="nocode"><a name="233">233: </a></span>		labelPanel.add(standardLogicLabel);
+<span class="nocode"><a name="234">234: </a></span>		standardLogicCheckBox = new JCheckBox(&quot;Standard Logik&quot;);
+<span class="nocode"><a name="235">235: </a></span>		standardLogicCheckBox.setToolTipText(&quot;Standard Logik: Mehr verkauft -&gt; Preis steigt&quot;);
+<span class="nocode"><a name="236">236: </a></span>		standardLogicCheckBox.setSelected(model.getSettings().isStandardLogic());
+<span class="nocode"><a name="237">237: </a></span>		valuePanel.add(standardLogicCheckBox);
+<span class="nocode"><a name="238">238: </a></span>		
+<span class="nocode"><a name="239">239: </a></span>	// Setting for running message text
+<span class="nocode"><a name="240">240: </a></span>		JLabel runningMessageTextLabel = new JLabel(&quot;Lauftext&quot;);
+<span class="nocode"><a name="241">241: </a></span>		labelPanel.add(runningMessageTextLabel);
+<span class="nocode"><a name="242">242: </a></span>		runningMessageTextField = new JTextField(model.getSettings().getMessage());
+<span class="nocode"><a name="243">243: </a></span>		valuePanel.add(runningMessageTextField);
+<span class="nocode"><a name="244">244: </a></span>		
+<span class="nocode"><a name="245">245: </a></span>	// Setting for running message speed
+<span class="nocode"><a name="246">246: </a></span>		JLabel runningMessageSpeedLabel = new JLabel(&quot;Lauftext Geschwindigkeit&quot;);
+<span class="nocode"><a name="247">247: </a></span>		labelPanel.add(runningMessageSpeedLabel);
+<span class="nocode"><a name="248">248: </a></span>		runningMessageSpeedSlider = new JSlider(1, 70, model.getSettings().getMessageSpeed());
+<span class="nocode"><a name="249">249: </a></span>		runningMessageSpeedSlider.setMinorTickSpacing(5);
+<span class="nocode"><a name="250">250: </a></span>		runningMessageSpeedSlider.setInverted(true);
+<span class="nocode"><a name="251">251: </a></span>		runningMessageSpeedSlider.setToolTipText(&quot;Links langsamer, Rechts schneller&quot;);
+<span class="nocode"><a name="252">252: </a></span>		valuePanel.add(runningMessageSpeedSlider);
+<span class="nocode"><a name="253">253: </a></span>		
+<span class="nocode"><a name="254">254: </a></span>		
+<span class="nocode"><a name="255">255: </a></span>	// Add label and value panel to main panel
+<span class="nocode"><a name="256">256: </a></span>		settingsPanel.add(labelPanel, BorderLayout.WEST);
+<span class="nocode"><a name="257">257: </a></span>		settingsPanel.add(valuePanel, BorderLayout.CENTER);
+<span class="nocode"><a name="258">258: </a></span>		
+<span class="nocode"><a name="259">259: </a></span>	// Return main panel
+<span class="nocode"><a name="260">260: </a></span>		return settingsPanel;
+<span class="nocode"><a name="261">261: </a></span>	}
+<span class="nocode"><a name="262">262: </a></span>	
+<span class="nocode"><a name="263">263: </a></span>	public void setSettingsController(ActionListener al) {
+<span class="nocode"><a name="264">264: </a></span>		okButton.addActionListener(al);
+<span class="nocode"><a name="265">265: </a></span>		cancelButton.addActionListener(al);
+<span class="nocode"><a name="266">266: </a></span>		drinkComboBox.addActionListener(al);
+<span class="nocode"><a name="267">267: </a></span>		fileChooserButton.addActionListener(al);
+<span class="nocode"><a name="268">268: </a></span>	}
+<span class="nocode"><a name="269">269: </a></span>
+<span class="nocode"><a name="270">270: </a></span>	@Override
+<span class="nocode"><a name="271">271: </a></span>	public void close() {
+<span class="nocode"><a name="272">272: </a></span>		dispose();
+<span class="nocode"><a name="273">273: </a></span>	}
+<span class="nocode"><a name="274">274: </a></span>
+<span class="nocode"><a name="275">275: </a></span>	@Override
+<span class="nocode"><a name="276">276: </a></span>	public int getTimeInterval() {
+<span class="nocode"><a name="277">277: </a></span>		try {
+<span class="nocode"><a name="278">278: </a></span>			return Integer.valueOf(timeIntervalTextField.getText()).intValue();
+<span class="nocode"><a name="279">279: </a></span>		} catch(NumberFormatException nfe) {
+<span class="nocode"><a name="280">280: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="281">281: </a></span>		}
+<span class="nocode"><a name="282">282: </a></span>		return -1;
+<span class="nocode"><a name="283">283: </a></span>	}
+<span class="nocode"><a name="284">284: </a></span>
+<span class="nocode"><a name="285">285: </a></span>	@Override
+<span class="nocode"><a name="286">286: </a></span>	public String getCurrency() {
+<span class="nocode"><a name="287">287: </a></span>		return currencyTextField.getText();
+<span class="nocode"><a name="288">288: </a></span>	}
+<span class="nocode"><a name="289">289: </a></span>
+<span class="nocode"><a name="290">290: </a></span>	@Override
+<span class="nocode"><a name="291">291: </a></span>	public int getPriceSteps() {
+<span class="nocode"><a name="292">292: </a></span>		if(priceStep5RadioButton.isSelected()) {
+<span class="nocode"><a name="293">293: </a></span>			return 5;
+<span class="nocode"><a name="294">294: </a></span>		} else if(priceStep10RadioButton.isSelected()) {
+<span class="nocode"><a name="295">295: </a></span>			return 10;
+<span class="nocode"><a name="296">296: </a></span>		} else if(priceStep20RadioButton.isSelected()) {
+<span class="nocode"><a name="297">297: </a></span>			return 20;
+<span class="nocode"><a name="298">298: </a></span>		} else if(priceStep50RadioButton.isSelected()) {
+<span class="nocode"><a name="299">299: </a></span>			return 50;
+<span class="nocode"><a name="300">300: </a></span>		}
+<span class="nocode"><a name="301">301: </a></span>		return 10;
+<span class="nocode"><a name="302">302: </a></span>	}
+<span class="nocode"><a name="303">303: </a></span>
+<span class="nocode"><a name="304">304: </a></span>	
+<span class="nocode"><a name="305">305: </a></span>
+<span class="nocode"><a name="306">306: </a></span>	@Override
+<span class="nocode"><a name="307">307: </a></span>	public String getDrinkName() {
+<span class="nocode"><a name="308">308: </a></span>		return drinkNameTextField.getText();
+<span class="nocode"><a name="309">309: </a></span>	}
+<span class="nocode"><a name="310">310: </a></span>	
+<span class="nocode"><a name="311">311: </a></span>	@Override
+<span class="nocode"><a name="312">312: </a></span>	public int getKey() {
+<span class="nocode"><a name="313">313: </a></span>		try {
+<span class="nocode"><a name="314">314: </a></span>			return ((MyKeyMap)drinkKeyComboBox.getSelectedItem()).getCode();
+<span class="nocode"><a name="315">315: </a></span>		} catch(NumberFormatException nfe) {
+<span class="nocode"><a name="316">316: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="317">317: </a></span>		}
+<span class="nocode"><a name="318">318: </a></span>		return -1;
+<span class="nocode"><a name="319">319: </a></span>	}
+<span class="nocode"><a name="320">320: </a></span>	
+<span class="nocode"><a name="321">321: </a></span>	@Override
+<span class="nocode"><a name="322">322: </a></span>	public int getStartPrice() {
+<span class="nocode"><a name="323">323: </a></span>		try {
+<span class="nocode"><a name="324">324: </a></span>			return Integer.valueOf(drinkStartPriceTextField.getText());
+<span class="nocode"><a name="325">325: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="326">326: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="327">327: </a></span>		}
+<span class="nocode"><a name="328">328: </a></span>		return -1;
+<span class="nocode"><a name="329">329: </a></span>	}
+<span class="nocode"><a name="330">330: </a></span>	
+<span class="nocode"><a name="331">331: </a></span>	@Override
+<span class="nocode"><a name="332">332: </a></span>	public int getMinPrice() {
+<span class="nocode"><a name="333">333: </a></span>		try {
+<span class="nocode"><a name="334">334: </a></span>			return Integer.valueOf(drinkMinPriceTextField.getText());
+<span class="nocode"><a name="335">335: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="336">336: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="337">337: </a></span>		}
+<span class="nocode"><a name="338">338: </a></span>		return -1;
+<span class="nocode"><a name="339">339: </a></span>	}
+<span class="nocode"><a name="340">340: </a></span>	
+<span class="nocode"><a name="341">341: </a></span>	@Override
+<span class="nocode"><a name="342">342: </a></span>	public int getMaxPrice() {
+<span class="nocode"><a name="343">343: </a></span>		try {
+<span class="nocode"><a name="344">344: </a></span>			return Integer.valueOf(drinkMaxPriceTextField.getText());
+<span class="nocode"><a name="345">345: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="346">346: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="347">347: </a></span>		}
+<span class="nocode"><a name="348">348: </a></span>		return -1;
+<span class="nocode"><a name="349">349: </a></span>	}
+<span class="nocode"><a name="350">350: </a></span>	
+<span class="nocode"><a name="351">351: </a></span>	@Override
+<span class="nocode"><a name="352">352: </a></span>	public int getMaxStep() {
+<span class="nocode"><a name="353">353: </a></span>		try {
+<span class="nocode"><a name="354">354: </a></span>			return Integer.valueOf(drinkMaxStepTextField.getText());
+<span class="nocode"><a name="355">355: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="356">356: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="357">357: </a></span>		}
+<span class="nocode"><a name="358">358: </a></span>		return -1;
+<span class="nocode"><a name="359">359: </a></span>	}
+<span class="nocode"><a name="360">360: </a></span>	
+<span class="nocode"><a name="361">361: </a></span>	@Override
+<span class="nocode"><a name="362">362: </a></span>	public int getTargetAmount() {
+<span class="nocode"><a name="363">363: </a></span>		try {
+<span class="nocode"><a name="364">364: </a></span>			return Integer.valueOf(drinkTargetAmountTextField.getText());
+<span class="nocode"><a name="365">365: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="366">366: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="367">367: </a></span>		}
+<span class="nocode"><a name="368">368: </a></span>		return -1;
+<span class="nocode"><a name="369">369: </a></span>	}
+<span class="nocode"><a name="370">370: </a></span>	
+<span class="nocode"><a name="371">371: </a></span>	@Override
+<span class="nocode"><a name="372">372: </a></span>	public int getDeltaAmount() {
+<span class="nocode"><a name="373">373: </a></span>		try {
+<span class="nocode"><a name="374">374: </a></span>			return Integer.valueOf(drinkDeltaAmountTextField.getText());
+<span class="nocode"><a name="375">375: </a></span>		} catch (NumberFormatException nfe) {
+<span class="nocode"><a name="376">376: </a></span>			model.getLog().error(this, nfe);
+<span class="nocode"><a name="377">377: </a></span>		}
+<span class="nocode"><a name="378">378: </a></span>		return -1;
+<span class="nocode"><a name="379">379: </a></span>	}
+<span class="nocode"><a name="380">380: </a></span>	
+<span class="nocode"><a name="381">381: </a></span>	@Override
+<span class="nocode"><a name="382">382: </a></span>	public boolean isUsed() {
+<span class="nocode"><a name="383">383: </a></span>		return drinkIsUsedCheckBox.isSelected();
+<span class="nocode"><a name="384">384: </a></span>	}
+<span class="nocode"><a name="385">385: </a></span>
+<span class="nocode"><a name="386">386: </a></span>	public Drink getDrink() {
+<span class="nocode"><a name="387">387: </a></span>		return drink;
+<span class="nocode"><a name="388">388: </a></span>	}
+<span class="nocode"><a name="389">389: </a></span>
+<span class="nocode"><a name="390">390: </a></span>	@Override
+<span class="nocode"><a name="391">391: </a></span>	public boolean isStandardLogic() {
+<span class="nocode"><a name="392">392: </a></span>		return standardLogicCheckBox.isSelected();
+<span class="nocode"><a name="393">393: </a></span>	}
+<span class="nocode"><a name="394">394: </a></span>	
+<span class="nocode"><a name="395">395: </a></span>	@Override
+<span class="nocode"><a name="396">396: </a></span>	public String getBackgroundPicturePath() {
+<span class="nocode"><a name="397">397: </a></span>		return backgroundFilePathtextField.getText();
+<span class="nocode"><a name="398">398: </a></span>	}
+<span class="nocode"><a name="399">399: </a></span>	
+<span class="nocode"><a name="400">400: </a></span>	@Override
+<span class="nocode"><a name="401">401: </a></span>	public void setBackgronudPicturePath(String path) {
+<span class="nocode"><a name="402">402: </a></span>		backgroundFilePathtextField.setText(path);
+<span class="nocode"><a name="403">403: </a></span>	}	
+<span class="nocode"><a name="404">404: </a></span>
+<span class="nocode"><a name="405">405: </a></span>	@Override
+<span class="nocode"><a name="406">406: </a></span>	public void setDrink(Drink drink) {
+<span class="nocode"><a name="407">407: </a></span>		this.drink = drink;
+<span class="nocode"><a name="408">408: </a></span>		drinkSettingsPanel.removeAll();
+<span class="nocode"><a name="409">409: </a></span>		drinkSettingsPanel.add(drinkComboBox, BorderLayout.NORTH);
+<span class="nocode"><a name="410">410: </a></span>		drinkSettingsPanel.add(createDrinkSettingsPanel(drink), BorderLayout.CENTER);
+<span class="nocode"><a name="411">411: </a></span>		validate();
+<span class="nocode"><a name="412">412: </a></span>		repaint();
+<span class="nocode"><a name="413">413: </a></span>	}
+<span class="nocode"><a name="414">414: </a></span>
+<span class="nocode"><a name="415">415: </a></span>	@Override
+<span class="nocode"><a name="416">416: </a></span>	public String getRunningMessage() {
+<span class="nocode"><a name="417">417: </a></span>		return runningMessageTextField.getText();
+<span class="nocode"><a name="418">418: </a></span>	}
+<span class="nocode"><a name="419">419: </a></span>
+<span class="nocode"><a name="420">420: </a></span>	@Override
+<span class="nocode"><a name="421">421: </a></span>	public int getRunningMessageSpeed() {
+<span class="nocode"><a name="422">422: </a></span>		return runningMessageSpeedSlider.getValue();
+<span class="nocode"><a name="423">423: </a></span>	}
+<span class="nocode"><a name="424">424: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree4949130130299358133.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 19809
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: bierse
+<li>TARGET_CLASS: bierse.view.DefaultSettingsView
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/49_diebierse/diebierse.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>
