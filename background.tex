@@ -1,0 +1,171 @@
+%!TEX root=qsic2014.tex
+% mainfile: qsic2014.tex
+
+\section{Quality of Test Cases}
+
+While goals, company policy, and/or community standards may influence the
+quality of developer-written test cases, automatically generated ones are
+similarly affected by both the choice of the tool and the configuration of the
+tool's parameters. \todo{Define the term quality of a test case: low complexity
+but high efficiency and effectiveness}
+
+Test effectiveness is frequently measured based on the code coverage or
+fault-finding ability of the test suite.  Code coverage is a structure-based
+criterion that requires exercising certain control structures and variables
+within a program~\cite{kapfhammer-testing-handbook}. A fault-based test adequacy
+criterion, on the other hand, attempts to ensure that a program does not contain
+the types of faults that developers inadvertently introduce into software
+systems~\cite{demillo1978hints}.  
+
+A common type of test effectiveness evaluation, in both industrial and academic
+work, leverages structurally-based criteria that require the execution of
+statements or branches in a program~\cite{weyuker1988evaluation}.
+\todo{Add a bit more details about code coverage?}
+
+In contrast, mutation analysis is a fault-based technique that measures the
+fault-finding ability of a test case on the basis of induced artificial
+faults~\cite{demillo1978hints, hamlet1977testing}.  Originally proposed by
+DeMillo et al.~\cite{demillo1978hints}, mutation analysis systematically seeds
+artificial faults into a program and measures a test suite's ability to
+distinguish the original program from many altered versions, called mutants.
+Mutants are obtained by applying mutation operators and the mutation score is
+the ratio of mutants that a test suite can distinguish from the original
+program.  Examples for mutation operators include the replacement of arithmetic
+operators (e.g., \verb|a*b| $\mapsto$ \verb|a-b|), manipulation of branch
+conditions, or deletion of statements.  Prior studies have used mutation
+analysis to experimentally gauge the effectiveness of different testing
+strategies~\cite{andrews2005mutation,andrews2006,do2006,just2014}.  
+
+\section{Generation of Test Cases} 
+\label{sec:background}
+
+\todo{RJ: Based on our discussion, I used the following terminology:
+Generally, there are 2 types of test generation techniques: deterministic and
+randomized. Furthermore, a test generation tool might produce a simple template,
+a skeleton (aims at hight coverage but does not include sophisticated test
+oracles), or complete test cases (includes test oracles).}
+
+This section discusses the processes of manually developing test cases and the
+use of automatic test generation tools for this purpose.  It also outlines
+existing test generation approaches and tools, and describes \evo and \codepro
+in greater detail as they are empirically studied in this paper.
+
+\subsection{Manually Written Tests}
+
+Test suites are most often written manually, either by the developers themselves
+or through a quality assurance team.  While companies may have their own
+standards and goals that are followed when writing test cases---such as high
+levels of statement or branch coverage (e.g.~\cite{DO-178B, IEC61508})---no
+well-established patterns exist to help standardize test writing practice
+throughout the software development industry. Thus, the methods and styles of
+writing individual tests, fulfillment of coverage and fault-finding goals, and
+the ordering of test suites are often left to industry requirements or personal
+preference.\todo{This paragraph does not add much and is rather repetitive
+w.r.t. the intro --- cut it?}
+
+\subsection{Automatically Generated Tests}
+\todo{Group the test generation tools by their output: templates, skeletons, and
+full test cases}
+Instead of, or in addition to, manually developing test cases without rigorous
+guidelines, developers may employ automatic test generation tools that
+could reduce the time and cost associated with testing while also improving code
+coverage.  Many automatic test suite generators currently exist.  Some tools,
+like the MoreUnit plugin for Eclipse \cite{moreunit}, generate test case stubs
+for the method that is currently highlighted by the cursor.  Alternatively,
+tools such as \codepro~\cite{CodePro1},
+\evo~\cite{fraser:2011:eat:2025113.2025179}, \jcrasher~\cite{csallner2004},
+\palus~\cite{zhang:2011:pha:1985793.1986036},
+\randoop~\cite{pacheco2007feedback}, and
+\testera~\cite{marinov:2001:tnf:872023.872551} can generate complete test suites
+that need no modification prior to execution.
+
+Automatic test case generation tools use both deterministic (e.g., hard-coded
+rules and regular expressions) and learning-based (e.g., randomized or
+evolutionary) algorithms to produce test cases based on particular strategies,
+thereby avoiding the subjectivity and wide variation in styles commonly found in
+manually generated tests.  Test suite generators also have the potential to
+significantly reduce the amount of human time and effort required of the
+developer to create the test suite.  
+
+Due to the high cost and inconsistencies introduced when developing test suites
+by hand, automatic test suite generation research is on the rise.  In the past,
+the writing of test cases was left as an afterthought, and their implementation
+was the responsibility of a separate quality assurance team rather than the
+developer.  This led to a disconnect between the code and the tests.  In recent
+years, however, there has been a move towards a more involved test development
+system in tandem with the development
+process~\cite{Gelperin:1988:GST:62959.62965}.  This movement includes a focus on
+creating unit tests for code as it is developed, ensuring that code always
+passes tests and thereby improving the quality of the
+code~\cite{Canfora:2006:EAT:1159733.1159788}.  Although this improvement in test
+creation processes successfully improved the reliability of the code, the cost
+of human time and effort needed to manually write high quality tests increased
+as programs became more complex~\cite{clarke1998automated}. 
+
+While many different techniques have been used to automatically generate tests,
+they can be divided into two key categories: Deterministic and Learning-Based.
+
+\subsubsection{Deterministic}
+
+Deterministic automatic test case generators normally analyze method parameters
+and basic paths to create unit tests.  The simplest of these tools statically
+analyze the basic source code paths alone and create skeletons of  needed tests.
+For example, JUnitDoclet \cite{JUnitDoclet} uses Javadoc to parse the source
+code of the application classes. From the collected information, JUnitDoclet
+writes test cases and test suites where there is a test suite for each Java
+package, a test case for each public, non-abstract class, and a skeleton test
+method for each public method. %The compiler will additionally guide the
+developer to challenging code segments such as classes that do not have a public
+constructor, classes that have no default constructors, and accessors for double
+or float values that need some epsilon when comparing two values.
+
+While these test skeletons are helpful, more sophisticated tools have been
+developed that create fuller tests by taking the method parameters into
+consideration. CoView~\cite{CoView}, for instance, is a commercial Eclipse
+plug-in tool that analyzes Java source code and calculates the number of
+data-driven and cyclomatic paths in a method. Each path is one that should be
+verified via a unit test. CoView then analyzes existing JUnit tests to determine
+which paths are and are not being tested. This determination is made with
+instrumented bytecode that calculates path and branch coverage. CoView then
+creates the missing JUnit tests for the developer. The developer will have to
+modify parts of the tests, such as the assertions, but the tool helps the
+developer by identifying the minimum number of tests that should be created
+given parameter options \mbox{and paths}.
+
+Other tools are capable of generating fully executable tests that require no
+modification: for instance, this paper considers \codepro~\cite{CodePro1}, an
+Eclipse plug-in tool with many powerful code analysis features and metrics.
+Given an input class, the tool creates a corresponding test class complete with
+multiple test methods for each input class method. The tool analyzes each method
+and input argument with the goal of generating tests that exercise each line of
+code using a combination of both static analysis and by dynamically executing
+the code to be tested in order to observe the behavior of the
+code~\cite{CodePro2}.  \codepro was a Jolt Award finalist and has been studied
+in terms of the types of tests it can write in comparison to other
+tools~\cite{xie2009}.  Yet, to the best of our knowledge, no work has compared
+the overall quality of the test cases it creates.
+
+\subsubsection{Learning-Based}
+
+Another set of automatic test case generation tools use learning algorithms to
+improve the overall quality of the generated test suites.  The two top-ranked
+tools in this area are Randoop and \evo~\cite{fraser2013a}.  Using
+feedback-directed random test generation, Randoop automatically creates tests
+for Java classes in JUnit format~\cite{pacheco2007feedback}. This technique
+randomly generates sequences of methods and constructor invocations for the
+classes under test and uses the sequences to create tests. Randoop then executes
+the sequences it creates and uses the results of the execution to create more
+assertions, attempting to  avoid redundant and illegal inputs while guiding
+towards generation of tests that lead to new object states. 
+
+\evo~\cite{fraser:2011:eat:2025113.2025179}, which is used in this paper, ranked
+first in SBST 2013 Tool Competition~\cite{fraser2013a} and similarly uses a
+learning algorithm to generate a full, executable test suite.  The tool's
+evolutionary search approach evolves whole test suites with respect to both
+coverage and mutation scores.  Optimization with respect to a coverage criterion
+rather than individual coverage goals helps the algorithm to not be adversely
+influenced by difficulty of infeasibility of individual coverage goals.
+Repeated mutation testing is used to produce a reduced set of assertions that
+maximizes the number of seeded defects in a class that are revealed by the
+generated test cases.
+
