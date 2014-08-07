@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IniResource.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.io</a> &gt; <span class="el_source">IniResource.java</span></div><h1>IniResource.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.io;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import static org.jsecurity.util.StringUtils.clean;
+import static org.jsecurity.util.StringUtils.splitKeyValue;
+
+import java.io.InputStream;
+import java.io.Reader;
+import java.text.ParseException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * //TODO - complete JavaDoc
+ *
+ * @author Les Hazlewood
+ * @since 0.9
+ */
+public class IniResource extends TextResource {
+
+<span class="fc" id="L41">    private static final Log log = LogFactory.getLog(IniResource.class);    </span>
+
+    public static final String COMMENT_POUND = &quot;#&quot;;
+    public static final String COMMENT_SEMICOLON = &quot;;&quot;;
+    public static final String HEADER_PREFIX = &quot;[&quot;;
+    public static final String HEADER_SUFFIX = &quot;]&quot;;
+
+<span class="pc" id="L48">    protected Map&lt;String, Map&lt;String, String&gt;&gt; sections = new LinkedHashMap&lt;String, Map&lt;String, String&gt;&gt;();</span>
+
+<span class="nc" id="L50">    public IniResource() {</span>
+<span class="nc" id="L51">    }</span>
+
+<span class="nc" id="L53">    public IniResource(String configBodyOrResourcePath) {</span>
+<span class="nc" id="L54">        load(configBodyOrResourcePath);</span>
+<span class="nc" id="L55">    }</span>
+
+<span class="nc" id="L57">    public IniResource(String configBodyOrResourcePath, String charsetName) {</span>
+<span class="nc" id="L58">        setCharsetName(charsetName);</span>
+<span class="nc" id="L59">        load(configBodyOrResourcePath);</span>
+<span class="nc" id="L60">    }</span>
+
+<span class="nc" id="L62">    public IniResource(InputStream is) {</span>
+<span class="nc" id="L63">        load(is);</span>
+<span class="nc" id="L64">    }</span>
+
+<span class="fc" id="L66">    public IniResource(Reader r) {</span>
+<span class="fc" id="L67">        load(r);</span>
+<span class="fc" id="L68">    }</span>
+
+<span class="nc" id="L70">    public IniResource(Scanner s) {</span>
+<span class="nc" id="L71">        load(s);</span>
+<span class="nc" id="L72">    }</span>
+
+    public Map&lt;String, Map&lt;String, String&gt;&gt; getSections() {
+<span class="fc" id="L75">        return sections;</span>
+    }
+
+    public void setSections(Map&lt;String, Map&lt;String, String&gt;&gt; sections) {
+<span class="nc" id="L79">        this.sections = sections;</span>
+<span class="nc" id="L80">    }</span>
+
+    public void load(Scanner scanner) {
+
+<span class="fc" id="L84">        String currSectionName = null;</span>
+
+<span class="fc" id="L86">        Map&lt;String, String&gt; section = new LinkedHashMap&lt;String, String&gt;();</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        while (scanner.hasNextLine()) {</span>
+
+<span class="fc" id="L90">            String line = clean(scanner.nextLine());</span>
+
+<span class="pc bpc" id="L92" title="3 of 6 branches missed.">            if (line == null || line.startsWith(COMMENT_POUND) || line.startsWith(COMMENT_SEMICOLON)) {</span>
+                //skip empty lines and comments:
+<span class="nc" id="L94">                continue;</span>
+            }
+
+<span class="fc" id="L97">            String sectionName = getSectionName(line.toLowerCase());</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">            if (sectionName != null) {</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">                if (!section.isEmpty()) {</span>
+<span class="nc" id="L100">                    sections.put(currSectionName, section);</span>
+                }
+<span class="fc" id="L102">                currSectionName = sectionName;</span>
+<span class="fc" id="L103">                section = new LinkedHashMap&lt;String, String&gt;();</span>
+
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L106">                    log.debug(&quot;Parsing &quot; + HEADER_PREFIX + currSectionName + HEADER_SUFFIX);</span>
+                }
+            } else {
+                //normal line - split it into Key Value pairs and add it to the section:
+                try {
+<span class="fc" id="L111">                    String[] keyValue = splitKeyValue(line);</span>
+<span class="fc" id="L112">                    section.put(keyValue[0], keyValue[1]);</span>
+<span class="nc" id="L113">                } catch (ParseException e) {</span>
+<span class="nc" id="L114">                    String msg = &quot;Unable to read key value pair for line [&quot; + line + &quot;].&quot;;</span>
+<span class="nc" id="L115">                    throw new ResourceException(msg, e);</span>
+<span class="fc" id="L116">                }</span>
+            }
+<span class="fc" id="L118">        }</span>
+
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (!section.isEmpty()) {</span>
+<span class="fc" id="L121">            sections.put(currSectionName, section);</span>
+        }
+<span class="fc" id="L123">    }</span>
+
+    protected static boolean isSectionHeader(String line) {
+<span class="fc" id="L126">        String s = clean(line);</span>
+<span class="pc bpc" id="L127" title="2 of 6 branches missed.">        return s != null &amp;&amp; s.startsWith(HEADER_PREFIX) &amp;&amp; s.endsWith(HEADER_SUFFIX);</span>
+    }
+
+    protected static String getSectionName(String line) {
+<span class="fc" id="L131">        String s = clean(line);</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (isSectionHeader(s)) {</span>
+<span class="fc" id="L133">            return clean(s.substring(1, s.length() - 1));</span>
+        }
+<span class="fc" id="L135">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

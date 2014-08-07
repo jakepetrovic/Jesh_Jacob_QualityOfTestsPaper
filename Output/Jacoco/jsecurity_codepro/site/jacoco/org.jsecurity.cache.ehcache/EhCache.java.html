@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EhCache.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.cache.ehcache</a> &gt; <span class="el_source">EhCache.java</span></div><h1>EhCache.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.cache.ehcache;
+
+import net.sf.ehcache.Element;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.cache.Cache;
+import org.jsecurity.cache.CacheException;
+
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * JSecurity {@link org.jsecurity.cache.Cache} implementation that wraps an {@link net.sf.ehcache.Ehcache} instance.
+ *
+ * @author Jeremy Haile
+ * @author Les Hazlewood
+ * @since 0.2
+ */
+@SuppressWarnings(&quot;unchecked&quot;)
+public class EhCache implements Cache {
+
+    /** Private internal log instance. */
+<span class="fc" id="L43">    private static final Log log = LogFactory.getLog(EhCache.class);</span>
+
+    /**
+     * The wrapped Ehcache instance.
+     */
+    private net.sf.ehcache.Ehcache cache;
+
+    /**
+     * Constructs a new EhCache instance with the given cache.
+     *
+     * @param cache - delegate EhCache instance this JSecurity cache instance will wrap.
+     */
+<span class="fc" id="L55">    public EhCache(net.sf.ehcache.Cache cache) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (cache == null) {</span>
+<span class="fc" id="L57">            throw new IllegalArgumentException(&quot;Cache argument cannot be null.&quot;);</span>
+        }
+<span class="fc" id="L59">        this.cache = cache;</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * Gets a value of an element which matches the given key.
+     *
+     * @param key the key of the element to return.
+     * @return The value placed into the cache with an earlier put, or null if not found or expired
+     */
+    public Object get(Object key) throws CacheException {
+        try {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L71">                log.trace(&quot;Getting object from cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</span>
+            }
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (key == null) {</span>
+<span class="fc" id="L74">                return null;</span>
+            } else {
+<span class="nc" id="L76">                Element element = cache.get(key);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">                if (element == null) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                    if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L79">                        log.trace(&quot;Element for [&quot; + key + &quot;] is null.&quot;);</span>
+                    }
+<span class="nc" id="L81">                    return null;</span>
+                } else {
+<span class="nc" id="L83">                    return element.getObjectValue();</span>
+                }
+            }
+        }
+<span class="fc" id="L87">        catch (Throwable t) {</span>
+<span class="fc" id="L88">            throw new CacheException(t);</span>
+        }
+    }
+
+    /**
+     * Puts an object into the cache.
+     *
+     * @param key   the key.
+     * @param value the value.
+     */
+    public void put(Object key, Object value) throws CacheException {
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L100">            log.trace(&quot;Putting object in cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</span>
+        }
+        try {
+<span class="nc" id="L103">            Element element = new Element(key, value);</span>
+<span class="nc" id="L104">            cache.put(element);</span>
+        }
+<span class="fc" id="L106">        catch (Throwable t) {</span>
+<span class="fc" id="L107">            throw new CacheException(t);</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">    }</span>
+
+    /**
+     * Removes the element which matches the key.
+     *
+     * &lt;p&gt;If no element matches, nothing is removed and no Exception is thrown.&lt;/p&gt;
+     *
+     * @param key the key of the element to remove
+     */
+    public void remove(Object key) throws CacheException {
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L120">            log.trace(&quot;Removing object from cache [&quot; + cache.getName() + &quot;] for key [&quot; + key + &quot;]&quot;);</span>
+        }
+        try {
+<span class="nc" id="L123">            cache.remove(key);</span>
+<span class="fc" id="L124">        } catch (Throwable t) {</span>
+<span class="fc" id="L125">            throw new CacheException(t);</span>
+<span class="nc" id="L126">        }</span>
+<span class="nc" id="L127">    }</span>
+
+    /**
+     * Removes all elements in the cache, but leaves the cache in a useable state.
+     */
+    public void clear() throws CacheException {
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L134">            log.trace(&quot;Clearing all objects from cache [&quot; + cache.getName() + &quot;]&quot;);</span>
+        }
+        try {
+<span class="nc" id="L137">            cache.removeAll();</span>
+<span class="fc" id="L138">        } catch (Throwable t) {</span>
+<span class="fc" id="L139">            throw new CacheException(t);</span>
+<span class="nc" id="L140">        }</span>
+<span class="nc" id="L141">    }</span>
+
+    public int size() {
+        try {
+<span class="nc" id="L145">            return cache.getSize();</span>
+<span class="fc" id="L146">        } catch (Throwable t) {</span>
+<span class="fc" id="L147">            throw new CacheException(t);</span>
+        }
+    }
+
+    public Set keys() {
+        try {
+<span class="nc" id="L153">            List keys = cache.getKeys();</span>
+<span class="nc bnc" id="L154" title="All 4 branches missed.">            if (keys != null &amp;&amp; !keys.isEmpty()) {</span>
+<span class="nc" id="L155">                return Collections.unmodifiableSet(new LinkedHashSet(keys));</span>
+            } else {
+<span class="nc" id="L157">                return Collections.EMPTY_SET;</span>
+            }
+<span class="fc" id="L159">        } catch (Throwable t) {</span>
+<span class="fc" id="L160">            throw new CacheException(t);</span>
+        }
+    }
+
+    public Set values() {
+        try {
+<span class="nc" id="L166">            List keys = cache.getKeys();</span>
+<span class="nc bnc" id="L167" title="All 4 branches missed.">            if (keys != null &amp;&amp; !keys.isEmpty()) {</span>
+<span class="nc" id="L168">                Set values = new LinkedHashSet(keys.size());</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">                for (Object key : keys) {</span>
+<span class="nc" id="L170">                    values.add(cache.get(key));</span>
+<span class="nc" id="L171">                }</span>
+<span class="nc" id="L172">                return Collections.unmodifiableSet(values);</span>
+            } else {
+<span class="nc" id="L174">                return Collections.EMPTY_SET;</span>
+            }
+<span class="fc" id="L176">        } catch (Throwable t) {</span>
+<span class="fc" id="L177">            throw new CacheException(t);</span>
+        }
+    }
+
+    /**
+     * Returns the size (in bytes) that this EhCache is using in memory (RAM), or &lt;code&gt;-1&lt;/code&gt; if that
+     * number is unknown or cannot be calculated.
+     *
+     * @return the size (in bytes) that this EhCache is using in memory (RAM), or &lt;code&gt;-1&lt;/code&gt; if that
+     *         number is unknown or cannot be calculated.
+     */
+    public long getMemoryUsage() {
+        try {
+<span class="nc" id="L190">            return cache.calculateInMemorySize();</span>
+        }
+<span class="fc" id="L192">        catch (Throwable t) {</span>
+<span class="fc" id="L193">            return -1;</span>
+        }
+    }
+
+    /**
+     * Returns the size (in bytes) that this EhCache's memory store is using (RAM), or &lt;code&gt;-1&lt;/code&gt; if
+     * that number is unknown or cannot be calculated.
+     *
+     * @return the size (in bytes) that this EhCache's memory store is using (RAM), or &lt;code&gt;-1&lt;/code&gt; if
+     *         that number is unknown or cannot be calculated.
+     */
+    public long getMemoryStoreSize() {
+        try {
+<span class="nc" id="L206">            return cache.getMemoryStoreSize();</span>
+        }
+<span class="fc" id="L208">        catch (Throwable t) {</span>
+<span class="fc" id="L209">            throw new CacheException(t);</span>
+        }
+    }
+
+    /**
+     * Returns the size (in bytes) that this EhCache's disk store is consuming or &lt;code&gt;-1&lt;/code&gt; if
+     * that number is unknown or cannot be calculated.
+     *
+     * @return the size (in bytes) that this EhCache's disk store is consuming or &lt;code&gt;-1&lt;/code&gt; if
+     *         that number is unknown or cannot be calculated.
+     */
+    public long getDiskStoreSize() {
+        try {
+<span class="nc" id="L222">            return cache.getDiskStoreSize();</span>
+<span class="fc" id="L223">        } catch (Throwable t) {</span>
+<span class="fc" id="L224">            throw new CacheException(t);</span>
+        }
+    }
+
+    /**
+     * Returns &amp;quot;EhCache [&amp;quot; + cache.getName() + &amp;quot;]&amp;quot;
+     *
+     * @return &amp;quot;EhCache [&amp;quot; + cache.getName() + &amp;quot;]&amp;quot;
+     */
+    public String toString() {
+<span class="fc" id="L234">        return &quot;EhCache [&quot; + cache.getName() + &quot;]&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

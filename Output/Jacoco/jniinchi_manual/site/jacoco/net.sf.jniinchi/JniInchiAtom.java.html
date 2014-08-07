@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JniInchiAtom.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">JniInchiAtom.java</span></div><h1>JniInchiAtom.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package net.sf.jniinchi;
+
+/**
+ * Encapsulates properties of InChI Atom.  See &lt;tt&gt;inchi_api.h&lt;/tt&gt;.
+ * @author Sam Adams
+ */
+public class JniInchiAtom {
+
+    /**
+     * Indicates relative rather than absolute isotopic mass. Value
+     * from inchi_api.h.
+     */
+    protected static final int ISOTOPIC_SHIFT_FLAG = 10000;
+
+    /**
+     * Atom x-coordinate.
+     */
+    private double x;
+
+    /**
+     * Atom y-coordinate.
+     */
+    private double y;
+
+    /**
+     * Atom z-coordinate.
+     */
+    private double z;
+
+    /**
+     * Chemical element symbol eg C, O, Fe, Hg.
+     */
+    private String elname;
+
+    /**
+     * Number of implicit hydrogens on atom. If set to -1, InChI will add
+     * implicit H automatically.
+     */
+<span class="fc" id="L57">    private int implicitH = -1;</span>
+
+    /**
+     * Number of implicit protiums (isotopic 1-H) on atom.
+     */
+<span class="fc" id="L62">    private int implicitP = 0;</span>
+
+    /**
+     * Number of implicit deuteriums (isotopic 2-H) on atom.
+     */
+<span class="fc" id="L67">    private int implicitD = 0;</span>
+
+    /**
+     * Number of implicit tritiums (isotopic 3-H) on atom.
+     */
+<span class="fc" id="L72">    private int implicitT = 0;</span>
+
+    /**
+     * Mass of isotope. If set to 0, no isotopic mass set; otherwise, isotopic
+     * mass, or ISOTOPIC_SHIFT_FLAG + (mass - average atomic mass).
+     */
+<span class="fc" id="L78">    private int isotopic_mass = 0;</span>
+
+    /**
+     * Radical status of atom.
+     */
+<span class="fc" id="L83">    private INCHI_RADICAL radical = INCHI_RADICAL.NONE;</span>
+
+    /**
+     * Charge on atom.
+     */
+<span class="fc" id="L88">    private int charge = 0;</span>
+
+    /**
+     * &lt;p&gt;Create new atom.
+     *
+     * &lt;p&gt;Coordinates and element symbol must be set (unknown
+     * coordinates/dimensions should be set to zero).  All other
+     * parameters are initialised to default values:
+     * &lt;p&gt;
+     * &lt;tt&gt;
+     *    Num Implicit H = 0&lt;br&gt;
+     *    Num Implicit 1H = 0&lt;br&gt;
+     *    Num Implicit 2H = 0&lt;br&gt;
+     *    Num Implicit 3H = 0&lt;br&gt;
+     *    Isotopic mass = 0 (non isotopic)&lt;br&gt;
+     *    Radical status = NONE  (radical status not defined)
+     * &lt;/tt&gt;
+     *
+     * @param x     x-coordinate
+     * @param y     y-coordinate
+     * @param z     z-coordinate
+     * @param el    Chemical element symbol
+     * @throws NullPointerException - if the element symbol is null.
+     */
+<span class="fc" id="L112">    public JniInchiAtom(final double x, final double y, final double z, final String el) {</span>
+<span class="fc" id="L113">        this.x = x;</span>
+<span class="fc" id="L114">        this.y = y;</span>
+<span class="fc" id="L115">        this.z = z;</span>
+
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (el == null) {</span>
+<span class="fc" id="L118">        	throw new NullPointerException(&quot;Chemical element must not be null&quot;);</span>
+        }
+<span class="fc" id="L120">        this.elname = el;</span>
+<span class="fc" id="L121">    }</span>
+
+
+    /**
+     * Convenience method to create a new atom with zero coordinates.
+     * @param el
+     */
+    public JniInchiAtom(final String el) {
+<span class="fc" id="L129">        this(0.0, 0.0, 0.0, el);</span>
+<span class="fc" id="L130">    }</span>
+
+
+    /**
+     * Sets charge on atom.
+     *
+     * @param charge
+     */
+    public void setCharge(final int charge) {
+<span class="fc" id="L139">        this.charge = charge;</span>
+<span class="fc" id="L140">    }</span>
+
+    /**
+     * Sets radical status of atom.
+     *
+     * @param radical
+     */
+    public void setRadical(final INCHI_RADICAL radical) {
+<span class="fc" id="L148">        this.radical = radical;</span>
+<span class="fc" id="L149">    }</span>
+
+    /**
+     * Sets isotopic mass. If set to 0, non-isotopic.
+     *
+     * @param mass  Isotopic mass
+     */
+    public void setIsotopicMass(final int mass) {
+<span class="fc" id="L157">        this.isotopic_mass = mass;</span>
+<span class="fc" id="L158">    }</span>
+
+    /**
+     * Sets isotopic mass, relative to standard mass.
+     *
+     * @param shift  Isotopic mass minus average atomic mass
+     */
+    public void setIsotopicMassShift(final int shift) {
+<span class="fc" id="L166">        this.isotopic_mass = ISOTOPIC_SHIFT_FLAG + shift;</span>
+<span class="fc" id="L167">    }</span>
+
+    /**
+     * Sets number of implicit hydrogens on atom. If set to -1, InChI will add
+     * implicit H automatically.
+     *
+     * @param n  Number of implicit hydrogen
+     */
+    public void setImplicitH(final int n) {
+<span class="fc" id="L176">        this.implicitH = n;</span>
+<span class="fc" id="L177">    }</span>
+
+    /**
+     * Sets number of implicit protium (1H) on atom.
+     * @param n  Number of implicit protium
+     */
+    public void setImplicitProtium(final int n) {
+<span class="fc" id="L184">        this.implicitP = n;</span>
+<span class="fc" id="L185">    }</span>
+
+    /**
+     * Sets number of implicit deuterium (2H) on atom.
+     *
+     * @param n  Number of implicit deuterium
+     */
+    public void setImplicitDeuterium(final int n) {
+<span class="fc" id="L193">        this.implicitD = n;</span>
+<span class="fc" id="L194">    }</span>
+
+    /**
+     * Sets number of implicit tritium (3H) on atom.
+     * @param n  Number of implicit tritium
+     */
+    public void setImplicitTritium(final int n) {
+<span class="fc" id="L201">        this.implicitT = n;</span>
+<span class="fc" id="L202">    }</span>
+
+    /**
+     * Returns chemical element symbol of atom.
+     * @return
+     */
+    public String getElementType() {
+<span class="fc" id="L209">        return elname;</span>
+    }
+
+    /**
+     * Returns charge on atom.
+     * @return
+     */
+    public int getCharge() {
+<span class="fc" id="L217">        return charge;</span>
+    }
+
+    /**
+     * Returns radical state of atom.
+     * @return
+     */
+    public INCHI_RADICAL getRadical() {
+<span class="fc" id="L225">        return radical;</span>
+    }
+    
+    /**
+     * Returns atom's X-coordinate.
+     * @return
+     */
+    public double getX() {
+<span class="fc" id="L233">        return x;</span>
+    }
+
+    /**
+     * Returns atom's Y-coordinate.
+     * @return
+     */
+    public double getY() {
+<span class="fc" id="L241">        return y;</span>
+    }
+
+    /**
+     * Returns atom's Z-coordinate.
+     * @return
+     */
+    public double getZ() {
+<span class="fc" id="L249">        return z;</span>
+    }
+
+    /**
+     * Returns number of implicit hydrogens on atom.
+     * @return
+     */
+    public int getImplicitH() {
+<span class="fc" id="L257">        return implicitH;</span>
+    }
+
+    /**
+     * Returns number of implicit protiums (1H) on atom.
+     * @return
+     */
+    public int getImplicitProtium() {
+<span class="fc" id="L265">        return implicitP;</span>
+    }
+
+    /**
+     * Returns number of implicit deuteriums (2H) on atom.
+     * @return
+     */
+    public int getImplicitDeuterium() {
+<span class="fc" id="L273">        return implicitD;</span>
+    }
+
+    /**
+     * Returns number of implicit tritiums (3H) on atom.
+     * @return
+     */
+    public int getImplicitTritium() {
+<span class="fc" id="L281">        return implicitT;</span>
+    }
+
+    /**
+     * Returns isotopic mass of atom.
+     * @return
+     */
+    public int getIsotopicMass() {
+<span class="fc" id="L289">        return isotopic_mass;</span>
+    }
+
+    
+    int getInchiRadical() {
+<span class="nc" id="L294">    	return radical.getIndx();</span>
+    }
+    
+    void setInchiRadical(int radical) {
+<span class="nc" id="L298">    	this.radical = INCHI_RADICAL.getValue(radical);</span>
+<span class="nc" id="L299">    }</span>
+
+    
+    /**
+     * Generates string representation of information on atom,
+     * for debugging purposes.
+     */
+    public String getDebugString() {
+<span class="nc" id="L307">        return &quot;InChI Atom: &quot;</span>
+            + elname
+            + &quot; [&quot; + x + &quot;,&quot; + y + &quot;,&quot; + z + &quot;] &quot;
+            + &quot;Charge:&quot; + charge + &quot; // &quot;
+            + &quot;Iso Mass:&quot; + isotopic_mass + &quot; // &quot;
+            + &quot;Implicit H:&quot; + implicitH
+            + &quot; P:&quot; + implicitP
+            + &quot; D:&quot; + implicitD
+            + &quot; T:&quot; + implicitT
+            + &quot; // Radical: &quot; + radical;
+    }
+
+    /**
+     * Outputs information on atom, for debugging purposes.
+     */
+    public void debug() {
+<span class="nc" id="L323">        System.out.println(getDebugString());</span>
+<span class="nc" id="L324">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ServletContextSupport.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.servlet</a> &gt; <span class="el_source">ServletContextSupport.java</span></div><h1>ServletContextSupport.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.servlet;
+
+import javax.servlet.ServletContext;
+
+/**
+ * TODO - class javadoc
+ *
+ * @author Les Hazlewood
+ * @since 0.2
+ */
+<span class="fc" id="L29">public class ServletContextSupport {</span>
+
+    //TODO - complete JavaDoc
+<span class="fc" id="L32">    private ServletContext servletContext = null;</span>
+
+    public ServletContext getServletContext() {
+<span class="fc" id="L35">        return servletContext;</span>
+    }
+
+    public void setServletContext(ServletContext servletContext) {
+<span class="fc" id="L39">        this.servletContext = servletContext;</span>
+<span class="fc" id="L40">    }</span>
+
+    protected String getContextInitParam(String paramName) {
+<span class="nc" id="L43">        return getServletContext().getInitParameter(paramName);</span>
+    }
+
+    private ServletContext getServletContextNullCheck() {
+<span class="fc" id="L47">        ServletContext servletContext = getServletContext();</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (servletContext == null) {</span>
+<span class="fc" id="L49">            String msg = &quot;ServletContext property must be set via the setServletContext method.&quot;;</span>
+<span class="fc" id="L50">            throw new IllegalStateException(msg);</span>
+        }
+<span class="nc" id="L52">        return servletContext;</span>
+    }
+
+    protected void setAttribute(String key, Object value) {
+<span class="nc" id="L56">        getServletContextNullCheck().setAttribute(key, value);</span>
+<span class="nc" id="L57">    }</span>
+
+    protected Object getAttribute(String key) {
+<span class="nc" id="L60">        return getServletContextNullCheck().getAttribute(key);</span>
+    }
+
+    protected void removeAttribute(String key) {
+<span class="nc" id="L64">        getServletContextNullCheck().removeAttribute(key);</span>
+<span class="nc" id="L65">    }</span>
+
+    protected void bind(String name, String key, Object value) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (value == null) {</span>
+<span class="fc" id="L69">            throw new IllegalArgumentException(name + &quot; argument cannot be null.&quot;);</span>
+        }
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (getAttribute(key) != null) {</span>
+<span class="nc" id="L72">            String msg = name + &quot; already bound to ServletContext.  Please check your configuration to ensure &quot; +</span>
+                    &quot;you don't have mutliple SecurityManager Loaders configured (listener, servlet, etc).&quot;;
+<span class="nc" id="L74">            throw new IllegalStateException(msg);</span>
+        }
+<span class="nc" id="L76">        setAttribute(key, value);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

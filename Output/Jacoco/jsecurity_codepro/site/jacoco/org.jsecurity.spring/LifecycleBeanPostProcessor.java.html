@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LifecycleBeanPostProcessor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.spring</a> &gt; <span class="el_source">LifecycleBeanPostProcessor.java</span></div><h1>LifecycleBeanPostProcessor.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.spring;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.util.Destroyable;
+import org.jsecurity.util.Initializable;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.FatalBeanException;
+import org.springframework.beans.factory.config.DestructionAwareBeanPostProcessor;
+
+/**
+ * &lt;p&gt;Bean post processor for Spring that automatically calls the &lt;tt&gt;init()&lt;/tt&gt; and/or
+ * &lt;tt&gt;destroy()&lt;/tt&gt; methods on JSecurity objects that implement the {@link org.jsecurity.util.Initializable}
+ * or {@link org.jsecurity.util.Destroyable} interfaces, respectfully.  This post processor makes it easier
+ * to configure JSecurity beans in Spring, since the user never has to worry about whether or not if they
+ * have to specify init-method and destroy-method bean attributes.&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;Warning: This post processor has no way to determine if &lt;tt&gt;init()&lt;/tt&gt; or &lt;tt&gt;destroy()&lt;/tt&gt; have
+ * already been called, so if you define this post processor in your applicationContext, do not also call these
+ * methods manually or via Spring's &lt;tt&gt;init-method&lt;/tt&gt; or &lt;tt&gt;destroy-method&lt;/tt&gt; bean attributes.&lt;/b&gt;&lt;/p&gt;
+ *
+ * @author Jeremy Haile
+ * @since 0.2
+ */
+<span class="fc" id="L43">public class LifecycleBeanPostProcessor implements DestructionAwareBeanPostProcessor {</span>
+
+    /**
+     * Private internal class log instance.
+     */
+<span class="fc" id="L48">    private static final Log log = LogFactory.getLog(LifecycleBeanPostProcessor.class);</span>
+
+    /**
+     * Calls the &lt;tt&gt;init()&lt;/tt&gt; methods on the bean if it implements {@link org.jsecurity.util.Initializable}
+     *
+     * @param object the object being initialized.
+     * @param name   the name of the bean being initialized.
+     * @return the initialized bean.
+     * @throws BeansException if any exception is thrown during initialization.
+     */
+    public Object postProcessBeforeInitialization(Object object, String name) throws BeansException {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (object instanceof Initializable) {</span>
+            try {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L62">                    log.debug(&quot;Initializing bean [&quot; + name + &quot;]...&quot;);</span>
+                }
+
+<span class="fc" id="L65">                ((Initializable) object).init();</span>
+<span class="nc" id="L66">            } catch (Exception e) {</span>
+<span class="nc" id="L67">                throw new FatalBeanException(&quot;Error initializing bean [&quot; + name + &quot;]&quot;, e);</span>
+<span class="fc" id="L68">            }</span>
+        }
+<span class="fc" id="L70">        return object;</span>
+    }
+
+
+    /**
+     * Does nothing - merely returns the object argument immediately.
+     */
+    public Object postProcessAfterInitialization(Object object, String name) throws BeansException {
+        // Does nothing after initialization
+<span class="fc" id="L79">        return object;</span>
+    }
+
+
+    /**
+     * Calls the &lt;tt&gt;destroy()&lt;/tt&gt; methods on the bean if it implements {@link org.jsecurity.util.Destroyable}
+     *
+     * @param object the object being initialized.
+     * @param name   the name of the bean being initialized.
+     * @throws BeansException if any exception is thrown during initialization.
+     */
+    public void postProcessBeforeDestruction(Object object, String name) throws BeansException {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (object instanceof Destroyable) {</span>
+            try {
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L94">                    log.debug(&quot;Destroying bean [&quot; + name + &quot;]...&quot;);</span>
+                }
+
+<span class="fc" id="L97">                ((Destroyable) object).destroy();</span>
+<span class="nc" id="L98">            } catch (Exception e) {</span>
+<span class="nc" id="L99">                throw new FatalBeanException(&quot;Error destroying bean [&quot; + name + &quot;]&quot;, e);</span>
+<span class="fc" id="L100">            }</span>
+        }
+<span class="fc" id="L102">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

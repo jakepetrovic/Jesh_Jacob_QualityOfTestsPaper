@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>INCHI_OPTION.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">INCHI_OPTION.java</span></div><h1>INCHI_OPTION.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package net.sf.jniinchi;
+
+
+/**
+ * Type-safe enumeration of InChI options.  See &lt;tt&gt;inchi_api.h&lt;/tt&gt;.
+ * @author Sam Adams
+ */
+<span class="pc" id="L26">public enum INCHI_OPTION {</span>
+
+    /**
+     * Use Chiral Flag.
+     */
+<span class="fc" id="L31">    SUCF,</span>
+
+    /**
+     * Set Chiral Flag.
+     */
+<span class="fc" id="L36">    ChiralFlagON,</span>
+
+    /**
+     * Set Not-Chiral Flag.
+     */
+<span class="fc" id="L41">    ChiralFlagOFF,</span>
+
+    /**
+     * Exclude stereo (Default: Include Absolute stereo).
+     */
+<span class="fc" id="L46">    SNon,</span>
+
+    /**
+     * Absolute stereo.
+     */
+<span class="fc" id="L51">    SAbs,</span>
+
+    /**
+     * Relative stereo.
+     */
+<span class="fc" id="L56">    SRel,</span>
+
+    /**
+     * Racemic stereo.
+     */
+<span class="fc" id="L61">    SRac,</span>
+
+    /**
+     * Include omitted unknown/undefined stereo.
+     */
+<span class="fc" id="L66">    SUU,</span>
+
+    /**
+     * Narrow end of wedge points to stereocentre (default: both).
+     */
+<span class="fc" id="L71">    NEWPS,</span>
+
+    /**
+     * Include reconnected bond to metal results.
+     */
+<span class="fc" id="L76">    RecMet,</span>
+
+    /**
+     * Mobile H Perception Off (Default: On).
+     */
+<span class="fc" id="L81">    FixedH,</span>
+
+    /**
+     * Omit auxiliary information (default: Include).
+     */
+<span class="fc" id="L86">    AuxNone,</span>
+
+    /**
+     * Disable Aggressive Deprotonation (for testing only).
+     */
+<span class="fc" id="L91">    NoADP,</span>
+
+    /**
+     * Compressed output.
+     */
+<span class="fc" id="L96">    Compress,</span>
+
+    /**
+     * Overrides inchi_Atom::num_iso_H[0] == -1.
+     */
+<span class="fc" id="L101">    DoNotAddH,</span>
+
+    /**
+     * Set time-out per structure in seconds; W0 means unlimited. In InChI
+     * library the default value is unlimited
+     */
+<span class="fc" id="L107">    Wnumber,</span>
+
+    /**
+     * Output SDfile instead of InChI.
+     */
+<span class="fc" id="L112">    OutputSDF,</span>
+
+    /**
+     * Warn and produce empty InChI for empty structure.
+     */
+<span class="fc" id="L117">    WarnOnEmptyStructure,</span>
+
+    /**
+     * Fix bug leading to missing or undefined sp3 parity.
+     */
+<span class="fc" id="L122">    FixSp3Bug,</span>
+
+    /**
+     * Same as FixSp3Bug.
+     */
+<span class="fc" id="L127">    FB,</span>
+
+    /**
+     * Include Phosphines Stereochemistry.
+     */
+<span class="fc" id="L132">    SPXYZ,</span>
+
+    /**
+     * Include Arsines Stereochemistry
+     */
+<span class="fc" id="L137">    SAsXYZ;</span>
+
+    /* -- DOESN'T WORK
+     * Generate InChIKey
+     * /
+    Key,
+    */
+
+    public static INCHI_OPTION valueOfIgnoreCase(String string) {
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for (INCHI_OPTION option : INCHI_OPTION.values()) {</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">            if (option.name().equalsIgnoreCase(string)) {</span>
+<span class="nc" id="L148">                return option;</span>
+            }
+        }
+<span class="fc" id="L151">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>INCHI_STATUS.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">INCHI_STATUS.java</span></div><h1>INCHI_STATUS.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+
+package net.sf.jniinchi;
+
+/**
+ * @author sea36
+ */
+<span class="pc" id="L25">public enum INCHI_STATUS {</span>
+
+<span class="fc" id="L27">    VALID_STANDARD(0),</span>
+<span class="fc" id="L28">    VALID_NON_STANDARD(-1),</span>
+<span class="fc" id="L29">    INVALID_PREFIX(1),</span>
+<span class="fc" id="L30">    INVALID_VERSION(2),</span>
+<span class="fc" id="L31">    INVALID_LAYOUT(3),</span>
+<span class="fc" id="L32">    FAIL_I2I(4);</span>
+
+    /**
+     * Internal InChI index (from inchi_api.h).
+     */
+    private final int indx;
+
+    /**
+     * Constructor.
+     */
+<span class="fc" id="L42">    private INCHI_STATUS(final int indx) {</span>
+<span class="fc" id="L43">        this.indx = indx;</span>
+<span class="fc" id="L44">    }</span>
+
+    public int getIndx() {
+<span class="fc" id="L47">        return indx;</span>
+    }
+
+    public static INCHI_STATUS getValue(int value) {
+<span class="fc bfc" id="L51" title="All 7 branches covered.">        switch (value) {</span>
+            case -1:
+<span class="fc" id="L53">                return VALID_NON_STANDARD;</span>
+            case 0:
+<span class="fc" id="L55">                return VALID_STANDARD;</span>
+            case 1:
+<span class="fc" id="L57">                return INVALID_PREFIX;</span>
+            case 2:
+<span class="fc" id="L59">                return INVALID_VERSION;</span>
+            case 3:
+<span class="fc" id="L61">                return INVALID_LAYOUT;</span>
+            case 4:
+<span class="fc" id="L63">                return FAIL_I2I;</span>
+            default:
+<span class="fc" id="L65">                return null;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

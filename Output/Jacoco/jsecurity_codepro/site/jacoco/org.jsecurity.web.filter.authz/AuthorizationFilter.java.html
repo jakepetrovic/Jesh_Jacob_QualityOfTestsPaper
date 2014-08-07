@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AuthorizationFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.filter.authz</a> &gt; <span class="el_source">AuthorizationFilter.java</span></div><h1>AuthorizationFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.filter.authz;
+
+import org.jsecurity.subject.Subject;
+import org.jsecurity.util.StringUtils;
+import org.jsecurity.web.WebUtils;
+import org.jsecurity.web.filter.AccessControlFilter;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Superclass for authorization-related filters.  For unauthorized requests, this filter redirects to the
+ * login page if the current user is unknown (i.e. not authenticated or remembered).  If the user is known,
+ * the filter redirects to an unauthorized URL or returns an unauthorized HTTP status code if no unauthorized
+ * URL is specified.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.9
+ */
+<span class="fc" id="L41">public abstract class AuthorizationFilter extends AccessControlFilter {</span>
+
+    //TODO - complete JavaDoc
+
+    private String unauthorizedUrl;
+
+    protected String getUnauthorizedUrl() {
+<span class="fc" id="L48">        return unauthorizedUrl;</span>
+    }
+
+    public void setUnauthorizedUrl(String unauthorizedUrl) {
+<span class="fc" id="L52">        this.unauthorizedUrl = unauthorizedUrl;</span>
+<span class="fc" id="L53">    }</span>
+
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
+
+<span class="nc" id="L57">        Subject subject = getSubject(request, response);</span>
+        // If the subject isn't identified, redirect to login URL
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (subject.getPrincipal() == null) {</span>
+<span class="nc" id="L60">            saveRequestAndRedirectToLogin(request, response);</span>
+<span class="nc" id="L61">            return false;</span>
+        } else {
+
+            // If subject is known but not authorized, redirect to the unauthorized URL if there is one 
+            // If no unauthorized URL is specified, just return an unauthorized HTTP status code
+<span class="nc" id="L66">            WebUtils.toHttp(response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if (StringUtils.hasText(getUnauthorizedUrl())) {</span>
+<span class="nc" id="L68">                WebUtils.issueRedirect(request, response, getUnauthorizedUrl());</span>
+            }
+
+        }
+<span class="nc" id="L72">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

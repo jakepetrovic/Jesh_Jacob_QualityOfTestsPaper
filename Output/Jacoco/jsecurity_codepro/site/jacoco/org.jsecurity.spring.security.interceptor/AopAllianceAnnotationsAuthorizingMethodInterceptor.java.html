@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AopAllianceAnnotationsAuthorizingMethodInterceptor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.spring.security.interceptor</a> &gt; <span class="el_source">AopAllianceAnnotationsAuthorizingMethodInterceptor.java</span></div><h1>AopAllianceAnnotationsAuthorizingMethodInterceptor.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.spring.security.interceptor;
+
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import org.jsecurity.authz.aop.AnnotationsAuthorizingMethodInterceptor;
+
+import java.lang.reflect.Method;
+
+/**
+ * Allows JSecurity Annotations to work in any &lt;a href=&quot;http://aopalliance.sourceforge.net/&quot;&gt;AOP Alliance&lt;/a&gt;
+ * specific implementation environment (for example, Spring).
+ *
+ * @author Les Hazlewood
+ * @since 0.2
+ */
+<span class="fc" id="L34">public class AopAllianceAnnotationsAuthorizingMethodInterceptor</span>
+        extends AnnotationsAuthorizingMethodInterceptor implements MethodInterceptor {
+
+    /**
+     * Creates a {@link MethodInvocation MethodInvocation} that wraps an
+     * {@link org.aopalliance.intercept.MethodInvocation org.aopalliance.intercept.MethodInvocation} instance,
+     * enabling JSecurity Annotations in &lt;a href=&quot;http://aopalliance.sourceforge.net/&quot;&gt;AOP Alliance&lt;/a&gt; environments
+     * (Spring, etc).
+     *
+     * @param implSpecificMethodInvocation AOP Alliance {@link org.aopalliance.intercept.MethodInvocation MethodInvocation}
+     * @return a JSecurity {@link MethodInvocation MethodInvocation} instance that wraps the AOP Alliance instance.
+     */
+    protected org.jsecurity.aop.MethodInvocation createMethodInvocation(Object implSpecificMethodInvocation) {
+<span class="fc" id="L47">        final MethodInvocation mi = (MethodInvocation) implSpecificMethodInvocation;</span>
+
+<span class="fc" id="L49">        return new org.jsecurity.aop.MethodInvocation() {</span>
+            public Method getMethod() {
+<span class="nc" id="L51">                return mi.getMethod();</span>
+            }
+
+            public Object[] getArguments() {
+<span class="nc" id="L55">                return mi.getArguments();</span>
+            }
+
+            public String toString() {
+<span class="nc" id="L59">                return &quot;Method invocation [&quot; + mi.getMethod() + &quot;]&quot;;</span>
+            }
+
+            public Object proceed() throws Throwable {
+<span class="nc" id="L63">                return mi.proceed();</span>
+            }
+        };
+    }
+
+    /**
+     * Simply casts the method argument to an
+     * {@link org.aopalliance.intercept.MethodInvocation org.aopalliance.intercept.MethodInvocation} and then
+     * calls &lt;code&gt;methodInvocation.{@link org.aopalliance.intercept.MethodInvocation#proceed proceed}()&lt;/code&gt;
+     * @param aopAllianceMethodInvocation the {@link org.aopalliance.intercept.MethodInvocation org.aopalliance.intercept.MethodInvocation}
+     * @return the {@link org.aopalliance.intercept.MethodInvocation#proceed() org.aopalliance.intercept.MethodInvocation.proceed()} method call result.
+     * @throws Throwable if the underlying AOP Alliance &lt;code&gt;proceed()&lt;/code&gt; call throws a &lt;code&gt;Throwable&lt;/code&gt;.
+     */
+    protected Object continueInvocation(Object aopAllianceMethodInvocation) throws Throwable {
+<span class="nc" id="L77">        MethodInvocation mi = (MethodInvocation) aopAllianceMethodInvocation;</span>
+<span class="nc" id="L78">        return mi.proceed();</span>
+    }
+
+    /**
+     * Creates a JSecurity {@link MethodInvocation MethodInvocation} instance and then immediately calls
+     * {@link org.jsecurity.authz.aop.AuthorizingMethodInterceptor#invoke super.invoke}.
+     *
+     * @param methodInvocation the AOP Alliance-specific &lt;code&gt;methodInvocation&lt;/code&gt; instance.
+     * @return the return value from invoking the method invocation.
+     * @throws Throwable if the underlying AOP Alliance method invocation throws a &lt;code&gt;Throwable&lt;/code&gt;.
+     */
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+<span class="nc" id="L90">        org.jsecurity.aop.MethodInvocation mi = createMethodInvocation(methodInvocation);</span>
+<span class="nc" id="L91">        return super.invoke(mi);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

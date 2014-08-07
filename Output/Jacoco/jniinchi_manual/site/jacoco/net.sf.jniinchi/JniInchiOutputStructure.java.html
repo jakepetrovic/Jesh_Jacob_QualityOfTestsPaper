@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JniInchiOutputStructure.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">JniInchiOutputStructure.java</span></div><h1>JniInchiOutputStructure.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package net.sf.jniinchi;
+
+/**
+ * Encapsulates output from InChI to structure conversion.
+ * @author Sam Adams
+ */
+public class JniInchiOutputStructure extends JniInchiStructure {
+
+    /**
+     * Return status from conversion.
+     */
+    private INCHI_RET retStatus;
+
+    /**
+     * Error/warning messages generated.
+     */
+    private String message;
+
+    /**
+     * Log generated.
+     */
+    private String log;
+
+    /**
+     * &lt;p&gt;Warning flags, see INCHIDIFF in inchicmp.h.
+     *
+     * &lt;p&gt;[x][y]:
+     * &lt;br&gt;x=0 =&gt; Reconnected if present in InChI otherwise Disconnected/Normal
+     * &lt;br&gt;x=1 =&gt; Disconnected layer if Reconnected layer is present
+     * &lt;br&gt;y=1 =&gt; Main layer or Mobile-H
+     * &lt;br&gt;y=0 =&gt; Fixed-H layer
+     */
+<span class="fc" id="L51">    private long[][] warningFlags = new long[2][2];</span>
+
+    
+    public JniInchiOutputStructure(int ret, String message, String log, long w00, long w01, long w10, long w11) {
+<span class="nc" id="L55">    	this(INCHI_RET.getValue(ret));</span>
+<span class="nc" id="L56">    	setMessage(message);</span>
+<span class="nc" id="L57">    	setLog(log);</span>
+<span class="nc" id="L58">    	setWarningFlags(w00, w01, w10, w11);</span>
+<span class="nc" id="L59">    }</span>
+    
+
+<span class="fc" id="L62">    public JniInchiOutputStructure(INCHI_RET value) {</span>
+<span class="fc" id="L63">		this.retStatus = value;</span>
+<span class="fc" id="L64">	}</span>
+
+
+	/**
+     * Gets return status from InChI process.  OKAY and WARNING indicate
+     * InChI has been generated, in all other cases InChI generation
+     * has failed.
+     */
+    public INCHI_RET getReturnStatus() {
+<span class="fc" id="L73">        return retStatus;</span>
+    }
+
+    /**
+     * Gets generated (error/warning) messages.
+     */
+    public String getMessage() {
+<span class="fc" id="L80">        return message;</span>
+    }
+
+    /**
+     * Gets generated log.
+     */
+    public String getLog() {
+<span class="fc" id="L87">        return log;</span>
+    }
+
+    /**
+     * &lt;p&gt;Returns warning flags, see INCHIDIFF in inchicmp.h.
+     *
+     * &lt;p&gt;[x][y]:
+     * &lt;br&gt;x=0 =&gt; Reconnected if present in InChI otherwise Disconnected/Normal
+     * &lt;br&gt;x=1 =&gt; Disconnected layer if Reconnected layer is present
+     * &lt;br&gt;y=1 =&gt; Main layer or Mobile-H
+     * &lt;br&gt;y=0 =&gt; Fixed-H layer
+     */
+    public long[][] getWarningFlags() {
+<span class="fc" id="L100">        return warningFlags;</span>
+    }
+
+    protected void setLog(final String log) {
+<span class="fc" id="L104">        this.log = log;</span>
+<span class="fc" id="L105">    }</span>
+
+    protected void setMessage(final String message) {
+<span class="fc" id="L108">        this.message = message;</span>
+<span class="fc" id="L109">    }</span>
+
+    protected void setRetStatus(final INCHI_RET retStatus) {
+<span class="nc" id="L112">        this.retStatus = retStatus;</span>
+<span class="nc" id="L113">    }</span>
+
+    protected void setWarningFlags(final long[][] warningFlags) {
+<span class="fc" id="L116">        this.warningFlags = warningFlags;</span>
+<span class="fc" id="L117">    }</span>
+    
+    protected void setWarningFlags(long f00, long f01, long f10, long f11) {
+<span class="nc" id="L120">    	this.warningFlags = new long[][] {{f00, f01}, {f10, f11}};</span>
+<span class="nc" id="L121">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

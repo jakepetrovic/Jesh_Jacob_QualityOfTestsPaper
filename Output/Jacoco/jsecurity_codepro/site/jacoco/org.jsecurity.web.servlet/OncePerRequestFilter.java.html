@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OncePerRequestFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.servlet</a> &gt; <span class="el_source">OncePerRequestFilter.java</span></div><h1>OncePerRequestFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.servlet;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.util.Nameable;
+
+import javax.servlet.*;
+import java.io.IOException;
+
+/**
+ * Filter base class that guarantees to be just executed once per request,
+ * on any servlet container. It provides a {@link #doFilterInternal}
+ * method with HttpServletRequest and HttpServletResponse arguments.
+ *
+ * &lt;p&gt;The {@link #getAlreadyFilteredAttributeName} method determines how
+ * to identify that a request is already filtered. The default implementation
+ * is based on the configured name of the concrete filter instance.
+ *
+ * &lt;p&gt;&lt;b&gt;NOTE&lt;/b&gt; This class was borrowed from the Spring framework, and as such,
+ * all copyright notices and author names have remained in tact.
+ *
+ * @author Les Hazlewood
+ * @author Juergen Hoeller
+ * @since 0.1
+ */
+<span class="fc" id="L44">public abstract class OncePerRequestFilter extends ServletContextSupport implements Filter, Nameable {</span>
+
+    /** Private internal log instance. */
+<span class="fc" id="L47">    private static final Log log = LogFactory.getLog(OncePerRequestFilter.class);</span>
+
+    /**
+     * Suffix that gets appended to the filter name for the &quot;already filtered&quot; request attribute.
+     *
+     * @see #getAlreadyFilteredAttributeName
+     */
+    public static final String ALREADY_FILTERED_SUFFIX = &quot;.FILTERED&quot;;
+
+    /** FilterConfig provided by the Servlet container at startup. */
+    protected FilterConfig filterConfig;
+
+    /** The name of this filter, unique within an application. */
+    private String name;
+
+    /**
+     * Returns the servlet container specified &lt;code&gt;FilterConfig&lt;/code&gt; instance provided at
+     * {@link #init(javax.servlet.FilterConfig) startup}.
+     *
+     * @return the servlet container specified &lt;code&gt;FilterConfig&lt;/code&gt; instance provided at startup.
+     */
+    public FilterConfig getFilterConfig() {
+<span class="fc" id="L69">        return filterConfig;</span>
+    }
+
+    /**
+     * Sets the FilterConfig &lt;em&gt;and&lt;/em&gt; the &lt;code&gt;ServletContext&lt;/code&gt; as attributes of this class for use by
+     * subclasses.  That is:
+     * &lt;p/&gt;
+     * &lt;code&gt;this.filterConfig = filterConfig;&lt;br/&gt;
+     * setServletContext(filterConfig.getServletContext());&lt;/code&gt;
+     *
+     * @param filterConfig the FilterConfig instance provided by the Servlet container at startup.
+     */
+    public void setFilterConfig(FilterConfig filterConfig) {
+<span class="nc" id="L82">        this.filterConfig = filterConfig;</span>
+<span class="nc" id="L83">        setServletContext(filterConfig.getServletContext());</span>
+<span class="nc" id="L84">    }</span>
+
+    /**
+     * Returns the name of this filter.
+     * &lt;p/&gt;
+     * Unless overridden by calling the {@link #setName(String) setName(String)} method, this value defaults to the
+     * filter name as specified by the servlet container at startup:
+     * &lt;p/&gt;
+     * &lt;code&gt;this.name = {@link #getFilterConfig() getFilterConfig()}.{@link FilterConfig#getFilterName() getName()};&lt;/code&gt;
+     *
+     * @return the filter name, or &lt;code&gt;null&lt;/code&gt; if none available
+     * @see javax.servlet.GenericServlet#getServletName()
+     * @see javax.servlet.FilterConfig#getFilterName()
+     */
+    protected String getName() {
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (this.name == null) {</span>
+<span class="fc" id="L100">            FilterConfig config = getFilterConfig();</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (config != null) {</span>
+<span class="nc" id="L102">                this.name = config.getFilterName();</span>
+            }
+        }
+
+<span class="fc" id="L106">        return this.name;</span>
+    }
+
+    /**
+     * Sets the filter's name.
+     * &lt;p/&gt;
+     * Unless overridden by calling this method, this value defaults to the filter name as specified by the
+     * servlet container at startup:
+     * &lt;p/&gt;
+     * &lt;code&gt;this.name = {@link #getFilterConfig() getFilterConfig()}.{@link FilterConfig#getFilterName() getName()};&lt;/code&gt;
+     *
+     * @param name the name of the filter.
+     */
+    public void setName(String name) {
+<span class="fc" id="L120">        this.name = name;</span>
+<span class="fc" id="L121">    }</span>
+
+    /**
+     * Sets the filter's {@link #setFilterConfig filterConfig} and then immediately calls
+     * {@link #onFilterConfigSet() onFilterConfigSet()} to trigger any processing a subclass might wish to perform.
+     *
+     * @param filterConfig the servlet container supplied FilterConfig instance.
+     * @throws ServletException if {@link #onFilterConfigSet() onFilterConfigSet()} throws an Exception.
+     */
+    public final void init(FilterConfig filterConfig) throws ServletException {
+<span class="nc" id="L131">        setFilterConfig(filterConfig);</span>
+        try {
+<span class="nc" id="L133">            onFilterConfigSet();</span>
+<span class="nc" id="L134">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (e instanceof ServletException) {</span>
+<span class="nc" id="L136">                throw (ServletException) e;</span>
+            } else {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                if (log.isErrorEnabled()) {</span>
+<span class="nc" id="L139">                    log.error(&quot;Unable to start Filter: [&quot; + e.getMessage() + &quot;].&quot;, e);</span>
+                }
+<span class="nc" id="L141">                throw new ServletException(e);</span>
+            }
+<span class="nc" id="L143">        }</span>
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * Template method to be overridden by subclasses to perform initialization logic at startup.  The
+     * &lt;code&gt;ServletContext&lt;/code&gt; and &lt;code&gt;FilterConfig&lt;/code&gt; will be accessible
+     * (and non-&lt;code&gt;null&lt;/code&gt;) at the time this method is invoked via the
+     * {@link #getServletContext() getServletContext()} and {@link #getFilterConfig() getFilterConfig()}
+     * methods respectively.
+     *
+     * @throws Exception if the subclass has an error upon initialization.
+     */
+    protected void onFilterConfigSet() throws Exception {
+<span class="nc" id="L156">    }</span>
+
+    /**
+     * This &lt;code&gt;doFilter&lt;/code&gt; implementation stores a request attribute for
+     * &quot;already filtered&quot;, proceeding without filtering again if the
+     * attribute is already there.
+     *
+     * @see #getAlreadyFilteredAttributeName
+     * @see #shouldNotFilter
+     * @see #doFilterInternal
+     */
+    public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+
+<span class="nc" id="L170">        String alreadyFilteredAttributeName = getAlreadyFilteredAttributeName();</span>
+<span class="nc bnc" id="L171" title="All 4 branches missed.">        if (request.getAttribute(alreadyFilteredAttributeName) != null || shouldNotFilter(request)) {</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L173">                log.trace(&quot;Filter already executed.  Proceeding without invoking this filter.&quot;);</span>
+            }
+            // Proceed without invoking this filter...
+<span class="nc" id="L176">            filterChain.doFilter(request, response);</span>
+        } else {
+            // Do invoke this filter...
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L180">                log.trace(&quot;Filter not yet executed.  Executing now.&quot;);</span>
+            }
+<span class="nc" id="L182">            request.setAttribute(alreadyFilteredAttributeName, Boolean.TRUE);</span>
+<span class="nc" id="L183">            doFilterInternal(request, response, filterChain);</span>
+        }
+<span class="nc" id="L185">    }</span>
+
+    /**
+     * Return name of the request attribute that identifies that a request has already been filtered.
+     * &lt;p/&gt;
+     * The default implementation takes the configured {@link #getName() name} and appends &quot;.FILTERED&quot;.
+     * If the filter is not fully initialized, it falls back to the implementation's class name.
+     *
+     * @return the name of the request attribute that identifies that a request has already been filtered.
+     * @see #getName
+     * @see #ALREADY_FILTERED_SUFFIX
+     */
+    protected String getAlreadyFilteredAttributeName() {
+<span class="fc" id="L198">        String name = getName();</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        if (name == null) {</span>
+<span class="fc" id="L200">            name = getClass().getName();</span>
+        }
+<span class="fc" id="L202">        return name + ALREADY_FILTERED_SUFFIX;</span>
+    }
+
+    /**
+     * Can be overridden in subclasses for custom filtering control,
+     * returning &lt;code&gt;true&lt;/code&gt; to avoid filtering of the given request.
+     * &lt;p&gt;The default implementation always returns &lt;code&gt;false&lt;/code&gt;.
+     *
+     * @param request current HTTP request
+     * @return whether the given request should &lt;i&gt;not&lt;/i&gt; be filtered
+     * @throws ServletException in case of errors
+     */
+    protected boolean shouldNotFilter(ServletRequest request) throws ServletException {
+<span class="nc" id="L215">        return false;</span>
+    }
+
+
+    /**
+     * Same contract as for &lt;code&gt;doFilter&lt;/code&gt;, but guaranteed to be
+     * just invoked once per request. Provides HttpServletRequest and
+     * HttpServletResponse arguments instead of the default ServletRequest
+     * and ServletResponse ones.
+     */
+    protected abstract void doFilterInternal(
+            ServletRequest request, ServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException;
+
+    /**
+     * Default no-op implementation that can be overridden by subclasses for custom cleanup behavior.
+     */
+    public void destroy() {
+<span class="nc" id="L233">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

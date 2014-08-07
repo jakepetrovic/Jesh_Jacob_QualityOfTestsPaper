@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SimpleAuthorizingAccount.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.authz</a> &gt; <span class="el_source">SimpleAuthorizingAccount.java</span></div><h1>SimpleAuthorizingAccount.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.authz;
+
+import org.jsecurity.authc.Account;
+import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.subject.PrincipalCollection;
+
+import java.util.*;
+
+/**
+ * &lt;p&gt;A simple implementation of the {@link AuthorizingAccount} interface that is useful
+ * for many realms.  This implementation caches an internal collection of roles and permissions
+ * in order to perform authorization checks for a particular user.&lt;/p&gt;
+ *
+ * &lt;p&gt;See {@link AuthorizingAccount} interface for reasons why this class is deprecated.&lt;/p&gt;
+ *
+ * @author Jeremy Haile
+ * @author Les Hazlewood
+ * @deprecated
+ * @since 0.2
+ */
+public class SimpleAuthorizingAccount extends SimpleAccount implements AuthorizingAccount {
+
+    protected Set&lt;SimpleRole&gt; simpleRoles;
+
+    /*--------------------------------------------
+    |         C O N S T R U C T O R S           |
+    ============================================*/
+<span class="fc" id="L46">    public SimpleAuthorizingAccount() {</span>
+<span class="fc" id="L47">    }</span>
+
+    public SimpleAuthorizingAccount(Object principal, Object credentials, String realmName) {
+<span class="fc" id="L50">        super(principal, credentials, realmName);</span>
+<span class="fc" id="L51">    }</span>
+
+    public SimpleAuthorizingAccount(Collection principals, Object credentials, String realmName) {
+<span class="nc" id="L54">        super(principals, credentials, realmName);</span>
+<span class="nc" id="L55">    }</span>
+
+    public SimpleAuthorizingAccount(PrincipalCollection principals, Object credentials) {
+<span class="fc" id="L58">        super(principals, credentials);</span>
+<span class="fc" id="L59">    }</span>
+
+    public SimpleAuthorizingAccount(Object principal, Object credentials, String realmName, Set&lt;String&gt; roleNames, Set&lt;Permission&gt; permissions) {
+<span class="fc" id="L62">        this(principal, credentials, realmName);</span>
+<span class="fc" id="L63">        addRoles(roleNames);</span>
+        //only create a private role if there are permissions
+<span class="pc bpc" id="L65" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc" id="L66">            addPrivateRole(getPrincipals(), permissions);</span>
+        }
+<span class="fc" id="L68">    }</span>
+
+    public SimpleAuthorizingAccount(Collection principals, Object credentials, String realmName, Set&lt;String&gt; roleNames, Set&lt;Permission&gt; permissions) {
+<span class="nc" id="L71">        this(principals, credentials, realmName);</span>
+<span class="nc" id="L72">        addRoles(roleNames);</span>
+        //only create a private role if there are permissions:
+<span class="nc bnc" id="L74" title="All 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc" id="L75">            addPrivateRole(getPrincipals(), permissions);</span>
+        }
+<span class="nc" id="L77">    }</span>
+
+    public SimpleAuthorizingAccount(PrincipalCollection principals, Object credentials, String realmName, Set&lt;String&gt; roleNames, Set&lt;Permission&gt; permissions) {
+<span class="fc" id="L80">        this(principals, credentials, realmName);</span>
+<span class="fc" id="L81">        addRoles(roleNames);</span>
+        //only create a private role if there are permissions:
+<span class="pc bpc" id="L83" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc" id="L84">            addPrivateRole(getPrincipals(), permissions);</span>
+        }
+<span class="fc" id="L86">    }</span>
+
+    /*--------------------------------------------
+    |               M E T H O D S               |
+    ============================================*/
+    @SuppressWarnings({&quot;unchecked&quot;})
+    public void merge(Account otherAccount) {
+<span class="nc" id="L93">        super.merge(otherAccount);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (otherAccount instanceof SimpleAuthorizingAccount) {</span>
+<span class="nc" id="L95">            SimpleAuthorizingAccount other = (SimpleAuthorizingAccount) otherAccount;</span>
+<span class="nc" id="L96">            Set&lt;SimpleRole&gt; otherRoles = other.getSimpleRoles();</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">            if (otherRoles != null &amp;&amp; !otherRoles.isEmpty()) {</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                for (SimpleRole otherRole : otherRoles) {</span>
+<span class="nc" id="L99">                    merge(otherRole);</span>
+<span class="nc" id="L100">                }</span>
+            }
+        }
+<span class="nc" id="L103">    }</span>
+
+    protected void merge(SimpleRole role) {
+<span class="fc" id="L106">        SimpleRole existing = getRole(role.getName());</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (existing != null) {</span>
+<span class="nc" id="L108">            Set&lt;Permission&gt; rolePerms = role.getPermissions();</span>
+<span class="nc bnc" id="L109" title="All 4 branches missed.">            if (rolePerms != null &amp;&amp; !rolePerms.isEmpty()) {</span>
+<span class="nc" id="L110">                existing.addAll(rolePerms);</span>
+            }
+<span class="nc" id="L112">        } else {</span>
+<span class="fc" id="L113">            add(role);</span>
+        }
+<span class="fc" id="L115">    }</span>
+
+    protected void addPrivateRole(PrincipalCollection principals, Collection&lt;Permission&gt; perms) {
+<span class="fc" id="L118">        SimpleRole privateRole = createPrivateRole(principals);</span>
+<span class="pc bpc" id="L119" title="1 of 4 branches missed.">        if (perms != null &amp;&amp; !perms.isEmpty()) {</span>
+<span class="nc" id="L120">            privateRole.addAll(perms);</span>
+        }
+<span class="fc" id="L122">        add(privateRole);</span>
+<span class="fc" id="L123">    }</span>
+
+    protected String getPrivateRoleName(PrincipalCollection principals) {
+<span class="fc" id="L126">        return getClass().getName() + &quot;_PRIVATE_ROLE_&quot; + PrincipalCollection.class.getName();</span>
+    }
+
+    protected SimpleRole createPrivateRole(PrincipalCollection principals) {
+<span class="fc" id="L130">        String privateRoleName = getPrivateRoleName(principals);</span>
+<span class="fc" id="L131">        return new SimpleRole(privateRoleName);</span>
+    }
+
+    public Set&lt;SimpleRole&gt; getSimpleRoles() {
+<span class="fc" id="L135">        return simpleRoles;</span>
+    }
+
+    public void setSimpleRoles(Set&lt;SimpleRole&gt; simpleRoles) {
+<span class="fc" id="L139">        this.simpleRoles = simpleRoles;</span>
+<span class="fc" id="L140">    }</span>
+
+    public SimpleRole getRole(String name) {
+<span class="fc" id="L143">        Collection&lt;SimpleRole&gt; roles = getSimpleRoles();</span>
+<span class="pc bpc" id="L144" title="1 of 4 branches missed.">        if (roles != null &amp;&amp; !roles.isEmpty()) {</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            for (SimpleRole role : roles) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                if (role.getName().equals(name)) {</span>
+<span class="nc" id="L147">                    return role;</span>
+                }
+<span class="nc" id="L149">            }</span>
+        }
+<span class="fc" id="L151">        return null;</span>
+    }
+
+    public Set&lt;Permission&gt; getPermissions() {
+<span class="fc" id="L155">        Set&lt;Permission&gt; permissions = new HashSet&lt;Permission&gt;();</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        for (SimpleRole role : simpleRoles) {</span>
+<span class="nc" id="L157">            permissions.addAll(role.getPermissions());</span>
+<span class="nc" id="L158">        }</span>
+<span class="fc" id="L159">        return permissions;</span>
+    }
+
+    public Set&lt;String&gt; getRolenames() {
+<span class="fc" id="L163">        Set&lt;String&gt; rolenames = new HashSet&lt;String&gt;();</span>
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        for (SimpleRole role : simpleRoles) {</span>
+<span class="nc" id="L165">            rolenames.add(role.getName());</span>
+<span class="nc" id="L166">        }</span>
+<span class="fc" id="L167">        return rolenames;</span>
+    }
+
+    public void addRole(String roleName) {
+<span class="fc" id="L171">        SimpleRole existing = getRole(roleName);</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (existing == null) {</span>
+<span class="fc" id="L173">            SimpleRole role = new SimpleRole(roleName);</span>
+<span class="fc" id="L174">            add(role);</span>
+        }
+<span class="fc" id="L176">    }</span>
+
+    public void add(SimpleRole role) {
+<span class="fc" id="L179">        Set&lt;SimpleRole&gt; roles = getSimpleRoles();</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">        if (roles == null) {</span>
+<span class="fc" id="L181">            roles = new LinkedHashSet&lt;SimpleRole&gt;();</span>
+<span class="fc" id="L182">            setSimpleRoles(roles);</span>
+        }
+<span class="fc" id="L184">        roles.add(role);</span>
+<span class="fc" id="L185">    }</span>
+
+    public void addRoles(Set&lt;String&gt; roleNames) {
+<span class="pc bpc" id="L188" title="1 of 4 branches missed.">        if (roleNames != null &amp;&amp; !roleNames.isEmpty()) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">            for (String name : roleNames) {</span>
+<span class="nc" id="L190">                addRole(name);</span>
+<span class="nc" id="L191">            }</span>
+        }
+<span class="fc" id="L193">    }</span>
+
+    public void addAll(Collection&lt;SimpleRole&gt; roles) {
+<span class="pc bpc" id="L196" title="1 of 4 branches missed.">        if (roles != null &amp;&amp; !roles.isEmpty()) {</span>
+<span class="nc" id="L197">            Set&lt;SimpleRole&gt; existingRoles = getSimpleRoles();</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (existingRoles == null) {</span>
+<span class="nc" id="L199">                existingRoles = new LinkedHashSet&lt;SimpleRole&gt;(roles.size());</span>
+<span class="nc" id="L200">                setSimpleRoles(existingRoles);</span>
+            }
+<span class="nc" id="L202">            existingRoles.addAll(roles);</span>
+        }
+
+<span class="fc" id="L205">    }</span>
+
+    public boolean hasRole(String roleName) {
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">        return getRole(roleName) != null;</span>
+    }
+
+    public boolean isPermitted(Permission permission) {
+<span class="fc" id="L212">        Collection&lt;SimpleRole&gt; roles = getSimpleRoles();</span>
+<span class="pc bpc" id="L213" title="1 of 4 branches missed.">        if (roles != null &amp;&amp; !roles.isEmpty()) {</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            for (SimpleRole role : roles) {</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">                if (role.isPermitted(permission)) {</span>
+<span class="nc" id="L216">                    return true;</span>
+                }
+<span class="nc" id="L218">            }</span>
+        }
+<span class="fc" id="L220">        return false;</span>
+    }
+
+    public boolean[] hasRoles(List&lt;String&gt; roleIdentifiers) {
+        boolean[] result;
+<span class="pc bpc" id="L225" title="1 of 4 branches missed.">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
+<span class="nc" id="L226">            int size = roleIdentifiers.size();</span>
+<span class="nc" id="L227">            result = new boolean[size];</span>
+<span class="nc" id="L228">            int i = 0;</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">            for (String roleName : roleIdentifiers) {</span>
+<span class="nc" id="L230">                result[i++] = hasRole(roleName);</span>
+<span class="nc" id="L231">            }</span>
+<span class="nc" id="L232">        } else {</span>
+<span class="fc" id="L233">            result = new boolean[0];</span>
+        }
+<span class="fc" id="L235">        return result;</span>
+    }
+
+    public boolean hasAllRoles(Collection&lt;String&gt; roleIdentifiers) {
+<span class="pc bpc" id="L239" title="1 of 4 branches missed.">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">            for (String roleName : roleIdentifiers) {</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                if (!hasRole(roleName)) {</span>
+<span class="nc" id="L242">                    return false;</span>
+                }
+<span class="nc" id="L244">            }</span>
+        }
+<span class="fc" id="L246">        return true;</span>
+    }
+
+    public boolean[] isPermitted(List&lt;Permission&gt; permissions) {
+        boolean[] result;
+<span class="pc bpc" id="L251" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc" id="L252">            int size = permissions.size();</span>
+<span class="nc" id="L253">            result = new boolean[size];</span>
+<span class="nc" id="L254">            int i = 0;</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">            for (Permission p : permissions) {</span>
+<span class="nc" id="L256">                result[i++] = isPermitted(p);</span>
+<span class="nc" id="L257">            }</span>
+<span class="nc" id="L258">        } else {</span>
+<span class="fc" id="L259">            result = new boolean[0];</span>
+        }
+<span class="fc" id="L261">        return result;</span>
+    }
+
+    public boolean isPermittedAll(Collection&lt;Permission&gt; permissions) {
+<span class="pc bpc" id="L265" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            for (Permission p : permissions) {</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                if (!isPermitted(p)) {</span>
+<span class="nc" id="L268">                    return false;</span>
+                }
+<span class="nc" id="L270">            }</span>
+        }
+<span class="fc" id="L272">        return true;</span>
+    }
+
+    public void checkPermission(Permission permission) throws AuthorizationException {
+<span class="pc bpc" id="L276" title="1 of 2 branches missed.">        if (!isPermitted(permission)) {</span>
+<span class="fc" id="L277">            String msg = &quot;User is not permitted [&quot; + permission + &quot;]&quot;;</span>
+<span class="fc" id="L278">            throw new UnauthorizedException(msg);</span>
+        }
+<span class="nc" id="L280">    }</span>
+
+    public void checkPermissions(Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<span class="pc bpc" id="L283" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">            for (Permission p : permissions) {</span>
+<span class="nc" id="L285">                checkPermission(p);</span>
+<span class="nc" id="L286">            }</span>
+        }
+<span class="fc" id="L288">    }</span>
+
+    public void checkRole(String role) {
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">        if (!hasRole(role)) {</span>
+<span class="fc" id="L292">            String msg = &quot;User does not have role [&quot; + role + &quot;]&quot;;</span>
+<span class="fc" id="L293">            throw new UnauthorizedException(msg);</span>
+        }
+<span class="nc" id="L295">    }</span>
+
+    public void checkRoles(Collection&lt;String&gt; roles) {
+<span class="pc bpc" id="L298" title="1 of 4 branches missed.">        if (roles != null &amp;&amp; !roles.isEmpty()) {</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">            for (String roleName : roles) {</span>
+<span class="nc" id="L300">                checkRole(roleName);</span>
+<span class="nc" id="L301">            }</span>
+        }
+<span class="fc" id="L303">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>
