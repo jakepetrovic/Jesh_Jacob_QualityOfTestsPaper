@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IdentityModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.identity</a> &gt; <span class="el_source">IdentityModel.java</span></div><h1>IdentityModel.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.identity;
+
+import java.sql.Connection;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.Assert;
+import org.databene.commons.ErrorHandler;
+import org.databene.commons.Level;
+import org.databene.commons.Named;
+import org.databene.commons.bean.HashCodeBuilder;
+import org.databene.commons.iterator.TableRowIterator;
+import org.databene.jdbacl.ArrayResultSetIterator;
+import org.databene.jdbacl.model.DBRow;
+import org.databene.jdbacl.model.Database;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Abstract parent for classes which provide information about tables
+ * and features for processing the tables.&lt;br/&gt;&lt;br/&gt;
+ * Created: 01.09.2010 08:53:02
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public abstract class IdentityModel implements Named {
+	
+<span class="nc" id="L50">	protected final Logger logger = LoggerFactory.getLogger(this.getClass());</span>
+
+<span class="nc" id="L52">	ErrorHandler errorHandler = new ErrorHandler(&quot;DBMerger&quot;, Level.warn);</span>
+	
+	String tableName;
+	private Set&lt;String&gt; unimportantColumns;
+
+<span class="nc" id="L57">	public IdentityModel(String tableName) {</span>
+<span class="nc" id="L58">		Assert.notNull(tableName, &quot;tableName&quot;);</span>
+<span class="nc" id="L59">		this.tableName = tableName;</span>
+<span class="nc" id="L60">	    this.unimportantColumns = new HashSet&lt;String&gt;();</span>
+<span class="nc" id="L61">    }</span>
+	
+	// properties ------------------------------------------------------------------------------------------------------
+	
+	public String getTableName() {
+<span class="nc" id="L66">		return tableName;</span>
+	}
+
+	public String getName() {
+<span class="nc" id="L70">		return tableName;</span>
+	}
+	
+	public void addIrrelevantColumn(String unimportantColumn) {
+<span class="nc" id="L74">	    this.unimportantColumns.add(unimportantColumn);</span>
+<span class="nc" id="L75">    }</span>
+
+	// functional interface --------------------------------------------------------------------------------------------
+
+	public abstract TableRowIterator createNkPkIterator(
+			Connection connection, String dbId, KeyMapper mapper, Database database);
+
+	public String extractNK(Object[] nkPkTuple) {
+<span class="nc" id="L83">		return String.valueOf(nkPkTuple[0]);</span>
+	}
+
+	public Object extractPK(Object[] nkPkTuple) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		if (nkPkTuple.length == 2)</span>
+<span class="nc" id="L88">			return nkPkTuple[1];</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		else if (nkPkTuple.length &gt; 2) {</span>
+<span class="nc" id="L90">			Object[] pk = new Object[nkPkTuple.length - 1];</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">			for (int i = 0; i &lt; nkPkTuple.length - 1; i++)</span>
+<span class="nc" id="L92">				pk[i] = nkPkTuple[1 + i];</span>
+<span class="nc" id="L93">			return pk;</span>
+		} else
+<span class="nc" id="L95">			throw new UnsupportedOperationException(&quot;Table &quot; + tableName + &quot; does not have a primary key&quot;);</span>
+	}
+
+	public abstract String getDescription();
+	
+	// non-public helpers ----------------------------------------------------------------------------------------------
+
+	protected TableRowIterator query(String query, Connection connection) {
+<span class="nc" id="L103">		Assert.notEmpty(query, &quot;query&quot;);</span>
+<span class="nc" id="L104">		return new ArrayResultSetIterator(connection, query);</span>
+	}
+	protected void handleNKNotFound(String naturalKey, String tableName, String sourceDbId, String targetDbId) {
+<span class="nc" id="L107">	    String message = &quot;Missing entry: &quot; + sourceDbId + '.' + tableName + &quot;[&quot; + naturalKey + &quot;]&quot; + </span>
+	    	&quot; does not appear in &quot; + targetDbId;
+<span class="nc" id="L109">	    errorHandler.handleError(message);</span>
+<span class="nc" id="L110">    }</span>
+
+    protected void handleNonEquivalence(String message, Object pk, DBRow entity) {
+<span class="nc" id="L113">	    errorHandler.handleError(message);</span>
+<span class="nc" id="L114">    }</span>
+
+    protected void handleMissingOwner(String ownedTableName, DBRow ownedEntity, String ownerTableName, Object ownerId,
+            String sourceDbId) {
+<span class="nc" id="L118">	    String message = &quot;Owner of &quot; + sourceDbId + '.' + ownedTableName + </span>
+                		'[' + ArrayFormat.format(ownedEntity.getPKValues()) + &quot;] was dropped. &quot; +
+                		&quot;Missing: &quot; + sourceDbId + '.' + ownerTableName + '[' + ownerId + &quot;]. &quot; +
+                		&quot;Possibly it was rejected or it was missing in the NK query&quot;;
+<span class="nc" id="L122">		errorHandler.handleError(message);</span>
+<span class="nc" id="L123">    }</span>
+
+	// java.lang.Object overrides --------------------------------------------------------------------------------------
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L129">		return HashCodeBuilder.hashCode(tableName);</span>
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">		if (obj == this)</span>
+<span class="nc" id="L135">			return true;</span>
+<span class="nc bnc" id="L136" title="All 4 branches missed.">		if (obj == null || this.getClass() != obj.getClass())</span>
+<span class="nc" id="L137">			return false;</span>
+<span class="nc" id="L138">		IdentityModel that = (IdentityModel) obj;</span>
+<span class="nc" id="L139">		return this.tableName.equals(that.tableName);</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="nc" id="L144">		return getClass().getSimpleName() + &quot;(&quot; + tableName + &quot;)&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

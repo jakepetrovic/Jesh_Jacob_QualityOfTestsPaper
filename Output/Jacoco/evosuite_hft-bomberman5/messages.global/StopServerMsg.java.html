@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StopServerMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.global</a> &gt; <span class="el_source">StopServerMsg.java</span></div><h1>StopServerMsg.java</h1><pre class="source lang-java linenums">package messages.global;
+
+import org.apache.log4j.Logger;
+
+import client.BomberClient;
+import server.BomberServer;
+import server.ClientInfo;
+
+/**
+ * This message is sent to the server to shut it down. This will never happen
+ * due to an event triggered in the game but only due to a message sent from
+ * outside of the game. This mechanism is used to automatically shut the old
+ * server down after a fresh build and start a new one.
+ * 
+ * @author Bjoern, Steffen
+ * 
+ */
+<span class="nc" id="L18">public class StopServerMsg implements GlobalClientMsg {</span>
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(BomberServer bomberSrv, ClientInfo sender) {
+<span class="nc" id="L24">		System.out.println(&quot;Server will stop...&quot;);</span>
+<span class="nc" id="L25">		bomberSrv.stopServer();</span>
+<span class="nc" id="L26">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

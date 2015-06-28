@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StartFrame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">StartFrame.java</span></div><h1>StartFrame.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.DisplayMode;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import messages.global.MapInfo;
+import messages.global.SessionDetailsMsg;
+
+import org.apache.log4j.Logger;
+
+import sound.SoundPlayer;
+import client.BomberClient;
+import client.gui.components.MyPanel;
+import client.view.GameCanvas;
+import db.DBGameUser;
+
+public class StartFrame extends JFrame implements KeyListener,
+		ComponentListener, WindowFocusListener {
+
+<span class="fc" id="L46">	private static final Logger logger = Logger.getLogger(StartFrame.class);</span>
+	/**
+	 * @param args
+	 */
+	/**
+	 * for fullscreen mode
+	 */
+
+<span class="fc" id="L54">	private static String fullscreen = &quot; &quot;;</span>
+
+	private Component actualPanel;
+
+<span class="nc" id="L58">	MyPanel jPanelFirst = new MyPanel();</span>
+
+<span class="nc" id="L60">	MyPanel jPanelSelectGame = new MyPanel();</span>
+
+<span class="nc" id="L62">	public ServerSelectionDialog jPanelSelectServer = new ServerSelectionDialog();</span>
+
+<span class="nc" id="L64">	MyPanel jPanelConfig = new MyPanel();</span>
+
+<span class="nc" id="L66">	MyPanel jPanelJoinGame = new MyPanel();</span>
+
+<span class="nc" id="L68">	Game jPanelGame = new Game();</span>
+
+	// TODO
+<span class="nc" id="L71">	GameCanvas gameCanvas = jPanelGame.gameCanvas;</span>
+	// GameCanvas gameCanvas = new GameCanvas(800, 600);
+
+<span class="nc" id="L74">	GlobalLobby jPanelGlobalLobby = new GlobalLobby();</span>
+
+<span class="nc" id="L76">	CreateGameDialog jPanelNewGame = new CreateGameDialog();</span>
+
+<span class="nc" id="L78">	LoginDialog jPanelLogin = LoginDialog.init();</span>
+
+<span class="nc" id="L80">	SessionLobby jPanelWaitForGame = new SessionLobby();</span>
+
+<span class="nc" id="L82">	public HighscoreLobby jPanelHighscoreLobby = new HighscoreLobby();</span>
+
+<span class="nc" id="L84">	GlobalHighscoreLobby jPanelGlobalHighscoreLobby = new GlobalHighscoreLobby();</span>
+
+<span class="nc" id="L86">	JButton jButtonSelectServer = new JButton(&quot;SelectServer&quot;);</span>
+
+<span class="nc" id="L88">	JButton jButtonConfig = new JButton(&quot;Config&quot;);</span>
+
+	// JButton jButtonSelectServer
+
+<span class="nc" id="L92">	JTextField jTextFieldSelectedServerIP = new JTextField();</span>
+
+<span class="nc" id="L94">	JTextField jTextFieldSelectedServerName = new JTextField();</span>
+
+<span class="nc" id="L96">	JComboBox jComboBoxSelectedServerLoad = new JComboBox();</span>
+
+<span class="nc" id="L98">	JButton jButtonSelectedServerLoad = new JButton(&quot;Load&quot;);</span>
+
+<span class="nc" id="L100">	JButton jButtonSelectedServerStore = new JButton(&quot;Store&quot;);</span>
+
+<span class="nc" id="L102">	JButton jButtonSelectedServerCancel = new JButton(&quot;Cancel&quot;);</span>
+
+<span class="nc" id="L104">	JButton jButtonSelectedServerOkay = new JButton(&quot;Okay&quot;);</span>
+
+<span class="nc" id="L106">	JButton jButtonSelectedServerConfig = new JButton(&quot;Config&quot;);</span>
+
+<span class="nc" id="L108">	JTextField jTextFieldLoginUsername = new JTextField();</span>
+
+<span class="nc" id="L110">	JTextField jTextFieldLoginPassword = new JTextField();</span>
+
+<span class="nc" id="L112">	JButton jButtonLoginCancel = new JButton(&quot;Cancel&quot;);</span>
+
+<span class="nc" id="L114">	JButton jButtonLoginLogin = new JButton(&quot;Login&quot;);</span>
+
+<span class="fc" id="L116">	public static StartFrame startFrame = null;</span>
+
+<span class="nc" id="L118">	ActionListenerChangePanel actionListenerChangePanel = new ActionListenerChangePanel();</span>
+
+	// TODO
+<span class="nc" id="L121">	Cash myCash = new Cash();</span>
+
+	public static void main(String[] args) {
+
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		if (args.length &gt; 0) {</span>
+<span class="nc" id="L126">			fullscreen = args[0];</span>
+		}
+<span class="nc" id="L128">		System.out.println(fullscreen);</span>
+
+<span class="nc" id="L130">		SplashThread splash = new SplashThread();</span>
+<span class="nc" id="L131">		SoundPlayer.getInstance().intro();</span>
+<span class="nc" id="L132">		splash.start();</span>
+
+<span class="nc" id="L134">		startFrame = new StartFrame();</span>
+
+<span class="nc" id="L136">		startFrame.setActualPanel(startFrame.jPanelSelectServer);</span>
+
+<span class="nc" id="L138">		splash.setRun(false);</span>
+<span class="nc" id="L139">		synchronized (splash) {</span>
+<span class="nc" id="L140">			splash.notify();</span>
+<span class="nc" id="L141">		}</span>
+		// SoundPlayer.getInstance().hintergrund();
+<span class="nc" id="L143">	}</span>
+
+	public static StartFrame getInstance() {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		if (startFrame == null) {</span>
+<span class="nc" id="L147">			startFrame = new StartFrame();</span>
+		}
+<span class="nc" id="L149">		return startFrame;</span>
+
+	}
+
+	private StartFrame() {
+<span class="nc" id="L154">		super(&quot;Fubarman&quot;);</span>
+<span class="nc" id="L155">		startFrame = this;</span>
+<span class="nc" id="L156">		initFrame();</span>
+<span class="nc" id="L157">		this.setDefaultCloseOperation(EXIT_ON_CLOSE);</span>
+<span class="nc" id="L158">	}</span>
+
+	/*
+	 * Spiel in Fullscreen @Ghazwan
+	 * 
+	 * 
+	 */
+
+<span class="nc" id="L166">	int width = 0;</span>
+<span class="nc" id="L167">	int height = 0;</span>
+	private Cursor theCursor;
+
+	public void setFullScreen() {
+
+		/*
+		 * Rectangle virtualBounds = new Rectangle(); GraphicsDevice GDEVICE =
+		 * GraphicsEnvironment.getLocalGraphicsEnvironment()
+		 * .getDefaultScreenDevice(); GraphicsConfiguration[] gc =
+		 * GDEVICE.getConfigurations();
+		 * 
+		 * setResizable(false); setUndecorated(true); virtualBounds =
+		 * virtualBounds.union(gc[0].getBounds()); width = virtualBounds.width;
+		 * height = virtualBounds.height; setVisible(true);
+		 * GDEVICE.setFullScreenWindow(this);
+		 */
+
+<span class="nc" id="L184">		setUndecorated(true);</span>
+<span class="nc" id="L185">		GraphicsDevice device = GraphicsEnvironment</span>
+				.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+		// setSize(800, 600);
+		// setVisible(true);
+		// setResizable(false);
+<span class="nc" id="L190">		device.setFullScreenWindow(this);</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">		if (device.isDisplayChangeSupported()) {</span>
+<span class="nc" id="L192">			DisplayMode dm = new DisplayMode(800, 600, 32,</span>
+					DisplayMode.REFRESH_RATE_UNKNOWN);
+<span class="nc" id="L194">			device.setDisplayMode(dm);</span>
+
+		}
+		// device.setDisplayMode(new DisplayMode(800 , 600, 16, 85));
+
+<span class="nc" id="L199">	}</span>
+
+	// private JFrame hackFrame;
+
+	public void initFrame() {
+		// Add the bomb as cursor
+		// Image i = ResourceService.getImage(&quot;/images/mousecursor.png&quot;);
+		// Cursor c = getToolkit().createCustomCursor(i, new Point(10, 10),
+		// &quot;CUSTOM_CURSOR&quot;);
+		// setCursor(c);
+
+		// Calculate the Size of the screen for fullscreen
+
+<span class="nc" id="L212">		Rectangle virtualBounds = new Rectangle();</span>
+<span class="nc" id="L213">		GraphicsEnvironment ge = GraphicsEnvironment</span>
+				.getLocalGraphicsEnvironment();
+<span class="nc" id="L215">		GraphicsDevice[] gs = ge.getScreenDevices();</span>
+<span class="nc" id="L216">		this.addKeyListener(this);</span>
+		try {
+<span class="nc" id="L218">			GraphicsDevice gd = gs[0];</span>
+<span class="nc" id="L219">			GraphicsConfiguration[] gc = gd.getConfigurations(); // System.out.println(&quot;GraphicsConfig:</span>
+			// &quot; +
+<span class="nc" id="L221">			gd.getConfigurations();</span>
+<span class="nc" id="L222">			virtualBounds = virtualBounds.union(gc[0].getBounds());</span>
+<span class="nc" id="L223">			width = virtualBounds.width;</span>
+<span class="nc" id="L224">			height = virtualBounds.height;</span>
+<span class="nc" id="L225">		} catch (Exception e) {</span>
+<span class="nc" id="L226">		}</span>
+
+<span class="nc" id="L228">		Dimension dimm = new Dimension(width, height);</span>
+<span class="nc" id="L229">		startFrame.setSize(dimm);</span>
+		// startFrame.setResizable(false);
+		// startFrame.setUndecorated(true);
+<span class="nc" id="L232">		startFrame.getContentPane().setLayout(null);</span>
+		// startFrame.setForeground(new Color(255,255,255));
+		// JButton but = new JButton(&quot;Test&quot;);
+		// getContentPane().add (but);
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">		if (fullscreen.equals(&quot;-fullscreen&quot;)) {</span>
+<span class="nc" id="L238">			logger.info(&quot;Changing to fullscreen mode&quot;);</span>
+<span class="nc" id="L239">			setFullScreen();</span>
+		}
+
+		else {
+<span class="nc" id="L243">			setMiddel(jPanelSelectServer);</span>
+<span class="nc" id="L244">			setMiddel(jPanelLogin);</span>
+<span class="nc" id="L245">			setMiddel(jPanelGame);</span>
+<span class="nc" id="L246">			setMiddel(jPanelGlobalLobby);</span>
+<span class="nc" id="L247">			setMiddel(jPanelHighscoreLobby);</span>
+<span class="nc" id="L248">			setMiddel(jPanelWaitForGame);</span>
+<span class="nc" id="L249">			setMiddel(jPanelNewGame);</span>
+<span class="nc" id="L250">			setMiddel(jPanelGlobalHighscoreLobby);</span>
+		}
+
+<span class="nc" id="L253">		getContentPane().add(jPanelSelectServer);</span>
+<span class="nc" id="L254">		actualPanel = jPanelSelectServer;</span>
+<span class="nc" id="L255">		initjPanelConfig();</span>
+//		initjPanelLogin();
+//		getContentPane().add(jPanelGlobalLobby);	
+//		getContentPane().add(jPanelLogin);
+//		getContentPane().add(jPanelNewGame);
+//		getContentPane().add(jPanelGame);
+//		getContentPane().add(jPanelWaitForGame);
+//		getContentPane().add(jPanelHighscoreLobby);
+//		getContentPane().add(jPanelGlobalHighscoreLobby);
+//		getContentPane().add(jPanelLogin);
+//		jPanelGlobalLobby.setVisible(false);
+//		jPanelLogin.setVisible(false);
+//		jPanelNewGame.setVisible(false);
+//		jPanelGame.setVisible(false);
+//		jPanelWaitForGame.setVisible(false);
+//		jPanelHighscoreLobby.setVisible(false);
+//		jPanelGlobalHighscoreLobby.setVisible(false);
+//		jPanelLogin.setVisible(false);
+<span class="nc" id="L273">		jButtonSelectServer.addActionListener(actionListenerChangePanel);</span>
+<span class="nc" id="L274">		jButtonConfig.addActionListener(actionListenerChangePanel);</span>
+<span class="nc" id="L275">		jButtonSelectedServerOkay.addActionListener(actionListenerChangePanel);</span>
+<span class="nc" id="L276">		jButtonSelectedServerConfig</span>
+				.addActionListener(actionListenerChangePanel);
+
+		// getContentPane().add(myCash);
+		// gameCanvas.getCanvas().setBackground(Color.white);
+		// changePanel(gameCanvas);
+		// this.setResizable(false);
+		// startFrame.getContentPane().setBackground(new Color(0, 0, 0));
+		// but.requestFocus();
+<span class="nc" id="L285">		startFrame.addKeyListener(this);</span>
+<span class="nc" id="L286">	}</span>
+
+	private void setMiddel(MyPanel panel) {
+<span class="nc" id="L289">		int pwidth = (int) panel.getBounds().getWidth();</span>
+<span class="nc" id="L290">		int pheight = (int) panel.getBounds().getHeight();</span>
+
+<span class="nc" id="L292">		int offsetX = (width / 2) - (pwidth / 2);</span>
+<span class="nc" id="L293">		int offsetY = (height / 2) - (pheight / 2);</span>
+
+<span class="nc" id="L295">		panel.setBounds(offsetX, offsetY, pwidth, pheight);</span>
+
+<span class="nc" id="L297">	}</span>
+
+	private void initjPanelConfig() {
+<span class="nc" id="L300">		jPanelConfig.setSize(new Dimension(800, 600));</span>
+<span class="nc" id="L301">		jPanelConfig.add(new JLabel(&quot;Config&quot;));</span>
+<span class="nc" id="L302">	}</span>
+
+<span class="nc" id="L304">	public class ActionListenerChangePanel implements ActionListener {</span>
+
+		public void actionPerformed(ActionEvent evt) {
+<span class="nc" id="L307">			jPanelFirst.setVisible(false);</span>
+<span class="nc" id="L308">			jPanelSelectServer.setVisible(false);</span>
+<span class="nc" id="L309">			jPanelConfig.setVisible(false);</span>
+			// startFrame.removeAll();
+<span class="nc bnc" id="L311" title="All 2 branches missed.">			if (evt.getSource().equals(jButtonSelectServer)) {</span>
+				// System.out.println(&quot;SelectServer&quot;);
+<span class="nc" id="L313">				jPanelSelectServer.setVisible(true);</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">			} else if (evt.getSource().equals(jButtonConfig)) {</span>
+				// System.out.println(&quot;Config&quot;);
+<span class="nc" id="L316">				jPanelConfig.setVisible(true);</span>
+
+			}
+			// else if (evt.getSource().equals(jButtonSelectedServerConfig)) {
+			// System.out.println(&quot;Config&quot;);
+			// jPanelConfig.setVisible(true);
+			//
+			// }else if (evt.getSource().equals(jButtonSelectedServerOkay)) {
+			// System.out.println(&quot;Config&quot;);
+			// jPanelLogin.setVisible(true);
+			//
+			// }
+<span class="nc" id="L328">		}</span>
+
+	}
+
+	public GlobalLobby getJPanelGlobalLobby() {
+<span class="nc" id="L333">		return jPanelGlobalLobby;</span>
+	}
+
+	public void changePanel(Component panel) {
+<span class="nc" id="L337">		getContentPane().remove(actualPanel);</span>
+<span class="nc" id="L338">		panel.setVisible(false);</span>
+<span class="nc" id="L339">		getContentPane().add(panel);</span>
+<span class="nc" id="L340">		panel.setVisible(true);</span>
+<span class="nc" id="L341">		actualPanel = panel;</span>
+//		jPanelFirst.setVisible(false);
+//		jPanelSelectServer.setVisible(false);
+//		jPanelConfig.setVisible(false);
+//		jPanelGlobalLobby.setVisible(false);
+//		jPanelNewGame.setVisible(false);
+//		jPanelWaitForGame.setVisible(false);
+//		jPanelGame.setVisible(false);
+//		jPanelLogin.setVisible(false);
+//		jPanelHighscoreLobby.setVisible(false);
+//		jPanelGlobalHighscoreLobby.setVisible(false);
+<span class="nc" id="L352">	}</span>
+
+	public void keyPressed(KeyEvent evt) {
+<span class="nc" id="L355">		System.out.println(&quot;Key pressed&quot;);</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">		if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {</span>
+<span class="nc" id="L357">			System.out.println(&quot;Escape pressedS&quot;);</span>
+<span class="nc" id="L358">			System.out.println(evt.getKeyCode());</span>
+		}
+<span class="nc" id="L360">	}</span>
+
+	/*
+	 * Sollte das gesamte Spiel beenden durch &quot;Esc&quot; funktioniert aber noch
+	 * nicht!
+	 * 
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
+
+	public void keyReleased(KeyEvent evt) {
+<span class="nc bnc" id="L370" title="All 2 branches missed.">		if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {</span>
+			// System.out.println(&quot;Exit&quot;);
+
+<span class="nc" id="L373">			System.exit(0);</span>
+
+		}
+<span class="nc" id="L376">	}</span>
+
+	/**
+	 * wird nicht verwendet
+	 */
+	public void keyTyped(KeyEvent arg0) {
+<span class="nc" id="L382">	}</span>
+
+	/**
+	 * liefert die GameCanvas
+	 * 
+	 * @return
+	 */
+
+	public GameCanvas getGameCanvas() {
+<span class="nc" id="L391">		return gameCanvas;</span>
+	}
+
+	/**
+	 * Das GameCanvas wird auf dem Bilschirm angezeigt
+	 */
+
+	public void showGameCanvas() {
+<span class="nc" id="L399">		logger</span>
+				.debug(&quot;Showing GameCanvas, isVisible: &quot;
+						+ gameCanvas.isVisible());
+		// gameCanvas.getCanvas().setBackground(Color.white);
+<span class="nc" id="L403">		changePanel(jPanelGame);</span>
+<span class="nc" id="L404">		theCursor = getCursor();</span>
+		// Add the bomb as cursor
+<span class="nc" id="L406">		Image i = new ImageIcon(&quot;&quot;).getImage();</span>
+<span class="nc" id="L407">		Cursor c = getToolkit().createCustomCursor(i, new Point(10, 10),</span>
+				&quot;CUSTOM_CURSOR&quot;);
+<span class="nc" id="L409">		setCursor(c);</span>
+<span class="nc" id="L410">		jPanelGame.gameCanvas.requestFocus();</span>
+
+<span class="nc" id="L412">	}</span>
+
+	/**
+	 * Game wird vom Bildschirm genommen und der Screen &quot;Join_New_Game&quot; zur
+	 * auswahl eines Spieles oder erstellen eines neuen Spieles
+	 */
+	// TODO
+	public void showHighscoreLobby() {
+<span class="nc" id="L420">		jPanelHighscoreLobby.jButtonNextRound.setVisible(true);</span>
+<span class="nc" id="L421">		jPanelHighscoreLobby.repaint();</span>
+<span class="nc" id="L422">		this.changePanel(jPanelHighscoreLobby);</span>
+		// // Add the bomb as cursor
+		// Image i = ResourceService.getImage(&quot;/images/mousecursor.png&quot;);
+		// Cursor c = getToolkit().createCustomCursor(i, new Point(10, 10),
+		// &quot;CUSTOM_CURSOR&quot;);
+<span class="nc" id="L427">		setCursor(theCursor);</span>
+
+<span class="nc" id="L429">	}</span>
+
+	public void updateRoundScoreData(HashMap&lt;String, Integer&gt; rndscore) {
+<span class="nc" id="L432">		jPanelHighscoreLobby.setTable(rndscore);</span>
+<span class="nc" id="L433">	}</span>
+
+	public void updateSessionScoreData(HashMap&lt;String, Integer&gt; rndscore) {
+<span class="nc" id="L436">		jPanelHighscoreLobby.setSessionTable(rndscore);</span>
+<span class="nc" id="L437">	}</span>
+
+	public void removeHighScoreData() {
+<span class="nc" id="L440">		jPanelHighscoreLobby.removeTable();</span>
+<span class="nc" id="L441">	}</span>
+
+	public void removeSessionHighScoreData() {
+<span class="nc" id="L444">		jPanelHighscoreLobby.removeSessionTable();</span>
+<span class="nc" id="L445">	}</span>
+
+	public void setAvailableMaps(Vector&lt;MapInfo&gt; maps) {
+<span class="nc" id="L448">		jPanelNewGame.jListMap.setListData(maps);</span>
+<span class="nc" id="L449">		jPanelNewGame.jListMap.requestFocus();</span>
+<span class="nc" id="L450">	}</span>
+
+	public void setAvailableSessions(Vector&lt;SessionDetailsMsg&gt; sessions) {
+<span class="nc" id="L453">		jPanelGlobalLobby.jListGames.setListData(sessions);</span>
+<span class="nc" id="L454">	}</span>
+
+	/**
+	 * @param sender
+	 * @param msg
+	 */
+	public void addChatMessageSession(String sender, String msg) {
+<span class="nc bnc" id="L461" title="All 2 branches missed.">		if (jPanelWaitForGame.isVisible()) {</span>
+<span class="nc" id="L462">			jPanelWaitForGame.getChat().addChatMessage(sender, msg);</span>
+		} else {
+<span class="nc" id="L464">			jPanelHighscoreLobby.chat.addChatMessage(sender, msg);</span>
+		}
+
+<span class="nc" id="L467">	}</span>
+
+	/**
+	 * 
+	 */
+	public void removeChatMessageSession() {
+
+<span class="nc" id="L474">		jPanelWaitForGame.getChat().clearChat();</span>
+<span class="nc" id="L475">		jPanelHighscoreLobby.chat.clearChat();</span>
+
+<span class="nc" id="L477">	}</span>
+
+	public void addChatMessageGlobal(String sender, String msg) {
+<span class="nc" id="L480">		getJPanelGlobalLobby().getChat().addChatMessage(sender, msg);</span>
+		// jPanelHighscoreLobby.chat.addChatMessage(sender, msg);
+
+<span class="nc" id="L483">	}</span>
+
+	public void showGlobalLobby() {
+<span class="nc" id="L486">		BomberClient.getInstance().requestSessionList();</span>
+<span class="nc" id="L487">		jPanelGlobalLobby.hideInfos();</span>
+<span class="nc" id="L488">		jPanelGlobalLobby.jListGames.setSelectedIndex(-1);</span>
+<span class="nc" id="L489">		changePanel(jPanelGlobalLobby);</span>
+		// Image i = ResourceService.getImage(&quot;/images/mousecursor.png&quot;);
+		// Cursor c = getToolkit().createCustomCursor(i, new Point(10, 10),
+		// &quot;CUSTOM_CURSOR&quot;);
+<span class="nc bnc" id="L493" title="All 2 branches missed.">		if (theCursor != null)</span>
+<span class="nc" id="L494">			setCursor(theCursor);</span>
+<span class="nc" id="L495">	}</span>
+
+	public void setGlobalScore(ArrayList&lt;DBGameUser&gt; list) {
+<span class="nc" id="L498">		jPanelGlobalHighscoreLobby.fillScore(list);</span>
+<span class="nc" id="L499">	}</span>
+
+	public void logout() {
+<span class="nc" id="L502">		StartFrame.getInstance().changePanel(</span>
+				StartFrame.getInstance().jPanelSelectServer);
+<span class="nc" id="L504">		BomberClient.getInstance().closeConnection();</span>
+<span class="nc" id="L505">	}</span>
+
+	public SessionLobby getSessionLobby() {
+<span class="nc" id="L508">		return jPanelWaitForGame;</span>
+	}
+
+	public void windowGainedFocus(WindowEvent e) {
+<span class="nc" id="L512">		repaint();</span>
+
+<span class="nc" id="L514">	}</span>
+
+	public void windowLostFocus(WindowEvent e) {
+<span class="nc" id="L517">		repaint();</span>
+
+<span class="nc" id="L519">	}</span>
+
+	public void componentHidden(ComponentEvent e) {
+<span class="nc" id="L522">		repaint();</span>
+
+<span class="nc" id="L524">	}</span>
+
+	public void componentMoved(ComponentEvent e) {
+<span class="nc" id="L527">		repaint();</span>
+
+<span class="nc" id="L529">	}</span>
+
+	public void componentResized(ComponentEvent e) {
+<span class="nc" id="L532">		repaint();</span>
+
+<span class="nc" id="L534">	}</span>
+
+	public void componentShown(ComponentEvent e) {
+<span class="nc" id="L537">		repaint();</span>
+
+<span class="nc" id="L539">	}</span>
+
+	/**
+	 * 
+	 */
+	public void showNewGamePanel() {
+<span class="nc" id="L545">		changePanel(jPanelNewGame);</span>
+<span class="nc" id="L546">	}</span>
+
+	/**
+	 * 
+	 */
+	public void showSessionLobby() {
+<span class="nc" id="L552">		changePanel(jPanelWaitForGame);</span>
+<span class="nc" id="L553">		StartFrame.getInstance().jPanelWaitForGame.updateInfo();</span>
+<span class="nc" id="L554">	}</span>
+
+	public Component getActualPanel() {
+<span class="nc" id="L557">		return actualPanel;</span>
+	}
+
+	public void setActualPanel(Component actualPanel) {
+<span class="nc" id="L561">		this.actualPanel = actualPanel;</span>
+<span class="nc" id="L562">	}</span>
+
+	public void setCursorWait() {
+<span class="nc" id="L565">		setCursor(new Cursor(Cursor.WAIT_CURSOR));</span>
+<span class="nc" id="L566">	}</span>
+
+	public void setCursorNormal() {
+<span class="nc" id="L569">		setCursor(theCursor);</span>
+<span class="nc" id="L570">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DatabaseDialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl</a> &gt; <span class="el_source">DatabaseDialect.java</span></div><h1>DatabaseDialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2008-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.databene.commons.ArrayUtil;
+import org.databene.commons.ObjectNotFoundException;
+import org.databene.commons.StringUtil;
+import org.databene.commons.converter.TimestampFormatter;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.model.DBCatalog;
+import org.databene.jdbacl.model.DBPackage;
+import org.databene.jdbacl.model.DBSchema;
+import org.databene.jdbacl.model.DBSequence;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DBTrigger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Provides abstractions of concepts that are implemented differently 
+ * by different database vendors.&lt;br/&gt;&lt;br/&gt;
+ * @since 0.4.0
+ * @author Volker Bergmann
+ */
+public abstract class DatabaseDialect {
+	
+	private static final String DEFAULT_TIMESTAMP_PATTERN = &quot;yyyy-MM-dd HH:mm:ss.SSSSSSSSS&quot;;
+
+<span class="nc" id="L64">    protected final Logger logger = LoggerFactory.getLogger(getClass());</span>
+
+    private   final String system;
+    public    final boolean quoteTableNames;
+    protected final boolean sequenceSupported;
+	private   final DateFormat dateFormat;
+	private   final DateFormat timeFormat;
+    
+    public DatabaseDialect(String system, boolean quoteTableNames, boolean sequenceSupported, 
+<span class="nc" id="L73">    		String datePattern, String timePattern) {</span>
+<span class="nc" id="L74">        this.system = system;</span>
+<span class="nc" id="L75">        this.quoteTableNames = quoteTableNames;</span>
+<span class="nc" id="L76">        this.sequenceSupported = sequenceSupported;</span>
+<span class="nc" id="L77">        this.dateFormat = new SimpleDateFormat(datePattern);</span>
+<span class="nc" id="L78">        this.timeFormat = new SimpleDateFormat(timePattern);</span>
+<span class="nc" id="L79">    }</span>
+
+    public String getSystem() {
+<span class="nc" id="L82">    	return system;</span>
+    }
+
+    public abstract boolean isDefaultCatalog(String catalog, String user);
+    
+    public abstract boolean isDefaultSchema(String schema, String user);
+    
+	public boolean isSequenceSupported() {
+<span class="nc" id="L90">    	return sequenceSupported;</span>
+    }
+
+	public boolean isSequenceBoundarySupported() {
+<span class="nc" id="L94">    	return sequenceSupported;</span>
+    }
+
+    public DBSequence[] querySequences(Connection connection) throws SQLException {
+<span class="nc" id="L98">		throw new UnsupportedOperationException();</span>
+	}
+
+	public void createSequence(String name, long initialValue, Connection connection) throws SQLException {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">		if (sequenceSupported)</span>
+<span class="nc" id="L103">			DBUtil.executeUpdate(&quot;create sequence &quot; + name + &quot; start with &quot; + initialValue, connection);</span>
+		else
+<span class="nc" id="L105">			throw checkSequenceSupport(&quot;createSequence&quot;);</span>
+<span class="nc" id="L106">    }</span>
+    
+	public String renderCreateSequence(DBSequence sequence) {
+<span class="nc" id="L109">		StringBuilder builder = new StringBuilder(&quot;CREATE SEQUENCE &quot;);</span>
+<span class="nc" id="L110">		builder.append(renderSequenceNameAndType(sequence));</span>
+<span class="nc" id="L111">		BigInteger start = sequence.getStart();</span>
+<span class="nc bnc" id="L112" title="All 4 branches missed.">		if (start != null &amp;&amp; isNotOne(start))</span>
+<span class="nc" id="L113">			builder.append(&quot; START WITH &quot;).append(start);</span>
+<span class="nc" id="L114">		BigInteger increment = sequence.getIncrement();</span>
+<span class="nc bnc" id="L115" title="All 4 branches missed.">		if (increment != null &amp;&amp; isNotOne(increment))</span>
+<span class="nc" id="L116">			builder.append(&quot; INCREMENT BY &quot;).append(increment);</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		if (isSequenceBoundarySupported()) {</span>
+<span class="nc" id="L118">			BigInteger maxValue = sequence.getMaxValue();</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">			if (maxValue != null)</span>
+<span class="nc" id="L120">				builder.append(&quot; MAXVALUE &quot;).append(maxValue);</span>
+<span class="nc" id="L121">			BigInteger minValue = sequence.getMinValue();</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">			if (minValue != null)</span>
+<span class="nc" id="L123">				builder.append(&quot; MINVALUE &quot;).append(minValue);</span>
+		}
+<span class="nc" id="L125">		Boolean cycle = sequence.isCycle(); </span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">		if (cycle != null)</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">			builder.append(cycle ? &quot; CYCLE&quot; : &quot; &quot; + sequenceNoCycle());</span>
+<span class="nc" id="L128">		return builder.toString();</span>
+	}
+
+	protected String renderSequenceNameAndType(DBSequence sequence) {
+<span class="nc" id="L132">		return sequence.getName();</span>
+	}
+	
+	protected String sequenceNoCycle() {
+<span class="nc" id="L136">		return &quot;NOCYCLE&quot;;</span>
+	}
+
+	protected static boolean isNotOne(BigInteger i) {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">		return (BigInteger.ONE.compareTo(i) != 0);</span>
+	}
+
+    public String renderFetchSequenceValue(String sequenceName) {
+<span class="nc" id="L144">		throw checkSequenceSupport(&quot;nextSequenceValue&quot;);</span>
+    }
+
+    public void setNextSequenceValue(String sequenceName, long value, Connection connection) throws SQLException {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">		if (sequenceSupported) {</span>
+<span class="nc" id="L149">			long old = DBUtil.queryLong(renderFetchSequenceValue(sequenceName), connection);</span>
+<span class="nc" id="L150">			long increment = value - old - 1;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">			if (increment != 0) {</span>
+<span class="nc" id="L152">				BigInteger formerIncrement = getSequence(sequenceName, connection).getIncrement();</span>
+<span class="nc" id="L153">				DBUtil.executeUpdate(&quot;alter sequence &quot; + sequenceName + &quot; increment by &quot; + increment, connection);</span>
+<span class="nc" id="L154">				DBUtil.queryLong(renderFetchSequenceValue(sequenceName), connection);</span>
+<span class="nc" id="L155">				DBUtil.executeUpdate(&quot;alter sequence &quot; + sequenceName + &quot; increment by &quot; + formerIncrement, connection);</span>
+			}
+<span class="nc" id="L157">		} else</span>
+<span class="nc" id="L158">			throw checkSequenceSupport(&quot;incrementSequence&quot;);</span>
+<span class="nc" id="L159">    }</span>
+    
+	public DBSequence getSequence(String sequenceName, Connection connection) throws SQLException {
+<span class="nc" id="L162">		DBSequence[] sequences = querySequences(connection);</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		for (DBSequence seq : sequences)</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">			if (seq.getName().equalsIgnoreCase(sequenceName))</span>
+<span class="nc" id="L165">				return seq;</span>
+<span class="nc" id="L166">		throw new ObjectNotFoundException(&quot;No sequence found with name '&quot; + sequenceName + &quot;'&quot;);</span>
+	}
+
+	public String renderDropSequence(String sequenceName) {
+<span class="nc bnc" id="L170" title="All 2 branches missed.">		if (sequenceSupported)</span>
+<span class="nc" id="L171">			return &quot;drop sequence &quot; + sequenceName;</span>
+		else
+<span class="nc" id="L173">			throw checkSequenceSupport(&quot;dropSequence&quot;);</span>
+    }
+    
+    public String insert(DBTable table, List&lt;ColumnInfo&gt; columnInfos) {
+<span class="nc" id="L177">        StringBuilder builder = new StringBuilder(&quot;insert into &quot;);</span>
+<span class="nc" id="L178">        appendQualifiedTableName(table, builder).append(&quot; (&quot;);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        if (columnInfos.size() &gt; 0)</span>
+<span class="nc" id="L180">            appendColumnName(columnInfos.get(0).name, builder);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        for (int i = 1; i &lt; columnInfos.size(); i++) {</span>
+<span class="nc" id="L182">            builder.append(&quot;,&quot;);</span>
+<span class="nc" id="L183">            appendColumnName(columnInfos.get(i).name, builder);</span>
+        }
+<span class="nc" id="L185">        builder.append(&quot;) values (&quot;);</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if (columnInfos.size() &gt; 0)</span>
+<span class="nc" id="L187">            builder.append(&quot;?&quot;);</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        for (int i = 1; i &lt; columnInfos.size(); i++)</span>
+<span class="nc" id="L189">            builder.append(&quot;,?&quot;);</span>
+<span class="nc" id="L190">        builder.append(&quot;)&quot;);</span>
+<span class="nc" id="L191">        String sql = builder.toString();</span>
+<span class="nc" id="L192">        logger.debug(&quot;built SQL statement: &quot; + sql);</span>
+<span class="nc" id="L193">        return sql;</span>
+    }
+
+	public String update(DBTable table, String[] pkColumnNames, List&lt;ColumnInfo&gt; columnInfos) {
+<span class="nc bnc" id="L197" title="All 2 branches missed.">    	if (pkColumnNames.length == 0)</span>
+<span class="nc" id="L198">    		throw new UnsupportedOperationException(&quot;Cannot update table without primary key: &quot; + table.getName());</span>
+<span class="nc" id="L199">        StringBuilder builder = new StringBuilder(&quot;update &quot;);</span>
+<span class="nc" id="L200">        appendQualifiedTableName(table, builder).append(&quot; set&quot;);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        for (int i = 0; i &lt; columnInfos.size(); i++) {</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        	if (!ArrayUtil.contains(columnInfos.get(i).name, pkColumnNames)) {</span>
+<span class="nc" id="L203">	            builder.append(&quot; &quot;);</span>
+<span class="nc" id="L204">	            appendColumnName(columnInfos.get(i).name, builder);</span>
+<span class="nc" id="L205">	            builder.append(&quot;=?&quot;);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">	            if (i &lt; columnInfos.size() - pkColumnNames.length - 1)</span>
+<span class="nc" id="L207">	            	builder.append(&quot;, &quot;);</span>
+        	}
+        }
+<span class="nc" id="L210">        builder.append(&quot; where&quot;);</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        for (int i = 0; i &lt; pkColumnNames.length; i++) {</span>
+<span class="nc" id="L212">        	builder.append(' ');</span>
+<span class="nc" id="L213">        	appendColumnName(pkColumnNames[i], builder);</span>
+<span class="nc" id="L214">        	builder.append(&quot;=?&quot;);</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">        	if (i &lt; pkColumnNames.length - 1)</span>
+<span class="nc" id="L216">        		builder.append(&quot; and&quot;);</span>
+        }
+<span class="nc" id="L218">        String sql = builder.toString();</span>
+<span class="nc" id="L219">        logger.debug(&quot;built SQL statement: &quot; + sql);</span>
+<span class="nc" id="L220">        return sql;</span>
+    }
+
+	public String formatValue(Object value) {
+<span class="nc bnc" id="L224" title="All 4 branches missed.">		if (value instanceof CharSequence || value instanceof Character)</span>
+<span class="nc" id="L225">			return &quot;'&quot; + DBUtil.escape(value.toString()) + &quot;'&quot;;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">		else if (value instanceof Timestamp)</span>
+<span class="nc" id="L227">			return formatTimestamp((Timestamp) value);</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">		else if (value instanceof Time)</span>
+<span class="nc" id="L229">			return timeFormat.format(value);</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">		else if (value instanceof Date)</span>
+<span class="nc" id="L231">			return dateFormat.format(value);</span>
+		else
+<span class="nc" id="L233">			return String.valueOf(value);</span>
+    }
+
+	public String formatTimestamp(Timestamp timestamp) {
+<span class="nc" id="L237">		return &quot;'&quot; + new TimestampFormatter(DEFAULT_TIMESTAMP_PATTERN).format(timestamp) + &quot;'&quot;;</span>
+	}
+	
+	
+
+	// private helpers -------------------------------------------------------------------------------------------------
+	
+    private StringBuilder appendQualifiedTableName(DBTable table, StringBuilder builder) {
+<span class="nc" id="L245">    	DBCatalog catalog = table.getCatalog();</span>
+<span class="nc bnc" id="L246" title="All 4 branches missed.">		if (catalog != null &amp;&amp; catalog.getName() != null)</span>
+<span class="nc" id="L247">    		appendQuoted(catalog.getName(), builder).append('.');</span>
+<span class="nc bnc" id="L248" title="All 4 branches missed.">    	if (table.getSchema() != null &amp;&amp; table.getSchema().getName() != null)</span>
+<span class="nc" id="L249">    		appendQuoted(table.getSchema().getName(), builder).append('.');</span>
+<span class="nc" id="L250">    	return appendQuoted(table.getName(), builder);</span>
+    }
+
+	private StringBuilder appendColumnName(String columnName, StringBuilder builder) {
+<span class="nc" id="L254">    	return appendQuoted(columnName, builder);</span>
+	}
+	
+    private StringBuilder appendQuoted(String name, StringBuilder builder) {
+<span class="nc bnc" id="L258" title="All 2 branches missed.">    	if (quoteTableNames)</span>
+<span class="nc" id="L259">    		return builder.append('&quot;').append(name).append('&quot;');</span>
+    	else
+<span class="nc" id="L261">    		return builder.append(name);</span>
+    }
+    
+    private UnsupportedOperationException checkSequenceSupport(String methodName) {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">		if (!sequenceSupported)</span>
+<span class="nc" id="L266">			return new UnsupportedOperationException(&quot;Sequence not supported in &quot; + system);</span>
+		else
+<span class="nc" id="L268">			return new UnsupportedOperationException(methodName + &quot;() not implemented&quot;);</span>
+    }
+
+    /** Determines if a primary key constraint name was explicitly specified on creation 
+     * or at least generated by the database in a deterministic (reproducible) way */
+	public abstract boolean isDeterministicPKName(String pkName);
+
+    /** Determines if a unique key constraint name was explicitly specified on creation 
+     * or at least generated by the database in a deterministic (reproducible) way */
+	public abstract boolean isDeterministicUKName(String ukName);
+
+    /** Determines if a foreign key constraint name was explicitly specified creation 
+     * or at least generated by the database in a deterministic (reproducible) way */
+	public abstract boolean isDeterministicFKName(String fkName);
+
+    /** Determines if an index name was explicitly specified creation 
+     * or at least generated by the database in a deterministic (reproducible) way */
+	public abstract boolean isDeterministicIndexName(String indexName);
+	
+	/** Tells if the database supports regular expressions */
+	public boolean supportsRegex() {
+<span class="nc" id="L289">		return false;</span>
+	}
+
+	/** 
+	 * Renders a query condition for a regular expression.
+	 * @param expression a column name or a SQL value expression to be checked with a regular expression
+	 * @param not if set to true, the query fits expressions which do not match the regular expression
+	 * @param regex the regular expression to check with
+	 * @return a string with a SQL query condition.
+	 * @throws UnsupportedOperationException if the database does not support regular expressions
+	 */
+	public String regexQuery(String expression, boolean not, String regex) {
+<span class="nc" id="L301">		throw new UnsupportedOperationException(system + &quot; does not support regular expressions&quot;);</span>
+	}
+
+	public String renderCase(String columnName, String elseExpression, String... whenThenExpressionPairs) {
+<span class="nc" id="L305">		StringBuilder builder = new StringBuilder();</span>
+<span class="nc" id="L306">		builder.append(&quot;CASE&quot;);</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">		for (int i = 0; i &lt; whenThenExpressionPairs.length; i += 2) {</span>
+<span class="nc" id="L308">			builder.append(&quot; WHEN &quot;).append(whenThenExpressionPairs[i]); // when part</span>
+<span class="nc" id="L309">			builder.append(&quot; THEN &quot;).append(whenThenExpressionPairs[i + 1]); // then part</span>
+		}
+<span class="nc bnc" id="L311" title="All 2 branches missed.">		if (!StringUtil.isEmpty(elseExpression))</span>
+<span class="nc" id="L312">			builder.append(&quot; ELSE &quot;).append(elseExpression); // else part</span>
+<span class="nc" id="L313">		builder.append(&quot; END&quot;); // closing the case</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">		if (columnName != null)</span>
+<span class="nc" id="L315">			builder.append(&quot; AS &quot;).append(columnName); // applying column name</span>
+<span class="nc" id="L316">		return builder.toString();</span>
+	}
+	
+    /* TODO implement queries for indexes, views, functions and procedures
+    public List&lt;DBView&gt; queryViews(Connection connection) throws SQLException {
+		return new ArrayList&lt;DBView&gt;();
+		// ORA: select VIEW_NAME, OWNER from SYS.ALL_VIEWS order by OWNER, VIEW_NAME
+	}
+
+    public List&lt;DBIndex&gt; queryIndexes(DBSchema schema, Connection connection) throws SQLException {
+		return new ArrayList&lt;DBIndex&gt;();
+	}
+
+    public List&lt;DBFunction&gt; queryFunctions(Connection connection) throws SQLException {
+		return new ArrayList&lt;DBTrigger&gt;();
+		// ORA: select OBJECT_NAME, OWNER from SYS.ALL_OBJECTS where upper(OBJECT_TYPE) = upper('FUNCTION') order by OWNER, OBJECT_NAME 
+	}
+
+    public List&lt;DBProcedure&gt; queryProcedures(Connection connection) throws SQLException {
+		return new ArrayList&lt;DBTrigger&gt;();
+		// ORA: select OBJECT_NAME, OWNER from SYS.ALL_OBJECTS where upper(OBJECT_TYPE) = upper('PROCEDURE') order by OWNER, OBJECT_NAME 
+	}
+	*/
+	
+    public List&lt;DBTrigger&gt; queryTriggers(DBSchema schema, Connection connection) throws SQLException {
+<span class="nc" id="L341">		return new ArrayList&lt;DBTrigger&gt;();</span>
+	}
+
+    public List&lt;DBPackage&gt; queryPackages(DBSchema schema, Connection connection) throws SQLException {
+<span class="nc" id="L345">		return new ArrayList&lt;DBPackage&gt;();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

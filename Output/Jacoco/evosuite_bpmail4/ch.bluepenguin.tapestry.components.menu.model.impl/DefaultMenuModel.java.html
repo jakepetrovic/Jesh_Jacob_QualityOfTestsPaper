@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultMenuModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.tapestry.components.menu.model.impl</a> &gt; <span class="el_source">DefaultMenuModel.java</span></div><h1>DefaultMenuModel.java</h1><pre class="source lang-java linenums">// Decompiled by DJ v3.8.8.85 Copyright 2005 Atanas Neshkov  Date: 16.05.2005 11:59:04
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   DefaultMenuModel.java
+
+package ch.bluepenguin.tapestry.components.menu.model.impl;
+
+import ch.bluepenguin.tapestry.components.menu.model.*;
+import ch.bluepenguin.tapestry.components.menu.renderer.IMenuItemRenderer;
+import ch.bluepenguin.tapestry.components.menu.renderer.impl.HyperlinkMenuItemRenderer;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+// Referenced classes of package ch.bluepenguin.tapestry.components.menu.model.impl:
+//            MenuItemList
+
+public class DefaultMenuModel
+    implements IMenuModel
+{
+
+    public DefaultMenuModel()
+<span class="fc" id="L22">    {</span>
+<span class="fc" id="L23">        rootList = new MenuItemList(null);</span>
+<span class="fc" id="L24">        orphans = new ArrayList();</span>
+<span class="fc" id="L25">    }</span>
+
+    public Iterator getMenuItemsDepthFirst()
+        throws MenuStructureException
+    {
+<span class="fc" id="L30">        ArrayList all = new ArrayList();</span>
+<span class="fc" id="L31">        getMenuItemsRecursion(rootList, all);</span>
+<span class="fc" id="L32">        return all.iterator();</span>
+    }
+
+    private void getMenuItemsRecursion(MenuItemList list, ArrayList all)
+    {
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if(list.getMenuItem() != null)</span>
+<span class="fc" id="L38">            all.add(list.getMenuItem());</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for(Iterator children = list.getChildrenIterator(); children.hasNext(); getMenuItemsRecursion((MenuItemList)children.next(), all));</span>
+<span class="fc" id="L40">    }</span>
+
+    public void addMenuItem(IMenuItem item)
+    {
+<span class="fc" id="L44">        HyperlinkMenuItemRenderer renderer = new HyperlinkMenuItemRenderer();</span>
+<span class="fc" id="L45">        renderer.setHyperlink(&quot;#&quot;);</span>
+<span class="fc" id="L46">        addMenuItem(item, ((IMenuItemRenderer) (renderer)));</span>
+<span class="fc" id="L47">    }</span>
+
+    private void addMenuItemToList(IMenuItem item, MenuItemList parentlist)
+    {
+<span class="fc" id="L51">        item.setIndex(parentlist.getChildrenSize());</span>
+<span class="fc" id="L52">        MenuItemList menulist = new MenuItemList(item);</span>
+<span class="fc" id="L53">        attachOrphans(menulist);</span>
+<span class="fc" id="L54">        parentlist.addChild(menulist);</span>
+<span class="fc" id="L55">    }</span>
+
+    private void attachOrphans(MenuItemList menulist)
+    {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for(int i = 0; i &lt; orphans.size(); i++)</span>
+        {
+<span class="fc" id="L61">            IMenuItem current = (IMenuItem)orphans.get(i);</span>
+<span class="fc" id="L62">            MenuItemList list = new MenuItemList(current);</span>
+<span class="fc" id="L63">            orphans.remove(i);</span>
+<span class="pc bpc" id="L64" title="1 of 4 branches missed.">            if(current.getParent() != null &amp;&amp; current.getParent().equals(menulist.getMenuItem().getContained()))</span>
+<span class="fc" id="L65">                menulist.addChild(list);</span>
+            else
+<span class="fc" id="L67">                rootList.addChild(list);</span>
+<span class="fc" id="L68">            attachOrphans(list);</span>
+        }
+
+<span class="fc" id="L71">    }</span>
+
+    private MenuItemList findParentList(IMenuItem item, MenuItemList parentList)
+    {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if(item.getParent() == null)</span>
+<span class="nc" id="L76">            return null;</span>
+<span class="fc bfc" id="L77" title="All 4 branches covered.">        if(parentList.getMenuItem() != null &amp;&amp; parentList.getMenuItem().getContained().equals(item.getParent()))</span>
+        {
+<span class="fc" id="L79">            parentList.getMenuItem().setLeaf(false);</span>
+<span class="fc" id="L80">            return parentList;</span>
+        }
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        for(Iterator children = parentList.getChildrenIterator(); children.hasNext();)</span>
+        {
+<span class="fc" id="L84">            MenuItemList childList = (MenuItemList)children.next();</span>
+<span class="fc" id="L85">            MenuItemList found = findParentList(item, childList);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            if(found != null)</span>
+<span class="fc" id="L87">                return found;</span>
+<span class="fc" id="L88">        }</span>
+
+<span class="fc" id="L90">        return null;</span>
+    }
+
+    private MenuItemList findChildList(IMenuItem item, MenuItemList currentList)
+    {
+<span class="fc bfc" id="L95" title="All 4 branches covered.">        if(currentList.getMenuItem() != null &amp;&amp; currentList.getMenuItem().equals(item))</span>
+<span class="fc" id="L96">            return currentList;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for(Iterator children = currentList.getChildrenIterator(); children.hasNext();)</span>
+        {
+<span class="fc" id="L99">            MenuItemList childList = (MenuItemList)children.next();</span>
+<span class="fc" id="L100">            MenuItemList found = findChildList(item, childList);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            if(found != null)</span>
+<span class="fc" id="L102">                return found;</span>
+<span class="fc" id="L103">        }</span>
+
+<span class="fc" id="L105">        return null;</span>
+    }
+
+    public void checkMenuModelHealth()
+        throws MenuStructureException
+    {
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if(orphans.size() &gt; 0)</span>
+<span class="nc" id="L112">            throw new MenuStructureException(&quot;Too many orphans still hanging around! &quot;);</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if(!rootList.checkConsistency())</span>
+<span class="nc" id="L114">            throw new MenuStructureException(&quot;Tree structure not consistent &quot;);</span>
+        else
+<span class="fc" id="L116">            return;</span>
+    }
+
+    public String displayMenuStructure()
+    {
+<span class="fc" id="L121">        return displayMenuList(rootList, new StringBuffer());</span>
+    }
+
+    private String displayMenuList(MenuItemList list, StringBuffer spacer)
+    {
+<span class="fc" id="L126">        spacer.append(&quot;   &quot;);</span>
+<span class="fc" id="L127">        StringBuffer buffer = new StringBuffer();</span>
+<span class="fc" id="L128">        buffer.append(list.toString());</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for(Iterator children = list.getChildrenIterator(); children.hasNext(); spacer.delete(spacer.length() - 4, spacer.length() - 1))</span>
+<span class="fc" id="L130">            buffer.append(&quot;\n&quot;).append(spacer.toString()).append(displayMenuList((MenuItemList)children.next(), spacer));</span>
+
+<span class="fc" id="L132">        return buffer.toString();</span>
+    }
+
+    public void addMenuItem(IMenuItem item, IMenuItemRenderer renderer)
+    {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if(item == null)</span>
+<span class="fc" id="L138">            return;</span>
+<span class="fc" id="L139">        item.setRenderer(renderer);</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if(item.getParent() == null)</span>
+        {
+<span class="fc" id="L142">            addMenuItemToList(item, rootList);</span>
+        } else
+        {
+<span class="fc" id="L145">            MenuItemList parentlist = findParentList(item, rootList);</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">            if(parentlist == null)</span>
+<span class="fc" id="L147">                orphans.add(item);</span>
+            else
+<span class="fc" id="L149">                addMenuItemToList(item, parentlist);</span>
+        }
+<span class="fc" id="L151">    }</span>
+
+    public MenuItemList getRootList()
+    {
+<span class="fc" id="L155">        return rootList;</span>
+    }
+
+    public MenuItemList getChildList(IMenuItem item)
+    {
+<span class="fc" id="L160">        return findChildList(item, rootList);</span>
+    }
+
+    private MenuItemList rootList;
+    private ArrayList orphans;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CookieAttribute.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.attr</a> &gt; <span class="el_source">CookieAttribute.java</span></div><h1>CookieAttribute.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.attr;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import static org.jsecurity.web.WebUtils.toHttp;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.beans.PropertyEditor;
+
+/**
+ * A &lt;tt&gt;CookieAttribute&lt;/tt&gt; stores an object as a {@link Cookie} for access on later requests.
+ *
+ * @author Les Hazlewood
+ * @author Peter Ledbrook
+ * @since 0.2
+ */
+public class CookieAttribute&lt;T&gt; extends AbstractWebAttribute&lt;T&gt; {
+
+    //TODO - complete JavaDoc
+    
+    /** Private internal log instance. */
+<span class="fc" id="L44">    private static final Log log = LogFactory.getLog(CookieAttribute.class);    </span>
+
+    /**
+     * The number of seconds in one year (= 60 * 60 * 24 * 365).
+     */
+    public static final int ONE_YEAR = 60 * 60 * 24 * 365;
+    /**
+     * This is the same value as Integer.MAX_VALUE, and while Tomcat does fine with cookie max age with this value,
+     * Jetty apparently has problems with it.  If you're using Jetty, you might want to use the
+     * {@link #ONE_YEAR ONE_YEAR} constant or another value.
+     */
+    public static final int INDEFINITE = Integer.MAX_VALUE;
+
+    /**
+     * &lt;code&gt;null&lt;/code&gt;, indicating the cookie should be set on the request context root.
+     */
+<span class="fc" id="L60">    public static final String DEFAULT_PATH = null;</span>
+    /**
+     * &lt;code&gt;-1&lt;/code&gt;, indicating the cookie should expire when the browser closes.
+     */
+    public static final int DEFAULT_MAX_AGE = -1;
+    /**
+     * Default value is &lt;code&gt;false&lt;/code&gt;.
+     */
+    public static final boolean DEFAULT_SECURE = false;
+
+<span class="pc" id="L70">    private String path = DEFAULT_PATH;</span>
+<span class="pc" id="L71">    private int maxAge = DEFAULT_MAX_AGE;</span>
+<span class="pc" id="L72">    private boolean secure = DEFAULT_SECURE;</span>
+
+<span class="nc" id="L74">    public CookieAttribute() {</span>
+<span class="nc" id="L75">    }</span>
+
+    /**
+     * Constructs a &lt;tt&gt;CookieAttribute&lt;/tt&gt; using a {@link Cookie Cookie} with the specified {@link Cookie#getName() name}
+     * using the request context's path and with a {@link Cookie#setMaxAge(int) maxAge} of &lt;tt&gt;-1&lt;/tt&gt;, indicating the
+     * Cookie will persist until browser shutdown.
+     *
+     * @param name the Cookie {@link Cookie#getName() name}
+     */
+    public CookieAttribute(String name) {
+<span class="fc" id="L85">        super(name);</span>
+<span class="fc" id="L86">    }</span>
+
+    /**
+     * Constructs a &lt;tt&gt;CookieAttribute&lt;/tt&gt; using a {@link Cookie Cookie} with the specified
+     * {@link Cookie#getName() name} and {@link Cookie#getPath() path}.
+     *
+     * &lt;p&gt;A &lt;tt&gt;null&lt;/tt&gt; &lt;tt&gt;path&lt;/tt&gt; value means the request context's path will be used by default.
+     *
+     * &lt;p&gt;The Cookie's {@link Cookie#getMaxAge() maxAge} will be &lt;tt&gt;-1&lt;/tt&gt;, indicating the Cookie will persist until
+     * browser shutdown.
+     *
+     * @param name the Cookie {@link Cookie#getName() name}
+     * @param path the Cookie {@link Cookie#setPath(String) path}.
+     */
+    public CookieAttribute(String name, String path) {
+<span class="nc" id="L101">        super(name);</span>
+<span class="nc" id="L102">        setPath(path);</span>
+<span class="nc" id="L103">    }</span>
+
+    /**
+     * Constructs a &lt;tt&gt;CookieAttribute&lt;/tt&gt; using a {@link Cookie Cookie} with the specified
+     * {@link Cookie#getName() name} and {@link Cookie#getMaxAge() maxAge}.
+     *
+     * &lt;p&gt;The Cookie's {@link javax.servlet.http.Cookie#getPath() path} will be the &lt;tt&gt;Request&lt;/tt&gt;'s
+     * {@link javax.servlet.http.HttpServletRequest#getContextPath() context path}.
+     *
+     * @param name   the Cookie {@link javax.servlet.http.Cookie#getName() name};
+     * @param maxAge the Cookie {@link Cookie#getMaxAge() maxAge}
+     */
+    public CookieAttribute(String name, int maxAge) {
+<span class="nc" id="L116">        super(name);</span>
+<span class="nc" id="L117">        setMaxAge(maxAge);</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * Constructs a &lt;tt&gt;CookieAttribute&lt;/tt&gt; using a {@link Cookie Cookie} with the specified
+     * {@link Cookie#getName() name}, {@link javax.servlet.http.Cookie#getPath() path}, and
+     * {@link Cookie#getMaxAge() maxAge}.
+     *
+     * @param name   the Cookie {@link Cookie#getName() name}
+     * @param path   the Cookie {@link Cookie#setPath(String) path}.
+     * @param maxAge the Cookie {@link Cookie#getMaxAge() maxAge}
+     */
+    public CookieAttribute(String name, String path, int maxAge) {
+<span class="nc" id="L130">        this(name, path);</span>
+<span class="nc" id="L131">        setMaxAge(maxAge);</span>
+<span class="nc" id="L132">    }</span>
+
+    /**
+     * Constructs a &lt;tt&gt;CookieAttribute&lt;/tt&gt; using a {@link Cookie Cookie} with the specified
+     * {@link Cookie#getName() name}, {@link javax.servlet.http.Cookie#getPath() path}, and
+     * {@link Cookie#getMaxAge() maxAge}, utilizing the specified &lt;tt&gt;PropertyEditor&lt;/tt&gt; to perform value/string
+     * conversion on the object stored as a cookie.
+     *
+     * @param name        the Cookie {@link Cookie#getName() name}
+     * @param path        the Cookie {@link Cookie#setPath(String) path}.
+     * @param maxAge      the Cookie {@link Cookie#getMaxAge() maxAge}
+     * @param editorClass the &lt;tt&gt;PropertyEditor&lt;/tt&gt; to perform value/string conversion on the object stored as a
+     *                    Cookie.
+     */
+    public CookieAttribute(String name, String path, int maxAge, Class&lt;? extends PropertyEditor&gt; editorClass) {
+<span class="nc" id="L147">        super(name, editorClass);</span>
+<span class="nc" id="L148">        setPath(path);</span>
+<span class="nc" id="L149">        setMaxAge(maxAge);</span>
+<span class="nc" id="L150">    }</span>
+
+    /**
+     * Returns the Cookie's {@link Cookie#getPath() path} setting.  If &lt;tt&gt;null&lt;/tt&gt;, the &lt;tt&gt;request&lt;/tt&gt;'s
+     * {@link javax.servlet.http.HttpServletRequest#getContextPath() context path} will be used.
+     *
+     * &lt;p&gt;The default is &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+     *
+     * @return the Cookie's path, or &lt;tt&gt;null&lt;/tt&gt; if the request's context path should be used as the path when the
+     *         cookie is created.
+     */
+    public String getPath() {
+<span class="fc" id="L162">        return path;</span>
+    }
+
+    /**
+     * Sets the Cookie's {@link Cookie#getPath() path} setting.  If the argument is &lt;tt&gt;null&lt;/tt&gt;, the &lt;tt&gt;request&lt;/tt&gt;'s
+     * {@link javax.servlet.http.HttpServletRequest#getContextPath() context path} will be used.
+     *
+     * &lt;p&gt;The default is &lt;code&gt;null&lt;/code&gt;.&lt;/p&gt;
+     *
+     * @param path the Cookie's path, or &lt;tt&gt;null&lt;/tt&gt; if the request's context path should be used as the path when the
+     *             cookie is created.
+     */
+    public void setPath(String path) {
+<span class="nc" id="L175">        this.path = path;</span>
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Returns the Cookie's {@link Cookie#setMaxAge(int) maxAge} setting.  Please see that JavaDoc for the semantics on
+     * the repercussions of negative, zero, and positive values for the maxAge.
+     *
+     * &lt;p&gt;The default value is &lt;code&gt;-1&lt;/code&gt;, meaning the cookie will expire when the browser is closed.&lt;/p&gt;
+     *
+     * @return the Cookie's {@link Cookie#setMaxAge(int) maxAge}
+     */
+    public int getMaxAge() {
+<span class="fc" id="L187">        return maxAge;</span>
+    }
+
+    /**
+     * Sets the Cookie's {@link Cookie#setMaxAge(int) maxAge} setting.  Please see that JavaDoc for the semantics on
+     * the repercussions of negative, zero, and positive values for the maxAge.
+     *
+     * &lt;p&gt;The default value is &lt;code&gt;-1&lt;/code&gt;, meaning the cookie will expire when the browser is closed.&lt;/p&gt;
+     *
+     * @param maxAge the Cookie's {@link Cookie#setMaxAge(int) maxAge}
+     */
+    public void setMaxAge(int maxAge) {
+<span class="fc" id="L199">        this.maxAge = maxAge;</span>
+<span class="fc" id="L200">    }</span>
+
+    public boolean isSecure() {
+<span class="fc" id="L203">        return secure;</span>
+    }
+
+    public void setSecure(boolean secure) {
+<span class="nc" id="L207">        this.secure = secure;</span>
+<span class="nc" id="L208">    }</span>
+
+    /**
+     * Returns the cookie with the given name from the request or &lt;tt&gt;null&lt;/tt&gt; if no cookie
+     * with that name could be found.
+     *
+     * @param request    the current executing http request.
+     * @param cookieName the name of the cookie to find and return.
+     * @return the cookie with the given name from the request or &lt;tt&gt;null&lt;/tt&gt; if no cookie
+     *         with that name could be found.
+     */
+    private static Cookie getCookie(HttpServletRequest request, String cookieName) {
+<span class="fc" id="L220">        Cookie cookies[] = request.getCookies();</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">        if (cookies != null) {</span>
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">            for (Cookie cookie : cookies) {</span>
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">                if (cookie.getName().equals(cookieName)) {</span>
+<span class="fc" id="L224">                    return cookie;</span>
+                }
+            }
+        }
+<span class="fc" id="L228">        return null;</span>
+    }
+
+    public T onRetrieveValue(ServletRequest request, ServletResponse response) {
+<span class="fc" id="L232">        T value = null;</span>
+
+        String stringValue;
+<span class="fc" id="L235">        Cookie cookie = getCookie(toHttp(request), getName());</span>
+<span class="pc bpc" id="L236" title="2 of 4 branches missed.">        if (cookie != null &amp;&amp; cookie.getMaxAge() != 0 ) {</span>
+<span class="fc" id="L237">            stringValue = cookie.getValue();</span>
+<span class="pc bpc" id="L238" title="1 of 2 branches missed.">            if (log.isInfoEnabled()) {</span>
+<span class="fc" id="L239">                log.info(&quot;Found string value [&quot; + stringValue + &quot;] from HttpServletRequest Cookie [&quot; + getName() + &quot;]&quot;);</span>
+            }
+<span class="fc" id="L241">            value = fromStringValue(stringValue);</span>
+        } else {
+<span class="nc bnc" id="L243" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L244">                log.debug(&quot;No value found in request Cookies under cookie name [&quot; + getName() + &quot;]&quot;);</span>
+            }
+        }
+
+<span class="fc" id="L248">        return value;</span>
+    }
+
+    public void onStoreValue(T value, ServletRequest servletRequest, ServletResponse servletResponse) {
+
+<span class="fc" id="L253">        HttpServletRequest request = toHttp(servletRequest);</span>
+<span class="fc" id="L254">        HttpServletResponse response = toHttp(servletResponse);</span>
+
+<span class="fc" id="L256">        String name = getName();</span>
+<span class="fc" id="L257">        int maxAge = getMaxAge();</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">        String path = getPath() != null ? getPath() : request.getContextPath();</span>
+
+<span class="fc" id="L260">        String stringValue = toStringValue(value);</span>
+<span class="fc" id="L261">        Cookie cookie = new Cookie(name, stringValue);</span>
+<span class="fc" id="L262">        cookie.setMaxAge(maxAge);</span>
+<span class="fc" id="L263">        cookie.setPath(path);</span>
+<span class="pc bpc" id="L264" title="1 of 2 branches missed.">        if (isSecure()) {</span>
+<span class="nc" id="L265">            cookie.setSecure(true);</span>
+        }
+
+<span class="fc" id="L268">        response.addCookie(cookie);</span>
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L270">            log.trace(&quot;Added Cookie [&quot; + name + &quot;] to path [&quot; + path + &quot;] with value [&quot; +</span>
+                    stringValue + &quot;] to the HttpServletResponse.&quot;);
+        }
+<span class="fc" id="L273">    }</span>
+
+    public void removeValue(ServletRequest servletRequest, ServletResponse response) {
+<span class="fc" id="L276">        HttpServletRequest request = toHttp(servletRequest);</span>
+<span class="fc" id="L277">        Cookie cookie = getCookie(request, getName());</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">        if (cookie != null) {</span>
+<span class="fc" id="L279">            cookie.setMaxAge(0);</span>
+            //JSEC-94: Must set the path on the outgoing cookie (some browsers don't retain it from the
+            //retrieved cookie?)
+<span class="pc bpc" id="L282" title="1 of 2 branches missed.">            cookie.setPath(getPath() == null ? request.getContextPath() : getPath());</span>
+<span class="fc" id="L283">            cookie.setSecure(isSecure());</span>
+<span class="fc" id="L284">            toHttp(response).addCookie(cookie);</span>
+        }
+<span class="fc" id="L286">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

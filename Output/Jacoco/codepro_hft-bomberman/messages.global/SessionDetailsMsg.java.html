@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SessionDetailsMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.global</a> &gt; <span class="el_source">SessionDetailsMsg.java</span></div><h1>SessionDetailsMsg.java</h1><pre class="source lang-java linenums">package messages.global;
+
+import java.util.List;
+
+import javax.swing.ImageIcon;
+
+import server.BomberServer;
+import server.ClientInfo;
+import server.ServerGameSession;
+
+/**
+ * This message is sent to the server, when a client has created a new game (session).
+ * A reply in the shape of a GlobalStateMsg is sent back to the client, indicating
+ * whether the creation of the game (session) was successful or not.
+ * 
+ * @author Steffen, Bj�rn , Andi
+ * @see GlobalStateMsg
+ * 
+ */
+public class SessionDetailsMsg implements GlobalClientMsg {
+	/**
+	 * Spielname
+	 * 
+	 */
+    private String gameName;
+    
+    /**
+     * Mappe f�r das Spiel
+     * 
+     */
+    private List&lt;String&gt; maps;
+    
+    /**
+     * Number of players who are currently in this session.
+     */
+    private int nrOfPlayers;
+    
+    /**
+     * Expected number of players for the session.
+     */
+    private int totalNrOfPlayers;
+    
+    /**
+     * Anzahl der Runden
+     * 
+     */
+    private int totalRounds;
+    
+    /**
+     * Preview of the first map of the session.
+     */
+    private ImageIcon preview;
+
+    /**
+     * Creates a new SessionDetailsMsg. Please use setPreview() to add a small preview
+     * image of the first map played in this session if desired.
+     * 
+     * @param gameName - Spielname
+     * @param map - Mappe f�r das Spiel
+     * @param nrOfPlayers - Anzahl der Teilnehmenden Spieler
+     * @param totalNrOfPlayers - Expected number of players for this session. 
+     * @param rounds - Anzahl der Runden
+     */
+    public SessionDetailsMsg(String gameName, List&lt;String&gt; maps, ImageIcon mapPreview, int nrOfPlayers, int totalNrOfPlayers, int rounds) {
+<span class="fc" id="L65">        super();</span>
+<span class="fc" id="L66">        this.gameName = gameName;</span>
+<span class="fc" id="L67">        this.maps = maps;</span>
+<span class="fc" id="L68">        this.preview = mapPreview;</span>
+<span class="fc" id="L69">        this.nrOfPlayers = nrOfPlayers;</span>
+<span class="fc" id="L70">        this.totalNrOfPlayers = totalNrOfPlayers;</span>
+<span class="fc" id="L71">        this.totalRounds = rounds;</span>
+<span class="fc" id="L72">    }</span>
+
+	@Override
+	public void execute(BomberServer bomberSrv, ClientInfo sender) {
+<span class="nc" id="L76">		ServerGameSession newSession = bomberSrv.createSession(gameName, maps, preview, nrOfPlayers, totalRounds);</span>
+
+		// provide feedback to client whether creation of session was succesful or not
+<span class="nc bnc" id="L79" title="All 2 branches missed.">		if (newSession != null) {</span>
+			// TODO maybe remove SESSION_CREA... if unneeded
+<span class="nc" id="L81">			sender.sendMsg(new GlobalStateMsg(GlobalStateMsg.SESSION_CREATION_SUCCESSFUL));</span>
+<span class="nc" id="L82">			sender.joinGameSession(newSession);</span>
+		} else {
+<span class="nc" id="L84">			sender.sendMsg(new GlobalStateMsg(GlobalStateMsg.SESSION_NAME_TAKEN));</span>
+		}
+<span class="nc" id="L86">	}</span>
+
+	public void setPreview(ImageIcon preview) {
+<span class="nc" id="L89">		this.preview = preview;</span>
+<span class="nc" id="L90">	}</span>
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+<span class="nc" id="L97">		return gameName;</span>
+	}
+
+
+
+	public String getGameName() {
+<span class="nc" id="L103">		return gameName;</span>
+	}
+
+
+
+	public List&lt;String&gt; getMaps() {
+<span class="nc" id="L109">		return maps;</span>
+	}
+
+
+
+	public int getNrOfPlayers() {
+<span class="nc" id="L115">		return nrOfPlayers;</span>
+	}
+
+
+
+	public int getTotalNrOfPlayers() {
+<span class="nc" id="L121">		return totalNrOfPlayers;</span>
+	}
+
+
+
+	public int getTotalRounds() {
+<span class="nc" id="L127">		return totalRounds;</span>
+	}
+
+
+
+	public ImageIcon getPreview() {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if(preview == null){</span>
+			//System.out.println(&quot;Preview ist leer&quot;);
+<span class="nc" id="L135">			return new ImageIcon();</span>
+		}else{
+<span class="nc" id="L137">			return preview;	</span>
+		}
+		
+	}
+	
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

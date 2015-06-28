@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ExplosionGfxFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">ExplosionGfxFactory.java</span></div><h1>ExplosionGfxFactory.java</h1><pre class="source lang-java linenums">package client.view;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Stack;
+
+import javax.imageio.ImageIO;
+
+import common.ResourceService;
+
+/**
+ * @author andi
+ *
+ */
+public class ExplosionGfxFactory {
+
+	private HashMap&lt;String, Image&gt; explImageCache;
+
+	private Stack&lt;AffineTransform&gt; transformations;
+
+<span class="fc" id="L29">	public ExplosionGfxFactory() {</span>
+<span class="fc" id="L30">		explImageCache = new HashMap&lt;String, Image&gt;();</span>
+<span class="fc" id="L31">		transformations = new Stack&lt;AffineTransform&gt;();</span>
+<span class="fc" id="L32">	}</span>
+
+	public Image getExplosionImage(int diameter, int id) {
+<span class="nc" id="L35">		BufferedImage image = new BufferedImage(diameter*40, diameter*40, BufferedImage.TYPE_INT_ARGB);</span>
+<span class="nc" id="L36">		Graphics2D gfx = image.createGraphics();</span>
+
+<span class="nc" id="L38">		int size = image.getHeight();</span>
+<span class="nc" id="L39">		int center = diameter / 2;</span>
+
+<span class="nc" id="L41">		Image end = loadExplosionImage(id, &quot;end&quot;);</span>
+<span class="nc" id="L42">		Image middle = loadExplosionImage(id, &quot;cross&quot;);</span>
+<span class="nc" id="L43">		Image conn = loadExplosionImage(id, &quot;straight&quot;);</span>
+
+		
+<span class="nc bnc" id="L46" title="All 2 branches missed.">		for (int y = 0; y &lt; diameter; y++) {</span>
+<span class="nc" id="L47">			pushTransform(gfx.getTransform());</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">			if (y == 0) {</span>
+<span class="nc" id="L49">				Point tr = getTranslation(center, y);</span>
+<span class="nc" id="L50">				gfx.translate(tr.x, tr.y);</span>
+<span class="nc" id="L51">				gfx.drawImage(end, 0, 0, null);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">			} else if (y == diameter - 1) {</span>
+<span class="nc" id="L53">				Point tr = getTranslation(center, y);</span>
+<span class="nc" id="L54">				gfx.rotate(Math.PI, size/2,size/2);</span>
+<span class="nc" id="L55">				gfx.translate(tr.x, 0);</span>
+<span class="nc" id="L56">				gfx.drawImage(end, 0, 0, null);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">			} else if (y == center) {</span>
+<span class="nc" id="L58">				Point tr = getTranslation(center, y);</span>
+<span class="nc" id="L59">				gfx.translate(tr.x, tr.y);</span>
+<span class="nc" id="L60">				gfx.drawImage(middle, 0, 0, null);</span>
+<span class="nc" id="L61">			} else {</span>
+<span class="nc" id="L62">				Point tr = getTranslation(center, y);</span>
+<span class="nc" id="L63">				gfx.translate(tr.x, tr.y);</span>
+<span class="nc" id="L64">				gfx.drawImage(conn, 0, 0, null);</span>
+			}
+<span class="nc" id="L66">			gfx.setTransform(popTransform());</span>
+		}
+		
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		for (int x = 0; x &lt; diameter; x++) {</span>
+<span class="nc" id="L70">			pushTransform(gfx.getTransform());</span>
+			
+<span class="nc bnc" id="L72" title="All 2 branches missed.">			if (x == 0) {</span>
+<span class="nc" id="L73">				Point tr = getTranslation(x, center);</span>
+<span class="nc" id="L74">				gfx.rotate(-Math.PI/2, size/2,size/2);</span>
+<span class="nc" id="L75">				gfx.translate(tr.y, 0);</span>
+<span class="nc" id="L76">				gfx.drawImage(end, 0, 0, null);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">			} else if (x == diameter - 1) {</span>
+<span class="nc" id="L78">				Point tr = getTranslation(x, center);</span>
+<span class="nc" id="L79">				gfx.rotate(Math.PI/2, size/2,size/2);</span>
+<span class="nc" id="L80">				gfx.translate(tr.y, 0);</span>
+<span class="nc" id="L81">				gfx.drawImage(end, 0, 0, null);</span>
+				
+<span class="nc bnc" id="L83" title="All 2 branches missed.">			} else if (x == center) {</span>
+<span class="nc" id="L84">				Point tr = getTranslation(x,center);</span>
+<span class="nc" id="L85">				gfx.translate(tr.x, tr.y);</span>
+<span class="nc" id="L86">				gfx.drawImage(middle, 0, 0, null);</span>
+<span class="nc" id="L87">			} else {</span>
+<span class="nc" id="L88">				Point tr = getTranslation(x, center);</span>
+<span class="nc" id="L89">				gfx.rotate(Math.PI/2, size/2,size/2);</span>
+<span class="nc" id="L90">				gfx.translate(tr.y, tr.x);</span>
+<span class="nc" id="L91">				gfx.drawImage(conn, 0, 0, null);</span>
+			}
+<span class="nc" id="L93">			gfx.setTransform(popTransform());</span>
+		}
+<span class="nc" id="L95">		return image;</span>
+
+	}
+
+	private Image loadExplosionImage(int id, String imagename) {
+
+<span class="nc" id="L101">		String path = &quot;/gfx/player/&quot; + id + &quot;/&quot; + imagename + &quot;.png&quot;;</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">		if (explImageCache.keySet().contains(path)) {</span>
+<span class="nc" id="L103">			return explImageCache.get(path);</span>
+		} else {
+<span class="nc" id="L105">			return loadImage(path);</span>
+		}
+
+	}
+
+	private Image loadImage(String path) {
+<span class="nc" id="L111">		return ResourceService.getImage(path);</span>
+	}
+
+	private void pushTransform(AffineTransform transform) {
+<span class="nc" id="L115">		transformations.push(transform);</span>
+<span class="nc" id="L116">	}</span>
+
+	private AffineTransform popTransform() {
+<span class="nc" id="L119">		return transformations.pop();</span>
+	}
+
+	private Point getTranslation(int tileX, int tileY) {
+<span class="nc" id="L123">		int trX = tileX * 40;</span>
+<span class="nc" id="L124">		int trY = tileY * 40;</span>
+<span class="nc" id="L125">		return new Point(trX, trY);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

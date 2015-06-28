@@ -1,5 +1,5 @@
 library("ggplot2")
-DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/BranchCov_versus_Mutation.csv")
+DoubleChecksoniTrust <- read.csv("BranchCov_versus_Mutation.csv")
 data <- DoubleChecksoniTrust
 
 # CodePro ---------------------------------------------------------
@@ -34,9 +34,9 @@ p5_line <- p4_line + annotate("text", x=.5, y=45, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=45, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_BranchCov_versus_Mutation_line.pdf")
+ggsave("CodePro_BranchCov_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/CodePro_BranchCov_versus_Mutation_poly.pdf")
+ggsave("CodePro_BranchCov_versus_Mutation_poly.pdf")
 
 # Manual ---------------------------------------------------------
 p1 <- ggplot(data, aes(x=MBranchCov, y=MMutation))
@@ -70,9 +70,9 @@ p5_line <- p4_line + annotate("text", x=.5, y=75, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=75, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_BranchCov_versus_Mutation_line.pdf")
+ggsave("Manual_BranchCov_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Manual_BranchCov_versus_Mutation_poly.pdf")
+ggsave("Manual_BranchCov_versus_Mutation_poly.pdf")
 
 
 # Evosuite ---------------------------------------------------------
@@ -107,6 +107,6 @@ p5_line <- p4_line + annotate("text", x=.5, y=80, label=lm_line_eqn(data), hjust
 p5_poly <- p4_poly + annotate("text", x=.5, y=80, label=lm_poly_eqn(data), hjust=0, size=6, family="Times", face="italic", parse=TRUE)
 
 p5_line + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_BranchCov_versus_Mutation_line.pdf")
+ggsave("Evosuite_BranchCov_versus_Mutation_line.pdf")
 p5_poly + geom_point()
-ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/Evosuite_BranchCov_versus_Mutation_poly.pdf")
+ggsave("Evosuite_BranchCov_versus_Mutation_poly.pdf")

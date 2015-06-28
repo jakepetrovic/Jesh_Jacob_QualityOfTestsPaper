@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PlayerView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">PlayerView.java</span></div><h1>PlayerView.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client.view;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
+
+import client.ClientPlayer;
+
+import common.Actor;
+import common.Player;
+
+/**
+ * @author Andi
+ * 
+ */
+public class PlayerView extends GameObjectView {
+
+	private static final int WIDTH = 30;
+
+	private static final int HEIGHT = 30;
+
+	private Image playerImage;
+
+<span class="fc" id="L32">	private int lastState = 3;</span>
+
+<span class="fc" id="L34">	private boolean swap = true;</span>
+
+	/**
+	 * @param gameObject
+	 */
+	public PlayerView(Player player, GfxFactory gfxFactory) {
+<span class="fc" id="L40">		super(player, gfxFactory);</span>
+<span class="fc" id="L41">		lastState = getState();</span>
+<span class="fc" id="L42">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see client.view.GameObjectView#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics gfx) {
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		if (!active) {</span>
+<span class="nc" id="L52">			return;</span>
+		}
+<span class="nc" id="L54">		paintPlayerShape(gfx);</span>
+<span class="nc" id="L55">	}</span>
+
+	private int leftUpperX() {
+<span class="nc" id="L58">		return (int) (gameObject.getPosition().x - WIDTH * 0.5);</span>
+	}
+
+	private int leftUpperY() {
+<span class="nc" id="L62">		return (int) (gameObject.getPosition().y - HEIGHT * 0.5);</span>
+	}
+
+	/**
+	 * 
+	 */
+	private void paintPlayerShape(Graphics gfx) {
+<span class="nc" id="L69">		Graphics2D g2fx = (Graphics2D) gfx;</span>
+<span class="nc" id="L70">		AffineTransform preTf = g2fx.getTransform();</span>
+		
+<span class="nc" id="L72">		int state = getState();</span>
+
+<span class="nc" id="L74">		playerImage = gfxFactory.getPlayerImage(gameObject.getId(), state);</span>
+<span class="nc" id="L75">		int x = gameObject.getPosition().x;</span>
+<span class="nc" id="L76">		int y = gameObject.getPosition().y;</span>
+
+<span class="nc" id="L78">		g2fx.translate(x - 20, y - 60);</span>
+<span class="nc" id="L79">		gfx.drawImage(playerImage, 0, 0, null);</span>
+<span class="nc" id="L80">		g2fx.setTransform(preTf);</span>
+
+<span class="nc" id="L82">		ClientPlayer player = (ClientPlayer) gameObject;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		if (GameView.displayNames()) {</span>
+<span class="nc" id="L84">			String name = player.getName();</span>
+<span class="nc" id="L85">			Font font = new Font(&quot;Arial&quot;, Font.BOLD, 14);</span>
+<span class="nc" id="L86">			gfx.setColor(Color.BLACK);</span>
+<span class="nc" id="L87">			gfx.setFont(font);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">			if (name != null) {</span>
+<span class="nc" id="L89">				FontMetrics fm = gfx.getFontMetrics();</span>
+<span class="nc" id="L90">				int width = fm.stringWidth(name);</span>
+<span class="nc" id="L91">				gfx.drawString(name, x - width / 2, y - 65);</span>
+			}
+<span class="nc" id="L93">			gfx.setColor(Color.WHITE);</span>
+		}
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if(state == 112) {</span>
+<span class="nc" id="L96">			this.setVisible(false);</span>
+		}
+<span class="nc" id="L98">	}</span>
+
+	private int getState() {
+<span class="fc" id="L101">		Point moveVec = ((Actor) gameObject).getMoveVector();</span>
+<span class="pc bpc" id="L102" title="3 of 6 branches missed.">		if (moveVec.x == 0 &amp;&amp; moveVec.y == 0 &amp;&amp; gameObject.isActive()) {</span>
+<span class="fc" id="L103">			return lastState;</span>
+		}
+<span class="nc" id="L105">		int state = 3;</span>
+
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if (!gameObject.isActive()) {</span>
+<span class="nc" id="L108">			state = handleInactiveState();</span>
+<span class="nc" id="L109">			lastState = state;</span>
+<span class="nc" id="L110">			return state;</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">		} else if (moveVec.y &lt; 0) {</span>
+<span class="nc" id="L112">			state = 1;</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">		} else if (moveVec.y &gt; 0) {</span>
+<span class="nc" id="L114">			state = 3;</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">		} else if (moveVec.x &lt; 0) {</span>
+<span class="nc" id="L116">			state = 4;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		} else if (moveVec.x &gt; 0) {</span>
+<span class="nc" id="L118">			state = 2;</span>
+		} else {
+<span class="nc" id="L120">			state = 3;</span>
+		}
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (swap) {</span>
+<span class="nc" id="L123">			state = state + 10;</span>
+		}
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		swap = !swap;</span>
+<span class="nc" id="L126">		lastState = state;</span>
+<span class="nc" id="L127">		return state;</span>
+
+	}
+
+	private int handleInactiveState() {
+		int state;
+<span class="nc bnc" id="L133" title="All 2 branches missed.">		if (lastState &lt; 100) {</span>
+<span class="nc" id="L134">			state = 101;</span>
+		} else {
+<span class="nc" id="L136">			state = Math.min(112, lastState + 1);</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">			if (state == 112) {</span>
+<span class="nc" id="L138">				active = false;</span>
+			}
+		}
+<span class="nc" id="L141">		return state;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

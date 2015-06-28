@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBRow.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DBRow.java</span></div><h1>DBRow.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.io.Serializable;
+import java.util.Map;
+
+import org.databene.commons.Assert;
+import org.databene.commons.collection.OrderedNameMap;
+
+/**
+ * Represents a row in a database table.&lt;br/&gt;&lt;br/&gt;
+ * Created: 23.07.2010 07:29:14
+ * @since 0.6.3
+ * @author Volker Bergmann
+ */
+public class DBRow implements Serializable {
+	
+	private static final long serialVersionUID = 644247555736773166L;
+	
+	DBTable table;
+	OrderedNameMap&lt;Object&gt; cells;
+
+<span class="fc" id="L43">	public DBRow(DBTable table) {</span>
+<span class="fc" id="L44">	    this.table = table;</span>
+<span class="fc" id="L45">	    this.cells = OrderedNameMap.createCaseIgnorantMap();</span>
+<span class="fc" id="L46">    }</span>
+
+	public DBTable getTable() {
+<span class="fc" id="L49">    	return table;</span>
+    }
+	
+	public Map&lt;String, Object&gt; getCells() {
+<span class="fc" id="L53">		return cells;</span>
+	}
+
+	public Object[] getPKValues() {
+<span class="fc" id="L57">		return getCellValues(table.getPKColumnNames());</span>
+    }
+
+	public Object getPKValue() {
+<span class="fc" id="L61">		String[] columnNames = table.getPKColumnNames();</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">		if (columnNames.length == 1)</span>
+<span class="nc" id="L63">			return getCellValue(columnNames[0]);</span>
+		else
+<span class="fc" id="L65">			return getCellValues(columnNames);</span>
+	}
+
+	public Object getFKValue(DBForeignKeyConstraint fk) {
+<span class="fc" id="L69">		String[] columnNames = fk.getColumnNames();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">		if (columnNames.length == 1)</span>
+<span class="fc" id="L71">			return getCellValue(columnNames[0]);</span>
+		else
+<span class="fc" id="L73">			return getCellValues(columnNames);</span>
+    }
+
+	public void setFKValue(DBForeignKeyConstraint fkConstraint, Object fkValue) {
+<span class="fc" id="L77">		String[] columnNames = fkConstraint.getColumnNames();</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">		if (columnNames.length == 1)</span>
+<span class="fc" id="L79">			setCellValue(columnNames[0], fkValue);</span>
+		else {
+<span class="nc" id="L81">			Object[] cellValues = (Object[]) fkValue;</span>
+<span class="nc" id="L82">			setCellValues(columnNames, cellValues);</span>
+		}
+<span class="fc" id="L84">	}</span>
+
+	public Object[] getFKComponents(DBForeignKeyConstraint fk) {
+<span class="fc" id="L87">		return getCellValues(fk.getColumnNames());</span>
+	}
+
+	public void setCellValues(String[] columnNames, Object[] cellValues) {
+<span class="nc" id="L91">		Assert.equals(columnNames.length, cellValues.length, &quot;mismatch of column and value counts&quot;);</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		for (int i = 0; i &lt; columnNames.length; i++)</span>
+<span class="nc" id="L93">			setCellValue(columnNames[i], cellValues[i]);</span>
+<span class="nc" id="L94">	}</span>
+
+	private Object[] getCellValues(String[] columnNames) {
+<span class="fc" id="L97">		Object[] result = new Object[columnNames.length];</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">		for (int i = 0; i &lt; columnNames.length; i++)</span>
+<span class="fc" id="L99">			result[i] = cells.get(columnNames[i]);</span>
+<span class="fc" id="L100">	    return result;</span>
+    }
+
+	public Object getCellValue(String columnName) {
+<span class="fc" id="L104">	    return cells.get(columnName);</span>
+    }
+
+	public void setCellValue(String columnName, Object value) {
+<span class="fc" id="L108">	    cells.put(columnName, value);</span>
+<span class="fc" id="L109">    }</span>
+
+	@Override
+	public String toString() {
+<span class="fc" id="L113">	    return table.getName() + cells.values();</span>
+	}
+
+	public void setPKValue(Object newPK) {
+<span class="nc" id="L117">		String[] columnNames = table.getPKColumnNames();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">		if (columnNames.length == 1)</span>
+<span class="nc" id="L119">			setCellValue(columnNames[0], newPK);</span>
+		else
+<span class="nc" id="L121">			setCellValues(columnNames, (Object[]) newPK);</span>
+<span class="nc" id="L122">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

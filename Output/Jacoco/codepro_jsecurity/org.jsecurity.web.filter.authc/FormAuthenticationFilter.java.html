@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FormAuthenticationFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.filter.authc</a> &gt; <span class="el_source">FormAuthenticationFilter.java</span></div><h1>FormAuthenticationFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.filter.authc;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.authc.AuthenticationException;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.UsernamePasswordToken;
+import org.jsecurity.subject.Subject;
+import org.jsecurity.web.WebUtils;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Requires the requesting user to be authenticated for the request to continue, and if they are not, forces the user
+ * to login via by redirecting them to the {@link #setLoginUrl(String) loginUrl} you configure.
+ *
+ * &lt;p&gt;This filter constructs a {@link UsernamePasswordToken UsernamePasswordToken} with the values found in
+ * {@link #setUsernameParam(String) username}, {@link #setPasswordParam(String) password},
+ * and {@link #setRememberMeParam(String) rememberMe} request parameters.  It then calls
+ * {@link org.jsecurity.subject.Subject#login(org.jsecurity.authc.AuthenticationToken) Subject.login(usernamePasswordToken)},
+ * effectively automatically performing a login attempt.  Note that the login attempt will only occur when the
+ * {@link #isLoginSubmission(javax.servlet.ServletRequest, javax.servlet.ServletResponse) isLoginSubmission(request,response)}
+ * is &lt;code&gt;true&lt;/code&gt;, which by default occurs when the request is for the {@link #setLoginUrl(String) loginUrl} and
+ * is a POST request.
+ *
+ * &lt;p&gt;If the login attempt fails, the resulting &lt;code&gt;AuthenticationException&lt;/code&gt; fully qualified class name will
+ * be set as a request attribute under the {@link #setFailureKeyAttribute(String) failureKeyAttribute} key.  This
+ * FQCN can be used as an i18n key or lookup mechanism to explain to the user why their login attempt failed
+ * (e.g. no account, incorrect password, etc).
+ *
+ * &lt;p&gt;If you would prefer to handle the authentication validation and login in your own code, consider using the
+ * {@link org.jsecurity.web.filter.authc.PassThruAuthenticationFilter} instead, which allows requests to the
+ * {@link #loginUrl} to pass through to your application's code directly.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @see org.jsecurity.web.filter.authc.PassThruAuthenticationFilter
+ * @since 0.9
+ */
+public class FormAuthenticationFilter extends AuthenticatingFilter {
+
+    //TODO - complete JavaDoc
+
+    public static final String DEFAULT_ERROR_KEY_ATTRIBUTE_NAME = &quot;jsecLoginFailure&quot;;
+
+    public static final String DEFAULT_USERNAME_PARAM = &quot;username&quot;;
+    public static final String DEFAULT_PASSWORD_PARAM = &quot;password&quot;;
+    public static final String DEFAULT_REMEMBER_ME_PARAM = &quot;rememberMe&quot;;
+
+<span class="fc" id="L70">    private static final Log log = LogFactory.getLog(FormAuthenticationFilter.class);</span>
+
+<span class="fc" id="L72">    private String usernameParam = DEFAULT_USERNAME_PARAM;</span>
+<span class="fc" id="L73">    private String passwordParam = DEFAULT_PASSWORD_PARAM;</span>
+<span class="fc" id="L74">    private String rememberMeParam = DEFAULT_REMEMBER_ME_PARAM;</span>
+
+<span class="fc" id="L76">    private String failureKeyAttribute = DEFAULT_ERROR_KEY_ATTRIBUTE_NAME;</span>
+
+<span class="fc" id="L78">    public FormAuthenticationFilter() {</span>
+<span class="fc" id="L79">        setLoginUrl(DEFAULT_LOGIN_URL);</span>
+<span class="fc" id="L80">    }</span>
+
+    public String getUsernameParam() {
+<span class="fc" id="L83">        return usernameParam;</span>
+    }
+
+    /**
+     * Sets the request parameter name to look for when acquiring the username.  Unless overridden by calling this
+     * method, the default is &lt;code&gt;username&lt;/code&gt;.
+     *
+     * @param usernameParam the name of the request param to check for acquiring the username.
+     */
+    public void setUsernameParam(String usernameParam) {
+<span class="fc" id="L93">        this.usernameParam = usernameParam;</span>
+<span class="fc" id="L94">    }</span>
+
+    public String getPasswordParam() {
+<span class="fc" id="L97">        return passwordParam;</span>
+    }
+
+    /**
+     * Sets the request parameter name to look for when acquiring the password.  Unless overridden by calling this
+     * method, the default is &lt;code&gt;password&lt;/code&gt;.
+     *
+     * @param passwordParam the name of the request param to check for acquiring the password.
+     */
+    public void setPasswordParam(String passwordParam) {
+<span class="fc" id="L107">        this.passwordParam = passwordParam;</span>
+<span class="fc" id="L108">    }</span>
+
+    public String getRememberMeParam() {
+<span class="fc" id="L111">        return rememberMeParam;</span>
+    }
+
+    /**
+     * Sets the request parameter name to look for when acquiring the rememberMe boolean value.  Unless overridden
+     * by calling this method, the default is &lt;code&gt;rememberMe&lt;/code&gt;.
+     * &lt;p/&gt;
+     * RememberMe will be &lt;code&gt;true&lt;/code&gt; if the parameter value equals any of those supported by
+     * {@link WebUtils#isTrue(javax.servlet.ServletRequest, String) WebUtils.isTrue(request,value)}, &lt;code&gt;false&lt;/code&gt;
+     * otherwise.
+     *
+     * @param rememberMeParam the name of the request param to check for acquiring the rememberMe boolean value.
+     */
+    public void setRememberMeParam(String rememberMeParam) {
+<span class="fc" id="L125">        this.rememberMeParam = rememberMeParam;</span>
+<span class="fc" id="L126">    }</span>
+
+    public String getFailureKeyAttribute() {
+<span class="fc" id="L129">        return failureKeyAttribute;</span>
+    }
+
+    public void setFailureKeyAttribute(String failureKeyAttribute) {
+<span class="fc" id="L133">        this.failureKeyAttribute = failureKeyAttribute;</span>
+<span class="fc" id="L134">    }</span>
+
+    @Override
+    protected void onFilterConfigSet() throws Exception {
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L139">            log.trace(&quot;Adding default login url to applied paths.&quot;);</span>
+        }
+<span class="fc" id="L141">        this.appliedPaths.put(getLoginUrl(), null);</span>
+<span class="fc" id="L142">    }</span>
+
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (isLoginRequest(request, response)) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (isLoginSubmission(request, response)) {</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L148">                    log.trace(&quot;Login submission detected.  Attempting to execute login.&quot;);</span>
+                }
+<span class="nc" id="L150">                return executeLogin(request, response);</span>
+            } else {
+<span class="nc bnc" id="L152" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L153">                    log.trace(&quot;Login page view.&quot;);</span>
+                }
+                //allow them to see the login page ;)
+<span class="nc" id="L156">                return true;</span>
+            }
+        } else {
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L160">                log.trace(&quot;Attempting to access a path which requires authentication.  Forwarding to the &quot; +</span>
+                        &quot;Authentication url [&quot; + getLoginUrl() + &quot;]&quot;);
+            }
+
+<span class="nc" id="L164">            saveRequestAndRedirectToLogin(request, response);</span>
+<span class="nc" id="L165">            return false;</span>
+        }
+    }
+
+    /**
+     * This default implementation merely returns &lt;code&gt;true&lt;/code&gt; if the request is an HTTP &lt;code&gt;POST&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise. Can be overridden by subclasses for custom login submission detection behavior.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse.
+     * @return &lt;code&gt;true&lt;/code&gt; if the request is an HTTP &lt;code&gt;POST&lt;/code&gt;, &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    protected boolean isLoginSubmission(ServletRequest request, ServletResponse response) {
+<span class="nc bnc" id="L178" title="All 4 branches missed.">        return (request instanceof HttpServletRequest) &amp;&amp; WebUtils.toHttp(request).getMethod().equalsIgnoreCase(POST_METHOD);</span>
+    }
+
+    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+<span class="nc" id="L182">        String username = getUsername(request);</span>
+<span class="nc" id="L183">        String password = getPassword(request);</span>
+<span class="nc" id="L184">        return createToken(username, password, request, response);</span>
+    }
+
+    protected boolean isRememberMe(ServletRequest request) {
+<span class="nc" id="L188">        return WebUtils.isTrue(request, getRememberMeParam());</span>
+    }
+
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
+                                     ServletRequest request, ServletResponse response) throws Exception {
+<span class="nc" id="L193">        issueSuccessRedirect(request, response);</span>
+        //we handled the success redirect directly, prevent the chain from continuing:
+<span class="nc" id="L195">        return false;</span>
+    }
+
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e,
+                                     ServletRequest request, ServletResponse response) {
+<span class="nc" id="L200">        setFailureAttribute(request, e);</span>
+        //login failed, let request continue back to the login page:
+<span class="nc" id="L202">        return true;</span>
+    }
+
+    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
+<span class="nc" id="L206">        String className = ae.getClass().getName();</span>
+<span class="nc" id="L207">        request.setAttribute(getFailureKeyAttribute(), className);</span>
+<span class="nc" id="L208">    }</span>
+
+    protected String getUsername(ServletRequest request) {
+<span class="nc" id="L211">        return WebUtils.getCleanParam(request, getUsernameParam());</span>
+    }
+
+    protected String getPassword(ServletRequest request) {
+<span class="nc" id="L215">        return WebUtils.getCleanParam(request, getPasswordParam());</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SQLParserUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.sql</a> &gt; <span class="el_source">SQLParserUtil.java</span></div><h1>SQLParserUtil.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.sql;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.ParserRuleReturnScope;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
+import org.databene.commons.ArrayBuilder;
+import org.databene.commons.ParseException;
+import org.databene.commons.StringUtil;
+import org.databene.commons.SyntaxError;
+import org.databene.jdbacl.DatabaseDialect;
+import org.databene.jdbacl.model.DBDataType;
+import org.databene.jdbacl.model.DBPrimaryKeyConstraint;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DefaultDBColumn;
+import org.databene.jdbacl.model.DefaultDBTable;
+import org.databene.jdbacl.sql.parser.SQLLexer;
+import org.databene.jdbacl.sql.parser.SQLParser;
+import org.databene.jdbacl.sql.parser.TextHolder;
+import org.databene.script.Expression;
+import org.databene.script.expression.ConcatExpression;
+import org.databene.script.expression.ConditionalAndExpression;
+import org.databene.script.expression.ConditionalOrExpression;
+import org.databene.script.expression.DivisionExpression;
+import org.databene.script.expression.EqualsExpression;
+import org.databene.script.expression.ExclusiveOrExpression;
+import org.databene.script.expression.ExpressionUtil;
+import org.databene.script.expression.GreaterExpression;
+import org.databene.script.expression.GreaterOrEqualsExpression;
+import org.databene.script.expression.LessExpression;
+import org.databene.script.expression.LessOrEqualsExpression;
+import org.databene.script.expression.LogicalComplementExpression;
+import org.databene.script.expression.ModuloExpression;
+import org.databene.script.expression.MultiplicationExpression;
+import org.databene.script.expression.NotEqualsExpression;
+import org.databene.script.expression.NullExpression;
+import org.databene.script.expression.SubtractionExpression;
+import org.databene.script.expression.SumExpression;
+import org.databene.script.expression.UnaryMinusExpression;
+import org.databene.script.expression.ValueCollectionContainsExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Provides SQL parsing functionality.&lt;br/&gt;&lt;br/&gt;
+ * Created: 05.08.2010 10:19:38
+ * @since 0.1
+ * @author Volker Bergmann
+ */
+<span class="fc" id="L78">public class SQLParserUtil {</span>
+	
+<span class="fc" id="L80">	static final Logger LOGGER = LoggerFactory.getLogger(SQLParserUtil.class);</span>
+
+    public static Object parse(CharStream in, DatabaseDialect dialect) throws ParseException {
+<span class="fc" id="L83">    	String text = null;</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">    	if (in instanceof TextHolder)</span>
+<span class="fc" id="L85">    		text = ((TextHolder) in).getText();</span>
+        try {
+<span class="nc" id="L87">        	SQLParser parser = parser(in);</span>
+<span class="nc" id="L88">        	SQLParser.commands_return r = parser.commands();</span>
+<span class="nc" id="L89">	        checkForSyntaxErrors(text, &quot;weightedLiteralList&quot;, parser, r);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">	        if (r != null) {</span>
+<span class="nc" id="L91">	        	return convertNode((CommonTree) r.getTree(), dialect);</span>
+	        } else
+<span class="nc" id="L93">	        	return null;</span>
+<span class="fc" id="L94">        } catch (RuntimeException e) {</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        	if (e.getCause() instanceof RecognitionException)</span>
+<span class="nc" id="L96">        		throw mapToParseException((RecognitionException) e.getCause(), text);</span>
+        	else
+<span class="fc" id="L98">        		throw e;</span>
+<span class="fc" id="L99">        } catch (RecognitionException e) {</span>
+<span class="fc" id="L100">        	throw mapToParseException(e, text);</span>
+        }
+    }
+	
+    public static Expression&lt;?&gt; parseExpression(CharStream in) throws ParseException {
+<span class="fc" id="L105">    	String text = null;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">    	if (in instanceof TextHolder)</span>
+<span class="fc" id="L107">    		text = ((TextHolder) in).getText();</span>
+        try {
+<span class="fc" id="L109">        	SQLParser parser = parser(in);</span>
+<span class="fc" id="L110">        	SQLParser.expression_return r = parser.expression();</span>
+<span class="fc" id="L111">	        checkForSyntaxErrors(text, &quot;expression&quot;, parser, r);</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">	        if (r != null) {</span>
+<span class="fc" id="L113">	        	return convertExpressionNode((CommonTree) r.getTree());</span>
+	        } else
+<span class="nc" id="L115">	        	return null;</span>
+<span class="fc" id="L116">        } catch (RuntimeException e) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        	if (e.getCause() instanceof RecognitionException)</span>
+<span class="fc" id="L118">        		throw mapToParseException((RecognitionException) e.getCause(), text);</span>
+        	else
+<span class="fc" id="L120">        		throw e;</span>
+<span class="fc" id="L121">        } catch (RecognitionException e) {</span>
+<span class="fc" id="L122">        	throw mapToParseException(e, text);</span>
+        }
+    }
+	
+	private static Object convertNode(CommonTree node, DatabaseDialect dialect) {
+<span class="nc bnc" id="L127" title="All 9 branches missed.">    	switch (node.getType()) {</span>
+<span class="nc" id="L128">			case SQLLexer.CREATE_TABLE: return convertCreateTable(node, dialect);</span>
+<span class="nc" id="L129">			case SQLLexer.DROP_TABLE: return convertDropTable(node);</span>
+<span class="nc" id="L130">			case SQLLexer.ALTER_TABLE: return convertAlterTable(node);</span>
+<span class="nc" id="L131">			case SQLLexer.CREATE_SEQUENCE: return convertCreateSequence(node);</span>
+<span class="nc" id="L132">			case SQLLexer.DROP_SEQUENCE: return convertDropSequence(node);</span>
+<span class="nc" id="L133">			case SQLLexer.CREATE_INDEX: return convertCreateIndex(node);</span>
+<span class="nc" id="L134">			case SQLLexer.COMMENT_TABLE: return convertTableComment(node);</span>
+<span class="nc" id="L135">			case SQLLexer.COMMENT_COLUMN: return convertColumnComment(node);</span>
+		}
+<span class="nc bnc" id="L137" title="All 2 branches missed.">    	if (node.isNil()) {</span>
+<span class="nc" id="L138">    		List&lt;Object&gt; nodes = convertNodes(getChildNodes(node), dialect);</span>
+<span class="nc" id="L139">    		return nodes.toArray();</span>
+    	}
+<span class="nc" id="L141">		throw new ParseException(&quot;Unknown token type&quot;, &quot;'&quot; + node.getText() + &quot;'&quot;);</span>
+    }
+
+	@SuppressWarnings(&quot;rawtypes&quot;)
+	private static Expression convertExpressionNode(CommonTree node) {
+<span class="pc bpc" id="L146" title="23 of 27 branches missed.">    	switch (node.getType()) {</span>
+<span class="nc" id="L147">			case SQLLexer.OR: return convertOr(node);</span>
+<span class="nc" id="L148">			case SQLLexer.AND: return convertAnd(node);</span>
+<span class="nc" id="L149">			case SQLLexer.XOR: return convertXor(node);</span>
+<span class="nc" id="L150">			case SQLLexer.EQ: return convertEq(node);</span>
+<span class="nc" id="L151">			case SQLLexer.BANGEQ: return convertBangEq(node);</span>
+<span class="nc" id="L152">			case SQLLexer.LTGT: return convertBangEq(node); // &lt;&gt;</span>
+<span class="nc" id="L153">			case SQLLexer.GT: return convertGt(node);</span>
+<span class="nc" id="L154">			case SQLLexer.GE: return convertGe(node);</span>
+<span class="nc" id="L155">			case SQLLexer.LT: return convertLt(node);</span>
+<span class="nc" id="L156">			case SQLLexer.LE: return convertLe(node);</span>
+<span class="nc" id="L157">			case SQLLexer.IS: return convertIs(node);</span>
+<span class="nc" id="L158">			case SQLLexer.NOT: return convertNot(node);</span>
+<span class="nc" id="L159">			case SQLLexer.NULL: return convertNull(node);</span>
+<span class="nc" id="L160">			case SQLLexer.IN: return convertIn(node);</span>
+<span class="fc" id="L161">			case SQLLexer.BETWEEN: return convertBetween(node);</span>
+<span class="nc" id="L162">			case SQLLexer.PLUS: return convertPlus(node);</span>
+<span class="nc" id="L163">			case SQLLexer.SUB: return convertSub(node);</span>
+<span class="nc" id="L164">			case SQLLexer.STAR: return convertStar(node);</span>
+<span class="nc" id="L165">			case SQLLexer.SLASH: return convertSlash(node);</span>
+<span class="nc" id="L166">			case SQLLexer.PERCENT: return convertPercent(node);</span>
+<span class="nc" id="L167">			case SQLLexer.BARBAR: return convertBarBar(node);</span>
+<span class="fc" id="L168">			case SQLLexer.INVOCATION: return convertInvocation(node);</span>
+<span class="fc" id="L169">			case SQLLexer.QUOTED_NAME: return convertQuotedName(node);</span>
+<span class="nc" id="L170">			case SQLLexer.IDENTIFIER: return convertIdentifier(node);</span>
+<span class="fc" id="L171">			case SQLLexer.STRING: return convertStringToExpression(node);</span>
+<span class="nc" id="L172">			case SQLLexer.INT: return convertInt(node);</span>
+<span class="nc" id="L173">			default: throw new ParseException(&quot;Unknown token type (&quot; + node.getType() + &quot;)&quot;, &quot;'&quot; + node.getText() + &quot;'&quot;);</span>
+		}
+    }
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;Boolean&gt; convertOr(CommonTree node) {
+<span class="nc" id="L179">		ConditionalOrExpression result = new ConditionalOrExpression(&quot;OR&quot;);</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		for (CommonTree childNode : getChildNodes(node))</span>
+<span class="nc" id="L181">				result.addTerm(convertExpressionNode(childNode));</span>
+<span class="nc" id="L182">		return result;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;Boolean&gt; convertAnd(CommonTree node) {
+<span class="nc" id="L187">		ConditionalAndExpression result = new ConditionalAndExpression(&quot;AND&quot;);</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">		for (CommonTree childNode : getChildNodes(node))</span>
+<span class="nc" id="L189">				result.addTerm(convertExpressionNode(childNode));</span>
+<span class="nc" id="L190">		return result;</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertXor(CommonTree node) {
+<span class="nc" id="L194">		return new ExclusiveOrExpression(</span>
+				convertExpressionNode(childAt(0, node)), 
+				convertExpressionNode(childAt(1, node)));
+	}
+
+	private static Expression&lt;Boolean&gt; convertEq(CommonTree node) {
+<span class="nc" id="L200">		return new EqualsExpression(&quot;=&quot;, </span>
+				convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));
+	}
+
+	private static Expression&lt;Boolean&gt; convertBangEq(CommonTree node) {
+<span class="nc" id="L205">		return new NotEqualsExpression(convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertGt(CommonTree node) {
+<span class="nc" id="L209">		return new GreaterExpression(convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertGe(CommonTree node) {
+<span class="nc" id="L213">		return new GreaterOrEqualsExpression(convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertLt(CommonTree node) {
+<span class="nc" id="L217">		return new LessExpression(convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertLe(CommonTree node) {
+<span class="nc" id="L221">		return new LessOrEqualsExpression(convertExpressionNode(childAt(0, node)), convertExpressionNode(childAt(1, node)));</span>
+	}
+
+	private static Expression&lt;Boolean&gt; convertIs(CommonTree node) {
+<span class="nc bnc" id="L225" title="All 2 branches missed.">		if (node.getChildCount() &gt; 1)</span>
+<span class="nc" id="L226">			return new NotEqualsExpression(&quot;IS NOT&quot;, convertExpressionNode(childAt(0, node)), new NullExpression());</span>
+		else
+<span class="nc" id="L228">			return new EqualsExpression(&quot;IS&quot;, convertExpressionNode(childAt(0, node)), new NullExpression());</span>
+	}
+
+	private static Expression&lt;?&gt; convertNot(CommonTree node) {
+<span class="nc" id="L232">		return new LogicalComplementExpression(&quot;NOT &quot;, convertExpressionNode(childAt(0, node)));</span>
+	}
+
+	private static Expression&lt;?&gt; convertNull(CommonTree node) {
+<span class="nc" id="L236">		return new NullExpression();</span>
+	}
+
+	private static Expression&lt;?&gt; convertIn(CommonTree node) {
+<span class="nc" id="L240">		Expression&lt;?&gt; valueEx = convertExpressionNode(childAt(0, node));</span>
+<span class="nc" id="L241">		CommonTree child1 = childAt(1, node);</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">		boolean not = (child1.getType() == SQLLexer.NOT);</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">		int collectionIndex = (not ? 2 : 1);</span>
+<span class="nc" id="L244">		Expression&lt;? extends Collection&lt;?&gt;&gt; collEx = convertValueList(childAt(collectionIndex, node));</span>
+<span class="nc" id="L245">		Expression&lt;?&gt; result = new ValueCollectionContainsExpression(&quot;IN&quot;, valueEx, collEx);</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">		if (not)</span>
+<span class="nc" id="L247">			result = new LogicalComplementExpression(result);</span>
+<span class="nc" id="L248">		return result;</span>
+	}
+
+	private static Expression&lt;? extends Collection&lt;?&gt;&gt; convertValueList(CommonTree node) {
+<span class="nc" id="L252">		List&lt;Expression&lt;?&gt;&gt; result = new ArrayList&lt;Expression&lt;?&gt;&gt;();</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">		for (CommonTree child : getChildNodes(node))</span>
+<span class="nc" id="L254">			result.add(convertExpressionNode(child));</span>
+<span class="nc" id="L255">		return ExpressionUtil.constant(result);</span>
+	}
+
+	private static Expression&lt;?&gt; convertBetween(CommonTree node) {
+<span class="fc" id="L259">		return new BetweenExpression(convertExpressionNode(childAt(0, node)), </span>
+				convertExpressionNode(childAt(1, node)), 
+				convertExpressionNode(childAt(2, node)));
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;?&gt; convertPlus(CommonTree node) {
+<span class="nc" id="L266">		SumExpression result = new SumExpression();</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">		for (CommonTree child : getChildNodes(node))</span>
+<span class="nc" id="L268">			result.addTerm(convertExpressionNode(child));</span>
+<span class="nc" id="L269">		return result;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;?&gt; convertSub(CommonTree node) {
+<span class="nc bnc" id="L274" title="All 2 branches missed.">		if (node.getChildCount() == 1) {</span>
+<span class="nc" id="L275">			return new UnaryMinusExpression&lt;Object&gt;(convertExpressionNode(childAt(0, node)));</span>
+		} else {
+<span class="nc" id="L277">			SubtractionExpression result = new SubtractionExpression();</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">			for (CommonTree child : getChildNodes(node))</span>
+<span class="nc" id="L279">				result.addTerm(convertExpressionNode(child));</span>
+<span class="nc" id="L280">			return result;</span>
+		}
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;?&gt; convertStar(CommonTree node) {
+<span class="nc" id="L286">		MultiplicationExpression result = new MultiplicationExpression();</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">		for (CommonTree child : getChildNodes(node))</span>
+<span class="nc" id="L288">			result.addTerm(convertExpressionNode(child));</span>
+<span class="nc" id="L289">		return result;</span>
+	}
+
+	@SuppressWarnings(&quot;unchecked&quot;)
+	private static Expression&lt;?&gt; convertSlash(CommonTree node) {
+<span class="nc" id="L294">		DivisionExpression result = new DivisionExpression();</span>
+<span class="nc bnc" id="L295" title="All 2 branches missed.">		for (CommonTree child : getChildNodes(node))</span>
+<span class="nc" id="L296">			result.addTerm(convertExpressionNode(child));</span>
+<span class="nc" id="L297">		return result;</span>
+	}
+
+	private static Expression&lt;?&gt; convertPercent(CommonTree node) {
+<span class="nc" id="L301">		return new ModuloExpression(</span>
+				convertExpressionNode(childAt(0, node)), 
+				convertExpressionNode(childAt(1, node)));
+	}
+
+	private static Expression&lt;String&gt; convertBarBar(CommonTree node) {
+<span class="nc" id="L307">		return new ConcatExpression(&quot;||&quot;, </span>
+				convertExpressionNode(childAt(0, node)), 
+				convertExpressionNode(childAt(1, node)));
+	}
+
+	private static Expression&lt;?&gt; convertInvocation(CommonTree node) {
+<span class="fc" id="L313">		String functionName = convertIdentifier(childAt(0, node)).evaluate(null);</span>
+<span class="fc" id="L314">		Expression&lt;?&gt;[] arguments = convertArguments(childAt(1, node));</span>
+<span class="fc" id="L315">		return new FunctionInvocation(functionName, arguments);</span>
+	}
+
+	@SuppressWarnings(&quot;rawtypes&quot;)
+	private static Expression&lt;?&gt;[] convertArguments(CommonTree node) {
+<span class="fc" id="L320">		ArrayBuilder&lt;Expression&gt; result = new ArrayBuilder&lt;Expression&gt;(Expression.class);</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">		for (CommonTree child : getChildNodes(node))</span>
+<span class="fc" id="L322">			result.add(convertExpressionNode(child));</span>
+<span class="fc" id="L323">		return result.toArray();</span>
+	}
+
+	private static Expression&lt;String&gt; convertIdentifier(CommonTree node) {
+<span class="fc" id="L327">		return new ColumnExpression(node.getText(), false);</span>
+	}
+
+	private static Expression&lt;String&gt; convertQuotedName(CommonTree node) {
+<span class="fc" id="L331">		String quotedColName = node.getText().trim();</span>
+<span class="fc" id="L332">		String colName = quotedColName.substring(1, quotedColName.length() - 1);</span>
+<span class="fc" id="L333">		return new ColumnExpression(colName, true);</span>
+	}
+
+	private static Expression&lt;?&gt; convertStringToExpression(CommonTree node) {
+<span class="fc" id="L337">		return ExpressionUtil.constant(node.getText());</span>
+	}
+
+	private static Expression&lt;?&gt; convertInt(CommonTree node) {
+<span class="nc" id="L341">		return ExpressionUtil.constant(new BigInteger(node.getText()));</span>
+	}
+
+	private static Object convertTableComment(CommonTree node) {
+	    // TODO v1.0 Process 'comment on table'
+<span class="nc" id="L346">	    return null;</span>
+    }
+
+	private static Object convertColumnComment(CommonTree node) {
+	    // TODO v1.0 Process 'comment on column'
+<span class="nc" id="L351">	    return null;</span>
+    }
+
+	private static Object convertAlterTable(CommonTree node) {
+	    // TODO v1.0 Process 'alter table'
+<span class="nc" id="L356">	    return null;</span>
+    }
+
+	private static Object convertDropTable(CommonTree node) {
+	    // TODO v1.0 Process 'drop table'
+<span class="nc" id="L361">	    return null;</span>
+    }
+
+	private static Object convertCreateSequence(CommonTree node) {
+	    // TODO v1.0 Process 'create sequence'
+<span class="nc" id="L366">	    return null;</span>
+    }
+
+	private static Object convertCreateIndex(CommonTree node) {
+	    // TODO v1.0 Process 'create index'
+<span class="nc" id="L371">	    return null;</span>
+    }
+
+	private static Object convertDropSequence(CommonTree node) {
+	    // TODO v1.0 Process 'drop sequence'
+<span class="nc" id="L376">	    return null;</span>
+    }
+
+	private static List&lt;Object&gt; convertNodes(List&lt;CommonTree&gt; nodes, DatabaseDialect dialect) {
+<span class="nc" id="L380">	    List&lt;Object&gt; result = new ArrayList&lt;Object&gt;();</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">	    for (CommonTree node : nodes)</span>
+<span class="nc" id="L382">	    	result.add(convertNode(node, dialect));</span>
+<span class="nc" id="L383">	    return result;</span>
+    }
+
+	private static DBTable convertCreateTable(CommonTree node, DatabaseDialect dialect) {
+<span class="nc" id="L387">		String tableName = convertString(childAt(0, node));</span>
+<span class="nc" id="L388">		DefaultDBTable table = new DefaultDBTable(tableName);</span>
+<span class="nc" id="L389">		convertTableDetails(childAt(1, node), table, dialect);</span>
+		// TODO v1.0 parse ora_configs
+<span class="nc" id="L391">	    return table;</span>
+    }
+
+	private static void convertTableDetails(CommonTree node, DefaultDBTable table, DatabaseDialect dialect) {
+<span class="nc bnc" id="L395" title="All 2 branches missed.">		for (CommonTree subNode : getChildNodes(node))</span>
+<span class="nc" id="L396">			convertTableDetail(subNode, table, dialect);</span>
+<span class="nc" id="L397">    }</span>
+
+	private static void convertTableDetail(CommonTree node, DefaultDBTable table, DatabaseDialect dialect) {
+<span class="nc bnc" id="L400" title="All 3 branches missed.">		switch (node.getType()) {</span>
+<span class="nc" id="L401">			case SQLLexer.COLUMN_SPEC: convertColumnSpec(node, table); break;</span>
+<span class="nc" id="L402">			case SQLLexer.PRIMARY: convertInlinePK(node, table, dialect); break;</span>
+<span class="nc" id="L403">			default: throw new ParseException(&quot;Unknown table detail token type&quot;, </span>
+					String.valueOf(node.getText()), 
+					node.getLine(), 
+					node.getCharPositionInLine());
+		}
+<span class="nc" id="L408">    }</span>
+
+	private static void convertInlinePK(CommonTree node, DefaultDBTable table, DatabaseDialect dialect) {
+<span class="nc" id="L411">	    String constraintName = convertString(childAt(0, node));</span>
+<span class="nc" id="L412">	    String[] pkColumnNames = convertNameList(childAt(1, node));</span>
+<span class="nc" id="L413">	    DBPrimaryKeyConstraint pk = new DBPrimaryKeyConstraint(</span>
+	    		table, constraintName, dialect.isDeterministicPKName(constraintName), pkColumnNames);
+<span class="nc" id="L415">	    table.setPrimaryKey(pk);</span>
+<span class="nc" id="L416">    }</span>
+
+	private static String[] convertNameList(CommonTree node) {
+<span class="nc" id="L419">		String[] result = new String[node.getChildCount()];</span>
+<span class="nc bnc" id="L420" title="All 2 branches missed.">		for (int i = 0; i &lt; result.length; i++)</span>
+<span class="nc" id="L421">			result[i] = convertString(childAt(i, node));</span>
+<span class="nc" id="L422">		return result;</span>
+    }
+
+	private static void convertColumnSpec(CommonTree node, DefaultDBTable table) {
+<span class="nc" id="L426">		String columnName = convertString(childAt(0, node));</span>
+		String columnTypeName;
+<span class="nc" id="L428">		Integer size = null;</span>
+<span class="nc" id="L429">		Integer fractionDigits = null;</span>
+<span class="nc" id="L430">		int detailOffset = 2;</span>
+<span class="nc" id="L431">		columnTypeName = convertString(childAt(1, node));</span>
+<span class="nc bnc" id="L432" title="All 4 branches missed.">		if (node.getChildCount() &gt; 2 &amp;&amp; childAt(2, node).getType() == SQLLexer.SIZE) {</span>
+<span class="nc" id="L433">			detailOffset++;</span>
+<span class="nc" id="L434">			CommonTree sizeNode = childAt(2, node);</span>
+<span class="nc" id="L435">			size = convertInteger(childAt(0, sizeNode));</span>
+<span class="nc bnc" id="L436" title="All 2 branches missed.">			if (sizeNode.getChildCount() &gt; 1) {</span>
+<span class="nc" id="L437">				CommonTree subNode2 = childAt(1, sizeNode);</span>
+<span class="nc bnc" id="L438" title="All 2 branches missed.">				if (subNode2.getType() == SQLLexer.INT) {</span>
+<span class="nc" id="L439">					fractionDigits = convertInteger(subNode2);</span>
+				} else {
+					// TODO v1.0 support (n BYTE) / (n CHAR)
+				}
+			}
+		}
+<span class="nc" id="L445">		DefaultDBColumn column = new DefaultDBColumn(columnName, table, DBDataType.getInstance(columnTypeName), size, fractionDigits);</span>
+<span class="nc" id="L446">		table.addColumn(column);</span>
+<span class="nc bnc" id="L447" title="All 2 branches missed.">	    for (int i = detailOffset; i &lt; node.getChildCount(); i++)</span>
+<span class="nc" id="L448">	    	convertColumnDetail(childAt(i, node), column);</span>
+<span class="nc" id="L449">    }</span>
+
+	private static Integer convertInteger(CommonTree node) {
+<span class="nc" id="L452">	    return Integer.parseInt(node.getText());</span>
+    }
+
+	private static void convertColumnDetail(CommonTree node, DefaultDBColumn column) {
+<span class="nc bnc" id="L456" title="All 3 branches missed.">		switch (node.getType()) {</span>
+<span class="nc" id="L457">			case SQLLexer.NOT : column.setNullable(false); break;</span>
+<span class="nc" id="L458">			case SQLLexer.DEFAULT : column.setNullable(false); break;</span>
+<span class="nc" id="L459">			default: throw new ParseException(&quot;Unknown column detail token type&quot;, </span>
+					String.valueOf(node.getText()), 
+					node.getLine(), 
+					node.getCharPositionInLine());
+		}
+<span class="nc" id="L464">    }</span>
+
+	private static String convertString(CommonTree node) {
+<span class="nc" id="L467">	    return node.getText();</span>
+    }
+
+	private static SQLParser parser(CharStream in) {
+<span class="fc" id="L471">		SQLLexer lex = new SQLLexer(in);</span>
+<span class="fc" id="L472">	    CommonTokenStream tokens = new CommonTokenStream(lex);</span>
+<span class="fc" id="L473">	    SQLParser parser = new SQLParser(tokens);</span>
+<span class="fc" id="L474">	    return parser;</span>
+    }
+
+    private static ParseException mapToParseException(RecognitionException cause, String text) {
+<span class="fc" id="L478">    	return new ParseException(&quot;Error parsing SQL&quot;, cause, </span>
+    			text, cause.line, cause.charPositionInLine);
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    private static List&lt;CommonTree&gt; getChildNodes(CommonTree node) {
+<span class="fc" id="L484">	    return node.getChildren();</span>
+    }
+
+    private static CommonTree childAt(int index, CommonTree node) {
+<span class="fc" id="L488">	    return (CommonTree) node.getChild(index);</span>
+    }
+
+	private static void checkForSyntaxErrors(String text, String type,
+			SQLParser parser, ParserRuleReturnScope r) {
+<span class="pc bpc" id="L493" title="1 of 2 branches missed.">		if (parser.getNumberOfSyntaxErrors() &gt; 0)</span>
+<span class="nc" id="L494">			throw new SyntaxError(&quot;Illegal &quot; + type, text, -1, -1);</span>
+<span class="fc" id="L495">		CommonToken stop = (CommonToken) r.stop;</span>
+<span class="pc bpc" id="L496" title="1 of 4 branches missed.">		if (text != null &amp;&amp; stop.getStopIndex() &lt; StringUtil.trimRight(text).length() - 1) {</span>
+<span class="pc bpc" id="L497" title="1 of 2 branches missed.">			if (stop.getStopIndex() == 0)</span>
+<span class="nc" id="L498">				throw new SyntaxError(&quot;Syntax error after &quot; + stop.getText(), text);</span>
+			else
+<span class="fc" id="L500">				throw new SyntaxError(&quot;Syntax error at the beginning &quot;, text);</span>
+		}
+<span class="fc" id="L502">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

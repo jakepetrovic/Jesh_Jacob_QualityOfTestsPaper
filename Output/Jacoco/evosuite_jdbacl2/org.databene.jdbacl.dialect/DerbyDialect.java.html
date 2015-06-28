@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DerbyDialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.dialect</a> &gt; <span class="el_source">DerbyDialect.java</span></div><h1>DerbyDialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.dialect;
+
+import java.util.regex.Pattern;
+
+import org.databene.jdbacl.DatabaseDialect;
+
+/**
+ * Implements generic database concepts for Derby.&lt;br/&gt;&lt;br/&gt;
+ * Created: 26.01.2010 07:14:34
+ * @since 0.6.0
+ * @author Volker Bergmann
+ */
+public class DerbyDialect extends DatabaseDialect {
+
+	private static final String DATE_PATTERN = &quot;'DATE('''yyyy-MM-dd''')'&quot;;
+	private static final String TIME_PATTERN = &quot;'TIME('''HH:mm:ss''')'&quot;;
+	
+<span class="nc" id="L44">	Pattern randomPKNamePattern = Pattern.compile(&quot;SQL[0-9A-F]{15}&quot;);</span>
+<span class="nc" id="L45">	Pattern randomUKNamePattern = Pattern.compile(&quot;SQL[0-9A-F]{15}&quot;);</span>
+<span class="nc" id="L46">	Pattern randomFKNamePattern = Pattern.compile(&quot;FK[0-9A-F]{15,16}&quot;);</span>
+<span class="nc" id="L47">	Pattern randomIndexNamePattern = Pattern.compile(&quot;SQL\\d+&quot;);</span>
+
+    public DerbyDialect() {
+<span class="nc" id="L50">	    this(false);</span>
+<span class="nc" id="L51">    }</span>
+
+    public DerbyDialect(boolean sequenceSupported) {
+<span class="nc" id="L54">	    super(&quot;derby&quot;, false, sequenceSupported, DATE_PATTERN, TIME_PATTERN);</span>
+<span class="nc" id="L55">    }</span>
+
+	@Override
+    public boolean isDefaultCatalog(String catalog, String user) {
+<span class="nc" id="L59">	    return true;</span>
+    }
+
+	@Override
+    public boolean isDefaultSchema(String schema, String user) {
+<span class="nc" id="L64">		schema = schema.toUpperCase();</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">	    return schema.equalsIgnoreCase(&quot;APP&quot;) || schema.equalsIgnoreCase(user);</span>
+    }
+
+	@Override
+	public boolean isDeterministicPKName(String pkName) {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">		return !randomPKNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicUKName(String ukName) {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		return !randomUKNamePattern.matcher(ukName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicFKName(String fkName) {
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		return !randomFKNamePattern.matcher(fkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicIndexName(String indexName) {
+<span class="nc bnc" id="L85" title="All 2 branches missed.">		return !randomIndexNamePattern.matcher(indexName).matches();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

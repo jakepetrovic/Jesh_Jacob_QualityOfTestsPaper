@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WebRememberMeManager.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web</a> &gt; <span class="el_source">WebRememberMeManager.java</span></div><h1>WebRememberMeManager.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.codec.Base64;
+import org.jsecurity.subject.AbstractRememberMeManager;
+import org.jsecurity.web.attr.CookieAttribute;
+import org.jsecurity.web.attr.WebAttribute;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+/**
+ * Remembers a Subject's identity by using a {@link WebAttribute WebAttribute} instance to retain
+ * the identity value between web requests.
+ *
+ * &lt;p&gt;This class's default &lt;code&gt;WebAttribute&lt;/code&gt; instance is a {@link CookieAttribute CookieAttribute}, storing
+ * the Subject's {@link org.jsecurity.subject.Subject#getPrincipals principals} in a &lt;code&gt;Cookie&lt;/code&gt;.  Note that
+ * because this class subclasses the &lt;code&gt;AbstractRememberMeManager&lt;/code&gt; which already provides serialization and
+ * encryption logic, this class utilizes both for added security before setting the cookie value.&lt;/p&gt;
+ *
+ * &lt;p&gt;This class also contains &amp;quot;passthrough&amp;quot; JavaBeans-compatible getters/setters for the underlying
+ * &lt;code&gt;CookieAttribute&lt;/code&gt;'s properties to make configuration easier.&lt;/p&gt;
+ *
+ * &lt;p&gt;Note however as a basic sanity check, these passthrough methods will first assert that the underlying
+ * {@link #getIdentityAttribute identityAttribute} is actually a {@link CookieAttribute CookieAttribute}.  If it
+ * is not, an {@link IllegalStateException} will be thrown.  Because the default instance of this class &lt;em&gt;is&lt;/em&gt;
+ * already &lt;code&gt;CookieAttribute&lt;/code&gt;, you would only ever experience the exception if you explicitly
+ * override the internal instance with a different type and accidentally call one of these JavaBeans passthrough
+ * methods.&lt;/p&gt;
+ *
+ * &lt;p&gt;Just be aware of this if you manually override the {@link #getIdentityAttribute identityAttribute} property
+ * to be an instance of something &lt;em&gt;other&lt;/em&gt; than a &lt;code&gt;CookieAttribute&lt;/code&gt;.&lt;/p&gt;
+ *
+ * @author Les Hazlewood
+ * @since 0.9
+ */
+public class WebRememberMeManager extends AbstractRememberMeManager {
+
+    //TODO - complete JavaDoc
+
+<span class="nc" id="L60">    private static transient final Log log = LogFactory.getLog( WebRememberMeManager.class );</span>
+
+    /**
+     * The default name of the underlying rememberMe cookie which is &lt;code&gt;rememberMe&lt;/code&gt;.
+     */
+    public static final String DEFAULT_REMEMBER_ME_COOKIE_NAME = &quot;rememberMe&quot;;
+
+<span class="nc" id="L67">    protected WebAttribute&lt;String&gt; identityAttribute = null;</span>
+
+<span class="nc" id="L69">    public WebRememberMeManager() {</span>
+<span class="nc" id="L70">        CookieAttribute&lt;String&gt; attr = new CookieAttribute&lt;String&gt;(DEFAULT_REMEMBER_ME_COOKIE_NAME);</span>
+<span class="nc" id="L71">        attr.setCheckRequestParams(false);</span>
+        //Peter (JSecurity developer) said that Jetty didn't like the CookieAttribute.INDEFINITE value
+        // (Tomcat was ok with it), so just default to a few years for now.  If anyone doesn't visit a site in 3 years
+        // after last login, I doubt any JSecurity users would mind their end-users to be forced to log in. - LAH.
+<span class="nc" id="L75">        attr.setMaxAge(CookieAttribute.ONE_YEAR * 3);</span>
+<span class="nc" id="L76">        this.identityAttribute = attr;</span>
+<span class="nc" id="L77">    }</span>
+
+    public WebAttribute&lt;String&gt; getIdentityAttribute() {
+<span class="nc" id="L80">        return identityAttribute;</span>
+    }
+
+    public void setIdentityAttribute(WebAttribute&lt;String&gt; identityAttribute) {
+<span class="nc" id="L84">        this.identityAttribute = identityAttribute;</span>
+<span class="nc" id="L85">    }</span>
+
+    protected void assertCookieAttribute() {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (!(this.identityAttribute instanceof CookieAttribute)) {</span>
+<span class="nc" id="L89">            String msg = &quot;Attempting to access a Cookie property, but the underlying &quot; +</span>
+                    WebAttribute.class.getName() + &quot; instance is not a &quot; +
+                    CookieAttribute.class.getName() + &quot; instance.  This is expected if you &quot; +
+                    &quot;are accessing or modifying a cookie property.&quot;;
+<span class="nc" id="L93">            throw new IllegalStateException(msg);</span>
+        }
+<span class="nc" id="L95">    }</span>
+
+    /**
+     * Passthrough JavaBeans property that will get the underyling rememberMe cookie's name.
+     *
+     * &lt;p&gt;The default value is {@link #DEFAULT_REMEMBER_ME_COOKIE_NAME}&lt;/p&gt;
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @return the underlying rememberMe cookie's name
+     */
+    public String getCookieName() {
+<span class="nc" id="L107">        assertCookieAttribute();</span>
+<span class="nc" id="L108">        return ((CookieAttribute) this.identityAttribute).getName();</span>
+    }
+
+    /**
+     * Passthrough JavaBeans property that will set the underyling rememberMe cookie's name.
+     *
+     * &lt;p&gt;The default value is {@link #DEFAULT_REMEMBER_ME_COOKIE_NAME}&lt;/p&gt;
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @param name the name to assign to the underlying rememberMe cookie
+     */
+    public void setCookieName(String name) {
+<span class="nc" id="L121">        assertCookieAttribute();</span>
+<span class="nc" id="L122">        ((CookieAttribute) this.identityAttribute).setName(name);</span>
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * Passthrough JavaBeans property that will get the underyling rememberMe cookie's path.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @return the underlying rememberMe cookie's path
+     */
+    public String getCookiePath() {
+<span class="nc" id="L133">        assertCookieAttribute();</span>
+<span class="nc" id="L134">        return ((CookieAttribute) this.identityAttribute).getPath();</span>
+    }
+
+    /**
+     * Passthrough JavaBeans property that will set the underyling rememberMe cookie's path.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @param path the path to assign to the underlying rememberMe cookie
+     */
+    public void setCookiePath(String path) {
+<span class="nc" id="L145">        assertCookieAttribute();</span>
+<span class="nc" id="L146">        ((CookieAttribute) this.identityAttribute).setPath(path);</span>
+<span class="nc" id="L147">    }</span>
+
+    /**
+     * Passthrough JavaBeans property that will get the underyling rememberMe cookie's max age.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @return the underlying rememberMe cookie's max age.
+     */
+    public int getCookieMaxAge() {
+<span class="nc" id="L157">        assertCookieAttribute();</span>
+<span class="nc" id="L158">        return ((CookieAttribute) this.identityAttribute).getMaxAge();</span>
+    }
+
+    /**
+     * Passthrough JavaBeans property that will get the underyling rememberMe cookie's max age.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @param maxAge the max age to assign to the underlying rememberMe cookie
+     */
+    public void setCookieMaxAge(int maxAge) {
+<span class="nc" id="L169">        assertCookieAttribute();</span>
+<span class="nc" id="L170">        ((CookieAttribute) this.identityAttribute).setMaxAge(maxAge);</span>
+<span class="nc" id="L171">    }</span>
+
+    /**
+     * Passthrough JavaBeans property that will get the underyling rememberMe cookie's 'secure' status.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @return the underlying rememberMe cookie's 'secure' flag
+     */
+    public boolean isCookieSecure() {
+<span class="nc" id="L181">        assertCookieAttribute();</span>
+<span class="nc" id="L182">        return ((CookieAttribute) this.identityAttribute).isSecure();</span>
+    }
+
+    /**
+     * Passthrough JavaBeans property that will set the underyling rememberMe cookie's 'secure' status.
+     *
+     * &lt;p&gt;This method performs a quick &lt;code&gt;CookieAttribute&lt;/code&gt; sanity check as described in the class-level JavaDoc.&lt;/p&gt;
+     *
+     * @param secure the 'secure' flag to assign to the underlying rememberMe cookie.
+     */
+    public void setCookieSecure(boolean secure) {
+<span class="nc" id="L193">        assertCookieAttribute();</span>
+<span class="nc" id="L194">        ((CookieAttribute) this.identityAttribute).setSecure(secure);</span>
+<span class="nc" id="L195">    }</span>
+
+    protected void rememberSerializedIdentity(byte[] serialized) {
+<span class="nc" id="L198">        ServletRequest request = WebUtils.getRequiredServletRequest();</span>
+<span class="nc" id="L199">        ServletResponse response = WebUtils.getRequiredServletResponse();</span>
+        //base 64 encode it and store as a cookie:
+<span class="nc" id="L201">        String base64 = Base64.encodeToString(serialized);</span>
+<span class="nc" id="L202">        getIdentityAttribute().storeValue(base64, request, response);</span>
+<span class="nc" id="L203">    }</span>
+
+    protected byte[] getSerializedRememberedIdentity() {
+<span class="nc" id="L206">        ServletRequest request = WebUtils.getRequiredServletRequest();</span>
+<span class="nc" id="L207">        ServletResponse response = WebUtils.getRequiredServletResponse();</span>
+<span class="nc" id="L208">        String base64 = getIdentityAttribute().retrieveValue(request, response);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">        if (base64 != null) {</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">            if ( log.isTraceEnabled() ) {</span>
+<span class="nc" id="L211">                log.trace( &quot;Acquired Base64 encoded identity [&quot; + base64 + &quot;]&quot; );</span>
+            }
+<span class="nc" id="L213">            byte[] decoded = Base64.decode(base64);</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            if ( log.isTraceEnabled() ) {</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">                log.trace( &quot;Base64 decoded byte array length: &quot; + (decoded != null ? decoded.length : 0) + &quot; bytes.&quot; );</span>
+            }
+<span class="nc" id="L217">            return decoded;</span>
+        } else {
+            //no cookie set - new site visitor?
+<span class="nc" id="L220">            return null;</span>
+        }
+    }
+
+    protected void forgetIdentity() {
+<span class="nc" id="L225">        ServletRequest request = WebUtils.getRequiredServletRequest();</span>
+<span class="nc" id="L226">        ServletResponse response = WebUtils.getRequiredServletResponse();</span>
+<span class="nc" id="L227">        getIdentityAttribute().removeValue(request, response);</span>
+<span class="nc" id="L228">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

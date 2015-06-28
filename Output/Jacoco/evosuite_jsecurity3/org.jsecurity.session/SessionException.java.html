@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SessionException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.session</a> &gt; <span class="el_source">SessionException.java</span></div><h1>SessionException.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.session;
+
+import org.jsecurity.JSecurityException;
+
+import java.io.Serializable;
+
+/**
+ * General security exception attributed to problems during interaction with the system during
+ * a session.
+ *
+ * @author Les Hazlewood
+ * @since 0.1
+ */
+public class SessionException extends JSecurityException {
+
+    private Serializable sessionId;
+
+    /**
+     * Creates a new SessionException.
+     */
+    public SessionException() {
+<span class="nc" id="L40">        super();</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Constructs a new SessionException.
+     *
+     * @param message the reason for the exception
+     */
+    public SessionException(String message) {
+<span class="nc" id="L49">        super(message);</span>
+<span class="nc" id="L50">    }</span>
+
+    /**
+     * Constructs a new SessionException.
+     *
+     * @param cause the underlying Throwable that caused this exception to be thrown.
+     */
+    public SessionException(Throwable cause) {
+<span class="nc" id="L58">        super(cause);</span>
+<span class="nc" id="L59">    }</span>
+
+    /**
+     * Constructs a new SessionException.
+     *
+     * @param message the reason for the exception
+     * @param cause   the underlying Throwable that caused this exception to be thrown.
+     */
+    public SessionException(String message, Throwable cause) {
+<span class="nc" id="L68">        super(message, cause);</span>
+<span class="nc" id="L69">    }</span>
+
+    /**
+     * Constructs a new SessionException.
+     *
+     * @param sessionId the session id of associated {@link Session Session}.
+     */
+<span class="nc" id="L76">    public SessionException(Serializable sessionId) {</span>
+<span class="nc" id="L77">        setSessionId(sessionId);</span>
+<span class="nc" id="L78">    }</span>
+
+    /**
+     * Constructs a new SessionException.
+     *
+     * @param message   the reason for the exception
+     * @param sessionId the session id of associated {@link Session Session}.
+     */
+    public SessionException(String message, Serializable sessionId) {
+<span class="nc" id="L87">        this(message);</span>
+<span class="nc" id="L88">        setSessionId(sessionId);</span>
+<span class="nc" id="L89">    }</span>
+
+    /**
+     * Constructs a new InvalidSessionException.
+     *
+     * @param message   the reason for the exception
+     * @param cause     the underlying Throwable that caused this exception to be thrown.
+     * @param sessionId the session id of associated {@link Session Session}.
+     */
+    public SessionException(String message, Throwable cause, Serializable sessionId) {
+<span class="nc" id="L99">        this(message, cause);</span>
+<span class="nc" id="L100">        setSessionId(sessionId);</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Returns the session id of the associated &lt;tt&gt;Session&lt;/tt&gt;.
+     *
+     * @return the session id of the associated &lt;tt&gt;Session&lt;/tt&gt;.
+     */
+    public Serializable getSessionId() {
+<span class="nc" id="L109">        return sessionId;</span>
+    }
+
+    /**
+     * Sets the session id of the &lt;tt&gt;Session&lt;/tt&gt; associated with this exception.
+     *
+     * @param sessionId the session id of the &lt;tt&gt;Session&lt;/tt&gt; associated with this exception.
+     */
+    public void setSessionId(Serializable sessionId) {
+<span class="nc" id="L118">        this.sessionId = sessionId;</span>
+<span class="nc" id="L119">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

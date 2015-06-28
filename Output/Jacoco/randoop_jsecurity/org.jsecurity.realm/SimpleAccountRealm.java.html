@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SimpleAccountRealm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.realm</a> &gt; <span class="el_source">SimpleAccountRealm.java</span></div><h1>SimpleAccountRealm.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.realm;
+
+import org.jsecurity.authc.*;
+import org.jsecurity.authz.AuthorizationInfo;
+import org.jsecurity.authz.SimpleAuthorizingAccount;
+import org.jsecurity.authz.SimpleRole;
+import org.jsecurity.cache.Cache;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.util.CollectionUtils;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * &lt;p&gt;A simple implementation of the {@link org.jsecurity.realm.Realm Realm} interface that
+ * uses a set of configured user accounts and roles to support authentication and authorization.  Each account entry
+ * specifies the username, password, and roles for a user.  Roles can also be mapped
+ * to permissions and associated with users.&lt;/p&gt;
+ *
+ * &lt;p&gt;User accounts and roles are stored in two {@link Cache cache}s, so it is the Cache manager implementation that
+ * determines if this class stores all data in memory or spools to disk or clusters it, etc based on the
+ * Caches it creates.
+ *
+ * @author Jeremy Haile
+ * @author Les Hazlewood
+ * @since 0.1
+ */
+public class SimpleAccountRealm extends AuthorizingRealm {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L52">    protected Map&lt;String, SimpleRole&gt; roles = null;</span>
+
+<span class="fc" id="L54">    public SimpleAccountRealm() {</span>
+<span class="fc" id="L55">        init();</span>
+<span class="fc" id="L56">    }</span>
+
+<span class="fc" id="L58">    public SimpleAccountRealm(String name) {</span>
+<span class="fc" id="L59">        setName(name);</span>
+<span class="fc" id="L60">        init();</span>
+<span class="fc" id="L61">    }</span>
+
+    public void afterAuthorizationCacheSet() {
+<span class="fc" id="L64">        initRoleCache();</span>
+<span class="fc" id="L65">        afterRoleCacheSet();</span>
+<span class="fc" id="L66">    }</span>
+
+    public void afterRoleCacheSet() {
+<span class="fc" id="L69">    }</span>
+
+    protected void initRoleCache() {
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (getAuthorizationCache() == null) {</span>
+<span class="fc" id="L73">            initAuthorizationCache();</span>
+        }
+
+<span class="fc" id="L76">        this.roles = new HashMap&lt;String, SimpleRole&gt;();</span>
+<span class="fc" id="L77">        accountAndRoleCachesCreated();</span>
+<span class="fc" id="L78">    }</span>
+
+    protected SimpleAccount getUser(String username) {
+<span class="fc" id="L81">        return (SimpleAccount) getAuthorizationCache().get(username);</span>
+    }
+
+    public boolean accountExists(String username) {
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        return getUser(username) != null;</span>
+    }
+
+    public void addAccount(String username, String password) {
+<span class="fc" id="L89">        addAccount(username, password, (String[])null);</span>
+<span class="fc" id="L90">    }</span>
+
+    public void addAccount(String username, String password, String... roles) {
+<span class="fc" id="L93">        Set&lt;String&gt; roleNames = CollectionUtils.asSet(roles);</span>
+<span class="fc" id="L94">        SimpleAccount account = new SimpleAuthorizingAccount(username, password, getName(), roleNames, null);</span>
+<span class="fc" id="L95">        add(account);</span>
+<span class="fc" id="L96">    }</span>
+
+    protected void add(SimpleAccount account) {
+<span class="fc" id="L99">        Object key = getAuthorizationCacheKey(account.getPrincipals());</span>
+<span class="fc" id="L100">        getAuthorizationCache().put(key, account);</span>
+<span class="fc" id="L101">    }</span>
+
+    protected SimpleRole getRole(String rolename) {
+<span class="fc" id="L104">        return roles.get(rolename);</span>
+    }
+
+    public boolean roleExists(String name) {
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        return getRole(name) != null;</span>
+    }
+
+    public void addRole(String name) {
+<span class="fc" id="L112">        add(new SimpleRole(name));</span>
+<span class="fc" id="L113">    }</span>
+
+    protected void add(SimpleRole role) {
+<span class="fc" id="L116">        roles.put(role.getName(), role);</span>
+<span class="fc" id="L117">    }</span>
+
+    protected static Set&lt;String&gt; toSet(String delimited, String delimiter) {
+<span class="nc bnc" id="L120" title="All 4 branches missed.">        if (delimited == null || delimited.trim().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L121">            return null;</span>
+        }
+
+<span class="nc" id="L124">        Set&lt;String&gt; values = new HashSet&lt;String&gt;();</span>
+<span class="nc" id="L125">        String[] rolenamesArray = delimited.split(delimiter);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        for (String s : rolenamesArray) {</span>
+<span class="nc" id="L127">            String trimmed = s.trim();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">            if (trimmed.length() &gt; 0) {</span>
+<span class="nc" id="L129">                values.add(trimmed);</span>
+            }
+        }
+
+<span class="nc" id="L133">        return values;</span>
+    }
+
+    protected void accountAndRoleCachesCreated() {
+<span class="fc" id="L137">    }</span>
+
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+<span class="nc" id="L140">        UsernamePasswordToken upToken = (UsernamePasswordToken) token;</span>
+<span class="nc" id="L141">        SimpleAccount account = (SimpleAccount) getAuthorizationCache().get(upToken.getUsername());</span>
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if (account.isLocked()) {</span>
+<span class="nc" id="L144">            throw new LockedAccountException(&quot;Account [&quot; + account + &quot;] is locked.&quot;);</span>
+        }
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (account.isCredentialsExpired()) {</span>
+<span class="nc" id="L147">            String msg = &quot;The credentials for account [&quot; + account + &quot;] are expired&quot;;</span>
+<span class="nc" id="L148">            throw new ExpiredCredentialsException(msg);</span>
+        }
+
+<span class="nc" id="L151">        return account;</span>
+    }
+
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+<span class="nc" id="L155">        return (Account) getAuthorizationCache().get(getAuthorizationCacheKey(principals));</span>
+    }
+
+    protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
+<span class="fc" id="L159">        return principals.fromRealm(getName()).iterator().next(); //returns the username</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

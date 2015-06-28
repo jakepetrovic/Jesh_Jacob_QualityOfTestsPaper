@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ModularRealmAuthenticator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.authc.pam</a> &gt; <span class="el_source">ModularRealmAuthenticator.java</span></div><h1>ModularRealmAuthenticator.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.authc.pam;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.authc.*;
+import org.jsecurity.realm.Realm;
+import org.jsecurity.subject.PrincipalCollection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * A &lt;tt&gt;ModularRealmAuthenticator&lt;/tt&gt; delgates account lookups to a pluggable (modular) collection of
+ * {@link Realm}s.  This enables PAM (Pluggable Authentication Module) behavior in JSecurity.
+ * In addition to authorization duties, a JSecurity Realm can also be thought of a PAM 'module'.
+ *
+ * &lt;p&gt;Using this Authenticator allows you to &amp;quot;plug-in&amp;quot; your own
+ * &lt;tt&gt;Realm&lt;/tt&gt;s as you see fit.  Common realms are those based on accessing
+ * LDAP, relational databases, file systems, etc.
+ *
+ * &lt;p&gt;If only one realm is configured (this is often the case for most applications), authentication success is naturally
+ * only dependent upon invoking this one Realm's
+ * {@link Realm#getAuthenticationInfo(org.jsecurity.authc.AuthenticationToken)} method.
+ *
+ * &lt;p&gt;But if two or more realms are configured, PAM behavior is implemented by iterating over the collection of realms
+ * and interacting with each over the course of the authentication attempt.  As this is more complicated, this
+ * authenticator allows customized behavior for interpreting what happens when interacting with multiple realms - for
+ * example, you might require all realms to be successful during the attempt, or perhaps only at least one must be
+ * successful, or some other interpretation.  This customized behavior can be performed via the use of a
+ * {@link #setModularAuthenticationStrategy(ModularAuthenticationStrategy) ModularAuthenticationStrategy}, which
+ * you can inject as a property of this class.
+ *
+ * &lt;p&gt;The strategy object provides callback methods that allow you to
+ * determine what constitutes a success or failure in a multi-realm (PAM) scenario.  And because this only makes sense
+ * in a mult-realm scenario, the strategy object is only utilized when more than one Realm is configured.
+ *
+ * &lt;p&gt;For greater security in a multi-realm configuration, unless overridden, the default implementation is the
+ * {@link AllSuccessfulModularAuthenticationStrategy AllSuccessfulModularAuthenticationStrategy}
+ *
+ * @author Jeremy Haile
+ * @author Les Hazlewood
+ * @see #setRealms
+ * @see AllSuccessfulModularAuthenticationStrategy
+ * @see AtLeastOneSuccessfulModularAuthenticationStrategy
+ * @since 0.1
+ */
+public class ModularRealmAuthenticator extends AbstractAuthenticator {
+
+    /*--------------------------------------------
+    |             C O N S T A N T S             |
+    ============================================*/
+<span class="nc" id="L71">    private static final Log log = LogFactory.getLog(ModularRealmAuthenticator.class);</span>
+
+    /*--------------------------------------------
+    |    I N S T A N C E   V A R I A B L E S    |
+    ============================================*/
+    /**
+     * List of realms that will be iterated through when a user authenticates.
+     */
+    private Collection&lt;Realm&gt; realms;
+
+    /**
+     * The authentication strategy to use during authentication attempts.
+     */
+    private ModularAuthenticationStrategy modularAuthenticationStrategy;
+
+    /*--------------------------------------------
+    |         C O N S T R U C T O R S           |
+    ============================================*/
+    /**
+     * Default no-argument constructor which
+     * {@link #setModularAuthenticationStrategy(ModularAuthenticationStrategy) enables}  a
+     * {@link org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy AllSuccessfulModularAuthenticationStrategy}
+     * by default.
+     */
+<span class="nc" id="L95">    public ModularRealmAuthenticator() {</span>
+<span class="nc" id="L96">        ModularAuthenticationStrategy strategy = new AllSuccessfulModularAuthenticationStrategy();</span>
+<span class="nc" id="L97">        setModularAuthenticationStrategy(strategy);</span>
+<span class="nc" id="L98">    }</span>
+
+    /**
+     * Constructor which initializes this &lt;code&gt;Authenticator&lt;/code&gt; with a single realm to use during
+     * an authentiation attempt.  Because
+     * this would set a single realm, no {@link #setModularAuthenticationStrategy(ModularAuthenticationStrategy)
+     * modularAuthenticationStrategy} would be used during authentication attempts.
+     * @param realm the realm to consult during an authentication attempt.
+     */
+<span class="nc" id="L107">    public ModularRealmAuthenticator(Realm realm) {</span>
+<span class="nc" id="L108">        setRealm(realm);</span>
+<span class="nc" id="L109">    }</span>
+
+    /**
+     * Constructor which initializes this &lt;code&gt;Authenticator&lt;/code&gt; with multiple realms that will be
+     * consulted during an authentication attempt, effectively enabling PAM (Pluggable Authentication Module)
+     * behavior according to the configured
+     * {@link #setModularAuthenticationStrategy(ModularAuthenticationStrategy) ModularAuthenticationStrategy}.
+     * @param realms the realms to consult during an authentication attempt.
+     */
+<span class="nc" id="L118">    public ModularRealmAuthenticator(List&lt;Realm&gt; realms) {</span>
+<span class="nc" id="L119">        setRealms(realms);</span>
+<span class="nc" id="L120">    }</span>
+
+    /*--------------------------------------------
+    |  A C C E S S O R S / M O D I F I E R S    |
+    ============================================*/
+    /**
+     * Convenience setter for single-realm environments (fairly common).  This method just wraps the realm in a
+     * collection and then calls {@link #setRealms}.
+     *
+     * @param realm the realm to consult during authentication attempts.
+     */
+    public void setRealm(Realm realm) {
+<span class="nc" id="L132">        List&lt;Realm&gt; realms = new ArrayList&lt;Realm&gt;(1);</span>
+<span class="nc" id="L133">        realms.add(realm);</span>
+<span class="nc" id="L134">        setRealms(realms);</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Sets all realms used by this Authenticator, providing PAM (Pluggable Authentication Module) configuration.
+     *
+     * @param realms the realms to consult during authentication attempts.
+     */
+    public void setRealms(Collection&lt;Realm&gt; realms) {
+<span class="nc" id="L143">        this.realms = realms;</span>
+<span class="nc" id="L144">    }</span>
+
+    /**
+     * Returns the realm(s) used by this &lt;code&gt;Authenticator&lt;/code&gt; during an authentication attempt.
+     * @return the realm(s) used by this &lt;code&gt;Authenticator&lt;/code&gt; during an authentication attempt.
+     */
+    protected Collection&lt;Realm&gt; getRealms() {
+<span class="nc" id="L151">        return this.realms;</span>
+    }
+
+    /**
+     * Returns the &lt;tt&gt;ModularAuthenticationStrategy&lt;/tt&gt; utilized by this modular authenticator during a multi-realm
+     * log-in attempt.  This object is only used when two or more Realms are configured.
+     *
+     * &lt;p&gt;Unless overridden by
+     * the {@link #setModularAuthenticationStrategy(ModularAuthenticationStrategy)} method, the default implementation
+     * is the {@link AllSuccessfulModularAuthenticationStrategy}.
+     *
+     * @return the &lt;tt&gt;ModularAuthenticationStrategy&lt;/tt&gt; utilized by this modular authenticator during a log-in attempt.
+     * @since 0.2
+     */
+    public ModularAuthenticationStrategy getModularAuthenticationStrategy() {
+<span class="nc" id="L166">        return modularAuthenticationStrategy;</span>
+    }
+
+    /**
+     * Allows overriding the default &lt;tt&gt;ModularAuthenticationStrategy&lt;/tt&gt; utilized during multi-realm log-in attempts.
+     * This object is only used when two or more Realms are configured.
+     *
+     * @param modularAuthenticationStrategy the strategy implementation to use during log-in attempts.
+     * @since 0.2
+     */
+    public void setModularAuthenticationStrategy(ModularAuthenticationStrategy modularAuthenticationStrategy) {
+<span class="nc" id="L177">        this.modularAuthenticationStrategy = modularAuthenticationStrategy;</span>
+<span class="nc" id="L178">    }</span>
+
+    /*--------------------------------------------
+    |               M E T H O D S               |
+    ============================================*/
+    /**
+     * Used by the internal {@link #doAuthenticate} implementation to ensure that the &lt;tt&gt;realms&lt;/tt&gt; property
+     * has been set.  The default implementation ensures the property is not null and not empty.
+     *
+     * @throws IllegalStateException if the &lt;tt&gt;realms&lt;/tt&gt; property is configured incorrectly.
+     */
+    protected void assertRealmsConfigured() throws IllegalStateException {
+<span class="nc" id="L190">        Collection&lt;Realm&gt; realms = getRealms();</span>
+<span class="nc bnc" id="L191" title="All 4 branches missed.">        if (realms == null || realms.isEmpty()) {</span>
+<span class="nc" id="L192">            String msg = &quot;Configuration error:  No realms have been configured!  One or more realms must be &quot; +</span>
+                    &quot;present to execute an authentication attempt.&quot;;
+<span class="nc" id="L194">            throw new IllegalStateException(msg);</span>
+        }
+<span class="nc" id="L196">    }</span>
+
+    /**
+     * Performs the authentication attempt by interacting with the single configured realm, which is significantly
+     * simpler than performing multi-realm logic.
+     *
+     * @param realm the realm to consult for AuthenticationInfo.
+     * @param token the submitted AuthenticationToken representing the subject's (user's) log-in principals and credentials.
+     * @return the AuthenticationInfo associated with the user account corresponding to the specified &lt;tt&gt;token&lt;/tt&gt;
+     */
+    protected AuthenticationInfo doSingleRealmAuthentication(Realm realm, AuthenticationToken token) {
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if (!realm.supports(token)) {</span>
+<span class="nc" id="L208">            String msg = &quot;Realm [&quot; + realm + &quot;] does not support authentication token [&quot; +</span>
+                    token + &quot;].  Please ensure that the appropriate Realm implementation is &quot; +
+                    &quot;configured correctly or that the realm accepts AuthenticationTokens of this type.&quot;;
+<span class="nc" id="L211">            throw new UnsupportedTokenException(msg);</span>
+        }
+<span class="nc" id="L213">        AuthenticationInfo info = realm.getAuthenticationInfo(token);</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (info == null) {</span>
+<span class="nc" id="L215">            String msg = &quot;Realm [&quot; + realm + &quot;] was unable to find account data for the &quot; +</span>
+                    &quot;submitted AuthenticationToken [&quot; + token + &quot;].&quot;;
+<span class="nc" id="L217">            throw new UnknownAccountException(msg);</span>
+        }
+<span class="nc" id="L219">        return info;</span>
+    }
+
+    /**
+     * Performs the multi-realm authentication attempt by calling back to a {@link ModularAuthenticationStrategy} object
+     * as each realm is consulted for &lt;tt&gt;AuthenticationInfo&lt;/tt&gt; for the specified &lt;tt&gt;token&lt;/tt&gt;.
+     *
+     * @param realms the multiple realms configured on this Authenticator instance.
+     * @param token  the submitted AuthenticationToken representing the subject's (user's) log-in principals and credentials.
+     * @return an aggregated AuthenticationInfo instance representing account data across all the successfully
+     *         consulted realms.
+     */
+    protected AuthenticationInfo doMultiRealmAuthentication(Collection&lt;Realm&gt; realms, AuthenticationToken token) {
+
+<span class="nc" id="L233">        ModularAuthenticationStrategy strategy = getModularAuthenticationStrategy();</span>
+
+<span class="nc" id="L235">        AuthenticationInfo aggregate = strategy.beforeAllAttempts(realms, token);</span>
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L238">            log.debug(&quot;Iterating through [&quot; + realms.size() + &quot;] realms for PAM authentication&quot;);</span>
+        }
+
+<span class="nc bnc" id="L241" title="All 2 branches missed.">        for (Realm realm : realms) {</span>
+
+<span class="nc bnc" id="L243" title="All 2 branches missed.">            if (realm.supports(token)) {</span>
+
+<span class="nc bnc" id="L245" title="All 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L246">                    log.debug(&quot;Attempting to authenticate token [&quot; + token + &quot;] &quot; +</span>
+                            &quot;using realm of type [&quot; + realm + &quot;]&quot;);
+                }
+
+<span class="nc" id="L250">                AuthenticationInfo info = null;</span>
+<span class="nc" id="L251">                Throwable t = null;</span>
+                try {
+<span class="nc" id="L253">                    info = realm.getAuthenticationInfo(token);</span>
+<span class="nc" id="L254">                } catch (Throwable throwable) {</span>
+<span class="nc" id="L255">                    t = throwable;</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">                    if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L257">                        String msg = &quot;Realm [&quot; + realm + &quot;] threw an exception during a multi-realm authentication attempt:&quot;;</span>
+<span class="nc" id="L258">                        log.trace(msg, t);</span>
+                    }
+<span class="nc" id="L260">                }</span>
+
+<span class="nc" id="L262">                aggregate = strategy.afterAttempt(realm, token, info, aggregate, t);</span>
+
+<span class="nc" id="L264">            } else {</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L266">                    log.debug(&quot;Realm of type [&quot; + realm + &quot;] does not support token &quot; +</span>
+                            &quot;[&quot; + token + &quot;].  Skipping realm.&quot;);
+                }
+            }
+<span class="nc" id="L270">        }</span>
+
+<span class="nc" id="L272">        aggregate = strategy.afterAllAttempts(token, aggregate);</span>
+
+<span class="nc" id="L274">        return aggregate;</span>
+    }
+
+
+    /**
+     * &lt;p&gt;Attempts to authenticate the given token by iterating over the internal collection of
+     * {@link Realm}s.  For each realm, first the {@link Realm#supports(org.jsecurity.authc.AuthenticationToken)}
+     * method will be called to determine if the realm supports the &lt;tt&gt;authenticationToken&lt;/tt&gt; method argument.
+     *
+     * If a realm does support
+     * the token, its {@link Realm#getAuthenticationInfo(org.jsecurity.authc.AuthenticationToken)}
+     * method will be called.  If the realm returns a non-null account, the token will be
+     * considered authenticated for that realm and the account data recorded.  If the realm returns &lt;tt&gt;null&lt;/tt&gt;,
+     * the next realm will be consulted.  If no realms support the token or all supporting realms return null,
+     * an {@link AuthenticationException} will be thrown to indicate that the user could not be authenticated.
+     *
+     * &lt;p&gt;After all realms have been consulted, the information from each realm is aggregated into a single
+     * {@link AuthenticationInfo} object and returned.
+     *
+     * @param authenticationToken the token containing the authentication principal and credentials for the
+     *                            user being authenticated.
+     * @return account information attributed to the authenticated user.
+     * @throws AuthenticationException if the user could not be authenticated or the user is denied authentication
+     *                                 for the given principal and credentials.
+     */
+    protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken) throws AuthenticationException {
+<span class="nc" id="L300">        assertRealmsConfigured();</span>
+<span class="nc" id="L301">        Collection&lt;Realm&gt; realms = getRealms();</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">        if (realms.size() == 1) {</span>
+<span class="nc" id="L303">            return doSingleRealmAuthentication(realms.iterator().next(), authenticationToken);</span>
+        } else {
+<span class="nc" id="L305">            return doMultiRealmAuthentication(realms, authenticationToken);</span>
+        }
+    }
+
+    /**
+     * First calls &lt;code&gt;super.onLogout(principals)&lt;/code&gt; to ensure a logout notification is issued, and for each
+     * wrapped &lt;tt&gt;Realm&lt;/tt&gt; that implements the {@link LogoutAware LogoutAware} interface, calls
+     * &lt;code&gt;((LogoutAware)realm).onLogout(principals)&lt;/code&gt; to allow each realm the opportunity to perform
+     * logout/cleanup operations during an user-logout.
+     *
+     * &lt;p&gt;JSecurity's Realm implementations all implement the &lt;tt&gt;LogoutAware&lt;/tt&gt; interface by default and can be
+     * overridden for realm-specific logout logic.
+     *
+     * @param principals the application-specific Subject/user identifier.
+     */
+    public void onLogout(PrincipalCollection principals) {
+<span class="nc" id="L321">        super.onLogout(principals);</span>
+<span class="nc" id="L322">        Collection&lt;Realm&gt; realms = getRealms();</span>
+<span class="nc bnc" id="L323" title="All 4 branches missed.">        if (realms != null &amp;&amp; !realms.isEmpty()) {</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">            for (Realm realm : realms) {</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">                if (realm instanceof LogoutAware) {</span>
+<span class="nc" id="L326">                    ((LogoutAware) realm).onLogout(principals);</span>
+                }
+<span class="nc" id="L328">            }</span>
+        }
+<span class="nc" id="L330">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoggingStatementHandler.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.proxy</a> &gt; <span class="el_source">LoggingStatementHandler.java</span></div><h1>LoggingStatementHandler.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2008-2009 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.databene.commons.BeanUtil;
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.ConfigurationError;
+import org.databene.commons.LogCategories;
+import org.databene.commons.debug.Debug;
+import org.databene.commons.debug.ResourceMonitor;
+import org.databene.jdbacl.DBUtil;
+import org.databene.profile.Profiler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * {@link InvocationHandler} implementation for a proxy to the {@link Statement} interface
+ * which logs relevant JDBC or SQL calls to the log categories &lt;code&gt;org.databene.JDBC&lt;/code&gt; 
+ * and &lt;code&gt;org.databene.SQL&lt;/code&gt;.&lt;br/&gt;
+ * &lt;br/&gt;
+ * Created at 26.12.2008 04:48:38
+ * @since 0.5.7
+ * @author Volker Bergmann
+ */
+
+public class LoggingStatementHandler implements InvocationHandler {
+
+<span class="fc" id="L60">    private static final Logger sqlLogger = LoggerFactory.getLogger(LogCategories.SQL); </span>
+<span class="fc" id="L61">    private static final Logger jdbcLogger = LoggerFactory.getLogger(LogCategories.JDBC);</span>
+
+	private static volatile AtomicInteger openStatementCount;
+    private static ResourceMonitor openStatementMonitor;
+
+    // attributes ------------------------------------------------------------------------------------------------------
+
+	private Statement realStatement;
+	private boolean readOnly;
+	private String sql;
+	private boolean closed;
+	
+	
+	// constructor -----------------------------------------------------------------------------------------------------
+
+    static {
+<span class="fc" id="L77">    	openStatementCount = new AtomicInteger();</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">    	if (Debug.active())</span>
+<span class="nc" id="L79">    		openStatementMonitor = new ResourceMonitor();</span>
+<span class="fc" id="L80">    }</span>
+    
+<span class="nc" id="L82">	public LoggingStatementHandler(Statement realStatement, boolean readOnly) {</span>
+<span class="nc" id="L83">		this.realStatement = realStatement;</span>
+<span class="nc" id="L84">		this.readOnly = readOnly;</span>
+<span class="nc" id="L85">		this.closed = false;</span>
+<span class="nc" id="L86">		openStatementCount.incrementAndGet();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		if (openStatementMonitor != null)</span>
+<span class="nc" id="L88">			openStatementMonitor.register(this);</span>
+<span class="nc" id="L89">	}</span>
+	
+	// InvocationHandler interface implementation ----------------------------------------------------------------------
+
+	public Object invoke(Object proxy, Method method, Object[] args)
+			throws Throwable {
+		try {
+<span class="nc" id="L96">			String methodName = method.getName();</span>
+<span class="nc" id="L97">			Method localMethod = BeanUtil.findMethod(this.getClass(), methodName, method.getParameterTypes());</span>
+			Object result;
+<span class="nc bnc" id="L99" title="All 4 branches missed.">			boolean profile = methodName.startsWith(&quot;execute&quot;) &amp;&amp; &quot;true&quot;.equals(System.getProperty(&quot;profile&quot;));</span>
+<span class="nc" id="L100">			long startTime = 0;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">			if (profile)</span>
+<span class="nc" id="L102">				startTime = System.nanoTime();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">			if (localMethod != null)</span>
+<span class="nc" id="L104">				result = BeanUtil.invoke(this, localMethod, args);</span>
+			else
+<span class="nc" id="L106">				result = BeanUtil.invoke(realStatement, method, args);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">			if (result instanceof ResultSet)</span>
+<span class="nc" id="L108">				result = DBUtil.createLoggingResultSet((ResultSet) result, (Statement) proxy);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">			if (profile) {</span>
+<span class="nc" id="L110">				long duration = (System.nanoTime() - startTime) / 1000000;</span>
+<span class="nc" id="L111">				Profiler.defaultInstance().addSample(CollectionUtil.toList(&quot;SQL&quot;, sql), duration);</span>
+			}
+<span class="nc" id="L113">			return result;</span>
+<span class="nc" id="L114">		} catch (ConfigurationError e) {</span>
+<span class="nc bnc" id="L115" title="All 4 branches missed.">			if (e.getCause() instanceof InvocationTargetException &amp;&amp; e.getCause().getCause() instanceof SQLException)</span>
+<span class="nc" id="L116">				throw e.getCause().getCause();</span>
+			else
+<span class="nc" id="L118">				throw e;</span>
+		}
+	}
+
+	// execute methods -------------------------------------------------------------------------------------------------
+
+	public boolean execute(String sql, int autoGeneratedKeys) throws SQLException {
+<span class="nc" id="L125">		logAll(&quot;execute&quot;, sql);</span>
+<span class="nc" id="L126">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L127">		this.sql = sql;</span>
+<span class="nc" id="L128">		return realStatement.execute(sql, autoGeneratedKeys);</span>
+	}
+
+	public boolean execute(String sql, int[] columnIndexes) throws SQLException {
+<span class="nc" id="L132">		logAll(&quot;execute&quot;, sql);</span>
+<span class="nc" id="L133">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L134">		this.sql = sql;</span>
+<span class="nc" id="L135">		return realStatement.execute(sql, columnIndexes);</span>
+	}
+
+	public boolean execute(String sql, String[] columnNames) throws SQLException {
+<span class="nc" id="L139">		logAll(&quot;execute&quot;, sql);</span>
+<span class="nc" id="L140">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L141">		this.sql = sql;</span>
+<span class="nc" id="L142">		return realStatement.execute(sql, columnNames);</span>
+	}
+
+	public boolean execute(String sql) throws SQLException {
+<span class="nc" id="L146">		logAll(&quot;execute&quot;, sql);</span>
+<span class="nc" id="L147">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L148">		this.sql = sql;</span>
+<span class="nc" id="L149">		return realStatement.execute(sql);</span>
+	}
+
+	public int[] executeBatch() throws SQLException {
+<span class="nc" id="L153">		jdbcLogger.debug(&quot;executeBatch()&quot;);</span>
+<span class="nc" id="L154">		return realStatement.executeBatch();</span>
+	}
+
+	public ResultSet executeQuery(String sql) throws SQLException {
+<span class="nc" id="L158">		logAll(&quot;executeQuery&quot;, sql);</span>
+<span class="nc" id="L159">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L160">		this.sql = sql;</span>
+<span class="nc" id="L161">		return realStatement.executeQuery(sql);</span>
+	}
+	
+	public int executeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
+<span class="nc" id="L165">		logAll(&quot;executeUpdate&quot;, sql);</span>
+<span class="nc" id="L166">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L167">		this.sql = sql;</span>
+<span class="nc" id="L168">		return realStatement.executeUpdate(sql, autoGeneratedKeys);</span>
+	}
+
+	public int executeUpdate(String sql, int[] columnIndexes) throws SQLException {
+<span class="nc" id="L172">		logAll(&quot;executeUpdate&quot;, sql);</span>
+<span class="nc" id="L173">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L174">		this.sql = sql;</span>
+<span class="nc" id="L175">		return realStatement.executeUpdate(sql, columnIndexes);</span>
+	}
+
+	public int executeUpdate(String sql, String[] columnNames) throws SQLException {
+<span class="nc" id="L179">		logAll(&quot;executeUpdate&quot;, sql);</span>
+<span class="nc" id="L180">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L181">		this.sql = sql;</span>
+<span class="nc" id="L182">		return realStatement.executeUpdate(sql, columnNames);</span>
+	}
+
+	public int executeUpdate(String sql) throws SQLException {
+<span class="nc" id="L186">		logAll(&quot;executeUpdate&quot;, sql);</span>
+<span class="nc" id="L187">		DBUtil.checkReadOnly(sql, readOnly);</span>
+<span class="nc" id="L188">		this.sql = sql;</span>
+<span class="nc" id="L189">		return realStatement.executeUpdate(sql);</span>
+	}
+	
+	public void close() throws SQLException {
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		if (closed)</span>
+<span class="nc" id="L194">			return;</span>
+<span class="nc" id="L195">		logAll(&quot;close&quot;, sql);</span>
+<span class="nc" id="L196">		this.closed = true;</span>
+<span class="nc" id="L197">		openStatementCount.decrementAndGet();</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">		if (openStatementMonitor != null)</span>
+<span class="nc" id="L199">			openStatementMonitor.unregister(this);</span>
+<span class="nc" id="L200">		realStatement.close();</span>
+<span class="nc" id="L201">	}</span>
+	
+    public static int getOpenStatementCount() {
+<span class="fc" id="L204">    	return openStatementCount.get();</span>
+    }
+    
+	public static void resetMonitors() {
+<span class="fc" id="L208">		openStatementCount.set(0);</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">		if (openStatementMonitor != null)</span>
+<span class="nc" id="L210">			openStatementMonitor.reset();</span>
+<span class="fc" id="L211">	}</span>
+    
+	public static boolean assertAllStatementsClosed(boolean critical) {
+<span class="nc" id="L214">		return openStatementMonitor.assertNoRegistrations(critical);</span>
+	}
+
+	// private helpers -------------------------------------------------------------------------------------------------
+	
+	private void logAll(String method, String sql) {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">		if (jdbcLogger.isDebugEnabled())</span>
+<span class="nc" id="L221">			jdbcLogger.debug(method + &quot;: &quot; + sql);</span>
+<span class="nc" id="L222">		sqlLogger.debug(sql);</span>
+<span class="nc" id="L223">	}</span>
+
+	// java.lang.Object overrides --------------------------------------------------------------------------------------
+	
+	@Override
+	public String toString() {
+<span class="nc" id="L229">		return &quot;Statement (&quot; + sql + &quot;)&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

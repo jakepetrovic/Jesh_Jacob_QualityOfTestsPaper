@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultSettingsView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.view</a> &gt; <span class="el_source">DefaultSettingsView.java</span></div><h1>DefaultSettingsView.java</h1><pre class="source lang-java linenums">package bierse.view;
+
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Vector;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+
+import bierse.view.ISettingsView;
+import bierse.model.Drink;
+import bierse.model.Model;
+
+public class DefaultSettingsView extends JFrame  implements ISettingsView, IDrinkSettingsView {
+
+	private static final long serialVersionUID = -1160952914735227669L;
+
+	JButton okButton;
+	JButton cancelButton;
+	
+	JTextField timeIntervalTextField;
+	JTextField currencyTextField;
+	JRadioButton priceStep5RadioButton;
+	JRadioButton priceStep10RadioButton;
+	JRadioButton priceStep20RadioButton;
+	JRadioButton priceStep50RadioButton;
+	JCheckBox standardLogicCheckBox;
+	JTextField backgroundFilePathtextField;
+	JButton fileChooserButton;
+	JTextField runningMessageTextField;
+	JSlider runningMessageSpeedSlider;
+	
+	
+	JPanel drinkSettingsPanel;
+	
+	JComboBox drinkComboBox;
+	JTextField drinkNameTextField;
+	JComboBox drinkKeyComboBox;
+	JTextField drinkStartPriceTextField;
+	JTextField drinkMinPriceTextField;
+	JTextField drinkMaxPriceTextField;
+	JTextField drinkMaxStepTextField;
+	JTextField drinkTargetAmountTextField;
+	JTextField drinkDeltaAmountTextField;
+	JCheckBox drinkIsUsedCheckBox;
+	
+	private Model model;
+	private Drink drink;
+
+	public DefaultSettingsView(Model model) {
+<span class="nc" id="L68">		super(&quot;Einstellungen&quot;);</span>
+<span class="nc" id="L69">		this.model = model;</span>
+<span class="nc" id="L70">		JTabbedPane tabbedPane = new JTabbedPane();</span>
+		
+<span class="nc" id="L72">		JPanel mainPanel = new JPanel();</span>
+<span class="nc" id="L73">		mainPanel.setLayout(new BorderLayout());</span>
+<span class="nc" id="L74">		mainPanel.add(tabbedPane, BorderLayout.CENTER);</span>
+<span class="nc" id="L75">		getContentPane().add(mainPanel);</span>
+		
+<span class="nc" id="L77">		JPanel mainSettingsPanel = new JPanel();</span>
+<span class="nc" id="L78">		mainSettingsPanel.setLayout(new GridLayout(1, 1));</span>
+<span class="nc" id="L79">		JScrollPane settingsScrollPane = new JScrollPane(mainSettingsPanel);</span>
+<span class="nc" id="L80">		mainSettingsPanel.add(createSettingsPanel());</span>
+		
+<span class="nc" id="L82">		drinkSettingsPanel = new JPanel();</span>
+<span class="nc" id="L83">		drinkSettingsPanel.setLayout(new BorderLayout());</span>
+<span class="nc" id="L84">		JScrollPane drinkSettingsScrollPane = new JScrollPane(drinkSettingsPanel);</span>
+<span class="nc" id="L85">		Drink newDrink = new Drink(Drink.NEW_DRINK_NAME, model);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		if (!model.getLstDrinks().contains(newDrink)) {</span>
+<span class="nc" id="L87">			model.getLstDrinks().add(newDrink);</span>
+		}
+		
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		if(model.getLstDrinks().size() &gt; 0) {</span>
+<span class="nc" id="L91">			drink = model.getLstDrinks().get(0);</span>
+		} else {
+<span class="nc" id="L93">			drink = newDrink;</span>
+		}
+		
+<span class="nc" id="L96">		drinkComboBox = new JComboBox(model.getLstDrinks());</span>
+<span class="nc" id="L97">		drinkComboBox.setActionCommand(ISettingsView.SETTINGS_ACTION_DRINK_SELECTED);</span>
+<span class="nc" id="L98">		drinkSettingsPanel.add(drinkComboBox, BorderLayout.NORTH);</span>
+<span class="nc" id="L99">		drinkSettingsPanel.add(createDrinkSettingsPanel(drink), BorderLayout.CENTER);</span>
+		
+<span class="nc" id="L101">		JPanel buttonPanel = new JPanel();</span>
+<span class="nc" id="L102">		buttonPanel.setLayout(new GridLayout(1, 2));</span>
+<span class="nc" id="L103">		okButton = new JButton(&quot;OK&quot;);</span>
+<span class="nc" id="L104">		okButton.setMnemonic(KeyEvent.VK_O);</span>
+<span class="nc" id="L105">		okButton.setActionCommand(ISettingsView.SETTINGS_ACTION_OK);</span>
+<span class="nc" id="L106">		buttonPanel.add(okButton);</span>
+<span class="nc" id="L107">		cancelButton = new JButton(&quot;Abbrechen&quot;);</span>
+<span class="nc" id="L108">		cancelButton.setMnemonic(KeyEvent.VK_A);</span>
+<span class="nc" id="L109">		cancelButton.setActionCommand(ISettingsView.SETTINGS_ACTION_CANCEL);</span>
+<span class="nc" id="L110">		buttonPanel.add(cancelButton);</span>
+<span class="nc" id="L111">		mainPanel.add(buttonPanel, BorderLayout.SOUTH);</span>
+	// Add settings panel to tabbed pane
+<span class="nc" id="L113">		tabbedPane.addTab(&quot;Einstellungen&quot;, settingsScrollPane);</span>
+<span class="nc" id="L114">		tabbedPane.addTab(&quot;Drink Einstellungen&quot;, drinkSettingsScrollPane);</span>
+		
+<span class="nc" id="L116">		pack();</span>
+<span class="nc" id="L117">		setVisible(true);</span>
+<span class="nc" id="L118">	}</span>
+	
+	private JPanel createDrinkSettingsPanel(Drink drink) {
+<span class="nc" id="L121">		JPanel drinkSettings = new JPanel();</span>
+<span class="nc" id="L122">		drinkSettings.setLayout(new GridLayout(0, 2));</span>
+<span class="nc" id="L123">		JLabel drinkNameLabel = new JLabel(&quot;Name&quot;);</span>
+<span class="nc" id="L124">		drinkSettings.add(drinkNameLabel);</span>
+<span class="nc" id="L125">		drinkNameTextField = new JTextField(drink.getName());</span>
+<span class="nc" id="L126">		drinkSettings.add(drinkNameTextField);</span>
+<span class="nc" id="L127">		JLabel drinkKeyLabel = new JLabel(&quot;Taste&quot;);</span>
+<span class="nc" id="L128">		drinkSettings.add(drinkKeyLabel);</span>
+<span class="nc" id="L129">		drinkKeyComboBox = new JComboBox(new KeyMapComboBoxModel());</span>
+<span class="nc" id="L130">		drinkKeyComboBox.setSelectedItem(KeyMapComboBoxModel.getMyKeyMapForKeyCode(drink.getKey()));</span>
+<span class="nc" id="L131">		drinkSettings.add(drinkKeyComboBox);</span>
+<span class="nc" id="L132">		JLabel drinkStartPriceLabel = new JLabel(&quot;Start Preis&quot;);</span>
+<span class="nc" id="L133">		drinkSettings.add(drinkStartPriceLabel);</span>
+<span class="nc" id="L134">		drinkStartPriceTextField = new JTextField(String.valueOf(drink.getStartPrice()));</span>
+<span class="nc" id="L135">		drinkSettings.add(drinkStartPriceTextField);</span>
+<span class="nc" id="L136">		JLabel drinkMinPriceLabel = new JLabel(&quot;Minimum Preis&quot;);</span>
+<span class="nc" id="L137">		drinkSettings.add(drinkMinPriceLabel);</span>
+<span class="nc" id="L138">		drinkMinPriceTextField = new JTextField(String.valueOf(drink.getMinPrice()));</span>
+<span class="nc" id="L139">		drinkSettings.add(drinkMinPriceTextField);</span>
+<span class="nc" id="L140">		JLabel drinkMaxPriceLabel = new JLabel(&quot;Maximum Preis&quot;);</span>
+<span class="nc" id="L141">		drinkSettings.add(drinkMaxPriceLabel);</span>
+<span class="nc" id="L142">		drinkMaxPriceTextField = new JTextField(String.valueOf(drink.getMaxPrice()));</span>
+<span class="nc" id="L143">		drinkSettings.add(drinkMaxPriceTextField);</span>
+<span class="nc" id="L144">		JLabel drinkMaxStep = new JLabel(&quot;Maximum Preisschritt&quot;);</span>
+<span class="nc" id="L145">		drinkSettings.add(drinkMaxStep);</span>
+<span class="nc" id="L146">		drinkMaxStepTextField = new JTextField(String.valueOf(drink.getMaxStep()));</span>
+<span class="nc" id="L147">		drinkSettings.add(drinkMaxStepTextField);</span>
+<span class="nc" id="L148">		JLabel drinkTargetAmountLabel = new JLabel(&quot;Verkauf-Soll&quot;);</span>
+<span class="nc" id="L149">		drinkSettings.add(drinkTargetAmountLabel);</span>
+<span class="nc" id="L150">		drinkTargetAmountTextField = new JTextField(String.valueOf(drink.getTargetAmount()));</span>
+<span class="nc" id="L151">		drinkSettings.add(drinkTargetAmountTextField);</span>
+<span class="nc" id="L152">		JLabel drinkDeltaAmountLabel = new JLabel(&quot;VerkaufDifferenz&quot;);</span>
+<span class="nc" id="L153">		drinkSettings.add(drinkDeltaAmountLabel);</span>
+<span class="nc" id="L154">		drinkDeltaAmountTextField = new JTextField(String.valueOf(drink.getDeltaAmount()));</span>
+<span class="nc" id="L155">		drinkSettings.add(drinkDeltaAmountTextField);</span>
+<span class="nc" id="L156">		drinkIsUsedCheckBox = new JCheckBox(&quot;Aktiv&quot;);</span>
+<span class="nc" id="L157">		drinkIsUsedCheckBox.setSelected(drink.isUsed());</span>
+<span class="nc" id="L158">		drinkSettings.add(drinkIsUsedCheckBox);</span>
+		
+<span class="nc" id="L160">		return drinkSettings;</span>
+	}
+	
+	private JPanel createSettingsPanel() {
+	// Create settings panel
+<span class="nc" id="L165">		JPanel settingsPanel = new JPanel();</span>
+<span class="nc" id="L166">		settingsPanel.setLayout(new BorderLayout(10, 10));</span>
+		
+		
+	// Create panel containing the labels
+<span class="nc" id="L170">		JPanel labelPanel = new JPanel();</span>
+<span class="nc" id="L171">		labelPanel.setLayout(new GridLayout(0,1));</span>
+		
+	// Create panel containing the values
+<span class="nc" id="L174">		JPanel valuePanel = new JPanel();</span>
+<span class="nc" id="L175">		valuePanel.setLayout(new GridLayout(0,1));</span>
+		
+	// Setting for time interval 
+<span class="nc" id="L178">		JLabel timeIntervalLabel = new JLabel(&quot;Zeitinterval&quot;);</span>
+<span class="nc" id="L179">		labelPanel.add(timeIntervalLabel);</span>
+<span class="nc" id="L180">		timeIntervalTextField = new JTextField(String.valueOf(model.getSettings().getTimeInterval()));</span>
+<span class="nc" id="L181">		valuePanel.add(timeIntervalTextField);</span>
+		
+	// Setting for price steps
+<span class="nc" id="L184">		JLabel priceStepsLabel = new JLabel(&quot;Preisschritte&quot;);</span>
+<span class="nc" id="L185">		labelPanel.add(priceStepsLabel);</span>
+	// Create panel for price steps radio buttons
+<span class="nc" id="L187">		JPanel buttonGroupPanel = new JPanel();</span>
+<span class="nc" id="L188">		buttonGroupPanel.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L189">		ButtonGroup priceStepsButtonGroup = new ButtonGroup();</span>
+<span class="nc" id="L190">		priceStep5RadioButton = new JRadioButton(&quot;5&quot;);</span>
+<span class="nc" id="L191">		priceStepsButtonGroup.add(priceStep5RadioButton);</span>
+<span class="nc" id="L192">		buttonGroupPanel.add(priceStep5RadioButton);</span>
+<span class="nc" id="L193">		priceStep10RadioButton = new JRadioButton(&quot;10&quot;);</span>
+<span class="nc" id="L194">		buttonGroupPanel.add(priceStep10RadioButton);</span>
+<span class="nc" id="L195">		priceStepsButtonGroup.add(priceStep10RadioButton);</span>
+<span class="nc" id="L196">		priceStep20RadioButton = new JRadioButton(&quot;20&quot;);</span>
+<span class="nc" id="L197">		buttonGroupPanel.add(priceStep20RadioButton);</span>
+<span class="nc" id="L198">		priceStepsButtonGroup.add(priceStep20RadioButton);</span>
+<span class="nc" id="L199">		priceStep50RadioButton = new JRadioButton(&quot;50&quot;);</span>
+<span class="nc" id="L200">		buttonGroupPanel.add(priceStep50RadioButton);</span>
+<span class="nc" id="L201">		priceStepsButtonGroup.add(priceStep50RadioButton);</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">		if(model.getSettings().getPriceSteps() == 5) {</span>
+<span class="nc" id="L203">			priceStep5RadioButton.setSelected(true);</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">		} else if(model.getSettings().getPriceSteps() == 10) {</span>
+<span class="nc" id="L205">			priceStep10RadioButton.setSelected(true);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">		} else if(model.getSettings().getPriceSteps() == 20) {</span>
+<span class="nc" id="L207">			priceStep20RadioButton.setSelected(true);</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">		} else if(model.getSettings().getPriceSteps() == 50) {</span>
+<span class="nc" id="L209">			priceStep50RadioButton.setSelected(true);</span>
+		}
+<span class="nc" id="L211">		valuePanel.add(buttonGroupPanel);</span>
+
+	// Setting for Currency
+<span class="nc" id="L214">		JLabel currencyLabel = new JLabel(&quot;W�hrung&quot;);</span>
+<span class="nc" id="L215">		labelPanel.add(currencyLabel);</span>
+<span class="nc" id="L216">		currencyTextField = new JTextField(model.getSettings().getCurrency());</span>
+<span class="nc" id="L217">		valuePanel.add(currencyTextField);</span>
+		
+	// Setting for background image
+<span class="nc" id="L220">		JLabel backgroundFileLabel = new JLabel(&quot;Hintergrundbild&quot;);</span>
+<span class="nc" id="L221">		labelPanel.add(backgroundFileLabel);</span>
+<span class="nc" id="L222">		JPanel backgroundImageChooserPanel = new JPanel();</span>
+<span class="nc" id="L223">		backgroundImageChooserPanel.setLayout(new BorderLayout());</span>
+<span class="nc" id="L224">		backgroundFilePathtextField = new JTextField(model.getSettings().getBackgroundImagePath());</span>
+<span class="nc" id="L225">		backgroundImageChooserPanel.add(backgroundFilePathtextField, BorderLayout.CENTER);</span>
+<span class="nc" id="L226">		fileChooserButton = new JButton(&quot;...&quot;);</span>
+<span class="nc" id="L227">		fileChooserButton.setActionCommand(ISettingsView.SETTINGS_ACTION_CHOOSE_BACKGROUND);</span>
+<span class="nc" id="L228">		backgroundImageChooserPanel.add(fileChooserButton, BorderLayout.EAST);</span>
+<span class="nc" id="L229">		valuePanel.add(backgroundImageChooserPanel);</span>
+		
+	// Setting for standard logic
+<span class="nc" id="L232">		JLabel standardLogicLabel = new JLabel();</span>
+<span class="nc" id="L233">		labelPanel.add(standardLogicLabel);</span>
+<span class="nc" id="L234">		standardLogicCheckBox = new JCheckBox(&quot;Standard Logik&quot;);</span>
+<span class="nc" id="L235">		standardLogicCheckBox.setToolTipText(&quot;Standard Logik: Mehr verkauft -&gt; Preis steigt&quot;);</span>
+<span class="nc" id="L236">		standardLogicCheckBox.setSelected(model.getSettings().isStandardLogic());</span>
+<span class="nc" id="L237">		valuePanel.add(standardLogicCheckBox);</span>
+		
+	// Setting for running message text
+<span class="nc" id="L240">		JLabel runningMessageTextLabel = new JLabel(&quot;Lauftext&quot;);</span>
+<span class="nc" id="L241">		labelPanel.add(runningMessageTextLabel);</span>
+<span class="nc" id="L242">		runningMessageTextField = new JTextField(model.getSettings().getMessage());</span>
+<span class="nc" id="L243">		valuePanel.add(runningMessageTextField);</span>
+		
+	// Setting for running message speed
+<span class="nc" id="L246">		JLabel runningMessageSpeedLabel = new JLabel(&quot;Lauftext Geschwindigkeit&quot;);</span>
+<span class="nc" id="L247">		labelPanel.add(runningMessageSpeedLabel);</span>
+<span class="nc" id="L248">		runningMessageSpeedSlider = new JSlider(1, 70, model.getSettings().getMessageSpeed());</span>
+<span class="nc" id="L249">		runningMessageSpeedSlider.setMinorTickSpacing(5);</span>
+<span class="nc" id="L250">		runningMessageSpeedSlider.setInverted(true);</span>
+<span class="nc" id="L251">		runningMessageSpeedSlider.setToolTipText(&quot;Links langsamer, Rechts schneller&quot;);</span>
+<span class="nc" id="L252">		valuePanel.add(runningMessageSpeedSlider);</span>
+		
+		
+	// Add label and value panel to main panel
+<span class="nc" id="L256">		settingsPanel.add(labelPanel, BorderLayout.WEST);</span>
+<span class="nc" id="L257">		settingsPanel.add(valuePanel, BorderLayout.CENTER);</span>
+		
+	// Return main panel
+<span class="nc" id="L260">		return settingsPanel;</span>
+	}
+	
+	public void setSettingsController(ActionListener al) {
+<span class="nc" id="L264">		okButton.addActionListener(al);</span>
+<span class="nc" id="L265">		cancelButton.addActionListener(al);</span>
+<span class="nc" id="L266">		drinkComboBox.addActionListener(al);</span>
+<span class="nc" id="L267">		fileChooserButton.addActionListener(al);</span>
+<span class="nc" id="L268">	}</span>
+
+	@Override
+	public void close() {
+<span class="nc" id="L272">		dispose();</span>
+<span class="nc" id="L273">	}</span>
+
+	@Override
+	public int getTimeInterval() {
+		try {
+<span class="nc" id="L278">			return Integer.valueOf(timeIntervalTextField.getText()).intValue();</span>
+<span class="nc" id="L279">		} catch(NumberFormatException nfe) {</span>
+<span class="nc" id="L280">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L282">		return -1;</span>
+	}
+
+	@Override
+	public String getCurrency() {
+<span class="nc" id="L287">		return currencyTextField.getText();</span>
+	}
+
+	@Override
+	public int getPriceSteps() {
+<span class="nc bnc" id="L292" title="All 2 branches missed.">		if(priceStep5RadioButton.isSelected()) {</span>
+<span class="nc" id="L293">			return 5;</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">		} else if(priceStep10RadioButton.isSelected()) {</span>
+<span class="nc" id="L295">			return 10;</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">		} else if(priceStep20RadioButton.isSelected()) {</span>
+<span class="nc" id="L297">			return 20;</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">		} else if(priceStep50RadioButton.isSelected()) {</span>
+<span class="nc" id="L299">			return 50;</span>
+		}
+<span class="nc" id="L301">		return 10;</span>
+	}
+
+	
+
+	@Override
+	public String getDrinkName() {
+<span class="nc" id="L308">		return drinkNameTextField.getText();</span>
+	}
+	
+	@Override
+	public int getKey() {
+		try {
+<span class="nc" id="L314">			return ((MyKeyMap)drinkKeyComboBox.getSelectedItem()).getCode();</span>
+<span class="nc" id="L315">		} catch(NumberFormatException nfe) {</span>
+<span class="nc" id="L316">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L318">		return -1;</span>
+	}
+	
+	@Override
+	public int getStartPrice() {
+		try {
+<span class="nc" id="L324">			return Integer.valueOf(drinkStartPriceTextField.getText());</span>
+<span class="nc" id="L325">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L326">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L328">		return -1;</span>
+	}
+	
+	@Override
+	public int getMinPrice() {
+		try {
+<span class="nc" id="L334">			return Integer.valueOf(drinkMinPriceTextField.getText());</span>
+<span class="nc" id="L335">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L336">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L338">		return -1;</span>
+	}
+	
+	@Override
+	public int getMaxPrice() {
+		try {
+<span class="nc" id="L344">			return Integer.valueOf(drinkMaxPriceTextField.getText());</span>
+<span class="nc" id="L345">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L346">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L348">		return -1;</span>
+	}
+	
+	@Override
+	public int getMaxStep() {
+		try {
+<span class="nc" id="L354">			return Integer.valueOf(drinkMaxStepTextField.getText());</span>
+<span class="nc" id="L355">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L356">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L358">		return -1;</span>
+	}
+	
+	@Override
+	public int getTargetAmount() {
+		try {
+<span class="nc" id="L364">			return Integer.valueOf(drinkTargetAmountTextField.getText());</span>
+<span class="nc" id="L365">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L366">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L368">		return -1;</span>
+	}
+	
+	@Override
+	public int getDeltaAmount() {
+		try {
+<span class="nc" id="L374">			return Integer.valueOf(drinkDeltaAmountTextField.getText());</span>
+<span class="nc" id="L375">		} catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L376">			model.getLog().error(this, nfe);</span>
+		}
+<span class="nc" id="L378">		return -1;</span>
+	}
+	
+	@Override
+	public boolean isUsed() {
+<span class="nc" id="L383">		return drinkIsUsedCheckBox.isSelected();</span>
+	}
+
+	public Drink getDrink() {
+<span class="nc" id="L387">		return drink;</span>
+	}
+
+	@Override
+	public boolean isStandardLogic() {
+<span class="nc" id="L392">		return standardLogicCheckBox.isSelected();</span>
+	}
+	
+	@Override
+	public String getBackgroundPicturePath() {
+<span class="nc" id="L397">		return backgroundFilePathtextField.getText();</span>
+	}
+	
+	@Override
+	public void setBackgronudPicturePath(String path) {
+<span class="nc" id="L402">		backgroundFilePathtextField.setText(path);</span>
+<span class="nc" id="L403">	}	</span>
+
+	@Override
+	public void setDrink(Drink drink) {
+<span class="nc" id="L407">		this.drink = drink;</span>
+<span class="nc" id="L408">		drinkSettingsPanel.removeAll();</span>
+<span class="nc" id="L409">		drinkSettingsPanel.add(drinkComboBox, BorderLayout.NORTH);</span>
+<span class="nc" id="L410">		drinkSettingsPanel.add(createDrinkSettingsPanel(drink), BorderLayout.CENTER);</span>
+<span class="nc" id="L411">		validate();</span>
+<span class="nc" id="L412">		repaint();</span>
+<span class="nc" id="L413">	}</span>
+
+	@Override
+	public String getRunningMessage() {
+<span class="nc" id="L417">		return runningMessageTextField.getText();</span>
+	}
+
+	@Override
+	public int getRunningMessageSpeed() {
+<span class="nc" id="L422">		return runningMessageSpeedSlider.getValue();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

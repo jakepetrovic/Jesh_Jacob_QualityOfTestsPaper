@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PowerUpHitMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.round</a> &gt; <span class="el_source">PowerUpHitMsg.java</span></div><h1>PowerUpHitMsg.java</h1><pre class="source lang-java linenums">package messages.round;
+
+import common.GameObject;
+import client.ClientPlayer;
+import common.PowerUp;
+
+import client.ClientGameRound;
+
+/**
+ * Message, that a player has hit a powerup
+ * 
+ * @author Bj�rn
+ * 
+ */
+public class PowerUpHitMsg implements RoundServerMsg {
+<span class="fc" id="L16">	private static int SPEED = 1;</span>
+<span class="fc" id="L17">	private static int BOWL_BOMB = 2;</span>
+<span class="fc" id="L18">	private static int BOMB_LONGER = 3;</span>
+<span class="fc" id="L19">	private static int MORE_BOMBS = 4;</span>
+
+	private int type;
+	private int playerID;
+	private int powerUpID;
+
+	/**
+	 * @return
+	 */
+	public int getType() {
+<span class="nc" id="L29">		return type;</span>
+	}
+
+	/**
+	 * @return
+	 */
+	public int getPlayerID() {
+<span class="nc" id="L36">		return playerID;</span>
+	}
+
+	/**
+	 * @return
+	 */
+	public int getPowerUpID() {
+<span class="nc" id="L43">		return powerUpID;</span>
+	}
+
+	/**
+	 * @param type,
+	 *            the type of the powerup
+	 * @param powerUpID,
+	 *            the id of the powerup
+	 * @param playerID,
+	 *            the id of the player
+	 */
+<span class="fc" id="L54">	public PowerUpHitMsg(int type, int powerUpID, int playerID) {</span>
+<span class="fc" id="L55">		this.type = type;</span>
+<span class="fc" id="L56">		this.playerID = playerID;</span>
+<span class="fc" id="L57">		this.powerUpID = powerUpID;</span>
+<span class="fc" id="L58">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void execute(ClientGameRound round) {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		if (ClientPlayer.class.isInstance(round.getGameObjectById(playerID))) {</span>
+<span class="nc" id="L67">			ClientPlayer player = (ClientPlayer) round</span>
+					.getGameObjectById(playerID);
+<span class="nc bnc" id="L69" title="All 2 branches missed.">			if (getType() == SPEED) {</span>
+<span class="nc" id="L70">				player.increaseSpeed();</span>
+				//player.resetBombDiameter();
+<span class="nc" id="L72">				player.resetBowlBombs();</span>
+				//player.resetMaxBombs();
+			}
+<span class="nc bnc" id="L75" title="All 2 branches missed.">			if (getType() == BOWL_BOMB) {</span>
+<span class="nc" id="L76">				player.setBowlBombs();</span>
+				//player.resetBombDiameter();
+<span class="nc" id="L78">				player.resetSpeed();</span>
+				//player.resetMaxBombs();
+			}
+<span class="nc bnc" id="L81" title="All 2 branches missed.">			if (getType() == BOMB_LONGER) {</span>
+<span class="nc" id="L82">				player.increaseBombDiameter();</span>
+<span class="nc" id="L83">				player.resetSpeed();</span>
+<span class="nc" id="L84">				player.resetBowlBombs();</span>
+				//player.resetMaxBombs();
+			}
+<span class="nc bnc" id="L87" title="All 2 branches missed.">			if (getType() == MORE_BOMBS) {</span>
+<span class="nc" id="L88">				player.increaseMaxBombs();</span>
+				//player.resetBombDiameter();
+<span class="nc" id="L90">				player.resetBowlBombs();</span>
+<span class="nc" id="L91">				player.resetSpeed();</span>
+			}
+		}
+<span class="nc bnc" id="L94" title="All 2 branches missed.">		if (PowerUp.class.isInstance(round.getGameObjectById(powerUpID))) {</span>
+<span class="nc" id="L95">			PowerUp powerUp = (PowerUp) round.getGameObjectById(powerUpID);</span>
+<span class="nc" id="L96">			powerUp.setInactive();</span>
+<span class="nc" id="L97">			powerUp.setInvisible();</span>
+		}
+<span class="nc" id="L99">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

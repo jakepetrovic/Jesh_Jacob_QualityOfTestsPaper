@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ResourceUtils.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.io</a> &gt; <span class="el_source">ResourceUtils.java</span></div><h1>ResourceUtils.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.io;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.util.ClassUtils;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+/**
+ * Static helper methods for loading resources.
+ *
+ * @author Jeremy Haile
+ * @since 0.2
+ */
+public class ResourceUtils {
+
+    //TODO complete JavaDoc
+
+    /**
+     * Resource path prefix that specifies to load from a classpath location, value is &lt;b&gt;&lt;code&gt;classpath:&lt;/code&gt;&lt;/b&gt;
+     */
+    public static final String CLASSPATH_PREFIX = &quot;classpath:&quot;;
+    /**
+     * Resource path prefix that specifies to load from a url location, value is &lt;b&gt;&lt;code&gt;url:&lt;/code&gt;&lt;/b&gt;
+     */
+    public static final String URL_PREFIX = &quot;url:&quot;;
+    /**
+     * Resource path prefix that specifies to load from a file location, value is &lt;b&gt;&lt;code&gt;file:&lt;/code&gt;&lt;/b&gt;
+     */
+    public static final String FILE_PREFIX = &quot;file:&quot;;
+
+    /** Private internal log instance. */
+<span class="fc" id="L54">    private static final Log log = LogFactory.getLog(ResourceUtils.class);</span>
+
+
+    /**
+     * Prevent instantiation.
+     */
+<span class="nc" id="L60">    private ResourceUtils() {</span>
+<span class="nc" id="L61">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the resource path is not null and starts with one of the recognized
+     * resource prefixes ({@link #CLASSPATH_PREFIX CLASSPATH_PREFIX}, 
+     * {@link #URL_PREFIX URL_PREFIX}, or {@link #FILE_PREFIX FILE_PREFIX}), &lt;code&gt;false&lt;/code&gt; otherwise.
+     *
+     * @param resourcePath the resource path to check
+     * @return &lt;code&gt;true&lt;/code&gt; if the resource path is not null and starts with one of the recognized
+     * resource prefixes, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * @since 0.9
+     */
+    public static boolean hasResourcePrefix(String resourcePath) {
+<span class="fc bfc" id="L74" title="All 8 branches covered.">        return resourcePath != null &amp;&amp;</span>
+                (resourcePath.startsWith(CLASSPATH_PREFIX) ||
+                        resourcePath.startsWith(URL_PREFIX) ||
+                        resourcePath.startsWith(FILE_PREFIX));
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the resource at the specified path exists, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * @param resourcePath the path of the resource to check.
+     * @return &lt;code&gt;true&lt;/code&gt; if the resource at the specified path exists, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * @since 0.9
+     */
+    public static boolean resourceExists(String resourcePath) {
+<span class="fc" id="L87">        InputStream stream = null;</span>
+<span class="fc" id="L88">        boolean exists = false;</span>
+
+        try {
+<span class="nc" id="L91">            stream = getInputStreamForPath(resourcePath);</span>
+<span class="nc" id="L92">            exists = true;</span>
+<span class="fc" id="L93">        } catch (IOException e) {</span>
+<span class="fc" id="L94">            stream = null;</span>
+        } finally {
+<span class="pc bpc" id="L96" title="4 of 6 branches missed.">            if (stream != null) {</span>
+                try {
+<span class="nc" id="L98">                    stream.close();</span>
+<span class="nc" id="L99">                } catch (IOException ignored) {</span>
+<span class="pc" id="L100">                }</span>
+            }
+        }
+
+<span class="fc" id="L104">        return exists;</span>
+    }
+
+
+    /**
+     * Returns the InputStream for the resource represented by the specified path.
+     *
+     * &lt;p&gt;The supporting prefixes are defined as as *_PREFIX constants in this class.&lt;/p&gt;
+     *
+     * @param resourcePath the String path representing the resource to obtain.
+     * @return the InputStraem for the specified resource.
+     * @throws IOException if there is a problem acquiring the resource at the specified path.
+     */
+    public static InputStream getInputStreamForPath(String resourcePath) throws IOException {
+
+        InputStream is;
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (resourcePath.startsWith(CLASSPATH_PREFIX)) {</span>
+<span class="fc" id="L121">            is = loadFromClassPath(stripPrefix(resourcePath));</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        } else if (resourcePath.startsWith(URL_PREFIX)) {</span>
+<span class="nc" id="L124">            is = loadFromUrl(stripPrefix(resourcePath));</span>
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        } else if (resourcePath.startsWith(FILE_PREFIX)) {</span>
+<span class="nc" id="L127">            is = loadFromFile(stripPrefix(resourcePath));</span>
+
+        } else {
+<span class="nc" id="L130">            is = loadFromFile(resourcePath);</span>
+        }
+
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        if (is == null) {</span>
+<span class="fc" id="L134">            throw new IOException(&quot;Resource [&quot; + resourcePath + &quot;] could not be found.&quot;);</span>
+        }
+
+<span class="nc" id="L137">        return is;</span>
+    }
+
+    private static InputStream loadFromFile(String path) throws IOException {
+
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L143">            log.debug(&quot;Opening file [&quot; + path + &quot;]...&quot;);</span>
+        }
+
+<span class="nc" id="L146">        return new FileInputStream(path);</span>
+    }
+
+    private static InputStream loadFromUrl(String urlPath) throws IOException {
+
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L152">            log.debug(&quot;Opening url [&quot; + urlPath + &quot;]...&quot;);</span>
+        }
+
+<span class="nc" id="L155">        URL url = new URL(urlPath);</span>
+<span class="nc" id="L156">        return url.openStream();</span>
+    }
+
+    private static InputStream loadFromClassPath(String path) {
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L161">            log.debug(&quot;Opening resource from class path [&quot; + path + &quot;]...&quot;);</span>
+        }
+
+<span class="fc" id="L164">        return ClassUtils.getResourceAsStream(path);</span>
+    }
+
+    private static String stripPrefix(String resourcePath) {
+<span class="fc" id="L168">        return resourcePath.substring(resourcePath.indexOf(&quot;:&quot;) + 1);</span>
+    }
+
+    public static void close(InputStream is) {
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        if (is != null) {</span>
+            try {
+<span class="fc" id="L174">                is.close();</span>
+<span class="nc" id="L175">            } catch (IOException e) {</span>
+<span class="nc" id="L176">                log.warn(&quot;Error closing input stream.&quot;, e);</span>
+<span class="fc" id="L177">            }</span>
+        }
+<span class="fc" id="L179">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientGameSession.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client</a> &gt; <span class="el_source">ClientGameSession.java</span></div><h1>ClientGameSession.java</h1><pre class="source lang-java linenums">package client;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+
+import messages.session.PlayerInfo;
+import messages.session.PlayerLeftMsg;
+
+import org.apache.log4j.Logger;
+
+import client.gui.StartFrame;
+import client.view.GameCanvas;
+
+import common.GameSession;
+import common.Map;
+import common.Player;
+
+import db.DBGameUser;
+
+/**
+ * Represents a session on the client. A session consists of several game
+ * rounds.
+ * 
+ * @author andi, Bj�rn, daniel
+ * 
+ */
+public class ClientGameSession extends GameSession {
+
+	private int id;
+<span class="nc" id="L35">	private Set&lt;ClientPlayer&gt; players = new HashSet&lt;ClientPlayer&gt;();</span>
+
+	private HashMap&lt;Integer, String&gt; playerNames;
+	private ClientGameRound currentRound;
+<span class="nc" id="L39">	private Logger logger = Logger.getLogger(ClientGameSession.class);</span>
+
+	/**
+	 * Creates a new game session from the arguments.
+	 * 
+	 * @param name
+	 *            The name of this session.
+	 * @param maps
+	 *            A list of map names that will be used for this session.
+	 * @param nrOfPlayers
+	 *            The number of players that will participate
+	 * @param totalRounds
+	 *            The number of rounds to play
+	 * @param idOffset
+	 *            The id offset for this session.
+	 */
+	public ClientGameSession(String name, List&lt;String&gt; maps,
+			ImageIcon mapPreview, int nrOfPlayers, int totalRounds, int idOffset) {
+<span class="nc" id="L57">		super(name, maps, mapPreview, nrOfPlayers, totalRounds);</span>
+<span class="nc" id="L58">		this.id = idOffset;</span>
+<span class="nc" id="L59">		this.playerNames = new HashMap&lt;Integer, String&gt;();</span>
+<span class="nc" id="L60">	}</span>
+
+	/**
+	 * Starts the active game round.
+	 * 
+	 * @see common.GameSession#beginRound()
+	 */
+	@Override
+	public void beginRound() {
+<span class="nc" id="L69">		currentRound.start();</span>
+<span class="nc" id="L70">	}</span>
+
+	/**
+	 * Return the next unqiue id.
+	 * 
+	 * @return a unique id.
+	 */
+	public int getNextId() {
+<span class="nc" id="L78">		return ++id;</span>
+	}
+
+	/**
+	 * Adds a player to this session.
+	 * 
+	 * @param player
+	 */
+	public void addPlayer(ClientPlayer player) {
+<span class="nc" id="L87">		players.add(player);</span>
+<span class="nc" id="L88">	}</span>
+
+	/**
+	 * Removes a player from this session.
+	 * 
+	 * @param player
+	 */
+	public void removePlayer(ClientPlayer player) {
+<span class="nc" id="L96">		players.remove(player);</span>
+<span class="nc" id="L97">	}</span>
+
+	/**
+	 * Cleans up after a round has finished. This involves calculation of
+	 * scores.
+	 * 
+	 * @see common.GameSession#doPostRoundProcessing()
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see common.GameSession#doPostRoundProcessing()
+	 */
+	@Override
+	public void doPostRoundProcessing() {
+<span class="nc" id="L112">		logger.info(&quot;in ClientGameSession#doPostRoundProcessing()&quot;);</span>
+<span class="nc" id="L113">		StartFrame.getInstance().removeChatMessageSession();</span>
+
+		// register user with score for round highscore
+<span class="nc" id="L116">		logger.info(&quot;before nameforscore&quot;);</span>
+
+<span class="nc" id="L118">		currentRound.endRound();</span>
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		for (ClientPlayer player : players) {</span>
+
+<span class="nc" id="L122">			player.resetSpeed();</span>
+<span class="nc" id="L123">			player.resetBowlBombs();</span>
+<span class="nc" id="L124">			player.resetMaxBombs();</span>
+<span class="nc" id="L125">			player.resetBombDiameter();</span>
+<span class="nc" id="L126">		}</span>
+
+		// currentRound.terminateRound();
+<span class="nc bnc" id="L129" title="All 4 branches missed.">		if (currentRoundNr &lt; totalRounds &amp;&amp; playerNames.size() &gt; 1) {</span>
+<span class="nc" id="L130">			currentRound.setStatus(&quot;Waiting&quot;);</span>
+<span class="nc" id="L131">			StartFrame.getInstance().showHighscoreLobby();</span>
+<span class="nc" id="L132">			StartFrame.getInstance().removeSessionHighScoreData();</span>
+		} else {
+
+<span class="nc" id="L135">			doPostSessionProcessing();</span>
+		}
+
+<span class="nc" id="L138">	}</span>
+
+	/**
+	 * 
+	 * @see common.GameSession#doPostSessionProcessing()
+	 */
+	@Override
+	protected void doPostSessionProcessing() {
+<span class="nc" id="L146">		logger.info(&quot;in ClientGameSession#doPostSessionProcessing()&quot;);</span>
+<span class="nc" id="L147">		currentRound = null;</span>
+<span class="nc" id="L148">		BomberClient.getInstance().closeSessionAndShowHighscores();</span>
+<span class="nc" id="L149">		StartFrame.getInstance().jPanelHighscoreLobby.jButtonNextRound</span>
+				.setVisible(false);
+<span class="nc" id="L151">		StartFrame.getInstance().jPanelHighscoreLobby.jLabelGameOver</span>
+				.setVisible(true);
+<span class="nc" id="L153">		StartFrame.getInstance().jPanelHighscoreLobby.repaint();</span>
+		
+<span class="nc" id="L155">	}</span>
+
+	/**
+	 * Returns the active round.
+	 * 
+	 * @return the active round.
+	 */
+	public ClientGameRound getCurrentRound() {
+<span class="nc" id="L163">		return currentRound;</span>
+	}
+
+	/**
+	 * Creates a new game round and configures it. After this method returns the
+	 * newly created round will be stored in currentRound and the round number
+	 * will be increased by 1.
+	 * 
+	 * @param players
+	 *            the players that participate in this round.
+	 * @param map
+	 *            The map that is used in this round.
+	 */
+	public void initializeRound(Vector&lt;PlayerInfo&gt; players, Map map) {
+<span class="nc" id="L177">		GameCanvas gameCanvas = StartFrame.getInstance().getGameCanvas();</span>
+<span class="nc" id="L178">		ClientGameRound round = new ClientGameRound(this, gameCanvas);</span>
+<span class="nc" id="L179">		round.setMap(map);</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		for (PlayerInfo pi : players) {</span>
+<span class="nc" id="L181">			ClientPlayer player = new ClientPlayer(pi.getPosition(), pi.getId());</span>
+<span class="nc" id="L182">			player.setRemote(true);</span>
+<span class="nc" id="L183">			player.setName(pi.getName());</span>
+<span class="nc" id="L184">			round.addPlayer(player.getId(), player);</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">			if (pi.getId() == id) {</span>
+<span class="nc" id="L186">				logger.debug(&quot;Attaching LocalControl to ClientPlayer #&quot;</span>
+						+ player.getId());
+<span class="nc" id="L188">				player.setRemote(false);</span>
+<span class="nc" id="L189">				round.setLocalPlayer(player);</span>
+			}
+<span class="nc" id="L191">		}</span>
+
+<span class="nc" id="L193">		currentRound = round;</span>
+<span class="nc" id="L194">		currentRoundNr++;</span>
+<span class="nc" id="L195">	}</span>
+
+	/**
+	 * Registers a player with the given id and name for this session.
+	 * 
+	 * @param playerId
+	 *            The id that is used to identify the player.
+	 * @param playerName
+	 *            The human friendly identification of the player.
+	 */
+	public void join(int playerId, String playerName) {
+<span class="nc" id="L206">		playerNames.put(playerId, playerName);</span>
+<span class="nc" id="L207">		logger.info(playerName + &quot; has joined the game&quot;);</span>
+
+<span class="nc" id="L209">	}</span>
+
+	/**
+	 * Removes the player identified by the given id from this session.
+	 * 
+	 * @param playerId
+	 *            The id of the player that should be kicked.
+	 */
+	public void leave(int playerId) {
+<span class="nc" id="L218">		logger.info(playerNames.get(id) + &quot; is leaving the game right now&quot;);</span>
+<span class="nc" id="L219">		playerNames.remove(playerId);</span>
+<span class="nc" id="L220">	}</span>
+
+	/**
+	 * @return user round scores within a session
+	 */
+	public DBGameUser[] getUserScores() {
+
+<span class="nc" id="L227">		DBGameUser[] dbgu = new DBGameUser[players.size()];</span>
+<span class="nc" id="L228">		int i = 0;</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">		for (Player player : players) {</span>
+<span class="nc" id="L230">			DBGameUser dbguser = new DBGameUser();</span>
+<span class="nc" id="L231">			dbguser.setName(player.getName());</span>
+<span class="nc" id="L232">			dbguser.setScore(player.getRoundScore());</span>
+<span class="nc" id="L233">			dbgu[i++] = dbguser;</span>
+
+<span class="nc" id="L235">		}</span>
+<span class="nc" id="L236">		return dbgu;</span>
+	}
+
+	/**
+	 * @param idOffset
+	 */
+	public void setIdOffset(int idOffset) {
+<span class="nc" id="L243">		id = idOffset;</span>
+
+<span class="nc" id="L245">	}</span>
+
+	/**
+	 * @param sender
+	 * @param msg
+	 */
+	public void addChat(String sender, String msg) {
+<span class="nc" id="L252">		StartFrame.getInstance().addChatMessageSession(sender, msg);</span>
+<span class="nc" id="L253">	}</span>
+
+	public int getId() {
+<span class="nc" id="L256">		return id;</span>
+	}
+
+	/**
+	 * 
+	 */
+	public void leave() {
+<span class="nc" id="L263">		logger.info(&quot;player left msg sent&quot;);</span>
+<span class="nc" id="L264">		BomberClient.getInstance().sendMsg(new PlayerLeftMsg());</span>
+<span class="nc" id="L265">	}</span>
+
+	public Set&lt;ClientPlayer&gt; getPlayers() {
+<span class="nc" id="L268">		return players;</span>
+	}
+
+	public java.util.Map&lt;Integer, String&gt; getPlayerNames() {
+<span class="nc" id="L272">		return playerNames;</span>
+	}
+
+	public void setSessionScore(HashMap&lt;String, Integer&gt; sessionscore) {
+<span class="nc" id="L276">		StartFrame.getInstance().updateSessionScoreData(sessionscore);</span>
+
+<span class="nc" id="L278">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

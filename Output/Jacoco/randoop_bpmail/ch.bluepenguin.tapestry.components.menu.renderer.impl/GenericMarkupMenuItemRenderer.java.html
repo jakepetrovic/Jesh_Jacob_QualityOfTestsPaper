@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GenericMarkupMenuItemRenderer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.tapestry.components.menu.renderer.impl</a> &gt; <span class="el_source">GenericMarkupMenuItemRenderer.java</span></div><h1>GenericMarkupMenuItemRenderer.java</h1><pre class="source lang-java linenums">// Decompiled by DJ v3.8.8.85 Copyright 2005 Atanas Neshkov  Date: 16.05.2005 11:59:04
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   GenericMarkupMenuItemRenderer.java
+
+package ch.bluepenguin.tapestry.components.menu.renderer.impl;
+
+import ch.bluepenguin.tapestry.components.menu.model.IMenuItem;
+import ch.bluepenguin.tapestry.components.menu.renderer.IMenuItemRenderer;
+import java.util.*;
+import org.apache.tapestry.IMarkupWriter;
+
+// Referenced classes of package ch.bluepenguin.tapestry.components.menu.renderer.impl:
+//            AbstractMenuItemRenderer
+
+public class GenericMarkupMenuItemRenderer extends AbstractMenuItemRenderer
+{
+
+    public GenericMarkupMenuItemRenderer()
+<span class="fc" id="L20">    {</span>
+<span class="fc" id="L21">    }</span>
+
+    public void setNestedRenderer(IMenuItemRenderer nested)
+    {
+<span class="fc" id="L25">        this.nested = nested;</span>
+<span class="fc" id="L26">    }</span>
+
+    public void setElement(String element)
+    {
+<span class="fc" id="L30">        this.element = element;</span>
+<span class="fc" id="L31">    }</span>
+
+    public void setAttributes(HashMap attributes)
+    {
+<span class="nc" id="L35">        this.attributes = attributes;</span>
+<span class="nc" id="L36">    }</span>
+
+    public void setText(String text)
+    {
+<span class="fc" id="L40">        this.text = text;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void startRender(IMarkupWriter writer, IMenuItem item)
+    {
+<span class="nc" id="L45">        writer.begin(element);</span>
+<span class="nc bnc" id="L46" title="All 4 branches missed.">        if(attributes != null &amp;&amp; attributes.keySet() != null)</span>
+        {
+            String attributeName;
+            String attributeValue;
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            for(Iterator attributeNames = attributes.keySet().iterator(); attributeNames.hasNext(); writer.attribute(attributeName, attributeValue))</span>
+            {
+<span class="nc" id="L52">                attributeName = (String)attributeNames.next();</span>
+<span class="nc" id="L53">                attributeValue = (String)attributes.get(attributeName);</span>
+            }
+
+        }
+<span class="nc" id="L57">        writer.print(text);</span>
+<span class="nc" id="L58">        nested.render(writer.getNestedWriter(), item);</span>
+<span class="nc" id="L59">    }</span>
+
+    IMenuItemRenderer nested;
+    private String element;
+    private HashMap attributes;
+    private String text;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

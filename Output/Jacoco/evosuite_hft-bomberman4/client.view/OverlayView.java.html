@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OverlayView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">OverlayView.java</span></div><h1>OverlayView.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client.view;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
+
+/**
+ * @author andi
+ *
+ */
+<span class="nc" id="L16">public class OverlayView extends View {</span>
+
+	private String text;
+	
+<span class="nc" id="L20">	private static Font font = new Font(&quot;Dialog&quot;, Font.PLAIN, 72);</span>
+	
+	private static FontMetrics fontMetrics;
+	
+<span class="nc" id="L24">	private boolean dirty = true;</span>
+	
+	private int baseX;
+	
+	private int baseY;
+	
+	public void setText(String text){
+<span class="nc" id="L31">		this.text = text;</span>
+<span class="nc" id="L32">		this.dirty = true;</span>
+<span class="nc" id="L33">	}</span>
+	
+	/* (non-Javadoc)
+	 * @see client.view.View#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics gfx) {
+<span class="nc bnc" id="L40" title="All 2 branches missed.">		if(text == null){</span>
+<span class="nc" id="L41">			return;</span>
+		}
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		if(dirty){</span>
+<span class="nc" id="L44">			fontMetrics = gfx.getFontMetrics();</span>
+<span class="nc" id="L45">			baseX = getBaseX(text, gfx);</span>
+<span class="nc" id="L46">			baseY = getBaseY(text, gfx);</span>
+		}
+<span class="nc" id="L48">		Color pre = gfx.getColor();</span>
+<span class="nc" id="L49">		gfx.setColor(Color.RED);</span>
+<span class="nc" id="L50">		gfx.setFont(font);</span>
+<span class="nc" id="L51">		gfx.drawString(text, baseX, baseY);</span>
+<span class="nc" id="L52">		gfx.setColor(pre);</span>
+<span class="nc" id="L53">	}</span>
+	
+	private int getBaseX(String string, Graphics gfx){
+<span class="nc" id="L56">		return (800-fontMetrics.stringWidth(string))/2;</span>
+	}
+	
+	private int getBaseY(String string, Graphics gfx){
+<span class="nc" id="L60">		return 300 + fontMetrics.getHeight()/2;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

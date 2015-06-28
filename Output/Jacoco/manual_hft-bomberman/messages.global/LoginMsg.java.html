@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.global</a> &gt; <span class="el_source">LoginMsg.java</span></div><h1>LoginMsg.java</h1><pre class="source lang-java linenums">package messages.global;
+
+import server.BomberServer;
+import server.ClientInfo;
+import server.ServerLogin;
+
+/**
+ * LoginMsg.java
+ * 
+ * Message from Client to Server, to request the login on the server
+ * 
+ * @author Bj�rn
+ */
+public class LoginMsg implements GlobalClientMsg {
+<span class="fc" id="L15">	public static int REGISTER = 1;</span>
+<span class="fc" id="L16">	public static int LOGIN = 2;</span>
+<span class="fc" id="L17">	public static int GUEST_LOGIN = 3;</span>
+
+	/**
+	 * username
+	 * 
+	 */
+	private String username;
+
+	/**
+	 * password
+	 * 
+	 */
+	private String password;
+
+	/**
+	 * type of the login (register, login, guest-login)
+	 * 
+	 */
+	private int action;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param username
+	 * @param password
+	 * @param action
+	 */
+	public LoginMsg(String username, String password, int action) {
+<span class="fc" id="L45">		super();</span>
+<span class="fc" id="L46">		this.action = action;</span>
+<span class="fc" id="L47">		this.password = password;</span>
+<span class="fc" id="L48">		this.username = username;</span>
+<span class="fc" id="L49">	}</span>
+
+	/**
+	 * Constructor
+	 * 
+	 * @param username
+	 * @param action
+	 */
+	public LoginMsg(String username, int action) {
+<span class="nc" id="L58">		super();</span>
+<span class="nc" id="L59">		this.action = action;</span>
+<span class="nc" id="L60">		this.username = username;</span>
+<span class="nc" id="L61">	}</span>
+
+	public String getUsername() {
+<span class="fc" id="L64">		return username;</span>
+	}
+
+	public void setUsername(String username) {
+<span class="fc" id="L68">		this.username = username;</span>
+<span class="fc" id="L69">	}</span>
+
+	public String getPassword() {
+<span class="fc" id="L72">		return password;</span>
+	}
+
+	public void setPassword(String password) {
+<span class="fc" id="L76">		this.password = password;</span>
+<span class="fc" id="L77">	}</span>
+
+	public int getAction() {
+<span class="fc" id="L80">		return action;</span>
+	}
+
+	public void setAction(int action) {
+<span class="fc" id="L84">		this.action = action;</span>
+<span class="fc" id="L85">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(BomberServer bomberSrv, ClientInfo sender) {
+<span class="nc" id="L92">		ServerLogin login = new ServerLogin();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		if (action == REGISTER) {</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">			if (login.register(this.username, this.password) == ServerLogin.LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L95">				sender.setName(username);</span>
+<span class="nc" id="L96">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.LOGIN_SUCCESSFUL);
+<span class="nc" id="L98">				sender.sendMsg(msg);</span>
+<span class="nc" id="L99">			} else {</span>
+<span class="nc" id="L100">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.USERNAME_TAKEN);
+<span class="nc" id="L102">				sender.sendMsg(msg);</span>
+			}
+		}
+<span class="nc bnc" id="L105" title="All 2 branches missed.">		if (action == LOGIN) {</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">			if (login.login(this.username, this.password) == ServerLogin.LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L107">				sender.setName(username);</span>
+<span class="nc" id="L108">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.LOGIN_SUCCESSFUL);
+<span class="nc" id="L110">				sender.sendMsg(msg);</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">			} else if (login.login(this.username, this.password) == ServerLogin.WRONG_PASSWORD) {</span>
+<span class="nc" id="L112">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.WRONG_PASSWORD);
+<span class="nc" id="L114">				sender.sendMsg(msg);</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">			} else if (login.login(this.username, this.password) == ServerLogin.WRONG_USERNAME) {</span>
+<span class="nc" id="L116">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.WRONG_USERNAME);
+<span class="nc" id="L118">				sender.sendMsg(msg);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">			} else if (login.login(this.username, this.password) == ServerLogin.USER_STILL_LOGGED_IN) {</span>
+<span class="nc" id="L120">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.USER_STILL_LOGGED_IN);
+<span class="nc" id="L122">				sender.sendMsg(msg);</span>
+			}
+		}
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		if (action == GUEST_LOGIN) {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">			if (login.loginGuest(this.username) == ServerLogin.LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L127">				sender.setName(username);</span>
+<span class="nc" id="L128">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.LOGIN_SUCCESSFUL);
+<span class="nc" id="L130">				sender.sendMsg(msg);</span>
+<span class="nc" id="L131">			} else {</span>
+<span class="nc" id="L132">				GlobalStateMsg msg = new GlobalStateMsg(</span>
+						GlobalStateMsg.USERNAME_TAKEN);
+<span class="nc" id="L134">				sender.sendMsg(msg);</span>
+			}
+		}
+<span class="nc" id="L137">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

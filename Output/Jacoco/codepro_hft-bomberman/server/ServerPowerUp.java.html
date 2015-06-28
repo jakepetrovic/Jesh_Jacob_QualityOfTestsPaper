@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ServerPowerUp.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">ServerPowerUp.java</span></div><h1>ServerPowerUp.java</h1><pre class="source lang-java linenums">package server;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.Collection;
+
+import org.apache.log4j.Logger;
+
+import messages.round.PowerUpHitMsg;
+
+import common.Actor;
+import common.Constants;
+import common.GameObject;
+import common.Player;
+import common.PowerUp;
+
+/**
+ * @author Bj�rn
+ * 
+ */
+public class ServerPowerUp extends PowerUp {
+<span class="fc" id="L22">	private static final Logger logger = Logger.getLogger(Actor.class);</span>
+
+	private ServerGameSession session;
+
+	public ServerPowerUp(Point position, ServerGameSession session) {
+<span class="fc" id="L27">		super(position);</span>
+<span class="fc" id="L28">		this.session = session;</span>
+<span class="fc" id="L29">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void updateWithCollisionCheck(Collection&lt;GameObject&gt; gameObjects) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		if (isVisible()) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">			for (GameObject gameObject : gameObjects) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">				if (ServerPlayer.class.isInstance(gameObject)) {</span>
+<span class="nc" id="L40">					ServerPlayer player = (ServerPlayer) gameObject;</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">					if (checkHit(player)) {</span>
+<span class="nc" id="L42">						PowerUpHitMsg msg = new PowerUpHitMsg(getTypeInt(),</span>
+								getId(), gameObject.getId());
+<span class="nc" id="L44">						session.broadcastMsg(msg);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">						if (getTypeInt() == 1) {</span>
+<span class="nc" id="L46">							player.increaseSpeed();</span>
+						}
+<span class="nc" id="L48">						setInactive();</span>
+<span class="nc" id="L49">						setInvisible();</span>
+<span class="nc" id="L50">						break;</span>
+					}
+				}
+<span class="nc" id="L53">			}</span>
+		}
+<span class="nc" id="L55">	}</span>
+
+	/**
+	 * check if a gameObject hits the powerup.
+	 * 
+	 * @param gameObject
+	 * @return
+	 */
+	public boolean checkHit(ServerPlayer player) {
+<span class="nc" id="L64">		Rectangle rect = getCollisionRectangle();</span>
+<span class="nc" id="L65">		Rectangle rect2 = player.getCollisionRectangle();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		if (this.getId() != player.getId()) {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">			if (rect.intersects(rect2)) {</span>
+<span class="nc" id="L68">				logger.info(&quot;Player &quot; + player.getId() + &quot; hit Power UP &quot;</span>
+						+ getId());
+<span class="nc" id="L70">				return true;</span>
+			}
+		}
+<span class="nc" id="L73">		return false;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

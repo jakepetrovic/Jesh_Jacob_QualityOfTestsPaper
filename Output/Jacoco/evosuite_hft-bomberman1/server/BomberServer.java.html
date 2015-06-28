@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BomberServer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">BomberServer.java</span></div><h1>BomberServer.java</h1><pre class="source lang-java linenums">package server;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+
+import messages.Message;
+import messages.global.GlobalServerMsg;
+import messages.global.SessionDetailsMsg;
+import messages.global.SessionListMsg;
+
+import org.apache.log4j.Logger;
+import org.hsqldb.Server;
+import org.hsqldb.jdbc.jdbcDataSource;
+
+import common.Constants;
+
+
+/**
+ * This is the main server class. It is responsible for accepting connections
+ * from clients and starting new games/session.
+ * 
+ * @author Steffen, Bj�rn, Daniel
+ */
+public class BomberServer {
+
+<span class="nc" id="L36">	private static final Logger logger = Logger.getLogger(BomberServer.class);</span>
+	
+	/**
+	 * The BomberServer singleton.
+	 */
+	private static BomberServer bomberServer;
+
+	/**
+	 * The ServerSocket on which connections are accepted.
+	 */
+	private ServerSocket srvSocket;
+
+	/**
+	 * The sessions currently running on this on this server. key: session name,
+	 * value: corresponding session object
+	 */
+<span class="nc" id="L52">	private HashMap&lt;String, ServerGameSession&gt; gameSessions = new HashMap&lt;String, ServerGameSession&gt;();</span>
+
+	/**
+	 * Contains all the clients who are currently in the global lobby.
+	 */
+<span class="nc" id="L57">	private Vector&lt;ClientInfo&gt; globalClients = new Vector&lt;ClientInfo&gt;();</span>
+
+	/**
+	 * Contains all the clients who are currently connected to the Server.
+	 */
+<span class="nc" id="L62">	private Vector&lt;ClientInfo&gt; allClients = new Vector&lt;ClientInfo&gt;();</span>
+
+<span class="nc" id="L64">	private static int port = Constants.DEFAULT_SERVER_PORT;</span>
+	
+	private ServerGameSession newSession; 
+	/**
+	 * Private constructor. Creates a new BomberServer. Use the
+	 * getInstance-method to obtain the BomberServer singleton.
+	 */
+<span class="nc" id="L71">	private BomberServer() {</span>
+<span class="nc" id="L72">		startDB();</span>
+
+		try {
+<span class="nc" id="L75">			srvSocket = new ServerSocket(port);</span>
+<span class="nc" id="L76">		} catch (IOException e) {</span>
+<span class="nc" id="L77">			logger.fatal(&quot;Couldn't create ServerSocket&quot;, e);</span>
+<span class="nc" id="L78">		}</span>
+<span class="nc" id="L79">	}</span>
+
+	private void startDB() {
+<span class="nc" id="L82">		String[] options = new String[] { &quot;-database.0&quot;, &quot;hsqldb/datenbank&quot;,</span>
+				&quot;-dbname.0&quot;, &quot;datenbank&quot; };
+<span class="nc" id="L84">		Server.main(options);</span>
+<span class="nc" id="L85">	}</span>
+
+	/**
+	 * Main method. One optional parameter may be specified, which will be
+	 * interpreted as the port number the server accepts client connections on.
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[]) {
+		// try to read user-defined port if specified
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if (args.length &gt; 0) {</span>
+			try {
+<span class="nc" id="L97">				port = Integer.valueOf(args[0]);</span>
+<span class="nc" id="L98">			} catch (NumberFormatException e) {</span>
+<span class="nc" id="L99">				logger</span>
+						.warn(&quot;Incorrect server port specified! Using default...&quot;);
+<span class="nc" id="L101">			}</span>
+		}
+<span class="nc" id="L103">		logger.info(&quot;Starting server on port: &quot; + port);</span>
+<span class="nc" id="L104">		BomberServer bomberSrv = getInstance();</span>
+<span class="nc" id="L105">		bomberSrv.waitForClients();</span>
+<span class="nc" id="L106">	}</span>
+
+	/**
+	 * Accepts incoming client connections.
+	 */
+	public void waitForClients() {
+<span class="nc" id="L112">		new Thread() {</span>
+			public void run() {
+<span class="nc" id="L114">				logger.info(&quot;Waiting for players...&quot;);</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">				while (!isInterrupted()) {</span>
+					Socket clientSocket;
+					try {
+<span class="nc" id="L118">						clientSocket = srvSocket.accept();</span>
+<span class="nc" id="L119">						ClientInfo clientInfo = new ClientInfo(clientSocket);</span>
+<span class="nc" id="L120">						addClientToGlobal(clientInfo);</span>
+<span class="nc" id="L121">						addClient(clientInfo);</span>
+<span class="nc" id="L122">					} catch (IOException e) {</span>
+<span class="nc" id="L123">						logger</span>
+								.fatal(
+										&quot;Couldn't accept connection on ServerSocket&quot;,
+										e);
+<span class="nc" id="L127">					}</span>
+<span class="nc" id="L128">				}</span>
+<span class="nc" id="L129">			}</span>
+		}.start();
+<span class="nc" id="L131">	}</span>
+
+	/**
+	 * Creates a new GameSession.
+	 * 
+	 * @param name
+	 * @param totalRounds
+	 * @return The newly created GameSession-object, null if the session name
+	 *         was already taken
+	 */
+	public ServerGameSession createSession(String name, List&lt;String&gt; maps,
+			ImageIcon mapPreview, int nrOfPlayers, int totalRounds) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">		if (gameSessions.containsKey(name)) {</span>
+<span class="nc" id="L144">			return null;</span>
+		} else {
+<span class="nc" id="L146">			newSession = new ServerGameSession(name, maps,</span>
+					mapPreview, nrOfPlayers, totalRounds);
+<span class="nc" id="L148">			gameSessions.put(name, newSession);</span>
+<span class="nc" id="L149">			newSession.broadcastMsg(new SessionListMsg());</span>
+<span class="nc" id="L150">			broadcastSessionList();</span>
+<span class="nc" id="L151">			return newSession;</span>
+		}
+		
+	}
+	
+	/**
+	 * Creates a SessionListMsg from all open sessions and
+	 * sends it to all clients.
+	 */
+	private void broadcastSessionList(){
+<span class="nc" id="L161">	    SessionListMsg response = new SessionListMsg();</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (ServerGameSession session : getGameSessions()) {</span>
+            // a session has at least one player in it (hacky)
+<span class="nc" id="L164">            int nrOfPlayers = 1;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">            if(session.getCurrentNrOfPlayers() != 0){</span>
+<span class="nc" id="L166">                nrOfPlayers = session.getCurrentNrOfPlayers();</span>
+            }
+           
+<span class="nc" id="L169">            SessionDetailsMsg sessionInfo = new SessionDetailsMsg(session</span>
+                    .getName(), session.getMaps(), session.getPreview(),
+                    session.getTotalNrOfPlayers(), nrOfPlayers, session
+                            .getTotalRounds());
+
+<span class="nc" id="L174">            response.addSessionInfo(sessionInfo);</span>
+<span class="nc" id="L175">        }</span>
+<span class="nc" id="L176">        multicastMsg(response, null);</span>
+<span class="nc" id="L177">	}</span>
+
+	/**
+	 * Sends the message to all clients except the original sender itself.
+	 * 
+	 * @param msg
+	 *            The message to be sent.
+	 * @param sender
+	 *            The original sender of the msg.
+	 */
+	public void multicastMsg(Message msg, ClientInfo sender) {
+<span class="nc bnc" id="L188" title="All 2 branches missed.">		for (ClientInfo participant : globalClients) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">			if (participant != sender) {</span>
+<span class="nc" id="L190">				participant.sendMsg(msg);</span>
+			}
+<span class="nc" id="L192">		}</span>
+<span class="nc" id="L193">	}</span>
+
+	/**
+	 * Broadcasts a message to all connected clients.
+	 * 
+	 * @param msg
+	 *            The message to be sent.
+	 */
+	public void broadcastMsg(Message msg) {
+<span class="nc bnc" id="L202" title="All 2 branches missed.">		for (ClientInfo client : globalClients) {</span>
+<span class="nc" id="L203">			client.sendMsg(msg);</span>
+<span class="nc" id="L204">		}</span>
+<span class="nc" id="L205">	}</span>
+
+	/**
+	 * this will exit the server
+	 * 
+	 * @author Bj�rn
+	 */
+	public void stopServer() {
+<span class="nc" id="L213">		closeDB();</span>
+<span class="nc" id="L214">		logger.info(&quot;Server stopped&quot;);</span>
+<span class="nc" id="L215">		System.exit(0);</span>
+<span class="nc" id="L216">	}</span>
+
+	// shutdown database
+	public static void closeDB() {
+<span class="nc" id="L220">		jdbcDataSource dataSource = setupDataSource();</span>
+		try {
+<span class="nc" id="L222">			Connection connection = dataSource.getConnection();</span>
+<span class="nc" id="L223">			Statement statement = connection.createStatement();</span>
+<span class="nc" id="L224">			statement.execute(&quot;SHUTDOWN&quot;);</span>
+<span class="nc" id="L225">			statement.close();</span>
+<span class="nc" id="L226">			connection.close();</span>
+<span class="nc" id="L227">		} catch (SQLException e) {</span>
+<span class="nc" id="L228">			e.printStackTrace();</span>
+<span class="nc" id="L229">		}</span>
+<span class="nc" id="L230">	}</span>
+
+	private static jdbcDataSource setupDataSource() {
+<span class="nc" id="L233">		jdbcDataSource dataSource = new jdbcDataSource();</span>
+<span class="nc" id="L234">		dataSource.setDatabase(&quot;jdbc:hsqldb:hsql://localhost/datenbank&quot;);</span>
+<span class="nc" id="L235">		dataSource.setUser(&quot;sa&quot;);</span>
+<span class="nc" id="L236">		dataSource.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L237">		return dataSource;</span>
+	}
+
+	/**
+	 * Removes the client whose ClientInfo object is passed as a parameter from
+	 * the global area. As a result this client will no longer receive global
+	 * messages.
+	 * 
+	 * @param clientInfo
+	 */
+	public void removeClientFromGlobal(ClientInfo clientInfo) {
+<span class="nc" id="L248">		globalClients.remove(clientInfo);</span>
+<span class="nc" id="L249">	}</span>
+
+	public void addClientToGlobal(ClientInfo clientInfo) {
+<span class="nc" id="L252">		globalClients.add(clientInfo);</span>
+<span class="nc" id="L253">	}</span>
+
+	/**
+	 * Removes a client
+	 * 
+	 * @param clientInfo
+	 */
+	public void removeClient(ClientInfo clientInfo) {
+<span class="nc" id="L261">		allClients.remove(clientInfo);</span>
+<span class="nc" id="L262">	}</span>
+
+	public void addClient(ClientInfo clientInfo) {
+<span class="nc" id="L265">		allClients.add(clientInfo);</span>
+<span class="nc" id="L266">	}</span>
+
+	/**
+	 * Static factory method.
+	 * 
+	 * @return The BomberServer Singleton
+	 */
+	public static BomberServer getInstance() {
+<span class="nc bnc" id="L274" title="All 2 branches missed.">		if (bomberServer == null) {</span>
+<span class="nc" id="L275">			bomberServer = new BomberServer();</span>
+		}
+<span class="nc" id="L277">		return bomberServer;</span>
+	}
+
+	public Collection&lt;ServerGameSession&gt; getGameSessions() {
+<span class="nc" id="L281">		return gameSessions.values();</span>
+	}
+
+	public ServerGameSession getGameSession(String name) {
+<span class="nc" id="L285">		return gameSessions.get(name);</span>
+	}
+
+	public void removeSession(String name) {
+<span class="nc" id="L289">		gameSessions.remove(name);</span>
+<span class="nc" id="L290">		newSession.broadcastMsg(new SessionListMsg());</span>
+<span class="nc" id="L291">	}</span>
+
+	public Vector&lt;ClientInfo&gt; getClients() {
+<span class="nc" id="L294">		return allClients;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

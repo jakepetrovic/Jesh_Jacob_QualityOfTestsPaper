@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdviceFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.servlet</a> &gt; <span class="el_source">AdviceFilter.java</span></div><h1>AdviceFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.servlet;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
+
+/**
+ * A Servlet Filter that enables AOP-style advice for a SerlvetRequest via
+ * {@link #preHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) preHandle},
+ * {@link #postHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) postHandle},
+ * and {@link #afterCompletion(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Exception) afterCompletion}
+ * hooks.
+ *
+ * @author Les Hazlewood
+ * @since 0.9
+ */
+<span class="fc" id="L40">public abstract class AdviceFilter extends OncePerRequestFilter {</span>
+
+    /** The static logger available to this class only */
+<span class="fc" id="L43">    private static final Log log = LogFactory.getLog(AdviceFilter.class);</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the filter chain should be allowed to continue, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * It is called before the chain is actually consulted/executed.
+     * &lt;p/&gt;
+     * The default implementation returns &lt;code&gt;true&lt;/code&gt; always and exists as a template method for subclasses.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse
+     * @return &lt;code&gt;true&lt;/code&gt; if the filter chain should be allowed to continue, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * @throws Exception if there is any error.
+     */
+    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+<span class="nc" id="L57">        return true;</span>
+    }
+
+    /**
+     * Allows 'post' advice logic to be called, but only if no exception occurs during filter chain execution.  That
+     * is, if {@link #executeChain executeChain} throws an exception, this method will never be called.  Be aware of
+     * this when implementing logic.  Most resource 'cleanup' behavior is often done in the
+     * {@link #afterCompletion(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Exception) afterCompletion(request,response,exception)}
+     * implementation, which is guaranteed to be called for every request, even when the chain processing throws
+     * an Exception.
+     * &lt;p/&gt;
+     * The default implementation does nothing (no-op) and exists as a template method for subclasses.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse
+     * @throws Exception if an error occurs.
+     */
+    protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+<span class="nc" id="L75">    }</span>
+
+    /**
+     * Called in all cases in a &lt;code&gt;finally&lt;/code&gt; block even if {@link #preHandle preHandle} returns
+     * &lt;code&gt;false&lt;/code&gt; or if an exception is thrown during filter chain processing.  Can be used for resource
+     * cleanup if so desired.
+     * &lt;p/&gt;
+     * The default implementation does nothing (no-op) and exists as a template method for subclasses.
+     *
+     * @param request   the incoming ServletRequest
+     * @param response  the outgoing ServletResponse
+     * @param exception any exception thrown during {@link #preHandle preHandle}, {@link #executeChain executeChain},
+     *                  or {@link #postHandle postHandle} execution, or &lt;code&gt;null&lt;/code&gt; if no exception was thrown
+     *                  (i.e. the chain processed successfully).
+     * @throws Exception if an error occurs.
+     */
+    public void afterCompletion(ServletRequest request, ServletResponse response, Exception exception) throws Exception {
+<span class="nc" id="L92">    }</span>
+
+    /**
+     * Actually executes the specified filter chain by calling &lt;code&gt;chain.doFilter(request,response);&lt;/code&gt;.
+     * &lt;p/&gt;
+     * Can be overridden by subclasses for custom logic.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse
+     * @param chain    the filter chain to execute
+     * @throws Exception if there is any error executing the chain.
+     */
+    protected void executeChain(ServletRequest request, ServletResponse response, FilterChain chain) throws Exception {
+<span class="nc" id="L105">        chain.doFilter(request, response);</span>
+<span class="nc" id="L106">    }</span>
+
+    /**
+     * Actually implements the chain execution logic, utilizing
+     * {@link #preHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) pre},
+     * {@link #postHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse) post}, and
+     * {@link #afterCompletion(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Exception) after}
+     * advice hooks.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse
+     * @param chain    the filter chain to execute
+     * @throws ServletException if a servlet-related error occurs
+     * @throws IOException      if an IO error occurs
+     */
+    @SuppressWarnings({&quot;ThrowFromFinallyBlock&quot;})
+    public void doFilterInternal(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
+
+<span class="nc" id="L125">        Exception exception = null;</span>
+
+        try {
+
+<span class="nc" id="L129">            boolean continueChain = preHandle(request, response);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L131">                log.trace(&quot;Invked preHandle method.  Continuing chain?: [&quot; + continueChain + &quot;]&quot;);</span>
+            }
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            if (continueChain) {</span>
+<span class="nc" id="L135">                executeChain(request, response, chain);</span>
+            }
+
+<span class="nc" id="L138">            postHandle(request, response);</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L140">                log.trace(&quot;Successfully invoked postHandle method&quot;);</span>
+            }
+
+<span class="nc" id="L143">        } catch (Exception e) {</span>
+<span class="nc" id="L144">            exception = e;</span>
+        } finally {
+<span class="nc" id="L146">            cleanup( request, response, exception );</span>
+<span class="nc" id="L147">        }</span>
+<span class="nc" id="L148">    }</span>
+
+    /**
+     * Executes cleanup logic in the &lt;code&gt;finally&lt;/code&gt; code block in the
+     * {@link #doFilterInternal(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain) doFilterInternal}
+     * implementation.
+     * &lt;p/&gt;
+     * This implementation specifically calls
+     * {@link #afterCompletion(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Exception) afterCompletion}
+     * as well as handles any exceptions properly.
+     *
+     * @param request the incoming &lt;code&gt;ServletRequest&lt;/code&gt;
+     * @param response the outgoing &lt;code&gt;ServletResponse&lt;/code&gt;
+     * @param existing any exception that might have occurred while executing the &lt;code&gt;FilterChain&lt;/code&gt; or
+     * pre or post advice, or &lt;code&gt;null&lt;/code&gt; if the pre/chain/post excution did not throw an &lt;code&gt;Exception&lt;/code&gt;.
+     * @throws ServletException if any exception other than an &lt;code&gt;IOException&lt;/code&gt; is thrown.
+     * @throws IOException if the pre/chain/post execution throw an &lt;code&gt;IOException&lt;/code&gt;
+     */
+    protected void cleanup( ServletRequest request, ServletResponse response, Exception existing )
+        throws ServletException, IOException {
+<span class="nc" id="L168">        Exception exception = existing;</span>
+        try {
+<span class="nc" id="L170">            afterCompletion(request, response, exception);</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L172">                log.trace(&quot;Successfully invoked afterCompletion method.&quot;);</span>
+            }
+<span class="nc" id="L174">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            if (exception == null) {</span>
+<span class="nc" id="L176">                exception = e;</span>
+            }
+<span class="nc" id="L178">        }</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        if (exception != null) {</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">            if (exception instanceof ServletException) {</span>
+<span class="nc" id="L181">                throw (ServletException) exception;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            } else if (exception instanceof IOException) {</span>
+<span class="nc" id="L183">                throw (IOException) exception;</span>
+            } else {
+<span class="nc" id="L185">                String msg = &quot;Filter execution resulted in an unexpected Exception &quot; +</span>
+                        &quot;(not IOException or ServletException as the Filter api recommends).  &quot; +
+                        &quot;Wrapping in ServletException and propagating.&quot;;
+<span class="nc" id="L188">                throw new ServletException(msg, exception);</span>
+            }
+        }
+<span class="nc" id="L191">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

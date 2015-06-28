@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientMsgReceiver.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.network</a> &gt; <span class="el_source">ClientMsgReceiver.java</span></div><h1>ClientMsgReceiver.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client.network;
+
+import java.io.IOException;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
+import messages.Message;
+import messages.global.GlobalServerMsg;
+import messages.round.RoundServerMsg;
+import messages.session.SessionServerMsg;
+
+import org.apache.log4j.Logger;
+
+import client.BomberClient;
+import client.ClientGameRound;
+import client.ClientGameSession;
+import client.gui.StartFrame;
+
+import common.network.MsgReceiver;
+
+
+/**
+ * This is the central message receiver. All messages that are sent to the client
+ * arrive here. The messages are forwarded to the objects that are
+ * responsible for processing them.
+ * @author Andi, Daniel
+ * 
+ */
+public class ClientMsgReceiver extends MsgReceiver {
+
+<span class="fc" id="L35">	private static final Logger logger = Logger.getLogger(ClientMsgReceiver.class);</span>
+	
+	/**
+	 * The BomberClient that is associated with this dispatcher.
+	 */
+	private final BomberClient bomberClient;
+<span class="fc" id="L41">	protected final String error = &quot;CONNECTION LOST&quot;;</span>
+
+<span class="fc" id="L43">	private boolean logout = false;</span>
+
+	/**
+	 * Creates a new ClientMsgDispatcher that listens on the given socket.
+	 * Messages are forwarded to the specified BomberClient and its children.
+	 * @param socket The socket that will be listened on.
+	 * @param bomberClient The BomberClient that the received messages belong to
+	 */
+	public ClientMsgReceiver(Socket socket, BomberClient bomberClient) {
+<span class="fc" id="L52">		super(socket);</span>
+<span class="fc" id="L53">		this.bomberClient = bomberClient;</span>
+<span class="fc" id="L54">	}</span>
+
+	/**
+	 * Inspects the given message and forwards it depending on its type.
+	 * Messages are routed as follows:
+	 * &lt;ul&gt;
+	 * &lt;li&gt;GlobalServerMsg-&gt; BomberClient
+	 * &lt;li&gt;SessionServerMsg-&gt; ClientGameSession
+	 * &lt;li&gt;RoundServerMsg-&gt; ClientGameRound
+	 * &lt;/ul&gt;
+	 * @see common.MsgReceiver#processMsg(messages.Message)
+	 */
+	@Override
+	protected void processMsg(Message msg) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if(GlobalServerMsg.class.isInstance(msg)){</span>
+<span class="nc" id="L69">			GlobalServerMsg globalMsg = (GlobalServerMsg) msg;</span>
+<span class="nc" id="L70">			globalMsg.execute(bomberClient);</span>
+<span class="nc" id="L71">		} else {</span>
+<span class="nc" id="L72">			ClientGameSession session = bomberClient.getCurrentSession();</span>
+			//have to check for null because otherwise delayed messages may cause NullPointer
+<span class="nc bnc" id="L74" title="All 2 branches missed.">			if (session != null) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">				if(SessionServerMsg.class.isInstance(msg)){</span>
+<span class="nc" id="L76">					SessionServerMsg sessionMsg = (SessionServerMsg) msg;</span>
+<span class="nc" id="L77">					sessionMsg.execute(session);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">				}else if(RoundServerMsg.class.isInstance(msg)){</span>
+<span class="nc" id="L79">					RoundServerMsg roundMsg = (RoundServerMsg) msg;</span>
+<span class="nc" id="L80">					ClientGameRound round = session.getCurrentRound();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">					if (round != null) {</span>
+<span class="nc" id="L82">						roundMsg.execute(round);</span>
+					}
+<span class="nc" id="L84">				}else{</span>
+<span class="nc" id="L85">					throw new IllegalArgumentException(&quot;Unknown message type: &quot; + msg.getClass());</span>
+				}
+			}
+		}
+<span class="nc" id="L89">	}</span>
+
+	@Override
+	protected void handleConnectionLoss(Exception e) {
+<span class="nc" id="L93">		displayErrorMessage();</span>
+<span class="nc" id="L94">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L95">		startFrame.changePanel(startFrame.jPanelSelectServer);</span>
+<span class="nc" id="L96">		logger.fatal(&quot;Lost connection to server!&quot;, e);</span>
+<span class="nc" id="L97">	}</span>
+	
+	public void displayErrorMessage() {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		if (!logout) {</span>
+<span class="nc" id="L101">			JOptionPane.showMessageDialog(StartFrame.getInstance(), error, &quot;ERROR&quot;,</span>
+					JOptionPane.ERROR_MESSAGE);
+		}
+<span class="nc" id="L104">	}</span>
+	
+	public void closeConnection() {
+		try {
+<span class="nc" id="L108">			logout = true;</span>
+<span class="nc" id="L109">			in.close();</span>
+<span class="nc" id="L110">		} catch (IOException e) {</span>
+<span class="nc" id="L111">			logger.info(&quot;Couldn't close input stream&quot;, e);</span>
+<span class="nc" id="L112">		}</span>
+<span class="nc" id="L113">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

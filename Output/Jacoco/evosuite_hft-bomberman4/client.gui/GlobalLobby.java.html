@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GlobalLobby.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">GlobalLobby.java</span></div><h1>GlobalLobby.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+
+import messages.global.SessionDetailsMsg;
+import client.BomberClient;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+
+public class GlobalLobby extends MyPanel implements ActionListener,
+		MouseListener {
+
+	/**
+	 * @param args
+	 */
+	Chat chat;
+
+	public Chat getChat() {
+<span class="nc" id="L29">		return chat;</span>
+	}
+
+<span class="nc" id="L32">	MyButton jButtonJoin = new MyButton(&quot;Join Game&quot;);</span>
+<span class="nc" id="L33">	MyButton jButtonStart = new MyButton(&quot;New Game&quot;);</span>
+<span class="nc" id="L34">	MyButton jButtonRefresh = new MyButton(&quot;Refresh&quot;);</span>
+
+<span class="nc" id="L36">	MyButton jButtonLogout = new MyButton(&quot;Logout&quot;);</span>
+<span class="nc" id="L37">	MyButton jButtonHightscore = new MyButton(&quot;Highscore&quot;);</span>
+	// JLabel jLabelJoin = new JLabel(&quot;Join Game:&quot;);
+
+<span class="nc" id="L40">	JList jListGames = new JList();</span>
+
+<span class="nc" id="L42">	JLabel jLabelMap = new JLabel(&quot;Map:&quot;);</span>
+<span class="nc" id="L43">	JLabel jLabelPlayers = new JLabel(&quot;Players:&quot;);</span>
+<span class="nc" id="L44">	JLabel jLabelPlayersShow = new JLabel(&quot;-0/-0&quot;);</span>
+<span class="nc" id="L45">	JLabel jLabelRounds = new JLabel(&quot;Rounds:&quot;);</span>
+<span class="nc" id="L46">	JLabel jLabelRoundsShow = new JLabel(&quot;-1&quot;);</span>
+
+<span class="nc" id="L48">	ImageCache preview = new ImageCache(null, 20, 320, 120, 90);</span>
+
+	public GlobalLobby() {
+<span class="nc" id="L51">		super();</span>
+<span class="nc" id="L52">		setLayout(null);</span>
+<span class="nc" id="L53">		setBounds(0, 0, 800, 600);</span>
+	//	this.setBackground(new Color(100, 0, 100));
+		// jLabelJoin.setForeground(new Color(0, 255, 0));
+<span class="nc" id="L56">		jButtonStart.addActionListener(this);</span>
+<span class="nc" id="L57">		jButtonJoin.addActionListener(this);</span>
+		// jLabelJoin.setBounds(20, 20, 150, 25);
+		// hide join button at startup
+<span class="nc" id="L60">		jButtonJoin.setBounds(20, 270, 115, 25);</span>
+<span class="nc" id="L61">		jButtonJoin.setVisible(false);</span>
+<span class="nc" id="L62">		jButtonJoin.setEnabled(false);</span>
+<span class="nc" id="L63">		jButtonStart.setBounds(145, 270, 115, 25);</span>
+<span class="nc" id="L64">		jButtonRefresh.setBounds(270, 270, 115, 25);</span>
+<span class="nc" id="L65">		jButtonLogout.setBounds(10, 570, 80, 25);</span>
+<span class="nc" id="L66">		jButtonHightscore.setBounds(100, 570, 150, 25);</span>
+<span class="nc" id="L67">		jListGames.setBounds(20, 60, 370, 200);</span>
+
+<span class="nc" id="L69">		jListGames.addMouseListener(this);</span>
+<span class="nc" id="L70">		jButtonRefresh.addActionListener(this);</span>
+<span class="nc" id="L71">		jButtonLogout.addActionListener(this);</span>
+<span class="nc" id="L72">		jButtonHightscore.addActionListener(this);</span>
+
+<span class="nc" id="L74">		jLabelMap.setBounds(20, 300, 50, 25);</span>
+<span class="nc" id="L75">		jLabelPlayers.setBounds(20, 410, 50, 25);</span>
+<span class="nc" id="L76">		jLabelPlayersShow.setBounds(120, 410, 50, 25);</span>
+<span class="nc" id="L77">		jLabelRounds.setBounds(20, 440, 50, 25);</span>
+<span class="nc" id="L78">		jLabelRoundsShow.setBounds(120, 440, 50, 25);</span>
+
+		// this.addLabel(jLabelJoin);
+<span class="nc" id="L81">		this.add(jButtonStart);</span>
+<span class="nc" id="L82">		this.add(jButtonJoin);</span>
+<span class="nc" id="L83">		this.add(jListGames);</span>
+<span class="nc" id="L84">		this.add(jButtonRefresh);</span>
+<span class="nc" id="L85">		this.setVisible(true);</span>
+<span class="nc" id="L86">		this.add(jButtonLogout);</span>
+<span class="nc" id="L87">		this.add(jButtonHightscore);</span>
+<span class="nc" id="L88">		this.addLabel(jLabelMap);</span>
+<span class="nc" id="L89">		this.addImage(preview);</span>
+<span class="nc" id="L90">		this.addLabel(jLabelPlayers);</span>
+<span class="nc" id="L91">		this.addLabel(jLabelPlayersShow);</span>
+<span class="nc" id="L92">		this.addLabel(jLabelRounds);</span>
+<span class="nc" id="L93">		this.addLabel(jLabelRoundsShow);</span>
+<span class="nc" id="L94">		chat = new Chat(400, 600);</span>
+<span class="nc" id="L95">		chat.setType(chat.GLOBAL);</span>
+<span class="nc" id="L96">		chat.setBounds(400, 0, 400, 600);</span>
+<span class="nc" id="L97">		add(chat);</span>
+<span class="nc" id="L98">		this.setTitel(&quot;Select Game or create new Game&quot;);</span>
+<span class="nc" id="L99">		hideInfos();</span>
+<span class="nc" id="L100">		setPicture(&quot;/images/backgroundLeft.png&quot;);</span>
+<span class="nc" id="L101">	}</span>
+
+	// public void actionPerformed(ActionEvent evt) {
+	// StartFrame frame = StartFrame.init();
+	// if (evt.getSource().equals(jButtonStart)) {
+	//			
+	// System.out.println(&quot;Neues Spiel wird gestartet!&quot;);
+	// frame.changePanel(frame.jPanelNewGame);
+	// }else if (evt.getSource().equals(jButtonJoin)){
+	// // TODO Das ausgewaehlte Spiel muss geladen werden
+	// Config.gameName = &quot;&quot; + jListGames.getSelectedValue();
+	// frame.changePanel(frame.jPanelGame);
+	// System.out.println(&quot;Join Game&quot;);
+	// }
+	// }
+
+	public void loadGames() {
+<span class="nc" id="L118">		BomberClient.getInstance().requestSessionList();</span>
+<span class="nc" id="L119">		jListGames.setSelectedIndex(0);</span>
+<span class="nc" id="L120">	}</span>
+
+	/**
+	 * load game/session details to display
+	 * 
+	 * @param index
+	 */
+	public void loadSessionInfos() {
+
+<span class="nc bnc" id="L129" title="All 2 branches missed.">		if (jListGames.getSelectedIndex() != -1) {</span>
+<span class="nc" id="L130">			SessionDetailsMsg cash = (SessionDetailsMsg) jListGames</span>
+					.getSelectedValue();
+<span class="nc" id="L132">			jLabelPlayersShow.setText(cash.getTotalNrOfPlayers() + &quot;/&quot;</span>
+					+ cash.getNrOfPlayers());
+<span class="nc" id="L134">			jLabelRoundsShow.setText(&quot;&quot; + cash.getTotalRounds());</span>
+<span class="nc" id="L135">			jButtonJoin.setVisible(true);</span>
+<span class="nc" id="L136">			jButtonJoin.setEnabled(true);</span>
+<span class="nc" id="L137">			preview.setImg(cash.getPreview().getImage());</span>
+<span class="nc" id="L138">			super.repaint();</span>
+<span class="nc" id="L139">		} else {</span>
+<span class="nc" id="L140">			jButtonJoin.setVisible(false);</span>
+<span class="nc" id="L141">			jButtonJoin.setEnabled(false);</span>
+<span class="nc" id="L142">			super.repaint();</span>
+		}
+
+<span class="nc" id="L145">	}</span>
+
+	public void mouseClicked(MouseEvent evt) {
+
+<span class="nc" id="L149">		StartFrame frame = StartFrame.getInstance();</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">		if (evt.getSource().equals(jButtonStart)) {</span>
+<span class="nc" id="L151">			BomberClient.getInstance().requestMapList();</span>
+			// System.out.println(&quot;Neues Spiel wird gestartet!&quot;);
+<span class="nc" id="L153">			frame.changePanel(frame.jPanelNewGame);</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonJoin)) {</span>
+			// TODO Das ausgewaehlte Spiel muss geladen werden
+<span class="nc" id="L156">			Config.gameName = &quot;&quot; + jListGames.getSelectedValue();</span>
+<span class="nc" id="L157">			SessionDetailsMsg session = (SessionDetailsMsg) jListGames</span>
+					.getSelectedValue();
+
+<span class="nc" id="L160">			BomberClient.getInstance().createSession(session);</span>
+
+<span class="nc" id="L162">			frame.changePanel(frame.jPanelWaitForGame);</span>
+			// System.out.println(&quot;Join Game&quot;);
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		} else if (evt.getSource().equals(jListGames)) {</span>
+<span class="nc" id="L165">			showInfos();</span>
+<span class="nc" id="L166">			actionPreformed();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		} else if (evt.getSource().equals((jButtonRefresh))) {</span>
+<span class="nc" id="L168">			loadGames();</span>
+			// System.out.println(&quot;Lade Spiele&quot;);
+<span class="nc bnc" id="L170" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonLogout)) {</span>
+<span class="nc" id="L171">			StartFrame.getInstance().logout();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonHightscore)) {</span>
+
+<span class="nc" id="L174">			BomberClient.getInstance().requestGlobalScore();</span>
+
+<span class="nc" id="L176">			StartFrame.getInstance().changePanel(</span>
+					StartFrame.getInstance().jPanelGlobalHighscoreLobby);
+			
+
+		}
+<span class="nc" id="L181">	}</span>
+
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L186">	}</span>
+
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L191">	}</span>
+
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L196">	}</span>
+
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L201">	}</span>
+
+	public void actionPreformed() {
+<span class="nc" id="L204">		BomberClient.getInstance().requestMapList();</span>
+		// StartFrame.init().jPanelNewGame.loadAndDisplayMaps();
+<span class="nc" id="L206">		loadSessionInfos();</span>
+<span class="nc" id="L207">	}</span>
+
+	public void actionPerformed(ActionEvent evt) {
+<span class="nc" id="L210">		StartFrame frame = StartFrame.getInstance();</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">		if (evt.getSource().equals(jButtonStart)) {</span>
+<span class="nc" id="L212">			BomberClient.getInstance().requestMapList();</span>
+			// System.out.println(&quot;Neues Spiel wird gestartet!&quot;);
+<span class="nc" id="L214">			frame.changePanel(frame.jPanelNewGame);</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonJoin)) {</span>
+			// TODO Das ausgewaehlte Spiel muss geladen werden
+<span class="nc" id="L217">			Config.gameName = &quot;&quot; + jListGames.getSelectedValue();</span>
+<span class="nc" id="L218">			SessionDetailsMsg session = (SessionDetailsMsg) jListGames</span>
+					.getSelectedValue();
+
+<span class="nc" id="L221">			BomberClient.getInstance().createSession(session);</span>
+
+<span class="nc" id="L223">			frame.changePanel(frame.jPanelWaitForGame);</span>
+			// System.out.println(&quot;Join Game&quot;);
+<span class="nc bnc" id="L225" title="All 2 branches missed.">		} else if (evt.getSource().equals(jListGames)) {</span>
+<span class="nc" id="L226">			showInfos();</span>
+<span class="nc" id="L227">			actionPreformed();</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">		} else if (evt.getSource().equals((jButtonRefresh))) {</span>
+<span class="nc" id="L229">			loadGames();</span>
+			// System.out.println(&quot;Lade Spiele&quot;);
+<span class="nc bnc" id="L231" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonLogout)) {</span>
+<span class="nc" id="L232">			StartFrame.getInstance().logout();</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonHightscore)) {</span>
+
+<span class="nc" id="L235">			BomberClient.getInstance().requestGlobalScore();</span>
+
+<span class="nc" id="L237">			StartFrame.getInstance().changePanel(</span>
+					StartFrame.getInstance().jPanelGlobalHighscoreLobby);
+			
+
+		}
+
+<span class="nc" id="L243">	}</span>
+
+	public void showInfos() {
+<span class="nc" id="L246">		jLabelMap.setVisible(true);</span>
+<span class="nc" id="L247">		jLabelPlayers.setVisible(true);</span>
+<span class="nc" id="L248">		jLabelPlayersShow.setVisible(true);</span>
+<span class="nc" id="L249">		jLabelRounds.setVisible(true);</span>
+<span class="nc" id="L250">		jLabelRoundsShow.setVisible(true);</span>
+<span class="nc" id="L251">	}</span>
+
+	public void hideInfos() {
+
+<span class="nc" id="L255">		jLabelMap.setVisible(false);</span>
+<span class="nc" id="L256">		jLabelPlayers.setVisible(false);</span>
+<span class="nc" id="L257">		jLabelPlayersShow.setVisible(false);</span>
+<span class="nc" id="L258">		jLabelRounds.setVisible(false);</span>
+<span class="nc" id="L259">		jLabelRoundsShow.setVisible(false);</span>
+<span class="nc" id="L260">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

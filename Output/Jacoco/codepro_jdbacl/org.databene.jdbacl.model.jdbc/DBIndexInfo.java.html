@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBIndexInfo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model.jdbc</a> &gt; <span class="el_source">DBIndexInfo.java</span></div><h1>DBIndexInfo.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2006-2010 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model.jdbc;
+
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.ArrayUtil;
+
+/**
+ * Represents a database index.&lt;br/&gt;&lt;br/&gt;
+ * Created: 13.01.2007 23:40:52
+ * @author Volker Bergmann
+ */
+class DBIndexInfo {
+	
+    public String name;
+    public String tableName;
+    public boolean unique;
+    public String catalogName;
+    public short type;
+    public Boolean ascending;
+    public int cardinality;
+    public int pages;
+    public String filterCondition;
+
+    public String[] columnNames;
+
+<span class="fc" id="L51">    public DBIndexInfo(String name, String tableName, short type, String catalogName, boolean unique, short ordinalPosition, String columnName, Boolean ascending, int cardinality, int pages, String filterCondition) {</span>
+<span class="fc" id="L52">        this.name = name;</span>
+<span class="fc" id="L53">        this.tableName = tableName;</span>
+<span class="fc" id="L54">        this.unique = unique;</span>
+<span class="fc" id="L55">        this.catalogName = catalogName;</span>
+<span class="fc" id="L56">        this.type = type;</span>
+<span class="fc" id="L57">        this.ascending = ascending;</span>
+<span class="fc" id="L58">        this.cardinality = cardinality;</span>
+<span class="fc" id="L59">        this.pages = pages;</span>
+<span class="fc" id="L60">        this.filterCondition = filterCondition;</span>
+<span class="fc" id="L61">        this.columnNames = new String[] { columnName };</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (ordinalPosition != 1)</span>
+<span class="fc" id="L63">            throw new IllegalArgumentException(&quot;ordinalPosition is expected to be 1, found: &quot; + ordinalPosition);</span>
+<span class="fc" id="L64">    }</span>
+
+    public void addColumn(short ordinalPosition, String columnName) {
+<span class="nc" id="L67">        int expectedPosition = columnNames.length + 1;</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (ordinalPosition == expectedPosition)</span>
+<span class="nc" id="L69">        	columnNames = ArrayUtil.append(columnName, columnNames);</span>
+        else {
+<span class="nc bnc" id="L71" title="All 4 branches missed.">        	if (ordinalPosition &gt; expectedPosition || !columnNames[ordinalPosition - 1].equals(columnName))</span>
+<span class="nc" id="L72">        		throw new IllegalArgumentException(&quot;ordinalPosition is expected to be &quot; + expectedPosition + &quot;, &quot; +</span>
+                    &quot;found: &quot; + ordinalPosition);
+        }
+<span class="nc" id="L75">    }</span>
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L79">    	return &quot;[&quot; + ArrayFormat.format(columnNames) + &quot;]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

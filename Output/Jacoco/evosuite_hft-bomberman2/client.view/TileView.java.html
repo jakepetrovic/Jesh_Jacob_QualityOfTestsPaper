@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TileView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">TileView.java</span></div><h1>TileView.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client.view;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import common.Constants;
+import common.GameObject;
+import common.Tile;
+
+/**
+ * @author Andi
+ * 
+ */
+public class TileView extends GameObjectView {
+
+<span class="nc" id="L22">	private int state = 1;</span>
+	private String imageSet;
+
+<span class="nc" id="L25">	private Logger logger = Logger.getLogger(TileView.class);</span>
+
+	/**
+	 * @param gameObject
+	 * @param gfxFactory
+	 */
+	public TileView(GameObject gameObject, GfxFactory gfxFactory) {
+<span class="nc" id="L32">		super(gameObject, gfxFactory);		</span>
+<span class="nc" id="L33">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see client.view.GameObjectView#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics gfx) {
+<span class="nc" id="L42">		Image image = null;</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		if (!gameObject.isActive()) {</span>
+<span class="nc" id="L44">			state = Math.min(state + 1, 8);</span>
+<span class="nc" id="L45">			image = gfxFactory.getWallImage(state);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">			if(state == 8) {</span>
+<span class="nc" id="L47">				this.setVisible(false);</span>
+			}
+		} else {
+<span class="nc" id="L50">			String type = ((Tile) gameObject).getType();</span>
+<span class="nc" id="L51">			image = gfxFactory.getTileImage(type);</span>
+		}
+<span class="nc" id="L53">		Point position = gameObject.getPosition();</span>
+<span class="nc" id="L54">		gfx.drawImage(image, position.x - Constants.HALF_TILE, position.y  - Constants.HALF_TILE, null);</span>
+
+<span class="nc" id="L56">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

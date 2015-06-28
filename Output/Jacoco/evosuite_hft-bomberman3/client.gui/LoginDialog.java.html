@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoginDialog.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">LoginDialog.java</span></div><h1>LoginDialog.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import common.Constants;
+
+import messages.global.LoginMsg;
+import client.BomberClient;
+import client.ClientProperties;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+
+public class LoginDialog extends MyPanel implements KeyListener, MouseListener, ActionListener {
+
+<span class="nc" id="L26">	MyPanel jPanelRegUser = new MyPanel();</span>
+<span class="nc" id="L27">	MyPanel jPanelGuestUser = new MyPanel();</span>
+<span class="nc" id="L28">	MyPanel jPanelNewAccount = new MyPanel();</span>
+
+<span class="nc" id="L30">	JLabel jLabelRegUser = new JLabel(&quot;User: &quot;);</span>
+<span class="nc" id="L31">	JLabel jLabelRegPassword = new JLabel(&quot;Password: &quot;);</span>
+
+<span class="nc" id="L33">	JLabel jLabelGuestUser = new JLabel(&quot;User: &quot;);</span>
+
+<span class="nc" id="L35">	JLabel jLabelNewUser = new JLabel(&quot;User: &quot;);</span>
+<span class="nc" id="L36">	JLabel jLabelNewPassword_01 = new JLabel(&quot;new Password: &quot;);</span>
+<span class="nc" id="L37">	JLabel jLabelNewPassword_02 = new JLabel(&quot;retype Password: &quot;);</span>
+
+<span class="nc" id="L39">	JLabel jLabelMessage = new JLabel(&quot; &quot;);</span>
+
+<span class="nc" id="L41">	JTextField jTextFieldGuestUser = new JTextField(&quot;&quot;);</span>
+<span class="nc" id="L42">	JPasswordField jTextFieldGuestPassword = new JPasswordField(&quot;&quot;);</span>
+
+<span class="nc" id="L44">	JTextField jTextFieldRegUser = new JTextField(&quot;&quot;);</span>
+<span class="nc" id="L45">	JPasswordField jTextFieldRegPassword = new JPasswordField(&quot;&quot;);</span>
+
+<span class="nc" id="L47">	JTextField jTextFieldNewUser = new JTextField(&quot;&quot;);</span>
+<span class="nc" id="L48">	JPasswordField jTextFieldNewPassword_01 = new JPasswordField(&quot;&quot;);</span>
+<span class="nc" id="L49">	JPasswordField jTextFieldNewPassword_02 = new JPasswordField(&quot;&quot;);</span>
+
+<span class="nc" id="L51">	MyButton jButtonLogin = new MyButton(&quot;Login&quot;);</span>
+<span class="nc" id="L52">	MyButton jButtonBack = new MyButton(&quot;Back&quot;);</span>
+<span class="nc" id="L53">	MyButton jButtonGast = new MyButton(&quot;Login&quot;);</span>
+<span class="nc" id="L54">	MyButton jButtonNewAccount = new MyButton(&quot;New Account&quot;);</span>
+<span class="nc" id="L55">	MyButton jButtonCreate = new MyButton(&quot;Create&quot;);</span>
+<span class="nc" id="L56">	MyButton jButtonReturn = new MyButton(&quot;Back&quot;);</span>
+	String userName;
+	String userType;
+	ClientProperties clientProperties;
+
+	public static LoginDialog loginDialog;
+
+	public static LoginDialog init() {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (loginDialog == null) {</span>
+<span class="nc" id="L65">			loginDialog = new LoginDialog();</span>
+		}
+<span class="nc" id="L67">		return loginDialog;</span>
+	}
+
+<span class="nc" id="L70">	private LoginDialog() {</span>
+<span class="nc" id="L71">		setLayout(null);</span>
+<span class="nc" id="L72">		setSize(800, 600);</span>
+		//setBackground(new Color(255, 150, 255));
+
+		// check properties in properties.xml
+<span class="nc" id="L76">		clientProperties = new ClientProperties(Constants.PROPERTIES_FILE);</span>
+<span class="nc" id="L77">		userName = clientProperties.getProperty(&quot;nickname&quot;);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">		if (!userName.isEmpty()) {</span>
+<span class="nc" id="L79">			userType = clientProperties.getProperty(&quot;usertype&quot;);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">			if (userType.equals(&quot;guest&quot;)) {</span>
+<span class="nc" id="L81">				jTextFieldGuestUser.setText(userName);</span>
+			} else {
+<span class="nc" id="L83">				jTextFieldRegUser.setText(userName);</span>
+<span class="nc" id="L84">				jTextFieldRegPassword.setText(clientProperties</span>
+						.getProperty(&quot;password&quot;));
+			}
+<span class="nc" id="L87">			super.repaint();</span>
+		}
+
+		//jPanelRegUser.setBackground(Color.cyan);
+		//jPanelGuestUser.setBackground(Color.blue);
+
+<span class="nc" id="L93">		jPanelGuestUser.setBounds(150, 215, 500, 60);</span>
+<span class="nc" id="L94">		jPanelRegUser.setBounds(150, 285, 500, 150);</span>
+<span class="nc" id="L95">		jPanelNewAccount.setBounds(150, 225, 500, 150);</span>
+
+<span class="nc" id="L97">		jLabelMessage.setBounds(150, 150, 500, 50);</span>
+		
+<span class="nc" id="L99">		jPanelRegUser.setLayout(null);</span>
+<span class="nc" id="L100">		jPanelGuestUser.setLayout(null);</span>
+<span class="nc" id="L101">		jPanelNewAccount.setLayout(null);</span>
+
+		// TODO Kay
+<span class="nc" id="L104">		jPanelRegUser.setPicture(&quot;/images/simple_background.png&quot;);</span>
+<span class="nc" id="L105">		jPanelGuestUser.setPicture(&quot;/images/simple_background.png&quot;);</span>
+<span class="nc" id="L106">		jPanelNewAccount.setPicture(&quot;/images/simple_background.png&quot;);</span>
+
+<span class="nc" id="L108">		jPanelRegUser.setTitel(&quot;Registered User&quot;);</span>
+<span class="nc" id="L109">		jPanelGuestUser.setTitel(&quot;Guest&quot;);</span>
+<span class="nc" id="L110">		jPanelNewAccount.setTitel(&quot;New Account&quot;);</span>
+<span class="nc" id="L111">		add(jPanelRegUser);</span>
+<span class="nc" id="L112">		add(jPanelGuestUser);</span>
+<span class="nc" id="L113">		add(jPanelNewAccount);</span>
+<span class="nc" id="L114">		jPanelNewAccount.setVisible(false);</span>
+<span class="nc" id="L115">		jLabelMessage.setVisible(true);</span>
+<span class="nc" id="L116">		addLabel(jLabelMessage);</span>
+//		addLabel(jLabelTest);
+<span class="nc" id="L118">		jButtonLogin.addActionListener(this);</span>
+<span class="nc" id="L119">		jButtonGast.addActionListener(this);</span>
+<span class="nc" id="L120">		jButtonNewAccount.addActionListener(this);</span>
+<span class="nc" id="L121">		jButtonCreate.addActionListener(this);</span>
+<span class="nc" id="L122">		jButtonReturn.addActionListener(this);</span>
+<span class="nc" id="L123">		jButtonBack.addActionListener(this);</span>
+
+<span class="nc" id="L125">		jTextFieldRegPassword.addKeyListener(this);</span>
+<span class="nc" id="L126">		jTextFieldGuestUser.addKeyListener(this);</span>
+
+		// Guestpanel init:
+<span class="nc" id="L129">		jLabelGuestUser.setBounds(20, 20, 70, 25);</span>
+
+<span class="nc" id="L131">		jTextFieldGuestUser.setBounds(90, 20, 250, 25);</span>
+
+<span class="nc" id="L133">		jButtonGast.setBounds(350, 20, 120, 25);</span>
+<span class="nc" id="L134">		jButtonBack.setBounds(20, 100, 120, 25);</span>
+
+<span class="nc" id="L136">		jPanelGuestUser.add(jButtonGast);</span>
+<span class="nc" id="L137">		jPanelGuestUser.addLabel(jLabelGuestUser);</span>
+<span class="nc" id="L138">		jPanelGuestUser.add(jTextFieldGuestUser);</span>
+
+		// LoginPanel init:
+<span class="nc" id="L141">		jLabelRegUser.setBounds(20, 20, 100, 25);</span>
+<span class="nc" id="L142">		jLabelRegPassword.setBounds(20, 55, 70, 25);</span>
+
+<span class="nc" id="L144">		jTextFieldRegUser.setBounds(90, 20, 250, 25);</span>
+<span class="nc" id="L145">		jTextFieldRegPassword.setBounds(90, 55, 250, 25);</span>
+
+<span class="nc" id="L147">		jButtonLogin.setBounds(350, 55, 120, 25);</span>
+<span class="nc" id="L148">		jButtonNewAccount.setBounds(350, 20, 120, 25);</span>
+
+<span class="nc" id="L150">		jPanelRegUser.add(jButtonLogin);</span>
+<span class="nc" id="L151">		jPanelRegUser.add(jButtonBack);</span>
+<span class="nc" id="L152">		jPanelRegUser.add(jButtonNewAccount);</span>
+<span class="nc" id="L153">		jPanelRegUser.addLabel(jLabelRegPassword);</span>
+<span class="nc" id="L154">		jPanelRegUser.addLabel(jLabelRegUser);</span>
+<span class="nc" id="L155">		jPanelRegUser.add(jTextFieldRegPassword);</span>
+<span class="nc" id="L156">		jPanelRegUser.add(jTextFieldRegUser);</span>
+
+		// new Accout init:
+<span class="nc" id="L159">		jLabelNewUser.setBounds(20, 20, 120, 25);</span>
+<span class="nc" id="L160">		jLabelNewPassword_01.setBounds(20, 55, 120, 25);</span>
+<span class="nc" id="L161">		jLabelNewPassword_02.setBounds(20, 90, 120, 25);</span>
+
+<span class="nc" id="L163">		jTextFieldNewUser.setBounds(150, 20, 220, 25);</span>
+<span class="nc" id="L164">		jTextFieldNewPassword_01.setBounds(150, 55, 220, 25);</span>
+<span class="nc" id="L165">		jTextFieldNewPassword_02.setBounds(150, 90, 220, 25);</span>
+
+<span class="nc" id="L167">		jButtonCreate.setBounds(390, 90, 100, 25);</span>
+<span class="nc" id="L168">		jButtonReturn.setBounds(390, 20, 100, 25);</span>
+
+<span class="nc" id="L170">		jPanelNewAccount.addLabel(jLabelNewUser);</span>
+<span class="nc" id="L171">		jPanelNewAccount.addLabel(jLabelNewPassword_01);</span>
+<span class="nc" id="L172">		jPanelNewAccount.addLabel(jLabelNewPassword_02);</span>
+<span class="nc" id="L173">		jPanelNewAccount.add(jTextFieldNewPassword_01);</span>
+<span class="nc" id="L174">		jPanelNewAccount.add(jTextFieldNewPassword_02);</span>
+<span class="nc" id="L175">		jPanelNewAccount.add(jTextFieldNewUser);</span>
+<span class="nc" id="L176">		jPanelNewAccount.add(jButtonCreate);</span>
+<span class="nc" id="L177">		jPanelNewAccount.add(jButtonReturn);</span>
+
+<span class="nc" id="L179">	}</span>
+
+	/**
+	 * ActionListener fuer &lt;br&gt;
+	 * jButtonLogin&lt;br&gt;
+	 * jButtonGast&lt;br&gt;
+	 * jButtonNewAccount&lt;br&gt;
+	 * &lt;br&gt;
+	 * Es wird geprueft ob alle notwendigen Felder ausgefuellt sind.&lt;br&gt;
+	 * Anschliessend wird die entsprechende Session gestartet.
+	 * 
+	 * 
+	 */
+
+	public void actionPerformed(ActionEvent evt) {
+
+<span class="nc" id="L195">		jLabelGuestUser.setForeground(Color.BLACK);</span>
+<span class="nc" id="L196">		jLabelRegUser.setForeground(Color.BLACK);</span>
+<span class="nc" id="L197">		jLabelRegPassword.setForeground(Color.BLACK);</span>
+<span class="nc" id="L198">		jLabelNewPassword_01.setForeground(Color.black);</span>
+<span class="nc" id="L199">		jLabelNewPassword_02.setForeground(Color.black);</span>
+<span class="nc" id="L200">		jLabelNewUser.setForeground(Color.black);</span>
+<span class="nc" id="L201">		jLabelMessage.setText(&quot;&quot;);</span>
+<span class="nc" id="L202">		String s = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L204" title="All 2 branches missed.">		if (evt.getSource().equals(jButtonLogin)) {</span>
+
+<span class="nc bnc" id="L206" title="All 2 branches missed.">			if (jTextFieldRegUser.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L207">				s += &quot;&lt;br&gt;- Username&quot;;</span>
+<span class="nc" id="L208">				jLabelRegUser.setForeground(Color.red);</span>
+			}
+<span class="nc bnc" id="L210" title="All 2 branches missed.">			if (jTextFieldRegPassword.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L211">				s += &quot;&lt;br&gt;- Password&quot;;</span>
+<span class="nc" id="L212">				jLabelRegPassword.setForeground(Color.red);</span>
+			}
+<span class="nc bnc" id="L214" title="All 2 branches missed.">			if (!s.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L215">				jLabelMessage</span>
+						.setText(&quot;&lt;Html&gt;The following things are requried:&quot; + s
+								+ &quot;&quot;);
+			} else {
+<span class="nc" id="L219">				clientProperties = new ClientProperties(</span>
+						Constants.PROPERTIES_FILE);
+<span class="nc" id="L221">				clientProperties.setProperty(&quot;nickname&quot;, jTextFieldRegUser</span>
+						.getText());
+<span class="nc" id="L223">				clientProperties.setProperty(&quot;usertype&quot;, &quot;registered&quot;);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">				if (Integer.parseInt(clientProperties.getProperty(&quot;savepwd&quot;)) == 1) {</span>
+<span class="nc" id="L225">					clientProperties.setProperty(&quot;password&quot;,</span>
+							jTextFieldRegPassword.getText());
+				} else {
+<span class="nc" id="L228">					clientProperties.setProperty(&quot;password&quot;, &quot;&quot;);</span>
+				}
+
+<span class="nc" id="L231">				loginSession(jTextFieldRegUser.getText(), jTextFieldRegPassword</span>
+						.getText());
+<span class="nc" id="L233">				StartFrame.getInstance().setCursorWait();</span>
+			}
+
+<span class="nc bnc" id="L236" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonGast)) {</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">			if (jTextFieldGuestUser.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L238">				jLabelMessage.setText(&quot;You need a username to play as guest!&quot;);</span>
+<span class="nc" id="L239">				jLabelGuestUser.setForeground(Color.red);</span>
+			} else {
+<span class="nc" id="L241">				clientProperties = new ClientProperties(</span>
+						Constants.PROPERTIES_FILE);
+<span class="nc" id="L243">				clientProperties.setProperty(&quot;nickname&quot;, jTextFieldGuestUser</span>
+						.getText());
+<span class="nc" id="L245">				clientProperties.setProperty(&quot;usertype&quot;, &quot;guest&quot;);</span>
+<span class="nc" id="L246">				clientProperties.setProperty(&quot;password&quot;, &quot;&quot;);</span>
+<span class="nc" id="L247">				guestSession(jTextFieldGuestUser.getText());</span>
+<span class="nc" id="L248">				StartFrame.getInstance().setCursorWait();</span>
+			}
+<span class="nc bnc" id="L250" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonNewAccount)) {</span>
+<span class="nc" id="L251">			jPanelRegUser.setVisible(false);</span>
+<span class="nc" id="L252">			jPanelGuestUser.setVisible(false);</span>
+<span class="nc" id="L253">			jPanelNewAccount.setVisible(true);</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonCreate)) {</span>
+			//System.out.println(&quot;Create&quot;);
+<span class="nc bnc" id="L256" title="All 2 branches missed.">			if (jTextFieldNewUser.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L257">				s += &quot;&lt;br&gt;- Username&quot;;</span>
+<span class="nc" id="L258">				jLabelNewUser.setForeground(Color.red);</span>
+			}
+<span class="nc bnc" id="L260" title="All 2 branches missed.">			if (jTextFieldNewPassword_01.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L261">				s += &quot;&lt;br&gt;- Password&quot;;</span>
+<span class="nc" id="L262">				jLabelNewPassword_01.setForeground(Color.red);</span>
+			}
+<span class="nc bnc" id="L264" title="All 2 branches missed.">			if (jTextFieldNewPassword_02.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L265">				s += &quot;&lt;br&gt;- Password confirm&quot;;</span>
+<span class="nc" id="L266">				jLabelNewPassword_02.setForeground(Color.red);</span>
+			}
+			//System.out.println(&quot;Pruefen&quot;);
+<span class="nc bnc" id="L269" title="All 2 branches missed.">			if (!s.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L270">				jLabelMessage</span>
+						.setText(&quot;&lt;Html&gt;The following things are requried:&quot; + s
+								+ &quot;&lt;/Html&gt;&quot;);
+<span class="nc bnc" id="L273" title="All 2 branches missed.">			} else if (!jTextFieldNewPassword_01.getText().equals(</span>
+					jTextFieldNewPassword_02.getText())) {
+			//	System.out.println(&quot;Passwoerter stimmen nicht!&quot;);
+<span class="nc" id="L276">				jLabelMessage.setText(&quot;The passwords are not equal!&quot;);</span>
+<span class="nc" id="L277">				jTextFieldNewPassword_01.setText(&quot;&quot;);</span>
+<span class="nc" id="L278">				jTextFieldNewPassword_02.setText(&quot;&quot;);</span>
+<span class="nc" id="L279">				jTextFieldNewPassword_01.requestFocus();</span>
+<span class="nc" id="L280">				jLabelNewPassword_01.setForeground(Color.red);</span>
+<span class="nc" id="L281">				jLabelNewPassword_02.setForeground(Color.red);</span>
+
+			} else {
+<span class="nc" id="L284">				newAccountSession(jTextFieldNewUser.getText(),</span>
+						jTextFieldNewPassword_01.getText());
+<span class="nc" id="L286">				StartFrame.getInstance().setCursorWait();</span>
+			}
+<span class="nc bnc" id="L288" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonReturn)) {</span>
+<span class="nc" id="L289">			jPanelRegUser.setVisible(true);</span>
+<span class="nc" id="L290">			jPanelGuestUser.setVisible(true);</span>
+<span class="nc" id="L291">			jPanelNewAccount.setVisible(false);</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">		}else if(evt.getSource().equals(jButtonBack)){</span>
+<span class="nc" id="L293">			StartFrame.getInstance().logout();</span>
+		}
+<span class="nc" id="L295">		repaint();</span>
+
+<span class="nc" id="L297">	}</span>
+
+	public void keyPressed(KeyEvent evt) {
+<span class="nc bnc" id="L300" title="All 2 branches missed.">		if (evt.getKeyCode() == KeyEvent.VK_ENTER) {</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">			if (evt.getSource().equals(jTextFieldGuestUser)) {</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">				if (!jTextFieldGuestUser.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L303">					guestSession(jTextFieldGuestUser.getText());</span>
+<span class="nc" id="L304">					jLabelMessage.setText(&quot;GastLogin nach Enter!&quot;);</span>
+				}
+<span class="nc bnc" id="L306" title="All 2 branches missed.">			} else if (evt.getSource().equals(jTextFieldRegPassword)) {</span>
+<span class="nc bnc" id="L307" title="All 4 branches missed.">				if (!jTextFieldRegUser.getText().equals(&quot;&quot;)</span>
+						&amp;&amp; !jTextFieldRegPassword.getText().equals(&quot;&quot;)) {
+<span class="nc" id="L309">					loginSession(jTextFieldRegUser.getText(),</span>
+							jTextFieldRegPassword.getText());
+<span class="nc" id="L311">					jLabelMessage.setText(&quot;Login nach Enter!&quot;);</span>
+				}
+<span class="nc bnc" id="L313" title="All 2 branches missed.">			} else if (evt.getSource().equals(jLabelNewPassword_02)) {</span>
+<span class="nc bnc" id="L314" title="All 6 branches missed.">				if (!jTextFieldNewPassword_01.getText().equals(&quot;&quot;)</span>
+						&amp;&amp; !jTextFieldNewPassword_02.getText().equals(&quot;&quot;)
+						&amp;&amp; !jTextFieldNewUser.getText().equals(&quot;&quot;)) {
+<span class="nc" id="L317">					newAccountSession(jTextFieldNewUser.getText(),</span>
+							jTextFieldNewPassword_01.getText());
+				}
+			}
+		}
+<span class="nc" id="L322">	}</span>
+
+	public void keyReleased(KeyEvent arg0) {
+
+<span class="nc" id="L326">	}</span>
+
+	public void keyTyped(KeyEvent arg0) {
+
+<span class="nc" id="L330">	}</span>
+
+	/**
+	 * @author Bj�rn
+	 * 
+	 * @param username
+	 * @param password
+	 */
+	public void loginSession(String username, String password) {
+<span class="nc" id="L339">		LoginMsg msg = new LoginMsg(username, password, LoginMsg.LOGIN);</span>
+<span class="nc" id="L340">		BomberClient.getInstance().sendMsg(msg);</span>
+<span class="nc" id="L341">		BomberClient.getInstance().setPlayerName(username);</span>
+<span class="nc" id="L342">	}</span>
+
+	/**
+	 * @author Bj�rn
+	 * 
+	 * @param username
+	 */
+	public void guestSession(String username) {
+<span class="nc" id="L350">		LoginMsg msg = new LoginMsg(username, LoginMsg.GUEST_LOGIN);</span>
+<span class="nc" id="L351">		BomberClient.getInstance().sendMsg(msg);</span>
+<span class="nc" id="L352">		BomberClient.getInstance().setPlayerName(username);</span>
+<span class="nc" id="L353">	}</span>
+
+	/**
+	 * @author Bj�rn
+	 * 
+	 * @param username
+	 * @param password
+	 */
+	public void newAccountSession(String username, String password) {
+<span class="nc" id="L362">		LoginMsg msg = new LoginMsg(username, password, LoginMsg.REGISTER);</span>
+<span class="nc" id="L363">		BomberClient.getInstance().sendMsg(msg);</span>
+<span class="nc" id="L364">		BomberClient.getInstance().setPlayerName(username);</span>
+<span class="nc" id="L365">	}</span>
+
+	public void mouseClicked(MouseEvent e) {
+//		actionPerformed(e);
+
+<span class="nc" id="L370">	}</span>
+
+	public void mouseEntered(MouseEvent e) {
+
+<span class="nc" id="L374">	}</span>
+
+	public void mouseExited(MouseEvent e) {
+
+<span class="nc" id="L378">	}</span>
+
+	public void mousePressed(MouseEvent e) {
+
+<span class="nc" id="L382">	}</span>
+
+	public void mouseReleased(MouseEvent e) {
+
+<span class="nc" id="L386">	}</span>
+
+	/**
+	 * Handles the action, when the server sends, that the entered username is
+	 * wrong
+	 * 
+	 * @author Bj�rn
+	 */
+	public void loginWrongUsername() {
+<span class="nc" id="L395">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L396">		startFrame.changePanel(startFrame.jPanelLogin);</span>
+<span class="nc" id="L397">		jLabelMessage.setText(&quot;The username you have entered isn't correct!&quot;);</span>
+<span class="nc" id="L398">		jLabelRegUser.setForeground(Color.red);</span>
+<span class="nc" id="L399">	}</span>
+
+	/**
+	 * Handles the action, when the server sends, that the entered password is
+	 * wrong
+	 * 
+	 * @author Bj�rn
+	 */
+	public void loginWrongPassword() {
+<span class="nc" id="L408">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L409">		startFrame.changePanel(startFrame.jPanelLogin);</span>
+<span class="nc" id="L410">		jLabelMessage.setText(&quot;The password you have entered isn't correct!&quot;);</span>
+<span class="nc" id="L411">		jLabelRegPassword.setForeground(Color.red);</span>
+<span class="nc" id="L412">	}</span>
+
+	/**
+	 * Handles the action, when the server sends, that the entered username is
+	 * assigned
+	 * 
+	 * @author Bj�rn
+	 */
+	public void loginUsernameTaken() {
+<span class="nc" id="L421">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L422">		startFrame.changePanel(startFrame.jPanelLogin);</span>
+<span class="nc" id="L423">		jLabelMessage.setText(&quot;The username you have entered is assigned!&quot;);</span>
+<span class="nc" id="L424">		jLabelGuestUser.setForeground(Color.red);</span>
+<span class="nc" id="L425">		jLabelNewUser.setForeground(Color.red);</span>
+<span class="nc" id="L426">	}</span>
+
+	/**
+	 * Handles the action, when the server sends, that the entered user is still
+	 * logged in
+	 * 
+	 * @author Bj�rn
+	 */
+	public void loginUserStillLogedIn() {
+<span class="nc" id="L435">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L436">		startFrame.changePanel(startFrame.jPanelLogin);</span>
+<span class="nc" id="L437">		jLabelMessage</span>
+				.setText(&quot;The username you have entered is still logged in on this server!&quot;);
+<span class="nc" id="L439">	}</span>
+
+	/**
+	 * Handles the action, when the server sends, that the login was successful
+	 * 
+	 * @author Bj�rn
+	 */
+	public void loginSuccessful() {
+<span class="nc" id="L447">		StartFrame startFrame = StartFrame.getInstance();</span>
+<span class="nc" id="L448">		startFrame.changePanel(startFrame.jPanelGlobalLobby);</span>
+<span class="nc" id="L449">	}</span>
+
+
+	
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		actionPerformed(e);
+//		
+//	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

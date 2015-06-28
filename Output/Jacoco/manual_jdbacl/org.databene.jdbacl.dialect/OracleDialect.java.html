@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OracleDialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.dialect</a> &gt; <span class="el_source">OracleDialect.java</span></div><h1>OracleDialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2008-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.dialect;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import org.databene.commons.ArrayBuilder;
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.NameUtil;
+import org.databene.commons.OrderedMap;
+import org.databene.commons.StringUtil;
+import org.databene.commons.converter.TimestampFormatter;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.DatabaseDialect;
+import org.databene.jdbacl.model.DBCheckConstraint;
+import org.databene.jdbacl.model.DBPackage;
+import org.databene.jdbacl.model.DBProcedure;
+import org.databene.jdbacl.model.DBSchema;
+import org.databene.jdbacl.model.DBSequence;
+import org.databene.jdbacl.model.DBTrigger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Implements generic database concepts for Oracle.&lt;br/&gt;&lt;br/&gt;
+ * Created: 26.01.2008 07:05:28
+ * @since 0.4.0
+ * @author Volker Bergmann
+ */
+public class OracleDialect extends DatabaseDialect {
+	
+<span class="fc" id="L65">	private static final Logger LOGGER = LoggerFactory.getLogger(OracleDialect.class);</span>
+    
+	private static final String DATE_PATTERN = &quot;'to_date('''yyyy-MM-dd HH:mm:ss''', ''yyyy-mm-dd HH24:mi:ss'')'&quot;;
+	private static final String TIME_PATTERN = &quot;'to_date('''HH:mm:ss''', ''HH24:mi:ss'')'&quot;;
+    private static final String TIMESTAMP_MESSAGE = &quot;to_timestamp(''{0}'', ''yyyy-mm-dd HH24:mi:ss.FF'')&quot;;
+    private static final String TIMESTAMP_PATTERN = &quot;yyyy-MM-dd HH:mm:ss.SSSSSSSSS&quot;;
+<span class="fc" id="L71">    private static final Pattern SIMPLE_NOT_NULL_CHECK = Pattern.compile(&quot;\&quot;[A-Z0-9_]+\&quot; IS NOT NULL&quot;);</span>
+
+<span class="fc" id="L73">	Pattern randomNamePattern = Pattern.compile(&quot;SYS_C\\d{8}&quot;);</span>
+
+	public OracleDialect() {
+<span class="fc" id="L76">	    super(&quot;oracle&quot;, true, true, DATE_PATTERN, TIME_PATTERN);</span>
+<span class="fc" id="L77">    }</span>
+
+	@Override
+	public boolean isDefaultCatalog(String catalog, String user) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">	    return (catalog == null);</span>
+	}
+	
+	@Override
+	public boolean isDefaultSchema(String schema, String user) {
+<span class="nc" id="L86">	    return user.equalsIgnoreCase(schema);</span>
+	}
+	
+	@Override
+	public String renderCreateSequence(DBSequence sequence) {
+		/* Oracle sequence syntax:
+			CREATE SEQUENCE [myschema.]xyz 
+			START WITH 1
+			INCREMENT BY 1 
+			MINVALUE 1 | NOMINVALUE
+			MAXVALUE 999999999 | NOMAXVALUE
+			CACHE 1 | NOCACHE
+			CYCLE | NOCYCLE
+			ORDER | NOORDER
+		 */
+<span class="fc" id="L101">		String result = super.renderCreateSequence(sequence);</span>
+		// apply cache settings
+<span class="fc" id="L103">    	Long cache = sequence.getCache();</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">    	if (cache != null)</span>
+<span class="fc" id="L105">    		result += &quot; CACHE &quot; + cache;</span>
+		// if applicable, append ORDER. This is purely oracle
+<span class="fc" id="L107">		Boolean order = sequence.isOrder();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">		if (order != null)</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">			result += (order ? &quot; ORDER&quot; : &quot;NOORDER&quot;);</span>
+<span class="fc" id="L110">		return result;</span>
+	}
+	
+	@Override
+	protected String renderSequenceNameAndType(DBSequence sequence) {
+<span class="fc" id="L115">		String schemaName = sequence.getSchemaName();</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">		return (schemaName != null ? &quot;\&quot;&quot; + schemaName + &quot;\&quot;.&quot; : &quot;&quot;) + '&quot;' + sequence.getName() + '&quot;';</span>
+	}
+	
+	@Override
+    public String renderFetchSequenceValue(String sequenceName) {
+<span class="fc" id="L121">        return &quot;select &quot; + sequenceName + &quot;.nextval from dual&quot;;</span>
+    }
+	
+	@Override
+    public String formatTimestamp(Timestamp value) {
+<span class="fc" id="L126">		String renderedTimestamp = new TimestampFormatter(TIMESTAMP_PATTERN).format(value);</span>
+<span class="fc" id="L127">		return MessageFormat.format(TIMESTAMP_MESSAGE, renderedTimestamp);</span>
+    }
+
+	@Override
+	public DBSequence[] querySequences(Connection connection) throws SQLException {
+<span class="nc" id="L132">		Statement statement = connection.createStatement();</span>
+		try {
+<span class="nc" id="L134">			ResultSet resultSet = statement.executeQuery(&quot;select sequence_name, min_value, max_value, increment_by, &quot; +</span>
+					&quot;cycle_flag, order_flag, cache_size, last_number from user_sequences&quot;);
+			try {
+<span class="nc" id="L137">				ArrayBuilder&lt;DBSequence&gt; builder = new ArrayBuilder&lt;DBSequence&gt;(DBSequence.class);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">				while (resultSet.next()) {</span>
+<span class="nc" id="L139">					DBSequence sequence = new DBSequence(resultSet.getString(1), null);</span>
+<span class="nc" id="L140">					sequence.setMinValue(new BigInteger(resultSet.getString(2)));</span>
+<span class="nc" id="L141">					sequence.setMaxValue(new BigInteger(resultSet.getString(3)));</span>
+<span class="nc" id="L142">					sequence.setIncrement(new BigInteger(resultSet.getString(4)));</span>
+<span class="nc" id="L143">					sequence.setCycle(&quot;Y&quot;.equals(resultSet.getString(5)));</span>
+<span class="nc" id="L144">					sequence.setOrder(&quot;Y&quot;.equals(resultSet.getString(6)));</span>
+<span class="nc" id="L145">					sequence.setCache(resultSet.getLong(7));</span>
+<span class="nc" id="L146">					sequence.setLastNumber(new BigInteger(resultSet.getString(8)));</span>
+<span class="nc" id="L147">					builder.add(sequence);</span>
+<span class="nc" id="L148">				}</span>
+<span class="nc" id="L149">				return builder.toArray();</span>
+			} finally {
+<span class="nc" id="L151">				DBUtil.close(resultSet);</span>
+			}
+		} finally {
+<span class="nc" id="L154">			DBUtil.close(statement);</span>
+		}
+	}
+	
+	public DBCheckConstraint[] queryCheckConstraints(Connection connection, String schemaName) throws SQLException {
+<span class="nc" id="L159">		Statement statement = connection.createStatement();</span>
+<span class="nc" id="L160">		statement.setFetchSize(300);</span>
+<span class="nc" id="L161">		String query = &quot;select owner, constraint_name, table_name, search_condition &quot; +</span>
+				&quot;from user_constraints where constraint_type = 'C'&quot;;
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		if (schemaName != null)</span>
+<span class="nc" id="L164">			query += &quot; and owner = '&quot; + schemaName.toUpperCase() + &quot;'&quot;;</span>
+<span class="nc" id="L165">		ResultSet resultSet = statement.executeQuery(query);</span>
+<span class="nc" id="L166">		ArrayBuilder&lt;DBCheckConstraint&gt; builder = new ArrayBuilder&lt;DBCheckConstraint&gt;(DBCheckConstraint.class);</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		while (resultSet.next()) {</span>
+<span class="nc" id="L168">			String ownerName = resultSet.getString(&quot;owner&quot;);</span>
+<span class="nc bnc" id="L169" title="All 4 branches missed.">			if (schemaName == null || StringUtil.equalsIgnoreCase(schemaName, ownerName)) {</span>
+<span class="nc" id="L170">				String constraintName = resultSet.getString(&quot;constraint_name&quot;);</span>
+<span class="nc" id="L171">				String tableName = resultSet.getString(&quot;table_name&quot;);</span>
+<span class="nc" id="L172">				String condition = resultSet.getString(&quot;search_condition&quot;);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">				if (!SIMPLE_NOT_NULL_CHECK.matcher(condition).matches()) {</span>
+					try {
+<span class="nc bnc" id="L175" title="All 2 branches missed.">						DBCheckConstraint constraint = new DBCheckConstraint(</span>
+								constraintName, !isDeterministicCheckName(constraintName), tableName, condition);
+<span class="nc" id="L177">						builder.add(constraint);</span>
+<span class="nc" id="L178">					} catch (Exception e) {</span>
+<span class="nc" id="L179">						LOGGER.error(&quot;Error parsing check constraint &quot;, e);</span>
+<span class="nc" id="L180">					}</span>
+				}
+			}
+<span class="nc" id="L183">		}</span>
+<span class="nc" id="L184">		return builder.toArray();</span>
+	}
+
+	public boolean isDeterministicCheckName(String checkName) {
+<span class="fc bfc" id="L188" title="All 2 branches covered.">		return !randomNamePattern.matcher(checkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicPKName(String pkName) {
+<span class="fc bfc" id="L193" title="All 2 branches covered.">		return !randomNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicUKName(String ukName) {
+<span class="fc bfc" id="L198" title="All 2 branches covered.">		return !randomNamePattern.matcher(ukName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicFKName(String fkName) {
+<span class="fc bfc" id="L203" title="All 2 branches covered.">		return !randomNamePattern.matcher(fkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicIndexName(String indexName) {
+<span class="fc bfc" id="L208" title="All 2 branches covered.">		return !randomNamePattern.matcher(indexName).matches();</span>
+	}
+
+	@Override
+	public boolean supportsRegex() {
+<span class="fc" id="L213">		return true;</span>
+	}
+	
+	@Override
+	public String regexQuery(String expression, boolean not, String regex) {
+<span class="fc bfc" id="L218" title="All 2 branches covered.">		return (not ? &quot;NOT &quot; : &quot;&quot;) + &quot;REGEXP_LIKE(&quot; + expression + &quot;, '&quot; + regex + &quot;')&quot;;</span>
+	}
+
+	/*
+	@Override
+	public List&lt;DBIndex&gt; queryIndexes(DBSchema schema, Connection connection) throws SQLException {
+		String query = &quot;SELECT INDEX_NAME, INDEX_TYPE, TABLE_OWNER, TABLE_NAME, TABLE_TYPE, UNIQUENESS&quot; +
+				&quot; FROM USER_INDEXES&quot;;
+		if (schema != null)
+			query += &quot; WHERE TABLE_OWNER = '&quot; + schema.getName().toUpperCase() + &quot;'&quot;;
+		List&lt;Object[]&gt; indexInfos = DBUtil.query(query, connection);
+		OrderedMap&lt;String, DBIndex&gt; indexes = new OrderedMap&lt;String, DBIndex&gt;();
+		for (int i = 0; i &lt; indexInfos.size(); i++) {
+			Object[] indexInfo = indexInfos.get(i);
+			String ownerName = (String) indexInfo[2];
+			if (schema == null || schema.getName().equals(ownerName)) {
+				boolean unique = &quot;UNIQUE&quot;.equalsIgnoreCase(indexInfo[5].toString());
+				String name = (String) indexInfo[0];
+				String tableName = (String) indexInfo[3];
+				boolean deterministicName = isDeterministicIndexName(name);
+				DBTable table = schema.getTable(tableName);
+				DBIndex index;
+				if (unique) {
+					DBUniqueConstraint uk = table.getUniqueConstraint(name);
+					index = new DBUniqueIndex(name, deterministicName, uk);
+				} else {
+					index = new DBNonUniqueIndex(name, deterministicName, table);
+				}
+				indexes.put(index.getName(), index);
+				LOGGER.debug(&quot;Imported index {}&quot;, index);
+			}
+		}
+		
+		// query package procedures
+		query = &quot;SELECT INDEX_NAME, TABLE_NAME, COLUMN_NAME, COLUMN_POSITION FROM USER_IND_COLUMNS&quot;;
+		if (schema != null)
+			query += &quot; AND OWNER = '&quot; + schema.getName().toUpperCase() + &quot;'&quot;;
+		query += &quot; ORDER BY INDEX_NAME, COLUMN_POSITION&quot;;
+		List&lt;Object[]&gt; colInfos = DBUtil.query(query, connection);
+		for (int i = 0; i &lt; colInfos.size(); i++) {
+			Object[] colInfo = colInfos.get(i);
+			DBIndex index = indexes.get((String) colInfo[0]);
+			String columnName = (String) colInfo[2];
+			index.addColumnName(columnName);
+			LOGGER.debug(&quot;Imported index column {}.{}&quot;, index.getName(), columnName);
+		}		
+		return indexes.values();
+	}
+	*/
+	
+	@Override
+	public List&lt;DBTrigger&gt; queryTriggers(DBSchema schema, Connection connection) throws SQLException {
+<span class="nc" id="L270">		String query = &quot;SELECT OWNER, TRIGGER_NAME, TRIGGER_TYPE, TRIGGERING_EVENT, TABLE_OWNER, BASE_OBJECT_TYPE, &quot; +</span>
+			&quot;TABLE_NAME, COLUMN_NAME, REFERENCING_NAMES, WHEN_CLAUSE, STATUS, DESCRIPTION, ACTION_TYPE, &quot; +
+			&quot;TRIGGER_BODY FROM SYS.ALL_TRIGGERS&quot;;
+<span class="nc bnc" id="L273" title="All 2 branches missed.">		if (schema != null)</span>
+<span class="nc" id="L274">			query += &quot; WHERE OWNER = '&quot; + schema.getName().toUpperCase() + &quot;'&quot;;</span>
+<span class="nc" id="L275">		List&lt;Object[]&gt; triggerInfos = DBUtil.query(query, connection);</span>
+<span class="nc" id="L276">		List&lt;DBTrigger&gt; triggers = new ArrayList&lt;DBTrigger&gt;();</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">		for (int i = 0; i &lt; triggerInfos.size(); i++) {</span>
+<span class="nc" id="L278">			Object[] triggerInfo = triggerInfos.get(i);</span>
+<span class="nc" id="L279">			DBTrigger trigger = new DBTrigger((String) triggerInfo[1], schema);</span>
+<span class="nc" id="L280">			trigger.setTriggerType((String) triggerInfo[2]);</span>
+<span class="nc" id="L281">			trigger.setTriggeringEvent((String) triggerInfo[3]);</span>
+<span class="nc" id="L282">			trigger.setTableOwner((String) triggerInfo[4]);</span>
+<span class="nc" id="L283">			trigger.setBaseObjectType((String) triggerInfo[5]);</span>
+<span class="nc" id="L284">			trigger.setTableName((String) triggerInfo[6]);</span>
+<span class="nc" id="L285">			trigger.setColumnName((String) triggerInfo[7]);</span>
+<span class="nc" id="L286">			trigger.setReferencingNames((String) triggerInfo[8]);</span>
+<span class="nc" id="L287">			trigger.setWhenClause((String) triggerInfo[9]);</span>
+<span class="nc" id="L288">			trigger.setStatus((String) triggerInfo[10]);</span>
+<span class="nc" id="L289">			trigger.setDescription((String) triggerInfo[11]);</span>
+<span class="nc" id="L290">			trigger.setActionType((String) triggerInfo[12]);</span>
+<span class="nc" id="L291">			trigger.setTriggerBody((String) triggerInfo[13]);</span>
+<span class="nc" id="L292">			triggers.add(trigger);</span>
+<span class="nc" id="L293">			LOGGER.debug(&quot;Imported trigger: {}&quot;, trigger.getName());</span>
+		}
+<span class="nc" id="L295">		return triggers;</span>
+	}
+	
+	@Override
+	public List&lt;DBPackage&gt; queryPackages(DBSchema schema, Connection connection) throws SQLException {
+		
+		// query packages
+<span class="nc" id="L302">		String query = &quot;SELECT OWNER, OBJECT_NAME, SUBOBJECT_NAME, OBJECT_ID, OBJECT_TYPE, STATUS&quot; +</span>
+				&quot; FROM USER_OBJECTS WHERE UPPER(OBJECT_TYPE) = 'PACKAGE'&quot;;
+<span class="nc bnc" id="L304" title="All 2 branches missed.">		if (schema != null)</span>
+<span class="nc" id="L305">			query += &quot; AND OWNER = '&quot; + schema.getName().toUpperCase() + &quot;'&quot;;</span>
+<span class="nc" id="L306">		List&lt;Object[]&gt; pkgInfos = DBUtil.query(query, connection);</span>
+<span class="nc" id="L307">		OrderedMap&lt;String, DBPackage&gt; packages = new OrderedMap&lt;String, DBPackage&gt;();</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">		for (int i = 0; i &lt; pkgInfos.size(); i++) {</span>
+<span class="nc" id="L309">			Object[] pkgInfo = pkgInfos.get(i);</span>
+<span class="nc" id="L310">			String ownerName = (String) pkgInfo[0];</span>
+<span class="nc bnc" id="L311" title="All 4 branches missed.">			if (schema == null || schema.getName().equals(ownerName)) {</span>
+<span class="nc" id="L312">				String name = (String) pkgInfo[1];</span>
+<span class="nc" id="L313">				DBPackage pkg = new DBPackage(name, schema);</span>
+<span class="nc" id="L314">				pkg.setSubObjectName((String) pkgInfo[2]);</span>
+<span class="nc" id="L315">				pkg.setObjectId(pkgInfo[3].toString());</span>
+<span class="nc" id="L316">				pkg.setObjectType((String) pkgInfo[4]);</span>
+<span class="nc" id="L317">				pkg.setStatus((String) pkgInfo[5]);</span>
+<span class="nc" id="L318">				packages.put(pkg.getName(), pkg);</span>
+<span class="nc" id="L319">				LOGGER.debug(&quot;Imported package {}&quot;, pkg);</span>
+			}
+		}
+		
+		// query package procedures
+<span class="nc" id="L324">		query = &quot;SELECT OBJECT_NAME, PROCEDURE_NAME, OBJECT_ID, SUBPROGRAM_ID, OVERLOAD&quot; +</span>
+			&quot; FROM SYS.USER_PROCEDURES WHERE UPPER(OBJECT_TYPE) = 'PACKAGE'&quot; +
+			&quot; AND PROCEDURE_NAME IS NOT NULL AND OBJECT_NAME IN (&quot; + 
+			CollectionUtil.formatCommaSeparatedList(NameUtil.getNames(packages.values()), '\'') + &quot;)&quot;;
+<span class="nc" id="L328">		List&lt;Object[]&gt; procInfos = DBUtil.query(query, connection);</span>
+<span class="nc bnc" id="L329" title="All 2 branches missed.">		for (int i = 0; i &lt; procInfos.size(); i++) {</span>
+<span class="nc" id="L330">			Object[] procInfo = procInfos.get(i);</span>
+<span class="nc" id="L331">			DBPackage owner = packages.get((String) procInfo[0]);</span>
+<span class="nc" id="L332">			String name = (String) procInfo[1];</span>
+<span class="nc" id="L333">			DBProcedure proc = new DBProcedure(name, owner);</span>
+<span class="nc" id="L334">			proc.setObjectId(procInfo[2].toString());</span>
+<span class="nc" id="L335">			proc.setSubProgramId(procInfo[3].toString());</span>
+<span class="nc" id="L336">			proc.setOverload((String) procInfo[4]);</span>
+<span class="nc" id="L337">			LOGGER.debug(&quot;Imported package procedure {}.{}&quot;, owner.getName(),  proc.getName());</span>
+		}		
+<span class="nc" id="L339">		return packages.values();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

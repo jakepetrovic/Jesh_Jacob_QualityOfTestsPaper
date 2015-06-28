@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DummyEmailFacadeImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client.service.impl</a> &gt; <span class="el_source">DummyEmailFacadeImpl.java</span></div><h1>DummyEmailFacadeImpl.java</h1><pre class="source lang-java linenums">/*
+ * Created on 20.10.2004
+ *
+ */
+package ch.bluepenguin.email.client.service.impl;
+
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import ch.bluepenguin.email.client.Folder;
+import ch.bluepenguin.email.client.IDGenerator;
+import ch.bluepenguin.email.client.MailMessage;
+import ch.bluepenguin.email.client.service.EmailFacade;
+import ch.bluepenguin.email.client.service.EmailFacadeException;
+
+/**
+ * @author Christian
+ *
+ */
+<span class="nc" id="L21">public class DummyEmailFacadeImpl /*implements EmailFacade*/ {</span>
+
+    //dependency injected stuff
+    Logger logger;
+<span class="nc" id="L25">    private int count=0;</span>
+	private String folderName;
+    
+    public void setLogger(Logger logger) {
+<span class="nc" id="L29">        this.logger = logger;</span>
+<span class="nc" id="L30">    }</span>
+    
+    /* (non-Javadoc)
+     * @see ch.bluepenguin.email.client.service.EmailFacade#sendMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+     */
+    public void sendMessage(String from, String to, String subject,
+            String message) {
+<span class="nc" id="L37">        logger.log(Level.INFO, &quot;sendMessage called&quot;);</span>
+<span class="nc" id="L38">    }</span>
+
+    /* (non-Javadoc)
+     * @see ch.bluepenguin.email.client.service.EmailFacade#getAllFolders()
+     */
+    public Folder[] getAllFolders() {
+<span class="nc" id="L44">    	Folder[] result = new Folder[3];</span>
+    	
+<span class="nc bnc" id="L46" title="All 2 branches missed.">   	 for(int i=0;i&lt;result.length;i++) {</span>
+<span class="nc" id="L47">	 	result[i]= new Folder();</span>
+<span class="nc" id="L48">	 	result[i].getUniqueID().setId(IDGenerator.next());</span>
+	 }
+<span class="nc" id="L50">    	result[0].setName(&quot;INBOX&quot;);</span>
+<span class="nc" id="L51">    	result[1].setName(&quot;IMPORTANT&quot;);</span>
+<span class="nc" id="L52">    	result[1].setParent(result[0]);</span>
+<span class="nc" id="L53">    	result[2].setName(&quot;DUMMY&quot;);</span>
+<span class="nc" id="L54">        return  result;</span>
+    }
+
+    /* (non-Javadoc)
+     * @see ch.bluepenguin.email.client.service.EmailFacade#getAllMessagesFromFolder(java.lang.String)
+     */
+    public MailMessage[] getAllMessages() {
+<span class="nc" id="L61">    	return getMessagesFromFolder(&quot;NO Folder selectet! &quot;);</span>
+    }
+
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getName()
+	 */
+	public String getName() {
+<span class="nc" id="L69">		return &quot;Dummy EmailFacade Impl&quot;;</span>
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#setFolder(java.lang.String)
+	 */
+	public void setCurrentFolder(String folderName) {
+<span class="nc" id="L76">		this.folderName = folderName;</span>
+		
+<span class="nc" id="L78">	}</span>
+	
+	
+	
+    public MailMessage[] getMessagesFromFolder(String folderName) {
+<span class="nc" id="L83">    	MailMessage[] result = new MailMessage[3];</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">     	 for(int i=0;i&lt;result.length;i++) {</span>
+     	 	//TODO: make this configurable
+<span class="nc" id="L86">    	 	result[i]= new MailMessage();</span>
+<span class="nc" id="L87">    	 	result[i].getUniqueID().setId(IDGenerator.next());</span>
+    	 }
+
+<span class="nc" id="L90">    	result[0].setSubject(folderName + &quot; Very important message &quot; + count++);</span>
+<span class="nc" id="L91">    	result[0].setFrom(&quot;cs@bluepenguin.ch&quot;);</span>
+<span class="nc" id="L92">    	result[0].setTo(&quot;noone@nowhere.com&quot;);</span>
+<span class="nc" id="L93">    	result[0].setSentDate(new Date(1999,20,12));</span>
+<span class="nc" id="L94">    	result[0].setCc(&quot;cc@dd.ee&quot;);</span>
+<span class="nc" id="L95">    	result[0].setText(&quot;short message&quot;);</span>
+<span class="nc" id="L96">    	result[1].setSubject(folderName + &quot; not too important message&quot;);</span>
+<span class="nc" id="L97">    	result[1].setFrom(&quot;cs@bluepenguin.ch&quot;);</span>
+<span class="nc" id="L98">    	result[1].setTo(&quot;noone@nowhere.com&quot;);</span>
+<span class="nc" id="L99">    	result[1].setSentDate(new Date(1999,20,12));</span>
+<span class="nc" id="L100">    	result[1].setCc(&quot;cc@dd.ee&quot;);</span>
+<span class="nc" id="L101">    	result[1].setText(&quot;short message&quot;);</span>
+<span class="nc" id="L102">    	result[2].setSubject(folderName + &quot; spam!&quot;);</span>
+<span class="nc" id="L103">    	result[2].setFrom(&quot;cs@bluepenguin.ch&quot;);</span>
+<span class="nc" id="L104">    	result[2].setTo(&quot;noone@nowhere.com&quot;);</span>
+<span class="nc" id="L105">    	result[2].setSentDate(new Date(1999,20,12));</span>
+<span class="nc" id="L106">    	result[2].setCc(&quot;cc@dd.ee&quot;);</span>
+<span class="nc" id="L107">    	result[2].setText(&quot;short message&quot;);</span>
+<span class="nc" id="L108">    	return result; </span>
+    }
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getFolder(java.lang.String)
+	 */
+	public Folder getCurrentFolder() {
+<span class="nc" id="L115">		Folder result = new Folder();</span>
+<span class="nc" id="L116">		result.setName(&quot;Current Folder&quot;);</span>
+<span class="nc" id="L117">		return result;</span>
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getMessage(int, java.lang.String)
+	 */
+	public MailMessage getMessage(int id, String folderName) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L126">		throw new RuntimeException(&quot;Method not implemented&quot;);</span>
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#copyMessages(ch.bluepenguin.email.client.MailMessage[], java.lang.String, java.lang.String)
+	 */
+	public void copyMessages(MailMessage[] messages, String folderFrom, String folderTo) throws EmailFacadeException {
+		// TODO Auto-generated method stub
+<span class="nc" id="L134">		throw new RuntimeException(&quot;Method not implemented&quot;);</span>
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#moveMessages(ch.bluepenguin.email.client.MailMessage[], java.lang.String, java.lang.String)
+	 */
+	public void moveMessages(MailMessage[] messages, String folderFrom, String folderTo) throws EmailFacadeException {
+		// TODO Auto-generated method stub
+<span class="nc" id="L143">		throw new RuntimeException(&quot;Method not implemented&quot;);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBServiceFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">db</a> &gt; <span class="el_source">DBServiceFactory.java</span></div><h1>DBServiceFactory.java</h1><pre class="source lang-java linenums">package db;
+
+/**
+ * This class returns an instance for bomberman database services.
+ * The access to the methods for the database services is supplied by this class
+ * 
+ * @author Daniel Tunjic
+ *
+ */
+
+public class DBServiceFactory {
+	
+<span class="fc" id="L13">    private static BombermanDBService instance = null;</span>
+
+<span class="nc" id="L15">    private DBServiceFactory() {</span>
+<span class="nc" id="L16">    }</span>
+    
+    public synchronized static BombermanDBService getInstance() {
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (instance == null) {</span>
+
+<span class="nc" id="L21">            instance = new BombermanDBService();</span>
+        }
+        
+<span class="nc" id="L24">        return instance;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

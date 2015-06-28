@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JoinAckMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.global</a> &gt; <span class="el_source">JoinAckMsg.java</span></div><h1>JoinAckMsg.java</h1><pre class="source lang-java linenums">package messages.global;
+
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import client.BomberClient;
+import client.gui.StartFrame;
+
+/**
+ * This message is sent to a client in response to a JoinSessionMsg. It indicates to the
+ * receiver whether or not its try to join the desired session was successful.
+ * It also includes the clients idOffset in case the session was successfully
+ * joined.
+ * 
+ * @author Steffen, Andi
+ * @see JoinSessionMsg
+ *
+ */
+public class JoinAckMsg implements GlobalServerMsg {
+	
+	private boolean joinSuccessful;
+	private int idOffset;
+	private List&lt;ParticipantInfo&gt; participants;
+
+	public JoinAckMsg(boolean joinSuccessful, int idOffset) {
+<span class="nc" id="L27">		super();</span>
+<span class="nc" id="L28">		this.joinSuccessful = joinSuccessful;</span>
+<span class="nc" id="L29">		this.idOffset = idOffset;</span>
+<span class="nc" id="L30">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(BomberClient bomberClient) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		if(joinSuccessful){</span>
+<span class="nc" id="L38">			BomberClient.getInstance().setIdOffset(idOffset);</span>
+<span class="nc" id="L39">			BomberClient.getInstance().openSession();</span>
+			
+			// add the player itself to the session
+<span class="nc" id="L42">			bomberClient.getCurrentSession().join(idOffset, bomberClient.getPlayerName());</span>
+			
+			// add all other players that already were in the session
+<span class="nc bnc" id="L45" title="All 2 branches missed.">			for (ParticipantInfo participant : participants) {</span>
+<span class="nc" id="L46">				bomberClient.getCurrentSession().join(participant.getId(), participant.getName());</span>
+<span class="nc" id="L47">			}</span>
+<span class="nc" id="L48">			StartFrame.getInstance().showSessionLobby();</span>
+			//System.out.println(&quot;Assigned id: &quot; + idOffset);
+		}else{
+<span class="nc" id="L51">			JOptionPane.showMessageDialog(StartFrame.getInstance(), &quot;Sorry. Session already full!&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</span>
+<span class="nc" id="L52">			StartFrame.getInstance().showSessionLobby();</span>
+		}
+		
+<span class="nc" id="L55">	}</span>
+
+	public void setParticipants(List&lt;ParticipantInfo&gt; participants) {
+<span class="nc" id="L58">		this.participants = participants;</span>
+<span class="nc" id="L59">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

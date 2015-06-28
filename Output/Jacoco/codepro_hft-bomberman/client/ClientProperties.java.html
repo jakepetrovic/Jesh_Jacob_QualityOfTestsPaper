@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientProperties.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client</a> &gt; <span class="el_source">ClientProperties.java</span></div><h1>ClientProperties.java</h1><pre class="source lang-java linenums">package client;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.log4j.Logger;
+
+import common.Constants;
+import common.XmlFunctions;
+
+/**
+ * reads and writes properties to xml-file 
+ * properties file is saved to user directory 
+ * 
+ * @author christian
+ * 
+ */
+public class ClientProperties {
+	private XmlFunctions xmlFunctions;
+
+	// is set to true if file can not be copied or
+	// found in user directory
+	// if set to true, class is ignoring invocations
+<span class="fc" id="L26">	private boolean fileError = false;</span>
+
+<span class="fc" id="L28">	private static final Logger logger = Logger</span>
+			.getLogger(ClientProperties.class);
+
+	/**
+	 * constructor, opens file for reading if exists
+	 * 
+	 * @param fileName -
+	 *            Name to xml file
+	 */
+<span class="fc" id="L37">	public ClientProperties(String fileName) {</span>
+<span class="fc" id="L38">		CheckPropertiesFile(fileName);</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">		if (!fileError) {</span>
+<span class="fc" id="L40">			xmlFunctions = new XmlFunctions(fileName);</span>
+		}
+<span class="fc" id="L42">	}</span>
+
+	/**
+	 * checks if local properties file is present, if not tries to copy empty
+	 * file to location. If this fails, flag fileError is set to true and read
+	 * or write access is bypassed
+	 * 
+	 * @param fileName -
+	 *            name of file
+	 */
+	private void CheckPropertiesFile(String fileName) {
+		// properties file on users file system
+<span class="fc" id="L54">		File checkFile = new File(fileName);</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">		if (!checkFile.exists()) {</span>
+<span class="nc" id="L56">			logger</span>
+					.info(&quot;File fubarman_properties.xml was not found in user directory. Try to copy default file...&quot;);
+<span class="nc" id="L58">			InputStream defaultFile = common.ResourceService</span>
+					.getInputStream(Constants.PROPERTIES_DEFAULTFILE);
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			if (!fileCopy(defaultFile, checkFile)) {</span>
+<span class="nc" id="L61">				logger</span>
+						.error(&quot;File fubarman_properties.xml could not be copied to user directory. Properties disabled.&quot;);
+<span class="nc" id="L63">				this.fileError = true;</span>
+			} else {
+<span class="nc" id="L65">				logger</span>
+						.info(&quot;File fubarman_properties.xml was successfully copied to user directory.&quot;);
+			}
+		}
+<span class="fc" id="L69">	}</span>
+
+	/**
+	 * get property value by element-name returns empty string if fileError is
+	 * true
+	 * 
+	 * @param element -
+	 *            Name of element
+	 * @return String - value
+	 */
+	public String getProperty(String element) {
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		if (!fileError) {</span>
+<span class="nc" id="L81">			String XmlPath = &quot;//&quot; + element;</span>
+<span class="nc" id="L82">			return xmlFunctions.getXmlValue(XmlPath);</span>
+		} else {
+<span class="nc" id="L84">			return new String(&quot;&quot;);</span>
+		}
+	}
+
+	/**
+	 * (over)writes value of specific element 
+	 * does nothing if fileError is true
+	 * 
+	 * @param element -
+	 *            Name of element
+	 * @param value -
+	 *            new value
+	 */
+	public void setProperty(String element, String value) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		if (!fileError) {</span>
+<span class="nc" id="L99">			String XmlPath = &quot;//&quot; + element;</span>
+<span class="nc" id="L100">			xmlFunctions.setXmlValue(XmlPath, value);</span>
+		}
+<span class="nc" id="L102">	}</span>
+
+	/**
+	 * copies a file from a to b
+	 * used InputStream as provided from ResourceService class as
+	 * source and File as destination
+	 * 
+	 * @param sourceFile -
+	 *            InputStream - File which should be copied
+	 * @param destFile -
+	 *            destination where file should be copied to
+	 * @return boolean - true if successfully copied, otherwise false
+	 */
+	public static boolean fileCopy(InputStream sourceFile, File destFile) {
+		try {
+<span class="fc" id="L117">			InputStream in = sourceFile;</span>
+<span class="fc" id="L118">			FileOutputStream out = new FileOutputStream(destFile);</span>
+
+<span class="fc" id="L120">			byte buf[] = new byte[4096];</span>
+
+			int len;
+<span class="fc bfc" id="L123" title="All 2 branches covered.">			while ((len = in.read(buf)) &gt; 0)</span>
+<span class="fc" id="L124">				out.write(buf, 0, len);</span>
+<span class="fc" id="L125">			out.close();</span>
+<span class="fc" id="L126">			in.close();</span>
+<span class="fc" id="L127">		} catch (IOException e) {</span>
+<span class="fc" id="L128">			return false;</span>
+<span class="fc" id="L129">		}</span>
+<span class="fc" id="L130">		return true;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

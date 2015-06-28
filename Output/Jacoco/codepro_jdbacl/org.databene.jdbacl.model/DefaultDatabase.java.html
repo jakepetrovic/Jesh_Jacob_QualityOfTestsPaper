@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultDatabase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DefaultDatabase.java</span></div><h1>DefaultDatabase.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.databene.commons.ObjectNotFoundException;
+import org.databene.commons.StringUtil;
+import org.databene.commons.collection.OrderedNameMap;
+import org.databene.commons.version.VersionNumber;
+
+/**
+ * Default implementation of the {@link Database} interface.&lt;br/&gt;&lt;br/&gt;
+ * Created: 05.12.2010 16:18:57
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class DefaultDatabase extends AbstractCompositeDBObject&lt;DBCatalog&gt; implements Database {
+	
+	private static final long serialVersionUID = -1873203097942961523L;
+	
+	private String productName;
+	private VersionNumber productVersion;
+	private Date importDate;
+	private String user;
+	private String tableInclusionPattern;
+	private String tableExclusionPattern;
+	private boolean importedChecks;
+	private boolean importedUKs;
+	private boolean importedIndexes;
+	private boolean importedSequences;
+	
+	private OrderedNameMap&lt;DBCatalog&gt; catalogs;
+	
+    // constructors ----------------------------------------------------------------------------------------------------
+
+    public DefaultDatabase(String name, String productName, VersionNumber productVersion) {
+<span class="fc" id="L59">        super(name, &quot;database&quot;);</span>
+<span class="fc" id="L60">        this.productName = productName;</span>
+<span class="fc" id="L61">        this.productVersion = productVersion;</span>
+<span class="fc" id="L62">        this.catalogs = OrderedNameMap.createCaseInsensitiveMap();</span>
+<span class="fc" id="L63">    }</span>
+    
+    public String getDatabaseProductName() {
+<span class="fc" id="L66">    	return productName;</span>
+    }
+    
+    public VersionNumber getDatabaseProductVersion() {
+<span class="fc" id="L70">    	return productVersion;</span>
+    }
+    
+	public Date getImportDate() {
+<span class="fc" id="L74">		return importDate;</span>
+	}
+
+	public void setImportDate(Date importDate) {
+<span class="fc" id="L78">		this.importDate = importDate;</span>
+<span class="fc" id="L79">	}</span>
+
+	public String getUser() {
+<span class="fc" id="L82">		return user;</span>
+	}
+
+	public void setUser(String user) {
+<span class="fc" id="L86">		this.user = user;</span>
+<span class="fc" id="L87">	}</span>
+
+	public String getTableInclusionPattern() {
+<span class="fc" id="L90">		return tableInclusionPattern;</span>
+	}
+
+	public void setTableInclusionPattern(String tableInclusionPattern) {
+<span class="fc" id="L94">		this.tableInclusionPattern = tableInclusionPattern;</span>
+<span class="fc" id="L95">	}</span>
+
+	public String getTableExclusionPattern() {
+<span class="fc" id="L98">		return tableExclusionPattern;</span>
+	}
+
+	public void setTableExclusionPattern(String tableExclusionPattern) {
+<span class="fc" id="L102">		this.tableExclusionPattern = tableExclusionPattern;</span>
+<span class="fc" id="L103">	}</span>
+
+	public boolean isImportedChecks() {
+<span class="fc" id="L106">		return importedChecks;</span>
+	}
+
+	public void setImportedChecks(boolean importedChecks) {
+<span class="fc" id="L110">		this.importedChecks = importedChecks;</span>
+<span class="fc" id="L111">	}</span>
+
+	public boolean isImportedUKs() {
+<span class="fc" id="L114">		return importedUKs;</span>
+	}
+
+	public void setImportedUKs(boolean importedUKs) {
+<span class="fc" id="L118">		this.importedUKs = importedUKs;</span>
+<span class="fc" id="L119">	}</span>
+
+	public boolean isImportedIndexes() {
+<span class="fc" id="L122">		return importedIndexes;</span>
+	}
+
+	public void setImportedIndexes(boolean importedIndexes) {
+<span class="fc" id="L126">		this.importedIndexes = importedIndexes;</span>
+<span class="fc" id="L127">	}</span>
+
+	public boolean isImportedSequences() {
+<span class="fc" id="L130">		return importedSequences;</span>
+	}
+
+	public void setImportedSequences(boolean importedSequences) {
+<span class="fc" id="L134">		this.importedSequences = importedSequences;</span>
+<span class="fc" id="L135">	}</span>
+
+    // CompositeDBObject implementation --------------------------------------------------------------------------------
+
+	public List&lt;DBCatalog&gt; getComponents() {
+<span class="fc" id="L140">		return catalogs.values();</span>
+	}
+	
+    // catalog operations ----------------------------------------------------------------------------------------------
+
+    public List&lt;DBCatalog&gt; getCatalogs() {
+<span class="fc" id="L146">        return getComponents();</span>
+    }
+
+    public DBCatalog getCatalog(String catalogName) {
+<span class="fc" id="L150">        return catalogs.get(catalogName);</span>
+    }
+
+    public void addCatalog(DBCatalog catalog) {
+<span class="fc" id="L154">        catalog.setDatabase(this);</span>
+<span class="fc" id="L155">        catalogs.put(catalog.getName(), catalog);</span>
+<span class="fc" id="L156">    }</span>
+
+    public void removeCatalog(DBCatalog catalog) {
+<span class="fc" id="L159">        catalogs.remove(catalog.getName());</span>
+<span class="fc" id="L160">        catalog.setOwner(null);</span>
+<span class="fc" id="L161">    }</span>
+
+    // schema operations -----------------------------------------------------------------------------------------------
+
+	public DBSchema getSchema(String schemaName) {
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs()) {</span>
+<span class="nc" id="L167">            DBSchema schema = catalog.getSchema(schemaName);</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            if (schema != null)</span>
+<span class="nc" id="L169">            	return schema;</span>
+<span class="nc" id="L170">        }</span>
+<span class="fc" id="L171">        throw new ObjectNotFoundException(&quot;Table '&quot; + name + &quot;'&quot;);</span>
+	}
+
+    // table operations ------------------------------------------------------------------------------------------------
+
+	public List&lt;DBTable&gt; getTables() {
+<span class="fc" id="L177">		return getTables(true);</span>
+	}
+
+	public List&lt;DBTable&gt; getTables(boolean recursive) {
+<span class="fc bfc" id="L181" title="All 2 branches covered.">		if (!recursive)</span>
+<span class="fc" id="L182">			return new ArrayList&lt;DBTable&gt;();</span>
+<span class="fc" id="L183">    	List&lt;DBTable&gt; tables = new ArrayList&lt;DBTable&gt;();</span>
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs())</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            for (DBTable table : catalog.getTables())</span>
+<span class="nc" id="L186">            	tables.add(table);</span>
+<span class="fc" id="L187">        return tables;</span>
+    }
+
+	public DBTable getTable(String name) {
+<span class="nc" id="L191">		return getTable(name, true);</span>
+	}
+
+    public DBTable getTable(String name, boolean required) {
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs())</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">            for (DBTable table : catalog.getTables())</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            	if (StringUtil.equalsIgnoreCase(table.getName(), name))</span>
+<span class="nc" id="L198">            		return table;</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if (required)</span>
+<span class="fc" id="L200">        	throw new ObjectNotFoundException(&quot;Table '&quot; + name + &quot;'&quot;);</span>
+        else
+<span class="fc" id="L202">        	return null;</span>
+    }
+    
+	public void removeTable(String tableName) {
+<span class="nc" id="L206">		DBTable table = getTable(tableName, true);</span>
+<span class="nc" id="L207">		table.getSchema().removeTable(table);</span>
+<span class="nc" id="L208">    }</span>
+
+	public List&lt;DBSequence&gt; getSequences() {
+<span class="fc" id="L211">		return getSequences(true);</span>
+	}
+
+	public List&lt;DBSequence&gt; getSequences(boolean recursive) {
+<span class="fc bfc" id="L215" title="All 2 branches covered.">		if (!recursive)</span>
+<span class="fc" id="L216">			return new ArrayList&lt;DBSequence&gt;();</span>
+<span class="fc" id="L217">    	List&lt;DBSequence&gt; sequences = new ArrayList&lt;DBSequence&gt;();</span>
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs())</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            for (DBSequence table : catalog.getSequences())</span>
+<span class="nc" id="L220">            	sequences.add(table);</span>
+<span class="fc" id="L221">        return sequences;</span>
+	}
+
+	public List&lt;DBTrigger&gt; getTriggers() {
+<span class="fc" id="L225">    	List&lt;DBTrigger&gt; triggers = new ArrayList&lt;DBTrigger&gt;();</span>
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs())</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">            for (DBSchema schema : catalog.getSchemas())</span>
+<span class="nc" id="L228">            	triggers.addAll(schema.getTriggers());</span>
+<span class="fc" id="L229">        return triggers;</span>
+	}
+
+	public List&lt;DBPackage&gt; getPackages() {
+<span class="fc" id="L233">    	List&lt;DBPackage&gt; packages = new ArrayList&lt;DBPackage&gt;();</span>
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        for (DBCatalog catalog : getCatalogs())</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">            for (DBSchema schema : catalog.getSchemas())</span>
+<span class="nc" id="L236">            	packages.addAll(schema.getPackages());</span>
+<span class="fc" id="L237">        return packages;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

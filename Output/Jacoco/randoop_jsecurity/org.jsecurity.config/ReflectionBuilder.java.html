@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ReflectionBuilder.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.config</a> &gt; <span class="el_source">ReflectionBuilder.java</span></div><h1>ReflectionBuilder.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.config;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.util.ClassUtils;
+import org.jsecurity.util.Nameable;
+
+import java.beans.PropertyDescriptor;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ * Object builder that uses reflection and Apache Commons BeanUtils to build objects given a
+ * map of &quot;property values&quot;.  Typically these come from the JSecurity INI configuration and are used
+ * to construct or modify the SecurityManager, its dependencies, and web-based security filters.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.9
+ */
+@SuppressWarnings(&quot;unchecked&quot;)
+public class ReflectionBuilder {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L47">    private static final Log log = LogFactory.getLog(ReflectionBuilder.class);</span>
+
+    private static final String OBJECT_REFERENCE_BEGIN_TOKEN = &quot;$&quot;;
+    private static final String ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN = &quot;\\$&quot;;
+    private static final String GLOBAL_PROPERTY_PREFIX = &quot;jsecurity&quot;;
+
+
+    protected Map objects;
+
+<span class="fc" id="L56">    public ReflectionBuilder() {</span>
+<span class="fc" id="L57">        setObjects(new LinkedHashMap&lt;String, Object&gt;());</span>
+<span class="fc" id="L58">    }</span>
+
+<span class="fc" id="L60">    public ReflectionBuilder(Map defaults) {</span>
+<span class="fc" id="L61">        setObjects(defaults);</span>
+<span class="fc" id="L62">    }</span>
+
+    public Map getObjects() {
+<span class="fc" id="L65">        return objects;</span>
+    }
+
+    public void setObjects(Map objects) {
+<span class="fc" id="L69">        this.objects = objects;</span>
+<span class="fc" id="L70">    }</span>
+
+    public Map buildObjects(Map&lt;String, String&gt; kvPairs) {
+<span class="pc bpc" id="L73" title="2 of 4 branches missed.">        if (kvPairs != null &amp;&amp; !kvPairs.isEmpty()) {</span>
+
+            // Separate key value pairs into object declarations and property assignment
+            // so that all objects can be created up front
+<span class="nc" id="L77">            Map&lt;String, String&gt; instanceMap = new HashMap&lt;String, String&gt;();</span>
+<span class="nc" id="L78">            Map&lt;String, String&gt; propertyMap = new HashMap&lt;String, String&gt;();</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            for (Map.Entry&lt;String, String&gt; entry : kvPairs.entrySet()) {</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">                if (entry.getKey().indexOf('.') &lt; 0 || entry.getKey().endsWith(&quot;.class&quot;)) {</span>
+<span class="nc" id="L81">                    instanceMap.put(entry.getKey(), entry.getValue());</span>
+                } else {
+<span class="nc" id="L83">                    propertyMap.put(entry.getKey(), entry.getValue());</span>
+                }
+<span class="nc" id="L85">            }</span>
+
+            // Create all instances
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            for (Map.Entry&lt;String, String&gt; entry : instanceMap.entrySet()) {</span>
+<span class="nc" id="L89">                createNewInstance(objects, entry.getKey(), entry.getValue());</span>
+<span class="nc" id="L90">            }</span>
+
+            // Set all properties
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            for (Map.Entry&lt;String, String&gt; entry : propertyMap.entrySet()) {</span>
+<span class="nc" id="L94">                applyProperty(entry.getKey(), entry.getValue(), objects);</span>
+<span class="nc" id="L95">            }</span>
+        }
+
+<span class="fc" id="L98">        return objects;</span>
+    }
+
+    protected void createNewInstance(Map objects, String name, String value) {
+
+<span class="nc" id="L103">        Object currentInstance = objects.get(name);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        if (currentInstance != null) {</span>
+<span class="nc" id="L105">            log.info(&quot;An instance with name [&quot; + name + &quot;] already exists.  &quot; +</span>
+                    &quot;Redefining this object as a new instance of type [&quot; + value + &quot;].&quot;);
+        }
+
+        Object instance;//name with no property, assume right hand side of equals sign is the class name:
+        try {
+<span class="nc" id="L111">            instance = ClassUtils.newInstance(value);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">            if (instance instanceof Nameable) {</span>
+<span class="nc" id="L113">                ((Nameable) instance).setName(name);</span>
+            }
+<span class="nc" id="L115">        } catch (Exception e) {</span>
+<span class="nc" id="L116">            String msg = &quot;Unable to instantiate class [&quot; + value + &quot;] for object named '&quot; + name + &quot;'.  &quot; +</span>
+                    &quot;Please ensure you've specified the fully qualified class name correctly.&quot;;
+<span class="nc" id="L118">            throw new ConfigurationException(msg, e);</span>
+<span class="nc" id="L119">        }</span>
+<span class="nc" id="L120">        objects.put(name, instance);</span>
+<span class="nc" id="L121">    }</span>
+
+    protected void applyProperty(String key, String value, Map objects) {
+
+<span class="nc" id="L125">        int index = key.indexOf('.');</span>
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (index &gt;= 0) {</span>
+<span class="nc" id="L128">            String name = key.substring(0, index);</span>
+<span class="nc" id="L129">            String property = key.substring(index + 1, key.length());</span>
+
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (GLOBAL_PROPERTY_PREFIX.equalsIgnoreCase(name)) {</span>
+<span class="nc" id="L132">                applyGlobalProperty(objects, property, value);</span>
+            } else {
+<span class="nc" id="L134">                applySingleProperty(objects, name, property, value);</span>
+            }
+
+
+<span class="nc" id="L138">        } else {</span>
+<span class="nc" id="L139">            throw new IllegalArgumentException(&quot;All property keys must contain a '.' character. &quot; +</span>
+                    &quot;(e.g. myBean.property = value)  These should already be separated out by buildObjects().&quot;);
+        }
+<span class="nc" id="L142">    }</span>
+
+    protected void applyGlobalProperty(Map objects, String property, String value) {
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        for (Object instance : objects.values()) {</span>
+            try {
+<span class="nc" id="L147">                PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(instance, property);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                if (pd != null) {</span>
+<span class="nc" id="L149">                    applyProperty(instance, property, value);</span>
+                }
+<span class="nc" id="L151">            } catch (Exception e) {</span>
+<span class="nc" id="L152">                String msg = &quot;Error retrieving property descriptor for instance &quot; +</span>
+                        &quot;of type [&quot; + instance.getClass().getName() + &quot;] &quot; +
+                        &quot;while setting property [&quot; + property + &quot;]&quot;;
+<span class="nc" id="L155">                throw new ConfigurationException(msg, e);</span>
+<span class="nc" id="L156">            }</span>
+<span class="nc" id="L157">        }</span>
+<span class="nc" id="L158">    }</span>
+
+    protected void applySingleProperty(Map objects, String name, String property, String value) {
+<span class="nc" id="L161">        Object instance = objects.get(name);</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (property.equals(&quot;class&quot;)) {</span>
+<span class="nc" id="L163">            throw new IllegalArgumentException(&quot;Property keys should not contain 'class' properties since these &quot; +</span>
+                    &quot;should already be separated out by buildObjects().&quot;);
+
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        } else if (instance == null) {</span>
+<span class="nc" id="L167">            String msg = &quot;Configuration error.  Specified object [&quot; + name + &quot;] with property [&quot; +</span>
+                    property + &quot;] without first defining that object's class.  Please first &quot; +
+                    &quot;specify the class property first, e.g. myObject.class = fully_qualified_class_name &quot; +
+                    &quot;and then define additional properties.&quot;;
+<span class="nc" id="L171">            throw new IllegalArgumentException(msg);</span>
+
+        } else {
+<span class="nc" id="L174">            applyProperty(instance, property, value);</span>
+        }
+<span class="nc" id="L176">    }</span>
+
+    protected boolean isReference(String value) {
+<span class="nc bnc" id="L179" title="All 4 branches missed.">        return value != null &amp;&amp; value.startsWith(OBJECT_REFERENCE_BEGIN_TOKEN);</span>
+    }
+
+    protected String getId(String referenceToken) {
+<span class="nc" id="L183">        return referenceToken.substring(OBJECT_REFERENCE_BEGIN_TOKEN.length());</span>
+    }
+
+    protected Object getReferencedObject(String id) {
+<span class="nc bnc" id="L187" title="All 4 branches missed.">        Object o = objects != null &amp;&amp; !objects.isEmpty() ? objects.get(id) : null;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        if (o == null) {</span>
+<span class="nc" id="L189">            String msg = &quot;The object with id [&quot; + id + &quot;] has not yet been defined and therefore cannot be &quot; +</span>
+                    &quot;referenced.  Please ensure objects are defined in the order in which they should be &quot; +
+                    &quot;created and made avaialable for future reference.&quot;;
+<span class="nc" id="L192">            throw new UnresolveableReferenceException(msg);</span>
+        }
+<span class="nc" id="L194">        return o;</span>
+    }
+
+    protected String unescapeIfNecessary(String value) {
+<span class="nc bnc" id="L198" title="All 4 branches missed.">        if (value != null &amp;&amp; value.startsWith(ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN)) {</span>
+<span class="nc" id="L199">            return value.substring(ESCAPED_OBJECT_REFERENCE_BEGIN_TOKEN.length() - 1);</span>
+        }
+<span class="nc" id="L201">        return value;</span>
+    }
+
+    protected void applyProperty(Object object, String propertyName, String stringValue) {
+
+        Object value;
+
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (isReference(stringValue)) {</span>
+<span class="nc" id="L209">            String id = getId(stringValue);</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L211">                log.debug(&quot;Encountered object reference [&quot; + stringValue + &quot;].  Looking up object &quot; +</span>
+                        &quot;with id [&quot; + id + &quot;]&quot;);
+            }
+<span class="nc" id="L214">            value = getReferencedObject(id);</span>
+<span class="nc" id="L215">        } else {</span>
+<span class="nc" id="L216">            value = unescapeIfNecessary(stringValue);</span>
+        }
+
+        try {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L221">                log.trace(&quot;Applying property [&quot; + propertyName + &quot;] value [&quot; + value + &quot;] on object of type [&quot; + object.getClass().getName() + &quot;]&quot;);</span>
+            }
+<span class="nc" id="L223">            BeanUtils.setProperty(object, propertyName, value);</span>
+<span class="nc" id="L224">        } catch (Exception e) {</span>
+<span class="nc" id="L225">            String msg = &quot;Unable to set property [&quot; + propertyName + &quot;] with value [&quot; + stringValue + &quot;].  If &quot; +</span>
+                    &quot;'&quot; + stringValue + &quot;' is a reference to another (previously defined) object, please prefix it with &quot; +
+                    &quot;'&quot; + OBJECT_REFERENCE_BEGIN_TOKEN + &quot;' to indicate that the referenced &quot; +
+                    &quot;object should be used as the actual value.  &quot; +
+                    &quot;For example, &quot; + OBJECT_REFERENCE_BEGIN_TOKEN + stringValue;
+<span class="nc" id="L230">            throw new ConfigurationException(msg, e);</span>
+<span class="nc" id="L231">        }</span>
+<span class="nc" id="L232">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

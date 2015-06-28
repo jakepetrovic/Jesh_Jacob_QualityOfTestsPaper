@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Top10Highscore.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">db</a> &gt; <span class="el_source">Top10Highscore.java</span></div><h1>Top10Highscore.java</h1><pre class="source lang-java linenums">package db;
+
+/**
+ * This Class retrieves the top 10 users from the database and returns 
+ * them in an array list
+ * 
+ * @author Daniel Tunjic
+ *
+ */
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import org.apache.log4j.Level;
+
+import logging.Logging;	
+
+
+public class Top10Highscore {
+
+<span class="nc" id="L21">    private ArrayList&lt;DBGameUser&gt; playerList = new ArrayList&lt;DBGameUser&gt;();</span>
+<span class="nc" id="L22">    private static Logging logger = Logging.getInstance();</span>
+
+    public Top10Highscore() {
+<span class="nc" id="L25">        super();</span>
+<span class="nc" id="L26">        List&lt;DBGameUser&gt; dbplayerList = new ArrayList&lt;DBGameUser&gt;();</span>
+        try {
+<span class="nc" id="L28">            dbplayerList = DBServiceFactory.getInstance().getTopTenGameUser();</span>
+<span class="nc" id="L29">        } catch (DBException e) {</span>
+<span class="nc" id="L30">        	logger.log(Level.ERROR, this,  e.toString());</span>
+<span class="nc" id="L31">        }</span>
+        
+        /*
+         * Momentan sind &quot;user&quot; und &quot;player&quot; identische Objekte und der Iterator macht
+         * nicht wirklich Sinn. Da wir sp�ter aber nur den Namen und den Score der Spieler
+         * brauchen, war der Gedanke einen &quot;leichtgewichtigen player&quot; zu erstellen, der nur
+         * diese Informationen beinhaltet. 
+        */
+        
+<span class="nc" id="L40">        Iterator&lt;DBGameUser&gt; it = dbplayerList.iterator();</span>
+        
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        while (it.hasNext()) {</span>
+<span class="nc" id="L43">            DBGameUser user = it.next();</span>
+<span class="nc" id="L44">            DBGameUser player = new DBGameUser();</span>
+        
+<span class="nc" id="L46">            player.setName(user.getName());</span>
+<span class="nc" id="L47">            player.setScore(user.getScore());</span>
+<span class="nc" id="L48">            playerList.add(player);</span>
+<span class="nc" id="L49">        }</span>
+
+<span class="nc" id="L51">    }</span>
+
+    public ArrayList&lt;DBGameUser&gt; getPlayerList() {
+<span class="nc" id="L54">        return playerList;</span>
+    }
+
+    public void setPlayerList(ArrayList&lt;DBGameUser&gt; playerList) {
+<span class="nc" id="L58">        this.playerList = playerList;</span>
+<span class="nc" id="L59">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

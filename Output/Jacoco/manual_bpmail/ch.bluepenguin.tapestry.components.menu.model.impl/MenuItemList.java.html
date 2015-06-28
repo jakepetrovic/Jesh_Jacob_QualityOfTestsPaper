@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MenuItemList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.tapestry.components.menu.model.impl</a> &gt; <span class="el_source">MenuItemList.java</span></div><h1>MenuItemList.java</h1><pre class="source lang-java linenums">// Decompiled by DJ v3.8.8.85 Copyright 2005 Atanas Neshkov  Date: 16.05.2005 11:59:04
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   MenuItemList.java
+
+package ch.bluepenguin.tapestry.components.menu.model.impl;
+
+import ch.bluepenguin.tapestry.components.menu.model.IMenuItem;
+import java.util.Iterator;
+import java.util.Vector;
+
+public class MenuItemList
+{
+
+    public MenuItemList(IMenuItem parent)
+<span class="nc" id="L16">    {</span>
+<span class="nc" id="L17">        parentMenuItem = parent;</span>
+<span class="nc" id="L18">        children = new Vector();</span>
+<span class="nc" id="L19">    }</span>
+
+    public void addChild(MenuItemList item)
+    {
+<span class="nc bnc" id="L23" title="All 2 branches missed.">        if(parentMenuItem == null)</span>
+<span class="nc" id="L24">            item.getMenuItem().setDepth(0);</span>
+        else
+<span class="nc" id="L26">            item.getMenuItem().setDepth(parentMenuItem.getDepth() + 1);</span>
+<span class="nc" id="L27">        children.add(item);</span>
+<span class="nc" id="L28">    }</span>
+
+    public IMenuItem getMenuItem()
+    {
+<span class="nc" id="L32">        return parentMenuItem;</span>
+    }
+
+    public int getChildrenSize()
+    {
+<span class="nc" id="L37">        return children.size();</span>
+    }
+
+    public boolean checkConsistency()
+    {
+<span class="nc" id="L42">        boolean result = true;</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">        for(int i = 0; i &lt; children.size() &amp;&amp; result; i++)</span>
+        {
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            if(!(children.get(i) instanceof MenuItemList))</span>
+<span class="nc" id="L46">                result = false;</span>
+<span class="nc" id="L47">            MenuItemList childList = (MenuItemList)children.get(i);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if(!childList.getMenuItem().equals(parentMenuItem))</span>
+<span class="nc" id="L49">                result = false;</span>
+<span class="nc" id="L50">            result = childList.checkConsistency();</span>
+        }
+
+<span class="nc" id="L53">        return result;</span>
+    }
+
+    public Iterator getChildrenIterator()
+    {
+<span class="nc" id="L58">        return children.iterator();</span>
+    }
+
+    public String toString()
+    {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if(parentMenuItem == null)</span>
+<span class="nc" id="L64">            return &quot;(0) null&quot;;</span>
+        else
+<span class="nc" id="L66">            return &quot;(&quot; + parentMenuItem.getDepth() + &quot;) &quot; + parentMenuItem.getName();</span>
+    }
+
+<span class="nc" id="L69">    private static String lineseparator = System.getProperty(&quot;line.separator&quot;);</span>
+    private Vector children;
+    private IMenuItem parentMenuItem;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

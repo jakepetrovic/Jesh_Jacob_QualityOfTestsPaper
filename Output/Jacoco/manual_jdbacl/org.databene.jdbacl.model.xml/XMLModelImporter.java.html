@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XMLModelImporter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model.xml</a> &gt; <span class="el_source">XMLModelImporter.java</span></div><h1>XMLModelImporter.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model.xml;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+
+import org.databene.commons.ArrayUtil;
+import org.databene.commons.Assert;
+import org.databene.commons.IOUtil;
+import org.databene.commons.ImportFailedException;
+import org.databene.commons.StringUtil;
+import org.databene.commons.SyntaxError;
+import org.databene.commons.version.VersionNumber;
+import org.databene.commons.xml.XMLUtil;
+import org.databene.jdbacl.model.DBPackage;
+import org.databene.jdbacl.model.DBProcedure;
+import org.databene.jdbacl.model.DBTrigger;
+import org.databene.jdbacl.model.FKChangeRule;
+import org.databene.jdbacl.model.DBCatalog;
+import org.databene.jdbacl.model.DBCheckConstraint;
+import org.databene.jdbacl.model.DBColumn;
+import org.databene.jdbacl.model.DBForeignKeyConstraint;
+import org.databene.jdbacl.model.DBIndex;
+import org.databene.jdbacl.model.DBMetaDataImporter;
+import org.databene.jdbacl.model.DBNonUniqueIndex;
+import org.databene.jdbacl.model.DBPrimaryKeyConstraint;
+import org.databene.jdbacl.model.DBSchema;
+import org.databene.jdbacl.model.DBSequence;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DBUniqueConstraint;
+import org.databene.jdbacl.model.DBUniqueIndex;
+import org.databene.jdbacl.model.Database;
+import org.databene.jdbacl.model.DefaultDBColumn;
+import org.databene.jdbacl.model.DefaultDBTable;
+import org.databene.jdbacl.model.DefaultDatabase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * Imports a meta data model from an XML file.&lt;br/&gt;&lt;br/&gt;
+ * Created: 28.11.2010 15:18:55
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class XMLModelImporter implements DBMetaDataImporter {
+	
+<span class="fc" id="L71">	private static final Logger LOGGER = LoggerFactory.getLogger(XMLModelImporter.class);</span>
+
+	private File file;
+	
+<span class="fc" id="L75">	public XMLModelImporter(File file) {</span>
+<span class="fc" id="L76">		this.file = file;</span>
+<span class="fc" id="L77">	}</span>
+
+	public Database importDatabase() throws ImportFailedException {
+<span class="fc" id="L80">		FileInputStream in = null;</span>
+		try {
+<span class="nc" id="L82">			in = new FileInputStream(file);</span>
+<span class="nc" id="L83">			Document doc = XMLUtil.parse(in);</span>
+<span class="nc" id="L84">			Database database = parseDatabase(doc.getDocumentElement());</span>
+<span class="nc" id="L85">			scanReferers(database);</span>
+<span class="nc" id="L86">			return database;</span>
+<span class="fc" id="L87">		} catch (IOException e) {</span>
+<span class="fc" id="L88">			throw new ImportFailedException(e);</span>
+		} finally {
+<span class="pc" id="L90">			IOUtil.close(in);</span>
+		}
+	}
+
+	private void scanReferers(Database database) {
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		for (DBTable table : database.getTables())</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">			for (DBForeignKeyConstraint fk : table.getForeignKeyConstraints())</span>
+<span class="nc" id="L97">				fk.getRefereeTable().addReferrer(table);</span>
+<span class="nc" id="L98">	}</span>
+
+	private Database parseDatabase(Element e) {
+<span class="nc" id="L101">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L102">		String product = e.getAttribute(&quot;databaseProductName&quot;);</span>
+<span class="nc" id="L103">		VersionNumber version = VersionNumber.valueOf(e.getAttribute(&quot;databaseProductVersion&quot;));</span>
+<span class="nc" id="L104">		DefaultDatabase db = new DefaultDatabase(name, product, version);</span>
+<span class="nc" id="L105">    	db.setImportDate(XMLUtil.getDateAttribute(e, &quot;importDate&quot;));</span>
+<span class="nc" id="L106">    	db.setUser(e.getAttribute(&quot;user&quot;));</span>
+<span class="nc" id="L107">    	db.setTableInclusionPattern(e.getAttribute(&quot;tableInclusionPattern&quot;));</span>
+<span class="nc" id="L108">    	db.setTableExclusionPattern(e.getAttribute(&quot;tableExclusionPattern&quot;));</span>
+<span class="nc" id="L109">    	db.setImportedChecks(XMLUtil.getBooleanAttribute(e, &quot;importedChecks&quot;));</span>
+<span class="nc" id="L110">    	db.setImportedUKs(XMLUtil.getBooleanAttribute(e, &quot;importedUKs&quot;));</span>
+<span class="nc" id="L111">    	db.setImportedIndexes(XMLUtil.getBooleanAttribute(e, &quot;importedIndexes&quot;));</span>
+<span class="nc" id="L112">    	db.setImportedSequences(XMLUtil.getBooleanAttribute(e, &quot;importedSequences&quot;));</span>
+
+		// import catalogs
+<span class="nc bnc" id="L115" title="All 2 branches missed.">		for (Element child : XMLUtil.getChildElements(e)) {</span>
+<span class="nc" id="L116">			String childName = child.getNodeName();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">			if (&quot;catalog&quot;.equals(childName))</span>
+<span class="nc" id="L118">				parseCatalog(child, db);</span>
+			else
+<span class="nc" id="L120">				throw new UnsupportedOperationException(&quot;Not an allowed element within &lt;database&gt;: &quot; + childName);</span>
+		}
+<span class="nc" id="L122">		return db;</span>
+	}
+
+	private DBCatalog parseCatalog(Element e, Database db) {
+<span class="nc" id="L126">		String name = StringUtil.emptyToNull(e.getAttribute(&quot;name&quot;));</span>
+<span class="nc" id="L127">		DBCatalog catalog = new DBCatalog(name, db);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		for (Element child : XMLUtil.getChildElements(e)) {</span>
+<span class="nc" id="L129">			String childName = child.getNodeName();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">			if (&quot;schema&quot;.equals(childName))</span>
+<span class="nc" id="L131">				parseSchema(child, catalog);</span>
+			else
+<span class="nc" id="L133">				throw new UnsupportedOperationException(&quot;Not an allowed element within &lt;catalog&gt;: &quot; + childName);</span>
+		}
+<span class="nc" id="L135">		return catalog;</span>
+	}
+
+	private DBSchema parseSchema(Element e, DBCatalog catalog) {
+<span class="nc" id="L139">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L140">		DBSchema schema = new DBSchema(name, catalog);</span>
+<span class="nc" id="L141">		Element[] children = XMLUtil.getChildElements(e);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		for (Element child : children) {</span>
+<span class="nc" id="L143">			String childName = child.getNodeName();</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			if (&quot;table&quot;.equals(childName))</span>
+<span class="nc" id="L145">				parseTableName(child, schema);</span>
+<span class="nc bnc" id="L146" title="All 6 branches missed.">			else if (!&quot;sequence&quot;.equals(childName) &amp;&amp; !&quot;trigger&quot;.equals(childName) &amp;&amp; !&quot;package&quot;.equals(childName))</span>
+<span class="nc" id="L147">				throw new UnsupportedOperationException(&quot;Not an allowed element within &lt;schema&gt;: &quot; + childName);</span>
+		}
+<span class="nc bnc" id="L149" title="All 2 branches missed.">		for (Element child : children) {</span>
+<span class="nc" id="L150">			String childName = child.getNodeName();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">			if (&quot;table&quot;.equals(childName))</span>
+<span class="nc" id="L152">				parseTableStructure(child, schema);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">			else if (&quot;sequence&quot;.equals(childName))</span>
+<span class="nc" id="L154">				parseSequence(child, schema);</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">			else if (&quot;trigger&quot;.equals(childName))</span>
+<span class="nc" id="L156">				parseTrigger(child, schema);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">			else if (&quot;package&quot;.equals(childName))</span>
+<span class="nc" id="L158">				parsePackage(child, schema);</span>
+			else
+<span class="nc" id="L160">				throw new UnsupportedOperationException(&quot;Not an allowed element within &lt;schema&gt;: &quot; + childName);</span>
+		}
+<span class="nc" id="L162">		return schema;</span>
+	}
+
+	private DefaultDBTable parseTableName(Element e, DBSchema schema) {
+<span class="nc" id="L166">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L167">		return new DefaultDBTable(name, schema);</span>
+	}
+
+	private DefaultDBTable parseTableStructure(Element e, DBSchema schema) {
+<span class="nc" id="L171">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L172">		DefaultDBTable table = (DefaultDBTable) schema.getTable(name);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">		for (Element child : XMLUtil.getChildElements(e)) {</span>
+<span class="nc" id="L174">			String childName = child.getNodeName();</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">			if (&quot;column&quot;.equals(childName))</span>
+<span class="nc" id="L176">				parseColumn(child, table);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">			else if (&quot;pk&quot;.equals(childName))</span>
+<span class="nc" id="L178">				parsePK(child, table);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">			else if (&quot;uk&quot;.equals(childName))</span>
+<span class="nc" id="L180">				parseUK(child, table);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">			else if (&quot;fk&quot;.equals(childName))</span>
+<span class="nc" id="L182">				parseFK(child, table, schema);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">			else if (&quot;check&quot;.equals(childName))</span>
+<span class="nc" id="L184">				parseCheck(child, table);</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">			else if (&quot;index&quot;.equals(childName))</span>
+<span class="nc" id="L186">				parseIndex(child, table);</span>
+			else
+<span class="nc" id="L188">				throw new UnsupportedOperationException(&quot;Not an allowed element within &lt;table&gt;: &quot; + childName);</span>
+		}
+<span class="nc" id="L190">		return table;</span>
+	}
+
+	private DBColumn parseColumn(Element e, DefaultDBTable table) {
+<span class="nc" id="L194">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L195">		String typeAndSizeSpec = e.getAttribute(&quot;type&quot;);</span>
+<span class="nc" id="L196">		int jdbcType = Integer.parseInt(e.getAttribute(&quot;jdbcType&quot;));</span>
+<span class="nc" id="L197">		DefaultDBColumn column = new DefaultDBColumn(name, table, jdbcType, typeAndSizeSpec);</span>
+<span class="nc" id="L198">		String defaultValue = e.getAttribute(&quot;default&quot;);</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">		if (!StringUtil.isEmpty(defaultValue))</span>
+<span class="nc" id="L200">			column.setDefaultValue(defaultValue);</span>
+<span class="nc" id="L201">		String nullableSpec = e.getAttribute(&quot;nullable&quot;);</span>
+<span class="nc bnc" id="L202" title="All 4 branches missed.">		boolean nullable = (nullableSpec == null || !&quot;false&quot;.equals(nullableSpec));</span>
+<span class="nc" id="L203">		column.setNullable(nullable);</span>
+<span class="nc" id="L204">		return column;</span>
+	}
+
+	private DBPrimaryKeyConstraint parsePK(Element e, DefaultDBTable table) {
+<span class="nc" id="L208">		boolean autoNamed = false;</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">		if (e.getAttribute(&quot;autoNamed&quot;) != null)</span>
+<span class="nc" id="L210">			autoNamed = Boolean.valueOf(e.getAttribute(&quot;autoNamed&quot;));</span>
+<span class="nc" id="L211">		return new DBPrimaryKeyConstraint(table, e.getAttribute(&quot;name&quot;), autoNamed, parseColumnNames(e));</span>
+	}
+
+	private DBUniqueConstraint parseUK(Element e, DefaultDBTable table) {
+<span class="nc" id="L215">		boolean autoNamed = false;</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">		if (e.getAttribute(&quot;autoNamed&quot;) != null)</span>
+<span class="nc" id="L217">			autoNamed = Boolean.valueOf(e.getAttribute(&quot;autoNamed&quot;));</span>
+<span class="nc" id="L218">		return new DBUniqueConstraint(table, e.getAttribute(&quot;name&quot;), autoNamed, parseColumnNames(e));</span>
+	}
+
+	private DBForeignKeyConstraint parseFK(Element e, DefaultDBTable owner, DBSchema schema) {
+<span class="nc" id="L222">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L223">		String refereeTableName = e.getAttribute(&quot;refereeTable&quot;);</span>
+<span class="nc" id="L224">		DBTable refereeTable = schema.getTable(refereeTableName);</span>
+<span class="nc" id="L225">		Assert.notNull(refereeTable, &quot;refereeTable&quot;);</span>
+<span class="nc" id="L226">		String colAttr = e.getAttribute(&quot;column&quot;);</span>
+<span class="nc" id="L227">		String[] columnNames = null;</span>
+<span class="nc" id="L228">		String[] refereeColumnNames = null;</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">		if (!StringUtil.isEmpty(colAttr)) {</span>
+<span class="nc" id="L230">			columnNames = new String[] { colAttr };</span>
+<span class="nc" id="L231">			refereeColumnNames = new String[] { e.getAttribute(&quot;refereeColumn&quot;) };</span>
+		} else {
+<span class="nc" id="L233">			Element colsElement = XMLUtil.getChildElement(e, false, true, &quot;columns&quot;);</span>
+<span class="nc" id="L234">			Element[] colElements = XMLUtil.getChildElements(colsElement, false, &quot;column&quot;);</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">			for (Element colElement : colElements) {</span>
+<span class="nc" id="L236">				columnNames = ArrayUtil.append(colElement.getAttribute(&quot;name&quot;), columnNames);</span>
+<span class="nc" id="L237">				refereeColumnNames = ArrayUtil.append(colElement.getAttribute(&quot;refereeColumn&quot;), refereeColumnNames);</span>
+			}
+		}
+<span class="nc" id="L240">		boolean autoNamed = false;</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">		if (e.getAttribute(&quot;autoNamed&quot;) != null)</span>
+<span class="nc" id="L242">			autoNamed = Boolean.valueOf(e.getAttribute(&quot;autoNamed&quot;));</span>
+<span class="nc" id="L243">		DBForeignKeyConstraint fk = new DBForeignKeyConstraint(name, autoNamed, owner, columnNames, refereeTable, refereeColumnNames);</span>
+		// parse rules
+<span class="nc" id="L245">		String updateRule = XMLUtil.getAttribute(e, &quot;updateRule&quot;, false);</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">		if (!StringUtil.isEmpty(updateRule))</span>
+<span class="nc" id="L247">			fk.setUpdateRule(FKChangeRule.valueOf(updateRule));</span>
+<span class="nc" id="L248">		String deleteRule = XMLUtil.getAttribute(e, &quot;deleteRule&quot;, false);</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">		if (!StringUtil.isEmpty(deleteRule))</span>
+<span class="nc" id="L250">			fk.setDeleteRule(FKChangeRule.valueOf(deleteRule));</span>
+<span class="nc" id="L251">		return fk;</span>
+	}
+
+	private DBCheckConstraint parseCheck(Element e, DefaultDBTable table) {
+		try {
+<span class="nc" id="L256">			boolean autoNamed = false;</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">			if (e.getAttribute(&quot;autoNamed&quot;) != null)</span>
+<span class="nc" id="L258">				autoNamed = Boolean.valueOf(e.getAttribute(&quot;autoNamed&quot;));</span>
+<span class="nc" id="L259">			return new DBCheckConstraint(e.getAttribute(&quot;name&quot;),autoNamed, table, e.getAttribute(&quot;definition&quot;));</span>
+<span class="nc" id="L260">		} catch (Exception ex) {</span>
+<span class="nc" id="L261">			LOGGER.error(&quot;Error parsing check constraint&quot;, ex);</span>
+<span class="nc" id="L262">			return null;</span>
+		}
+		
+	}
+
+	private DBIndex parseIndex(Element e, DefaultDBTable table) {
+<span class="nc" id="L268">		String name = e.getAttribute(&quot;name&quot;);</span>
+<span class="nc" id="L269">		String uniqueSpec = e.getAttribute(&quot;unique&quot;);</span>
+<span class="nc bnc" id="L270" title="All 4 branches missed.">		boolean unique = (uniqueSpec != null &amp;&amp; &quot;true&quot;.equals(uniqueSpec));</span>
+<span class="nc" id="L271">		String nameDeterministicSpec = e.getAttribute(&quot;nameDeterministic&quot;);</span>
+<span class="nc bnc" id="L272" title="All 4 branches missed.">		boolean nameDeterministic = (nameDeterministicSpec == null || &quot;true&quot;.equals(nameDeterministicSpec));</span>
+<span class="nc" id="L273">		String[] columnNames = parseColumnNames(e);</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">		if (unique)</span>
+<span class="nc" id="L275">			return new DBUniqueIndex(name, nameDeterministic, table.getUniqueConstraint(columnNames));</span>
+		else
+<span class="nc" id="L277">			return new DBNonUniqueIndex(name, nameDeterministic, table, columnNames);</span>
+	}
+
+	public String[] parseColumnNames(Element e) {
+<span class="nc" id="L281">		String colAttr = e.getAttribute(&quot;column&quot;);</span>
+<span class="nc" id="L282">		String[] columnNames = null;</span>
+<span class="nc bnc" id="L283" title="All 2 branches missed.">		if (!StringUtil.isEmpty(colAttr))</span>
+<span class="nc" id="L284">			columnNames = new String[] { colAttr };</span>
+		else {
+<span class="nc" id="L286">			Element colsElement = XMLUtil.getChildElement(e, false, true, &quot;columns&quot;);</span>
+<span class="nc" id="L287">			Element[] colElements = XMLUtil.getChildElements(colsElement, false, &quot;column&quot;);</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">			for (Element colElement : colElements)</span>
+<span class="nc" id="L289">				columnNames = ArrayUtil.append(colElement.getAttribute(&quot;name&quot;), columnNames);</span>
+		}
+<span class="nc" id="L291">		return columnNames;</span>
+	}
+
+	private DBSequence parseSequence(Element e, DBSchema schema) {
+<span class="nc" id="L295">		DBSequence sequence = new DBSequence(e.getAttribute(&quot;name&quot;), schema);</span>
+<span class="nc" id="L296">		String start = e.getAttribute(&quot;start&quot;);</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">		if (!StringUtil.isEmpty(start))</span>
+<span class="nc" id="L298">			sequence.setStart(new BigInteger(start));</span>
+<span class="nc" id="L299">		String increment = e.getAttribute(&quot;increment&quot;);</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">		if (!StringUtil.isEmpty(increment))</span>
+<span class="nc" id="L301">			sequence.setIncrement(new BigInteger(increment));</span>
+<span class="nc" id="L302">		String maxValue = e.getAttribute(&quot;maxValue&quot;);</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">		if (!StringUtil.isEmpty(maxValue))</span>
+<span class="nc" id="L304">			sequence.setMaxValue(new BigInteger(maxValue));</span>
+<span class="nc" id="L305">		String minValue = e.getAttribute(&quot;minValue&quot;);</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">		if (!StringUtil.isEmpty(minValue))</span>
+<span class="nc" id="L307">			sequence.setMinValue(new BigInteger(minValue));</span>
+<span class="nc" id="L308">		String cycle = e.getAttribute(&quot;cycle&quot;);</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">		if (!StringUtil.isEmpty(cycle))</span>
+<span class="nc" id="L310">			sequence.setCycle(Boolean.parseBoolean(cycle));</span>
+<span class="nc" id="L311">		String cache = e.getAttribute(&quot;cache&quot;);</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">		if (!StringUtil.isEmpty(cache))</span>
+<span class="nc" id="L313">			sequence.setCache(Long.parseLong(cache));</span>
+<span class="nc" id="L314">		String order = e.getAttribute(&quot;order&quot;);</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">		if (!StringUtil.isEmpty(order))</span>
+<span class="nc" id="L316">			sequence.setOrder(Boolean.parseBoolean(order));</span>
+<span class="nc" id="L317">		return sequence;</span>
+	}
+
+	private DBTrigger parseTrigger(Element e, DBSchema schema) {
+<span class="nc" id="L321">		DBTrigger trigger = new DBTrigger(e.getAttribute(&quot;name&quot;), schema);</span>
+<span class="nc" id="L322">		String triggerType = e.getAttribute(&quot;triggerType&quot;);</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">		if (!StringUtil.isEmpty(triggerType))</span>
+<span class="nc" id="L324">			trigger.setTriggerType(triggerType);</span>
+<span class="nc" id="L325">		String triggeringEvent = e.getAttribute(&quot;triggeringEvent&quot;);</span>
+<span class="nc bnc" id="L326" title="All 2 branches missed.">		if (!StringUtil.isEmpty(triggeringEvent))</span>
+<span class="nc" id="L327">			trigger.setTriggeringEvent(triggeringEvent);</span>
+<span class="nc" id="L328">		String tableOwner = e.getAttribute(&quot;tableOwner&quot;);</span>
+<span class="nc bnc" id="L329" title="All 2 branches missed.">		if (!StringUtil.isEmpty(tableOwner))</span>
+<span class="nc" id="L330">			trigger.setTableOwner(tableOwner);</span>
+<span class="nc" id="L331">		String baseObjectType = e.getAttribute(&quot;baseObjectType&quot;);</span>
+<span class="nc bnc" id="L332" title="All 2 branches missed.">		if (!StringUtil.isEmpty(baseObjectType))</span>
+<span class="nc" id="L333">			trigger.setBaseObjectType(baseObjectType);</span>
+<span class="nc" id="L334">		String tableName = e.getAttribute(&quot;tableName&quot;);</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">		if (!StringUtil.isEmpty(tableName))</span>
+<span class="nc" id="L336">			trigger.setTableName(tableName);</span>
+<span class="nc" id="L337">		String columnName = e.getAttribute(&quot;columnName&quot;);</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">		if (!StringUtil.isEmpty(columnName))</span>
+<span class="nc" id="L339">			trigger.setColumnName(columnName);</span>
+<span class="nc" id="L340">		String referencingNames = e.getAttribute(&quot;referencingNames&quot;);</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">		if (!StringUtil.isEmpty(referencingNames))</span>
+<span class="nc" id="L342">			trigger.setReferencingNames(referencingNames);</span>
+<span class="nc" id="L343">		String whenClause = e.getAttribute(&quot;whenClause&quot;);</span>
+<span class="nc bnc" id="L344" title="All 2 branches missed.">		if (!StringUtil.isEmpty(whenClause))</span>
+<span class="nc" id="L345">			trigger.setWhenClause(whenClause);</span>
+<span class="nc" id="L346">		String status = e.getAttribute(&quot;status&quot;);</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">		if (!StringUtil.isEmpty(status))</span>
+<span class="nc" id="L348">			trigger.setStatus(status);</span>
+<span class="nc" id="L349">		String description = e.getAttribute(&quot;description&quot;);</span>
+<span class="nc bnc" id="L350" title="All 2 branches missed.">		if (!StringUtil.isEmpty(description))</span>
+<span class="nc" id="L351">			trigger.setDescription(description);</span>
+<span class="nc" id="L352">		String actionType = e.getAttribute(&quot;actionType&quot;);</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">		if (!StringUtil.isEmpty(actionType))</span>
+<span class="nc" id="L354">			trigger.setActionType(actionType);</span>
+<span class="nc" id="L355">		String triggerBody = e.getAttribute(&quot;triggerBody&quot;);</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">		if (!StringUtil.isEmpty(triggerBody))</span>
+<span class="nc" id="L357">			trigger.setTriggerBody(triggerBody);</span>
+<span class="nc" id="L358">		return trigger;</span>
+	}
+
+	private DBPackage parsePackage(Element e, DBSchema schema) {
+<span class="nc" id="L362">		DBPackage pkg = new DBPackage(e.getAttribute(&quot;name&quot;), schema);</span>
+<span class="nc" id="L363">		String subObjectName = e.getAttribute(&quot;subObjectName&quot;);</span>
+<span class="nc bnc" id="L364" title="All 2 branches missed.">		if (!StringUtil.isEmpty(subObjectName))</span>
+<span class="nc" id="L365">			pkg.setSubObjectName(subObjectName);</span>
+<span class="nc" id="L366">		String objectId = e.getAttribute(&quot;objectId&quot;);</span>
+<span class="nc bnc" id="L367" title="All 2 branches missed.">		if (!StringUtil.isEmpty(objectId))</span>
+<span class="nc" id="L368">			pkg.setObjectId(objectId);</span>
+<span class="nc" id="L369">		String dataObjectId = e.getAttribute(&quot;dataObjectId&quot;);</span>
+<span class="nc bnc" id="L370" title="All 2 branches missed.">		if (!StringUtil.isEmpty(dataObjectId))</span>
+<span class="nc" id="L371">			pkg.setDataObjectId(dataObjectId);</span>
+<span class="nc" id="L372">		String objectType = e.getAttribute(&quot;objectType&quot;);</span>
+<span class="nc bnc" id="L373" title="All 2 branches missed.">		if (!StringUtil.isEmpty(objectType))</span>
+<span class="nc" id="L374">			pkg.setObjectType(objectType);</span>
+<span class="nc" id="L375">		String status = e.getAttribute(&quot;status&quot;);</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">		if (!StringUtil.isEmpty(status))</span>
+<span class="nc" id="L377">			pkg.setStatus(status);</span>
+<span class="nc" id="L378">		parsePackageProcedures(e, pkg);</span>
+<span class="nc" id="L379">		return pkg;</span>
+	}
+
+	private void parsePackageProcedures(Element pkgElement, DBPackage pkg) {
+<span class="nc bnc" id="L383" title="All 2 branches missed.">		for (Element e : XMLUtil.getChildElements(pkgElement)) {</span>
+<span class="nc" id="L384">			String nodeName = e.getNodeName();</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">			if (&quot;procedure&quot;.equals(nodeName)) {</span>
+<span class="nc" id="L386">				DBProcedure procedure = new DBProcedure(e.getAttribute(&quot;name&quot;), pkg);</span>
+<span class="nc" id="L387">				String objectId = e.getAttribute(&quot;objectId&quot;);</span>
+<span class="nc bnc" id="L388" title="All 2 branches missed.">				if (!StringUtil.isEmpty(objectId))</span>
+<span class="nc" id="L389">					procedure.setObjectId(objectId);</span>
+<span class="nc" id="L390">				String subProgramId = e.getAttribute(&quot;subProgramId&quot;);</span>
+<span class="nc bnc" id="L391" title="All 2 branches missed.">				if (!StringUtil.isEmpty(subProgramId))</span>
+<span class="nc" id="L392">					procedure.setSubProgramId(subProgramId);</span>
+<span class="nc" id="L393">				String overload = e.getAttribute(&quot;overload&quot;);</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">				if (!StringUtil.isEmpty(overload))</span>
+<span class="nc" id="L395">					procedure.setOverload(overload);</span>
+<span class="nc" id="L396">			} else</span>
+<span class="nc" id="L397">				throw new SyntaxError(&quot;Illegal child element of &lt;package&gt;&quot;, XMLUtil.format(e));</span>
+		}
+<span class="nc" id="L399">	}</span>
+
+	public void close() throws IOException {
+		// nothing special to do
+<span class="nc" id="L403">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RunningMessagePanel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.view</a> &gt; <span class="el_source">RunningMessagePanel.java</span></div><h1>RunningMessagePanel.java</h1><pre class="source lang-java linenums">package bierse.view;
+
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class RunningMessagePanel extends JPanel implements ActionListener {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6901526441438331392L;
+
+	private String message;
+	private static Timer timer;
+	private int count;
+	private int stringWidth;
+	private int stringHeight;
+	
+	private int startX;
+	
+<span class="nc" id="L32">	public RunningMessagePanel(String message, int speed) {</span>
+<span class="nc" id="L33">		this.message = message;</span>
+<span class="nc" id="L34">		Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);</span>
+<span class="nc" id="L35">		this.setFont(font);</span>
+<span class="nc" id="L36">		JLabel tmpLabel = new JLabel(message);</span>
+<span class="nc" id="L37">		tmpLabel.setFont(font);</span>
+<span class="nc" id="L38">		stringWidth = tmpLabel.getFontMetrics(font).stringWidth(message);</span>
+<span class="nc" id="L39">		stringHeight = tmpLabel.getFontMetrics(font).getHeight();</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">		if (timer == null) {</span>
+<span class="nc" id="L41">			timer = new Timer(speed, this);</span>
+<span class="nc" id="L42">			timer.start();</span>
+		} else {
+<span class="nc" id="L44">			timer.addActionListener(this);</span>
+		}
+<span class="nc" id="L46">	}</span>
+
+	@Override
+	protected void paintComponent(Graphics g) {
+<span class="nc" id="L50">		super.paintComponent(g);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		if (message != null) {</span>
+<span class="nc" id="L52">			g.drawString(message, startX, 20);</span>
+		}
+<span class="nc" id="L54">	}</span>
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L58">		count++;</span>
+<span class="nc" id="L59">		startX = getWidth() - count; </span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">		if (startX + stringWidth + 30 &lt; 0) {</span>
+<span class="nc" id="L61">			count = 0;</span>
+		}
+<span class="nc" id="L63">		this.repaint();</span>
+<span class="nc" id="L64">	}</span>
+	
+	public int getStringWidth() {
+<span class="nc" id="L67">		return stringWidth;</span>
+	}
+	
+	public int getStringHeight() {
+<span class="nc" id="L71">		return stringHeight;</span>
+	}
+	
+	public void setSpeed(int speed) {
+<span class="nc" id="L75">		timer.setDelay(speed);</span>
+<span class="nc" id="L76">	}</span>
+	
+	public void setMessage(String message) {
+<span class="nc" id="L79">		this.message = message;</span>
+<span class="nc" id="L80">		Font font = new Font(Font.MONOSPACED, Font.BOLD, 20);</span>
+<span class="nc" id="L81">		this.setFont(font);</span>
+<span class="nc" id="L82">		JLabel tmpLabel = new JLabel(message);</span>
+<span class="nc" id="L83">		tmpLabel.setFont(font);</span>
+<span class="nc" id="L84">		stringWidth = tmpLabel.getFontMetrics(font).stringWidth(message);</span>
+<span class="nc" id="L85">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

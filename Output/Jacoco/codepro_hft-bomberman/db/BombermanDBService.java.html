@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BombermanDBService.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">db</a> &gt; <span class="el_source">BombermanDBService.java</span></div><h1>BombermanDBService.java</h1><pre class="source lang-java linenums">package db;
+
+/**
+ * This class is the interface to the database. It provides all CRUD
+ * services and queries. Every single access to the database happens in this class.
+ * 
+ * @author Daniel Tunjic
+ *
+ */
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import logging.Logging;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
+
+import client.gui.StartFrame;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
+public class BombermanDBService {
+
+<span class="fc" id="L28">	protected BombermanDBService() {</span>
+		try {
+<span class="nc" id="L30">			DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L31">		} catch (DBException ex) {</span>
+<span class="nc" id="L32">			DBEntityManagerFactory.createEntityManagerFactory();</span>
+<span class="nc" id="L33">		}</span>
+<span class="nc" id="L34">	}</span>
+
+<span class="fc" id="L36">	private static Logging logger = Logging.getInstance();</span>
+
+	/**
+	 * This method writes a single user into the database
+	 * 
+	 * @param user
+	 * @throws DBException
+	 */
+
+	public void saveGameUser(DBGameUser user) throws DBException {
+<span class="nc" id="L46">		logger.log(Level.INFO, this, &quot;db: saveGameUser called &quot;+user);</span>
+<span class="nc" id="L47">		EntityManagerFactory emf = null;</span>
+		try {
+<span class="nc" id="L49">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L50">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L51">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L52">		}</span>
+
+<span class="nc" id="L54">		EntityManager em = null;</span>
+<span class="nc" id="L55">		EntityTransaction tx = null;</span>
+
+		try {
+
+<span class="nc" id="L59">			em = emf.createEntityManager();</span>
+<span class="nc" id="L60">			tx = em.getTransaction();</span>
+
+<span class="nc" id="L62">			tx.begin();</span>
+<span class="nc" id="L63">			em.persist(user);</span>
+<span class="nc" id="L64">			tx.commit();</span>
+
+<span class="nc" id="L66">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L68">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L72">			try {</span>
+<span class="nc bnc" id="L73" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L74">					em.close();</span>
+<span class="nc" id="L75">			} catch (Exception exCl) {</span>
+<span class="nc" id="L76">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L77">			}</span>
+
+<span class="nc" id="L79">		}</span>
+<span class="nc" id="L80">	}</span>
+
+	/**
+	 * This method updates a single user in the database
+	 * 
+	 * @param user
+	 * @throws DBException
+	 */
+
+	public void updateGameUser(DBGameUser user) throws DBException {
+<span class="nc" id="L90">		logger.log(Level.INFO, this, &quot;db: updateGameUser called &quot;+user);</span>
+<span class="nc" id="L91">		EntityManagerFactory emf = null;</span>
+		try {
+<span class="nc" id="L93">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L94">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L95">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L96">		}</span>
+
+<span class="nc" id="L98">		EntityManager em = null;</span>
+<span class="nc" id="L99">		EntityTransaction tx = null;</span>
+
+		try {
+
+<span class="nc" id="L103">			em = emf.createEntityManager();</span>
+<span class="nc" id="L104">			tx = em.getTransaction();</span>
+
+<span class="nc" id="L106">			tx.begin();</span>
+<span class="nc" id="L107">			DBGameUser userx = em.find(DBGameUser.class, user.getName());</span>
+<span class="nc" id="L108">			userx.setScore(user.getScore());</span>
+<span class="nc" id="L109">			tx.commit();</span>
+
+<span class="nc" id="L111">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L113">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L117">			try {</span>
+<span class="nc bnc" id="L118" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L119">					em.close();</span>
+<span class="nc" id="L120">			} catch (Exception exCl) {</span>
+<span class="nc" id="L121">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L122">			}</span>
+
+<span class="nc" id="L124">		}</span>
+<span class="nc" id="L125">	}</span>
+
+	/**
+	 * This method reads a single user from the database
+	 * 
+	 * @param user
+	 * @throws DBException
+	 */
+
+	public DBGameUser getDBUser(String name) throws DBException {
+<span class="nc" id="L135">		logger.log(Level.INFO, this, &quot;db: getDBGameUser called&quot;);</span>
+<span class="nc" id="L136">		DBGameUser gU = new DBGameUser();</span>
+<span class="nc" id="L137">		EntityManagerFactory emf = null;</span>
+
+		try {
+<span class="nc" id="L140">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L141">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L142">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L143">		}</span>
+
+<span class="nc" id="L145">		EntityManager em = null;</span>
+
+		try {
+
+<span class="nc" id="L149">			em = emf.createEntityManager();</span>
+
+<span class="nc" id="L151">			List userList = em.createQuery(</span>
+					&quot;from DBGameUser where name='&quot; + name + &quot;'&quot;)
+					.getResultList();
+
+<span class="nc bnc" id="L155" title="All 2 branches missed.">			if (userList.size() == 0) {</span>
+<span class="nc" id="L156">				logger.log(Level.ERROR, this, &quot;user does not exist&quot;);</span>
+			} else
+<span class="nc" id="L158">				gU = (DBGameUser) userList.get(0);</span>
+
+<span class="nc" id="L160">			em.close();</span>
+
+<span class="nc" id="L162">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L164">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L168">			try {</span>
+<span class="nc bnc" id="L169" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L170">					em.close();</span>
+<span class="nc" id="L171">			} catch (Exception exCl) {</span>
+<span class="nc" id="L172">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L173">			}</span>
+<span class="nc" id="L174">		}</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">		if (gU.getScore() == null) {</span>
+<span class="nc" id="L176">			gU.setScore(0);</span>
+		}
+
+<span class="nc" id="L179">		return gU;</span>
+	}
+
+	/**
+	 * This method deletes a single user from the database
+	 * 
+	 * @param user
+	 * @throws DBException
+	 */
+
+	public void deleteDBUser(String name) throws DBException {
+<span class="nc" id="L190">		logger.log(Level.INFO, this, &quot;db: deleteDBGameUser called &quot;+name);</span>
+<span class="nc" id="L191">		EntityManagerFactory emf = null;</span>
+
+		try {
+<span class="nc" id="L194">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L195">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L196">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L197">		}</span>
+
+<span class="nc" id="L199">		EntityManager em = null;</span>
+<span class="nc" id="L200">		EntityTransaction tx = null;</span>
+
+		try {
+
+<span class="nc" id="L204">			em = emf.createEntityManager();</span>
+<span class="nc" id="L205">			tx = em.getTransaction();</span>
+
+<span class="nc" id="L207">			tx.begin();</span>
+<span class="nc" id="L208">			int deleted = em.createQuery(</span>
+					&quot;DELETE FROM DBGameUser where NAME = '&quot; + name + &quot;'&quot;)
+					.executeUpdate();
+<span class="nc" id="L211">			tx.commit();</span>
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">			if (deleted == 0) {</span>
+<span class="nc" id="L214">				logger.log(Level.ERROR, this, &quot;user not deleted&quot;);</span>
+			}
+
+<span class="nc" id="L217">			em.close();</span>
+
+<span class="nc" id="L219">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L221">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L225">			try {</span>
+<span class="nc bnc" id="L226" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L227">					em.close();</span>
+<span class="nc" id="L228">			} catch (Exception exCl) {</span>
+<span class="nc" id="L229">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L230">			}</span>
+<span class="nc" id="L231">		}</span>
+<span class="nc" id="L232">	}</span>
+
+	/**
+	 * This method deletes a single user from the database
+	 * 
+	 * @param user
+	 * @throws DBException
+	 */
+
+	public void updateScore(DBGameUser user) throws DBException {
+<span class="nc" id="L242">		logger.log(Level.INFO, this, &quot;db: update Score called &quot;+user);</span>
+<span class="nc" id="L243">		EntityManagerFactory emf = null;</span>
+
+		try {
+<span class="nc" id="L246">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L247">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L248">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L249">		}</span>
+
+<span class="nc" id="L251">		EntityManager em = null;</span>
+<span class="nc" id="L252">		EntityTransaction tx = null;</span>
+
+		try {
+
+<span class="nc" id="L256">			em = emf.createEntityManager();</span>
+<span class="nc" id="L257">			tx = em.getTransaction();</span>
+
+<span class="nc" id="L259">			tx.begin();</span>
+<span class="nc" id="L260">			int deleted = em.createQuery(</span>
+					&quot;UPDATE DBGameUser set SCORE=&quot; + user.getScore()
+							+ &quot; where NAME = '&quot; + user.getName() + &quot;'&quot;)
+					.executeUpdate();
+<span class="nc" id="L264">			tx.commit();</span>
+
+<span class="nc bnc" id="L266" title="All 2 branches missed.">			if (deleted == 0) {</span>
+<span class="nc" id="L267">				System.out.println(&quot;user not updated&quot;);</span>
+			}
+
+<span class="nc" id="L270">			em.close();</span>
+
+<span class="nc" id="L272">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L274">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L278">			try {</span>
+<span class="nc bnc" id="L279" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L280">					em.close();</span>
+<span class="nc" id="L281">			} catch (Exception exCl) {</span>
+<span class="nc" id="L282">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L283">			}</span>
+<span class="nc" id="L284">		}</span>
+<span class="nc" id="L285">	}</span>
+
+	/**
+	 * This method returns the top 10 user for the highscore list
+	 * 
+	 * @return List of top 10 user
+	 * @throws DBException
+	 */
+
+	public ArrayList&lt;DBGameUser&gt; getTopTenGameUser() throws DBException {
+<span class="nc" id="L295">		logger.log(Level.INFO, this, &quot;db: getTopTenGameUser() &quot;);</span>
+		
+<span class="nc" id="L297">		ArrayList&lt;DBGameUser&gt; topTenUser = new ArrayList&lt;DBGameUser&gt;();</span>
+
+<span class="nc" id="L299">		EntityManagerFactory emf = null;</span>
+		try {
+<span class="nc" id="L301">			emf = DBEntityManagerFactory.getInstance();</span>
+<span class="nc" id="L302">		} catch (HibernateException ex) {</span>
+<span class="nc" id="L303">			throw new DBException(ex.getMessage());</span>
+<span class="nc" id="L304">		}</span>
+
+<span class="nc" id="L306">		EntityManager em = null;</span>
+
+		try {
+
+<span class="nc" id="L310">			em = emf.createEntityManager();</span>
+			
+<span class="nc" id="L312">			javax.persistence.Query topTenQuery = em.createQuery(</span>
+					&quot;FROM DBGameUser order by score desc&quot;);
+<span class="nc" id="L314">			topTenQuery.setMaxResults(10);</span>
+
+<span class="nc" id="L316">			List res = topTenQuery.getResultList();</span>
+<span class="nc" id="L317">			logger.log(Level.INFO, this,&quot;resultset retreived&quot;);</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">			for (int i = 0; i &lt; res.size(); i++) {</span>
+<span class="nc" id="L319">				logger.log(Level.INFO, this, res.get(i).toString());</span>
+<span class="nc" id="L320">				DBGameUser usr = (DBGameUser) res</span>
+						.get(i);
+<span class="nc" id="L322">				topTenUser.add(usr);</span>
+			}
+			
+<span class="nc" id="L325">		} catch (HibernateException ex) {</span>
+
+<span class="nc" id="L327">			throw new DBException(ex.getMessage());</span>
+
+		} finally {
+
+<span class="nc" id="L331">			try {</span>
+<span class="nc bnc" id="L332" title="All 8 branches missed.">				if (em != null &amp;&amp; em.isOpen())</span>
+<span class="nc" id="L333">					em.close();</span>
+<span class="nc" id="L334">			} catch (Exception exCl) {</span>
+<span class="nc" id="L335">				logger.log(Level.ERROR, this, exCl.toString());</span>
+<span class="nc" id="L336">			}</span>
+<span class="nc" id="L337">		}</span>
+		
+
+<span class="nc" id="L340">		return topTenUser;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MessageView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client.tapestry</a> &gt; <span class="el_source">MessageView.java</span></div><h1>MessageView.java</h1><pre class="source lang-java linenums">/*
+ * Created on 08.01.2005
+ *
+ */
+package ch.bluepenguin.email.client.tapestry;
+
+import java.util.logging.Logger;
+
+import org.apache.tapestry.AbstractComponent;
+import org.apache.tapestry.IActionListener;
+import org.apache.tapestry.IRequestCycle;
+import org.apache.tapestry.event.PageEvent;
+import org.apache.tapestry.event.PageRenderListener;
+import org.apache.tapestry.html.BasePage;
+import org.apache.tapestry.listener.ListenerMap;
+
+import ch.bluepenguin.email.client.MailMessage;
+import ch.bluepenguin.email.client.service.EmailFacade;
+import ch.bluepenguin.email.client.service.EmailFacadeException;
+import ch.bluepenguin.email.client.tapestry.helpers.TreeModelHelper;
+import ch.bluepenguin.tapestry.components.menu.model.IMenuModel;
+
+/**
+ * @author Christian
+ *  
+ */
+<span class="nc" id="L27">public abstract class MessageView extends BasePage implements PageRenderListener, IActionListener {</span>
+<span class="nc" id="L28">	protected static Logger logger = Logger.getLogger(MessageView.class.getName());</span>
+
+	public abstract void setEmailFacade(EmailFacade emailFacade);
+	public abstract EmailFacade getEmailFacade();
+
+	public abstract void setCurrentFolder(ch.bluepenguin.email.client.Folder folderName);
+	public abstract ch.bluepenguin.email.client.Folder getCurrentFolder();
+
+	public abstract IMenuModel getFolderMenuModel();
+	public abstract void setFolderMenuModel(IMenuModel model);
+
+	public abstract IMenuModel getActionMenuModel();
+	public abstract void setActionMenuModel(IMenuModel model);
+
+	public abstract void setCurrentMessage(MailMessage message);
+	public abstract MailMessage getCurrentMessage();
+
+	public abstract void setCreateMode(boolean mode);
+	public abstract boolean getCreateMode();
+
+	public abstract void setMoveMode(boolean mode);
+	public abstract boolean getMoveMode();
+
+	public abstract void setComposeMessageText(String text);
+	public abstract String getComposeMessageText();
+
+	public abstract void setComposeMessageTo(String text);
+	public abstract String getComposeMessageTo();
+
+	public abstract void setComposeMessageCC(String text);
+	public abstract String getComposeMessageCC();
+
+	public abstract void setComposeMessageBCC(String text);
+	public abstract String getComposeMessageBCC();
+
+	public abstract void setComposeMessageSubject(String text);
+	public abstract String getComposeMessageSubject();
+
+
+	public void pageBeginRender(PageEvent evt) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if(getFolderMenuModel()==null) {</span>
+<span class="nc" id="L69">			TreeModelHelper helper = new TreeModelHelper();</span>
+<span class="nc" id="L70">			IMenuModel folderModel =null;</span>
+			try {
+<span class="nc" id="L72">				folderModel = helper.buildFolderModel</span>
+				(getEmailFacade().getAllFolders(),this.getComponent(&quot;folderDirectLink&quot;),evt.getRequestCycle());
+<span class="nc" id="L74">			} catch (EmailFacadeException e) {</span>
+<span class="nc" id="L75">				logger.info(&quot;pageBeginRender: Problem with email facade&quot;);</span>
+<span class="nc" id="L76">			}</span>
+<span class="nc" id="L77">			setFolderMenuModel(folderModel);</span>
+		}
+<span class="nc" id="L79">	}</span>
+
+	/**
+	 * displays the list of messages from a selected folder
+	 */
+	public void actionDisplayFolder(IRequestCycle cycle) {
+<span class="nc" id="L85">		ch.bluepenguin.email.client.Folder currentFolder = ((ch.bluepenguin.email.client.Folder)cycle.getServiceParameters()[0]);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		if(getMoveMode()) {</span>
+<span class="nc" id="L87">			((MessageList)getComponent(&quot;messageList&quot;)).moveSelectedMessages(currentFolder);</span>
+		} else {
+<span class="nc" id="L89">			((MessageList)getComponent(&quot;messageList&quot;)).setCurrentFolder(currentFolder);</span>
+<span class="nc" id="L90">			setCurrentFolder(currentFolder);</span>
+		}
+<span class="nc" id="L92">		setMoveMode(false);</span>
+<span class="nc" id="L93">	}</span>
+	/**
+	 * displays the chosen message from a selected folder
+	 */
+	public void actionDisplayMessage(IRequestCycle cycle) {
+<span class="nc" id="L98">		int id =  ((Integer)cycle.getServiceParameters()[0]).intValue();</span>
+<span class="nc" id="L99">		MailMessage currentMessage=null;</span>
+		try {
+<span class="nc" id="L101">			MailMessage[] currentMessages = getEmailFacade().getMessagesFromFolder(getCurrentFolder());</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">			for(int i=0; i&lt;currentMessages.length;i++) {</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">				if(id==currentMessages[i].getUniqueID().getId().intValue()) {</span>
+<span class="nc" id="L104">					currentMessage = currentMessages[i];</span>
+<span class="nc" id="L105">					break;</span>
+				}
+			}
+<span class="nc" id="L108">			getEmailFacade().fillMessageBody(currentMessage);</span>
+<span class="nc" id="L109">		} catch (EmailFacadeException e) {</span>
+<span class="nc" id="L110">			logger.severe(&quot;actionDisplayMessage: Problem with email facade&quot;);</span>
+<span class="nc" id="L111">		}</span>
+<span class="nc" id="L112">		setCurrentMessage(currentMessage);</span>
+<span class="nc" id="L113">	}</span>
+	
+	public void actionCreateMessage(IRequestCycle cycle) {
+<span class="nc" id="L116">		logger.info(&quot;actionCreateMessage called&quot;);</span>
+<span class="nc" id="L117">		setCreateMode(true);</span>
+<span class="nc" id="L118">	}</span>
+
+	public void actionCreateMessageCancel(IRequestCycle cycle) {
+<span class="nc" id="L121">		logger.info(&quot;actionCreateMessageCancel called&quot;);</span>
+<span class="nc" id="L122">		setCreateMode(false);</span>
+<span class="nc" id="L123">	}</span>
+
+	public void actionMoveMessageCancel(IRequestCycle cycle) {
+<span class="nc" id="L126">		logger.info(&quot;actionMoveMessageCancel called&quot;);</span>
+<span class="nc" id="L127">		setMoveMode(false);</span>
+<span class="nc" id="L128">	}</span>
+
+	public void actionCreateMessageSaveDraft(IRequestCycle cycle) {
+<span class="nc" id="L131">		logger.info(&quot;actionCreateMessageSaveDraft called&quot;);</span>
+<span class="nc" id="L132">		setCreateMode(false);</span>
+<span class="nc" id="L133">	}</span>
+
+	public void actionReplyMessage(IRequestCycle cycle) {
+<span class="nc" id="L136">		logger.info(&quot;actionReplyMessage called&quot;);</span>
+<span class="nc" id="L137">	}</span>
+
+	public void actionDeleteMessage(IRequestCycle cycle) {
+<span class="nc" id="L140">		logger.info(&quot;actionDeleteMessage called&quot;);</span>
+<span class="nc" id="L141">	}</span>
+	
+	public void actionMoveMessage(IRequestCycle cycle) {
+<span class="nc" id="L144">		logger.info(&quot;actionMoveMessage called&quot;);</span>
+<span class="nc" id="L145">		setMoveMode(true);</span>
+<span class="nc" id="L146">	}</span>
+
+	public void actionSendMessage(IRequestCycle cycle) {
+		/*
+		 * (String from, String to, 
+            String subject, String message);
+		 */
+<span class="nc" id="L153">		logger.info(&quot;actionSendMessage called&quot;);</span>
+		//TODO: FROM out of account
+		//TODO: arrays for FROM/TO/CC/BCC
+		//TODO: BCC
+		//TODO: attachment, MimeMessages
+<span class="nc" id="L158">		getEmailFacade().sendMessage(&quot;test@localhost.ch&quot;, getComposeMessageTo(),</span>
+				getComposeMessageSubject(),
+				getComposeMessageText());
+<span class="nc" id="L161">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

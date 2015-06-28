@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AbstractAuthenticator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.authc</a> &gt; <span class="el_source">AbstractAuthenticator.java</span></div><h1>AbstractAuthenticator.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.authc;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.subject.PrincipalCollection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ * Superclass for almost all {@link Authenticator} implementations that performs the common work around authentication
+ * attempts.
+ *
+ * &lt;p&gt;This class delegates the actual authentication attempt to subclasses but supports notification for
+ * successful and failed logins as well as logouts. Notification is sent to one or more registered
+ * {@link org.jsecurity.authc.AuthenticationListener AuthenticationListener}s to allow for custom processing logic
+ * when these conditions occur.
+ *
+ * &lt;p&gt;In most cases, the only thing a subclass needs to do (via its {@link #doAuthenticate} implementation)
+ * is perform the actual principal/credential verification process for the submitted &lt;tt&gt;AuthenticationToken&lt;/tt&gt;.
+ *
+ * @author Jeremy Haile
+ * @author Les Hazlewood
+ * @since 0.1
+ */
+public abstract class AbstractAuthenticator implements Authenticator, LogoutAware, AuthenticationListenerRegistrar {
+
+    /*--------------------------------------------
+    |             C O N S T A N T S             |
+    ============================================*/
+    /** Private class log instance. */
+<span class="fc" id="L50">    private static final Log log = LogFactory.getLog(AbstractAuthenticator.class);</span>
+
+    /*--------------------------------------------
+    |    I N S T A N C E   V A R I A B L E S    |
+    ============================================*/
+    /** Any registered listeners that wish to know about things during the authentication process. */
+    private Collection&lt;AuthenticationListener&gt; listeners;
+
+    /*--------------------------------------------
+    |         C O N S T R U C T O R S           |
+    ============================================*/
+    /**
+     * Default no-argument constructor. Ensures the internal
+     * {@link AuthenticationListener AuthenticationListener} collection is a non-null &lt;code&gt;ArrayList&lt;/code&gt;.
+     */
+<span class="fc" id="L65">    public AbstractAuthenticator() {</span>
+<span class="fc" id="L66">        listeners = new ArrayList&lt;AuthenticationListener&gt;();</span>
+<span class="fc" id="L67">    }</span>
+
+    /*--------------------------------------------
+    |  A C C E S S O R S / M O D I F I E R S    |
+    ============================================*/
+    public void setAuthenticationListeners(Collection&lt;AuthenticationListener&gt; listeners) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (listeners == null) {</span>
+<span class="nc" id="L74">            this.listeners = new ArrayList&lt;AuthenticationListener&gt;();</span>
+        } else {
+<span class="nc" id="L76">            this.listeners = listeners;</span>
+        }
+<span class="nc" id="L78">    }</span>
+
+    public void add(AuthenticationListener listener) {
+<span class="nc" id="L81">        this.listeners.add(listener);</span>
+<span class="nc" id="L82">    }</span>
+
+    public boolean remove(AuthenticationListener listener) {
+<span class="nc" id="L85">        return this.listeners.remove(listener);</span>
+    }
+
+    /*-------------------------------------------
+    |               M E T H O D S               |
+    ============================================*/
+    /**
+     * Notifies any registered {@link org.jsecurity.authc.AuthenticationListener AuthenticationListener}s that
+     * authentication was successful for the specified &lt;code&gt;token&lt;/code&gt; which resulted in the specified
+     * &lt;code&gt;info&lt;/code&gt;.  This implementation merely iterates over the internal &lt;code&gt;listeners&lt;/code&gt; collection and
+     * calls {@link org.jsecurity.authc.AuthenticationListener#onSuccess(AuthenticationToken, AuthenticationInfo) onSuccess}
+     * for each.
+     * @param token the submitted &lt;code&gt;AuthenticationToken&lt;/code&gt; that resulted in a successful authentication.
+     * @param info the returned &lt;code&gt;AuthenticationInfo&lt;/code&gt; resulting from the successful authentication.
+     */
+    protected void notifySuccess(AuthenticationToken token, AuthenticationInfo info) {
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        for (AuthenticationListener listener : this.listeners) {</span>
+<span class="nc" id="L102">            listener.onSuccess(token, info);</span>
+<span class="nc" id="L103">        }</span>
+<span class="nc" id="L104">    }</span>
+
+    /**
+     * Notifies any registered {@link org.jsecurity.authc.AuthenticationListener AuthenticationListener}s that
+     * authentication failed for the
+     * specified &lt;code&gt;token&lt;/code&gt; which resulted in the specified &lt;code&gt;ae&lt;/code&gt; exception.  This implementation merely
+     * iterates over the internal &lt;code&gt;listeners&lt;/code&gt; collection and calls
+     * {@link org.jsecurity.authc.AuthenticationListener#onFailure(AuthenticationToken, AuthenticationException) onFailure}
+     * for each.
+     * @param token the submitted &lt;code&gt;AuthenticationToken&lt;/code&gt; that resulted in a failed authentication.
+     * @param ae the resulting &lt;code&gt;AuthenticationException&lt;code&gt; that caused the authentication to fail.
+     */
+    protected void notifyFailure(AuthenticationToken token, AuthenticationException ae) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        for (AuthenticationListener listener : this.listeners) {</span>
+<span class="nc" id="L118">            listener.onFailure(token, ae);</span>
+<span class="nc" id="L119">        }</span>
+<span class="nc" id="L120">    }</span>
+
+    /**
+     * Notifies any registered {@link org.jsecurity.authc.AuthenticationListener AuthenticationListener}s that a
+     * &lt;code&gt;Subject&lt;/code&gt; has logged-out.  This implementation merely
+     * iterates over the internal &lt;code&gt;listeners&lt;/code&gt; collection and calls
+     * {@link org.jsecurity.authc.AuthenticationListener#onLogout(org.jsecurity.subject.PrincipalCollection) onLogout}
+     * for each.
+     * @param principals the identifying principals of the &lt;code&gt;Subject&lt;/code&gt;/account logging out.
+     */
+    protected void notifyLogout(PrincipalCollection principals) {
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        for (AuthenticationListener listener : this.listeners) {</span>
+<span class="nc" id="L132">            listener.onLogout(principals);</span>
+<span class="nc" id="L133">        }</span>
+<span class="fc" id="L134">    }</span>
+
+    /**
+     * This implementation merely calls
+     * {@link #notifyLogout(org.jsecurity.subject.PrincipalCollection) notifyLogout} to allow any registered listeners
+     * to react to the logout.
+     * @param principals the identifying principals of the &lt;code&gt;Subject&lt;/code&gt;/account logging out.
+     */
+    public void onLogout(PrincipalCollection principals) {
+<span class="fc" id="L143">        notifyLogout(principals);</span>
+<span class="fc" id="L144">    }</span>
+
+    /**
+     * Implementation of the {@link Authenticator} interface that functions in the following manner:
+     *
+     * &lt;ol&gt;
+     * &lt;li&gt;Calls template {@link #doAuthenticate doAuthenticate} method for subclass execution of the actual
+     * authentication behavior.&lt;/li&gt;
+     * &lt;li&gt;If an &lt;tt&gt;AuthenticationException&lt;/tt&gt; is thrown during &lt;tt&gt;doAuthenticate&lt;/tt&gt;,
+     * {@link #notifyFailure(AuthenticationToken, AuthenticationException) notify} any registered
+     * {@link AuthenticationListener AuthenticationListener}s of the exception and then propogate the exception
+     * for the caller to handle.&lt;/li&gt;
+     * &lt;li&gt;If no exception is thrown (indicating a successful login),
+     * {@link #notifySuccess(AuthenticationToken, AuthenticationInfo) notify} any registered
+     * {@link AuthenticationListener AuthenticationListener}s of the successful attempt.&lt;/li&gt;
+     * &lt;li&gt;Return the &lt;tt&gt;AuthenticationInfo&lt;/tt&gt;&lt;/li&gt;
+     * &lt;/ol&gt;
+     *
+     * @param token the submitted token representing the subject's (user's) login principals and credentials.
+     * @return the AuthenticationInfo referencing the authenticated user's account data.
+     * @throws AuthenticationException if there is any problem during the authentication process - see the
+     *                                 interface's JavaDoc for a more detailed explanation.
+     */
+    public final AuthenticationInfo authenticate(AuthenticationToken token)
+            throws AuthenticationException {
+
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (token == null) {</span>
+<span class="nc" id="L171">            throw new IllegalArgumentException(&quot;Method argumet (authentication token) cannot be null.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L175">            log.trace(&quot;Authentication attempt received for token [&quot; + token + &quot;]&quot;);</span>
+        }
+
+        AuthenticationInfo info;
+        try {
+<span class="nc" id="L180">            info = doAuthenticate(token);</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (info == null) {</span>
+<span class="nc" id="L182">                String msg = &quot;No account information found for authentication token [&quot; + token + &quot;] by this &quot; +</span>
+                        &quot;Authenticator instance.  Please check that it is configured correctly.&quot;;
+<span class="nc" id="L184">                throw new AuthenticationException(msg);</span>
+            }
+<span class="nc" id="L186">        } catch (Throwable t) {</span>
+<span class="nc" id="L187">            AuthenticationException ae = null;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">            if (t instanceof AuthenticationException) {</span>
+<span class="nc" id="L189">                ae = (AuthenticationException) t;</span>
+            }
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            if (ae == null) {</span>
+                //Exception thrown was not an expected AuthenticationException.  Therefore it is probably a little more
+                //severe or unexpected.  So, wrap in an AuthenticationException, log to warn, and propagate:
+<span class="nc" id="L194">                String msg = &quot;Authentication failed for token submission [&quot; + token + &quot;].  Possible unexpected &quot; +</span>
+                        &quot;error? (Typical or expected login exceptions should extend from AuthenticationException).&quot;;
+<span class="nc" id="L196">                ae = new AuthenticationException(msg, t);</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">                if (log.isWarnEnabled()) {</span>
+<span class="nc" id="L198">                    log.warn(msg, t);</span>
+                }
+            }
+            try {
+<span class="nc" id="L202">                notifyFailure(token, ae);</span>
+<span class="nc" id="L203">            } catch (Throwable t2) {</span>
+<span class="nc" id="L204">                String msg = &quot;Unable to send notification for failed authentication attempt - listener error?.  &quot; +</span>
+                        &quot;Please check your AuthenticationListener implementation(s).  Logging sending exception and &quot; +
+                        &quot;propagating original AuthenticationException instead...&quot;;
+<span class="nc bnc" id="L207" title="All 2 branches missed.">                if (log.isWarnEnabled()) {</span>
+<span class="nc" id="L208">                    log.warn(msg, t2);</span>
+                }
+<span class="nc" id="L210">            }</span>
+
+
+<span class="nc" id="L213">            throw ae;</span>
+<span class="nc" id="L214">        }</span>
+
+<span class="nc bnc" id="L216" title="All 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L217">            log.debug(&quot;Authentication successful for token [&quot; + token + &quot;].  Returned account: [&quot; + info + &quot;]&quot;);</span>
+        }
+
+<span class="nc" id="L220">        notifySuccess(token, info);</span>
+
+<span class="nc" id="L222">        return info;</span>
+    }
+
+    /**
+     * Template design pattern hook for subclasses to implement specific authentication behavior.
+     *
+     * &lt;p&gt;Common behavior for most authentication attempts is encapsulated in the
+     * {@link #authenticate} method and that method invokes this one for custom behavior.
+     *
+     * &lt;p&gt;&lt;b&gt;N.B.&lt;/b&gt; Subclasses &lt;em&gt;should&lt;/em&gt; throw some kind of
+     * &lt;tt&gt;AuthenticationException&lt;/tt&gt; if there is a problem during
+     * authentication instead of returning &lt;tt&gt;null&lt;/tt&gt;.  A &lt;tt&gt;null&lt;/tt&gt; return value indicates
+     * a configuration or programming error, since &lt;tt&gt;AuthenticationException&lt;/tt&gt;s should
+     * indicate any expected problem (such as an unknown account or username, or invalid password, etc).
+     *
+     * @param token the authentication token encapsulating the user's login information.
+     * @return an &lt;tt&gt;AuthenticationInfo&lt;/tt&gt; object encapsulating the user's account information
+     *         important to JSecurity.
+     * @throws AuthenticationException if there is a problem logging in the user.
+     */
+    protected abstract AuthenticationInfo doAuthenticate(AuthenticationToken token)
+            throws AuthenticationException;
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

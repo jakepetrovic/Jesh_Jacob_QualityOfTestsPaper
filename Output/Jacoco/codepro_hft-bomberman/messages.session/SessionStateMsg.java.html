@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SessionStateMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.session</a> &gt; <span class="el_source">SessionStateMsg.java</span></div><h1>SessionStateMsg.java</h1><pre class="source lang-java linenums">package messages.session;
+
+import server.ClientInfo;
+import server.ServerGameSession;
+
+public class SessionStateMsg implements SessionClientMsg {
+
+	/**
+	 * Indicates to the server that the client is ready to start the next round.
+	 */
+	public static final int READY_FOR_NEXT_ROUND = 1;
+	
+	/**
+	 * The type of this message. See constants above.
+	 */
+	private int type;
+
+	public SessionStateMsg(int type) {
+<span class="fc" id="L19">		super();</span>
+<span class="fc" id="L20">		this.type = type;</span>
+<span class="fc" id="L21">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ServerGameSession session, ClientInfo sender) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">		switch (type) {</span>
+		case READY_FOR_NEXT_ROUND:
+<span class="nc" id="L30">			session.markClientReady(sender);</span>
+<span class="nc" id="L31">			session.multicastMsg(new SessionChatMsg(sender.getName(), &quot;READY FOR NEXT ROUND&quot;), null);</span>
+			break;
+		}
+
+<span class="nc" id="L35">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

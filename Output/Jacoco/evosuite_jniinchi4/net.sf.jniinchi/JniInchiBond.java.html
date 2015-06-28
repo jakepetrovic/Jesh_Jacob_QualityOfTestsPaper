@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JniInchiBond.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">JniInchiBond.java</span></div><h1>JniInchiBond.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package net.sf.jniinchi;
+
+/**
+ * Encapsulates properties of InChI Bond.  See &lt;tt&gt;inchi_api.h&lt;/tt&gt;.
+ * @author Sam Adams
+ */
+public class JniInchiBond {
+
+    /**
+     * Origin atom in bond.
+     */
+    private JniInchiAtom atomOrigin;
+
+    /**
+     * Target atom in bond.
+     */
+    private JniInchiAtom atomTarget;
+
+    /**
+     * Bond type.
+     */
+<span class="fc" id="L40">    private INCHI_BOND_TYPE type = INCHI_BOND_TYPE.NONE;</span>
+
+    /**
+     * Bond 2D stereo definition.
+     */
+<span class="fc" id="L45">    private INCHI_BOND_STEREO stereo = INCHI_BOND_STEREO.NONE;</span>
+
+    /**
+     * Create bond.
+     *
+     * @param atO        Origin atom
+     * @param atT        Target atom
+     * @param type        Bond type
+     * @param stereo    Bond 2D stereo definition
+     */
+    public JniInchiBond(JniInchiAtom atO, JniInchiAtom atT,
+<span class="fc" id="L56">            INCHI_BOND_TYPE type, INCHI_BOND_STEREO stereo) {</span>
+
+<span class="fc" id="L58">        this.atomOrigin = atO;</span>
+<span class="fc" id="L59">        this.atomTarget = atT;</span>
+<span class="fc" id="L60">        this.type = type;</span>
+<span class="fc" id="L61">        this.stereo = stereo;</span>
+<span class="fc" id="L62">    }</span>
+    
+    
+    JniInchiBond(JniInchiAtom atO, JniInchiAtom atT,
+            int type, int stereo) {
+
+<span class="fc" id="L68">    	this(atO, atT, INCHI_BOND_TYPE.getValue(type), INCHI_BOND_STEREO.getValue(stereo));</span>
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * Create bond.
+     *
+     * @param atO        Origin atom
+     * @param atT        Target atom
+     * @param type        Bond type
+     */
+    public JniInchiBond(JniInchiAtom atO, JniInchiAtom atT,
+            INCHI_BOND_TYPE type) {
+
+<span class="fc" id="L81">        this(atO, atT, type, INCHI_BOND_STEREO.NONE);</span>
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Set 2D stereo definition.
+     *
+     * @param stereo    Bond 2D stereo definition
+     */
+    public void setStereoDefinition(INCHI_BOND_STEREO stereo) {
+<span class="fc" id="L90">        this.stereo = stereo;</span>
+<span class="fc" id="L91">    }</span>
+
+    /**
+     * Returns atom at bond origin.
+     * @return
+     */
+    public JniInchiAtom getOriginAtom() {
+<span class="fc" id="L98">        return atomOrigin;</span>
+    }
+
+    /**
+     * Returns atom at bond target.
+     * @return
+     */
+    public JniInchiAtom getTargetAtom() {
+<span class="fc" id="L106">        return atomTarget;</span>
+    }
+
+    /**
+     * Returns bond type.
+     * @return
+     */
+    public INCHI_BOND_TYPE getBondType() {
+<span class="fc" id="L114">        return type;</span>
+    }
+
+    /**
+     * Returns bond stereochemistry.
+     * @return
+     */
+    public INCHI_BOND_STEREO getBondStereo() {
+<span class="fc" id="L122">        return stereo;</span>
+    }
+
+    /**
+     * Generates string representation of information on bond,
+     * for debugging purposes.
+     */
+    public String getDebugString() {
+<span class="fc" id="L130">        return(&quot;InChI Bond: &quot;</span>
+        + atomOrigin.getElementType()
+        + &quot;-&quot; + atomTarget.getElementType()
+        + &quot; // Type: &quot; + type
+        + &quot; // Stereo: &quot; + stereo
+        );
+    }
+
+    /**
+     * Outputs information on bond, for debugging purposes.
+     */
+    public void debug() {
+<span class="nc" id="L142">        System.out.println(getDebugString());</span>
+<span class="nc" id="L143">    }</span>
+    
+    int getInchiBondType() {
+<span class="fc" id="L146">    	return type.getIndx();</span>
+    }
+    
+    int getInchiBondStereo() {
+<span class="fc" id="L150">    	return stereo.getIndx();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

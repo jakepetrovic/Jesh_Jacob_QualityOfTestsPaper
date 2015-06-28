@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientPlayer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client</a> &gt; <span class="el_source">ClientPlayer.java</span></div><h1>ClientPlayer.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client;
+
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import sound.SoundPlayer;
+
+import common.Actor;
+import common.Constants;
+import common.Player;
+
+/**
+ * The client specific implemetation of a Player. This implementation will
+ * notify any number of registered observers about changes to their state.
+ * 
+ * @author Andi, Bj�rn
+ */
+public class ClientPlayer extends Player {
+<span class="fc" id="L23">	private boolean bowlBombs = false;</span>
+
+<span class="fc" id="L25">	private Logger logger = Logger.getLogger(ClientPlayer.class);</span>
+
+<span class="fc" id="L27">	private int bombsPlanted = 0;</span>
+
+<span class="fc" id="L29">	private int bombDiameter = Constants.BOMB_DIAMETER;</span>
+
+<span class="fc" id="L31">	private int maxBombs = Constants.MIN_BOMBS;</span>
+	
+	private long lastPlant;
+
+	/**
+	 * Creates a new ClientPlayer that starts on a fixed position.
+	 * 
+	 * @param position
+	 *            The starting location for this player.
+	 */
+	public ClientPlayer(Point position, int id) {
+<span class="fc" id="L42">		super(position);</span>
+<span class="fc" id="L43">		this.id = id;</span>
+<span class="fc" id="L44">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see common.Actor#preUpdate()
+	 */
+	@Override
+	protected void preUpdate() {
+		// if (!moveVector.equals(previousMoveVector)) {
+<span class="nc" id="L54">		setChanged();</span>
+		// }
+<span class="nc" id="L56">	}</span>
+
+	/**
+	 * Plants a bomb on the battlefield. The bomb will be located at the current
+	 * position. If the user can bowl bombs the bomb get a moveVector. This will
+	 * trigger a notification for the observers.
+	 */
+	public void plantBomb() {
+<span class="nc" id="L64">		long time = System.currentTimeMillis();</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">		if ((bombsPlanted &gt;= maxBombs) || (time - lastPlant &lt; 100)) {</span>
+<span class="nc" id="L66">			return;</span>
+		}
+<span class="nc" id="L68">		lastPlant = time;</span>
+<span class="nc" id="L69">		setChanged();</span>
+<span class="nc" id="L70">		Point posClone = (Point) getPosition().clone();</span>
+<span class="nc" id="L71">		ClientBomb bomb = new ClientBomb(posClone, this);</span>
+<span class="nc" id="L72">		bomb.setId(BomberClient.getInstance().getNextId());</span>
+<span class="nc" id="L73">		bomb.setDiameter(bombDiameter);</span>
+<span class="nc" id="L74">		bomb.setRemote(false);</span>
+<span class="nc" id="L75">		Point moveVec = new Point(0, 0);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">		if (bowlBombs) {</span>
+<span class="nc" id="L77">			bomb.setStopped(false);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">			if (getDirection() == 1) {</span>
+<span class="nc" id="L79">				moveVec.y = -Actor.MOVE_DELTA * speed;</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">			} else if (getDirection() == 2) {</span>
+<span class="nc" id="L81">				moveVec.y = Actor.MOVE_DELTA * speed;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">			} else if (getDirection() == 3) {</span>
+<span class="nc" id="L83">				moveVec.x = -Actor.MOVE_DELTA * speed;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">			} else if (getDirection() == 4) {</span>
+<span class="nc" id="L85">				moveVec.x = Actor.MOVE_DELTA * speed;</span>
+			}
+		} else {
+<span class="nc" id="L88">			bomb.setStopped(true);</span>
+		}
+<span class="nc" id="L90">		bomb.setMoveVector(moveVec);</span>
+<span class="nc" id="L91">		bombsThatSpawnedOnMe.add(bomb);</span>
+<span class="nc" id="L92">		notifyObservers(bomb);</span>
+<span class="nc" id="L93">		SoundPlayer.getInstance().bWerfen();</span>
+		/*
+		 * This needs synchronization to prevent lost updates. A lost update
+		 * could occur when another thread changes the bombsPlanted variable
+		 * between the read/write operation of the increment.
+		 */
+<span class="nc" id="L99">		synchronized (this) {</span>
+<span class="nc" id="L100">			bombsPlanted = bombsPlanted + 1;</span>
+<span class="nc" id="L101">		}</span>
+<span class="nc" id="L102">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see common.Player#die()
+	 */
+	@Override
+	public void die() {
+<span class="nc" id="L111">		super.die();</span>
+<span class="nc" id="L112">		SoundPlayer.getInstance().stirbt();</span>
+<span class="nc" id="L113">		logger.info(&quot;#&quot; + getId() + &quot; died&quot;);</span>
+<span class="nc" id="L114">	}</span>
+
+	/**
+	 * Increases the maximum number of bombs this player can plant by one. If
+	 * the player can already plant MAX_BOMDS bombs, this method will do
+	 * nothing.
+	 */
+	public void increaseMaxBombs() {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (maxBombs &lt; Constants.MAX_BOMBS) {</span>
+<span class="nc" id="L123">			maxBombs = maxBombs + 1;</span>
+		}
+<span class="nc" id="L125">	}</span>
+
+	/**
+	 * Resets the maximum number of bombs this player can plant by one.
+	 */
+	public void resetMaxBombs() {
+<span class="nc" id="L131">		maxBombs = Constants.MIN_BOMBS;</span>
+<span class="nc" id="L132">	}</span>
+
+	/**
+	 * Notifies this player that a previously planted bomb has exploded. This
+	 * will decrease the count of currently planted bombs.
+	 * 
+	 */
+	public void plantedBombExploded() {
+		/*
+		 * This needs synchronization to prevent lost updates. A lost update
+		 * could occur when another thread changes the bombsPlanted variable
+		 * between the read/write operation of the decrement.
+		 */
+<span class="nc" id="L145">		synchronized (this) {</span>
+<span class="nc" id="L146">			bombsPlanted = bombsPlanted - 1;</span>
+<span class="nc" id="L147">		}</span>
+<span class="nc" id="L148">	}</span>
+
+	/**
+	 * Increases the diameter of the bomb, that this player can plant.
+	 */
+	public void increaseBombDiameter() {
+<span class="nc" id="L154">		bombDiameter += 2;</span>
+<span class="nc" id="L155">	}</span>
+
+	/**
+	 * Resets the diameter of the bomb, that this player can plant.
+	 */
+	public void resetBombDiameter() {
+<span class="nc" id="L161">		bombDiameter = Constants.BOMB_DIAMETER;</span>
+<span class="nc" id="L162">	}</span>
+
+	/**
+	 * Sets, that player can bowl bombs
+	 */
+	public void setBowlBombs() {
+<span class="nc" id="L168">		bowlBombs = true;</span>
+<span class="nc" id="L169">	}</span>
+
+	/**
+	 * Sets, that player can't bowl bombs
+	 */
+	public void resetBowlBombs() {
+<span class="nc" id="L175">		bowlBombs = false;</span>
+<span class="nc" id="L176">	}</span>
+
+	/**
+	 * Returns weather the player can bowl bombs
+	 * 
+	 * @return boolean can bowl bombs
+	 */
+	public boolean canBowlBombs() {
+<span class="nc" id="L184">		return bowlBombs;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

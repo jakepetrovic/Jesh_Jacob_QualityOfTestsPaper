@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KeyMapComboBoxModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.view</a> &gt; <span class="el_source">KeyMapComboBoxModel.java</span></div><h1>KeyMapComboBoxModel.java</h1><pre class="source lang-java linenums">package bierse.view;
+
+import java.awt.event.KeyEvent;
+
+import javax.swing.DefaultComboBoxModel;
+
+public class KeyMapComboBoxModel extends DefaultComboBoxModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1087130775887552360L;
+	
+	public static final String KEYNAME_F1 = &quot;F1&quot;;
+	public static final String KEYNAME_F2 = &quot;F2&quot;;
+	public static final String KEYNAME_F3 = &quot;F3&quot;;
+	public static final String KEYNAME_F4 = &quot;F4&quot;;
+	public static final String KEYNAME_F5 = &quot;F5&quot;;
+	public static final String KEYNAME_F6 = &quot;F6&quot;;
+	public static final String KEYNAME_F7 = &quot;F7&quot;;
+	public static final String KEYNAME_F8 = &quot;F8&quot;;
+	public static final String KEYNAME_F9 = &quot;F9&quot;;
+	public static final String KEYNAME_F10 = &quot;F10&quot;;
+	public static final String KEYNAME_F11 = &quot;F11&quot;;
+	public static final String KEYNAME_F12 = &quot;F12&quot;;
+	
+<span class="fc" id="L27">	private static final MyKeyMap KM1 = new MyKeyMap(KEYNAME_F1, KeyEvent.VK_F1);</span>
+<span class="fc" id="L28">	private static final MyKeyMap KM2 = new MyKeyMap(KEYNAME_F2, KeyEvent.VK_F2);</span>
+<span class="fc" id="L29">	private static final MyKeyMap KM3 = new MyKeyMap(KEYNAME_F3, KeyEvent.VK_F3);</span>
+<span class="fc" id="L30">	private static final MyKeyMap KM4 = new MyKeyMap(KEYNAME_F4, KeyEvent.VK_F4);</span>
+<span class="fc" id="L31">	private static final MyKeyMap KM5 = new MyKeyMap(KEYNAME_F5, KeyEvent.VK_F5);</span>
+<span class="fc" id="L32">	private static final MyKeyMap KM6 = new MyKeyMap(KEYNAME_F6, KeyEvent.VK_F6);</span>
+<span class="fc" id="L33">	private static final MyKeyMap KM7 = new MyKeyMap(KEYNAME_F7, KeyEvent.VK_F7);</span>
+<span class="fc" id="L34">	private static final MyKeyMap KM8 = new MyKeyMap(KEYNAME_F8, KeyEvent.VK_F8);</span>
+<span class="fc" id="L35">	private static final MyKeyMap KM9 = new MyKeyMap(KEYNAME_F9, KeyEvent.VK_F9);</span>
+<span class="fc" id="L36">	private static final MyKeyMap KM10 = new MyKeyMap(KEYNAME_F10, KeyEvent.VK_F10);</span>
+<span class="fc" id="L37">	private static final MyKeyMap KM11 = new MyKeyMap(KEYNAME_F11, KeyEvent.VK_F11);</span>
+<span class="fc" id="L38">	private static final MyKeyMap KM12 = new MyKeyMap(KEYNAME_F12, KeyEvent.VK_F12);</span>
+
+<span class="fc" id="L40">	public KeyMapComboBoxModel() {</span>
+<span class="fc" id="L41">		this.addElement(KM1);</span>
+<span class="fc" id="L42">		this.addElement(KM2);</span>
+<span class="fc" id="L43">		this.addElement(KM3);</span>
+<span class="fc" id="L44">		this.addElement(KM4);</span>
+<span class="fc" id="L45">		this.addElement(KM5);</span>
+<span class="fc" id="L46">		this.addElement(KM6);</span>
+<span class="fc" id="L47">		this.addElement(KM7);</span>
+<span class="fc" id="L48">		this.addElement(KM8);</span>
+<span class="fc" id="L49">		this.addElement(KM9);</span>
+<span class="fc" id="L50">		this.addElement(KM10);</span>
+<span class="fc" id="L51">		this.addElement(KM11);</span>
+<span class="fc" id="L52">		this.addElement(KM12);</span>
+<span class="fc" id="L53">	}</span>
+	
+	public static MyKeyMap getMyKeyMapForKeyCode(int keyCode) {
+<span class="pc bpc" id="L56" title="6 of 13 branches missed.">		switch(keyCode) {</span>
+		case KeyEvent.VK_F1:
+<span class="fc" id="L58">			return KM1;</span>
+		case KeyEvent.VK_F2:
+<span class="nc" id="L60">			return KM2;</span>
+		case KeyEvent.VK_F3:
+<span class="nc" id="L62">			return KM3;</span>
+		case KeyEvent.VK_F4:
+<span class="fc" id="L64">			return KM4;</span>
+		case KeyEvent.VK_F5:
+<span class="nc" id="L66">			return KM5;</span>
+		case KeyEvent.VK_F6:
+<span class="fc" id="L68">			return KM6;</span>
+		case KeyEvent.VK_F7:
+<span class="fc" id="L70">			return KM7;</span>
+		case KeyEvent.VK_F8:
+<span class="fc" id="L72">			return KM8;</span>
+		case KeyEvent.VK_F9:
+<span class="nc" id="L74">			return KM9;</span>
+		case KeyEvent.VK_F10:
+<span class="nc" id="L76">			return KM10;</span>
+		case KeyEvent.VK_F11:
+<span class="fc" id="L78">			return KM11;</span>
+		case KeyEvent.VK_F12:
+<span class="nc" id="L80">			return KM12;</span>
+		default:
+<span class="fc" id="L82">			return null;</span>
+		}
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultDrinkSellView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.view</a> &gt; <span class="el_source">DefaultDrinkSellView.java</span></div><h1>DefaultDrinkSellView.java</h1><pre class="source lang-java linenums">package bierse.view;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
+
+import bierse.model.Drink;
+import bierse.model.Model;
+
+public class DefaultDrinkSellView extends JFrame implements IDrinkSellView, IModelChangedListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7479281171426356909L;
+	
+	JTextField amountSoldTextField;
+	JTextField directPriceTextField;
+	JLabel timeLeftLabel;
+	JLabel iterationLabel;
+	JMenuItem displayInformationViewMI;
+	JMenuItem displaySettingsViewMI;
+<span class="nc" id="L46">	DecimalFormat df = new DecimalFormat(&quot;0.00&quot;);</span>
+	DefaultTableModel drinkTableModel;
+<span class="nc" id="L48">	String[] drinkTableHeader = new String[] {&quot;Name&quot;, 				//0</span>
+			 								  &quot;Taste&quot;,				//1
+			 								  &quot;Preis(akt)&quot;,			//2
+			 								  &quot;Preis (Min/Max)&quot;,	//3
+			 								  &quot;Neuer Preis&quot;,		//4
+			 								  &quot;Verkauf(Soll)&quot;,		//5
+			 								  &quot;Verkauf(akt)&quot;,		//6
+			 								  &quot;Verkauft (avg)&quot;,		//7
+			 								  &quot;Preis(avg)&quot;,			//8
+			 								  &quot;Verkauf-Preis (avg)&quot;,//9
+			 								  &quot;Verkauft(ges)&quot;,		//10
+			 								  &quot;Preis halten&quot;};		//11
+												
+<span class="nc" id="L61">	int numberOfColumns = 12;</span>
+<span class="nc" id="L62">	int keepPriceColumnIndex = 11;</span>
+	Model model;
+	
+	public DefaultDrinkSellView(String name, Model model) {
+<span class="nc" id="L66">		super(name);</span>
+<span class="nc" id="L67">		model.registerModelChangedListener(this);</span>
+<span class="nc" id="L68">		this.model = model;</span>
+<span class="nc" id="L69">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L70">		addWindowListener(new WindowAdapter() {</span>
+			@Override
+			public void windowClosing(WindowEvent e) {
+<span class="nc" id="L73">				super.windowClosing(e);</span>
+<span class="nc" id="L74">				beforeClose();</span>
+<span class="nc" id="L75">			}</span>
+		});
+<span class="nc" id="L77">		getContentPane().setLayout(new BorderLayout());</span>
+		
+		// Add menu
+<span class="nc" id="L80">		JMenuBar menubar = new JMenuBar();</span>
+<span class="nc" id="L81">		JMenu fileMenu = new JMenu(&quot;Datei&quot;);</span>
+<span class="nc" id="L82">		fileMenu.setMnemonic(KeyEvent.VK_D);</span>
+<span class="nc" id="L83">		menubar.add(fileMenu);</span>
+<span class="nc" id="L84">		displayInformationViewMI = new JMenuItem(&quot;Zeige neue Info-Anzeige&quot;);</span>
+<span class="nc" id="L85">		displayInformationViewMI.setMnemonic(KeyEvent.VK_I);</span>
+<span class="nc" id="L86">		displayInformationViewMI.setActionCommand(IDrinkSellView.MI_DISPLAY_INFO_VIEW);</span>
+<span class="nc" id="L87">		fileMenu.add(displayInformationViewMI);</span>
+<span class="nc" id="L88">		displaySettingsViewMI = new JMenuItem(&quot;Einstellungen&quot;);</span>
+<span class="nc" id="L89">		displaySettingsViewMI.setMnemonic(KeyEvent.VK_E);</span>
+<span class="nc" id="L90">		displaySettingsViewMI.setActionCommand(IDrinkSellView.MI_DISPLAY_SETTINGS_VIEW);</span>
+<span class="nc" id="L91">		fileMenu.add(displaySettingsViewMI);</span>
+		
+		
+<span class="nc" id="L94">		setJMenuBar(menubar);</span>
+		
+		// Add label to show the current iteration count
+<span class="nc" id="L97">		iterationLabel = new JLabel(&quot;Runde: &quot; + model.getIteration());</span>
+<span class="nc" id="L98">		getContentPane().add(iterationLabel, BorderLayout.NORTH);</span>
+	    
+		// Add table to show all drinks to the barkeeper
+<span class="nc" id="L101">		drinkTableModel = new DefaultTableModel(drinkTableHeader, model.getLstUsedDrink().size()) {</span>
+			@Override
+			public Class&lt;?&gt; getColumnClass(int columnIndex) {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">				if(columnIndex == keepPriceColumnIndex) {</span>
+<span class="nc" id="L105">					return Boolean.class;</span>
+				}
+<span class="nc" id="L107">				return super.getColumnClass(columnIndex);</span>
+			}
+			
+			@Override
+			public boolean isCellEditable(int row, int column) {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">				if(column == keepPriceColumnIndex) {</span>
+<span class="nc" id="L113">					return true;</span>
+				}
+<span class="nc" id="L115">				return false;</span>
+			}
+		};
+<span class="nc" id="L118">		drinkTableModel.setDataVector(getDrinkTableData(), drinkTableHeader);</span>
+		
+<span class="nc" id="L120">		JTable drinkTable = new JTable(drinkTableModel);</span>
+<span class="nc" id="L121">		Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 25);</span>
+<span class="nc" id="L122">		drinkTable.setFont(font);</span>
+<span class="nc" id="L123">		drinkTable.setRowHeight(drinkTable.getFontMetrics(font).getHeight() + 4);</span>
+<span class="nc" id="L124">		drinkTable.setAutoCreateColumnsFromModel(false);</span>
+<span class="nc" id="L125">		JScrollPane drinkPanelMain = new JScrollPane(drinkTable);</span>
+<span class="nc" id="L126">		getContentPane().add(drinkPanelMain, BorderLayout.CENTER);</span>
+		
+		// Add textfield to sell drinks
+<span class="nc" id="L129">        amountSoldTextField = new JTextField();</span>
+<span class="nc" id="L130">        amountSoldTextField.setText(&quot;1&quot;);</span>
+<span class="nc" id="L131">        amountSoldTextField.setColumns(3);</span>
+<span class="nc" id="L132">		amountSoldTextField.grabFocus();</span>
+<span class="nc" id="L133">		amountSoldTextField.selectAll();</span>
+		
+		// Add textfield to set a direct price
+<span class="nc" id="L136">		directPriceTextField = new JTextField(&quot;0&quot;, 5);</span>
+		
+		// Add drink sold panel
+<span class="nc" id="L139">		JPanel drinkSoldPanel = new JPanel();</span>
+<span class="nc" id="L140">		drinkSoldPanel.setLayout(new FlowLayout());</span>
+<span class="nc" id="L141">        JLabel label = new JLabel(&quot;Menge: &quot;);</span>
+<span class="nc" id="L142">        drinkSoldPanel.add(label);</span>
+<span class="nc" id="L143">        drinkSoldPanel.add(amountSoldTextField);</span>
+<span class="nc" id="L144">        JLabel directPriceLabel = new JLabel(&quot;Preis-Direkteingabe: &quot;);</span>
+<span class="nc" id="L145">        drinkSoldPanel.add(directPriceLabel);</span>
+<span class="nc" id="L146">        drinkSoldPanel.add(directPriceTextField);</span>
+<span class="nc" id="L147">        timeLeftLabel = new JLabel(&quot;Time left: &quot; + model.getTimeLeft());</span>
+<span class="nc" id="L148">        drinkSoldPanel.add(timeLeftLabel);</span>
+<span class="nc" id="L149">        getContentPane().add(drinkSoldPanel, BorderLayout.SOUTH);</span>
+        
+        //Display the window.
+<span class="nc" id="L152">        pack();</span>
+<span class="nc" id="L153">        setSize(Double.valueOf(getMaximumSize().getWidth()).intValue(), getHeight());</span>
+<span class="nc" id="L154">        setVisible(true);</span>
+<span class="nc" id="L155">	}</span>
+	
+	private void beforeClose() {
+<span class="nc" id="L158">		model.beforeClose();</span>
+<span class="nc" id="L159">	}</span>
+	
+	private Object[][] getDrinkTableData() {
+		
+<span class="nc" id="L163">	    Object [][] data = new Object[model.getLstUsedDrink().size()][numberOfColumns];</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		for(int i = 0; i &lt; model.getLstUsedDrink().size(); i++) {</span>
+<span class="nc" id="L165">			Drink drink = model.getLstUsedDrink().get(i);</span>
+<span class="nc" id="L166">			data[i][0] = drink.getName();</span>
+<span class="nc" id="L167">			data[i][1] = KeyEvent.getKeyText(drink.getKey());</span>
+<span class="nc" id="L168">			data[i][2] = String.valueOf(drink.getCurrentPrice());</span>
+<span class="nc" id="L169">			data[i][3] = String.valueOf(drink.getMinPrice() + &quot; / &quot; + drink.getMaxPrice());</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">			if (drink.getDirectPrice() != 0) {</span>
+<span class="nc" id="L171">				data[i][4] = String.valueOf(drink.getDirectPrice());</span>
+			} else {
+<span class="nc" id="L173">				data[i][4] = &quot;---&quot;;</span>
+			}
+<span class="nc" id="L175">			data[i][5] = String.valueOf(drink.getTargetAmount());</span>
+<span class="nc" id="L176">			data[i][6] = String.valueOf(drink.getLastSold());</span>
+<span class="nc" id="L177">			data[i][7] = String.valueOf(Math.round(drink.getAverageAmount()));</span>
+<span class="nc" id="L178">			data[i][8] = df.format(drink.getAveragePrice());</span>
+<span class="nc" id="L179">			data[i][9] = df.format(drink.getAverageSoldPrice());</span>
+<span class="nc" id="L180">			data[i][10] = drink.getTotalSold();</span>
+<span class="nc" id="L181">			data[i][11] = drink.isKeepPrice();</span>
+		}
+<span class="nc" id="L183">		return data;</span>
+	}
+	
+	private void repaintTimeLeftLabel() {
+<span class="nc" id="L187">		timeLeftLabel.setText(&quot;Time left: &quot; + model.getTimeLeft());</span>
+<span class="nc" id="L188">	}</span>
+	
+	private void repaintIterationLabel() {
+<span class="nc" id="L191">		iterationLabel.setText(&quot;Runde: &quot; + model.getIteration());</span>
+<span class="nc" id="L192">	}</span>
+	
+	@Override
+	public void fireModelChanged(int eventType) {
+		// If the event has changed the drink table data
+<span class="nc bnc" id="L197" title="All 2 branches missed.">		if((eventType &amp; Model.EVENT_DRINK_LIST_CHANGED + Model.EVENT_DRINK_SOLD + Model.EVENT_RECALCULATED + Model.EVENT_SETTINGS_CHANGED) &gt; 0) {</span>
+<span class="nc" id="L198">			drinkTableModel.setDataVector(getDrinkTableData(), drinkTableHeader);</span>
+<span class="nc" id="L199">			drinkTableModel.fireTableDataChanged();</span>
+		}
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		if(Model.EVENT_RECALCULATED == eventType) {</span>
+<span class="nc" id="L202">			repaintIterationLabel();</span>
+		}
+<span class="nc bnc" id="L204" title="All 2 branches missed.">		if(eventType == Model.EVENT_TIME_LEFT_CHANGED) {</span>
+<span class="nc" id="L205">			repaintTimeLeftLabel();</span>
+		}
+<span class="nc" id="L207">		this.validate();</span>
+<span class="nc" id="L208">		this.repaint();</span>
+<span class="nc" id="L209">	}</span>
+	
+	@Override
+	public int getAmount() {
+<span class="nc bnc" id="L213" title="All 2 branches missed.">		if(!amountSoldTextField.getText().isEmpty()) {</span>
+<span class="nc" id="L214">			return Integer.valueOf(amountSoldTextField.getText()).intValue();</span>
+		}
+<span class="nc" id="L216">		return 0;</span>
+	}
+	
+	@Override
+	public void setAmount(int amount) {
+<span class="nc" id="L221">		amountSoldTextField.setText(String.valueOf(amount));</span>
+<span class="nc" id="L222">		amountSoldTextField.grabFocus();</span>
+<span class="nc" id="L223">		amountSoldTextField.selectAll();</span>
+<span class="nc" id="L224">	}</span>
+	
+	@Override
+	public int getDirectPrice() {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">		if(!directPriceTextField.getText().isEmpty()) {</span>
+<span class="nc" id="L229">			return Integer.valueOf(directPriceTextField.getText()).intValue();</span>
+		}
+<span class="nc" id="L231">		return 0;</span>
+	}
+	
+	@Override
+	public void setDirectPrice(int directPrice) {
+<span class="nc" id="L236">		directPriceTextField.setText(String.valueOf(directPrice));</span>
+<span class="nc" id="L237">		directPriceTextField.selectAll();</span>
+<span class="nc" id="L238">	}</span>
+	
+	
+	
+	public void setDrinkSellController(KeyListener kl) {
+<span class="nc" id="L243">		amountSoldTextField.addKeyListener(kl);</span>
+<span class="nc" id="L244">		directPriceTextField.addKeyListener(kl);</span>
+<span class="nc" id="L245">	}</span>
+	
+	public void setMenuController(ActionListener al) {
+<span class="nc" id="L248">		displayInformationViewMI.addActionListener(al);</span>
+<span class="nc" id="L249">		displaySettingsViewMI.addActionListener(al);</span>
+<span class="nc" id="L250">	}</span>
+
+	public void setTableModelController(TableModelListener tml) {
+<span class="nc" id="L253">		drinkTableModel.addTableModelListener(tml);</span>
+<span class="nc" id="L254">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

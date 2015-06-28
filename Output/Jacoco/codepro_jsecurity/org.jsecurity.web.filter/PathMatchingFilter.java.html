@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PathMatchingFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.filter</a> &gt; <span class="el_source">PathMatchingFilter.java</span></div><h1>PathMatchingFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.filter;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.util.AntPathMatcher;
+import org.jsecurity.util.PatternMatcher;
+import static org.jsecurity.util.StringUtils.split;
+import org.jsecurity.web.WebUtils;
+import org.jsecurity.web.servlet.AdviceFilter;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ * &lt;p&gt;Base class for Filters that will process only specified paths and allow all others to pass through.&lt;/p&gt;
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.9
+ */
+<span class="fc" id="L41">public abstract class PathMatchingFilter extends AdviceFilter implements PathConfigProcessor {</span>
+
+    /**
+     * Log available to this class only
+     */
+<span class="fc" id="L46">    private static final Log log = LogFactory.getLog(PathMatchingFilter.class);</span>
+
+    /**
+     * PatternMatcher used in determining which paths to react to for a given request.
+     */
+<span class="fc" id="L51">    protected PatternMatcher pathMatcher = new AntPathMatcher();</span>
+
+    /**
+     * A collection of path-to-config entries where the key is a path which this filter should process and
+     * the value is the (possibly null) configuration element specific to this Filter for that specific path.
+     *
+     * &lt;p&gt;To put it another way, the keys are the paths (urls) that this Filter will process.
+     * &lt;p&gt;The values are filter-specific data that this Filter should use when processing the corresponding
+     * key (path).  The values can be null if no Filter-specific config was specified for that url.
+     */
+<span class="fc" id="L61">    protected Map&lt;String, Object&gt; appliedPaths = new LinkedHashMap&lt;String, Object&gt;();</span>
+
+    /**
+     * Splits any comma-delmited values that might be found in the &lt;code&gt;config&lt;/code&gt; argument and sets the resulting
+     * &lt;code&gt;String[]&lt;/code&gt; array on the &lt;code&gt;appliedPaths&lt;/code&gt; internal Map.
+     * &lt;p/&gt;
+     * That is:
+     * &lt;pre&gt;&lt;code&gt;
+     * String[] values = null;
+     * if (config != null) {
+     *     values = split(config);
+     * }
+     *
+     * this.{@link #appliedPaths appliedPaths}.put(path, values);
+     * &lt;/code&gt;&lt;/pre&gt;
+     *
+     * @param path   the application context path to match for executing this filter.
+     * @param config the specified for &lt;em&gt;this particular filter only&lt;/em&gt; for the given &lt;code&gt;path&lt;/code&gt;
+     */
+    public void processPathConfig(String path, String config) {
+<span class="fc" id="L81">        String[] values = null;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (config != null) {</span>
+<span class="fc" id="L83">            values = split(config);</span>
+        }
+
+<span class="fc" id="L86">        this.appliedPaths.put(path, values);</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Returns the context path within the application based on the specified &lt;code&gt;request&lt;/code&gt;.
+     * &lt;p/&gt;
+     * This implementation merely delegates to
+     * {@link WebUtils#getPathWithinApplication(javax.servlet.http.HttpServletRequest) WebUtils.getPathWithinApplication(request)},
+     * but can be overridden by subclasses for custom logic.
+     *
+     * @param request the incoming &lt;code&gt;ServletRequest&lt;/code&gt;
+     * @return the context path within the application.
+     */
+    protected String getPathWithinApplication(ServletRequest request) {
+<span class="nc" id="L100">        return WebUtils.getPathWithinApplication(WebUtils.toHttp(request));</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the incoming &lt;code&gt;request&lt;/code&gt; matches the specified &lt;code&gt;path&lt;/code&gt; pattern,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     * &lt;p/&gt;
+     * The default implementation acquires the &lt;code&gt;request&lt;/code&gt;'s path within the application and determines
+     * if that matches:
+     * &lt;p/&gt;
+     * &lt;code&gt;String requestURI = {@link #getPathWithinApplication(javax.servlet.ServletRequest) getPathWithinApplication(request)};&lt;br/&gt;
+     * return {@link #pathsMatch(String, String) pathsMatch(path,requestURI)}&lt;/code&gt;
+     *
+     * @param path    the configured url pattern to check the incoming request against.
+     * @param request the incoming ServletRequest
+     * @return &lt;code&gt;true&lt;/code&gt; if the incoming &lt;code&gt;request&lt;/code&gt; matches the specified &lt;code&gt;path&lt;/code&gt; pattern,
+     *         &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    protected boolean pathsMatch(String path, ServletRequest request) {
+<span class="nc" id="L119">        String requestURI = getPathWithinApplication(request);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L121">            log.trace(&quot;Attempting to match pattern [&quot; + path + &quot;] with current requestURI [&quot; + requestURI + &quot;]...&quot;);</span>
+        }
+<span class="nc" id="L123">        return pathsMatch(path, requestURI);</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if the &lt;code&gt;path&lt;/code&gt; matches the specified &lt;code&gt;pattern&lt;/code&gt; string,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     * &lt;p/&gt;
+     * Simply delegates to
+     * &lt;b&gt;&lt;code&gt;this.pathMatcher.{@link PatternMatcher#matches(String, String) matches(pattern,path)}&lt;/code&gt;&lt;/b&gt;,
+     * but can be overridden by subclasses for custom matching behavior.
+     *
+     * @param pattern the pattern to match against
+     * @param path    the value to match with the specified &lt;code&gt;pattern&lt;/code&gt;
+     * @return &lt;code&gt;true&lt;/code&gt; if the &lt;code&gt;path&lt;/code&gt; matches the specified &lt;code&gt;pattern&lt;/code&gt; string,
+     *         &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    protected boolean pathsMatch(String pattern, String path) {
+<span class="fc" id="L140">        return pathMatcher.matches(pattern, path);</span>
+    }
+
+    /**
+     * Implementation that handles path-matching behavior before a request is evaluated.  If the path matches,
+     * the request will be allowed through via the result from
+     * {@link #onPreHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Object) onPreHandle}.  If the
+     * path does not match, this filter will allow passthrough immediately.
+     *
+     * &lt;p&gt;In order to retain path-matching functionality, subclasses should not override this method if at all
+     * possible, and instead override
+     * {@link #onPreHandle(javax.servlet.ServletRequest, javax.servlet.ServletResponse, Object) onPreHandle} instead.
+     *
+     * @param request  the incoming ServletRequest
+     * @param response the outgoing ServletResponse
+     * @return true - allow the request chain to continue in this default implementation
+     * @throws Exception
+     */
+    public boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+
+<span class="nc bnc" id="L160" title="All 4 branches missed.">        if (this.appliedPaths == null || this.appliedPaths.isEmpty()) {</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L162">                log.trace(&quot;appliedPaths property is null or empty.  This Filter will passthrough immediately.&quot;);</span>
+            }
+<span class="nc" id="L164">            return true;</span>
+        }
+
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for (String path : this.appliedPaths.keySet()) {</span>
+            // If the path does match, then pass on to the subclass implementation for specific checks
+            //(first match 'wins'):
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (pathsMatch(path, request)) {</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L172">                    log.trace(&quot;Current requestURI matches pattern [&quot; + path + &quot;].  Performing onPreHandle check...&quot;);</span>
+                }
+<span class="nc" id="L174">                Object config = this.appliedPaths.get(path);</span>
+<span class="nc" id="L175">                return onPreHandle(request, response, config);</span>
+            }
+<span class="nc" id="L177">        }</span>
+
+        //no path matched, allow the request to go through:
+<span class="nc" id="L180">        return true;</span>
+    }
+
+    /**
+     * Default implementation always returns &lt;code&gt;true&lt;/code&gt;.  Should be overridden by subclasses for custom
+     * logic.
+     *
+     * @param request     the incoming ServletRequest
+     * @param response    the outgoing ServletResponse
+     * @param mappedValue the filter-specific config value mapped to this filter in the URL rules mappings.
+     * @return &lt;code&gt;true&lt;/code&gt; if the request should be able to continue, &lt;code&gt;false&lt;/code&gt; if the filter will
+     *         handle the response directly.
+     * @throws Exception if an error occurs
+     */
+    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+<span class="nc" id="L195">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

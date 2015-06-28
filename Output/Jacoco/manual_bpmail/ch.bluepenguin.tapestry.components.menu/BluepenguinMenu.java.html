@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BluepenguinMenu.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.tapestry.components.menu</a> &gt; <span class="el_source">BluepenguinMenu.java</span></div><h1>BluepenguinMenu.java</h1><pre class="source lang-java linenums">/*
+ * Created on 17.03.2005
+ *
+ */
+package ch.bluepenguin.tapestry.components.menu;
+
+import java.util.Iterator;
+
+import org.apache.tapestry.BaseComponent;
+import org.apache.tapestry.IEngine;
+import org.apache.tapestry.IMarkupWriter;
+import org.apache.tapestry.IRequestCycle;
+import org.apache.tapestry.IScript;
+import org.apache.tapestry.engine.IScriptSource;
+import org.apache.tapestry.html.Body;
+
+import ch.bluepenguin.tapestry.components.menu.model.IMenuItem;
+import ch.bluepenguin.tapestry.components.menu.model.IMenuModel;
+import ch.bluepenguin.tapestry.components.menu.model.impl.MenuItemList;
+
+/**
+ * @author Christian
+ *  
+ */
+<span class="nc" id="L25">public abstract class BluepenguinMenu extends BaseComponent {</span>
+	public abstract String getMenuTag();
+	public abstract void setMenuTag(String menuClass);
+	public abstract String getMenuClass();
+	public abstract void setMenuClass(String menuClass);
+	public abstract String getSubMenuClass();
+	public abstract void setSubMenuClass(String leafClass);
+	public abstract IMenuModel getModel();
+	public abstract void setModel(IMenuModel model);
+
+	/**
+     * A cached copy of the script used with the component.
+     */
+    private IScript _script;
+	
+	protected void renderComponent(IMarkupWriter writer, IRequestCycle cycle) {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (getModel() != null) {</span>
+<span class="nc" id="L42">			IMarkupWriter myWriter = writer.getNestedWriter();</span>
+<span class="nc" id="L43">			myWriter.begin(getMenuTag());</span>
+<span class="nc" id="L44">			myWriter.attribute(&quot;class&quot;, getMenuClass());</span>
+			//TODO:configurable
+<span class="nc" id="L46">			Iterator menuItemList = getModel().getRootList().getChildrenIterator();</span>
+<span class="nc" id="L47">			renderMenuRecursively(menuItemList, myWriter);</span>
+<span class="nc" id="L48">			myWriter.end();</span>
+<span class="nc" id="L49">			myWriter.flush();</span>
+<span class="nc" id="L50">			myWriter.close();</span>
+		}
+<span class="nc" id="L52">		super.renderComponent(writer, cycle);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (!cycle.isRewinding()) {</span>
+// no javascript atm
+//            runScript(cycle);
+        }
+<span class="nc" id="L57">	}</span>
+    /**
+     * Executes the associated script, which generates all the JavaScript to support this Palette.
+     */
+	
+    private void runScript(IRequestCycle cycle) {
+        // Get the script, if not already gotten. Scripts are re-entrant, so it is
+        // safe to share this between instances of Palette.
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (_script == null) {</span>
+<span class="nc" id="L66">            IEngine engine = getPage().getEngine();</span>
+<span class="nc" id="L67">            IScriptSource source = engine.getScriptSource();</span>
+<span class="nc" id="L68">            _script = source.getScript(getSpecification().</span>
+            		getSpecificationLocation().
+					getRelativeLocation(&quot;BluepenguinMenu.script&quot;));
+        }
+<span class="nc" id="L72">        _script.execute(cycle, Body.get(cycle), null);</span>
+<span class="nc" id="L73">    }</span>
+
+	
+	/**
+	 * @param menuItems
+	 * @param myWriter
+	 */
+	private void renderMenuRecursively(Iterator menuItems, IMarkupWriter myWriter) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">		while (menuItems.hasNext()) {</span>
+<span class="nc" id="L82">			MenuItemList itemList = (MenuItemList) menuItems.next();</span>
+<span class="nc" id="L83">			IMenuItem item = itemList.getMenuItem();</span>
+<span class="nc" id="L84">			IMarkupWriter workingWriter = myWriter.getNestedWriter();</span>
+			//check wether next item is node or leaf 
+<span class="nc bnc" id="L86" title="All 2 branches missed.">			if (!item.isLeaf()) {</span>
+				//node: create new menu tag (might be submenu tag later)
+				//start myself
+<span class="nc" id="L89">				item.getRenderer().setStyleClass(getSubMenuClass());</span>
+<span class="nc" id="L90">				item.getRenderer().startRender(workingWriter, item);</span>
+				//submenu tag
+<span class="nc" id="L92">					IMarkupWriter nested = workingWriter.getNestedWriter();</span>
+<span class="nc" id="L93">					nested.begin(getMenuTag());</span>
+					//write all children
+<span class="nc" id="L95">					    Iterator childrenList = getModel().getChildList(item).getChildrenIterator();</span>
+<span class="nc" id="L96">						renderMenuRecursively(childrenList, nested);</span>
+<span class="nc" id="L97">				    nested.end();</span>
+<span class="nc" id="L98">					nested.flush();</span>
+<span class="nc" id="L99">					nested.close();</span>
+				//stop myself --&gt; this writer won't be valid anymore	
+<span class="nc" id="L101">				item.getRenderer().stopRender(workingWriter, item);</span>
+<span class="nc" id="L102">			} else { </span>
+				//leaf: write myself &amp; be happy with it :)
+<span class="nc" id="L104">				item.getRenderer().render(workingWriter, item);</span>
+			}
+<span class="nc" id="L106">		}</span>
+<span class="nc" id="L107">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

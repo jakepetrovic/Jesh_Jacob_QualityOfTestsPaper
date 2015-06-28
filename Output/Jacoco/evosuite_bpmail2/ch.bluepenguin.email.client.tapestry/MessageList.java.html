@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MessageList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client.tapestry</a> &gt; <span class="el_source">MessageList.java</span></div><h1>MessageList.java</h1><pre class="source lang-java linenums">/*
+ * Created on 27.05.2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+package ch.bluepenguin.email.client.tapestry;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.apache.tapestry.BaseComponent;
+import org.apache.tapestry.IRequestCycle;
+import org.apache.tapestry.event.PageEvent;
+
+import ch.bluepenguin.email.client.Folder;
+import ch.bluepenguin.email.client.MailMessage;
+import ch.bluepenguin.email.client.service.EmailFacade;
+import ch.bluepenguin.email.client.service.EmailFacadeException;
+import ch.bluepenguin.email.client.tapestry.helpers.TreeModelHelper;
+import ch.bluepenguin.tapestry.components.menu.model.IMenuModel;
+
+/**
+ * @author Christian
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+<span class="nc" id="L32">public abstract class MessageList extends BaseComponent {</span>
+	/**
+	 * Logger for this class
+	 */
+<span class="nc" id="L36">	private static final Logger logger = Logger.getLogger(MessageList.class.getName());</span>
+	private Folder currentFolder;
+
+	public abstract void setEmailFacade(EmailFacade emailFacade);
+	public abstract EmailFacade getEmailFacade();
+	public abstract Map getSelectedMessages();
+	public abstract void setSelectedMessages(Map selectedMessages);
+	
+	public void setCurrentFolder(ch.bluepenguin.email.client.Folder folderName) {
+<span class="nc" id="L45">		this.currentFolder = folderName;</span>
+<span class="nc" id="L46">		mailMessages = null;</span>
+<span class="nc" id="L47">	}</span>
+	public ch.bluepenguin.email.client.Folder getCurrentFolder() {
+<span class="nc" id="L49">		return currentFolder;</span>
+	}
+//	public abstract void setCurrentMessage(MailMessage message);
+	public abstract MailMessage getCurrentMessage();
+
+	private MailMessage[] mailMessages;
+		
+	public void setCheckboxSelectedMessage(boolean selected) {
+<span class="nc" id="L57">		MailMessage myMessage =getCurrentMessage();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">		if(myMessage!=null) {</span>
+<span class="nc" id="L59">			Map mySelected = getSelectedMessages(); </span>
+<span class="nc bnc" id="L60" title="All 4 branches missed.">			if(selected &amp;! mySelected.containsKey(myMessage.getUniqueID().getId())) {</span>
+<span class="nc" id="L61">				logger.info(&quot;Setting the message as selected &quot; + myMessage.getUniqueID().getId());</span>
+<span class="nc" id="L62">				mySelected.put(myMessage.getUniqueID().getId(), myMessage);</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">			} else if(!selected &amp;&amp; mySelected.containsKey(myMessage.getUniqueID().getId())){</span>
+<span class="nc" id="L64">				mySelected.remove(myMessage);</span>
+<span class="nc" id="L65">				logger.info(&quot;Setting the message as *NOT* selected &quot; + myMessage.getUniqueID().getId());</span>
+			}
+<span class="nc" id="L67">			setSelectedMessages(mySelected);</span>
+		}
+<span class="nc" id="L69">	}</span>
+
+	public boolean getCheckboxSelectedMessage() {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		if(getSelectedMessages()==null) {</span>
+<span class="nc" id="L73">			setSelectedMessages(new java.util.HashMap());</span>
+<span class="nc" id="L74">			return false;</span>
+		}
+<span class="nc" id="L76">		boolean result = getSelectedMessages().containsKey(getCurrentMessage().getUniqueID().getId());</span>
+<span class="nc" id="L77">		logger.info(&quot;Checking for selected &quot; + getCurrentMessage().getUniqueID().getId()+ &quot; was &quot; + result);</span>
+<span class="nc" id="L78">		return result;</span>
+	}
+	
+	public MailMessage[] getMessagesFromCurrentFolder() {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		if(getCurrentFolder()==null) return null;</span>
+		try {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">			if(mailMessages==null) {</span>
+<span class="nc" id="L85">				mailMessages = getEmailFacade().getMessagesFromFolder(getCurrentFolder());</span>
+			}
+<span class="nc" id="L87">			return mailMessages;</span>
+
+<span class="nc" id="L89">		} catch (EmailFacadeException e) {</span>
+<span class="nc" id="L90">			logger.info(&quot;getMessagesFromCurrentFolder: Problem with email facade: &quot; + e);</span>
+		}
+<span class="nc" id="L92">		return null;</span>
+	}
+
+	public void moveSelectedMessages(Folder newFolder) {
+<span class="nc" id="L96">		logger.info(&quot;actionMoveMessage in table called&quot;);</span>
+<span class="nc" id="L97">		MailMessage[] selected =  new MailMessage[getSelectedMessages().size()];</span>
+<span class="nc" id="L98">		Iterator iter = getSelectedMessages().keySet().iterator();</span>
+<span class="nc" id="L99">		int i=0;</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		while(iter.hasNext()) {</span>
+<span class="nc" id="L101">			Integer key = (Integer) iter.next();</span>
+<span class="nc" id="L102">			selected[i++] = (MailMessage)getSelectedMessages().get(key);</span>
+<span class="nc" id="L103">		}</span>
+												  
+		try {
+<span class="nc" id="L106">			getEmailFacade().moveMessages(selected, getCurrentFolder().getFullName(), newFolder.getFullName());</span>
+<span class="nc" id="L107">		} catch (EmailFacadeException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L109">			e.printStackTrace();</span>
+<span class="nc" id="L110">		}</span>
+<span class="nc" id="L111">		mailMessages = null;</span>
+<span class="nc" id="L112">		getSelectedMessages().clear();</span>
+<span class="nc" id="L113">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

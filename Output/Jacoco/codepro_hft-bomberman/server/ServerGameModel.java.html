@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ServerGameModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">ServerGameModel.java</span></div><h1>ServerGameModel.java</h1><pre class="source lang-java linenums">package server;
+
+import java.awt.Point;
+
+import common.Constants;
+
+import messages.round.RoundTimeOverMsg;
+import messages.round.RoundTimeOneSecondLeftMsg;
+
+import common.GameModel;
+
+/**
+ * The GameModel for the Server.
+ * 
+ * @author Bj�rn
+ * 
+ */
+public class ServerGameModel extends GameModel {
+
+	/**
+	 * Count of the GameLoop Frames
+	 */
+<span class="fc" id="L23">	private int frames = 0;</span>
+
+	/**
+	 * Tile count for the borders
+	 */
+<span class="fc" id="L28">	private int count = 0;</span>
+
+	/**
+	 * Tile count for the borders
+	 */
+<span class="fc" id="L33">	private int count1 = 1;</span>
+
+	/**
+	 * Tile count for the borders
+	 */
+<span class="fc" id="L38">	private int count2 = 18;</span>
+
+	/**
+	 * Tile count for the borders
+	 */
+<span class="fc" id="L43">	private int count3 = 13;</span>
+
+	/**
+	 * 
+	 */
+	private ServerGameRound round;
+
+	/**
+	 * Saves weather the time ticking has stopped or not.
+	 */
+<span class="fc" id="L53">	private boolean stopped = false;</span>
+
+<span class="fc" id="L55">	public ServerGameModel(ServerGameRound round) {</span>
+<span class="fc" id="L56">		this.round = round;</span>
+<span class="fc" id="L57">	}</span>
+
+	@Override
+	public void update() {
+<span class="nc" id="L61">		super.update();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">		if (!stopped) {</span>
+<span class="nc" id="L63">			frames++;</span>
+<span class="nc" id="L64">			tick();</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">			if (frames == 62) {</span>
+<span class="nc" id="L66">				oneSecondLeft();</span>
+			}
+<span class="nc bnc" id="L68" title="All 2 branches missed.">			if (time == 120000) {</span>
+<span class="nc" id="L69">				twoMinutesToEnd();</span>
+			}
+<span class="nc bnc" id="L71" title="All 2 branches missed.">			if (time == 90000) {</span>
+<span class="nc" id="L72">				oneAndAHalfMinuteToEnd();</span>
+			}
+<span class="nc bnc" id="L74" title="All 2 branches missed.">			if (time == 60000) {</span>
+<span class="nc" id="L75">				oneMinuteToEnd();</span>
+			}
+<span class="nc bnc" id="L77" title="All 2 branches missed.">			if (time == 30000) {</span>
+<span class="nc" id="L78">				halfMinuteToEnd();</span>
+			}
+<span class="nc bnc" id="L80" title="All 2 branches missed.">			if (time &lt;= 0) {</span>
+<span class="nc" id="L81">				timeExpired();</span>
+			}
+<span class="nc bnc" id="L83" title="All 4 branches missed.">			if (round.getBorder() == 1 &amp;&amp; frames % 10 == 0) {</span>
+<span class="nc" id="L84">				int id = 10000 + count;</span>
+<span class="nc" id="L85">				count++;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">				if (count &lt; 19) {</span>
+<span class="nc" id="L87">					round.createNewTile(new Point(count * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, Constants.TILE_BORDER
+							+ Constants.HALF_TILE), id, &quot;stone&quot;, false, false,
+							true);
+<span class="nc bnc" id="L91" title="All 4 branches missed.">				} else if (count &gt;= 19 &amp;&amp; count &lt; 31) {</span>
+<span class="nc" id="L92">					count1++;</span>
+<span class="nc" id="L93">					round.createNewTile(new Point(18 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count1
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L97" title="All 2 branches missed.">					if (count == 30) {</span>
+<span class="nc" id="L98">						count1 = 2;</span>
+					}
+<span class="nc bnc" id="L100" title="All 4 branches missed.">				} else if (count &gt;= 31 &amp;&amp; count &lt; 48) {</span>
+<span class="nc" id="L101">					count2--;</span>
+<span class="nc" id="L102">					round.createNewTile(new Point(count2</span>
+							* Constants.TILE_BORDER + Constants.HALF_TILE, 13
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L106" title="All 2 branches missed.">					if (count == 47) {</span>
+<span class="nc" id="L107">						count2 = 17;</span>
+					}
+<span class="nc bnc" id="L109" title="All 4 branches missed.">				} else if (count &gt;= 48 &amp;&amp; count &lt; 59) {</span>
+<span class="nc" id="L110">					count3--;</span>
+<span class="nc" id="L111">					round.createNewTile(new Point(Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count3
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L115" title="All 2 branches missed.">					if (count == 58) {</span>
+<span class="nc" id="L116">						count3 = 12;</span>
+					}
+<span class="nc bnc" id="L118" title="All 2 branches missed.">				} else if (count == 59) {</span>
+<span class="nc" id="L119">					count = 1;</span>
+<span class="nc" id="L120">					round.setBorder(0);</span>
+				}
+			}
+<span class="nc bnc" id="L123" title="All 4 branches missed.">			if (round.getBorder() == 2 &amp;&amp; frames % 10 == 0) {</span>
+<span class="nc" id="L124">				int id = 20000 + count;</span>
+<span class="nc" id="L125">				count++;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">				if (count &lt; 18) {</span>
+<span class="nc" id="L127">					round.createNewTile(new Point(count * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, 2 * Constants.TILE_BORDER
+							+ Constants.HALF_TILE), id, &quot;stone&quot;, false, false,
+							true);
+<span class="nc bnc" id="L131" title="All 4 branches missed.">				} else if (count &gt;= 18 &amp;&amp; count &lt; 28) {</span>
+<span class="nc" id="L132">					count1++;</span>
+<span class="nc" id="L133">					round.createNewTile(new Point(17 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count1
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L137" title="All 2 branches missed.">					if (count == 27) {</span>
+<span class="nc" id="L138">						count1 = 3;</span>
+					}
+<span class="nc bnc" id="L140" title="All 4 branches missed.">				} else if (count &gt;= 28 &amp;&amp; count &lt; 43) {</span>
+<span class="nc" id="L141">					count2--;</span>
+<span class="nc" id="L142">					round.createNewTile(new Point(count2</span>
+							* Constants.TILE_BORDER + Constants.HALF_TILE, 12
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L146" title="All 2 branches missed.">					if (count == 42) {</span>
+<span class="nc" id="L147">						count2 = 16;</span>
+					}
+<span class="nc bnc" id="L149" title="All 4 branches missed.">				} else if (count &gt;= 43 &amp;&amp; count &lt; 52) {</span>
+<span class="nc" id="L150">					count3--;</span>
+<span class="nc" id="L151">					round.createNewTile(new Point(2 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count3
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L155" title="All 2 branches missed.">					if (count == 51) {</span>
+<span class="nc" id="L156">						count3 = 11;</span>
+					}
+<span class="nc bnc" id="L158" title="All 2 branches missed.">				} else if (count == 52) {</span>
+<span class="nc" id="L159">					count = 2;</span>
+<span class="nc" id="L160">					round.setBorder(0);</span>
+				}
+			}
+<span class="nc bnc" id="L163" title="All 4 branches missed.">			if (round.getBorder() == 3 &amp;&amp; frames % 10 == 0) {</span>
+<span class="nc" id="L164">				int id = 30000 + count;</span>
+<span class="nc" id="L165">				count++;</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">				if (count &lt; 17) {</span>
+<span class="nc" id="L167">					round.createNewTile(new Point(count * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, 3 * Constants.TILE_BORDER
+							+ Constants.HALF_TILE), id, &quot;stone&quot;, false, false,
+							true);
+<span class="nc bnc" id="L171" title="All 4 branches missed.">				} else if (count &gt;= 17 &amp;&amp; count &lt; 25) {</span>
+<span class="nc" id="L172">					count1++;</span>
+<span class="nc" id="L173">					round.createNewTile(new Point(16 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count1
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L177" title="All 2 branches missed.">					if (count == 24) {</span>
+<span class="nc" id="L178">						count1 = 4;</span>
+					}
+<span class="nc bnc" id="L180" title="All 4 branches missed.">				} else if (count &gt;= 25 &amp;&amp; count &lt; 38) {</span>
+<span class="nc" id="L181">					count2--;</span>
+<span class="nc" id="L182">					round.createNewTile(new Point(count2</span>
+							* Constants.TILE_BORDER + Constants.HALF_TILE, 11
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L186" title="All 2 branches missed.">					if (count == 37) {</span>
+<span class="nc" id="L187">						count2 = 15;</span>
+					}
+<span class="nc bnc" id="L189" title="All 4 branches missed.">				} else if (count &gt;= 38 &amp;&amp; count &lt; 45) {</span>
+<span class="nc" id="L190">					count3--;</span>
+<span class="nc" id="L191">					round.createNewTile(new Point(3 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count3
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L195" title="All 2 branches missed.">					if (count == 44) {</span>
+<span class="nc" id="L196">						count3 = 10;</span>
+					}
+<span class="nc bnc" id="L198" title="All 2 branches missed.">				} else if (count == 45) {</span>
+<span class="nc" id="L199">					count = 3;</span>
+<span class="nc" id="L200">					round.setBorder(0);</span>
+				}
+			}
+<span class="nc bnc" id="L203" title="All 4 branches missed.">			if (round.getBorder() == 4 &amp;&amp; frames % 10 == 0) {</span>
+<span class="nc" id="L204">				int id = 40000 + count;</span>
+<span class="nc" id="L205">				count++;</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">				if (count &lt; 16) {</span>
+<span class="nc" id="L207">					round.createNewTile(new Point(count * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, 4 * Constants.TILE_BORDER
+							+ Constants.HALF_TILE), id, &quot;stone&quot;, false, false,
+							true);
+<span class="nc bnc" id="L211" title="All 4 branches missed.">				} else if (count &gt;= 16 &amp;&amp; count &lt; 22) {</span>
+<span class="nc" id="L212">					count1++;</span>
+<span class="nc" id="L213">					round.createNewTile(new Point(15 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count1
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L217" title="All 2 branches missed.">					if (count == 21) {</span>
+<span class="nc" id="L218">						count1 = 1;</span>
+					}
+<span class="nc bnc" id="L220" title="All 4 branches missed.">				} else if (count &gt;= 22 &amp;&amp; count &lt; 33) {</span>
+<span class="nc" id="L221">					count2--;</span>
+<span class="nc" id="L222">					round.createNewTile(new Point(count2</span>
+							* Constants.TILE_BORDER + Constants.HALF_TILE,
+							10 * 40 + Constants.HALF_TILE), id, &quot;stone&quot;, false,
+							false, true);
+<span class="nc bnc" id="L226" title="All 2 branches missed.">					if (count == 32) {</span>
+<span class="nc" id="L227">						count2 = 18;</span>
+					}
+<span class="nc bnc" id="L229" title="All 4 branches missed.">				} else if (count &gt;= 33 &amp;&amp; count &lt; 38) {</span>
+<span class="nc" id="L230">					count3--;</span>
+<span class="nc" id="L231">					round.createNewTile(new Point(4 * Constants.TILE_BORDER</span>
+							+ Constants.HALF_TILE, count3
+							* Constants.TILE_BORDER + Constants.HALF_TILE), id,
+							&quot;stone&quot;, false, false, true);
+<span class="nc bnc" id="L235" title="All 2 branches missed.">					if (count == 37) {</span>
+<span class="nc" id="L236">						count = 13;</span>
+					}
+<span class="nc bnc" id="L238" title="All 2 branches missed.">				} else if (count == 38) {</span>
+<span class="nc" id="L239">					count = 1;</span>
+<span class="nc" id="L240">					round.setBorder(0);</span>
+				}
+			}
+<span class="nc bnc" id="L243" title="All 2 branches missed.">			if (frames == 62) {</span>
+<span class="nc" id="L244">				frames = 0;</span>
+			}
+		}
+<span class="nc" id="L247">	}</span>
+
+	/**
+	 * The time will get 16 ms smaller every GameLoop update.
+	 */
+	public void tick() {
+<span class="nc" id="L253">		this.time -= 16;</span>
+<span class="nc" id="L254">	}</span>
+
+	/**
+	 * One Second has left, sending a message with the new time to the clients
+	 */
+	private void oneSecondLeft() {
+<span class="nc" id="L260">		time -= 8;</span>
+<span class="nc" id="L261">		RoundTimeOneSecondLeftMsg msg = new RoundTimeOneSecondLeftMsg(time);</span>
+<span class="nc" id="L262">		round.getSession().broadcastMsg(msg);</span>
+<span class="nc" id="L263">	}</span>
+
+	/**
+	 * Two minutes till the round ends, sending a message to all clients and
+	 * make the first border with tiles.
+	 */
+	public void twoMinutesToEnd() {
+<span class="nc" id="L270">		round.setBorder(1);</span>
+<span class="nc" id="L271">	}</span>
+
+	/**
+	 * One and a half minute till the round ends, sending a message to all
+	 * clients and make the second border with tiles.
+	 */
+	private void oneAndAHalfMinuteToEnd() {
+<span class="nc" id="L278">		round.setBorder(2);</span>
+<span class="nc" id="L279">	}</span>
+
+	/**
+	 * One minute till the round ends, sending a message to all clients and make
+	 * the third border with tiles.
+	 */
+	public void oneMinuteToEnd() {
+<span class="nc" id="L286">		round.setBorder(3);</span>
+
+<span class="nc" id="L288">	}</span>
+
+	/**
+	 * A half minute till the round ends, sending a message to all clients and
+	 * make the fourth border with tiles.
+	 */
+	private void halfMinuteToEnd() {
+<span class="nc" id="L295">		round.setBorder(4);</span>
+<span class="nc" id="L296">	}</span>
+
+	/**
+	 * The time of the round has expired, sending a message to all clients and
+	 * &quot;doPostRoundProcessing()&quot;
+	 */
+	public void timeExpired() {
+<span class="nc" id="L303">		RoundTimeOverMsg msg = new RoundTimeOverMsg();</span>
+<span class="nc" id="L304">		round.getSession().broadcastMsg(msg);</span>
+<span class="nc" id="L305">		stopped = true;</span>
+<span class="nc" id="L306">		round.doPostRoundProcessing();</span>
+<span class="nc" id="L307">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

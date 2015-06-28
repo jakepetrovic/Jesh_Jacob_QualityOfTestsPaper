@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GameModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">common</a> &gt; <span class="el_source">GameModel.java</span></div><h1>GameModel.java</h1><pre class="source lang-java linenums">package common;
+
+import java.awt.Point;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Vector;
+import java.util.Map.Entry;
+
+import messages.round.RoundTimeOverMsg;
+
+import org.apache.log4j.Logger;
+
+/**
+ * @author Steffen, Andi, Bj�rn
+ * 
+ */
+<span class="fc" id="L17">public class GameModel {</span>
+
+<span class="fc" id="L19">	protected HashMap&lt;Integer, GameObject&gt; gameObjects = new HashMap&lt;Integer, GameObject&gt;();</span>
+<span class="fc" id="L20">	protected Vector&lt;Player&gt; players = new Vector&lt;Player&gt;();</span>
+<span class="fc" id="L21">	protected long time = Constants.time;</span>
+
+<span class="fc" id="L23">	protected static final Logger logger = Logger.getLogger(GameModel.class);</span>
+
+	public void update() {
+<span class="nc" id="L26">		synchronized (gameObjects) {</span>
+<span class="nc" id="L27">			HashMap&lt;Integer, GameObject&gt; inactiveObjects = new HashMap&lt;Integer, GameObject&gt;();</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">			for (Entry&lt;Integer, GameObject&gt; entry : gameObjects.entrySet()) {</span>
+<span class="nc" id="L30">				GameObject gameObject = entry.getValue();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">				if (gameObject.isActive()) {</span>
+<span class="nc" id="L32">					gameObject.updateWithCollisionCheck(gameObjects.values());</span>
+				}
+<span class="nc" id="L34">			}</span>
+
+<span class="nc bnc" id="L36" title="All 2 branches missed.">			for (Entry&lt;Integer, GameObject&gt; entry : gameObjects.entrySet()) {</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">				if (!entry.getValue().isActive()) {</span>
+<span class="nc" id="L38">					inactiveObjects.put(entry.getKey(), entry.getValue());</span>
+				}
+<span class="nc" id="L40">			}</span>
+
+			// remove inactive objects now
+<span class="nc bnc" id="L43" title="All 2 branches missed.">			for (Entry&lt;Integer, GameObject&gt; entry : inactiveObjects.entrySet()) {</span>
+<span class="nc" id="L44">				logger.info(&quot;Removing game object: &quot; + entry.getKey());</span>
+<span class="nc" id="L45">				gameObjects.remove(entry.getKey());</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">				if (Player.class.isInstance(entry.getValue())) {</span>
+<span class="nc" id="L47">					logger.info(&quot;Removing player: &quot; + entry.getKey());</span>
+<span class="nc" id="L48">					players.remove(entry.getValue());</span>
+				}
+<span class="nc" id="L50">			}</span>
+<span class="nc" id="L51">			inactiveObjects = null;</span>
+<span class="nc" id="L52">		}</span>
+<span class="nc" id="L53">	}</span>
+
+	/**
+	 * Checks if the game is over and if yes returns the gameObjectId of the
+	 * winner.
+	 * 
+	 * @return -1 if game still running, 0 in case of a tie, gameObjectId of the
+	 *         winner in all other cases
+	 */
+	public int checkForWinner() {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">		if (players.size() &lt; 2) {</span>
+<span class="nc" id="L64">			int winnerId = 0; // 0 means it's a tie (all remaining players got</span>
+			// killed by the same bomb)
+<span class="nc bnc" id="L66" title="All 2 branches missed.">			if (players.size() == 1) { // only the winner is left</span>
+<span class="nc" id="L67">				winnerId = players.get(0).getId();</span>
+			}
+<span class="nc" id="L69">			return winnerId;</span>
+		} else { // game still running
+<span class="nc" id="L71">			return -1;</span>
+		}
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.Vector#add(java.lang.Object)
+	 */
+
+	public void addGameObject(int id, GameObject newGameObject) {
+<span class="nc" id="L82">		synchronized (gameObjects) {</span>
+<span class="nc" id="L83">			this.gameObjects.put(id, newGameObject);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">			if (Player.class.isInstance(newGameObject)) {</span>
+<span class="nc" id="L85">				players.add((Player) newGameObject);</span>
+			}
+<span class="nc" id="L87">		}</span>
+<span class="nc" id="L88">	}</span>
+
+	/**
+	 * @param id
+	 * @return
+	 */
+	public GameObject getGameObjectById(int id) {
+<span class="nc" id="L95">		return gameObjects.get(id);</span>
+	}
+
+	public void snapToGrid(Bomb bomb) {
+<span class="nc" id="L99">		Point pos = bomb.getPosition();</span>
+<span class="nc" id="L100">		int newX = (pos.x / 40) * 40 + 20;</span>
+<span class="nc" id="L101">		int newY = (pos.y / 40) * 40 + 20;</span>
+<span class="nc" id="L102">		pos.setLocation(newX, newY);</span>
+<span class="nc" id="L103">	}</span>
+
+	/**
+	 * Returns the actual time of this GameModel.
+	 * 
+	 * @return long - actual time
+	 */
+	public long getTime() {
+<span class="nc" id="L111">		return time;</span>
+	}
+
+	/**
+	 * Sets the time of this GameModel.
+	 * 
+	 * @param time
+	 *            the time, which should be set
+	 */
+	public void setTime(long time) {
+<span class="nc" id="L121">		this.time = time;</span>
+<span class="nc" id="L122">	}</span>
+
+	public Vector&lt;Player&gt; getPlayers() {
+<span class="nc" id="L125">		return players;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

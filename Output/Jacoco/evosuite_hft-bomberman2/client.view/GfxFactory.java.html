@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GfxFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">GfxFactory.java</span></div><h1>GfxFactory.java</h1><pre class="source lang-java linenums">package client.view;
+
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+
+import org.apache.log4j.Logger;
+
+import common.ResourceService;
+ /**
+  * 
+  * @author Andreas Glauner
+  * @autor Adam Kozielski
+  *
+  */
+public class GfxFactory {
+
+	private HashMap&lt;Integer, Image&gt; wallImageCache;
+	
+	private HashMap&lt;String, Image&gt; tileImageCache;
+	
+	private HashMap&lt;String, Image&gt; powerUpImageCache;
+	
+	private HashMap&lt;String, Image&gt; o;
+	
+	private HashMap&lt;Integer, Image&gt;[] playerImageCache;
+	
+	private HashMap&lt;Integer, Image&gt;[] bombImageCache;
+	
+	private HashMap&lt;Integer, Integer&gt; idTranslator;
+	
+	private HashMap&lt;Integer, Image&gt;[] explosionImageCache;
+	
+	private ExplosionGfxFactory explosionGfxFactory;
+	
+<span class="nc" id="L39">	private int currentId = 1;</span>
+	
+<span class="nc" id="L41">	private static String basePath = &quot;/gfx&quot;;</span>
+	
+<span class="nc" id="L43">	private String tileSet = &quot;ice&quot;;</span>
+	
+<span class="nc" id="L45">	private Logger logger = Logger.getLogger(GfxFactory.class);</span>
+	
+	
+<span class="nc" id="L48">	public GfxFactory() {</span>
+<span class="nc" id="L49">		wallImageCache = new HashMap&lt;Integer, Image&gt;();</span>
+<span class="nc" id="L50">		playerImageCache = new HashMap[9];</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		for(int i = 0; i &lt; 9; i++){</span>
+<span class="nc" id="L52">			playerImageCache[i] = new HashMap&lt;Integer, Image&gt;();</span>
+		}
+<span class="nc" id="L54">		bombImageCache = new HashMap[9];</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">		for(int i = 0; i &lt; 9; i++){</span>
+<span class="nc" id="L56">			bombImageCache[i] = new HashMap&lt;Integer, Image&gt;();</span>
+		}
+<span class="nc" id="L58">		explosionImageCache = new HashMap[9];</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		for(int i = 0; i &lt; 9; i++){</span>
+<span class="nc" id="L60">			explosionImageCache[i] = new HashMap&lt;Integer, Image&gt;();</span>
+		}
+<span class="nc" id="L62">		idTranslator = new HashMap&lt;Integer, Integer&gt;();</span>
+<span class="nc" id="L63">		explosionGfxFactory = new ExplosionGfxFactory();</span>
+<span class="nc" id="L64">		tileImageCache = new HashMap&lt;String, Image&gt;();</span>
+<span class="nc" id="L65">		powerUpImageCache = new HashMap &lt;String, Image&gt;();</span>
+<span class="nc" id="L66">	}</span>
+
+	/**
+	 * @param id The player id.
+	 * @param state
+	 * @return
+	 */
+	public Image getPlayerImage(int id, int state) {
+<span class="nc" id="L74">		int key = translateId(id);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">		if(!playerImageCache[key].containsKey(state)){</span>
+<span class="nc" id="L76">			playerImageCache[key].put(state, loadImage((basePath + &quot;/player/&quot; + key + &quot;/&quot; + state + &quot;.png&quot;)));</span>
+		}
+<span class="nc" id="L78">		return playerImageCache[key].get(state);</span>
+	}
+
+	public Image getTileImage(String type) {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		if(!tileImageCache.keySet().contains(type)){</span>
+<span class="nc" id="L83">			String path = &quot;/gfx/map/&quot; + tileSet + &quot;/&quot; + type + &quot;.png&quot;;</span>
+<span class="nc" id="L84">			tileImageCache.put(type, loadImage(path));</span>
+		}
+<span class="nc" id="L86"> 		return tileImageCache.get(type);</span>
+		
+	}
+	
+	private int translateId(int id){
+<span class="nc bnc" id="L91" title="All 2 branches missed.">		if(!idTranslator.containsKey(id)){</span>
+<span class="nc" id="L92">			idTranslator.put(id, currentId);</span>
+<span class="nc" id="L93">			currentId = currentId + 1;</span>
+		}
+<span class="nc" id="L95">		return idTranslator.get(id);</span>
+	}
+
+	private Image loadImage(String path) {
+<span class="nc" id="L99">		return ResourceService.getImage(path);</span>
+	}
+
+	/**
+	 * @param id The planter's id.
+	 * @return
+	 */
+	public Image getBombImage(int id) {
+<span class="nc" id="L107">		int key = translateId(id);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">		if(!bombImageCache[key].containsKey(0)){</span>
+<span class="nc" id="L109">			bombImageCache[key].put(0, loadImage(basePath + &quot;/player/&quot; + key + &quot;/bomb.png&quot;));</span>
+		}
+<span class="nc" id="L111">		return bombImageCache[key].get(0);</span>
+	}
+	
+	/**
+	 * @param id The planter's id.
+	 * @return
+	 */
+	public Image getBombImage(int id, int state) {
+<span class="nc" id="L119">		int key = translateId(id);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		if(!bombImageCache[key].containsKey(state)){</span>
+			
+<span class="nc" id="L122">			bombImageCache[key].put(state, loadImage(basePath + &quot;/player/&quot; + key + &quot;/bomb&quot; + state + &quot;.png&quot;));</span>
+		}
+<span class="nc" id="L124">		return bombImageCache[key].get(state);</span>
+	}
+	
+
+	public Image getExplosionImage(int diameter, int id) {
+<span class="nc" id="L129">		int key = translateId(id);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		if(!explosionImageCache[key].containsKey(diameter)){</span>
+<span class="nc" id="L131">			explosionImageCache[key].put(diameter, explosionGfxFactory.getExplosionImage(diameter, translateId(id)));</span>
+		}
+<span class="nc" id="L133">		return explosionImageCache[key].get(diameter);</span>
+	}
+
+	public void setTileSet(String tileSet) {
+<span class="nc" id="L137">		this.tileSet = tileSet;</span>
+<span class="nc" id="L138">	}</span>
+
+	public Image getWallImage(int state) {
+<span class="nc bnc" id="L141" title="All 2 branches missed.">		if(!wallImageCache.containsKey(state)){</span>
+<span class="nc" id="L142">			wallImageCache.put(state, loadImage(basePath + &quot;/map/&quot; + tileSet + &quot;/wall&quot; + state + &quot;.png&quot;));</span>
+		}
+<span class="nc" id="L144">		return wallImageCache.get(state);</span>
+	}
+	/**
+	 * Power up image loading
+	 * @param type A String value describing the type of powerUp
+	 *  *
+	 */
+	public Image getPowerUpImage(String type) {
+<span class="nc bnc" id="L152" title="All 2 branches missed.">		if (!powerUpImageCache.keySet().contains(type)) {</span>
+<span class="nc" id="L153">			String path = &quot;/gfx/powerUps/&quot; + type + &quot;.png&quot;;</span>
+<span class="nc" id="L154">			powerUpImageCache.put(type, loadImage(path));</span>
+		}
+<span class="nc" id="L156">		return powerUpImageCache.get(type);</span>
+
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

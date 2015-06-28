@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SqlServerDialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.dialect</a> &gt; <span class="el_source">SqlServerDialect.java</span></div><h1>SqlServerDialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.dialect;
+
+import java.util.regex.Pattern;
+
+import org.databene.commons.StringUtil;
+import org.databene.jdbacl.DatabaseDialect;
+
+/**
+ * Implements generic database concepts for SQL Server.&lt;br/&gt;&lt;br/&gt;
+ * Created: 09.04.2010 07:29:32
+ * @since 0.6.0
+ * @author Volker Bergmann
+ */
+public class SqlServerDialect extends DatabaseDialect {
+
+	private static final String DATE_PATTERN = &quot;''yyyy-MM-dd'T'HH:mm:ss''&quot;;
+	private static final String TIME_PATTERN = &quot;''HH:mm:ss''&quot;;
+
+<span class="fc" id="L40">	Pattern randomNamePattern = Pattern.compile(&quot;SYS_\\w*&quot;);</span>
+
+	public SqlServerDialect() {
+<span class="fc" id="L43">	    super(&quot;sql_server&quot;, false, false, DATE_PATTERN, TIME_PATTERN);</span>
+<span class="fc" id="L44">    }</span>
+
+	@Override
+    public boolean isDefaultCatalog(String catalog, String user) {
+<span class="fc" id="L48">	    return true;</span>
+    }
+
+	@Override
+    public boolean isDefaultSchema(String schema, String user) {
+<span class="fc" id="L53">	    return &quot;DBO&quot;.equalsIgnoreCase(schema);</span>
+    }
+
+	@Override
+	public boolean isDeterministicPKName(String pkName) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">		return !randomNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicUKName(String pkName) {
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">		return !randomNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicFKName(String pkName) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">		return !randomNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicIndexName(String indexName) {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">		return !randomNamePattern.matcher(indexName).matches();</span>
+	}
+
+	public String renderCase(String columnName, String elseExpression, String... whenThenExpressionPairs) {
+<span class="fc" id="L77">		StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L78">		builder.append(columnName).append(&quot; = &quot;); // applying column name</span>
+<span class="fc" id="L79">		builder.append(&quot;CASE&quot;);</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">		for (int i = 0; i &lt; whenThenExpressionPairs.length; i += 2) {</span>
+<span class="fc" id="L81">			builder.append(&quot; WHEN &quot;).append(whenThenExpressionPairs[i]); // when part</span>
+<span class="fc" id="L82">			builder.append(&quot; THEN &quot;).append(whenThenExpressionPairs[i + 1]); // then part</span>
+		}
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		if (!StringUtil.isEmpty(elseExpression))</span>
+<span class="fc" id="L85">			builder.append(&quot; ELSE &quot;).append(elseExpression); // else part</span>
+<span class="fc" id="L86">		builder.append(&quot; END&quot;); // closing the case</span>
+<span class="fc" id="L87">		return builder.toString();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

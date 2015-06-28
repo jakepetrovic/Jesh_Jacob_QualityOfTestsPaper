@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PlayerStateMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.round</a> &gt; <span class="el_source">PlayerStateMsg.java</span></div><h1>PlayerStateMsg.java</h1><pre class="source lang-java linenums">package messages.round;
+
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import common.Player;
+
+import server.ClientInfo;
+import server.ServerGameLoop;
+import server.ServerGameRound;
+import client.ClientGameRound;
+
+/**
+ * Message, which sends the position and direction of a player
+ * 
+ * @author Bjoern, Steffen, Andi
+ */
+public class PlayerStateMsg implements RoundClientMsg, RoundServerMsg {
+
+<span class="fc" id="L21">	private static Logger logger = Logger.getLogger(PlayerStateMsg.class);</span>
+
+	/**
+	 * position
+	 */
+	private int[] position;
+
+	/**
+	 * direction
+	 */
+	private int[] moveVector;
+
+	/**
+	 * playerID
+	 */
+	private int gameObjectId;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param positio
+	 * @param moveVector
+	 */
+	public PlayerStateMsg(int gameObjectId, Point position, Point moveVector) {
+<span class="fc" id="L45">		super();</span>
+<span class="fc" id="L46">		this.gameObjectId = gameObjectId;</span>
+<span class="fc" id="L47">		this.moveVector = new int[] { moveVector.x, moveVector.y };</span>
+<span class="fc" id="L48">		this.position = new int[] { position.x, position.y };</span>
+<span class="fc" id="L49">	}</span>
+
+	private Point getPosition() {
+<span class="nc" id="L52">		return new Point(position[0], position[1]);</span>
+	}
+
+	private Point getMoveVector() {
+<span class="nc" id="L56">		return new Point(moveVector[0], moveVector[1]);</span>
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ServerGameRound round, ClientInfo sender) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (round != null) {</span>
+			// forward message to all clients
+<span class="nc" id="L66">			round.getSession().multicastMsg(this, sender);</span>
+
+			// update corresponding player on server
+<span class="nc" id="L69">			Player player = (Player) round.getGameObject(gameObjectId);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">			if (player != null) {</span>
+<span class="nc" id="L71">				player.updateMovement(getPosition());</span>
+			}
+		}
+<span class="nc" id="L74">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ClientGameRound round) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">		if (round != null) {</span>
+<span class="nc" id="L82">			Player player = (Player) round.getGameObjectById(gameObjectId);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">			if (player != null) {</span>
+<span class="nc" id="L84">				player.updateMovement(getPosition());</span>
+			}
+		}
+<span class="nc" id="L87">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JDBCDriverInfo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl</a> &gt; <span class="el_source">JDBCDriverInfo.java</span></div><h1>JDBCDriverInfo.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2009-2010 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.Collection;
+import java.util.HashMap;
+
+import org.databene.commons.ArrayBuilder;
+import org.databene.commons.ConfigurationError;
+import org.databene.commons.xml.XMLUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * Represents a JDBC driver and related information.&lt;br/&gt;
+ * &lt;br/&gt;
+ * Created at 23.02.2009 09:40:31
+ * @since 0.4.8
+ * @author Volker Bergmann
+ */
+
+public class JDBCDriverInfo implements Serializable {
+
+    private static final long serialVersionUID = 190436633421519236L;
+
+	private static final String DB_DEFINITION_FILE = &quot;org/databene/jdbacl/jdbc-driver-info.xml&quot;;
+
+    private String id;
+	private String name;
+	private String dbSystem;
+	private String downloadUrl;
+	private String driverClass;
+	private String defaultDatabase;
+	private String defaultSchema;
+	private String defaultPort;
+	private String urlPattern;
+	private String defaultUser;
+	private String[] jars;
+	
+	public JDBCDriverInfo() {
+<span class="nc" id="L68">		this(null, null, null);</span>
+<span class="nc" id="L69">	}</span>
+	
+<span class="nc" id="L71">	public JDBCDriverInfo(String id, String name, String dbSystem) {</span>
+<span class="nc" id="L72">		this.id = id;</span>
+<span class="nc" id="L73">		this.name = name;</span>
+<span class="nc" id="L74">		this.dbSystem = dbSystem;</span>
+<span class="nc" id="L75">	}</span>
+	
+	public String getId() {
+<span class="nc" id="L78">    	return id;</span>
+    }
+
+	public void setId(String id) {
+<span class="nc" id="L82">    	this.id = normalizeNull(id);</span>
+<span class="nc" id="L83">    }</span>
+
+	public String getName() {
+<span class="nc" id="L86">    	return name;</span>
+    }
+
+	public void setName(String name) {
+<span class="nc" id="L90">    	this.name = normalizeNull(name);</span>
+<span class="nc" id="L91">    }</span>
+
+	public String getDbSystem() {
+<span class="nc" id="L94">    	return dbSystem;</span>
+    }
+	
+	public void setDbSystem(String dbSystem) {
+<span class="nc" id="L98">    	this.dbSystem = normalizeNull(dbSystem);</span>
+<span class="nc" id="L99">    }</span>
+
+	public String getUrlPattern() {
+<span class="nc" id="L102">    	return urlPattern;</span>
+    }
+
+	public void setUrlPattern(String urlPattern) {
+<span class="nc" id="L106">    	this.urlPattern = normalizeNotNull(urlPattern);</span>
+<span class="nc" id="L107">    }</span>
+
+	public String getDownloadUrl() {
+<span class="nc" id="L110">    	return downloadUrl;</span>
+    }
+
+	public void setDownloadUrl(String downloadUrl) {
+<span class="nc" id="L114">    	this.downloadUrl = normalizeNull(downloadUrl);</span>
+<span class="nc" id="L115">    }</span>
+
+	public String getDefaultPort() {
+<span class="nc" id="L118">    	return defaultPort;</span>
+    }
+
+	public void setDefaultPort(String defaultPort) {
+<span class="nc" id="L122">    	this.defaultPort = normalizeNull(defaultPort);</span>
+<span class="nc" id="L123">    }</span>
+
+	public String[] getJars() {
+<span class="nc" id="L126">    	return jars;</span>
+    }
+
+	public void setJars(String[] jars) {
+<span class="nc" id="L130">    	this.jars = jars;</span>
+<span class="nc" id="L131">    }</span>
+
+	public String getDriverClass() {
+<span class="nc" id="L134">		return driverClass;</span>
+	}
+	
+	public void setDriverClass(String driverClass) {
+<span class="nc" id="L138">    	this.driverClass = normalizeNull(driverClass);</span>
+<span class="nc" id="L139">    }</span>
+
+	public String getDefaultUser() {
+<span class="nc" id="L142">		return defaultUser;</span>
+	}
+	
+	public void setDefaultUser(String defaultUser) {
+<span class="nc" id="L146">    	this.defaultUser = normalizeNull(defaultUser);</span>
+<span class="nc" id="L147">    }</span>
+
+	public String getDefaultDatabase() {
+<span class="nc" id="L150">    	return defaultDatabase;</span>
+    }
+
+	public void setDefaultDatabase(String defaultDatabase) {
+<span class="nc" id="L154">    	this.defaultDatabase = normalizeNull(defaultDatabase);</span>
+<span class="nc" id="L155">    }</span>
+
+	public String getDefaultSchema() {
+<span class="nc" id="L158">    	return defaultSchema;</span>
+    }
+
+	public void setDefaultSchema(String defaultSchema) {
+<span class="nc" id="L162">    	this.defaultSchema = defaultSchema;</span>
+<span class="nc" id="L163">    }</span>
+
+	public String getUrlPrefix() {
+<span class="nc" id="L166">		int check = urlPattern.indexOf('{');</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		return (check &gt; 0 ? urlPattern.substring(0, check) : urlPattern);</span>
+    }
+
+	// operations ------------------------------------------------------------------------------------------------------
+	
+	public String jdbcURL(String host, String port, String database) {
+<span class="nc" id="L173">		return MessageFormat.format(urlPattern, host, port, database);</span>
+	}
+	
+	// private helpers -------------------------------------------------------------------------------------------------
+	
+	private String normalizeNull(String value) {
+<span class="nc bnc" id="L179" title="All 4 branches missed.">		return (value == null || value.trim().length() == 0 ? null : value.trim());</span>
+	}
+	
+	private String normalizeNotNull(String value) {
+<span class="nc bnc" id="L183" title="All 4 branches missed.">		return (value == null || value.trim().length() == 0 ? &quot;&quot; : value.trim());</span>
+	}
+	
+<span class="fc" id="L186">	private static HashMap&lt;String, JDBCDriverInfo&gt; instances = new HashMap&lt;String, JDBCDriverInfo&gt;();</span>
+	
+	static {
+		try {
+<span class="nc" id="L190">	        Document document = XMLUtil.parse(DB_DEFINITION_FILE);</span>
+<span class="nc" id="L191">	        Element root = document.getDocumentElement();</span>
+<span class="nc" id="L192">	        Element[] driverElements = XMLUtil.getChildElements(root);</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">	        for (Element driverElement : driverElements) {</span>
+<span class="nc" id="L194">	        	JDBCDriverInfo driver = new JDBCDriverInfo();</span>
+<span class="nc" id="L195">	        	driver.setId(driverElement.getAttribute(&quot;id&quot;));</span>
+<span class="nc" id="L196">	        	driver.setName(driverElement.getAttribute(&quot;name&quot;));</span>
+<span class="nc" id="L197">	        	driver.setDbSystem(driverElement.getAttribute(&quot;system&quot;));</span>
+<span class="nc" id="L198">	        	driver.setDriverClass(driverElement.getAttribute(&quot;class&quot;));</span>
+<span class="nc" id="L199">	        	driver.setDefaultPort(driverElement.getAttribute(&quot;port&quot;));</span>
+<span class="nc" id="L200">	        	driver.setDefaultDatabase(driverElement.getAttribute(&quot;defaultDatabase&quot;));</span>
+<span class="nc" id="L201">	        	driver.setDefaultSchema(driverElement.getAttribute(&quot;defaultSchema&quot;));</span>
+<span class="nc" id="L202">	        	driver.setUrlPattern(driverElement.getAttribute(&quot;url&quot;));</span>
+<span class="nc" id="L203">	        	driver.setDownloadUrl(driverElement.getAttribute(&quot;info&quot;));</span>
+<span class="nc" id="L204">	        	driver.setDefaultUser(driverElement.getAttribute(&quot;user&quot;));</span>
+<span class="nc" id="L205">	        	ArrayBuilder&lt;String&gt; builder = new ArrayBuilder&lt;String&gt;(String.class);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">	        	for (Element dependencyElement : XMLUtil.getChildElements(driverElement, false, &quot;dependency&quot;))</span>
+<span class="nc" id="L207">	        		builder.add(dependencyElement.getAttribute(&quot;lib&quot;));</span>
+<span class="nc" id="L208">	        	driver.setJars(builder.toArray());</span>
+<span class="nc" id="L209">	        	instances.put(driver.getId(), driver);</span>
+	        }
+<span class="nc" id="L211">        } catch (IOException e) {</span>
+<span class="nc" id="L212">        	throw new ConfigurationError(&quot;Unable to read database info file&quot;, e);</span>
+<span class="nc" id="L213">        }</span>
+	}
+	
+	@Override
+	public String toString() {
+<span class="nc" id="L218">	    return dbSystem;</span>
+	}
+	
+	@Override
+    public int hashCode() {
+<span class="nc" id="L223">	    return id.hashCode();</span>
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">	    if (this == obj)</span>
+<span class="nc" id="L229">		    return true;</span>
+<span class="nc bnc" id="L230" title="All 4 branches missed.">	    if (obj == null || getClass() != obj.getClass())</span>
+<span class="nc" id="L231">		    return false;</span>
+<span class="nc" id="L232">	    JDBCDriverInfo that = (JDBCDriverInfo) obj;</span>
+<span class="nc" id="L233">	    return this.id.equals(that.id);</span>
+    }
+
+<span class="nc" id="L236">	public static final JDBCDriverInfo HSQL = getInstance(&quot;HSQL&quot;);</span>
+<span class="nc" id="L237">	public static final JDBCDriverInfo FIREBIRD = getInstance(&quot;FIREBIRD&quot;);</span>
+<span class="nc" id="L238">	public static final JDBCDriverInfo ORACLE = getInstance(&quot;ORACLE&quot;);</span>
+	
+	public static Collection&lt;JDBCDriverInfo&gt; getInstances() {
+<span class="nc" id="L241">		return instances.values();</span>
+	}
+	
+	public static JDBCDriverInfo getInstance(String name) {
+<span class="nc" id="L245">		return instances.get(name);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

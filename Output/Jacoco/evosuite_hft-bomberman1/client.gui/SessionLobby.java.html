@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SessionLobby.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">SessionLobby.java</span></div><h1>SessionLobby.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import org.apache.log4j.Logger;
+
+import client.BomberClient;
+import client.ClientGameSession;
+import client.ClientPlayer;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+
+public class SessionLobby extends MyPanel implements MouseListener, ActionListener {
+
+	/**
+	 * @param args
+	 */
+
+<span class="nc" id="L31">	private static final Logger logger = Logger.getLogger(HighscoreLobby.class);</span>
+
+	private Chat chat;
+
+<span class="nc" id="L35">	public MyButton leave = new MyButton(&quot;back&quot;);</span>
+
+<span class="nc" id="L37">	JLabel jLabelMap = new JLabel(&quot;Map:&quot;);</span>
+<span class="nc" id="L38">	JLabel jLabelPlayers = new JLabel(&quot;Players:&quot;);</span>
+<span class="nc" id="L39">	JLabel jLabelPlayersShow = new JLabel(&quot;-0/-0&quot;);</span>
+<span class="nc" id="L40">	JLabel jLabelRounds = new JLabel(&quot;Rounds:&quot;);</span>
+<span class="nc" id="L41">	JLabel jLabelRoundsShow = new JLabel(&quot;-1&quot;);</span>
+
+<span class="nc" id="L43">	ImageCache preview = new ImageCache(null, 120, 180, 120, 90);</span>
+
+	public SessionLobby() {
+<span class="nc" id="L46">		super();</span>
+
+<span class="nc" id="L48">		leave.addActionListener(this);</span>
+<span class="nc" id="L49">		setLayout(null);</span>
+<span class="nc" id="L50">		setBounds(0, 0, 800, 600);</span>
+<span class="nc" id="L51">		chat = new Chat(400, 600);</span>
+<span class="nc" id="L52">		chat.setType(chat.SESSION);</span>
+<span class="nc" id="L53">		chat.setBounds(400, 0, 400, 600);</span>
+<span class="nc" id="L54">		leave.setBounds(20, 20, 150, 25);</span>
+<span class="nc" id="L55">		add(chat);</span>
+<span class="nc" id="L56">		add(leave);</span>
+<span class="nc" id="L57">		this.setTitel(&quot;Wait for game to start!&quot;);</span>
+
+<span class="nc" id="L59">		jLabelMap.setBounds(20, 170, 50, 25);</span>
+<span class="nc" id="L60">		jLabelPlayers.setBounds(20, 310, 50, 25);</span>
+<span class="nc" id="L61">		jLabelPlayersShow.setBounds(120, 310, 150, 150);</span>
+<span class="nc" id="L62">		jLabelRounds.setBounds(20, 440, 50, 25);</span>
+<span class="nc" id="L63">		jLabelRoundsShow.setBounds(120, 440, 50, 25);</span>
+
+<span class="nc" id="L65">		updateInfo();</span>
+
+<span class="nc" id="L67">		addLabel(jLabelMap);</span>
+<span class="nc" id="L68">		addLabel(jLabelPlayers);</span>
+<span class="nc" id="L69">		addLabel(jLabelPlayersShow);</span>
+<span class="nc" id="L70">		addLabel(jLabelRounds);</span>
+<span class="nc" id="L71">		addLabel(jLabelRoundsShow);</span>
+<span class="nc" id="L72">		addImage(preview);</span>
+<span class="nc" id="L73">	}</span>
+
+	public void updateInfo() {
+<span class="nc" id="L76">		ClientGameSession session = BomberClient.getInstance()</span>
+				.getCurrentSession();
+<span class="nc bnc" id="L78" title="All 2 branches missed.">		if (session != null) {</span>
+<span class="nc" id="L79">			Map&lt;Integer, String&gt; playerNames = session.getPlayerNames();</span>
+<span class="nc" id="L80">			jLabelRoundsShow.setText(&quot;&quot; + session.getTotalRounds());</span>
+<span class="nc" id="L81">			Iterator&lt;Entry&lt;Integer, String&gt;&gt;iter = playerNames.entrySet().iterator();</span>
+<span class="nc" id="L82">			String playerString = new String(&quot;&lt;HTML&gt;&quot;);</span>
+<span class="nc" id="L83">			int num = 0;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">			while (iter.hasNext()) {</span>
+<span class="nc" id="L85">				Entry&lt;Integer, String&gt; entry = (Entry&lt;Integer, String&gt;) iter.next();</span>
+<span class="nc" id="L86">				playerString += entry.getValue() + &quot;&lt;br&gt;&quot;;</span>
+<span class="nc" id="L87">				num++;</span>
+<span class="nc" id="L88">			}</span>
+
+<span class="nc" id="L90">			jLabelPlayersShow.setText(playerString + &quot;&lt;br&gt;&quot; + num + &quot; / &quot;</span>
+					+ session.getTotalNrOfPlayers() + &quot;&quot;);
+<span class="nc" id="L92">			repaint();</span>
+		}
+		// show preview
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		if (session != null) {</span>
+<span class="nc" id="L96">			preview.setImg(session.getPreview().getImage());</span>
+		}
+<span class="nc" id="L98">	}</span>
+
+	/**
+	 * @return
+	 */
+	public Chat getChat() {
+<span class="nc" id="L104">		return chat;</span>
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		if (e.getSource().equals(leave)) {</span>
+<span class="nc" id="L110">			logger.info(&quot;leave --&gt; SessionLobby&quot;);</span>
+			
+<span class="nc" id="L112">			BomberClient.getInstance().leaveSession();</span>
+<span class="nc" id="L113">			StartFrame.getInstance().showGlobalLobby();</span>
+		}
+<span class="nc" id="L115">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+<span class="nc" id="L120">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+<span class="nc" id="L125">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+<span class="nc" id="L130">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+<span class="nc" id="L135">	}</span>
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		if (e.getSource().equals(leave)) {</span>
+<span class="nc" id="L140">			logger.info(&quot;leave --&gt; SessionLobby&quot;);</span>
+			
+<span class="nc" id="L142">			BomberClient.getInstance().leaveSession();</span>
+<span class="nc" id="L143">			StartFrame.getInstance().showGlobalLobby();</span>
+		}
+		
+<span class="nc" id="L146">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

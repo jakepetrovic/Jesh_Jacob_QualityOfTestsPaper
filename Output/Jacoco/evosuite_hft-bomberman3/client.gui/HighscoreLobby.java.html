@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HighscoreLobby.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">HighscoreLobby.java</span></div><h1>HighscoreLobby.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
+import org.apache.log4j.Logger;
+
+import messages.session.SessionStateMsg;
+import client.BomberClient;
+import client.ClientGameLoop;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+
+/**
+ * @author tobias
+ * lobby between two rounds
+ *
+ */
+public class HighscoreLobby extends MyPanel implements MouseListener,ActionListener {
+
+<span class="nc" id="L29">	String[] columnNames = { &quot;Player&quot;, &quot;Score&quot; };</span>
+	String[][] rowData;
+	String[][] rowSessionData;
+<span class="nc" id="L32">	private static final Logger logger = Logger.getLogger(HighscoreLobby.class);</span>
+
+<span class="nc" id="L34">	public MyButton jButtonNextRound = new MyButton(&quot;Ready for next round&quot;);</span>
+	Chat chat;
+	JLabel sessionScoreLabel;
+	JTable jTableScore;
+	JTable jTableSessionScore;
+<span class="nc" id="L39">	public MyButton jButtonLogout = new MyButton(&quot;quit session&quot;);</span>
+<span class="nc" id="L40">	public JLabel jLabelGameOver = new JLabel(&quot;Game over!&quot;);</span>
+
+<span class="nc" id="L42">	public HighscoreLobby() {</span>
+<span class="nc" id="L43">		this.setSize(800, 600);</span>
+<span class="nc" id="L44">		setLayout(null);</span>
+<span class="nc" id="L45">		jButtonNextRound.setBounds(20, 240, 250, 25);</span>
+<span class="nc" id="L46">		jButtonNextRound.addActionListener(this);</span>
+<span class="nc" id="L47">		jButtonLogout.setBounds(10, 570, 150, 25);</span>
+<span class="nc" id="L48">		jLabelGameOver.setBounds(120, 480, 150, 80); //380</span>
+<span class="nc" id="L49">		jLabelGameOver.setVisible(false);</span>
+<span class="nc" id="L50">		jButtonLogout.addActionListener(this);</span>
+<span class="nc" id="L51">		add(jButtonNextRound);</span>
+<span class="nc" id="L52">		add(jButtonLogout);</span>
+<span class="nc" id="L53">		chat = new Chat(400, 600);</span>
+
+<span class="nc" id="L55">		chat.setType(chat.SESSION);</span>
+<span class="nc" id="L56">		chat.setBounds(400, 0, 400, 600);</span>
+<span class="nc" id="L57">		add(chat);</span>
+<span class="nc" id="L58">		setFont(new Font(&quot;Arial&quot;, 0, 24));</span>
+<span class="nc" id="L59">		addLabel(jLabelGameOver);</span>
+<span class="nc" id="L60">	}</span>
+
+	private void setTable(String[][] nameForScore) {
+		
+<span class="nc" id="L64">		logger.info(&quot;setting table&quot;);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">		if(jTableScore!=null){</span>
+<span class="nc" id="L66">			remove(jTableScore);</span>
+		}
+<span class="nc" id="L68">		rowData = nameForScore;</span>
+<span class="nc" id="L69">		JLabel label2 = new JLabel(&quot;Round Scores&quot;);</span>
+<span class="nc" id="L70">		label2.setBounds(20, 10, 300, 30);</span>
+<span class="nc" id="L71">		jTableScore = new JTable(rowData, columnNames);</span>
+<span class="nc" id="L72">		jTableScore.setBounds(20, 50, 300, 150);</span>
+<span class="nc" id="L73">		add(jTableScore);</span>
+<span class="nc" id="L74">		addLabel(label2);</span>
+<span class="nc" id="L75">		this.repaint();</span>
+<span class="nc" id="L76">	}</span>
+
+	public void setTable(HashMap&lt;String, Integer&gt; rndscore){
+<span class="nc" id="L79">		outScores(rndscore);</span>
+<span class="nc" id="L80">		String[][] rndscorearr = new String[rndscore.size()][2];</span>
+<span class="nc" id="L81">		int index = 0;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		for (String key : rndscore.keySet()) {</span>
+<span class="nc" id="L83">			rndscorearr[index][0]=key;</span>
+<span class="nc" id="L84">			rndscorearr[index][1]=rndscore.get(key).toString();</span>
+<span class="nc" id="L85">			index++;</span>
+			
+<span class="nc" id="L87">		}</span>
+<span class="nc" id="L88">		setTable(rndscorearr);</span>
+<span class="nc" id="L89">	}</span>
+	
+	private void outScores(HashMap&lt;String, Integer&gt; rndscore) {
+<span class="nc" id="L92">		logger.info(&quot;GAMEROUND SCORES&quot;);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		for (Entry entry : rndscore.entrySet()) {</span>
+<span class="nc" id="L94">			logger.info(entry.getKey() + &quot; &quot; + entry.getValue());</span>
+<span class="nc" id="L95">		}</span>
+<span class="nc" id="L96">		logger.info(&quot;/GAMEROUND SCORES&quot;);</span>
+<span class="nc" id="L97">	}</span>
+	public void setSessionTable(HashMap&lt;String, Integer&gt; rndscore){
+<span class="nc" id="L99">		outScores(rndscore);</span>
+<span class="nc" id="L100">		String[][] rndscorearr = new String[rndscore.size()][2];</span>
+<span class="nc" id="L101">		int index = 0;</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">		for (String key : rndscore.keySet()) {</span>
+<span class="nc" id="L103">			rndscorearr[index][0]=key;</span>
+<span class="nc" id="L104">			rndscorearr[index][1]=rndscore.get(key).toString();</span>
+<span class="nc" id="L105">			index++;</span>
+			
+<span class="nc" id="L107">		}</span>
+<span class="nc" id="L108">		setSessionTable(rndscorearr);</span>
+<span class="nc" id="L109">	}</span>
+	
+
+	private void setSessionTable(String[][] nameForScore) {
+<span class="nc" id="L113">		removeSessionTable();</span>
+<span class="nc" id="L114">		logger.info(&quot;setting session table&quot;);</span>
+<span class="nc" id="L115">		logger.info(&quot;setting sessionscore&quot;);</span>
+<span class="nc" id="L116">		sessionScoreLabel = new JLabel(&quot;Session Scores&quot;);</span>
+<span class="nc" id="L117">		sessionScoreLabel.setBounds(20, 210, 300, 20);</span>
+<span class="nc" id="L118">		rowSessionData = nameForScore;</span>
+<span class="nc" id="L119">		jTableSessionScore = new JTable(rowSessionData, columnNames);</span>
+<span class="nc" id="L120">		jTableSessionScore.setBounds(20, 240, 300, 150);</span>
+<span class="nc" id="L121">		add(jTableSessionScore);</span>
+<span class="nc" id="L122">		addLabel(sessionScoreLabel);</span>
+<span class="nc" id="L123">		this.repaint();</span>
+<span class="nc" id="L124">	}</span>
+
+	public void removeSessionTable() {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">		if (jTableSessionScore != null) {</span>
+<span class="nc" id="L128">			remove(jTableSessionScore);</span>
+<span class="nc" id="L129">			this.repaint();</span>
+		}
+<span class="nc bnc" id="L131" title="All 2 branches missed.">		if(sessionScoreLabel!=null){</span>
+<span class="nc" id="L132">			remove(sessionScoreLabel);</span>
+<span class="nc" id="L133">			this.repaint();</span>
+			
+		}
+<span class="nc" id="L136">	}</span>
+
+	public void removeTable() {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		if (jTableScore != null) {</span>
+<span class="nc" id="L140">			remove(jTableScore);</span>
+		}
+<span class="nc" id="L142">	}</span>
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		if (e.getSource().equals(jButtonNextRound)) {</span>
+<span class="nc" id="L147">			BomberClient.getInstance().sendMsg(</span>
+					new SessionStateMsg(SessionStateMsg.READY_FOR_NEXT_ROUND));
+<span class="nc" id="L149">			jButtonNextRound.setVisible(false);</span>
+<span class="nc" id="L150">			repaint();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		} else if (e.getSource().equals(jButtonLogout)) {</span>
+			// TODO Quit Session
+<span class="nc" id="L153">			logger.info(&quot;leave --&gt; HighScoreLobby&quot;);</span>
+<span class="nc" id="L154">			BomberClient.getInstance().leaveSession();</span>
+<span class="nc" id="L155">			StartFrame.getInstance().changePanel(</span>
+					StartFrame.getInstance().jPanelGlobalLobby);
+		}
+<span class="nc" id="L158">	}</span>
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+<span class="nc" id="L163">	}</span>
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+<span class="nc" id="L168">	}</span>
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+<span class="nc" id="L172">	}</span>
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+<span class="nc" id="L177">	}</span>
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">		if (e.getSource().equals(jButtonNextRound)) {</span>
+<span class="nc" id="L182">			BomberClient.getInstance().sendMsg(</span>
+					new SessionStateMsg(SessionStateMsg.READY_FOR_NEXT_ROUND));
+<span class="nc" id="L184">			jButtonNextRound.setVisible(false);</span>
+<span class="nc" id="L185">			repaint();</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">		} else if (e.getSource().equals(jButtonLogout)) {</span>
+			// TODO Quit Session
+<span class="nc" id="L188">			logger.info(&quot;leave --&gt; HighScoreLobby&quot;);</span>
+<span class="nc" id="L189">			BomberClient.getInstance().leaveSession();</span>
+<span class="nc" id="L190">			StartFrame.getInstance().changePanel(</span>
+					StartFrame.getInstance().jPanelGlobalLobby);
+		}
+		
+<span class="nc" id="L194">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

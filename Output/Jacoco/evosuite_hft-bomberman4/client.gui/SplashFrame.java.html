@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SplashFrame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">SplashFrame.java</span></div><h1>SplashFrame.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import common.ResourceService;
+
+public class SplashFrame extends JFrame{
+	
+	
+	
+<span class="nc" id="L16">	public SplashFrame(){</span>
+<span class="nc" id="L17">		setUndecorated(true);</span>
+<span class="nc" id="L18">		setResizable(false);</span>
+<span class="nc" id="L19">		setSize(500, 375);</span>
+<span class="nc" id="L20">		Dimension d = Toolkit.getDefaultToolkit().getScreenSize(); </span>
+<span class="nc" id="L21">		setLocation( (d.width - getSize().width ) / 2, (d.height - getSize().height) / 2 ); </span>
+<span class="nc" id="L22">		setTitle(&quot;Fubarman&quot;);</span>
+<span class="nc" id="L23">		ImageIcon label = ResourceService.getImageIcon(&quot;/images/logo.png&quot;);</span>
+<span class="nc" id="L24">		JLabel picture = new JLabel(label);</span>
+<span class="nc" id="L25">		picture.setBounds(0,0,500,375);</span>
+<span class="nc" id="L26">		setLayout(null);</span>
+<span class="nc" id="L27">		add(picture);</span>
+<span class="nc" id="L28">	}</span>
+
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

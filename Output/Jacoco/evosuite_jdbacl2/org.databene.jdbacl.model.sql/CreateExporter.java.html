@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CreateExporter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model.sql</a> &gt; <span class="el_source">CreateExporter.java</span></div><h1>CreateExporter.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model.sql;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Set;
+
+import org.databene.commons.IOUtil;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.DatabaseDialect;
+import org.databene.jdbacl.DatabaseDialectManager;
+import org.databene.jdbacl.NameSpec;
+import org.databene.jdbacl.SQLUtil;
+import org.databene.jdbacl.model.DBMetaDataExporter;
+import org.databene.jdbacl.model.DBForeignKeyConstraint;
+import org.databene.jdbacl.model.DBSequence;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.Database;
+
+/**
+ * Exports database meta data to a DDL file with CREATE TABLE commands.&lt;br/&gt;&lt;br/&gt;
+ * Created: 11.08.2010 16:23:59
+ * @since 0.6.10
+ * @author Volker Bergmann
+ */
+public class CreateExporter implements DBMetaDataExporter {
+
+	File file;
+	
+<span class="fc" id="L53">	public CreateExporter(File file) {</span>
+<span class="fc" id="L54">		this.file = file;</span>
+<span class="fc" id="L55">	}</span>
+
+    public void export(Database database) throws IOException {
+<span class="nc" id="L58">	    PrintWriter out = null;</span>
+	    try {
+<span class="nc" id="L60">	    	out = new PrintWriter(new FileWriter(file));</span>
+<span class="nc" id="L61">	    	exportSequences(database, out);</span>
+<span class="nc" id="L62">	    	exportTables(database, out);</span>
+<span class="nc" id="L63">	    	exportForeignKeys(database, out);</span>
+	    } finally {
+<span class="nc" id="L65">	    	IOUtil.close(out);</span>
+<span class="nc" id="L66">	    }</span>
+<span class="nc" id="L67">    }</span>
+
+	private void exportSequences(Database database, PrintWriter out) {
+<span class="nc" id="L70">		List&lt;DBSequence&gt; sequences = database.getSequences(true);</span>
+<span class="nc" id="L71">		DatabaseDialect dialect = DatabaseDialectManager.getDialectForProduct(</span>
+			database.getDatabaseProductName(), database.getDatabaseProductVersion());
+<span class="nc bnc" id="L73" title="All 2 branches missed.">		for (DBSequence sequence : sequences) {</span>
+<span class="nc" id="L74">			out.print(dialect.renderCreateSequence(sequence));</span>
+<span class="nc" id="L75">			out.println(';');</span>
+<span class="nc" id="L76">			out.println();</span>
+<span class="nc" id="L77">		}</span>
+<span class="nc" id="L78">	}</span>
+
+	private void exportTables(Database database, PrintWriter out) {
+<span class="nc" id="L81">		List&lt;DBTable&gt; tables = DBUtil.dependencyOrderedTables(database);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		for (DBTable table : tables) {</span>
+<span class="nc" id="L83">			SQLUtil.renderCreateTable(table, false, NameSpec.IF_REPRODUCIBLE, out);</span>
+<span class="nc" id="L84">			out.println(';');</span>
+<span class="nc" id="L85">			out.println();</span>
+<span class="nc" id="L86">		}</span>
+<span class="nc" id="L87">    }</span>
+
+	private void exportForeignKeys(Database database, PrintWriter out) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		for (DBTable table : database.getTables())</span>
+<span class="nc" id="L91">			exportForeignKeys(table, out);</span>
+<span class="nc" id="L92">    }</span>
+
+	private void exportForeignKeys(DBTable table, PrintWriter out) {
+<span class="nc" id="L95">		Set&lt;DBForeignKeyConstraint&gt; fks = table.getForeignKeyConstraints();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		for (DBForeignKeyConstraint fk : fks) {</span>
+<span class="nc" id="L97">			SQLUtil.renderAddForeignKey(fk, NameSpec.IF_REPRODUCIBLE, out);</span>
+<span class="nc" id="L98">			out.println(';');</span>
+<span class="nc" id="L99">			out.println();</span>
+<span class="nc" id="L100">		}</span>
+<span class="nc" id="L101">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

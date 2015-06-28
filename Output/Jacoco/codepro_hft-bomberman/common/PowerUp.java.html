@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PowerUp.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">common</a> &gt; <span class="el_source">PowerUp.java</span></div><h1>PowerUp.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package common;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.Collection;
+
+import org.apache.log4j.Logger;
+import org.postgresql.core.VisibleBufferedInputStream;
+
+/**
+ * @author Bj�rn
+ * 
+ */
+public class PowerUp extends GameObject {
+	/**
+	 * @param position
+	 *            the position of the powerup
+	 */
+	public PowerUp(Point position) {
+<span class="fc" id="L23">		super(position);</span>
+<span class="fc" id="L24">		setActive();</span>
+<span class="fc" id="L25">		setInvisible();</span>
+<span class="fc" id="L26">	}</span>
+
+	/**
+	 * Type of this powerup.
+	 */
+	private String type;
+
+	@Override
+	public boolean collide(GameObject gameobject) {
+<span class="nc" id="L35">		return false;</span>
+	}
+
+	@Override
+	public Rectangle getCollisionRectangle() {
+<span class="nc" id="L40">		return new Rectangle(getPosition().x - Constants.HALF_POWERUP,</span>
+				getPosition().y - Constants.HALF_POWERUP,
+				Constants.POWERUP_BORDER, Constants.POWERUP_BORDER);
+	}
+
+	@Override
+	public boolean isAccessable() {
+<span class="nc" id="L47">		return true;</span>
+	}
+
+	@Override
+	public void update() {
+
+<span class="nc" id="L53">	}</span>
+
+	@Override
+	public void updateWithCollisionCheck(Collection&lt;GameObject&gt; gameObjects) {
+
+<span class="nc" id="L58">	}</span>
+
+	/**
+	 * Returns the type of this powerup as a string.
+	 * 
+	 * @return String type of powerup
+	 */
+	public String getType() {
+<span class="nc" id="L66">		return type;</span>
+	}
+
+	/**
+	 * Sets the type of this powerup.
+	 * 
+	 * @param type,
+	 *            which should be set
+	 */
+	public void setType(String type) {
+<span class="nc" id="L76">		this.type = type;</span>
+<span class="nc" id="L77">	}</span>
+
+	/**
+	 * 
+	 */
+	public void die() {
+<span class="nc" id="L83">		active = true;</span>
+<span class="nc" id="L84">	}</span>
+
+	/**
+	 * Returns the type of this powerup as a integer.
+	 * 
+	 * @return int type of powerup
+	 * 
+	 * missing powerup-types: bomb, poison, timer
+	 */
+	public int getTypeInt() {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">		if (getType().equals(&quot;speed&quot;))</span>
+<span class="nc" id="L95">			return 1;</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		else if (getType().equals(&quot;bowl&quot;))</span>
+<span class="nc" id="L97">			return 2;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		else if (getType().equals(&quot;longray&quot;))</span>
+<span class="nc" id="L99">			return 3;</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		else if (getType().equals(&quot;multibomb&quot;))</span>
+<span class="nc" id="L101">			return 4;</span>
+		else
+<span class="nc" id="L103">			return 0;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

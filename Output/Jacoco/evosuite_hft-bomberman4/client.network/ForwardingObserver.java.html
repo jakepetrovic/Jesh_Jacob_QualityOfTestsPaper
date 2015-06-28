@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ForwardingObserver.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.network</a> &gt; <span class="el_source">ForwardingObserver.java</span></div><h1>ForwardingObserver.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client.network;
+
+import java.awt.Point;
+import java.util.Observable;
+import java.util.Observer;
+
+import messages.Message;
+import messages.round.BombMoveMsg;
+import messages.round.PlayerStateMsg;
+import messages.round.NewBombMsg;
+import client.BomberClient;
+import client.ClientBomb;
+import client.ClientGameRound;
+
+import common.Bomb;
+import common.Player;
+import common.Actor;
+
+/**
+ * An observer implementation that will process notifications and forward them
+ * to the server.
+ * 
+ * @author Andi, Bj�rn
+ * 
+ */
+public class ForwardingObserver implements Observer {
+
+	/**
+	 * The BomberClient that this ForwardingObserver belongs to.
+	 */
+	private BomberClient bomberClient;
+	private final ClientGameRound clientGameRound;
+
+	/**
+	 * Creates a new ForwardingOberver belonging to the given BomberClient.
+	 * 
+	 * @param bomberClient
+	 *            The BomberClient that will be used to send the messages.
+	 * @param clientGameRound
+	 */
+	public ForwardingObserver(BomberClient bomberClient,
+			ClientGameRound clientGameRound) {
+<span class="nc" id="L46">		super();</span>
+<span class="nc" id="L47">		this.bomberClient = bomberClient;</span>
+<span class="nc" id="L48">		this.clientGameRound = clientGameRound;</span>
+<span class="nc" id="L49">	}</span>
+
+	/**
+	 * Called when an observable has requested an update. Possible update types
+	 * are:
+	 * &lt;ul&gt;
+	 * &lt;li&gt;Bomb has been planted
+	 * &lt;li&gt;Bomb has changed his position
+	 * &lt;li&gt;Player has changed his position
+	 * &lt;/ul&gt;
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (Player.class.isInstance(o)) {</span>
+<span class="nc" id="L65">			Player p = (Player) o;</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">			if (ClientBomb.class.isInstance(arg)) {</span>
+<span class="nc" id="L67">				ClientBomb newBomb = (ClientBomb) arg;</span>
+<span class="nc" id="L68">				clientGameRound.snapToGrid(newBomb);</span>
+<span class="nc" id="L69">				clientGameRound.addBomb(newBomb.getId(), newBomb);</span>
+<span class="nc" id="L70">				NewBombMsg msg = new NewBombMsg(newBomb.getPosition(), newBomb</span>
+						.getId(), p.getId(), newBomb.getDiameter(), newBomb
+						.isStopped());
+<span class="nc" id="L73">				bomberClient.sendMsg(msg);</span>
+<span class="nc" id="L74">			} else {</span>
+<span class="nc" id="L75">				PlayerStateMsg msg = new PlayerStateMsg(p.getId(), p</span>
+						.getPosition(), p.getMoveVector());
+<span class="nc" id="L77">				bomberClient.sendMsg(msg);</span>
+			}
+		}
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		if (ClientBomb.class.isInstance(o)) {</span>
+<span class="nc" id="L81">			ClientBomb bomb = (ClientBomb) o;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">			if (!bomb.isRemote()) {</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">				if (bomb.getMoveVector().x == 0 &amp;&amp; bomb.getMoveVector().y == 0) {</span>
+<span class="nc" id="L84">					bomb.setStopped(true);</span>
+				}
+<span class="nc" id="L86">				int[] position = new int[2];</span>
+<span class="nc" id="L87">				position[0] = bomb.getPosition().x;</span>
+<span class="nc" id="L88">				position[1] = bomb.getPosition().y;</span>
+<span class="nc" id="L89">				int[] moveVector = new int[2];</span>
+<span class="nc" id="L90">				moveVector[0] = bomb.getMoveVector().x;</span>
+<span class="nc" id="L91">				moveVector[1] = bomb.getMoveVector().y;</span>
+<span class="nc" id="L92">				BombMoveMsg msg = new BombMoveMsg(bomb.getId(), position,</span>
+						moveVector, bomb.isStopped());
+<span class="nc" id="L94">				bomberClient.sendMsg(msg);</span>
+			}
+		}
+<span class="nc" id="L97">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

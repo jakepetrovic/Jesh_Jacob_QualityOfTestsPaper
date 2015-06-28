@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JSecurityFilter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web.servlet</a> &gt; <span class="el_source">JSecurityFilter.java</span></div><h1>JSecurityFilter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web.servlet;
+
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.config.Configuration;
+import org.jsecurity.config.ConfigurationException;
+import org.jsecurity.mgt.SecurityManager;
+import org.jsecurity.util.ClassUtils;
+import org.jsecurity.util.LifecycleUtils;
+import static org.jsecurity.util.StringUtils.clean;
+import org.jsecurity.util.ThreadContext;
+import org.jsecurity.web.DefaultWebSecurityManager;
+import org.jsecurity.web.WebUtils;
+import org.jsecurity.web.config.IniWebConfiguration;
+import org.jsecurity.web.config.WebConfiguration;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.beans.PropertyDescriptor;
+import java.io.IOException;
+import java.net.InetAddress;
+
+/**
+ * Main ServletFilter that configures and enables all JSecurity functions within a web application.
+ *
+ * The following is a fully commented example that documents how to configure it:
+ *
+ * &lt;pre&gt;&amp;lt;filter&amp;gt;
+ * &amp;lt;filter-name&amp;gt;JSecurityFilter&amp;lt;/filter-name&amp;gt;
+ * &amp;lt;filter-class&amp;gt;org.jsecurity.web.servlet.JSecurityFilter&amp;lt;/filter-class&amp;gt;
+ * &amp;lt;init-param&amp;gt;&amp;lt;param-name&amp;gt;config&amp;lt;/param-name&amp;gt;&amp;lt;param-value&amp;gt;
+ *
+ * #NOTE:  This config looks pretty long - but its not - its only 5 lines of actual config.
+ * #       Everything else is just heavily commented to explain things in-depth. Feel free to delete any
+ * #       comments that you don't want to read from your own configuration ;)
+ * #
+ * # Any commented values below are JSecurity's defaults.  If you want to change any values, you only
+ * # need to uncomment the lines you want to change.
+ *
+ * [main]
+ * # The 'main' section defines JSecurity-wide configuration.
+ * #
+ * # Session Mode: By default, JSecurity's Session infrastructure in a web environment will use the
+ * # Servlet container's HttpSession.  However, if you need to share session state across client types
+ * # (e.g. Web MVC plus Java Web Start or Flash), or are doing distributed/shared Sessions for
+ * # Single Sign On, HttpSessions aren't good enough.  You'll need to use JSecurity's more powerful
+ * # (and client-agnostic) session management.  You can enable this by uncommenting the following line
+ * # and changing 'http' to 'jsecurity'
+ * #
+ * #securityManager = {@link org.jsecurity.web.DefaultWebSecurityManager org.jsecurity.web.DefaultWebSecurityManager}
+ * #securityManager.{@link org.jsecurity.web.DefaultWebSecurityManager#setSessionMode(String) sessionMode} = http
+ *
+ * [filters]
+ * # This section defines the 'pool' of all Filters available to the url path definitions in the [urls] section below.
+ * #
+ * # The following commented values are already provided by JSecurity by default and are immediately usable
+ * # in the [urls] definitions below.  If you like, you may override any values by uncommenting only the lines
+ * # you need to change.
+ * #
+ * # Each Filter is configured based on its functionality and/or protocol.  You should read each
+ * # Filter's JavaDoc to fully understand what each does and how it works as well as how it would
+ * # affect the user experience.
+ * #
+ * # Form-based Authentication filter:
+ * #&lt;a name=&quot;authc&quot;&gt;&lt;/a&gt;authc = {@link org.jsecurity.web.filter.authc.FormAuthenticationFilter}
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setLoginUrl(String) url} = /login.jsp
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setUsernameParam(String) usernameParam} = username
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setPasswordParam(String) passwordParam} = password
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setRememberMeParam(String) rememberMeParam} = rememberMe
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setSuccessUrl(String) successUrl}  = /login.jsp
+ * #authc.{@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#setFailureKeyAttribute(String) failureKeyAttribute} = {@link org.jsecurity.web.filter.authc.FormAuthenticationFilter#DEFAULT_ERROR_KEY_ATTRIBUTE_NAME}
+ * #
+ * # Http BASIC Authentication filter:
+ * #&lt;a name=&quot;authcBasic&quot;&gt;&lt;/a&gt;authcBasic = {@link org.jsecurity.web.filter.authc.BasicHttpAuthenticationFilter}
+ * #authcBasic.{@link org.jsecurity.web.filter.authc.BasicHttpAuthenticationFilter#setApplicationName(String) applicationName} = application
+ * #
+ * # Roles filter: requires the requesting user to have one or more roles for the request to continue.
+ * # If they do not have the specified roles, they are redirected to the specified URL.
+ * #&lt;a name=&quot;roles&quot;&gt;&lt;/a&gt;roles = {@link org.jsecurity.web.filter.authz.RolesAuthorizationFilter}
+ * #roles.{@link org.jsecurity.web.filter.authz.RolesAuthorizationFilter#setUnauthorizedUrl(String) url} =
+ * # (note the above url is null by default, which will cause an HTTP 403 (Access Denied) response instead
+ * # of redirecting to a page.  If you want to show a 'nice page' instead, you should specify that url.
+ * #
+ * # Permissions filter: requires the requesting user to have one or more permissions for the request to
+ * # continue, and if they do not, redirects them to the specified URL.
+ * #&lt;a name=&quot;perms&quot;&gt;&lt;/a&gt;perms = {@link org.jsecurity.web.filter.authz.PermissionsAuthorizationFilter}
+ * #perms.{@link org.jsecurity.web.filter.authz.PermissionsAuthorizationFilter#setUnauthorizedUrl(String) url} =
+ * # (note the above url is null by default, which will cause an HTTP 403 (Access Denied) response instead
+ * # of redirecting to a page.  If you want to show a 'nice page' instead, you should specify that url.  Many
+ * # applications like to use the same url specified in roles.url above.
+ * #
+ * #
+ * # Define your own filters here.  To properly handle url path matching (see the [urls] section below), your
+ * # filter should extend the {@link org.jsecurity.web.filter.PathMatchingFilter PathMatchingFilter} abstract class.
+ *
+ * [urls]
+ * # This section defines url path mappings.  Each mapping entry must be on a single line and conform to the
+ * # following representation:
+ * #
+ * # ant_path_expression = path_specific_filter_chain_definition
+ * #
+ * # For any request that matches a specified path, the corresponding value defines a comma-delimited chain of
+ * # filters to execute for that request.
+ * #
+ * # This is incredibly powerful in that you can define arbitrary filter chains for any given request pattern
+ * # to greatly customize the security experience.
+ * #
+ * # The path_specific_filter_chain_definition must match the following format:
+ * #
+ * # filter1[optional_config1], filter2[optional_config2], ..., filterN[optional_configN]
+ * #
+ * # where 'filterN' is the name of an filter defined above in the [filters] section and
+ * # '[optional_configN]' is an optional bracketed string that has meaning for that particular filter for
+ * # _that particular path_.  If the filter does not need specific config for that url path, you may
+ * # discard the brackets - that is, filterN[] just becomes filterN.
+ * #
+ * # And because filter tokens define chains, order matters!  Define the tokens for each path pattern
+ * # in the order you want them to filter (comma-delimited).
+ * #
+ * # Finally, each filter is free to handle the response however it wants if its necessary
+ * # conditions are not met (redirect, HTTP error code, direct rendering, etc).  Otherwise, it is expected to allow
+ * # the request to continue through the chain on to the final destination view.
+ * #
+ * # Examples:
+ * #
+ * # To illustrate chain configuration, look at the /account/** mapping below.  This says
+ * # &amp;quot;apply the above 'authcBasic' filter to any request matching the '/account/**' pattern&amp;quot;.  Since the
+ * # 'authcBasic' filter does not need any path-specific config, it doesn't have any config brackets [].
+ * #
+ * # The /remoting/** definition on the other hand uses the 'roles' and 'perms' filters which do use
+ * # bracket notation.  That definition says:
+ * #
+ * # &amp;quot;To access /remoting/** urls, ensure that the user is first authenticated ('authcBasic'), then ensure that user
+ * # has the 'b2bClient' role, and then finally ensure that they have the 'remote:invoke:lan,wan' permission.&amp;quot;
+ * #
+ * # (Note that because elements within brackets [ ] are comma-delimited themselves, we needed to escape the permission
+ * # actions of 'lan,wan' with quotes.  If we didn't do that, the permission filter would interpret
+ * # the text between the brackets as two permissions: 'remote:invoke:lan' and 'wan' instead of the
+ * # single desired 'remote:invoke:lan,wan' token.  So, you can use quotes wherever you need to escape internal
+ * # commas.)
+ *
+ * /account/** = &lt;a href=&quot;#authcBasic&quot;&gt;authcBasic&lt;/a&gt;
+ * /remoting/** = &lt;a href=&quot;#authcBasic&quot;&gt;authcBasic&lt;/a&gt;, &lt;a href=&quot;#roles&quot;&gt;roles&lt;/a&gt;[b2bClient], &lt;a href=&quot;#perms&quot;&gt;perms&lt;/a&gt;[remote:invoke:&quot;lan,wan&quot;]
+ *
+ * &amp;lt;/param-value&amp;gt;&amp;lt;/init-param&amp;gt;
+ * &amp;lt;/filter&amp;gt;
+ *
+ *
+ * &amp;lt;filter-mapping&amp;gt;
+ * &amp;lt;filter-name&amp;gt;JSecurityFilter&amp;lt;/filter-name&amp;gt;
+ * &amp;lt;url-pattern&amp;gt;/*&amp;lt;/url-pattern&amp;gt;
+ * &amp;lt;/filter-mapping&amp;gt;&lt;/pre&gt;
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.1
+ */
+public class JSecurityFilter extends OncePerRequestFilter {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L182">    public static final String SECURITY_MANAGER_CONTEXT_KEY = SecurityManager.class.getName() + &quot;_SERVLET_CONTEXT_KEY&quot;;</span>
+
+    public static final String CONFIG_CLASS_NAME_INIT_PARAM_NAME = &quot;configClassName&quot;;
+    public static final String CONFIG_INIT_PARAM_NAME = &quot;config&quot;;
+    public static final String CONFIG_URL_INIT_PARAM_NAME = &quot;configUrl&quot;;
+
+<span class="fc" id="L188">    private static final Log log = LogFactory.getLog(JSecurityFilter.class);    </span>
+
+    protected String config;
+    protected String configUrl;
+    protected String configClassName;
+    protected WebConfiguration configuration;
+
+    // Reference to the security manager used by this filter
+    protected SecurityManager securityManager;
+
+<span class="fc" id="L198">    public JSecurityFilter() {</span>
+<span class="fc" id="L199">        this.configClassName = IniWebConfiguration.class.getName();</span>
+<span class="fc" id="L200">    }</span>
+
+    public WebConfiguration getConfiguration() {
+<span class="fc" id="L203">        return configuration;</span>
+    }
+
+    public void setConfiguration(WebConfiguration configuration) {
+<span class="fc" id="L207">        this.configuration = configuration;</span>
+<span class="fc" id="L208">    }</span>
+
+    public SecurityManager getSecurityManager() {
+<span class="nc" id="L211">        return securityManager;</span>
+    }
+
+    protected void setSecurityManager(SecurityManager sm) {
+<span class="nc" id="L215">        this.securityManager = sm;</span>
+<span class="nc" id="L216">    }</span>
+
+    protected void onFilterConfigSet() throws Exception {
+<span class="nc" id="L219">        applyInitParams();</span>
+<span class="nc" id="L220">        WebConfiguration config = configure();</span>
+<span class="nc" id="L221">        setConfiguration(config);</span>
+
+        // Retrieve and store a reference to the security manager
+<span class="nc" id="L224">        SecurityManager sm = ensureSecurityManager(config);</span>
+<span class="nc" id="L225">        setSecurityManager(sm);</span>
+<span class="nc" id="L226">    }</span>
+
+    /**
+     * Retrieves the security manager for the given configuration.
+     *
+     * @param config the configuration for this filter.
+     * @return the security manager that this filter should use.
+     */
+    protected SecurityManager ensureSecurityManager(Configuration config) {
+<span class="nc" id="L235">        SecurityManager sm = config.getSecurityManager();</span>
+
+        // If the config doesn't return a security manager, build one by default.
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        if (sm == null) {</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (log.isInfoEnabled()) {</span>
+<span class="nc" id="L240">                log.info(&quot;Configuration instance [&quot; + config + &quot;] did not provide a SecurityManager.  No config &quot; +</span>
+                        &quot;specified?  Defaulting to a &quot; + DefaultWebSecurityManager.class.getName() + &quot; instance...&quot;);
+            }
+<span class="nc" id="L243">            sm = new DefaultWebSecurityManager();</span>
+        }
+
+<span class="nc" id="L246">        return sm;</span>
+    }
+
+    protected void applyInitParams() {
+<span class="nc" id="L250">        FilterConfig config = getFilterConfig();</span>
+
+<span class="nc" id="L252">        String configCN = clean(config.getInitParameter(CONFIG_CLASS_NAME_INIT_PARAM_NAME));</span>
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (configCN != null) {</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">            if (ClassUtils.isAvailable(configCN)) {</span>
+<span class="nc" id="L255">                this.configClassName = configCN;</span>
+            } else {
+<span class="nc" id="L257">                String msg = &quot;configClassName fully qualified class name value [&quot; + configCN + &quot;] is not &quot; +</span>
+                        &quot;available in the classpath.  Please ensure you have typed it correctly and the &quot; +
+                        &quot;corresponding class or jar is in the classpath.&quot;;
+<span class="nc" id="L260">                throw new ConfigurationException(msg);</span>
+            }
+        }
+
+<span class="nc" id="L264">        this.config = clean(config.getInitParameter(CONFIG_INIT_PARAM_NAME));</span>
+<span class="nc" id="L265">        this.configUrl = clean(config.getInitParameter(CONFIG_URL_INIT_PARAM_NAME));</span>
+<span class="nc" id="L266">    }</span>
+
+    protected WebConfiguration configure() {
+<span class="nc" id="L269">        WebConfiguration conf = (WebConfiguration) ClassUtils.newInstance(this.configClassName);</span>
+<span class="nc" id="L270">        applyFilterConfig(conf);</span>
+<span class="nc" id="L271">        applyUrlConfig(conf);</span>
+<span class="nc" id="L272">        applyEmbeddedConfig(conf);</span>
+<span class="nc" id="L273">        LifecycleUtils.init(conf);</span>
+<span class="nc" id="L274">        return conf;</span>
+    }
+
+    protected void applyFilterConfig(WebConfiguration conf) {
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L279">            String msg = &quot;Attempting to inject the FilterConfig (using 'setFilterConfig' method) into the &quot; +</span>
+                    &quot;instantiated WebConfiguration for any wrapped Filter initialization...&quot;;
+<span class="nc" id="L281">            log.debug(msg);</span>
+        }
+        try {
+<span class="nc" id="L284">            PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(conf, &quot;filterConfig&quot;);</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">            if (pd != null) {</span>
+<span class="nc" id="L286">                PropertyUtils.setProperty(conf, &quot;filterConfig&quot;, getFilterConfig());</span>
+            }
+<span class="nc" id="L288">        } catch (Exception e) {</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L290">                log.debug(&quot;Error setting FilterConfig on WebConfiguration instance.&quot;, e);</span>
+            }
+<span class="nc" id="L292">        }</span>
+<span class="nc" id="L293">    }</span>
+
+    protected void applyEmbeddedConfig(WebConfiguration conf) {
+<span class="nc bnc" id="L296" title="All 2 branches missed.">        if (this.config != null) {</span>
+            try {
+<span class="nc" id="L298">                PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(conf, &quot;config&quot;);</span>
+
+<span class="nc bnc" id="L300" title="All 2 branches missed.">                if (pd != null) {</span>
+<span class="nc" id="L301">                    PropertyUtils.setProperty(conf, &quot;config&quot;, this.config);</span>
+                } else {
+<span class="nc" id="L303">                    String msg = &quot;The 'config' filter param was specified, but there is no &quot; +</span>
+                            &quot;'setConfig(String)' method on the Configuration instance [&quot; + conf + &quot;].  If you do &quot; +
+                            &quot;not require the 'config' filter param, please comment it out, or if you do need it, &quot; +
+                            &quot;please ensure your Configuration instance has a 'setConfig(String)' method to receive it.&quot;;
+<span class="nc" id="L307">                    throw new ConfigurationException(msg);</span>
+                }
+<span class="nc" id="L309">            } catch (Exception e) {</span>
+<span class="nc" id="L310">                String msg = &quot;There was an error setting the 'config' property of the Configuration object.&quot;;</span>
+<span class="nc" id="L311">                throw new ConfigurationException(msg, e);</span>
+<span class="nc" id="L312">            }</span>
+        }
+<span class="nc" id="L314">    }</span>
+
+    protected void applyUrlConfig(WebConfiguration conf) {
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        if (this.configUrl != null) {</span>
+            try {
+<span class="nc" id="L319">                PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(conf, &quot;configUrl&quot;);</span>
+
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                if (pd != null) {</span>
+<span class="nc" id="L322">                    PropertyUtils.setProperty(conf, &quot;configUrl&quot;, this.configUrl);</span>
+                } else {
+<span class="nc" id="L324">                    String msg = &quot;The 'configUrl' filter param was specified, but there is no &quot; +</span>
+                            &quot;'setConfigUrl(String)' method on the Configuration instance [&quot; + conf + &quot;].  If you do &quot; +
+                            &quot;not require the 'configUrl' filter param, please comment it out, or if you do need it, &quot; +
+                            &quot;please ensure your Configuration instance has a 'setConfigUrl(String)' method to receive it.&quot;;
+<span class="nc" id="L328">                    throw new ConfigurationException(msg);</span>
+                }
+<span class="nc" id="L330">            } catch (Exception e) {</span>
+<span class="nc" id="L331">                String msg = &quot;There was an error setting the 'configUrl' property of the Configuration object.&quot;;</span>
+<span class="nc" id="L332">                throw new ConfigurationException(msg, e);</span>
+<span class="nc" id="L333">            }</span>
+        }
+<span class="nc" id="L335">    }</span>
+
+    protected boolean isHttpSessions() {
+<span class="nc" id="L338">        SecurityManager secMgr = getSecurityManager();</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (secMgr instanceof DefaultWebSecurityManager) {</span>
+<span class="nc" id="L340">            return ((DefaultWebSecurityManager) secMgr).isHttpSessionMode();</span>
+        } else {
+<span class="nc" id="L342">            return true;</span>
+        }
+    }
+
+    protected InetAddress getInetAddress(ServletRequest request) {
+<span class="nc" id="L347">        return WebUtils.getInetAddress(request);</span>
+    }
+
+    protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse,
+                                    FilterChain origChain) throws ServletException, IOException {
+
+<span class="nc" id="L353">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span>
+<span class="nc" id="L354">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span>
+
+<span class="nc" id="L356">        ThreadContext.bind(getInetAddress(request));</span>
+
+<span class="nc" id="L358">        boolean httpSessions = isHttpSessions();</span>
+<span class="nc" id="L359">        request = new JSecurityHttpServletRequest(request, getServletContext(), httpSessions);</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">        if (!httpSessions) {</span>
+            //the JSecurityHttpServletResponse exists to support URL rewriting for session ids.  This is only needed if
+            //using JSecurity sessions (i.e. not simple HttpSession based sessions):
+<span class="nc" id="L363">            response = new JSecurityHttpServletResponse(response, getServletContext(), (JSecurityHttpServletRequest) request);</span>
+        }
+
+<span class="nc" id="L366">        WebUtils.bind(request);</span>
+<span class="nc" id="L367">        WebUtils.bind(response);</span>
+<span class="nc" id="L368">        ThreadContext.bind(getSecurityManager());</span>
+<span class="nc" id="L369">        ThreadContext.bind(getSecurityManager().getSubject());</span>
+
+<span class="nc" id="L371">        FilterChain chain = getConfiguration().getChain(request, response, origChain);</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (chain == null) {</span>
+<span class="nc" id="L373">            chain = origChain;</span>
+<span class="nc bnc" id="L374" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L375">                log.trace(&quot;No security filter chain configured for the current request.  Using default.&quot;);</span>
+            }
+        } else {
+<span class="nc bnc" id="L378" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L379">                log.trace(&quot; Using configured filter chain for the current request.&quot;);</span>
+            }
+        }
+
+        try {
+<span class="nc" id="L384">            chain.doFilter(request, response);</span>
+        } finally {
+<span class="nc" id="L386">            ThreadContext.unbindSubject();</span>
+<span class="nc" id="L387">            ThreadContext.unbindSecurityManager();</span>
+<span class="nc" id="L388">            WebUtils.unbindServletResponse();</span>
+<span class="nc" id="L389">            WebUtils.unbindServletRequest();</span>
+<span class="nc" id="L390">            ThreadContext.unbindInetAddress();</span>
+<span class="nc" id="L391">        }</span>
+<span class="nc" id="L392">    }</span>
+
+    public void destroy() {
+<span class="fc" id="L395">        LifecycleUtils.destroy(getConfiguration());</span>
+<span class="fc" id="L396">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

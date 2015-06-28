@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XMLModelExporter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model.xml</a> &gt; <span class="el_source">XMLModelExporter.java</span></div><h1>XMLModelExporter.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model.xml;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Set;
+
+import org.databene.commons.Encodings;
+import org.databene.commons.IOUtil;
+import org.databene.commons.xml.SimpleXMLWriter;
+import org.databene.jdbacl.SQLUtil;
+import org.databene.jdbacl.model.DBPackage;
+import org.databene.jdbacl.model.DBProcedure;
+import org.databene.jdbacl.model.DBTrigger;
+import org.databene.jdbacl.model.FKChangeRule;
+import org.databene.jdbacl.model.DBCatalog;
+import org.databene.jdbacl.model.DBCheckConstraint;
+import org.databene.jdbacl.model.DBColumn;
+import org.databene.jdbacl.model.DBForeignKeyConstraint;
+import org.databene.jdbacl.model.DBIndex;
+import org.databene.jdbacl.model.DBMetaDataExporter;
+import org.databene.jdbacl.model.DBPrimaryKeyConstraint;
+import org.databene.jdbacl.model.DBSchema;
+import org.databene.jdbacl.model.DBSequence;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DBUniqueConstraint;
+import org.databene.jdbacl.model.Database;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
+import static org.databene.commons.xml.SimpleXMLWriter.*;
+
+/**
+ * Saves a database meta data model as XML file.&lt;br/&gt;&lt;br/&gt;
+ * Created: 28.11.2010 06:30:25
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class XMLModelExporter implements DBMetaDataExporter {
+	
+<span class="fc" id="L65">	private SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+	private String encoding;
+	private File file;
+	
+	// constructors ----------------------------------------------------------------------------------------------------
+	
+	public XMLModelExporter(File file) {
+<span class="fc" id="L72">		this(file, Encodings.UTF_8);</span>
+<span class="fc" id="L73">	}</span>
+
+<span class="fc" id="L75">	public XMLModelExporter(File file, String encoding) {</span>
+<span class="fc" id="L76">		this.file = file;</span>
+<span class="fc" id="L77">		this.encoding = encoding;</span>
+<span class="fc" id="L78">	}</span>
+	
+	// interface -------------------------------------------------------------------------------------------------------
+
+	public void export(Database database) throws IOException, SQLException {
+<span class="nc" id="L83">		OutputStream out = new FileOutputStream(file);</span>
+<span class="nc" id="L84">		SimpleXMLWriter writer = null;</span>
+		try {
+<span class="nc" id="L86">			writer = new SimpleXMLWriter(out, encoding, true);</span>
+<span class="nc" id="L87">			writer.startDocument();</span>
+<span class="nc" id="L88">			exportDatabase(database, writer);</span>
+<span class="nc" id="L89">			writer.endDocument();</span>
+<span class="nc" id="L90">		} catch (SAXException e) {</span>
+<span class="nc" id="L91">			throw new RuntimeException(&quot;Error exporting database &quot; + database, e);</span>
+		} finally {
+<span class="nc" id="L93">			IOUtil.close(writer);</span>
+<span class="nc" id="L94">		}</span>
+<span class="nc" id="L95">	}</span>
+	
+	// private helper methods ------------------------------------------------------------------------------------------
+
+	private void exportDatabase(Database database, SimpleXMLWriter writer)
+			throws SAXException {
+<span class="nc" id="L101">		AttributesImpl attribs = createAttributes(&quot;name&quot;, database.getName());</span>
+<span class="nc" id="L102">		addAttribute(&quot;databaseProductName&quot;, database.getDatabaseProductName(), attribs);</span>
+<span class="nc" id="L103">		addAttribute(&quot;databaseProductVersion&quot;, database.getDatabaseProductVersion().toString(), attribs);</span>
+<span class="nc" id="L104">		addAttribute(&quot;importDate&quot;, sdf.format(database.getImportDate()), attribs);</span>
+<span class="nc" id="L105">		addAttribute(&quot;user&quot;, database.getUser(), attribs);</span>
+<span class="nc" id="L106">		addAttribute(&quot;tableInclusionPattern&quot;, database.getTableInclusionPattern(), attribs);</span>
+<span class="nc" id="L107">		addAttribute(&quot;tableExclusionPattern&quot;, database.getTableExclusionPattern(), attribs);</span>
+<span class="nc" id="L108">		addAttribute(&quot;importedChecks&quot;, String.valueOf(database.isImportedChecks()), attribs);</span>
+<span class="nc" id="L109">		addAttribute(&quot;importedUKs&quot;, String.valueOf(database.isImportedUKs()), attribs);</span>
+<span class="nc" id="L110">		addAttribute(&quot;importedIndexes&quot;, String.valueOf(database.isImportedIndexes()), attribs);</span>
+<span class="nc" id="L111">		addAttribute(&quot;importedSequences&quot;, String.valueOf(database.isImportedSequences()), attribs);</span>
+<span class="nc" id="L112">		writer.startElement(&quot;database&quot;, attribs);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">		for (DBCatalog catalog : database.getCatalogs())</span>
+<span class="nc" id="L114">			exportCatalog(catalog, writer);</span>
+<span class="nc" id="L115">		writer.endElement(&quot;database&quot;);</span>
+<span class="nc" id="L116">	}</span>
+
+	private void exportCatalog(DBCatalog catalog, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L119">		writer.startElement(&quot;catalog&quot;, createAttributes(&quot;name&quot;, catalog.getName()));</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">		for (DBSchema schema : catalog.getSchemas())</span>
+<span class="nc" id="L121">			exportSchema(schema, writer);</span>
+<span class="nc" id="L122">		writer.endElement(&quot;catalog&quot;);</span>
+<span class="nc" id="L123">	}</span>
+
+	private void exportSchema(DBSchema schema, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L126">		AttributesImpl atts = createAttributes(&quot;name&quot;, schema.getName());</span>
+<span class="nc" id="L127">		writer.startElement(&quot;schema&quot;, atts);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">		for (DBTable table : schema.getTables())</span>
+<span class="nc" id="L129">			exportTable(table, writer);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		for (DBSequence sequence : schema.getSequences(true))</span>
+<span class="nc" id="L131">			exportSequence(sequence, writer);</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		for (DBTrigger trigger : schema.getTriggers())</span>
+<span class="nc" id="L133">			exportTrigger(trigger, writer);</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">		for (DBPackage pkg : schema.getPackages())</span>
+<span class="nc" id="L135">			exportPackage(pkg, writer);</span>
+<span class="nc" id="L136">		writer.endElement(&quot;schema&quot;);</span>
+<span class="nc" id="L137">	}</span>
+
+	private void exportTable(DBTable table, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L140">		AttributesImpl atts = createAttributes(&quot;name&quot;, table.getName());</span>
+<span class="nc" id="L141">		writer.startElement(&quot;table&quot;, atts);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		for (DBColumn column : table.getColumns())</span>
+<span class="nc" id="L143">			exportColumn(column, writer);</span>
+<span class="nc" id="L144">		DBPrimaryKeyConstraint pk = table.getPrimaryKeyConstraint();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">		if (pk != null)</span>
+<span class="nc" id="L146">			exportPK(pk, writer);</span>
+<span class="nc" id="L147">		exportFks(table.getForeignKeyConstraints(), writer);</span>
+<span class="nc" id="L148">		exportUKs(table.getUniqueConstraints(false), writer);</span>
+<span class="nc" id="L149">		exportChecks(table.getCheckConstraints(), writer);</span>
+<span class="nc" id="L150">		exportIndexes(table.getIndexes(), writer);</span>
+<span class="nc" id="L151">		writer.endElement(&quot;table&quot;);</span>
+<span class="nc" id="L152">	}</span>
+
+	private void exportColumn(DBColumn column, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L155">		AttributesImpl atts = createAttributes(&quot;name&quot;, column.getName());</span>
+<span class="nc" id="L156">		addAttribute(&quot;default&quot;, column.getDefaultValue(), atts);</span>
+<span class="nc" id="L157">		addAttribute(&quot;jdbcType&quot;, String.valueOf(column.getType().getJdbcType()), atts);</span>
+<span class="nc" id="L158">		addAttribute(&quot;type&quot;, SQLUtil.renderColumnTypeWithSize(column), atts);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">		addAttribute(&quot;nullable&quot;, (column.isNullable() ? null : &quot;false&quot;), atts);</span>
+<span class="nc" id="L160">		writer.startElement(&quot;column&quot;, atts);</span>
+<span class="nc" id="L161">		writer.endElement(&quot;column&quot;);</span>
+<span class="nc" id="L162">	}</span>
+
+	private void exportPK(DBPrimaryKeyConstraint pk, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L165">		AttributesImpl pkAtts = createAttributes(&quot;name&quot;, pk.getName());</span>
+<span class="nc" id="L166">		String[] pkColumnNames = pk.getColumnNames();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		if (pkColumnNames.length == 1)</span>
+<span class="nc" id="L168">			addAttribute(&quot;column&quot;, pkColumnNames[0], pkAtts);</span>
+<span class="nc" id="L169">		writer.startElement(&quot;pk&quot;, pkAtts);</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">		if (pkColumnNames.length &gt; 1)</span>
+<span class="nc" id="L171">			writeColumnGroup(pkColumnNames, writer);</span>
+<span class="nc" id="L172">		writer.endElement(&quot;pk&quot;);</span>
+<span class="nc" id="L173">	}</span>
+
+	private void exportUKs(Set&lt;DBUniqueConstraint&gt; uks, SimpleXMLWriter writer) 
+			throws SAXException {
+<span class="nc bnc" id="L177" title="All 2 branches missed.">		for (DBUniqueConstraint uk : uks) {</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">			if (uk instanceof DBPrimaryKeyConstraint)</span>
+<span class="nc" id="L179">				continue;</span>
+<span class="nc" id="L180">			AttributesImpl atts = createAttributes(&quot;name&quot;, uk.getName());</span>
+<span class="nc" id="L181">			String[] columnNames = uk.getColumnNames();</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">			if (columnNames.length == 1)</span>
+<span class="nc" id="L183">				addAttribute(&quot;column&quot;, columnNames[0], atts);</span>
+<span class="nc" id="L184">			writer.startElement(&quot;uk&quot;, atts);</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">			if (columnNames.length &gt; 1)</span>
+<span class="nc" id="L186">				writeColumnGroup(columnNames, writer);</span>
+<span class="nc" id="L187">			writer.endElement(&quot;uk&quot;);</span>
+<span class="nc" id="L188">		}</span>
+<span class="nc" id="L189">	}</span>
+
+	private void exportChecks(List&lt;DBCheckConstraint&gt; checks, SimpleXMLWriter writer) 
+			throws SAXException {
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		for (DBCheckConstraint check : checks) {</span>
+<span class="nc" id="L194">			AttributesImpl atts = createAttributes(&quot;name&quot;, check.getName());</span>
+<span class="nc" id="L195">			addAttribute(&quot;definition&quot;, check.getConditionText(), atts);</span>
+<span class="nc" id="L196">			writer.startElement(&quot;check&quot;, atts);</span>
+<span class="nc" id="L197">			writer.endElement(&quot;check&quot;);</span>
+<span class="nc" id="L198">		}</span>
+<span class="nc" id="L199">	}</span>
+
+	private void exportFks(Set&lt;DBForeignKeyConstraint&gt; fks, SimpleXMLWriter writer) 
+			throws SAXException {
+<span class="nc bnc" id="L203" title="All 2 branches missed.">		for (DBForeignKeyConstraint fk : fks) {</span>
+<span class="nc" id="L204">			AttributesImpl atts = createAttributes(&quot;name&quot;, fk.getName());</span>
+<span class="nc" id="L205">			String[] columnNames = fk.getColumnNames();</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">			if (columnNames.length == 1)</span>
+<span class="nc" id="L207">				addAttribute(&quot;column&quot;, columnNames[0], atts);</span>
+<span class="nc" id="L208">			addAttribute(&quot;refereeTable&quot;, fk.getRefereeTable().getName(), atts);</span>
+<span class="nc" id="L209">			String[] refereeColumns = fk.getRefereeColumnNames();</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">			if (refereeColumns.length == 1)</span>
+<span class="nc" id="L211">				addAttribute(&quot;refereeColumn&quot;, refereeColumns[0], atts);</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">			if (fk.getUpdateRule() != FKChangeRule.NO_ACTION)</span>
+<span class="nc" id="L213">				addAttribute(&quot;updateRule&quot;, fk.getUpdateRule().name(), atts);</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">			if (fk.getDeleteRule() != FKChangeRule.NO_ACTION)</span>
+<span class="nc" id="L215">				addAttribute(&quot;deleteRule&quot;, fk.getDeleteRule().name(), atts);</span>
+<span class="nc" id="L216">			writer.startElement(&quot;fk&quot;, atts);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">			if (columnNames.length &gt; 1) {</span>
+<span class="nc" id="L218">				writer.startElement(&quot;columns&quot;);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">				for (String columnName : columnNames) {</span>
+<span class="nc" id="L220">					AttributesImpl colAtts = createAttributes(&quot;name&quot;, columnName);</span>
+<span class="nc" id="L221">					addAttribute(&quot;refereeColumn&quot;, fk.columnReferencedBy(columnName), colAtts);</span>
+<span class="nc" id="L222">					writer.startElement(&quot;column&quot;, colAtts);</span>
+<span class="nc" id="L223">					writer.endElement(&quot;column&quot;);</span>
+				}
+<span class="nc" id="L225">				writer.endElement(&quot;columns&quot;);</span>
+			}
+<span class="nc" id="L227">			writer.endElement(&quot;fk&quot;);</span>
+<span class="nc" id="L228">		}</span>
+<span class="nc" id="L229">	}</span>
+
+	private void exportIndexes(List&lt;DBIndex&gt; indexes, SimpleXMLWriter writer) throws SAXException {
+<span class="nc bnc" id="L232" title="All 2 branches missed.">		for (DBIndex index : indexes) {</span>
+<span class="nc" id="L233">			AttributesImpl atts = createAttributes(&quot;name&quot;, index.getName());</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">			addAttribute(&quot;unique&quot;, (index.isUnique() ? &quot;true&quot; : null), atts);</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">			addAttribute(&quot;nameDeterministic&quot;, (index.isNameDeterministic() ? null : &quot;false&quot;), atts);</span>
+<span class="nc" id="L236">			String[] columnNames = index.getColumnNames();</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">			if (columnNames.length == 1)</span>
+<span class="nc" id="L238">				addAttribute(&quot;column&quot;, columnNames[0], atts);</span>
+<span class="nc" id="L239">			writer.startElement(&quot;index&quot;, atts);</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">			if (columnNames.length &gt; 1)</span>
+<span class="nc" id="L241">				writeColumnGroup(columnNames, writer);</span>
+<span class="nc" id="L242">			writer.endElement(&quot;index&quot;);</span>
+<span class="nc" id="L243">		}</span>
+<span class="nc" id="L244">	}</span>
+
+	public void writeColumnGroup(String[] pkColumnNames, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L247">		writer.startElement(&quot;columns&quot;);</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">		for (String pkColumnName : pkColumnNames) {</span>
+<span class="nc" id="L249">			AttributesImpl colAtts = createAttributes(&quot;name&quot;, pkColumnName);</span>
+<span class="nc" id="L250">			writer.startElement(&quot;column&quot;, colAtts);</span>
+<span class="nc" id="L251">			writer.endElement(&quot;column&quot;);</span>
+		}
+<span class="nc" id="L253">		writer.endElement(&quot;columns&quot;);</span>
+<span class="nc" id="L254">	}</span>
+
+	private void exportSequence(DBSequence sequence, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L257">		AttributesImpl atts = createAttributes(&quot;name&quot;, sequence.getName());</span>
+<span class="nc" id="L258">		addIfNotNull(&quot;start&quot;, sequence.getStartIfNotDefault(), atts);</span>
+<span class="nc" id="L259">		addIfNotNull(&quot;increment&quot;, sequence.getIncrementIfNotDefault(), atts);</span>
+<span class="nc" id="L260">		addIfNotNull(&quot;maxValue&quot;, sequence.getMaxValueIfNotDefault(), atts);</span>
+<span class="nc" id="L261">		addIfNotNull(&quot;minValue&quot;, sequence.getMinValueIfNotDefault(), atts);</span>
+<span class="nc" id="L262">		addIfNotNull(&quot;cycle&quot;, sequence.isCycle(), atts);</span>
+<span class="nc" id="L263">		addIfNotNull(&quot;cache&quot;, sequence.getCache(), atts);</span>
+<span class="nc" id="L264">		addIfNotNull(&quot;order&quot;, sequence.isOrder(), atts);</span>
+<span class="nc" id="L265">		writer.startElement(&quot;sequence&quot;, atts);</span>
+<span class="nc" id="L266">		writer.endElement(&quot;sequence&quot;);</span>
+<span class="nc" id="L267">	}</span>
+
+	private void exportTrigger(DBTrigger trigger, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L270">		AttributesImpl atts = createAttributes(&quot;name&quot;, trigger.getName());</span>
+<span class="nc" id="L271">		addIfNotNull(&quot;triggerType&quot;, trigger.getTriggerType(), atts);</span>
+<span class="nc" id="L272">		addIfNotNull(&quot;triggeringEvent&quot;, trigger.getTriggeringEvent(), atts);</span>
+<span class="nc" id="L273">		addIfNotNull(&quot;tableOwner&quot;, trigger.getTableOwner(), atts);</span>
+<span class="nc" id="L274">		addIfNotNull(&quot;baseObjectType&quot;, trigger.getBaseObjectType(), atts);</span>
+<span class="nc" id="L275">		addIfNotNull(&quot;tableName&quot;, trigger.getTableName(), atts);</span>
+<span class="nc" id="L276">		addIfNotNull(&quot;columnName&quot;, trigger.getColumnName(), atts);</span>
+<span class="nc" id="L277">		addIfNotNull(&quot;referencingNames&quot;, trigger.getReferencingNames(), atts);</span>
+<span class="nc" id="L278">		addIfNotNull(&quot;whenClause&quot;, trigger.getWhenClause(), atts);</span>
+<span class="nc" id="L279">		addIfNotNull(&quot;status&quot;, trigger.getStatus(), atts);</span>
+<span class="nc" id="L280">		addIfNotNull(&quot;description&quot;, trigger.getDescription(), atts);</span>
+<span class="nc" id="L281">		addIfNotNull(&quot;actionType&quot;, trigger.getActionType(), atts);</span>
+<span class="nc" id="L282">		addIfNotNull(&quot;triggerBody&quot;, trigger.getTriggerBody(), atts);</span>
+<span class="nc" id="L283">		writer.startElement(&quot;trigger&quot;, atts);</span>
+<span class="nc" id="L284">		writer.endElement(&quot;trigger&quot;);</span>
+<span class="nc" id="L285">	}</span>
+
+	private void exportPackage(DBPackage pkg, SimpleXMLWriter writer) throws SAXException {
+<span class="nc" id="L288">		AttributesImpl atts = createAttributes(&quot;name&quot;, pkg.getName());</span>
+<span class="nc" id="L289">		addIfNotNull(&quot;subObjectName&quot;, pkg.getSubObjectName(), atts);</span>
+<span class="nc" id="L290">		addIfNotNull(&quot;objectId&quot;, pkg.getObjectId(), atts);</span>
+<span class="nc" id="L291">		addIfNotNull(&quot;dataObjectId&quot;, pkg.getDataObjectId(), atts);</span>
+<span class="nc" id="L292">		addIfNotNull(&quot;objectType&quot;, pkg.getObjectType(), atts);</span>
+<span class="nc" id="L293">		addIfNotNull(&quot;status&quot;, pkg.getStatus(), atts);</span>
+<span class="nc" id="L294">		writer.startElement(&quot;package&quot;, atts);</span>
+<span class="nc" id="L295">		exportPackageProcedures(pkg, writer);</span>
+<span class="nc" id="L296">		writer.endElement(&quot;package&quot;);</span>
+<span class="nc" id="L297">	}</span>
+
+	private void exportPackageProcedures(DBPackage pkg, SimpleXMLWriter writer) throws SAXException {
+<span class="nc bnc" id="L300" title="All 2 branches missed.">		for (DBProcedure procedure : pkg.getProcedures()) {</span>
+<span class="nc" id="L301">			AttributesImpl atts = createAttributes(&quot;name&quot;, procedure.getName());</span>
+<span class="nc" id="L302">			addIfNotNull(&quot;objectId&quot;, procedure.getObjectId(), atts);</span>
+<span class="nc" id="L303">			addIfNotNull(&quot;subProgramId&quot;, procedure.getSubProgramId(), atts);</span>
+<span class="nc" id="L304">			addIfNotNull(&quot;overload&quot;, procedure.getOverload(), atts);</span>
+<span class="nc" id="L305">			writer.startElement(&quot;procedure&quot;, atts);</span>
+<span class="nc" id="L306">			writer.endElement(&quot;procedure&quot;);</span>
+<span class="nc" id="L307">		}</span>
+<span class="nc" id="L308">	}</span>
+
+	private void addIfNotNull(String name, Object value, AttributesImpl atts) {
+<span class="nc bnc" id="L311" title="All 2 branches missed.">		if (value != null)</span>
+<span class="nc" id="L312">			addAttribute(name, value.toString(), atts);</span>
+<span class="nc" id="L313">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

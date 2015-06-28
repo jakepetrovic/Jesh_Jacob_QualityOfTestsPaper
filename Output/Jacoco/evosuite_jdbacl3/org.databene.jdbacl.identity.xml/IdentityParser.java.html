@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IdentityParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.identity.xml</a> &gt; <span class="el_source">IdentityParser.java</span></div><h1>IdentityParser.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.identity.xml;
+
+import java.util.Set;
+
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.ConfigurationError;
+import org.databene.commons.StringUtil;
+import org.databene.commons.xml.XMLUtil;
+import org.databene.jdbacl.identity.IdentityModel;
+import org.databene.jdbacl.identity.IdentityProvider;
+import org.databene.jdbacl.identity.NaturalPkIdentity;
+import org.databene.jdbacl.identity.NkPkQueryIdentity;
+import org.databene.jdbacl.identity.SubNkPkQueryIdentity;
+import org.databene.jdbacl.identity.UniqueKeyIdentity;
+import org.databene.webdecs.xml.AbstractXMLElementParser;
+import org.databene.webdecs.xml.ParseContext;
+import org.w3c.dom.Element;
+
+/**
+ * Parses an &amp;lt;identity&amp;gt; element in a DB Sanity XML file.&lt;br/&gt;&lt;br/&gt;
+ * Created: 05.12.2010 14:39:48
+ * @since 0.7.1
+ * @author Volker Bergmann
+ */
+public class IdentityParser extends AbstractXMLElementParser&lt;Object&gt; {
+	
+	public static final String IDENTITY = &quot;identity&quot;;
+<span class="nc" id="L49">	public static final Set&lt;String&gt; REQUIRED_ATTRIBUTES = CollectionUtil.toSet(&quot;type&quot;, &quot;table&quot;);</span>
+<span class="nc" id="L50">	public static final Set&lt;String&gt; OPTIONAL_ATTRIBUTES = CollectionUtil.toSet(&quot;nk-pk-query&quot;, &quot;sub-nk-pk-query&quot;, &quot;parents&quot;, &quot;unique-key&quot;, &quot;natural-pk&quot;, &quot;columns&quot;);</span>
+	
+	public IdentityParser() {
+<span class="nc" id="L53">		super(IDENTITY, REQUIRED_ATTRIBUTES, OPTIONAL_ATTRIBUTES, Object.class);</span>
+<span class="nc" id="L54">	}</span>
+
+	@Override
+	public IdentityModel doParse(Element element, Object[] parentPath, ParseContext&lt;Object&gt; context) {
+<span class="nc" id="L58">		String type = getRequiredAttribute(&quot;type&quot;, element);</span>
+<span class="nc" id="L59">		String tableName = getRequiredAttribute(&quot;table&quot;, element);</span>
+		
+		IdentityModel identity;
+<span class="nc" id="L62">		IdentityProvider identityProvider = ((IdentityParseContext) context).getIdentityProvider();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">		if (&quot;nk-pk-query&quot;.equals(type))</span>
+<span class="nc" id="L64">			identity = parseNkPkQuery(element, tableName);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">		else if (&quot;sub-nk-pk-query&quot;.equals(type))</span>
+<span class="nc" id="L66">			identity = parseSubNkPkQuery(element, identityProvider, tableName);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">		else if (&quot;unique-key&quot;.equals(type))</span>
+<span class="nc" id="L68">			identity = parseUniqueKey(element, tableName);</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		else if (&quot;natural-pk&quot;.equals(type))</span>
+<span class="nc" id="L70">			identity = parseNaturalPk(element, tableName);</span>
+		else
+<span class="nc" id="L72">			throw new ConfigurationError(&quot;Not a supported &lt;identity&gt; type: &quot; + type);</span>
+<span class="nc" id="L73">		identityProvider.registerIdentity(identity, identity.getTableName());</span>
+<span class="nc" id="L74">		return identity;</span>
+	}
+
+	public static String createCheckName(String tableName, String type) {
+<span class="nc" id="L78">		return tableName + &quot;-identity-&quot; + type;</span>
+	}
+	
+	// private helpers -------------------------------------------------------------------------------------------------
+
+	private IdentityModel parseNkPkQuery(Element element, String tableName) {
+<span class="nc" id="L84">	    String nkPkQuery = XMLUtil.getWholeText(element);</span>
+<span class="nc" id="L85">	    return new NkPkQueryIdentity(tableName, nkPkQuery);</span>
+    }
+
+	private IdentityModel parseNaturalPk(Element element, String tableName) {
+<span class="nc" id="L89">		return new NaturalPkIdentity(tableName);</span>
+    }
+
+	private IdentityModel parseUniqueKey(Element element, String tableName) {
+<span class="nc" id="L93">		String[] columnNames = getRequiredAttribute(&quot;columns&quot;, element).split(&quot;,&quot;);</span>
+<span class="nc" id="L94">		columnNames = StringUtil.trimAll(columnNames);</span>
+<span class="nc" id="L95">		UniqueKeyIdentity identity = new UniqueKeyIdentity(tableName, columnNames);</span>
+<span class="nc" id="L96">	    return identity;</span>
+    }
+
+	private IdentityModel parseSubNkPkQuery(Element element, IdentityProvider identityProvider, String tableName) {
+<span class="nc" id="L100">		String[] parentTableNames = getRequiredAttribute(&quot;parents&quot;, element).split(&quot;,&quot;);</span>
+<span class="nc" id="L101">		SubNkPkQueryIdentity identity = new SubNkPkQueryIdentity(tableName, parentTableNames, identityProvider);</span>
+<span class="nc" id="L102">	    identity.setSubNkPkQuery(XMLUtil.getWholeText(element));</span>
+<span class="nc" id="L103">	    return identity;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

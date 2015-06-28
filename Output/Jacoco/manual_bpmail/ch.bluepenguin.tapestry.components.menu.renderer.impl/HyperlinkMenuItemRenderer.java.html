@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HyperlinkMenuItemRenderer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.tapestry.components.menu.renderer.impl</a> &gt; <span class="el_source">HyperlinkMenuItemRenderer.java</span></div><h1>HyperlinkMenuItemRenderer.java</h1><pre class="source lang-java linenums">// Decompiled by DJ v3.8.8.85 Copyright 2005 Atanas Neshkov  Date: 16.05.2005 11:59:04
+// Home Page : http://members.fortunecity.com/neshkov/dj.html  - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   HyperlinkMenuItemRenderer.java
+
+package ch.bluepenguin.tapestry.components.menu.renderer.impl;
+
+import ch.bluepenguin.tapestry.components.menu.model.IMenuItem;
+import org.apache.tapestry.IMarkupWriter;
+
+// Referenced classes of package ch.bluepenguin.tapestry.components.menu.renderer.impl:
+//            DefaultMenuItemRenderer
+
+public class HyperlinkMenuItemRenderer extends DefaultMenuItemRenderer
+{
+
+    public HyperlinkMenuItemRenderer()
+<span class="nc" id="L18">    {</span>
+<span class="nc" id="L19">    }</span>
+
+    public void startRender(IMarkupWriter writer, IMenuItem item)
+    {
+<span class="nc" id="L23">        writer.begin(&quot;li&quot;);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if(styleClass != null)</span>
+<span class="nc" id="L25">            writer.attribute(&quot;class&quot;, styleClass);</span>
+<span class="nc" id="L26">        IMarkupWriter nested = writer.getNestedWriter();</span>
+<span class="nc" id="L27">        nested.begin(&quot;a&quot;);</span>
+<span class="nc" id="L28">        nested.attribute(&quot;href&quot;, getHyperlink());</span>
+<span class="nc" id="L29">        nested.print(item.getName());</span>
+<span class="nc" id="L30">        nested.end();</span>
+<span class="nc" id="L31">        nested.flush();</span>
+<span class="nc" id="L32">        nested.close();</span>
+<span class="nc" id="L33">    }</span>
+
+    public String getHyperlink()
+    {
+<span class="nc" id="L37">        return hyperlink;</span>
+    }
+
+    public void setHyperlink(String hyperlink)
+    {
+<span class="nc" id="L42">        this.hyperlink = hyperlink;</span>
+<span class="nc" id="L43">    }</span>
+
+    private String hyperlink;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

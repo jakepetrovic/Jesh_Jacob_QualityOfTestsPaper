@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Chat.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">Chat.java</span></div><h1>Chat.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import org.apache.log4j.Logger;
+
+
+import messages.global.GlobalChatMsg;
+import messages.session.SessionChatMsg;
+
+import client.BomberClient;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+import client.network.ClientMsgSender;
+
+/**
+ * @author Tobi
+ * 
+ */
+public class Chat extends MyPanel implements MouseListener, KeyListener, ActionListener {
+<span class="nc" id="L38">	private static Logger logger = Logger.getLogger(BomberClient.class);</span>
+	private int id;
+<span class="nc" id="L40">	public final int GLOBAL = 1;</span>
+<span class="nc" id="L41">	public final int SESSION = 2;</span>
+
+	public void setType(int id) {
+<span class="nc" id="L44">		this.id = id;</span>
+<span class="nc" id="L45">	}</span>
+
+	public boolean isGlobal() {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		return this.id == GLOBAL;</span>
+	}
+
+	public boolean isSession() {
+<span class="nc bnc" id="L52" title="All 2 branches missed.">		return this.id == SESSION;</span>
+	}
+
+<span class="nc" id="L55">	MyButton jButtonSend = new MyButton(&quot;Send&quot;);</span>
+<span class="nc" id="L56">	JTextField jTextFieldChat = new JTextField(&quot;&quot;);</span>
+
+<span class="nc" id="L58">	JLabel jLabelChat = new JLabel(&quot;Your Text:&quot;);</span>
+
+<span class="nc" id="L60">	JTextArea jTextAreaChat = new JTextArea();</span>
+
+<span class="nc" id="L62">	JScrollPane pane = new JScrollPane();</span>
+
+	public Chat(int width, int height) {
+<span class="nc" id="L65">		super();</span>
+<span class="nc" id="L66">		setLayout(null);</span>
+		// setBounds(0,0,800,600);
+<span class="nc" id="L68">		setSize(new Dimension(width, height));</span>
+<span class="nc" id="L69">		setVisible(true);</span>
+<span class="nc" id="L70">		setBackground(new Color(50, 50, 200));</span>
+
+<span class="nc" id="L72">		jTextFieldChat.addKeyListener(this);</span>
+<span class="nc" id="L73">		jButtonSend.addKeyListener(this);</span>
+
+<span class="nc" id="L75">		jTextFieldChat.addMouseListener(this);</span>
+<span class="nc" id="L76">		jButtonSend.addActionListener(this);</span>
+
+<span class="nc" id="L78">		jLabelChat.setBounds(20, height - 40, 60, 25);</span>
+<span class="nc" id="L79">		jTextFieldChat.setBounds(100, height - 40, width - 210, 25);</span>
+<span class="nc" id="L80">		jButtonSend.setBounds(width - 100, height - 40, 80, 25);</span>
+
+<span class="nc" id="L82">		jTextAreaChat.setBounds(20, 20, width -40, height- 70);</span>
+<span class="nc" id="L83">		jTextAreaChat.setEditable(false);</span>
+		
+<span class="nc" id="L85">		pane.setBounds(20, 20, width - 40, height -70);</span>
+
+		// pane.setViewportView(new JTextArea());
+<span class="nc" id="L88">		pane.setViewportView(jTextAreaChat);</span>
+<span class="nc" id="L89">		pane.setAutoscrolls(true);</span>
+
+		// pane.setV
+
+<span class="nc" id="L93">		addLabel(jLabelChat);</span>
+<span class="nc" id="L94">		add(jTextFieldChat);</span>
+<span class="nc" id="L95">		add(jButtonSend);</span>
+<span class="nc" id="L96">		add(pane);</span>
+<span class="nc" id="L97">		setPicture(&quot;/images/simple_background.png&quot;);</span>
+<span class="nc" id="L98">	}</span>
+
+	public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L101">		actionPreformed();</span>
+<span class="nc" id="L102">	}</span>
+
+	public void setBounds(int x, int y, int width, int height) {
+<span class="nc" id="L105">		super.setBounds(x, y, width, height);</span>
+<span class="nc" id="L106">	}</span>
+
+	public void mouseClicked(MouseEvent arg0) {
+<span class="nc" id="L109">		actionPreformed();</span>
+<span class="nc" id="L110">	}</span>
+
+	public void mouseEntered(MouseEvent arg0) {
+
+<span class="nc" id="L114">	}</span>
+
+	public void mouseExited(MouseEvent arg0) {
+<span class="nc" id="L117">	}</span>
+
+	public void mousePressed(MouseEvent arg0) {
+<span class="nc" id="L120">	}</span>
+
+	public void mouseReleased(MouseEvent arg0) {
+<span class="nc" id="L123">	}</span>
+
+	public void actionPreformed() {
+<span class="nc bnc" id="L126" title="All 2 branches missed.">		if (jTextFieldChat.getText().equals(&quot;&quot;)) {</span>
+			// System.out.println(&quot;nothing sent&quot;);
+			// logger.debug(&quot;nothin sent&quot;);
+<span class="nc" id="L129">			return;</span>
+		}
+		// System.out.println(&quot;sending&quot;);
+<span class="nc" id="L132">		logger.debug(&quot;sending chatmsg&quot;);</span>
+		
+		// jTextAreaChat.setText(jTextAreaChat.getText() + &quot;\n&quot; +
+		// jTextFieldChat.getText());
+		// System.out.println(&quot;Nachricht2: &quot; + jTextFieldChat.getText());
+
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		if (isGlobal()) {</span>
+<span class="nc" id="L139">			logger.info(&quot;sending chat message glob&quot;);</span>
+<span class="nc" id="L140">			GlobalChatMsg chatmsg = new GlobalChatMsg(jTextFieldChat.getText());</span>
+<span class="nc" id="L141">			BomberClient.getInstance().sendMsg(chatmsg);</span>
+		}
+<span class="nc bnc" id="L143" title="All 2 branches missed.">		if (isSession()) {</span>
+<span class="nc" id="L144">			logger.info(&quot;sending chat message sess&quot;);</span>
+<span class="nc" id="L145">			SessionChatMsg chatmsg = new SessionChatMsg(jTextFieldChat</span>
+					.getText());
+<span class="nc" id="L147">			BomberClient.getInstance().sendMsg(chatmsg);</span>
+		}
+<span class="nc" id="L149">		jTextFieldChat.setText(&quot;&quot;);</span>
+<span class="nc" id="L150">		jTextFieldChat.requestFocus();</span>
+<span class="nc" id="L151">	}</span>
+
+	public void keyPressed(KeyEvent arg0) {
+
+<span class="nc" id="L155">	}</span>
+
+	public void keyReleased(KeyEvent evt) {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">		if (evt.getKeyCode() == evt.VK_ENTER) {</span>
+<span class="nc" id="L159">			actionPreformed();</span>
+		}
+
+<span class="nc" id="L162">	}</span>
+
+	public void keyTyped(KeyEvent arg0) {
+<span class="nc" id="L165">	}</span>
+
+	/**
+	 * @param sender
+	 * @param msg
+	 */
+	public void addChatMessage(String sender, String msg) {
+<span class="nc" id="L172">		String newline = &quot;\n&quot;;</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">		if (jTextAreaChat.getText().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L174">			newline = &quot;&quot;;</span>
+		}
+<span class="nc" id="L176">		Calendar cal = Calendar.getInstance();</span>
+	    DateFormat df;
+<span class="nc" id="L178">	    df = DateFormat.getTimeInstance(DateFormat.MEDIUM);</span>
+<span class="nc" id="L179">	    String time = df.format(cal.getTime() ); //18:34:08</span>
+	    
+		//logger.info(msg+&quot; said by &quot;+sender);
+		//Date d = new Date();
+<span class="nc" id="L183">		jTextAreaChat.append(newline+&quot;[&quot;+time+&quot;] &quot; + sender + &quot;: &quot;</span>
+				+ msg);
+<span class="nc" id="L185">		jTextAreaChat.setCaretPosition(jTextAreaChat.getDocument().getLength());</span>
+
+<span class="nc" id="L187">	}</span>
+	
+	/**
+	 * 
+	 */
+	public void clearChat(){
+<span class="nc" id="L193">		logger.info(&quot;clearing the chat text&quot;);</span>
+		//logger.info(jTextAreaChat.setText(&quot;&quot;));
+<span class="nc" id="L195">		this.jTextAreaChat.setText(&quot;&quot;);</span>
+<span class="nc" id="L196">		}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

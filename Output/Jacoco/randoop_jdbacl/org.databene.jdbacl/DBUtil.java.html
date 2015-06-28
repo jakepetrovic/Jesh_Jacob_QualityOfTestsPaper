@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl</a> &gt; <span class="el_source">DBUtil.java</span></div><h1>DBUtil.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2007-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl;
+
+import org.databene.commons.ArrayBuilder;
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.BeanUtil;
+import org.databene.commons.ConfigurationError;
+import org.databene.commons.ConnectFailedException;
+import org.databene.commons.ErrorHandler;
+import org.databene.commons.IOUtil;
+import org.databene.commons.ImportFailedException;
+import org.databene.commons.LogCategories;
+import org.databene.commons.ObjectNotFoundException;
+import org.databene.commons.ReaderLineIterator;
+import org.databene.commons.StringUtil;
+import org.databene.commons.SystemInfo;
+import org.databene.commons.converter.AnyConverter;
+import org.databene.commons.converter.ToStringConverter;
+import org.databene.commons.debug.Debug;
+import org.databene.commons.depend.DependencyModel;
+import org.databene.jdbacl.model.DBConstraint;
+import org.databene.jdbacl.model.DBMetaDataImporter;
+import org.databene.jdbacl.model.DBPrimaryKeyConstraint;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DBUniqueConstraint;
+import org.databene.jdbacl.model.Database;
+import org.databene.jdbacl.model.TableHolder;
+import org.databene.jdbacl.model.cache.CachingDBImporter;
+import org.databene.jdbacl.model.jdbc.JDBCDBImporter;
+import org.databene.jdbacl.proxy.LoggingPreparedStatementHandler;
+import org.databene.jdbacl.proxy.LoggingResultSetHandler;
+import org.databene.jdbacl.proxy.LoggingStatementHandler;
+import org.databene.jdbacl.proxy.PooledConnectionHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.Driver;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+
+import javax.sql.PooledConnection;
+
+/**
+ * Provides database related utility methods.&lt;br/&gt;
+ * &lt;br/&gt;
+ * Created: 06.01.2007 19:27:02
+ * @author Volker Bergmann
+ */
+public class DBUtil {
+
+<span class="fc" id="L90">    private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class);</span>
+
+<span class="fc" id="L92">    private static final Logger JDBC_LOGGER = LoggerFactory.getLogger(LogCategories.JDBC);</span>
+<span class="fc" id="L93">    private static final Logger SQL_LOGGER = LoggerFactory.getLogger(LogCategories.SQL);</span>
+    
+    /** private constructor for preventing instantiation. */
+<span class="nc" id="L96">    private DBUtil() {}</span>
+    
+    
+    // connection handling ---------------------------------------------------------------------------------------------
+    
+    public static boolean existsEnvironment(String environment) {
+    	try {
+<span class="nc" id="L103">    		getConnectData(environment);</span>
+<span class="nc" id="L104">    		return true;</span>
+<span class="fc" id="L105">    	} catch (Exception e) {</span>
+<span class="fc" id="L106">    		return false;</span>
+    	}
+    }
+    
+    public static JDBCConnectData getConnectData(String environment) {
+		try {
+<span class="fc" id="L112">			String filename = environment + &quot;.env.properties&quot;;</span>
+<span class="fc" id="L113">			File file = new File(filename);</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">			if (!file.exists())</span>
+<span class="fc" id="L115">				file = new File(SystemInfo.getUserHome() + SystemInfo.getFileSeparator() + &quot;databene&quot;, filename);</span>
+			String path;
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">			if (file.exists()) {</span>
+<span class="nc" id="L118">				path = file.getAbsolutePath();</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">			} else if (IOUtil.isURIAvailable(filename)) {</span>
+<span class="nc" id="L120">				path = filename;</span>
+			} else {
+<span class="fc" id="L122">				throw new ConfigurationError(&quot;No environment definition '&quot; + filename + &quot;' found&quot;);</span>
+			}
+<span class="nc" id="L124">			return JDBCConnectData.parseSingleDbProperties(path);</span>
+<span class="nc" id="L125">		} catch (IOException e) {</span>
+<span class="nc" id="L126">			throw new ConfigurationError(&quot;Error reading environment data for '&quot; + environment + &quot;'&quot;);</span>
+		}
+    }
+    
+	public static Connection connect(String environment, boolean readOnly) throws ConnectFailedException {
+<span class="nc" id="L131">		JDBCConnectData connectData = DBUtil.getConnectData(environment);</span>
+<span class="nc" id="L132">	    return connect(connectData, readOnly);</span>
+    }
+
+	public static Connection connect(JDBCConnectData data, boolean readOnly) throws ConnectFailedException {
+<span class="nc bnc" id="L136" title="All 2 branches missed.">		if (StringUtil.isEmpty(data.url))</span>
+<span class="nc" id="L137">			throw new ConfigurationError(&quot;No JDBC URL specified&quot;);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">		if (StringUtil.isEmpty(data.driver))</span>
+<span class="nc" id="L139">			throw new ConfigurationError(&quot;No JDBC driver class name specified&quot;);</span>
+<span class="nc" id="L140">	    return connect(data.url, data.driver, data.user, data.password, readOnly);</span>
+    }
+
+    public static Connection connect(String url, String driverClassName, String user, String password, boolean readOnly) throws ConnectFailedException {
+		try {
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">			if (driverClassName == null)</span>
+<span class="nc" id="L146">				throw new ConfigurationError(&quot;No JDBC driver class name provided&quot;);</span>
+			
+			// Instantiate driver
+<span class="fc" id="L149">            Class&lt;Driver&gt; driverClass = BeanUtil.forName(driverClassName);</span>
+<span class="fc" id="L150">            Driver driver = driverClass.newInstance();</span>
+            
+            // Wrap connection properties
+<span class="fc" id="L153">	        java.util.Properties info = new java.util.Properties();</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">			if (user != null)</span>
+<span class="fc" id="L155">			    info.put(&quot;user&quot;, user);</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">			if (password != null)</span>
+<span class="fc" id="L157">			    info.put(&quot;password&quot;, password);</span>
+			
+			// connect
+<span class="nc" id="L160">            JDBC_LOGGER.debug(&quot;opening connection to &quot; + url);</span>
+<span class="nc" id="L161">            Connection connection = driver.connect(url, info);</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            if (connection == null)</span>
+<span class="nc" id="L163">            	throw new ConnectFailedException(&quot;Connecting the database failed silently - &quot; +</span>
+            			&quot;probably due to wrong driver (&quot; + driverClassName + &quot;) or wrong URL format (&quot; + url + &quot;)&quot;);
+<span class="nc" id="L165">            connection = wrapWithPooledConnection(connection, readOnly);</span>
+<span class="nc" id="L166">			return connection;</span>
+<span class="fc" id="L167">        } catch (Exception e) {</span>
+<span class="fc" id="L168">			throw new ConnectFailedException(&quot;Connecting &quot; + url + &quot; failed: &quot;, e);</span>
+		}
+	}
+
+    public static boolean available(String url, String driverClass, String user, String password) {
+		try {
+<span class="nc" id="L174">	    	Connection connection = connect(url, driverClass, user, password, false);</span>
+<span class="nc" id="L175">	    	close(connection);</span>
+<span class="nc" id="L176">            return true;</span>
+<span class="fc" id="L177">        } catch (Exception e) {</span>
+<span class="fc" id="L178">            return false;</span>
+		}
+	}
+
+    /** Closes a database connection silently */
+    public static void close(Connection connection) {
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (connection == null)</span>
+<span class="fc" id="L185">            return;</span>
+        try {
+<span class="nc" id="L187">            connection.close();</span>
+<span class="nc" id="L188">        } catch (SQLException e) {</span>
+<span class="nc" id="L189">            LOGGER.error(&quot;Error closing connection&quot;, e);</span>
+<span class="nc" id="L190">        }</span>
+<span class="nc" id="L191">    }</span>
+    
+	public static Connection wrapWithPooledConnection(Connection connection, boolean readOnly) {
+<span class="nc" id="L194">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L195">		return (Connection) Proxy.newProxyInstance(classLoader, </span>
+				new Class[] { Connection.class, PooledConnection.class }, 
+				new PooledConnectionHandler(connection, readOnly));
+	}
+	
+	public static int getOpenConnectionCount() {
+<span class="fc" id="L201">		return PooledConnectionHandler.getOpenConnectionCount();</span>
+	}
+	
+	public static void resetMonitors() {
+<span class="fc" id="L205">		LoggingPreparedStatementHandler.resetMonitors();</span>
+<span class="fc" id="L206">		LoggingResultSetHandler.resetMonitors();</span>
+<span class="fc" id="L207">		LoggingStatementHandler.resetMonitors();</span>
+<span class="fc" id="L208">		PooledConnectionHandler.resetMonitors();</span>
+<span class="fc" id="L209">	}</span>
+	
+    // statement handling ----------------------------------------------------------------------------------------------
+    
+	public static Statement createLoggingStatementHandler(Statement statement, boolean readOnly) {
+<span class="nc" id="L214">		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L215">        statement = (Statement) Proxy.newProxyInstance(classLoader, </span>
+			new Class[] { Statement.class }, 
+			new LoggingStatementHandler(statement, readOnly));
+<span class="nc" id="L218">		return statement;</span>
+	}
+
+	public static PreparedStatement prepareStatement(Connection connection, String sql, boolean readOnly) throws SQLException {
+<span class="nc" id="L222">		return prepareStatement(connection, sql, readOnly, </span>
+				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+	}
+
+	public static PreparedStatement prepareStatement(
+			Connection connection, 
+			String sql, 
+			boolean readOnly,
+			int resultSetType,
+            int resultSetConcurrency,
+            int resultSetHoldability) throws SQLException {
+<span class="nc" id="L233">		JDBC_LOGGER.debug(&quot;preparing statement: &quot; + sql);</span>
+<span class="nc" id="L234">		checkReadOnly(sql, readOnly);</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        if (connection instanceof PooledConnection)</span>
+<span class="nc" id="L236">        	connection = ((PooledConnection) connection).getConnection();</span>
+<span class="nc" id="L237">		PreparedStatement statement = connection.prepareStatement(</span>
+				sql, resultSetType, resultSetConcurrency, resultSetHoldability);
+<span class="nc" id="L239">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc bnc" id="L240" title="All 4 branches missed.">		if (SQL_LOGGER.isDebugEnabled() || JDBC_LOGGER.isDebugEnabled())</span>
+<span class="nc" id="L241">			statement = (PreparedStatement) Proxy.newProxyInstance(classLoader, </span>
+				new Class[] { PreparedStatement.class }, 
+				new LoggingPreparedStatementHandler(statement, sql));
+<span class="nc" id="L244">		return statement;</span>
+	}
+
+    public static void close(Statement statement) {
+<span class="nc bnc" id="L248" title="All 2 branches missed.">        if (statement != null) {</span>
+            try {
+<span class="nc" id="L250">                statement.close();</span>
+<span class="nc" id="L251">            } catch (SQLException e) {</span>
+<span class="nc" id="L252">                throw new ConfigurationError(&quot;Closing statement failed&quot;, e);</span>
+<span class="nc" id="L253">            }</span>
+        }
+<span class="nc" id="L255">    }</span>
+
+	public static int getOpenStatementCount() {
+<span class="fc" id="L258">		return LoggingStatementHandler.getOpenStatementCount();</span>
+	}
+	
+	public static int getOpenPreparedStatementCount() {
+<span class="fc" id="L262">		return LoggingPreparedStatementHandler.getOpenStatementCount();</span>
+	}
+	
+    // ResultSet handling ----------------------------------------------------------------------------------------------
+    
+	public static ResultSet createLoggingResultSet(ResultSet realResultSet, Statement statement) {
+<span class="nc" id="L268">        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L269">		return (ResultSet) Proxy.newProxyInstance(classLoader, </span>
+				new Class[] { ResultSet.class }, 
+				new LoggingResultSetHandler(realResultSet, statement));
+	}
+
+	public static Statement getStatement(ResultSet resultSet) {
+		try {
+<span class="nc" id="L276">			return resultSet.getStatement();</span>
+<span class="nc" id="L277">		} catch (SQLException e) {</span>
+<span class="nc" id="L278">			throw new RuntimeException(&quot;Error getting statement from result set&quot;, e);</span>
+		}
+	}
+
+	public static void close(ResultSet resultSet) {
+<span class="nc bnc" id="L283" title="All 2 branches missed.">        if (resultSet != null) {</span>
+            try {
+<span class="nc" id="L285">                resultSet.close();</span>
+<span class="nc" id="L286">            } catch (SQLException e) {</span>
+<span class="nc" id="L287">                throw new ConfigurationError(&quot;Closing statement failed&quot;, e);</span>
+<span class="nc" id="L288">            }</span>
+        }
+<span class="nc" id="L290">    }</span>
+
+	public static void closeResultSetAndStatement(ResultSet resultSet) {
+<span class="nc" id="L293">		Statement statement = DBUtil.getStatement(resultSet);</span>
+<span class="nc" id="L294">		DBUtil.close(resultSet);</span>
+<span class="nc" id="L295">		DBUtil.close(statement);</span>
+<span class="nc" id="L296">	}</span>
+
+	public static int getOpenResultSetCount() {
+<span class="fc" id="L299">		return LoggingResultSetHandler.getOpenResultSetCount();</span>
+	}
+
+    public static Object parseAndSimplifyResultSet(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L303">    	List&lt;Object[]&gt; rows = parseResultSet(resultSet);</span>
+<span class="nc bnc" id="L304" title="All 4 branches missed.">        if (rows.size() == 1 &amp;&amp; rows.get(0).length == 1)</span>
+<span class="nc" id="L305">        	return rows.get(0)[0];</span>
+        else {
+<span class="nc" id="L307">	        Object[][] array = new Object[rows.size()][];</span>
+<span class="nc" id="L308">	        return rows.toArray(array);</span>
+        }
+    }
+    
+    public static List&lt;Object[]&gt; parseResultSet(ResultSet resultSet) throws SQLException { 
+<span class="nc" id="L313">        List&lt;Object[]&gt; rows = new ArrayList&lt;Object[]&gt;();</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        while (resultSet.next())</span>
+<span class="nc" id="L315">            rows.add(parseResultRow(resultSet));</span>
+<span class="nc" id="L316">        return rows;</span>
+    }
+
+	protected static Object[] parseResultRow(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L320">		int columnCount = resultSet.getMetaData().getColumnCount();</span>
+<span class="nc" id="L321">		Object[] cells = new Object[columnCount];</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">		for (int i = 0; i &lt; columnCount; i++)</span>
+<span class="nc" id="L323">		    cells[i] = resultSet.getObject(i + 1);</span>
+<span class="nc" id="L324">		return cells;</span>
+	}
+
+    /** @deprecated replaced by ConvertingIterable(ResultSetIterator, ResultSetConverter) */
+    @Deprecated
+    public static Object[] nextLine(ResultSet resultSet) throws SQLException {
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        if (!resultSet.next())</span>
+<span class="nc" id="L331">            return null;</span>
+<span class="nc" id="L332">        return currentLine(resultSet);</span>
+    }
+
+    /** @deprecated replaced by ResultSetConverter */
+    @Deprecated
+    public static Object[] currentLine(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L338">        Object[] cells = parseResultRow(resultSet);</span>
+<span class="nc" id="L339">        return cells;</span>
+    }
+
+	public static long countRows(String tableName, Connection connection) {
+<span class="nc" id="L343">		return DBUtil.queryLong(&quot;select count(*) from &quot; + tableName, connection);</span>
+	}
+
+    public static String format(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L347">        StringBuilder builder = new StringBuilder();</span>
+        // format column names
+<span class="nc" id="L349">        ResultSetMetaData metaData = resultSet.getMetaData();</span>
+<span class="nc" id="L350">        int columnCount = metaData.getColumnCount();</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">        for (int i = 1; i &lt;= columnCount; i++)</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">            builder.append(metaData.getColumnName(i)).append(i &lt; columnCount ? &quot;, &quot; : SystemInfo.getLineSeparator());</span>
+        // format cells
+<span class="nc" id="L354">        Object parsed = parseAndSimplifyResultSet(resultSet);</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">        if (parsed instanceof Object[][]) {</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">	        for (Object[] row : (Object[][]) parsed) {</span>
+<span class="nc" id="L357">	            builder.append(ArrayFormat.format(&quot;, &quot;, row)).append(SystemInfo.getLineSeparator());</span>
+	        }
+        } else
+<span class="nc" id="L360">        	builder.append(ToStringConverter.convert(parsed, &quot;null&quot;));</span>
+<span class="nc" id="L361">        return builder.toString();</span>
+    }
+
+    public static String queryString(PreparedStatement statement) { 
+        try {
+<span class="nc" id="L366">            ResultSet resultSet = statement.executeQuery();</span>
+<span class="nc bnc" id="L367" title="All 2 branches missed.">            if (!resultSet.next())</span>
+<span class="nc" id="L368">                throw new RuntimeException(&quot;Expected a row.&quot;);</span>
+<span class="nc" id="L369">            String value = resultSet.getString(1);</span>
+<span class="nc bnc" id="L370" title="All 2 branches missed.">            if (resultSet.next())</span>
+<span class="nc" id="L371">                throw new RuntimeException(&quot;Expected exactly one row, found more.&quot;);</span>
+<span class="nc" id="L372">            close(resultSet);</span>
+<span class="nc" id="L373">            return value;</span>
+<span class="nc" id="L374">        } catch (SQLException e) {</span>
+<span class="nc" id="L375">            throw new RuntimeException(&quot;Database query failed: &quot;, e);</span>
+        }
+    }
+    
+    public static long queryLong(String query, Connection connection) {
+<span class="nc" id="L380">    	return AnyConverter.convert(queryScalar(query, connection), Long.class);</span>
+    }
+
+    public static Object queryScalar(String query, Connection connection) {
+        try {
+<span class="nc" id="L385">        	Statement statement = connection.createStatement();</span>
+<span class="nc" id="L386">            ResultSet resultSet = statement.executeQuery(query);</span>
+<span class="nc bnc" id="L387" title="All 2 branches missed.">            if (!resultSet.next())</span>
+<span class="nc" id="L388">                throw new RuntimeException(&quot;Expected a row.&quot;);</span>
+<span class="nc" id="L389">            Object value = resultSet.getObject(1);</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">            if (resultSet.next())</span>
+<span class="nc" id="L391">                throw new RuntimeException(&quot;Expected exactly one row, found more.&quot;);</span>
+<span class="nc" id="L392">            close(resultSet);</span>
+<span class="nc" id="L393">            close(statement);</span>
+<span class="nc" id="L394">            return value;</span>
+<span class="nc" id="L395">        } catch (SQLException e) {</span>
+<span class="nc" id="L396">            throw new RuntimeException(&quot;Database query failed: &quot;, e);</span>
+        }
+    }
+
+    public static DBExecutionResult runScript(
+    		String scriptUri, String encoding, Connection connection, boolean ignoreComments, ErrorHandler errorHandler) 
+    			throws IOException {
+<span class="nc" id="L403">		return runScript(scriptUri, encoding, ';', connection, ignoreComments, errorHandler);</span>
+    }
+
+    public static DBExecutionResult runScript(
+    		String scriptUri, String encoding, char separator, Connection connection, boolean ignoreComments, ErrorHandler errorHandler) 
+    			throws IOException {
+<span class="nc" id="L409">		BufferedReader reader = IOUtil.getReaderForURI(scriptUri, encoding);</span>
+<span class="nc" id="L410">		return runScript(reader, separator, connection, ignoreComments, errorHandler);</span>
+    }
+
+    public static DBExecutionResult runScript(String scriptText, Connection connection, boolean ignoreComments, ErrorHandler errorHandler) {
+<span class="nc" id="L414">		return runScript(scriptText, ';', connection, ignoreComments, errorHandler);</span>
+    }
+
+    public static DBExecutionResult runScript(String scriptText, char separator, Connection connection, boolean ignoreComments, ErrorHandler errorHandler) {
+<span class="nc" id="L418">    	StringReader reader = new StringReader(scriptText);</span>
+<span class="nc" id="L419">		return runScript(reader, separator, connection, ignoreComments, errorHandler);</span>
+    }
+
+	private static DBExecutionResult runScript(
+			Reader reader, char separator, Connection connection, boolean ignoreComments, ErrorHandler errorHandler) {
+<span class="nc" id="L424">		ReaderLineIterator iterator = new ReaderLineIterator(reader);</span>
+<span class="nc" id="L425">		SQLScriptException exception = null;</span>
+<span class="nc" id="L426">		Object result = null;</span>
+<span class="nc" id="L427">		Boolean changedStructure = false;</span>
+		try {
+<span class="nc" id="L429">			StringBuilder cmd = new StringBuilder();</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">			while (iterator.hasNext()) {</span>
+<span class="nc" id="L431">			    String line = iterator.next().trim();</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">			    if (line.startsWith(&quot;--&quot;))</span>
+<span class="nc" id="L433">			        continue;</span>
+<span class="nc bnc" id="L434" title="All 2 branches missed.">			    if (cmd.length() &gt; 0)</span>
+<span class="nc" id="L435">			        cmd.append('\n');</span>
+<span class="nc" id="L436">			    cmd.append(line);</span>
+<span class="nc bnc" id="L437" title="All 4 branches missed.">			    boolean lineEndsWithSeparator = (line.length() &gt; 0 &amp;&amp; StringUtil.lastChar(line) == separator);</span>
+<span class="nc bnc" id="L438" title="All 4 branches missed.">			    if (lineEndsWithSeparator || !iterator.hasNext()) {</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">			    	if (lineEndsWithSeparator)</span>
+<span class="nc" id="L440">			    		cmd.delete(cmd.length() - 1, cmd.length()); // delete trailing separators</span>
+<span class="nc" id="L441">			        String sql = cmd.toString().trim();</span>
+<span class="nc bnc" id="L442" title="All 6 branches missed.">			        if (sql.length() &gt; 0 &amp;&amp; (!ignoreComments || !StringUtil.startsWithIgnoreCase(sql, &quot;COMMENT&quot;))) {</span>
+			        	try {
+<span class="nc bnc" id="L444" title="All 2 branches missed.">				        	if (SQLUtil.isQuery(sql))</span>
+<span class="nc" id="L445">				        		result = queryAndSimplify(sql, connection);</span>
+				        	else {
+<span class="nc" id="L447">				        		result = executeUpdate(sql, connection);</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">				        		if (!Boolean.TRUE.equals(changedStructure)) {</span>
+				        			// if we are not already certain that structure was changed, check it
+<span class="nc" id="L450">					        		Boolean tmp = SQLUtil.mutatesStructure(sql);</span>
+<span class="nc bnc" id="L451" title="All 4 branches missed.">					        		if (!(changedStructure == null &amp;&amp; Boolean.FALSE.equals(tmp)))</span>
+<span class="nc" id="L452">					        			changedStructure = tmp; // merge results using the worse one (true worse than null worse than false)</span>
+				        		}
+				        	}
+<span class="nc" id="L455">						} catch (SQLException e) {</span>
+<span class="nc bnc" id="L456" title="All 2 branches missed.">							if (errorHandler == null)</span>
+<span class="nc" id="L457">								errorHandler = new ErrorHandler(DBUtil.class);</span>
+<span class="nc" id="L458">							errorHandler.handleError(&quot;Error in executing SQL: &quot; + SystemInfo.getLineSeparator() + cmd, e);</span>
+							// if we arrive here, the ErrorHandler decided not to throw an exception
+							// so we save the exception and line number and continue execution
+<span class="nc bnc" id="L461" title="All 2 branches missed.">							if (exception != null) // only the first exception is saved</span>
+<span class="nc" id="L462">								exception = new SQLScriptException(e, iterator.lineCount());</span>
+<span class="nc" id="L463">						}</span>
+				    }
+<span class="nc" id="L465">			        cmd.delete(0, cmd.length());</span>
+			    }
+<span class="nc" id="L467">			}</span>
+<span class="nc bnc" id="L468" title="All 2 branches missed.">			Object returnedValue = (exception != null ? exception : result);</span>
+<span class="nc" id="L469">			return new DBExecutionResult(returnedValue, changedStructure);</span>
+        } finally {
+<span class="nc" id="L471">			IOUtil.close(iterator);</span>
+        }
+	}
+
+    public static int executeUpdate(String sql, Connection connection) throws SQLException {
+<span class="nc bnc" id="L476" title="All 4 branches missed.">    	if (sql == null || sql.trim().length() == 0) {</span>
+<span class="nc" id="L477">    		LOGGER.warn(&quot;Empty SQL string in executeUpdate()&quot;);</span>
+<span class="nc" id="L478">    		return 0;</span>
+    	}
+<span class="nc" id="L480">        int result = 0;</span>
+<span class="nc" id="L481">        Statement statement = null;</span>
+        try {
+<span class="nc" id="L483">            statement = connection.createStatement();</span>
+<span class="nc" id="L484">            result = statement.executeUpdate(sql);</span>
+        } finally {
+<span class="nc bnc" id="L486" title="All 4 branches missed.">            if (statement != null)</span>
+<span class="nc" id="L487">                close(statement);</span>
+        }
+<span class="nc" id="L489">        return result;</span>
+    }
+
+    public static &lt;T&gt; T[] queryScalarArray(String query, Class&lt;T&gt; componentType, Connection connection) throws SQLException {
+<span class="nc" id="L493">    	Statement statement = null;</span>
+<span class="nc" id="L494">    	ResultSet resultSet = null;</span>
+    	try {
+<span class="nc" id="L496">	    	statement = connection.createStatement();</span>
+<span class="nc" id="L497">	    	resultSet = statement.executeQuery(query);</span>
+<span class="nc" id="L498">	        ArrayBuilder&lt;T&gt; builder = new ArrayBuilder&lt;T&gt;(componentType);</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">	        while (resultSet.next())</span>
+<span class="nc" id="L500">	        	builder.add(AnyConverter.convert(resultSet.getObject(1), componentType));</span>
+<span class="nc" id="L501">	        return builder.toArray();</span>
+    	} finally {
+<span class="nc" id="L503">	    	close(resultSet);</span>
+<span class="nc" id="L504">	    	close(statement);</span>
+    	}
+    }
+
+    public static Object queryAndSimplify(String query, Connection connection) throws SQLException {
+<span class="nc" id="L509">    	ResultSet resultSet = null;</span>
+    	try {
+<span class="nc" id="L511">	    	resultSet = executeQuery(query, connection);</span>
+<span class="nc" id="L512">	    	return parseAndSimplifyResultSet(resultSet);</span>
+    	} finally {
+<span class="nc bnc" id="L514" title="All 4 branches missed.">    		if (resultSet != null)</span>
+<span class="nc" id="L515">    			closeResultSetAndStatement(resultSet);</span>
+    	}
+    }
+
+    public static List&lt;Object[]&gt; query(String query, Connection connection) throws SQLException {
+<span class="nc" id="L520">    	ResultSet resultSet = null;</span>
+    	try {
+<span class="nc" id="L522">	    	resultSet = executeQuery(query, connection);</span>
+<span class="nc" id="L523">	    	return parseResultSet(resultSet);</span>
+    	} finally {
+<span class="nc bnc" id="L525" title="All 4 branches missed.">    		if (resultSet != null)</span>
+<span class="nc" id="L526">    			closeResultSetAndStatement(resultSet);</span>
+    	}
+    }
+
+    public static Object[] querySingleRow(String query, Connection connection) throws SQLException {
+<span class="nc" id="L531">    	ResultSet resultSet = null;</span>
+    	try {
+<span class="nc" id="L533">	    	resultSet = executeQuery(query, connection);</span>
+<span class="nc bnc" id="L534" title="All 2 branches missed.">	    	if (!resultSet.next())</span>
+<span class="nc" id="L535">	    		throw new ObjectNotFoundException(&quot;Database query did not return a result: &quot; + query);</span>
+<span class="nc" id="L536">	    	Object[] result = parseResultRow(resultSet);</span>
+<span class="nc bnc" id="L537" title="All 2 branches missed.">	    	if (resultSet.next())</span>
+<span class="nc" id="L538">	    		throw new IllegalStateException(&quot;One-row database query returned multiple rows: &quot; + query);</span>
+<span class="nc" id="L539">			return result;</span>
+    	} finally {
+<span class="nc bnc" id="L541" title="All 4 branches missed.">    		if (resultSet != null)</span>
+<span class="nc" id="L542">    			closeResultSetAndStatement(resultSet);</span>
+    	}
+    }
+
+    public static ResultSet executeQuery(String query, Connection connection) throws SQLException {
+<span class="nc" id="L547">    	return connection.createStatement().executeQuery(query);</span>
+    }
+
+	public static String escape(String text) {
+<span class="fc" id="L551">		return text.replace(&quot;'&quot;, &quot;''&quot;);</span>
+	}
+
+    public static ResultsWithMetadata queryWithMetadata(String query, Connection connection) throws SQLException {
+<span class="nc" id="L555">    	Statement statement = null;</span>
+<span class="nc" id="L556">    	ResultSet resultSet = null;</span>
+    	try {
+<span class="nc" id="L558">	    	statement = connection.createStatement();</span>
+<span class="nc" id="L559">	    	resultSet = statement.executeQuery(query);</span>
+<span class="nc" id="L560">            ResultSetMetaData metaData = resultSet.getMetaData();</span>
+<span class="nc" id="L561">			int columnCount = metaData.getColumnCount();</span>
+<span class="nc" id="L562">            String[] columnNames = new String[columnCount];</span>
+<span class="nc bnc" id="L563" title="All 2 branches missed.">            for (int i = 1; i &lt;= columnCount; i++)</span>
+<span class="nc" id="L564">            	columnNames[i - 1] = metaData.getColumnLabel(i);</span>
+<span class="nc" id="L565">	        List&lt;Object[]&gt; rows = new ArrayList&lt;Object[]&gt;();</span>
+<span class="nc bnc" id="L566" title="All 2 branches missed.">	        while (resultSet.next()) {</span>
+<span class="nc" id="L567">	            String[] cells = new String[columnCount];</span>
+<span class="nc bnc" id="L568" title="All 2 branches missed.">	            for (int i = 0; i &lt; columnCount; i++)</span>
+<span class="nc" id="L569">	                cells[i] = resultSet.getString(i + 1);</span>
+<span class="nc" id="L570">	            rows.add(cells);</span>
+<span class="nc" id="L571">	        }</span>
+<span class="nc" id="L572">	        String[][] array = new String[rows.size()][];</span>
+<span class="nc" id="L573">	        return new ResultsWithMetadata(columnNames, rows.toArray(array));</span>
+    	} finally {
+<span class="nc" id="L575">	    	close(resultSet);</span>
+<span class="nc" id="L576">	    	close(statement);</span>
+    	}
+    }
+
+	public static void checkReadOnly(String sql, boolean readOnly) {
+<span class="fc bfc" id="L581" title="All 2 branches covered.">		if (!readOnly)</span>
+<span class="fc" id="L582">			return;</span>
+<span class="fc" id="L583">		Boolean mutation = SQLUtil.mutatesDataOrStructure(sql);</span>
+<span class="pc bpc" id="L584" title="1 of 4 branches missed.">		if (mutation == null || mutation)</span>
+<span class="fc" id="L585">			throw new IllegalStateException(&quot;Tried to mutate a database with read-only settings: &quot; + sql);</span>
+<span class="fc" id="L586">	}</span>
+
+    public static void logMetaData(Connection connection) {
+    	try {
+<span class="nc" id="L590">	        DatabaseMetaData metaData = connection.getMetaData();</span>
+<span class="nc" id="L591">	        JDBC_LOGGER.info(&quot;Connected to &quot; + metaData.getDatabaseProductName() + ' ' + metaData.getDatabaseProductVersion());</span>
+<span class="nc" id="L592">	        JDBC_LOGGER.info(&quot;Using driver &quot; + metaData.getDriverName() + ' ' + metaData.getDriverVersion());</span>
+<span class="nc" id="L593">	        JDBC_LOGGER.info(&quot;JDBC version &quot; + metaData.getJDBCMajorVersion() + '.' + metaData.getJDBCMinorVersion());</span>
+	        
+<span class="nc" id="L595">        } catch (SQLException e) {</span>
+<span class="nc" id="L596">        	LOGGER.error(&quot;Failed to fetch metadata from connection &quot; + connection);</span>
+<span class="nc" id="L597">        }</span>
+<span class="nc" id="L598">    }</span>
+
+    public static List&lt;DBTable&gt; dependencyOrderedTables(TableHolder tableHolder) {
+<span class="fc" id="L601">        DependencyModel&lt;DBTable&gt; model = new DependencyModel&lt;DBTable&gt;();</span>
+<span class="fc bfc" id="L602" title="All 2 branches covered.">        for (DBTable table : tableHolder.getTables())</span>
+<span class="fc" id="L603">            model.addNode(table);</span>
+<span class="fc" id="L604">        return model.dependencyOrderedObjects(true);</span>
+    }
+
+	public static boolean equivalent(DBUniqueConstraint uk, DBPrimaryKeyConstraint pk) {
+<span class="nc" id="L608">	    return Arrays.equals(uk.getColumnNames(), pk.getColumnNames());</span>
+    }
+
+	public static void assertAllDbResourcesClosed(boolean critical) {
+<span class="fc" id="L612">		boolean success = true;</span>
+<span class="fc" id="L613">		String message = null;</span>
+<span class="pc bpc" id="L614" title="1 of 2 branches missed.">		if (Debug.active()) {</span>
+<span class="nc" id="L615">			success &amp;= PooledConnectionHandler.assertAllConnectionsClosed(false);</span>
+<span class="nc" id="L616">			success &amp;= LoggingPreparedStatementHandler.assertAllStatementsClosed(false);</span>
+<span class="nc" id="L617">			success &amp;= LoggingStatementHandler.assertAllStatementsClosed(false);</span>
+<span class="nc" id="L618">			success &amp;= LoggingResultSetHandler.assertAllResultSetsClosed(false);</span>
+<span class="nc bnc" id="L619" title="All 2 branches missed.">			if (!success)</span>
+<span class="nc" id="L620">				message = &quot;There are unclosed database resources&quot;;</span>
+		} else {
+<span class="fc" id="L622">			int c = getOpenConnectionCount();</span>
+<span class="fc" id="L623">			int r = getOpenResultSetCount();</span>
+<span class="fc" id="L624">			int s = getOpenStatementCount();</span>
+<span class="fc" id="L625">			int p = getOpenPreparedStatementCount();</span>
+<span class="pc bpc" id="L626" title="4 of 8 branches missed.">			success = (c == 0 &amp;&amp; r == 0 &amp;&amp; s == 0 &amp;&amp; p == 0);</span>
+<span class="pc bpc" id="L627" title="1 of 2 branches missed.">			if (!success) {</span>
+<span class="nc" id="L628">				StringBuilder builder = new StringBuilder();</span>
+<span class="nc bnc" id="L629" title="All 2 branches missed.">				if (c != 0)</span>
+<span class="nc" id="L630">					builder.append(c).append(&quot; connection(s)&quot;);</span>
+<span class="nc bnc" id="L631" title="All 2 branches missed.">				if (r != 0)</span>
+<span class="nc bnc" id="L632" title="All 2 branches missed.">					builder.append(builder.length() &gt; 0 ? &quot;, &quot; : &quot;&quot;).append(r).append(&quot; result set(s)&quot;);</span>
+<span class="nc bnc" id="L633" title="All 2 branches missed.">				if (s != 0)</span>
+<span class="nc bnc" id="L634" title="All 2 branches missed.">					builder.append(builder.length() &gt; 0 ? &quot;, &quot; : &quot;&quot;).append(s).append(&quot; statement(s)&quot;);</span>
+<span class="nc bnc" id="L635" title="All 2 branches missed.">				if (p != 0)</span>
+<span class="nc bnc" id="L636" title="All 2 branches missed.">					builder.append(builder.length() &gt; 0 ? &quot;, &quot; : &quot;&quot;).append(s).append(&quot; prepared statement(s)&quot;);</span>
+<span class="nc" id="L637">				message = &quot;There are unclosed database resources: &quot; + builder.toString();</span>
+			}
+		}
+<span class="pc bpc" id="L640" title="1 of 2 branches missed.">		if (!success) {</span>
+<span class="nc bnc" id="L641" title="All 2 branches missed.">			if (critical)</span>
+<span class="nc" id="L642">				throw new AssertionError(message);</span>
+			else
+<span class="nc" id="L644">				LOGGER.warn(message);</span>
+		}
+<span class="fc" id="L646">	}</span>
+
+	public static boolean containsMandatoryColumn(DBConstraint fk) {
+<span class="pc bnc" id="L649" title="All 2 branches missed.">		for (String columnName : fk.getColumnNames())</span>
+<span class="nc bnc" id="L650" title="All 2 branches missed.">			if (!fk.getTable().getColumn(columnName).isNullable())</span>
+<span class="nc" id="L651">				return true;</span>
+<span class="nc" id="L652">		return false;</span>
+	}
+
+
+	public static Database getMetaData(String environment, 
+			boolean importUKs, boolean importIndexes, boolean importSequences, boolean importChecks,
+			String tableExclusionPattern, boolean lazy, boolean cached) 
+				throws ConnectFailedException, ImportFailedException {
+<span class="nc" id="L660">		DBMetaDataImporter importer = configureImporter(new JDBCDBImporter(environment), </span>
+				importUKs, importIndexes, importSequences, importChecks, tableExclusionPattern, lazy);
+<span class="nc bnc" id="L662" title="All 2 branches missed.">		if (cached)</span>
+<span class="nc" id="L663">			importer = new CachingDBImporter(importer, environment);</span>
+<span class="nc" id="L664">		return importer.importDatabase();</span>
+	}
+
+	public static Database getMetaData(Connection connection, String user, String schemaName,
+			boolean importUKs, boolean importIndexes, boolean importSequences, boolean importChecks,
+			String tableExclusionPattern, boolean lazy) 
+				throws ConnectFailedException, ImportFailedException {
+<span class="nc" id="L671">		JDBCDBImporter importer = new JDBCDBImporter(connection, user, schemaName);</span>
+<span class="nc" id="L672">		configureImporter(importer, </span>
+				importUKs, importIndexes, importSequences, importChecks, tableExclusionPattern, lazy);
+<span class="nc" id="L674">		return importer.importDatabase();</span>
+	}
+
+	private static JDBCDBImporter configureImporter(JDBCDBImporter importer, 
+			boolean importUKs, boolean importIndexes, boolean importSequences, boolean importChecks,
+			String tableExclusionPattern, boolean lazy) {
+<span class="nc" id="L680">		importer.setExcludeTables(tableExclusionPattern);</span>
+<span class="nc" id="L681">		importer.setLazy(lazy);</span>
+<span class="nc" id="L682">		importer.setImportingUKs(importUKs);</span>
+<span class="nc" id="L683">		importer.setImportingIndexes(importIndexes);</span>
+<span class="nc" id="L684">		importer.setImportingSequences(importSequences);</span>
+<span class="nc" id="L685">		importer.setImportingChecks(importChecks);</span>
+<span class="nc" id="L686">		return importer;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

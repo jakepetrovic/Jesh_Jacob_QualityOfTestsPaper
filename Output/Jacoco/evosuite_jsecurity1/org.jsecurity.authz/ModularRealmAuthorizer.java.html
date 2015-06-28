@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ModularRealmAuthorizer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.authz</a> &gt; <span class="el_source">ModularRealmAuthorizer.java</span></div><h1>ModularRealmAuthorizer.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.authz;
+
+import org.jsecurity.authz.permission.PermissionResolver;
+import org.jsecurity.authz.permission.PermissionResolverAware;
+import org.jsecurity.realm.Realm;
+import org.jsecurity.subject.PrincipalCollection;
+
+import java.util.Collection;
+import java.util.List;
+
+/**
+ * A &lt;tt&gt;ModularRealmAuthorizer&lt;/tt&gt; is an &lt;tt&gt;Authorizer&lt;/tt&gt; implementation that consults one or more configured
+ * {@link Realm Realm}s during an authorization operation.
+ *
+ * @author Les Hazlewood
+ * @since 0.2
+ */
+public class ModularRealmAuthorizer implements Authorizer, PermissionResolverAware {
+
+    /**
+     * The realms to consult during any authorization check.
+     */
+    protected Collection&lt;Realm&gt; realms;
+
+    /**
+     * Default no-argument constructor, does nothing.
+     */
+<span class="fc" id="L46">    public ModularRealmAuthorizer() {</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Constructor that accepts the &lt;code&gt;Realm&lt;/code&gt;s to consult during an authorization check.  Immediately calls
+     * {@link #setRealms setRealms(realms)}.
+     * @param realms the realms to consult during an authorization check.
+     */
+<span class="fc" id="L54">    public ModularRealmAuthorizer(Collection&lt;Realm&gt; realms) {</span>
+<span class="fc" id="L55">        setRealms(realms);</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * Returns the realms wrapped by this &lt;code&gt;Authorizer&lt;/code&gt; which are consulted during an authorization check.
+     * @return the realms wrapped by this &lt;code&gt;Authorizer&lt;/code&gt; which are consulted during an authorization check.
+     */
+    public Collection&lt;Realm&gt; getRealms() {
+<span class="fc" id="L63">        return this.realms;</span>
+    }
+
+    /**
+     * Sets the realms wrapped by this &lt;code&gt;Authorizer&lt;/code&gt; which are consulted during an authorization check.
+     * @param realms the realms wrapped by this &lt;code&gt;Authorizer&lt;/code&gt; which are consulted during an authorization check.
+     */
+    public void setRealms(Collection&lt;Realm&gt; realms) {
+<span class="fc" id="L71">        this.realms = realms;</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Used by the {@link Authorizer Authorizer} implementation methods to ensure that the {@link #setRealms realms}
+     * has been set.  The default implementation ensures the property is not null and not empty.
+     *
+     * @throws IllegalStateException if the &lt;tt&gt;realms&lt;/tt&gt; property is configured incorrectly.
+     */
+    protected void assertRealmsConfigured() throws IllegalStateException {
+<span class="fc" id="L81">        Collection&lt;Realm&gt; realms = getRealms();</span>
+<span class="fc bfc" id="L82" title="All 4 branches covered.">        if (realms == null || realms.isEmpty()) {</span>
+<span class="fc" id="L83">            String msg = &quot;Configuration error:  No realms have been configured!  One or more realms must be &quot; +</span>
+                    &quot;present to execute an authorization operation.&quot;;
+<span class="fc" id="L85">            throw new IllegalStateException(msg);</span>
+        }
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Sets the specified {@link PermissionResolver PermissionResolver} on any of the wrapped realms that implement
+     * the {@link org.jsecurity.authz.permission.PermissionResolverAware PermissionResolverAware} interface.
+     *
+     * @param permissionResolver the permissionResolver to set on all of the wrapped realms that implement the
+     * {@link org.jsecurity.authz.permission.PermissionResolverAware PermissionResolverAware} interface.
+     */
+    public void setPermissionResolver(PermissionResolver permissionResolver) {
+<span class="fc" id="L97">        Collection&lt;Realm&gt; realms = getRealms();</span>
+<span class="fc bfc" id="L98" title="All 4 branches covered.">        if (realms != null &amp;&amp; !realms.isEmpty()) {</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            for (Realm realm : realms) {</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">                if (realm instanceof PermissionResolverAware) {</span>
+<span class="fc" id="L101">                    ((PermissionResolverAware) realm).setPermissionResolver(permissionResolver);</span>
+                }
+<span class="fc" id="L103">            }</span>
+        }
+<span class="fc" id="L105">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, String)} returns &lt;code&gt;true&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean isPermitted(PrincipalCollection principals, String permission) {
+<span class="fc" id="L113">        assertRealmsConfigured();</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        for (Realm realm : getRealms()) {</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (realm.isPermitted(principals, permission)) {</span>
+<span class="nc" id="L116">                return true;</span>
+            }
+<span class="fc" id="L118">        }</span>
+<span class="fc" id="L119">        return false;</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, Permission)} call returns &lt;code&gt;true&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean isPermitted(PrincipalCollection principals, Permission permission) {
+<span class="fc" id="L128">        assertRealmsConfigured();</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (Realm realm : getRealms()) {</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">            if (realm.isPermitted(principals, permission)) {</span>
+<span class="nc" id="L131">                return true;</span>
+            }
+<span class="fc" id="L133">        }</span>
+<span class="fc" id="L134">        return false;</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, String[])} call returns &lt;code&gt;true&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean[] isPermitted(PrincipalCollection principals, String... permissions) {
+<span class="pc bpc" id="L143" title="2 of 4 branches missed.">        if (permissions != null &amp;&amp; permissions.length &gt; 0) {</span>
+<span class="fc" id="L144">            boolean[] isPermitted = new boolean[permissions.length];</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            for (int i = 0; i &lt; permissions.length; i++) {</span>
+<span class="fc" id="L146">                isPermitted[i] = isPermitted(principals, permissions[i]);</span>
+            }
+<span class="fc" id="L148">            return isPermitted;</span>
+        }
+<span class="nc" id="L150">        return new boolean[0];</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms' 
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, List)} call returns &lt;code&gt;true&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean[] isPermitted(PrincipalCollection principals, List&lt;Permission&gt; permissions) {
+<span class="pc bpc" id="L159" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc" id="L160">            boolean[] isPermitted = new boolean[permissions.size()];</span>
+<span class="nc" id="L161">            int i = 0;</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            for (Permission p : permissions) {</span>
+<span class="nc" id="L163">                isPermitted[i++] = isPermitted(principals, p);</span>
+<span class="nc" id="L164">            }</span>
+<span class="nc" id="L165">            return isPermitted;</span>
+        }
+
+<span class="fc" id="L168">        return new boolean[0];</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, String)} call returns &lt;code&gt;true&lt;/code&gt;
+     * for &lt;em&gt;all&lt;/em&gt; of the specified string permissions, &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean isPermittedAll(PrincipalCollection principals, String... permissions) {
+<span class="nc bnc" id="L177" title="All 4 branches missed.">        if (permissions != null &amp;&amp; permissions.length &gt; 0) {</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">            for (String perm : permissions) {</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                if (!isPermitted(principals, perm)) {</span>
+<span class="nc" id="L180">                    return false;</span>
+                }
+            }
+        }
+<span class="nc" id="L184">        return true;</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#isPermitted(org.jsecurity.subject.PrincipalCollection, Permission)} call returns &lt;code&gt;true&lt;/code&gt;
+     * for &lt;em&gt;all&lt;/em&gt; of the specified Permissions, &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean isPermittedAll(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) {
+<span class="fc bfc" id="L193" title="All 4 branches covered.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="pc bnc" id="L194" title="All 2 branches missed.">            for (Permission permission : permissions) {</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                if (!isPermitted(principals, permission)) {</span>
+<span class="nc" id="L196">                    return false;</span>
+                }
+<span class="nc" id="L198">            }</span>
+        }
+<span class="fc" id="L200">        return true;</span>
+    }
+
+    /**
+     * If !{@link #isPermitted(org.jsecurity.subject.PrincipalCollection, String) isPermitted(permission)}, throws
+     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
+     */
+    public void checkPermission(PrincipalCollection principals, String permission) throws AuthorizationException {
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if (!isPermitted(principals, permission)) {</span>
+<span class="nc" id="L209">            throw new UnauthorizedException(&quot;Subject does not have permission [&quot; + permission + &quot;]&quot;);</span>
+        }
+<span class="nc" id="L211">    }</span>
+
+    /**
+     * If !{@link #isPermitted(org.jsecurity.subject.PrincipalCollection, Permission) isPermitted(permission)}, throws
+     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
+     */
+    public void checkPermission(PrincipalCollection principals, Permission permission) throws AuthorizationException {
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        if (!isPermitted(principals, permission)) {</span>
+<span class="fc" id="L219">            throw new UnauthorizedException(&quot;Subject does not have permission [&quot; + permission + &quot;]&quot;);</span>
+        }
+<span class="nc" id="L221">    }</span>
+
+    /**
+     * If !{@link #isPermitted(org.jsecurity.subject.PrincipalCollection, String[]) isPermitted(permission)}, throws
+     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
+     */
+    public void checkPermissions(PrincipalCollection principals, String... permissions) throws AuthorizationException {
+<span class="pc bpc" id="L228" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; permissions.length &gt; 0) {</span>
+<span class="pc bnc" id="L229" title="All 2 branches missed.">            for (String perm : permissions) {</span>
+<span class="nc" id="L230">                checkPermission(principals, perm);</span>
+            }
+        }
+<span class="fc" id="L233">    }</span>
+
+    /**
+     * If !{@link #isPermitted(org.jsecurity.subject.PrincipalCollection, Permission) isPermitted(permission)} for
+     * &lt;em&gt;all&lt;/em&gt; the given Permissions, throws
+     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
+     */
+    public void checkPermissions(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<span class="fc bfc" id="L241" title="All 2 branches covered.">        if (permissions != null) {</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">            for (Permission permission : permissions) {</span>
+<span class="nc" id="L243">                checkPermission(principals, permission);</span>
+<span class="nc" id="L244">            }</span>
+        }
+<span class="fc" id="L246">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if any of the configured realms'
+     * {@link Realm#hasRole(org.jsecurity.subject.PrincipalCollection, String)} call returns &lt;code&gt;true&lt;/code&gt;,
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean hasRole(PrincipalCollection principals, String roleIdentifier) {
+<span class="fc" id="L254">        assertRealmsConfigured();</span>
+<span class="fc bfc" id="L255" title="All 2 branches covered.">        for (Realm realm : getRealms()) {</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">            if (realm.hasRole(principals, roleIdentifier)) {</span>
+<span class="nc" id="L257">                return true;</span>
+            }
+<span class="fc" id="L259">        }</span>
+<span class="fc" id="L260">        return false;</span>
+    }
+
+    /**
+     * Calls {@link #hasRole(org.jsecurity.subject.PrincipalCollection, String)} for each role name in the specified
+     * collection and places the return value from each call at the respective location in the returned array.
+     */
+    public boolean[] hasRoles(PrincipalCollection principals, List&lt;String&gt; roleIdentifiers) {
+<span class="pc bpc" id="L268" title="1 of 4 branches missed.">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
+<span class="nc" id="L269">            boolean[] hasRoles = new boolean[roleIdentifiers.size()];</span>
+<span class="nc" id="L270">            int i = 0;</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            for (String roleId : roleIdentifiers) {</span>
+<span class="nc" id="L272">                hasRoles[i++] = hasRole(principals, roleId);</span>
+<span class="nc" id="L273">            }</span>
+<span class="nc" id="L274">            return hasRoles;</span>
+        }
+
+<span class="fc" id="L277">        return new boolean[0];</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; iff any of the configured realms'
+     * {@link Realm#hasRole(org.jsecurity.subject.PrincipalCollection, String)} call returns &lt;code&gt;true&lt;/code&gt; for
+     * &lt;em&gt;all&lt;/em&gt; roles specified, &lt;code&gt;false&lt;/code&gt; otherwise.
+     */
+    public boolean hasAllRoles(PrincipalCollection principals, Collection&lt;String&gt; roleIdentifiers) {
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">        for (String roleIdentifier : roleIdentifiers) {</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">            if (!hasRole(principals, roleIdentifier)) {</span>
+<span class="nc" id="L288">                return false;</span>
+            }
+<span class="nc" id="L290">        }</span>
+<span class="fc" id="L291">        return true;</span>
+    }
+
+    /**
+     * If !{@link #hasRole(org.jsecurity.subject.PrincipalCollection, String) hasRole(role)}, throws
+     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
+     */
+    public void checkRole(PrincipalCollection principals, String role) throws AuthorizationException {
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">        if (!hasRole(principals, role)) {</span>
+<span class="fc" id="L300">            throw new UnauthorizedException(&quot;Subject does not have role [&quot; + role + &quot;]&quot;);</span>
+        }
+<span class="nc" id="L302">    }</span>
+
+    /**
+     * Calls {@link #checkRole(org.jsecurity.subject.PrincipalCollection, String) checkRole} for each role specified.
+     */
+    public void checkRoles(PrincipalCollection principals, Collection&lt;String&gt; roles) throws AuthorizationException {
+<span class="fc bfc" id="L308" title="All 2 branches covered.">        if (roles != null) {</span>
+<span class="pc bpc" id="L309" title="1 of 2 branches missed.">            for (String role : roles) {</span>
+<span class="nc" id="L310">                checkRole(principals, role);</span>
+<span class="nc" id="L311">            }</span>
+        }
+<span class="fc" id="L313">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

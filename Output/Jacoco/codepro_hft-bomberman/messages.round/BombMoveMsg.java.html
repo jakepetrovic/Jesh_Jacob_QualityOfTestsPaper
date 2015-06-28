@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BombMoveMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.round</a> &gt; <span class="el_source">BombMoveMsg.java</span></div><h1>BombMoveMsg.java</h1><pre class="source lang-java linenums">package messages.round;
+
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import common.Bomb;
+
+import server.ClientInfo;
+import server.ServerBomb;
+import server.ServerGameRound;
+import client.ClientBomb;
+import client.ClientGameRound;
+
+/**
+ * Message, which sends the position and direction of a bomb
+ * 
+ * @author Bjoern, Steffen
+ */
+public class BombMoveMsg implements RoundClientMsg, RoundServerMsg {
+
+<span class="fc" id="L22">	private static Logger logger = Logger.getLogger(BombMoveMsg.class);</span>
+
+	/**
+	 * position
+	 */
+	private int[] position;
+
+	/**
+	 * direction
+	 */
+	private int[] moveVector;
+
+	/**
+	 * playerID
+	 */
+	private int gameObjectId;
+
+	/**
+	 * wheater move has been stopped or not
+	 */
+	private boolean stopped;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param positio
+	 * @param moveVector
+	 */
+	public BombMoveMsg(int gameObjectId, int[] position, int[] moveVector,
+			boolean stopped) {
+<span class="fc" id="L52">		super();</span>
+<span class="fc" id="L53">		this.gameObjectId = gameObjectId;</span>
+<span class="fc" id="L54">		this.stopped = stopped;</span>
+<span class="fc" id="L55">		this.position = position;</span>
+<span class="fc" id="L56">		this.moveVector = moveVector;</span>
+<span class="fc" id="L57">	}</span>
+
+	public Point getPosition() {
+<span class="nc" id="L60">		return new Point(position[0], position[1]);</span>
+	}
+
+	private Point getMoveVector() {
+<span class="nc" id="L64">		return new Point(moveVector[0], moveVector[1]);</span>
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ServerGameRound round, ClientInfo sender) {
+		// forward message to all clients
+<span class="nc" id="L73">		round.getSession().multicastMsg(this, sender);</span>
+
+		// update corresponding bomb on server
+<span class="nc bnc" id="L76" title="All 2 branches missed.">		if (ServerBomb.class.isInstance(round.getGameObject(gameObjectId))) {</span>
+<span class="nc" id="L77">			ServerBomb bomb = (ServerBomb) round.getGameObject(gameObjectId);</span>
+<span class="nc" id="L78">			bomb.setStopped(stopped);</span>
+<span class="nc" id="L79">			bomb.updateMovement(getPosition());</span>
+		}
+<span class="nc" id="L81">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ClientGameRound round) {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">		if (ClientBomb.class.isInstance(round.getGameObjectById(gameObjectId))) {</span>
+<span class="nc" id="L89">			ClientBomb bomb = (ClientBomb) round</span>
+					.getGameObjectById(gameObjectId);
+<span class="nc" id="L91">			bomb.setStopped(stopped);</span>
+<span class="nc" id="L92">			bomb.updateMovement(getPosition());</span>
+		}
+<span class="nc" id="L94">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

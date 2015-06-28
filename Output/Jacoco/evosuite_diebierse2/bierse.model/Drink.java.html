@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Drink.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.model</a> &gt; <span class="el_source">Drink.java</span></div><h1>Drink.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package bierse.model;
+
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
+
+import bierse.view.MyKeyMap;
+
+
+/**
+ * @author Rainer Friesen
+ *
+ */
+public class Drink {
+	public static final String DRINKS_FOLDER = Model.CONFIG_FOLDER + &quot;drinks/&quot;;
+	public static final String NEW_DRINK_NAME = &quot;Neues Getr�nk&quot;;
+
+	/**
+	 * Name of the drink
+	 */
+	private String name;
+	
+	/**
+	 * Minimum price(Cent) for what the drink is sold.
+	 */
+<span class="nc" id="L35">	private int minPrice = 70;</span>
+	/**
+	 * Maximum price(Cent) for what the drink is sold,
+	 */
+<span class="nc" id="L39">	private int maxPrice = 130;</span>
+	/**
+	 * Current price(Cent) of the drink.
+	 */
+<span class="nc" id="L43">	private int currentPrice = 0;</span>
+	/**
+	 * Start price for this drink
+	 */
+<span class="nc" id="L47">	private int startPrice = 100;</span>
+	/**
+	 * Amount of drinks sold in the last iteration
+	 */
+<span class="nc" id="L51">	private int lastSold = 0;</span>
+	/**
+	 * The total amount of drinks sold
+	 */
+<span class="nc" id="L55">	private int totalSold = 0;</span>
+	/**
+	 * The average amount of drinks sold in an iteration. Used to calculate the new price.
+	 */
+<span class="nc" id="L59">	private float averageAmount = 0;</span>
+	/**
+	 * The average price in cent
+	 */
+<span class="nc" id="L63">	private float averagePrice = 0;</span>
+	/**
+	 * The average price (Cent) for what the drink is sold
+	 */
+<span class="nc" id="L67">	private float averageSoldPrice = 0;</span>
+	/**
+	 * The maximum difference between two prices in one iteration
+	 */
+<span class="nc" id="L71">	private int maxStep = 20;</span>
+	/**
+	 * The target amount of drinks to keep the price stable
+	 */
+<span class="nc" id="L75">	private int targetAmount = 20;</span>
+	/**
+	 * The delta to calculate the step width. If the targetAmount - delta is not reached 
+	 * the price is decreased by the maximum step. If the targetAmount + delta is reached
+	 * the price is increased by the maximum step.
+	 */
+<span class="nc" id="L81">	private int deltaAmount = 15;</span>
+	/**
+	 * Show if the drink is used currently
+	 */
+<span class="nc" id="L85">	private boolean used=true;</span>
+	/**
+	 * Key used to indicate the sell of a drink
+	 */
+<span class="nc" id="L89">	private int key = KeyEvent.VK_F1;</span>
+	/**
+	 * Show if the price is lower (-1), equal(0) or higher(1) than during the last iteration
+	 */
+<span class="nc" id="L93">	private int trend=0;</span>
+	/**
+	 * Keep the price and do no new calculation 
+	 */
+<span class="nc" id="L97">	private boolean keepPrice=false;</span>
+	/**
+	 * Set the new price directly without calculating 
+	 */
+<span class="nc" id="L101">	private int directPrice=0;</span>
+	
+	/**
+	 * Model that uses the drink
+	 */
+	Model model;
+
+
+	
+/**********************************************************************************************************************************************
+ * Constructor
+ *********************************************************************************************************************************************/
+<span class="nc" id="L113">	public Drink(String name, Model model) {</span>
+<span class="nc" id="L114">		this.name = name;</span>
+<span class="nc" id="L115">		this.model = model;</span>
+<span class="nc" id="L116">		load();</span>
+<span class="nc" id="L117">		currentPrice = startPrice;</span>
+<span class="nc" id="L118">	}</span>
+	
+	public Drink(String name, Model model, int startPrice) {
+<span class="nc" id="L121">		this(name, model);</span>
+<span class="nc" id="L122">		currentPrice = startPrice;</span>
+<span class="nc" id="L123">	}</span>
+	
+/**********************************************************************************************************************************************
+ * Methods
+ *********************************************************************************************************************************************/	
+	
+	/**
+	 * Sell the amount of drinks
+	 * 
+	 * @param amount Amount of drinks sold
+	 */
+	public synchronized void sell(int amount) {
+<span class="nc" id="L135">		lastSold += amount;</span>
+<span class="nc" id="L136">		model.informModelChangedListeners(Model.EVENT_DRINK_SOLD);</span>
+<span class="nc" id="L137">	}</span>
+	
+	public void setDirectPrice(int directPrice) {
+<span class="nc" id="L140">		this.directPrice = directPrice;</span>
+<span class="nc" id="L141">		model.informModelChangedListeners(Model.EVENT_DRINK_LIST_CHANGED);</span>
+<span class="nc" id="L142">	}</span>
+	
+	/**
+	 * Recalculate the current price for this drink
+	 */
+	public int recalculate() {//Calculate new average values
+<span class="nc" id="L148">		totalSold += lastSold;</span>
+<span class="nc" id="L149">		averageAmount = (float)totalSold / model.getIteration();</span>
+<span class="nc" id="L150">		averagePrice = ((averagePrice * (model.getIteration()-1)) + currentPrice) / model.getIteration();</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">		if(totalSold &gt; 0) {</span>
+<span class="nc" id="L152">			averageSoldPrice = ((averageSoldPrice * (totalSold - lastSold)) + (currentPrice * lastSold)) / totalSold;</span>
+		}
+		int newPrice;
+		
+<span class="nc bnc" id="L156" title="All 2 branches missed.">		 if(directPrice != 0) {</span>
+				// If a direct price was set, use it
+<span class="nc" id="L158">				newPrice = directPrice;</span>
+<span class="nc" id="L159">				directPrice = 0;</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">			} else if(keepPrice) {</span>
+				// Keep the price
+<span class="nc" id="L162">				newPrice = currentPrice;</span>
+			} else {
+			// Calculate the new price
+<span class="nc" id="L165">			double diffSold = lastSold - targetAmount;</span>
+<span class="nc" id="L166">			double factor = diffSold / deltaAmount;</span>
+<span class="nc" id="L167">			double change = factor * maxStep;</span>
+			
+<span class="nc" id="L169">			int priceSteps = model.getSettings().getPriceSteps();</span>
+			
+<span class="nc" id="L171">			double rest = Math.floor(Math.abs(change % priceSteps));</span>
+<span class="nc" id="L172">			double full = Math.floor(Math.abs(change / priceSteps));</span>
+	
+<span class="nc" id="L174">			int priceChange = 0;</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">			if(rest &gt;= priceSteps/2) {</span>
+<span class="nc" id="L176">				priceChange = priceSteps;</span>
+			}
+<span class="nc" id="L178">			priceChange += full * priceSteps;</span>
+			
+			// Check that the change of the price is not more than the max step
+<span class="nc bnc" id="L181" title="All 2 branches missed.">			if(priceChange &gt; maxStep) {</span>
+<span class="nc" id="L182">				priceChange = maxStep;</span>
+			}
+			
+<span class="nc bnc" id="L185" title="All 2 branches missed.">			if(model.getSettings().isStandardLogic()) {</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">				if(factor &gt;= 0) {</span>
+<span class="nc" id="L187">					newPrice = currentPrice + priceChange;</span>
+				} else {
+<span class="nc" id="L189">					newPrice = currentPrice - priceChange;</span>
+				}
+			} else {
+				// Inverse logic
+<span class="nc bnc" id="L193" title="All 2 branches missed.">				if(factor &gt;= 0) {</span>
+<span class="nc" id="L194">					newPrice = currentPrice - priceChange;</span>
+				} else {
+<span class="nc" id="L196">					newPrice = currentPrice + priceChange;</span>
+				}
+			}
+		}
+		// Check that the new price is not above the max price or below the min price
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		if(newPrice &gt; maxPrice) {</span>
+<span class="nc" id="L202">			newPrice = maxPrice;</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">		} else if(newPrice &lt; minPrice) {</span>
+<span class="nc" id="L204">			newPrice = minPrice;</span>
+		}
+		
+		
+		// Calculate the trend
+<span class="nc bnc" id="L209" title="All 2 branches missed.">		if(newPrice&gt;currentPrice) {</span>
+<span class="nc" id="L210">			trend = 1;</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">		} else if(newPrice&lt;currentPrice) {</span>
+<span class="nc" id="L212">			trend = -1;</span>
+		} else {
+<span class="nc" id="L214">			trend = 0;</span>
+		}
+
+<span class="nc" id="L217">		currentPrice = newPrice;</span>
+
+		//Debug output
+<span class="nc" id="L220">		model.getLog().debug(&quot;Recalculating drink: &quot; + name + &quot; for iteration: &quot; + model.getIteration());</span>
+<span class="nc" id="L221">		model.getLog().debug(&quot;Last sold: &quot; + lastSold);</span>
+<span class="nc" id="L222">		model.getLog().debug(&quot;Total sold:&quot; + totalSold);</span>
+<span class="nc" id="L223">		model.getLog().debug(&quot;Average sold: &quot; + averageAmount);</span>
+<span class="nc" id="L224">		model.getLog().debug(&quot;Average price: &quot; + averagePrice);</span>
+<span class="nc" id="L225">		model.getLog().debug(&quot;Average sold price: &quot; + averageSoldPrice);</span>
+<span class="nc" id="L226">		model.getLog().debug(&quot;New price: &quot; + currentPrice);</span>
+		
+		// Reset values for the next iteration
+<span class="nc" id="L229">		lastSold = 0;</span>
+		
+<span class="nc" id="L231">		return currentPrice;</span>
+	}
+	
+	/**
+	 * Save the drink description to a XML file
+	 */
+	public File save() {
+<span class="nc bnc" id="L238" title="All 2 branches missed.">		if (!NEW_DRINK_NAME.equals(name)) {</span>
+<span class="nc" id="L239">			model.getLog().debug(&quot;Save drink: &quot; + name);</span>
+			// Build JDOM document representing the settings
+<span class="nc" id="L241">			Element root = new Element(&quot;drink&quot;);</span>
+<span class="nc" id="L242">			Element minPriceElem = new Element(&quot;minPrice&quot;);</span>
+<span class="nc" id="L243">			minPriceElem.setText(String.valueOf(minPrice));</span>
+<span class="nc" id="L244">			root.addContent(minPriceElem);</span>
+<span class="nc" id="L245">			Element maxPriceElem = new Element(&quot;maxPrice&quot;);</span>
+<span class="nc" id="L246">			maxPriceElem.setText(String.valueOf(maxPrice));</span>
+<span class="nc" id="L247">			root.addContent(maxPriceElem);</span>
+<span class="nc" id="L248">			Element startPriceElem = new Element(&quot;startPrice&quot;);</span>
+<span class="nc" id="L249">			startPriceElem.setText(String.valueOf(startPrice));</span>
+<span class="nc" id="L250">			root.addContent(startPriceElem);</span>
+<span class="nc" id="L251">			Element targetAmountElem = new Element(&quot;targetAmount&quot;);</span>
+<span class="nc" id="L252">			targetAmountElem.setText(String.valueOf(targetAmount));</span>
+<span class="nc" id="L253">			root.addContent(targetAmountElem);</span>
+<span class="nc" id="L254">			Element deltaAmountElem = new Element(&quot;deltaAmount&quot;);</span>
+<span class="nc" id="L255">			deltaAmountElem.setText(String.valueOf(deltaAmount));</span>
+<span class="nc" id="L256">			root.addContent(deltaAmountElem);</span>
+<span class="nc" id="L257">			Element maxStepElem = new Element(&quot;maxStep&quot;);</span>
+<span class="nc" id="L258">			maxStepElem.setText(String.valueOf(maxStep));</span>
+<span class="nc" id="L259">			root.addContent(maxStepElem);</span>
+<span class="nc" id="L260">			Element usedElem = new Element(&quot;used&quot;);</span>
+<span class="nc" id="L261">			usedElem.setText(String.valueOf(used));</span>
+<span class="nc" id="L262">			root.addContent(usedElem);</span>
+<span class="nc" id="L263">			Element keyElem = new Element(&quot;key&quot;);</span>
+<span class="nc" id="L264">			keyElem.setText(String.valueOf(key));</span>
+<span class="nc" id="L265">			root.addContent(keyElem);</span>
+			
+<span class="nc" id="L267">			Document settingsDoc = new Document(root);</span>
+			
+			// Save JDOM document to file system
+<span class="nc" id="L270">			File folder = new File(DRINKS_FOLDER);</span>
+<span class="nc" id="L271">			File file = new File(DRINKS_FOLDER + name + &quot;.xml&quot;);</span>
+			try {
+<span class="nc bnc" id="L273" title="All 2 branches missed.">				if(!folder.exists()) {</span>
+<span class="nc" id="L274">					folder.mkdirs();</span>
+				}
+<span class="nc" id="L276">				model.getLog().debug(&quot;File for Drink: &quot; + file.getAbsolutePath());</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">				if(file.exists()) {</span>
+<span class="nc" id="L278">					file.delete();</span>
+				}
+<span class="nc" id="L280">				file.createNewFile();</span>
+<span class="nc" id="L281">				FileOutputStream fos = new FileOutputStream(file);</span>
+<span class="nc" id="L282">				XMLOutputter serializer = new XMLOutputter();</span>
+<span class="nc" id="L283">				serializer.output(settingsDoc, fos);</span>
+<span class="nc" id="L284">				fos.flush();</span>
+<span class="nc" id="L285">				fos.close();</span>
+<span class="nc" id="L286">			} catch(Exception e) {</span>
+<span class="nc" id="L287">				model.getLog().error(this, e);</span>
+<span class="nc" id="L288">			}</span>
+<span class="nc" id="L289">			return file;</span>
+		}
+<span class="nc" id="L291">		return null;</span>
+	}
+	
+	/**
+	 * Load the description from a XML file
+	 */
+	public void load() {
+<span class="nc" id="L298">		model.getLog().debug(&quot;Load drink: &quot; + name);</span>
+		try {
+<span class="nc" id="L300">			File file = new File(DRINKS_FOLDER + name + &quot;.xml&quot;);</span>
+<span class="nc" id="L301">			model.getLog().debug(&quot;File for Drink: &quot; + file.getAbsolutePath());</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">			if(file.exists()) {</span>
+<span class="nc" id="L303">				SAXBuilder builder = new SAXBuilder();</span>
+<span class="nc" id="L304">				Document doc = builder.build(file);</span>
+<span class="nc" id="L305">				Element root = doc.getRootElement();</span>
+<span class="nc" id="L306">				minPrice = Integer.valueOf(root.getChildText(&quot;minPrice&quot;));</span>
+<span class="nc" id="L307">				maxPrice = Integer.valueOf(root.getChildText(&quot;maxPrice&quot;));</span>
+<span class="nc" id="L308">				startPrice = Integer.valueOf(root.getChildText(&quot;startPrice&quot;));</span>
+<span class="nc" id="L309">				targetAmount = Integer.valueOf(root.getChildText(&quot;targetAmount&quot;));</span>
+<span class="nc" id="L310">				deltaAmount = Integer.valueOf(root.getChildText(&quot;deltaAmount&quot;));</span>
+<span class="nc" id="L311">				maxStep = Integer.valueOf(root.getChildText(&quot;maxStep&quot;));</span>
+<span class="nc" id="L312">				used = Boolean.parseBoolean(root.getChildText(&quot;used&quot;));</span>
+<span class="nc" id="L313">				key = Integer.valueOf(root.getChildText(&quot;key&quot;));</span>
+			}
+<span class="nc" id="L315">		} catch(Exception e1) {</span>
+<span class="nc" id="L316">			model.getLog().error(this, e1);</span>
+<span class="nc" id="L317">		}</span>
+<span class="nc" id="L318">	}</span>
+	
+	public String toString() {
+<span class="nc" id="L321">		return name;</span>
+	}
+	
+	public static String getDataHeaderString() {
+<span class="nc" id="L325">		return &quot;NAME;MIN_PRICE;START_PRICE;MAX_PRICE;AVG_AMOUNT;AVG_PRICE;AVG_SOLD_PRICE;TOTAL_SOLD&quot;;</span>
+	}
+	
+	public String getDataString() {
+<span class="nc" id="L329">		StringBuilder result = new StringBuilder();</span>
+<span class="nc" id="L330">		result.append(name);</span>
+<span class="nc" id="L331">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L332">		result.append(minPrice);</span>
+<span class="nc" id="L333">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L334">		result.append(startPrice);</span>
+<span class="nc" id="L335">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L336">		result.append(maxPrice);</span>
+<span class="nc" id="L337">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L338">		result.append(averageAmount);</span>
+<span class="nc" id="L339">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L340">		result.append(averagePrice);</span>
+<span class="nc" id="L341">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L342">		result.append(averageSoldPrice);</span>
+<span class="nc" id="L343">		result.append(Model.DELIMITER);</span>
+<span class="nc" id="L344">		result.append(totalSold);</span>
+<span class="nc" id="L345">		return result.toString();</span>
+	}
+	
+/**********************************************************************************************************************************************
+ * Getters and Setters
+ *********************************************************************************************************************************************/
+	
+	public int getMinPrice() {
+<span class="nc" id="L353">		return minPrice;</span>
+	}
+	public void setMinPrice(int minPrice) {
+<span class="nc" id="L356">		this.minPrice = minPrice;</span>
+<span class="nc" id="L357">	}</span>
+	public int getMaxPrice() {
+<span class="nc" id="L359">		return maxPrice;</span>
+	}
+	public void setMaxPrice(int maxPrice) {
+<span class="nc" id="L362">		this.maxPrice = maxPrice;</span>
+<span class="nc" id="L363">	}</span>
+	public int getCurrentPrice() {
+<span class="nc" id="L365">		return currentPrice;</span>
+	}
+	public void setCurrentPrice(int currentPrice) {
+<span class="nc" id="L368">		this.currentPrice = currentPrice;</span>
+<span class="nc" id="L369">	}</span>
+	public int getLastSold() {
+<span class="nc" id="L371">		return lastSold;</span>
+	}
+	public void setLastSold(int lastSold) {
+<span class="nc" id="L374">		this.lastSold = lastSold;</span>
+<span class="nc" id="L375">	}</span>
+	public int getTotalSold() {
+<span class="nc" id="L377">		return totalSold;</span>
+	}
+	public void setTotalSold(int totalSold) {
+<span class="nc" id="L380">		this.totalSold = totalSold;</span>
+<span class="nc" id="L381">	}</span>
+	public float getAverageAmount() {
+<span class="nc" id="L383">		return averageAmount;</span>
+	}
+	public void setAverageAmount(float averageAmount) {
+<span class="nc" id="L386">		this.averageAmount = averageAmount;</span>
+<span class="nc" id="L387">	}</span>
+	public float getAveragePrice() {
+<span class="nc" id="L389">		return averagePrice;</span>
+	}
+	public void setAveragePrice(float averagePrice) {
+<span class="nc" id="L392">		this.averagePrice = averagePrice;</span>
+<span class="nc" id="L393">	}</span>
+	public float getAverageSoldPrice() {
+<span class="nc" id="L395">		return averageSoldPrice;</span>
+	}
+	public void setAverageSoldPrice(float averageSoldPrice) {
+<span class="nc" id="L398">		this.averageSoldPrice = averageSoldPrice;</span>
+<span class="nc" id="L399">	}</span>
+	public int getMaxStep() {
+<span class="nc" id="L401">		return maxStep;</span>
+	}
+	public void setMaxStep(int maxStep) {
+<span class="nc" id="L404">		this.maxStep = maxStep;</span>
+<span class="nc" id="L405">	}</span>
+	public int getTargetAmount() {
+<span class="nc" id="L407">		return targetAmount;</span>
+	}
+	public void setTargetAmount(int targetAmount) {
+<span class="nc" id="L410">		this.targetAmount = targetAmount;</span>
+<span class="nc" id="L411">	}</span>
+	public int getDeltaAmount() {
+<span class="nc" id="L413">		return deltaAmount;</span>
+	}
+	public void setDeltaAmount(int deltaAmount) {
+<span class="nc" id="L416">		this.deltaAmount = deltaAmount;</span>
+<span class="nc" id="L417">	}</span>
+
+	public String getName() {
+<span class="nc" id="L420">		return name;</span>
+	}
+
+	public void setName(String name) {
+<span class="nc" id="L424">		this.name = name;</span>
+<span class="nc" id="L425">	}</span>
+
+	public int getStartPrice() {
+<span class="nc" id="L428">		return startPrice;</span>
+	}
+
+	public void setStartPrice(int startPrice) {
+<span class="nc" id="L432">		this.startPrice = startPrice;</span>
+<span class="nc" id="L433">	}</span>
+
+	public boolean isUsed() {
+<span class="nc" id="L436">		return used;</span>
+	}
+
+	public void setUsed(boolean used) {
+<span class="nc" id="L440">		this.used = used;</span>
+<span class="nc" id="L441">	}</span>
+
+	public int getKey() {
+<span class="nc" id="L444">		return key;</span>
+	}
+
+	public void setKey(int key) {
+<span class="nc" id="L448">		this.key = key;</span>
+<span class="nc" id="L449">	}</span>
+
+	public int getTrend() {
+<span class="nc" id="L452">		return trend;</span>
+	}
+
+	public boolean isKeepPrice() {
+<span class="nc" id="L456">		return keepPrice;</span>
+	}
+
+	public void setKeepPrice(boolean keepPrice) {
+<span class="nc" id="L460">		this.keepPrice = keepPrice;</span>
+<span class="nc" id="L461">	}</span>
+
+	public int getDirectPrice() {
+<span class="nc" id="L464">		return directPrice;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc" id="L469">		Drink drink = (Drink) obj;</span>
+<span class="nc bnc" id="L470" title="All 4 branches missed.">		if(name == null &amp;&amp; drink.getName() == null) {</span>
+<span class="nc" id="L471">			return true;</span>
+<span class="nc bnc" id="L472" title="All 4 branches missed.">		} else if (name != null &amp;&amp; drink.getName() != null) {</span>
+<span class="nc" id="L473">			return name.equals(((Drink)obj).getName());</span>
+		} else {
+<span class="nc" id="L475">			return false;</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

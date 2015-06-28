@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package client.gui;
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import client.BomberClient;
+import client.gui.components.MyPanel;
+import client.view.GameCanvas;
+
+import java.awt.color.*;
+
+
+public class Game extends MyPanel implements KeyListener{
+	
+	public GameCanvas gameCanvas ;
+	
+<span class="nc" id="L23">	JPanel cash = new JPanel();</span>
+	
+	public Game(){
+<span class="nc" id="L26">		super();</span>
+<span class="nc" id="L27">		setLayout(null);</span>
+<span class="nc" id="L28">		this.setBounds(0, 0, 800, 600);</span>
+		//setBackground(Color.red);
+<span class="nc" id="L30">		gameCanvas = new GameCanvas(800,600);</span>
+<span class="nc" id="L31">		gameCanvas.setBounds(0, 0, 800, 600);</span>
+//		cash.setBounds(0,0,800,600);
+//		cash.setBackground(Color.blue);
+<span class="nc" id="L34">		gameCanvas.setBackground(Color.white);</span>
+<span class="nc" id="L35">		gameCanvas.setVisible(true);</span>
+//		gameCanvas.addMouseListener(this);
+//		gameCanvas.setVisible(true);
+//		this.add(cash);
+<span class="nc" id="L39">		this.add(gameCanvas);</span>
+//		this.addMouseListener(this);
+<span class="nc" id="L41">		this.setFocusable(true);</span>
+<span class="nc" id="L42">		this.setEnabled(true);</span>
+<span class="nc" id="L43">		this.requestFocus();</span>
+		
+<span class="nc" id="L45">	}</span>
+		
+
+	@Override
+	public void keyPressed(KeyEvent evt) {
+<span class="nc" id="L50">		System.out.println(&quot;Key pressed&quot;);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {</span>
+<span class="nc" id="L52">			System.out.println(&quot;Escape pressedS&quot;);</span>
+<span class="nc" id="L53">			System.out.println(evt.getKeyCode());</span>
+<span class="nc" id="L54">			BomberClient.getInstance().closeSession();</span>
+			
+		}
+		
+<span class="nc" id="L58">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L64">	}</span>
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L70">	}</span>
+
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

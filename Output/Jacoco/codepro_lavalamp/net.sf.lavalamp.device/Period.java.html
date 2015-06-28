@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Period.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.lavalamp.device</a> &gt; <span class="el_source">Period.java</span></div><h1>Period.java</h1><pre class="source lang-java linenums">package net.sf.lavalamp.device;
+
+import java.util.Calendar;
+
+import net.sf.lavalamp.LavaLogger;
+/**
+ * A time period
+ * @author stehal
+ *
+ */
+<span class="pc bpc" id="L11" title="1 of 2 branches missed.">public class Period {</span>
+<span class="fc" id="L12">	private final LavaLogger logger = new LavaLogger();</span>
+	private final TimeOfDay startTime;
+	private final TimeOfDay endTime;
+
+	
+<span class="fc" id="L17">	public Period(TimeOfDay startTime, TimeOfDay endTime) {</span>
+<span class="fc" id="L18">		this.startTime = startTime;</span>
+<span class="fc" id="L19">		this.endTime = endTime;</span>
+<span class="fc" id="L20">	}</span>
+
+	public boolean isInPeriod(Calendar now) {
+
+<span class="fc" id="L24">		TimeOfDay nowTime = new TimeOfDay(now.get(Calendar.HOUR_OF_DAY) ,</span>
+				 now.get(Calendar.MINUTE));
+		
+		
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">		if (startTime.compareTo(endTime)&lt; 0) {</span>
+<span class="nc" id="L29">			return isInPeriodWhenStartAndEndOnSameDay(nowTime);</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">		} else  if (!startTime.equals(endTime)){</span>
+<span class="nc" id="L31">			return isInPeriodWhenEndIsNextDay(nowTime);</span>
+		}
+<span class="fc" id="L33">		return false;</span>
+
+	}
+
+	private boolean isInPeriodWhenEndIsNextDay(TimeOfDay nowTime) {
+<span class="nc bnc" id="L38" title="All 4 branches missed.">		assert startTime.compareTo(endTime) &gt; 0;</span>
+<span class="nc bnc" id="L39" title="All 4 branches missed.">		if (nowTime.compareTo(startTime) &gt; 0 || nowTime.compareTo(endTime) &lt; 0) {</span>
+<span class="nc" id="L40">			logger.debug(&quot;In period &quot; + startTime + &quot;-&quot; + endTime);</span>
+<span class="nc" id="L41">			return true;</span>
+		}
+<span class="nc" id="L43">		return false;</span>
+	}
+
+	private boolean isInPeriodWhenStartAndEndOnSameDay(TimeOfDay nowTime) {
+<span class="nc bnc" id="L47" title="All 4 branches missed.">		assert startTime.compareTo(endTime) &lt;0;</span>
+<span class="nc bnc" id="L48" title="All 4 branches missed.">		if (nowTime.compareTo(startTime) &gt;0  &amp;&amp; nowTime.compareTo(endTime) &lt; 0) {</span>
+<span class="nc" id="L49">			logger.debug(&quot;In period &quot; + startTime + &quot;-&quot; + endTime);</span>
+<span class="nc" id="L50">			return true;</span>
+		}
+<span class="nc" id="L52">		return false;</span>
+	}
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

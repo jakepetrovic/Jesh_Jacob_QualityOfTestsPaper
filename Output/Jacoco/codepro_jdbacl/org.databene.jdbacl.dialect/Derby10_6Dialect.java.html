@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Derby10_6Dialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.dialect</a> &gt; <span class="el_source">Derby10_6Dialect.java</span></div><h1>Derby10_6Dialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.dialect;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.databene.commons.ArrayBuilder;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.DatabaseDialect;
+import org.databene.jdbacl.model.DBSequence;
+
+/**
+ * {@link DatabaseDialect} for Derby 10.6+ which supports sequences.&lt;br/&gt;&lt;br/&gt;
+ * Created: 24.10.2011 10:09:04
+ * @since 0.6.13
+ * @author Volker Bergmann
+ */
+public class Derby10_6Dialect extends DerbyDialect {
+
+	public Derby10_6Dialect() {
+<span class="fc" id="L43">		super(true);</span>
+<span class="fc" id="L44">	}</span>
+
+	@Override
+	public String renderCreateSequence(DBSequence sequence) {
+		/*
+			CREATE SEQUENCE [ schemaName. ] SQL92Identifier
+			AS dataType 
+			| START WITH signedInteger 
+			| INCREMENT BY signedInteger 
+			| MAXVALUE signedInteger | NO MAXVALUE 
+			| MINVALUE signedInteger | NO MINVALUE 
+			| CYCLE | NO CYCLE 
+		 */
+<span class="fc" id="L57">		return super.renderCreateSequence(sequence);</span>
+	}
+	
+	@Override
+	protected String renderSequenceNameAndType(DBSequence sequence) {
+<span class="fc" id="L62">		String schemaName = sequence.getSchemaName();</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">		return (schemaName != null ? schemaName + '.' : &quot;&quot;) + sequence.getName() + &quot; AS BIGINT&quot;;</span>
+	}
+	
+	@Override
+	protected String sequenceNoCycle() {
+<span class="fc" id="L68">		return &quot;NO CYCLE&quot;;</span>
+	}
+	
+	@Override
+	public String renderDropSequence(String sequenceName) {
+<span class="fc" id="L73">		return &quot;DROP SEQUENCE &quot; + sequenceName + &quot; RESTRICT&quot;;</span>
+	}
+
+    public DBSequence[] querySequences(Connection connection) throws SQLException {
+<span class="nc" id="L77">    	List&lt;Object[]&gt; rows = DBUtil.query(&quot;SELECT SEQUENCENAME, STARTVALUE, INCREMENT, MAXIMUMVALUE, MINIMUMVALUE, &quot; +</span>
+    			&quot;CYCLEOPTION, CURRENTVALUE FROM SYS.SYSSEQUENCES&quot;, connection);
+<span class="nc" id="L79">    	ArrayBuilder&lt;DBSequence&gt; builder = new ArrayBuilder&lt;DBSequence&gt;(DBSequence.class, rows.size());</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">    	for (Object[] row : rows) {</span>
+<span class="nc" id="L81">    		DBSequence sequence = new DBSequence(row[0].toString(), null);</span>
+<span class="nc" id="L82">    		sequence.setStart(new BigInteger(row[1].toString()));</span>
+<span class="nc" id="L83">    		sequence.setIncrement(new BigInteger(row[2].toString()));</span>
+<span class="nc" id="L84">    		sequence.setMaxValue(new BigInteger(row[3].toString()));</span>
+<span class="nc" id="L85">    		sequence.setMinValue(new BigInteger(row[4].toString()));</span>
+<span class="nc" id="L86">    		sequence.setCycle(&quot;Y&quot;.equals(row[5].toString()));</span>
+<span class="nc" id="L87">    		sequence.setLastNumber(new BigInteger(row[6].toString()));</span>
+<span class="nc" id="L88">    		builder.add(sequence);</span>
+<span class="nc" id="L89">    	}</span>
+<span class="nc" id="L90">    	return builder.toArray();</span>
+	}
+    
+    @Override
+	public String renderFetchSequenceValue(String sequenceName) {
+    	// see http://db.apache.org/derby/docs/10.7/ref/rrefsqljnextvaluefor.html
+		// see http://stackoverflow.com/questions/5729063/how-to-use-sequence-in-apache-derby
+<span class="fc" id="L97">		return &quot;VALUES (NEXT VALUE FOR &quot; + sequenceName + &quot;)&quot;;</span>
+	}
+	
+    @Override
+    public void setNextSequenceValue(String sequenceName, long nextValue, Connection connection) throws SQLException {
+<span class="nc" id="L102">    	DBSequence sequence = getSequence(sequenceName, connection);</span>
+<span class="nc" id="L103">    	BigInteger lastNumber = sequence.getLastNumber();</span>
+<span class="nc" id="L104">    	long defaultNext = lastNumber.add(BigInteger.ONE).longValue();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">    	if (nextValue != defaultNext) {</span>
+<span class="nc" id="L106">    		DBUtil.executeUpdate(renderDropSequence(sequenceName), connection);</span>
+<span class="nc" id="L107">    		sequence.setStart(BigInteger.valueOf(nextValue));</span>
+<span class="nc" id="L108">    		DBUtil.executeUpdate(renderCreateSequence(sequence), connection);</span>
+    	}
+<span class="nc" id="L110">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

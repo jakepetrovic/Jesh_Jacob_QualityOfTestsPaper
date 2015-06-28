@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tile.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">common</a> &gt; <span class="el_source">Tile.java</span></div><h1>Tile.java</h1><pre class="source lang-java linenums">package common;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.Collection;
+
+/** 
+ * tile object can be specified for each tile of map
+ * 
+ * @author christian, Daniel Tunjic
+ * 
+ */
+public class Tile extends GameObject {
+	// tile properties
+	private String type;
+<span class="nc" id="L16">	private boolean accessible = true;</span>
+<span class="nc" id="L17">	private boolean bombable = false;</span>
+<span class="nc" id="L18">	private boolean visible = true;</span>
+<span class="nc" id="L19">	private double speedFactor = 1.0;</span>
+
+	/**
+	 * create tile object at coordinates p
+	 * 
+	 * @param p
+	 */
+	public Tile(Point p) {
+<span class="nc" id="L27">		super(p);</span>
+<span class="nc" id="L28">	}</span>
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L34">	}</span>
+
+	/** gets type of tile, important for tile image
+	 * @return
+	 */
+	public String getType() {
+<span class="nc" id="L40">		return this.type;</span>
+	}
+
+	/** sets type of tile, important for tile image
+	 * @param type
+	 */
+	public void setType(String type) {
+<span class="nc" id="L47">		this.type = type;</span>
+<span class="nc" id="L48">	}</span>
+	
+	/** sets a bunch of properties
+	 * @param type - String, type of tile
+	 * @param accessible - Boolean, is tile accessible
+	 * @param bombable - Boolean, is tile bombable
+	 */
+	public void setProperties(String type, boolean accessible, boolean bombable){
+<span class="nc" id="L56">		this.type = type;</span>
+<span class="nc" id="L57">		this.bombable = bombable;</span>
+<span class="nc" id="L58">		this.accessible = accessible;</span>
+<span class="nc" id="L59">	}</span>
+
+	/** returns weather tile accessible or not
+	 *  isAccessable is identical but wrong spelled
+	 * @return
+	 */
+	public boolean isAccessible() {
+<span class="nc" id="L66">		return this.accessible;</span>
+	}
+
+	/** returns weather tile accessible or not
+	 *  isAccessable is identical but wrong spelled
+	 * @return
+	 */
+	@Override
+	public boolean isAccessable() {
+<span class="nc" id="L75">		return this.accessible;</span>
+	}
+
+	/** sets if tile is accessible or not
+	 * @param a
+	 */
+	public void setAccessible(boolean a) {
+<span class="nc" id="L82">		this.accessible = a;</span>
+<span class="nc" id="L83">	}</span>
+
+	/** checks if tile can be bombed
+	 * @return
+	 */
+	public boolean isBombable() {
+<span class="nc" id="L89">		return this.bombable;</span>
+	}
+
+	/** sets if tile can be bombed
+	 * @param b
+	 */
+	public void setBombable(boolean b) {
+<span class="nc" id="L96">		this.bombable = b;</span>
+<span class="nc" id="L97">	}</span>
+
+	/** checks if tile is visible
+	 * @return
+	 */
+	public boolean isVisible() {
+<span class="nc" id="L103">		return visible;</span>
+	}
+
+	/** sets if tile is visible
+	 * @param visible
+	 */
+	public void setVisible(boolean visible) {
+<span class="nc" id="L110">		this.visible = visible;</span>
+<span class="nc" id="L111">	}</span>
+
+	/** returns speedfactor for tile
+	 * @return
+	 */
+	public double getSpeedFactor() {
+<span class="nc" id="L117">		return speedFactor;</span>
+	}
+
+	@Override
+	public void updateWithCollisionCheck(Collection&lt;GameObject&gt; gameObjects) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L124">	}</span>
+
+	@Override
+	public boolean collide(GameObject gameobject) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L129">		return false;</span>
+	}
+
+	@Override
+	public Rectangle getCollisionRectangle() {
+<span class="nc" id="L134">		return new Rectangle(position.getLocation().x - Constants.HALF_TILE,</span>
+				position.getLocation().y - Constants.HALF_TILE,
+				Constants.TILE_BORDER, Constants.TILE_BORDER);
+	}
+
+	public void die() {
+<span class="nc" id="L140">		active = false;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">		if(bombable){</span>
+<span class="nc" id="L142">			accessible = true;</span>
+		}
+<span class="nc" id="L144">	}</span>
+
+	public void destroy() {
+<span class="nc" id="L147">		die();</span>
+<span class="nc" id="L148">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

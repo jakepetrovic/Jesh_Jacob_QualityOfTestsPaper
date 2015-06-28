@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultDBTable.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DefaultDBTable.java</span></div><h1>DefaultDBTable.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2006-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.Assert;
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.HeavyweightIterator;
+import org.databene.commons.NameUtil;
+import org.databene.commons.NullSafeComparator;
+import org.databene.commons.ObjectNotFoundException;
+import org.databene.commons.OrderedSet;
+import org.databene.commons.StringUtil;
+import org.databene.jdbacl.ArrayResultSetIterator;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.QueryIterator;
+import org.databene.jdbacl.ResultSetConverter;
+import org.databene.jdbacl.SQLUtil;
+import org.databene.commons.bean.HashCodeBuilder;
+import org.databene.commons.collection.OrderedNameMap;
+import org.databene.commons.depend.Dependent;
+import org.databene.commons.iterator.ConvertingIterator;
+import org.databene.commons.iterator.TableRowIterator;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+
+/**
+ * Represents a database table.&lt;br/&gt;&lt;br/&gt;
+ * Created: 06.01.2007 08:58:49
+ * @author Volker Bergmann
+ */
+public class DefaultDBTable extends AbstractCompositeDBObject&lt;DBTableComponent&gt; implements DBTable, Dependent&lt;DBTable&gt; {
+
+    private static final long serialVersionUID = 6829370969378083211L;
+<span class="nc" id="L67">    private static final String[] EMPTY_ARRAY = new String[0];</span>
+
+    OrderedNameMap&lt;DBColumn&gt; columns;
+    private DBPrimaryKeyConstraint pk;
+    private OrderedSet&lt;DBUniqueConstraint&gt; uniqueConstraints;
+    private OrderedSet&lt;DBForeignKeyConstraint&gt; foreignKeyConstraints;
+    private OrderedNameMap&lt;DBIndex&gt; indexes;
+    private Set&lt;DBTable&gt; referrers;
+	private List&lt;DBCheckConstraint&gt; checkConstraints;
+
+    // constructors ----------------------------------------------------------------------------------------------------
+
+    public DefaultDBTable() {
+<span class="nc" id="L80">        this(null);</span>
+<span class="nc" id="L81">    }</span>
+
+    public DefaultDBTable(String name) {
+<span class="nc" id="L84">        this(name, null);</span>
+<span class="nc" id="L85">    }</span>
+
+    public DefaultDBTable(String name, DBSchema schema) {
+<span class="nc" id="L88">        super(name, &quot;table&quot;, schema);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (schema != null)</span>
+<span class="nc" id="L90">        	schema.addTable(this);</span>
+<span class="nc" id="L91">        this.doc = null;</span>
+<span class="nc" id="L92">        this.columns = OrderedNameMap.createCaseInsensitiveMap();</span>
+<span class="nc" id="L93">        this.uniqueConstraints = new OrderedSet&lt;DBUniqueConstraint&gt;();</span>
+<span class="nc" id="L94">        this.foreignKeyConstraints = new OrderedSet&lt;DBForeignKeyConstraint&gt;();</span>
+<span class="nc" id="L95">        this.checkConstraints = new ArrayList&lt;DBCheckConstraint&gt;();</span>
+<span class="nc" id="L96">        this.indexes = OrderedNameMap.createCaseInsensitiveMap();</span>
+<span class="nc" id="L97">        this.referrers = new HashSet&lt;DBTable&gt;();</span>
+<span class="nc" id="L98">    }</span>
+    
+    // properties ------------------------------------------------------------------------------------------------------
+
+    public String getDoc() {
+<span class="nc" id="L103">        return doc;</span>
+    }
+
+    public void setDoc(String doc) {
+<span class="nc" id="L107">        this.doc = doc;</span>
+<span class="nc" id="L108">    }</span>
+
+	public DBCatalog getCatalog() {
+<span class="nc" id="L111">		return getSchema().getCatalog();</span>
+	}
+
+    // schema operations -----------------------------------------------------------------------------------------------
+
+	public DBSchema getSchema() {
+<span class="nc" id="L117">        return (DBSchema) getOwner();</span>
+    }
+
+    public void setSchema(DBSchema schema) {
+<span class="nc" id="L121">        setOwner(schema);</span>
+<span class="nc" id="L122">    }</span>
+
+    // Primary Key operations ------------------------------------------------------------------------------------------
+
+    public void setPrimaryKey(DBPrimaryKeyConstraint constraint) {
+<span class="nc" id="L127">        this.pk = constraint;</span>
+<span class="nc" id="L128">    }</span>
+
+    public DBPrimaryKeyConstraint getPrimaryKeyConstraint() {
+<span class="nc" id="L131">    	return pk;</span>
+    }
+
+	public List&lt;DBTableComponent&gt; getComponents() {
+<span class="nc" id="L135">		List&lt;DBTableComponent&gt; result = new ArrayList&lt;DBTableComponent&gt;();</span>
+<span class="nc" id="L136">		result.addAll(columns.values());</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if (pk != null)</span>
+<span class="nc" id="L138">			result.add(pk);</span>
+<span class="nc" id="L139">		result.addAll(uniqueConstraints);</span>
+<span class="nc" id="L140">		result.addAll(foreignKeyConstraints);</span>
+<span class="nc" id="L141">		result.addAll(indexes.values());</span>
+<span class="nc" id="L142">		return result;</span>
+	}
+
+    // column operations -----------------------------------------------------------------------------------------------
+
+	public String[] getColumnNames() {
+<span class="nc" id="L148">		return CollectionUtil.toArray(NameUtil.getNames(columns.values()), String.class);</span>
+	}
+	
+    public List&lt;DBColumn&gt; getColumns() {
+<span class="nc" id="L152">        return columns.values();</span>
+    }
+
+    public DBColumn[] getColumns(String[] columnNames) {
+<span class="nc" id="L156">        List&lt;DBColumn&gt; list = new ArrayList&lt;DBColumn&gt;(columnNames.length);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        for (String columnName : columnNames) {</span>
+<span class="nc" id="L158">            DBColumn column = getColumn(columnName);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            if (column == null)</span>
+<span class="nc" id="L160">                throw new IllegalArgumentException(&quot;Table '&quot; + name + &quot;' does not have a column '&quot; + columnName + &quot;'&quot;);</span>
+<span class="nc" id="L161">            list.add(column);</span>
+        }
+<span class="nc" id="L163">        DBColumn[] array = new DBColumn[columnNames.length];</span>
+<span class="nc" id="L164">        return list.toArray(array);</span>
+    }
+
+    public DBColumn getColumn(String columnName) {
+<span class="nc" id="L168">        DBColumn column = columns.get(columnName);</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">        if (column == null)</span>
+<span class="nc" id="L170">            throw new ObjectNotFoundException(&quot;Column '&quot; + columnName + </span>
+                    &quot;' not found in table '&quot; + this.getName() + &quot;'&quot;);
+<span class="nc" id="L172">        return column;</span>
+    }
+
+    public void addColumn(DBColumn column) {
+<span class="nc" id="L176">        column.setTable(this);</span>
+<span class="nc" id="L177">        columns.put(column.getName(), column);</span>
+<span class="nc" id="L178">    }</span>
+
+    // index operations ------------------------------------------------------------------------------------------------
+
+    public List&lt;DBIndex&gt; getIndexes() {
+<span class="nc" id="L183">        return new ArrayList&lt;DBIndex&gt;(indexes.values());</span>
+    }
+
+    public DBIndex getIndex(String indexName) {
+<span class="nc" id="L187">        return indexes.get(indexName);</span>
+    }
+
+    public void addIndex(DBIndex index) {
+<span class="nc" id="L191">    	index.setTable(this);</span>
+<span class="nc" id="L192">        indexes.put(index.getName(), index);</span>
+<span class="nc" id="L193">    }</span>
+
+    public void removeIndex(DBIndex index) {
+<span class="nc" id="L196">        indexes.remove(index.getName());</span>
+<span class="nc" id="L197">    }</span>
+
+    // uniqueConstraint operations -------------------------------------------------------------------------------------
+
+    public Set&lt;DBUniqueConstraint&gt; getUniqueConstraints(boolean includePK) {
+<span class="nc" id="L202">    	Set&lt;DBUniqueConstraint&gt; result = new HashSet&lt;DBUniqueConstraint&gt;(uniqueConstraints);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">    	if (includePK)</span>
+<span class="nc" id="L204">    		result.add(pk);</span>
+<span class="nc" id="L205">    	return result;</span>
+    }
+
+	public DBUniqueConstraint getUniqueConstraint(String[] columnNames) {
+<span class="nc bnc" id="L209" title="All 4 branches missed.">		if (pk != null &amp;&amp; StringUtil.equalsIgnoreCase(columnNames, pk.getColumnNames()))</span>
+<span class="nc" id="L210">			return pk;</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">		for (DBUniqueConstraint constraint : uniqueConstraints)</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">			if (StringUtil.equalsIgnoreCase(columnNames, constraint.getColumnNames()))</span>
+<span class="nc" id="L213">				return constraint;</span>
+<span class="nc" id="L214">		return null;</span>
+	}
+
+	public DBUniqueConstraint getUniqueConstraint(String name) {
+<span class="nc bnc" id="L218" title="All 2 branches missed.">		if (name.equalsIgnoreCase(pk.getName()))</span>
+<span class="nc" id="L219">			return pk;</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">		for (DBUniqueConstraint constraint : uniqueConstraints)</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">			if (name.equals(constraint.getName()))</span>
+<span class="nc" id="L222">				return constraint;</span>
+<span class="nc" id="L223">		return null;</span>
+	}
+
+	public void addUniqueConstraint(DBUniqueConstraint uk) {
+<span class="nc" id="L227">		uk.setTable(this);</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">		if (uk instanceof DBPrimaryKeyConstraint)</span>
+<span class="nc" id="L229">			setPrimaryKey((DBPrimaryKeyConstraint) uk);</span>
+<span class="nc" id="L230">		uniqueConstraints.add(uk);</span>
+<span class="nc" id="L231">    }</span>
+
+    public void removeUniqueConstraint(DBUniqueConstraint constraint) {
+<span class="nc" id="L234">        uniqueConstraints.remove(constraint.getName());</span>
+<span class="nc" id="L235">    }</span>
+
+    // ForeignKeyConstraint operations ---------------------------------------------------------------------------------
+
+    public Set&lt;DBForeignKeyConstraint&gt; getForeignKeyConstraints() {
+<span class="nc" id="L240">        return new HashSet&lt;DBForeignKeyConstraint&gt;(foreignKeyConstraints);</span>
+    }
+
+	public DBForeignKeyConstraint getForeignKeyConstraint(String[] columnNames) {
+<span class="nc bnc" id="L244" title="All 2 branches missed.">		for (DBForeignKeyConstraint fk : foreignKeyConstraints)</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">			if (StringUtil.equalsIgnoreCase(fk.getColumnNames(), columnNames))</span>
+<span class="nc" id="L246">				return fk;</span>
+<span class="nc" id="L247">		throw new ObjectNotFoundException(&quot;Table '&quot; + name + &quot;' has no foreign key &quot; +</span>
+				&quot;with the columns (&quot; + ArrayFormat.format(columnNames) + &quot;)&quot;);
+	}
+
+    public void addForeignKey(DBForeignKeyConstraint constraint) {
+<span class="nc" id="L252">    	constraint.setTable(this);</span>
+<span class="nc" id="L253">        foreignKeyConstraints.add(constraint);</span>
+<span class="nc" id="L254">    }</span>
+
+    public void removeForeignKeyConstraint(DBForeignKeyConstraint constraint) {
+<span class="nc" id="L257">        foreignKeyConstraints.remove(constraint);</span>
+<span class="nc" id="L258">    }</span>
+
+    // referrer operations ---------------------------------------------------------------------------------------------
+    
+    public Collection&lt;DBTable&gt; getReferrers() {
+<span class="nc" id="L263">    	return new HashSet&lt;DBTable&gt;(referrers);</span>
+    }
+    
+	public void addReferrer(DBTable referrer) {
+<span class="nc" id="L267">		referrers.add(referrer);</span>
+<span class="nc" id="L268">    }</span>
+    
+	public String[] getPKColumnNames() {
+<span class="nc" id="L271">		DBPrimaryKeyConstraint pk = getPrimaryKeyConstraint();</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">		return (pk != null ? pk.getColumnNames() : EMPTY_ARRAY);</span>
+	}
+
+    // check constraint operations -------------------------------------------------------------------------------------
+
+	public List&lt;DBCheckConstraint&gt; getCheckConstraints() {
+<span class="nc" id="L278">		return new ArrayList&lt;DBCheckConstraint&gt;(checkConstraints);</span>
+	}
+
+	public void addCheckConstraint(DBCheckConstraint checkConstraint) {
+<span class="nc" id="L282">		checkConstraint.setTable(this);</span>
+<span class="nc" id="L283">		this.checkConstraints.add(checkConstraint);</span>
+<span class="nc" id="L284">	}</span>
+
+    // row operations --------------------------------------------------------------------------------------------------
+
+    public DBRowIterator allRows(Connection connection) throws SQLException {
+<span class="nc" id="L289">        return new DBRowIterator(this, connection, null);</span>
+    }
+    
+	public DBRowIterator queryRows(String whereClause, Connection connection) throws SQLException {
+<span class="nc" id="L293">        return new DBRowIterator(this, connection, whereClause);</span>
+	}
+
+	public long getRowCount(Connection connection) {
+<span class="nc" id="L297">		return DBUtil.countRows(name, connection);</span>
+	}
+
+	public DBRow queryByPK(Object pk, Connection connection) throws SQLException {
+<span class="nc" id="L301">    	String[] pkColumnNames = getPrimaryKeyConstraint().getColumnNames();</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">    	if (pkColumnNames.length == 0)</span>
+<span class="nc" id="L303">    		throw new ObjectNotFoundException(&quot;Table &quot; + name + &quot; has no primary key&quot;);</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">    	Object[] pkComponents = (pk.getClass().isArray() ? (Object[]) pk : new Object[] { pk });</span>
+<span class="nc" id="L305">		String whereClause = SQLUtil.renderWhereClause(pkColumnNames, pkComponents);</span>
+<span class="nc" id="L306">        DBRowIterator iterator = new DBRowIterator(this, connection, whereClause);</span>
+<span class="nc bnc" id="L307" title="All 2 branches missed.">        if (!iterator.hasNext())</span>
+<span class="nc" id="L308">        	throw new ObjectNotFoundException(&quot;No &quot; + name + &quot; row with id (&quot; + pkComponents + &quot;)&quot;);</span>
+<span class="nc" id="L309">		DBRow result = iterator.next();</span>
+<span class="nc" id="L310">		iterator.close();</span>
+<span class="nc" id="L311">		return result;</span>
+    }
+    
+    public DBRowIterator queryRowsByCellValues(String[] columns, Object[] values, Connection connection) throws SQLException {
+<span class="nc" id="L315">		String whereClause = SQLUtil.renderWhereClause(columns, values);</span>
+<span class="nc" id="L316">        return new DBRowIterator(this, connection, whereClause);</span>
+    }
+    
+	public HeavyweightIterator&lt;Object&gt; queryPKs(Connection connection) {
+<span class="nc" id="L320">		StringBuilder query = new StringBuilder(&quot;select &quot;);</span>
+<span class="nc" id="L321">		query.append(ArrayFormat.format(getPKColumnNames()));</span>
+<span class="nc" id="L322">		query.append(&quot; from &quot;).append(name);</span>
+<span class="nc" id="L323">    	Iterator&lt;ResultSet&gt; rawIterator = new QueryIterator(query.toString(), connection, 100);</span>
+<span class="nc" id="L324">        ResultSetConverter&lt;Object&gt; converter = new ResultSetConverter&lt;Object&gt;(Object.class, true);</span>
+<span class="nc" id="L325">    	return new ConvertingIterator&lt;ResultSet, Object&gt;(rawIterator, converter);</span>
+	}
+
+	public TableRowIterator query(String query, Connection connection) {
+<span class="nc" id="L329">		Assert.notEmpty(query, &quot;query&quot;);</span>
+<span class="nc" id="L330">		return new ArrayResultSetIterator(connection, query);</span>
+	}
+
+	// implementation of the 'Dependent' interface ---------------------------------------------------------------------
+
+    public int countProviders() {
+<span class="nc" id="L336">        return getForeignKeyConstraints().size();</span>
+    }
+
+    public DBTable getProvider(int index) {
+<span class="nc" id="L340">        return foreignKeyConstraints.get(index).getRefereeTable();</span>
+    }
+
+    public boolean requiresProvider(int index) {
+<span class="nc" id="L344">        String firstFkColumnName = foreignKeyConstraints.get(index).getForeignKeyColumnNames()[0];</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">		return !getColumn(firstFkColumnName).isNullable();</span>
+    }
+
+	// java.lang.Object overrides --------------------------------------------------------------------------------------
+	
+	@Override
+    public int hashCode() {
+<span class="nc" id="L352">		return HashCodeBuilder.hashCode(owner, name);</span>
+    }
+
+    public boolean equals(Object other) {
+<span class="nc bnc" id="L356" title="All 2 branches missed.">	    if (this == other)</span>
+<span class="nc" id="L357">		    return true;</span>
+<span class="nc bnc" id="L358" title="All 4 branches missed.">	    if (other == null || !(other instanceof DBTable))</span>
+<span class="nc" id="L359">		    return false;</span>
+<span class="nc" id="L360">	    DBTable that = (DBTable) other;</span>
+<span class="nc bnc" id="L361" title="All 2 branches missed.">	    if (!NullSafeComparator.equals(this.owner, that.getSchema()))</span>
+<span class="nc" id="L362">	    	return false;</span>
+<span class="nc" id="L363">	    return NullSafeComparator.equals(this.name, that.getName());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

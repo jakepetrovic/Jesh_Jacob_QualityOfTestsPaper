@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AuthorizingRealm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.realm</a> &gt; <span class="el_source">AuthorizingRealm.java</span></div><h1>AuthorizingRealm.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.realm;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.authc.credential.CredentialsMatcher;
+import org.jsecurity.authz.*;
+import org.jsecurity.authz.permission.PermissionResolver;
+import org.jsecurity.authz.permission.PermissionResolverAware;
+import org.jsecurity.authz.permission.WildcardPermissionResolver;
+import org.jsecurity.cache.Cache;
+import org.jsecurity.cache.CacheManager;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.util.Initializable;
+
+import java.util.*;
+
+/**
+ * An &lt;tt&gt;AuthorizingRealm&lt;/tt&gt; extends the &lt;tt&gt;AuthenticatingRealm&lt;/tt&gt;'s capabilities by adding Authorization
+ * (access control) support.
+ *
+ * &lt;p&gt;This implementation will perform all role and permission checks automatically (and subclasses do not have to
+ * write this logic) as long as the
+ * {@link #getAuthorizationInfo(org.jsecurity.subject.PrincipalCollection)} method returns an
+ * {@link AuthorizationInfo}.  Please see that method's JavaDoc for an in-depth explanation.
+ *
+ * &lt;p&gt;If you find that you do not want to utilize the {@link AuthorizationInfo AuthorizationInfo} construct,
+ * you are of course free to subclass the {@link AuthenticatingRealm AuthenticatingRealm} directly instead and
+ * implement the remaining Realm interface methods directly.  You might do this if you want have better control
+ * over how the Role and Permission checks occur for your specific data source.  However, using AuthorizationInfo
+ * (and its default implementation {@link SimpleAuthorizationInfo SimpleAuthorizationInfo}) is sufficient in the large
+ * majority of Realm cases.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @see SimpleAuthorizationInfo
+ * @since 0.2
+ */
+public abstract class AuthorizingRealm extends AuthenticatingRealm implements Initializable, PermissionResolverAware {
+
+    //TODO - complete JavaDoc
+
+    /*--------------------------------------------
+    |             C O N S T A N T S             |
+    ============================================*/
+<span class="fc" id="L63">    private static final Log log = LogFactory.getLog(AuthorizingRealm.class);</span>
+
+    /**
+     * The default postfix appended to the realm name for caching AuthorizationInfos.
+     */
+    private static final String DEFAULT_AUTHORIZATION_CACHE_POSTFIX = &quot;-authorization&quot;;
+
+<span class="fc" id="L70">    private static int INSTANCE_COUNT = 0;</span>
+
+    /*--------------------------------------------
+    |    I N S T A N C E   V A R I A B L E S    |
+    ============================================*/
+    /**
+     * The cache used by this realm to store AuthorizationInfos associated with individual Subject principals.
+     */
+<span class="pc" id="L78">    private Cache authorizationCache = null;</span>
+<span class="pc" id="L79">    private String authorizationCacheName = null;</span>
+
+<span class="pc" id="L81">    private PermissionResolver permissionResolver = new WildcardPermissionResolver();</span>
+
+    /*--------------------------------------------
+    |         C O N S T R U C T O R S           |
+    ============================================*/
+<span class="fc" id="L86">    public AuthorizingRealm() {</span>
+<span class="fc" id="L87">    }</span>
+
+    public AuthorizingRealm(CacheManager cacheManager) {
+<span class="nc" id="L90">        super(cacheManager);</span>
+<span class="nc" id="L91">    }</span>
+
+    public AuthorizingRealm(CredentialsMatcher matcher) {
+<span class="nc" id="L94">        super(matcher);</span>
+<span class="nc" id="L95">    }</span>
+
+    public AuthorizingRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
+<span class="nc" id="L98">        super(cacheManager, matcher);</span>
+<span class="nc" id="L99">    }</span>
+
+    /*--------------------------------------------
+    |  A C C E S S O R S / M O D I F I E R S    |
+    ============================================*/
+    public void setAuthorizationCache(Cache authorizationCache) {
+<span class="fc" id="L105">        this.authorizationCache = authorizationCache;</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (this.authorizationCache != null) {</span>
+<span class="fc" id="L107">            afterAuthorizationCacheSet();</span>
+        }
+<span class="fc" id="L109">    }</span>
+
+    public Cache getAuthorizationCache() {
+<span class="fc" id="L112">        return this.authorizationCache;</span>
+    }
+
+    public String getAuthorizationCacheName() {
+<span class="fc" id="L116">        return authorizationCacheName;</span>
+    }
+
+    public void setAuthorizationCacheName(String authorizationCacheName) {
+<span class="fc" id="L120">        this.authorizationCacheName = authorizationCacheName;</span>
+<span class="fc" id="L121">    }</span>
+
+    public PermissionResolver getPermissionResolver() {
+<span class="fc" id="L124">        return permissionResolver;</span>
+    }
+
+    public void setPermissionResolver(PermissionResolver permissionResolver) {
+<span class="fc" id="L128">        this.permissionResolver = permissionResolver;</span>
+<span class="fc" id="L129">    }</span>
+
+    /*--------------------------------------------
+    |               M E T H O D S               |
+    ============================================*/
+    /**
+     * Initializes this realm and potentially enables a cache, depending on configuration.
+     *
+     * &lt;p&gt;When this method is called, the following logic is executed:
+     * &lt;ol&gt;
+     * &lt;li&gt;If the {@link #setAuthorizationCache cache} property has been set, it will be
+     * used to cache the AuthorizationInfo objects returned from {@link #getAuthorizationInfo}
+     * method invocations.
+     * All future calls to &lt;tt&gt;getAuthorizationInfo&lt;/tt&gt; will attempt to use this cache first
+     * to alleviate any potentially unnecessary calls to an underlying data store.&lt;/li&gt;
+     * &lt;li&gt;If the {@link #setAuthorizationCache cache} property has &lt;b&gt;not&lt;/b&gt; been set,
+     * the {@link #setCacheManager cacheManager} property will be checked.
+     * If a &lt;tt&gt;cacheManager&lt;/tt&gt; has been set, it will be used to create an authorization
+     * &lt;tt&gt;cache&lt;/tt&gt;, and this newly created cache which will be used as specified in #1.&lt;/li&gt;
+     * &lt;li&gt;If neither the {@link #setAuthorizationCache (org.jsecurity.cache.Cache) cache}
+     * or {@link #setCacheManager(org.jsecurity.cache.CacheManager) cacheManager}
+     * properties are set, caching will be disabled and authorization lookups will be delegated to
+     * subclass implementations for each authorization check.&lt;/li&gt;
+     * &lt;/ol&gt;
+     */
+    public final void init() {
+<span class="fc" id="L155">        initAuthorizationCache();</span>
+<span class="fc" id="L156">    }</span>
+
+    protected void afterCacheManagerSet() {
+<span class="fc" id="L159">        this.authorizationCache = null;</span>
+<span class="fc" id="L160">        initAuthorizationCache();</span>
+<span class="fc" id="L161">    }</span>
+
+    protected void afterAuthorizationCacheSet() {
+<span class="nc" id="L164">    }</span>
+
+    public void initAuthorizationCache() {
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L168">            log.trace(&quot;Initializing authorization cache.&quot;);</span>
+        }
+
+<span class="fc" id="L171">        Cache cache = getAuthorizationCache();</span>
+
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (cache == null) {</span>
+
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L176">                log.debug(&quot;No cache implementation set.  Checking cacheManager...&quot;);</span>
+            }
+
+<span class="fc" id="L179">            CacheManager cacheManager = getCacheManager();</span>
+
+<span class="fc bfc" id="L181" title="All 2 branches covered.">            if (cacheManager != null) {</span>
+<span class="fc" id="L182">                String cacheName = getAuthorizationCacheName();</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">                if (cacheName == null) {</span>
+                    //Simple default in case they didn't provide one:
+<span class="fc" id="L185">                    cacheName = getClass().getName() + &quot;-&quot; + INSTANCE_COUNT++ + DEFAULT_AUTHORIZATION_CACHE_POSTFIX;</span>
+<span class="fc" id="L186">                    setAuthorizationCacheName(cacheName);</span>
+                }
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L189">                    log.debug(&quot;CacheManager [&quot; + cacheManager + &quot;] has been configured.  Building &quot; +</span>
+                            &quot;authorization cache named [&quot; + cacheName + &quot;]&quot;);
+                }
+<span class="fc" id="L192">                cache = cacheManager.getCache(cacheName);</span>
+<span class="fc" id="L193">                setAuthorizationCache(cache);</span>
+<span class="fc" id="L194">            } else {</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                if (log.isInfoEnabled()) {</span>
+<span class="fc" id="L196">                    log.info(&quot;No cache or cacheManager properties have been set.  Authorization caching is &quot; +</span>
+                            &quot;disabled.&quot;);
+                }
+            }
+        }
+<span class="fc" id="L201">    }</span>
+
+
+    /**
+     * Returns an account's authorization-specific information for the specified &lt;code&gt;principals&lt;/code&gt;,
+     * or &lt;tt&gt;null&lt;/tt&gt; if no account could be found.  The resulting &lt;code&gt;AuthorizationInfo&lt;/code&gt; object is used
+     * by the other method implementations in this class to automatically perform access control checks for the
+     * corresponding &lt;code&gt;Subject&lt;/code&gt;.
+     *
+     * &lt;p&gt;This implementation obtains the actual &lt;code&gt;AuthorizationInfo&lt;/code&gt; object from the subclass's
+     * implementation of
+     * {@link #doGetAuthorizationInfo(org.jsecurity.subject.PrincipalCollection) doGetAuthorizationInfo}, and then
+     * caches it for efficient reuse if caching is enabled (see below).
+     *
+     * &lt;p&gt;Invocations of this method should be thought of as completely orthogonal to acquiring
+     * {@link #getAuthenticationInfo(org.jsecurity.authc.AuthenticationToken) authenticationInfo}, since either could
+     * occur in any order.
+     *
+     * &lt;p&gt;For example, in &amp;quot;Remember Me&amp;quot; scenarios, the user identity is remembered (and
+     * assumed) for their current session and an authentication attempt during that session might never occur.
+     * But because their identity would be remembered, that is sufficient enough information to call this method to
+     * execute any necessary authorization checks.  For this reason, authentication and authorization should be
+     * loosely coupled and not depend on each other.
+     *
+     * &lt;h4&gt;Caching&lt;/h4&gt;
+     *
+     * &lt;p&gt;The &lt;code&gt;AuthorizationInfo&lt;/code&gt; values returned from this method are cached for performant reuse
+     * if caching is enabled.  Caching is enabled automatically when a &lt;code&gt;CacheManager&lt;/code&gt; has been
+     * {@link #setCacheManager injected} and then the realm is {@link #init initialized}.  It can also be enabled by explictly
+     * calling {@link #initAuthorizationCache() initAuthorizationCache()}.
+     *
+     * &lt;p&gt;If caching is enabled, the authorization cache will be checked first and if found, will return the cached
+     * &lt;code&gt;AuthorizationInfo&lt;/code&gt; immediately.  If caching is disabled, or there is a cache miss from the cache
+     * lookup, the authorization info will be looked up from the underlying data store via the
+     * {@link #doGetAuthorizationInfo(PrincipalCollection)} method, which must be implemented by subclasses.
+     *
+     * &lt;p&gt;&lt;b&gt;Please note:&lt;/b&gt;  If caching is enabled and if any authorization data for an account is changed at
+     * runtime, such as adding or removing roles and/or permissions, the subclass imlementation should clear the
+     * cached AuthorizationInfo for that account via the
+     * {@link #clearCachedAuthorizationInfo(org.jsecurity.subject.PrincipalCollection) clearCachedAuthorizationInfo}
+     * method.  This ensures that the next call to &lt;code&gt;getAuthorizationInfo(PrincipalCollection)&lt;/code&gt; will
+     * acquire the account's fresh authorization data, where it will then be cached for efficient reuse.  This
+     * ensures that stale authorization data will not be reused.
+     *
+     * @param principals the corresponding Subject's identifying principals with which to look up the Subject's
+     *                   &lt;code&gt;AuthorizationInfo&lt;/code&gt;.
+     * @return the authorization information for the account associated with the specified &lt;code&gt;principals&lt;/code&gt;,
+     *         or &lt;tt&gt;null&lt;/tt&gt; if no account could be found.
+     */
+    public AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
+
+<span class="fc bfc" id="L252" title="All 2 branches covered.">        if (principals == null) {</span>
+<span class="fc" id="L253">            return null;</span>
+        }
+
+<span class="fc" id="L256">        AuthorizationInfo info = null;</span>
+
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L259">            log.trace(&quot;Retrieving AuthorizationInfo for principals [&quot; + principals + &quot;]&quot;);</span>
+        }
+
+<span class="fc" id="L262">        Cache authzCache = getAuthorizationCache();</span>
+<span class="fc bfc" id="L263" title="All 2 branches covered.">        if (authzCache != null) {</span>
+<span class="pc bpc" id="L264" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L265">                log.trace(&quot;Attempting to retrieve the AuthorizationIfno from cache.&quot;);</span>
+            }
+<span class="nc" id="L267">            Object key = getAuthorizationCacheKey(principals);</span>
+<span class="nc" id="L268">            info = (AuthorizationInfo) authzCache.get(key);</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">                if (info == null) {</span>
+<span class="nc" id="L271">                    log.trace(&quot;No AuthorizationInfo found in cache for principals [&quot; + principals + &quot;]&quot;);</span>
+                } else {
+<span class="nc" id="L273">                    log.trace(&quot;AuthorizationInfo found in cache for principals [&quot; + principals + &quot;]&quot;);</span>
+                }
+            }
+        }
+
+
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        if (info == null) {</span>
+            // Call template method if tbe info was not found in a cache
+<span class="nc" id="L281">            info = doGetAuthorizationInfo(principals);</span>
+            // If the info is not null and the cache has been created, then cache the authorization info.
+<span class="nc bnc" id="L283" title="All 4 branches missed.">            if (info != null &amp;&amp; authzCache != null) {</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L285">                    log.trace(&quot;Caching authorization info for principals: [&quot; + principals + &quot;].&quot;);</span>
+                }
+<span class="nc" id="L287">                Object key = getAuthorizationCacheKey(principals);</span>
+<span class="nc" id="L288">                authzCache.put(key, info);</span>
+            }
+        }
+
+<span class="nc" id="L292">        return info;</span>
+    }
+
+    protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
+<span class="nc" id="L296">        return principals;</span>
+    }
+
+    /**
+     * Clears out the AuthorizationInfo cache entry for the specified account.
+     * &lt;p/&gt;
+     * This method is provided as a convenience to subclasses so they can invalidate a cache entry when they
+     * change an account's authorization data (add/remove roles or permissions) during runtime.  Because an account's
+     * AuthorizationInfo can be cached, there needs to be a way to invalidate the cache for only that account so that
+     * subsequent authorization operations don't used the (old) cached value if account data changes.
+     * &lt;p/&gt;
+     * After this method is called, the next authorization check for that same account will result in a call to
+     * {@link #getAuthorizationInfo(org.jsecurity.subject.PrincipalCollection) getAuthorizationInfo}, and the
+     * resulting return value will be cached before being returned so it can be reused for later authorization checks.
+     *
+     * @param principals the principals of the account for which to clear the cached AuthorizationInfo.
+     */
+    protected void clearCachedAuthorizationInfo(PrincipalCollection principals) {
+<span class="fc bfc" id="L314" title="All 2 branches covered.">        if ( principals == null ) {</span>
+<span class="fc" id="L315">            return;</span>
+        }
+
+<span class="fc" id="L318">        Cache cache = getAuthorizationCache();</span>
+        //cache instance will be non-null if caching is enabled:
+<span class="pc bpc" id="L320" title="1 of 2 branches missed.">        if (cache != null) {</span>
+<span class="nc" id="L321">            Object key = getAuthorizationCacheKey(principals);</span>
+<span class="nc" id="L322">            cache.remove(key);</span>
+        }
+<span class="fc" id="L324">    }</span>
+
+    /**
+     * Retrieves the AuthorizationInfo for the given principals from the underlying data store.  When returning
+     * an instance from this method, you might want to consider using an instance of
+     * {@link SimpleAuthorizationInfo SimpleAuthorizationInfo}, as it is suitable in most cases.
+     *
+     * @param principals the primary identifying principals of the AuthorizationInfo that should be retrieved.
+     * @return the AuthorizationInfo associated with this principals.
+     * @see SimpleAuthorizationInfo
+     */
+    protected abstract AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals);
+
+    @SuppressWarnings({&quot;unchecked&quot;})
+    private Collection&lt;Permission&gt; getPermissions(AuthorizationInfo info) {
+<span class="fc" id="L339">        Set&lt;Permission&gt; permissions = new HashSet&lt;Permission&gt;();</span>
+
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        if (info != null) {</span>
+<span class="pc bpc" id="L342" title="1 of 2 branches missed.">            if (info.getObjectPermissions() != null) {</span>
+<span class="nc" id="L343">                permissions.addAll(info.getObjectPermissions());</span>
+            }
+
+<span class="pc bpc" id="L346" title="1 of 2 branches missed.">            if (info.getStringPermissions() != null) {</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">                for (String strPermission : info.getStringPermissions()) {</span>
+<span class="nc" id="L348">                    Permission permission = getPermissionResolver().resolvePermission(strPermission);</span>
+<span class="nc" id="L349">                    permissions.add(permission);</span>
+<span class="nc" id="L350">                }</span>
+            }
+        }
+
+<span class="pc bpc" id="L354" title="1 of 2 branches missed.">        if (permissions.isEmpty()) {</span>
+<span class="fc" id="L355">            return Collections.EMPTY_SET;</span>
+        } else {
+<span class="nc" id="L357">            return Collections.unmodifiableSet(permissions);</span>
+        }
+    }
+
+    public boolean isPermitted(PrincipalCollection principals, String permission) {
+<span class="fc" id="L362">        Permission p = getPermissionResolver().resolvePermission(permission);</span>
+<span class="fc" id="L363">        return isPermitted(principals, p);</span>
+    }
+
+    public boolean isPermitted(PrincipalCollection principals, Permission permission) {
+<span class="fc" id="L367">        AuthorizationInfo info = getAuthorizationInfo(principals);</span>
+<span class="fc" id="L368">        return isPermitted(permission, info);</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    private boolean isPermitted(Permission permission, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="pc bpc" id="L374" title="1 of 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L375">            return ((AuthorizingAccount) info).isPermitted(permission);</span>
+        }
+
+<span class="fc" id="L378">        Collection&lt;Permission&gt; perms = getPermissions(info);</span>
+<span class="pc bpc" id="L379" title="2 of 4 branches missed.">        if (perms != null &amp;&amp; !perms.isEmpty()) {</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">            for (Permission perm : perms) {</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">                if (perm.implies(permission)) {</span>
+<span class="nc" id="L382">                    return true;</span>
+                }
+<span class="nc" id="L384">            }</span>
+        }
+<span class="fc" id="L386">        return false;</span>
+    }
+
+    public boolean[] isPermitted(PrincipalCollection subjectIdentifier, String... permissions) {
+<span class="fc" id="L390">        List&lt;Permission&gt; perms = new ArrayList&lt;Permission&gt;(permissions.length);</span>
+<span class="fc bfc" id="L391" title="All 2 branches covered.">        for (String permString : permissions) {</span>
+<span class="fc" id="L392">            perms.add(getPermissionResolver().resolvePermission(permString));</span>
+        }
+<span class="fc" id="L394">        return isPermitted(subjectIdentifier, perms);</span>
+    }
+
+    public boolean[] isPermitted(PrincipalCollection principals, List&lt;Permission&gt; permissions) {
+<span class="fc" id="L398">        AuthorizationInfo info = getAuthorizationInfo(principals);</span>
+<span class="fc" id="L399">        return isPermitted(permissions, info);</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected boolean[] isPermitted(List&lt;Permission&gt; permissions, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="fc bfc" id="L405" title="All 2 branches covered.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="fc" id="L406">            return ((AuthorizingAccount) info).isPermitted(permissions);</span>
+        }
+
+        boolean[] result;
+<span class="fc bfc" id="L410" title="All 4 branches covered.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="fc" id="L411">            int size = permissions.size();</span>
+<span class="fc" id="L412">            result = new boolean[size];</span>
+<span class="fc" id="L413">            int i = 0;</span>
+<span class="fc bfc" id="L414" title="All 2 branches covered.">            for (Permission p : permissions) {</span>
+<span class="fc" id="L415">                result[i++] = isPermitted(p, info);</span>
+<span class="fc" id="L416">            }</span>
+<span class="fc" id="L417">        } else {</span>
+<span class="fc" id="L418">            result = new boolean[0];</span>
+        }
+<span class="fc" id="L420">        return result;</span>
+    }
+
+    public boolean isPermittedAll(PrincipalCollection subjectIdentifier, String... permissions) {
+<span class="pc bpc" id="L424" title="2 of 4 branches missed.">        if (permissions != null &amp;&amp; permissions.length &gt; 0) {</span>
+<span class="fc" id="L425">            Collection&lt;Permission&gt; perms = new ArrayList&lt;Permission&gt;(permissions.length);</span>
+<span class="fc bfc" id="L426" title="All 2 branches covered.">            for (String permString : permissions) {</span>
+<span class="fc" id="L427">                perms.add(getPermissionResolver().resolvePermission(permString));</span>
+            }
+<span class="fc" id="L429">            return isPermittedAll(subjectIdentifier, perms);</span>
+        }
+<span class="nc" id="L431">        return false;</span>
+    }
+
+    public boolean isPermittedAll(PrincipalCollection principal, Collection&lt;Permission&gt; permissions) {
+<span class="fc" id="L435">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="pc bpc" id="L436" title="3 of 4 branches missed.">        return info != null &amp;&amp; isPermittedAll(permissions, info);</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected boolean isPermittedAll(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="pc bpc" id="L442" title="1 of 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L443">            return ((AuthorizingAccount) info).isPermittedAll(permissions);</span>
+        }
+
+<span class="pc bpc" id="L446" title="1 of 4 branches missed.">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc bnc" id="L447" title="All 2 branches missed.">            for (Permission p : permissions) {</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">                if (!isPermitted(p, info)) {</span>
+<span class="nc" id="L449">                    return false;</span>
+                }
+<span class="nc" id="L451">            }</span>
+        }
+<span class="fc" id="L453">        return true;</span>
+    }
+
+    public void checkPermission(PrincipalCollection subjectIdentifier, String permission) throws AuthorizationException {
+<span class="nc" id="L457">        Permission p = getPermissionResolver().resolvePermission(permission);</span>
+<span class="nc" id="L458">        checkPermission(subjectIdentifier, p);</span>
+<span class="nc" id="L459">    }</span>
+
+    public void checkPermission(PrincipalCollection principal, Permission permission) throws AuthorizationException {
+<span class="nc" id="L462">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="nc" id="L463">        checkPermission(permission, info);</span>
+<span class="nc" id="L464">    }</span>
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected void checkPermission(Permission permission, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="pc bpc" id="L469" title="1 of 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L470">            ((AuthorizingAccount) info).checkPermission(permission);</span>
+        } else {
+<span class="pc bpc" id="L472" title="1 of 2 branches missed.">            if (!isPermitted(permission, info)) {</span>
+<span class="fc" id="L473">                String msg = &quot;User is not permitted [&quot; + permission + &quot;]&quot;;</span>
+<span class="fc" id="L474">                throw new UnauthorizedException(msg);</span>
+            }
+        }
+<span class="nc" id="L477">    }</span>
+
+    public void checkPermissions(PrincipalCollection subjectIdentifier, String... permissions) throws AuthorizationException {
+<span class="pc bpc" id="L480" title="1 of 2 branches missed.">        if (permissions != null) {</span>
+<span class="pc bnc" id="L481" title="All 2 branches missed.">            for (String permString : permissions) {</span>
+<span class="nc" id="L482">                checkPermission(subjectIdentifier, permString);</span>
+            }
+        }
+<span class="nc" id="L485">    }</span>
+
+    public void checkPermissions(PrincipalCollection principal, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
+<span class="fc" id="L488">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="fc" id="L489">        checkPermissions(permissions, info);</span>
+<span class="fc" id="L490">    }</span>
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected void checkPermissions(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="pc bpc" id="L495" title="1 of 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L496">            ((AuthorizingAccount) info).checkPermissions(permissions);</span>
+        } else {
+<span class="pc bpc" id="L498" title="1 of 4 branches missed.">            if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">                for (Permission p : permissions) {</span>
+<span class="nc" id="L500">                    checkPermission(p, info);</span>
+<span class="nc" id="L501">                }</span>
+            }
+        }
+<span class="fc" id="L504">    }</span>
+
+    public boolean hasRole(PrincipalCollection principal, String roleIdentifier) {
+<span class="fc" id="L507">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="fc" id="L508">        return hasRole(roleIdentifier, info);</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected boolean hasRole(String roleIdentifier, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="fc bfc" id="L514" title="All 2 branches covered.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="fc" id="L515">            return ((AuthorizingAccount) info).hasRole(roleIdentifier);</span>
+        }
+<span class="pc bpc" id="L517" title="1 of 6 branches missed.">        return info != null &amp;&amp; info.getRoles() != null &amp;&amp; info.getRoles().contains(roleIdentifier);</span>
+    }
+
+    public boolean[] hasRoles(PrincipalCollection principal, List&lt;String&gt; roleIdentifiers) {
+<span class="fc" id="L521">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="pc bpc" id="L522" title="1 of 2 branches missed.">        boolean[] result = new boolean[roleIdentifiers != null ? roleIdentifiers.size() : 0];</span>
+<span class="pc bpc" id="L523" title="1 of 2 branches missed.">        if (info != null) {</span>
+<span class="nc" id="L524">            result = hasRoles(roleIdentifiers, info);</span>
+        }
+<span class="fc" id="L526">        return result;</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected boolean[] hasRoles(List&lt;String&gt; roleIdentifiers, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="fc bfc" id="L532" title="All 2 branches covered.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="fc" id="L533">            return ((AuthorizingAccount) info).hasRoles(roleIdentifiers);</span>
+        }
+
+        boolean[] result;
+<span class="fc bfc" id="L537" title="All 4 branches covered.">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
+<span class="fc" id="L538">            int size = roleIdentifiers.size();</span>
+<span class="fc" id="L539">            result = new boolean[size];</span>
+<span class="fc" id="L540">            int i = 0;</span>
+<span class="fc bfc" id="L541" title="All 2 branches covered.">            for (String roleName : roleIdentifiers) {</span>
+<span class="fc" id="L542">                result[i++] = hasRole(roleName, info);</span>
+<span class="fc" id="L543">            }</span>
+<span class="fc" id="L544">        } else {</span>
+<span class="fc" id="L545">            result = new boolean[0];</span>
+        }
+<span class="fc" id="L547">        return result;</span>
+    }
+
+    public boolean hasAllRoles(PrincipalCollection principal, Collection&lt;String&gt; roleIdentifiers) {
+<span class="fc" id="L551">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="pc bpc" id="L552" title="3 of 4 branches missed.">        return info != null &amp;&amp; hasAllRoles(roleIdentifiers, info);</span>
+    }
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    private boolean hasAllRoles(Collection&lt;String&gt; roleIdentifiers, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="nc bnc" id="L558" title="All 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L559">            return ((AuthorizingAccount) info).hasAllRoles(roleIdentifiers);</span>
+        }
+
+<span class="nc bnc" id="L562" title="All 4 branches missed.">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
+<span class="nc bnc" id="L563" title="All 2 branches missed.">            for (String roleName : roleIdentifiers) {</span>
+<span class="nc bnc" id="L564" title="All 2 branches missed.">                if (!hasRole(roleName, info)) {</span>
+<span class="nc" id="L565">                    return false;</span>
+                }
+<span class="nc" id="L567">            }</span>
+        }
+<span class="nc" id="L569">        return true;</span>
+    }
+
+    public void checkRole(PrincipalCollection principal, String role) throws AuthorizationException {
+<span class="nc" id="L573">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="nc" id="L574">        checkRole(role, info);</span>
+<span class="nc" id="L575">    }</span>
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected void checkRole(String role, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="pc bpc" id="L580" title="1 of 2 branches missed.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="nc" id="L581">            ((AuthorizingAccount) info).checkRole(role);</span>
+        } else {
+<span class="pc bpc" id="L583" title="1 of 2 branches missed.">            if (!hasRole(role, info)) {</span>
+<span class="fc" id="L584">                String msg = &quot;User does not have role [&quot; + role + &quot;]&quot;;</span>
+<span class="fc" id="L585">                throw new UnauthorizedException(msg);</span>
+            }
+        }
+<span class="nc" id="L588">    }</span>
+
+    public void checkRoles(PrincipalCollection principal, Collection&lt;String&gt; roles) throws AuthorizationException {
+<span class="fc" id="L591">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
+<span class="fc" id="L592">        checkRoles(roles, info);</span>
+<span class="fc" id="L593">    }</span>
+
+    @SuppressWarnings(&quot;deprecation&quot;)
+    protected void checkRoles(Collection&lt;String&gt; roles, AuthorizationInfo info) {
+        //todo Remove this once AuthorizingAccount class is deleted
+<span class="fc bfc" id="L598" title="All 2 branches covered.">        if (info instanceof AuthorizingAccount) {</span>
+<span class="fc" id="L599">            ((AuthorizingAccount) info).checkRoles(roles);</span>
+        } else {
+<span class="fc bfc" id="L601" title="All 4 branches covered.">            if (roles != null &amp;&amp; !roles.isEmpty()) {</span>
+<span class="pc bnc" id="L602" title="All 2 branches missed.">                for (String roleName : roles) {</span>
+<span class="nc" id="L603">                    checkRole(roleName, info);</span>
+<span class="nc" id="L604">                }</span>
+            }
+        }
+<span class="fc" id="L607">    }</span>
+
+    /**
+     * If authorization caching is enabled, this will remove the AuthorizationInfo from the cache.
+     * Subclasses are free to override for additional behavior, but be sure to call &lt;tt&gt;super.onLogout&lt;/tt&gt;
+     * to ensure cache cleanup.
+     *
+     * @param principals the application-specific Subject/user identifier.
+     */
+    public void onLogout(PrincipalCollection principals) {
+<span class="fc" id="L617">        clearCachedAuthorizationInfo(principals);</span>
+<span class="fc" id="L618">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

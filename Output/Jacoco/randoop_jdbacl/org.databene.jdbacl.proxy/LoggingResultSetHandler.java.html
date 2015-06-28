@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoggingResultSetHandler.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.proxy</a> &gt; <span class="el_source">LoggingResultSetHandler.java</span></div><h1>LoggingResultSetHandler.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.databene.commons.BeanUtil;
+import org.databene.commons.ConfigurationError;
+import org.databene.commons.LogCategories;
+import org.databene.commons.debug.Debug;
+import org.databene.commons.debug.ResourceMonitor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * {@link InvocationHandler} for the {@link ResultSet} interface 
+ * that logs certain calls to the category {@link LogCategories#JDBC}.&lt;br/&gt;
+ * &lt;br/&gt;
+ * Created: 12.04.2011 14:02:38
+ * @since 0.6.8
+ * @author Volker Bergmann
+ */
+public class LoggingResultSetHandler implements InvocationHandler {
+
+<span class="fc" id="L50">    private static final Logger JDBC_LOGGER = LoggerFactory.getLogger(LogCategories.JDBC);</span>
+    
+    private static volatile AtomicInteger openResultSetCount;
+    private static ResourceMonitor openResultSetMonitor;
+
+	// attributes ------------------------------------------------------------------------------------------------------
+
+	private ResultSet realResultSet;
+	private Statement statement;
+	
+	// constructor -----------------------------------------------------------------------------------------------------
+
+	static {
+<span class="fc" id="L63">		openResultSetCount = new AtomicInteger();</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">    	if (Debug.active())</span>
+<span class="nc" id="L65">    		openResultSetMonitor = new ResourceMonitor();</span>
+<span class="fc" id="L66">	}</span>
+	
+<span class="nc" id="L68">	public LoggingResultSetHandler(ResultSet realResultSet, Statement statement) {</span>
+<span class="nc" id="L69">		this.realResultSet = realResultSet;</span>
+<span class="nc" id="L70">		this.statement = statement;</span>
+<span class="nc" id="L71">		openResultSetCount.incrementAndGet();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		if (openResultSetMonitor != null)</span>
+<span class="nc" id="L73">			openResultSetMonitor.register(this);</span>
+<span class="nc" id="L74">		JDBC_LOGGER.debug(&quot;created result set {}&quot;, this);</span>
+<span class="nc" id="L75">	}</span>
+	
+	// InvocationHandler interface implementation ----------------------------------------------------------------------
+
+	public Object invoke(Object proxy, Method method, Object[] args)
+			throws Throwable {
+		try {
+<span class="nc" id="L82">			String methodName = method.getName();</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">			if (&quot;close&quot;.equals(methodName)) {</span>
+<span class="nc" id="L84">				openResultSetCount.decrementAndGet();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">				if (openResultSetMonitor != null)</span>
+<span class="nc" id="L86">					openResultSetMonitor.unregister(this);</span>
+<span class="nc" id="L87">				JDBC_LOGGER.debug(&quot;closing result set {}&quot;, this);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">			} else if (&quot;toString&quot;.equals(methodName)) {</span>
+<span class="nc" id="L89">				return &quot;ResultSet (&quot; + statement + &quot;)&quot;;</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">			} else if (&quot;getStatement&quot;.equals(methodName)) {</span>
+<span class="nc" id="L91">				return statement;</span>
+			}
+<span class="nc" id="L93">			return BeanUtil.invoke(realResultSet, method, args);</span>
+<span class="nc" id="L94">		} catch (ConfigurationError e) {</span>
+<span class="nc bnc" id="L95" title="All 4 branches missed.">			if (e.getCause() instanceof InvocationTargetException &amp;&amp; e.getCause().getCause() instanceof SQLException)</span>
+<span class="nc" id="L96">				throw e.getCause().getCause();</span>
+			else
+<span class="nc" id="L98">				throw e;</span>
+		}
+	}
+
+	// tracking methods ------------------------------------------------------------------------------------------------
+	
+	public static int getOpenResultSetCount() {
+<span class="fc" id="L105">		return openResultSetCount.get();</span>
+	}
+
+	public static void resetMonitors() {
+<span class="fc" id="L109">		openResultSetCount.set(0);</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">		if (openResultSetMonitor != null)</span>
+<span class="nc" id="L111">			openResultSetMonitor.reset();</span>
+<span class="fc" id="L112">	}</span>
+
+	public static boolean assertAllResultSetsClosed(boolean critical) {
+<span class="nc" id="L115">		return openResultSetMonitor.assertNoRegistrations(critical);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Producer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">nu.staldal.lagoon.core</a> &gt; <span class="el_source">Producer.java</span></div><h1>Producer.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (c) 2001-2002, Mikael St�ldal
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions 
+ * are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright 
+ * notice, this list of conditions and the following disclaimer.
+ * 
+ * 2. Redistributions in binary form must reproduce the above copyright 
+ * notice, this list of conditions and the following disclaimer in the 
+ * documentation and/or other materials provided with the distribution.
+ * 
+ * 3. Neither the name of the author nor the names of its contributors 
+ * may be used to endorse or promote products derived from this software 
+ * without specific prior written permission. 
+ * 
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY 
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * 
+ * Note: This is known as &quot;the modified BSD license&quot;. It's an approved 
+ * Open Source and Free Software license, see 
+ * http://www.opensource.org/licenses/ 
+ * and
+ * http://www.gnu.org/philosophy/license-list.html
+ */
+
+package nu.staldal.lagoon.core;
+
+import java.io.*;
+import java.util.*;
+
+import nu.staldal.util.Utils;
+
+
+/**
+ * A Producer is one step in the pipeline process to build a
+ * file in a website.
+ */
+<span class="fc" id="L53">public abstract class Producer implements ProducerInterface</span>
+{
+    /**
+     * Parameters to this producer.
+     */
+<span class="fc" id="L58">    private Hashtable params = new Hashtable();</span>
+
+    private String entryName;
+<span class="fc" id="L61">	private SourceManagerProvider sourceMan = null;</span>
+<span class="fc" id="L62">    private LagoonProcessor processor = null;</span>
+<span class="fc" id="L63">    private int position = 0;</span>
+
+    
+    public void destroy()
+        throws java.io.IOException        
+    {
+        // empty default implementation 
+<span class="fc" id="L70">    }</span>
+    
+
+    public void beforeBuild()
+        throws java.io.IOException        
+    {
+        // empty default implementation 
+<span class="fc" id="L77">    }</span>
+    
+
+    public void afterBuild()
+        throws java.io.IOException        
+    {
+        // empty default implementation 
+<span class="fc" id="L84">    }</span>
+
+    
+    void doDestroy()
+        throws java.io.IOException        
+    {
+<span class="fc" id="L90">        destroy();</span>
+<span class="fc" id="L91">    }</span>
+    
+
+    void doBeforeBuild()
+        throws java.io.IOException        
+    {
+<span class="fc" id="L97">        beforeBuild();</span>
+<span class="fc" id="L98">    }</span>
+
+
+    void doAfterBuild()
+        throws java.io.IOException        
+    {
+<span class="fc" id="L104">        afterBuild();</span>
+<span class="fc" id="L105">    }</span>
+    
+    
+	/**
+	 * Set the name of the sitemap entry this producer is associated with.
+	 * Used during initialization.
+	 */
+	void setEntryName(String entryName)
+	{
+<span class="fc" id="L114">        this.entryName = entryName;</span>
+<span class="fc" id="L115">	}</span>
+
+	
+	/**
+	 * Get the name of the sitemap entry this producer is associated with.
+	 */
+	public String getEntryName()
+	{
+<span class="fc" id="L123">        return entryName;</span>
+	}
+
+	
+	/**
+	 * Set the SourceManagerProvider this producer is associated with.
+	 * Used during initialization.
+	 */
+	void setSourceManager(SourceManagerProvider sourceMan)
+	{
+<span class="fc" id="L133">        this.sourceMan = sourceMan;</span>
+<span class="fc" id="L134">	}</span>
+
+	/**
+	 * Set the position of this producer in the pipeline.
+	 * Used during initialization.
+	 */
+	void setPosition(int pos)
+	{
+<span class="fc" id="L142">        this.position = pos;</span>
+<span class="fc" id="L143">	}</span>
+
+
+	/**
+	 * Get the position of this producer in the pipeline.
+	 */
+	public int getPosition()
+	{
+<span class="fc" id="L151">        return position;</span>
+	}
+
+
+	/**
+	 * Set the LagoonProcessor this producer is associated with.
+	 * Used during initialization.
+	 */
+	void setProcessor(LagoonProcessor processor)
+	{
+<span class="nc" id="L161">        this.processor = processor;</span>
+<span class="nc" id="L162">	}</span>
+
+
+	/**
+	 * Get the SourceManager this producer is associated with.
+	 */
+	public SourceManager getSourceMan()
+	{
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if (sourceMan == null)</span>
+<span class="fc" id="L171">            throw new RuntimeException(&quot;No SourceManager avaliable&quot;);</span>
+		
+<span class="nc" id="L173">		SourceManager sm = sourceMan.getSourceManager(); </span>
+        
+<span class="nc bnc" id="L175" title="All 2 branches missed.">		if (sm == null)</span>
+<span class="nc" id="L176">            throw new RuntimeException(&quot;No SourceManager avaliable&quot;);</span>
+        
+<span class="nc" id="L178">		return sm;</span>
+	}
+
+	
+	/**
+	 * Get the LagoonContext this producer is associated with.
+	 */
+	public LagoonContext getContext()
+	{
+<span class="fc" id="L187">		return processor;</span>
+	}
+
+	
+    /**
+     * Add a parameter to this producer.
+     * Used during initialization.
+     *
+     * @param name  the name of the paramter
+     * @param value  the value of the parameter
+     */
+    void addParam(String name, String value)
+    {
+<span class="fc" id="L200">        params.put(name, value);</span>
+<span class="fc" id="L201">    }</span>
+
+	
+    /**
+     * Get a parameter.
+     *
+     * @param name  the name of the parameter to get
+     * @return  the value of the requested parameter,
+     *           or null if the parameter doesn't exitst
+     */
+    public String getParam(String name)
+    {
+<span class="fc" id="L213">        return (String)params.get(name);</span>
+    }
+
+	
+    /**
+     * Get an Enumeration of all parameter names.
+     */
+    public Enumeration getParamNames()
+    {
+<span class="fc" id="L222">        return params.keys();</span>
+    }
+
+
+    private String makeKey(String key)
+    {
+<span class="nc" id="L228">        return getClass().getName() + &quot;.&quot; + position + &quot;.&quot; + key;</span>
+    }
+
+	
+    /**
+     * Read from a file in the repository.
+     * Read from the returned InputStream and close() it.
+     *
+     * @param key  the key to locate the file
+     *
+     * @return an InputStream to read the file from, or &lt;code&gt;null&lt;/code&gt;
+     * if the file wasn't found.
+     */
+    public InputStream readFileFromRepository(String key)
+    {
+<span class="nc" id="L243">        return processor.readFileFromRepository(</span>
+            Utils.encodePath(entryName),
+            makeKey(key));
+    }
+
+    /**
+     * Store a file in the repository.
+     * Write to the returned OutputStream and close() it.
+     *
+     * @param key  the key to locate the file
+     *
+     * @return  an OutputStream to write to the file, or &lt;code&gt;null&lt;/code&gt;
+	 *          if the repository is unavailable.
+     */
+    public OutputStream storeFileInRepository(String key)
+        throws IOException
+    {
+<span class="nc" id="L260">        return processor.storeFileInRepository(</span>
+            Utils.encodePath(entryName),
+            makeKey(key));
+    }
+
+
+    /**
+     * Get an object from the repository.
+     *
+     * @param key  the key to locate the object
+     *
+     * @return  the object, or &lt;code&gt;null&lt;/code&gt; if not found
+     */
+    public Object getObjectFromRepository(String key)
+        throws java.io.IOException
+    {
+<span class="nc" id="L276">        return processor.getObjectFromRepository(</span>
+            Utils.encodePath(entryName),
+            makeKey(key));
+    }
+
+
+    /**
+     * Store an object into the repository.
+     *
+     * @param key  the key to locate the object
+     * @param obj  the object to store, must be Serializable
+	 *
+	 * @return &lt;code&gt;true&lt;/code&gt; if successful, 
+	 *		   &lt;code&gt;false&lt;/code&gt; if the repository is unavailable. 
+     */
+    public boolean putObjectIntoRepository(String key, Object obj)
+        throws java.io.IOException
+    {
+<span class="nc" id="L294">        return processor.putObjectIntoRepository(</span>
+            Utils.encodePath(entryName),
+            makeKey(key),
+            obj);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

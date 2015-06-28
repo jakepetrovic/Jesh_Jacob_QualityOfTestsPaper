@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClassUtils.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.util</a> &gt; <span class="el_source">ClassUtils.java</span></div><h1>ClassUtils.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.util;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+
+/**
+ * Utility method library used to conveniently interact with &lt;code&gt;Class&lt;/code&gt;es, such as acquiring them from the
+ * application &lt;code&gt;ClassLoader&lt;/code&gt;s and instantiating Objects from them.
+ * 
+ * @author Les Hazlewood
+ * @since 0.1
+ */
+<span class="fc" id="L34">public class ClassUtils {</span>
+
+    //TODO - complete JavaDoc
+
+    /** Private internal log instance. */
+<span class="fc" id="L39">    private static final Log log = LogFactory.getLog(ClassUtils.class);</span>
+
+    /**
+     * Returns the specified resource by checking the current thread's
+     * {@link Thread#getContextClassLoader() context class loader}, then the
+     * current ClassLoader (&lt;code&gt;ClassUtils.class.getClassLoader()&lt;/code&gt;), then the system/application
+     * ClassLoader (&lt;code&gt;ClassLoader.getSystemClassLoader()&lt;/code&gt;, in that order, using
+     * {@link ClassLoader#getResourceAsStream(String) getResourceAsStream(name)}.
+     *
+     * @param name the name of the resource to acquire from the classloader(s).
+     * @return the InputStream of the resource found, or &lt;code&gt;null&lt;/code&gt; if the resource cannot be found from any
+     *         of the three mentioned ClassLoaders.
+     * @since 0.9
+     */
+    public static InputStream getResourceAsStream(String name) {
+<span class="fc" id="L54">        InputStream is = null;</span>
+<span class="fc" id="L55">        ClassLoader cl = Thread.currentThread().getContextClassLoader();</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (cl != null) {</span>
+<span class="fc" id="L57">            is = cl.getResourceAsStream(name);</span>
+        }
+
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (is == null) {</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L62">                log.trace(&quot;Resource [&quot; + name + &quot;] was not found via the thread context ClassLoader.  Trying the &quot; +</span>
+                        &quot;current ClassLoader...&quot;);
+            }
+<span class="fc" id="L65">            cl = ClassUtils.class.getClassLoader();</span>
+<span class="fc" id="L66">            is = cl.getResourceAsStream(name);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">            if (is == null) {</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L69">                    log.trace(&quot;Resource [&quot; + name + &quot;] was not found via the current class loader.  Trying the &quot; +</span>
+                            &quot;system/application ClassLoader...&quot;);
+                }
+<span class="fc" id="L72">                cl = ClassLoader.getSystemClassLoader();</span>
+<span class="fc" id="L73">                is = cl.getResourceAsStream(name);</span>
+<span class="pc bpc" id="L74" title="2 of 4 branches missed.">                if (is == null &amp;&amp; log.isTraceEnabled()) {</span>
+<span class="nc" id="L75">                    log.trace(&quot;Resource [&quot; + name + &quot;] was not found via the thread context, current, or &quot; +</span>
+                            &quot;system/application ClassLoaders.  All heuristics have been exhausted.  Returning null.&quot;);
+                }
+            }
+        }
+<span class="fc" id="L80">        return is;</span>
+    }
+
+    /**
+     * Attempts to load the specified class name from the current thread's
+     * {@link Thread#getContextClassLoader() context class loader}, then the
+     * current ClassLoader (&lt;code&gt;ClassUtils.class.getClassLoader()&lt;/code&gt;), then the system/application
+     * ClassLoader (&lt;code&gt;ClassLoader.getSystemClassLoader()&lt;/code&gt;, in that order.  If any of them cannot locate
+     * the specified class, an &lt;code&gt;UnknownClassException&lt;/code&gt; is thrown (our RuntimeException equivalent of
+     * the JRE's &lt;code&gt;ClassNotFoundException&lt;/code&gt;.
+     *
+     * @param fqcn the fully qualified class name to load
+     * @return the located class
+     * @throws UnknownClassException if the class cannot be found.
+     */
+    public static Class forName(String fqcn) throws UnknownClassException {
+<span class="fc" id="L96">        Class clazz = null;</span>
+<span class="fc" id="L97">        ClassLoader cl = Thread.currentThread().getContextClassLoader();</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (cl != null) {</span>
+            try {
+<span class="nc" id="L100">                clazz = cl.loadClass(fqcn);</span>
+<span class="fc" id="L101">            } catch (ClassNotFoundException e) {</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L103">                    log.trace(&quot;Unable to load class named [&quot; + fqcn +</span>
+                            &quot;] from the thread context ClassLoader.  Trying the current ClassLoader...&quot;);
+                }
+<span class="nc" id="L106">            }</span>
+        }
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (clazz == null) {</span>
+<span class="fc" id="L109">            cl = ClassUtils.class.getClassLoader();</span>
+            try {
+<span class="nc" id="L111">                clazz = cl.loadClass(fqcn);</span>
+<span class="fc" id="L112">            } catch (ClassNotFoundException e1) {</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L114">                    log.trace(&quot;Unable to load class named [&quot; + fqcn + &quot;] from the current ClassLoader.  &quot; +</span>
+                            &quot;Trying the system/application ClassLoader...&quot;);
+                }
+<span class="fc" id="L117">                cl = ClassLoader.getSystemClassLoader();</span>
+                try {
+<span class="nc" id="L119">                    clazz = cl.loadClass(fqcn);</span>
+<span class="fc" id="L120">                } catch (ClassNotFoundException ignored) {</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                    if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L122">                        log.trace(&quot;Unable to load class named [&quot; + fqcn + &quot;] from the &quot; +</span>
+                                &quot;system/application ClassLoader.&quot;);
+                    }
+<span class="nc" id="L125">                }</span>
+<span class="nc" id="L126">            }</span>
+        }
+
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (clazz == null) {</span>
+<span class="fc" id="L130">            String msg = &quot;Unable to load class named [&quot; + fqcn + &quot;] from the thread context, current, or &quot; +</span>
+                    &quot;system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.&quot;;
+<span class="fc" id="L132">            throw new UnknownClassException(msg);</span>
+        }
+<span class="nc" id="L134">        return clazz;</span>
+    }
+
+    public static boolean isAvailable(String fullyQualifiedClassName) {
+        try {
+<span class="nc" id="L139">            forName(fullyQualifiedClassName);</span>
+<span class="nc" id="L140">            return true;</span>
+<span class="fc" id="L141">        } catch (UnknownClassException e) {</span>
+<span class="fc" id="L142">            return false;</span>
+        }
+    }
+
+    public static Object newInstance(String fqcn) {
+<span class="nc" id="L147">        return newInstance(forName(fqcn));</span>
+    }
+
+    public static Object newInstance(String fqcn, Object... args) {
+<span class="nc" id="L151">        return newInstance(forName(fqcn), args);</span>
+    }
+
+    public static Object newInstance(Class clazz) {
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (clazz == null) {</span>
+<span class="fc" id="L156">            String msg = &quot;Class method parameter cannot be null.&quot;;</span>
+<span class="fc" id="L157">            throw new IllegalArgumentException(msg);</span>
+        }
+        try {
+<span class="fc" id="L160">            return clazz.newInstance();</span>
+<span class="nc" id="L161">        } catch (Exception e) {</span>
+<span class="nc" id="L162">            throw new org.jsecurity.util.InstantiationException(&quot;Unable to instantiate class [&quot; + clazz.getName() + &quot;]&quot;, e);</span>
+        }
+    }
+
+    public static Object newInstance(Class clazz, Object... args) {
+<span class="fc" id="L167">        Class[] argTypes = new Class[args.length];</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        for (int i = 0; i &lt; args.length; i++) {</span>
+<span class="fc" id="L169">            argTypes[i] = args[i].getClass();</span>
+        }
+<span class="nc" id="L171">        Constructor ctor = getConstructor(clazz, argTypes);</span>
+<span class="nc" id="L172">        return instantiate(ctor, args);</span>
+    }
+
+    public static Constructor getConstructor(Class clazz, Class... argTypes) {
+        try {
+<span class="nc" id="L177">            return clazz.getConstructor(argTypes);</span>
+<span class="fc" id="L178">        } catch (NoSuchMethodException e) {</span>
+<span class="fc" id="L179">            throw new IllegalStateException(e);</span>
+        }
+
+    }
+
+    public static Object instantiate(Constructor ctor, Object... args) {
+        try {
+<span class="nc" id="L186">            return ctor.newInstance(args);</span>
+<span class="fc" id="L187">        } catch (Exception e) {</span>
+<span class="fc" id="L188">            String msg = &quot;Unable to instantiate Permission instance with constructor [&quot; + ctor + &quot;]&quot;;</span>
+<span class="fc" id="L189">            throw new org.jsecurity.util.InstantiationException(msg, e);</span>
+        }
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

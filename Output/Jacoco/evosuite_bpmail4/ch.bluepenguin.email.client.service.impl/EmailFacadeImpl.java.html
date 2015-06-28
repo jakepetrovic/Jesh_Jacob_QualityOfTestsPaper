@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmailFacadeImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client.service.impl</a> &gt; <span class="el_source">EmailFacadeImpl.java</span></div><h1>EmailFacadeImpl.java</h1><pre class="source lang-java linenums">
+/*
+ * Created on 20.10.2004
+ *
+ */
+package ch.bluepenguin.email.client.service.impl;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.mail.Address;
+import javax.mail.Flags;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailReader;
+
+import ch.bluepenguin.email.client.Account;
+import ch.bluepenguin.email.client.Folder;
+import ch.bluepenguin.email.client.IDGenerator;
+import ch.bluepenguin.email.client.MailMessage;
+import ch.bluepenguin.email.client.cache.MailCache;
+import ch.bluepenguin.email.client.service.EmailFacade;
+import ch.bluepenguin.email.client.service.EmailFacadeException;
+
+/**
+ * @author Christian
+ *
+ */
+public class EmailFacadeImpl implements EmailFacade {
+
+    //dependency injected stuff
+    private Logger logger;
+    private MailSender sender;
+    private JavaMailReader reader;
+<span class="nc" id="L43">    private EmailFacadeState state = new EmailFacadeState();</span>
+    private MailCache cache;
+    //TODO: multiple accounts
+<span class="nc" id="L46">	private Account account = new Account();</span>
+	
+<span class="nc" id="L48">	public EmailFacadeImpl() {</span>
+<span class="nc" id="L49">		account.getUniqueID().setId(IDGenerator.next());</span>
+<span class="nc" id="L50">	}</span>
+	/**
+	 * @return Returns the cache.
+	 */
+	public MailCache getCache() {
+<span class="nc" id="L55">		return cache;</span>
+	}
+	/**
+	 * @param cache The cache to set.
+	 */
+	public void setCache(MailCache cache) {
+<span class="nc" id="L61">		this.cache = cache;</span>
+<span class="nc" id="L62">		setDirty(true);</span>
+<span class="nc" id="L63">	}</span>
+	/**
+	 * @return Returns the dirty.
+	 */
+	public boolean isDirty() {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		return !state.isAllClean();</span>
+	}
+	/**
+	 * @param dirty The dirty to set.
+	 */
+	public void setDirty(boolean dirty) {
+<span class="nc" id="L74">		state.setAll(dirty);</span>
+<span class="nc" id="L75">	}</span>
+
+	public void setLogger(Logger logger) {
+<span class="nc" id="L78">        this.logger = logger;</span>
+<span class="nc" id="L79">    }</span>
+    
+    public Logger getLogger() {
+<span class="nc" id="L82">        return logger;</span>
+    }
+    /* (non-Javadoc)
+     * @see ch.bluepenguin.email.client.service.EmailFacade#sendMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+     */
+    public void sendMessage(String from, String to, String subject,
+            String message) {
+<span class="nc" id="L89">        logger.log(Level.INFO, &quot;sendMessage called&quot;);</span>
+<span class="nc" id="L90">        SimpleMailMessage mail = new SimpleMailMessage();</span>
+<span class="nc" id="L91">        mail.setFrom(from);</span>
+<span class="nc" id="L92">        mail.setTo(to);</span>
+<span class="nc" id="L93">        mail.setSubject(subject);</span>
+<span class="nc" id="L94">        mail.setText(message);</span>
+<span class="nc" id="L95">        sender.send(mail);</span>
+<span class="nc" id="L96">        logger.log(Level.INFO, &quot;sendMessage finished&quot;);</span>
+<span class="nc" id="L97">    }</span>
+
+    /* (non-Javadoc)
+     * @see ch.bluepenguin.email.client.service.EmailFacade#getAllFolders()
+     */
+    public Folder[] getAllFolders() throws EmailFacadeException {
+<span class="nc" id="L103">    	Folder[] myFolders = null;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">    	if(isDirty()) {</span>
+    		//clear the state. This leads to all messages beeing dirty
+    		// too
+<span class="nc" id="L107">	    	state.clear();</span>
+<span class="nc" id="L108">	    	Vector folders = reader.getAllFolders();</span>
+<span class="nc" id="L109">	    	myFolders = new Folder[folders.size()];</span>
+<span class="nc" id="L110">			ArrayList folderIDs = new ArrayList();</span>
+<span class="nc" id="L111">			cache.addElement(account.getUniqueID().getId(), account, null);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">	    	for(int i=0; i&lt;folders.size(); i++) {</span>
+<span class="nc" id="L113">				myFolders[i] =convertFolder((javax.mail.Folder)folders.get(i));</span>
+		    	//this will mark the folder as beeing dirty, and will lead to 
+				// the messages being read
+<span class="nc" id="L116">				state.setState(myFolders[i].getUniqueID().getId(), true);</span>
+		    	//add the folder to the cache without children
+<span class="nc" id="L118">				cache.addElement(myFolders[i].getUniqueID().getId(), myFolders[i], null);</span>
+				//add the folders to the cache, as children of an account
+				//TODO: account handling!
+<span class="nc" id="L121">				myFolders[i].setAccount(account);</span>
+<span class="nc" id="L122">				folderIDs.add(myFolders[i].getUniqueID().getId());</span>
+	    	}
+<span class="nc" id="L124">	    	logger.info(&quot;adding folders to cache&quot;);</span>
+<span class="nc" id="L125">	    	cache.addElement(account.getUniqueID().getId(), account, folderIDs);</span>
+<span class="nc" id="L126">    	} else {</span>
+<span class="nc" id="L127">	    	myFolders = getCachedFolders();</span>
+    	}
+<span class="nc" id="L129">        return myFolders;</span>
+    }
+
+	private MailMessage[] getCachedMessagesFromFolder(Folder folder) throws EmailFacadeException {
+		MailMessage[] result;
+<span class="nc" id="L134">		logger.info(&quot;reading messages from cache&quot;);</span>
+<span class="nc" id="L135">		List messages = cache.getChildKeys(folder.getUniqueID().getId());</span>
+		//might be out of cache already
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if(messages==null) {</span>
+<span class="nc" id="L138">			logger.warning(&quot;The messages of folder where not found in the cache: &quot; + folder.getFullName());</span>
+<span class="nc" id="L139">			setDirty(true);</span>
+			//should work!
+<span class="nc" id="L141">			result = getMessagesFromFolder(folder);</span>
+		}else {
+<span class="nc" id="L143">			result= new MailMessage[messages.size()];</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			for(int i=0; i&lt;messages.size(); i++) {</span>
+				//TODO: this might fail too...
+<span class="nc" id="L146">				result[i] = (MailMessage) cache.getElement((Integer) messages.get(i));</span>
+			}
+		}
+<span class="nc" id="L149">		return result;</span>
+	}
+
+	
+	/**
+	 * @return
+	 * @throws EmailFacadeException
+	 */
+	private Folder[] getCachedFolders() throws EmailFacadeException {
+		Folder[] myFolders;
+<span class="nc" id="L159">		logger.info(&quot;reading folders from cache&quot;);</span>
+<span class="nc" id="L160">		List folders = cache.getChildKeys(account.getUniqueID().getId());</span>
+		//might be out of cache already
+<span class="nc bnc" id="L162" title="All 2 branches missed.">		if(folders==null) {</span>
+<span class="nc" id="L163">			logger.warning(&quot;The folders of account where not found in the cache: &quot; + account.getUniqueID().getId());</span>
+<span class="nc" id="L164">			setDirty(true);</span>
+			//should work!
+			//TODO risk of loops
+<span class="nc" id="L167">			myFolders = getAllFolders();</span>
+		}else {
+<span class="nc" id="L169">			myFolders = new Folder[folders.size()];</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">			for(int i=0; i&lt;folders.size(); i++) {</span>
+				//TODO: this might fail too...
+<span class="nc" id="L172">				myFolders[i] = (Folder) cache.getElement((Integer) folders.get(i));</span>
+			}
+		}
+<span class="nc" id="L175">		return myFolders;</span>
+	}
+	/**
+	 * @param current
+	 * @return
+	 * @throws EmailFacadeException
+	 */
+	private Folder convertFolder(javax.mail.Folder current) throws EmailFacadeException {
+<span class="nc" id="L183">		Folder myFolder = new Folder();</span>
+<span class="nc" id="L184">		myFolder.getUniqueID().setId(IDGenerator.next());</span>
+<span class="nc" id="L185">		myFolder.setName(current.getName());</span>
+<span class="nc" id="L186">		myFolder.setFullName(current.getFullName());</span>
+		
+		try {
+<span class="nc bnc" id="L189" title="All 8 branches missed.">			if(current.getParent()!=null &amp;&amp; current.getParent().getName()!=null </span>
+					&amp;! &quot;&quot;.equals(current.getParent().getName())) {
+<span class="nc" id="L191">				javax.mail.Folder parent =current.getParent(); </span>
+<span class="nc" id="L192">				Folder myParent = new Folder();</span>
+<span class="nc" id="L193">				myParent.getUniqueID().setId(IDGenerator.next());</span>
+<span class="nc" id="L194">				myParent.setName(parent.getName());</span>
+<span class="nc" id="L195">				myParent.setFullName(parent.getFullName());</span>
+<span class="nc" id="L196">				myFolder.setParent(myParent);</span>
+			}
+<span class="nc" id="L198">		} catch (MessagingException e) {</span>
+<span class="nc" id="L199">			logger.severe(&quot;convertFolder failed with &quot; + e);</span>
+<span class="nc" id="L200">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L201">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L202">			throw ex;</span>
+<span class="nc" id="L203">		}</span>
+<span class="nc" id="L204">		return myFolder;</span>
+	}
+
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getName()
+	 */
+	public String getName() {
+<span class="nc" id="L211">		return &quot;Default EmailFacade Impl&quot;;</span>
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getAllMessages()
+	 */
+	//TODO: exchang this with loop over all folders!
+	public MailMessage[] getAllMessages() throws EmailFacadeException {
+
+<span class="nc" id="L221">		ArrayList allMessages = new ArrayList(); </span>
+<span class="nc" id="L222">    	int completeSize=0;</span>
+		
+<span class="nc" id="L224">    	logger.info(&quot;getAllMessages: resetting cache&quot;);</span>
+    	//THIS WILL SET THE DIRTY FLAG ANYWAYS
+<span class="nc" id="L226">    	Folder[] folders = getAllFolders();</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">    	for(int i =0; i&lt;folders.length; i++) {</span>
+<span class="nc" id="L228">    		MailMessage[] messagesFromFolder = getMessagesFromFolder(folders[i]);</span>
+<span class="nc" id="L229">    		completeSize+=messagesFromFolder.length;</span>
+<span class="nc" id="L230">    		allMessages.add(messagesFromFolder);</span>
+    	}
+    	//everything read, incl folders and messages
+<span class="nc" id="L233">		setDirty(false);</span>
+<span class="nc" id="L234">		MailMessage[] result = new MailMessage[completeSize];</span>
+<span class="nc" id="L235">		int count =0;</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">		for(int i=0; i&lt;allMessages.size();i++) {</span>
+<span class="nc" id="L237">			MailMessage[] messagesFromFolder = (MailMessage[]) allMessages.get(i);</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">			for(int j=0; j&lt;messagesFromFolder.length;j++) {</span>
+<span class="nc" id="L239">				result[count]=messagesFromFolder[j];</span>
+<span class="nc" id="L240">				count++;</span>
+			}
+		}
+<span class="nc" id="L243">		return result;</span>
+	}
+	
+	/* (non-Javadoc)
+	 * @see ch.bluepenguin.email.client.service.EmailFacade#getMessagesFromFolder(java.lang.String)
+	 */
+	public MailMessage[] getMessagesFromFolder(Folder folder) throws EmailFacadeException {
+<span class="nc" id="L250">		MailMessage[] result=null;</span>
+    	try {
+    		
+<span class="nc bnc" id="L253" title="All 2 branches missed.">		if(state.isDirty(folder.getUniqueID().getId())) {</span>
+<span class="nc" id="L254">	    	logger.info(&quot;reading messages directly for folder &quot; + folder.getFullName());</span>
+<span class="nc" id="L255">			result = convertMessages(reader.getAllMessages(folder.getFullName()));</span>
+<span class="nc" id="L256">			ArrayList messageIDs = new ArrayList();</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">			for(int i=0; i&lt;result.length;i++) {</span>
+<span class="nc" id="L258">				state.setState(result[i].getUniqueID().getId(),false);</span>
+<span class="nc" id="L259">				messageIDs.add(result[i].getUniqueID().getId());</span>
+<span class="nc" id="L260">				getCache().addElement(result[i].getUniqueID().getId(),result[i],null);</span>
+			}
+<span class="nc" id="L262">			getCache().addElement(folder.getUniqueID().getId(),folder,messageIDs);</span>
+<span class="nc" id="L263">			state.setState(folder.getUniqueID().getId(), false);</span>
+<span class="nc" id="L264">		} else {</span>
+<span class="nc" id="L265">	    	logger.info(&quot;reading messages from cache for folder &quot; + folder.getFullName());</span>
+	    	//lookup one folder from cache
+<span class="nc" id="L267">	    	result =  getCachedMessagesFromFolder(folder);</span>
+			
+		}
+<span class="nc" id="L270">			return result;</span>
+<span class="nc" id="L271">		} catch (MessagingException e) {</span>
+<span class="nc" id="L272">			logger.info(&quot;getAllFolders failed with &quot; + e);</span>
+<span class="nc" id="L273">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L274">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L275">			throw ex;</span>
+		}
+	}
+
+	/**
+	 * @param messages
+	 * @return
+	 * @throws MessagingException
+	 * @throws EmailFacadeException
+	 */
+	private MailMessage[] convertMessages(Message[] messages) throws MessagingException, EmailFacadeException {
+<span class="nc bnc" id="L286" title="All 2 branches missed.">		if(messages == null) return null; 	 	</span>
+<span class="nc" id="L287">		MailMessage[] result = new MailMessage[messages.length];</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">		for(int h=0; h&lt;messages.length; h++) {</span>
+<span class="nc" id="L289">			MailMessage current = new MailMessage();</span>
+<span class="nc" id="L290">			Message technical = messages[h];</span>
+<span class="nc" id="L291">			current.setTechnicalID(technical.getMessageNumber());</span>
+<span class="nc" id="L292">			current.setFolder(convertFolder(technical.getFolder()));</span>
+<span class="nc" id="L293">			Address[] technicalAddresses = technical.getAllRecipients();</span>
+<span class="nc" id="L294">			Vector tos = new Vector();</span>
+<span class="nc" id="L295">			Vector bccs = new Vector();</span>
+<span class="nc" id="L296">			Vector ccs= new Vector();</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">			for(int j =0; j&lt;technicalAddresses.length;j++) {</span>
+<span class="nc" id="L298">				Address technicalAddress = technicalAddresses[j];</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">				if(technicalAddress.getType().equals(Message.RecipientType.BCC)) {</span>
+<span class="nc" id="L300">					bccs.add(technicalAddress.toString());</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">				} else if(technicalAddress.getType().equals(Message.RecipientType.CC)) {</span>
+<span class="nc" id="L302">					bccs.add(technicalAddress.toString());</span>
+				}else {
+<span class="nc" id="L304">					tos.add(technicalAddress.toString());</span>
+				}
+			}
+			
+<span class="nc" id="L308">			String[] bccs2 = new String[bccs.size()];</span>
+<span class="nc bnc" id="L309" title="All 2 branches missed.">			for(int i=0; i&lt;bccs.size(); i++) {</span>
+<span class="nc" id="L310">				bccs2[i] = (String)bccs.get(i);</span>
+			}
+<span class="nc" id="L312">			String[] ccs2 = new String[ccs.size()];</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">			for(int i=0; i&lt;ccs.size(); i++) {</span>
+<span class="nc" id="L314">				ccs2[i] = (String)ccs.get(i);</span>
+			}
+<span class="nc" id="L316">			String[] tos2 = new String[tos.size()];</span>
+<span class="nc bnc" id="L317" title="All 2 branches missed.">			for(int i=0; i&lt;tos.size(); i++) {</span>
+<span class="nc" id="L318">				tos2[i] = (String)tos.get(i);</span>
+			}
+			
+<span class="nc" id="L321">			current.setBcc(bccs2);</span>
+<span class="nc" id="L322">			current.setCc(ccs2);</span>
+<span class="nc" id="L323">			current.setTo(tos2);</span>
+<span class="nc" id="L324">			current.setFrom(technical.getFrom()[0].toString());</span>
+<span class="nc" id="L325">			current.setReplyTo(technical.getReplyTo()[0].toString());</span>
+<span class="nc" id="L326">			current.setSentDate(technical.getSentDate());</span>
+<span class="nc" id="L327">			current.setSubject(technical.getSubject());</span>
+			//current.setText(technical.getContent().toString());
+<span class="nc" id="L329">			current.getUniqueID().setId(IDGenerator.next());</span>
+<span class="nc" id="L330">			result[h] = current;</span>
+		}
+<span class="nc" id="L332">		return result;</span>
+	}
+
+	/**
+	 * @return Returns the reader.
+	 */
+	public JavaMailReader getReader() {
+<span class="nc" id="L339">		return reader;</span>
+	}
+	/**
+	 * @param reader The reader to set.
+	 */
+	public void setReader(JavaMailReader reader) {
+<span class="nc" id="L345">		this.reader = reader;</span>
+<span class="nc" id="L346">	}</span>
+	/**
+	 * @return Returns the sender.
+	 */
+	public MailSender getSender() {
+<span class="nc" id="L351">		return sender;</span>
+	}
+	/**
+	 * @param sender The sender to set.
+	 */
+	public void setSender(MailSender sender) {
+<span class="nc" id="L357">		this.sender = sender;</span>
+<span class="nc" id="L358">	}</span>
+	
+	/** this will fill the message body
+	 * 
+	 * @param messageID
+	 * @param folder
+	 * @return
+	 * @throws EmailFacadeException
+	 */
+    public void fillMessageBody(MailMessage message) throws EmailFacadeException {
+    	Message technical;
+		try {
+<span class="nc" id="L370">			technical = reader.getMessageInFolder(message.getTechnicalID() , message.getFolder().getFullName());</span>
+<span class="nc" id="L371">			message.setText(technical.getContent().toString());</span>
+<span class="nc" id="L372">		} catch (MessagingException e) {</span>
+<span class="nc" id="L373">			logger.info(&quot;getMessage failed with &quot; + e);</span>
+<span class="nc" id="L374">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L375">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L376">			throw ex;</span>
+<span class="nc" id="L377">		} catch (IOException e) {</span>
+<span class="nc" id="L378">			logger.info(&quot;getMessage failed with &quot; + e);</span>
+<span class="nc" id="L379">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L380">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L381">			throw ex;</span>
+<span class="nc" id="L382">		}</span>
+<span class="nc" id="L383">    }</span>
+    public void moveMessages(MailMessage[] messages, String folderFrom, String folderTo) throws EmailFacadeException {
+<span class="nc" id="L385">    	Message[] technical = copyMessagesInternal(messages, folderFrom, folderTo);</span>
+		try {
+<span class="nc bnc" id="L387" title="All 2 branches missed.">			for(int i=0; i&lt;technical.length; i++) {</span>
+<span class="nc" id="L388">				technical[i].setFlag(Flags.Flag.DELETED, true);</span>
+			}
+<span class="nc" id="L390">			getFolder(folderFrom).expunge();</span>
+<span class="nc" id="L391">		} catch (MessagingException e) {</span>
+<span class="nc" id="L392">			logger.info(&quot;moveMessages failed with &quot; + e);</span>
+<span class="nc" id="L393">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L394">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L395">			throw ex;</span>
+<span class="nc" id="L396">		}</span>
+<span class="nc" id="L397">    	Folder[] folders = getAllFolders();</span>
+<span class="nc bnc" id="L398" title="All 2 branches missed.">    	for (int i = 0; i &lt; folders.length; i++) {</span>
+<span class="nc bnc" id="L399" title="All 4 branches missed.">			if(folderFrom.equals(folders[i].getFullName())</span>
+				||	folderTo.equals(folders[i].getFullName())) {
+<span class="nc" id="L401">				state.setState(folders[i].getUniqueID().getId(),true);</span>
+			}
+		}
+<span class="nc" id="L404">    }</span>
+    
+    public void copyMessages(MailMessage[] messages, String folderFrom, String folderTo) throws EmailFacadeException {
+<span class="nc" id="L407">    	copyMessagesInternal(messages, folderFrom, folderTo);</span>
+<span class="nc" id="L408">    	Folder[] folders = getAllFolders();</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">    	for (int i = 0; i &lt; folders.length; i++) {</span>
+<span class="nc bnc" id="L410" title="All 4 branches missed.">			if(folderFrom.equals(folders[i].getFullName())</span>
+				||	folderTo.equals(folders[i].getFullName())) {
+<span class="nc" id="L412">				state.setState(folders[i].getUniqueID().getId(),true);</span>
+			}
+		}
+<span class="nc" id="L415">    }</span>
+
+	/**
+	 * @param messages
+	 * @param folderFrom
+	 * @param folderTo
+	 * @throws EmailFacadeException
+	 */
+	private Message[]  copyMessagesInternal(MailMessage[] messages, String folderFrom, String folderTo) throws EmailFacadeException {
+<span class="nc" id="L424">    	Message[] technical = new Message[messages.length];</span>
+		try {
+<span class="nc bnc" id="L426" title="All 2 branches missed.">			for(int i=0; i&lt;messages.length; i++) {</span>
+<span class="nc" id="L427">				technical[i] = reader.getMessageInFolder(messages[i].getTechnicalID(), folderFrom);</span>
+			}
+<span class="nc" id="L429">			getFolder(folderFrom).copyMessages(technical, getFolder(folderTo));</span>
+<span class="nc" id="L430">		} catch (MessagingException e) {</span>
+<span class="nc" id="L431">			logger.info(&quot;copyMessagesInternal failed with &quot; + e);</span>
+<span class="nc" id="L432">			EmailFacadeException ex = new EmailFacadeException();</span>
+<span class="nc" id="L433">			ex.setTechnicalException(e);</span>
+<span class="nc" id="L434">			throw ex;</span>
+<span class="nc" id="L435">		}</span>
+<span class="nc" id="L436">		return technical;</span>
+	}
+
+	/**
+	 * @param folderFrom
+	 * @return
+	 * @throws MessagingException
+	 */
+	private javax.mail.Folder getFolder(String fullName) throws MessagingException {
+<span class="nc" id="L445">		return reader.getFolder(fullName);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

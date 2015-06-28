@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultInfoView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">bierse.view</a> &gt; <span class="el_source">DefaultInfoView.java</span></div><h1>DefaultInfoView.java</h1><pre class="source lang-java linenums">package bierse.view;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.text.DecimalFormat;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+import javax.swing.event.MouseInputAdapter;
+
+import bierse.model.Drink;
+import bierse.model.Model;
+
+public class DefaultInfoView extends JPanel implements IModelChangedListener, ImageObserver {
+
+<span class="nc" id="L40">	private final static DecimalFormat df = new DecimalFormat(&quot;0.00&quot;);</span>
+<span class="nc" id="L41">	private final static Font font = new Font(Font.SERIF, Font.PLAIN, 60);</span>
+<span class="nc" id="L42">	private final ImageIcon trendNeutralIcon = new ImageIcon(getClass().getResource(&quot;/img/neutral.gif&quot;));</span>
+<span class="nc" id="L43">	private final ImageIcon trendLowerIcon = new ImageIcon(getClass().getResource(&quot;/img/lower.gif&quot;));</span>
+<span class="nc" id="L44">	private final ImageIcon trendHigherIcon = new ImageIcon(getClass().getResource(&quot;/img/higher.gif&quot;));</span>
+	
+	private Model model;
+	private Image bgrImg;
+	private JLabel timeLeftLabel;
+	private RunningMessagePanel runningMessagePanel;
+	private JFrame frame;
+	
+<span class="nc" id="L52">	public DefaultInfoView(Model model) {</span>
+<span class="nc" id="L53">		frame = new JFrame(&quot;Preise&quot;);</span>
+<span class="nc" id="L54">		frame.setUndecorated(true);</span>
+<span class="nc" id="L55">		Object mouseListener = new DefaultInfoViewMouseListener(frame);</span>
+<span class="nc" id="L56">		frame.addMouseListener((MouseListener)mouseListener);</span>
+<span class="nc" id="L57">		frame.addMouseMotionListener((MouseMotionListener)mouseListener);</span>
+		
+<span class="nc" id="L59">		JPopupMenu contextMenu = new JPopupMenu();</span>
+<span class="nc" id="L60">		JMenuItem closeMenuItem = new JMenuItem(&quot;Schlie�en&quot;);</span>
+<span class="nc" id="L61">		closeMenuItem.addActionListener(new ActionListener() {</span>
+			@Override
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L64">				frame.dispose();</span>
+<span class="nc" id="L65">			}</span>
+		});
+<span class="nc" id="L67">		contextMenu.add(closeMenuItem);</span>
+		
+		
+<span class="nc" id="L70">		this.model = model;</span>
+<span class="nc" id="L71">		model.registerModelChangedListener(this);</span>
+<span class="nc" id="L72">		frame.getContentPane().setLayout(new BorderLayout());</span>
+		
+<span class="nc" id="L74">		JPanel infoPanel = createInfoPanel(model, contextMenu);</span>
+<span class="nc" id="L75">		frame.getContentPane().add(infoPanel, BorderLayout.SOUTH);</span>
+		
+<span class="nc" id="L77">		setOpaque(false);</span>
+		
+<span class="nc" id="L79">		add(createDrinkList());</span>
+<span class="nc" id="L80">		bgrImg = Toolkit.getDefaultToolkit().createImage(model.getSettings().getBackgroundImagePath());</span>
+<span class="nc" id="L81">		MediaTracker mt = new MediaTracker(this);</span>
+<span class="nc" id="L82">		mt.addImage(bgrImg, 0);</span>
+		try {
+<span class="nc" id="L84">			mt.waitForAll();</span>
+<span class="nc" id="L85">		} catch (Exception e) {</span>
+<span class="nc" id="L86">			model.getLog().error(this, e);</span>
+<span class="nc" id="L87">		}</span>
+<span class="nc" id="L88">		frame.getContentPane().add(this, BorderLayout.CENTER);</span>
+<span class="nc" id="L89">		frame.setAlwaysOnTop(true);</span>
+		
+<span class="nc" id="L91">		frame.setSize(new Dimension(800, 600));</span>
+<span class="nc" id="L92">		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L93">		frame.setVisible(true);</span>
+<span class="nc" id="L94">	}</span>
+
+	private JPanel createInfoPanel(Model model, JPopupMenu contextMenu) {
+<span class="nc" id="L97">		JPanel infoPanel = new JPanel(new BorderLayout());</span>
+		
+<span class="nc" id="L99">		infoPanel.setComponentPopupMenu(contextMenu);</span>
+		
+<span class="nc" id="L101">		runningMessagePanel = new RunningMessagePanel(model.getSettings().getMessage(), model.getSettings().getMessageSpeed());</span>
+<span class="nc" id="L102">		infoPanel.add(runningMessagePanel, BorderLayout.CENTER);</span>
+		
+<span class="nc" id="L104">		JPanel timeLeftPanel = createTimeLeftPanel(model, runningMessagePanel);	</span>
+<span class="nc" id="L105">		infoPanel.add(timeLeftPanel, BorderLayout.EAST);</span>
+<span class="nc" id="L106">		return infoPanel;</span>
+	}
+
+	private JPanel createTimeLeftPanel(Model model, RunningMessagePanel runningMessagePanel) {
+<span class="nc" id="L110">		JPanel timeLeftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L111">		timeLeftPanel.setOpaque(false);</span>
+<span class="nc" id="L112">		timeLeftLabel = new JLabel(&quot;Noch &quot; + model.getTimeLeft() + &quot; Sekunden&quot;);</span>
+<span class="nc" id="L113">		timeLeftPanel.add(timeLeftLabel);</span>
+		
+<span class="nc" id="L115">		Dimension panelDim = new Dimension();</span>
+<span class="nc" id="L116">		int width = timeLeftLabel.getFontMetrics(timeLeftLabel.getFont()).stringWidth(&quot;Noch &quot; + model.getSettings().getTimeInterval() + &quot; Sekunden&quot;);</span>
+<span class="nc" id="L117">		panelDim.setSize(width + 10, runningMessagePanel.getStringHeight());</span>
+<span class="nc" id="L118">		timeLeftPanel.setPreferredSize(panelDim);</span>
+<span class="nc" id="L119">		timeLeftPanel.setMinimumSize(panelDim);</span>
+<span class="nc" id="L120">		return timeLeftPanel;</span>
+	}
+	
+	protected void paintComponent(Graphics g) {
+<span class="nc" id="L124">		g.drawImage(bgrImg,0,0,this.getWidth(),this.getHeight(),this);</span>
+<span class="nc" id="L125">		super.paintComponent(g);</span>
+<span class="nc" id="L126">	}</span>
+	
+	private JPanel createDrinkList() {
+<span class="nc" id="L129">		JPanel drinkListPanel = new JPanel();</span>
+<span class="nc" id="L130">		drinkListPanel.setOpaque(false);</span>
+<span class="nc" id="L131">		drinkListPanel.setLayout(new GridLayout(model.getLstUsedDrink().size(), 1));</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		for(Drink drink : model.getLstUsedDrink()) {</span>
+<span class="nc" id="L133">			Box drinkBox = new Box(BoxLayout.X_AXIS);</span>
+<span class="nc" id="L134">			JLabel nameLabel = new JLabel(drink.getName() + &quot;:  &quot;);</span>
+<span class="nc" id="L135">			nameLabel.setFont(font);</span>
+<span class="nc" id="L136">			drinkBox.add(nameLabel);</span>
+<span class="nc" id="L137">			float price = drink.getCurrentPrice() / 100f;</span>
+<span class="nc" id="L138">			JLabel priceLabel = new JLabel(df.format(price) + &quot; &quot; + model.getSettings().getCurrency() + &quot;  &quot;);</span>
+<span class="nc" id="L139">			priceLabel.setFont(font);</span>
+<span class="nc" id="L140">			drinkBox.add(priceLabel);</span>
+<span class="nc" id="L141">			ImageIcon trendIcon = trendNeutralIcon;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">			if(drink.getTrend()&lt;0) {</span>
+<span class="nc" id="L143">				trendIcon = trendLowerIcon;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">			} else if(drink.getTrend()&gt;0) {</span>
+<span class="nc" id="L145">				trendIcon = trendHigherIcon; </span>
+			}
+<span class="nc" id="L147">			JLabel trendLabel = new JLabel(trendIcon);</span>
+<span class="nc" id="L148">			trendLabel.setFont(font);</span>
+<span class="nc" id="L149">			drinkBox.add(trendLabel);</span>
+<span class="nc" id="L150">			drinkListPanel.add(drinkBox);</span>
+<span class="nc" id="L151">		}</span>
+<span class="nc" id="L152">		return drinkListPanel;</span>
+	}
+
+	@Override
+	public void fireModelChanged(int eventType) {
+<span class="nc bnc" id="L157" title="All 2 branches missed.">		if((eventType &amp; Model.EVENT_RECALCULATED + Model.EVENT_SETTINGS_CHANGED) &gt; 0) {</span>
+<span class="nc" id="L158">			removeAll();</span>
+<span class="nc" id="L159">			add(createDrinkList());</span>
+<span class="nc" id="L160">			runningMessagePanel.setSpeed(model.getSettings().getMessageSpeed());</span>
+<span class="nc" id="L161">			runningMessagePanel.setMessage(model.getSettings().getMessage());</span>
+		}
+<span class="nc bnc" id="L163" title="All 2 branches missed.">		if((eventType &amp; Model.EVENT_TIME_LEFT_CHANGED) &gt; 0) {</span>
+<span class="nc" id="L164">			timeLeftLabel.setText(&quot;Noch &quot; + model.getTimeLeft() + &quot; Sekunden&quot;);</span>
+		}
+<span class="nc" id="L166">		validate();</span>
+<span class="nc" id="L167">		repaint();</span>
+<span class="nc" id="L168">	}</span>
+	
+	@Override
+	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
+<span class="nc" id="L172">		return true;</span>
+	}
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

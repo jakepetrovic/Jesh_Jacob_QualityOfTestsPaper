@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientInfo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">ClientInfo.java</span></div><h1>ClientInfo.java</h1><pre class="source lang-java linenums">package server;
+
+import java.net.Socket;
+
+import org.apache.log4j.Logger;
+
+import messages.Message;
+import messages.global.JoinAckMsg;
+import messages.session.SessionParticipationMsg;
+import server.network.ServerMsgReceiver;
+import server.network.ServerMsgSender;
+
+import common.network.MsgReceiver;
+import common.network.MsgSender;
+
+/**
+ * This class holds the releveant information about one client. It holds the
+ * MsgReceiver and MsgSender objects needed to communicate with this client as
+ * well as what session it is currently participating in, the players name, etc.
+ * 
+ * @author Steffen
+ *
+ */
+public class ClientInfo {
+	
+<span class="fc" id="L26">	private static final Logger logger = Logger.getLogger(ClientInfo.class);</span>
+	
+	/**
+	 * The client's name.
+	 */
+	private String name;
+	private Socket socket;
+	private ServerGameSession gameSession;
+	private int idOffset;
+	private MsgSender msgSender;
+	private MsgReceiver msgReceiver;
+
+<span class="fc" id="L38">	public ClientInfo(Socket clientSocket) {</span>
+<span class="fc" id="L39">		this.socket = clientSocket;</span>
+<span class="fc" id="L40">		this.msgReceiver = new ServerMsgReceiver(this);</span>
+<span class="fc" id="L41">		msgReceiver.start();</span>
+<span class="fc" id="L42">		this.msgSender = new ServerMsgSender(clientSocket);</span>
+<span class="fc" id="L43">		msgSender.start();</span>
+<span class="fc" id="L44">	}</span>
+
+	public void setName(String name) {
+<span class="fc" id="L47">		this.name = name;</span>
+<span class="fc" id="L48">	}</span>
+
+	public String getName() {
+<span class="fc" id="L51">		return name;</span>
+	}
+
+	public Socket getSocket() {
+<span class="fc" id="L55">		return socket;</span>
+	}
+
+	public ServerGameSession getGameSession() {
+<span class="fc" id="L59">		return gameSession;</span>
+	}
+
+	public int getIdOffset() {
+<span class="fc" id="L63">		return idOffset;</span>
+	}
+
+	public MsgSender getMsgSender() {
+<span class="fc" id="L67">		return msgSender;</span>
+	}
+
+	/**
+	 * This is a convenience method that simply forwards the given message to the
+	 * MsgSender that belongs to this client.
+	 * 
+	 * @param msg The message to be sent to the client.
+	 */
+	public void sendMsg(Message msg) {
+<span class="fc" id="L77">		msgSender.sendMsg(msg);</span>
+<span class="fc" id="L78">	}</span>
+	
+	/**
+	 * Adds the player to the given gameSession. If this is successful a JoinAckMsg containg the idOffset
+	 * for the client is sent back to the joining client and all others are notified of its joining, otherwise
+	 * only a JoinAckMsg indicating the failure is sent back to the joining client.
+	 * 
+	 * @param gameSession The gameSession the client is supposed to join.
+	 */
+	synchronized public void joinGameSession(ServerGameSession gameSession) {
+<span class="nc" id="L88">		int idOffset = gameSession.addParticipant(this);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		if (idOffset != -1) {</span>
+<span class="nc" id="L90">			logger.info(&quot;Player &quot; + name + &quot; is joining session &quot; + gameSession);</span>
+<span class="nc" id="L91">			this.idOffset = idOffset;</span>
+<span class="nc" id="L92">			this.gameSession = gameSession;</span>
+<span class="nc" id="L93">			JoinAckMsg response = new JoinAckMsg(true, idOffset);</span>
+<span class="nc" id="L94">			response.setParticipants(gameSession.getParticipantInfos());</span>
+<span class="nc" id="L95">			sendMsg(response);</span>
+<span class="nc" id="L96">			BomberServer.getInstance().removeClientFromGlobal(this);</span>
+<span class="nc" id="L97">			gameSession.multicastMsg(new SessionParticipationMsg(true, idOffset, this.getName()), this);</span>
+<span class="nc" id="L98">			gameSession.beginRoundIfReady();</span>
+<span class="nc" id="L99">		} else {</span>
+<span class="nc" id="L100">			logger.info(&quot;Player &quot; + name + &quot; was rejected for session &quot; + gameSession);</span>
+<span class="nc" id="L101">			sendMsg(new JoinAckMsg(false, idOffset));</span>
+		}
+<span class="nc" id="L103">	}</span>
+
+	/**
+	 * Removes the client from its current game session and notifies all participants.
+	 * If the client is currently not participating in any session no action
+	 * will be performed.
+	 */
+	public void leaveGameSession() {
+<span class="nc" id="L111">		logger.info(&quot;on clientinfo serverside leave msg is called&quot;);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">		if (gameSession!=null) {</span>
+<span class="nc" id="L113">			logger.info(&quot;Player &quot; + name + &quot; is leaving session &quot; + gameSession);</span>
+<span class="nc" id="L114">			gameSession.removeParticipant(this);</span>
+<span class="nc" id="L115">			gameSession.multicastMsg(new SessionParticipationMsg(false, idOffset, this.getName()), this);</span>
+<span class="nc" id="L116">			gameSession = null;</span>
+<span class="nc" id="L117">			BomberServer.getInstance().addClientToGlobal(this);</span>
+		} else {
+<span class="nc" id="L119">			logger.info(&quot;Couldn't leave game session (null)!&quot;);</span>
+		}
+<span class="nc" id="L121">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Test.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">sound</a> &gt; <span class="el_source">Test.java</span></div><h1>Test.java</h1><pre class="source lang-java linenums">package sound;
+// Autor Ghazwan
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+
+import javax.swing.JFrame;
+
+import org.apache.log4j.Level;
+
+import logging.*;
+
+
+public class Test extends JFrame implements KeyListener {
+	
+	//for logging
+<span class="nc" id="L19">	private static Logging logger = Logging.getInstance();</span>
+
+<span class="nc" id="L21">	public Test(){</span>
+		
+<span class="nc" id="L23">		this.setSize(100,100);</span>
+<span class="nc" id="L24">		this.setVisible(true);</span>
+<span class="nc" id="L25">		this.addKeyListener(this);</span>
+<span class="nc" id="L26">		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+		
+<span class="nc" id="L28">	}</span>
+
+	//private static final long serialVersionUID = 1L;
+
+	public static void main(String[] args) {
+		
+		//Thread beispiel1 = new Thread( new Sound( ISound.INTRO ) );
+		//beispiel1.start();
+		//Thread beispiel2 = new Thread( new Sound( ISound.BUTTON ) );
+		//beispiel2.start();
+		//Thread beispiel3 = new Thread( new Sound( ISound.HOLY ) );
+		//beispiel3.start();
+		
+	/*	Sound test =new Sound();
+		test.intro();
+		test.button();
+		test.button2();
+		test.hintergrund();
+		test.bWerfen();
+		test.explosion1();
+		test.explosion2();
+		test.kasse();
+		test.powerUp();
+		test.verliert();
+		test.gewinnt();
+		test.outro();
+	  //test.gameOver();*/
+	
+<span class="nc" id="L56">		Test t = new Test();</span>
+<span class="nc" id="L57">	}</span>
+
+	@Override
+	public void keyPressed(KeyEvent arg0) 
+	{
+<span class="nc" id="L62">		int keyCode = arg0.getKeyCode(); </span>
+<span class="nc bnc" id="L63" title="All 13 branches missed.">		switch(keyCode)</span>
+		{
+			case KeyEvent.VK_1:
+				
+<span class="nc" id="L67">				Thread tintro =new Thread( new Sound( ISound.INTRO ) );</span>
+<span class="nc" id="L68">				tintro.start();</span>
+				//for logging ausgeben
+<span class="nc" id="L70">				logger.log( Level.INFO, this, &quot;Hier wird sound Intro aufgerufen&quot;  );</span>
+<span class="nc" id="L71">				break;</span>
+			
+			case KeyEvent.VK_2:
+<span class="nc" id="L74">				Thread tbutton =new Thread( new Sound( ISound.BUTTON ) );</span>
+<span class="nc" id="L75">				tbutton.start();</span>
+				//for logging ausgeben
+<span class="nc" id="L77">				logger.log( Level.INFO, this, &quot;Hier wird sound Button aufgerufen&quot;  );</span>
+<span class="nc" id="L78">				break;</span>
+				
+			case KeyEvent.VK_3:
+<span class="nc" id="L81">				Thread tbutton2 =new Thread( new Sound( ISound.BUTTON2 ) );</span>
+<span class="nc" id="L82">				tbutton2.start();</span>
+				//for logging ausgeben
+<span class="nc" id="L84">				logger.log( Level.INFO, this, &quot;Hier wird sound Button2 aufgerufen&quot;  );</span>
+<span class="nc" id="L85">				break;</span>
+				
+			case KeyEvent.VK_4:
+<span class="nc" id="L88">				Thread thintergrund =new Thread( new Sound( ISound.HINTERGRUND ) );</span>
+<span class="nc" id="L89">				thintergrund.start();</span>
+<span class="nc" id="L90">				break;</span>
+				
+			case KeyEvent.VK_5:
+<span class="nc" id="L93">				Thread tbWerfen =new Thread( new Sound( ISound.B_WERFEN ) );</span>
+<span class="nc" id="L94">				tbWerfen.start();</span>
+<span class="nc" id="L95">				break;</span>
+				
+			case KeyEvent.VK_6:
+<span class="nc" id="L98">				Thread texplosion1 =new Thread( new Sound( ISound.EXPLOSION1 ) );</span>
+<span class="nc" id="L99">				texplosion1.start();</span>
+<span class="nc" id="L100">				break;</span>
+				
+			case KeyEvent.VK_7:
+<span class="nc" id="L103">				Thread texplosion2 =new Thread( new Sound( ISound.EXPLOSION2 ) );</span>
+<span class="nc" id="L104">				texplosion2.start();</span>
+<span class="nc" id="L105">				break;</span>
+				
+			case KeyEvent.VK_8:
+<span class="nc" id="L108">				Thread tkasse =new Thread( new Sound( ISound.KASSE ) );</span>
+<span class="nc" id="L109">				tkasse.start();</span>
+<span class="nc" id="L110">				break;</span>
+				
+			case KeyEvent.VK_9:
+<span class="nc" id="L113">				Thread tpowerUp =new Thread( new Sound( ISound.POWER_UP ) );</span>
+<span class="nc" id="L114">				tpowerUp.start();</span>
+<span class="nc" id="L115">				break;</span>
+				
+			case KeyEvent.VK_0:
+<span class="nc" id="L118">				Thread tverliert =new Thread( new Sound( ISound.VERLIERT ) );</span>
+<span class="nc" id="L119">				tverliert.start();</span>
+<span class="nc" id="L120">				break;</span>
+				
+			case KeyEvent.VK_Q:
+<span class="nc" id="L123">				Thread tgewinnt =new Thread( new Sound( ISound.GEWINNT ) );</span>
+<span class="nc" id="L124">				tgewinnt.start();</span>
+<span class="nc" id="L125">				break;</span>
+				
+			case KeyEvent.VK_W:
+<span class="nc" id="L128">				Thread toutro =new Thread( new Sound( ISound.OUTRO ) );</span>
+<span class="nc" id="L129">				toutro.start();</span>
+				break;
+		}
+<span class="nc" id="L132">	}</span>
+
+	@Override
+	public void keyReleased(KeyEvent arg0) 
+	{
+<span class="nc" id="L137">	}</span>
+	@Override
+	public void keyTyped(KeyEvent arg0) 
+	{
+<span class="nc" id="L141">	}</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

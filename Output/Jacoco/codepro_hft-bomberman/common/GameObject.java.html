@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GameObject.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">common</a> &gt; <span class="el_source">GameObject.java</span></div><h1>GameObject.java</h1><pre class="source lang-java linenums">package common;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Vector;
+
+public abstract class GameObject extends Observable implements Serializable {
+
+	protected Point position;
+	protected int id;
+	protected Vector&lt;Observer&gt; observers;
+<span class="fc" id="L16">	protected boolean active = true;</span>
+<span class="fc" id="L17">	protected boolean visible = true;</span>
+
+<span class="fc" id="L19">	protected GameObject(Point position) {</span>
+<span class="fc" id="L20">		this.position = position;</span>
+<span class="fc" id="L21">	}</span>
+
+	public abstract void update();
+
+	public abstract Rectangle getCollisionRectangle();
+
+	public abstract void updateWithCollisionCheck(
+			Collection&lt;GameObject&gt; gameObjects);
+
+	public abstract boolean collide(GameObject gameobject);
+
+	public abstract boolean isAccessable();
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+<span class="fc" id="L38">		return id;</span>
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(int id) {
+<span class="fc" id="L46">		this.id = id;</span>
+<span class="fc" id="L47">	}</span>
+
+	/**
+	 * @return the position
+	 */
+	public Point getPosition() {
+<span class="fc" id="L53">		return position;</span>
+	}
+
+	/**
+	 * @param position
+	 *            the position to set
+	 */
+	public void setPosition(Point position) {
+<span class="fc" id="L61">		this.position.setLocation(position);</span>
+<span class="fc" id="L62">	}</span>
+
+	/**
+	 * Returns the active status
+	 * 
+	 * @author Bj�rn
+	 */
+	public boolean isActive() {
+<span class="fc" id="L70">		return active;</span>
+	}
+
+	/**
+	 * Sets the object inactive
+	 * 
+	 * @author Bj�rn
+	 */
+	public void setInactive() {
+<span class="fc" id="L79">		this.active = false;</span>
+<span class="fc" id="L80">	}</span>
+
+	/**
+	 * Sets the object active
+	 * 
+	 * @author Bj�rn
+	 */
+	public void setActive() {
+<span class="fc" id="L88">		this.active = true;</span>
+<span class="fc" id="L89">	}</span>
+	
+	public void setVisible() {
+<span class="fc" id="L92">		this.visible = true;</span>
+<span class="fc" id="L93">	}</span>
+	
+	public void setInvisible() {
+<span class="fc" id="L96">		this.visible = false;</span>
+<span class="fc" id="L97">	}</span>
+	
+	public boolean isVisible() {
+<span class="fc" id="L100">		return visible;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

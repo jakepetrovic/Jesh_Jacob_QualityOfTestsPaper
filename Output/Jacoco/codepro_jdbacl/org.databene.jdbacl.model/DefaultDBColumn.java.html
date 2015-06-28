@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultDBColumn.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DefaultDBColumn.java</span></div><h1>DefaultDBColumn.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.databene.commons.ArrayUtil;
+import org.databene.commons.NullSafeComparator;
+import org.databene.commons.bean.HashCodeBuilder;
+import org.databene.jdbacl.SQLUtil;
+
+/**
+ * Default implementation of the {@link DBColumn} interface.&lt;br/&gt;&lt;br/&gt;
+ * Created: 14.11.2010 19:33:30
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class DefaultDBColumn extends AbstractDBTableComponent implements DBColumn {
+
+	private static final long serialVersionUID = 5693941485232520002L;
+	
+    protected DBDataType type;
+    protected Integer size;
+    protected Integer fractionDigits;
+    protected String defaultValue;
+    protected boolean versionColumn;
+
+    protected List&lt;DBUniqueConstraint&gt; ukConstraints; // constraints may be unnamed, so a Map does not make sense
+    protected DBNotNullConstraint notNullConstraint;
+
+    // constructors ----------------------------------------------------------------------------------------------------
+
+    public DefaultDBColumn(String name, DBTable table, DBDataType type) {
+<span class="fc" id="L54">        this(name, table, type, null);</span>
+<span class="fc" id="L55">    }</span>
+
+    public DefaultDBColumn(String name, DBTable table, int jdbcType, String typeAndSize) {
+<span class="fc" id="L58">        this(name, table, null, null);</span>
+<span class="fc" id="L59">        Object[] tokens = SQLUtil.parseColumnTypeAndSize(typeAndSize);</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (tokens.length &gt; 0)</span>
+<span class="fc" id="L61">        	this.type = DBDataType.getInstance(jdbcType, (String) tokens[0]);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (tokens.length &gt; 1)</span>
+<span class="nc" id="L63">        	this.size = (Integer) tokens[1];</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (tokens.length &gt; 2)</span>
+<span class="nc" id="L65">        	this.fractionDigits = (Integer) tokens[2];</span>
+<span class="fc" id="L66">    }</span>
+
+    public DefaultDBColumn(String name, DBTable table, DBDataType type, Integer size) {
+<span class="fc" id="L69">        this(name, table, type, size, null);</span>
+<span class="fc" id="L70">    }</span>
+    
+    public DefaultDBColumn(String name, DBTable table, DBDataType type, Integer size, Integer fractionDigits) {
+<span class="fc" id="L73">    	super(name, &quot;column&quot;);</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">    	if (table != null)</span>
+<span class="fc" id="L75">    		table.addColumn(this);</span>
+<span class="fc" id="L76">        this.name = name;</span>
+<span class="fc" id="L77">        this.type = type;</span>
+<span class="fc" id="L78">        this.size = size;</span>
+<span class="fc" id="L79">        this.fractionDigits = fractionDigits;</span>
+<span class="fc" id="L80">        this.doc = null;</span>
+<span class="fc" id="L81">        this.defaultValue = null;</span>
+<span class="fc" id="L82">        this.ukConstraints = new ArrayList&lt;DBUniqueConstraint&gt;();</span>
+<span class="fc" id="L83">        this.notNullConstraint = null;</span>
+<span class="fc" id="L84">        this.versionColumn = false;</span>
+<span class="fc" id="L85">    }</span>
+
+    // properties ------------------------------------------------------------------------------------------------------
+
+    public DBDataType getType() {
+<span class="fc" id="L90">        return type;</span>
+    }
+
+    public void setType(DBDataType type) {
+<span class="fc" id="L94">        this.type = type;</span>
+<span class="fc" id="L95">    }</span>
+
+    public Integer getSize() {
+<span class="fc" id="L98">        return size;</span>
+    }
+
+    public void setSize(Integer size) {
+<span class="fc" id="L102">        this.size = size;</span>
+<span class="fc" id="L103">    }</span>
+
+    public Integer getFractionDigits() {
+<span class="fc" id="L106">        return fractionDigits;</span>
+    }
+
+    public void setFractionDigits(Integer fractionDigits) {
+<span class="fc" id="L110">        this.fractionDigits = fractionDigits;</span>
+<span class="fc" id="L111">    }</span>
+
+    public String getDefaultValue() {
+<span class="fc" id="L114">        return defaultValue;</span>
+    }
+
+    public void setDefaultValue(String defaultValue) {
+<span class="fc" id="L118">        this.defaultValue = defaultValue;</span>
+<span class="fc" id="L119">    }</span>
+
+    public boolean isUnique() {
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">    	for (DBUniqueConstraint constraint : ukConstraints)</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">    		if (constraint.getColumnNames().length == 1)</span>
+<span class="nc" id="L124">    			return true;</span>
+<span class="fc" id="L125">    	return false;</span>
+    }
+    
+    public List&lt;DBUniqueConstraint&gt; getUkConstraints() {
+<span class="fc" id="L129">        return ukConstraints;</span>
+    }
+
+    public void addUkConstraint(DBUniqueConstraint constraint) {
+<span class="fc" id="L133">        this.ukConstraints.add(constraint);</span>
+<span class="fc" id="L134">    }</span>
+
+    public DBNotNullConstraint getNotNullConstraint() {
+<span class="fc" id="L137">        return notNullConstraint;</span>
+    }
+
+    public void setNotNullConstraint(DBNotNullConstraint notNullConstraint) {
+<span class="fc" id="L141">        this.notNullConstraint = notNullConstraint;</span>
+<span class="fc" id="L142">    }</span>
+
+    public boolean isNullable() {
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">        return (notNullConstraint == null);</span>
+    }
+
+    public void setNullable(boolean nullable) {
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (nullable) {</span>
+            // if a NotNullConstraint exists then remove it
+<span class="fc" id="L151">            notNullConstraint = null;</span>
+        } else {
+            // if there needs to be a NotNullConstraint, check if there exists one, first
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">            if (this.isNullable()) {</span>
+<span class="fc" id="L155">				String constraintName = getTable().getName() + '_' + name + &quot;_NOT_NULL&quot;; // TODO v0.7 get constraint name from DB</span>
+<span class="fc" id="L156">				this.notNullConstraint = new DBNotNullConstraint(getTable(), constraintName , true, name);</span>
+			}
+        }
+<span class="fc" id="L159">    }</span>
+
+    public boolean isVersionColumn() {
+<span class="fc" id="L162">        return versionColumn;</span>
+    }
+
+    public void setVersionColumn(boolean versionColumn) {
+<span class="fc" id="L166">        this.versionColumn = versionColumn;</span>
+<span class="fc" id="L167">    }</span>
+
+	public DBForeignKeyConstraint getForeignKeyConstraint() {
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">		for (DBForeignKeyConstraint fk : getTable().getForeignKeyConstraints())</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">			if (ArrayUtil.contains(name, fk.getColumnNames()))</span>
+<span class="nc" id="L172">				return fk;</span>
+<span class="fc" id="L173">	    return null;</span>
+	}
+	
+    // java.lang.Object overrides --------------------------------------------------------------------------------------
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		if (this == obj)</span>
+<span class="nc" id="L181">			return true;</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">		if (obj == null || !DBColumn.class.isAssignableFrom(obj.getClass()))</span>
+<span class="nc" id="L183">			return false;</span>
+<span class="nc" id="L184">		DBColumn that = (DBColumn) obj;</span>
+<span class="nc bnc" id="L185" title="All 16 branches missed.">		return NullSafeComparator.equals(this.name, that.getName())</span>
+			&amp;&amp; this.type.equals(that.getType())
+			&amp;&amp; NullSafeComparator.equals(this.size, that.getSize())
+			&amp;&amp; NullSafeComparator.equals(this.fractionDigits, that.getFractionDigits())
+			&amp;&amp; NullSafeComparator.equals(this.defaultValue, that.getDefaultValue())
+			&amp;&amp; this.versionColumn == that.isVersionColumn()
+			&amp;&amp; this.ukConstraints.equals(that.getUkConstraints())
+			&amp;&amp; NullSafeComparator.equals(notNullConstraint, that.getNotNullConstraint());
+	}
+	
+	@Override
+	public int hashCode() {
+<span class="nc" id="L197">		return HashCodeBuilder.hashCode(name, type, size, fractionDigits, defaultValue, versionColumn, </span>
+				ukConstraints, notNullConstraint/*, fkConstraint*/);
+	}
+	
+    @Override
+    public String toString() {
+<span class="fc" id="L203">        StringBuilder builder = new StringBuilder(name).append(&quot; : &quot;);</span>
+<span class="fc" id="L204">        SQLUtil.renderColumnTypeWithSize(this, builder);</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">        if (!isNullable())</span>
+<span class="nc" id="L206">            builder.append(&quot; NOT NULL&quot;);</span>
+<span class="fc" id="L207">        return builder.toString();</span>
+    }
+
+	public boolean isIdentical(DBObject other) {
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">		if (this == other)</span>
+<span class="nc" id="L212">			return true;</span>
+<span class="pc bpc" id="L213" title="2 of 4 branches missed.">		if (other == null || !(other instanceof DBColumn))</span>
+<span class="fc" id="L214">			return false;</span>
+<span class="nc bnc" id="L215" title="All 4 branches missed.">		return this.name.equals(other.getName()) &amp;&amp; isEquivalent(other);</span>
+	}
+
+	public boolean isEquivalent(DBObject other) {
+<span class="nc bnc" id="L219" title="All 2 branches missed.">		if (this == other)</span>
+<span class="nc" id="L220">			return true;</span>
+<span class="nc bnc" id="L221" title="All 4 branches missed.">		if (other == null || !(other instanceof DBColumn))</span>
+<span class="nc" id="L222">			return false;</span>
+<span class="nc" id="L223">		DBColumn that = (DBColumn) other;</span>
+<span class="nc bnc" id="L224" title="All 6 branches missed.">		return this.type.equals(that.getType()) </span>
+			&amp;&amp; NullSafeComparator.equals(this.size, that.getSize())
+			&amp;&amp; NullSafeComparator.equals(this.fractionDigits, that.getFractionDigits());
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

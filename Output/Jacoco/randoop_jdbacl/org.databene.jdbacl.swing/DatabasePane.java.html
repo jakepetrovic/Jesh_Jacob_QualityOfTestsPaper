@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DatabasePane.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.swing</a> &gt; <span class="el_source">DatabasePane.java</span></div><h1>DatabasePane.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.swing;
+
+import java.awt.BorderLayout;
+import java.io.IOException;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.TreeModel;
+
+import org.databene.commons.ConnectFailedException;
+import org.databene.commons.ImportFailedException;
+import org.databene.commons.ui.swing.SwingTreeModelAdapter;
+import org.databene.jdbacl.DatabaseTreeModel;
+import org.databene.jdbacl.model.DBMetaDataImporter;
+import org.databene.jdbacl.model.DBObject;
+import org.databene.jdbacl.model.Database;
+import org.databene.jdbacl.model.cache.CachingDBImporter;
+import org.databene.jdbacl.model.jdbc.JDBCDBImporter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * {@link JPanel} which displays database information and the hierarchy tree.&lt;br/&gt;&lt;br/&gt;
+ * Created: 07.11.2011 16:46:33
+ * @since 0.7.0
+ * @author Volker Bergmann
+ */
+@SuppressWarnings(&quot;serial&quot;)
+public class DatabasePane extends JPanel {
+	
+<span class="nc" id="L53">	private static final Logger LOGGER = LoggerFactory.getLogger(DatabasePane.class);</span>
+	
+	private JScrollPane scrollPane;
+	private DatabaseTree tree;
+	private DBMetaDataImporter importer;
+	private TextFieldValueProvider exclusionPatternProvider;
+
+	public DatabasePane(TextFieldValueProvider exclusionPatternProvider) {
+<span class="nc" id="L61">		super(new BorderLayout());</span>
+<span class="nc" id="L62">		this.exclusionPatternProvider = exclusionPatternProvider;</span>
+<span class="nc" id="L63">		this.scrollPane = new JScrollPane();</span>
+<span class="nc" id="L64">		add(scrollPane, BorderLayout.CENTER);</span>
+<span class="nc" id="L65">	}</span>
+	
+	public void setEnvironment(String environment) throws ConnectFailedException, ImportFailedException {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if (importer != null) {</span>
+			try {
+<span class="nc" id="L70">				importer.close();</span>
+<span class="nc" id="L71">			} catch (IOException e) {</span>
+<span class="nc" id="L72">				LOGGER.error(&quot;Error closing &quot; + getClass().getName(), e);</span>
+<span class="nc" id="L73">			}</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">			if (tree != null)</span>
+<span class="nc" id="L75">				scrollPane.remove(tree);</span>
+		}
+<span class="nc" id="L77">		new Thread(new Importer(environment)).start();</span>
+<span class="nc" id="L78">	}</span>
+
+	class Importer implements Runnable {
+		String environment;
+<span class="nc" id="L82">		public Importer(String environment) {</span>
+<span class="nc" id="L83">			this.environment = environment;</span>
+<span class="nc" id="L84">		}</span>
+		public void run() {
+			try {
+<span class="nc" id="L87">				JDBCDBImporter parser = new JDBCDBImporter(environment);</span>
+<span class="nc" id="L88">				parser.setExcludeTables(exclusionPatternProvider.getValue());</span>
+<span class="nc" id="L89">				parser.setImportingChecks(true);</span>
+<span class="nc" id="L90">				parser.setImportingIndexes(true);</span>
+<span class="nc" id="L91">				parser.setImportingSequences(true);</span>
+<span class="nc" id="L92">				parser.setImportingTriggers(true);</span>
+<span class="nc" id="L93">				parser.setImportingPackages(true);</span>
+<span class="nc" id="L94">				parser.setImportingUKs(true);</span>
+<span class="nc" id="L95">				CachingDBImporter importer = new CachingDBImporter(parser, environment);</span>
+<span class="nc" id="L96">				Database database = importer.importDatabase();</span>
+<span class="nc" id="L97">				DatabasePane.this.importer = importer;</span>
+<span class="nc" id="L98">				final TreeModel model = new SwingTreeModelAdapter&lt;DBObject&gt;(new DatabaseTreeModel(database));</span>
+<span class="nc" id="L99">				SwingUtilities.invokeLater(new Runnable() {</span>
+					public void run() {
+<span class="nc" id="L101">						tree = new DatabaseTree(model);</span>
+<span class="nc" id="L102">						scrollPane.setViewportView(tree);</span>
+<span class="nc" id="L103">					}</span>
+				});
+<span class="nc" id="L105">			} catch (Exception e) {</span>
+<span class="nc" id="L106">				throw new RuntimeException(e);</span>
+<span class="nc" id="L107">			}</span>
+<span class="nc" id="L108">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JndiTemplate.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.jndi</a> &gt; <span class="el_source">JndiTemplate.java</span></div><h1>JndiTemplate.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.jndi;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NameNotFoundException;
+import javax.naming.NamingException;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Properties;
+
+/**
+ * Helper class that simplifies JNDI operations. It provides methods to lookup and
+ * bind objects, and allows implementations of the {@link JndiCallback} interface
+ * to perform any operation they like with a JNDI naming context provided.
+ *
+ * &lt;p&gt;Note that this implementation is an almost exact copy of the Spring Framework's identically named class from
+ * their 2.5.4 distribution - we didn't want to re-invent the wheel, but not require a full dependency on the
+ * Spring framework, nor does Spring make available only its JNDI classes in a small jar, or we would have used that.
+ * Since JSecurity is also Apache 2.0 licensed, all regular licenses and conditions and authors have remained in tact.
+ *
+ * @author Rod Johnson
+ * @author Juergen Hoeller
+ * @see JndiCallback
+ * @see #execute
+ */
+public class JndiTemplate {
+
+<span class="fc" id="L49">    private static final Log log = LogFactory.getLog(JndiTemplate.class);</span>
+
+    private Properties environment;
+
+    /**
+     * Create a new JndiTemplate instance.
+     */
+<span class="fc" id="L56">    public JndiTemplate() {</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Create a new JndiTemplate instance, using the given environment.
+     *
+     * @param environment the Properties to initialize with
+     */
+<span class="fc" id="L64">    public JndiTemplate(Properties environment) {</span>
+<span class="fc" id="L65">        this.environment = environment;</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Set the environment for the JNDI InitialContext.
+     *
+     * @param environment the Properties to initialize with
+     */
+    public void setEnvironment(Properties environment) {
+<span class="fc" id="L74">        this.environment = environment;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Return the environment for the JNDI InitialContext, or &lt;code&gt;null&lt;/code&gt; if none should be used.
+     *
+     * @return the environment for the JNDI InitialContext, or &lt;code&gt;null&lt;/code&gt; if none should be used.
+     */
+    public Properties getEnvironment() {
+<span class="fc" id="L83">        return this.environment;</span>
+    }
+
+    /**
+     * Execute the given JNDI context callback implementation.
+     *
+     * @param contextCallback JndiCallback implementation
+     * @return a result object returned by the callback, or &lt;code&gt;null&lt;/code&gt;
+     * @throws NamingException thrown by the callback implementation
+     * @see #createInitialContext
+     */
+    public Object execute(JndiCallback contextCallback) throws NamingException {
+<span class="fc" id="L95">        Context ctx = createInitialContext();</span>
+        try {
+<span class="nc" id="L97">            return contextCallback.doInContext(ctx);</span>
+        }
+        finally {
+<span class="fc" id="L100">            try {</span>
+<span class="pc" id="L101">                ctx.close();</span>
+            }
+<span class="nc" id="L103">            catch (NamingException ex) {</span>
+<span class="nc" id="L104">                log.debug(&quot;Could not close JNDI InitialContext&quot;, ex);</span>
+<span class="pc" id="L105">            }</span>
+        }
+    }
+
+    /**
+     * Create a new JNDI initial context. Invoked by {@link #execute}.
+     * &lt;p&gt;The default implementation use this template's environment settings.
+     * Can be subclassed for custom contexts, e.g. for testing.
+     *
+     * @return the initial Context instance
+     * @throws NamingException in case of initialization errors
+     */
+    @SuppressWarnings({&quot;unchecked&quot;})
+    protected Context createInitialContext() throws NamingException {
+<span class="fc" id="L119">        Properties env = getEnvironment();</span>
+<span class="fc" id="L120">        Hashtable icEnv = null;</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (env != null) {</span>
+<span class="fc" id="L122">            icEnv = new Hashtable(env.size());</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            for (Enumeration en = env.propertyNames(); en.hasMoreElements();) {</span>
+<span class="fc" id="L124">                String key = (String) en.nextElement();</span>
+<span class="fc" id="L125">                icEnv.put(key, env.getProperty(key));</span>
+<span class="fc" id="L126">            }</span>
+        }
+<span class="fc" id="L128">        return new InitialContext(icEnv);</span>
+    }
+
+    /**
+     * Look up the object with the given name in the current JNDI context.
+     *
+     * @param name the JNDI name of the object
+     * @return object found (cannot be &lt;code&gt;null&lt;/code&gt;; if a not so well-behaved
+     *         JNDI implementations returns null, a NamingException gets thrown)
+     * @throws NamingException if there is no object with the given
+     *                         name bound to JNDI
+     */
+    public Object lookup(final String name) throws NamingException {
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L142">            log.debug(&quot;Looking up JNDI object with name [&quot; + name + &quot;]&quot;);</span>
+        }
+<span class="pc" id="L144">        return execute(new JndiCallback() {</span>
+            public Object doInContext(Context ctx) throws NamingException {
+<span class="nc" id="L146">                Object located = ctx.lookup(name);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                if (located == null) {</span>
+<span class="nc" id="L148">                    throw new NameNotFoundException(</span>
+                            &quot;JNDI object with [&quot; + name + &quot;] not found: JNDI implementation returned null&quot;);
+                }
+<span class="nc" id="L151">                return located;</span>
+            }
+        });
+    }
+
+    /**
+     * Look up the object with the given name in the current JNDI context.
+     *
+     * @param name         the JNDI name of the object
+     * @param requiredType type the JNDI object must match. Can be an interface or
+     *                     superclass of the actual class, or &lt;code&gt;null&lt;/code&gt; for any match. For example,
+     *                     if the value is &lt;code&gt;Object.class&lt;/code&gt;, this method will succeed whatever
+     *                     the class of the returned instance.
+     * @return object found (cannot be &lt;code&gt;null&lt;/code&gt;; if a not so well-behaved
+     *         JNDI implementations returns null, a NamingException gets thrown)
+     * @throws NamingException if there is no object with the given
+     *                         name bound to JNDI
+     */
+    public Object lookup(String name, Class requiredType) throws NamingException {
+<span class="nc" id="L170">        Object jndiObject = lookup(name);</span>
+<span class="nc bnc" id="L171" title="All 4 branches missed.">        if (requiredType != null &amp;&amp; !requiredType.isInstance(jndiObject)) {</span>
+<span class="nc" id="L172">            String msg = &quot;Jndi object acquired under name '&quot; + name + &quot;' is of type [&quot; +</span>
+                    jndiObject.getClass().getName() + &quot;] and not assignable to the required type [&quot; +
+                    requiredType.getName() + &quot;].&quot;;
+<span class="nc" id="L175">            throw new NamingException(msg);</span>
+        }
+<span class="nc" id="L177">        return jndiObject;</span>
+    }
+
+    /**
+     * Bind the given object to the current JNDI context, using the given name.
+     *
+     * @param name   the JNDI name of the object
+     * @param object the object to bind
+     * @throws NamingException thrown by JNDI, mostly name already bound
+     */
+    public void bind(final String name, final Object object) throws NamingException {
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L189">            log.debug(&quot;Binding JNDI object with name [&quot; + name + &quot;]&quot;);</span>
+        }
+<span class="pc" id="L191">        execute(new JndiCallback() {</span>
+            public Object doInContext(Context ctx) throws NamingException {
+<span class="nc" id="L193">                ctx.bind(name, object);</span>
+<span class="nc" id="L194">                return null;</span>
+            }
+        });
+<span class="nc" id="L197">    }</span>
+
+    /**
+     * Rebind the given object to the current JNDI context, using the given name.
+     * Overwrites any existing binding.
+     *
+     * @param name   the JNDI name of the object
+     * @param object the object to rebind
+     * @throws NamingException thrown by JNDI
+     */
+    public void rebind(final String name, final Object object) throws NamingException {
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L209">            log.debug(&quot;Rebinding JNDI object with name [&quot; + name + &quot;]&quot;);</span>
+        }
+<span class="pc" id="L211">        execute(new JndiCallback() {</span>
+            public Object doInContext(Context ctx) throws NamingException {
+<span class="nc" id="L213">                ctx.rebind(name, object);</span>
+<span class="nc" id="L214">                return null;</span>
+            }
+        });
+<span class="nc" id="L217">    }</span>
+
+    /**
+     * Remove the binding for the given name from the current JNDI context.
+     *
+     * @param name the JNDI name of the object
+     * @throws NamingException thrown by JNDI, mostly name not found
+     */
+    public void unbind(final String name) throws NamingException {
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L227">            log.debug(&quot;Unbinding JNDI object with name [&quot; + name + &quot;]&quot;);</span>
+        }
+<span class="pc" id="L229">        execute(new JndiCallback() {</span>
+            public Object doInContext(Context ctx) throws NamingException {
+<span class="nc" id="L231">                ctx.unbind(name);</span>
+<span class="nc" id="L232">                return null;</span>
+            }
+        });
+<span class="nc" id="L235">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

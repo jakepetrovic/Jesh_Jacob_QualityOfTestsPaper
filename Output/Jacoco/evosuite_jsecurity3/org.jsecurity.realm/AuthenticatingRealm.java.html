@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AuthenticatingRealm.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.realm</a> &gt; <span class="el_source">AuthenticatingRealm.java</span></div><h1>AuthenticatingRealm.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.realm;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.authc.*;
+import org.jsecurity.authc.credential.AllowAllCredentialsMatcher;
+import org.jsecurity.authc.credential.CredentialsMatcher;
+import org.jsecurity.authc.credential.SimpleCredentialsMatcher;
+import org.jsecurity.cache.CacheManager;
+import org.jsecurity.subject.PrincipalCollection;
+
+/**
+ * A top-level abstract implementation of the &lt;tt&gt;Realm&lt;/tt&gt; interface that only implements authentication support
+ * (log-in) operations and leaves authorization (access control) behavior to subclasses.
+ *
+ * &lt;p&gt;Since a Realm provides both authentication &lt;em&gt;and&lt;/em&gt; authorization operations, the implementation approach for
+ * this class could have been reversed.  That is, authorization support could have been implemented here and
+ * authentication support left to subclasses.
+ *
+ * &lt;p&gt;The reason the existing implementation is in place though
+ * (authentication support) is that most authentication operations are fairly common across the large majority of
+ * applications, whereas authorization operations are more so heavily dependent upon the application's data model, which
+ * can vary widely.
+ *
+ * &lt;p&gt;By providing the most common authentication operations here and leaving data-model specific authorization checks
+ * to subclasses, a top-level abstract class for most common authentication behavior is more useful as an extension
+ * point for most applications.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.2
+ */
+public abstract class AuthenticatingRealm extends CachingRealm implements LogoutAware {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L55">    private static final Log log = LogFactory.getLog(AuthenticatingRealm.class);</span>
+
+    /**
+     * Password matcher used to determine if the provided password matches
+     * the password stored in the data store.
+     */
+<span class="pc" id="L61">    private CredentialsMatcher credentialsMatcher = new SimpleCredentialsMatcher();</span>
+
+    /**
+     * The class that this realm supports for authentication tokens.  This is used by the
+     * default implementation of the {@link Realm#supports(org.jsecurity.authc.AuthenticationToken)} method to
+     * determine whether or not the given authentication token is supported by this realm.
+     */
+<span class="pc" id="L68">    private Class&lt;? extends AuthenticationToken&gt; authenticationTokenClass = UsernamePasswordToken.class;</span>
+
+    /*--------------------------------------------
+    |         C O N S T R U C T O R S           |
+    ============================================*/
+<span class="fc" id="L73">    public AuthenticatingRealm() {</span>
+<span class="fc" id="L74">    }</span>
+
+<span class="nc" id="L76">    public AuthenticatingRealm(CacheManager cacheManager) {</span>
+<span class="nc" id="L77">        setCacheManager(cacheManager);</span>
+<span class="nc" id="L78">    }</span>
+
+<span class="nc" id="L80">    public AuthenticatingRealm(CredentialsMatcher matcher) {</span>
+<span class="nc" id="L81">        setCredentialsMatcher(matcher);</span>
+<span class="nc" id="L82">    }</span>
+
+<span class="nc" id="L84">    public AuthenticatingRealm(CacheManager cacheManager, CredentialsMatcher matcher) {</span>
+<span class="nc" id="L85">        setCacheManager(cacheManager);</span>
+<span class="nc" id="L86">        setCredentialsMatcher(matcher);</span>
+<span class="nc" id="L87">    }</span>
+
+    /*--------------------------------------------
+    |  A C C E S S O R S / M O D I F I E R S    |
+    ============================================*/
+    /**
+     * Returns the &lt;code&gt;CredentialsMatcher&lt;/code&gt; used during an authentication attempt to verify submitted
+     * credentials with those stored in the system.
+     *
+     * &lt;p&gt;Unless overridden by the {@link #setCredentialsMatcher setCredentialsMatcher} method, the default
+     * value is a {@link org.jsecurity.authc.credential.SimpleCredentialsMatcher SimpleCredentialsMatcher} instance.
+     *
+     * @return the &lt;code&gt;CredentialsMatcher&lt;/code&gt; used during an authentication attempt to verify submitted
+     *         credentials with those stored in the system.
+     */
+    public CredentialsMatcher getCredentialsMatcher() {
+<span class="fc" id="L103">        return credentialsMatcher;</span>
+    }
+
+    /**
+     * Sets the CrendialsMatcher used during an authentication attempt to verify submitted credentials with those
+     * stored in the system.  The implementation of this matcher can be switched via configuration to
+     * support any number of schemes, including plain text comparisons, hashing comparisons, and others.
+     *
+     * &lt;p&gt;Unless overridden by this method, the default value is a
+     * {@link org.jsecurity.authc.credential.SimpleCredentialsMatcher} instance.
+     *
+     * @param credentialsMatcher the matcher to use.
+     */
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+<span class="nc" id="L117">        this.credentialsMatcher = credentialsMatcher;</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * Returns the authenticationToken class supported by this realm.
+     *
+     * &lt;p&gt;The default value is &lt;tt&gt;{@link UsernamePasswordToken UsernamePasswordToken.class}&lt;/tt&gt;, since
+     * about 90% of realms use username/password authentication, regardless of their protocol (e.g. over jdbc, ldap,
+     * kerberos, http, etc).
+     *
+     * &lt;p&gt;If subclasses haven't already overridden the {@link Realm#supports Realm.supports(AuthenticationToken)} method,
+     * they must {@link #setAuthenticationTokenClass(Class) set a new class} if they won't support
+     * &lt;tt&gt;UsernamePasswordToken&lt;/tt&gt; authentication token submissions.
+     *
+     * @return the authenticationToken class supported by this realm.
+     * @see #setAuthenticationTokenClass
+     */
+    public Class getAuthenticationTokenClass() {
+<span class="fc" id="L135">        return authenticationTokenClass;</span>
+    }
+
+    /**
+     * Sets the authenticationToken class supported by this realm.
+     *
+     * &lt;p&gt;Unless overridden by this method, the default value is
+     * {@link UsernamePasswordToken UsernamePasswordToken.class} to support the majority of applications.
+     *
+     * @param authenticationTokenClass the class of authentication token instances supported by this realm.
+     * @see #getAuthenticationTokenClass getAuthenticationTokenClass() for more explanation.
+     */
+    public void setAuthenticationTokenClass(Class&lt;? extends AuthenticationToken&gt; authenticationTokenClass) {
+<span class="nc" id="L148">        this.authenticationTokenClass = authenticationTokenClass;</span>
+<span class="nc" id="L149">    }</span>
+
+    /*--------------------------------------------
+    |               M E T H O D S               |
+    ============================================*/
+    /**
+     * Convenience implementation that returns
+     * &lt;tt&gt;getAuthenticationTokenClass().isAssignableFrom( token.getClass() );&lt;/tt&gt;.  Can be overridden
+     * by subclasses for more complex token checking.
+     * &lt;p&gt;Most configurations will only need to set a different class via
+     * {@link #setAuthenticationTokenClass}, as opposed to overriding this method.
+     *
+     * @param token the token being submitted for authentication.
+     * @return true if this authentication realm can process the submitted token instance of the class, false otherwise.
+     */
+    public boolean supports(AuthenticationToken token) {
+<span class="pc bpc" id="L165" title="1 of 4 branches missed.">        return token != null &amp;&amp; getAuthenticationTokenClass().isAssignableFrom(token.getClass());</span>
+    }
+
+    public final AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+
+<span class="fc" id="L170">        AuthenticationInfo info = doGetAuthenticationInfo(token);</span>
+
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (info == null) {</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L174">                String msg = &quot;No authentication information found for submitted authentication token [&quot; + token + &quot;].  &quot; +</span>
+                        &quot;Returning null.&quot;;
+<span class="nc" id="L176">                log.debug(msg);</span>
+            }
+<span class="nc" id="L178">            return null;</span>
+        }
+
+<span class="fc" id="L181">        CredentialsMatcher cm = getCredentialsMatcher();</span>
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">        if (cm != null) {</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">            if (!cm.doCredentialsMatch(token, info)) {</span>
+<span class="nc" id="L184">                String msg = &quot;The credentials provided for account [&quot; + token +</span>
+                        &quot;] did not match the expected credentials.&quot;;
+<span class="nc" id="L186">                throw new IncorrectCredentialsException(msg);</span>
+            }
+        } else {
+<span class="nc" id="L189">            throw new AuthenticationException(&quot;A CredentialsMatcher must be configured in order to verify &quot; +</span>
+                    &quot;credentials during authentication.  If you do not wish for credentials to be examined, you &quot; +
+                    &quot;can configure an &quot; + AllowAllCredentialsMatcher.class.getName() + &quot; instance.&quot;);
+        }
+
+<span class="fc" id="L194">        return info;</span>
+    }
+
+    /**
+     * Retrieves authentication data from an implementation-specific datasource (RDBMS, LDAP, etc) for the given
+     * authentication token.
+     *
+     * &lt;p&gt;For most datasources, this means just 'pulling' authentication data for an associated subject/user and nothing
+     * more and letting JSecurity do the rest.  But in some systems, this method could actually perform EIS specific
+     * log-in logic in addition to just retrieving data - it is up to the Realm implementation.
+     *
+     * &lt;p&gt;A &lt;tt&gt;null&lt;/tt&gt; return value means that no account could be associated with the specified token.
+     *
+     * @param token the authentication token containing the user's principal and credentials.
+     * @return an {@link AuthenticationInfo} object containing account data resulting from the
+     *         authentication ONLY if the lookup is successful (i.e. account exists and is valid, etc.)
+     * @throws org.jsecurity.authc.AuthenticationException
+     *          if there is an error acquiring data or performing
+     *          realm-specific authentication logic for the specified &lt;tt&gt;token&lt;/tt&gt;
+     */
+    protected abstract AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException;
+
+    /**
+     * Default implementation that does nothing (no-op) and exists as a convenience mechanism in case subclasses
+     * wish to override it to implement realm-specific logout logic for the given user account logging out.&lt;/p&gt;
+     * &lt;p/&gt;
+     * In a single-realm JSecurity configuration (most applications), the &lt;code&gt;principals&lt;/code&gt; method
+     * argument will be the same as that which is contained in the &lt;code&gt;AuthenticationInfo&lt;/code&gt; object returned by the
+     * {@link #doGetAuthenticationInfo} method (that is, {@link AuthenticationInfo#getPrincipals info.getPrincipals()}).
+     * &lt;p/&gt;
+     * In a multi-realm JSecurity configuration, the given &lt;code&gt;principals&lt;/code&gt; method
+     * argument could contain principals returned by many realms.  Therefore the subclass implementation would need
+     * to know how to extract the principal(s) relevant to only itself and ignore other realms' principals.  This is
+     * usually done by calling {@link PrincipalCollection#fromRealm(String) principals.fromRealm(name)},
+     * using the realm's own {@link org.jsecurity.realm.Realm#getName() name}.
+     *
+     * @param principals the application-specific Subject/user identifier that is logging out.
+     */
+    public void onLogout(PrincipalCollection principals) {
+        //no-op, here for subclass override if desired.
+<span class="nc" id="L234">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

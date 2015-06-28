@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PooledConnectionHandler.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.proxy</a> &gt; <span class="el_source">PooledConnectionHandler.java</span></div><h1>PooledConnectionHandler.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2007-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.proxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.sql.ConnectionEventListener;
+
+import org.databene.commons.BeanUtil;
+import org.databene.commons.LogCategories;
+import org.databene.commons.debug.Debug;
+import org.databene.commons.debug.ResourceMonitor;
+import org.databene.jdbacl.DBUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Wraps a connection for logging of JDBC connection handling.&lt;br/&gt;
+ * Created: 24.08.2008 18:47:44&lt;br/&gt;
+ * @author Volker Bergmann
+ * @since 0.5.5
+ */
+public class PooledConnectionHandler implements InvocationHandler {
+    
+<span class="fc" id="L57">    private static final Logger jdbcLogger = LoggerFactory.getLogger(LogCategories.JDBC);</span>
+    
+<span class="fc" id="L59">    private static long nextId = 0;</span>
+
+    private static volatile AtomicInteger openConnectionCount;
+    private static ResourceMonitor openConnectionMonitor;
+
+    private boolean readOnly;
+    private Connection realConnection;
+    private long id;
+    private boolean closed;
+    
+    // construction ----------------------------------------------------------------------------------------------------
+    
+    static {
+<span class="fc" id="L72">    	openConnectionCount = new AtomicInteger();</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">    	if (Debug.active())</span>
+<span class="nc" id="L74">    		openConnectionMonitor = new ResourceMonitor();</span>
+<span class="fc" id="L75">    }</span>
+    
+<span class="fc" id="L77">    public PooledConnectionHandler(Connection realConnection, boolean readOnly) {</span>
+<span class="fc" id="L78">    	this.readOnly = readOnly;</span>
+<span class="fc" id="L79">        this.id = nextId();</span>
+<span class="fc" id="L80">        this.realConnection = realConnection;</span>
+<span class="fc" id="L81">        this.listeners = new ArrayList&lt;ConnectionEventListener&gt;();</span>
+<span class="fc" id="L82">        this.closed = false;</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (jdbcLogger.isDebugEnabled())</span>
+<span class="fc" id="L84">            jdbcLogger.debug(&quot;Created connection #&quot; + id + &quot;: &quot; + realConnection);</span>
+<span class="fc" id="L85">        openConnectionCount.incrementAndGet();</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">    	if (openConnectionMonitor != null)</span>
+<span class="nc" id="L87">    		openConnectionMonitor.register(this);</span>
+<span class="fc" id="L88">    }</span>
+
+    // InvocationHandler implementation --------------------------------------------------------------------------------
+    
+	public Object invoke(Object proxy, Method method, Object[] args)
+			throws Throwable {
+<span class="fc" id="L94">		String methodName = method.getName();</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">		if (&quot;close&quot;.equals(methodName))</span>
+<span class="nc" id="L96">			this.close();</span>
+<span class="pc bpc" id="L97" title="5 of 6 branches missed.">		else if (&quot;getConnection&quot;.equals(methodName) &amp;&amp; (args == null || args.length == 0))</span>
+<span class="nc" id="L98">			return this.getConnection();</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		else if (&quot;addConnectionEventListener&quot;.equals(methodName)) {</span>
+<span class="nc" id="L100">			this.addConnectionEventListener((ConnectionEventListener) args[0]);</span>
+<span class="nc" id="L101">			return null;</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		} else if (&quot;removeConnectionEventListener&quot;.equals(methodName)) {</span>
+<span class="nc" id="L103">			this.removeConnectionEventListener((ConnectionEventListener) args[0]);</span>
+<span class="nc" id="L104">			return null;</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">		} else if (&quot;prepareStatement&quot;.equals(methodName)) {</span>
+<span class="nc bnc" id="L106" title="All 5 branches missed.">			switch (args.length) {</span>
+<span class="nc" id="L107">				case 1: return DBUtil.prepareStatement(realConnection, (String) args[0], readOnly);</span>
+				case 2: 
+<span class="nc bnc" id="L109" title="All 2 branches missed.">					if (method.getParameterTypes()[1] == int.class)</span>
+<span class="nc" id="L110">						return DBUtil.prepareStatement(realConnection, (String) args[0], readOnly,</span>
+								(Integer) args[1], ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+					else
+						break;
+<span class="nc" id="L114">				case 3: return DBUtil.prepareStatement(realConnection, (String) args[0], readOnly,</span>
+						(Integer) args[1], (Integer) args[2], ResultSet.HOLD_CURSORS_OVER_COMMIT);
+<span class="nc" id="L116">				case 4: return DBUtil.prepareStatement(realConnection, (String) args[0], readOnly, </span>
+						(Integer) args[1], (Integer) args[2], (Integer) args[3]);
+			}
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		} else if (&quot;createStatement&quot;.equals(methodName))</span>
+<span class="nc" id="L120">			return createStatement(method, args);</span>
+<span class="fc" id="L121">		return BeanUtil.invoke(realConnection, method, args);</span>
+	}
+
+	private Statement createStatement(Method method, Object[] args) {
+<span class="nc" id="L125">		Statement statement = (Statement) BeanUtil.invoke(realConnection, method, args);</span>
+<span class="nc" id="L126">        return DBUtil.createLoggingStatementHandler(statement, readOnly);</span>
+	}
+
+	// PooledConnection implementation ---------------------------------------------------------------------------------
+    
+	public void close() throws SQLException {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		if (closed)</span>
+<span class="nc" id="L133">			return;</span>
+        try {
+<span class="nc" id="L135">            realConnection.close();</span>
+<span class="nc" id="L136">            listeners.clear();</span>
+<span class="nc" id="L137">            openConnectionCount.decrementAndGet();</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        	if (openConnectionMonitor != null)</span>
+<span class="nc" id="L139">        		openConnectionMonitor.unregister(this);</span>
+<span class="nc" id="L140">            closed = true;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">            if (jdbcLogger.isDebugEnabled())</span>
+<span class="nc" id="L142">                jdbcLogger.debug(&quot;Closed connection #&quot; + id + &quot;: &quot; + realConnection);</span>
+<span class="nc" id="L143">        } catch (SQLException e) {</span>
+<span class="nc" id="L144">            jdbcLogger.error(&quot;Error closing connection #&quot; + id + &quot;: &quot; + realConnection, e);</span>
+<span class="nc" id="L145">            throw e;</span>
+<span class="nc" id="L146">        }</span>
+<span class="nc" id="L147">    }</span>
+
+    public Connection getConnection() {
+<span class="nc" id="L150">        return realConnection;</span>
+    }
+
+    private List&lt;ConnectionEventListener&gt; listeners;
+    
+    public void addConnectionEventListener(ConnectionEventListener listener) {
+<span class="nc" id="L156">        listeners.add(listener);</span>
+<span class="nc" id="L157">    }</span>
+
+    public void removeConnectionEventListener(ConnectionEventListener listener) {
+<span class="nc" id="L160">        listeners.remove(listener);</span>
+<span class="nc" id="L161">    }</span>
+    
+    // connection count ------------------------------------------------------------------------------------------------
+    
+    public static int getOpenConnectionCount() {
+<span class="fc" id="L166">    	return openConnectionCount.get();</span>
+    }
+    
+	public static void resetMonitors() {
+<span class="fc" id="L170">		openConnectionCount.set(0);</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">		if (openConnectionMonitor != null)</span>
+<span class="nc" id="L172">			openConnectionMonitor.reset();</span>
+<span class="fc" id="L173">	}</span>
+    
+	public static boolean assertAllConnectionsClosed(boolean critical) {
+<span class="nc" id="L176">		return openConnectionMonitor.assertNoRegistrations(critical);</span>
+	}
+
+    // private helpers -------------------------------------------------------------------------------------------------
+
+    private static synchronized long nextId() {
+<span class="fc" id="L182">        return ++nextId;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

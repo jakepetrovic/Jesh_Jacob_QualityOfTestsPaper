@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ServerLogin.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">ServerLogin.java</span></div><h1>ServerLogin.java</h1><pre class="source lang-java linenums">package server;
+
+import org.apache.log4j.Logger;
+
+import db.DBException;
+import db.DBGameUser;
+import db.DBServiceFactory;
+
+/**
+ * The Class for the login and the registration
+ * 
+ * @author Bj�rn
+ */
+<span class="nc" id="L14">public class ServerLogin {</span>
+	public static final int LOGIN_SUCCESSFUL = 1;
+	public static final int USERNAME_TAKEN = 2;
+	public static final int WRONG_PASSWORD = 3;
+	public static final int WRONG_USERNAME = 4;
+	public static final int USER_STILL_LOGGED_IN = 5;
+
+	/**
+	 * the DBGameUser object
+	 */
+<span class="nc" id="L24">	private DBGameUser user = null;</span>
+
+	/**
+	 * the status of the login
+	 */
+	private int status;
+
+	/**
+	 * the logger for login
+	 */
+<span class="nc" id="L34">	private static final Logger logger = Logger.getLogger(BomberServer.class);</span>
+
+	/**
+	 * Handles the register of a new user.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return boolean status, true if register is correct
+	 */
+	public int register(String username, String password) {
+		try {
+<span class="nc" id="L45">			user = DBServiceFactory.getInstance().getDBUser(username);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">			if (user.getName() == null) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">				for (ClientInfo client : BomberServer.getInstance()</span>
+						.getClients()) {
+<span class="nc bnc" id="L49" title="All 2 branches missed.">					if (client.getName() != null) {</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">						if (client.getName().equals(username)) {</span>
+<span class="nc" id="L51">							status = USERNAME_TAKEN;</span>
+<span class="nc" id="L52">							break;</span>
+						} else {
+<span class="nc" id="L54">							status = LOGIN_SUCCESSFUL;</span>
+						}
+					} else {
+<span class="nc" id="L57">						status = LOGIN_SUCCESSFUL;</span>
+					}
+<span class="nc" id="L59">				}</span>
+			} else {
+<span class="nc" id="L61">				status = USERNAME_TAKEN;</span>
+			}
+<span class="nc bnc" id="L63" title="All 2 branches missed.">			if (status == LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L64">				logger.info(&quot;creating user &quot;+username);</span>
+<span class="nc" id="L65">				user = new DBGameUser();</span>
+<span class="nc" id="L66">				user.setName(username);</span>
+<span class="nc" id="L67">				user.setPassword(password);</span>
+<span class="nc" id="L68">				user.setScore(0);</span>
+<span class="nc" id="L69">				DBServiceFactory.getInstance().saveGameUser(user);</span>
+<span class="nc" id="L70">				status = LOGIN_SUCCESSFUL;</span>
+<span class="nc" id="L71">				String userstr = DBServiceFactory.getInstance().getDBUser(user.getName()).toString();</span>
+<span class="nc" id="L72">				logger.info(userstr);</span>
+<span class="nc" id="L73">				logger.info(&quot;register as &quot; + username + &quot; correct!&quot;);</span>
+			}
+<span class="nc" id="L75">		} catch (DBException e) {</span>
+<span class="nc" id="L76">		}</span>
+
+<span class="nc" id="L78">		return status;</span>
+	}
+
+	/**
+	 * Handles the login as a registered user.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return boolean status, true if login is correct
+	 */
+	public int login(String username, String password) {
+		try {
+<span class="nc" id="L90">			user = DBServiceFactory.getInstance().getDBUser(username);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">			if (user.getName() != null) {</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">				if (password.equals(user.getPassword())) {</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">					for (ClientInfo client : BomberServer.getInstance()</span>
+							.getClients()) {
+<span class="nc bnc" id="L95" title="All 2 branches missed.">						if (client.getName() != null) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">							if (client.getName().equals(username)) {</span>
+<span class="nc" id="L97">								status = USER_STILL_LOGGED_IN;</span>
+<span class="nc" id="L98">								break;</span>
+							} else {
+<span class="nc" id="L100">								status = LOGIN_SUCCESSFUL;</span>
+							}
+						} else {
+<span class="nc" id="L103">							status = LOGIN_SUCCESSFUL;</span>
+						}
+<span class="nc" id="L105">					}</span>
+				} else {
+<span class="nc" id="L107">					status = WRONG_PASSWORD;</span>
+				}
+			} else {
+<span class="nc" id="L110">				status = WRONG_USERNAME;</span>
+			}
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">			if (status == LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L114">				logger.info(&quot;login as &quot; + username + &quot; correct!&quot;);</span>
+			}
+<span class="nc" id="L116">		} catch (DBException e) {</span>
+<span class="nc" id="L117">		}</span>
+
+<span class="nc" id="L119">		return status;</span>
+	}
+
+	/**
+	 * Handles the login as a guest.
+	 * 
+	 * @param username
+	 * @return boolean status, true if login is correct
+	 */
+	public int loginGuest(String username) {
+		try {
+<span class="nc bnc" id="L130" title="All 2 branches missed.">			if(username.equals(&quot;&quot;)){</span>
+<span class="nc" id="L131">				return WRONG_USERNAME;</span>
+			}
+<span class="nc" id="L133">			logger.info(&quot;loginGuest called &quot;+username);</span>
+<span class="nc" id="L134">			user = DBServiceFactory.getInstance().getDBUser(username);</span>
+			
+<span class="nc bnc" id="L136" title="All 6 branches missed.">			if (user == null || user.getName()==null || user.getName().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L137">				logger.info(&quot;loginGuest user not in db &quot;+username);</span>
+<span class="nc" id="L138">				register(username, &quot;&quot;);</span>
+<span class="nc" id="L139">				user = DBServiceFactory.getInstance().getDBUser(username);</span>
+			}
+
+<span class="nc bnc" id="L142" title="All 6 branches missed.">			if (user != null</span>
+					&amp;&amp; (user.getPassword() == null || user.getPassword()
+							.equals(&quot;&quot;))) {
+<span class="nc" id="L145">				logger.info(&quot;user &quot;+username+&quot; (Guest) logged with score &quot;+user.getScore());</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">				for (ClientInfo client : BomberServer.getInstance()</span>
+						.getClients()) {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">					if (client.getName() != null) {</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">						if (client.getName().equals(username)) {</span>
+<span class="nc" id="L150">							status = USERNAME_TAKEN;</span>
+<span class="nc" id="L151">							break;</span>
+						} else {
+<span class="nc" id="L153">							status = LOGIN_SUCCESSFUL;</span>
+						}
+					} else {
+<span class="nc" id="L156">						status = LOGIN_SUCCESSFUL;</span>
+					}
+<span class="nc" id="L158">				}</span>
+			} else {
+<span class="nc" id="L160">				status = USERNAME_TAKEN;</span>
+			}
+<span class="nc" id="L162">		} catch (DBException e) {</span>
+<span class="nc" id="L163">		}</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">		if (status == LOGIN_SUCCESSFUL) {</span>
+<span class="nc" id="L165">			logger.info(&quot;login as &quot; + username + &quot; correct!&quot;);</span>
+		}
+<span class="nc" id="L167">		return status;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

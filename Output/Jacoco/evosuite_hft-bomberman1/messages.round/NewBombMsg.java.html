@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>NewBombMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.round</a> &gt; <span class="el_source">NewBombMsg.java</span></div><h1>NewBombMsg.java</h1><pre class="source lang-java linenums">package messages.round;
+
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import common.Bomb;
+import common.GameObject;
+
+import server.ClientInfo;
+import server.ServerBomb;
+import server.ServerGameRound;
+import client.ClientBomb;
+import client.ClientGameRound;
+
+/**
+ * ClientBombMsg.java
+ * 
+ * Message to send, that a new bomb was placed
+ * 
+ * @author Bjoern, Steffen, Andi
+ */
+public class NewBombMsg implements RoundClientMsg, RoundServerMsg {
+<span class="nc" id="L24">	private static final Logger logger = Logger.getLogger(NewBombMsg.class);</span>
+
+	/**
+	 * ID of the bomb
+	 * 
+	 */
+	private int bombID;
+
+	/**
+	 * position of the client
+	 * 
+	 */
+	private Point position;
+
+	private int planterId;
+
+	private int bombDiameter;
+
+	private boolean start;
+
+	/**
+	 * @param position
+	 * @param moveVector
+	 * @param bombID
+	 * @param planterId
+	 * @param bombDiameter
+	 */
+	public NewBombMsg(Point position, int bombID,
+			int planterId, int bombDiameter, boolean start) {
+<span class="nc" id="L53">		super();</span>
+<span class="nc" id="L54">		this.position = position;</span>
+<span class="nc" id="L55">		this.bombID = bombID;</span>
+<span class="nc" id="L56">		this.planterId = planterId;</span>
+<span class="nc" id="L57">		this.bombDiameter = bombDiameter;</span>
+<span class="nc" id="L58">		this.start = start;</span>
+<span class="nc" id="L59">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ServerGameRound round, ClientInfo sender) {
+<span class="nc" id="L66">		logger.info(&quot;New bomb at: &quot; + position.x + &quot;, &quot; + position.y);</span>
+<span class="nc" id="L67">		ServerBomb bomb = new ServerBomb(position, round.getSession());</span>
+<span class="nc" id="L68">		bomb.setId(bombID);</span>
+<span class="nc" id="L69">		bomb.setPlanterId(planterId);</span>
+<span class="nc" id="L70">		bomb.setDiameter(bombDiameter);</span>
+<span class="nc" id="L71">		bomb.setRemote(true);</span>
+<span class="nc" id="L72">		bomb.setStopped(start);</span>
+<span class="nc" id="L73">		round.addGameObject(bombID, bomb);</span>
+<span class="nc" id="L74">		round.getSession().multicastMsg(this, sender);</span>
+<span class="nc" id="L75">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(ClientGameRound round) {
+<span class="nc" id="L82">		logger.info(&quot;New bomb at: &quot; + position.x + &quot;, &quot; + position.y);</span>
+<span class="nc" id="L83">		GameObject planter = round.getGameObjectById(planterId);</span>
+<span class="nc" id="L84">		ClientBomb bomb = new ClientBomb(position, planter);</span>
+<span class="nc" id="L85">		bomb.setId(bombID);</span>
+<span class="nc" id="L86">		bomb.setPlanterId(planterId);</span>
+<span class="nc" id="L87">		bomb.setDiameter(bombDiameter);</span>
+<span class="nc" id="L88">		bomb.setRemote(true);</span>
+<span class="nc" id="L89">		round.addBomb(bombID, bomb);</span>
+<span class="nc" id="L90">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

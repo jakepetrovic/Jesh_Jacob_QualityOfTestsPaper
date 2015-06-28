@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TargetDatabaseMapper.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.identity.mem</a> &gt; <span class="el_source">TargetDatabaseMapper.java</span></div><h1>TargetDatabaseMapper.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.identity.mem;
+
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.databene.jdbacl.identity.IdentityModel;
+import org.databene.jdbacl.identity.KeyMapper;
+import org.databene.jdbacl.model.Database;
+
+/**
+ * In-memory implementation of the mapping functionality needed for a target database.&lt;br/&gt;&lt;br/&gt;
+ * Created: 24.08.2010 11:15:53
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class TargetDatabaseMapper {
+
+	KeyMapper root;
+	Connection target;
+	String targetDbId;
+	Database database;
+	Map&lt;String, TargetTableMapper&gt; tableMappers;
+	
+<span class="nc" id="L46">	public TargetDatabaseMapper(KeyMapper root, Connection target, String targetDbId, Database database) {</span>
+<span class="nc" id="L47">		this.root = root;</span>
+<span class="nc" id="L48">		this.target = target;</span>
+<span class="nc" id="L49">		this.targetDbId = targetDbId;</span>
+<span class="nc" id="L50">		this.database = database;</span>
+<span class="nc" id="L51">		tableMappers = new HashMap&lt;String, TargetTableMapper&gt;(500);</span>
+<span class="nc" id="L52">    }</span>
+	
+	// interface -------------------------------------------------------------------------------------------------------
+	
+	public String getDbId() {
+<span class="nc" id="L57">		return targetDbId;</span>
+	}
+	
+	public void store(IdentityModel identity, String naturalKey, Object targetPK) {
+<span class="nc" id="L61">		getOrCreateTableMapper(target, targetDbId, identity).store(targetPK, naturalKey);</span>
+<span class="nc" id="L62">	}</span>
+	
+	public String getNaturalKey(IdentityModel identity, Object sourcePK) {
+<span class="nc" id="L65">		return getOrCreateTableMapper(target, targetDbId, identity).getNaturalKey(sourcePK);</span>
+    }
+	
+	public Object getTargetPK(IdentityModel identity, String naturalKey) {
+<span class="nc" id="L69">		return getOrCreateTableMapper(target, targetDbId, identity).getTargetId(naturalKey);</span>
+	}
+	
+	// helpers ---------------------------------------------------------------------------------------------------------
+	
+	private TargetTableMapper getOrCreateTableMapper(Connection target, String targetDbId, IdentityModel identity) {
+<span class="nc" id="L75">		String tableName = identity.getTableName();</span>
+<span class="nc" id="L76">		TargetTableMapper result = tableMappers.get(tableName);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">		if (result == null) {</span>
+<span class="nc" id="L78">			result = new TargetTableMapper(root, target, targetDbId, identity, database);</span>
+<span class="nc" id="L79">			tableMappers.put(tableName, result);</span>
+		}
+<span class="nc" id="L81">		return result;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ClientGameRound.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client</a> &gt; <span class="el_source">ClientGameRound.java</span></div><h1>ClientGameRound.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package client;
+
+import java.awt.Point;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
+import client.controller.LocalControl;
+import client.gui.StartFrame;
+import client.network.ForwardingObserver;
+import client.view.BombView;
+import client.view.GameCanvas;
+import client.view.GameView;
+import client.view.GfxFactory;
+import client.view.OffGamePainter;
+import client.view.PlayerView;
+import client.view.PowerUpView;
+import client.view.StatusView;
+import client.view.TileView;
+
+import common.Bomb;
+import common.Constants;
+import common.GameModel;
+import common.GameObject;
+import common.GameRound;
+import common.Map;
+import common.Player;
+import common.PowerUp;
+import common.Tile;
+
+/**
+ * Represents a game on the client side. This class serves as a connection
+ * between the model, view and game loop.
+ * 
+ * @author Andi, Bj�rn
+ * 
+ */
+public class ClientGameRound extends GameRound implements Observer {
+
+	/**
+	 * The GameModel instance for this game.
+	 */
+	private GameModel model;
+
+	/**
+	 * The GameView instance for this game.
+	 */
+	private GameView view;
+
+	/**
+	 * The GameLoop instance for this game.
+	 */
+	private ClientGameLoop gameLoop;
+
+	/**
+	 * The GfxFactory instance for this game.
+	 */
+	private GfxFactory gfxFactory;
+
+<span class="nc" id="L66">	private static final Logger logger = Logger.getLogger(ClientGameRound.class);</span>
+
+	private Player localPlayer;
+
+	private final ClientGameSession session;
+
+	private Thread offGamePainter;
+
+	private final GameCanvas gameCanvas;
+
+	private ForwardingObserver forwardingObserver;
+
+	/**
+	 * Creates a new game that will be painted on the passed GameCanvas object.
+	 * When this constructor finishes, all necessary game objects will be
+	 * initialized, but they will lack player and map objects.
+	 * 
+	 * @param gameCanvas
+	 *            The canvas that will be used for painting the view.
+	 */
+<span class="nc" id="L86">	public ClientGameRound(ClientGameSession session, GameCanvas gameCanvas) {</span>
+<span class="nc" id="L87">		this.session = session;</span>
+<span class="nc" id="L88">		this.gameCanvas = gameCanvas;</span>
+<span class="nc" id="L89">		model = new GameModel();</span>
+<span class="nc" id="L90">		view = new GameView(gameCanvas);</span>
+<span class="nc" id="L91">		gameLoop = new ClientGameLoop(this, model, view);</span>
+<span class="nc" id="L92">		gfxFactory = new GfxFactory();</span>
+<span class="nc" id="L93">		forwardingObserver = new ForwardingObserver(BomberClient.getInstance(), this);</span>
+<span class="nc" id="L94">		offGamePainter = new OffGamePainter(view);</span>
+<span class="nc" id="L95">		offGamePainter.start();</span>
+<span class="nc" id="L96">	}</span>
+
+	/**
+	 * Adds a player to the game. Adds the player object to GameModel and
+	 * creates a view object for the player and adds it to the GameView.
+	 * 
+	 * @param player
+	 *            The player to add to this game.
+	 */
+	public void addPlayer(int id, ClientPlayer player) {
+<span class="nc" id="L106">		player.addObserver(this);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">		if (id == session.getId()) {</span>
+<span class="nc" id="L108">			player.addObserver(forwardingObserver);</span>
+<span class="nc" id="L109">			StatusView statusView = new StatusView(player, gfxFactory);</span>
+<span class="nc" id="L110">			view.addGameObjectView(statusView);</span>
+		}
+<span class="nc" id="L112">		model.addGameObject(id, player);</span>
+<span class="nc" id="L113">		view.addGameObjectView(new PlayerView(player, gfxFactory));</span>
+<span class="nc" id="L114">	}</span>
+
+	public void addBomb(int id, Bomb bomb) {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">		if (model.getGameObjectById(id) != null) {</span>
+<span class="nc" id="L118">			return;</span>
+		}
+<span class="nc" id="L120">		bomb.addObserver(forwardingObserver);</span>
+<span class="nc" id="L121">		model.addGameObject(id, bomb);</span>
+<span class="nc" id="L122">		view.addGameObjectView(new BombView(bomb, gfxFactory));</span>
+<span class="nc" id="L123">	}</span>
+
+	/**
+	 * Sets the map for this game. All tiles that are contained in the map are
+	 * added to the GameModel. For every tile a TileView is created and added to
+	 * the GameView.
+	 * 
+	 * @param map=
+	 *            The map that will be used in this game.
+	 */
+	public void setMap(Map map) {
+<span class="nc" id="L134">		Vector&lt;Tile&gt; tiles = new Vector&lt;Tile&gt;();</span>
+<span class="nc" id="L135">		String imageSet = map.getImageSet();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">		for (Tile tile : map) {</span>
+<span class="nc" id="L137">			model.addGameObject(tile.getId(), tile);</span>
+<span class="nc" id="L138">			tiles.add(tile);</span>
+<span class="nc" id="L139">			gfxFactory.setTileSet(map.getImageSet());</span>
+<span class="nc" id="L140">			view.addGameObjectView(new TileView(tile, gfxFactory));</span>
+<span class="nc" id="L141">		}</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">		for (PowerUp powerUp : map.powerupiterator) {</span>
+<span class="nc" id="L143">			model.addGameObject(powerUp.getId(), powerUp);</span>
+<span class="nc" id="L144">			view.addGameObjectView(new PowerUpView(powerUp, gfxFactory));</span>
+<span class="nc" id="L145">		}</span>
+<span class="nc" id="L146">	}</span>
+
+	/**
+	 * Starts this game by creating a new thread and running the game loop in
+	 * it.
+	 */
+	public void start() {
+<span class="nc" id="L153">		offGamePainter.interrupt();</span>
+<span class="nc" id="L154">		gameLoop.start();</span>
+<span class="nc" id="L155">	}</span>
+
+	/**
+	 * Set the local control for this game. This control will be used to move
+	 * the local player on the screen.
+	 * 
+	 * @param localControl
+	 *            The local control to use.
+	 */
+	public void setLocalControl(LocalControl localControl) {
+<span class="nc" id="L165">		gameLoop.setLocalControl(localControl);</span>
+<span class="nc" id="L166">	}</span>
+
+	/**
+	 * Called when an observable has changed. Usages:
+	 * &lt;ul&gt;
+	 * &lt;li&gt;Player plants a bomb
+	 * &lt;/ul&gt;
+	 * 
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+
+<span class="nc" id="L179">	}</span>
+
+	/**
+	 * Searches and returns a GameObject by its id.
+	 * 
+	 * @param id
+	 *            The id of the GameObject that should be returned.
+	 * @return The matching GameObject or null if the id is unknown.
+	 */
+	public GameObject getGameObjectById(int id) {
+<span class="nc" id="L189">		return model.getGameObjectById(id);</span>
+	}
+
+	/**
+	 * Updates the countdown for this GameRound. Visual and acoustic
+	 * notifications will be triggered.
+	 * 
+	 * @param countdown
+	 *            The current countdown.
+	 */
+	public void countdown(int countdown) {
+		String overlayText;
+<span class="nc bnc" id="L201" title="All 2 branches missed.">		if (countdown == 0) {</span>
+<span class="nc" id="L202">			overlayText = &quot;&quot;;</span>
+		} else {
+<span class="nc" id="L204">			overlayText = String.valueOf(countdown);</span>
+		}
+<span class="nc" id="L206">		view.setOverlayText(overlayText);</span>
+<span class="nc" id="L207">	}</span>
+
+	/**
+	 * @param player
+	 */
+	public void setLocalPlayer(Player localPlayer) {
+<span class="nc" id="L213">		this.localPlayer = localPlayer;</span>
+<span class="nc" id="L214">		LocalControl lControl = new LocalControl(localPlayer);</span>
+<span class="nc" id="L215">		gameCanvas.addKeyListener(lControl);</span>
+<span class="nc" id="L216">		gameLoop.setLocalControl(lControl);</span>
+<span class="nc" id="L217">	}</span>
+
+
+
+	/**
+	 * Finishes this game round by calculating the score and notifying the
+	 * session that the round has ended.
+	 * 
+	 * @see common.GameRound#doPostRoundProcessing()
+	 */
+	@Override
+	public void doPostRoundProcessing() {
+<span class="nc" id="L229">		setTime(Constants.time);</span>
+
+<span class="nc" id="L231">		logger.info(&quot;in ClientGameRound#doPostRoundProcessing()&quot;);</span>
+
+<span class="nc" id="L233">		StartFrame.getInstance().removeChatMessageSession();</span>
+<span class="nc" id="L234">		session.doPostRoundProcessing();</span>
+<span class="nc" id="L235">	}</span>
+
+	/**
+	 * Snaps the location of the given bomb to the next intersection on the
+	 * grid.
+	 * 
+	 * @param bomb
+	 *            The bomb that should be relocated on the grid.
+	 */
+	public void snapToGrid(Bomb bomb) {
+<span class="nc" id="L245">		model.snapToGrid(bomb);</span>
+<span class="nc" id="L246">	}</span>
+
+	/**
+	 * Sets the status of the round. This is used to inform the user about
+	 * what's happening.
+	 * 
+	 * @param string
+	 *            The string that will be displayed to the user.
+	 */
+	public void setStatus(String string) {
+<span class="nc" id="L256">		view.setOverlayText(string);</span>
+<span class="nc" id="L257">	}</span>
+
+	/**
+	 * End the game round. The action will stop but the game will still be
+	 * painted on the canvas.
+	 */
+	public void endRound() {
+
+<span class="nc" id="L265">	}</span>
+
+	/**
+	 * Terminate this round. This will stop the rendering of the game.
+	 */
+	public void terminateRound() {
+		try {
+<span class="nc" id="L272">			gameLoop.interrupt();</span>
+<span class="nc" id="L273">			view.resetGfx();</span>
+<span class="nc" id="L274">			session.doPostSessionProcessing();</span>
+<span class="nc" id="L275">			logger.info(&quot;interrupted game loop&quot;);</span>
+<span class="nc" id="L276">		} catch (RuntimeException e) {</span>
+			// whatever...
+<span class="nc" id="L278">			logger.info(&quot;game loop already interrupted&quot;);</span>
+<span class="nc" id="L279">		}</span>
+<span class="nc" id="L280">	}</span>
+
+	/**
+	 * Returns the actual time of this GameRound.
+	 * 
+	 * @return long - actual time
+	 */
+	public long getTime() {
+<span class="nc" id="L288">		return model.getTime();</span>
+	}
+
+	/**
+	 * Sets the time of this GameRound.
+	 * 
+	 * @param time
+	 *            the time, which should be set
+	 */
+	public void setTime(long time) {
+<span class="nc" id="L298">		model.setTime(time);</span>
+<span class="nc" id="L299">	}</span>
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 */
+	@Override
+	public void createNewTile(Point point, int id, String type, boolean bombable, boolean accessible, boolean active) {
+<span class="nc" id="L307">		Tile t = new Tile(point);</span>
+<span class="nc" id="L308">		t.setId(id);</span>
+<span class="nc" id="L309">		t.setBombable(bombable);</span>
+<span class="nc bnc" id="L310" title="All 2 branches missed.">		if (active) {</span>
+<span class="nc" id="L311">			t.setActive();</span>
+		} else {
+<span class="nc" id="L313">			t.setInactive();</span>
+		}
+<span class="nc" id="L315">		t.setType(type);</span>
+<span class="nc" id="L316">		t.setAccessible(accessible);</span>
+<span class="nc" id="L317">		t.setVisible();</span>
+<span class="nc" id="L318">		model.addGameObject(t.getId(), t);</span>
+<span class="nc" id="L319">		view.addGameObjectView(new TileView(t, gfxFactory));</span>
+<span class="nc" id="L320">	}</span>
+
+	public void toggleDisplayNames() {
+<span class="nc" id="L323">		view.toggleDisplayNames();</span>
+<span class="nc" id="L324">	}</span>
+
+	public void setRoundScore(HashMap&lt;String, Integer&gt; rndscore) {
+<span class="nc" id="L327">		StartFrame.getInstance().updateRoundScoreData(rndscore);</span>
+		
+<span class="nc" id="L329">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

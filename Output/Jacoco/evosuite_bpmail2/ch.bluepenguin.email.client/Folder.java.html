@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Folder.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client</a> &gt; <span class="el_source">Folder.java</span></div><h1>Folder.java</h1><pre class="source lang-java linenums">/*
+ * Created Wed Oct 06 07:36:19 GMT+01:00 2004 by MyEclipse Hibernate Tool.
+ */
+package ch.bluepenguin.email.client;
+
+import java.io.Serializable;
+
+/**
+ * A class that represents a row in the 'folder' table. 
+ * This class may be customized as it is never re-generated 
+ * after being created.
+ */
+public class Folder 
+    implements Serializable
+{
+<span class="fc" id="L16">	private AbstractUniqueID uniqueID = new AbstractUniqueID();</span>
+
+    /** The value of the simple parentFolderId property. */
+    private java.lang.Integer parentFolderId;
+
+    /** The value of the simple name property. */
+    private java.lang.String name;
+    
+    private String fullName;
+
+    /**
+	 * @return Returns the uniqueID.
+	 */
+	public AbstractUniqueID getUniqueID() {
+<span class="fc" id="L30">		return uniqueID;</span>
+	}
+
+	/**
+	 * @return Returns the fullName.
+	 */
+	public String getFullName() {
+<span class="fc" id="L37">		return fullName;</span>
+	}
+	/**
+	 * @param fullName The fullName to set.
+	 */
+	public void setFullName(String fullName) {
+<span class="fc" id="L43">		this.fullName = fullName;</span>
+<span class="fc" id="L44">	}</span>
+    private Folder parent;
+
+	private Account account;
+    /**
+     * Simple constructor of Folder instances.
+     */
+    public Folder()
+<span class="fc" id="L52">    {</span>
+<span class="fc" id="L53">    }</span>
+
+
+
+
+    /**
+     * Return the value of the parent_folder_id column.
+     * @return java.lang.Integer
+     */
+    public java.lang.Integer getParentFolderId()
+    {
+<span class="fc" id="L64">        return this.parentFolderId;</span>
+    }
+
+    /**
+     * Set the value of the parent_folder_id column.
+     * @param parentFolderId
+     */
+    public void setParentFolderId(java.lang.Integer parentFolderId)
+    {
+<span class="fc" id="L73">        this.parentFolderId = parentFolderId;</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * Return the value of the name column.
+     * @return java.lang.String
+     */
+    public java.lang.String getName()
+    {
+<span class="fc" id="L82">        return this.name;</span>
+    }
+
+    /**
+     * Set the value of the name column.
+     * @param name
+     */
+    public void setName(java.lang.String name)
+    {
+<span class="fc" id="L91">        this.name = name;</span>
+<span class="fc" id="L92">    }</span>
+
+
+    
+    /* Add customized code below */
+
+    public Folder getParent() {
+<span class="fc" id="L99">        return parent;</span>
+    }
+    public void setParent(Folder parent) {
+<span class="fc" id="L102">        this.parent = parent;</span>
+<span class="fc" id="L103">        setParentFolderId(parent.getUniqueID().getId());</span>
+<span class="fc" id="L104">    }</span>
+
+	/**
+	 * @param account
+	 */
+	public void setAccount(Account account) {
+<span class="fc" id="L110">		this.account = account;</span>
+<span class="fc" id="L111">	}</span>
+	/**
+	 * @param account
+	 */
+	public Account getAccount() {
+<span class="fc" id="L116">		return account;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

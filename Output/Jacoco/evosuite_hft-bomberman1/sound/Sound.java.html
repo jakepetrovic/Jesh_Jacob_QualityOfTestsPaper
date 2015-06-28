@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Sound.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">sound</a> &gt; <span class="el_source">Sound.java</span></div><h1>Sound.java</h1><pre class="source lang-java linenums">package sound;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import org.apache.log4j.Logger;
+
+import common.ResourceService;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
+/**
+ * represents a Sound file which can be played (in a Thread)
+ * 
+ * @author Ghazwan, Tobi
+ * 
+ */
+public class Sound implements Runnable {
+
+    String sndf;
+<span class="nc" id="L25">    Player player = null;</span>
+<span class="nc" id="L26">    private static final Logger logger = Logger.getLogger(Sound.class);</span>
+
+<span class="nc" id="L28">    public Sound() {</span>
+<span class="nc" id="L29">    }</span>
+
+<span class="nc" id="L31">    public Sound(String soundFile) {</span>
+<span class="nc" id="L32">        sndf = soundFile;</span>
+<span class="nc" id="L33">    }</span>
+
+    /**
+     * plays a MP3 File
+     * 
+     * @param filename
+     */
+    public void play(String filename) {
+<span class="nc" id="L41">        InputStream fis = null;</span>
+        try {
+<span class="nc" id="L43">            fis = ResourceService.getInputStream(filename);</span>
+<span class="nc" id="L44">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L45">            logger.info(&quot;mp3 not found: &quot; + filename);</span>
+<span class="nc" id="L46">            return;</span>
+<span class="nc" id="L47">        }</span>
+
+<span class="nc" id="L49">        BufferedInputStream bis = null;</span>
+       
+        try {
+<span class="nc" id="L52">            bis = new BufferedInputStream(fis);</span>
+
+<span class="nc" id="L54">            player = new Player(bis);</span>
+<span class="nc" id="L55">            player.play();</span>
+<span class="nc" id="L56">        } catch (JavaLayerException e) {</span>
+<span class="nc" id="L57">            e.printStackTrace();</span>
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }</span>
+
+    public void run() {
+   
+<span class="nc" id="L63">        this.play(sndf);</span>
+         
+<span class="nc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

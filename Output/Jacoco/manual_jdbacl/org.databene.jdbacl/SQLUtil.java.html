@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SQLUtil.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl</a> &gt; <span class="el_source">SQLUtil.java</span></div><h1>SQLUtil.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.StringUtil;
+import org.databene.jdbacl.model.DBCheckConstraint;
+import org.databene.jdbacl.model.DBColumn;
+import org.databene.jdbacl.model.DBConstraint;
+import org.databene.jdbacl.model.DBForeignKeyConstraint;
+import org.databene.jdbacl.model.DBNotNullConstraint;
+import org.databene.jdbacl.model.DBObject;
+import org.databene.jdbacl.model.DBPrimaryKeyConstraint;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.DBUniqueConstraint;
+
+/**
+ * Provides utility methods for creating SQL queries and commands.&lt;br/&gt;&lt;br/&gt;
+ * Created: 01.09.2010 09:38:46
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+<span class="nc" id="L51">public class SQLUtil {</span>
+	
+<span class="fc" id="L53">	private static final Set&lt;String&gt; NO_SIZE_TYPES = CollectionUtil.toSet(</span>
+			&quot;DATE&quot;, &quot;BLOB&quot;, &quot;CLOB&quot;, &quot;NCLOB&quot;);
+
+<span class="fc" id="L56">	private static final Set&lt;String&gt; DDL_STATEMENTS = CollectionUtil.toSet(</span>
+			&quot;create table&quot;, &quot;alter table&quot;, &quot;drop table&quot;,
+			&quot;create unique index&quot;, &quot;drop index&quot;, &quot;alter index&quot;,
+			&quot;rename&quot;,
+			&quot;create materialized view&quot;, &quot;alter materialized view&quot;, &quot;drop materialized view&quot; 
+			);
+	
+<span class="fc" id="L63">	private static final Set&lt;String&gt; DML_STATEMENTS = CollectionUtil.toSet(</span>
+			&quot;insert&quot;, &quot;update&quot;, &quot;delete&quot;, &quot;truncate&quot;, &quot;select into&quot;);
+	
+<span class="fc" id="L66">	private static final Set&lt;String&gt; PROCEDURE_CALLS = CollectionUtil.toSet(</span>
+			&quot;execute&quot;, &quot;exec&quot;, &quot;call&quot;);
+	
+	public static Object[] parseColumnTypeAndSize(String spec) {
+<span class="fc" id="L70">		int lparen = spec.indexOf('(');</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">		if (lparen &lt; 0)</span>
+<span class="fc" id="L72">			return new Object[] { spec };</span>
+<span class="fc" id="L73">		String type = spec.substring(0, lparen);</span>
+<span class="fc" id="L74">		int rparen = spec.indexOf(')', lparen);</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">		if (rparen &lt; 0)</span>
+<span class="nc" id="L76">			throw new RuntimeException(&quot;Illegal column type format: &quot; + spec);</span>
+<span class="fc" id="L77">		String[] sizeAndFractionDigits = spec.substring(lparen + 1, rparen).split(&quot;,&quot;);</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">		if (sizeAndFractionDigits.length == 1)</span>
+<span class="fc" id="L79">			return new Object[] { type, Integer.parseInt(sizeAndFractionDigits[0].trim()) };</span>
+		else 
+<span class="fc" id="L81">			return new Object[] { type, Integer.parseInt(sizeAndFractionDigits[0].trim()), </span>
+				Integer.parseInt(sizeAndFractionDigits[1].trim()) };
+	}
+	
+	public static void renderCreateTable(DBTable table, 
+			boolean includeForeignKeys, NameSpec nameSpec, PrintWriter out) {
+		// create table &lt;name&gt; (
+<span class="nc" id="L88">		out.print(&quot;create table &quot;);</span>
+<span class="nc" id="L89">		out.print(table.getName());</span>
+<span class="nc" id="L90">		out.print(&quot; (&quot;);</span>
+		// columns
+<span class="nc" id="L92">		List&lt;DBColumn&gt; columns = table.getColumns();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		for (int i = 0; i &lt; columns.size(); i++) {</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">			if (i &gt; 0)</span>
+<span class="nc" id="L95">				out.print(',');</span>
+<span class="nc" id="L96">			out.println();</span>
+<span class="nc" id="L97">			out.print('\t');</span>
+<span class="nc" id="L98">			out.print(renderColumn(columns.get(i)));</span>
+		}
+		// primary key
+<span class="nc" id="L101">		DBPrimaryKeyConstraint pk = table.getPrimaryKeyConstraint();</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">		if (pk != null) {</span>
+<span class="nc" id="L103">			out.println(&quot;,&quot;);</span>
+<span class="nc" id="L104">			out.print('\t');</span>
+<span class="nc" id="L105">			out.print(pkSpec(pk, nameSpec));</span>
+		}
+		// unique keys
+<span class="nc" id="L108">		Set&lt;DBUniqueConstraint&gt; uks = table.getUniqueConstraints(false);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		for (DBUniqueConstraint uk : uks) {</span>
+<span class="nc" id="L110">			out.println(&quot;,&quot;);</span>
+<span class="nc" id="L111">			out.print('\t');</span>
+<span class="nc" id="L112">			out.print(ukSpec(uk, nameSpec));</span>
+<span class="nc" id="L113">		}</span>
+		// unique keys
+<span class="nc bnc" id="L115" title="All 2 branches missed.">		if (includeForeignKeys) {</span>
+<span class="nc" id="L116">			Set&lt;DBForeignKeyConstraint&gt; fks = table.getForeignKeyConstraints();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">			for (DBForeignKeyConstraint fk : fks) {</span>
+<span class="nc" id="L118">				out.println(&quot;,&quot;);</span>
+<span class="nc" id="L119">				out.print('\t');</span>
+<span class="nc" id="L120">				out.print(fkSpec(fk, nameSpec));</span>
+<span class="nc" id="L121">			}</span>
+		}
+		// checks
+<span class="nc" id="L124">		List&lt;DBCheckConstraint&gt; checks = table.getCheckConstraints();</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		for (DBCheckConstraint check : checks) {</span>
+<span class="nc" id="L126">			out.println(&quot;,&quot;);</span>
+<span class="nc" id="L127">			out.print('\t');</span>
+<span class="nc" id="L128">			out.print(checkSpec(check, nameSpec));</span>
+<span class="nc" id="L129">		}</span>
+<span class="nc" id="L130">		out.println();</span>
+<span class="nc" id="L131">		out.print(&quot;)&quot;);</span>
+<span class="nc" id="L132">	}</span>
+	
+	public static void renderAddForeignKey(DBForeignKeyConstraint fk, NameSpec nameSpec, PrintWriter printer) {
+<span class="nc" id="L135">		printer.println(&quot;ALTER TABLE &quot; + fk.getTable().getName() + &quot; ADD &quot;);</span>
+<span class="nc" id="L136">		printer.print('\t');</span>
+<span class="nc" id="L137">		printer.print(SQLUtil.fkSpec(fk, nameSpec));</span>
+<span class="nc" id="L138">    }</span>
+
+    public static String renderColumnNames(DBColumn[] columns) {
+<span class="nc" id="L141">        StringBuilder builder = new StringBuilder(columns[0].getName());</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        for (int i = 1; i &lt; columns.length; i++)</span>
+<span class="nc" id="L143">            builder.append(&quot;, &quot;).append(columns[i].getName());</span>
+<span class="nc" id="L144">        return builder.toString();</span>
+    }
+
+    public static String renderColumnNames(List&lt;DBColumn&gt; columns) {
+<span class="nc" id="L148">        StringBuilder builder = new StringBuilder(columns.get(0).getName());</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        for (int i = 1; i &lt; columns.size(); i++)</span>
+<span class="nc" id="L150">            builder.append(&quot;, &quot;).append(columns.get(i).getName());</span>
+<span class="nc" id="L151">        return builder.toString();</span>
+    }
+
+	public static String renderColumnNames(String[] columnNames) {
+<span class="fc" id="L155">		return '(' + ArrayFormat.format(columnNames) + ')';</span>
+	}
+
+	public static String renderColumn(DBColumn column) {
+<span class="nc" id="L159">		StringBuilder builder = new StringBuilder();</span>
+		
+	    // column name
+<span class="nc" id="L162">	    builder.append(column.getName());</span>
+	    
+	    // column type &amp; size
+<span class="nc" id="L165">		builder.append(' ');</span>
+<span class="nc" id="L166">		renderColumnTypeWithSize(column, builder);</span>
+	    
+	    // default
+<span class="nc bnc" id="L169" title="All 2 branches missed.">	    if (column.getDefaultValue() != null)</span>
+<span class="nc" id="L170">	    	builder.append(&quot; DEFAULT &quot; + column.getDefaultValue());</span>
+	    
+	    // nullability
+<span class="nc bnc" id="L173" title="All 2 branches missed.">	    if (!column.isNullable())</span>
+<span class="nc" id="L174">	    	builder.append(&quot; NOT&quot;);</span>
+<span class="nc" id="L175">    	builder.append(&quot; NULL&quot;);</span>
+	    
+<span class="nc" id="L177">	    return builder.toString();</span>
+    }
+
+	public static String renderColumnTypeWithSize(DBColumn column) {
+<span class="fc" id="L181">	    StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L182">		renderColumnTypeWithSize(column, builder);</span>
+<span class="fc" id="L183">		return builder.toString();</span>
+    }
+	
+	public static void renderColumnTypeWithSize(DBColumn column, StringBuilder builder) {
+<span class="fc" id="L187">	    String typeName = column.getType().getName();</span>
+<span class="fc" id="L188">	    builder.append(typeName);</span>
+<span class="pc bpc" id="L189" title="1 of 4 branches missed.">	    if (column.getSize() != null &amp;&amp; !NO_SIZE_TYPES.contains(typeName)) {</span>
+<span class="fc" id="L190">	    	builder.append(&quot;(&quot; + column.getSize());</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">	    	if (column.getFractionDigits() != null)</span>
+<span class="fc" id="L192">	    		builder.append(&quot;,&quot; + column.getFractionDigits());</span>
+<span class="fc" id="L193">	    	builder.append(&quot;)&quot;);</span>
+	    }
+<span class="fc" id="L195">    }</span>
+	
+	public static String substituteMarkers(String sql, String marker, Object substitution) {
+<span class="nc" id="L198">		return sql.replace(marker, renderValue(substitution));</span>
+    }
+
+    public static String renderQuery(DBTable table, String[] columnNames, Object[] values) {
+<span class="nc" id="L202">		StringBuilder builder = new StringBuilder(&quot;SELECT * FROM &quot;).append(table.getName());</span>
+<span class="nc" id="L203">		builder.append(&quot; WHERE &quot;).append(renderWhereClause(columnNames, values));</span>
+<span class="nc" id="L204">		return builder.toString();</span>
+    }
+    
+    public static String renderWhereClause(String[] columnNames, Object[] values) {
+<span class="nc" id="L208">		StringBuilder builder = new StringBuilder();</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">		for (int i = 0; i &lt; columnNames.length; i++) {</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">			if (i &gt; 0)</span>
+<span class="nc" id="L211">				builder.append(&quot; AND &quot;);</span>
+<span class="nc" id="L212">			builder.append(columnNames[i]).append(&quot; = &quot;).append(renderValue(values[i]));</span>
+		}
+<span class="nc" id="L214">		return builder.toString();</span>
+    }
+    
+    public static String renderValue(Object value) {
+<span class="nc bnc" id="L218" title="All 4 branches missed.">	    if (value instanceof String || value instanceof Character)</span>
+<span class="nc" id="L219">	    	return &quot;'&quot; + value + &quot;'&quot;;</span>
+	    else
+<span class="nc" id="L221">	    	return String.valueOf(value);</span>
+    }
+    
+	public static Boolean mutatesDataOrStructure(String sql) {
+<span class="fc" id="L225">		sql = normalizeSQL(sql);</span>
+		// ALTER SESSION does not change data or structure
+<span class="fc bfc" id="L227" title="All 2 branches covered.">		if (sql.trim().startsWith(&quot;alter session&quot;))</span>
+<span class="fc" id="L228">			return false;</span>
+
+		// check if structure is changed...
+<span class="fc bfc" id="L231" title="All 2 branches covered.">		if (Boolean.TRUE.equals(mutatesStructure(sql)))</span>
+<span class="fc" id="L232">			return true;</span>
+<span class="fc bfc" id="L233" title="All 2 branches covered.">		else if (isQuery(sql))</span>
+<span class="fc" id="L234">			return false;</span>
+<span class="fc bfc" id="L235" title="All 2 branches covered.">		else if (isDML(sql))</span>
+<span class="fc" id="L236">			return true;</span>
+<span class="fc" id="L237">		return null;</span>
+    }
+
+	public static Boolean mutatesStructure(String sql) {
+<span class="fc bfc" id="L241" title="All 2 branches covered.">	    if (isDDL(sql))</span>
+<span class="fc" id="L242">	   		return true;</span>
+<span class="fc bfc" id="L243" title="All 2 branches covered.">	    if (isProcedureCall(sql))</span>
+<span class="fc" id="L244">    		return false;</span>
+<span class="fc" id="L245">	    return false;</span>
+    }
+	
+	public static boolean isDDL(String sql) {
+<span class="fc" id="L249">		sql = normalizeSQL(sql);</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">	    for (String ddl : DDL_STATEMENTS)</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">	    	if (sql.startsWith(ddl))</span>
+<span class="fc" id="L252">	    		return true;</span>
+<span class="fc" id="L253">	    return false;</span>
+	}
+	
+	public static boolean isDML(String sql) {
+<span class="fc" id="L257">		sql = normalizeSQL(sql);</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">	    for (String ddl : DML_STATEMENTS)</span>
+<span class="fc bfc" id="L259" title="All 2 branches covered.">	    	if (sql.startsWith(ddl))</span>
+<span class="fc" id="L260">	    		return true;</span>
+<span class="fc" id="L261">	    return false;</span>
+	}
+	
+	public static boolean isProcedureCall(String sql) {
+<span class="fc" id="L265">		sql = normalizeSQL(sql);</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">	    for (String call : PROCEDURE_CALLS)</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">	    	if (sql.startsWith(call))</span>
+<span class="fc" id="L268">	    		return true;</span>
+<span class="fc" id="L269">	    return false;</span>
+	}
+
+	public static boolean isQuery(String sql) {
+<span class="fc" id="L273">		sql = normalizeSQL(sql);</span>
+		// anything else than SELECT must be a mutation...
+<span class="fc bfc" id="L275" title="All 2 branches covered.">	    if (!sql.startsWith(&quot;select&quot;))</span>
+<span class="fc" id="L276">	    	return false;</span>
+	    // ... but a 'select' statement might be a 'select into'
+<span class="fc" id="L278">	    StringTokenizer t = new StringTokenizer(sql);</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">	    while (t.hasMoreTokens())</span>
+<span class="fc bfc" id="L280" title="All 2 branches covered.">	    	if (&quot;into&quot;.equals(t.nextToken()))</span>
+<span class="fc" id="L281">	    		return false;</span>
+	    // it is a plain select statement
+<span class="fc" id="L283">	    return true;</span>
+    }
+
+	private static String normalizeSQL(String sql) {
+<span class="fc" id="L287">		sql = StringUtil.normalizeSpace(sql.trim().toLowerCase());</span>
+<span class="pc bpc" id="L288" title="1 of 2 branches missed.">		while (sql.contains(&quot;/*&quot;))</span>
+<span class="nc" id="L289">			sql = StringUtil.removeSection(sql, &quot;/*&quot;, &quot;*/&quot;).trim();</span>
+<span class="fc" id="L290">		return sql;</span>
+	}
+
+	public static String constraintSpec(DBConstraint constraint, NameSpec nameSpec) {
+<span class="nc bnc" id="L294" title="All 2 branches missed.">		if (constraint instanceof DBPrimaryKeyConstraint)</span>
+<span class="nc" id="L295">			return pkSpec((DBPrimaryKeyConstraint) constraint, nameSpec);</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">		else if (constraint instanceof DBUniqueConstraint)</span>
+<span class="nc" id="L297">			return ukSpec((DBUniqueConstraint) constraint, nameSpec);</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">		else if (constraint instanceof DBForeignKeyConstraint)</span>
+<span class="nc" id="L299">			return fkSpec((DBForeignKeyConstraint) constraint, nameSpec);</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">		else if (constraint instanceof DBNotNullConstraint)</span>
+<span class="nc" id="L301">			return notNullSpec((DBNotNullConstraint) constraint);</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">		else if (constraint instanceof DBCheckConstraint)</span>
+<span class="nc" id="L303">			return checkSpec((DBCheckConstraint) constraint, nameSpec);</span>
+		else
+<span class="nc" id="L305">			throw new UnsupportedOperationException(&quot;Unknown constraint type: &quot; + </span>
+					constraint.getClass());
+	}
+	
+	private static String checkSpec(DBCheckConstraint check, NameSpec nameSpec) {
+<span class="nc" id="L310">		StringBuilder builder = createConstraintSpecBuilder(check, nameSpec);</span>
+<span class="nc" id="L311">		builder.append(&quot;CHECK &quot;).append(check.getConditionText());</span>
+<span class="nc" id="L312">		return builder.toString();</span>
+	}
+
+	private static String notNullSpec(DBNotNullConstraint constraint) {
+<span class="nc" id="L316">		return constraint.getColumnNames()[0] + &quot; NOT NULL&quot;;</span>
+	}
+
+	public static String pkSpec(DBPrimaryKeyConstraint pk, NameSpec nameSpec) {
+<span class="nc" id="L320">		StringBuilder builder = createConstraintSpecBuilder(pk, nameSpec);</span>
+<span class="nc" id="L321">		builder.append(&quot;PRIMARY KEY &quot;).append(renderColumnNames(pk.getColumnNames()));</span>
+<span class="nc" id="L322">		return builder.toString();</span>
+	}
+	
+	public static String ukSpec(DBUniqueConstraint uk, NameSpec nameSpec) {
+<span class="fc" id="L326">		StringBuilder builder = createConstraintSpecBuilder(uk, nameSpec);</span>
+<span class="fc" id="L327">		builder.append(&quot;UNIQUE &quot;).append(renderColumnNames(uk.getColumnNames()));</span>
+<span class="fc" id="L328">		return builder.toString();</span>
+    }
+
+	public static String fkSpec(DBForeignKeyConstraint fk, NameSpec nameSpec) {
+<span class="nc" id="L332">		StringBuilder builder = createConstraintSpecBuilder(fk, nameSpec);</span>
+<span class="nc" id="L333">		builder.append(&quot;FOREIGN KEY &quot;).append(renderColumnNames(fk.getColumnNames()));</span>
+<span class="nc" id="L334">		builder.append(&quot; REFERENCES &quot;).append(fk.getRefereeTable()).append(renderColumnNames(fk.getRefereeColumnNames()));</span>
+<span class="nc" id="L335">		return builder.toString();</span>
+	}
+
+	protected static StringBuilder createConstraintSpecBuilder(DBConstraint constraint, NameSpec nameSpec) {
+<span class="fc" id="L339">		StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L340">		return appendConstraintName(constraint, builder, nameSpec);</span>
+	}
+	
+	public static String leftJoin(String alias1, String[] columns1, 
+			String table2, String alias2, String[] columns2) {
+<span class="nc" id="L345">		return join(&quot;left&quot;, alias1, columns1, table2, alias2, columns2);</span>
+	}
+
+	public static String innerJoin(String alias1, String[] columns1, 
+			String table2, String alias2, String[] columns2) {
+<span class="nc" id="L350">		return join(&quot;inner&quot;, alias1, columns1, table2, alias2, columns2);</span>
+	}
+
+	public static String join(String type, String refererAlias, String[] refererColumns, 
+			String refereeTable, String refereeAlias, String[] refereeColumns) {
+<span class="nc" id="L355">		StringBuilder builder = new StringBuilder();</span>
+<span class="nc bnc" id="L356" title="All 4 branches missed.">		if (!StringUtil.isEmpty(type) &amp;&amp; !&quot;inner&quot;.equalsIgnoreCase(type))</span>
+<span class="nc" id="L357">			builder.append(type).append(&quot; join &quot;);</span>
+<span class="nc" id="L358">		builder.append(refereeTable).append(&quot; as &quot;).append(refereeAlias).append(&quot; on &quot;); </span>
+<span class="nc bnc" id="L359" title="All 2 branches missed.">		for (int i = 0; i &lt; refererColumns.length; i++) {</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">			if (i &gt; 0)</span>
+<span class="nc" id="L361">				builder.append(&quot; and &quot;);</span>
+<span class="nc" id="L362">			builder.append(refererAlias).append('.').append(refererColumns[i]);</span>
+<span class="nc" id="L363">			builder.append(&quot; = &quot;).append(refereeAlias).append('.').append(refereeColumns[i]);</span>
+		}
+<span class="nc" id="L365">		return builder.toString();</span>
+	}
+
+	public static StringBuilder addRequiredCondition(String condition, StringBuilder builder) {
+<span class="nc bnc" id="L369" title="All 2 branches missed.">		if (builder.length() &gt; 0)</span>
+<span class="nc" id="L370">			builder.append(&quot; and &quot;);</span>
+<span class="nc" id="L371">		return builder.append(condition);</span>
+	}
+
+	public static StringBuilder addOptionalCondition(String condition, StringBuilder builder) {
+<span class="nc bnc" id="L375" title="All 2 branches missed.">		if (builder.length() &gt; 0)</span>
+<span class="nc" id="L376">			builder.append(&quot; or &quot;);</span>
+<span class="nc" id="L377">		return builder.append(condition);</span>
+	}
+
+	public static String ownerDotComponent(DBObject object) {
+<span class="nc bnc" id="L381" title="All 2 branches missed.">		return (object.getOwner() != null ? object.getOwner() + &quot;.&quot; : &quot;&quot;) + object.getName();</span>
+	}
+
+	public static StringBuilder appendConstraintName(DBConstraint constraint, StringBuilder builder, NameSpec nameSpec) {
+<span class="pc bpc" id="L385" title="6 of 8 branches missed.">		if (constraint.getName() != null &amp;&amp; (nameSpec == NameSpec.ALWAYS || (nameSpec == NameSpec.IF_REPRODUCIBLE &amp;&amp; constraint.isNameDeterministic())))</span>
+<span class="fc" id="L386">			builder.append(&quot;CONSTRAINT &quot; + quoteNameIfNecessary(constraint.getName()) + ' ');</span>
+<span class="fc" id="L387">		return builder;</span>
+	}
+	
+	public static void appendConstraintName(DBConstraint constraint, StringBuilder builder) {
+<span class="nc bnc" id="L391" title="All 2 branches missed.">		if (constraint.getName() != null)</span>
+<span class="nc" id="L392">			builder.append(&quot;CONSTRAINT &quot; + quoteNameIfNecessary(constraint.getName()) + ' ');</span>
+<span class="nc" id="L393">	}</span>
+	
+	public static String constraintName(DBConstraint constraint) {
+<span class="nc bnc" id="L396" title="All 2 branches missed.">		return (constraint.getName() != null ? </span>
+				&quot;CONSTRAINT &quot; + quoteNameIfNecessary(constraint.getName()) + ' ' : 
+				&quot;&quot;);
+	}
+	
+	public static String typeAndName(DBObject dbObject) {
+<span class="nc bnc" id="L402" title="All 2 branches missed.">		if (dbObject == null)</span>
+<span class="nc" id="L403">			return null;</span>
+<span class="nc" id="L404">		String name = dbObject.getName();</span>
+<span class="nc bnc" id="L405" title="All 4 branches missed.">		if (name == null &amp;&amp; dbObject instanceof DBConstraint)</span>
+<span class="nc" id="L406">			name = &quot;constraint&quot;;</span>
+<span class="nc" id="L407">		return dbObject.getObjectType() + ' ' + name;</span>
+	}
+
+	public static String removeComments(String sql) {
+<span class="fc" id="L411">		String result = sql;</span>
+		String tmp;
+		do {
+<span class="fc" id="L414">			tmp = result;</span>
+<span class="fc" id="L415">			result = StringUtil.removeSection(tmp, &quot;/*&quot;, &quot;*/&quot;);</span>
+<span class="fc bfc" id="L416" title="All 2 branches covered.">		} while (!result.equals(tmp));</span>
+<span class="fc" id="L417">		return result;</span>
+	}
+
+	public static String normalize(String sql, boolean removeComments) {
+<span class="fc bfc" id="L421" title="All 2 branches covered.">		if (removeComments)</span>
+<span class="fc" id="L422">			sql = sql.replace(&quot;--&quot;, &quot;//&quot;);</span>
+<span class="fc" id="L423">		StreamTokenizer tokenizer = new StreamTokenizer(new StringReader(sql));</span>
+<span class="fc" id="L424">		tokenizer.resetSyntax();</span>
+<span class="fc" id="L425">		tokenizer.wordChars('A', 'Z');</span>
+<span class="fc" id="L426">		tokenizer.wordChars('a', 'z');</span>
+<span class="fc" id="L427">		tokenizer.wordChars('0', '9');</span>
+<span class="fc" id="L428">		tokenizer.wordChars('_', '_');</span>
+<span class="fc" id="L429">		tokenizer.whitespaceChars(' ', ' ');</span>
+<span class="fc" id="L430">		tokenizer.whitespaceChars('\n', '\n');</span>
+<span class="fc" id="L431">		tokenizer.whitespaceChars('\r', '\r');</span>
+<span class="fc" id="L432">		tokenizer.whitespaceChars('\t', '\t');</span>
+<span class="fc" id="L433">		tokenizer.quoteChar('\'');</span>
+<span class="fc" id="L434">		tokenizer.quoteChar('&quot;');</span>
+<span class="fc bfc" id="L435" title="All 2 branches covered.">		if (removeComments) {</span>
+<span class="fc" id="L436">			tokenizer.slashStarComments(true);</span>
+<span class="fc" id="L437">			tokenizer.slashSlashComments(true);</span>
+		}
+<span class="fc" id="L439">		StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L440">		int lastTtype = StreamTokenizer.TT_EOF;</span>
+		try {
+<span class="fc bfc" id="L442" title="All 2 branches covered.">			while (tokenizer.nextToken() != StreamTokenizer.TT_EOF) {</span>
+<span class="fc" id="L443">				int ttype = tokenizer.ttype;</span>
+<span class="fc bfc" id="L444" title="All 24 branches covered.">				if (builder.length() &gt; 0 // insert space if this is not the beginning of the string </span>
+						&amp;&amp; ttype != ')' &amp;&amp; ttype != ',' &amp;&amp; lastTtype != '(' // no space for brackets and lists
+						&amp;&amp; lastTtype != '.' &amp;&amp; ttype != '.' // no space around '.' 
+						&amp;&amp; !(lastTtype == '/' &amp;&amp; ttype =='*') // preserve /* if it has not been filtered out 
+						&amp;&amp; !(lastTtype == '-' &amp;&amp; ttype =='-') // preserve -- if it has not been filtered out
+						&amp;&amp; !(lastTtype == '*' &amp;&amp; ttype =='/')) // preserve */ if it has not been filtered out
+<span class="fc" id="L450">					builder.append(' ');</span>
+<span class="pc bpc" id="L451" title="1 of 5 branches missed.">				switch (ttype) {</span>
+<span class="fc" id="L452">					case StreamTokenizer.TT_WORD: builder.append(tokenizer.sval); break;</span>
+<span class="nc" id="L453">					case StreamTokenizer.TT_NUMBER: builder.append(renderNumber(tokenizer)); break;</span>
+<span class="fc" id="L454">					case '&quot;': builder.append('&quot;').append(tokenizer.sval).append('&quot;'); break;</span>
+<span class="fc" id="L455">					case '\'': builder.append('\'').append(tokenizer.sval).append('\''); break;</span>
+<span class="fc" id="L456">					default: builder.append((char) ttype);</span>
+				}				
+<span class="fc" id="L458">				lastTtype = ttype;</span>
+<span class="fc" id="L459">			}</span>
+<span class="nc" id="L460">		} catch (IOException e) {</span>
+<span class="nc" id="L461">			throw new RuntimeException(e);</span>
+<span class="fc" id="L462">		}</span>
+<span class="fc" id="L463">		return builder.toString();</span>
+	}
+
+	protected static String renderNumber(StreamTokenizer tokenizer) {
+<span class="nc" id="L467">		double value = tokenizer.nval;</span>
+<span class="nc bnc" id="L468" title="All 2 branches missed.">		if (Math.floor(value) == value)</span>
+<span class="nc" id="L469">			return renderLong((long) value);</span>
+		else
+<span class="nc" id="L471">			return renderDouble(value);</span>
+	}
+
+	public static String renderColumnListWithTableName(String table, String... columns) {
+<span class="fc" id="L475">		StringBuilder builder = new StringBuilder();</span>
+<span class="fc bfc" id="L476" title="All 2 branches covered.">		for (int i = 0; i &lt; columns.length; i++) {</span>
+<span class="fc bfc" id="L477" title="All 2 branches covered.">			if (i &gt; 0)</span>
+<span class="fc" id="L478">				builder.append(&quot;, &quot;);</span>
+<span class="fc" id="L479">			builder.append(table).append('.').append(columns[i]);</span>
+		}
+<span class="fc" id="L481">		return builder.toString();</span>
+	}
+
+	// private helpers -------------------------------------------------------------------------------------------------
+	
+	private static String renderLong(long value) {
+<span class="nc bnc" id="L487" title="All 2 branches missed.">		if (value &gt; 0)</span>
+<span class="nc" id="L488">			return String.valueOf(value);</span>
+		else
+<span class="nc" id="L490">			return &quot;- &quot; + String.valueOf(Math.abs(value));</span>
+	}
+
+	private static String renderDouble(double value) {
+<span class="nc bnc" id="L494" title="All 2 branches missed.">		if (value &gt; 0)</span>
+<span class="nc" id="L495">			return String.valueOf(value);</span>
+		else
+<span class="nc" id="L497">			return &quot;- &quot; + String.valueOf(Math.abs(value));</span>
+	}
+
+	private static String quoteNameIfNecessary(String name) {
+<span class="pc bpc" id="L501" title="2 of 4 branches missed.">		return (name != null &amp;&amp; name.indexOf(' ') &gt;= 0 ? '&quot;' + name + '&quot;' : name);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

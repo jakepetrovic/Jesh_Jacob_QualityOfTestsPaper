@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SpringEngine.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">ch.bluepenguin.email.client.tapestry</a> &gt; <span class="el_source">SpringEngine.java</span></div><h1>SpringEngine.java</h1><pre class="source lang-java linenums">/*
+ * Created on 11.01.2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+package ch.bluepenguin.email.client.tapestry;
+
+import java.util.Map;
+
+import org.apache.tapestry.engine.BaseEngine;
+import org.apache.tapestry.request.RequestContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+/**
+ * @author Christian
+ * 
+ * TODO To change the template for this generated type comment go to Window -
+ * Preferences - Java - Code Style - Code Templates
+ */
+<span class="fc" id="L22">public class SpringEngine extends BaseEngine {</span>
+	private static final String APPLICATION_CONTEXT_KEY = &quot;appContext&quot;;
+
+	protected void setupForRequest(RequestContext context) {
+<span class="nc" id="L26">		super.setupForRequest(context); </span>
+		//		 insert ApplicationContext in global, if not there
+<span class="nc" id="L28">		Map global = (Map) getGlobal();</span>
+<span class="nc" id="L29">		ApplicationContext ac = (ApplicationContext) global</span>
+				.get(APPLICATION_CONTEXT_KEY);
+<span class="nc bnc" id="L31" title="All 2 branches missed.">		if (ac == null) {</span>
+<span class="nc" id="L32">			ac = WebApplicationContextUtils.getWebApplicationContext(context</span>
+					.getServlet().getServletContext());
+<span class="nc" id="L34">			global.put(APPLICATION_CONTEXT_KEY, ac);</span>
+		}
+<span class="nc" id="L36">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

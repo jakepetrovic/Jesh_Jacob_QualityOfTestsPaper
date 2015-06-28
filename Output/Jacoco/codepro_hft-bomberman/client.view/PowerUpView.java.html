@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PowerUpView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.view</a> &gt; <span class="el_source">PowerUpView.java</span></div><h1>PowerUpView.java</h1><pre class="source lang-java linenums">package client.view;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+
+import org.apache.log4j.Logger;
+
+import common.Constants;
+import common.GameObject;
+import common.PowerUp;
+
+public class PowerUpView extends GameObjectView {
+
+<span class="fc" id="L15">	private String type = null;</span>
+
+<span class="fc" id="L17">	private Logger logger = Logger.getLogger(PowerUpView.class);</span>
+
+	/**
+	 * @param gameObject
+	 * @param gfxFactory
+	 */
+	public PowerUpView(GameObject gameObject, GfxFactory gfxFactory) {
+<span class="fc" id="L24">		super(gameObject, gfxFactory);</span>
+<span class="fc" id="L25">	}</span>
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see client.view.GameObjectView#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics gfx) {
+<span class="nc" id="L34">		Image image = null;</span>
+<span class="nc bnc" id="L35" title="All 4 branches missed.">		if (gameObject.isActive() &amp;&amp; gameObject.isVisible()) {</span>
+<span class="nc" id="L36">			image = gfxFactory</span>
+					.getPowerUpImage(((PowerUp) gameObject).getType());
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		} else if (!gameObject.isActive()) {</span>
+<span class="nc" id="L39">			this.setVisible(false);</span>
+<span class="nc" id="L40">			return;</span>
+		} else {
+<span class="nc" id="L42">			return;</span>
+		}
+<span class="nc" id="L44">		Point position = gameObject.getPosition();</span>
+<span class="nc" id="L45">		gfx.drawImage(image, position.x - Constants.HALF_POWERUP, position.y</span>
+				- Constants.HALF_POWERUP, null);
+<span class="nc" id="L47">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

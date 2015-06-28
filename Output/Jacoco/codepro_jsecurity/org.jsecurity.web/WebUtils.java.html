@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>WebUtils.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.web</a> &gt; <span class="el_source">WebUtils.java</span></div><h1>WebUtils.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.web;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.SecurityUtils;
+import org.jsecurity.session.Session;
+import org.jsecurity.subject.Subject;
+import org.jsecurity.util.StringUtils;
+import org.jsecurity.util.ThreadContext;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.URLDecoder;
+import java.net.UnknownHostException;
+import java.util.Map;
+
+/**
+ * Simple utility class for operations used across multiple class hierarchies in the web framework code.
+ *
+ * &lt;p&gt;Some methods in this class were copied from the Spring Framework so we didn't have to re-invent the wheel,
+ * and in these cases, we have retained all license, copyright and author information.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @author Rod Johnson
+ * @author Juergen Hoeller
+ * @since 0.9
+ */
+<span class="fc" id="L52">public class WebUtils {</span>
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L56">    private static final Log log = LogFactory.getLog(WebUtils.class);</span>
+
+
+    /**
+     * Message displayed when a servlet request or response is not bound to the current thread context when expected.
+     */
+    private static final String NOT_BOUND_ERROR_MESSAGE =
+            &quot;Make sure WebUtils.bind() is being called. (typically called by JSecurityFilter)  &quot; +
+                    &quot;This could also happen when running integration tests that don't properly call WebUtils.bind().&quot;;
+
+<span class="fc" id="L66">    public static final String SERVLET_REQUEST_KEY = ServletRequest.class.getName() + &quot;_JSECURITY_THREAD_CONTEXT_KEY&quot;;</span>
+<span class="fc" id="L67">    public static final String SERVLET_RESPONSE_KEY = ServletResponse.class.getName() + &quot;_JSECURITY_THREAD_CONTEXT_KEY&quot;;</span>
+
+    /**
+     * {@link Session Session} key used to save a request and later restore it, for example when redirecting to a
+     * requested page after login, equal to &lt;code&gt;jsecuritySavedRequest&lt;/code&gt;.
+     */
+    public static final String SAVED_REQUEST_KEY = &quot;jsecuritySavedRequest&quot;;
+
+
+    /**
+     * Standard Servlet 2.3+ spec request attributes for include URI and paths.
+     * &lt;p&gt;If included via a RequestDispatcher, the current resource will see the
+     * originating request. Its own URI and paths are exposed as request attributes.
+     */
+    public static final String INCLUDE_REQUEST_URI_ATTRIBUTE = &quot;javax.servlet.include.request_uri&quot;;
+    public static final String INCLUDE_CONTEXT_PATH_ATTRIBUTE = &quot;javax.servlet.include.context_path&quot;;
+    public static final String INCLUDE_SERVLET_PATH_ATTRIBUTE = &quot;javax.servlet.include.servlet_path&quot;;
+    public static final String INCLUDE_PATH_INFO_ATTRIBUTE = &quot;javax.servlet.include.path_info&quot;;
+    public static final String INCLUDE_QUERY_STRING_ATTRIBUTE = &quot;javax.servlet.include.query_string&quot;;
+
+    /**
+     * Standard Servlet 2.4+ spec request attributes for forward URI and paths.
+     * &lt;p&gt;If forwarded to via a RequestDispatcher, the current resource will see its
+     * own URI and paths. The originating URI and paths are exposed as request attributes.
+     */
+    public static final String FORWARD_REQUEST_URI_ATTRIBUTE = &quot;javax.servlet.forward.request_uri&quot;;
+    public static final String FORWARD_CONTEXT_PATH_ATTRIBUTE = &quot;javax.servlet.forward.context_path&quot;;
+    public static final String FORWARD_SERVLET_PATH_ATTRIBUTE = &quot;javax.servlet.forward.servlet_path&quot;;
+    public static final String FORWARD_PATH_INFO_ATTRIBUTE = &quot;javax.servlet.forward.path_info&quot;;
+    public static final String FORWARD_QUERY_STRING_ATTRIBUTE = &quot;javax.servlet.forward.query_string&quot;;
+
+    /**
+     * Default character encoding to use when &lt;code&gt;request.getCharacterEncoding&lt;/code&gt;
+     * returns &lt;code&gt;null&lt;/code&gt;, according to the Servlet spec.
+     *
+     * @see javax.servlet.ServletRequest#getCharacterEncoding
+     */
+    public static final String DEFAULT_CHARACTER_ENCODING = &quot;ISO-8859-1&quot;;
+
+    /**
+     * Return the path within the web application for the given request.
+     * &lt;p&gt;Detects include request URL if called within a RequestDispatcher include.
+     * &lt;p/&gt;
+     * For example, for a request to URL
+     * &lt;p/&gt;
+     * &lt;code&gt;http://www.somehost.com/myapp/my/url.jsp&lt;/code&gt;,
+     * &lt;p/&gt;
+     * for an application deployed to &lt;code&gt;/mayapp&lt;/code&gt; (the application's context path), this method would return
+     * &lt;p/&gt;
+     * &lt;code&gt;/my/url.jsp&lt;/code&gt;.
+     *
+     * @param request current HTTP request
+     * @return the path within the web application
+     */
+    public static String getPathWithinApplication(HttpServletRequest request) {
+<span class="nc" id="L122">        String contextPath = getContextPath(request);</span>
+<span class="nc" id="L123">        String requestUri = getRequestUri(request);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (StringUtils.startsWithIgnoreCase(requestUri, contextPath)) {</span>
+            // Normal case: URI contains context path.
+<span class="nc" id="L126">            String path = requestUri.substring(contextPath.length());</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            return (StringUtils.hasText(path) ? path : &quot;/&quot;);</span>
+        } else {
+            // Special case: rather unusual.
+<span class="nc" id="L130">            return requestUri;</span>
+        }
+    }
+
+    /**
+     * Return the request URI for the given request, detecting an include request
+     * URL if called within a RequestDispatcher include.
+     * &lt;p&gt;As the value returned by &lt;code&gt;request.getRequestURI()&lt;/code&gt; is &lt;i&gt;not&lt;/i&gt;
+     * decoded by the servlet container, this method will decode it.
+     * &lt;p&gt;The URI that the web container resolves &lt;i&gt;should&lt;/i&gt; be correct, but some
+     * containers like JBoss/Jetty incorrectly include &quot;;&quot; strings like &quot;;jsessionid&quot;
+     * in the URI. This method cuts off such incorrect appendices.
+     *
+     * @param request current HTTP request
+     * @return the request URI
+     */
+    public static String getRequestUri(HttpServletRequest request) {
+<span class="nc" id="L147">        String uri = (String) request.getAttribute(INCLUDE_REQUEST_URI_ATTRIBUTE);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (uri == null) {</span>
+<span class="nc" id="L149">            uri = request.getRequestURI();</span>
+        }
+<span class="nc" id="L151">        return decodeAndCleanUriString(request, uri);</span>
+    }
+
+    /**
+     * Decode the supplied URI string and strips any extraneous portion after a ';'.
+     *
+     * @param request the incoming HttpServletRequest
+     * @param uri     the application's URI string
+     * @return the supplied URI string stripped of any extraneous portion after a ';'.
+     */
+    private static String decodeAndCleanUriString(HttpServletRequest request, String uri) {
+<span class="nc" id="L162">        uri = decodeRequestString(request, uri);</span>
+<span class="nc" id="L163">        int semicolonIndex = uri.indexOf(';');</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        return (semicolonIndex != -1 ? uri.substring(0, semicolonIndex) : uri);</span>
+    }
+
+    /**
+     * Return the context path for the given request, detecting an include request
+     * URL if called within a RequestDispatcher include.
+     * &lt;p&gt;As the value returned by &lt;code&gt;request.getContextPath()&lt;/code&gt; is &lt;i&gt;not&lt;/i&gt;
+     * decoded by the servlet container, this method will decode it.
+     *
+     * @param request current HTTP request
+     * @return the context path
+     */
+    public static String getContextPath(HttpServletRequest request) {
+<span class="nc" id="L177">        String contextPath = (String) request.getAttribute(INCLUDE_CONTEXT_PATH_ATTRIBUTE);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (contextPath == null) {</span>
+<span class="nc" id="L179">            contextPath = request.getContextPath();</span>
+        }
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (&quot;/&quot;.equals(contextPath)) {</span>
+            // Invalid case, but happens for includes on Jetty: silently adapt it.
+<span class="nc" id="L183">            contextPath = &quot;&quot;;</span>
+        }
+<span class="nc" id="L185">        return decodeRequestString(request, contextPath);</span>
+    }
+
+    /**
+     * Decode the given source string with a URLDecoder. The encoding will be taken
+     * from the request, falling back to the default &quot;ISO-8859-1&quot;.
+     * &lt;p&gt;The default implementation uses &lt;code&gt;URLDecoder.decode(input, enc)&lt;/code&gt;.
+     *
+     * @param request current HTTP request
+     * @param source  the String to decode
+     * @return the decoded String
+     * @see #DEFAULT_CHARACTER_ENCODING
+     * @see javax.servlet.ServletRequest#getCharacterEncoding
+     * @see java.net.URLDecoder#decode(String, String)
+     * @see java.net.URLDecoder#decode(String)
+     */
+    @SuppressWarnings({&quot;deprecation&quot;})
+    public static String decodeRequestString(HttpServletRequest request, String source) {
+<span class="nc" id="L203">        String enc = determineEncoding(request);</span>
+        try {
+<span class="nc" id="L205">            return URLDecoder.decode(source, enc);</span>
+        }
+<span class="nc" id="L207">        catch (UnsupportedEncodingException ex) {</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">            if (log.isWarnEnabled()) {</span>
+<span class="nc" id="L209">                log.warn(&quot;Could not decode request string [&quot; + source + &quot;] with encoding '&quot; + enc +</span>
+                        &quot;': falling back to platform default encoding; exception message: &quot; + ex.getMessage());
+            }
+<span class="nc" id="L212">            return URLDecoder.decode(source);</span>
+        }
+    }
+
+    /**
+     * Determine the encoding for the given request.
+     * Can be overridden in subclasses.
+     * &lt;p&gt;The default implementation checks the request's
+     * {@link ServletRequest#getCharacterEncoding() character encoding}, and if that
+     * &lt;code&gt;null&lt;/code&gt;, falls back to the {@link #DEFAULT_CHARACTER_ENCODING}.
+     *
+     * @param request current HTTP request
+     * @return the encoding for the request (never &lt;code&gt;null&lt;/code&gt;)
+     * @see javax.servlet.ServletRequest#getCharacterEncoding()
+     */
+    protected static String determineEncoding(HttpServletRequest request) {
+<span class="nc" id="L228">        String enc = request.getCharacterEncoding();</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">        if (enc == null) {</span>
+<span class="nc" id="L230">            enc = DEFAULT_CHARACTER_ENCODING;</span>
+        }
+<span class="nc" id="L232">        return enc;</span>
+    }
+
+    /**
+     * Returns the &lt;code&gt;InetAddress&lt;/code&gt; associated with the current request, or &lt;code&gt;null&lt;/code&gt; if the
+     * address cannot be resolved/determined.
+     * &lt;p/&gt;
+     * This implementation returns the InetAddress resolved from the request's
+     * {@link javax.servlet.ServletRequest#getRemoteHost() remoteHost} value.  The returned &lt;code&gt;String&lt;/code&gt;
+     * is resolved to an InetAddress by calling
+     * {@link InetAddress#getByName(String) InetAddress.getByName(remoteHost)}. If the remote host is &lt;code&gt;null&lt;/code&gt;
+     * or &lt;code&gt;getByName(remoteHost)&lt;/code&gt; throws an exception, &lt;code&gt;null&lt;/code&gt; is returned.
+     *
+     * @param request the incoming ServletRequest
+     * @return the &lt;code&gt;InetAddress&lt;/code&gt; associated with the current request, or &lt;code&gt;null&lt;/code&gt; if the
+     *         address cannot be resolved/determined.
+     */
+    public static InetAddress getInetAddress(ServletRequest request) {
+<span class="nc" id="L250">        InetAddress clientAddress = null;</span>
+        //get the Host/IP the client is coming from:
+<span class="nc" id="L252">        String addrString = request.getRemoteHost();</span>
+        try {
+<span class="nc" id="L254">            clientAddress = InetAddress.getByName(addrString);</span>
+<span class="nc" id="L255">        } catch (UnknownHostException e) {</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            if (log.isInfoEnabled()) {</span>
+<span class="nc" id="L257">                log.info(&quot;Unable to acquire InetAddress from ServletRequest&quot;, e);</span>
+            }
+<span class="nc" id="L259">        }</span>
+
+<span class="nc" id="L261">        return clientAddress;</span>
+    }
+
+    /**
+     * A convenience method that merely casts the incoming &lt;code&gt;ServletRequest&lt;/code&gt; to an
+     * &lt;code&gt;HttpServletRequest&lt;/code&gt;:
+     * &lt;p/&gt;
+     * &lt;code&gt;return (HttpServletRequest)request;&lt;/code&gt;
+     * &lt;p/&gt;
+     * Logic could be changed in the future for logging or throwing an meaningful exception in
+     * non HTTP request environments (e.g. Portlet API).
+     *
+     * @param request the incoming ServletRequest
+     * @return the &lt;code&gt;request&lt;/code&gt; argument casted to an &lt;code&gt;HttpServletRequest&lt;/code&gt;.
+     */
+    public static HttpServletRequest toHttp(ServletRequest request) {
+<span class="nc" id="L277">        return (HttpServletRequest) request;</span>
+    }
+
+    /**
+     * A convenience method that merely casts the incoming &lt;code&gt;ServletResponse&lt;/code&gt; to an
+     * &lt;code&gt;HttpServletResponse&lt;/code&gt;:
+     * &lt;p/&gt;
+     * &lt;code&gt;return (HttpServletResponse)response;&lt;/code&gt;
+     * &lt;p/&gt;
+     * Logic could be changed in the future for logging or throwing an meaningful exception in
+     * non HTTP request environments (e.g. Portlet API).
+     *
+     * @param response the outgoing ServletResponse
+     * @return the &lt;code&gt;response&lt;/code&gt; argument casted to an &lt;code&gt;HttpServletResponse&lt;/code&gt;.
+     */
+    public static HttpServletResponse toHttp(ServletResponse response) {
+<span class="nc" id="L293">        return (HttpServletResponse) response;</span>
+    }
+
+    public static void bindInetAddressToThread(ServletRequest request) {
+<span class="nc" id="L297">        InetAddress ip = getInetAddress(request);</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">        if (ip != null) {</span>
+<span class="nc" id="L299">            ThreadContext.bind(ip);</span>
+        }
+<span class="nc" id="L301">    }</span>
+
+    public static void unbindInetAddressFromThread() {
+<span class="fc" id="L304">        ThreadContext.unbindInetAddress();</span>
+<span class="fc" id="L305">    }</span>
+
+    /**
+     * Convenience method that simplifies retrieval of a required thread-bound ServletRequest.  If there is no
+     * ServletRequest bound to the thread when this method is called, an &lt;code&gt;IllegalStateException&lt;/code&gt; is
+     * thrown.
+     * &lt;p/&gt;
+     * This method is basically a convenient wrapper for the following:
+     * &lt;p/&gt;
+     * &lt;code&gt;(ServletRequest){@link ThreadContext#get ThreadContext.get}( SERVLET_REQUEST_KEY );&lt;/code&gt;
+     * &lt;p/&gt;
+     * But throws an &lt;code&gt;IllegalStateException&lt;/code&gt; if the value is not bound to the &lt;code&gt;ThreadContext&lt;/code&gt;.
+     * &lt;p/&gt;
+     * This method only returns the bound value if it exists - it does not remove it
+     * from the thread.  To remove it, one must call {@link #unbindServletRequest() unbindServletRequest} instead.
+     *
+     * @return the ServletRequest bound to the thread.  Never returns null.
+     * @throws IllegalStateException if no servlet request is bound in the {@link ThreadContext ThreadContext}.
+     */
+    public static ServletRequest getRequiredServletRequest() throws IllegalStateException {
+<span class="fc" id="L325">        ServletRequest request = (ServletRequest) ThreadContext.get(SERVLET_REQUEST_KEY);</span>
+<span class="pc bpc" id="L326" title="1 of 2 branches missed.">        if (request == null) {</span>
+<span class="fc" id="L327">            throw new IllegalStateException(&quot;No ServletRequest found in ThreadContext. &quot; + NOT_BOUND_ERROR_MESSAGE);</span>
+        }
+<span class="nc" id="L329">        return request;</span>
+    }
+
+    /**
+     * Convenience method that simplifies binding a ServletRequest to the current thread (via the ThreadContext).
+     *
+     * &lt;p&gt;The method's existence is to help reduce casting in your own code and to simplify remembering of
+     * ThreadContext key names.  The implementation is simple in that, if the servletRequest is not &lt;tt&gt;null&lt;/tt&gt;,
+     * it binds it to the thread, i.e.:
+     *
+     * &lt;pre&gt;
+     * if (servletRequest != null) {
+     *     ThreadContext.put( SERVLET_REQUEST_KEY, servletRequest );
+     * }&lt;/pre&gt;
+     *
+     * @param servletRequest the ServletRequest object to bind to the thread.  If the argument is null, nothing will be done.
+     */
+    public static void bind(ServletRequest servletRequest) {
+<span class="pc bpc" id="L347" title="1 of 2 branches missed.">        if (servletRequest != null) {</span>
+<span class="nc" id="L348">            ThreadContext.put(SERVLET_REQUEST_KEY, servletRequest);</span>
+        }
+<span class="fc" id="L350">    }</span>
+
+    /**
+     * Convenience method that simplifies removal of a thread-local ServletRequest from the thread.
+     * &lt;p/&gt;
+     * The implementation just helps reduce casting and remembering of the ThreadContext key name, i.e it is
+     * merely a conveient wrapper for the following:
+     * &lt;p/&gt;
+     * &lt;code&gt;return (ServletRequest)ThreadContext.remove( SERVLET_REQUEST_KEY );&lt;/code&gt;
+     * &lt;p/&gt;
+     * If you wish to just retrieve the object from the thread without removing it (so it can be retrieved later during
+     * thread execution), you should use the {@link #getRequiredServletRequest() getRequiredServletRequest()} method
+     * for that purpose.
+     *
+     * @return the Session object previously bound to the thread, or &lt;tt&gt;null&lt;/tt&gt; if there was none bound.
+     */
+    public static ServletRequest unbindServletRequest() {
+<span class="fc" id="L367">        return (ServletRequest) ThreadContext.remove(SERVLET_REQUEST_KEY);</span>
+    }
+
+    /**
+     * Convenience method that simplifies retrieval of a required thread-bound ServletResponse.  If there is no
+     * ServletResponse bound to the thread when this method is called, an &lt;code&gt;IllegalStateException&lt;/code&gt; is
+     * thrown.
+     * &lt;p/&gt;
+     * This method is basically a convenient wrapper for the following:
+     * &lt;p/&gt;
+     * &lt;code&gt;return (ServletResponse){@link ThreadContext#get ThreadContext.get}( SERVLET_RESPONSE_KEY );&lt;/code&gt;
+     * &lt;p/&gt;
+     * But throws an &lt;code&gt;IllegalStateException&lt;/code&gt; if the value is not bound to the &lt;code&gt;ThreadContext&lt;/code&gt;.
+     * &lt;p/&gt;
+     * This method only returns the bound value if it exists - it does not remove it
+     * from the thread.  To remove it, one must call {@link #unbindServletResponse() unbindServletResponse} instead.
+     *
+     * @return the ServletResponse bound to the thread.  Never returns null.
+     * @throws IllegalStateException if no &lt;code&gt;ServletResponse&gt; is bound in the {@link ThreadContext ThreadContext}
+     */
+    public static ServletResponse getRequiredServletResponse() throws IllegalStateException {
+<span class="fc" id="L388">        ServletResponse response = (ServletResponse) ThreadContext.get(SERVLET_RESPONSE_KEY);</span>
+<span class="pc bpc" id="L389" title="1 of 2 branches missed.">        if (response == null) {</span>
+<span class="fc" id="L390">            throw new IllegalStateException(&quot;No ServletResponse found in ThreadContext. &quot; + NOT_BOUND_ERROR_MESSAGE);</span>
+        }
+<span class="nc" id="L392">        return response;</span>
+    }
+
+    /**
+     * Convenience method that simplifies binding a ServletResponse to the thread via the ThreadContext.
+     *
+     * &lt;p&gt;The method's existence is to help reduce casting in your own code and to simplify remembering of
+     * ThreadContext key names.  The implementation is simple in that, if the servletResponse is not &lt;tt&gt;null&lt;/tt&gt;,
+     * it binds it to the thread, i.e.:
+     *
+     * &lt;pre&gt;
+     * if (servletResponse != null) {
+     *     ThreadContext.put( SERVLET_RESPONSE_KEY, servletResponse );
+     * }&lt;/pre&gt;
+     *
+     * @param servletResponse the ServletResponse object to bind to the thread.  If the argument is null, nothing will be done.
+     */
+    public static void bind(ServletResponse servletResponse) {
+<span class="pc bpc" id="L410" title="1 of 2 branches missed.">        if (servletResponse != null) {</span>
+<span class="nc" id="L411">            ThreadContext.put(SERVLET_RESPONSE_KEY, servletResponse);</span>
+        }
+<span class="fc" id="L413">    }</span>
+
+    /**
+     * Convenience method that simplifies removal of a thread-local ServletResponse from the thread.
+     * &lt;p/&gt;
+     * The implementation just helps reduce casting and remembering of the ThreadContext key name, i.e it is
+     * merely a conveient wrapper for the following:
+     * &lt;p/&gt;
+     * &lt;code&gt;return (ServletResponse)ThreadContext.remove( SERVLET_RESPONSE_KEY );&lt;/code&gt;
+     * &lt;p/&gt;
+     * If you wish to just retrieve the object from the thread without removing it (so it can be retrieved later during
+     * thread execution), you should use the {@link #getRequiredServletResponse() getRequiredServletResponse()} method
+     * for that purpose.
+     *
+     * @return the Session object previously bound to the thread, or &lt;tt&gt;null&lt;/tt&gt; if there was none bound.
+     */
+    public static ServletResponse unbindServletResponse() {
+<span class="fc" id="L430">        return (ServletResponse) ThreadContext.remove(SERVLET_RESPONSE_KEY);</span>
+    }
+
+    /**
+     * Redirects the current request to a new URL based on the given parameters.
+     *
+     * @param request          the servlet request.
+     * @param response         the servlet response.
+     * @param url              the URL to redirect the user to.
+     * @param queryParams      a map of parameters that should be set as request parameters for the new request.
+     * @param contextRelative  true if the URL is relative to the servlet context path, or false if the URL is absolute.
+     * @param http10Compatible whether to stay compatible with HTTP 1.0 clients.
+     * @throws java.io.IOException if thrown by response methods.
+     */
+    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams, boolean contextRelative, boolean http10Compatible) throws IOException {
+<span class="nc" id="L445">        RedirectView view = new RedirectView(url, contextRelative, http10Compatible);</span>
+<span class="nc" id="L446">        view.renderMergedOutputModel(queryParams, toHttp(request), toHttp(response));</span>
+<span class="nc" id="L447">    }</span>
+
+    /**
+     * Redirects the current request to a new URL based on the given parameters and default values
+     * for unspecified parameters.
+     *
+     * @param request  the servlet request.
+     * @param response the servlet response.
+     * @param url      the URL to redirect the user to.
+     * @throws java.io.IOException if thrown by response methods.
+     */
+    public static void issueRedirect(ServletRequest request, ServletResponse response, String url) throws IOException {
+<span class="nc" id="L459">        issueRedirect(request, response, url, null, true, true);</span>
+<span class="nc" id="L460">    }</span>
+
+    /**
+     * Redirects the current request to a new URL based on the given parameters and default values
+     * for unspecified parameters.
+     *
+     * @param request     the servlet request.
+     * @param response    the servlet response.
+     * @param url         the URL to redirect the user to.
+     * @param queryParams a map of parameters that should be set as request parameters for the new request.
+     * @throws java.io.IOException if thrown by response methods.
+     */
+    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams) throws IOException {
+<span class="nc" id="L473">        issueRedirect(request, response, url, queryParams, true, true);</span>
+<span class="nc" id="L474">    }</span>
+
+    /**
+     * Redirects the current request to a new URL based on the given parameters and default values
+     * for unspecified parameters.
+     *
+     * @param request         the servlet request.
+     * @param response        the servlet response.
+     * @param url             the URL to redirect the user to.
+     * @param queryParams     a map of parameters that should be set as request parameters for the new request.
+     * @param contextRelative true if the URL is relative to the servlet context path, or false if the URL is absolute.
+     * @throws java.io.IOException if thrown by response methods.
+     */
+    public static void issueRedirect(ServletRequest request, ServletResponse response, String url, Map queryParams, boolean contextRelative) throws IOException {
+<span class="nc" id="L488">        issueRedirect(request, response, url, queryParams, contextRelative, true);</span>
+<span class="nc" id="L489">    }</span>
+
+    /**
+     * &lt;p&gt;Checks to see if a request param is considered true using a loose matching strategy for
+     * general values that indicate that something is true or enabled, etc.&lt;/p&gt;
+     *
+     * &lt;p&gt;Values that are considered &quot;true&quot; include (case-insensitive): true, t, 1, enabled, y, yes, on.&lt;/p&gt;
+     *
+     * @param request   the servlet request
+     * @param paramName @return true if the param value is considered true or false if it isn't.
+     * @return true if the given parameter is considered &quot;true&quot; - false otherwise.
+     */
+    public static boolean isTrue(ServletRequest request, String paramName) {
+<span class="nc" id="L502">        String value = getCleanParam(request, paramName);</span>
+<span class="nc bnc" id="L503" title="All 16 branches missed.">        return value != null &amp;&amp;</span>
+                (value.equalsIgnoreCase(&quot;true&quot;) ||
+                        value.equalsIgnoreCase(&quot;t&quot;) ||
+                        value.equalsIgnoreCase(&quot;1&quot;) ||
+                        value.equalsIgnoreCase(&quot;enabled&quot;) ||
+                        value.equalsIgnoreCase(&quot;y&quot;) ||
+                        value.equalsIgnoreCase(&quot;yes&quot;) ||
+                        value.equalsIgnoreCase(&quot;on&quot;));
+    }
+
+    /**
+     * Convenience method that returns a request parameter value, first running it through
+     * {@link StringUtils#clean(String)}.
+     *
+     * @param request   the servlet request.
+     * @param paramName the parameter name.
+     * @return the clean param value, or null if the param does not exist or is empty.
+     */
+    public static String getCleanParam(ServletRequest request, String paramName) {
+<span class="nc" id="L522">        return StringUtils.clean(request.getParameter(paramName));</span>
+    }
+
+    public static void saveRequest(ServletRequest request) {
+<span class="nc" id="L526">        Subject subject = SecurityUtils.getSubject();</span>
+<span class="nc" id="L527">        Session session = subject.getSession();</span>
+<span class="nc" id="L528">        HttpServletRequest httpRequest = toHttp(request);</span>
+<span class="nc" id="L529">        SavedRequest savedRequest = new SavedRequest(httpRequest);</span>
+<span class="nc" id="L530">        session.setAttribute(SAVED_REQUEST_KEY, savedRequest);</span>
+<span class="nc" id="L531">    }</span>
+
+    public static SavedRequest getAndClearSavedRequest(ServletRequest request) {
+<span class="nc" id="L534">        SavedRequest savedRequest = getSavedRequest(request);</span>
+<span class="nc bnc" id="L535" title="All 2 branches missed.">        if (savedRequest != null) {</span>
+<span class="nc" id="L536">            Subject subject = SecurityUtils.getSubject();</span>
+<span class="nc" id="L537">            Session session = subject.getSession();</span>
+<span class="nc" id="L538">            session.removeAttribute(SAVED_REQUEST_KEY);</span>
+        }
+<span class="nc" id="L540">        return savedRequest;</span>
+    }
+
+    public static SavedRequest getSavedRequest(ServletRequest request) {
+<span class="nc" id="L544">        SavedRequest savedRequest = null;</span>
+<span class="nc" id="L545">        Subject subject = SecurityUtils.getSubject();</span>
+<span class="nc" id="L546">        Session session = subject.getSession(false);</span>
+<span class="nc bnc" id="L547" title="All 2 branches missed.">        if (session != null) {</span>
+<span class="nc" id="L548">            savedRequest = (SavedRequest) session.getAttribute(SAVED_REQUEST_KEY);</span>
+        }
+<span class="nc" id="L550">        return savedRequest;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

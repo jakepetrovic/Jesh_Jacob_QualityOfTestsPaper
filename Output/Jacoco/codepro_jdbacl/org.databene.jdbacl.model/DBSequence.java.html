@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBSequence.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DBSequence.java</span></div><h1>DBSequence.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.math.BigInteger;
+
+import org.databene.commons.NullSafeComparator;
+
+/**
+ * Represents a database sequence.&lt;br/&gt;&lt;br/&gt;
+ * Created: 31.05.2011 17:55:05
+ * @since 0.6.8
+ * @author Volker Bergmann
+ */
+public class DBSequence extends AbstractDBObject implements ContainerComponent {
+
+	private static final long serialVersionUID = 8602052311285255364L;
+
+	private String catalogName;
+	private String schemaName;
+<span class="fc" id="L40">	private BigInteger start = BigInteger.ONE;</span>
+<span class="fc" id="L41">	private BigInteger increment = BigInteger.ONE;</span>
+<span class="fc" id="L42">	private BigInteger maxValue = null;</span>
+<span class="fc" id="L43">	private BigInteger minValue = null;</span>
+	private Boolean cycle;
+	private Long cache;
+	private Boolean order;
+<span class="fc" id="L47">	private BigInteger lastNumber = BigInteger.ZERO;</span>
+
+	public DBSequence(String name, DBSchema owner) {
+<span class="fc" id="L50">		super(name, &quot;sequence&quot;, owner);</span>
+<span class="fc" id="L51">	}</span>
+
+	public DBSequence(String name, String catalogName, String schemaName) {
+<span class="fc" id="L54">		super(name, &quot;sequence&quot;, null);</span>
+<span class="fc" id="L55">		this.catalogName = catalogName;</span>
+<span class="fc" id="L56">		this.schemaName = schemaName;</span>
+<span class="fc" id="L57">	}</span>
+
+	@Override
+	public void setOwner(CompositeDBObject&lt;?&gt; owner) {
+<span class="fc" id="L61">		super.setOwner(owner);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (owner != null) {</span>
+<span class="fc" id="L63">    		DBSchema schema = (DBSchema) owner;</span>
+<span class="fc" id="L64">    		schema.addSequence(this);</span>
+<span class="fc" id="L65">        	this.catalogName = schema.getCatalog().getName();</span>
+<span class="fc" id="L66">        	this.schemaName = schema.getName();</span>
+        }
+<span class="fc" id="L68">	}</span>
+
+	public String getCatalogName() {
+<span class="fc" id="L71">		return catalogName;</span>
+	}
+	
+	public String getSchemaName() {
+<span class="fc" id="L75">		return schemaName;</span>
+	}
+	
+	public BigInteger getStart() {
+<span class="fc" id="L79">		return start;</span>
+	}
+
+	public BigInteger getStartIfNotDefault() {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		return (BigInteger.ONE.equals(this.start) ? null : this.start);</span>
+	}
+
+	public void setStart(BigInteger start) {
+<span class="fc" id="L87">		this.start = start;</span>
+<span class="fc" id="L88">	}</span>
+
+	public BigInteger getIncrement() {
+<span class="fc" id="L91">		return increment;</span>
+	}
+	
+	public BigInteger getIncrementIfNotDefault() {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">		return (BigInteger.ONE.equals(increment) ?  null : increment);</span>
+	}
+	
+	public void setIncrement(BigInteger increment) {
+<span class="fc" id="L99">		this.increment = increment;</span>
+<span class="fc" id="L100">	}</span>
+
+	public BigInteger getMaxValue() {
+<span class="fc" id="L103">		return maxValue;</span>
+	}
+
+	public BigInteger getMaxValueIfNotDefault() {
+<span class="fc" id="L107">		return maxValue;</span>
+	}
+
+	public void setMaxValue(BigInteger maxValue) {
+<span class="fc" id="L111">		this.maxValue = maxValue;</span>
+<span class="fc" id="L112">	}</span>
+
+	public BigInteger getMinValue() {
+<span class="fc" id="L115">		return minValue;</span>
+	}
+
+	public BigInteger getMinValueIfNotDefault() {
+<span class="fc" id="L119">		return minValue;</span>
+	}
+
+	public void setMinValue(BigInteger minValue) {
+<span class="fc" id="L123">		this.minValue = minValue;</span>
+<span class="fc" id="L124">	}</span>
+
+	public Boolean isCycle() {
+<span class="fc" id="L127">		return cycle;</span>
+	}
+
+	public void setCycle(Boolean cycle) {
+<span class="fc" id="L131">		this.cycle = cycle;</span>
+<span class="fc" id="L132">	}</span>
+
+	public Long getCache() {
+<span class="fc" id="L135">		return cache;</span>
+	}
+	
+	public void setCache(Long cache) {
+<span class="fc" id="L139">		this.cache = cache;</span>
+<span class="fc" id="L140">	}</span>
+
+	public Boolean isOrder() {
+<span class="fc" id="L143">		return order;</span>
+	}
+
+	public void setOrder(Boolean order) {
+<span class="fc" id="L147">		this.order = order;</span>
+<span class="fc" id="L148">	}</span>
+
+	public BigInteger getLastNumber() {
+<span class="fc" id="L151">		return lastNumber;</span>
+	}
+	
+	public void setLastNumber(BigInteger lastNumber) {
+<span class="fc" id="L155">		this.lastNumber = lastNumber;</span>
+<span class="fc" id="L156">	}</span>
+	
+	public boolean isIdentical(DBObject other) {
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">		if (this == other)</span>
+<span class="nc" id="L160">			return true;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">		if (!(other instanceof DBSequence))</span>
+<span class="fc" id="L162">			return false;</span>
+<span class="fc" id="L163">		DBSequence that = (DBSequence) other;</span>
+<span class="pc bpc" id="L164" title="6 of 16 branches missed.">		return this.name.equals(that.getName()) &amp;&amp;</span>
+			this.start == that.getStart() &amp;&amp;
+			this.increment == that.getIncrement() &amp;&amp;
+			NullSafeComparator.equals(this.maxValue, that.getMaxValue()) &amp;&amp;
+			NullSafeComparator.equals(this.minValue, that.getMinValue()) &amp;&amp;
+			this.cycle == that.isCycle() &amp;&amp;
+			this.cache == that.getCache() &amp;&amp;
+			this.order == that.isOrder();
+	}
+
+	public String dropDDL() {
+<span class="fc" id="L175">		return &quot;drop sequence &quot; + name;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

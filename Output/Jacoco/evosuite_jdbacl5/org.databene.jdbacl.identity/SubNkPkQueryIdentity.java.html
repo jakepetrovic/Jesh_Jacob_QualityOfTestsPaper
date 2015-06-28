@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SubNkPkQueryIdentity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.identity</a> &gt; <span class="el_source">SubNkPkQueryIdentity.java</span></div><h1>SubNkPkQueryIdentity.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.identity;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.Iterator;
+
+import org.databene.commons.ArrayFormat;
+import org.databene.commons.HeavyweightIterator;
+import org.databene.commons.IOUtil;
+import org.databene.commons.SystemInfo;
+import org.databene.commons.iterator.ConvertingIterator;
+import org.databene.commons.iterator.TableRowIterator;
+import org.databene.jdbacl.ArrayResultSetIterator;
+import org.databene.jdbacl.QueryIterator;
+import org.databene.jdbacl.ResultSetConverter;
+import org.databene.jdbacl.SQLUtil;
+import org.databene.jdbacl.model.DBTable;
+import org.databene.jdbacl.model.Database;
+
+/**
+ * {@link IdentityModel} for tables which are owned by another table but have a sub identity 
+ * (resulting in a one-to-many relationship between parent and child). 
+ * Their natural key is composed from the owner row's natural key and a sub key for the row itself.&lt;br/&gt;&lt;br/&gt;
+ * Created: 01.09.2010 09:24:26
+ * @since 0.6.4
+ * @author Volker Bergmann
+ */
+public class SubNkPkQueryIdentity extends IdentityModel {
+
+	private String parentTableNames[]; // TODO v0.7 support multiple 'parent' and 'parentColumns' property
+	private String subNkPkQuery;
+	private IdentityProvider identityProvider;
+
+	public SubNkPkQueryIdentity(String tableName, String[] parentTableNames, IdentityProvider identityProvider) {
+<span class="nc" id="L56">	    super(tableName);</span>
+<span class="nc" id="L57">	    this.parentTableNames = parentTableNames;</span>
+<span class="nc" id="L58">	    this.identityProvider = identityProvider;</span>
+<span class="nc" id="L59">    }</span>
+	
+	// properties ------------------------------------------------------------------------------------------------------
+
+	public void setSubNkPkQuery(String subNkPkQuery) {
+<span class="nc" id="L64">	    this.subNkPkQuery = subNkPkQuery;</span>
+<span class="nc" id="L65">    }</span>
+
+	@Override
+	public String getDescription() {
+<span class="nc" id="L69">		return &quot;Sub identity of (&quot; + ArrayFormat.format(parentTableNames) + &quot;):&quot; + </span>
+			SystemInfo.getLineSeparator() + subNkPkQuery;
+	}
+
+	// implementation --------------------------------------------------------------------------------------------------
+	
+    public TableRowIterator createNkPkIterator(Connection connection, String dbId, KeyMapper mapper, Database database) {
+<span class="nc" id="L76">		return new RecursiveIterator(connection, dbId, mapper, database);</span>
+    }
+    
+    // helper class for recursive iteration ----------------------------------------------------------------------------
+
+    public class RecursiveIterator implements TableRowIterator {
+    	
+    	Connection connection;
+    	String dbId;
+    	KeyMapper mapper;
+    	HeavyweightIterator&lt;Object&gt; ownerPkIterator;
+    	String ownerNK;
+    	TableRowIterator subNkPkIterator;
+
+<span class="nc" id="L90">	    public RecursiveIterator(Connection connection, String dbId, KeyMapper mapper, Database database) {</span>
+<span class="nc" id="L91">	        this.connection = connection;</span>
+<span class="nc" id="L92">	        this.dbId = dbId;</span>
+<span class="nc" id="L93">	        this.mapper = mapper;</span>
+<span class="nc" id="L94">	        ownerPkIterator = createParentPkIterator(connection, database); // TODO v0.7 support multiple parents</span>
+<span class="nc" id="L95">	        createSubNkPkIterator(connection, dbId);</span>
+<span class="nc" id="L96">        }</span>
+
+		protected HeavyweightIterator&lt;Object&gt; createParentPkIterator(Connection connection, Database database) {
+<span class="nc" id="L99">			DBTable parentTable = database.getTable(parentTableNames[0]);</span>
+<span class="nc" id="L100">			StringBuilder query = new StringBuilder(&quot;select &quot;);</span>
+<span class="nc" id="L101">			query.append(ArrayFormat.format(parentTable.getPKColumnNames()));</span>
+<span class="nc" id="L102">			query.append(&quot; from &quot;).append(parentTable);</span>
+<span class="nc" id="L103">	    	Iterator&lt;ResultSet&gt; rawIterator = new QueryIterator(query.toString(), connection, 100);</span>
+<span class="nc" id="L104">	        ResultSetConverter&lt;Object&gt; converter = new ResultSetConverter&lt;Object&gt;(Object.class, true);</span>
+<span class="nc" id="L105">	    	return new ConvertingIterator&lt;ResultSet, Object&gt;(rawIterator, converter);</span>
+		}
+
+		public boolean hasNext() {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">			if (subNkPkIterator.hasNext())</span>
+<span class="nc" id="L110">				return true;</span>
+<span class="nc bnc" id="L111" title="All 6 branches missed.">	    	while (subNkPkIterator != null &amp;&amp; !subNkPkIterator.hasNext() &amp;&amp; ownerPkIterator.hasNext()) {</span>
+<span class="nc" id="L112">	    		IOUtil.close(subNkPkIterator);</span>
+<span class="nc" id="L113">	    		createSubNkPkIterator(connection, dbId);</span>
+	    	}
+<span class="nc bnc" id="L115" title="All 4 branches missed.">	    	return (subNkPkIterator != null &amp;&amp; subNkPkIterator.hasNext());</span>
+	    }
+
+	    public Object[] next() {
+<span class="nc" id="L119">	    	Object[] result = (Object[]) subNkPkIterator.next();</span>
+<span class="nc" id="L120">	    	result[0] = ownerNK + '|' + result[0];</span>
+<span class="nc" id="L121">	    	return result;</span>
+	    }
+
+		public String[] getColumnLabels() {
+<span class="nc" id="L125">			return subNkPkIterator.getColumnLabels();</span>
+		}
+
+	    public void remove() {
+<span class="nc" id="L129">		    throw new UnsupportedOperationException(getClass() + &quot; does not support removal&quot;);</span>
+	    }
+
+	    public void close() {
+<span class="nc" id="L133">	    	IOUtil.close(subNkPkIterator);</span>
+<span class="nc" id="L134">		    IOUtil.close(ownerPkIterator);</span>
+<span class="nc" id="L135">	    }</span>
+
+		private void createSubNkPkIterator(Connection connection, String dbId) {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">	        if (ownerPkIterator.hasNext()) {</span>
+<span class="nc" id="L139">	        	Object ownerPk = ownerPkIterator.next();</span>
+<span class="nc" id="L140">	        	ownerNK = mapper.getNaturalKey(dbId, identityProvider.getIdentity(parentTableNames[0]), ownerPk); // TODO v0.7 support multiple owners</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">	        	if (ownerNK == null)</span>
+<span class="nc" id="L142">	        		throw new InvalidIdentityDefinitionError(tableName + &quot; row with PK &quot; + ownerPk + </span>
+	        				&quot; cannot be found. Most likely this is a subsequent fault of a parent's identity&quot; +
+	        				&quot; definition: &quot; + ArrayFormat.format(parentTableNames));
+<span class="nc" id="L145">	        	String query = SQLUtil.substituteMarkers(subNkPkQuery, &quot;?&quot;, ownerPk);</span>
+<span class="nc" id="L146">	        	subNkPkIterator = new ArrayResultSetIterator(connection, query);</span>
+<span class="nc" id="L147">	        } else</span>
+<span class="nc" id="L148">	        	subNkPkIterator = null;</span>
+<span class="nc" id="L149">        }</span>
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

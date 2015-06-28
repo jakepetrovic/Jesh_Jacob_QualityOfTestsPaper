@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Logging.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">logging</a> &gt; <span class="el_source">Logging.java</span></div><h1>Logging.java</h1><pre class="source lang-java linenums">package logging;
+
+import java.text.MessageFormat;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import org.apache.log4j.*;
+import org.apache.log4j.xml.DOMConfigurator;
+
+/*
+ *@author  Tawatchai Siripanya************
+ * Email dongathome@yahoo.com
+ * Date 15.04.2008
+ * &lt;br&gt;
+ *************************************************
+ *&lt;p&gt;
+ *Usage:
+ *&lt;/p&gt;
+ * ************************************************
+ * &lt;br&gt;
+ *1. import logging.*
+ *&lt;br&gt;
+ *or import logging.Logging
+ *&lt;br&gt;
+ * 2. object declaration
+ * &lt;br&gt;
+ * private static Logging logger = Logging.getInstance();  
+ * &lt;br&gt; 
+ * 3. define your logging level such as INFO,WARN,ERROR ,etc.
+ * &lt;br&gt;
+ * Example:
+ * logger.log( Level.ERROR, this, &quot;E002&quot; );
+ *  Where 
+ * -E002 is your error code  which will be translated to English and German
+ *  more about the error code will be provided later. *  
+ * &lt;br&gt;
+ * &lt;br&gt;  
+ * more information about  logging levels please have a look at
+ * http://supportweb.cs.bham.ac.uk/docs/tutorials/docsystem/build/tutorials/log4j/log4j.html
+ *****************************************************/
+
+public class Logging {
+	private static final String LOG4J_CONFIG_FILE = &quot;log4j.properties&quot;;
+	private static final String MEIN_LOGGER_NAME = &quot;Logging&quot;;
+	private static final String MESSAGES_RESBUNDLE = &quot;lib/messages&quot;;
+	private static ResourceBundle messagesResBundle;
+	private static Logging meinLogger;
+	private static Logger log4jLogger;
+
+	/*
+	 *  private in order to be Singleton
+	 */
+<span class="fc" id="L53">	private Logging() {</span>
+<span class="fc" id="L54">		init();</span>
+<span class="fc" id="L55">	}</span>
+
+	private synchronized void init() {
+		try {
+<span class="nc" id="L59">			DOMConfigurator.configureAndWatch(LOG4J_CONFIG_FILE, 60 * 1000);</span>
+<span class="nc" id="L60">			log4jLogger = Logger.getLogger(MEIN_LOGGER_NAME);</span>
+<span class="nc" id="L61">			messagesResBundle = ResourceBundle.getBundle(MESSAGES_RESBUNDLE);</span>
+<span class="nc" id="L62">			log4jLogger.setResourceBundle(messagesResBundle);</span>
+<span class="fc" id="L63">		} catch (MissingResourceException ex) {</span>
+<span class="fc" id="L64">			System.err.println(&quot;Error: '&quot; + MESSAGES_RESBUNDLE</span>
+					+ &quot;'-.properties-Data is missing!&quot;);
+<span class="nc" id="L66">		} catch (Exception ex) {</span>
+<span class="nc" id="L67">			System.err.println(&quot;error occurred while initializing the Logger&quot;);</span>
+<span class="pc" id="L68">		}</span>
+<span class="fc" id="L69">	}</span>
+
+	/*
+	 * Singleton-Instance
+	 */ 
+	public static synchronized Logging getInstance() {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">		if (meinLogger == null)</span>
+<span class="fc" id="L76">			meinLogger = new Logging();</span>
+<span class="fc" id="L77">		return meinLogger;</span>
+	}
+
+	public synchronized void log(Level level, Object caller, String id /*
+																		 * ,
+																		 * String[]
+																		 * parms
+																		 */) {
+<span class="nc" id="L85">		MDC.put(&quot;clss&quot;, caller.getClass().getName());</span>
+<span class="nc" id="L86">		MDC.put(&quot;id&quot;, id);</span>
+
+<span class="nc" id="L88">		String message = id;</span>
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		if (null != messagesResBundle) {</span>
+			try {
+<span class="nc" id="L92">				message = messagesResBundle.getString(id);</span>
+<span class="nc" id="L93">			} catch (MissingResourceException ex) {/**/</span>
+<span class="nc" id="L94">			}</span>
+
+		}
+
+		/*
+		 * if( null != parms ) message = MessageFormat.format( message, parms );
+		 */
+
+<span class="nc bnc" id="L102" title="All 6 branches missed.">		switch (level.toInt()) {</span>
+		case Priority.ALL_INT:
+		case Priority.DEBUG_INT:
+<span class="nc" id="L105">			log4jLogger.debug(message);</span>
+<span class="nc" id="L106">			break;</span>
+		case Priority.INFO_INT:
+<span class="nc" id="L108">			log4jLogger.info(message);</span>
+<span class="nc" id="L109">			break;</span>
+		case Priority.WARN_INT:
+<span class="nc" id="L111">			log4jLogger.warn(message);</span>
+<span class="nc" id="L112">			break;</span>
+		case Priority.ERROR_INT:
+<span class="nc" id="L114">			log4jLogger.error(message);</span>
+<span class="nc" id="L115">			break;</span>
+		case Priority.FATAL_INT:
+<span class="nc" id="L117">			log4jLogger.fatal(message);</span>
+			break;
+		}
+<span class="nc" id="L120">	}</span>
+
+	public boolean isEnabledFor(Level level) {
+<span class="nc" id="L123">		return log4jLogger.isEnabledFor(level);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IniConfiguration.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.config</a> &gt; <span class="el_source">IniConfiguration.java</span></div><h1>IniConfiguration.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.config;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.JSecurityException;
+import org.jsecurity.io.IniResource;
+import org.jsecurity.io.ResourceUtils;
+import org.jsecurity.mgt.DefaultSecurityManager;
+import org.jsecurity.mgt.RealmSecurityManager;
+import org.jsecurity.mgt.SecurityManager;
+import org.jsecurity.realm.Realm;
+import org.jsecurity.realm.RealmFactory;
+import org.jsecurity.util.LifecycleUtils;
+
+import java.io.InputStream;
+import java.io.Reader;
+import java.util.*;
+
+/**
+ * A Configuration based on the &lt;a href=&quot;http://en.wikipedia.org/wiki/INI_file&quot;&gt;.ini format&lt;/a&gt;.
+ *
+ * @author Les Hazlewood
+ * @author Jeremy Haile
+ * @since 0.9
+ */
+public class IniConfiguration extends TextConfiguration {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L48">    private static final Log log = LogFactory.getLog(IniConfiguration.class);</span>
+
+    public static final String DEFAULT_INI_RESOURCE_PATH = &quot;classpath:jsecurity.ini&quot;;
+
+    public static final String MAIN = &quot;main&quot;;
+
+    public static final String SESSION_MODE_PROPERTY_NAME = &quot;sessionMode&quot;;
+
+    protected String configUrl;
+    protected IniResource iniResource;
+<span class="pc" id="L58">    protected boolean ignoreResourceNotFound = false;</span>
+
+<span class="fc" id="L60">    public IniConfiguration() {</span>
+<span class="fc" id="L61">    }</span>
+
+<span class="nc" id="L63">    public IniConfiguration(String configBodyOrResourcePath) {</span>
+<span class="nc" id="L64">        load(configBodyOrResourcePath);</span>
+<span class="nc" id="L65">    }</span>
+
+<span class="fc" id="L67">    public IniConfiguration(String configBodyOrResourcePath, String charsetName) {</span>
+        try {
+<span class="nc" id="L69">            this.iniResource = new IniResource(configBodyOrResourcePath, charsetName);</span>
+<span class="nc" id="L70">            process(this.iniResource);</span>
+<span class="fc" id="L71">        } catch (Exception e) {</span>
+<span class="fc" id="L72">            throw new ConfigurationException(e);</span>
+<span class="nc" id="L73">        }</span>
+<span class="nc" id="L74">    }</span>
+
+    protected String getConfigUrl() {
+<span class="nc" id="L77">        return configUrl;</span>
+    }
+
+    public void setConfigUrl(String configUrl) {
+<span class="fc" id="L81">        this.configUrl = configUrl;</span>
+<span class="fc" id="L82">    }</span>
+
+    public void init() throws JSecurityException {
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (configUrl != null) {</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            if (ResourceUtils.resourceExists(configUrl)) {</span>
+<span class="nc" id="L88">                load(configUrl);</span>
+            } else {
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">                if (ignoreResourceNotFound) {</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                    if (log.isDebugEnabled()) {</span>
+<span class="fc" id="L92">                        log.debug(&quot;JSecurity resource [&quot; + configUrl + &quot;] not found.  Ignoring since &quot; +</span>
+                                &quot;'ignoreResourceNotFound' is set to true.&quot;);
+                    }
+                } else {
+<span class="nc" id="L96">                    throw new ConfigurationException(&quot;JSecurity resource [&quot; + configUrl + &quot;] specified as a 'configUrl' &quot; +</span>
+                            &quot;cannot be found.  If you want to fall back on default configuration specified &quot; +
+                            &quot;via the 'config' parameter, then set 'ignoreResourceNotFound' to true.&quot;);
+                }
+            }
+
+        } else {
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">            if (ResourceUtils.resourceExists(DEFAULT_INI_RESOURCE_PATH)) {</span>
+<span class="nc" id="L104">                load(DEFAULT_INI_RESOURCE_PATH);</span>
+            }
+        }
+
+        // Only call super.init() after we try loading from the configUrl first.
+<span class="nc" id="L109">        super.init();</span>
+
+<span class="nc" id="L111">        SecurityManager sm = getSecurityManager();</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (sm == null) {</span>
+            //no config specified, use the defaults:
+<span class="nc" id="L114">            sm = createDefaultSecurityManager();</span>
+<span class="nc" id="L115">            setSecurityManager(sm);</span>
+        }
+<span class="nc" id="L117">    }</span>
+
+    protected void load(Reader r) throws ConfigurationException {
+        try {
+<span class="nc" id="L121">            this.iniResource = new IniResource(r);</span>
+<span class="nc" id="L122">            process(this.iniResource);</span>
+<span class="nc" id="L123">        } catch (Exception e) {</span>
+<span class="nc" id="L124">            throw new ConfigurationException(e);</span>
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">    }</span>
+
+    protected void load(Scanner s) throws ConfigurationException {
+        try {
+<span class="nc" id="L130">            this.iniResource = new IniResource(s);</span>
+<span class="nc" id="L131">            process(this.iniResource);</span>
+<span class="nc" id="L132">        } catch (Exception e) {</span>
+<span class="nc" id="L133">            throw new ConfigurationException(e);</span>
+<span class="nc" id="L134">        }</span>
+<span class="nc" id="L135">    }</span>
+
+    public void load(String path) throws ConfigurationException {
+        try {
+<span class="nc" id="L139">            this.iniResource = new IniResource(path);</span>
+<span class="nc" id="L140">            process(this.iniResource);</span>
+<span class="fc" id="L141">        } catch (Exception e) {</span>
+<span class="fc" id="L142">            throw new ConfigurationException(e);</span>
+<span class="nc" id="L143">        }</span>
+<span class="nc" id="L144">    }</span>
+
+    public void load(InputStream is) throws ConfigurationException {
+        try {
+<span class="nc" id="L148">            this.iniResource = new IniResource(is);</span>
+<span class="nc" id="L149">            process(this.iniResource);</span>
+<span class="nc" id="L150">        } catch (Exception e) {</span>
+<span class="nc" id="L151">            throw new ConfigurationException(e);</span>
+<span class="nc" id="L152">        }</span>
+<span class="nc" id="L153">    }</span>
+
+    protected void process(IniResource ini) {
+<span class="nc" id="L156">        processIni(ini.getSections());</span>
+<span class="nc" id="L157">    }</span>
+
+    protected void processIni(Map&lt;String, Map&lt;String, String&gt;&gt; sections) {
+<span class="nc" id="L160">        SecurityManager securityManager = createSecurityManager(sections);</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (securityManager == null) {</span>
+<span class="nc" id="L162">            String msg = &quot;A &quot; + SecurityManager.class + &quot; instance must be created at startup.&quot;;</span>
+<span class="nc" id="L163">            throw new ConfigurationException(msg);</span>
+        }
+<span class="nc" id="L165">        setSecurityManager(securityManager);</span>
+
+<span class="nc" id="L167">        afterSecurityManagerSet(sections);</span>
+<span class="nc" id="L168">    }</span>
+
+    protected SecurityManager createDefaultSecurityManager() {
+<span class="nc" id="L171">        return newSecurityManagerInstance();</span>
+    }
+
+    protected SecurityManager createSecurityManager(Map&lt;String, Map&lt;String, String&gt;&gt; sections) {
+<span class="nc" id="L175">        Map&lt;String, String&gt; mainSection = sections.get(MAIN);</span>
+<span class="nc" id="L176">        return createSecurityManagerForSection(mainSection);</span>
+    }
+
+    protected RealmSecurityManager newSecurityManagerInstance() {
+<span class="nc" id="L180">        return new DefaultSecurityManager();</span>
+    }
+
+    @SuppressWarnings({&quot;unchecked&quot;})
+    protected SecurityManager createSecurityManagerForSection(Map&lt;String, String&gt; mainSection) {
+
+<span class="nc" id="L186">        Map&lt;String, Object&gt; defaults = new LinkedHashMap&lt;String, Object&gt;();</span>
+
+<span class="nc" id="L188">        RealmSecurityManager securityManager = newSecurityManagerInstance();</span>
+<span class="nc" id="L189">        defaults.put(&quot;securityManager&quot;, securityManager);</span>
+        //convenient alias:
+<span class="nc" id="L191">        defaults.put(&quot;sm&quot;, securityManager);</span>
+<span class="nc" id="L192">        ReflectionBuilder builder = new ReflectionBuilder(defaults);</span>
+<span class="nc" id="L193">        Map&lt;String, Object&gt; objects = builder.buildObjects(mainSection);</span>
+
+        //realms and realm factory might have been created - pull them out first so we can
+        //initialize the securityManager:
+
+<span class="nc" id="L198">        List&lt;Realm&gt; realms = new ArrayList&lt;Realm&gt;();</span>
+
+        //iterate over the map entries to pull out the realm factory(s):
+
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        for (Map.Entry&lt;String, Object&gt; entry : objects.entrySet()) {</span>
+<span class="nc" id="L203">            String name = entry.getKey();</span>
+<span class="nc" id="L204">            Object value = entry.getValue();</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            if (value instanceof RealmSecurityManager) {</span>
+<span class="nc" id="L206">                securityManager = (RealmSecurityManager) value;</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            } else if (value instanceof RealmFactory) {</span>
+<span class="nc" id="L208">                RealmFactory factory = (RealmFactory) value;</span>
+<span class="nc" id="L209">                LifecycleUtils.init(factory);</span>
+<span class="nc" id="L210">                Collection&lt;Realm&gt; factoryRealms = factory.getRealms();</span>
+<span class="nc bnc" id="L211" title="All 4 branches missed.">                if (factoryRealms != null &amp;&amp; !factoryRealms.isEmpty()) {</span>
+<span class="nc" id="L212">                    realms.addAll(factoryRealms);</span>
+                }
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            } else if (value instanceof Realm) {</span>
+<span class="nc" id="L215">                Realm realm = (Realm) value;</span>
+                //set the name if null:
+<span class="nc" id="L217">                String existingName = realm.getName();</span>
+<span class="nc bnc" id="L218" title="All 4 branches missed.">                if (existingName == null || existingName.startsWith(realm.getClass().getName())) {</span>
+                    try {
+<span class="nc" id="L220">                        builder.applyProperty(realm, &quot;name&quot;, name);</span>
+<span class="nc" id="L221">                    } catch (Exception ignored) {</span>
+<span class="nc" id="L222">                    }</span>
+                }
+<span class="nc" id="L224">                realms.add(realm);</span>
+            }
+<span class="nc" id="L226">        }</span>
+
+        //set them on the SecurityManager
+<span class="nc bnc" id="L229" title="All 2 branches missed.">        if (!realms.isEmpty()) {</span>
+<span class="nc" id="L230">            securityManager.setRealms(realms);</span>
+<span class="nc" id="L231">            LifecycleUtils.init(realms);</span>
+        }
+
+<span class="nc" id="L234">        return securityManager;</span>
+    }
+
+    protected void afterSecurityManagerSet(Map&lt;String, Map&lt;String, String&gt;&gt; sections) {
+<span class="nc" id="L238">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

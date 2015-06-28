@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>XPathLexer.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">com.werken.saxpath</a> &gt; <span class="el_source">XPathLexer.java</span></div><h1>XPathLexer.java</h1><pre class="source lang-java linenums">/*
+ * $Header: /cvsroot/saxpath/saxpath/src/java/main/com/werken/saxpath/XPathLexer.java,v 1.10 2002/04/26 17:05:34 jstrachan Exp $
+ * $Revision: 1.10 $
+ * $Date: 2002/04/26 17:05:34 $
+ *
+ * ====================================================================
+ *
+ * Copyright (C) 2000-2002 werken digital.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions, and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions, and the disclaimer that follows 
+ *    these conditions in the documentation and/or other materials 
+ *    provided with the distribution.
+ *
+ * 3. The name &quot;SAXPath&quot; must not be used to endorse or promote products
+ *    derived from this software without prior written permission.  For
+ *    written permission, please contact license@saxpath.org.
+ * 
+ * 4. Products derived from this software may not be called &quot;SAXPath&quot;, nor
+ *    may &quot;SAXPath&quot; appear in their name, without prior written permission
+ *    from the SAXPath Project Management (pm@saxpath.org).
+ * 
+ * In addition, we request (but do not require) that you include in the 
+ * end-user documentation provided with the redistribution and/or in the 
+ * software itself an acknowledgement equivalent to the following:
+ *     &quot;This product includes software developed by the
+ *      SAXPath Project (http://www.saxpath.org/).&quot;
+ * Alternatively, the acknowledgment may be graphical using the logos 
+ * available at http://www.saxpath.org/
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE SAXPath AUTHORS OR THE PROJECT
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the SAXPath Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * SAXPath Project, please see &lt;http://www.saxpath.org/&gt;.
+ * 
+ * $Id: XPathLexer.java,v 1.10 2002/04/26 17:05:34 jstrachan Exp $
+ */
+
+
+
+package com.werken.saxpath;
+
+class XPathLexer
+{
+    private String xpath;
+    private int    currentPosition;
+    private int    endPosition;
+
+    private Token  previousToken;
+
+    public XPathLexer(String xpath)
+<span class="nc" id="L75">    {</span>
+<span class="nc" id="L76">        setXPath( xpath );</span>
+<span class="nc" id="L77">    }</span>
+
+    XPathLexer()
+<span class="nc" id="L80">    {</span>
+<span class="nc" id="L81">    }</span>
+
+    void setXPath(String xpath)
+    {
+<span class="nc" id="L85">        this.xpath           = xpath;</span>
+<span class="nc" id="L86">        this.currentPosition = 0;</span>
+<span class="nc" id="L87">        this.endPosition     = xpath.length();</span>
+<span class="nc" id="L88">    }</span>
+
+    public String getXPath()
+    {
+<span class="nc" id="L92">        return this.xpath;</span>
+    }
+
+    public Token nextToken()
+    {
+<span class="nc" id="L97">        Token token = null;</span>
+
+        do
+        {
+<span class="nc" id="L101">            token = null;</span>
+
+<span class="nc bnc" id="L103" title="All 21 branches missed.">            switch ( LA(1) )</span>
+            {
+                case '$':
+                {
+<span class="nc" id="L107">                    token = dollar();</span>
+<span class="nc" id="L108">                    break;</span>
+                }
+                    
+                case '&quot;':
+                case '\'':
+                {
+<span class="nc" id="L114">                    token = literal();</span>
+<span class="nc" id="L115">                    break;</span>
+                }
+                    
+                case '/':
+                {
+<span class="nc" id="L120">                    token = slashes();</span>
+<span class="nc" id="L121">                    break;</span>
+                }
+
+                case ',':
+                {
+<span class="nc" id="L126">                    token = comma();</span>
+<span class="nc" id="L127">                    break;</span>
+                }
+                    
+                case '(':
+                {
+<span class="nc" id="L132">                    token = leftParen();</span>
+<span class="nc" id="L133">                    break;</span>
+                }
+                    
+                case ')':
+                {
+<span class="nc" id="L138">                    token = rightParen();</span>
+<span class="nc" id="L139">                    break;</span>
+                }
+                    
+                case '[':
+                {
+<span class="nc" id="L144">                    token = leftBracket();</span>
+<span class="nc" id="L145">                    break;</span>
+                }
+                    
+                case ']':
+                {
+<span class="nc" id="L150">                    token = rightBracket();</span>
+<span class="nc" id="L151">                    break;</span>
+                }
+                    
+                case '+':
+                {
+<span class="nc" id="L156">                    token = plus();</span>
+<span class="nc" id="L157">                    break;</span>
+                }
+                    
+                case '-':
+                {
+<span class="nc" id="L162">                    token = minus();</span>
+<span class="nc" id="L163">                    break;</span>
+                }
+                    
+                case '&lt;':
+                case '&gt;':
+                {
+<span class="nc" id="L169">                    token = relationalOperator();</span>
+<span class="nc" id="L170">                    break;</span>
+                }        
+
+                case '=':
+                {
+<span class="nc" id="L175">                    token = equals();</span>
+<span class="nc" id="L176">                    break;</span>
+                }
+                    
+                case '!':
+                {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                    if ( LA(2) == '=' )</span>
+                    {
+<span class="nc" id="L183">                        token = notEquals();</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L187">                        token = not();</span>
+                    }
+<span class="nc" id="L189">                    break;</span>
+                }
+                    
+                case '|':
+                {
+<span class="nc" id="L194">                    token = pipe();</span>
+<span class="nc" id="L195">                    break;</span>
+                }
+                    
+                case '@':
+                {
+<span class="nc" id="L200">                    token = at();</span>
+<span class="nc" id="L201">                    break;</span>
+                }
+                    
+                case ':':
+                {
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                    if ( LA(2) == ':' )</span>
+                    {
+<span class="nc" id="L208">                        token = doubleColon();</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L212">                        token = colon();</span>
+                    }
+<span class="nc" id="L214">                    break;</span>
+                }
+                    
+                case '*':
+                {
+<span class="nc" id="L219">                    token = star();</span>
+<span class="nc" id="L220">                    break;</span>
+                }
+                    
+                case '.':
+                {
+<span class="nc bnc" id="L225" title="All 2 branches missed.">                    switch ( LA(2) )</span>
+                    {
+                        case '0':
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        {
+<span class="nc" id="L238">                            token = number();</span>
+<span class="nc" id="L239">                            break;</span>
+                        }
+                        default:
+                        {
+<span class="nc" id="L243">                            token = dots();</span>
+<span class="nc" id="L244">                            break;</span>
+                        }
+                    }
+                    break;
+                }
+
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                {
+<span class="nc" id="L261">                    token = number();</span>
+<span class="nc" id="L262">                    break;</span>
+                }
+
+                case ' ':
+                case '\t':
+                case '\n':
+                case '\r':
+                {
+<span class="nc" id="L270">                    token = whitespace();</span>
+<span class="nc" id="L271">                    break;</span>
+                }
+                    
+                default:
+                {
+<span class="nc bnc" id="L276" title="All 2 branches missed.">                    if ( isIdentifierStartChar( LA(1) ) )</span>
+                    {
+<span class="nc" id="L278">                        token = identifierOrOperatorName();</span>
+                    }
+                }
+            }
+
+<span class="nc bnc" id="L283" title="All 2 branches missed.">            if ( token == null )</span>
+            {
+<span class="nc" id="L285">                token = new Token( TokenTypes.EOF,</span>
+                                   getXPath(),
+                                   currentPosition(),
+                                   endPosition() );
+            }
+        }
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        while ( token.getTokenType() == TokenTypes.SKIP );</span>
+        
+<span class="nc" id="L293">        setPreviousToken( token );</span>
+        
+<span class="nc" id="L295">        return token;</span>
+    }
+
+Token identifierOrOperatorName() 
+{
+<span class="nc" id="L300">    Token token = null;</span>
+
+<span class="nc" id="L302">    Token previousToken = getPreviousToken();</span>
+
+<span class="nc bnc" id="L304" title="All 2 branches missed.">    if ( previousToken != null )</span>
+    {
+        // For some reason, section 3.7, Lexical structure,
+        // doesn't seem to feel like it needs to mention the
+        // SLASH, DOUBLE_SLASH, and COLON tokens for the test
+        // if an NCName is an operator or not.
+        //
+        // Accoring to section 3.7, &quot;/foo&quot; should be considered
+        // as a SLASH following by an OperatorName being 'foo'.
+        // Which is just simply, clearly, wrong, in my mind.
+        //
+        //     -bob
+        
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        switch ( previousToken.getTokenType() )</span>
+        {
+            case TokenTypes.AT:
+            case TokenTypes.DOUBLE_COLON:
+            case TokenTypes.LEFT_PAREN:
+            case TokenTypes.LEFT_BRACKET:
+            case TokenTypes.AND:
+            case TokenTypes.OR:
+            case TokenTypes.MOD:
+            case TokenTypes.DIV:
+            case TokenTypes.COLON:
+            case TokenTypes.SLASH:
+            case TokenTypes.DOUBLE_SLASH:
+            case TokenTypes.PIPE:
+            case TokenTypes.DOLLAR:
+            case TokenTypes.PLUS:
+            case TokenTypes.MINUS:
+            case TokenTypes.STAR:
+            case TokenTypes.COMMA:
+            case TokenTypes.LESS_THAN:
+            case TokenTypes.GREATER_THAN:
+            case TokenTypes.LESS_THAN_EQUALS:
+            case TokenTypes.GREATER_THAN_EQUALS:
+            case TokenTypes.EQUALS:
+            case TokenTypes.NOT_EQUALS:
+            {
+<span class="nc" id="L343">                token = identifier();</span>
+<span class="nc" id="L344">                break;</span>
+            }
+            default:
+            {
+<span class="nc" id="L348">                token = operatorName();</span>
+<span class="nc" id="L349">                break;</span>
+            }
+        }
+    }
+    else
+    {
+<span class="nc" id="L355">        token = identifier();</span>
+    }
+
+<span class="nc" id="L358">    return token;</span>
+}
+
+Token identifier() 
+{
+<span class="nc" id="L363">    Token token = null;</span>
+
+<span class="nc" id="L365">    int start = currentPosition();</span>
+
+<span class="nc bnc" id="L367" title="All 2 branches missed.">    while ( hasMoreChars() )</span>
+    {
+<span class="nc bnc" id="L369" title="All 2 branches missed.">        if ( isIdentifierChar( LA(1) ) )</span>
+        {
+<span class="nc" id="L371">            consume();</span>
+        }
+        else
+        {
+            break;
+        }
+    }
+
+<span class="nc" id="L379">    token = new Token( TokenTypes.IDENTIFIER,</span>
+                       getXPath(),
+                       start,
+                       currentPosition() );
+
+<span class="nc" id="L384">    return token;</span>
+}
+
+Token operatorName() 
+{
+<span class="nc" id="L389">    Token token = null;</span>
+
+<span class="nc bnc" id="L391" title="All 5 branches missed.">    switch ( LA(1) )</span>
+    {
+        case 'a':
+        {
+<span class="nc" id="L395">            token = and();</span>
+<span class="nc" id="L396">            break;</span>
+        }
+
+        case 'o':
+        {
+<span class="nc" id="L401">            token = or();</span>
+<span class="nc" id="L402">            break;</span>
+        }
+
+        case 'm':
+        {
+<span class="nc" id="L407">            token = mod();</span>
+<span class="nc" id="L408">            break;</span>
+        }
+
+        case 'd':
+        {
+<span class="nc" id="L413">            token = div();</span>
+            break;
+        }
+    }
+
+<span class="nc" id="L418">    return token;</span>
+}
+
+Token mod() 
+{
+<span class="nc" id="L423">    Token token = null;</span>
+
+<span class="nc bnc" id="L425" title="All 8 branches missed.">    if ( ( LA(1) == 'm' )</span>
+         &amp;&amp;
+         ( LA(2) == 'o' )
+         &amp;&amp;
+         ( LA(3) == 'd' ) 
+         &amp;&amp;
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+<span class="nc" id="L433">        token = new Token( TokenTypes.MOD,</span>
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+
+<span class="nc" id="L438">        consume();</span>
+<span class="nc" id="L439">        consume();</span>
+<span class="nc" id="L440">        consume();</span>
+    }
+
+<span class="nc" id="L443">    return token;</span>
+}
+
+Token div() 
+{
+<span class="nc" id="L448">    Token token = null;</span>
+
+<span class="nc bnc" id="L450" title="All 8 branches missed.">    if ( ( LA(1) == 'd' )</span>
+         &amp;&amp;
+         ( LA(2) == 'i' )
+         &amp;&amp;
+         ( LA(3) == 'v' ) 
+         &amp;&amp;
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+<span class="nc" id="L458">        token = new Token( TokenTypes.DIV,</span>
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+
+<span class="nc" id="L463">        consume();</span>
+<span class="nc" id="L464">        consume();</span>
+<span class="nc" id="L465">        consume();</span>
+    }
+
+<span class="nc" id="L468">    return token;</span>
+}
+
+Token and() 
+{
+<span class="nc" id="L473">    Token token = null;</span>
+
+<span class="nc bnc" id="L475" title="All 8 branches missed.">    if ( ( LA(1) == 'a' )</span>
+         &amp;&amp;
+         ( LA(2) == 'n' )
+         &amp;&amp;
+         ( LA(3) == 'd' )
+         &amp;&amp;
+         ( ! isIdentifierChar( LA(4) ) ) )
+    {
+<span class="nc" id="L483">        token = new Token( TokenTypes.AND,</span>
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+3 );
+            
+<span class="nc" id="L488">        consume();</span>
+<span class="nc" id="L489">        consume();</span>
+<span class="nc" id="L490">        consume();</span>
+    }
+
+<span class="nc" id="L493">    return token;</span>
+}
+
+Token or() 
+{
+<span class="nc" id="L498">    Token token = null;</span>
+
+<span class="nc bnc" id="L500" title="All 6 branches missed.">    if ( ( LA(1) == 'o' )</span>
+         &amp;&amp;
+         ( LA(2) == 'r' ) 
+         &amp;&amp;
+         ( ! isIdentifierChar( LA(3) ) ) )
+    {
+<span class="nc" id="L506">        token = new Token( TokenTypes.OR,</span>
+                           getXPath(),
+                           currentPosition(),
+                           currentPosition()+2 );
+
+<span class="nc" id="L511">        consume();</span>
+<span class="nc" id="L512">        consume();</span>
+    }
+
+<span class="nc" id="L515">    return token;</span>
+}
+
+Token number()
+{
+<span class="nc" id="L520">    int     start         = currentPosition();</span>
+<span class="nc" id="L521">    boolean periodAllowed = true;</span>
+
+  loop:
+    while( true )
+    {
+<span class="nc bnc" id="L526" title="All 3 branches missed.">        switch ( LA(1) )</span>
+        {
+            case '.':
+            {
+<span class="nc bnc" id="L530" title="All 2 branches missed.">                if ( periodAllowed )</span>
+                {
+<span class="nc" id="L532">                    periodAllowed = false;</span>
+<span class="nc" id="L533">                    consume();</span>
+                }
+                else
+                {
+                    break loop;
+                }
+                break;
+            }
+            
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            {
+<span class="nc" id="L553">                consume();</span>
+<span class="nc" id="L554">                break;</span>
+            }
+            default:
+            {
+<span class="nc" id="L558">                break loop;</span>
+            }
+        }
+    }
+
+<span class="nc" id="L563">    Token token = null;</span>
+
+<span class="nc bnc" id="L565" title="All 2 branches missed.">    if ( periodAllowed )</span>
+    {
+<span class="nc" id="L567">        token = new Token( TokenTypes.INTEGER,</span>
+                           getXPath(),
+                           start,
+                           currentPosition() );
+    }
+    else
+    {
+<span class="nc" id="L574">        token = new Token( TokenTypes.DOUBLE,</span>
+                           getXPath(),
+                           start,
+                           currentPosition() );
+    }
+
+<span class="nc" id="L580">    return token;</span>
+}
+
+Token whitespace() 
+{
+<span class="nc" id="L585">    consume();</span>
+        
+  loop:
+<span class="nc bnc" id="L588" title="All 2 branches missed.">    while( hasMoreChars() )</span>
+    {
+<span class="nc bnc" id="L590" title="All 2 branches missed.">        switch ( LA(1) )</span>
+        {
+            case ' ':
+            case '\t':
+            case '\n':
+            case '\r':
+            {
+<span class="nc" id="L597">                consume();</span>
+<span class="nc" id="L598">                break;</span>
+            }
+                
+            default:
+            {
+<span class="nc" id="L603">                break loop;</span>
+            }
+        }
+    }
+
+<span class="nc" id="L608">    return new Token( TokenTypes.SKIP,</span>
+                      getXPath(),
+                      0,
+                      0 );
+}
+
+Token comma()
+{
+<span class="nc" id="L616">    Token token = new Token( TokenTypes.COMMA,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L621">    consume();</span>
+
+<span class="nc" id="L623">    return token;</span>
+}
+
+Token equals()
+{
+<span class="nc" id="L628">    Token token = new Token( TokenTypes.EQUALS,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L633">    consume();</span>
+
+<span class="nc" id="L635">    return token;</span>
+}
+
+Token minus() 
+{
+<span class="nc" id="L640">    Token token = new Token( TokenTypes.MINUS,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+<span class="nc" id="L644">    consume();</span>
+        
+<span class="nc" id="L646">    return token;</span>
+}
+
+Token plus() 
+{
+<span class="nc" id="L651">    Token token = new Token( TokenTypes.PLUS,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+<span class="nc" id="L655">    consume();</span>
+
+<span class="nc" id="L657">    return token;</span>
+}
+
+Token dollar() 
+{
+<span class="nc" id="L662">    Token token = new Token( TokenTypes.DOLLAR,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+<span class="nc" id="L666">    consume();</span>
+
+<span class="nc" id="L668">    return token;</span>
+}
+
+Token pipe() 
+{
+<span class="nc" id="L673">    Token token = new Token( TokenTypes.PIPE,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L678">    consume();</span>
+
+<span class="nc" id="L680">    return token;</span>
+}
+
+Token at() 
+{
+<span class="nc" id="L685">    Token token = new Token( TokenTypes.AT,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L690">    consume();</span>
+
+<span class="nc" id="L692">    return token;</span>
+}
+
+Token colon() 
+{
+<span class="nc" id="L697">    Token token = new Token( TokenTypes.COLON,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+<span class="nc" id="L701">    consume();</span>
+
+<span class="nc" id="L703">    return token;</span>
+}
+
+Token doubleColon() 
+{
+<span class="nc" id="L708">    Token token = new Token( TokenTypes.DOUBLE_COLON,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+2 );
+
+<span class="nc" id="L713">    consume();</span>
+<span class="nc" id="L714">    consume();</span>
+
+<span class="nc" id="L716">    return token;</span>
+}
+
+Token not() 
+{
+<span class="nc" id="L721">    Token token = new Token( TokenTypes.NOT,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition() + 1 );
+
+<span class="nc" id="L726">    consume();</span>
+
+<span class="nc" id="L728">    return token;</span>
+}
+
+Token notEquals() 
+{
+<span class="nc" id="L733">    Token token = new Token( TokenTypes.NOT_EQUALS,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition() + 2 );
+
+<span class="nc" id="L738">    consume();</span>
+<span class="nc" id="L739">    consume();</span>
+
+<span class="nc" id="L741">    return token;</span>
+}
+
+Token relationalOperator() 
+{
+<span class="nc" id="L746">    Token token = null;</span>
+
+<span class="nc bnc" id="L748" title="All 3 branches missed.">    switch ( LA(1) )</span>
+    {
+        case '&lt;':
+        {
+<span class="nc bnc" id="L752" title="All 2 branches missed.">            if ( LA(2) == '=' )</span>
+            {
+<span class="nc" id="L754">                token = new Token( TokenTypes.LESS_THAN_EQUALS,</span>
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 2 );
+<span class="nc" id="L758">                consume();</span>
+            }
+            else
+            {
+<span class="nc" id="L762">                token = new Token( TokenTypes.LESS_THAN,</span>
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 1);
+            }
+
+<span class="nc" id="L768">            consume();</span>
+<span class="nc" id="L769">            break;</span>
+        }
+        case '&gt;':
+        {
+<span class="nc bnc" id="L773" title="All 2 branches missed.">            if ( LA(2) == '=' )</span>
+            {
+<span class="nc" id="L775">                token = new Token( TokenTypes.GREATER_THAN_EQUALS,</span>
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 2 );
+<span class="nc" id="L779">                consume();</span>
+            }
+            else
+            {
+<span class="nc" id="L783">                token = new Token( TokenTypes.GREATER_THAN,</span>
+                                   getXPath(),
+                                   currentPosition(),
+                                   currentPosition() + 1 );
+            }
+
+<span class="nc" id="L789">            consume();</span>
+            break;
+        }
+    }
+
+<span class="nc" id="L794">    return token;</span>
+            
+}
+
+Token star() 
+{
+<span class="nc" id="L800">    Token token = new Token( TokenTypes.STAR,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L805">    consume();</span>
+        
+<span class="nc" id="L807">    return token;</span>
+}
+
+Token literal() 
+{
+<span class="nc" id="L812">    Token token = null;</span>
+
+<span class="nc" id="L814">    char match  = LA(1);</span>
+
+<span class="nc" id="L816">    consume();</span>
+
+<span class="nc" id="L818">    int start = currentPosition();</span>
+        
+    while ( ( token == null )
+<span class="nc bnc" id="L821" title="All 4 branches missed.">            &amp;&amp;</span>
+            hasMoreChars() )
+    {
+<span class="nc bnc" id="L824" title="All 2 branches missed.">        if ( LA(1) == match )</span>
+        {
+<span class="nc" id="L826">            token = new Token( TokenTypes.LITERAL,</span>
+                               getXPath(),
+                               start,
+                               currentPosition() );
+        }
+<span class="nc" id="L831">        consume();</span>
+    }
+
+<span class="nc" id="L834">    return token;</span>
+}
+
+Token dots() 
+{
+<span class="nc" id="L839">    Token token = null;</span>
+
+<span class="nc bnc" id="L841" title="All 2 branches missed.">    switch ( LA(2) )</span>
+    {
+        case '.':
+        {
+<span class="nc" id="L845">            token = new Token( TokenTypes.DOT_DOT,</span>
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+2 ) ;
+<span class="nc" id="L849">            consume();</span>
+<span class="nc" id="L850">            consume();</span>
+<span class="nc" id="L851">            break;</span>
+        }
+        default:
+        {
+<span class="nc" id="L855">            token = new Token( TokenTypes.DOT,</span>
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+1 );
+<span class="nc" id="L859">            consume();</span>
+            break;
+        }
+    }
+
+<span class="nc" id="L864">    return token;</span>
+}
+
+Token leftBracket() 
+{
+<span class="nc" id="L869">    Token token = new Token( TokenTypes.LEFT_BRACKET,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L874">    consume();</span>
+
+<span class="nc" id="L876">    return token;</span>
+}
+
+Token rightBracket() 
+{
+<span class="nc" id="L881">    Token token = new Token( TokenTypes.RIGHT_BRACKET,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L886">    consume();</span>
+
+<span class="nc" id="L888">    return token;</span>
+}
+
+Token leftParen() 
+{
+<span class="nc" id="L893">    Token token = new Token( TokenTypes.LEFT_PAREN,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L898">    consume();</span>
+
+<span class="nc" id="L900">    return token;</span>
+}
+
+Token rightParen() 
+{
+<span class="nc" id="L905">    Token token = new Token( TokenTypes.RIGHT_PAREN,</span>
+                             getXPath(),
+                             currentPosition(),
+                             currentPosition()+1 );
+
+<span class="nc" id="L910">    consume();</span>
+
+<span class="nc" id="L912">    return token;</span>
+}
+
+Token slashes() 
+{
+<span class="nc" id="L917">    Token token = null;</span>
+
+<span class="nc bnc" id="L919" title="All 2 branches missed.">    switch ( LA(2) )</span>
+    {
+        case '/':
+        {
+<span class="nc" id="L923">            token = new Token( TokenTypes.DOUBLE_SLASH,</span>
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+2 );
+<span class="nc" id="L927">            consume();</span>
+<span class="nc" id="L928">            consume();</span>
+<span class="nc" id="L929">            break;</span>
+        }
+        default:
+        {
+<span class="nc" id="L933">            token = new Token( TokenTypes.SLASH,</span>
+                               getXPath(),
+                               currentPosition(),
+                               currentPosition()+1 );
+<span class="nc" id="L937">            consume();</span>
+        }
+    }
+
+<span class="nc" id="L941">    return token;</span>
+}
+
+char LA(int i) 
+{
+<span class="nc bnc" id="L946" title="All 2 branches missed.">    if ( currentPosition + ( i - 1 ) &gt;= endPosition() )</span>
+    {
+<span class="nc" id="L948">        return (char) -1;</span>
+    }
+
+<span class="nc" id="L951">    return getXPath().charAt( currentPosition() + (i - 1) );</span>
+}
+
+void consume()
+{
+<span class="nc" id="L956">    ++this.currentPosition;</span>
+<span class="nc" id="L957">}</span>
+
+void consume(int i)
+{
+<span class="nc" id="L961">    this.currentPosition += i;</span>
+<span class="nc" id="L962">}</span>
+
+int currentPosition()
+{
+<span class="nc" id="L966">    return this.currentPosition;</span>
+}
+
+int endPosition()
+{
+<span class="nc" id="L971">    return this.endPosition;</span>
+}
+
+Token getPreviousToken()
+{
+<span class="nc" id="L976">    return this.previousToken;</span>
+}
+
+void setPreviousToken(Token previousToken)
+{
+<span class="nc" id="L981">    this.previousToken = previousToken;</span>
+<span class="nc" id="L982">}</span>
+
+boolean hasMoreChars()
+{
+<span class="nc bnc" id="L986" title="All 2 branches missed.">    return currentPosition() &lt; endPosition();</span>
+}
+
+boolean isIdentifierChar(char c)
+{
+<span class="nc bnc" id="L991" title="All 2 branches missed.">    switch ( c )</span>
+    {
+        case '-':
+        case '.':
+<span class="nc" id="L995">            return true;</span>
+    }
+
+<span class="nc" id="L998">    return Character.isUnicodeIdentifierPart( c );</span>
+}
+
+boolean isIdentifierStartChar(char c)
+{
+<span class="nc bnc" id="L1003" title="All 4 branches missed.">    return c == '_' || Character.isUnicodeIdentifierStart( c );</span>
+}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

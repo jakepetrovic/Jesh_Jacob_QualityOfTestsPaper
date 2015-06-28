@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MemorySessionDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.jsecurity.session.mgt.eis</a> &gt; <span class="el_source">MemorySessionDAO.java</span></div><h1>MemorySessionDAO.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * &quot;License&quot;); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+package org.jsecurity.session.mgt.eis;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jsecurity.cache.HashtableCacheManager;
+import org.jsecurity.session.Session;
+import org.jsecurity.session.mgt.SimpleSession;
+import org.jsecurity.util.JavaEnvironment;
+
+import java.io.Serializable;
+import java.util.Random;
+
+/**
+ * Simple memory-based implementation of the SessionDAO that relies on its configured
+ * {@link #setCacheManager CacheManager} for Session caching and in-memory persistence.
+ *
+ * &lt;p&gt;&lt;b&gt;PLEASE NOTE&lt;/b&gt; the default CacheManager internal to this implementation is a
+ * {@link org.jsecurity.cache.HashtableCacheManager HashtableCacheManager}, which IS NOT RECOMMENDED for production environments.
+ *
+ * &lt;p&gt;If you
+ * want to use the MemorySessionDAO in production environments, such as those that require session data to be
+ * recoverable in case of a server restart, you should do one of two things (or both):
+ *
+ * &lt;ul&gt;
+ * &lt;li&gt;Configure it with a production-quality CacheManager. The
+ * {@link org.jsecurity.cache.ehcache.EhCacheManager EhCacheManager} is one such implementation.  It is not used by default
+ * to prevent a forced runtime dependency on ehcache.jar that may not be required in many environments)&lt;/li&gt;&lt;br/&gt;
+ * &lt;li&gt;If you need session information beyond their transient start/stop lifetimes, you should subclass this one and
+ * override the &lt;tt&gt;do*&lt;/tt&gt; methods to perform CRUD operations using an EIS-tier API (e.g. Hibernate/JPA/JCR/etc).
+ * This class implementation does not retain sessions after they have been stopped or expired, so you would need to
+ * override these methods to ensure Sessions can be accessed beyond JSecurity's needs.&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * @author Les Hazlewood
+ * @since 0.1
+ */
+public class MemorySessionDAO extends CachingSessionDAO {
+
+    //TODO - complete JavaDoc
+
+<span class="fc" id="L59">    private static final Log log = LogFactory.getLog(MemorySessionDAO.class);</span>
+
+    private static final String RANDOM_NUM_GENERATOR_ALGORITHM_NAME = &quot;SHA1PRNG&quot;;
+<span class="fc" id="L62">    private Random randomNumberGenerator = null;</span>
+
+<span class="fc" id="L64">    public MemorySessionDAO() {</span>
+<span class="fc" id="L65">        setCacheManager(new HashtableCacheManager());</span>
+<span class="fc" id="L66">    }</span>
+
+    private Random getRandomNumberGenerator() {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (randomNumberGenerator == null) {</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (log.isInfoEnabled()) {</span>
+<span class="nc" id="L71">                String msg = &quot;On Java 1.4 platforms and below, there is no built-in UUID class (Java 1.5 and above &quot; +</span>
+                        &quot;only) to use for Session ID generation - reverting to SecureRandom number generator.  &quot; +
+                        &quot;Although this is probably sufficient for all but high user volume applications, if you &quot; +
+                        &quot;see ID collision, you will want to upgrade to JDK 1.5 or better as soon as possible, or &quot; +
+                        &quot;subclass the &quot; + getClass().getName() + &quot; class and override the #generateNewSessionId() &quot; +
+                        &quot;method to use a better algorithm.&quot;;
+<span class="nc" id="L77">                log.info(msg);</span>
+            }
+
+            try {
+<span class="nc" id="L81">                randomNumberGenerator = java.security.SecureRandom.getInstance(RANDOM_NUM_GENERATOR_ALGORITHM_NAME);</span>
+<span class="nc" id="L82">            } catch (java.security.NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L83">                randomNumberGenerator = new java.security.SecureRandom();</span>
+<span class="nc" id="L84">            }</span>
+        }
+<span class="nc" id="L86">        return randomNumberGenerator;</span>
+    }
+
+    protected Serializable generateNewSessionId() {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (JavaEnvironment.isAtLeastVersion15()) {</span>
+<span class="nc" id="L91">            return java.util.UUID.randomUUID().toString();</span>
+        } else {
+<span class="nc" id="L93">            return Long.toString(getRandomNumberGenerator().nextLong());</span>
+        }
+    }
+
+    protected Serializable doCreate(Session session) {
+<span class="nc" id="L98">        Serializable sessionId = generateNewSessionId();</span>
+<span class="nc" id="L99">        assignSessionId(session, sessionId);</span>
+<span class="nc" id="L100">        return sessionId;</span>
+    }
+
+    protected void assignSessionId(Session session, Serializable sessionId) {
+<span class="nc" id="L104">        ((SimpleSession) session).setId(sessionId);</span>
+<span class="nc" id="L105">    }</span>
+
+    protected Session doReadSession(Serializable sessionId) {
+<span class="nc" id="L108">        return null; //should never execute because this implementation relies on parent class to access cache, which</span>
+        //is where all sessions reside - it is the cache implementation that determines if the
+        //cache is memory only or disk-persistent, etc.
+    }
+
+    protected void doUpdate(Session session) {
+        //does nothing - parent class persists to cache.
+<span class="nc" id="L115">    }</span>
+
+    protected void doDelete(Session session) {
+        //does nothing - parent class removes from cache.
+<span class="nc" id="L119">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

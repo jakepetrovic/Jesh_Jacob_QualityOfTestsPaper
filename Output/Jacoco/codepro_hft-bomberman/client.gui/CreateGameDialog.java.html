@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CreateGameDialog.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">CreateGameDialog.java</span></div><h1>CreateGameDialog.java</h1><pre class="source lang-java linenums">package client.gui;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
+
+import messages.global.MapInfo;
+import client.BomberClient;
+import client.gui.components.MyButton;
+import client.gui.components.MyPanel;
+
+public class CreateGameDialog extends MyPanel implements ActionListener,
+		ItemListener, MouseListener {
+
+<span class="nc" id="L27">	JList jListMap = new JList();</span>
+<span class="nc" id="L28">	JTextField jTextFieldRounds = new JTextField();</span>
+<span class="nc" id="L29">	JTextField jTextFieldPlayerNumber = new JTextField();</span>
+<span class="nc" id="L30">	JTextField jTextFieldName = new JTextField(&quot;Game name&quot;);</span>
+
+<span class="nc" id="L32">	JLabel jLabelRounds = new JLabel(&quot;Rounds:&quot;);</span>
+<span class="nc" id="L33">	JLabel jLabelPlayerNumber = new JLabel(&quot;Playernumber: &quot;);</span>
+<span class="nc" id="L34">	JLabel jLabelPrev = new JLabel(&quot;Preview&quot;);</span>
+<span class="nc" id="L35">	ImageCache preview = new ImageCache(null, 400, 270, 300, 225);</span>
+<span class="nc" id="L36">	JLabel jLabelName = new JLabel(&quot;Game Name:&quot;);</span>
+<span class="nc" id="L37">	JLabel jLabelMessage = new JLabel(&quot; &quot;);</span>
+	
+<span class="nc" id="L39">	MyButton jButtonStart = new MyButton(&quot;Create Game&quot;);</span>
+<span class="nc" id="L40">	MyButton jButtonCancel = new MyButton(&quot;Cancel&quot;);</span>
+<span class="nc" id="L41">	MyButton jButtonReturn = new MyButton(&quot;Return&quot;);</span>
+
+	public void actionPerformed(ActionEvent evt) {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">		if (evt.getSource().equals(jButtonStart)) {</span>
+
+		}
+
+<span class="nc" id="L48">	}</span>
+
+	public CreateGameDialog() {
+<span class="nc" id="L51">		super();</span>
+
+<span class="nc" id="L53">		this.setLayout(null);</span>
+<span class="nc" id="L54">		this.setBounds(0, 0, 800, 600);</span>
+		// setBackground(new Color(100, 100, 100));
+
+<span class="nc" id="L57">		jLabelRounds.setBounds(20, 20, 130, 25);</span>
+<span class="nc" id="L58">		jLabelPlayerNumber.setBounds(20, 100, 130, 25);</span>
+<span class="nc" id="L59">		jLabelName.setBounds(20, 200, 130, 25);</span>
+
+<span class="nc" id="L61">		jTextFieldRounds.setBounds(140, 20, 50, 25);</span>
+<span class="nc" id="L62">		jTextFieldPlayerNumber.setBounds(140, 100, 50, 25);</span>
+<span class="nc" id="L63">		jTextFieldName.setBounds(140, 200, 200, 25);</span>
+
+<span class="nc" id="L65">		jListMap.setBounds(400, 20, 300, 225);</span>
+<span class="nc" id="L66">		jLabelPrev.setBounds(400, 250, 170, 110);</span>
+
+<span class="nc" id="L68">		jButtonStart.setBounds(20, 250, 160, 25);</span>
+<span class="nc" id="L69">		jButtonStart.setEnabled(false);</span>
+<span class="nc" id="L70">		jButtonStart.setVisible(false);</span>
+		// jButtonCancel.setBounds(190,195,160,25);
+<span class="nc" id="L72">		jButtonReturn.setBounds(190, 250, 160, 25);</span>
+<span class="nc" id="L73">		jLabelMessage.setBounds(20, 300, 160, 25);</span>
+
+		// ImageIcon icon = new ImageIcon(&quot;C:\\Bombermann\\PrevGruen.png&quot;);
+
+		// jLabelPrev.setIcon(icon);
+		// jLabelPrev.setBackground(new Color(0, 0, 0));
+		// jLabelPrev.setForeground(new Color(255, 255, 255));
+
+<span class="nc" id="L81">		jTextFieldRounds.setText(&quot;3&quot;);</span>
+<span class="nc" id="L82">		jTextFieldPlayerNumber.setText(&quot;2&quot;);</span>
+<span class="nc" id="L83">		jTextFieldName.setText(&quot;Game Name&quot;);</span>
+
+<span class="nc" id="L85">		jListMap.addMouseListener(this);</span>
+
+<span class="nc" id="L87">		jButtonStart.addMouseListener(this);</span>
+<span class="nc" id="L88">		jButtonReturn.addMouseListener(this);</span>
+
+<span class="nc" id="L90">		add(jButtonStart);</span>
+<span class="nc" id="L91">		add(jButtonReturn);</span>
+<span class="nc" id="L92">		addLabel(jLabelRounds);</span>
+<span class="nc" id="L93">		addLabel(jLabelPlayerNumber);</span>
+<span class="nc" id="L94">		add(jTextFieldRounds);</span>
+<span class="nc" id="L95">		add(jTextFieldPlayerNumber);</span>
+<span class="nc" id="L96">		add(jListMap);</span>
+<span class="nc" id="L97">		add(jTextFieldName);</span>
+<span class="nc" id="L98">		addLabel(jLabelName);</span>
+<span class="nc" id="L99">		addLabel(jLabelPrev);</span>
+<span class="nc" id="L100">		addLabel(jLabelMessage);</span>
+<span class="nc" id="L101">		addImage(preview);</span>
+<span class="nc" id="L102">	}</span>
+
+	// Nobody uses this shit
+	public Vector&lt;MapInfo&gt; loadMaps() {
+<span class="nc" id="L106">		return BomberClient.getInstance().getAvailableMaps();</span>
+	}
+
+	// Nobody uses this shit
+	public void loadAndDisplayMaps() {
+<span class="nc" id="L111">		jListMap.setListData(loadMaps());</span>
+<span class="nc" id="L112">		jListMap.setFocusable(true);</span>
+<span class="nc" id="L113">		jListMap.setEnabled(true);</span>
+
+<span class="nc" id="L115">	}</span>
+
+	public void itemStateChanged(ItemEvent arg0) {
+
+<span class="nc" id="L119">	}</span>
+
+	public void mouseClicked(MouseEvent evt) {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (evt.getSource().equals(jListMap)) {</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			if (jListMap.getSelectedIndex() != -1) {</span>
+<span class="nc" id="L124">				jLabelMessage.setVisible(false);</span>
+<span class="nc" id="L125">				boolean isOk = true;</span>
+<span class="nc" id="L126">				int number = -1;</span>
+				try {
+<span class="nc" id="L128">					number = Integer.parseInt(jTextFieldPlayerNumber.getText());</span>
+<span class="nc" id="L129">				} catch (Exception e) {</span>
+
+<span class="nc" id="L131">				}</span>
+<span class="nc" id="L132">				Object[] items = jListMap.getSelectedValues();</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">				for (int i = 0; i &lt; items.length; i++) {</span>
+<span class="nc" id="L134">					MapInfo cash = (MapInfo) items[i];</span>
+<span class="nc" id="L135">					int aktuellNumber = cash.getMaxPlayers();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">					if (aktuellNumber &lt; number) {</span>
+<span class="nc" id="L137">						isOk = false;</span>
+					}
+				}
+<span class="nc bnc" id="L140" title="All 2 branches missed.">				if (isOk) {</span>
+<span class="nc" id="L141">					jButtonStart.setEnabled(true);</span>
+<span class="nc" id="L142">					jButtonStart.setVisible(true);</span>
+				}else {
+<span class="nc" id="L144">					jLabelMessage.setText(&quot;&lt;HTML&gt;At least one of the chosen maps &lt;br&gt;doesn't support &quot; + number + &quot; player&quot;);</span>
+<span class="nc" id="L145">					jLabelMessage.setVisible(true);</span>
+
+<span class="nc" id="L147">					jButtonStart.setEnabled(false);</span>
+<span class="nc" id="L148">					jButtonStart.setVisible(false);</span>
+				}
+
+<span class="nc" id="L151">			} else {</span>
+<span class="nc" id="L152">				jButtonStart.setEnabled(false);</span>
+<span class="nc" id="L153">				jButtonStart.setVisible(false);</span>
+			}
+<span class="nc" id="L155">			Object o = jListMap.getSelectedValue();</span>
+<span class="nc" id="L156">			ImageIcon icon = new ImageIcon();</span>
+<span class="nc" id="L157">			icon = (((MapInfo) o).getPreview());</span>
+			// draw preview direct to panel
+<span class="nc" id="L159">			preview.setImg(icon.getImage());</span>
+<span class="nc" id="L160">			super.repaint();</span>
+<span class="nc bnc" id="L161" title="All 4 branches missed.">		} else if (evt.getSource().equals(jButtonStart)</span>
+				&amp;&amp; jListMap.getSelectedIndex() != -1) {
+<span class="nc" id="L163">			int number = -1;</span>
+<span class="nc" id="L164">			int rounds = -1;</span>
+			try {
+<span class="nc" id="L166">				number = Integer.parseInt(jTextFieldPlayerNumber.getText());</span>
+<span class="nc" id="L167">				rounds = Integer.parseInt(jTextFieldRounds.getText());</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">				if (number &lt; 2) {</span>
+<span class="nc" id="L169">					number = 2;</span>
+				}
+<span class="nc" id="L171">				StartFrame frame = StartFrame.getInstance();</span>
+<span class="nc" id="L172">				Config.playerNumber = number;</span>
+<span class="nc" id="L173">				Config.rounds = rounds;</span>
+<span class="nc" id="L174">				Config.gameName = jTextFieldName.getText();</span>
+
+<span class="nc" id="L176">				ArrayList&lt;String&gt; selection = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L177">				ImageIcon previewIcon = null;</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">				for (Object o : jListMap.getSelectedValues()) {</span>
+<span class="nc" id="L179">					selection.add(((MapInfo) o).getFile());</span>
+					// set preview of first map
+<span class="nc bnc" id="L181" title="All 2 branches missed.">					if (previewIcon == null) {</span>
+<span class="nc" id="L182">						previewIcon = ((MapInfo) o).getPreview();</span>
+					}
+				}
+
+<span class="nc" id="L186">				BomberClient.getInstance().createSession(Config.gameName,</span>
+						selection, previewIcon, Config.playerNumber,
+						Config.rounds);
+<span class="nc" id="L189">			} catch (Exception e) {</span>
+				// TODO Hinweis wegen geht nicht
+
+<span class="nc" id="L192">			}</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">		} else if (evt.getSource().equals(jButtonReturn)) {</span>
+<span class="nc" id="L194">			StartFrame.getInstance().showGlobalLobby();</span>
+		}
+<span class="nc" id="L196">		repaint();</span>
+<span class="nc" id="L197">	}</span>
+
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L202">	}</span>
+
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L207">	}</span>
+
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L212">	}</span>
+
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L217">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

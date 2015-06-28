@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">net.sf.jniinchi</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2006-2011 Sam Adams &lt;sea36 at users.sourceforge.net&gt;
+ *
+ * This file is part of JNI-InChI.
+ *
+ * JNI-InChI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JNI-InChI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JNI-InChI.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package net.sf.jniinchi;
+
+
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+
+/**
+ * Simple test class, for debugging purposes.
+ * @author sea36
+ */
+<span class="nc" id="L31">public class Main {</span>
+
+    /**
+     * Provide test structure.
+     * @return
+     */
+    public static JniInchiStructure getTestMolecule() {
+<span class="nc" id="L38">        JniInchiStructure struct = new JniInchiStructure();</span>
+<span class="nc" id="L39">        JniInchiAtom a1 = struct.addAtom(new JniInchiAtom(264.0, 968.0, 0.0, &quot;C&quot;));</span>
+<span class="nc" id="L40">        JniInchiAtom a2 = struct.addAtom(new JniInchiAtom(295.0, 985.0, 0.0, &quot;C&quot;));</span>
+<span class="nc" id="L41">        JniInchiAtom a3 = struct.addAtom(new JniInchiAtom(233.0, 986.0, 0.0, &quot;N&quot;));</span>
+<span class="nc" id="L42">        JniInchiAtom a4 = struct.addAtom(new JniInchiAtom(264.0, 932.0, 0.0, &quot;C&quot;));</span>
+<span class="nc" id="L43">        JniInchiAtom a5 = struct.addAtom(new JniInchiAtom(326.0, 967.0, 0.0, &quot;O&quot;));</span>
+<span class="nc" id="L44">        JniInchiAtom a6 = struct.addAtom(new JniInchiAtom(295.0, 1021.0, 0.0, &quot;O&quot;));</span>
+<span class="nc" id="L45">        a1.setImplicitH(1);</span>
+<span class="nc" id="L46">        a3.setImplicitH(2);</span>
+<span class="nc" id="L47">        a4.setImplicitH(3);</span>
+<span class="nc" id="L48">        a5.setImplicitH(1);</span>
+<span class="nc" id="L49">        struct.addBond(new JniInchiBond(a1, a2, INCHI_BOND_TYPE.SINGLE));</span>
+<span class="nc" id="L50">        struct.addBond(new JniInchiBond(a1, a3, INCHI_BOND_TYPE.SINGLE)).setStereoDefinition(INCHI_BOND_STEREO.SINGLE_1DOWN);</span>
+<span class="nc" id="L51">        struct.addBond(new JniInchiBond(a1, a4, INCHI_BOND_TYPE.SINGLE));</span>
+<span class="nc" id="L52">        struct.addBond(new JniInchiBond(a2, a5, INCHI_BOND_TYPE.SINGLE));</span>
+<span class="nc" id="L53">        struct.addBond(new JniInchiBond(a2, a6, INCHI_BOND_TYPE.DOUBLE));</span>
+
+<span class="nc" id="L55">        return struct;</span>
+    }
+
+    public static void runChecks() throws JniInchiException {
+<span class="nc" id="L59">        System.err.println(&quot;Loading native code&quot;);</span>
+<span class="nc" id="L60">        System.err.println();</span>
+
+        try {
+<span class="nc" id="L63">        	JniInchiWrapper.loadLibrary();</span>
+
+<span class="nc" id="L65">        	System.err.println();</span>
+<span class="nc" id="L66">        	System.err.println(&quot;Native code version: &quot; + JniInchiWrapper.LibInchiGetVersion());</span>
+<span class="nc" id="L67">        	System.err.println();</span>
+
+<span class="nc" id="L69">            System.err.println(&quot;Running checks&quot;);</span>
+<span class="nc" id="L70">            System.err.println();</span>
+
+<span class="nc" id="L72">            System.err.println(&quot;Generating InChI from structure&quot;);</span>
+
+<span class="nc" id="L74">            JniInchiStructure mol = getTestMolecule();</span>
+<span class="nc" id="L75">            JniInchiOutput out1 = JniInchiWrapper.getInchi(new JniInchiInput(mol));</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (&quot;InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)/t2-/m0/s1&quot;.equals(out1.getInchi())) {</span>
+<span class="nc" id="L77">                System.err.println(&quot; - OKAY&quot;);</span>
+            } else {
+<span class="nc" id="L79">                System.err.println(&quot; - ERROR&quot;);</span>
+<span class="nc" id="L80">                System.err.println(out1.getInchi());</span>
+            }
+
+<span class="nc" id="L83">            System.err.println(&quot;Generating structure from InChI&quot;);</span>
+<span class="nc" id="L84">            JniInchiOutputStructure out2 = JniInchiWrapper.getStructureFromInchi(new JniInchiInputInchi(&quot;InChI=1/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)&quot;));</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">            if (out2.getNumAtoms() == 6 &amp;&amp; out2.getNumBonds() == 5) {</span>
+<span class="nc" id="L86">                System.err.println(&quot; - OKAY&quot;);</span>
+            } else {
+<span class="nc" id="L88">                System.err.println(&quot; - ERROR&quot;);</span>
+            }
+
+<span class="nc" id="L91">            System.err.println(&quot;Converting structure back to InChI&quot;);</span>
+<span class="nc" id="L92">            JniInchiOutput out3 = JniInchiWrapper.getInchi(new JniInchiInput(out2));</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">            if (&quot;InChI=1S/C3H7NO2/c1-2(4)3(5)6/h2H,4H2,1H3,(H,5,6)&quot;.equals(out3.getInchi())) {</span>
+<span class="nc" id="L94">                System.err.println(&quot; - OKAY&quot;);</span>
+            } else {
+<span class="nc" id="L96">                System.err.println(&quot; - ERROR&quot;);</span>
+<span class="nc" id="L97">                System.err.println(out3.getInchi());</span>
+            }
+<span class="nc" id="L99">        } catch (Exception e) {</span>
+<span class="nc" id="L100">            System.err.println(&quot; - ERROR&quot;);</span>
+<span class="nc" id="L101">            e.printStackTrace();</span>
+<span class="nc" id="L102">        }</span>
+
+//        System.err.println(&quot;Running memtest&quot;);
+//        for (int i = 0; i &lt; 1000000; i++) {
+//            if (i % 1000 == 0) {
+//                System.err.println(i+&quot;\t&quot;+((int)(Runtime.getRuntime().totalMemory()/1024)));
+//            }
+//            JniInchiStructure mol = getTestMolecule();
+//            JniInchiWrapper.getInchi(new JniInchiInput(mol));
+//        }
+
+<span class="nc" id="L113">        System.err.println();</span>
+<span class="nc" id="L114">        System.err.println(&quot;Checks done.&quot;);</span>
+<span class="nc" id="L115">        System.err.println();</span>
+<span class="nc" id="L116">    }</span>
+
+    public static void main(final String[] args) throws Exception {
+    	
+        // Output header message
+<span class="nc" id="L121">        System.err.println();</span>
+<span class="nc" id="L122">        System.err.println(&quot;** JniInchi debugger **&quot;);</span>
+<span class="nc" id="L123">        System.err.println();</span>
+        
+        // Set up logging
+<span class="nc" id="L126">		Logger root = Logger.getRootLogger();</span>
+<span class="nc bnc" id="L127" title="All 4 branches missed.">		if (args.length == 1 &amp;&amp; &quot;-debug&quot;.equals(args[0])) {</span>
+<span class="nc" id="L128">			root.setLevel(Level.ALL);</span>
+		} else {
+<span class="nc" id="L130">			root.setLevel(Level.INFO);</span>
+		}
+<span class="nc" id="L132">		root.removeAllAppenders();</span>
+		
+<span class="nc" id="L134">		PatternLayout layout = new PatternLayout(&quot;%-5p %c - %m%n&quot;);</span>
+		
+		// Create console appender
+<span class="nc" id="L137">		ConsoleAppender aconn = new ConsoleAppender(layout, ConsoleAppender.SYSTEM_ERR);</span>
+<span class="nc" id="L138">		aconn.setThreshold(Level.ALL);</span>
+<span class="nc" id="L139">		root.addAppender(aconn);</span>
+
+<span class="nc" id="L141">        runChecks();</span>
+<span class="nc" id="L142">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

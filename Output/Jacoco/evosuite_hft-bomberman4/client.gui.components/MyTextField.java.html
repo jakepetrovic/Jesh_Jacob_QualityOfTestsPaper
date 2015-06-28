@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MyTextField.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">client.gui.components</a> &gt; <span class="el_source">MyTextField.java</span></div><h1>MyTextField.java</h1><pre class="source lang-java linenums">package client.gui.components;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class MyTextField extends JTextField{
+
+	
+	public MyTextField (String text){
+<span class="nc" id="L16">		super(text);</span>
+<span class="nc" id="L17">		init();</span>
+<span class="nc" id="L18">	}</span>
+	
+	public MyTextField (){
+<span class="nc" id="L21">		super();</span>
+<span class="nc" id="L22">		init();</span>
+<span class="nc" id="L23">	}</span>
+
+<span class="nc" id="L25">	Font real = new Font(&quot;Arial&quot;, 3, 15);</span>
+<span class="nc" id="L26">	Font dum = new Font(&quot;Arial&quot;,0,15);</span>
+	
+	public void init(){
+<span class="nc" id="L29">		this.setFont(dum);</span>
+//		this.setBackground(Color.blue );
+//		this.setForeground(Color.blue);
+<span class="nc" id="L32">	}</span>
+	
+	
+	
+	public void paintComponent(Graphics g) {
+<span class="nc" id="L37">    	super.paintComponent(g);</span>
+        ImageIcon icon;
+        Image i;
+<span class="nc" id="L40">        icon = new ImageIcon(&quot;images/background_2.png&quot;);</span>
+<span class="nc" id="L41">        i = icon.getImage();</span>
+        
+////        g.fillRect(0,0,g.getClipBounds().width,g.getClipBounds().height);
+<span class="nc" id="L44">        g.drawImage(i,0,0,g.getClipBounds().width,g.getClipBounds().height, null);</span>
+//        
+<span class="nc" id="L46">        g.setFont(real);</span>
+//        g.setFont(new Font(&quot;Arial&quot;, 3, 12));
+<span class="nc" id="L48">        String text = this.getText();</span>
+<span class="nc" id="L49">        int index = text.length() - 13;</span>
+//        int index2 = this.getSelectionEnd();
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (index &gt; 0){</span>
+//        	if (index2 &gt; 0){
+//        		index = index + index2;
+//        	}
+<span class="nc" id="L55">        text = text.substring(index);</span>
+        }
+////        for (int j = 0; j &lt; vectorLabels.size(); j++){
+////        	JLabel cash = (JLabel) vectorLabels.get(j);
+////        	
+////        	text = cash.getText();
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        	if (text != null){</span>
+<span class="nc" id="L62">        	int div_x = 2;</span>
+<span class="nc" id="L63">        	int div_y = (this.getBounds().height)/ 2 + 4;</span>
+<span class="nc" id="L64">        	g.setColor(new Color(5, 5, 5));</span>
+<span class="nc" id="L65">    		g.drawString(text, div_x + 2, div_y + 2);</span>
+
+<span class="nc" id="L67">    		g.setColor(new Color(0, 0, 0));</span>
+<span class="nc" id="L68">    		g.drawString(text, div_x - 1, div_y + 1);</span>
+<span class="nc" id="L69">    		g.drawString(text, div_x - 1, div_y - 1);</span>
+<span class="nc" id="L70">    		g.drawString(text, div_x + 1, div_y - 1);</span>
+<span class="nc" id="L71">    		g.drawString(text, div_x + 1, div_y + 1);</span>
+
+<span class="nc" id="L73">    		g.setColor(Color.white);</span>
+<span class="nc" id="L74">    		g.drawString(text, div_x, div_y);</span>
+<span class="nc" id="L75">    		g.setFont(dum);</span>
+        	}
+        	
+<span class="nc" id="L78">        	g.setColor(Color.blue);</span>
+//        }
+<span class="nc" id="L80">}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

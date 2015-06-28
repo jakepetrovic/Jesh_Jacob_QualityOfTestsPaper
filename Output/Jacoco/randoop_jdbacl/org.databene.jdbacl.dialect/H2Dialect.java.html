@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>H2Dialect.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.dialect</a> &gt; <span class="el_source">H2Dialect.java</span></div><h1>H2Dialect.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.dialect;
+
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
+
+import org.databene.commons.ArrayBuilder;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.DatabaseDialect;
+import org.databene.jdbacl.model.DBSequence;
+
+/**
+ * {@link DatabaseDialect} implementation for the H2 database.
+ * See &lt;a href=&quot;http://www.h2database.com/html/grammar.html&quot;&gt;H2 SQL grammar&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;
+ * Created: 28.03.2010 07:54:19
+ * @since 0.6.0
+ * @author Volker Bergmann
+ */
+public class H2Dialect extends DatabaseDialect {
+    
+	private static final String DATE_PATTERN = &quot;''yyyy-MM-dd''&quot;;
+	private static final String TIME_PATTERN = &quot;''HH:mm:ss''&quot;;
+
+<span class="fc" id="L47">	Pattern randomPKNamePattern = Pattern.compile(&quot;CONSTRAINT_\\w+&quot;);</span>
+<span class="fc" id="L48">	Pattern randomUKNamePattern = Pattern.compile(&quot;CONSTRAINT_INDEX_\\w+&quot;);</span>
+<span class="fc" id="L49">	Pattern randomFKNamePattern = Pattern.compile(&quot;CONSTRAINT_\\w+&quot;);</span>
+<span class="fc" id="L50">	Pattern randomIndexNamePattern = Pattern.compile(&quot;CONSTRAINT_INDEX_\\w+|PRIMARY_KEY_\\w+&quot;);</span>
+
+    public H2Dialect() {
+<span class="fc" id="L53">	    super(&quot;h2&quot;, false, true, DATE_PATTERN, TIME_PATTERN);</span>
+<span class="fc" id="L54">    }</span>
+
+	@Override
+    public boolean isDefaultCatalog(String catalog, String user) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">	    return (catalog == null);</span>
+    }
+
+	@Override
+    public boolean isDefaultSchema(String schema, String user) {
+<span class="fc" id="L63">	    return &quot;PUBLIC&quot;.equalsIgnoreCase(schema);</span>
+    }
+
+	@Override
+	public boolean isSequenceBoundarySupported() {
+<span class="fc" id="L68">		return false;</span>
+	}
+	
+	@Override
+    public DBSequence[] querySequences(Connection connection) throws SQLException {
+<span class="nc" id="L73">        String query = &quot;select SEQUENCE_CATALOG, SEQUENCE_SCHEMA, SEQUENCE_NAME, CURRENT_VALUE, INCREMENT, CACHE from information_schema.sequences&quot;;</span>
+        // TODO v0.7 restrict to catalog and schema, see http://www.h2database.com/html/grammar.html
+<span class="nc" id="L75">        ArrayBuilder&lt;DBSequence&gt; builder = new ArrayBuilder&lt;DBSequence&gt;(DBSequence.class);</span>
+<span class="nc" id="L76">        ResultSet resultSet = DBUtil.executeQuery(query, connection);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        while (resultSet.next()) {</span>
+<span class="nc" id="L78">        	String name = resultSet.getString(&quot;SEQUENCE_NAME&quot;);</span>
+<span class="nc" id="L79">        	DBSequence sequence = new DBSequence(name, null);</span>
+<span class="nc" id="L80">        	sequence.setStart(new BigInteger(resultSet.getString(&quot;CURRENT_VALUE&quot;)));</span>
+<span class="nc" id="L81">        	sequence.setLastNumber(sequence.getStart());</span>
+<span class="nc" id="L82">        	sequence.setIncrement(new BigInteger(resultSet.getString(&quot;INCREMENT&quot;)));</span>
+<span class="nc" id="L83">        	sequence.setCache(resultSet.getLong(&quot;CACHE&quot;));</span>
+<span class="nc" id="L84">        	builder.add(sequence);</span>
+<span class="nc" id="L85">        }</span>
+<span class="nc" id="L86">		return builder.toArray();</span>
+	}
+
+	@Override
+    public String renderFetchSequenceValue(String sequenceName) {
+<span class="fc" id="L91">        return &quot;select next value for &quot; + sequenceName;</span>
+    }
+
+	@Override
+	public void setNextSequenceValue(String sequenceName, long value, Connection connection) throws SQLException {
+<span class="nc" id="L96">	    DBUtil.executeUpdate(setSequenceValue(sequenceName, value), connection);</span>
+<span class="nc" id="L97">	}</span>
+
+	public String setSequenceValue(String sequenceName, long value) {
+<span class="fc" id="L100">	    return &quot;alter sequence &quot; + sequenceName + &quot; restart with &quot; + value;</span>
+    }
+	
+	@Override
+	public String renderDropSequence(String name) {
+<span class="fc" id="L105">		return &quot;drop sequence &quot; + name;</span>
+	}
+
+	@Override
+	public boolean isDeterministicPKName(String pkName) {
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">		return !randomPKNamePattern.matcher(pkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicUKName(String ukName) {
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		return !randomUKNamePattern.matcher(ukName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicFKName(String fkName) {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">		return !randomFKNamePattern.matcher(fkName).matches();</span>
+	}
+
+	@Override
+	public boolean isDeterministicIndexName(String indexName) {
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">		return !randomIndexNamePattern.matcher(indexName).matches();</span>
+	}
+
+	@Override
+	public boolean supportsRegex() {
+<span class="fc" id="L130">		return true;</span>
+	}
+	
+	@Override
+	public String regexQuery(String expression, boolean not, String regex) {
+<span class="fc bfc" id="L135" title="All 2 branches covered.">		return expression + (not ? &quot; NOT&quot; : &quot;&quot;) + &quot; REGEXP '&quot; + regex + &quot;'&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

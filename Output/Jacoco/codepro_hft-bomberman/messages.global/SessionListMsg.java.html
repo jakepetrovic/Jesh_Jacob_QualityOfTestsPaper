@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SessionListMsg.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">messages.global</a> &gt; <span class="el_source">SessionListMsg.java</span></div><h1>SessionListMsg.java</h1><pre class="source lang-java linenums">package messages.global;
+
+import java.util.Vector;
+
+import client.BomberClient;
+
+/**
+ * This message is sent from the server to the client when the latter enters the waiting room
+ * or when the session list is refreshed. The SessionDetailsMsg is being abused as a data structure
+ * for the info about each session.
+ * 
+ * @author Steffen, Andi
+ * @see SessionDetailsMsg
+ *
+ */
+<span class="fc" id="L16">public class SessionListMsg implements GlobalServerMsg {</span>
+
+<span class="fc" id="L18">	Vector&lt;SessionDetailsMsg&gt; sessionInfos = new Vector&lt;SessionDetailsMsg&gt;();</span>
+	
+	public void addSessionInfo(SessionDetailsMsg sessionInfo) {
+<span class="fc" id="L21">		sessionInfos.add(sessionInfo);</span>
+<span class="fc" id="L22">	}</span>
+
+	/**
+	 * Returns the sessionInfo-Objects. Only use this to extract information.
+	 * Use addSessionInfo() to add new objects.
+	 * 
+	 * @return
+	 */
+	public Vector&lt;SessionDetailsMsg&gt; getSessionInfos() {
+<span class="fc" id="L31">		return sessionInfos;</span>
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(BomberClient bomberClient) {
+<span class="nc" id="L39">		bomberClient.setAvailableSessions(sessionInfos);</span>
+<span class="nc" id="L40">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

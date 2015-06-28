@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBDataType.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DBDataType.java</span></div><h1>DBDataType.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2006-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License.
+ *
+ * For redistributing this software or a derivative work under a license other
+ * than the GPL-compatible Free Software License as defined by the Free
+ * Software Foundation or approved by OSI, you must first obtain a commercial
+ * license to this software product from Volker Bergmann.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.io.Serializable;
+import java.sql.Types;
+import java.util.HashMap;
+import java.util.Set;
+
+import org.databene.commons.CollectionUtil;
+import org.databene.commons.Named;
+
+/**
+ * Represents a database column type.&lt;br/&gt;&lt;br/&gt;
+ * Created: 06.01.2007 10:12:29
+ * @author Volker Bergmann
+ */
+public class DBDataType implements Named, Serializable {
+
+    private static final long serialVersionUID = 7725335502838132325L;
+    
+<span class="fc" id="L46">    private static final Set&lt;Integer&gt; ALPHA_TYPES = CollectionUtil.toSet(</span>
+    	Types.CHAR, Types.CLOB, Types.LONGVARCHAR, Types.LONGNVARCHAR, Types.NCHAR, Types.NCLOB, Types.NVARCHAR, Types.VARCHAR
+    );
+
+<span class="fc" id="L50">    private static final Set&lt;Integer&gt; NUMBER_TYPES = CollectionUtil.toSet(</span>
+        	Types.BIGINT, Types.DECIMAL, Types.DOUBLE, Types.FLOAT, Types.INTEGER, Types.NUMERIC, Types.SMALLINT, Types.TINYINT
+        );
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+<span class="fc" id="L55">	private static final HashMap&lt;String, Integer&gt; JDBC_TYPE_FOR_DB_TYPE = (HashMap&lt;String, Integer&gt;) CollectionUtil.buildMap(</span>
+        	&quot;ARRAY&quot;, Types.ARRAY,
+        	&quot;BIGINT&quot;, Types.BIGINT,
+        	&quot;BINARY&quot;, Types.BINARY,
+        	&quot;BIT&quot;, Types.BIT,
+        	&quot;BLOB&quot;, Types.BLOB,
+        	&quot;BOOLEAN&quot;, Types.BOOLEAN,
+        	&quot;BOOL&quot;, Types.BOOLEAN,
+        	&quot;CHAR&quot;, Types.CHAR,
+        	&quot;CHARACTER&quot;, Types.CHAR, // ANSI SQL
+        	&quot;CLOB&quot;, Types.CLOB,
+        	&quot;DATALINK&quot;, Types.DATALINK,
+        	&quot;DATE&quot;, Types.DATE,
+        	&quot;DECIMAL&quot;, Types.DECIMAL,
+        	&quot;DEC&quot;, Types.DECIMAL,
+        	&quot;NUMBER&quot;, Types.DECIMAL, // Oracle
+        	&quot;DISTINCT&quot;, Types.DISTINCT,
+        	&quot;DOUBLE&quot;, Types.DOUBLE,
+        	&quot;DOUBLE PRECISION&quot;, Types.DOUBLE, // ANSI SQL
+        	&quot;BINARY_DOUBLE&quot;, Types.DOUBLE, // Oracle
+        	&quot;FLOAT&quot;, Types.FLOAT,
+        	&quot;BINARY_FLOAT&quot;, Types.FLOAT, // Oracle
+        	&quot;INT&quot;, Types.INTEGER,
+        	&quot;INTEGER&quot;, Types.INTEGER,
+        	&quot;BINARY_INTEGER&quot;, Types.INTEGER, // Oracle
+        	&quot;PLS_INTEGER&quot;, Types.INTEGER, // Oracle
+        	&quot;OBJECT&quot;, Types.JAVA_OBJECT,
+        	&quot;LONGNVARCHAR&quot;, Types.LONGNVARCHAR,
+        	&quot;LONG&quot;, Types.LONGNVARCHAR, // Oracle
+        	&quot;LONGVARBINARY&quot;, Types.LONGVARBINARY,
+        	&quot;LONGVARCHAR&quot;, Types.LONGVARCHAR,
+        	&quot;NCHAR&quot;, Types.NCHAR,
+        	&quot;NATIONAL CHARACTER&quot;, Types.NCHAR, // ANSI SQL
+        	&quot;NCLOB&quot;, Types.NCLOB,
+        	&quot;NULL&quot;, Types.NULL,
+        	&quot;NUMERIC&quot;, Types.NUMERIC,
+        	&quot;NVARCHAR&quot;, Types.NVARCHAR,
+        	&quot;NATIONAL CHARACTER VARYING&quot;, Types.NVARCHAR, // ANSI SQL
+        	&quot;NVARCHAR2&quot;, Types.NVARCHAR, // Oracle
+        	&quot;REAL&quot;, Types.REAL,
+        	&quot;REF&quot;, Types.REF,
+        	&quot;ROWID&quot;, Types.ROWID,
+        	&quot;UROWID&quot;, Types.ROWID, // Oracle
+        	&quot;SMALLINT&quot;, Types.SMALLINT,
+        	&quot;XML&quot;, Types.SQLXML, // MS SQL Server
+        	&quot;XMLType&quot;, Types.SQLXML, // Oracle
+        	&quot;STRUCT&quot;, Types.STRUCT,
+        	&quot;TIME&quot;, Types.TIME,
+        	&quot;DATETIME&quot;, Types.TIMESTAMP,
+        	&quot;TIMESTAMP&quot;, Types.TIMESTAMP,
+        	&quot;TINYINT&quot;, Types.TINYINT,
+        	&quot;VARBINARY&quot;, Types.VARBINARY,
+        	&quot;TEXT&quot;, Types.VARCHAR, // MS Access
+        	&quot;VARCHAR&quot;, Types.VARCHAR,
+        	&quot;CHARACTER VARYING&quot;, Types.VARCHAR, // ANSI SQL
+        	&quot;VARCHAR2&quot;, Types.VARCHAR, // Oracle
+        	&quot;BIT VARYING&quot;, Types.OTHER, // ANSI SQL
+        	&quot;INTERVAL&quot;, Types.OTHER // ANSI SQL
+	);
+
+<span class="fc" id="L115">	private static final HashMap&lt;TypeDescriptor, DBDataType&gt; INSTANCES_BY_TYPE_AND_NAME = new HashMap&lt;TypeDescriptor, DBDataType&gt;();</span>
+<span class="fc" id="L116">	private static final HashMap&lt;String, DBDataType&gt; INSTANCES_BY_NAME = new HashMap&lt;String, DBDataType&gt;();</span>
+
+	public static DBDataType getInstance(String name) {
+<span class="nc" id="L119">		name = name.toUpperCase();</span>
+<span class="nc" id="L120">        DBDataType result = INSTANCES_BY_NAME.get(name);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (result == null) {</span>
+<span class="nc" id="L122">        	result = new DBDataType(jdbcTypeFor(name), name);</span>
+<span class="nc" id="L123">        	INSTANCES_BY_NAME.put(name, result);</span>
+        }
+<span class="nc" id="L125">		return result;</span>
+    }
+
+	public static DBDataType getInstance(int jdbcType, String name) {
+<span class="fc" id="L129">		TypeDescriptor descriptor = new TypeDescriptor(jdbcType, name.toUpperCase());</span>
+<span class="fc" id="L130">        DBDataType result = INSTANCES_BY_TYPE_AND_NAME.get(descriptor);</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (result == null) {</span>
+<span class="fc" id="L132">        	result = new DBDataType(jdbcType, name);</span>
+<span class="fc" id="L133">        	INSTANCES_BY_TYPE_AND_NAME.put(descriptor, result);</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        	if (result.jdbcType != descriptor.jdbcType) {</span>
+        		// since some DBs return improver types, we might have mapped it to another JDBC type, 
+        		// so let's store it with both values to ensure consistency of the 'outside' view with the 'inside'.
+<span class="nc" id="L137">        		INSTANCES_BY_TYPE_AND_NAME.put(new TypeDescriptor(jdbcType, name), result);</span>
+        	}
+        }
+<span class="fc" id="L140">		return result;</span>
+    }
+
+    private String name;
+    private int jdbcType;
+
+    // constructors ----------------------------------------------------------------------------------------------------
+
+    private DBDataType(String name) {
+<span class="nc" id="L149">    	this(jdbcTypeFor(name), name);</span>
+<span class="nc" id="L150">    }</span>
+
+<span class="fc" id="L152">	private DBDataType(int sqlType, String name) {</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">    	if (name.equals(&quot;NCLOB&quot;))</span>
+<span class="nc" id="L154">    		sqlType = Types.NCLOB; // fix for Oracle</span>
+<span class="fc" id="L155">        this.jdbcType = sqlType;</span>
+<span class="fc" id="L156">        this.name = name.toUpperCase();</span>
+<span class="fc" id="L157">    }</span>
+
+    public static int jdbcTypeFor(String name) {
+<span class="nc" id="L160">		return JDBC_TYPE_FOR_DB_TYPE.get(name.toUpperCase());</span>
+	}
+
+
+// properties ------------------------------------------------------------------------------------------------------
+
+    public String getName() {
+<span class="fc" id="L167">        return name;</span>
+    }
+
+    public int getJdbcType() {
+<span class="fc" id="L171">        return jdbcType;</span>
+    }
+
+    public boolean isLOB() {
+<span class="pc bpc" id="L175" title="5 of 10 branches missed.">        return jdbcType == Types.BLOB || jdbcType == Types.CLOB || jdbcType == Types.NCLOB || </span>
+        	name.endsWith(&quot;CLOB&quot;) || &quot;BLOB&quot;.equals(name);
+    }
+
+    public boolean isAlpha() {
+<span class="fc bfc" id="L180" title="All 2 branches covered.">    	if (ALPHA_TYPES.contains(jdbcType)) // standard types</span>
+<span class="fc" id="L181">    		return true;</span>
+<span class="pc bpc" id="L182" title="2 of 4 branches missed.">        return name.endsWith(&quot;VARCHAR2&quot;) || name.endsWith(&quot;CLOB&quot;); // fixes for Oracle</span>
+    }
+
+	public boolean isNumber() {
+<span class="fc" id="L186">        return NUMBER_TYPES.contains(jdbcType);</span>
+	}
+
+	public boolean isTemporal() {
+<span class="pc bpc" id="L190" title="4 of 8 branches missed.">	    return jdbcType == Types.DATE || </span>
+	    	jdbcType == Types.TIMESTAMP || 
+	    	name.contains(&quot;DATE&quot;) || 
+	    	name.contains(&quot;TIME&quot;);
+    }
+
+// java.lang.Object overrides --------------------------------------------------------------------------------------
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L200" title="All 2 branches covered.">        if (this == o)</span>
+<span class="fc" id="L201">            return true;</span>
+<span class="pc bpc" id="L202" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass())</span>
+<span class="fc" id="L203">            return false;</span>
+<span class="nc" id="L204">        final DBDataType that = (DBDataType) o;</span>
+<span class="nc" id="L205">        return name.equals(that.name);</span>
+    }
+
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L211">        return name.hashCode();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L216">        return name;</span>
+    }
+
+    private static class TypeDescriptor {
+    	final int jdbcType;
+    	final String name;
+    	
+<span class="fc" id="L223">		TypeDescriptor(int jdbcType, String name) {</span>
+<span class="fc" id="L224">			this.jdbcType = jdbcType;</span>
+<span class="fc" id="L225">			this.name = name;</span>
+<span class="fc" id="L226">		}</span>
+
+		@Override
+		public int hashCode() {
+<span class="fc" id="L230">			return jdbcType * 31 + name.hashCode();</span>
+		}
+
+		@Override
+		public boolean equals(Object other) {
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">			if (this == other)</span>
+<span class="nc" id="L236">				return true;</span>
+<span class="pc bpc" id="L237" title="2 of 4 branches missed.">			if (other == null || getClass() != other.getClass())</span>
+<span class="nc" id="L238">				return false;</span>
+<span class="fc" id="L239">			TypeDescriptor that = (TypeDescriptor) other;</span>
+<span class="pc bpc" id="L240" title="2 of 4 branches missed.">			return (this.jdbcType == that.jdbcType &amp;&amp; name.equals(that.name));</span>
+		}
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

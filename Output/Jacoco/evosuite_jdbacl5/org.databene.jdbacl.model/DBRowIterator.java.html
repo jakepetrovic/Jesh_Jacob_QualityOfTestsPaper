@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBRowIterator.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.databene.jdbacl.model</a> &gt; <span class="el_source">DBRowIterator.java</span></div><h1>DBRowIterator.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2010-2011 by Volker Bergmann. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, is permitted under the terms of the
+ * GNU General Public License (GPL).
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;
+ * WITHOUT A WARRANTY OF ANY KIND. ALL EXPRESS OR IMPLIED CONDITIONS,
+ * REPRESENTATIONS AND WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE
+ * HEREBY EXCLUDED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package org.databene.jdbacl.model;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.databene.commons.HeavyweightIterator;
+import org.databene.commons.LogCategories;
+import org.databene.jdbacl.DBUtil;
+import org.databene.jdbacl.ResultSetIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Iterates through the rows of a database.&lt;br/&gt;&lt;br/&gt;
+ * Created: 23.07.2010 07:29:47
+ * @since 0.6.3
+ * @author Volker Bergmann
+ */
+public class DBRowIterator implements HeavyweightIterator&lt;DBRow&gt; {
+	
+<span class="nc" id="L45">    private static final Logger SQL_LOGGER = LoggerFactory.getLogger(LogCategories.SQL); </span>
+
+    private DBTable table;
+    private ResultSet resultSet;
+    private ResultSetMetaData resultSetMetaData;
+    private ResultSetIterator resultSetIterator;
+    private boolean closed;
+
+<span class="nc" id="L53">	public DBRowIterator(DBTable table, Connection connection, String whereClause) throws SQLException {</span>
+<span class="nc" id="L54">		this.table = table;</span>
+<span class="nc" id="L55">	    String sql = &quot;SELECT * FROM &quot; + table.getName();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">	    if (whereClause != null)</span>
+<span class="nc" id="L57">	    	sql += &quot; WHERE &quot; + whereClause;</span>
+<span class="nc" id="L58">        SQL_LOGGER.debug(sql);</span>
+<span class="nc" id="L59">        Statement statement = connection.createStatement(</span>
+        		ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+<span class="nc" id="L61">        statement.setFetchSize(1000);</span>
+<span class="nc" id="L62">        this.resultSet = statement.executeQuery(sql);</span>
+<span class="nc" id="L63">        this.resultSetMetaData = resultSet.getMetaData();</span>
+<span class="nc" id="L64">	    this.resultSetIterator = new ResultSetIterator(resultSet, sql);</span>
+<span class="nc" id="L65">	    this.closed = false;</span>
+<span class="nc" id="L66">    }</span>
+
+	public boolean hasNext() {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		if (closed)</span>
+<span class="nc" id="L70">			return false;</span>
+<span class="nc" id="L71">		boolean result = resultSetIterator.hasNext();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		if (!result)</span>
+<span class="nc" id="L73">			close();</span>
+<span class="nc" id="L74">		return result;</span>
+	}
+
+	public DBRow next() {
+		try {
+<span class="nc" id="L79">			resultSetIterator.next();</span>
+<span class="nc" id="L80">	        DBRow row = new DBRow(table);</span>
+<span class="nc" id="L81">	        int columnCount = resultSetMetaData.getColumnCount();</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">	        for (int columnIndex = 1; columnIndex &lt;= columnCount; columnIndex++) {</span>
+<span class="nc" id="L83">	            String columnName = resultSetMetaData.getColumnName(columnIndex);</span>
+<span class="nc" id="L84">	            row.setCellValue(columnName, resultSet.getObject(columnIndex));</span>
+	        }
+<span class="nc" id="L86">	        return row;</span>
+<span class="nc" id="L87">        } catch (SQLException e) {</span>
+<span class="nc" id="L88">	        throw new RuntimeException(&quot;Error querying table &quot; + table, e);</span>
+        }
+	}
+
+	public void remove() {
+<span class="nc" id="L93">		throw new UnsupportedOperationException(&quot;remove() is not supported by &quot; + getClass());</span>
+	}
+
+	public void close() {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">		if (!closed) {</span>
+<span class="nc" id="L98">			DBUtil.closeResultSetAndStatement(resultSet);</span>
+<span class="nc" id="L99">			resultSet = null;</span>
+<span class="nc" id="L100">			closed = true;</span>
+		}
+<span class="nc" id="L102">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>
