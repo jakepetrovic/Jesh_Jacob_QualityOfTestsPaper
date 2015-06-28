@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.RemoteFileStorage
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.RemoteFileStorage: 42.86%</ul><ul>
-<li>13654 fitness evaluations, 275 generations, 21029 statements, 8437 tests.
+<li>13282 fitness evaluations, 267 generations, 19982 statements, 8160 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 0/4 branches, 3/5 methods, 3/7 total goals
 <li>Mutation score: 0%
@@ -31,10 +31,10 @@ nu.staldal.lagoon.core.RemoteFileStorage
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
+<span class="nocode"><a name="1">  1: </a></span>FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.fileModified(&quot;Illegal FileStorage confEg file: &quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fTPFileStorage0.closeDateFile();
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -44,7 +44,7 @@ nu.staldal.lagoon.core.RemoteFileStorage
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.close();
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.fileModified(&quot;_&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -173,7 +173,7 @@ nu.staldal.lagoon.core.RemoteFileStorage
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -191,7 +191,7 @@ nu.staldal.lagoon.core.RemoteFileStorage
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14742
+<li>process_communication_port: 11450
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

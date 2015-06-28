@@ -43,7 +43,7 @@ public class UniversalRunnerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       UniversalRunner universalRunner0 = new UniversalRunner();
-      String[] stringArray0 = new String[5];
+      String[] stringArray0 = new String[8];
       Console console0 = new Console();
       LavaLogger lavaLogger0 = new LavaLogger();
       universalRunner0.run(stringArray0, (Application) null, console0, lavaLogger0);

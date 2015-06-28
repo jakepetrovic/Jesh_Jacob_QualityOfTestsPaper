@@ -19,9 +19,9 @@ public class INCHI_BOND_TYPEEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.TRIPLE;
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
       int int0 = iNCHI_BOND_TYPE0.getIndx();
-      assertEquals(3, int0);
+      assertEquals(2, int0);
   }
 
   //Test case number: 1
@@ -44,12 +44,12 @@ public class INCHI_BOND_TYPEEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_BOND_TYPE.getValue(I)Lnet/sf/jniinchi/INCHI_BOND_TYPE;: I3 Branch 1 TABLESWITCH L70 Case 0 - false
-   * 2 net.sf.jniinchi.INCHI_BOND_TYPE.getValue(I)Lnet/sf/jniinchi/INCHI_BOND_TYPE;: I3 Branch 4 TABLESWITCH L70 Case 3 - true
+   * 2 net.sf.jniinchi.INCHI_BOND_TYPE.getValue(I)Lnet/sf/jniinchi/INCHI_BOND_TYPE;: I3 Branch 3 TABLESWITCH L70 Case 2 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(3);
-      assertEquals(INCHI_BOND_TYPE.TRIPLE, iNCHI_BOND_TYPE0);
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(2);
+      assertEquals(INCHI_BOND_TYPE.DOUBLE, iNCHI_BOND_TYPE0);
   }
 
   //Test case number: 3
@@ -66,12 +66,12 @@ public class INCHI_BOND_TYPEEvoSuiteTest {
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_BOND_TYPE.getValue(I)Lnet/sf/jniinchi/INCHI_BOND_TYPE;: I3 Branch 3 TABLESWITCH L70 Case 2 - true
+   * 1 net.sf.jniinchi.INCHI_BOND_TYPE.getValue(I)Lnet/sf/jniinchi/INCHI_BOND_TYPE;: I3 Branch 4 TABLESWITCH L70 Case 3 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(2);
-      assertEquals(INCHI_BOND_TYPE.DOUBLE, iNCHI_BOND_TYPE0);
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(3);
+      assertEquals(INCHI_BOND_TYPE.TRIPLE, iNCHI_BOND_TYPE0);
   }
 
   //Test case number: 5

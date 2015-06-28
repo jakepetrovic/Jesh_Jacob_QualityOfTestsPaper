@@ -62,26 +62,4 @@ public class ServerFactoryEvoSuiteTest {
          */
       }
   }
-
-  //Test case number: 3
-  /*
-   * 3 covered goals:
-   * 1 com.sap.netweaver.porta.core.ServerFactory.createServer(Ljava/util/Properties;)Lcom/sap/netweaver/porta/core/Server;: I20 Branch 2 IFNONNULL L136 - true
-   * 2 com.sap.netweaver.porta.core.ServerFactory.createServer(Ljava/util/Properties;)Lcom/sap/netweaver/porta/core/Server;: I45 Branch 3 IFNONNULL L141 - false
-   * 3 com.sap.netweaver.porta.core.ServerFactory.createServer(Ljava/util/Properties;)Lcom/sap/netweaver/porta/core/Server;: I3 Branch 1 IFNONNULL L131 - true
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      Properties properties0 = new Properties();
-      properties0.put((Object) "server.type", (Object) "server.type");
-      // Undeclared exception!
-      try {
-        ServerFactory.createServer(properties0);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * server.type is not supported server type. Supported types are: []. 
-         */
-      }
-  }
 }

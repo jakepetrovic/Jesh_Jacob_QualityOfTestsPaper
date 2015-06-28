@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import nu.staldal.xtree.ProcessingInstruction;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLReaderAdapter;
 
 public class ProcessingInstructionEvoSuiteTest {
 
@@ -17,32 +18,30 @@ public class ProcessingInstructionEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 nu.staldal.xtree.ProcessingInstruction.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   * 1 nu.staldal.xtree.ProcessingInstruction.getTarget()Ljava/lang/String;: root-Branch
    * 2 nu.staldal.xtree.ProcessingInstruction.<init>(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
-      // Undeclared exception!
-      try {
-        processingInstruction0.toSAX((ContentHandler) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("", "");
+      String string0 = processingInstruction0.getTarget();
+      assertNotNull(string0);
+      assertEquals("", processingInstruction0.getValue());
+      assertEquals("", string0);
   }
 
   //Test case number: 1
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.ProcessingInstruction.getTarget()Ljava/lang/String;: root-Branch
+   * 1 nu.staldal.xtree.ProcessingInstruction.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
-      String string0 = processingInstruction0.getTarget();
-      assertNotNull(string0);
-      assertEquals("$?{dV55I[FyN}$ S t", processingInstruction0.getValue());
-      assertEquals("$?{dV55I[FyN}$ S t", string0);
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("PWWQL6", "PWWQL6");
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      processingInstruction0.toSAX((ContentHandler) xMLReaderAdapter0);
+      assertEquals("PWWQL6", processingInstruction0.getValue());
+      assertEquals("PWWQL6", processingInstruction0.getTarget());
   }
 
   //Test case number: 2
@@ -53,10 +52,10 @@ public class ProcessingInstructionEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("9g\"s%?Oy0C?G{f", ":~fp&iW }uv");
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("PWWQL6", "PWWQL6");
       String string0 = processingInstruction0.getValue();
-      assertEquals("9g\"s%?Oy0C?G{f", processingInstruction0.getTarget());
       assertNotNull(string0);
-      assertEquals(":~fp&iW }uv", string0);
+      assertEquals("PWWQL6", string0);
+      assertEquals("PWWQL6", processingInstruction0.getTarget());
   }
 }

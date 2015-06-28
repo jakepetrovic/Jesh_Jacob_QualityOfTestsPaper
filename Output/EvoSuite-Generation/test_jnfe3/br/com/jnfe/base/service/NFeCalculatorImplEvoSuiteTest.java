@@ -59,28 +59,21 @@ public class NFeCalculatorImplEvoSuiteTest {
       BigDecimal bigDecimal0 = BigDecimal.TEN;
       BigDecimal bigDecimal1 = nFeCalculatorImpl0.internalCalculate(bigDecimal0, bigDecimal0);
       assertNotNull(bigDecimal1);
-      assertEquals(1, bigDecimal1.precision());
+      assertEquals("1", bigDecimal1.toPlainString());
   }
 
   //Test case number: 3
   /*
    * 2 covered goals:
    * 1 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I3 Branch 6 IFNONNULL L101 - true
-   * 2 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I14 Branch 7 IFNONNULL L104 - false
+   * 2 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I14 Branch 7 IFNONNULL L104 - true
    */
   @Test
   public void test3()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ONE;
-      // Undeclared exception!
-      try {
-        nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Valor da base de c\u00E1lculo n\u00E3o pode ser nulo
-         */
-      }
+      BigDecimal bigDecimal0 = BigDecimal.TEN;
+      nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
+      assertEquals(10, bigDecimal0.byteValueExact());
   }
 
   //Test case number: 4
@@ -105,15 +98,22 @@ public class NFeCalculatorImplEvoSuiteTest {
   //Test case number: 5
   /*
    * 3 covered goals:
-   * 1 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I14 Branch 7 IFNONNULL L104 - true
+   * 1 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I14 Branch 7 IFNONNULL L104 - false
    * 2 br.com.jnfe.base.service.NFeCalculatorImpl.<init>()V: root-Branch
    * 3 br.com.jnfe.base.service.NFeCalculatorImpl.validate(Ljava/math/BigDecimal;Ljava/math/BigDecimal;)V: I3 Branch 6 IFNONNULL L101 - true
    */
   @Test
   public void test5()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ONE;
-      nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
-      assertEquals(1, bigDecimal0.byteValueExact());
+      BigDecimal bigDecimal0 = BigDecimal.TEN;
+      // Undeclared exception!
+      try {
+        nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Valor da base de c\u00E1lculo n\u00E3o pode ser nulo
+         */
+      }
   }
 }

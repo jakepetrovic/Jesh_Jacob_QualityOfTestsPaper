@@ -20,9 +20,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CStat cStat0 = CStat._231;
+      CStat cStat0 = CStat._290;
       SitNFe sitNFe0 = cStat0.getSitNFe();
-      assertEquals(4, sitNFe0.ordinal());
+      assertEquals("REJEITADA", sitNFe0.name());
   }
 
   //Test case number: 1
@@ -32,9 +32,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CStat cStat0 = CStat._231;
+      CStat cStat0 = CStat._290;
       String string0 = cStat0.getMotivo();
-      assertEquals("IE do emitente n\u00E3o vinculada ao CNPJ", string0);
+      assertEquals("Certificado Assinatura inv\u00E1lido", string0);
   }
 
   //Test case number: 2
@@ -44,9 +44,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CStat cStat0 = CStat._231;
+      CStat cStat0 = CStat._290;
       String string0 = cStat0.toString();
-      assertEquals("231", string0);
       assertNotNull(string0);
+      assertEquals("290", string0);
   }
 }

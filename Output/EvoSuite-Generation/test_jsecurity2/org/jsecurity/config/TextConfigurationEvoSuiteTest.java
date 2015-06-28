@@ -45,7 +45,7 @@ public class TextConfigurationEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       IniConfiguration iniConfiguration0 = new IniConfiguration();
-      iniConfiguration0.setConfig("0EZ|J<0A}hu-Z");
+      iniConfiguration0.setConfig("8*i~");
       try {
         iniConfiguration0.init();
         fail("Expecting exception: ResourceException");

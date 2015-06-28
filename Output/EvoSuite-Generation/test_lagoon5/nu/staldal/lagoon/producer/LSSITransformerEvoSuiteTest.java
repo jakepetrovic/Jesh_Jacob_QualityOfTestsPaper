@@ -28,7 +28,7 @@ public class LSSITransformerEvoSuiteTest {
   public void test0()  throws Throwable  {
       LSSITransformer lSSITransformer0 = new LSSITransformer();
       lSSITransformer0.init();
-      assertNull(lSSITransformer0.getEntryName());
+      assertEquals(0, lSSITransformer0.getPosition());
   }
 
   //Test case number: 1

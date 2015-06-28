@@ -24,7 +24,7 @@ public class DummyRemoteGetterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
       char[] charArray0 = new char[6];
-      dummyRemoteGetter0.get("3!h98sKIKjklU", charArray0);
+      dummyRemoteGetter0.get("<buildState>Successful</buildState>", charArray0);
   }
 
   //Test case number: 1
@@ -35,7 +35,7 @@ public class DummyRemoteGetterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
-      dummyRemoteGetter0.get("7tv$!*6 E_JSB>x6S2#");
+      dummyRemoteGetter0.get("");
   }
 
   //Test case number: 2

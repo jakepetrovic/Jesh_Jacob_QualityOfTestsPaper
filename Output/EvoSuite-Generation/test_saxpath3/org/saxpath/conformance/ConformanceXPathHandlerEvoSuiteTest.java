@@ -70,8 +70,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.number((-1438));
-      assertEquals("(0) number(-1438)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.number(1982);
+      assertEquals("(0) number(1982)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 5
@@ -82,8 +82,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.variableReference("W*9X!mQH\"89i", "W*9X!mQH\"89i");
-      assertEquals("(0) variableReference(\"W*9X!mQH\"89i:W*9X!mQH\"89i\")\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.variableReference("", "");
+      assertEquals("(0) variableReference(\":\")\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 6
@@ -94,8 +94,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endUnionExpr(false);
-      assertEquals("(0) endUnionExpr(false)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endUnionExpr(true);
+      assertEquals("(0) endUnionExpr(true)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 7
@@ -106,8 +106,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endMultiplicativeExpr(92);
-      assertEquals("(0) endMultiplicativeExpr(92)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endMultiplicativeExpr((-1));
+      assertEquals("(0) endMultiplicativeExpr(-1)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 8
@@ -118,8 +118,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.literal("H3i&[%vExM");
-      assertEquals("(0) literal(\"H3i&[%vExM\")\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.literal("eG','a;R");
+      assertEquals("(0) literal(\"eG','a;R\")\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 9
@@ -166,8 +166,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endOrExpr(false);
-      assertEquals("(0) endOrExpr(false)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endOrExpr(true);
+      assertEquals("(0) endOrExpr(true)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 13
@@ -178,8 +178,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startTextNodeStep((-1809));
-      assertEquals("(0) startTextNodeStep(-1809)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startTextNodeStep(1);
+      assertEquals("(0) startTextNodeStep(1)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 14
@@ -190,8 +190,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test14()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endUnaryExpr((-1));
-      assertEquals("(0) endUnaryExpr(-1)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endUnaryExpr(836);
+      assertEquals("(0) endUnaryExpr(836)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 15
@@ -214,20 +214,25 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test16()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startProcessingInstructionNodeStep((-1), "");
-      assertEquals("(0) startProcessingInstructionNodeStep(-1, \"\")\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startProcessingInstructionNodeStep((-46), "(0) endTextNodeStep()\n(1) endPathExpr()\n(2) startTextNodeStep(-1)\n(3) endFilterExpr()\n(4) startRelationalExpr()\n(5) startPathExpr()\n(6) endNameStep()\n(7) startUnaryExpr()\n");
+      assertEquals("(0) startProcessingInstructionNodeStep(-46, \"(0) endTextNodeStep()\n(1) endPathExpr()\n(2) startTextNodeStep(-1)\n(3) endFilterExpr()\n(4) startRelationalExpr()\n(5) startPathExpr()\n(6) endNameStep()\n(7) startUnaryExpr()\n\")\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 17
   /*
-   * 1 covered goal:
-   * 1 org.saxpath.conformance.ConformanceXPathHandler.endFunction()V: root-Branch
+   * 3 covered goals:
+   * 1 org.saxpath.conformance.ConformanceXPathHandler.toString()Ljava/lang/String;: I20 Branch 2 IFEQ L327 - false
+   * 2 org.saxpath.conformance.ConformanceXPathHandler.endFunction()V: root-Branch
+   * 3 org.saxpath.conformance.ConformanceXPathHandler.toString()Ljava/lang/String;: I20 Branch 2 IFEQ L327 - true
    */
   @Test
   public void test17()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
       conformanceXPathHandler0.endFunction();
+      String string0 = conformanceXPathHandler0.toString();
+      assertNotNull(string0);
       assertEquals("(0) endFunction()\n", conformanceXPathHandler0.toString());
+      assertEquals("(0) endFunction()\n", string0);
   }
 
   //Test case number: 18
@@ -286,8 +291,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test22()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startNameStep(747, "W*9X!mQH\"89i", "startAdditiveExpr()");
-      assertEquals("(0) startNameStep(747, \"W*9X!mQH\"89i\", \"startAdditiveExpr()\")\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startNameStep(0, "eG','a;R", "");
+      assertEquals("(0) startNameStep(0, \"eG','a;R\", \"\")\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 23
@@ -304,19 +309,14 @@ public class ConformanceXPathHandlerEvoSuiteTest {
 
   //Test case number: 24
   /*
-   * 3 covered goals:
-   * 1 org.saxpath.conformance.ConformanceXPathHandler.toString()Ljava/lang/String;: I20 Branch 2 IFEQ L327 - false
-   * 2 org.saxpath.conformance.ConformanceXPathHandler.endAdditiveExpr(I)V: root-Branch
-   * 3 org.saxpath.conformance.ConformanceXPathHandler.toString()Ljava/lang/String;: I20 Branch 2 IFEQ L327 - true
+   * 1 covered goal:
+   * 1 org.saxpath.conformance.ConformanceXPathHandler.endAdditiveExpr(I)V: root-Branch
    */
   @Test
   public void test24()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
       conformanceXPathHandler0.endAdditiveExpr(0);
-      String string0 = conformanceXPathHandler0.toString();
       assertEquals("(0) endAdditiveExpr(0)\n", conformanceXPathHandler0.toString());
-      assertNotNull(string0);
-      assertEquals("(0) endAdditiveExpr(0)\n", string0);
   }
 
   //Test case number: 25
@@ -327,8 +327,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test25()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endEqualityExpr(0);
-      assertEquals("(0) endEqualityExpr(0)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endEqualityExpr(1293);
+      assertEquals("(0) endEqualityExpr(1293)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 26
@@ -351,8 +351,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test27()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.endRelationalExpr(373);
-      assertEquals("(0) endRelationalExpr(373)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.endRelationalExpr(0);
+      assertEquals("(0) endRelationalExpr(0)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 28
@@ -411,8 +411,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test32()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startFunction("", "");
-      assertEquals("(0) startFunction(\":\")\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startFunction("eG','a;R", "eG','a;R");
+      assertEquals("(0) startFunction(\"eG','a;R:eG','a;R\")\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 33
@@ -447,8 +447,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test35()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startAllNodeStep((-1438));
-      assertEquals("(0) startAllNodeStep(-1438)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startAllNodeStep(0);
+      assertEquals("(0) startAllNodeStep(0)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 36
@@ -459,8 +459,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test36()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.number(322.8382932740033);
-      assertEquals("(0) number(322.8382932740033)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.number((double) 1293);
+      assertEquals("(0) number(1293.0)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 37
@@ -507,8 +507,8 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test40()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      conformanceXPathHandler0.startCommentNodeStep(0);
-      assertEquals("(0) startCommentNodeStep(0)\n", conformanceXPathHandler0.toString());
+      conformanceXPathHandler0.startCommentNodeStep(1293);
+      assertEquals("(0) startCommentNodeStep(1293)\n", conformanceXPathHandler0.toString());
   }
 
   //Test case number: 41
@@ -556,7 +556,7 @@ public class ConformanceXPathHandlerEvoSuiteTest {
   @Test
   public void test44()  throws Throwable  {
       ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-      boolean boolean0 = conformanceXPathHandler0.equals((Object) "(0) endProcessingInstructionNodeStep()\n(1) endUnaryExpr(-1)\n");
+      boolean boolean0 = conformanceXPathHandler0.equals((Object) "");
       assertEquals(false, boolean0);
   }
 

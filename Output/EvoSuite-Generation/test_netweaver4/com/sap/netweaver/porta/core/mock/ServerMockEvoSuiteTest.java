@@ -24,6 +24,26 @@ public class ServerMockEvoSuiteTest {
 
   private static ExecutorService executor; 
 
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
+
   //Test case number: 0
   /*
    * 2 covered goals:
@@ -67,7 +87,7 @@ public class ServerMockEvoSuiteTest {
           } catch(SecurityException e) {
             /*
              * Security manager blocks (\"java.net.SocketPermission\" \"localhost\" \"resolve\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkConnect(SecurityManager.java:1048)
              * java.net.InetAddress.getAllByName0(InetAddress.java:1238)
@@ -88,7 +108,7 @@ public class ServerMockEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
         } catch(Throwable t) {

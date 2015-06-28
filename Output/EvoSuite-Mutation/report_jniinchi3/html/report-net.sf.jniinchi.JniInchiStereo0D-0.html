@@ -22,10 +22,10 @@ net.sf.jniinchi.JniInchiStereo0D
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiStereo0D: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3811 statements, 274 tests.
+<li>50 fitness evaluations, 2 generations, 3341 statements, 243 tests.
 <li>Time: 0:00:07(Search: 0:00:04, minimization: 0:00:03)
 <li>Coverage: 2/2 branches, 15/15 methods, 16/16 total goals
-<li>Mutation score: 52%
+<li>Mutation score: 51%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -36,17 +36,27 @@ net.sf.jniinchi.JniInchiStereo0D
 <span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
 <span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>JniInchiAtom jniInchiAtom1 = jniInchiStereo0D0.getNeighbor(0);
+<span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.getStereoType();
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
-<span class="nocode"><a name="8">  8: </a></span>assertNotNull(jniInchiAtom1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, 0, 0);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = jniInchiStereo0D0.getStereoType();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, iNCHI_STEREOTYPE0.ordinal());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;] &quot;);
+<span class="nocode"><a name="2">  2: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, 0, 0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(INCHI_STEREOTYPE.NONE, jniInchiStereo0D0.getStereoType());
 </pre>
 <h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;] &quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>JniInchiAtom jniInchiAtom1 = jniInchiStereo0D0.getNeighbor(0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [] ,] ,] ,] ] Type::DOUBLEBOND // Parity:UNDEFINED&quot;, jniInchiStereo0D0.getDebugString());
+<span class="nocode"><a name="8">  8: </a></span>assertNotNull(jniInchiAtom1);
+</pre>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
@@ -56,7 +66,7 @@ net.sf.jniinchi.JniInchiStereo0D
 <span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.debug();
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
 </pre>
-<h3>Test case 4</h3>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
@@ -64,54 +74,51 @@ net.sf.jniinchi.JniInchiStereo0D
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
 <span class="nocode"><a name="5">  5: </a></span>
 <span class="nocode"><a name="6">  6: </a></span>JniInchiAtom[] jniInchiAtomArray0 = jniInchiStereo0D0.getNeighbors();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
-<span class="nocode"><a name="8">  8: </a></span>assertNotNull(jniInchiAtomArray0);
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(346.669828676199, 346.669828676199, 346.669828676199, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.getDisconnectedParity();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D:  [,,,] Type::TETRAHEDRAL // Parity:UNKNOWN&quot;, jniInchiStereo0D0.getDebugString());
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(jniInchiAtomArray0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, 0, 0);
-<span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStereo0D0.getInchiParity();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
+<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.getDisconnectedParity();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;k*wNJIPmkC)PiJEm&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
 <span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.getParity();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>int int0 = jniInchiStereo0D0.getInchiParity();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: k*wNJIPmkC)PiJEm [k*wNJIPmkC)PiJEm,k*wNJIPmkC)PiJEm,k*wNJIPmkC)PiJEm,k*wNJIPmkC)PiJEm] Type::TETRAHEDRAL // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(2, int0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
-<span class="nocode"><a name="2">  2: </a></span>INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.TETRAHEDRAL;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>int int0 = jniInchiStereo0D0.getInchiStereoType();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(2, int0);
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
 <span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
 <span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>jniInchiStereo0D0.setDisconnectedParity(iNCHI_PARITY0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>int int0 = jniInchiStereo0D0.getInchiStereoType();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, int0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:EVEN&quot;, jniInchiStereo0D0.getDebugString());
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;] &quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>INCHI_PARITY iNCHI_PARITY1 = jniInchiStereo0D0.getParity();
+<span class="nocode"><a name="7">  7: </a></span>jniInchiStereo0D0.setDisconnectedParity(iNCHI_PARITY1);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;InChI Stereo0D: - [] ,] ,] ,] ] Type::DOUBLEBOND // Parity:UNDEFINED&quot;, jniInchiStereo0D0.getDebugString());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -125,13 +132,18 @@ net.sf.jniinchi.JniInchiStereo0D
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), (-1.0), 580.0552621409403, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, (-1999), (-670));
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(jniInchiStereo0D0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>String string0 = jniInchiStereo0D0.getDebugString();
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Stereo0D:  [,,,] Type::null // Parity:null&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;] &quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(jniInchiStereo0D0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>INCHI_PARITY iNCHI_PARITY1 = jniInchiStereo0D0.getParity();
+<span class="nocode"><a name="7">  7: </a></span>INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.TETRAHEDRAL;
+<span class="nocode"><a name="8">  8: </a></span>JniInchiStereo0D jniInchiStereo0D1 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY1);
+<span class="nocode"><a name="9">  9: </a></span>String string0 = jniInchiStereo0D1.getDebugString();
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(&quot;InChI Stereo0D: ]  [] ,] ,] ,] ] Type::TETRAHEDRAL // Parity:UNDEFINED&quot;, string0);
+<span class="nocode"><a name="11"> 11: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(&quot;InChI Stereo0D: - [] ,] ,] ,] ] Type::DOUBLEBOND // Parity:UNDEFINED&quot;, jniInchiStereo0D0.getDebugString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -420,7 +432,7 @@ net.sf.jniinchi.JniInchiStereo0D
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8287303538074592099.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7626547542380899941.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -438,7 +450,7 @@ net.sf.jniinchi.JniInchiStereo0D
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15374
+<li>process_communication_port: 12025
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

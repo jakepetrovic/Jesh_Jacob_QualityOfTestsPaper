@@ -20,15 +20,15 @@ public class XPathLexerEvoSuiteTest {
    * 2 com.werken.saxpath.XPathLexer.setXPath(Ljava/lang/String;)V: root-Branch
    * 3 com.werken.saxpath.XPathLexer.endPosition()I: root-Branch
    * 4 com.werken.saxpath.XPathLexer.<init>(Ljava/lang/String;)V: root-Branch
-   * 5 com.werken.saxpath.XPathLexer.hasMoreChars()Z: I6 Branch 224 IF_ICMPGE L986 - false
+   * 5 com.werken.saxpath.XPathLexer.hasMoreChars()Z: I6 Branch 224 IF_ICMPGE L986 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer("sC~3wZ]G5m");
+      XPathLexer xPathLexer0 = new XPathLexer("");
       boolean boolean0 = xPathLexer0.hasMoreChars();
-      assertEquals(10, xPathLexer0.endPosition());
+      assertEquals(0, xPathLexer0.endPosition());
+      assertEquals(false, boolean0);
       assertEquals(0, xPathLexer0.currentPosition());
-      assertEquals(true, boolean0);
   }
 
   //Test case number: 1
@@ -41,7 +41,7 @@ public class XPathLexerEvoSuiteTest {
   public void test1()  throws Throwable  {
       XPathLexer xPathLexer0 = new XPathLexer();
       xPathLexer0.setPreviousToken((Token) null);
-      assertEquals(0, xPathLexer0.endPosition());
+      assertNull(xPathLexer0.getXPath());
   }
 
   //Test case number: 2
@@ -52,16 +52,10 @@ public class XPathLexerEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer("sC~3wZ]G5m");
-      // Undeclared exception!
-      try {
-        xPathLexer0.LA((-610));
-        fail("Expecting exception: StringIndexOutOfBoundsException");
-      } catch(StringIndexOutOfBoundsException e) {
-        /*
-         * String index out of range: -611
-         */
-      }
+      XPathLexer xPathLexer0 = new XPathLexer("^3{i\"lmfi");
+      char char0 = xPathLexer0.LA(5);
+      assertEquals('\"', char0);
+      assertEquals(9, xPathLexer0.endPosition());
   }
 
   //Test case number: 3
@@ -74,6 +68,7 @@ public class XPathLexerEvoSuiteTest {
       XPathLexer xPathLexer0 = new XPathLexer();
       xPathLexer0.consume((int) '\uFFFF');
       assertEquals(65535, xPathLexer0.currentPosition());
+      assertEquals(false, xPathLexer0.hasMoreChars());
   }
 
   //Test case number: 4
@@ -83,7 +78,7 @@ public class XPathLexerEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
+      XPathLexer xPathLexer0 = new XPathLexer("");
       xPathLexer0.consume();
       assertEquals(1, xPathLexer0.currentPosition());
   }
@@ -96,43 +91,40 @@ public class XPathLexerEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       XPathLexer xPathLexer0 = new XPathLexer();
-      char char0 = xPathLexer0.LA(1043);
-      assertEquals(0, xPathLexer0.endPosition());
+      char char0 = xPathLexer0.LA(12);
       assertEquals('\uFFFF', char0);
+      assertEquals(0, xPathLexer0.endPosition());
   }
 
   //Test case number: 6
   /*
    * 3 covered goals:
-   * 1 com.werken.saxpath.XPathLexer.hasMoreChars()Z: I6 Branch 224 IF_ICMPGE L986 - true
+   * 1 com.werken.saxpath.XPathLexer.hasMoreChars()Z: I6 Branch 224 IF_ICMPGE L986 - false
    * 2 com.werken.saxpath.XPathLexer.currentPosition()I: root-Branch
    * 3 com.werken.saxpath.XPathLexer.endPosition()I: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
+      XPathLexer xPathLexer0 = new XPathLexer("^3{i\"lmfi");
       boolean boolean0 = xPathLexer0.hasMoreChars();
-      assertEquals(0, xPathLexer0.endPosition());
-      assertEquals(false, boolean0);
+      assertEquals(9, xPathLexer0.endPosition());
       assertEquals(0, xPathLexer0.currentPosition());
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 7
   /*
-   * 5 covered goals:
+   * 3 covered goals:
    * 1 com.werken.saxpath.XPathLexer.isIdentifierChar(C)Z: I3 Branch 225 LOOKUPSWITCH L991 Case 45 - true
    * 2 com.werken.saxpath.XPathLexer.isIdentifierChar(C)Z: I3 Branch 226 LOOKUPSWITCH L991 Case 46 - false
    * 3 com.werken.saxpath.XPathLexer.isIdentifierChar(C)Z: I3 Branch 227 LOOKUPSWITCH L991 Default-Case - false
-   * 4 com.werken.saxpath.XPathLexer.setXPath(Ljava/lang/String;)V: root-Branch
-   * 5 com.werken.saxpath.XPathLexer.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer("sC~3wZ]G5m");
+      XPathLexer xPathLexer0 = new XPathLexer("");
       boolean boolean0 = xPathLexer0.isIdentifierChar('-');
-      assertEquals(0, xPathLexer0.currentPosition());
-      assertEquals(10, xPathLexer0.endPosition());
       assertEquals(true, boolean0);
+      assertEquals(0, xPathLexer0.currentPosition());
   }
 
   //Test case number: 8
@@ -144,8 +136,10 @@ public class XPathLexerEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
+      XPathLexer xPathLexer0 = new XPathLexer("^3{i\"lmfi");
       boolean boolean0 = xPathLexer0.isIdentifierChar('.');
+      assertEquals(0, xPathLexer0.currentPosition());
+      assertEquals(9, xPathLexer0.endPosition());
       assertEquals(true, boolean0);
   }
 
@@ -158,9 +152,10 @@ public class XPathLexerEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
-      boolean boolean0 = xPathLexer0.isIdentifierChar('_');
+      XPathLexer xPathLexer0 = new XPathLexer("s");
+      boolean boolean0 = xPathLexer0.isIdentifierChar('Q');
       assertEquals(true, boolean0);
+      assertEquals(true, xPathLexer0.hasMoreChars());
   }
 
   //Test case number: 10
@@ -170,21 +165,25 @@ public class XPathLexerEvoSuiteTest {
    */
   @Test
   public void test10()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
+      XPathLexer xPathLexer0 = new XPathLexer("s");
       boolean boolean0 = xPathLexer0.isIdentifierStartChar('_');
       assertEquals(true, boolean0);
+      assertEquals(true, xPathLexer0.hasMoreChars());
   }
 
   //Test case number: 11
   /*
-   * 2 covered goals:
+   * 4 covered goals:
    * 1 com.werken.saxpath.XPathLexer.isIdentifierStartChar(C)Z: I4 Branch 228 IF_ICMPEQ L1003 - false
    * 2 com.werken.saxpath.XPathLexer.isIdentifierStartChar(C)Z: I7 Branch 229 IFEQ L1003 - false
+   * 3 com.werken.saxpath.XPathLexer.setXPath(Ljava/lang/String;)V: root-Branch
+   * 4 com.werken.saxpath.XPathLexer.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
-      XPathLexer xPathLexer0 = new XPathLexer();
-      boolean boolean0 = xPathLexer0.isIdentifierStartChar('k');
+      XPathLexer xPathLexer0 = new XPathLexer("");
+      boolean boolean0 = xPathLexer0.isIdentifierStartChar('r');
+      assertEquals(0, xPathLexer0.currentPosition());
       assertEquals(true, boolean0);
   }
 
@@ -198,7 +197,7 @@ public class XPathLexerEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       XPathLexer xPathLexer0 = new XPathLexer();
-      boolean boolean0 = xPathLexer0.isIdentifierStartChar('.');
+      boolean boolean0 = xPathLexer0.isIdentifierStartChar('\uFFFF');
       assertEquals(false, boolean0);
   }
 }

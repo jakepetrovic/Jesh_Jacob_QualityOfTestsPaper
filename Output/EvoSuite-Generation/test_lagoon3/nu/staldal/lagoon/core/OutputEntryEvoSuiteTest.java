@@ -29,7 +29,7 @@ public class OutputEntryEvoSuiteTest {
       OutputEntry outputEntry0 = new OutputEntry();
       BasicSplit basicSplit0 = new BasicSplit();
       outputEntry0.setBottomProducer((XMLStreamConsumer) basicSplit0);
-      assertEquals(0, basicSplit0.getPosition());
+      assertNull(basicSplit0.getEntryName());
   }
 
   //Test case number: 1

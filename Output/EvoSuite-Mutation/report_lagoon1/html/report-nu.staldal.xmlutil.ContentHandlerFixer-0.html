@@ -21,183 +21,32 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xmlutil.ContentHandlerFixer: 93.33%</ul><ul>
-<li>12208 fitness evaluations, 246 generations, 135372 statements, 8048 tests.
-<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
-<li>Coverage: 72/78 branches, 15/15 methods, 84/90 total goals
+<ul><li>Target class: nu.staldal.xmlutil.ContentHandlerFixer: 85.56%</ul><ul>
+<li>13676 fitness evaluations, 275 generations, 135127 statements, 8967 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 65/78 branches, 15/15 methods, 77/90 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.endPrefixMapping(&quot;?P_N~,&lt;j$&gt;y5&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
+<span class="nocode"><a name="2">  2: </a></span>contentHandlerFixer0.endPrefixMapping((String) null);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, true);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true);
 <span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startDocument();
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.skippedEntity(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, false);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.skippedEntity(&quot;CDATA&quot;);
 </pre>
 <h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.characters(charArray0, (int) '|', (int) '\u0000');
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.endDocument();
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[10];
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.ignorableWhitespace(charArray0, (int) '\u0000', 1348);
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.processingInstruction(&quot;LVD~:\&quot;*&amp;SR6H6vn6z-&quot;, &quot;LVD~:\&quot;*&amp;SR6H6vn6z-&quot;);
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true);
-<span class="nocode"><a name="3">  3: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.setDocumentLocator((Locator) locator2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>assertNull(locator2Impl0.getPublicId());
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startElement(&quot;{kH,=/eE$&quot;, &quot;{kH,=/eE$&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;{kH,=/eE$&quot;, &quot;{kH,=/eE$&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startElement((String) null, (String) null, (String) null, (Attributes) attributesImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributesImpl0.getLength());
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
-<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;i{uJ8l3YB2VJpOR7&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
-</pre>
-<h3>Test case 12</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
-<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;i{uJ8l3YB2VJpOR7&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;i{uJ8l3YB2VJpOR7&quot;, &quot;LVD~:\&quot;*&amp;SR6H6vn6z-&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
-</pre>
-<h3>Test case 13</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, attributesImpl0.getLength());
-</pre>
-<h3>Test case 14</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>attributesImpl0.setAttribute(0, &quot;9mNH:2\&quot;9r&quot;, &quot;&quot;, (String) null, &quot;9mNH:2\&quot;9r&quot;, &quot;9mNH:2\&quot;9r&quot;);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerFixer0.startElement(&quot;{kH,=/eE$&quot;, &quot;{kH,=/eE$&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, attributesImpl0.getLength());
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, attributesImpl0.getLength());
-</pre>
-<h3>Test case 16</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;, &quot;^~&quot;);
-<span class="nocode"><a name="5">  5: </a></span>attributesImpl0.setAttribute(0, &quot;{kH,=/eE$&quot;, &quot;^~&quot;, (String) null, &quot;9mNH:2\&quot;9r&quot;, &quot;^~&quot;);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerFixer0.startElement(&quot;{kH,=/eE$&quot;, &quot;{kH,=/eE$&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, attributesImpl0.getLength());
-</pre>
-<h3>Test case 17</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true);
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;Q9Zn1NT~4x&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
-</pre>
-<h3>Test case 18</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true);
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;No prefix for &quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;Q9Zn1NT~4x&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
-</pre>
-<h3>Test case 19</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  contentHandlerFixer0.endElement(&quot;TDO/]&quot;, (String) null, (String) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: Error&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(Error e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * No prefix for TDO/]
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 20</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, false);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  contentHandlerFixer0.endElement(&quot;^~&quot;, &quot;{kH,=/eE$&quot;, &quot;^~&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
-</pre>
-<h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
 <span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0);
@@ -208,7 +57,126 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
-<h3>Test case 22</h3>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.characters(charArray0, (int) 'G', (int) 'G');
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, false);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.endDocument();
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.ignorableWhitespace(charArray0, (-701), (int) '\u0000');
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.processingInstruction(&quot;m|B&quot;, &quot;m|B&quot;);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
+<span class="nocode"><a name="4">  4: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl((Locator) locatorImpl0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.setDocumentLocator((Locator) locator2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, locator2Impl0.getColumnNumber());
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true);
+<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startElement(&quot; e&quot;, &quot; e&quot;, (String) null, (Attributes) attributesImpl0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot; e&quot;, (String) null, (String) null, (Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(0, attributes2Impl0.getLength());
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>ContentHandlerFixer contentHandlerFixer1 = new ContentHandlerFixer((ContentHandler) contentHandlerFixer0, true, false);
+<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer1.startElement(&quot;m|B&quot;, &quot;m|B&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotSame(contentHandlerFixer1, contentHandlerFixer0);
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true, true);
+<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  contentHandlerFixer0.startElement(&quot;m|B&quot;, &quot;m|B&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;m|B&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerFixer0.startElement(&quot;m|B&quot;, &quot;m|B&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, false);
+<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerFixer0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, attributes2Impl0.getLength());
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  contentHandlerFixer0.endElement(&quot;`jzR''1K&lt;&quot;, (String) null, (String) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(Error e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * No prefix for `jzR''1K&lt;
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>ContentHandlerFixer contentHandlerFixer1 = new ContentHandlerFixer((ContentHandler) contentHandlerFixer0, true, false);
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer1.startPrefixMapping(&quot;&quot;, &quot;m|B&quot;);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  contentHandlerFixer1.endElement(&quot;m|B&quot;, &quot;m|B&quot;, &quot;&quot;);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(EmptyStackException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
 <span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true, true);
@@ -219,18 +187,18 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
-<h3>Test case 23</h3>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;NSQyN~]hJk0yF].Cr&quot;, &quot;NSQyN~]hJk0yF].Cr&quot;);
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.endElement(&quot;NSQyN~]hJk0yF].Cr&quot;, &quot;NSQyN~]hJk0yF].Cr&quot;, (String) null);
+</pre>
+<h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;?P_N~,&lt;j$&gt;y5&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
-</pre>
-<h3>Test case 24</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;C{uJ8l3YB2FpOR7&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, false);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;CDATA&quot;);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  contentHandlerFixer0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
@@ -241,12 +209,12 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 25</h3>
+<h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true);
-<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;No prefix for &quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, false, false);
+<span class="nocode"><a name="3">  3: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;_rx,c&amp;_&quot;, &quot;_rx,c&amp;_&quot;);
+<span class="nocode"><a name="4">  4: </a></span>contentHandlerFixer0.startPrefixMapping(&quot;g=b%kR&amp;bAa,x&quot;, &quot;g=b%kR&amp;bAa,x&quot;);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -446,13 +414,13 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <span class="nocode"><a name="195">195: </a></span>                }
 <span class="nocode"><a name="196">196: </a></span>                else
 <span class="nocode"><a name="197">197: </a></span>                {
-<span class="nocode"><a name="198">198: </a></span><span style="background-color: #ffffcc">                    String prefix = nsSup.getPrefix(uri);</span>
-<span class="nocode"><a name="199">199: </a></span><span style="background-color: #ffffcc">                    if (prefix == null)</span>
+<span class="nocode"><a name="198">198: </a></span>                    String prefix = nsSup.getPrefix(uri);
+<span class="nocode"><a name="199">199: </a></span>                    if (prefix == null)
 <span class="nocode"><a name="200">200: </a></span>					{
-<span class="nocode"><a name="201">201: </a></span><span style="background-color: #ffffcc">                       	prefix = genPrefix();</span>
-<span class="nocode"><a name="202">202: </a></span><span style="background-color: #ffffcc">						nsSup.declarePrefix(prefix, namespaceURI);</span>
+<span class="nocode"><a name="201">201: </a></span>                       	prefix = genPrefix();
+<span class="nocode"><a name="202">202: </a></span>						nsSup.declarePrefix(prefix, namespaceURI);
 <span class="nocode"><a name="203">203: </a></span>					}
-<span class="nocode"><a name="204">204: </a></span><span style="background-color: #ffffcc">                    aname = prefix + ':' + alocalName;</span>
+<span class="nocode"><a name="204">204: </a></span>                    aname = prefix + ':' + alocalName;
 <span class="nocode"><a name="205">205: </a></span>                }
 <span class="nocode"><a name="206">206: </a></span>            }
 <span class="nocode"><a name="207">207: </a></span><span style="background-color: #ffffcc">            newAtts.addAttribute(atts.getURI(i), atts.getLocalName(i), aname, </span>
@@ -525,7 +493,7 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <span class="nocode"><a name="274">274: </a></span>				{
 <span class="nocode"><a name="275">275: </a></span><span style="background-color: #ffffcc">					String defaultURI = nsSup.getURI(&quot;&quot;);</span>
 <span class="nocode"><a name="276">276: </a></span><span style="background-color: #ffffcc">	                if ((defaultURI != null) &amp;&amp; defaultURI.equals(namespaceURI))</span>
-<span class="nocode"><a name="277">277: </a></span>	                    prefix = &quot;&quot;; // default namespace
+<span class="nocode"><a name="277">277: </a></span><span style="background-color: #ffffcc">	                    prefix = &quot;&quot;; // default namespace</span>
 <span class="nocode"><a name="278">278: </a></span>	                else
 <span class="nocode"><a name="279">279: </a></span>					{
 <span class="nocode"><a name="280">280: </a></span><span style="background-color: #ffffcc">						throw new Error(&quot;No prefix for &quot; + namespaceURI);</span>
@@ -605,7 +573,7 @@ nu.staldal.xmlutil.ContentHandlerFixer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -623,7 +591,7 @@ nu.staldal.xmlutil.ContentHandlerFixer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8751
+<li>process_communication_port: 8155
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

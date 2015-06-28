@@ -24,7 +24,7 @@ public class ApplicationPropertiesLoaderEvoSuiteTest {
       ApplicationPropertiesLoader applicationPropertiesLoader0 = new ApplicationPropertiesLoader();
       // Undeclared exception!
       try {
-        applicationPropertiesLoader0.load("Jv8c{l{YO2Wp7Bp");
+        applicationPropertiesLoader0.load("xbU16(<");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*

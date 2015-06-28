@@ -24,8 +24,8 @@ public class BuildPropertiesEvoSuiteTest {
   public void test0()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
       String string0 = buildProperties0.toString();
-      assertEquals("\n\t\tbuildId=null,  null", string0);
       assertNotNull(string0);
+      assertEquals("\n\t\tbuildId=null,  null", string0);
   }
 
   //Test case number: 1
@@ -60,8 +60,9 @@ public class BuildPropertiesEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
-      buildProperties0.setSiteProperties((SiteProperties) null);
-      assertEquals("\n\t\tbuildId=null,  null", buildProperties0.toString());
+      SiteProperties siteProperties0 = new SiteProperties();
+      buildProperties0.setSiteProperties(siteProperties0);
+      assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
   }
 
   //Test case number: 4
@@ -73,9 +74,9 @@ public class BuildPropertiesEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
-      buildProperties0.setBuild("");
+      buildProperties0.setBuild("VHcZI5 ur");
       buildProperties0.check();
-      assertEquals("", buildProperties0.getBuild());
+      assertEquals("VHcZI5 ur", buildProperties0.getBuild());
   }
 
   //Test case number: 5

@@ -25,7 +25,7 @@ public class JniInchiInputInchiEvoSuiteTest {
       LinkedList<String> linkedList0 = new LinkedList<String>();
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi("6eyU]", (List) linkedList0);
+        jniInchiInputInchi0 = new JniInchiInputInchi("", (List) linkedList0);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -43,7 +43,7 @@ public class JniInchiInputInchiEvoSuiteTest {
   public void test1()  throws Throwable  {
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi("zG &S7^", "");
+        jniInchiInputInchi0 = new JniInchiInputInchi("eYMmKc,&sld", "");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -60,9 +60,9 @@ public class JniInchiInputInchiEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiInputInchi jniInchiInputInchi0 = new JniInchiInputInchi("");
+      JniInchiInputInchi jniInchiInputInchi0 = new JniInchiInputInchi("/?OYf&v/?p?.HD~L.Hv");
       String string0 = jniInchiInputInchi0.getInchi();
-      assertEquals("", string0);
+      assertEquals("/?OYf&v/?p?.HD~L.Hv", string0);
   }
 
   //Test case number: 3
@@ -73,7 +73,7 @@ public class JniInchiInputInchiEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      JniInchiInputInchi jniInchiInputInchi0 = new JniInchiInputInchi("");
+      JniInchiInputInchi jniInchiInputInchi0 = new JniInchiInputInchi("/?OYf&v/?p?.HD~L.Hv");
       String string0 = jniInchiInputInchi0.getOptions();
       assertEquals("", string0);
   }

@@ -21,7 +21,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Qk", (Value) null);
       Value value0 = attributeImpl0.value();
       assertNull(value0);
   }
@@ -61,8 +61,8 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("O6<t{{Q.0'$~u5", (Value) null);
-      boolean boolean0 = attributeImpl0.equals((Object) "O6<t{{Q.0'$~u5");
+      AttributeImpl attributeImpl0 = new AttributeImpl("Qk", (Value) null);
+      boolean boolean0 = attributeImpl0.equals((Object) "DM_A");
       assertEquals(false, boolean0);
   }
 
@@ -74,7 +74,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Qk", (Value) null);
       // Undeclared exception!
       try {
         attributeImpl0.equals((Object) attributeImpl0);
@@ -92,8 +92,8 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("", (Value) null);
-      AttributeImpl attributeImpl1 = new AttributeImpl((String) null, (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Qk", (Value) null);
+      AttributeImpl attributeImpl1 = new AttributeImpl("DM_A", (Value) null);
       boolean boolean0 = attributeImpl0.equals((Object) attributeImpl1);
       assertEquals(false, boolean0);
   }

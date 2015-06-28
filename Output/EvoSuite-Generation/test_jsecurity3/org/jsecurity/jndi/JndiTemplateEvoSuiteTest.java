@@ -7,9 +7,7 @@ package org.jsecurity.jndi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.FilenameFilter;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
@@ -20,32 +18,39 @@ public class JndiTemplateEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiTemplate.<init>(Ljava/util/Properties;)V: root-Branch
+   * 6 covered goals:
+   * 1 org.jsecurity.jndi.JndiTemplate$1.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;)V: root-Branch
+   * 2 org.jsecurity.jndi.JndiTemplate.getEnvironment()Ljava/util/Properties;: root-Branch
+   * 3 org.jsecurity.jndi.JndiTemplate.<init>()V: root-Branch
+   * 4 org.jsecurity.jndi.JndiTemplate.execute(Lorg/jsecurity/jndi/JndiCallback;)Ljava/lang/Object;: root-Branch
+   * 5 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - true
+   * 6 org.jsecurity.jndi.JndiTemplate.lookup(Ljava/lang/String;)Ljava/lang/Object;: I4 Branch 4 IFEQ L141 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      Properties properties0 = new Properties();
-      JndiTemplate jndiTemplate0 = new JndiTemplate(properties0);
-      assertNotNull(jndiTemplate0);
+      JndiTemplate jndiTemplate0 = new JndiTemplate();
+      Class<?> class0 = FilenameFilter.class;
+      // Undeclared exception!
+      try {
+        jndiTemplate0.lookup((String) null, (Class) class0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 1
   /*
-   * 7 covered goals:
-   * 1 org.jsecurity.jndi.JndiTemplate$4.doInContext(Ljavax/naming/Context;)Ljava/lang/Object;: root-Branch
-   * 2 org.jsecurity.jndi.JndiTemplate$4.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.jndi.JndiTemplate.unbind(Ljava/lang/String;)V: I4 Branch 9 IFEQ L226 - true
-   * 4 org.jsecurity.jndi.JndiTemplate.getEnvironment()Ljava/util/Properties;: root-Branch
-   * 5 org.jsecurity.jndi.JndiTemplate.<init>()V: root-Branch
-   * 6 org.jsecurity.jndi.JndiTemplate.execute(Lorg/jsecurity/jndi/JndiCallback;)Ljava/lang/Object;: root-Branch
-   * 7 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - true
+   * 4 covered goals:
+   * 1 org.jsecurity.jndi.JndiTemplate$2.doInContext(Ljavax/naming/Context;)Ljava/lang/Object;: root-Branch
+   * 2 org.jsecurity.jndi.JndiTemplate$2.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;Ljava/lang/Object;)V: root-Branch
+   * 3 org.jsecurity.jndi.JndiTemplate.bind(Ljava/lang/String;Ljava/lang/Object;)V: I4 Branch 7 IFEQ L188 - true
+   * 4 org.jsecurity.jndi.JndiTemplate.<init>(Ljava/util/Properties;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      JndiTemplate jndiTemplate0 = new JndiTemplate();
+      JndiTemplate jndiTemplate0 = new JndiTemplate((Properties) null);
       try {
-        jndiTemplate0.unbind("?70[Ov'vI=7Pv");
+        jndiTemplate0.bind(" D2 M_C2+p0U'nYh", (Object) jndiTemplate0);
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -56,16 +61,17 @@ public class JndiTemplateEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 3 covered goals:
+   * 4 covered goals:
    * 1 org.jsecurity.jndi.JndiTemplate$3.doInContext(Ljavax/naming/Context;)Ljava/lang/Object;: root-Branch
    * 2 org.jsecurity.jndi.JndiTemplate$3.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;Ljava/lang/Object;)V: root-Branch
    * 3 org.jsecurity.jndi.JndiTemplate.rebind(Ljava/lang/String;Ljava/lang/Object;)V: I4 Branch 8 IFEQ L208 - true
+   * 4 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - true
    */
   @Test
   public void test2()  throws Throwable  {
       JndiTemplate jndiTemplate0 = new JndiTemplate();
       try {
-        jndiTemplate0.rebind("H*SV*?", "");
+        jndiTemplate0.rebind("", "");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -76,47 +82,26 @@ public class JndiTemplateEvoSuiteTest {
 
   //Test case number: 3
   /*
-   * 4 covered goals:
-   * 1 org.jsecurity.jndi.JndiTemplate$2.doInContext(Ljavax/naming/Context;)Ljava/lang/Object;: root-Branch
-   * 2 org.jsecurity.jndi.JndiTemplate$2.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;Ljava/lang/Object;)V: root-Branch
-   * 3 org.jsecurity.jndi.JndiTemplate.bind(Ljava/lang/String;Ljava/lang/Object;)V: I4 Branch 7 IFEQ L188 - true
-   * 4 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - true
+   * 10 covered goals:
+   * 1 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I29 Branch 3 IFEQ L123 - false
+   * 2 org.jsecurity.jndi.JndiTemplate.setEnvironment(Ljava/util/Properties;)V: root-Branch
+   * 3 org.jsecurity.jndi.JndiTemplate.getEnvironment()Ljava/util/Properties;: root-Branch
+   * 4 org.jsecurity.jndi.JndiTemplate.<init>()V: root-Branch
+   * 5 org.jsecurity.jndi.JndiTemplate.execute(Lorg/jsecurity/jndi/JndiCallback;)Ljava/lang/Object;: root-Branch
+   * 6 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - false
+   * 7 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I29 Branch 3 IFEQ L123 - true
+   * 8 org.jsecurity.jndi.JndiTemplate.unbind(Ljava/lang/String;)V: I4 Branch 9 IFEQ L226 - true
+   * 9 org.jsecurity.jndi.JndiTemplate$4.doInContext(Ljavax/naming/Context;)Ljava/lang/Object;: root-Branch
+   * 10 org.jsecurity.jndi.JndiTemplate$4.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
       JndiTemplate jndiTemplate0 = new JndiTemplate();
-      try {
-        jndiTemplate0.bind("`)(x#(PD(IcZih#iW", ":");
-        fail("Expecting exception: NoInitialContextException");
-      } catch(NoInitialContextException e) {
-        /*
-         * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
-         */
-      }
-  }
-
-  //Test case number: 4
-  /*
-   * 9 covered goals:
-   * 1 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I29 Branch 3 IFEQ L123 - false
-   * 2 org.jsecurity.jndi.JndiTemplate$1.<init>(Lorg/jsecurity/jndi/JndiTemplate;Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.jndi.JndiTemplate.setEnvironment(Ljava/util/Properties;)V: root-Branch
-   * 4 org.jsecurity.jndi.JndiTemplate.getEnvironment()Ljava/util/Properties;: root-Branch
-   * 5 org.jsecurity.jndi.JndiTemplate.<init>()V: root-Branch
-   * 6 org.jsecurity.jndi.JndiTemplate.execute(Lorg/jsecurity/jndi/JndiCallback;)Ljava/lang/Object;: root-Branch
-   * 7 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I12 Branch 2 IFNULL L121 - false
-   * 8 org.jsecurity.jndi.JndiTemplate.createInitialContext()Ljavax/naming/Context;: I29 Branch 3 IFEQ L123 - true
-   * 9 org.jsecurity.jndi.JndiTemplate.lookup(Ljava/lang/String;)Ljava/lang/Object;: I4 Branch 4 IFEQ L141 - true
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      JndiTemplate jndiTemplate0 = new JndiTemplate();
       Properties properties0 = new Properties();
       jndiTemplate0.setEnvironment(properties0);
-      StringReader stringReader0 = new StringReader("=py!#lNd");
-      properties0.load((Reader) stringReader0);
+      properties0.put((Object) "/home/jeshkracht/'%7D%7CnDRHFXx.ij%25", (Object) "en");
       try {
-        jndiTemplate0.lookup("=py!#lNd");
+        jndiTemplate0.unbind("'}|nDRHFXx.ij%");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*

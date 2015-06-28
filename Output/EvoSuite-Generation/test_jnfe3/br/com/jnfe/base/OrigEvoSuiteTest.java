@@ -19,7 +19,7 @@ public class OrigEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Orig orig0 = Orig.ESTRANGEIRA_IMPDIR;
+      Orig orig0 = Orig.ESTRANGEIRA_ADQINT;
       boolean boolean0 = orig0.isNacional();
       assertEquals(false, boolean0);
   }
@@ -31,9 +31,9 @@ public class OrigEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Orig orig0 = Orig.ESTRANGEIRA_IMPDIR;
+      Orig orig0 = Orig.ESTRANGEIRA_ADQINT;
       String string0 = orig0.getDesc();
-      assertEquals("Estrangeira, importa\u00E7\u00E3o direta", string0);
+      assertEquals("Estrangeira, adquirida nomercado interno", string0);
   }
 
   //Test case number: 2
@@ -43,8 +43,8 @@ public class OrigEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Orig orig0 = Orig.ESTRANGEIRA_IMPDIR;
+      Orig orig0 = Orig.ESTRANGEIRA_ADQINT;
       char char0 = orig0.getValue();
-      assertEquals('1', char0);
+      assertEquals('2', char0);
   }
 }

@@ -18,41 +18,68 @@ public class ClassUtilsEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 7 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.util.ClassUtils.getConstructor(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/reflect/Constructor;: root-Branch
-   * 2 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;: root-Branch
-   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
-   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - true
-   * 5 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - true
-   * 6 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;: I14 Branch 15 IF_ICMPGE L168 - true
-   * 7 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;: I14 Branch 15 IF_ICMPGE L168 - false
+   * 2 org.jsecurity.util.ClassUtils.<init>()V: root-Branch
+   * 3 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - true
+   * 4 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;: I14 Branch 15 IF_ICMPGE L168 - true
+   * 5 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;: I14 Branch 15 IF_ICMPGE L168 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      Object[] objectArray0 = new Object[4];
-      objectArray0[0] = (Object) "org.apache.commons.logging.impl.Log4JLogger";
-      objectArray0[1] = (Object) "org.apache.commons.logging.impl.Log4JLogger";
-      objectArray0[2] = (Object) "org.apache.commons.logging.impl.Log4JLogger";
-      objectArray0[3] = (Object) "org.apache.commons.logging.impl.Log4JLogger";
+      Class<?> class0 = ClassUtils.class;
+      ClassUtils classUtils0 = (ClassUtils)ClassUtils.newInstance(class0);
+      Object[] objectArray0 = new Object[6];
+      objectArray0[0] = (Object) class0;
+      objectArray0[1] = (Object) classUtils0;
+      objectArray0[2] = (Object) classUtils0;
+      objectArray0[3] = (Object) class0;
+      objectArray0[4] = (Object) classUtils0;
+      objectArray0[5] = (Object) class0;
       // Undeclared exception!
       try {
-        ClassUtils.newInstance("org.apache.commons.logging.impl.Log4JLogger", objectArray0);
-        fail("Expecting exception: NoClassDefFoundError");
-      } catch(NoClassDefFoundError e) {
+        ClassUtils.newInstance((Class) class0, objectArray0);
+        fail("Expecting exception: IllegalStateException");
+      } catch(IllegalStateException e) {
         /*
-         * org/apache/log4j/Category
+         * java.lang.NoSuchMethodException: org.jsecurity.util.ClassUtils.<init>(java.lang.Class, org.jsecurity.util.ClassUtils, org.jsecurity.util.ClassUtils, java.lang.Class, org.jsecurity.util.ClassUtils, java.lang.Class)
          */
       }
   }
 
   //Test case number: 1
   /*
+   * 7 covered goals:
+   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;: root-Branch
+   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
+   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I29 Branch 9 IFEQ L102 - true
+   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - false
+   * 5 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I69 Branch 11 IFEQ L113 - true
+   * 6 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I106 Branch 12 IFEQ L121 - true
+   * 7 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      Object[] objectArray0 = new Object[5];
+      // Undeclared exception!
+      try {
+        ClassUtils.newInstance("N6lEXQH\"_X&", objectArray0);
+        fail("Expecting exception: UnknownClassException");
+      } catch(UnknownClassException e) {
+        /*
+         * Unable to load class named [N6lEXQH\"_X&] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+         */
+      }
+  }
+
+  //Test case number: 2
+  /*
    * 1 covered goal:
    * 1 org.jsecurity.util.ClassUtils.instantiate(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)Ljava/lang/Object;: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
-      Object[] objectArray0 = new Object[3];
+  public void test2()  throws Throwable  {
+      Object[] objectArray0 = new Object[7];
       // Undeclared exception!
       try {
         ClassUtils.instantiate((Constructor) null, objectArray0);
@@ -64,10 +91,28 @@ public class ClassUtilsEvoSuiteTest {
       }
   }
 
-  //Test case number: 2
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/String;)Ljava/lang/Object;: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      // Undeclared exception!
+      try {
+        ClassUtils.newInstance("");
+        fail("Expecting exception: UnknownClassException");
+      } catch(UnknownClassException e) {
+        /*
+         * Unable to load class named [] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+         */
+      }
+  }
+
+  //Test case number: 4
   /*
    * 6 covered goals:
-   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/String;)Ljava/lang/Object;: root-Branch
+   * 1 org.jsecurity.util.ClassUtils.isAvailable(Ljava/lang/String;)Z: root-Branch
    * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I29 Branch 9 IFEQ L102 - true
    * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - false
    * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I69 Branch 11 IFEQ L113 - true
@@ -75,36 +120,12 @@ public class ClassUtilsEvoSuiteTest {
    * 6 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - false
    */
   @Test
-  public void test2()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        ClassUtils.newInstance("EB*I8Fb\"I`");
-        fail("Expecting exception: UnknownClassException");
-      } catch(UnknownClassException e) {
-        /*
-         * Unable to load class named [EB*I8Fb\"I`] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
-         */
-      }
-  }
-
-  //Test case number: 3
-  /*
-   * 7 covered goals:
-   * 1 org.jsecurity.util.ClassUtils.isAvailable(Ljava/lang/String;)Z: root-Branch
-   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
-   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I29 Branch 9 IFEQ L102 - true
-   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - false
-   * 5 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I69 Branch 11 IFEQ L113 - true
-   * 6 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I106 Branch 12 IFEQ L121 - true
-   * 7 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - false
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      boolean boolean0 = ClassUtils.isAvailable("] from the current ClassLoader.  ");
+  public void test4()  throws Throwable  {
+      boolean boolean0 = ClassUtils.isAvailable("bQYn vf");
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 4
+  //Test case number: 5
   /*
    * 7 covered goals:
    * 1 org.jsecurity.util.ClassUtils.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream;: I12 Branch 1 IFNULL L56 - false
@@ -116,39 +137,22 @@ public class ClassUtilsEvoSuiteTest {
    * 7 org.jsecurity.util.ClassUtils.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream;: I96 Branch 7 IFEQ L74 - true
    */
   @Test
-  public void test4()  throws Throwable  {
-      InputStream inputStream0 = ClassUtils.getResourceAsStream("Ot# ");
-      assertNull(inputStream0);
-  }
-
-  //Test case number: 5
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - true
-   * 2 org.jsecurity.util.ClassUtils.<init>()V: root-Branch
-   */
-  @Test
   public void test5()  throws Throwable  {
-      Class<?> class0 = ClassUtils.class;
-      ClassUtils classUtils0 = (ClassUtils)ClassUtils.newInstance(class0);
-      assertNotNull(classUtils0);
+      InputStream inputStream0 = ClassUtils.getResourceAsStream("");
+      assertNull(inputStream0);
   }
 
   //Test case number: 6
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - false
+   * 4 covered goals:
+   * 1 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - true
+   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - true
+   * 3 org.jsecurity.util.ClassUtils.isAvailable(Ljava/lang/String;)Z: root-Branch
+   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
    */
   @Test
   public void test6()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        ClassUtils.newInstance((Class) null);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Class method parameter cannot be null.
-         */
-      }
+      boolean boolean0 = ClassUtils.isAvailable("org.apache.commons.logging.LogFactory");
+      assertEquals(true, boolean0);
   }
 }

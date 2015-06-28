@@ -21,11 +21,11 @@ nu.staldal.xtree.SequentialTreeBuilder
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xtree.SequentialTreeBuilder: 85.71%</ul><ul>
-<li>4276 fitness evaluations, 87 generations, 44828 statements, 2877 tests.
-<li>Time: 0:01:09(Search: 0:01:04, minimization: 0:00:04)
-<li>Coverage: 26/32 branches, 18/18 methods, 36/42 total goals
-<li>Mutation score: 3%
+<ul><li>Target class: nu.staldal.xtree.SequentialTreeBuilder: 88.10%</ul><ul>
+<li>8144 fitness evaluations, 164 generations, 72584 statements, 5268 tests.
+<li>Time: 0:01:05(Search: 0:01:02, minimization: 0:00:02)
+<li>Coverage: 27/32 branches, 18/18 methods, 37/42 total goals
+<li>Mutation score: 2%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,7 +33,7 @@ nu.staldal.xtree.SequentialTreeBuilder
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>InputSource inputSource0 = new InputSource();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  SequentialTreeBuilder.parseXMLSequential(inputSource0, false, (ElementHandler) null);
+<span class="nocode"><a name="3">  3: </a></span>  SequentialTreeBuilder.parseXMLSequential(inputSource0, true, (ElementHandler) null);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>}
@@ -76,20 +76,26 @@ nu.staldal.xtree.SequentialTreeBuilder
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.endPrefixMapping(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.endPrefixMapping(&quot;$f){NR&quot;);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;{&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>Element element0 = sequentialTreeBuilder0.getRootElement();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;&quot;, element0.getLocalName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;&quot;, element0.getNamespaceURI());
-<span class="nocode"><a name="8">  8: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="2">  2: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.setDocumentLocator((Locator) locatorImpl0);
+<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
+<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="4">  4: </a></span>Element element0 = sequentialTreeBuilder0.getRootElement();
+<span class="nocode"><a name="5">  5: </a></span>assertNull(element0.getSystemId());
+</pre>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -101,79 +107,69 @@ nu.staldal.xtree.SequentialTreeBuilder
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 10</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;25B?^P)pM`&quot;, &quot;25B?^P)pM`&quot;, &quot;25B?^P)pM`&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;(C~&quot;, &quot;$f){NR&quot;, &quot;$f){NR&quot;, (Attributes) attributesImpl0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  sequentialTreeBuilder0.endElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  sequentialTreeBuilder0.endElement(&quot;(C~&quot;, &quot;(C~&quot;, &quot;(C~&quot;);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.setDocumentLocator((Locator) locatorImpl0);
-<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
-</pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributesImpl0.getLength());
+<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="3">  3: </a></span>attributes2Impl0.addAttribute(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;C;F9~&gt;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.endElement(&quot;C/\&quot;7=$&quot;, &quot;C/\&quot;7=$&quot;, &quot;C/\&quot;7=$&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>sequentialTreeBuilder0.endElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.endElement((String) null, &quot;http://xml.org/sax/features/namespace-prefixes&quot;, (String) null);
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;Nw#?x+'C&lt;&quot;, &quot;zu$#9'v[GN_4&quot;);
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;gX!kqVn&quot;, &quot;gX!kqVn&quot;);
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;z:H*l&lt;nht,;xg;u&quot;, &quot;z:H*l&lt;nht,;xg;u&quot;);
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startPrefixMapping(&quot;z:H*l&lt;nht,;xg;u&quot;, &quot;z:H*l&lt;nht,;xg;u&quot;);
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[11];
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.characters(charArray0, (int) '|', (int) '|');
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[13];
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.characters(charArray0, (int) '\u0000', (int) '\u0000');
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[11];
-<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null, (URL) null);
+<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[1];
 <span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
 <span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  sequentialTreeBuilder0.characters(charArray0, (int) '@', (-1178));
+<span class="nocode"><a name="8">  8: </a></span>  sequentialTreeBuilder0.characters(charArray0, (int) 'o', (-1839));
 <span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NegativeArraySizeException&quot;);
 <span class="nocode"><a name="10"> 10: </a></span>} catch(NegativeArraySizeException e) {
 <span class="nocode"><a name="11"> 11: </a></span>}
@@ -181,43 +177,43 @@ nu.staldal.xtree.SequentialTreeBuilder
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) '9', 0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.ignorableWhitespace(charArray0, (-1451), (-577));
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[2];
-<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) '?', (int) '|');
+<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null, (URL) null);
+<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="6">  6: </a></span>sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) 'o', (-1839));
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.processingInstruction(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.processingInstruction(&quot; J18%&quot;, &quot;25B?^P)pM`&quot;);
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.processingInstruction(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, &quot;Nw#?x+'C&lt;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;zu$#9'v[GN_4&quot;, &quot;zu$#9'v[GN_4&quot;, &quot;zu$#9'v[GN_4&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.processingInstruction(&quot;zu$#9'v[GN_4&quot;, &quot;zu$#9'v[GN_4&quot;);
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.skippedEntity(&quot;&gt;!LSb_?j?}3R|&quot;);
+<span class="nocode"><a name="2">  2: </a></span>sequentialTreeBuilder0.skippedEntity(&quot;25B?^P)pM`&quot;);
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
+<span class="nocode"><a name="1">  1: </a></span>SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null, (URL) null);
 <span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, &quot;http://xml.org/sax/features/validation&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.skippedEntity(&quot;http://xml.org/sax/features/validation&quot;);
+<span class="nocode"><a name="3">  3: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>sequentialTreeBuilder0.startElement(&quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, &quot;S&amp;j\&quot;S mOrZNg]&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>sequentialTreeBuilder0.skippedEntity((String) null);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -420,9 +416,9 @@ nu.staldal.xtree.SequentialTreeBuilder
 <span class="nocode"><a name="198">198: </a></span><span style="background-color: #ffffcc">			if (baseURI != null) rootElement.setBaseURI(baseURI);</span>
 <span class="nocode"><a name="199">199: </a></span><span style="background-color: #ffffcc">			for (int i = 0; i &lt; atts.getLength(); i++)</span>
 <span class="nocode"><a name="200">200: </a></span>			{
-<span class="nocode"><a name="201">201: </a></span>				rootElement.addAttribute(atts.getURI(i), atts.getLocalName(i),
+<span class="nocode"><a name="201">201: </a></span><span style="background-color: #ffffcc">				rootElement.addAttribute(atts.getURI(i), atts.getLocalName(i),</span>
 <span class="nocode"><a name="202">202: </a></span>					atts.getType(i), atts.getValue(i));
-<span class="nocode"><a name="203">203: </a></span>				if (atts.getURI(i).equals(XML_NS) &amp;&amp;
+<span class="nocode"><a name="203">203: </a></span><span style="background-color: #ffffcc">				if (atts.getURI(i).equals(XML_NS) &amp;&amp;</span>
 <span class="nocode"><a name="204">204: </a></span>						atts.getLocalName(i).equals(&quot;base&quot;))
 <span class="nocode"><a name="205">205: </a></span>				{
 <span class="nocode"><a name="206">206: </a></span>					try {
@@ -467,7 +463,7 @@ nu.staldal.xtree.SequentialTreeBuilder
 <span class="nocode"><a name="245">245: </a></span>				subTreeBuilder.reset();
 <span class="nocode"><a name="246">246: </a></span>			}
 <span class="nocode"><a name="247">247: </a></span>			
-<span class="nocode"><a name="248">248: </a></span><span style="background-color: #ffffcc">			inSubTree--;			</span>
+<span class="nocode"><a name="248">248: </a></span>			inSubTree--;			
 <span class="nocode"><a name="249">249: </a></span>		}
 <span class="nocode"><a name="250">250: </a></span>		else
 <span class="nocode"><a name="251">251: </a></span>		{
@@ -558,7 +554,7 @@ nu.staldal.xtree.SequentialTreeBuilder
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -576,7 +572,7 @@ nu.staldal.xtree.SequentialTreeBuilder
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6092
+<li>process_communication_port: 7932
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

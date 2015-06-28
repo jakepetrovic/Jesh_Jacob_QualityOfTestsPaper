@@ -21,33 +21,45 @@ org.jsecurity.crypto.hash.Sha1Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Sha1Hash: 85.71%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3612 statements, 287 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
-<li>Mutation score: 56%
+<ul><li>Target class: org.jsecurity.crypto.hash.Sha1Hash: 100.00%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3427 statements, 260 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
+<li>Mutation score: 44%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;UTF-8&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ZjuQyJn6JaERBnvgwi/8ZNz1gcI=&quot;, sha1Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;h+6ntv$r2g#m;mYMn&quot;, (Object) &quot;1\uFFFD&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-1&quot;, sha1Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha1Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;SHA-1&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;xXG4ZUnkm/Ijz2SDiMRiiMIkG1o=&quot;, sha1Hash0.toBase64());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String(&quot;io.C&gt;v&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;8a80af&quot;, sha1Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String(&quot;Unable to convert byte array to String with encoding '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;52769b95eb687289ef7abb5bcad79aaeb6b2b684adae29e0c22b617a77287629e0&quot;, sha1Hash0.toHex());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;&quot;, (Object) &quot;SHA-1&quot;, 0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;c571b86549e49bf223cf648388c46288c2241b5a&quot;, sha1Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Sha1Hash.fromHexString(&quot;UTF-8&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;\u0000\u0000\u0000&quot;, (Object) &quot;UTF-8&quot;, 0);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;J1ckbqS+pPbgwaK3vT9xTqcpowg=&quot;, sha1Hash0.toBase64());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -98,7 +110,7 @@ org.jsecurity.crypto.hash.Sha1Hash
 <span class="nocode"><a name="46"> 46: </a></span>
 <span class="nocode"><a name="47"> 47: </a></span>    public Sha1Hash(Object source, Object salt) {
 <span class="nocode"><a name="48"> 48: </a></span>        super(source, salt);
-<span class="nocode"><a name="49"> 49: </a></span>    }
+<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="50"> 50: </a></span>
 <span class="nocode"><a name="51"> 51: </a></span>    public Sha1Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="52"> 52: </a></span>        super(source, salt, hashIterations);
@@ -111,7 +123,7 @@ org.jsecurity.crypto.hash.Sha1Hash
 <span class="nocode"><a name="59"> 59: </a></span>    public static Sha1Hash fromHexString(String hex) {
 <span class="nocode"><a name="60"> 60: </a></span><span style="background-color: #ffffcc">        Sha1Hash hash = new Sha1Hash();</span>
 <span class="nocode"><a name="61"> 61: </a></span><span style="background-color: #ffffcc">        hash.setBytes(Hex.decode(hex));</span>
-<span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">        return hash;</span>
+<span class="nocode"><a name="62"> 62: </a></span>        return hash;
 <span class="nocode"><a name="63"> 63: </a></span>    }
 <span class="nocode"><a name="64"> 64: </a></span>
 <span class="nocode"><a name="65"> 65: </a></span>    public static Sha1Hash fromBase64String(String base64) {
@@ -124,7 +136,7 @@ org.jsecurity.crypto.hash.Sha1Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -142,7 +154,7 @@ org.jsecurity.crypto.hash.Sha1Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20284
+<li>process_communication_port: 16742
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

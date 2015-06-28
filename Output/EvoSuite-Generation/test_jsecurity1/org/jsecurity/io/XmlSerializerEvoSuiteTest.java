@@ -15,11 +15,23 @@ public class XmlSerializerEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - false
+   * 1 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - true
    * 2 org.jsecurity.io.XmlSerializer.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
+      XmlSerializer xmlSerializer0 = new XmlSerializer();
+      byte[] byteArray0 = xmlSerializer0.serialize((Object) "");
+      assertNotNull(byteArray0);
+  }
+
+  //Test case number: 1
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
       // Undeclared exception!
       try {
@@ -32,28 +44,34 @@ public class XmlSerializerEvoSuiteTest {
       }
   }
 
-  //Test case number: 1
+  //Test case number: 2
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.io.XmlSerializer.deserialize([B)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L71 - true
-   * 2 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - true
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test2()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
-      byte[] byteArray0 = xmlSerializer0.serialize((Object) "jR&`");
-      String string0 = (String)xmlSerializer0.deserialize(byteArray0);
-      assertEquals("jR&`", string0);
+      byte[] byteArray0 = new byte[10];
+      // Undeclared exception!
+      try {
+        xmlSerializer0.deserialize(byteArray0);
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * 0
+         */
+      }
   }
 
-  //Test case number: 2
+  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 org.jsecurity.io.XmlSerializer.deserialize([B)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L71 - false
    * 2 org.jsecurity.io.XmlSerializer.<init>()V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test3()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
       // Undeclared exception!
       try {

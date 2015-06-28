@@ -16,33 +16,33 @@ public class RedirectViewEvoSuiteTest {
   /*
    * 3 covered goals:
    * 1 org.jsecurity.web.RedirectView.setUrl(Ljava/lang/String;)V: root-Branch
-   * 2 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;Z)V: root-Branch
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      RedirectView redirectView0 = new RedirectView((String) null, true);
-  }
-
-  //Test case number: 1
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;ZZ)V: root-Branch
-   * 2 org.jsecurity.web.RedirectView.setUrl(Ljava/lang/String;)V: root-Branch
+   * 2 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;ZZ)V: root-Branch
    * 3 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
-      RedirectView redirectView0 = new RedirectView((String) null, true, true);
+  public void test0()  throws Throwable  {
+      RedirectView redirectView0 = new RedirectView("m?j@s?W6Y]n[)v!1'", false, false);
   }
 
-  //Test case number: 2
+  //Test case number: 1
   /*
    * 1 covered goal:
    * 1 org.jsecurity.web.RedirectView.<init>()V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test1()  throws Throwable  {
       RedirectView redirectView0 = new RedirectView();
+  }
+
+  //Test case number: 2
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;Z)V: root-Branch
+   * 2 org.jsecurity.web.RedirectView.setUrl(Ljava/lang/String;)V: root-Branch
+   * 3 org.jsecurity.web.RedirectView.<init>(Ljava/lang/String;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      RedirectView redirectView0 = new RedirectView("m?j@s?W6Y]n[)v!1'", false);
   }
 }

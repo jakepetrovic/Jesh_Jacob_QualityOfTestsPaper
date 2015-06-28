@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.cache.CacheManager;
-import org.jsecurity.cache.HashtableCacheManager;
 import org.jsecurity.realm.SimpleAccountRealm;
 
 public class CachingRealmEvoSuiteTest {
@@ -24,26 +23,28 @@ public class CachingRealmEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("S(.I*XgD`!>sI*i");
-      String string0 = simpleAccountRealm0.getName();
-      assertEquals("S(.I*XgD`!>sI*i", string0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(".I5e\"z3sL");
+      // Undeclared exception!
+      try {
+        simpleAccountRealm0.addAccount(".I5e\"z3sL", ".I5e\"z3sL");
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 1
   /*
-   * 4 covered goals:
+   * 3 covered goals:
    * 1 org.jsecurity.realm.CachingRealm.setCacheManager(Lorg/jsecurity/cache/CacheManager;)V: root-Branch
    * 2 org.jsecurity.realm.CachingRealm.getCacheManager()Lorg/jsecurity/cache/CacheManager;: root-Branch
-   * 3 org.jsecurity.realm.CachingRealm.setName(Ljava/lang/String;)V: root-Branch
-   * 4 org.jsecurity.realm.CachingRealm.<init>()V: root-Branch
+   * 3 org.jsecurity.realm.CachingRealm.<init>()V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("S(.I*XgD`!>sI*i");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm-0-authorization", simpleAccountRealm0.getAuthorizationCacheName());
+      simpleAccountRealm0.setCacheManager((CacheManager) null);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_2", simpleAccountRealm0.getName());
   }
 }

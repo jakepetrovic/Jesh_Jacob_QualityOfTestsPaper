@@ -19,9 +19,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       String string0 = cST_PIS0.getGroup();
-      assertEquals("Outr", string0);
+      assertEquals("Aliq", string0);
   }
 
   //Test case number: 1
@@ -31,7 +31,7 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       boolean boolean0 = cST_PIS0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -43,9 +43,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       String string0 = cST_PIS0.getDesc();
-      assertEquals("Outras opera\u00E7\u00F5es", string0);
+      assertEquals("Al\u00EDquota normal", string0);
   }
 
   //Test case number: 3
@@ -55,9 +55,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       String string0 = cST_PIS0.getValue();
-      assertEquals("99", string0);
+      assertEquals("01", string0);
   }
 
   //Test case number: 4
@@ -69,8 +69,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
-      boolean boolean0 = cST_PIS0.isRequiredTag("GB");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      boolean boolean0 = cST_PIS0.isRequiredTag("");
       assertEquals(false, boolean0);
   }
 
@@ -83,7 +83,7 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_02;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       boolean boolean0 = cST_PIS0.isRequiredTag("vPIS");
       assertEquals(true, boolean0);
   }

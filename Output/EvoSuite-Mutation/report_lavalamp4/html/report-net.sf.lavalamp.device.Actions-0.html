@@ -22,8 +22,8 @@ net.sf.lavalamp.device.Actions
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.device.Actions: 100.00%</ul><ul>
-<li>150 fitness evaluations, 4 generations, 1387 statements, 272 tests.
-<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:00)
+<li>350 fitness evaluations, 8 generations, 2582 statements, 474 tests.
+<li>Time: 0:00:41(Search: 0:00:41, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 4/4 methods, 4/4 total goals
 <li>Mutation score: 33%
 </ul>
@@ -31,24 +31,24 @@ net.sf.lavalamp.device.Actions
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TurnOff turnOff0 = new TurnOff();
-<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) turnOff0, (Action) turnOff0, (Action) turnOff0);
-<span class="nocode"><a name="3">  3: </a></span>TurnOff turnOff1 = (TurnOff)actions0.getSuccessAction();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(turnOff0, turnOff1);
+<span class="nocode"><a name="1">  1: </a></span>Crash crash0 = new Crash();
+<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+<span class="nocode"><a name="3">  3: </a></span>Crash crash1 = (Crash)actions0.getSuccessAction();
+<span class="nocode"><a name="4">  4: </a></span>assertSame(crash1, crash0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TurnOn turnOn0 = new TurnOn();
-<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-<span class="nocode"><a name="3">  3: </a></span>TurnOn turnOn1 = (TurnOn)actions0.getErrorAction();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(turnOn1, turnOn0);
+<span class="nocode"><a name="1">  1: </a></span>Crash crash0 = new Crash();
+<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+<span class="nocode"><a name="3">  3: </a></span>Crash crash1 = (Crash)actions0.getErrorAction();
+<span class="nocode"><a name="4">  4: </a></span>assertSame(crash1, crash0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TurnOn turnOn0 = new TurnOn();
-<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-<span class="nocode"><a name="3">  3: </a></span>TurnOn turnOn1 = (TurnOn)actions0.getFailureAction();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(turnOn1, turnOn0);
+<span class="nocode"><a name="1">  1: </a></span>Crash crash0 = new Crash();
+<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+<span class="nocode"><a name="3">  3: </a></span>Crash crash1 = (Crash)actions0.getFailureAction();
+<span class="nocode"><a name="4">  4: </a></span>assertSame(crash1, crash0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -85,7 +85,7 @@ net.sf.lavalamp.device.Actions
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3656635714330023642.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1615131319000466248.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -103,7 +103,7 @@ net.sf.lavalamp.device.Actions
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10585
+<li>process_communication_port: 2451
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

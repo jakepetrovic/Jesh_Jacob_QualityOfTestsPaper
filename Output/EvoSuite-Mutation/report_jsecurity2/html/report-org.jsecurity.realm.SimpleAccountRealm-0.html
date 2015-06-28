@@ -22,10 +22,10 @@ org.jsecurity.realm.SimpleAccountRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.SimpleAccountRealm: 84.38%</ul><ul>
-<li>12574 fitness evaluations, 253 generations, 67610 statements, 8054 tests.
+<li>12052 fitness evaluations, 243 generations, 78118 statements, 7622 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 13/18 branches, 18/19 methods, 27/32 total goals
-<li>Mutation score: 66%
+<li>Coverage: 14/18 branches, 17/19 methods, 27/32 total goals
+<li>Mutation score: 67%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,64 +34,63 @@ org.jsecurity.realm.SimpleAccountRealm
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  simpleAccountRealm0.addAccount(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  simpleAccountRealm0.addAccount(&quot;u/DPTTq^,9uqV1%v&quot;, &quot;u/DPTTq^,9uqV1%v&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;xo:L Y|:17(~Ey&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simpleAccountRealm0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;Av9;7V{{3}&quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.afterAuthorizationCacheSet();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAccountRealm0.roleExists(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;Av9;7V{{3}&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
 <span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="4">  4: </a></span>String string0 = &quot;?elC!igR!BBz#rI\\589&quot;;
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.accountExists(string0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_27&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.accountExists(&quot; 59&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_32&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;a4b.@&quot;);
-<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.initRoleCache();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAccountRealm0.roleExists(&quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;a4b.@&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="4">  4: </a></span>String[] stringArray0 = new String[9];
+<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.addAccount(&quot; 5v&quot;, &quot; 5v&quot;, stringArray0);
+<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = simpleAccountRealm0.accountExists(&quot; 5v&quot;);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm-12-authorization&quot;, simpleAccountRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;a4b.@&quot;);
-<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.initRoleCache();
-<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.addRole(&quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.roleExists(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;a4b.@&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;Av9&gt;;V{{D}&quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.afterAuthorizationCacheSet();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.addRole(&quot;U&quot;);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.roleExists(&quot;U&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;Av9&gt;;V{{D}&quot;, simpleAccountRealm0.getName());
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet((String) null, (String) null);
+<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet((String) null, &quot;\u0000\u0001/\uFFFD\u0000\t\u0000&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(set0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(set0);
+<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet(&quot;Av9;7V{{3}&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(9, set0.size());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet(&quot;1:|h`IwaC(&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(10, set0.size());
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = SimpleAccountRealm.toSet(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(set0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -189,12 +188,12 @@ org.jsecurity.realm.SimpleAccountRealm
 <span class="nocode"><a name="93"> 93: </a></span><span style="background-color: #ffffcc">        Set&lt;String&gt; roleNames = CollectionUtils.asSet(roles);</span>
 <span class="nocode"><a name="94"> 94: </a></span><span style="background-color: #ffffcc">        SimpleAccount account = new SimpleAuthorizingAccount(username, password, getName(), roleNames, null);</span>
 <span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">        add(account);</span>
-<span class="nocode"><a name="96"> 96: </a></span>    }
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="97"> 97: </a></span>
 <span class="nocode"><a name="98"> 98: </a></span>    protected void add(SimpleAccount account) {
 <span class="nocode"><a name="99"> 99: </a></span><span style="background-color: #ffffcc">        Object key = getAuthorizationCacheKey(account.getPrincipals());</span>
 <span class="nocode"><a name="100">100: </a></span><span style="background-color: #ffffcc">        getAuthorizationCache().put(key, account);</span>
-<span class="nocode"><a name="101">101: </a></span>    }
+<span class="nocode"><a name="101">101: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="102">102: </a></span>
 <span class="nocode"><a name="103">103: </a></span>    protected SimpleRole getRole(String rolename) {
 <span class="nocode"><a name="104">104: </a></span><span style="background-color: #ffffcc">        return roles.get(rolename);</span>
@@ -248,7 +247,7 @@ org.jsecurity.realm.SimpleAccountRealm
 <span class="nocode"><a name="152">152: </a></span>    }
 <span class="nocode"><a name="153">153: </a></span>
 <span class="nocode"><a name="154">154: </a></span>    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-<span class="nocode"><a name="155">155: </a></span><span style="background-color: #ffffcc">        return (Account) getAuthorizationCache().get(getAuthorizationCacheKey(principals));</span>
+<span class="nocode"><a name="155">155: </a></span>        return (Account) getAuthorizationCache().get(getAuthorizationCacheKey(principals));
 <span class="nocode"><a name="156">156: </a></span>    }
 <span class="nocode"><a name="157">157: </a></span>
 <span class="nocode"><a name="158">158: </a></span>    protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
@@ -259,7 +258,7 @@ org.jsecurity.realm.SimpleAccountRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -277,7 +276,7 @@ org.jsecurity.realm.SimpleAccountRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14033
+<li>process_communication_port: 11913
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

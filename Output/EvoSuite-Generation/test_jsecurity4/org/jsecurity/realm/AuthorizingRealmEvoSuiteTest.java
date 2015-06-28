@@ -8,19 +8,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.TreeSet;
 import org.jsecurity.authc.SimpleAccount;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.authz.AuthorizationInfo;
 import org.jsecurity.authz.Permission;
 import org.jsecurity.authz.SimpleAuthorizationInfo;
 import org.jsecurity.authz.SimpleAuthorizingAccount;
 import org.jsecurity.authz.UnauthorizedException;
+import org.jsecurity.authz.permission.AllPermission;
 import org.jsecurity.authz.permission.PermissionResolver;
+import org.jsecurity.authz.permission.WildcardPermission;
 import org.jsecurity.authz.permission.WildcardPermissionResolver;
 import org.jsecurity.cache.Cache;
 import org.jsecurity.cache.CacheManager;
@@ -35,7 +39,7 @@ public class AuthorizingRealmEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 19 covered goals:
+   * 15 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)V: root-Branch
    * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationCache()Lorg/jsecurity/cache/Cache;: root-Branch
    * 3 org.jsecurity.realm.AuthorizingRealm.init()V: root-Branch
@@ -47,47 +51,36 @@ public class AuthorizingRealmEvoSuiteTest {
    * 9 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I23 Branch 4 IFEQ L175 - true
    * 10 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - true
    * 11 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I116 Branch 8 IFEQ L195 - false
-   * 12 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - false
-   * 13 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I9 Branch 21 IFNULL L341 - true
-   * 14 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I61 Branch 25 IFLE L354 - false
-   * 15 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 26 IFEQ L374 - true
-   * 16 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I21 Branch 27 IFNULL L379 - false
-   * 17 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I24 Branch 28 IFGT L379 - true
-   * 18 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 46 IFEQ L469 - true
-   * 19 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 47 IFNE L472 - false
+   * 12 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - true
+   * 13 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I16 Branch 10 IFEQ L258 - true
+   * 14 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - true
+   * 15 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I104 Branch 15 IFNONNULL L279 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "Mr@,)a9L>", "Mr@,)a9L>");
+      // Undeclared exception!
       try {
-        simpleAccountRealm0.checkPermission((PrincipalCollection) null, ")");
-        fail("Expecting exception: UnauthorizedException");
-      } catch(UnauthorizedException e) {
-        /*
-         * User is not permitted [org.jsecurity.authz.permission.WildcardPermission@719990c2]
-         */
+        simpleAccountRealm0.checkPermission((PrincipalCollection) simplePrincipalCollection0, "Mr@,)a9L>");
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
   //Test case number: 1
   /*
-   * 6 covered goals:
+   * 2 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: root-Branch
    * 2 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: root-Branch
-   * 3 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - true
-   * 4 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I16 Branch 10 IFEQ L258 - true
-   * 5 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - true
-   * 6 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I104 Branch 15 IFNONNULL L279 - false
    */
   @Test
   public void test1()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("+=(zKV(2R*wb8Dmc?N");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("2MyW,HCq&s_?K=pZf");
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        simpleAccountRealm0.isPermitted((PrincipalCollection) simplePrincipalCollection0, "+=(zKV(2R*wb8Dmc?N");
+        simpleAccountRealm0.isPermitted((PrincipalCollection) simplePrincipalCollection0, "Jdk14");
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -105,70 +98,77 @@ public class AuthorizingRealmEvoSuiteTest {
       
       WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
       simpleAccountRealm0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_65", simpleAccountRealm0.getName());
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_48", simpleAccountRealm0.getName());
   }
 
   //Test case number: 3
   /*
    * 8 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I46 Branch 6 IFNONNULL L183 - true
+   * 1 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I18 Branch 3 IFNONNULL L173 - true
    * 2 org.jsecurity.realm.AuthorizingRealm.afterCacheManagerSet()V: root-Branch
    * 3 org.jsecurity.realm.AuthorizingRealm.getAuthorizationCacheName()Ljava/lang/String;: root-Branch
    * 4 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCacheName(Ljava/lang/String;)V: root-Branch
-   * 5 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - false
-   * 6 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I46 Branch 6 IFNONNULL L183 - false
-   * 7 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I77 Branch 7 IFEQ L188 - true
-   * 8 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCache(Lorg/jsecurity/cache/Cache;)V: I9 Branch 1 IFNULL L106 - false
+   * 5 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCache(Lorg/jsecurity/cache/Cache;)V: I9 Branch 1 IFNULL L106 - false
+   * 6 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - false
+   * 7 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I46 Branch 6 IFNONNULL L183 - false
+   * 8 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I77 Branch 7 IFEQ L188 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
       assertNotNull(simpleAccountRealm0);
       
       HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
       simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-      simpleAccountRealm0.afterCacheManagerSet();
+      simpleAccountRealm0.initAuthorizationCache();
       assertEquals("org.jsecurity.realm.SimpleAccountRealm-3-authorization", simpleAccountRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 4
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
-   * 2 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I15 Branch 20 IFNULL L320 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("+=(zKV(2R*wb8Dmc?N");
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      simpleAccountRealm0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-      assertNull(simpleAccountRealm0.getAuthorizationCacheName());
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
+      simpleAccountRealm0.onLogout((PrincipalCollection) null);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_104", simpleAccountRealm0.getName());
   }
 
   //Test case number: 5
   /*
-   * 9 covered goals:
+   * 14 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: root-Branch
-   * 2 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I22 Branch 31 IF_ICMPGE L391 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I22 Branch 31 IF_ICMPGE L391 - false
-   * 4 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 32 IFEQ L405 - true
-   * 5 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 33 IFNULL L410 - false
-   * 6 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 34 IFGT L410 - false
-   * 7 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 35 IFEQ L414 - true
-   * 8 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 35 IFEQ L414 - false
-   * 9 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I9 Branch 21 IFNULL L341 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I9 Branch 21 IFNULL L341 - true
+   * 4 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I61 Branch 25 IFLE L354 - false
+   * 5 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 26 IFEQ L374 - true
+   * 6 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I21 Branch 27 IFNULL L379 - false
+   * 7 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I24 Branch 28 IFGT L379 - true
+   * 8 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I22 Branch 31 IF_ICMPGE L391 - true
+   * 9 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I22 Branch 31 IF_ICMPGE L391 - false
+   * 10 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 32 IFEQ L405 - true
+   * 11 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 33 IFNULL L410 - false
+   * 12 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 34 IFGT L410 - false
+   * 13 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 35 IFEQ L414 - true
+   * 14 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 35 IFEQ L414 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      String[] stringArray0 = new String[2];
-      stringArray0[0] = "*.c";
-      stringArray0[1] = "*.c";
-      simpleAccountRealm0.isPermitted((PrincipalCollection) null, stringArray0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_138", simpleAccountRealm0.getName());
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("2MyW,HCq&s_?K=pZf");
+      String[] stringArray0 = new String[6];
+      stringArray0[0] = "Jdk14";
+      stringArray0[1] = "2MyW,HCq&s_?K=pZf";
+      stringArray0[2] = "2MyW,HCq&s_?K=pZf";
+      stringArray0[3] = "2MyW,HCq&s_?K=pZf";
+      stringArray0[4] = "Jdk14";
+      stringArray0[5] = "Jdk14";
+      boolean[] booleanArray0 = simpleAccountRealm0.isPermitted((PrincipalCollection) null, stringArray0);
+      assertNotNull(booleanArray0);
   }
 
   //Test case number: 6
@@ -180,205 +180,170 @@ public class AuthorizingRealmEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
-      boolean boolean0 = simpleAccountRealm0.hasRole((PrincipalCollection) null, "}UN@");
+      boolean boolean0 = simpleAccountRealm0.hasRole((PrincipalCollection) null, "");
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_192", simpleAccountRealm0.getName());
       assertEquals(false, boolean0);
   }
 
   //Test case number: 7
   /*
-   * 1 covered goal:
+   * 3 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.checkRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)V: root-Branch
+   * 2 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 71 IFEQ L580 - true
+   * 3 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 72 IFNE L583 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("8=");
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "UTF-8", (Object) "\uFFFD\uFFFD\uFFFDr\u0000\u0000\u0000\u0000", "\uFFFD\uFFFD\uFFFDr\u0000\u0000\u0000\u0000");
-      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
-      // Undeclared exception!
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
       try {
-        simpleAccountRealm0.checkRole((PrincipalCollection) simplePrincipalCollection0, "\uFFFD\uFFFD\uFFFDr\u0000\u0000\u0000\u0000");
-        fail("Expecting exception: NoSuchElementException");
-      } catch(NoSuchElementException e) {
+        simpleAccountRealm0.checkRole((PrincipalCollection) null, (String) null);
+        fail("Expecting exception: UnauthorizedException");
+      } catch(UnauthorizedException e) {
+        /*
+         * User does not have role [null]
+         */
       }
   }
 
   //Test case number: 8
   /*
    * 4 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: root-Branch
-   * 2 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 50 IFEQ L495 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 51 IFNULL L498 - false
-   * 4 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 52 IFGT L498 - true
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: root-Branch
+   * 2 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 73 IFEQ L598 - true
+   * 3 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 74 IFNULL L601 - false
+   * 4 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 75 IFGT L601 - true
    */
   @Test
   public void test8()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
-      simpleAccountRealm0.checkPermissions((PrincipalCollection) null, (Collection<Permission>) linkedList0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_250", simpleAccountRealm0.getName());
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Wbl.xD#4F14-");
+      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      simpleAccountRealm0.checkRoles((PrincipalCollection) null, (Collection<String>) linkedHashSet0);
+      assertEquals("Wbl.xD#4F14-", simpleAccountRealm0.getName());
   }
 
   //Test case number: 9
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: root-Branch
-   * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - true
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
-      SimpleAccount simpleAccount0 = new SimpleAccount();
-      SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) "UTF-8", (Object) simpleAccount0, "");
-      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthorizingAccount0.getPrincipals();
-      SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
-      // Undeclared exception!
-      try {
-        simpleAccountRealm0.checkRoles((PrincipalCollection) simplePrincipalCollection1, (Collection<String>) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 10
   /*
    * 1 covered goal:
    * 1 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCache(Lorg/jsecurity/cache/Cache;)V: I9 Branch 1 IFNULL L106 - true
    */
   @Test
-  public void test10()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("+=(zKV(2R*wb8Dmc?N");
+  public void test9()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
       simpleAccountRealm0.setAuthorizationCache((Cache) null);
-      assertEquals("+=(zKV(2R*wb8Dmc?N", simpleAccountRealm0.getName());
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_262", simpleAccountRealm0.getName());
+  }
+
+  //Test case number: 10
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I46 Branch 6 IFNONNULL L183 - true
+   */
+  @Test
+  public void test10()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
+      assertNotNull(simpleAccountRealm0);
+      
+      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+      simpleAccountRealm0.afterCacheManagerSet();
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm-12-authorization", simpleAccountRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 11
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I18 Branch 3 IFNONNULL L173 - true
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache("");
-      simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
-      simpleAccountRealm0.initAuthorizationCache();
-      assertNull(simpleAccountRealm0.getAuthorizationCacheName());
-  }
-
-  //Test case number: 12
-  /*
-   * 8 covered goals:
+   * 6 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - false
    * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I44 Branch 12 IFEQ L264 - true
    * 3 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I67 Branch 13 IFEQ L269 - true
    * 4 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I114 Branch 16 IFNULL L283 - true
-   * 5 org.jsecurity.realm.AuthorizingRealm.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I9 Branch 64 IFNULL L552 - true
-   * 6 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - true
-   * 7 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I16 Branch 10 IFEQ L258 - true
-   * 8 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I104 Branch 15 IFNONNULL L279 - false
+   * 5 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I9 Branch 58 IFNULL L522 - true
+   * 6 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I21 Branch 59 IFNULL L523 - true
    */
   @Test
-  public void test12()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
+  public void test11()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
       assertNotNull(simpleAccountRealm0);
       
       HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache("");
-      simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
-      SimpleAccount simpleAccount0 = new SimpleAccount();
-      SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) "UTF-8", (Object) simpleAccount0, "");
-      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthorizingAccount0.getPrincipals();
-      SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
-      boolean boolean0 = simpleAccountRealm0.hasAllRoles((PrincipalCollection) simplePrincipalCollection1, (Collection<String>) null);
-      assertEquals(false, boolean0);
+      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "Mr@,)a9L>", "Mr@,)a9L>");
+      boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((PrincipalCollection) simplePrincipalCollection0, (List<String>) null);
+      assertNotNull(booleanArray0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm--6-authorization", simpleAccountRealm0.getAuthorizationCacheName());
+  }
+
+  //Test case number: 12
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I15 Branch 20 IFNULL L320 - true
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      simpleAccountRealm0.clearCachedAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_379", simpleAccountRealm0.getName());
   }
 
   //Test case number: 13
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - false
+   * 2 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I15 Branch 20 IFNULL L320 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - true
    */
   @Test
   public void test13()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-      simpleAccountRealm0.clearCachedAuthorizationInfo((PrincipalCollection) null);
-      assertNull(simpleAccountRealm0.getAuthorizationCacheName());
-  }
-
-  //Test case number: 14
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I15 Branch 20 IFNULL L320 - false
-   * 2 org.jsecurity.realm.AuthorizingRealm.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
-   * 3 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCache(Lorg/jsecurity/cache/Cache;)V: I9 Branch 1 IFNULL L106 - false
-   * 4 org.jsecurity.realm.AuthorizingRealm.clearCachedAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)V: I3 Branch 19 IFNONNULL L314 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("K");
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache("K");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
+      HashtableCache hashtableCache0 = new HashtableCache("");
       simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        simpleAccountRealm0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+        simpleAccountRealm0.clearCachedAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
   }
 
-  //Test case number: 15
+  //Test case number: 14
   /*
-   * 12 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I9 Branch 21 IFNULL L341 - false
    * 2 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I14 Branch 22 IFNULL L342 - true
    * 3 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I26 Branch 23 IFNULL L346 - true
-   * 4 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 41 IFEQ L442 - true
-   * 5 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 42 IFNULL L446 - false
-   * 6 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 43 IFGT L446 - false
-   * 7 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I27 Branch 44 IFEQ L447 - false
-   * 8 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I38 Branch 45 IFNE L448 - false
-   * 9 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 26 IFEQ L374 - true
-   * 10 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I21 Branch 27 IFNULL L379 - false
-   * 11 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I24 Branch 28 IFGT L379 - true
-   * 12 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I61 Branch 25 IFLE L354 - false
+   * 4 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 46 IFEQ L469 - true
+   * 5 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 47 IFNE L472 - false
    */
   @Test
-  public void test15()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
-      linkedList0.add((Permission) null);
-      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-      boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection<Permission>) linkedList0, (AuthorizationInfo) simpleAccount0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_391", simpleAccountRealm0.getName());
-      assertEquals(false, boolean0);
+  public void test14()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("@al(v}");
+      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set<String>) linkedHashSet0);
+      WildcardPermission wildcardPermission0 = new WildcardPermission("@al(v}");
+      // Undeclared exception!
+      try {
+        simpleAccountRealm0.checkPermission((Permission) wildcardPermission0, (AuthorizationInfo) simpleAuthorizationInfo0);
+        fail("Expecting exception: UnauthorizedException");
+      } catch(UnauthorizedException e) {
+        /*
+         * User is not permitted [org.jsecurity.authz.permission.WildcardPermission@3b7692ad]
+         */
+      }
   }
 
-  //Test case number: 16
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 33 IFNULL L410 - true
-   */
-  @Test
-  public void test16()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      simpleAccountRealm0.isPermitted((List<Permission>) null, (AuthorizationInfo) null);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_433", simpleAccountRealm0.getName());
-  }
-
-  //Test case number: 17
+  //Test case number: 15
   /*
    * 3 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 34 IFGT L410 - true
@@ -386,68 +351,107 @@ public class AuthorizingRealmEvoSuiteTest {
    * 3 org.jsecurity.realm.AuthorizingRealm.isPermitted(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 33 IFNULL L410 - false
    */
   @Test
-  public void test17()  throws Throwable  {
+  public void test15()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
       LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
       simpleAccountRealm0.isPermitted((List<Permission>) linkedList0, (AuthorizationInfo) null);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_449", simpleAccountRealm0.getName());
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_453", simpleAccountRealm0.getName());
   }
 
-  //Test case number: 18
+  //Test case number: 16
   /*
    * 5 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I29 Branch 38 IF_ICMPGE L426 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I9 Branch 39 IFNULL L436 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - true
    * 3 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I3 Branch 36 IFNULL L424 - false
    * 4 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I6 Branch 37 IFLE L424 - false
    * 5 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I29 Branch 38 IF_ICMPGE L426 - false
    */
   @Test
-  public void test18()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
+  public void test16()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "Mr@,)a9L>", "Mr@,)a9L>");
+      String[] stringArray0 = new String[1];
+      stringArray0[0] = "Mr@,)a9L>";
+      // Undeclared exception!
+      try {
+        simpleAccountRealm0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, stringArray0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 17
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I9 Branch 39 IFNULL L436 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I3 Branch 36 IFNULL L424 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I6 Branch 37 IFLE L424 - false
+   * 4 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I29 Branch 38 IF_ICMPGE L426 - true
+   * 5 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I29 Branch 38 IF_ICMPGE L426 - false
+   */
+  @Test
+  public void test17()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
       assertNotNull(simpleAccountRealm0);
       
+      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "Mr@,)a9L>", "Mr@,)a9L>");
       String[] stringArray0 = new String[1];
-      stringArray0[0] = "5X,+A92}{)_(3zM|8+";
-      boolean boolean0 = simpleAccountRealm0.isPermittedAll((PrincipalCollection) null, stringArray0);
+      stringArray0[0] = "Mr@,)a9L>";
+      boolean boolean0 = simpleAccountRealm0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, stringArray0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm--1-authorization", simpleAccountRealm0.getAuthorizationCacheName());
       assertEquals(false, boolean0);
+  }
+
+  //Test case number: 18
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 41 IFEQ L442 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 42 IFNULL L446 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 43 IFGT L446 - true
+   */
+  @Test
+  public void test18()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      assertNotNull(simpleAccountRealm0);
+      
+      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
+      boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection<Permission>) linkedList0, (AuthorizationInfo) null);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_608", simpleAccountRealm0.getName());
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 19
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 42 IFNULL L446 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 41 IFEQ L442 - true
    */
   @Test
   public void test19()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("nwxy-WGBp(ZO5$p+");
       assertNotNull(simpleAccountRealm0);
       
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-      boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection<Permission>) null, (AuthorizationInfo) simpleAuthorizationInfo0);
+      boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection<Permission>) null, (AuthorizationInfo) null);
       assertEquals(true, boolean0);
   }
 
   //Test case number: 20
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 43 IFGT L446 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 41 IFEQ L442 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.isPermittedAll(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 42 IFNULL L446 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I3 Branch 48 IFNULL L480 - true
    */
   @Test
   public void test20()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
-      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-      boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection<Permission>) linkedList0, (AuthorizationInfo) simpleAccount0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_530", simpleAccountRealm0.getName());
-      assertEquals(true, boolean0);
+      simpleAccountRealm0.checkPermissions((PrincipalCollection) null, (String[]) null);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_644", simpleAccountRealm0.getName());
   }
 
   //Test case number: 21
@@ -460,11 +464,9 @@ public class AuthorizingRealmEvoSuiteTest {
    */
   @Test
   public void test21()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      String[] stringArray0 = new String[7];
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("lK}cVx*@");
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "\uFFFD\uFFFD\uFFFD", "lK}cVx*@");
+      String[] stringArray0 = new String[8];
       // Undeclared exception!
       try {
         simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, stringArray0);
@@ -478,142 +480,248 @@ public class AuthorizingRealmEvoSuiteTest {
 
   //Test case number: 22
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 50 IFEQ L495 - false
+   * 18 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 50 IFEQ L495 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 51 IFNULL L498 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 52 IFGT L498 - true
+   * 4 org.jsecurity.realm.AuthorizingRealm.afterCacheManagerSet()V: root-Branch
+   * 5 org.jsecurity.realm.AuthorizingRealm.getAuthorizationCacheName()Ljava/lang/String;: root-Branch
+   * 6 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCacheName(Ljava/lang/String;)V: root-Branch
+   * 7 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: root-Branch
+   * 8 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - true
+   * 9 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I16 Branch 10 IFEQ L258 - true
+   * 10 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I39 Branch 11 IFNULL L263 - false
+   * 11 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I44 Branch 12 IFEQ L264 - true
+   * 12 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I67 Branch 13 IFEQ L269 - true
+   * 13 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I104 Branch 15 IFNONNULL L279 - false
+   * 14 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I114 Branch 16 IFNULL L283 - true
+   * 15 org.jsecurity.realm.AuthorizingRealm.setAuthorizationCache(Lorg/jsecurity/cache/Cache;)V: I9 Branch 1 IFNULL L106 - false
+   * 16 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - false
+   * 17 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I46 Branch 6 IFNONNULL L183 - false
+   * 18 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I77 Branch 7 IFEQ L188 - true
    */
   @Test
   public void test22()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
       assertNotNull(simpleAccountRealm0);
       
-      SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) "org.jsecurity.realm.SimpleAccountRealm_6667", (Object) null, "org.jsecurity.realm.SimpleAccountRealm_6667");
-      simpleAccountRealm0.checkPermissions((Collection<Permission>) null, (AuthorizationInfo) simpleAuthorizingAccount0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_586", simpleAccountRealm0.getName());
+      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "Mr@,)a9L>", "Mr@,)a9L>");
+      TreeSet<Permission> treeSet0 = new TreeSet<Permission>();
+      simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) treeSet0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm-5-authorization", simpleAccountRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 23
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 54 IFEQ L514 - false
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 51 IFNULL L498 - true
    */
   @Test
   public void test23()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
-      SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) "org.jsecurity.realm.SimpleAccountRealm_6667", (Object) null, "org.jsecurity.realm.SimpleAccountRealm_6667");
-      simpleAccountRealm0.hasRole("org.jsecurity.realm.SimpleAccountRealm_6667", (AuthorizationInfo) simpleAuthorizingAccount0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_601", simpleAccountRealm0.getName());
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
+      simpleAccountRealm0.checkPermissions((Collection<Permission>) null, (AuthorizationInfo) simpleAuthorizationInfo0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_758", simpleAccountRealm0.getName());
   }
 
   //Test case number: 24
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 55 IFNULL L517 - false
-   * 2 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 56 IFNULL L517 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 71 IFEQ L580 - true
-   * 4 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 72 IFNE L583 - false
-   * 5 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 54 IFEQ L514 - true
+   * 11 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 52 IFGT L498 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I27 Branch 53 IFEQ L499 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 26 IFEQ L374 - true
+   * 4 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I21 Branch 27 IFNULL L379 - false
+   * 5 org.jsecurity.realm.AuthorizingRealm.isPermitted(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I24 Branch 28 IFGT L379 - true
+   * 6 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 46 IFEQ L469 - true
+   * 7 org.jsecurity.realm.AuthorizingRealm.checkPermission(Lorg/jsecurity/authz/Permission;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 47 IFNE L472 - false
+   * 8 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 50 IFEQ L495 - true
+   * 9 org.jsecurity.realm.AuthorizingRealm.checkPermissions(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 51 IFNULL L498 - false
+   * 10 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I9 Branch 21 IFNULL L341 - true
+   * 11 org.jsecurity.realm.AuthorizingRealm.getPermissions(Lorg/jsecurity/authz/AuthorizationInfo;)Ljava/util/Collection;: I61 Branch 25 IFLE L354 - false
    */
   @Test
   public void test24()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("3Kz]y\"k");
+      HashSet<Permission> hashSet0 = new HashSet<Permission>();
+      AllPermission allPermission0 = new AllPermission();
+      hashSet0.add((Permission) allPermission0);
       // Undeclared exception!
       try {
-        simpleAccountRealm0.checkRole("Context classloader is null.", (AuthorizationInfo) simpleAuthorizationInfo0);
+        simpleAccountRealm0.checkPermissions((Collection<Permission>) hashSet0, (AuthorizationInfo) null);
         fail("Expecting exception: UnauthorizedException");
       } catch(UnauthorizedException e) {
         /*
-         * User does not have role [Context classloader is null.]
+         * User is not permitted [org.jsecurity.authz.permission.AllPermission@b1c0bcc]
          */
       }
   }
 
   //Test case number: 25
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I9 Branch 58 IFNULL L522 - false
-   * 2 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I21 Branch 59 IFNULL L523 - true
-   * 3 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 54 IFEQ L514 - false
    */
   @Test
   public void test25()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("lK}cVx*@");
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "\uFFFD\uFFFD\uFFFD", "lK}cVx*@");
+      SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null);
+      boolean boolean0 = simpleAccountRealm0.hasRole("lK}cVx*@", (AuthorizationInfo) simpleAuthorizingAccount0);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 26
+  /*
+   * 7 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 55 IFNULL L517 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 56 IFNULL L517 - true
+   * 3 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 60 IFEQ L532 - true
+   * 4 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 61 IFNULL L537 - false
+   * 5 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 62 IFGT L537 - false
+   * 6 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 63 IFEQ L541 - true
+   * 7 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I41 Branch 63 IFEQ L541 - false
+   */
+  @Test
+  public void test26()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mj^[v.tl");
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      linkedList0.add("Mj^[v.tl");
+      HashSet<Permission> hashSet0 = new HashSet<Permission>();
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "\u0000\uFFFD7\u0000gs\uFFFD7\u001A", (Object) "HashtableCache [Mj^[v.tl]", "\u0000\uFFFD7\u0000gs\uFFFD7\u001A", (Set<String>) null, (Set<Permission>) hashSet0);
+      boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List<String>) linkedList0, (AuthorizationInfo) simpleAccount0);
+      assertNotNull(booleanArray0);
+  }
+
+  //Test case number: 27
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I18 Branch 56 IFNULL L517 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I23 Branch 57 IFLE L517 - true
+   * 3 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 55 IFNULL L517 - false
+   */
+  @Test
+  public void test27()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("al(v}");
+      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set<String>) linkedHashSet0);
+      // Undeclared exception!
+      try {
+        simpleAccountRealm0.checkRole("al(v}", (AuthorizationInfo) simpleAuthorizationInfo0);
+        fail("Expecting exception: UnauthorizedException");
+      } catch(UnauthorizedException e) {
+        /*
+         * User does not have role [al(v}]
+         */
+      }
+  }
+
+  //Test case number: 28
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I9 Branch 58 IFNULL L522 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I21 Branch 59 IFNULL L523 - true
+   */
+  @Test
+  public void test28()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mj^[v.tl");
       LinkedList<String> linkedList0 = new LinkedList<String>();
       boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((PrincipalCollection) null, (List<String>) linkedList0);
       assertNotNull(booleanArray0);
   }
 
-  //Test case number: 26
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 60 IFEQ L532 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 61 IFNULL L537 - false
-   * 3 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 62 IFGT L537 - true
-   */
-  @Test
-  public void test26()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      assertNotNull(simpleAccountRealm0);
-      
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      simpleAccountRealm0.hasRoles((List<String>) linkedList0, (AuthorizationInfo) simpleAccount0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_662", simpleAccountRealm0.getName());
-  }
-
-  //Test case number: 27
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 61 IFNULL L537 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 60 IFEQ L532 - true
-   */
-  @Test
-  public void test27()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("K");
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-      boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List<String>) null, (AuthorizationInfo) simpleAuthorizationInfo0);
-      assertNotNull(booleanArray0);
-  }
-
-  //Test case number: 28
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 73 IFEQ L598 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 74 IFNULL L601 - false
-   * 3 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 75 IFGT L601 - true
-   */
-  @Test
-  public void test28()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      simpleAccountRealm0.checkRoles((Collection<String>) treeSet0, (AuthorizationInfo) null);
-      assertEquals(0, treeSet0.size());
-  }
-
   //Test case number: 29
   /*
-   * 10 covered goals:
-   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 74 IFNULL L601 - true
-   * 2 org.jsecurity.realm.AuthorizingRealm.getAuthorizationCache()Lorg/jsecurity/cache/Cache;: root-Branch
-   * 3 org.jsecurity.realm.AuthorizingRealm.init()V: root-Branch
-   * 4 org.jsecurity.realm.AuthorizingRealm.<init>()V: root-Branch
-   * 5 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 73 IFEQ L598 - true
-   * 6 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I4 Branch 2 IFEQ L167 - true
-   * 7 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I18 Branch 3 IFNONNULL L173 - false
-   * 8 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I23 Branch 4 IFEQ L175 - true
-   * 9 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - true
-   * 10 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I116 Branch 8 IFEQ L195 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 61 IFNULL L537 - true
    */
   @Test
   public void test29()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("2MyW,HCq&s_?K=pZf");
+      boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List<String>) null, (AuthorizationInfo) null);
+      assertNotNull(booleanArray0);
+  }
+
+  //Test case number: 30
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I18 Branch 62 IFGT L537 - true
+   * 2 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I4 Branch 60 IFEQ L532 - true
+   * 3 org.jsecurity.realm.AuthorizingRealm.hasRoles(Ljava/util/List;Lorg/jsecurity/authz/AuthorizationInfo;)[Z: I15 Branch 61 IFNULL L537 - false
+   */
+  @Test
+  public void test30()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("org.apache.commons.logging.impl.WeakHashtable");
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List<String>) linkedList0, (AuthorizationInfo) null);
+      assertNotNull(booleanArray0);
+  }
+
+  //Test case number: 31
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I9 Branch 64 IFNULL L552 - true
+   */
+  @Test
+  public void test31()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       assertNotNull(simpleAccountRealm0);
       
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-      simpleAccountRealm0.checkRoles((Collection<String>) null, (AuthorizationInfo) simpleAuthorizationInfo0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_717", simpleAccountRealm0.getName());
+      HashSet<String> hashSet0 = new HashSet<String>();
+      boolean boolean0 = simpleAccountRealm0.hasAllRoles((PrincipalCollection) null, (Collection<String>) hashSet0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_959", simpleAccountRealm0.getName());
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 32
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 74 IFNULL L601 - true
+   */
+  @Test
+  public void test32()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Mr@,)a9L>");
+      simpleAccountRealm0.checkRoles((Collection<String>) null, (AuthorizationInfo) null);
+      assertEquals("Mr@,)a9L>", simpleAccountRealm0.getName());
+  }
+
+  //Test case number: 33
+  /*
+   * 18 covered goals:
+   * 1 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 75 IFGT L601 - false
+   * 2 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I27 Branch 76 IFEQ L602 - false
+   * 3 org.jsecurity.realm.AuthorizingRealm.getAuthorizationCache()Lorg/jsecurity/cache/Cache;: root-Branch
+   * 4 org.jsecurity.realm.AuthorizingRealm.init()V: root-Branch
+   * 5 org.jsecurity.realm.AuthorizingRealm.<init>()V: root-Branch
+   * 6 org.jsecurity.realm.AuthorizingRealm.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: root-Branch
+   * 7 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I4 Branch 54 IFEQ L514 - true
+   * 8 org.jsecurity.realm.AuthorizingRealm.hasRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)Z: I15 Branch 55 IFNULL L517 - true
+   * 9 org.jsecurity.realm.AuthorizingRealm.getAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: I3 Branch 9 IFNONNULL L252 - false
+   * 10 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 73 IFEQ L598 - true
+   * 11 org.jsecurity.realm.AuthorizingRealm.checkRoles(Ljava/util/Collection;Lorg/jsecurity/authz/AuthorizationInfo;)V: I15 Branch 74 IFNULL L601 - false
+   * 12 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I4 Branch 2 IFEQ L167 - true
+   * 13 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I18 Branch 3 IFNONNULL L173 - false
+   * 14 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I23 Branch 4 IFEQ L175 - true
+   * 15 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I37 Branch 5 IFNULL L181 - true
+   * 16 org.jsecurity.realm.AuthorizingRealm.initAuthorizationCache()V: I116 Branch 8 IFEQ L195 - false
+   * 17 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I4 Branch 71 IFEQ L580 - true
+   * 18 org.jsecurity.realm.AuthorizingRealm.checkRole(Ljava/lang/String;Lorg/jsecurity/authz/AuthorizationInfo;)V: I18 Branch 72 IFNE L583 - false
+   */
+  @Test
+  public void test33()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("Wbl.xD#4F14-");
+      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      linkedHashSet0.add("Wbl.xD#4F14-");
+      try {
+        simpleAccountRealm0.checkRoles((PrincipalCollection) null, (Collection<String>) linkedHashSet0);
+        fail("Expecting exception: UnauthorizedException");
+      } catch(UnauthorizedException e) {
+        /*
+         * User does not have role [Wbl.xD#4F14-]
+         */
+      }
   }
 }

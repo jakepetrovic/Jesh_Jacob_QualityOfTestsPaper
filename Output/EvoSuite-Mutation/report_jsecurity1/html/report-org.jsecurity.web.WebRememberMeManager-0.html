@@ -22,7 +22,7 @@ org.jsecurity.web.WebRememberMeManager
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.web.WebRememberMeManager: 65.22%</ul><ul>
-<li>18556 fitness evaluations, 373 generations, 100798 statements, 11611 tests.
+<li>17776 fitness evaluations, 357 generations, 96888 statements, 10861 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/10 branches, 14/15 methods, 15/23 total goals
 <li>Mutation score: 0%
@@ -38,15 +38,21 @@ org.jsecurity.web.WebRememberMeManager
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.getIdentityAttribute();
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = webRememberMeManager0.isCookieSecure();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieSecure(true);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.getIdentityAttribute();
 </pre>
 <h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieSecure(false);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
+</pre>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -59,54 +65,55 @@ org.jsecurity.web.WebRememberMeManager
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
 <span class="nocode"><a name="2">  2: </a></span>String string0 = webRememberMeManager0.getCookiePath();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(string0);
 </pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[42];
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.rememberSerializedIdentity(byteArray0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>RequestParamAttribute&lt;String&gt; requestParamAttribute0 = new RequestParamAttribute&lt;String&gt;(&quot;&lt;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;rememberMe&quot;, &quot;rememberMe&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;rememberMe&quot;);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  webRememberMeManager0.rememberIdentity((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookiePath(&quot;}S1n~h$O 7&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;}S1n~h$O 7&quot;, webRememberMeManager0.getCookiePath());
+<span class="nocode"><a name="2">  2: </a></span>RequestParamAttribute&lt;String&gt; requestParamAttribute0 = new RequestParamAttribute&lt;String&gt;();
 </pre>
 <h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookiePath(&quot;I:jjJ%Kvx'&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
+</pre>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
 <span class="nocode"><a name="2">  2: </a></span>String string0 = webRememberMeManager0.getCookieName();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;rememberMe&quot;, string0);
 </pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieName(&quot;d?:D&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
-</pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieMaxAge(94608000);
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieName((String) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCookieMaxAge(355);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(355, webRememberMeManager0.getCookieMaxAge());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -290,7 +297,7 @@ org.jsecurity.web.WebRememberMeManager
 <span class="nocode"><a name="179">179: </a></span>     */
 <span class="nocode"><a name="180">180: </a></span>    public boolean isCookieSecure() {
 <span class="nocode"><a name="181">181: </a></span><span style="background-color: #ffffcc">        assertCookieAttribute();</span>
-<span class="nocode"><a name="182">182: </a></span>        return ((CookieAttribute) this.identityAttribute).isSecure();
+<span class="nocode"><a name="182">182: </a></span><span style="background-color: #ffffcc">        return ((CookieAttribute) this.identityAttribute).isSecure();</span>
 <span class="nocode"><a name="183">183: </a></span>    }
 <span class="nocode"><a name="184">184: </a></span>
 <span class="nocode"><a name="185">185: </a></span>    /**
@@ -342,7 +349,7 @@ org.jsecurity.web.WebRememberMeManager
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -360,7 +367,7 @@ org.jsecurity.web.WebRememberMeManager
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11806
+<li>process_communication_port: 3069
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

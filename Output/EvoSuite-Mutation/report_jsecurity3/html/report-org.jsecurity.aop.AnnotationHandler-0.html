@@ -22,8 +22,8 @@ org.jsecurity.aop.AnnotationHandler
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.aop.AnnotationHandler: 100.00%</ul><ul>
-<li>6500 fitness evaluations, 131 generations, 39574 statements, 4053 tests.
-<li>Time: 0:00:15(Search: 0:00:15, minimization: 0:00:00)
+<li>34550 fitness evaluations, 692 generations, 156723 statements, 19935 tests.
+<li>Time: 0:00:57(Search: 0:00:57, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 4/4 methods, 5/5 total goals
 <li>Mutation score: 60%
 </ul>
@@ -31,21 +31,21 @@ org.jsecurity.aop.AnnotationHandler
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>GuestAnnotationHandler guestAnnotationHandler0 = new GuestAnnotationHandler();
-<span class="nocode"><a name="2">  2: </a></span>Subject subject0 = guestAnnotationHandler0.getSubject();
+<span class="nocode"><a name="1">  1: </a></span>UserAnnotationHandler userAnnotationHandler0 = new UserAnnotationHandler();
+<span class="nocode"><a name="2">  2: </a></span>Subject subject0 = userAnnotationHandler0.getSubject();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(subject0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>UserAnnotationHandler userAnnotationHandler0 = new UserAnnotationHandler();
 <span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = userAnnotationHandler0.getAnnotationClass();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, class0.isArray());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, class0.isEnum());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthenticatedAnnotationHandler authenticatedAnnotationHandler0 = new AuthenticatedAnnotationHandler();
+<span class="nocode"><a name="1">  1: </a></span>UserAnnotationHandler userAnnotationHandler0 = new UserAnnotationHandler();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  authenticatedAnnotationHandler0.setAnnotationClass((Class&lt;?&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>  userAnnotationHandler0.setAnnotationClass((Class&lt;?&gt;) null);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -142,7 +142,7 @@ org.jsecurity.aop.AnnotationHandler
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -160,7 +160,7 @@ org.jsecurity.aop.AnnotationHandler
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12295
+<li>process_communication_port: 12875
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

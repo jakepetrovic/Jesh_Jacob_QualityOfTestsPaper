@@ -22,10 +22,10 @@ public class JniInchiInputInchiEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      LinkedList<Integer> linkedList0 = new LinkedList<Integer>();
+      LinkedList<Object> linkedList0 = new LinkedList<Object>();
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi((String) null, (List) linkedList0);
+        jniInchiInputInchi0 = new JniInchiInputInchi("$~7ZVoRH</8D1O1(er", (List) linkedList0);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -43,7 +43,7 @@ public class JniInchiInputInchiEvoSuiteTest {
   public void test1()  throws Throwable  {
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi("", "");
+        jniInchiInputInchi0 = new JniInchiInputInchi("", (String) null);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*

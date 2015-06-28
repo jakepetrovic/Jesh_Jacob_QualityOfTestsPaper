@@ -15,44 +15,44 @@ public class Sha256HashEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha256Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha256Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   * 1 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha256Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "NPSk", (Object) "UTF-8");
-      assertEquals("7ba6531844dad31f6bffb5c104246b5f4cda46a7653b090ee07ce6da77ba090c", sha256Hash0.toHex());
+      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("~|");
+      assertEquals("", sha256Hash0.toString());
   }
 
   //Test case number: 1
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Sha256Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "", (Object) "SHA-256");
+      assertEquals("bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea", sha256Hash0.toHex());
+  }
+
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha256Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test2()  throws Throwable  {
       // Undeclared exception!
       try {
-        Sha256Hash.fromHexString(" K'5/y8CoJb,K");
+        Sha256Hash.fromHexString("lqKW0iTyhcZ77pPDD4owkVfw2qNdxbh+QQt4YwoJz8c=");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * Odd number of characters.
+         * Illegal hexadecimal charcter l at index 0
          */
       }
-  }
-
-  //Test case number: 2
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha256Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("GGmy");
-      assertEquals("GGmy", sha256Hash0.toBase64());
   }
 
   //Test case number: 3
@@ -62,8 +62,8 @@ public class Sha256HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "q1e", (Object) "SHA-256", 42);
-      assertEquals("hZXTmJkPMG1EalS7aLLb/2ZKQs5kNvFzJC55uXVATpQ=", sha256Hash0.toBase64());
+      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "\u0000", (Object) "\u0000", (int) (byte)0);
+      assertEquals("96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7", sha256Hash0.toString());
   }
 
   //Test case number: 4
@@ -74,7 +74,7 @@ public class Sha256HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "\u0000\uFFFD\uFFFD\u0017J\uFFFD\uFFFDb\u059B");
-      assertEquals("92307cd53d8038154e7c634802798d006a91bee67d61510bcf2fb0eb812232fb", sha256Hash0.toHex());
+      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "");
+      assertEquals("SHA-256", sha256Hash0.getAlgorithmName());
   }
 }

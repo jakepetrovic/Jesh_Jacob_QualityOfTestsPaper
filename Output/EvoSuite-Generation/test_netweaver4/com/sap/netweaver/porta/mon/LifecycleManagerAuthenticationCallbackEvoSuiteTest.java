@@ -39,13 +39,13 @@ public class LifecycleManagerAuthenticationCallbackEvoSuiteTest {
   /*
    * 3 covered goals:
    * 1 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 1 LOOKUPSWITCH L26 Case 1 - false
-   * 2 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 3 LOOKUPSWITCH L26 Default-Case - true
-   * 3 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 2 LOOKUPSWITCH L26 Case 2 - false
+   * 2 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 2 LOOKUPSWITCH L26 Case 2 - true
+   * 3 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 3 LOOKUPSWITCH L26 Default-Case - false
    */
   @Test
   public void test1()  throws Throwable  {
       LifecycleManagerAuthenticationCallback lifecycleManagerAuthenticationCallback0 = new LifecycleManagerAuthenticationCallback();
-      AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
+      AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
       // Undeclared exception!
       try {
         lifecycleManagerAuthenticationCallback0.getCredentials(authenticationReason0);
@@ -57,15 +57,15 @@ public class LifecycleManagerAuthenticationCallbackEvoSuiteTest {
   //Test case number: 2
   /*
    * 4 covered goals:
-   * 1 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 2 LOOKUPSWITCH L26 Case 2 - true
+   * 1 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 3 LOOKUPSWITCH L26 Default-Case - true
    * 2 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.<init>()V: root-Branch
    * 3 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 1 LOOKUPSWITCH L26 Case 1 - false
-   * 4 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 3 LOOKUPSWITCH L26 Default-Case - false
+   * 4 com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 2 LOOKUPSWITCH L26 Case 2 - false
    */
   @Test
   public void test2()  throws Throwable  {
       LifecycleManagerAuthenticationCallback lifecycleManagerAuthenticationCallback0 = new LifecycleManagerAuthenticationCallback();
-      AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
+      AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
       // Undeclared exception!
       try {
         lifecycleManagerAuthenticationCallback0.getCredentials(authenticationReason0);

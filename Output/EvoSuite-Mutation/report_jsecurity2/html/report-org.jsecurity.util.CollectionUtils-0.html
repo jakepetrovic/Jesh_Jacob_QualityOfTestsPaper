@@ -22,7 +22,7 @@ org.jsecurity.util.CollectionUtils
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.util.CollectionUtils: 81.82%</ul><ul>
-<li>30364 fitness evaluations, 609 generations, 212593 statements, 19696 tests.
+<li>31864 fitness evaluations, 639 generations, 204457 statements, 19576 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 6/8 branches, 5/5 methods, 9/11 total goals
 <li>Mutation score: 23%
@@ -31,10 +31,10 @@ org.jsecurity.util.CollectionUtils
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Integer[] integerArray0 = new Integer[2];
-<span class="nocode"><a name="2">  2: </a></span>List&lt;Object&gt; list0 = CollectionUtils.asList((Object[]) integerArray0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(list0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, list0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = new String[1];
+<span class="nocode"><a name="2">  2: </a></span>List&lt;String&gt; list0 = CollectionUtils.asList(stringArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(1, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(list0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -44,25 +44,25 @@ org.jsecurity.util.CollectionUtils
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = Class.class;
-<span class="nocode"><a name="2">  2: </a></span>Collection&lt;Integer&gt; collection0 = CollectionUtils.emptyCollection((Class&lt;Integer&gt;) class0);
+<span class="nocode"><a name="2">  2: </a></span>Collection&lt;String&gt; collection0 = CollectionUtils.emptyCollection((Class&lt;String&gt;) class0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, collection0.size());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Set&lt;Object&gt; set0 = CollectionUtils.asSet((Object[]) null);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, set0.size());
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, set0.isEmpty());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Integer[] integerArray0 = new Integer[2];
-<span class="nocode"><a name="2">  2: </a></span>Set&lt;Integer&gt; set0 = CollectionUtils.asSet(integerArray0);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = new String[1];
+<span class="nocode"><a name="2">  2: </a></span>Set&lt;Object&gt; set0 = CollectionUtils.asSet((Object[]) stringArray0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(set0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, set0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, set0.isEmpty());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>List&lt;String&gt; list0 = CollectionUtils.asList((String[]) null);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="1">  1: </a></span>List&lt;Object&gt; list0 = CollectionUtils.asList((Object[]) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -141,7 +141,7 @@ org.jsecurity.util.CollectionUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -159,7 +159,7 @@ org.jsecurity.util.CollectionUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9206
+<li>process_communication_port: 9986
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

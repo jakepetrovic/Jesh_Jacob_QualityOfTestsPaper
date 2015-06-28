@@ -22,8 +22,8 @@ nu.staldal.lagoon.producer.FileSource
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.producer.FileSource: 100.00%</ul><ul>
-<li>150 fitness evaluations, 4 generations, 1282 statements, 315 tests.
-<li>Time: 0:00:10(Search: 0:00:10, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 976 statements, 248 tests.
+<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 4/4 methods, 4/4 total goals
 <li>Mutation score: 0%
 </ul>
@@ -39,22 +39,23 @@ nu.staldal.lagoon.producer.FileSource
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
 <span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  fileSource0.start((ContentHandler) xMLFilterImpl0, (Target) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(RuntimeException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * No SourceManager avaliable
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  fileSource0.start((ContentHandler) xMLReaderAdapter0, (Target) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(RuntimeException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * No SourceManager avaliable
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fileSource0.hasBeenUpdated(471L);
+<span class="nocode"><a name="4">  4: </a></span>  fileSource0.hasBeenUpdated(0L);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(RuntimeException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
@@ -140,7 +141,7 @@ nu.staldal.lagoon.producer.FileSource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -158,7 +159,7 @@ nu.staldal.lagoon.producer.FileSource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4896
+<li>process_communication_port: 5885
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -7,8 +7,14 @@ package org.jsecurity.io;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.CharArrayReader;
-import java.io.Reader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PipedInputStream;
+import java.nio.file.Path;
+import java.util.Map;
+import java.util.Scanner;
 import org.jsecurity.io.IniResource;
 import org.jsecurity.io.ResourceException;
 
@@ -17,53 +23,76 @@ public class IniResourceEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.io.IniResource.<init>()V: root-Branch
+   * 3 covered goals:
+   * 1 org.jsecurity.io.IniResource.setSections(Ljava/util/Map;)V: root-Branch
+   * 2 org.jsecurity.io.IniResource.getSections()Ljava/util/Map;: root-Branch
+   * 3 org.jsecurity.io.IniResource.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       IniResource iniResource0 = new IniResource();
+      Map<String, Map<String, String>> map0 = iniResource0.getSections();
+      iniResource0.setSections(map0);
       assertNull(iniResource0.getCharsetName());
   }
 
   //Test case number: 1
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.io.IniResource.<init>(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 3 covered goals:
+   * 1 org.jsecurity.io.IniResource.<init>(Ljava/io/InputStream;)V: root-Branch
+   * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - true
+   * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - true
    */
   @Test
   public void test1()  throws Throwable  {
-      IniResource iniResource0 = null;
-      try {
-        iniResource0 = new IniResource("{J*IoS_0xLDA>k'pZO", "P[;K9Zs6pFw5jtd ");
-        fail("Expecting exception: ResourceException");
-      } catch(ResourceException e) {
-        /*
-         * Unable to load text resource from the resource path [{J*IoS_0xLDA>k'pZO]
-         */
-      }
+      PipedInputStream pipedInputStream0 = new PipedInputStream(1981);
+      IniResource iniResource0 = new IniResource((InputStream) pipedInputStream0);
+      assertNull(iniResource0.getCharsetName());
   }
 
   //Test case number: 2
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
-   * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I24 Branch 2 IFNULL L92 - true
-   * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - true
-   * 4 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - true
-   * 5 org.jsecurity.io.IniResource.<init>(Ljava/io/Reader;)V: root-Branch
+   * 1 covered goal:
+   * 1 org.jsecurity.io.IniResource.<init>(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      char[] charArray0 = new char[6];
-      CharArrayReader charArrayReader0 = new CharArrayReader(charArray0, 0, 1879);
-      IniResource iniResource0 = new IniResource((Reader) charArrayReader0);
-      assertNull(iniResource0.getCharsetName());
+      IniResource iniResource0 = null;
+      try {
+        iniResource0 = new IniResource("zVs>EGts#nbMjvB", "zVs>EGts#nbMjvB");
+        fail("Expecting exception: ResourceException");
+      } catch(ResourceException e) {
+        /*
+         * Unable to load text resource from the resource path [zVs>EGts#nbMjvB]
+         */
+      }
   }
 
   //Test case number: 3
   /*
-   * 9 covered goals:
+   * 3 covered goals:
+   * 1 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
+   * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I24 Branch 2 IFNULL L92 - true
+   * 3 org.jsecurity.io.IniResource.<init>(Ljava/util/Scanner;)V: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      File file0 = new File("", "");
+      Path path0 = file0.toPath();
+      Scanner scanner0 = new Scanner(path0);
+      IniResource iniResource0 = new IniResource(scanner0);
+      assertNotNull(iniResource0);
+      
+      byte[] byteArray0 = new byte[8];
+      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
+      iniResource0.load((InputStream) byteArrayInputStream0);
+      assertEquals(-1, byteArrayInputStream0.read());
+      assertEquals(0, byteArrayInputStream0.available());
+  }
+
+  //Test case number: 4
+  /*
+   * 11 covered goals:
    * 1 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I24 Branch 2 IFNULL L92 - false
    * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I29 Branch 3 IFGT L92 - false
    * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I34 Branch 4 IFLE L92 - true
@@ -71,22 +100,42 @@ public class IniResourceEvoSuiteTest {
    * 5 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I8 Branch 9 IFNULL L127 - false
    * 6 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I13 Branch 10 IFLE L127 - true
    * 7 org.jsecurity.io.IniResource.getSectionName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 12 IFEQ L132 - true
-   * 8 org.jsecurity.io.IniResource.<init>(Ljava/io/Reader;)V: root-Branch
-   * 9 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
+   * 8 org.jsecurity.io.IniResource.<init>(Ljava/util/Scanner;)V: root-Branch
+   * 9 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - true
+   * 10 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
+   * 11 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - true
    */
   @Test
-  public void test3()  throws Throwable  {
-      char[] charArray0 = new char[6];
-      charArray0[0] = 'D';
-      CharArrayReader charArrayReader0 = new CharArrayReader(charArray0, 0, 1879);
-      IniResource iniResource0 = null;
+  public void test4()  throws Throwable  {
+      File file0 = new File("", "");
+      Path path0 = file0.toPath();
+      Scanner scanner0 = new Scanner(path0);
+      IniResource iniResource0 = new IniResource(scanner0);
+      assertNotNull(iniResource0);
+      
+      byte[] byteArray0 = new byte[8];
+      byteArray0[0] = (byte)47;
+      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
       try {
-        iniResource0 = new IniResource((Reader) charArrayReader0);
+        iniResource0.load((InputStream) byteArrayInputStream0);
         fail("Expecting exception: ResourceException");
       } catch(ResourceException e) {
         /*
-         * Unable to read key value pair for line [D].
+         * Unable to load data from input stream [java.io.ByteArrayInputStream@1da31657].
          */
       }
+      assertEquals(-1, byteArrayInputStream0.read());
+      assertEquals(0, byteArrayInputStream0.available());
+  }
+
+  //Test case number: 5
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I8 Branch 9 IFNULL L127 - true
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      boolean boolean0 = IniResource.isSectionHeader("");
+      assertEquals(false, boolean0);
   }
 }

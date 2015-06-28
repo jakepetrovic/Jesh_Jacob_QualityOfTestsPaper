@@ -42,7 +42,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "k");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "47F+f>");
       // Undeclared exception!
       try {
         valueImpl0.asByte();
@@ -59,11 +59,11 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "8n||~PEr[Y8v.dY");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       Class<?> class0 = ValueImpl.class;
       // Undeclared exception!
       try {
-        valueImpl0.asType((Class<BigDecimal>) class0);
+        valueImpl0.asType((Class<Double>) class0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -77,7 +77,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "3%wwh4Xs*!A5;h'");
       // Undeclared exception!
       try {
         valueImpl0.asLong();
@@ -94,7 +94,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, ")5Wd5+l99aX?)#iV0");
       // Undeclared exception!
       try {
         valueImpl0.asDate();
@@ -111,7 +111,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, ">4JCRDKJUv/Ci+[");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "messages");
       // Undeclared exception!
       try {
         valueImpl0.asInteger();
@@ -128,7 +128,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "@`");
       // Undeclared exception!
       try {
         valueImpl0.asString();
@@ -145,7 +145,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "BY_<733d1(J0U5Dm5");
       // Undeclared exception!
       try {
         valueImpl0.asDouble();
@@ -179,7 +179,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "'z<@!D@W");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "[M");
       // Undeclared exception!
       try {
         valueImpl0.asBigDecimal();
@@ -196,7 +196,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test10()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "messages");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
         valueImpl0.asBigInteger();
@@ -213,7 +213,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test11()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "3g b7cR$iU~lH_}L]");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
         valueImpl0.asBoolean();
@@ -229,9 +229,9 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test12()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "k");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "@`");
       String string0 = valueImpl0.toString();
-      assertEquals("k", string0);
+      assertEquals("@`", string0);
   }
 
   //Test case number: 13
@@ -241,9 +241,9 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test13()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "@`");
       int int0 = valueImpl0.hashCode();
-      assertEquals(0, int0);
+      assertEquals(2080, int0);
   }
 
   //Test case number: 14
@@ -253,10 +253,10 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "Im,2>");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "net.sf.xisemele.formatter.not.configured");
       // Undeclared exception!
       try {
-        valueImpl0.asDate("Im,2>");
+        valueImpl0.asDate("net.sf.xisemele.formatter.not.configured");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -269,8 +269,9 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test15()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "Im,2>");
-      boolean boolean0 = valueImpl0.equals((Object) null);
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
+      BigDecimal bigDecimal0 = new BigDecimal(59.77469533547871);
+      boolean boolean0 = valueImpl0.equals((Object) bigDecimal0);
       assertEquals(false, boolean0);
   }
 
@@ -282,7 +283,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test16()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, ">4JCRDKJUv/Ci+[");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "47F+f>");
       boolean boolean0 = valueImpl0.equals((Object) valueImpl0);
       assertEquals(true, boolean0);
   }

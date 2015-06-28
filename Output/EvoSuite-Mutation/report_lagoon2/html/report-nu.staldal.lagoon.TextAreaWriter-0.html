@@ -22,8 +22,8 @@ nu.staldal.lagoon.TextAreaWriter
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.TextAreaWriter: 100.00%</ul><ul>
-<li>1100 fitness evaluations, 23 generations, 4657 statements, 1023 tests.
-<li>Time: 0:00:21(Search: 0:00:20, minimization: 0:00:00)
+<li>4300 fitness evaluations, 87 generations, 15832 statements, 3040 tests.
+<li>Time: 0:00:35(Search: 0:00:35, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 5/5 methods, 6/6 total goals
 <li>Mutation score: 0%
 </ul>
@@ -33,19 +33,7 @@ nu.staldal.lagoon.TextAreaWriter
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
 <span class="nocode"><a name="2">  2: </a></span>textAreaWriter0.write(13);
-<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write((-12));
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  textAreaWriter0.flush();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[7];
-<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write(charArray0);
+<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write((-1));
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  textAreaWriter0.close();
@@ -53,13 +41,37 @@ nu.staldal.lagoon.TextAreaWriter
 <span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
+<span class="nocode"><a name="2">  2: </a></span>textAreaWriter0.write(&quot;_m|h~x?UD?ESU~8 e&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  textAreaWriter0.flush();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  textAreaWriter0.close();
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(StringIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * String index out of range: -2
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>No source found for nu.staldal.lagoon.TextAreaWriter
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -77,7 +89,7 @@ nu.staldal.lagoon.TextAreaWriter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16271
+<li>process_communication_port: 16319
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

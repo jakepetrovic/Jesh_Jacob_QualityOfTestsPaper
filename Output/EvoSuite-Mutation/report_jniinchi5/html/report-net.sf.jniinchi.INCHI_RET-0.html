@@ -22,8 +22,8 @@ net.sf.jniinchi.INCHI_RET
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_RET: 100.00%</ul><ul>
-<li>5150 fitness evaluations, 104 generations, 26589 statements, 3444 tests.
-<li>Time: 0:00:25(Search: 0:00:24, minimization: 0:00:00)
+<li>2500 fitness evaluations, 51 generations, 15060 statements, 1732 tests.
+<li>Time: 0:00:18(Search: 0:00:17, minimization: 0:00:00)
 <li>Coverage: 18/18 branches, 2/2 methods, 19/19 total goals
 <li>Mutation score: 85%
 </ul>
@@ -42,42 +42,42 @@ net.sf.jniinchi.INCHI_RET
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(5);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.BUSY, iNCHI_RET0);
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue((-1));
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.EOF, iNCHI_RET0);
 </pre>
-<h3>Test case 4</h3>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(0);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.OKAY, iNCHI_RET0);
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(1);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.WARNING, iNCHI_RET0);
 </pre>
-<h3>Test case 6</h3>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(2);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.ERROR, iNCHI_RET0);
 </pre>
-<h3>Test case 7</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(3);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.FATAL, iNCHI_RET0);
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(4);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.UNKNOWN, iNCHI_RET0);
 </pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(5);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_RET.BUSY, iNCHI_RET0);
-</pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET.getValue(1229386996);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET.getValue((-526));
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -207,7 +207,7 @@ net.sf.jniinchi.INCHI_RET
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -225,7 +225,7 @@ net.sf.jniinchi.INCHI_RET
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20328
+<li>process_communication_port: 14500
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -111,6 +111,6 @@ public class INCHI_STATUSEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      INCHI_STATUS.getValue(1933536339);
+      INCHI_STATUS.getValue((-229));
   }
 }

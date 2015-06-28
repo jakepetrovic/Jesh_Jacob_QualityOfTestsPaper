@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import org.jsecurity.realm.jndi.JndiRealmFactory;
 
 public class JndiRealmFactoryEvoSuiteTest {
@@ -26,8 +26,8 @@ public class JndiRealmFactoryEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JndiRealmFactory jndiRealmFactory0 = new JndiRealmFactory();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      jndiRealmFactory0.setJndiNames((Collection<String>) linkedHashSet0);
+      HashSet<String> hashSet0 = new HashSet<String>();
+      jndiRealmFactory0.setJndiNames((Collection<String>) hashSet0);
       try {
         jndiRealmFactory0.getRealms();
         fail("Expecting exception: IllegalStateException");
@@ -70,13 +70,13 @@ public class JndiRealmFactoryEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       JndiRealmFactory jndiRealmFactory0 = new JndiRealmFactory();
-      jndiRealmFactory0.setJndiNames("$");
+      jndiRealmFactory0.setJndiNames("Context !lassl]ader is null.");
       try {
         jndiRealmFactory0.getRealms();
         fail("Expecting exception: IllegalStateException");
       } catch(IllegalStateException e) {
         /*
-         * Unable to look up realm with jndi name '$'.
+         * Unable to look up realm with jndi name 'Context !lassl]ader is null.'.
          */
       }
   }

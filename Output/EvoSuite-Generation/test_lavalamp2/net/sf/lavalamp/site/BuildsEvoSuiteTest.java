@@ -31,38 +31,28 @@ public class BuildsEvoSuiteTest {
   //Test case number: 1
   /*
    * 4 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
-   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
+   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - false
+   * 2 net.sf.lavalamp.site.Builds.allSuccessful()Z: I40 Branch 2 IFNE L31 - true
    * 3 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
-   * 4 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
+   * 4 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
    */
   @Test
   public void test1()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("(");
+      Build build0 = new Build("(nkXJM`1{H&%");
       builds0.add(build0);
-      try {
-        builds0.getBuild("Passwrd for %s (u+ername %s):");
-        fail("Expecting exception: MissingBuildException");
-      } catch(MissingBuildException e) {
-        /*
-         * Passwrd for %s (u+ername %s): not found
-         */
-      }
+      boolean boolean0 = builds0.allSuccessful();
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 2
   /*
-   * 3 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - false
-   * 2 net.sf.lavalamp.site.Builds.allSuccessful()Z: I40 Branch 2 IFNE L31 - true
-   * 3 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
    */
   @Test
   public void test2()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
-      builds0.add(build0);
       boolean boolean0 = builds0.allSuccessful();
       assertEquals(true, boolean0);
   }
@@ -76,7 +66,7 @@ public class BuildsEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
+      Build build0 = new Build("(nkXJM`1{H&%");
       builds0.add(build0);
       build0.setSuccessful(false);
       boolean boolean0 = builds0.allSuccessful();
@@ -86,18 +76,22 @@ public class BuildsEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
+   * 3 covered goals:
+   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
+   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
+   * 3 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
    */
   @Test
   public void test4()  throws Throwable  {
       Builds builds0 = new Builds();
+      Build build0 = new Build("(nkXJM`1{H&%");
+      builds0.add(build0);
       try {
-        builds0.getBuild("os_authType=basic");
+        builds0.getBuild("lA$RP");
         fail("Expecting exception: MissingBuildException");
       } catch(MissingBuildException e) {
         /*
-         * os_authType=basic not found
+         * lA$RP not found
          */
       }
   }
@@ -113,9 +107,9 @@ public class BuildsEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
+      Build build0 = new Build("og");
       builds0.add(build0);
-      Build build1 = builds0.getBuild("");
-      assertEquals(true, build1.isSuccessful());
+      Build build1 = builds0.getBuild("og");
+      assertEquals("og", build1.getIdentity());
   }
 }

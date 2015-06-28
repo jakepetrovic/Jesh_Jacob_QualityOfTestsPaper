@@ -22,14 +22,20 @@ org.jsecurity.io.XmlSerializer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.XmlSerializer: 100.00%</ul><ul>
-<li>750 fitness evaluations, 16 generations, 10571 statements, 701 tests.
-<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:00)
+<li>150 fitness evaluations, 4 generations, 4170 statements, 338 tests.
+<li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:00)
 <li>Coverage: 4/4 branches, 3/3 methods, 5/5 total goals
-<li>Mutation score: 67%
+<li>Mutation score: 22%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = xmlSerializer0.serialize((Object) &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray0);
+</pre>
+<h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -42,14 +48,21 @@ org.jsecurity.io.XmlSerializer
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 2</h3>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = xmlSerializer0.serialize((Object) &quot;jR&amp;`&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = (String)xmlSerializer0.deserialize(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;jR&amp;`&quot;, string0);
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  xmlSerializer0.deserialize(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * 0
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
-<h3>Test case 3</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -139,15 +152,15 @@ org.jsecurity.io.XmlSerializer
 <span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">        ByteArrayInputStream bis = new ByteArrayInputStream(serialized);</span>
 <span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(bis));</span>
 <span class="nocode"><a name="76"> 76: </a></span><span style="background-color: #ffffcc">        Object o = decoder.readObject();</span>
-<span class="nocode"><a name="77"> 77: </a></span><span style="background-color: #ffffcc">        decoder.close();</span>
-<span class="nocode"><a name="78"> 78: </a></span><span style="background-color: #ffffcc">        return o;</span>
+<span class="nocode"><a name="77"> 77: </a></span>        decoder.close();
+<span class="nocode"><a name="78"> 78: </a></span>        return o;
 <span class="nocode"><a name="79"> 79: </a></span>    }
 <span class="nocode"><a name="80"> 80: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -165,7 +178,7 @@ org.jsecurity.io.XmlSerializer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4154
+<li>process_communication_port: 5885
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -29,9 +29,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
+      Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.attribute("$f5eh?F!$zA~,~B", (Date) null, "$f5eh?F!$zA~,~B");
+        writerImpl0.attribute("8", date0, "8");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -47,7 +48,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("");
+        writerImpl0.element("IU7Jxn4F)+bd]xN");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -111,7 +112,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("P&0B@6FM", "P&0B@6FM");
+        writerImpl0.element("", "Tue Jun 09 07:26:57 MDT 2015");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -125,10 +126,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Date date0 = new Date();
+      Date date0 = new Date(0L);
       // Undeclared exception!
       try {
-        writerImpl0.element("net.sf.xisemele.invalid.name", date0, "net.sf.xisemele.invalid.name");
+        writerImpl0.element("]$d3EUcQh##>s", date0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -175,10 +176,9 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Object object0 = new Object();
       // Undeclared exception!
       try {
-        writerImpl0.attribute("net.sf.xisemele.root.duplicate", object0);
+        writerImpl0.attribute("net.sf.xisemele.within.context.not.permitted", "net.sf.xisemele.within.context.not.permitted");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

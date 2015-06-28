@@ -22,7 +22,7 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "SM?cD2^W(`*47+lb%mh");
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 1, "*}kLIi2d30");
       jniInchiInputData0.getInput();
       assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
   }
@@ -34,7 +34,7 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "SM?cD2^W(`*47+lb%mh");
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 1, "*}kLIi2d30");
       INCHI_RET iNCHI_RET0 = jniInchiInputData0.getReturnValue();
       assertEquals(INCHI_RET.OKAY, iNCHI_RET0);
   }
@@ -47,9 +47,9 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "SM?cD2^W(`*47+lb%mh");
+      JniInchiInput jniInchiInput0 = new JniInchiInput();
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(1585, jniInchiInput0, (-6), "|");
       String string0 = jniInchiInputData0.getErrorMessage();
-      assertNotNull(string0);
-      assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
+      assertEquals("|", string0);
   }
 }

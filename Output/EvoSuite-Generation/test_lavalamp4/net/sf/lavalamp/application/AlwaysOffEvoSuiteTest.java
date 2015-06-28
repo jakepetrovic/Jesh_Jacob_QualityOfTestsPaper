@@ -16,18 +16,13 @@ public class AlwaysOffEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.application.AlwaysOff.run()V: root-Branch
-   * 2 net.sf.lavalamp.application.AlwaysOff.<init>(Lnet/sf/lavalamp/application/WebRun;Lnet/sf/lavalamp/Pause;)V: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.application.AlwaysOff.<init>(Lnet/sf/lavalamp/application/WebRun;Lnet/sf/lavalamp/Pause;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      AlwaysOff alwaysOff0 = new AlwaysOff((WebRun) null, (Pause) null);
-      // Undeclared exception!
-      try {
-        alwaysOff0.run();
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      Pause pause0 = new Pause();
+      AlwaysOff alwaysOff0 = new AlwaysOff((WebRun) null, pause0);
+      assertEquals(5, alwaysOff0.getPriority());
   }
 }

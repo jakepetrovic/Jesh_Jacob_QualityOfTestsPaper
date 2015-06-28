@@ -12,6 +12,7 @@ import com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl;
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -23,8 +24,8 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import net.sf.xisemele.api.Attribute;
 import net.sf.xisemele.api.Element;
+import net.sf.xisemele.api.Formatter;
 import net.sf.xisemele.api.Reader;
 import net.sf.xisemele.api.Value;
 import net.sf.xisemele.api.ValueList;
@@ -35,12 +36,33 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class FactoryImplEvoSuiteTest {
 
   private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
 
   //Test case number: 0
   /*
@@ -86,9 +108,9 @@ public class FactoryImplEvoSuiteTest {
   public void test2()  throws Throwable  {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
       DocumentBuilderImpl documentBuilderImpl0 = (DocumentBuilderImpl)factoryImpl0.createDocumentBuilder();
-      assertEquals(true, documentBuilderImpl0.isNamespaceAware());
-      assertEquals(false, documentBuilderImpl0.isValidating());
       assertNotNull(documentBuilderImpl0);
+      assertEquals(false, documentBuilderImpl0.isValidating());
+      assertEquals(true, documentBuilderImpl0.isNamespaceAware());
   }
 
   //Test case number: 3
@@ -111,15 +133,8 @@ public class FactoryImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-      // Undeclared exception!
-      try {
-        factoryImpl0.createDateFormatter(" 2R3j#1`*r}:$");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal pattern character 'R'
-         */
-      }
+      Formatter<Date> formatter0 = factoryImpl0.createDateFormatter("");
+      assertNotNull(formatter0);
   }
 
   //Test case number: 5
@@ -135,7 +150,7 @@ public class FactoryImplEvoSuiteTest {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
       // Undeclared exception!
       try {
-        factoryImpl0.createWriter((Document) null, "\"");
+        factoryImpl0.createWriter((Document) null, "fileName");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -173,7 +188,7 @@ public class FactoryImplEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-      Value value0 = factoryImpl0.createValue((String) null);
+      Value value0 = factoryImpl0.createValue("GOj%GC]7GZR>93");
       assertNotNull(value0);
   }
 
@@ -188,8 +203,8 @@ public class FactoryImplEvoSuiteTest {
   public void test9()  throws Throwable  {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
-      linkedList0.add((Node) iIOMetadataNode0);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      linkedList0.addFirst((Node) iIOMetadataNode0);
       List<Element> list0 = factoryImpl0.createElements((List<Node>) linkedList0);
       assertNotNull(list0);
       assertEquals(1, list0.size());
@@ -206,13 +221,13 @@ public class FactoryImplEvoSuiteTest {
             public void run() { 
         try {
           FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-          File file0 = new File(":C!uQ1D['#rcc&", ":C!uQ1D['#rcc&");
+          File file0 = new File("", "");
           try {
             factoryImpl0.createPrintWriter(file0);
             fail("Expecting exception: XisemeleIOException");
           } catch(XisemeleIOException e) {
             /*
-             * Erro ao tentar ler ou escrever o arquivo \":C!uQ1D['#rcc&\"
+             * Erro ao tentar ler ou escrever o arquivo \"\"
              */
           }
         } catch(Throwable t) {
@@ -246,18 +261,16 @@ public class FactoryImplEvoSuiteTest {
   public void test12()  throws Throwable  {
       FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
-      linkedList0.add((Node) iIOMetadataNode0);
-      List<Attribute> list0 = factoryImpl0.createAttributes((List<Node>) linkedList0);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      linkedList0.addFirst((Node) iIOMetadataNode0);
+      factoryImpl0.createAttributes((List<Node>) linkedList0);
       assertEquals(1, linkedList0.size());
-      assertEquals(false, list0.isEmpty());
   }
 
   //Test case number: 13
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.xisemele.impl.FactoryImpl.createValueList(Ljava/util/List;)Lnet/sf/xisemele/api/ValueList;: I14 Branch 3 IFEQ L202 - true
-   * 2 net.sf.xisemele.impl.FactoryImpl.<init>(Lnet/sf/xisemele/impl/FormatterProvider;)V: root-Branch
    */
   @Test
   public void test13()  throws Throwable  {
@@ -265,5 +278,28 @@ public class FactoryImplEvoSuiteTest {
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
       ValueList valueList0 = factoryImpl0.createValueList((List<Node>) linkedList0);
       assertNotNull(valueList0);
+  }
+
+  //Test case number: 14
+  /*
+   * 2 covered goals:
+   * 1 net.sf.xisemele.impl.FactoryImpl.createValueList(Ljava/util/List;)Lnet/sf/xisemele/api/ValueList;: I14 Branch 3 IFEQ L202 - false
+   * 2 net.sf.xisemele.impl.FactoryImpl.<init>(Lnet/sf/xisemele/impl/FormatterProvider;)V: root-Branch
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
+      LinkedList<Node> linkedList0 = new LinkedList<Node>();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      linkedList0.addFirst((Node) iIOMetadataNode0);
+      // Undeclared exception!
+      try {
+        factoryImpl0.createValueList((List<Node>) linkedList0);
+        fail("Expecting exception: DOMException");
+      } catch(DOMException e) {
+        /*
+         * Method not supported
+         */
+      }
   }
 }

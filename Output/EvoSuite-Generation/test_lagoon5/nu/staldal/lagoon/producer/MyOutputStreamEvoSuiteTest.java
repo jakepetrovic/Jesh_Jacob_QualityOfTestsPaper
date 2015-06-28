@@ -23,7 +23,7 @@ public class MyOutputStreamEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       MyOutputStream myOutputStream0 = new MyOutputStream((MyInputStream) null);
-      byte[] byteArray0 = new byte[28];
+      byte[] byteArray0 = new byte[16];
       // Undeclared exception!
       try {
         myOutputStream0.write(byteArray0);

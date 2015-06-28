@@ -22,7 +22,7 @@ nu.staldal.lagoon.producer.LSSITransformer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.producer.LSSITransformer: 33.33%</ul><ul>
-<li>21176 fitness evaluations, 425 generations, 47684 statements, 13555 tests.
+<li>14830 fitness evaluations, 298 generations, 35830 statements, 8979 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 0/6 branches, 3/4 methods, 3/9 total goals
 <li>Mutation score: 0%
@@ -38,12 +38,17 @@ nu.staldal.lagoon.producer.LSSITransformer
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LSSITransformer lSSITransformer0 = new LSSITransformer();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lSSITransformer0.start((ContentHandler) null, (Target) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+<span class="nocode"><a name="3">  3: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  lSSITransformer0.start((ContentHandler) xMLReaderAdapter0, (Target) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(RuntimeException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * No SourceManager avaliable
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -113,9 +118,9 @@ nu.staldal.lagoon.producer.LSSITransformer
 <span class="nocode"><a name="65"> 65: </a></span>    {
 <span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">        sax.startDocument();</span>
 <span class="nocode"><a name="67"> 67: </a></span>        
-<span class="nocode"><a name="68"> 68: </a></span>        Set includedFiles = new HashSet();
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">        Set includedFiles = new HashSet();</span>
 <span class="nocode"><a name="69"> 69: </a></span>        
-<span class="nocode"><a name="70"> 70: </a></span>        getNext().start(new LSSIHandler(getSourceMan(), sax, target, includedFiles), 
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">        getNext().start(new LSSIHandler(getSourceMan(), sax, target, includedFiles), </span>
 <span class="nocode"><a name="71"> 71: </a></span>            target);
 <span class="nocode"><a name="72"> 72: </a></span>            
 <span class="nocode"><a name="73"> 73: </a></span>        putObjectIntoRepository(&quot;includedFiles-&quot;+Utils.encodePath(getSourceMan().getSourceURL()), 
@@ -327,7 +332,7 @@ nu.staldal.lagoon.producer.LSSITransformer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -345,7 +350,7 @@ nu.staldal.lagoon.producer.LSSITransformer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5367
+<li>process_communication_port: 10796
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

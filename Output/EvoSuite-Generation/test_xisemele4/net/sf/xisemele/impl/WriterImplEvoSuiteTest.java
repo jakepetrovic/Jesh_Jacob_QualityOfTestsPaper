@@ -29,10 +29,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Date date0 = new Date();
+      Date date0 = new Date(0L);
       // Undeclared exception!
       try {
-        writerImpl0.attribute("W'", date0, "W'");
+        writerImpl0.attribute("", date0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -48,7 +48,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("3By-~\" T0");
+        writerImpl0.element("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -112,7 +112,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element((String) null, (Object) null);
+        writerImpl0.element("[fx-&CFcI)XW3Sl", "Wed Dec 31 16:59:59 MST 1969");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -125,11 +125,11 @@ public class WriterImplEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
+      Date date0 = new Date(1910L);
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.element((String) null, date0, (String) null);
+        writerImpl0.element("", date0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -178,7 +178,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.attribute("T", "Wed Dec 31 17:00:00 MST 1969");
+        writerImpl0.attribute("Rz9vePEbg", "Rz9vePEbg");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

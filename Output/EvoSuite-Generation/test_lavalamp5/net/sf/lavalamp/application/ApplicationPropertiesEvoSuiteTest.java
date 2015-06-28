@@ -24,6 +24,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       applicationProperties0.setPort(0);
       assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 1
@@ -85,8 +86,11 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setDebug(false);
-      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(false, applicationProperties0.isDebug());
+      
+      applicationProperties0.setDebug(true);
+      assertEquals(true, applicationProperties0.isDebug());
+      assertEquals("debug=true, port=0, runInterval=30000, null", applicationProperties0.toString());
   }
 
   //Test case number: 6
@@ -97,9 +101,9 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setRunInterval(1338);
-      assertEquals("debug=false, port=0, runInterval=1338, null", applicationProperties0.toString());
-      assertEquals(1338, applicationProperties0.getRunInterval());
+      applicationProperties0.setRunInterval(30000);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 7
@@ -125,7 +129,7 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[9];
+      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[8];
       applicationProperties0.setDeviceProperties(devicePropertiesArray0);
       // Undeclared exception!
       try {

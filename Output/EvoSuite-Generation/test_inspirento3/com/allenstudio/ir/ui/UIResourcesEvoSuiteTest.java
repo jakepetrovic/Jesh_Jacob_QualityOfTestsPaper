@@ -22,11 +22,11 @@ public class UIResourcesEvoSuiteTest {
   public void test0()  throws Throwable  {
       // Undeclared exception!
       try {
-        UIResources.getString("");
+        UIResources.getString("y=>`-(%XRK/2UZc\"");
         fail("Expecting exception: MissingResourceException");
       } catch(MissingResourceException e) {
         /*
-         * Can't find resource for bundle java.util.PropertyResourceBundle, key 
+         * Can't find resource for bundle java.util.PropertyResourceBundle, key y=>`-(%XRK/2UZc\"
          */
       }
   }

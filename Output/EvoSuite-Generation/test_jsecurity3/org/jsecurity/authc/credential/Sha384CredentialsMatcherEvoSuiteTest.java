@@ -7,6 +7,9 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import org.jsecurity.authc.AuthenticationInfo;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Sha384CredentialsMatcher;
 import org.jsecurity.crypto.hash.Sha384Hash;
 
@@ -35,14 +38,12 @@ public class Sha384CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("tN5", "tN5");
       // Undeclared exception!
       try {
-        sha384CredentialsMatcher0.hashProvidedCredentials((Object) null, (Object) null, 10);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Argument for byte conversion cannot be null.
-         */
+        sha384CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

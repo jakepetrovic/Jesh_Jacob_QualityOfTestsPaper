@@ -26,10 +26,11 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel();
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-3), (-3), (-3), (-3));
+      Object[] objectArray0 = new Object[5];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 18);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-617), (-617), (-617), (-617));
       defaultTableModelController0.tableChanged(tableModelEvent0);
-      assertEquals(-3, tableModelEvent0.getFirstRow());
+      assertEquals(-617, tableModelEvent0.getFirstRow());
   }
 
   //Test case number: 1
@@ -41,16 +42,14 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel();
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 26, 26);
+      Object[] objectArray0 = new Object[5];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 18);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
       // Undeclared exception!
       try {
         defaultTableModelController0.tableChanged(tableModelEvent0);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * 26 >= 0
-         */
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

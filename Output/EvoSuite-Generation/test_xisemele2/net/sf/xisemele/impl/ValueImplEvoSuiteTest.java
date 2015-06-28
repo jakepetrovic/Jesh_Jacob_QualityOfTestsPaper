@@ -7,7 +7,7 @@ package net.sf.xisemele.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.math.BigInteger;
+import java.util.Date;
 import net.sf.xisemele.exception.FormatterNotConfiguredException;
 import net.sf.xisemele.impl.Factory;
 import net.sf.xisemele.impl.FormatterProvider;
@@ -25,7 +25,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "Yc");
       // Undeclared exception!
       try {
         valueImpl0.asShort();
@@ -59,8 +59,8 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "i;X/?f2j|v");
-      Class<?> class0 = Boolean.class;
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "G");
+      Class<?> class0 = Long.class;
       // Undeclared exception!
       try {
         valueImpl0.asType((Class<Double>) class0);
@@ -77,7 +77,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "/#S>H|.P1Pll");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
         valueImpl0.asLong();
@@ -128,7 +128,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "Y`L0fBK.5XTHJ}Gbf0");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
         valueImpl0.asString();
@@ -145,7 +145,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "yb'q~wrq");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
       // Undeclared exception!
       try {
         valueImpl0.asDouble();
@@ -162,7 +162,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "messages");
       // Undeclared exception!
       try {
         valueImpl0.asFloat();
@@ -179,7 +179,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "RQ`g(x9%tc/e]p");
       // Undeclared exception!
       try {
         valueImpl0.asBigDecimal();
@@ -213,7 +213,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test11()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "~ye");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
         valueImpl0.asBoolean();
@@ -253,10 +253,10 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "j");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
       // Undeclared exception!
       try {
-        valueImpl0.asDate((String) null);
+        valueImpl0.asDate("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -270,8 +270,8 @@ public class ValueImplEvoSuiteTest {
   @Test
   public void test15()  throws Throwable  {
       ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "");
-      BigInteger bigInteger0 = BigInteger.TEN;
-      boolean boolean0 = valueImpl0.equals((Object) bigInteger0);
+      Date date0 = new Date(106L);
+      boolean boolean0 = valueImpl0.equals((Object) date0);
       assertEquals(false, boolean0);
   }
 
@@ -283,7 +283,7 @@ public class ValueImplEvoSuiteTest {
    */
   @Test
   public void test16()  throws Throwable  {
-      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "/#S>H|.P1Pll");
+      ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, "messages");
       boolean boolean0 = valueImpl0.equals((Object) valueImpl0);
       assertEquals(true, boolean0);
   }

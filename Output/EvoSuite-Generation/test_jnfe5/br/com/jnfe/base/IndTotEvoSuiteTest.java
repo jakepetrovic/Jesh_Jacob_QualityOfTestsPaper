@@ -19,8 +19,8 @@ public class IndTotEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      IndTot indTot0 = IndTot.SOMA;
+      IndTot indTot0 = IndTot.NAO_SOMA;
       int int0 = indTot0.getValue();
-      assertEquals(1, int0);
+      assertEquals(0, int0);
   }
 }

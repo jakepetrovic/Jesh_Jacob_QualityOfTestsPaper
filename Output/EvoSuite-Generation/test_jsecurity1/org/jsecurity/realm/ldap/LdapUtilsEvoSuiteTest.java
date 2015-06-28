@@ -47,9 +47,9 @@ public class LdapUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      BasicAttribute basicAttribute0 = new BasicAttribute("L!Y76Y_JHMM", (Object) "java.naming.authoritative", true);
+      BasicAttribute basicAttribute0 = new BasicAttribute("B6kc#&~'nRt{3$\"N,A,", "B6kc#&~'nRt{3$\"N,A,");
       Collection<String> collection0 = LdapUtils.getAllAttributeValues((Attribute) basicAttribute0);
       assertNotNull(collection0);
-      assertEquals(1, collection0.size());
+      assertEquals(false, collection0.isEmpty());
   }
 }

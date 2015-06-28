@@ -31,10 +31,10 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("KBb]|04u3-'z");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("Erro ao abrir armaz\u00E9m, ");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
       try {
-        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "KBb]|04u3-'z");
+        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "Erro ao abrir armaz\u00E9m, ");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -72,8 +72,8 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("KBb]|04u3-'z");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("Rha:iX:j6=");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
-      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "http://logback.qos.ch/codes.html#null_CS");
+      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "B5A:9CHF2Gz3EK]");
   }
 }

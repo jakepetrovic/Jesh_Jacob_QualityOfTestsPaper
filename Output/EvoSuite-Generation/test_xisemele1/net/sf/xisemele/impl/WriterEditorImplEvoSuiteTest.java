@@ -24,7 +24,7 @@ public class WriterEditorImplEvoSuiteTest {
   public void test0()  throws Throwable  {
       WriterEditorImpl writerEditorImpl0 = null;
       try {
-        writerEditorImpl0 = new WriterEditorImpl((Factory) null, (FormatterProvider) null, (Document) null, "");
+        writerEditorImpl0 = new WriterEditorImpl((Factory) null, (FormatterProvider) null, (Document) null, "CW-Q8");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

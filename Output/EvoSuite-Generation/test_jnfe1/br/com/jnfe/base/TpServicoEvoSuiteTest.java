@@ -19,9 +19,9 @@ public class TpServicoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpServico tpServico0 = TpServico.RECEPCAO_RPS;
+      TpServico tpServico0 = TpServico.CONSULTA_SIT;
       char char0 = tpServico0.getOrigemDoServico();
-      assertEquals('M', char0);
+      assertEquals('E', char0);
   }
 
   //Test case number: 1
@@ -31,8 +31,8 @@ public class TpServicoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TpServico tpServico0 = TpServico.RECEPCAO_RPS;
+      TpServico tpServico0 = TpServico.CONSULTA_CAD;
       String string0 = tpServico0.getNome();
-      assertEquals("Recep\u00E7\u00E3o de lote RPS", string0);
+      assertEquals("Consulta cadastro", string0);
   }
 }

@@ -19,9 +19,9 @@ public class TpDetEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpDet tpDet0 = TpDet.PRODUTO;
+      TpDet tpDet0 = TpDet.SERVICO;
       char char0 = tpDet0.getValue();
-      assertEquals('P', char0);
+      assertEquals('S', char0);
   }
 
   //Test case number: 1

@@ -24,7 +24,7 @@ public class DateFormatterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
       Class<Date> class0 = dateFormatter0.type();
-      assertEquals(false, class0.isLocalClass());
+      assertEquals("java.util.Date", class0.getName());
   }
 
   //Test case number: 1
@@ -58,6 +58,6 @@ public class DateFormatterEvoSuiteTest {
       Date date0 = new Date();
       String string0 = dateFormatter0.format(date0);
       assertNotNull(string0);
-      assertEquals(1398771797384L, date0.getTime());
+      assertEquals(1433856835530L, date0.getTime());
   }
 }

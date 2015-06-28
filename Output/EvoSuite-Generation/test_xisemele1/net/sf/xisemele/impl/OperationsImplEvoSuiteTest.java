@@ -25,10 +25,10 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("D:;R+#`tk(,nr|Jb");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, "D:;R+#`tk(,nr|Jb");
+        operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -42,7 +42,7 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
       // Undeclared exception!
       try {
         operationsImpl0.numberOfChildren((Node) iIOMetadataNode0);
@@ -62,7 +62,7 @@ public class OperationsImplEvoSuiteTest {
       IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.children((Node) iIOMetadataNode0, "mnNr`|<s");
+        operationsImpl0.children((Node) iIOMetadataNode0, "J.i2");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -78,7 +78,7 @@ public class OperationsImplEvoSuiteTest {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       // Undeclared exception!
       try {
-        operationsImpl0.attributeValue((Node) null, "messages");
+        operationsImpl0.attributeValue((Node) null, "K>Znc");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -92,9 +92,10 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("gt$&FEULxr");
       // Undeclared exception!
       try {
-        operationsImpl0.child((Node) null, "");
+        operationsImpl0.child((Node) iIOMetadataNode0, "gt$&FEULxr");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -118,18 +119,15 @@ public class OperationsImplEvoSuiteTest {
 
   //Test case number: 6
   /*
-   * 2 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsImpl.attributes(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L52 - false
-   * 2 net.sf.xisemele.impl.OperationsImpl.attributes(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L52 - true
+   * 1 covered goal:
+   * 1 net.sf.xisemele.impl.OperationsImpl.attributes(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L52 - true
    */
   @Test
   public void test6()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-      iIOMetadataNode0.setAttribute("", (String) null);
       List<Node> list0 = operationsImpl0.attributes((Node) iIOMetadataNode0);
-      assertNotNull(list0);
-      assertEquals(false, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 7
@@ -141,7 +139,7 @@ public class OperationsImplEvoSuiteTest {
   public void test7()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-      boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, "");
+      boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, "@");
       assertEquals(false, boolean0);
   }
 
@@ -153,26 +151,12 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("w-QT/7 %b286E/{0kI");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
       boolean boolean0 = operationsImpl0.containsAttributes((Node) iIOMetadataNode0);
       assertEquals(false, boolean0);
   }
 
   //Test case number: 9
-  /*
-   * 1 covered goal:
-   * 1 net.sf.xisemele.impl.OperationsImpl.containsAttributes(Lorg/w3c/dom/Node;)Z: I5 Branch 5 IFLE L101 - false
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-      iIOMetadataNode0.setAttribute("", (String) null);
-      boolean boolean0 = operationsImpl0.containsAttributes((Node) iIOMetadataNode0);
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 10
   /*
    * 4 covered goals:
    * 1 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I16 Branch 13 IFNULL L170 - false
@@ -181,13 +165,13 @@ public class OperationsImplEvoSuiteTest {
    * 4 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I16 Branch 13 IFNULL L170 - true
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test9()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.cloneNode(true);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      IIOMetadataNode iIOMetadataNode1 = new IIOMetadataNode("t}Vy(L_Z2N.hx9/t(B");
       IIOMetadataNode iIOMetadataNode2 = (IIOMetadataNode)iIOMetadataNode0.insertBefore((Node) iIOMetadataNode1, (Node) iIOMetadataNode1);
       String string0 = operationsImpl0.path((Node) iIOMetadataNode2);
-      assertEquals("/", string0);
+      assertEquals("null/t}Vy(L_Z2N.hx9/t(B", string0);
       assertNotNull(string0);
   }
 }

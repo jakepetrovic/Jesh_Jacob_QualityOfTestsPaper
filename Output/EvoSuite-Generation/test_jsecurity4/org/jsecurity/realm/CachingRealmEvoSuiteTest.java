@@ -23,9 +23,9 @@ public class CachingRealmEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("nzWjtX/\\");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
       String string0 = simpleAccountRealm0.getName();
-      assertEquals("nzWjtX/\\", string0);
+      assertNull(string0);
   }
 
   //Test case number: 1
@@ -38,8 +38,8 @@ public class CachingRealmEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("nzWjtX/\\");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
       simpleAccountRealm0.setCacheManager((CacheManager) null);
-      assertEquals("nzWjtX/\\", simpleAccountRealm0.getName());
+      assertNull(simpleAccountRealm0.getAuthorizationCacheName());
   }
 }

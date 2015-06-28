@@ -22,16 +22,16 @@ org.jsecurity.io.ResourceUtils
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.ResourceUtils: 74.19%</ul><ul>
-<li>7606 fitness evaluations, 154 generations, 26436 statements, 4941 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>4448 fitness evaluations, 90 generations, 21889 statements, 3002 tests.
+<li>Time: 0:01:03(Search: 0:01:03, minimization: 0:00:00)
 <li>Coverage: 22/30 branches, 8/8 methods, 23/31 total goals
-<li>Mutation score: 18%
+<li>Mutation score: 17%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;classpath:&amp;o&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;file:&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 2</h3>
@@ -41,23 +41,23 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;classpath:&amp;o&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;Term&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;file:[ENV] F@und system pop%rty [&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;classpath:classpath:&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;url:[ENV] Found system property [&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;url:] wa&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;B} h$v:0#gh&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;file:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -70,17 +70,29 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;file:[ENV] F@und system pop%rty [&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  ResourceUtils.getInputStreamForPath(&quot;classpath:classpath:&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: IOException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(IOException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * Resource [classpath:classpath:] could not be found.
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;url:[ENV] Found system property [&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  ResourceUtils.getInputStreamForPath(&quot;url:jzD&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(MalformedURLException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * no protocol: jzD
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;B} h$v:0#gh&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;wR&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 11</h3>
@@ -89,9 +101,10 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(pipedOutputStream0);
-<span class="nocode"><a name="3">  3: </a></span>ResourceUtils.close((InputStream) pipedInputStream0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[9];
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>ResourceUtils.close((InputStream) byteArrayInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(7, byteArrayInputStream0.available());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -278,7 +291,7 @@ org.jsecurity.io.ResourceUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -296,7 +309,7 @@ org.jsecurity.io.ResourceUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9284
+<li>process_communication_port: 2454
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

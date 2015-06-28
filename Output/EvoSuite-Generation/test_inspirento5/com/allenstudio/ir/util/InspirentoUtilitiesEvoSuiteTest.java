@@ -23,9 +23,9 @@ public class InspirentoUtilitiesEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      String string0 = InspirentoUtilities.escapeText("?/j>baTeR");
+      String string0 = InspirentoUtilities.escapeText("&quot;");
       assertNotNull(string0);
-      assertEquals("?/j&gt;baTeR", string0);
+      assertEquals("&amp;quot;", string0);
   }
 
   //Test case number: 1
@@ -42,14 +42,14 @@ public class InspirentoUtilitiesEvoSuiteTest {
   //Test case number: 2
   /*
    * 4 covered goals:
-   * 1 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I17 Branch 1 IFEQ L53 - true
-   * 2 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I17 Branch 1 IFEQ L53 - false
-   * 3 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I39 Branch 2 IF_ICMPGE L56 - true
-   * 4 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I39 Branch 2 IF_ICMPGE L56 - false
+   * 1 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I17 Branch 1 IFEQ L53 - false
+   * 2 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I39 Branch 2 IF_ICMPGE L56 - false
+   * 3 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I17 Branch 1 IFEQ L53 - true
+   * 4 com.allenstudio.ir.util.InspirentoUtilities.tokenize(Ljava/lang/String;)[Ljava/lang/String;: I39 Branch 2 IF_ICMPGE L56 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      String[] stringArray0 = InspirentoUtilities.tokenize("?/j>baTeR");
+      String[] stringArray0 = InspirentoUtilities.tokenize("&quot;");
       assertNotNull(stringArray0);
   }
 
@@ -63,7 +63,7 @@ public class InspirentoUtilitiesEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      String[] stringArray0 = InspirentoUtilities.tokenize("?/j&gt;baTeR", "?/j>baTeR");
+      String[] stringArray0 = InspirentoUtilities.tokenize("&amp;", "");
       assertNotNull(stringArray0);
   }
 }

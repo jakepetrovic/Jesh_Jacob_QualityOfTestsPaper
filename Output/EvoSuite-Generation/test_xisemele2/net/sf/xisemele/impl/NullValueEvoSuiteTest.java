@@ -95,7 +95,8 @@ public class NullValueEvoSuiteTest {
   public void test6()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
       Class<?> class0 = NullValue.class;
-      nullValue0.asType((Class<Integer>) class0);
+      NullValue nullValue1 = nullValue0.asType((Class<NullValue>) class0);
+      assertNull(nullValue1);
   }
 
   //Test case number: 7

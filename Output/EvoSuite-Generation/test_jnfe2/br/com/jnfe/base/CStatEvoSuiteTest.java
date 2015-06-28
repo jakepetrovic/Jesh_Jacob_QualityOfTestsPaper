@@ -20,9 +20,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CStat cStat0 = CStat._206;
+      CStat cStat0 = CStat._247;
       SitNFe sitNFe0 = cStat0.getSitNFe();
-      assertEquals(4, sitNFe0.ordinal());
+      assertEquals(SitNFe.REJEITADA, sitNFe0);
   }
 
   //Test case number: 1
@@ -32,9 +32,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CStat cStat0 = CStat._206;
+      CStat cStat0 = CStat._247;
       String string0 = cStat0.getMotivo();
-      assertEquals("NF-e j\u00E1 est\u00E1 inutilizada na Base de dados da SEFAZ", string0);
+      assertEquals("Sigla da UF do Emitente diverge da UF autorizadora", string0);
   }
 
   //Test case number: 2
@@ -44,9 +44,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CStat cStat0 = CStat._206;
+      CStat cStat0 = CStat._247;
       String string0 = cStat0.toString();
-      assertEquals("206", string0);
+      assertEquals("247", string0);
       assertNotNull(string0);
   }
 }

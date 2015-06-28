@@ -30,7 +30,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Byte> list0 = valueListImpl0.asByte();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 1
@@ -61,7 +61,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Short> list0 = valueListImpl0.asShort();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 3
@@ -123,7 +123,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Long> list0 = valueListImpl0.asLong();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 7
@@ -135,7 +135,7 @@ public class ValueListImplEvoSuiteTest {
   public void test7()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      linkedList0.add((Value) null);
+      linkedList0.offerLast((Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asLong();
@@ -160,44 +160,26 @@ public class ValueListImplEvoSuiteTest {
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 net.sf.xisemele.impl.ValueListImpl.asFloat()Ljava/util/List;: I15 Branch 5 IFEQ L89 - false
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      linkedList0.add((Value) null);
-      // Undeclared exception!
-      try {
-        valueListImpl0.asFloat();
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 10
-  /*
-   * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDouble()Ljava/util/List;: I15 Branch 6 IFEQ L100 - true
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test9()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Double> list0 = valueListImpl0.asDouble();
       assertEquals(0, list0.size());
   }
 
-  //Test case number: 11
+  //Test case number: 10
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDouble()Ljava/util/List;: I15 Branch 6 IFEQ L100 - false
    */
   @Test
-  public void test11()  throws Throwable  {
+  public void test10()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
+      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       // Undeclared exception!
       try {
         valueListImpl0.asDouble();
@@ -206,26 +188,26 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 12
+  //Test case number: 11
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBigInteger()Ljava/util/List;: I15 Branch 7 IFEQ L111 - true
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test11()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<BigInteger> list0 = valueListImpl0.asBigInteger();
       assertEquals(true, list0.isEmpty());
   }
 
-  //Test case number: 13
+  //Test case number: 12
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBigInteger()Ljava/util/List;: I15 Branch 7 IFEQ L111 - false
    */
   @Test
-  public void test13()  throws Throwable  {
+  public void test12()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
@@ -237,26 +219,26 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 14
+  //Test case number: 13
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBigDecimal()Ljava/util/List;: I15 Branch 8 IFEQ L122 - true
    */
   @Test
-  public void test14()  throws Throwable  {
+  public void test13()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<BigDecimal> list0 = valueListImpl0.asBigDecimal();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
-  //Test case number: 15
+  //Test case number: 14
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBigDecimal()Ljava/util/List;: I15 Branch 8 IFEQ L122 - false
    */
   @Test
-  public void test15()  throws Throwable  {
+  public void test14()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
@@ -268,29 +250,29 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 16
+  //Test case number: 15
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBoolean()Ljava/util/List;: I15 Branch 9 IFEQ L133 - true
    */
   @Test
-  public void test16()  throws Throwable  {
+  public void test15()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Boolean> list0 = valueListImpl0.asBoolean();
       assertEquals(true, list0.isEmpty());
   }
 
-  //Test case number: 17
+  //Test case number: 16
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asBoolean()Ljava/util/List;: I15 Branch 9 IFEQ L133 - false
    */
   @Test
-  public void test17()  throws Throwable  {
+  public void test16()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      linkedList0.add((Value) null);
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
+      linkedList0.add(0, (Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asBoolean();
@@ -299,26 +281,26 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 18
+  //Test case number: 17
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asString()Ljava/util/List;: I15 Branch 10 IFEQ L144 - true
    */
   @Test
-  public void test18()  throws Throwable  {
+  public void test17()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<String> list0 = valueListImpl0.asString();
       assertEquals(true, list0.isEmpty());
   }
 
-  //Test case number: 19
+  //Test case number: 18
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asString()Ljava/util/List;: I15 Branch 10 IFEQ L144 - false
    */
   @Test
-  public void test19()  throws Throwable  {
+  public void test18()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
@@ -330,26 +312,26 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 20
+  //Test case number: 19
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDate()Ljava/util/List;: I15 Branch 11 IFEQ L155 - true
    */
   @Test
-  public void test20()  throws Throwable  {
+  public void test19()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Date> list0 = valueListImpl0.asDate();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
-  //Test case number: 21
+  //Test case number: 20
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDate()Ljava/util/List;: I15 Branch 11 IFEQ L155 - false
    */
   @Test
-  public void test21()  throws Throwable  {
+  public void test20()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
@@ -361,66 +343,66 @@ public class ValueListImplEvoSuiteTest {
       }
   }
 
-  //Test case number: 22
+  //Test case number: 21
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDate(Ljava/lang/String;)Ljava/util/List;: I15 Branch 12 IFEQ L166 - true
    */
   @Test
-  public void test22()  throws Throwable  {
+  public void test21()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      List<Date> list0 = valueListImpl0.asDate("!CT/Of?fj`*g~)");
-      assertEquals(true, list0.isEmpty());
+      List<Date> list0 = valueListImpl0.asDate("3+0Wyj?v");
+      assertEquals(0, list0.size());
   }
 
-  //Test case number: 23
+  //Test case number: 22
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asDate(Ljava/lang/String;)Ljava/util/List;: I15 Branch 12 IFEQ L166 - false
    */
   @Test
-  public void test23()  throws Throwable  {
+  public void test22()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
+      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       // Undeclared exception!
       try {
-        valueListImpl0.asDate("%Q");
+        valueListImpl0.asDate((String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 24
+  //Test case number: 23
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.ValueListImpl.asType(Ljava/lang/Class;)Ljava/util/List;: I15 Branch 13 IFEQ L177 - true
    */
   @Test
-  public void test24()  throws Throwable  {
+  public void test23()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      Class<?> class0 = ValueListImpl.class;
-      List<BigInteger> list0 = valueListImpl0.asType((Class<BigInteger>) class0);
-      assertEquals(0, list0.size());
+      Class<?> class0 = Class.class;
+      List<String> list0 = valueListImpl0.asType((Class<String>) class0);
+      assertEquals(true, list0.isEmpty());
   }
 
-  //Test case number: 25
+  //Test case number: 24
   /*
    * 2 covered goals:
    * 1 net.sf.xisemele.impl.ValueListImpl.asType(Ljava/lang/Class;)Ljava/util/List;: I15 Branch 13 IFEQ L177 - false
    * 2 net.sf.xisemele.impl.ValueListImpl.<init>(Ljava/util/List;)V: root-Branch
    */
   @Test
-  public void test25()  throws Throwable  {
+  public void test24()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
-      Class<?> class0 = BigDecimal.class;
+      Class<?> class0 = Class.class;
       // Undeclared exception!
       try {
-        valueListImpl0.asType((Class<BigDecimal>) class0);
+        valueListImpl0.asType((Class<Float>) class0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

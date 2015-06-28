@@ -7,12 +7,16 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.Set;
+import java.util.TreeSet;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
+import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Md5CredentialsMatcher;
 import org.jsecurity.crypto.hash.Md5Hash;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class Md5CredentialsMatcherEvoSuiteTest {
 
@@ -39,12 +43,14 @@ public class Md5CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-      char[] charArray0 = new char[1];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("XrX)o+-W.k>", charArray0, false);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      char[] charArray0 = new char[3];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("\u0000\u0000", charArray0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null, (Set<String>) treeSet0);
       // Undeclared exception!
       try {
-        md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+        md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*

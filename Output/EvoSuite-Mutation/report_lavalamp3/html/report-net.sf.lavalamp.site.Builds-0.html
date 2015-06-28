@@ -22,8 +22,8 @@ net.sf.lavalamp.site.Builds
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.site.Builds: 100.00%</ul><ul>
-<li>450 fitness evaluations, 10 generations, 3082 statements, 508 tests.
-<li>Time: 0:00:05(Search: 0:00:03, minimization: 0:00:01)
+<li>250 fitness evaluations, 6 generations, 2030 statements, 398 tests.
+<li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:01)
 <li>Coverage: 8/8 branches, 5/5 methods, 11/11 total goals
 <li>Mutation score: 48%
 </ul>
@@ -38,7 +38,7 @@ net.sf.lavalamp.site.Builds
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Builds builds0 = new Builds();
-<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;qM;U&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;x3WQnz3qh#&quot;);
 <span class="nocode"><a name="3">  3: </a></span>builds0.add(build0);
 <span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = builds0.allSuccessful();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
@@ -52,7 +52,7 @@ net.sf.lavalamp.site.Builds
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Builds builds0 = new Builds();
-<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;v/]o2H&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;x3WQnz3qh#&quot;);
 <span class="nocode"><a name="3">  3: </a></span>builds0.add(build0);
 <span class="nocode"><a name="4">  4: </a></span>build0.setSuccessful(false);
 <span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = builds0.allSuccessful();
@@ -62,25 +62,25 @@ net.sf.lavalamp.site.Builds
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Builds builds0 = new Builds();
-<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;qM;U&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;x3WQnz3qh#&quot;);
 <span class="nocode"><a name="3">  3: </a></span>builds0.add(build0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  builds0.getBuild(&quot;YO!:_5J.q4bm0uu&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: MissingBuildException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(MissingBuildException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * YO!:_5J.q4bm0uu not found
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>Build build1 = builds0.getBuild(&quot;x3WQnz3qh#&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&lt;font color='green'&gt; build x3WQnz3qh# successful (null)&lt;/font&gt;&quot;, build1.toString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Builds builds0 = new Builds();
-<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;YO!:_5J.q4bm0uu&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Build build0 = new Build(&quot;x3WQnz3qh#&quot;);
 <span class="nocode"><a name="3">  3: </a></span>builds0.add(build0);
-<span class="nocode"><a name="4">  4: </a></span>Build build1 = builds0.getBuild(&quot;YO!:_5J.q4bm0uu&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;YO!:_5J.q4bm0uu&quot;, build1.getIdentity());
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  builds0.getBuild(&quot; not found&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: MissingBuildException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(MissingBuildException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   *  not found not found
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.site;
@@ -135,7 +135,7 @@ net.sf.lavalamp.site.Builds
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1302785138356621139.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6991366955262283980.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -153,7 +153,7 @@ net.sf.lavalamp.site.Builds
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14522
+<li>process_communication_port: 7876
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

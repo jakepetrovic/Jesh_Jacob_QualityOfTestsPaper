@@ -7,7 +7,7 @@ package nu.staldal.lagoon.core;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import nu.staldal.lagoon.producer.DirSource;
+import nu.staldal.lagoon.producer.FileSource;
 
 public class SourceEvoSuiteTest {
 
@@ -19,6 +19,6 @@ public class SourceEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DirSource dirSource0 = new DirSource();
+      FileSource fileSource0 = new FileSource();
   }
 }

@@ -21,7 +21,7 @@ public class RedirectViewEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      RedirectView redirectView0 = new RedirectView((String) null, true);
+      RedirectView redirectView0 = new RedirectView("L$", false);
   }
 
   //Test case number: 1
@@ -33,7 +33,7 @@ public class RedirectViewEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      RedirectView redirectView0 = new RedirectView((String) null, true, true);
+      RedirectView redirectView0 = new RedirectView("L$", false, false);
   }
 
   //Test case number: 2

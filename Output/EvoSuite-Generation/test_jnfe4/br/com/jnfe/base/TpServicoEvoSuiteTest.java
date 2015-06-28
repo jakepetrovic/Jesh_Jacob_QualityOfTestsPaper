@@ -31,8 +31,8 @@ public class TpServicoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TpServico tpServico0 = TpServico.RET_RECEPCAO;
+      TpServico tpServico0 = TpServico.CONSULTA_SERV;
       String string0 = tpServico0.getNome();
-      assertEquals("Consulta de processamento", string0);
+      assertEquals("Consulta servi\u00E7o", string0);
   }
 }

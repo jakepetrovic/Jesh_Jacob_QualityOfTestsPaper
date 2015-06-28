@@ -7,8 +7,9 @@ package com.allenstudio.ir.core.plugins;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import com.allenstudio.ir.core.plugins.AbstractNote;
 import com.allenstudio.ir.core.plugins.CommonNote;
-import com.allenstudio.ir.ui.NoteList;
+import com.allenstudio.ir.ui.NoteListCell;
 
 public class CommonNoteEvoSuiteTest {
 
@@ -25,25 +26,25 @@ public class CommonNoteEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      NoteList noteList0 = new NoteList();
-      assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-      assertNotNull(noteList0);
+      CommonNote commonNote0 = new CommonNote();
+      NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
+      assertNotNull(noteListCell0);
+      assertEquals("This is a testing description. \u00CF\u00A3\u00CD\u00FB\u00C4\u00E3\u00C4\u00DC\u00BF\u00B4\u00B5\u00BD\u00CB\u00FC\u00A1\u00A3", commonNote0.getDescription());
+      assertEquals("Title", commonNote0.getTitle());
+      assertEquals(" ", commonNote0.getOtherInfoText());
   }
 
   //Test case number: 1
   /*
-   * 5 covered goals:
-   * 1 com.allenstudio.ir.core.plugins.CommonNote.getOtherInfoText()Ljava/lang/String;: I8 Branch 1 IFNULL L42 - false
-   * 2 com.allenstudio.ir.core.plugins.CommonNote.getOtherInfoText()Ljava/lang/String;: I12 Branch 2 IFLE L42 - false
-   * 3 com.allenstudio.ir.core.plugins.CommonNote.<init>()V: root-Branch
-   * 4 com.allenstudio.ir.core.plugins.CommonNote.setOtherInfo(Ljava/lang/String;)V: root-Branch
-   * 5 com.allenstudio.ir.core.plugins.CommonNote.getOtherInfo()Ljava/lang/String;: root-Branch
+   * 2 covered goals:
+   * 1 com.allenstudio.ir.core.plugins.CommonNote.setOtherInfo(Ljava/lang/String;)V: root-Branch
+   * 2 com.allenstudio.ir.core.plugins.CommonNote.<init>()V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
-      commonNote0.setOtherInfo("");
-      String string0 = commonNote0.getOtherInfoText();
-      assertEquals(" ", string0);
+      commonNote0.setOtherInfo("3= yx4ac+6O%7I");
+      assertEquals("3= yx4ac+6O%7I", commonNote0.getOtherInfoText());
+      assertEquals("3= yx4ac+6O%7I", commonNote0.getOtherInfo());
   }
 }

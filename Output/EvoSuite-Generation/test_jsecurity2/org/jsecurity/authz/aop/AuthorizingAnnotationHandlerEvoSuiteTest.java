@@ -7,7 +7,7 @@ package org.jsecurity.authz.aop;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import org.jsecurity.authz.aop.AuthenticatedAnnotationHandler;
+import org.jsecurity.authz.aop.RoleAnnotationHandler;
 
 public class AuthorizingAnnotationHandlerEvoSuiteTest {
 
@@ -19,6 +19,6 @@ public class AuthorizingAnnotationHandlerEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthenticatedAnnotationHandler authenticatedAnnotationHandler0 = new AuthenticatedAnnotationHandler();
+      RoleAnnotationHandler roleAnnotationHandler0 = new RoleAnnotationHandler();
   }
 }

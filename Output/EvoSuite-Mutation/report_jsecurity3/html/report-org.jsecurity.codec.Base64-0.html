@@ -22,10 +22,10 @@ org.jsecurity.codec.Base64
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.codec.Base64: 82.83%</ul><ul>
-<li>15036 fitness evaluations, 302 generations, 205213 statements, 9910 tests.
+<li>13936 fitness evaluations, 280 generations, 199262 statements, 9603 tests.
 <li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
 <li>Coverage: 75/92 branches, 13/13 methods, 82/99 total goals
-<li>Mutation score: 61%
+<li>Mutation score: 58%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -36,35 +36,33 @@ org.jsecurity.codec.Base64
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[1];
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>String string0 = Base64.encodeToString(byteArray1);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;QUE9PQ==&quot;, string0);
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Base64.decodeToString(&quot;AAAAAA==&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;\u0000\u0000\u0000\u0000&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Base64.decodeToString(&quot;lTTGG7p!5a\&quot;+P&amp;=uAWi&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\uFFFD4\uFFFD\u001B\uFFFDyk\uFFFD\u0000\uFFFD\u0005\uFFFD&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = Base64.decode(&quot;this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String &quot;);
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encodeChunked(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encode(byteArray1, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray2, byteArray1);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = Base64.decode(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(byteArray0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte) (-123);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte) (-95);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray1.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = Base64.isBase64(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[1];
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
 <span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.discardNonBase64(byteArray0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray1);
 <span class="nocode"><a name="4">  4: </a></span>
@@ -73,98 +71,70 @@ org.jsecurity.codec.Base64
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
 <span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray1);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = Base64.isBase64(byteArray1);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[10];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[1] = (byte)9;
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = Base64.isBase64(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[2] = (byte)9;
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.discardWhitespace(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(byteArray1);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte)32;
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[5] = (byte)32;
 <span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.discardWhitespace(byteArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
 <span class="nocode"><a name="5">  5: </a></span>assertNotNull(byteArray1);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encodeChunked(byteArray1);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray2.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[6] = (byte) (-1);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, false);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray1, byteArray0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte) (-95);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray1.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte) (-123);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = Base64.encodeToString(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;AAAAhQA=&quot;, string0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[1] = (byte) (-1);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray1.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[4] = (byte) (-123);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = Base64.encodeToString(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;AAAAAIU=&quot;, string0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[2] = (byte) (-1);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray1.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.discardNonBase64(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encodeChunked(byteArray1);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray1, byteArray2);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[48];
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encodeChunked(byteArray0);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.encodeChunked(byteArray1);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray2.equals(byteArray0));
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte)61;
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.decode(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray1, byteArray0);
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte) (-95);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, true);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray0.equals(byteArray1));
-</pre>
-<h3>Test case 16</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[3] = (byte) (-63);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0, false);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray1.equals(byteArray0));
-</pre>
-<h3>Test case 17</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[4] = (byte) (-64);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray0.equals(byteArray1));
-</pre>
-<h3>Test case 18</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[1];
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray1 = Base64.encode(byteArray0);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray2 = Base64.decode(byteArray1);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(byteArray2.equals(byteArray1));
-</pre>
-<h3>Test case 19</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
-<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte)61;
-<span class="nocode"><a name="3">  3: </a></span>String string0 = Base64.decodeToString(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = Base64.decode(&quot;AAAAhYU=&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(byteArray0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -677,7 +647,7 @@ org.jsecurity.codec.Base64
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -695,7 +665,7 @@ org.jsecurity.codec.Base64
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21553
+<li>process_communication_port: 19805
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

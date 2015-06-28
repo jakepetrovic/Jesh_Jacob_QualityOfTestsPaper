@@ -29,7 +29,7 @@ public class XMLFormatterEvoSuiteTest {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       // Undeclared exception!
       try {
-        xMLFormatter0.hasBeenUpdated(59987L);
+        xMLFormatter0.hasBeenUpdated((-1L));
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -43,7 +43,7 @@ public class XMLFormatterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(1842);
       // Undeclared exception!
       try {
         xMLFormatter0.start((OutputStream) byteArrayOutputStream0, (Target) null);

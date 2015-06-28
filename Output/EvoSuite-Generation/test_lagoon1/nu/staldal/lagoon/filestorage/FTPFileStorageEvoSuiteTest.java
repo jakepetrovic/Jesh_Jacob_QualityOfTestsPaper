@@ -46,11 +46,11 @@ public class FTPFileStorageEvoSuiteTest {
   public void test1()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       try {
-        fTPFileStorage0.open("", (LagoonContext) null, "");
+        fTPFileStorage0.open("Date file is corrupt", (LagoonContext) null, "Date file is corrupt");
         fail("Expecting exception: MalformedURLException");
       } catch(MalformedURLException e) {
         /*
-         * 
+         * Date file is corrupt
          */
       }
   }
@@ -65,7 +65,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.createFile((String) null);
+        fTPFileStorage0.createFile("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -122,7 +122,7 @@ public class FTPFileStorageEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(1905);
       FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("", (OutputStream) byteArrayOutputStream0);
       // Undeclared exception!
       try {

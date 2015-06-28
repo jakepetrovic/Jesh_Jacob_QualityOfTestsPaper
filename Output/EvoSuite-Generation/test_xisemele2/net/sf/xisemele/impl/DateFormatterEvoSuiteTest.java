@@ -24,7 +24,7 @@ public class DateFormatterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
       Class<Date> class0 = dateFormatter0.type();
-      assertEquals("java.util.Date", class0.getCanonicalName());
+      assertEquals("Date", class0.getSimpleName());
   }
 
   //Test case number: 1
@@ -55,7 +55,7 @@ public class DateFormatterEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
-      Date date0 = new Date(0L);
+      Date date0 = new Date(1L);
       String string0 = dateFormatter0.format(date0);
       assertEquals("", string0);
   }

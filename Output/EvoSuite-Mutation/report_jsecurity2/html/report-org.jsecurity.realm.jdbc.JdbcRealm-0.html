@@ -21,37 +21,37 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.realm.jdbc.JdbcRealm: 38.71%</ul><ul>
-<li>17268 fitness evaluations, 347 generations, 96721 statements, 11286 tests.
+<ul><li>Target class: org.jsecurity.realm.jdbc.JdbcRealm: 41.94%</ul><ul>
+<li>17124 fitness evaluations, 344 generations, 102569 statements, 10828 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 5/24 branches, 10/12 methods, 12/31 total goals
-<li>Mutation score: 19%
+<li>Coverage: 6/24 branches, 10/12 methods, 13/31 total goals
+<li>Mutation score: 22%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setUserRolesQuery(&quot;m,@NY6 }:d;:2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setUserRolesQuery((String) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_0&quot;, jdbcRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setPermissionsLookupEnabled(false);
+<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setPermissionsLookupEnabled(true);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_5&quot;, jdbcRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setPermissionsQuery(&quot;m,@NY6 }:d;:2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setPermissionsQuery((String) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_13&quot;, jdbcRealm0.getName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>jdbcRealm0.buildAuthenticationInfo(&quot;&quot;, charArray0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="3">  3: </a></span>jdbcRealm0.buildAuthenticationInfo(&quot;{wykI3:v?OUU&quot;, charArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_18&quot;, jdbcRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
@@ -63,26 +63,26 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setAuthenticationQuery(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>jdbcRealm0.setAuthenticationQuery(&quot;org.jsecurity.realm.jdbc.JdbcRealm_12822&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_29&quot;, jdbcRealm0.getName());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;UTF-8&quot;, charArray0, false, (InetAddress) inet4Address0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;@&quot;, charArray0, (InetAddress) inet4Address0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="7">  7: </a></span>  jdbcRealm0.doGetAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, &quot;m,@NY6 }:d;:2&quot;, true);
+<span class="nocode"><a name="1">  1: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+<span class="nocode"><a name="2">  2: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
@@ -96,15 +96,13 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) usernamePasswordToken0, &quot;SHA-512&quot;);
-<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  jdbcRealm0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) linkedHashSet0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  jdbcRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NoSuchElementException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -122,9 +120,22 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>jdbcRealm0.getPermissions((Connection) null, &quot;I5X&quot;, (Collection&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>jdbcRealm0.getPermissions((Connection) null, &quot;@&quot;, (Collection&lt;String&gt;) treeSet0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.jdbc.JdbcRealm_68&quot;, jdbcRealm0.getName());
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JdbcRealm jdbcRealm0 = new JdbcRealm();
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) usernamePasswordToken0, &quot;'@&lt;sxa#/S/NPi.{&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  jdbcRealm0.getPermissions((Connection) null, &quot;'@&lt;sxa#/S/NPi.{&quot;, (Collection&lt;String&gt;) set0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -462,7 +473,7 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <span class="nocode"><a name="333">333: </a></span>        try {
 <span class="nocode"><a name="334">334: </a></span><span style="background-color: #ffffcc">            for (String roleName : roleNames) {</span>
 <span class="nocode"><a name="335">335: </a></span>
-<span class="nocode"><a name="336">336: </a></span>                ps = conn.prepareStatement(permissionsQuery);
+<span class="nocode"><a name="336">336: </a></span><span style="background-color: #ffffcc">                ps = conn.prepareStatement(permissionsQuery);</span>
 <span class="nocode"><a name="337">337: </a></span>                ps.setString(1, roleName);
 <span class="nocode"><a name="338">338: </a></span>
 <span class="nocode"><a name="339">339: </a></span>                // Execute query
@@ -491,7 +502,7 @@ org.jsecurity.realm.jdbc.JdbcRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -509,7 +520,7 @@ org.jsecurity.realm.jdbc.JdbcRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3120
+<li>process_communication_port: 12860
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

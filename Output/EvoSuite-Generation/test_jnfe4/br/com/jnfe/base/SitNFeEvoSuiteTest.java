@@ -19,7 +19,7 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.INDEFINIDA;
+      SitNFe sitNFe0 = SitNFe.CANCELADA;
       boolean boolean0 = sitNFe0.isUsar();
       assertEquals(false, boolean0);
   }
@@ -31,7 +31,7 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.DENEGADA;
+      SitNFe sitNFe0 = SitNFe.CANCELADA;
       boolean boolean0 = sitNFe0.isReenviar();
       assertEquals(false, boolean0);
   }
@@ -43,8 +43,8 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.INDEFINIDA;
+      SitNFe sitNFe0 = SitNFe.CANCELADA;
       char char0 = sitNFe0.getValue();
-      assertEquals('I', char0);
+      assertEquals('X', char0);
   }
 }

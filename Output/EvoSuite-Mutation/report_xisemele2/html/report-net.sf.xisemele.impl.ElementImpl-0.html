@@ -22,7 +22,7 @@ net.sf.xisemele.impl.ElementImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.ElementImpl: 4.55%</ul><ul>
-<li>8560 fitness evaluations, 173 generations, 13909 statements, 5419 tests.
+<li>11136 fitness evaluations, 224 generations, 18127 statements, 7449 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 0/6 branches, 1/19 methods, 1/22 total goals
 <li>Mutation score: 1%
@@ -31,13 +31,12 @@ net.sf.xisemele.impl.ElementImpl
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="2">  2: </a></span>ElementImpl elementImpl0 = null;
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  elementImpl0 = new ElementImpl((Factory) null, (Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>ElementImpl elementImpl0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  elementImpl0 = new ElementImpl((Factory) null, (Node) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -237,7 +236,7 @@ net.sf.xisemele.impl.ElementImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2357005916874755376.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5751899662695784620.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -255,7 +254,7 @@ net.sf.xisemele.impl.ElementImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6653
+<li>process_communication_port: 19794
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

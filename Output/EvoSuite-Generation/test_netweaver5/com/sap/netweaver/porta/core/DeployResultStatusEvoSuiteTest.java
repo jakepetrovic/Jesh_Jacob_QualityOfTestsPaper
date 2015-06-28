@@ -35,11 +35,11 @@ public class DeployResultStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        DeployResultStatus.getByName("kFkV>-V$LovrS;w)^V");
+        DeployResultStatus.getByName(")7 5-f7>.61q4WFkJCG");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * kFkV>-V$LovrS;w)^V
+         * )7 5-f7>.61q4WFkJCG
          */
       }
   }

@@ -21,10 +21,10 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "UNKNOWN");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, ",Ir| 1'y%&>GgCTF");
       DeployResultStatus deployResultStatus1 = deployResultMock0.getStatus();
-      assertEquals(DeployResultStatus.SUCCESS, deployResultStatus1);
+      assertSame(deployResultStatus0, deployResultStatus1);
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, ",Ir| 1'y%&>GgCTF");
       String string0 = deployResultMock0.getStatusDetails();
-      assertEquals("", string0);
+      assertEquals(",Ir| 1'y%&>GgCTF", string0);
   }
 }

@@ -7,32 +7,7 @@ package com.sap.netweaver.porta.mon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import com.sap.netweaver.porta.mon.DeployManagerAuthenticationCallback;
-import com.sap.netweaver.porta.mon.PortaMon;
-import java.io.PrintStream;
 
 public class PortaMonEvoSuiteTest {
 
-
-  //Test case number: 0
-  /*
-   * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.PortaMon.getDeployManagerAuthenticationCallback()Lcom/sap/netweaver/porta/mon/DeployManagerAuthenticationCallback;: root-Branch
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      DeployManagerAuthenticationCallback deployManagerAuthenticationCallback0 = PortaMon.getDeployManagerAuthenticationCallback();
-      assertNull(deployManagerAuthenticationCallback0);
-  }
-
-  //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.PortaMon.getOut()Ljava/io/PrintStream;: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      PrintStream printStream0 = PortaMon.getOut();
-      assertNull(printStream0);
-  }
 }

@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.sap.netweaver.porta.core.AuthenticationCallback;
 import com.sap.netweaver.porta.core.CoreException;
-import com.sap.netweaver.porta.core.NotAuthorizedException;
 import com.sap.netweaver.porta.core.nw7.DeployManagerImpl;
+import com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager;
 
 public class CoreModuleImplEvoSuiteTest {
 
@@ -18,32 +18,34 @@ public class CoreModuleImplEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.setAuthenticationCallback(Lcom/sap/netweaver/porta/core/AuthenticationCallback;)V: root-Branch
+   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.checkInitialized()V: I4 Branch 1 IFNE L38 - false
    * 2 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.<init>(Ljava/lang/String;I)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("", (-1137));
-      deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) null);
-      assertEquals(false, deployManagerImpl0.initialized());
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("", 1);
+      // Undeclared exception!
+      try {
+        deployManagerImpl0.checkInitialized();
+        fail("Expecting exception: NoClassDefFoundError");
+      } catch(NoClassDefFoundError e) {
+        /*
+         * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
+         */
+      }
   }
 
   //Test case number: 1
   /*
    * 2 covered goals:
-   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.checkInitialized()V: I4 Branch 1 IFNE L38 - false
+   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.setAuthenticationCallback(Lcom/sap/netweaver/porta/core/AuthenticationCallback;)V: root-Branch
    * 2 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.<init>(Ljava/lang/String;I)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("", (-1137));
-      try {
-        deployManagerImpl0.getApplications();
-        fail("Expecting exception: CoreException");
-      } catch(CoreException e) {
-        /*
-         * java.net.MalformedURLException: Invalid port number :-63687
-         */
-      }
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("DjK$ xa4r1/2B", (-7));
+      SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
+      deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
+      assertEquals(false, deployManagerImpl0.initialized());
   }
 }

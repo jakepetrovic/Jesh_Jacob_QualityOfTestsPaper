@@ -21,27 +21,28 @@ com.allenstudio.ir.event.DateChooserEvent
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.event.DateChooserEvent: 100,00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 2638 statements, 254 tests.
-<li>Time: 0:00:14(Search: 0:00:12, minimization: 0:00:01)
+<ul><li>Target class: com.allenstudio.ir.event.DateChooserEvent: 100.00%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3054 statements, 277 tests.
+<li>Time: 0:00:16(Search: 0:00:15, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 3/3 methods, 3/3 total goals
-<li>Mutation score: 50 %
+<li>Mutation score: 75%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1868, 1868, 1427, (-229), (-1189));
-<span class="nocode"><a name="2">  2: </a></span>DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) &quot;Etats-Unis&quot;, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>GregorianCalendar gregorianCalendar1 = (GregorianCalendar)dateChooserEvent0.getFormerDate();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(gregorianCalendar1, gregorianCalendar0);
+<span class="nocode"><a name="1">  1: </a></span>TimeZone timeZone0 = TimeZone.getDefault();
+<span class="nocode"><a name="2">  2: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance(timeZone0);
+<span class="nocode"><a name="3">  3: </a></span>DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) &quot;&quot;, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+<span class="nocode"><a name="4">  4: </a></span>dateChooserEvent0.getFormerDate();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;java.util.GregorianCalendar[time=1433738109637,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\&quot;GMT\&quot;,offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=8,DAY_OF_YEAR=159,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=2,AM_PM=0,HOUR=4,HOUR_OF_DAY=4,MINUTE=35,SECOND=9,MILLISECOND=637,ZONE_OFFSET=0,DST_OFFSET=0]&quot;, gregorianCalendar0.toString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433738109637L, gregorianCalendar0.getTimeInMillis());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1868, 1868, 1427, (-229), (-1189));
-<span class="nocode"><a name="2">  2: </a></span>DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) &quot;Etats-Unis&quot;, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>GregorianCalendar gregorianCalendar1 = (GregorianCalendar)dateChooserEvent0.getNewDate();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(52, gregorianCalendar1.getWeeksInWeekYear());
+<span class="nocode"><a name="1">  1: </a></span>DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) &quot;ja&quot;, (Calendar) null, (Calendar) null);
+<span class="nocode"><a name="2">  2: </a></span>Calendar calendar0 = dateChooserEvent0.getNewDate();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(calendar0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -104,7 +105,7 @@ com.allenstudio.ir.event.DateChooserEvent
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8484984744530070644.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree742537213929819977.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -122,7 +123,7 @@ com.allenstudio.ir.event.DateChooserEvent
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7671
+<li>process_communication_port: 7226
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -52,60 +52,60 @@ public class AxisEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 1 TABLESWITCH L115 Case 1 - false
-   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 2 TABLESWITCH L115 Case 2 - true
+   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 6 TABLESWITCH L115 Case 6 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Axis.lookup(2);
-      assertEquals("descendant", string0);
+      String string0 = Axis.lookup(6);
+      assertEquals("preceding-sibling", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 3 TABLESWITCH L115 Case 3 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 2 TABLESWITCH L115 Case 2 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      String string0 = Axis.lookup(3);
+      String string0 = Axis.lookup(2);
       assertNotNull(string0);
-      assertEquals("parent", string0);
+      assertEquals("descendant", string0);
   }
 
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 4 TABLESWITCH L115 Case 4 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 3 TABLESWITCH L115 Case 3 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      String string0 = Axis.lookup(4);
-      assertEquals("ancestor", string0);
+      String string0 = Axis.lookup(3);
+      assertEquals("parent", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 5 TABLESWITCH L115 Case 5 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 4 TABLESWITCH L115 Case 4 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      String string0 = Axis.lookup(5);
-      assertEquals("following-sibling", string0);
+      String string0 = Axis.lookup(4);
+      assertEquals("ancestor", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 6 TABLESWITCH L115 Case 6 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 5 TABLESWITCH L115 Case 5 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      String string0 = Axis.lookup(6);
-      assertEquals("preceding-sibling", string0);
+      String string0 = Axis.lookup(5);
+      assertEquals("following-sibling", string0);
       assertNotNull(string0);
   }
 
@@ -129,8 +129,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       String string0 = Axis.lookup(8);
-      assertNotNull(string0);
       assertEquals("preceding", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 9
@@ -165,8 +165,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       String string0 = Axis.lookup(11);
-      assertNotNull(string0);
       assertEquals("self", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 12
@@ -177,8 +177,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       String string0 = Axis.lookup(12);
-      assertNotNull(string0);
       assertEquals("descendant-or-self", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 13
@@ -190,8 +190,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       String string0 = Axis.lookup(13);
-      assertEquals("ancestor-or-self", string0);
       assertNotNull(string0);
+      assertEquals("ancestor-or-self", string0);
   }
 
   //Test case number: 14
@@ -214,7 +214,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      String string0 = Axis.lookup((-697));
+      String string0 = Axis.lookup(0);
       assertNull(string0);
   }
 
@@ -237,7 +237,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test15()  throws Throwable  {
-      int int0 = Axis.lookup("3E");
+      int int0 = Axis.lookup("\"M ^jo)AQ8^soyu;");
       assertEquals(0, int0);
   }
 

@@ -22,18 +22,19 @@ net.sf.lavalamp.device.DeviceController
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.device.DeviceController: 83.33%</ul><ul>
-<li>9504 fitness evaluations, 192 generations, 39509 statements, 6263 tests.
+<li>9172 fitness evaluations, 185 generations, 35518 statements, 5791 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 6/8 branches, 8/8 methods, 10/12 total goals
-<li>Mutation score: 34%
+<li>Mutation score: 41%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) null);
-<span class="nocode"><a name="2">  2: </a></span>List&lt;Device&gt; list0 = deviceController0.getDevices();
-<span class="nocode"><a name="3">  3: </a></span>assertNull(list0);
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
+<span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>List&lt;Device&gt; list0 = deviceController0.getDevices();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -41,11 +42,11 @@ net.sf.lavalamp.device.DeviceController
 <span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  deviceController0.setStatusForBuild((String) null, false);
+<span class="nocode"><a name="5">  5: </a></span>  deviceController0.setStatusForBuild(&quot;&quot;, false);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: MissingBuildException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(MissingBuildException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * null not found
+<span class="nocode"><a name="9">  9: </a></span>   *  not found
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
@@ -53,56 +54,51 @@ net.sf.lavalamp.device.DeviceController
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
 <span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
-<span class="nocode"><a name="4">  4: </a></span>deviceController0.setLogger(lavaLogger0);
+<span class="nocode"><a name="3">  3: </a></span>deviceController0.setLogger((LavaLogger) null);
 </pre>
 <h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
-<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Device) null);
-<span class="nocode"><a name="3">  3: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  deviceController0.getBuild(&quot;&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
-<span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>List&lt;String&gt; list0 = deviceController0.switchDevices((Calendar) null);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
-</pre>
-<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
 <span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
 <span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Device) dummyDevice0);
-<span class="nocode"><a name="5">  5: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
-<span class="nocode"><a name="6">  6: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="7">  7: </a></span>dummyDevice0.setProperties(deviceProperties0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  deviceController0.setStatusForBuild(&quot;6&quot;, true);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
+<span class="nocode"><a name="2">  2: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
+<span class="nocode"><a name="4">  4: </a></span>List&lt;String&gt; list0 = deviceController0.switchDevices((Calendar) gregorianCalendar0);
+<span class="nocode"><a name="5">  5: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
+<span class="nocode"><a name="6">  6: </a></span>Builds builds0 = new Builds();
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  deviceController0.turnOffOrOn(list0, builds0, (Device) dummyDevice0);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="12"> 12: </a></span>}
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Device&gt; linkedList0 = new LinkedList&lt;Device&gt;();
+<span class="nocode"><a name="2">  2: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Device) dummyDevice0);
+<span class="nocode"><a name="4">  4: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
+<span class="nocode"><a name="5">  5: </a></span>dummyDevice0.setProperties(deviceProperties0);
+<span class="nocode"><a name="6">  6: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) linkedList0);
+<span class="nocode"><a name="7">  7: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
 <span class="nocode"><a name="8">  8: </a></span>// Undeclared exception!
 <span class="nocode"><a name="9">  9: </a></span>try {
 <span class="nocode"><a name="10"> 10: </a></span>  deviceController0.switchDevices((Calendar) gregorianCalendar0);
 <span class="nocode"><a name="11"> 11: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="12"> 12: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="13"> 13: </a></span>}
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DeviceController deviceController0 = new DeviceController((List&lt;Device&gt;) null);
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>Builds builds0 = new Builds();
-<span class="nocode"><a name="4">  4: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  deviceController0.turnOffOrOn((List&lt;String&gt;) linkedList0, builds0, (Device) dummyDevice0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -203,7 +199,7 @@ net.sf.lavalamp.device.DeviceController
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3215396051626286958.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1185868961603558104.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -221,7 +217,7 @@ net.sf.lavalamp.device.DeviceController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11538
+<li>process_communication_port: 5549
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

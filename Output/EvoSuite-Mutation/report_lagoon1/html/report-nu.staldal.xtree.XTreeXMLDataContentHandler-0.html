@@ -22,7 +22,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.XTreeXMLDataContentHandler: 66.67%</ul><ul>
-<li>10838 fitness evaluations, 218 generations, 31355 statements, 6923 tests.
+<li>8654 fitness evaluations, 175 generations, 31557 statements, 5603 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/8 branches, 5/5 methods, 8/12 total goals
 <li>Mutation score: 10%
@@ -32,12 +32,15 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>FileDataSource fileDataSource0 = new FileDataSource(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xTreeXMLDataContentHandler0.getContent((DataSource) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  xTreeXMLDataContentHandler0.getContent((DataSource) fileDataSource0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: FileNotFoundException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(FileNotFoundException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   *  (No such file or directory)
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -49,15 +52,16 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
 <span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xTreeXMLDataContentHandler0.writeTo((Object) &quot;application/x-java-jvm-local-objectref&quot;, &quot;application/x-java-jvm-local-objectref&quot;, (OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ClassCastException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ClassCastException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * java.lang.String cannot be cast to nu.staldal.xtree.Node
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>ObjectOutputStream objectOutputStream0 = new ObjectOutputStream((OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xTreeXMLDataContentHandler0.writeTo((Object) &quot;4_%/$BRHDZOQ&quot;, &quot;4_%/$brhDzoQ&quot;, (OutputStream) objectOutputStream0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ClassCastException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(ClassCastException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * java.lang.String cannot be cast to nu.staldal.xtree.Node
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -219,7 +223,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -237,7 +241,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9512
+<li>process_communication_port: 5862
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

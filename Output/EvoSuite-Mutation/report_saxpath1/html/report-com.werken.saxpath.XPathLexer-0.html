@@ -22,103 +22,102 @@ com.werken.saxpath.XPathLexer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.werken.saxpath.XPathLexer: 4.75%</ul><ul>
-<li>25094 fitness evaluations, 503 generations, 192518 statements, 16093 tests.
+<li>25130 fitness evaluations, 504 generations, 143314 statements, 16230 tests.
 <li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
 <li>Coverage: 14/458 branches, 13/44 methods, 23/484 total goals
-<li>Mutation score: 7%
+<li>Mutation score: 8%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;sC~3wZ]G5m&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.hasMoreChars();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(10, xPathLexer0.endPosition());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathLexer0.currentPosition());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.endPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xPathLexer0.currentPosition());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
 <span class="nocode"><a name="2">  2: </a></span>xPathLexer0.setPreviousToken((Token) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.endPosition());
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xPathLexer0.getXPath());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;sC~3wZ]G5m&quot;);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xPathLexer0.LA((-610));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(StringIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * String index out of range: -611
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;^3{i\&quot;lmfi&quot;);
+<span class="nocode"><a name="2">  2: </a></span>char char0 = xPathLexer0.LA(5);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals('\&quot;', char0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(9, xPathLexer0.endPosition());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
 <span class="nocode"><a name="2">  2: </a></span>xPathLexer0.consume((int) '\uFFFF');
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(65535, xPathLexer0.currentPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, xPathLexer0.hasMoreChars());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>xPathLexer0.consume();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(1, xPathLexer0.currentPosition());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
-<span class="nocode"><a name="2">  2: </a></span>char char0 = xPathLexer0.LA(1043);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.endPosition());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals('\uFFFF', char0);
+<span class="nocode"><a name="2">  2: </a></span>char char0 = xPathLexer0.LA(12);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals('\uFFFF', char0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathLexer0.endPosition());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;^3{i\&quot;lmfi&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.hasMoreChars();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.endPosition());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xPathLexer0.currentPosition());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(9, xPathLexer0.endPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathLexer0.currentPosition());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;sC~3wZ]G5m&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierChar('-');
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.currentPosition());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(10, xPathLexer0.endPosition());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathLexer0.currentPosition());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;^3{i\&quot;lmfi&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierChar('.');
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.currentPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(9, xPathLexer0.endPosition());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierChar('_');
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;s&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierChar('Q');
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, xPathLexer0.hasMoreChars());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;s&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierStartChar('_');
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, xPathLexer0.hasMoreChars());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierStartChar('k');
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierStartChar('r');
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xPathLexer0.currentPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathLexer xPathLexer0 = new XPathLexer();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierStartChar('.');
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xPathLexer0.isIdentifierStartChar('\uFFFF');
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -1131,7 +1130,7 @@ com.werken.saxpath.XPathLexer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4399348071473267917.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6446833260403929533.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -1149,7 +1148,7 @@ com.werken.saxpath.XPathLexer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10118
+<li>process_communication_port: 9945
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

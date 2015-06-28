@@ -17,18 +17,17 @@ public class AuthCallbackEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 6 covered goals:
-   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 4 TABLESWITCH L39 Case 1 - true
-   * 2 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 5 TABLESWITCH L39 Case 2 - false
-   * 3 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 6 TABLESWITCH L39 Case 3 - false
-   * 4 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 7 TABLESWITCH L39 Default-Case - false
-   * 5 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I11 Branch 8 IFEQ L41 - true
-   * 6 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.<init>(ZLjava/lang/String;)V: root-Branch
+   * 5 covered goals:
+   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 4 TABLESWITCH L39 Case 1 - false
+   * 2 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 6 TABLESWITCH L39 Case 3 - true
+   * 3 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.<init>(ZLjava/lang/String;)V: root-Branch
+   * 4 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 5 TABLESWITCH L39 Case 2 - false
+   * 5 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 7 TABLESWITCH L39 Default-Case - false
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, "[u");
-      AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+      AuthCallback authCallback0 = new AuthCallback(false, "");
+      AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
       // Undeclared exception!
       try {
         authCallback0.getCredentials(authenticationReason0);
@@ -42,14 +41,17 @@ public class AuthCallbackEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 2 covered goals:
-   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 4 TABLESWITCH L39 Case 1 - false
-   * 2 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 6 TABLESWITCH L39 Case 3 - true
+   * 5 covered goals:
+   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 4 TABLESWITCH L39 Case 1 - true
+   * 2 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 5 TABLESWITCH L39 Case 2 - false
+   * 3 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 6 TABLESWITCH L39 Case 3 - false
+   * 4 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 7 TABLESWITCH L39 Default-Case - false
+   * 5 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I11 Branch 8 IFEQ L41 - false
    */
   @Test
   public void test1()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "os");
-      AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
+      AuthCallback authCallback0 = new AuthCallback(true, "");
+      AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {
         authCallback0.getCredentials(authenticationReason0);
@@ -69,8 +71,8 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
+      AuthCallback authCallback0 = new AuthCallback(false, "%gk-9Z");
       AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
-      AuthCallback authCallback0 = new AuthCallback(true, "");
       // Undeclared exception!
       try {
         authCallback0.getCredentials(authenticationReason0);
@@ -85,7 +87,7 @@ public class AuthCallbackEvoSuiteTest {
   //Test case number: 3
   /*
    * 6 covered goals:
-   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I11 Branch 8 IFEQ L41 - false
+   * 1 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I11 Branch 8 IFEQ L41 - true
    * 2 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.<init>(ZLjava/lang/String;)V: root-Branch
    * 3 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 4 TABLESWITCH L39 Case 1 - true
    * 4 com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback.getCredentials(Lcom/sap/netweaver/porta/core/AuthenticationReason;)Lcom/sap/netweaver/porta/core/Credentials;: I6 Branch 5 TABLESWITCH L39 Case 2 - false
@@ -94,8 +96,8 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "cKJqR/|Tha");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+      AuthCallback authCallback0 = new AuthCallback(false, "xFt%hOzzG3#zp$6aN");
       // Undeclared exception!
       try {
         authCallback0.getCredentials(authenticationReason0);

@@ -7,7 +7,6 @@ package nu.staldal.lagoon.filestorage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
@@ -31,7 +30,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.deleteFile("");
+        fTPFileStorage0.deleteFile("Illegal Producer config file: ");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -46,11 +45,11 @@ public class FTPFileStorageEvoSuiteTest {
   public void test1()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       try {
-        fTPFileStorage0.open("", (LagoonContext) null, "");
+        fTPFileStorage0.open("16:L}']I", (LagoonContext) null, "rg[AGyR");
         fail("Expecting exception: MalformedURLException");
       } catch(MalformedURLException e) {
         /*
-         * 
+         * 16:L}']I
          */
       }
   }
@@ -65,7 +64,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.createFile((String) null);
+        fTPFileStorage0.createFile("Hd#7+:M");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -122,8 +121,7 @@ public class FTPFileStorageEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
-      FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("", (OutputStream) byteArrayOutputStream0);
+      FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("<d>HZJfh!", (OutputStream) null);
       // Undeclared exception!
       try {
         fTPFileStorage_FTPOutputHandler0.discard();

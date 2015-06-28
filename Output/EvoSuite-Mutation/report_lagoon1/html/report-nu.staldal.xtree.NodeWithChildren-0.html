@@ -22,8 +22,8 @@ nu.staldal.xtree.NodeWithChildren
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.NodeWithChildren: 100.00%</ul><ul>
-<li>1300 fitness evaluations, 27 generations, 5071 statements, 983 tests.
-<li>Time: 0:00:09(Search: 0:00:08, minimization: 0:00:00)
+<li>4450 fitness evaluations, 90 generations, 14718 statements, 3037 tests.
+<li>Time: 0:00:21(Search: 0:00:20, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 7/7 methods, 8/8 total goals
 <li>Mutation score: 10%
 </ul>
@@ -32,70 +32,62 @@ nu.staldal.xtree.NodeWithChildren
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Element element1 = element0.getFirstChildElementOrNull();
-<span class="nocode"><a name="3">  3: </a></span>assertNull(element1);
+<span class="nocode"><a name="2">  2: </a></span>int int0 = element0.numberOfChildren();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Text text0 = new Text(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>element0.addChild((Node) text0);
+<span class="nocode"><a name="4">  4: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;elj2m &quot;, &quot;elj2m &quot;);
+<span class="nocode"><a name="5">  5: </a></span>element0.addChild((Node) processingInstruction0);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(1, element0.numberOfChildren());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1674), (-1674));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;def?\&quot;lt&quot;, &quot;def?\&quot;lt&quot;, 11);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(1);
+<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(11);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 1 &gt;= 0
+<span class="nocode"><a name="7">  7: </a></span>   * 11 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 726);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, (-629));
+<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, 726);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * -629
+<span class="nocode"><a name="7">  7: </a></span>   * 726 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1737));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.insertChild((Node) element0, 32);
+<span class="nocode"><a name="3">  3: </a></span>  element0.insertChild((Node) element0, (-1286));
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 32 &gt; 0
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;X&quot;, &quot;X&quot;, 590, 590);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild((-848));
+<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild(590);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * -848
+<span class="nocode"><a name="7">  7: </a></span>   * 590 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1), 11);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, element0.numberOfNamespaceMappings());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -263,7 +255,7 @@ nu.staldal.xtree.NodeWithChildren
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -281,7 +273,7 @@ nu.staldal.xtree.NodeWithChildren
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14658
+<li>process_communication_port: 14348
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

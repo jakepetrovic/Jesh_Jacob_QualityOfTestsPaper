@@ -21,128 +21,57 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.authz.ModularRealmAuthorizer: 66.28%</ul><ul>
-<li>8200 fitness evaluations, 165 generations, 75014 statements, 4742 tests.
+<ul><li>Target class: org.jsecurity.authz.ModularRealmAuthorizer: 67.44%</ul><ul>
+<li>10308 fitness evaluations, 208 generations, 78371 statements, 6192 tests.
 <li>Time: 0:01:05(Search: 0:01:01, minimization: 0:00:04)
-<li>Coverage: 53/82 branches, 20/21 methods, 57/86 total goals
-<li>Mutation score: 64%
+<li>Coverage: 54/82 branches, 21/21 methods, 58/86 total goals
+<li>Mutation score: 48%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>String[] stringArray0 = new String[8];
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, stringArray0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(IllegalStateException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) null);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
-<span class="nocode"><a name="5">  5: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthorizer0.hasRole((PrincipalCollection) null, &quot;(ivW!d^`e&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="5">  5: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
-<span class="nocode"><a name="6">  6: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_9&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;Lgdu20E&quot;);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) null);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
 <span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthorizer0.checkPermission((PrincipalCollection) null, &quot;a&amp;|$vlo/z$u)epLeN&quot;);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(UnauthorizedException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Subject does not have permission [a&amp;|$vlo/z$u)epLeN]
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="5">  5: </a></span>String[] stringArray0 = new String[6];
-<span class="nocode"><a name="6">  6: </a></span>stringArray0[0] = &quot;'. &quot;;
-<span class="nocode"><a name="7">  7: </a></span>stringArray0[1] = &quot;U#zF'c&quot;;
-<span class="nocode"><a name="8">  8: </a></span>stringArray0[2] = &quot;U#zF'c&quot;;
-<span class="nocode"><a name="9">  9: </a></span>stringArray0[3] = &quot;U#zF'c&quot;;
-<span class="nocode"><a name="10"> 10: </a></span>stringArray0[4] = &quot;U#zF'c&quot;;
-<span class="nocode"><a name="11"> 11: </a></span>stringArray0[5] = &quot;U#zF'c&quot;;
-<span class="nocode"><a name="12"> 12: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, stringArray0);
-<span class="nocode"><a name="13"> 13: </a></span>assertNotNull(booleanArray0);
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;Realm&gt; treeSet0 = new TreeSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) treeSet0);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List&lt;Permission&gt;) linkedList0);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(booleanArray0);
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_86&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="7">  7: </a></span>String[] stringArray0 = new String[2];
-<span class="nocode"><a name="8">  8: </a></span>stringArray0[0] = &quot;'. &quot;;
-<span class="nocode"><a name="9">  9: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, stringArray0);
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;Realm&gt; treeSet0 = new TreeSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) treeSet0);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, (Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
+<span class="nocode"><a name="3">  3: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
 <span class="nocode"><a name="5">  5: </a></span>AllPermission allPermission0 = new AllPermission();
 <span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
 <span class="nocode"><a name="7">  7: </a></span>try {
@@ -150,70 +79,136 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
 <span class="nocode"><a name="10"> 10: </a></span>} catch(UnauthorizedException e) {
 <span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * Subject does not have permission [org.jsecurity.authz.permission.AllPermission@42e31fc5]
+<span class="nocode"><a name="12"> 12: </a></span>   * Subject does not have permission [org.jsecurity.authz.permission.AllPermission@4d316986]
 <span class="nocode"><a name="13"> 13: </a></span>   */
 <span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="3">  3: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>String[] stringArray0 = new String[9];
+<span class="nocode"><a name="6">  6: </a></span>stringArray0[0] = &quot;(ivW!d^`e&quot;;
+<span class="nocode"><a name="7">  7: </a></span>stringArray0[1] = &quot;@&quot;;
+<span class="nocode"><a name="8">  8: </a></span>stringArray0[2] = &quot;tTu&amp;C? +.GY&quot;;
+<span class="nocode"><a name="9">  9: </a></span>stringArray0[3] = &quot;@&quot;;
+<span class="nocode"><a name="10"> 10: </a></span>stringArray0[4] = &quot;@&quot;;
+<span class="nocode"><a name="11"> 11: </a></span>stringArray0[5] = &quot;@&quot;;
+<span class="nocode"><a name="12"> 12: </a></span>stringArray0[6] = &quot;@&quot;;
+<span class="nocode"><a name="13"> 13: </a></span>stringArray0[7] = &quot;@&quot;;
+<span class="nocode"><a name="14"> 14: </a></span>stringArray0[8] = &quot;(ivW!d^`e&quot;;
+<span class="nocode"><a name="15"> 15: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, stringArray0);
+<span class="nocode"><a name="16"> 16: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simpleAccountRealm0, (Object) &quot;UTF-8&quot;, &quot;;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
+<span class="nocode"><a name="5">  5: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List&lt;Permission&gt;) null);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;~&gt;%' .7l2f]Nk&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simpleAccountRealm0, (Object) &quot;UTF-8&quot;, &quot;~&gt;%' .7l2f]Nk&quot;);
+<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
+<span class="nocode"><a name="5">  5: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
+<span class="nocode"><a name="6">  6: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List&lt;Permission&gt;) linkedList0);
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="3">  3: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_91&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>String[] stringArray0 = new String[10];
+<span class="nocode"><a name="8">  8: </a></span>stringArray0[0] = &quot;(ivW!d^`e&quot;;
+<span class="nocode"><a name="9">  9: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, stringArray0);
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, (Collection&lt;Permission&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) linkedList0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+</pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;Realm&gt; treeSet0 = new TreeSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) treeSet0);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;&amp;J65.&quot;, true);
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Permission) wildcardPermission0);
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) linkedList0);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, linkedHashSet0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (String[]) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-<span class="nocode"><a name="2">  2: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(booleanArray0);
+<span class="nocode"><a name="2">  2: </a></span>String[] stringArray0 = new String[2];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthorizer0.checkPermissions((PrincipalCollection) null, stringArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) linkedList0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(booleanArray0);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="5">  5: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="6">  6: </a></span>linkedList0.add(&quot;U#zF'c&quot;);
-<span class="nocode"><a name="7">  7: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) linkedList0);
-<span class="nocode"><a name="8">  8: </a></span>assertNotNull(booleanArray0);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthorizer0.checkPermissions((PrincipalCollection) null, (Collection&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, hashSet0.size());
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;Realm&gt; treeSet0 = new TreeSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) treeSet0);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) linkedHashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 18</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add(&quot;U#zF'c&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>AllPermission allPermission0 = new AllPermission();
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Permission) allPermission0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthorizer0.checkPermissions((PrincipalCollection) null, (Collection&lt;Permission&gt;) hashSet0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(IllegalStateException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
@@ -221,36 +216,75 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(booleanArray0);
+</pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_188&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="7">  7: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="8">  8: </a></span>linkedList0.add(&quot;U#zF'c&quot;);
-<span class="nocode"><a name="9">  9: </a></span>boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection&lt;String&gt;) linkedList0);
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="4">  4: </a></span>boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) simplePrincipalCollection0, (List&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(booleanArray0);
 </pre>
 <h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="3">  3: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthorizer0.checkRole((PrincipalCollection) null, &quot;yPf&quot;);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(UnauthorizedException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Subject does not have role [yPf]
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
 <span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="3">  3: </a></span>modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) null);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
-<h3>Test case 21</h3>
+<h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection&lt;Realm&gt;) linkedHashSet0);
-<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) linkedHashSet0, &quot;Wyfi!l'.I]-&quot;);
-<span class="nocode"><a name="6">  6: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet1 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="7">  7: </a></span>modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) linkedHashSet1);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;[]&quot;, linkedHashSet1.toString());
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, linkedList0.isEmpty());
+</pre>
+<h3>Test case 24</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;Lgdu20E&quot;);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) hashSet0, &quot;&amp;J65.&quot;);
+<span class="nocode"><a name="6">  6: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;String&gt;) set0);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="12"> 12: </a></span>  /*
+<span class="nocode"><a name="13"> 13: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+<span class="nocode"><a name="14"> 14: </a></span>   */
+<span class="nocode"><a name="15"> 15: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -446,8 +480,8 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="191">191: </a></span>     */
 <span class="nocode"><a name="192">192: </a></span>    public boolean isPermittedAll(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) {
 <span class="nocode"><a name="193">193: </a></span><span style="background-color: #ffffcc">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
-<span class="nocode"><a name="194">194: </a></span>            for (Permission permission : permissions) {
-<span class="nocode"><a name="195">195: </a></span>                if (!isPermitted(principals, permission)) {
+<span class="nocode"><a name="194">194: </a></span><span style="background-color: #ffffcc">            for (Permission permission : permissions) {</span>
+<span class="nocode"><a name="195">195: </a></span><span style="background-color: #ffffcc">                if (!isPermitted(principals, permission)) {</span>
 <span class="nocode"><a name="196">196: </a></span>                    return false;
 <span class="nocode"><a name="197">197: </a></span>                }
 <span class="nocode"><a name="198">198: </a></span>            }
@@ -461,7 +495,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="206">206: </a></span>     */
 <span class="nocode"><a name="207">207: </a></span>    public void checkPermission(PrincipalCollection principals, String permission) throws AuthorizationException {
 <span class="nocode"><a name="208">208: </a></span><span style="background-color: #ffffcc">        if (!isPermitted(principals, permission)) {</span>
-<span class="nocode"><a name="209">209: </a></span><span style="background-color: #ffffcc">            throw new UnauthorizedException(&quot;Subject does not have permission [&quot; + permission + &quot;]&quot;);</span>
+<span class="nocode"><a name="209">209: </a></span>            throw new UnauthorizedException(&quot;Subject does not have permission [&quot; + permission + &quot;]&quot;);
 <span class="nocode"><a name="210">210: </a></span>        }
 <span class="nocode"><a name="211">211: </a></span>    }
 <span class="nocode"><a name="212">212: </a></span>
@@ -485,7 +519,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="230">230: </a></span><span style="background-color: #ffffcc">                checkPermission(principals, perm);</span>
 <span class="nocode"><a name="231">231: </a></span>            }
 <span class="nocode"><a name="232">232: </a></span>        }
-<span class="nocode"><a name="233">233: </a></span>    }
+<span class="nocode"><a name="233">233: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="234">234: </a></span>
 <span class="nocode"><a name="235">235: </a></span>    /**
 <span class="nocode"><a name="236">236: </a></span>     * If !{@link #isPermitted(org.jsecurity.subject.PrincipalCollection, Permission) isPermitted(permission)} for
@@ -495,7 +529,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="240">240: </a></span>    public void checkPermissions(PrincipalCollection principals, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
 <span class="nocode"><a name="241">241: </a></span><span style="background-color: #ffffcc">        if (permissions != null) {</span>
 <span class="nocode"><a name="242">242: </a></span><span style="background-color: #ffffcc">            for (Permission permission : permissions) {</span>
-<span class="nocode"><a name="243">243: </a></span>                checkPermission(principals, permission);
+<span class="nocode"><a name="243">243: </a></span><span style="background-color: #ffffcc">                checkPermission(principals, permission);</span>
 <span class="nocode"><a name="244">244: </a></span>            }
 <span class="nocode"><a name="245">245: </a></span>        }
 <span class="nocode"><a name="246">246: </a></span><span style="background-color: #ffffcc">    }</span>
@@ -521,12 +555,12 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="266">266: </a></span>     */
 <span class="nocode"><a name="267">267: </a></span>    public boolean[] hasRoles(PrincipalCollection principals, List&lt;String&gt; roleIdentifiers) {
 <span class="nocode"><a name="268">268: </a></span><span style="background-color: #ffffcc">        if (roleIdentifiers != null &amp;&amp; !roleIdentifiers.isEmpty()) {</span>
-<span class="nocode"><a name="269">269: </a></span><span style="background-color: #ffffcc">            boolean[] hasRoles = new boolean[roleIdentifiers.size()];</span>
-<span class="nocode"><a name="270">270: </a></span><span style="background-color: #ffffcc">            int i = 0;</span>
-<span class="nocode"><a name="271">271: </a></span><span style="background-color: #ffffcc">            for (String roleId : roleIdentifiers) {</span>
-<span class="nocode"><a name="272">272: </a></span><span style="background-color: #ffffcc">                hasRoles[i++] = hasRole(principals, roleId);</span>
-<span class="nocode"><a name="273">273: </a></span><span style="background-color: #ffffcc">            }</span>
-<span class="nocode"><a name="274">274: </a></span><span style="background-color: #ffffcc">            return hasRoles;</span>
+<span class="nocode"><a name="269">269: </a></span>            boolean[] hasRoles = new boolean[roleIdentifiers.size()];
+<span class="nocode"><a name="270">270: </a></span>            int i = 0;
+<span class="nocode"><a name="271">271: </a></span>            for (String roleId : roleIdentifiers) {
+<span class="nocode"><a name="272">272: </a></span>                hasRoles[i++] = hasRole(principals, roleId);
+<span class="nocode"><a name="273">273: </a></span>            }
+<span class="nocode"><a name="274">274: </a></span>            return hasRoles;
 <span class="nocode"><a name="275">275: </a></span>        }
 <span class="nocode"><a name="276">276: </a></span>
 <span class="nocode"><a name="277">277: </a></span><span style="background-color: #ffffcc">        return new boolean[0];</span>
@@ -539,8 +573,8 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="284">284: </a></span>     */
 <span class="nocode"><a name="285">285: </a></span>    public boolean hasAllRoles(PrincipalCollection principals, Collection&lt;String&gt; roleIdentifiers) {
 <span class="nocode"><a name="286">286: </a></span><span style="background-color: #ffffcc">        for (String roleIdentifier : roleIdentifiers) {</span>
-<span class="nocode"><a name="287">287: </a></span><span style="background-color: #ffffcc">            if (!hasRole(principals, roleIdentifier)) {</span>
-<span class="nocode"><a name="288">288: </a></span><span style="background-color: #ffffcc">                return false;</span>
+<span class="nocode"><a name="287">287: </a></span>            if (!hasRole(principals, roleIdentifier)) {
+<span class="nocode"><a name="288">288: </a></span>                return false;
 <span class="nocode"><a name="289">289: </a></span>            }
 <span class="nocode"><a name="290">290: </a></span>        }
 <span class="nocode"><a name="291">291: </a></span><span style="background-color: #ffffcc">        return true;</span>
@@ -551,8 +585,8 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="296">296: </a></span>     * an &lt;code&gt;UnauthorizedException&lt;/code&gt; otherwise returns quietly.
 <span class="nocode"><a name="297">297: </a></span>     */
 <span class="nocode"><a name="298">298: </a></span>    public void checkRole(PrincipalCollection principals, String role) throws AuthorizationException {
-<span class="nocode"><a name="299">299: </a></span>        if (!hasRole(principals, role)) {
-<span class="nocode"><a name="300">300: </a></span>            throw new UnauthorizedException(&quot;Subject does not have role [&quot; + role + &quot;]&quot;);
+<span class="nocode"><a name="299">299: </a></span><span style="background-color: #ffffcc">        if (!hasRole(principals, role)) {</span>
+<span class="nocode"><a name="300">300: </a></span><span style="background-color: #ffffcc">            throw new UnauthorizedException(&quot;Subject does not have role [&quot; + role + &quot;]&quot;);</span>
 <span class="nocode"><a name="301">301: </a></span>        }
 <span class="nocode"><a name="302">302: </a></span>    }
 <span class="nocode"><a name="303">303: </a></span>
@@ -562,7 +596,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <span class="nocode"><a name="307">307: </a></span>    public void checkRoles(PrincipalCollection principals, Collection&lt;String&gt; roles) throws AuthorizationException {
 <span class="nocode"><a name="308">308: </a></span><span style="background-color: #ffffcc">        if (roles != null) {</span>
 <span class="nocode"><a name="309">309: </a></span><span style="background-color: #ffffcc">            for (String role : roles) {</span>
-<span class="nocode"><a name="310">310: </a></span>                checkRole(principals, role);
+<span class="nocode"><a name="310">310: </a></span><span style="background-color: #ffffcc">                checkRole(principals, role);</span>
 <span class="nocode"><a name="311">311: </a></span>            }
 <span class="nocode"><a name="312">312: </a></span>        }
 <span class="nocode"><a name="313">313: </a></span><span style="background-color: #ffffcc">    }</span>
@@ -572,7 +606,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -590,7 +624,7 @@ org.jsecurity.authz.ModularRealmAuthorizer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6556
+<li>process_communication_port: 14281
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

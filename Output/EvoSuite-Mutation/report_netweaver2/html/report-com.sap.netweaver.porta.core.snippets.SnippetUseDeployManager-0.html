@@ -22,7 +22,7 @@ com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager: 83.33%</ul><ul>
-<li>26842 fitness evaluations, 538 generations, 172460 statements, 17508 tests.
+<li>26794 fitness evaluations, 537 generations, 170121 statements, 17569 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/4 branches, 2/3 methods, 5/6 total goals
 <li>Mutation score: 29%
@@ -38,8 +38,8 @@ com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
-<span class="nocode"><a name="2">  2: </a></span>SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
+<span class="nocode"><a name="1">  1: </a></span>SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
+<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
 <span class="nocode"><a name="3">  3: </a></span>Credentials credentials0 = snippetUseDeployManager0.getCredentials(authenticationReason0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&lt;pass&gt;&quot;, credentials0.getPassword());
 </pre>
@@ -48,7 +48,7 @@ com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager
 <span class="nocode"><a name="1">  1: </a></span>SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
 <span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
 <span class="nocode"><a name="3">  3: </a></span>Credentials credentials0 = snippetUseDeployManager0.getCredentials(authenticationReason0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&lt;pass&gt;&quot;, credentials0.getPassword());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&lt;user&gt;&quot;, credentials0.getUser());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*******************************************************************************
@@ -123,7 +123,7 @@ com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4792024402461155010.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6407999222306312146.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -141,7 +141,7 @@ com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16935
+<li>process_communication_port: 8860
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

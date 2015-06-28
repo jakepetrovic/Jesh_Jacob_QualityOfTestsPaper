@@ -23,7 +23,7 @@ public class WildcardPermissionResolverEvoSuiteTest {
       WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
       // Undeclared exception!
       try {
-        wildcardPermissionResolver0.resolvePermission("");
+        wildcardPermissionResolver0.resolvePermission((String) null);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*

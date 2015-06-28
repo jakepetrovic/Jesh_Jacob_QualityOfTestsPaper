@@ -34,7 +34,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.removeAttribute((String) null);
+        editorImpl0.removeAttribute("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -48,9 +48,10 @@ public class EditorImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
+      Object object0 = new Object();
       // Undeclared exception!
       try {
-        editorImpl0.element("", "");
+        editorImpl0.element("net.sf.xisemele.remove.root.not.permitted", object0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -64,10 +65,10 @@ public class EditorImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-      Date date0 = new Date((-1593L));
+      Date date0 = new Date();
       // Undeclared exception!
       try {
-        editorImpl0.attribute((String) null, date0, (String) null);
+        editorImpl0.attribute("&", date0, "&");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -97,10 +98,10 @@ public class EditorImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-      Date date0 = new Date((-1670L));
+      Date date0 = new Date(90L);
       // Undeclared exception!
       try {
-        editorImpl0.element("=W0M:kj!$v X;", date0, "=W0M:kj!$v X;");
+        editorImpl0.element("^;<zw$*qj{=o1TaU=", date0, "^;<zw$*qj{=o1TaU=");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -116,7 +117,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.defineAsCurrent("net.sf.xisemele.within.context.not.permitted");
+        editorImpl0.defineAsCurrent("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -146,10 +147,10 @@ public class EditorImplEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-      Date date0 = new Date();
+      Date date0 = new Date(266L);
       // Undeclared exception!
       try {
-        editorImpl0.value(date0, "");
+        editorImpl0.value(date0, "DrE&EH<W+J!");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -197,7 +198,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.attribute("YdGV'tD", "YdGV'tD");
+        editorImpl0.attribute("eo1_Q<kow@7$", "eo1_Q<kow@7$");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -277,7 +278,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.rename("YZ1@0S3G\"");
+        editorImpl0.rename("x[=}(gM:}>0[_ |zq");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -341,7 +342,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.value((Object) null);
+        editorImpl0.value((Object) "omP");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -358,7 +359,7 @@ public class EditorImplEvoSuiteTest {
       EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        editorImpl0.removeChildren("I,UV=-");
+        editorImpl0.removeChildren((String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

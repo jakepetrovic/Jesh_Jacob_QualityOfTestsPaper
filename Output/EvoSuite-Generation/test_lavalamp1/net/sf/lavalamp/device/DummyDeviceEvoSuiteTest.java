@@ -21,7 +21,7 @@ public class DummyDeviceEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      dummyDevice0.turnOn();
+      dummyDevice0.turnOff();
       assertEquals("dummy device null", dummyDevice0.toString());
   }
 

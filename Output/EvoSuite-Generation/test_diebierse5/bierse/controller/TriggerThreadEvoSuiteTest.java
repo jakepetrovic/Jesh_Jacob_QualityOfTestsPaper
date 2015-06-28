@@ -20,7 +20,7 @@ public class TriggerThreadEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TriggerThread triggerThread0 = new TriggerThread((String) null, (Model) null);
-      assertEquals("Thread[Thread-5980,5,Test Execution]", triggerThread0.toString());
+      TriggerThread triggerThread0 = new TriggerThread("", (Model) null);
+      assertEquals(false, triggerThread0.isAlive());
   }
 }

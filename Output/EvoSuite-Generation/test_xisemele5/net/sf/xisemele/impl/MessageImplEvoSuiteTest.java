@@ -22,7 +22,7 @@ public class MessageImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       MessageImpl messageImpl0 = new MessageImpl();
-      Object[] objectArray0 = new Object[2];
+      Object[] objectArray0 = new Object[10];
       // Undeclared exception!
       try {
         messageImpl0.getMessage("", objectArray0);

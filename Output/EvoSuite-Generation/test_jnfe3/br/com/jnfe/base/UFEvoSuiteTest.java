@@ -14,27 +14,27 @@ public class UFEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
-   * 1 br.com.jnfe.base.UF.getCUF()Ljava/lang/String;: root-Branch
-   * 2 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I14 Branch 1 IF_ICMPGE L94 - true
-   * 3 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I14 Branch 1 IF_ICMPGE L94 - false
-   * 4 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I25 Branch 2 IFLE L95 - true
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      UF.getUF("bxq1<+W\"");
-  }
-
-  //Test case number: 1
-  /*
    * 1 covered goal:
    * 1 br.com.jnfe.base.UF.getNomeUF()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
-      UF uF0 = UF.AC;
+  public void test0()  throws Throwable  {
+      UF uF0 = UF.SC;
       String string0 = uF0.getNomeUF();
-      assertEquals("Acre", string0);
+      assertEquals("Santa Catarina", string0);
+  }
+
+  //Test case number: 1
+  /*
+   * 4 covered goals:
+   * 1 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I14 Branch 1 IF_ICMPGE L94 - true
+   * 2 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I14 Branch 1 IF_ICMPGE L94 - false
+   * 3 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I25 Branch 2 IFLE L95 - true
+   * 4 br.com.jnfe.base.UF.getCUF()Ljava/lang/String;: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      UF.getUF("");
   }
 
   //Test case number: 2
@@ -47,7 +47,7 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      UF uF0 = UF.getUF("31");
-      assertEquals(UF.MG, uF0);
+      UF uF0 = UF.getUF("41");
+      assertEquals(UF.PR, uF0);
   }
 }

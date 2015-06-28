@@ -25,12 +25,13 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(11, (-1760));
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
       Period period0 = new Period(timeOfDay0, timeOfDay0);
-      Locale locale0 = Locale.UK;
+      Locale.Category locale_Category0 = Locale.Category.DISPLAY;
+      Locale locale0 = Locale.getDefault(locale_Category0);
       GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals("java.util.GregorianCalendar[time=1398583702424,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=28,SECOND=22,MILLISECOND=424,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals("java.util.GregorianCalendar[time=1433727739687,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=7,HOUR_OF_DAY=19,MINUTE=42,SECOND=19,MILLISECOND=687,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
       assertEquals(false, boolean0);
   }
 
@@ -45,13 +46,14 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(11, (-1760));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-1760), 11);
-      Locale locale0 = Locale.UK;
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      Locale.Category locale_Category0 = Locale.Category.DISPLAY;
+      Locale locale0 = Locale.getDefault(locale_Category0);
       GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
-      Period period0 = new Period(timeOfDay1, timeOfDay0);
+      TimeOfDay timeOfDay1 = new TimeOfDay(59, 59);
+      Period period0 = new Period(timeOfDay0, timeOfDay1);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals("java.util.GregorianCalendar[time=1398583705229,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=28,SECOND=25,MILLISECOND=229,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals("java.util.GregorianCalendar[time=1433727742759,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=7,HOUR_OF_DAY=19,MINUTE=42,SECOND=22,MILLISECOND=759,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
       assertEquals(true, boolean0);
   }
 
@@ -66,32 +68,16 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(11, (-1760));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-1760), 11);
+      TimeOfDay timeOfDay0 = new TimeOfDay(300, 300);
+      TimeOfDay timeOfDay1 = new TimeOfDay((-1), (-1));
       Period period0 = new Period(timeOfDay0, timeOfDay1);
-      Locale locale0 = Locale.UK;
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals(1398583709467L, gregorianCalendar0.getTimeInMillis());
+      assertEquals("java.util.GregorianCalendar[time=1433727747731,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=7,HOUR_OF_DAY=19,MINUTE=42,SECOND=27,MILLISECOND=731,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
       assertEquals(false, boolean0);
   }
 
   //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I20 Branch 5 IFGT L39 - true
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(11, (-1760));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-1760), 11);
-      Period period0 = new Period(timeOfDay0, timeOfDay1);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-1760), (-1760), (-1760), 11, 11, 11);
-      boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 4
   /*
    * 6 covered goals:
    * 1 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 6 IFGE L39 - false
@@ -102,50 +88,32 @@ public class PeriodEvoSuiteTest {
    * 6 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I20 Branch 5 IFGT L39 - false
    */
   @Test
-  public void test4()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(685, 685);
-      TimeOfDay timeOfDay1 = new TimeOfDay(1, 685);
+  public void test3()  throws Throwable  {
+      TimeOfDay timeOfDay0 = new TimeOfDay(300, 300);
+      Integer integer0 = timeOfDay0.getMinutes();
+      TimeOfDay timeOfDay1 = new TimeOfDay(100, (int) integer0);
       Period period0 = new Period(timeOfDay0, timeOfDay1);
-      Locale locale0 = Locale.JAPAN;
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals("java.util.GregorianCalendar[time=1398583717344,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=18,WEEK_OF_MONTH=5,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=28,SECOND=37,MILLISECOND=344,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals("java.util.GregorianCalendar[time=1433727752036,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=7,HOUR_OF_DAY=19,MINUTE=42,SECOND=32,MILLISECOND=36,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
       assertEquals(true, boolean0);
   }
 
-  //Test case number: 5
+  //Test case number: 4
   /*
-   * 1 covered goal:
+   * 5 covered goals:
    * 1 net.sf.lavalamp.device.Period.isInPeriodWhenStartAndEndOnSameDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I20 Branch 9 IFLE L48 - true
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(685, 685);
-      TimeOfDay timeOfDay1 = new TimeOfDay(1, 685);
-      Period period0 = new Period(timeOfDay1, timeOfDay0);
-      Locale locale0 = Locale.JAPAN;
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
-      boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals(1398583721825L, gregorianCalendar0.getTimeInMillis());
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 6
-  /*
-   * 6 covered goals:
-   * 1 net.sf.lavalamp.device.Period.isInPeriodWhenStartAndEndOnSameDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 10 IFGE L48 - true
    * 2 net.sf.lavalamp.device.Period.<init>(Lnet/sf/lavalamp/device/TimeOfDay;Lnet/sf/lavalamp/device/TimeOfDay;)V: root-Branch
    * 3 net.sf.lavalamp.device.Period.isInPeriodWhenStartAndEndOnSameDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I3 Branch 7 IFNE L47 - false
    * 4 net.sf.lavalamp.device.Period.isInPeriodWhenStartAndEndOnSameDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I9 Branch 8 IFLT L47 - true
-   * 5 net.sf.lavalamp.device.Period.isInPeriodWhenStartAndEndOnSameDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I20 Branch 9 IFLE L48 - false
-   * 6 net.sf.lavalamp.device.Period.isInPeriod(Ljava/util/Calendar;)Z: I19 Branch 1 IFGE L28 - false
+   * 5 net.sf.lavalamp.device.Period.isInPeriod(Ljava/util/Calendar;)Z: I19 Branch 1 IFGE L28 - false
    */
   @Test
-  public void test6()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(11, (-1760));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-1760), 11);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-1760), (-1760), (-1760), 11, 11, 11);
-      Period period0 = new Period(timeOfDay1, timeOfDay0);
+  public void test4()  throws Throwable  {
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay1 = new TimeOfDay(59, 59);
+      Period period0 = new Period(timeOfDay0, timeOfDay1);
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(0, 92, 59);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
       assertEquals(false, boolean0);
   }

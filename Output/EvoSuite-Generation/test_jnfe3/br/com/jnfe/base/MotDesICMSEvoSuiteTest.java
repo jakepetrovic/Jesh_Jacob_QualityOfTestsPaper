@@ -19,8 +19,8 @@ public class MotDesICMSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      MotDesICMS motDesICMS0 = MotDesICMS.SUFRAMA;
+      MotDesICMS motDesICMS0 = MotDesICMS.AREAS_DE_LIVRE_COMERCIO;
       char char0 = motDesICMS0.getValue();
-      assertEquals('7', char0);
+      assertEquals('6', char0);
   }
 }

@@ -7,13 +7,45 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.AllowAllCredentialsMatcher;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class AllowAllCredentialsMatcherEvoSuiteTest {
+
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
 
 
   //Test case number: 0
@@ -24,11 +56,21 @@ public class AllowAllCredentialsMatcherEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AllowAllCredentialsMatcher allowAllCredentialsMatcher0 = new AllowAllCredentialsMatcher();
-      char[] charArray0 = new char[8];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, false);
-      SimpleAccount simpleAccount0 = new SimpleAccount();
-      boolean boolean0 = allowAllCredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
-      assertEquals(true, boolean0);
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+        try {
+          AllowAllCredentialsMatcher allowAllCredentialsMatcher0 = new AllowAllCredentialsMatcher();
+          char[] charArray0 = new char[4];
+          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0, false, (InetAddress) inet4Address0);
+          SimpleAccount simpleAccount0 = new SimpleAccount();
+          boolean boolean0 = allowAllCredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+          assertEquals(true, boolean0);
+        } catch(Throwable t) {
+            // Need to catch declared exceptions
+        }
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
   }
 }

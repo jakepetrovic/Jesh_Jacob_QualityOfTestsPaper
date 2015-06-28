@@ -19,8 +19,8 @@ public class ServerStateEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ServerState serverState0 = ServerState.UNKNOWN;
+      ServerState serverState0 = ServerState.STOPPED;
       String string0 = serverState0.toString();
-      assertEquals("Unknown", string0);
+      assertEquals("Stopped", string0);
   }
 }

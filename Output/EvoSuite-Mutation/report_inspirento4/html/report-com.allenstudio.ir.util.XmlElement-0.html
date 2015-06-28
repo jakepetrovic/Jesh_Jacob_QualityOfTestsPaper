@@ -21,23 +21,25 @@ com.allenstudio.ir.util.XmlElement
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.util.XmlElement: 49.47%</ul><ul>
-<li>608 fitness evaluations, 14 generations, 3762 statements, 658 tests.
-<li>Time: 0:01:04(Search: 0:01:02, minimization: 0:00:02)
-<li>Coverage: 29/70 branches, 28/36 methods, 47/95 total goals
-<li>Mutation score: 29%
+<ul><li>Target class: com.allenstudio.ir.util.XmlElement: 89.47%</ul><ul>
+<li>6420 fitness evaluations, 130 generations, 42960 statements, 4178 tests.
+<li>Time: 0:01:13(Search: 0:01:01, minimization: 0:00:12)
+<li>Coverage: 61/70 branches, 36/36 methods, 85/95 total goals
+<li>Mutation score: 50%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;r:HzJzzmyo_^K)Ebg&quot;, &quot;r:HzJzzmyo_^K)Ebg&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = (XmlElement)xmlElement0.clone();
-<span class="nocode"><a name="5">  5: </a></span>assertNotSame(xmlElement1, xmlElement0);
-<span class="nocode"><a name="6">  6: </a></span>assertTrue(xmlElement1.equals(xmlElement0));
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(xmlElement1);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xmlElement0.insertElement(xmlElement0, (-1));
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -47,88 +49,185 @@ com.allenstudio.ir.util.XmlElement
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlElement0.removeElement(0);
+<span class="nocode"><a name="4">  4: </a></span>  xmlElement0.removeElement((-230));
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Array index out of range: 0
+<span class="nocode"><a name="8">  8: </a></span>   * -230
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>String string0 = xmlElement0.getAttribute(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.setName(&quot;{}&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;{}&quot;, xmlElement0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = xmlElement0.addSubElement(&quot;RtT!?5PXW&lt;x+\&quot;2~B'&quot;, &quot;RtT!?5PXW&lt;x+\&quot;2~B'&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, xmlElement0.count());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;RtT!?5PXW&lt;x+\&quot;2~B'&quot;, xmlElement1.getData());
+<span class="nocode"><a name="4">  4: </a></span>String string0 = xmlElement0.getAttribute(&quot;&quot;, &quot;N.#8MaFNk&lt;IzavpC&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;N.#8MaFNk&lt;IzavpC&quot;, string0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>XmlElement.printNode(xmlElement0, &quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, xmlElement0.getData());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;]5cAA EI.[&gt;3&quot;, xmlElement0.getName());
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xmlElement0.notifyObservers();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, xmlElement0.getData());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>xmlElement0.append(xmlElement0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, xmlElement0.count());
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, (Hashtable&lt;String, String&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>int int0 = xmlElement0.hashCode();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(29376036, int0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  xmlElement0.addSubElement((XmlElement) null);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  xmlElement0.getElement((-1));
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * -1
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlElement0.getElement((-24));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xmlElement0.removeAllElements();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xmlElement0.count());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>int int0 = xmlElement0.count();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>XmlElement xmlElement1 = xmlElement0.addSubElement(&quot;]5cAA EI.[&gt;3&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xmlElement0.append(xmlElement1);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(2, xmlElement0.count());
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>XmlElement xmlElement1 = xmlElement0.getParent();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xmlElement1);
 </pre>
 <h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement((String) null, (String) null);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = xmlElement0.addAttribute((String) null, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(object0);
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = xmlElement0.addAttribute((String) null, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(object0);
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = xmlElement0.addSubElement(&quot;N.#8MaFNk&lt;IzavpC&quot;);
+<span class="nocode"><a name="5">  5: </a></span>xmlElement1.removeFromParent();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, xmlElement0.count());
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.addSubElement(&quot;7-^D&lt;E%T`v$nMVM&quot;);
+<span class="nocode"><a name="5">  5: </a></span>xmlElement0.removeElement(xmlElement0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, xmlElement0.count());
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="2">  2: </a></span>XmlElement xmlElement1 = xmlElement0.getElement(&quot;FPr4FH.Kd*e{9y8d9&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xmlElement1);
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.addSubElement(xmlElement0);
+<span class="nocode"><a name="5">  5: </a></span>xmlElement0.getElement(&quot; = '&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, xmlElement0.count());
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.addSubElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>xmlElement0.getElement(&quot;VW&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, xmlElement0.count());
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement((String) null, (String) null);
+<span class="nocode"><a name="2">  2: </a></span>XmlElement.printNode(xmlElement0, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xmlElement0.count());
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>XmlElement.printNode(xmlElement0, &quot;9c*z,(m+O&gt;7(p5&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot; = '&quot;, xmlElement0.getData());
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.addSubElement(&quot;N.#8MaFNk&lt;IzavpC&quot;);
+<span class="nocode"><a name="5">  5: </a></span>XmlElement.printNode(xmlElement0, &quot;#8MaFNk&lt;IzavpC&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, xmlElement0.count());
+</pre>
+<h3>Test case 22</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = new XmlElement(&quot; = '&quot;, (Hashtable&lt;String, String&gt;) null);
+<span class="nocode"><a name="5">  5: </a></span>xmlElement0.append(xmlElement1);
+<span class="nocode"><a name="6">  6: </a></span>XmlElement xmlElement2 = (XmlElement)xmlElement0.clone();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, xmlElement0.count());
+<span class="nocode"><a name="8">  8: </a></span>assertTrue(xmlElement2.equals(xmlElement0));
+</pre>
+<h3>Test case 23</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>xmlElement0.setAttributes((Hashtable&lt;String, String&gt;) null);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = xmlElement0.equals((Object) xmlElement0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 24</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = new XmlElement(&quot;7-^D&lt;E%T`v$nMVM&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(xmlElement1);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>xmlElement1.setAttributes((Hashtable&lt;String, String&gt;) null);
+<span class="nocode"><a name="8">  8: </a></span>boolean boolean0 = xmlElement1.equals((Object) xmlElement0);
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 25</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
@@ -136,17 +235,65 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = xmlElement0.equals((Object) null);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
 </pre>
-<h3>Test case 13</h3>
+<h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;]5cAA EI.[&gt;3&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = xmlElement0.equals(object0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = new XmlElement(&quot;7-^D&lt;E%T`v$nMVM&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(xmlElement1);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>XmlElement xmlElement2 = (XmlElement)xmlElement1.clone();
+<span class="nocode"><a name="8">  8: </a></span>assertNotNull(xmlElement2);
+<span class="nocode"><a name="9">  9: </a></span>
+<span class="nocode"><a name="10"> 10: </a></span>boolean boolean0 = xmlElement0.equals((Object) xmlElement2);
+<span class="nocode"><a name="11"> 11: </a></span>assertNotSame(xmlElement1, xmlElement2);
+<span class="nocode"><a name="12"> 12: </a></span>assertTrue(xmlElement1.equals(xmlElement2));
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 28</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;, &quot; = '&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = new XmlElement(&quot;7-^D&lt;E%T`v$nMVM&quot;);
+<span class="nocode"><a name="5">  5: </a></span>XmlElement xmlElement2 = (XmlElement)xmlElement1.clone();
+<span class="nocode"><a name="6">  6: </a></span>XmlElement xmlElement3 = xmlElement0.addSubElement((String) null, &quot;&quot;);
+<span class="nocode"><a name="7">  7: </a></span>boolean boolean0 = xmlElement3.equals((Object) xmlElement2);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(1, xmlElement0.count());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 29</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;7-^D&lt;E%T`v$nMVM&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>XmlElement xmlElement1 = (XmlElement)xmlElement0.clone();
+<span class="nocode"><a name="5">  5: </a></span>xmlElement0.addSubElement((String) null, &quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = xmlElement0.equals((Object) xmlElement1);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, xmlElement0.count());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 30</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot; = '&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = xmlElement0.hashCode();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals((-731699393), int0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(29376036, int0);
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 31</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement();
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement((String) null, (String) null);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(xmlElement0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = xmlElement0.hashCode();
@@ -249,10 +396,10 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="94"> 94: </a></span>     *  
 <span class="nocode"><a name="95"> 95: </a></span>     */
 <span class="nocode"><a name="96"> 96: </a></span>    public XmlElement(String name, Hashtable&lt;String, String&gt; attributes) {
-<span class="nocode"><a name="97"> 97: </a></span>        this.name = name;
-<span class="nocode"><a name="98"> 98: </a></span>        this.attributes = attributes;
-<span class="nocode"><a name="99"> 99: </a></span>        subElements = new Vector&lt;XmlElement&gt;();
-<span class="nocode"><a name="100">100: </a></span>    }
+<span class="nocode"><a name="97"> 97: </a></span><span style="background-color: #ffffcc">        this.name = name;</span>
+<span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">        this.attributes = attributes;</span>
+<span class="nocode"><a name="99"> 99: </a></span><span style="background-color: #ffffcc">        subElements = new Vector&lt;XmlElement&gt;();</span>
+<span class="nocode"><a name="100">100: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="101">101: </a></span>
 <span class="nocode"><a name="102">102: </a></span>    /**
 <span class="nocode"><a name="103">103: </a></span>     * **
@@ -266,11 +413,11 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="111">111: </a></span>     *  
 <span class="nocode"><a name="112">112: </a></span>     */
 <span class="nocode"><a name="113">113: </a></span>    public XmlElement(String name, String data) {
-<span class="nocode"><a name="114">114: </a></span>        this.name = name;
-<span class="nocode"><a name="115">115: </a></span>        this.data = data;
-<span class="nocode"><a name="116">116: </a></span>        subElements = new Vector&lt;XmlElement&gt;();
-<span class="nocode"><a name="117">117: </a></span>        this.attributes = new Hashtable&lt;String, String&gt;(10);
-<span class="nocode"><a name="118">118: </a></span>    }
+<span class="nocode"><a name="114">114: </a></span><span style="background-color: #ffffcc">        this.name = name;</span>
+<span class="nocode"><a name="115">115: </a></span><span style="background-color: #ffffcc">        this.data = data;</span>
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">        subElements = new Vector&lt;XmlElement&gt;();</span>
+<span class="nocode"><a name="117">117: </a></span><span style="background-color: #ffffcc">        this.attributes = new Hashtable&lt;String, String&gt;(10);</span>
+<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="119">119: </a></span>
 <span class="nocode"><a name="120">120: </a></span>    /**
 <span class="nocode"><a name="121">121: </a></span>     * Add attribute to this xml element.
@@ -289,7 +436,7 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">            return returnValue;</span>
 <span class="nocode"><a name="135">135: </a></span>        }
 <span class="nocode"><a name="136">136: </a></span>
-<span class="nocode"><a name="137">137: </a></span>        return null;
+<span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">        return null;</span>
 <span class="nocode"><a name="138">138: </a></span>    }
 <span class="nocode"><a name="139">139: </a></span>
 <span class="nocode"><a name="140">140: </a></span>    /**
@@ -382,8 +529,8 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="227">227: </a></span>    }
 <span class="nocode"><a name="228">228: </a></span>
 <span class="nocode"><a name="229">229: </a></span>    public void removeAllElements() {
-<span class="nocode"><a name="230">230: </a></span>        subElements.clear();
-<span class="nocode"><a name="231">231: </a></span>    }
+<span class="nocode"><a name="230">230: </a></span><span style="background-color: #ffffcc">        subElements.clear();</span>
+<span class="nocode"><a name="231">231: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="232">232: </a></span>
 <span class="nocode"><a name="233">233: </a></span>    /**
 <span class="nocode"><a name="234">234: </a></span>     * convienience method for the TreeView
@@ -416,9 +563,9 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="261">261: </a></span>     * @param index
 <span class="nocode"><a name="262">262: </a></span>     */
 <span class="nocode"><a name="263">263: </a></span>    public void insertElement(XmlElement e, int index) {
-<span class="nocode"><a name="264">264: </a></span>        e.removeFromParent();
+<span class="nocode"><a name="264">264: </a></span><span style="background-color: #ffffcc">        e.removeFromParent();</span>
 <span class="nocode"><a name="265">265: </a></span>
-<span class="nocode"><a name="266">266: </a></span>        subElements.add(index, e);
+<span class="nocode"><a name="266">266: </a></span><span style="background-color: #ffffcc">        subElements.add(index, e);</span>
 <span class="nocode"><a name="267">267: </a></span>        e.setParent(this);
 <span class="nocode"><a name="268">268: </a></span>    }
 <span class="nocode"><a name="269">269: </a></span>
@@ -458,8 +605,8 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="303">303: </a></span>        }
 <span class="nocode"><a name="304">304: </a></span>
 <span class="nocode"><a name="305">305: </a></span><span style="background-color: #ffffcc">        if (i &gt; 0) {</span>
-<span class="nocode"><a name="306">306: </a></span>            topName = path.substring(0, i);
-<span class="nocode"><a name="307">307: </a></span>            subName = path.substring(i + 1);
+<span class="nocode"><a name="306">306: </a></span><span style="background-color: #ffffcc">            topName = path.substring(0, i);</span>
+<span class="nocode"><a name="307">307: </a></span><span style="background-color: #ffffcc">            subName = path.substring(i + 1);</span>
 <span class="nocode"><a name="308">308: </a></span>        } else {
 <span class="nocode"><a name="309">309: </a></span><span style="background-color: #ffffcc">            topName = path;</span>
 <span class="nocode"><a name="310">310: </a></span><span style="background-color: #ffffcc">            subName = null;</span>
@@ -468,12 +615,12 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="313">313: </a></span>        int j;
 <span class="nocode"><a name="314">314: </a></span>
 <span class="nocode"><a name="315">315: </a></span><span style="background-color: #ffffcc">        for (j = 0; j &lt; subElements.size(); j++) {</span>
-<span class="nocode"><a name="316">316: </a></span>            if (((XmlElement) subElements.get(j)).getName().equals(topName)) {
-<span class="nocode"><a name="317">317: </a></span>                if (subName != null) {
+<span class="nocode"><a name="316">316: </a></span><span style="background-color: #ffffcc">            if (((XmlElement) subElements.get(j)).getName().equals(topName)) {</span>
+<span class="nocode"><a name="317">317: </a></span><span style="background-color: #ffffcc">                if (subName != null) {</span>
 <span class="nocode"><a name="318">318: </a></span>                    return (((XmlElement) subElements.get(j))
 <span class="nocode"><a name="319">319: </a></span>                            .getElement(subName));
 <span class="nocode"><a name="320">320: </a></span>                } else {
-<span class="nocode"><a name="321">321: </a></span>                    return ((XmlElement) subElements.get(j));
+<span class="nocode"><a name="321">321: </a></span><span style="background-color: #ffffcc">                    return ((XmlElement) subElements.get(j));</span>
 <span class="nocode"><a name="322">322: </a></span>                }
 <span class="nocode"><a name="323">323: </a></span>            }
 <span class="nocode"><a name="324">324: </a></span>        }
@@ -533,9 +680,9 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="378">378: </a></span>     */
 <span class="nocode"><a name="379">379: </a></span>    public XmlElement addSubElement(XmlElement e) {
 <span class="nocode"><a name="380">380: </a></span><span style="background-color: #ffffcc">        e.setParent(this);</span>
-<span class="nocode"><a name="381">381: </a></span>        subElements.add(e);
+<span class="nocode"><a name="381">381: </a></span><span style="background-color: #ffffcc">        subElements.add(e);</span>
 <span class="nocode"><a name="382">382: </a></span>
-<span class="nocode"><a name="383">383: </a></span>        return e;
+<span class="nocode"><a name="383">383: </a></span><span style="background-color: #ffffcc">        return e;</span>
 <span class="nocode"><a name="384">384: </a></span>    }
 <span class="nocode"><a name="385">385: </a></span>
 <span class="nocode"><a name="386">386: </a></span>    /**
@@ -574,7 +721,7 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="419">419: </a></span>     *  
 <span class="nocode"><a name="420">420: </a></span>     */
 <span class="nocode"><a name="421">421: </a></span>    public XmlElement getParent() {
-<span class="nocode"><a name="422">422: </a></span>        return parent;
+<span class="nocode"><a name="422">422: </a></span><span style="background-color: #ffffcc">        return parent;</span>
 <span class="nocode"><a name="423">423: </a></span>    }
 <span class="nocode"><a name="424">424: </a></span>
 <span class="nocode"><a name="425">425: </a></span>    /**
@@ -682,7 +829,7 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="527">527: </a></span><span style="background-color: #ffffcc">        if ((data == null) || data.equals(&quot;&quot;)) {</span>
 <span class="nocode"><a name="528">528: </a></span><span style="background-color: #ffffcc">            System.out.println(indent + node.getName());</span>
 <span class="nocode"><a name="529">529: </a></span>        } else {
-<span class="nocode"><a name="530">530: </a></span>            System.out.println(indent + node.getName() + &quot; = '&quot; + data + &quot;'&quot;);
+<span class="nocode"><a name="530">530: </a></span><span style="background-color: #ffffcc">            System.out.println(indent + node.getName() + &quot; = '&quot; + data + &quot;'&quot;);</span>
 <span class="nocode"><a name="531">531: </a></span>        }
 <span class="nocode"><a name="532">532: </a></span>
 <span class="nocode"><a name="533">533: </a></span>        // print attributes
@@ -696,7 +843,7 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="541">541: </a></span><span style="background-color: #ffffcc">        List subs = node.getElements();</span>
 <span class="nocode"><a name="542">542: </a></span>
 <span class="nocode"><a name="543">543: </a></span><span style="background-color: #ffffcc">        for (Iterator it = subs.iterator(); it.hasNext();) {</span>
-<span class="nocode"><a name="544">544: </a></span>            printNode((XmlElement) it.next(), indent + &quot;    &quot;);
+<span class="nocode"><a name="544">544: </a></span><span style="background-color: #ffffcc">            printNode((XmlElement) it.next(), indent + &quot;    &quot;);</span>
 <span class="nocode"><a name="545">545: </a></span>
 <span class="nocode"><a name="546">546: </a></span>            // for (i = 0; i &lt; subs.size(); i++) {
 <span class="nocode"><a name="547">547: </a></span>            // printNode((XmlElement) subs.get(i), indent + &quot; &quot;);
@@ -723,11 +870,11 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="568">568: </a></span>                XmlElement child;
 <span class="nocode"><a name="569">569: </a></span>
 <span class="nocode"><a name="570">570: </a></span><span style="background-color: #ffffcc">                for (Iterator it = childs.iterator(); it.hasNext();) {</span>
-<span class="nocode"><a name="571">571: </a></span>                    child = (XmlElement) it.next();
+<span class="nocode"><a name="571">571: </a></span><span style="background-color: #ffffcc">                    child = (XmlElement) it.next();</span>
 <span class="nocode"><a name="572">572: </a></span>
 <span class="nocode"><a name="573">573: </a></span>                    // for( int i=0; i&lt;childs.size(); i++ ) {
 <span class="nocode"><a name="574">574: </a></span>                    // child = (XmlElement) childs.get(i);
-<span class="nocode"><a name="575">575: </a></span>                    clone.addSubElement((XmlElement) child.clone());
+<span class="nocode"><a name="575">575: </a></span><span style="background-color: #ffffcc">                    clone.addSubElement((XmlElement) child.clone());</span>
 <span class="nocode"><a name="576">576: </a></span>                }
 <span class="nocode"><a name="577">577: </a></span>            }
 <span class="nocode"><a name="578">578: </a></span>
@@ -744,8 +891,8 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="589">589: </a></span>     *            The name to set
 <span class="nocode"><a name="590">590: </a></span>     */
 <span class="nocode"><a name="591">591: </a></span>    public void setName(String name) {
-<span class="nocode"><a name="592">592: </a></span>        this.name = name;
-<span class="nocode"><a name="593">593: </a></span>    }
+<span class="nocode"><a name="592">592: </a></span><span style="background-color: #ffffcc">        this.name = name;</span>
+<span class="nocode"><a name="593">593: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="594">594: </a></span>
 <span class="nocode"><a name="595">595: </a></span>    /**
 <span class="nocode"><a name="596">596: </a></span>     * Notify all Observers.
@@ -754,9 +901,9 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="599">599: </a></span>     */
 <span class="nocode"><a name="600">600: </a></span>    @Override
 <span class="nocode"><a name="601">601: </a></span>    public void notifyObservers() {
-<span class="nocode"><a name="602">602: </a></span>        setChanged();
-<span class="nocode"><a name="603">603: </a></span>        super.notifyObservers();
-<span class="nocode"><a name="604">604: </a></span>    }
+<span class="nocode"><a name="602">602: </a></span><span style="background-color: #ffffcc">        setChanged();</span>
+<span class="nocode"><a name="603">603: </a></span><span style="background-color: #ffffcc">        super.notifyObservers();</span>
+<span class="nocode"><a name="604">604: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="605">605: </a></span>
 <span class="nocode"><a name="606">606: </a></span>    /**
 <span class="nocode"><a name="607">607: </a></span>     * Returns true if the specified objects are equal. They are equal if they
@@ -771,15 +918,15 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="616">616: </a></span>     *         null or the &lt;code&gt;equals()&lt;/code&gt; method returns false.
 <span class="nocode"><a name="617">617: </a></span>     */
 <span class="nocode"><a name="618">618: </a></span>    private boolean equals(Object obj1, Object obj2) {
-<span class="nocode"><a name="619">619: </a></span>        boolean equal = false;
+<span class="nocode"><a name="619">619: </a></span><span style="background-color: #ffffcc">        boolean equal = false;</span>
 <span class="nocode"><a name="620">620: </a></span>
-<span class="nocode"><a name="621">621: </a></span>        if ((obj1 == null) &amp;&amp; (obj2 == null)) {
-<span class="nocode"><a name="622">622: </a></span>            equal = true;
-<span class="nocode"><a name="623">623: </a></span>        } else if ((obj1 != null) &amp;&amp; (obj2 != null)) {
-<span class="nocode"><a name="624">624: </a></span>            equal = obj1.equals(obj2);
+<span class="nocode"><a name="621">621: </a></span><span style="background-color: #ffffcc">        if ((obj1 == null) &amp;&amp; (obj2 == null)) {</span>
+<span class="nocode"><a name="622">622: </a></span><span style="background-color: #ffffcc">            equal = true;</span>
+<span class="nocode"><a name="623">623: </a></span><span style="background-color: #ffffcc">        } else if ((obj1 != null) &amp;&amp; (obj2 != null)) {</span>
+<span class="nocode"><a name="624">624: </a></span><span style="background-color: #ffffcc">            equal = obj1.equals(obj2);</span>
 <span class="nocode"><a name="625">625: </a></span>        }
 <span class="nocode"><a name="626">626: </a></span>
-<span class="nocode"><a name="627">627: </a></span>        return equal;
+<span class="nocode"><a name="627">627: </a></span><span style="background-color: #ffffcc">        return equal;</span>
 <span class="nocode"><a name="628">628: </a></span>    }
 <span class="nocode"><a name="629">629: </a></span>
 <span class="nocode"><a name="630">630: </a></span>    /** {@inheritDoc}
@@ -790,12 +937,12 @@ com.allenstudio.ir.util.XmlElement
 <span class="nocode"><a name="635">635: </a></span><span style="background-color: #ffffcc">        boolean equal = false;</span>
 <span class="nocode"><a name="636">636: </a></span>
 <span class="nocode"><a name="637">637: </a></span><span style="background-color: #ffffcc">        if ((obj != null) &amp;&amp; (obj instanceof XmlElement)) {</span>
-<span class="nocode"><a name="638">638: </a></span>            XmlElement other = (XmlElement) obj;
+<span class="nocode"><a name="638">638: </a></span><span style="background-color: #ffffcc">            XmlElement other = (XmlElement) obj;</span>
 <span class="nocode"><a name="639">639: </a></span>
-<span class="nocode"><a name="640">640: </a></span>            if (equals(attributes, other.attributes)
+<span class="nocode"><a name="640">640: </a></span><span style="background-color: #ffffcc">            if (equals(attributes, other.attributes)</span>
 <span class="nocode"><a name="641">641: </a></span>                    &amp;&amp; equals(data, other.data) &amp;&amp; equals(name, other.name)
 <span class="nocode"><a name="642">642: </a></span>                    &amp;&amp; equals(subElements, other.subElements)) {
-<span class="nocode"><a name="643">643: </a></span>                equal = true;
+<span class="nocode"><a name="643">643: </a></span><span style="background-color: #ffffcc">                equal = true;</span>
 <span class="nocode"><a name="644">644: </a></span>            }
 <span class="nocode"><a name="645">645: </a></span>        }
 <span class="nocode"><a name="646">646: </a></span>
@@ -833,7 +980,7 @@ com.allenstudio.ir.util.XmlElement
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8484984744530070644.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree742537213929819977.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -851,7 +998,7 @@ com.allenstudio.ir.util.XmlElement
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18870
+<li>process_communication_port: 10756
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

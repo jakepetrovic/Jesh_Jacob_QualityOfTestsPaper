@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authc.credential.Sha512CredentialsMatcher;
+import org.jsecurity.codec.CodecException;
 import org.jsecurity.crypto.hash.Sha512Hash;
 
 public class Sha512CredentialsMatcherEvoSuiteTest {
@@ -35,7 +36,15 @@ public class Sha512CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      Sha512Hash sha512Hash0 = (Sha512Hash)sha512CredentialsMatcher0.hashProvidedCredentials((Object) "u\u0000", (Object) "u\u0000", (int) (byte)117);
-      assertEquals("4f82511b68d3da9218bba41c41ddd9697f5074a6093dfb252380c47e2d85263fc8dabf9f1e717e3cf2cafa61da02ae61f77ffa5cacb23d22fb78d086648746b8", sha512Hash0.toHex());
+      Object object0 = new Object();
+      // Undeclared exception!
+      try {
+        sha512CredentialsMatcher0.hashProvidedCredentials((Object) "[]", object0, 0);
+        fail("Expecting exception: CodecException");
+      } catch(CodecException e) {
+        /*
+         * The org.jsecurity.crypto.hash.Sha512Hash implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.crypto.hash.Sha512Hash and override the objectToBytes(Object o) method.
+         */
+      }
   }
 }

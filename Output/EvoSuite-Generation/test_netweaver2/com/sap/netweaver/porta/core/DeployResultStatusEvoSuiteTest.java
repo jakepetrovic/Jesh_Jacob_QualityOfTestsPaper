@@ -19,9 +19,9 @@ public class DeployResultStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
       String string0 = deployResultStatus0.toString();
-      assertEquals("Unknown", string0);
+      assertEquals("Warning", string0);
   }
 
   //Test case number: 1
@@ -35,25 +35,24 @@ public class DeployResultStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        DeployResultStatus.getByName("");
+        DeployResultStatus.getByName("#-Q[4oU");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * 
+         * #-Q[4oU
          */
       }
   }
 
   //Test case number: 2
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - false
    * 2 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I14 Branch 1 IF_ICMPGE L57 - false
-   * 3 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.getByName("Warning");
-      assertEquals(DeployResultStatus.WARNING, deployResultStatus0);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.getByName("Unknown");
+      assertEquals(DeployResultStatus.UNKNOWN, deployResultStatus0);
   }
 }

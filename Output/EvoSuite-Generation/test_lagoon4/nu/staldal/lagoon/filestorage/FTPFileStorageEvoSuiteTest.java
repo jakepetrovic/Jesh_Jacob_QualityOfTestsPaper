@@ -7,9 +7,10 @@ package nu.staldal.lagoon.filestorage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PipedOutputStream;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import nu.staldal.ftp.FTPException;
@@ -31,7 +32,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.deleteFile("");
+        fTPFileStorage0.deleteFile("CWD ");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -65,7 +66,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.createFile((String) null);
+        fTPFileStorage0.createFile("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -122,8 +123,9 @@ public class FTPFileStorageEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
-      FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("", (OutputStream) byteArrayOutputStream0);
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintStream printStream0 = new PrintStream((OutputStream) pipedOutputStream0, false);
+      FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("IzGv?H!7rhA>@", (OutputStream) printStream0);
       // Undeclared exception!
       try {
         fTPFileStorage_FTPOutputHandler0.discard();

@@ -16,28 +16,17 @@ public class TextAreaWriterEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.lagoon.TextAreaWriter.write(I)V: root-Branch
-   * 2 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
+   * 4 covered goals:
+   * 1 nu.staldal.lagoon.TextAreaWriter.flush()V: I11 Branch 1 IF_ICMPNE L664 - false
+   * 2 nu.staldal.lagoon.TextAreaWriter.write(I)V: root-Branch
+   * 3 nu.staldal.lagoon.TextAreaWriter.close()V: root-Branch
+   * 4 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      TextAreaWriter textAreaWriter1 = (TextAreaWriter)textAreaWriter0.append('\u000E');
-      assertSame(textAreaWriter1, textAreaWriter0);
-  }
-
-  //Test case number: 1
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.lagoon.TextAreaWriter.flush()V: I11 Branch 1 IF_ICMPNE L664 - true
-   * 2 nu.staldal.lagoon.TextAreaWriter.write([CII)V: root-Branch
-   * 3 nu.staldal.lagoon.TextAreaWriter.close()V: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      textAreaWriter0.append((CharSequence) "select-word");
+      textAreaWriter0.write(13);
+      textAreaWriter0.append('\u0085');
       // Undeclared exception!
       try {
         textAreaWriter0.close();
@@ -46,14 +35,13 @@ public class TextAreaWriterEvoSuiteTest {
       }
   }
 
-  //Test case number: 2
+  //Test case number: 1
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 nu.staldal.lagoon.TextAreaWriter.close()V: root-Branch
-   * 2 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test1()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
       // Undeclared exception!
       try {
@@ -63,6 +51,25 @@ public class TextAreaWriterEvoSuiteTest {
         /*
          * String index out of range: -2
          */
+      }
+  }
+
+  //Test case number: 2
+  /*
+   * 3 covered goals:
+   * 1 nu.staldal.lagoon.TextAreaWriter.flush()V: I11 Branch 1 IF_ICMPNE L664 - true
+   * 2 nu.staldal.lagoon.TextAreaWriter.write([CII)V: root-Branch
+   * 3 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
+      textAreaWriter0.write("*VS6<ar#");
+      // Undeclared exception!
+      try {
+        textAreaWriter0.flush();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

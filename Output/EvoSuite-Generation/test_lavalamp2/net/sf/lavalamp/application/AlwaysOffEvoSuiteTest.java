@@ -23,6 +23,6 @@ public class AlwaysOffEvoSuiteTest {
   public void test0()  throws Throwable  {
       Pause pause0 = new Pause();
       AlwaysOff alwaysOff0 = new AlwaysOff((WebRun) null, pause0);
-      assertEquals("Thread[Thread-73,5,Test Execution]", alwaysOff0.toString());
+      assertEquals(0, alwaysOff0.countStackFrames());
   }
 }

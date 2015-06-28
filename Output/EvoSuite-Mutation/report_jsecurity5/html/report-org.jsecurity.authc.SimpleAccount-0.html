@@ -21,209 +21,259 @@ org.jsecurity.authc.SimpleAccount
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.authc.SimpleAccount: 80.85%</ul><ul>
-<li>12398 fitness evaluations, 249 generations, 90580 statements, 7661 tests.
-<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
-<li>Coverage: 13/20 branches, 31/32 methods, 38/47 total goals
-<li>Mutation score: 24%
+<ul><li>Target class: org.jsecurity.authc.SimpleAccount: 82.98%</ul><ul>
+<li>13914 fitness evaluations, 280 generations, 91648 statements, 8733 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 14/20 branches, 32/32 methods, 39/47 total goals
+<li>Mutation score: 31%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simpleAccount0.addRole(&quot;[]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAccount0);
+<span class="nocode"><a name="7">  7: </a></span>
+<span class="nocode"><a name="8">  8: </a></span>// Undeclared exception!
+<span class="nocode"><a name="9">  9: </a></span>try {
+<span class="nocode"><a name="10"> 10: </a></span>  simpleAccount0.addRole(&quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>  fail(&quot;Expecting exception: UnsupportedOperationException&quot;);
+<span class="nocode"><a name="12"> 12: </a></span>} catch(UnsupportedOperationException e) {
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) allPermission0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
 <span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
-<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
-<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount1 = new SimpleAccount((Collection) set0, (Object) &quot;[]&quot;, &quot;[]&quot;, set0, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
-<span class="nocode"><a name="8">  8: </a></span>try {
-<span class="nocode"><a name="9">  9: </a></span>  simpleAccount1.equals((Object) simpleAccount0);
-<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="11"> 11: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAccount0);
+<span class="nocode"><a name="7">  7: </a></span>
+<span class="nocode"><a name="8">  8: </a></span>simpleAccount0.merge((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simpleAccount0.merge((AuthenticationInfo) simpleAccount0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setRoles((Set&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;[]&quot;, hashSet0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.setRoles((Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>simpleAccount0.addStringPermission(&quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0, (Set&lt;String&gt;) hashSet0, (Set&lt;Permission&gt;) treeSet0);
-<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.addStringPermission(&quot;[]&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setLocked(false);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setLocked(true);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, simpleAccount0.isLocked());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.addObjectPermission((Permission) wildcardPermission0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;|Q&quot;, false);
+<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.addObjectPermission((Permission) wildcardPermission0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;Permission&gt; treeSet1 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) &quot;[]&quot;, &quot;[]&quot;, (Set&lt;String&gt;) treeSet0, (Set&lt;Permission&gt;) treeSet1);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setObjectPermissions((Set&lt;Permission&gt;) treeSet1);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;[]&quot;, treeSet1.toString());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount(object0, object0, &quot;]:#ccgZQwi0&quot;, (Set&lt;String&gt;) linkedHashSet0, (Set&lt;Permission&gt;) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAccount0.getPrincipals();
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
 <span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setCredentialsExpired(true);
-<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.merge((AuthenticationInfo) simpleAccount0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, simpleAccount0.isCredentialsExpired());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAccount0);
+<span class="nocode"><a name="7">  7: </a></span>
+<span class="nocode"><a name="8">  8: </a></span>simpleAccount0.setCredentialsExpired(true);
+<span class="nocode"><a name="9">  9: </a></span>simpleAccount0.merge((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setCredentials((Object) simplePrincipalCollection0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isLocked());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  simpleAccount0.getStringPermissions();
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount1 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) simpleAccount0, (Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount1.isCredentialsExpired());
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.setCredentials(object0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>Collection&lt;String&gt; collection0 = simpleAccount0.getStringPermissions();
-<span class="nocode"><a name="5">  5: </a></span>assertNull(collection0);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>HashSet&lt;Permission&gt; hashSet1 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0, (Set&lt;String&gt;) hashSet0, (Set&lt;Permission&gt;) hashSet1);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>Collection&lt;String&gt; collection0 = simpleAccount0.getRoles();
-<span class="nocode"><a name="4">  4: </a></span>assertNull(collection0);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount1 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) simpleAccount0, (Set&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>assertTrue(simpleAccount1.equals(simpleAccount0));
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0, (Set&lt;String&gt;) hashSet0, (Set&lt;Permission&gt;) treeSet0);
-<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.addStringPermissions((Collection&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;[]&quot;, hashSet0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;(2040);
+<span class="nocode"><a name="7">  7: </a></span>simpleAccount0.setObjectPermissions((Set&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, hashSet0.isEmpty());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;Permission&gt; treeSet1 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) &quot;[]&quot;, &quot;[]&quot;, (Set&lt;String&gt;) treeSet0, (Set&lt;Permission&gt;) treeSet1);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.addRole((Collection&lt;String&gt;) treeSet0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, treeSet0.size());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) simplePrincipalCollection0, (Object) wildcardPermission0, &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Collection&lt;String&gt; collection0 = simpleAccount0.getRoles();
+<span class="nocode"><a name="5">  5: </a></span>assertNull(collection0);
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.setStringPermissions((Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, hashSet0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.addStringPermissions((Collection&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;Ct^&quot;, false);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) wildcardPermission0);
-<span class="nocode"><a name="4">  4: </a></span>Collection&lt;Permission&gt; collection0 = simpleAccount0.getObjectPermissions();
-<span class="nocode"><a name="5">  5: </a></span>assertNull(collection0);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="5">  5: </a></span>simpleAccount0.addRole((Collection&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, linkedList0.size());
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;Permission&gt; treeSet1 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) &quot;[]&quot;, &quot;[]&quot;, (Set&lt;String&gt;) treeSet0, (Set&lt;Permission&gt;) treeSet1);
-<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.addObjectPermissions((Collection&lt;Permission&gt;) treeSet1);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, treeSet1.size());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>simpleAccount0.setStringPermissions(set0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="4">  4: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, object0, &quot;[]&quot;);
-<span class="nocode"><a name="6">  6: </a></span>simpleAccount0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, linkedHashSet0.isEmpty());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(1, linkedHashSet0.size());
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;28=b7xn\&quot;M7s`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = simplePrincipalCollection0.getRealmNames();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Collection) set0, (Object) simplePrincipalCollection0, &quot;28=b7xn\&quot;M7s`&quot;, set0, (Set&lt;Permission&gt;) treeSet0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAccount0);
+<span class="nocode"><a name="7">  7: </a></span>
+<span class="nocode"><a name="8">  8: </a></span>Collection&lt;Permission&gt; collection0 = simpleAccount0.getObjectPermissions();
+<span class="nocode"><a name="9">  9: </a></span>assertNotNull(collection0);
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, collection0.isEmpty());
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;SimpleAccount&gt; linkedHashSet0 = new LinkedHashSet&lt;SimpleAccount&gt;(1811);
+<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
 <span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) allPermission0);
-<span class="nocode"><a name="5">  5: </a></span>linkedHashSet0.add(simpleAccount0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, linkedHashSet0.isEmpty());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, linkedHashSet0.size());
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) simplePrincipalCollection0, &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>simpleAccount0.addObjectPermissions((Collection&lt;Permission&gt;) linkedHashSet0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, linkedHashSet0.size());
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAccount0.equals((Object) &quot;[]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simpleAccount0.merge((AuthenticationInfo) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount0.isCredentialsExpired());
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;[]&quot;, (Object) linkedHashSet0, &quot;[]&quot;);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>int int0 = simpleAccount0.hashCode();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(1400316560, int0);
+</pre>
+<h3>Test case 24</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccount0.equals(object0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 25</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) simplePrincipalCollection0, (Object) wildcardPermission0, &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccount0.equals((Object) simpleAccount0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 26</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) simplePrincipalCollection0, (Object) wildcardPermission0, &quot;[]&quot;);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount1 = new SimpleAccount((Object) &quot;[]&quot;, (Object) simpleAccount0, &quot;[]&quot;);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccount0.equals((Object) simpleAccount1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;);
 <span class="nocode"><a name="3">  3: </a></span>String string0 = simpleAccount0.toString();
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
@@ -322,7 +372,7 @@ org.jsecurity.authc.SimpleAccount
 <span class="nocode"><a name="92"> 92: </a></span>     */
 <span class="nocode"><a name="93"> 93: </a></span>    public SimpleAccount(Collection principals, Object credentials, String realmName) {
 <span class="nocode"><a name="94"> 94: </a></span>        this(new SimplePrincipalCollection(principals, realmName), credentials);
-<span class="nocode"><a name="95"> 95: </a></span>    }
+<span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="96"> 96: </a></span>
 <span class="nocode"><a name="97"> 97: </a></span>    /**
 <span class="nocode"><a name="98"> 98: </a></span>     * Constructs a SimpleAccount instance for the specified principals and credentials.
@@ -477,7 +527,7 @@ org.jsecurity.authc.SimpleAccount
 <span class="nocode"><a name="247">247: </a></span>     */
 <span class="nocode"><a name="248">248: </a></span>    public void addRole(String role) {
 <span class="nocode"><a name="249">249: </a></span><span style="background-color: #ffffcc">        this.authzInfo.addRole(role);</span>
-<span class="nocode"><a name="250">250: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="250">250: </a></span>    }
 <span class="nocode"><a name="251">251: </a></span>
 <span class="nocode"><a name="252">252: </a></span>    /**
 <span class="nocode"><a name="253">253: </a></span>     * Adds one or more roles to this Account's set of assigned roles. Simply delegates to
@@ -635,7 +685,7 @@ org.jsecurity.authc.SimpleAccount
 <span class="nocode"><a name="405">405: </a></span>     */
 <span class="nocode"><a name="406">406: </a></span>    public boolean equals(Object o) {
 <span class="nocode"><a name="407">407: </a></span><span style="background-color: #ffffcc">        if (o == this) {</span>
-<span class="nocode"><a name="408">408: </a></span>            return true;
+<span class="nocode"><a name="408">408: </a></span><span style="background-color: #ffffcc">            return true;</span>
 <span class="nocode"><a name="409">409: </a></span>        }
 <span class="nocode"><a name="410">410: </a></span><span style="background-color: #ffffcc">        if (o instanceof SimpleAccount) {</span>
 <span class="nocode"><a name="411">411: </a></span><span style="background-color: #ffffcc">            SimpleAccount sa = (SimpleAccount) o;</span>
@@ -659,7 +709,7 @@ org.jsecurity.authc.SimpleAccount
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -677,7 +727,7 @@ org.jsecurity.authc.SimpleAccount
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6856
+<li>process_communication_port: 21473
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

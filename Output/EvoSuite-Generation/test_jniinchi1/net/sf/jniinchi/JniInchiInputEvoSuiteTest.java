@@ -18,18 +18,15 @@ public class JniInchiInputEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
-   * 1 net.sf.jniinchi.JniInchiInput.<init>(Lnet/sf/jniinchi/JniInchiStructure;Ljava/lang/String;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiInput.<init>(Ljava/lang/String;)V: I8 Branch 1 IFNONNULL L48 - false
-   * 3 net.sf.jniinchi.JniInchiInput.<init>(Lnet/sf/jniinchi/JniInchiStructure;)V: root-Branch
-   * 4 net.sf.jniinchi.JniInchiInput.<init>()V: root-Branch
+   * 2 covered goals:
+   * 1 net.sf.jniinchi.JniInchiInput.<init>(Lnet/sf/jniinchi/JniInchiStructure;)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiInput.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       JniInchiInput jniInchiInput0 = new JniInchiInput(jniInchiStructure0);
-      JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0, (String) null);
-      assertEquals(0, jniInchiInput1.getNumBonds());
+      assertEquals(0, jniInchiInput0.getNumBonds());
   }
 
   //Test case number: 1
@@ -52,7 +49,7 @@ public class JniInchiInputEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      LinkedList<Object> linkedList0 = new LinkedList<Object>();
+      LinkedList<String> linkedList0 = new LinkedList<String>();
       JniInchiInput jniInchiInput0 = null;
       try {
         jniInchiInput0 = new JniInchiInput((List) linkedList0);
@@ -71,14 +68,26 @@ public class JniInchiInputEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
+      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       JniInchiInput jniInchiInput0 = null;
       try {
-        jniInchiInput0 = new JniInchiInput("N");
+        jniInchiInput0 = new JniInchiInput(jniInchiStructure0, "61[E/|29Bl*~I&D");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
          * net/sf/jnati/NativeCodeException
          */
       }
+  }
+
+  //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 net.sf.jniinchi.JniInchiInput.<init>(Ljava/lang/String;)V: I8 Branch 1 IFNONNULL L48 - false
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      JniInchiInput jniInchiInput0 = new JniInchiInput((String) null);
+      assertEquals(0, jniInchiInput0.getNumAtoms());
   }
 }

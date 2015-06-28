@@ -23,7 +23,7 @@ public class TellStickEvoSuiteTest {
       TellStick tellStick0 = new TellStick();
       Runtime runtime0 = Runtime.getRuntime();
       tellStick0.setRuntime(runtime0);
-      assertEquals(658229936L, runtime0.freeMemory());
+      assertEquals(3730309120L, runtime0.maxMemory());
   }
 
   //Test case number: 1
@@ -85,7 +85,7 @@ public class TellStickEvoSuiteTest {
       TellStick tellStick0 = new TellStick();
       // Undeclared exception!
       try {
-        tellStick0.exec("");
+        tellStick0.exec("\n\tdevice=");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

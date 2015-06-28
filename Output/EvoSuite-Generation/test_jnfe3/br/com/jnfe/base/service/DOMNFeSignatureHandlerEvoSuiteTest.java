@@ -31,10 +31,10 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("mXi{v;^:>{n");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("7}piJs.rteeC");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
       try {
-        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "mXi{v;^:>{n");
+        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "7}piJs.rteeC");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -71,9 +71,9 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("marker");
-      DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "uO$Il6");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("7}piJs.rteeC");
+      DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
+      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "VV|`A9kB");
   }
 }

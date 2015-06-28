@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import bierse.controller.DefaultTableModelController;
 import bierse.model.Model;
 import bierse.view.IDrinkSellView;
+import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -26,11 +27,11 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      Object[][] objectArray0 = new Object[10][4];
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[4]);
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-817), (-817), (-817), (-817));
+      JTable jTable0 = new JTable();
+      DefaultTableModel defaultTableModel0 = (DefaultTableModel)jTable0.getModel();
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-1377), (-1377), (-1377), (-1377));
       defaultTableModelController0.tableChanged(tableModelEvent0);
-      assertEquals(-817, tableModelEvent0.getColumn());
+      assertEquals(-1377, tableModelEvent0.getColumn());
   }
 
   //Test case number: 1
@@ -42,8 +43,8 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      Object[][] objectArray0 = new Object[10][4];
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[4]);
+      Object[][] objectArray0 = new Object[3][5];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[2]);
       TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
       // Undeclared exception!
       try {

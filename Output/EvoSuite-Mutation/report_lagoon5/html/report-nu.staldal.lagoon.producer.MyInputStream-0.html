@@ -21,10 +21,10 @@ nu.staldal.lagoon.producer.MyInputStream
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.producer.MyInputStream: 16.00%</ul><ul>
-<li>6 fitness evaluations, 2 generations, 286 statements, 34 tests.
-<li>Time: 0:01:19(Search: 0:01:12, minimization: 0:00:06)
-<li>Coverage: 2/22 branches, 3/6 methods, 4/25 total goals
+<ul><li>Target class: nu.staldal.lagoon.producer.MyInputStream: 28.00%</ul><ul>
+<li>8 fitness evaluations, 2 generations, 190 statements, 33 tests.
+<li>Time: 0:01:25(Search: 0:01:24, minimization: 0:00:00)
+<li>Coverage: 4/22 branches, 4/6 methods, 7/25 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,9 +32,18 @@ nu.staldal.lagoon.producer.MyInputStream
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MyInputStream myInputStream0 = new MyInputStream();
+<span class="nocode"><a name="2">  2: </a></span>myInputStream0.close();
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>MyInputStream myInputStream0 = new MyInputStream();
+<span class="nocode"><a name="2">  2: </a></span>myInputStream0.deliver((-268));
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>MyInputStream myInputStream0 = new MyInputStream();
 <span class="nocode"><a name="2">  2: </a></span>myInputStream0.eof();
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = new byte[7];
-<span class="nocode"><a name="4">  4: </a></span>myInputStream0.read(byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>myInputStream0.deliver((-1));
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>No source found for nu.staldal.lagoon.producer.MyInputStream
@@ -42,7 +51,7 @@ nu.staldal.lagoon.producer.MyInputStream
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -60,7 +69,7 @@ nu.staldal.lagoon.producer.MyInputStream
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2346
+<li>process_communication_port: 19422
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

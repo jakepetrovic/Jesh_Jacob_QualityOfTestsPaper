@@ -22,8 +22,8 @@ net.sf.jniinchi.JniInchiOutput
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiOutput: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 5953 statements, 296 tests.
-<li>Time: 0:00:08(Search: 0:00:05, minimization: 0:00:02)
+<li>50 fitness evaluations, 2 generations, 5125 statements, 259 tests.
+<li>Time: 0:00:06(Search: 0:00:04, minimization: 0:00:01)
 <li>Coverage: 0/0 branches, 13/13 methods, 13/13 total goals
 <li>Mutation score: 66%
 </ul>
@@ -31,86 +31,86 @@ net.sf.jniinchi.JniInchiOutput
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getMessage();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.EOF;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setAuxInfo(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(INCHI_RET.EOF, jniInchiOutput0.getReturnStatus());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getAuxInfo();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getMessage();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
 <span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.toString();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: UNKNOWN////&quot;, string0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getAuxInfo();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getLog();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.toString();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: FATAL////&quot;, string0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>INCHI_RET iNCHI_RET1 = jniInchiOutput0.getReturnStatus();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(INCHI_RET.BUSY, iNCHI_RET1);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getLog();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setInchi(&quot;n-=9&gt;VDbmy4l&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, jniInchiOutput0.getAuxInfo());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>INCHI_RET iNCHI_RET1 = jniInchiOutput0.getReturnStatus();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(5, iNCHI_RET1.ordinal());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setLog(&quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(INCHI_RET.BUSY, jniInchiOutput0.getReturnStatus());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setInchi(&quot;InChI_Output: EOF////&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: EOF////&quot;, jniInchiOutput0.getInchi());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1109, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;InChI_Output: null/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;&quot;, jniInchiOutput0.toString());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.SKIP;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;OZ&quot;, &quot;OZ&quot;, &quot;OZ&quot;, &quot;OZ&quot;);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setLog(&quot;^6JFp7$=0&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: SKIP/OZ/OZ/OZ/^6JFp7$=0&quot;, jniInchiOutput0.toString());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setAuxInfo(&quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, jniInchiOutput0.getAuxInfo());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;InChI_Output: OKAY////&quot;, jniInchiOutput0.toString());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.SKIP;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;OZ&quot;, &quot;OZ&quot;, &quot;OZ&quot;, &quot;OZ&quot;);
 <span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setRetStatus(iNCHI_RET0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Dv|Ewh8sA2v_XK&lt;&quot;, jniInchiOutput0.getLog());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;OZ&quot;, jniInchiOutput0.getLog());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.SKIP;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;e&quot;, &quot;e&quot;, &quot;e&quot;, &quot;e&quot;);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutput0.getInchi();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;e&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;, &quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setMessage(&quot;Dv|Ewh8sA2v_XK&lt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: BUSY/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;/Dv|Ewh8sA2v_XK&lt;&quot;, jniInchiOutput0.toString());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiOutput0.setMessage(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;InChI_Output: FATAL////&quot;, jniInchiOutput0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -245,7 +245,7 @@ net.sf.jniinchi.JniInchiOutput
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2966106683360006431.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7807429960142163071.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -263,7 +263,7 @@ net.sf.jniinchi.JniInchiOutput
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10042
+<li>process_communication_port: 2686
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

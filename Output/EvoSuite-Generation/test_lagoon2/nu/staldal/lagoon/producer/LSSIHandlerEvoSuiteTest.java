@@ -7,8 +7,7 @@ package nu.staldal.lagoon.producer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 import nu.staldal.lagoon.core.SourceManager;
 import nu.staldal.lagoon.core.Target;
@@ -17,9 +16,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+import org.xml.sax.ext.Attributes2Impl;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLFilterImpl;
+import org.xml.sax.helpers.LocatorImpl;
+import org.xml.sax.helpers.XMLReaderAdapter;
 
 public class LSSIHandlerEvoSuiteTest {
 
@@ -32,11 +33,12 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      char[] charArray0 = new char[13];
-      lSSIHandler0.ignorableWhitespace(charArray0, (int) '\u0000', (int) '\u0000');
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      Locale locale0 = Locale.PRC;
+      Set<String> set0 = locale0.getUnicodeLocaleKeys();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
+      char[] charArray0 = new char[2];
+      lSSIHandler0.ignorableWhitespace(charArray0, (int) 'x', 1518);
   }
 
   //Test case number: 1
@@ -46,9 +48,10 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      Locale locale0 = Locale.PRC;
+      Set<String> set0 = locale0.getUnicodeLocaleKeys();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
       lSSIHandler0.endDocument();
   }
 
@@ -59,9 +62,10 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      Locale locale0 = Locale.PRC;
+      Set<String> set0 = locale0.getUnicodeLocaleKeys();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
       lSSIHandler0.startDocument();
   }
 
@@ -72,10 +76,11 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      LinkedHashSet<Integer> linkedHashSet0 = new LinkedHashSet<Integer>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) linkedHashSet0);
-      lSSIHandler0.endPrefixMapping("htY.0!UEcK8d3)KjG");
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      Locale locale0 = Locale.PRC;
+      Set<String> set0 = locale0.getUnicodeLocaleKeys();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
+      lSSIHandler0.endPrefixMapping("Fpk|A4HB6yVA");
   }
 
   //Test case number: 4
@@ -85,10 +90,9 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.skippedEntity("file:/home/eshkracht/");
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      lSSIHandler0.skippedEntity("Q");
   }
 
   //Test case number: 5
@@ -98,10 +102,11 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.startPrefixMapping("file:/home/eshkracht/", "file:/home/eshkracht/");
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      Locale locale0 = Locale.CHINESE;
+      Set<String> set0 = locale0.getUnicodeLocaleAttributes();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+      lSSIHandler0.startPrefixMapping("Outpu entry ", "#thlsXwEXH,K`B9F/3");
   }
 
   //Test case number: 6
@@ -111,10 +116,11 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.setDocumentLocator((Locator) null);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      LocatorImpl locatorImpl0 = new LocatorImpl();
+      lSSIHandler0.setDocumentLocator((Locator) locatorImpl0);
+      assertNull(locatorImpl0.getPublicId());
   }
 
   //Test case number: 7
@@ -125,10 +131,9 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      char[] charArray0 = new char[13];
-      lSSIHandler0.characters(charArray0, (int) 'B', (int) '\u0000');
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      char[] charArray0 = new char[2];
+      lSSIHandler0.characters(charArray0, (int) 'V', (int) 'V');
   }
 
   //Test case number: 8
@@ -139,9 +144,10 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.processingInstruction("TargetThread", "TargetThread");
+      Locale locale0 = Locale.CHINESE;
+      Set<String> set0 = locale0.getUnicodeLocaleAttributes();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+      lSSIHandler0.processingInstruction("#thlsXwEXH,K`B9F/3", "#thlsXwEXH,K`B9F/3");
   }
 
   //Test case number: 9
@@ -152,24 +158,41 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
+      Locale locale0 = Locale.CHINESE;
+      Set<String> set0 = locale0.getUnicodeLocaleAttributes();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
       AttributesImpl attributesImpl0 = new AttributesImpl();
-      lSSIHandler0.startElement("TargetThread", "TargetThread", "TargetThread", (Attributes) attributesImpl0);
-      assertEquals(0, attributesImpl0.getLength());
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
+      lSSIHandler0.startElement("#thlsXwEXH,K`B9F/3", "#thlsXwEXH,K`B9F/3", "#thlsXwEXH,K`B9F/3", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 nu.staldal.lagoon.producer.LSSIHandler.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I5 Branch 13 IFLE L230 - true
-   * 2 nu.staldal.lagoon.producer.LSSIHandler.<init>(Lnu/staldal/lagoon/core/SourceManager;Lorg/xml/sax/ContentHandler;Lnu/staldal/lagoon/core/Target;Ljava/util/Set;)V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.endElement("TargetThread", "TargetThread", "TargetThread");
+      Locale locale0 = Locale.CHINESE;
+      Set<String> set0 = locale0.getUnicodeLocaleAttributes();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+      lSSIHandler0.endElement("Outpu entry ", "Outpu entry ", "YJB");
+  }
+
+  //Test case number: 11
+  /*
+   * 2 covered goals:
+   * 1 nu.staldal.lagoon.producer.LSSIHandler.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I5 Branch 13 IFLE L230 - false
+   * 2 nu.staldal.lagoon.producer.LSSIHandler.<init>(Lnu/staldal/lagoon/core/SourceManager;Lorg/xml/sax/ContentHandler;Lnu/staldal/lagoon/core/Target;Ljava/util/Set;)V: root-Branch
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      Locale locale0 = Locale.PRC;
+      Set<String> set0 = locale0.getUnicodeLocaleKeys();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
+      lSSIHandler0.endElement("http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI");
   }
 }

@@ -22,8 +22,8 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy: 100.00%</ul><ul>
-<li>650 fitness evaluations, 14 generations, 9775 statements, 607 tests.
-<li>Time: 0:00:07(Search: 0:00:06, minimization: 0:00:00)
+<li>350 fitness evaluations, 8 generations, 8768 statements, 462 tests.
+<li>Time: 0:00:06(Search: 0:00:05, minimization: 0:00:00)
 <li>Coverage: 6/6 branches, 2/2 methods, 7/7 total goals
 <li>Mutation score: 33%
 </ul>
@@ -32,8 +32,8 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;Z6Rj/O6&quot;, charArray0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;SHA-1&quot;, charArray0, true);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
@@ -47,9 +47,9 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot; and accountCredentials of type [&quot;, &quot; and accountCredentials of type [&quot;, true, (InetAddress) inet4Address0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
 <span class="nocode"><a name="7">  7: </a></span>  atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
@@ -63,12 +63,9 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;A&quot;, charArray0);
-<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;org.jsecurity.authc.UsernamePasswordToken - A, rememberMe=false&quot;, &quot;org.jsecurity.authc.UsernamePasswordToken - A, rememberMe=false&quot;);
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
-<span class="nocode"><a name="7">  7: </a></span>assertSame(simpleAccount1, simpleAccount0);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;HashtableCache [i: MP{J]&quot;, (Object) &quot;i: MP{J&quot;, &quot;HashtableCache [i: MP{J]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) null, (AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="4">  4: </a></span>assertSame(simpleAccount0, simpleAccount1);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -138,7 +135,7 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -156,7 +153,7 @@ org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9170
+<li>process_communication_port: 11753
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

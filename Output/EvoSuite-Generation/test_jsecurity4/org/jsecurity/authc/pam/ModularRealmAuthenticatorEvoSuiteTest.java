@@ -7,14 +7,19 @@ package org.jsecurity.authc.pam;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import org.jsecurity.authc.AuthenticationException;
+import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
+import org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy;
+import org.jsecurity.authc.pam.ModularAuthenticationStrategy;
 import org.jsecurity.authc.pam.ModularRealmAuthenticator;
 import org.jsecurity.authc.pam.UnsupportedTokenException;
 import org.jsecurity.realm.Realm;
@@ -50,38 +55,50 @@ public class ModularRealmAuthenticatorEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.getModularAuthenticationStrategy()Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;: root-Branch
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.getRealms()Ljava/util/Collection;: root-Branch
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I8 Branch 1 IFNULL L191 - false
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I11 Branch 2 IFLE L191 - true
-   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.doAuthenticate(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I14 Branch 11 IF_ICMPNE L302 - true
+   * 6 covered goals:
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(Lorg/jsecurity/realm/Realm;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I5 Branch 3 IFNE L207 - true
+   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doAuthenticate(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I14 Branch 11 IF_ICMPNE L302 - false
+   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.setRealm(Lorg/jsecurity/realm/Realm;)V: root-Branch
+   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>()V: root-Branch
+   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.setModularAuthenticationStrategy(Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;)V: root-Branch
+   * 6 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I11 Branch 2 IFLE L191 - true
    */
   @Test
   public void test1()  throws Throwable  {
-      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("G+wb[e%/");
-      linkedList0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List<Realm>) linkedList0);
-      linkedList0.add((Realm) simpleAccountRealm0);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      // Undeclared exception!
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(";");
+      modularRealmAuthenticator0.setRealm((Realm) simpleAccountRealm0);
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName("");
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", "", false, (InetAddress) inet4Address0);
       try {
-        modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) usernamePasswordToken0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        modularRealmAuthenticator0.authenticate((AuthenticationToken) usernamePasswordToken0);
+        fail("Expecting exception: AuthenticationException");
+      } catch(AuthenticationException e) {
+        /*
+         * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false (localhost/127.0.0.1)].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+         */
       }
   }
 
   //Test case number: 2
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I8 Branch 1 IFNULL L191 - true
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>()V: root-Branch
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.setModularAuthenticationStrategy(Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;)V: root-Branch
+   * 1 covered goal:
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>(Lorg/jsecurity/realm/Realm;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("[LOOKUP] No resource file with name 'META-INF/services/org.apache.commons.logging.LogFactory' found.");
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+      assertNotNull(modularRealmAuthenticator0);
+  }
+
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I8 Branch 1 IFNULL L191 - true
+   */
+  @Test
+  public void test3()  throws Throwable  {
       ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
       try {
         modularRealmAuthenticator0.assertRealmsConfigured();
@@ -93,110 +110,88 @@ public class ModularRealmAuthenticatorEvoSuiteTest {
       }
   }
 
-  //Test case number: 3
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(Lorg/jsecurity/realm/Realm;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I5 Branch 3 IFNE L207 - true
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doAuthenticate(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I14 Branch 11 IF_ICMPNE L302 - false
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.setRealm(Lorg/jsecurity/realm/Realm;)V: root-Branch
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>(Lorg/jsecurity/realm/Realm;)V: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      // Undeclared exception!
-      try {
-        modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) usernamePasswordToken0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
   //Test case number: 4
   /*
-   * 4 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(Lorg/jsecurity/realm/Realm;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I5 Branch 3 IFNE L207 - false
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I8 Branch 1 IFNULL L191 - false
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I11 Branch 2 IFLE L191 - true
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.doAuthenticate(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I14 Branch 11 IF_ICMPNE L302 - false
    */
   @Test
   public void test4()  throws Throwable  {
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+      // Undeclared exception!
       try {
-        modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) null);
+        modularRealmAuthenticator0.doSingleRealmAuthentication((Realm) simpleAccountRealm0, (AuthenticationToken) null);
         fail("Expecting exception: UnsupportedTokenException");
       } catch(UnsupportedTokenException e) {
         /*
-         * Realm [org.jsecurity.realm.SimpleAccountRealm@70484adb] does not support authentication token [null].  Please ensure that the appropriate Realm implementation is configured correctly or that the realm accepts AuthenticationTokens of this type.
+         * Realm [org.jsecurity.realm.SimpleAccountRealm@45e26fd] does not support authentication token [null].  Please ensure that the appropriate Realm implementation is configured correctly or that the realm accepts AuthenticationTokens of this type.
          */
       }
   }
 
   //Test case number: 5
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - false
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I50 Branch 7 IFEQ L243 - true
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I141 Branch 10 IFEQ L265 - true
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - true
-   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 5 IFEQ L237 - true
+   * 11 covered goals:
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 5 IFEQ L237 - true
+   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - true
+   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - false
+   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I50 Branch 7 IFEQ L243 - false
+   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I55 Branch 8 IFEQ L245 - true
+   * 6 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I104 Branch 9 IFEQ L256 - true
+   * 7 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>(Ljava/util/List;)V: root-Branch
+   * 8 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I8 Branch 1 IFNULL L191 - false
+   * 9 org.jsecurity.authc.pam.ModularRealmAuthenticator.assertRealmsConfigured()V: I11 Branch 2 IFLE L191 - true
+   * 10 org.jsecurity.authc.pam.ModularRealmAuthenticator.doAuthenticate(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I14 Branch 11 IF_ICMPNE L302 - true
+   * 11 org.jsecurity.authc.pam.ModularRealmAuthenticator.getModularAuthenticationStrategy()Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)modularRealmAuthenticator0.doMultiRealmAuthentication((Collection<Realm>) linkedHashSet0, (AuthenticationToken) null);
-      assertNotNull(simpleAuthenticationInfo0);
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("byte[] if the source is of type byte[], char[] or String.  The instance provided as a method ");
+      linkedList0.add((Realm) simpleAccountRealm0);
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List<Realm>) linkedList0);
+      linkedList0.addLast((Realm) simpleAccountRealm0);
+      char[] charArray0 = new char[10];
+      FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
+      modularRealmAuthenticator0.setModularAuthenticationStrategy((ModularAuthenticationStrategy) firstSuccessfulAuthenticationStrategy0);
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("byte[] if the source is of type byte[], char[] or String.  The instance provided as a method ", charArray0, true, (InetAddress) inet4Address0);
+      AuthenticationInfo authenticationInfo0 = modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) usernamePasswordToken0);
+      assertNull(authenticationInfo0);
   }
 
   //Test case number: 6
   /*
    * 6 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I50 Branch 7 IFEQ L243 - false
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I55 Branch 8 IFEQ L245 - true
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I104 Branch 9 IFEQ L256 - true
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.getModularAuthenticationStrategy()Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;: root-Branch
-   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 5 IFEQ L237 - true
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I50 Branch 7 IFEQ L243 - true
+   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I141 Branch 10 IFEQ L265 - true
+   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.getModularAuthenticationStrategy()Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;: root-Branch
+   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 5 IFEQ L237 - true
+   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - true
    * 6 org.jsecurity.authc.pam.ModularRealmAuthenticator.doMultiRealmAuthentication(Ljava/util/Collection;Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I40 Branch 6 IFEQ L241 - false
    */
   @Test
   public void test6()  throws Throwable  {
       ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      char[] charArray0 = new char[1];
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0, true);
-      // Undeclared exception!
-      try {
-        modularRealmAuthenticator0.doMultiRealmAuthentication((Collection<Realm>) linkedHashSet0, (AuthenticationToken) usernamePasswordToken0);
-        fail("Expecting exception: AuthenticationException");
-      } catch(AuthenticationException e) {
-        /*
-         * Unable to acquire account data from realm [org.jsecurity.realm.SimpleAccountRealm@7413e66a].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy implementation requires all configured realm(s) to operate successfully for a successful authentication.
-         */
-      }
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(";");
+      modularRealmAuthenticator0.setRealm((Realm) simpleAccountRealm0);
+      Collection<Realm> collection0 = modularRealmAuthenticator0.getRealms();
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)modularRealmAuthenticator0.doMultiRealmAuthentication(collection0, (AuthenticationToken) null);
+      assertNotNull(simpleAuthenticationInfo0);
+      assertEquals(false, collection0.isEmpty());
+      assertEquals(1, collection0.size());
   }
 
   //Test case number: 7
   /*
-   * 3 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I13 Branch 12 IFNULL L323 - true
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>()V: root-Branch
-   * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.setModularAuthenticationStrategy(Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
       ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-      assertEquals(true, simplePrincipalCollection0.isEmpty());
+      modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
   }
 
   //Test case number: 8
@@ -206,48 +201,51 @@ public class ModularRealmAuthenticatorEvoSuiteTest {
    * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I16 Branch 13 IFGT L323 - false
    * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - true
    * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - false
-   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I34 Branch 15 IFEQ L325 - true
+   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I34 Branch 15 IFEQ L325 - false
    */
   @Test
   public void test8()  throws Throwable  {
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) null);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "\u0000d\u0000\u0000\u0000J\u0000\u0000\u0000\uFFFD\u0000\u0000\u0000\u0000\u0000\u0000\u0000", "\u0000d\u0000\u0000\u0000J\u0000\u0000\u0000\uFFFD\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(";");
+      modularRealmAuthenticator0.setRealm((Realm) simpleAccountRealm0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-      assertEquals(false, simplePrincipalCollection0.isEmpty());
+      assertEquals(true, simplePrincipalCollection0.isEmpty());
   }
 
   //Test case number: 9
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I16 Branch 13 IFGT L323 - true
-   * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>(Ljava/util/List;)V: root-Branch
    */
   @Test
   public void test9()  throws Throwable  {
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
       LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List<Realm>) linkedList0);
-      modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
+      modularRealmAuthenticator0.setRealms((Collection<Realm>) linkedList0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "UTF-8", "UTF-8");
+      modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+      assertEquals(false, simplePrincipalCollection0.isEmpty());
   }
 
   //Test case number: 10
   /*
-   * 9 covered goals:
-   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I34 Branch 15 IFEQ L325 - false
+   * 10 covered goals:
+   * 1 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I34 Branch 15 IFEQ L325 - true
    * 2 org.jsecurity.authc.pam.ModularRealmAuthenticator.setRealms(Ljava/util/Collection;)V: root-Branch
    * 3 org.jsecurity.authc.pam.ModularRealmAuthenticator.setRealm(Lorg/jsecurity/realm/Realm;)V: root-Branch
-   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>(Lorg/jsecurity/realm/Realm;)V: root-Branch
-   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.getRealms()Ljava/util/Collection;: root-Branch
-   * 6 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I13 Branch 12 IFNULL L323 - false
-   * 7 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I16 Branch 13 IFGT L323 - false
-   * 8 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - true
-   * 9 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - false
+   * 4 org.jsecurity.authc.pam.ModularRealmAuthenticator.<init>()V: root-Branch
+   * 5 org.jsecurity.authc.pam.ModularRealmAuthenticator.setModularAuthenticationStrategy(Lorg/jsecurity/authc/pam/ModularAuthenticationStrategy;)V: root-Branch
+   * 6 org.jsecurity.authc.pam.ModularRealmAuthenticator.getRealms()Ljava/util/Collection;: root-Branch
+   * 7 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I13 Branch 12 IFNULL L323 - false
+   * 8 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I16 Branch 13 IFGT L323 - false
+   * 9 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - true
+   * 10 org.jsecurity.authc.pam.ModularRealmAuthenticator.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: I25 Branch 14 IFEQ L324 - false
    */
   @Test
   public void test10()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("X[iD4DTC@?&,n[");
-      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-      assertEquals(true, simplePrincipalCollection0.isEmpty());
+      ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+      modularRealmAuthenticator0.setRealm((Realm) null);
+      modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
   }
 }

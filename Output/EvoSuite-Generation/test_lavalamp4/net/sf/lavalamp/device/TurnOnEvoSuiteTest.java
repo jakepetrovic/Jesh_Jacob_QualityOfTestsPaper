@@ -28,7 +28,7 @@ public class TurnOnEvoSuiteTest {
       LinkedList<String> linkedList0 = new LinkedList<String>();
       DummyDevice dummyDevice0 = new DummyDevice();
       turnOn0.perform((List<String>) linkedList0, (Device) dummyDevice0);
+      assertEquals("[dummy device null turned on]", linkedList0.toString());
       assertEquals(1, linkedList0.size());
-      assertEquals(false, linkedList0.isEmpty());
   }
 }

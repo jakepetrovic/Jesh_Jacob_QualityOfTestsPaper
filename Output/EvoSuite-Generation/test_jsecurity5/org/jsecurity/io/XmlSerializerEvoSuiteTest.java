@@ -25,7 +25,7 @@ public class XmlSerializerEvoSuiteTest {
       Object object0 = new Object();
       byte[] byteArray0 = xmlSerializer0.serialize(object0);
       Object object1 = xmlSerializer0.deserialize(byteArray0);
-      assertNotSame(object1, object0);
+      assertNotSame(object0, object1);
   }
 
   //Test case number: 1

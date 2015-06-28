@@ -7,7 +7,19 @@ package net.sf.lavalamp.device;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import net.sf.lavalamp.device.Blink;
 
 public class BlinkEvoSuiteTest {
 
+
+  //Test case number: 0
+  /*
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.device.Blink.<init>()V: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      Blink blink0 = new Blink();
+      assertNotNull(blink0);
+  }
 }

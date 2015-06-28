@@ -16,56 +16,44 @@ public class JniInchiOutputKeyEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputKey.getKey()Ljava/lang/String;: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I7 Branch 1 IFNONNULL L32 - true
-   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
-   * 4 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - true
+   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.OK;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "PDjZr9v3YmRl");
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "|3,wP}=.C#;-8Ac0W?W");
       String string0 = jniInchiOutputKey0.getKey();
-      assertEquals("PDjZr9v3YmRl", string0);
+      assertEquals("|3,wP}=.C#;-8Ac0W?W", string0);
   }
 
   //Test case number: 1
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputKey.getReturnStatus()Lnet/sf/jniinchi/INCHI_KEY;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - true
+   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
+   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - true
    */
   @Test
   public void test1()  throws Throwable  {
       INCHI_KEY iNCHI_KEY0 = INCHI_KEY.OK;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "PDjZr9v3YmRl");
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "NOT_ENOUGH_MEMORY");
       INCHI_KEY iNCHI_KEY1 = jniInchiOutputKey0.getReturnStatus();
-      assertEquals("OK", iNCHI_KEY1.toString());
+      assertEquals(INCHI_KEY.OK, iNCHI_KEY1);
   }
 
   //Test case number: 2
-  /*
-   * 2 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(ILjava/lang/String;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(1, "PDjZr9v3YmRl");
-      assertEquals("PDjZr9v3YmRl", jniInchiOutputKey0.getKey());
-  }
-
-  //Test case number: 3
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I7 Branch 1 IFNONNULL L32 - false
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
-        jniInchiOutputKey0 = new JniInchiOutputKey(842, (String) null);
+        jniInchiOutputKey0 = new JniInchiOutputKey(1837, "egJNqcEXPLc");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*
@@ -74,7 +62,7 @@ public class JniInchiOutputKeyEvoSuiteTest {
       }
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
    * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - false
@@ -82,7 +70,7 @@ public class JniInchiOutputKeyEvoSuiteTest {
    * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test3()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
         jniInchiOutputKey0 = new JniInchiOutputKey(0, (String) null);

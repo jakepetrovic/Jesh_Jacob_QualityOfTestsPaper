@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.aop.MethodInvocation;
-import org.jsecurity.authz.aop.PermissionAnnotationMethodInterceptor;
+import org.jsecurity.authz.AuthorizationException;
+import org.jsecurity.authz.aop.RoleAnnotationMethodInterceptor;
 
 public class AnnotationMethodInterceptorEvoSuiteTest {
 
@@ -23,9 +24,10 @@ public class AnnotationMethodInterceptorEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      PermissionAnnotationMethodInterceptor permissionAnnotationMethodInterceptor0 = new PermissionAnnotationMethodInterceptor();
+      RoleAnnotationMethodInterceptor roleAnnotationMethodInterceptor0 = new RoleAnnotationMethodInterceptor();
+      // Undeclared exception!
       try {
-        permissionAnnotationMethodInterceptor0.invoke((MethodInvocation) null);
+        roleAnnotationMethodInterceptor0.assertAuthorized((MethodInvocation) null);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*

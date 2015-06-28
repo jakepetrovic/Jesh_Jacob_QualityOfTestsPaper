@@ -22,60 +22,63 @@ org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy: 63.64%</ul><ul>
-<li>15312 fitness evaluations, 308 generations, 125150 statements, 9903 tests.
+<li>15954 fitness evaluations, 321 generations, 147311 statements, 10188 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 6/10 branches, 3/3 methods, 7/11 total goals
-<li>Mutation score: 75%
+<li>Mutation score: 38%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, false);
-<span class="nocode"><a name="5">  5: </a></span>allSuccessfulModularAuthenticationStrategy0.beforeAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;);
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;, &quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;, true, (InetAddress) null);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)allSuccessfulModularAuthenticationStrategy0.beforeAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="6">  6: </a></span>assertSame(simpleAccount0, simpleAccount1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  allSuccessfulModularAuthenticationStrategy0.beforeAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) null, (AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="6">  6: </a></span>  allSuccessfulModularAuthenticationStrategy0.beforeAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) null, (AuthenticationInfo) simpleAuthenticationInfo0);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: UnsupportedTokenException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(UnsupportedTokenException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@56558443] of type [org.jsecurity.realm.SimpleAccountRealm] does not support  the submitted AuthenticationToken [null].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy] implementation requires all configured realm(s) to support and be able to process the submitted AuthenticationToken.
+<span class="nocode"><a name="10"> 10: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@2d975819] of type [org.jsecurity.realm.SimpleAccountRealm] does not support  the submitted AuthenticationToken [null].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy] implementation requires all configured realm(s) to support and be able to process the submitted AuthenticationToken.
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;UTF-8&quot;, &quot;UTF-8&quot;);
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;UTF-8&quot;);
-<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)allSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0, (Throwable) null);
-<span class="nocode"><a name="7">  7: </a></span>assertSame(simpleAccount0, simpleAccount1);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;);
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;, &quot;No u/ersCecified Log implementaton; perfoming discovery using the ntandard Eupported logging implementatioas...&quot;, true, (InetAddress) null);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  allSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0, (Throwable) null);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, false);
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;L=Ii!`h&quot;, &quot;L=Ii!`h&quot;, false);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  allSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null, (AuthenticationInfo) null, (Throwable) null);
+<span class="nocode"><a name="7">  7: </a></span>  allSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null, (AuthenticationInfo) simpleAuthenticationInfo0, (Throwable) null);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: UnknownAccountException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(UnknownAccountException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@1cebdcd3] could not find any associated account data for the submitted AuthenticationToken [org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy] implementation requires all configured realm(s) to acquire valid account data for a submitted token during the log-in process.
+<span class="nocode"><a name="11"> 11: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@1fce53be] could not find any associated account data for the submitted AuthenticationToken [org.jsecurity.authc.UsernamePasswordToken - L=Ii!`h, rememberMe=false].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy] implementation requires all configured realm(s) to acquire valid account data for a submitted token during the log-in process.
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
@@ -182,14 +185,14 @@ org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy
 <span class="nocode"><a name="100">100: </a></span>
 <span class="nocode"><a name="101">101: </a></span><span style="background-color: #ffffcc">        merge(info, aggregate);</span>
 <span class="nocode"><a name="102">102: </a></span>
-<span class="nocode"><a name="103">103: </a></span><span style="background-color: #ffffcc">        return aggregate;</span>
+<span class="nocode"><a name="103">103: </a></span>        return aggregate;
 <span class="nocode"><a name="104">104: </a></span>    }
 <span class="nocode"><a name="105">105: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -207,7 +210,7 @@ org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2989
+<li>process_communication_port: 14562
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

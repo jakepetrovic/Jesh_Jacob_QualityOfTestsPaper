@@ -14,8 +14,9 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
-import org.xml.sax.ext.Locator2Impl;
 import org.xml.sax.helpers.AttributeListImpl;
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 public class ContentHandlerAdapterEvoSuiteTest {
 
@@ -40,10 +41,10 @@ public class ContentHandlerAdapterEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
-      char[] charArray0 = new char[19];
-      contentHandlerAdapter0.ignorableWhitespace(charArray0, (-1763), (-1763));
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) xMLFilterImpl0);
+      char[] charArray0 = new char[8];
+      contentHandlerAdapter0.ignorableWhitespace(charArray0, (int) '\u0000', (int) 'N');
   }
 
   //Test case number: 2
@@ -53,8 +54,8 @@ public class ContentHandlerAdapterEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler0);
       contentHandlerAdapter0.endDocument();
   }
 
@@ -65,10 +66,10 @@ public class ContentHandlerAdapterEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
-      char[] charArray0 = new char[19];
-      contentHandlerAdapter0.characters(charArray0, (-1763), (-1763));
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) xMLFilterImpl0);
+      char[] charArray0 = new char[8];
+      contentHandlerAdapter0.characters(charArray0, (int) '\u0000', (int) 'N');
   }
 
   //Test case number: 4
@@ -80,7 +81,7 @@ public class ContentHandlerAdapterEvoSuiteTest {
   public void test4()  throws Throwable  {
       DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
       ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
-      contentHandlerAdapter0.processingInstruction("xmlns", "xmlns");
+      contentHandlerAdapter0.processingInstruction(" ", " ");
   }
 
   //Test case number: 5
@@ -90,57 +91,55 @@ public class ContentHandlerAdapterEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
-      Locator2Impl locator2Impl0 = new Locator2Impl();
-      contentHandlerAdapter0.setDocumentLocator((Locator) locator2Impl0);
-      assertEquals(0, locator2Impl0.getColumnNumber());
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) xMLFilterImpl0);
+      contentHandlerAdapter0.setDocumentLocator((Locator) null);
   }
 
   //Test case number: 6
   /*
-   * 10 covered goals:
+   * 9 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - false
    * 2 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I26 Branch 2 IFLE L96 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I45 Branch 3 IFLE L100 - false
+   * 3 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I45 Branch 3 IFLE L100 - true
    * 4 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - false
    * 5 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I92 Branch 5 IFGT L111 - false
-   * 6 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I96 Branch 6 IFGT L111 - true
-   * 7 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - true
-   * 9 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - true
-   * 10 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I96 Branch 6 IFGT L111 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - true
+   * 8 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - true
+   * 9 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler0);
       AttributeListImpl attributeListImpl0 = new AttributeListImpl();
-      attributeListImpl0.addAttribute("xmlns", "xmlns", "xmlns");
-      contentHandlerAdapter0.startElement("xmlns", (AttributeList) attributeListImpl0);
+      attributeListImpl0.addAttribute("1aK~", "1aK~", "1aK~");
+      contentHandlerAdapter0.startElement("1aK~", (AttributeList) attributeListImpl0);
       assertEquals(1, attributeListImpl0.getLength());
   }
 
   //Test case number: 7
   /*
-   * 9 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I45 Branch 3 IFLE L100 - true
-   * 2 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I96 Branch 6 IFGT L111 - false
-   * 3 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - true
-   * 4 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - false
-   * 5 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I26 Branch 2 IFLE L96 - true
-   * 6 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - true
-   * 7 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I92 Branch 5 IFGT L111 - false
-   * 9 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - true
+   * 10 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I45 Branch 3 IFLE L100 - false
+   * 2 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I96 Branch 6 IFGT L111 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - false
+   * 4 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - true
+   * 5 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I13 Branch 1 IF_ICMPGE L93 - false
+   * 6 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I26 Branch 2 IFLE L96 - true
+   * 7 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - true
+   * 8 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I79 Branch 4 IF_ICMPGE L108 - false
+   * 9 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I92 Branch 5 IFGT L111 - false
+   * 10 nu.staldal.xmlutil.ContentHandlerAdapter.startElement(Ljava/lang/String;Lorg/xml/sax/AttributeList;)V: I138 Branch 7 IFEQ L121 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) xMLFilterImpl0);
       AttributeListImpl attributeListImpl0 = new AttributeListImpl();
-      attributeListImpl0.addAttribute("@", "@", "@");
-      contentHandlerAdapter0.startElement("@", (AttributeList) attributeListImpl0);
+      attributeListImpl0.addAttribute("xmlns", "xmlns", "xmlns");
+      contentHandlerAdapter0.startElement("xmlns", (AttributeList) attributeListImpl0);
       assertEquals(1, attributeListImpl0.getLength());
   }
 
@@ -153,11 +152,11 @@ public class ContentHandlerAdapterEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) defaultHandler2_0);
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerAdapter contentHandlerAdapter0 = new ContentHandlerAdapter((ContentHandler) xMLFilterImpl0);
       // Undeclared exception!
       try {
-        contentHandlerAdapter0.endElement("h%KgZ*VQ[pLFN$");
+        contentHandlerAdapter0.endElement(")");
         fail("Expecting exception: EmptyStackException");
       } catch(EmptyStackException e) {
       }

@@ -7,7 +7,7 @@ package org.jsecurity.aop;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import org.jsecurity.authz.aop.AuthenticatedAnnotationMethodInterceptor;
+import org.jsecurity.authz.aop.RoleAnnotationMethodInterceptor;
 import org.jsecurity.subject.Subject;
 
 public class MethodInterceptorSupportEvoSuiteTest {
@@ -21,8 +21,8 @@ public class MethodInterceptorSupportEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthenticatedAnnotationMethodInterceptor authenticatedAnnotationMethodInterceptor0 = new AuthenticatedAnnotationMethodInterceptor();
-      Subject subject0 = authenticatedAnnotationMethodInterceptor0.getSubject();
+      RoleAnnotationMethodInterceptor roleAnnotationMethodInterceptor0 = new RoleAnnotationMethodInterceptor();
+      Subject subject0 = roleAnnotationMethodInterceptor0.getSubject();
       assertNull(subject0);
   }
 }

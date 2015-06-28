@@ -7,7 +7,6 @@ package net.sf.jniinchi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import net.sf.jniinchi.INCHI_RET;
 import net.sf.jniinchi.JniInchiInput;
 import net.sf.jniinchi.JniInchiInputData;
 
@@ -22,9 +21,10 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 8, "");
-      jniInchiInputData0.getInput();
-      assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
+      JniInchiInput jniInchiInput0 = new JniInchiInput();
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(6, jniInchiInput0, 0, ".;\"OwbPX1I%");
+      JniInchiInput jniInchiInput1 = jniInchiInputData0.getInput();
+      assertSame(jniInchiInput0, jniInchiInput1);
   }
 
   //Test case number: 1
@@ -34,9 +34,9 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 8, "");
-      INCHI_RET iNCHI_RET0 = jniInchiInputData0.getReturnValue();
-      assertEquals(INCHI_RET.OKAY, iNCHI_RET0);
+      JniInchiInput jniInchiInput0 = new JniInchiInput();
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(6, jniInchiInput0, 0, ".;\"OwbPX1I%");
+      jniInchiInputData0.getReturnValue();
   }
 
   //Test case number: 2
@@ -47,9 +47,9 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 8, "");
+      JniInchiInput jniInchiInput0 = new JniInchiInput();
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(6, jniInchiInput0, 0, ".;\"OwbPX1I%");
       String string0 = jniInchiInputData0.getErrorMessage();
-      assertNotNull(string0);
-      assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
+      assertEquals(".;\"OwbPX1I%", string0);
   }
 }

@@ -62,78 +62,78 @@ public class CommandFactoryEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 1 TABLESWITCH L29 Case 0 - false
-   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
+   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 2 TABLESWITCH L29 Case 1 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
-      assertNotNull(deployCommand0);
+      StartCommand startCommand0 = (StartCommand)CommandFactory.createCommand(1);
+      assertNotNull(startCommand0);
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 2 TABLESWITCH L29 Case 1 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 3 TABLESWITCH L29 Case 2 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      StartCommand startCommand0 = (StartCommand)CommandFactory.createCommand(1);
-      assertNotNull(startCommand0);
+      StopCommand stopCommand0 = (StopCommand)CommandFactory.createCommand(2);
+      assertNotNull(stopCommand0);
   }
 
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 3 TABLESWITCH L29 Case 2 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 4 TABLESWITCH L29 Case 3 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      StopCommand stopCommand0 = (StopCommand)CommandFactory.createCommand(2);
-      assertNotNull(stopCommand0);
+      RestartCommand restartCommand0 = (RestartCommand)CommandFactory.createCommand(3);
+      assertNotNull(restartCommand0);
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 4 TABLESWITCH L29 Case 3 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 5 TABLESWITCH L29 Case 4 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      RestartCommand restartCommand0 = (RestartCommand)CommandFactory.createCommand(3);
-      assertNotNull(restartCommand0);
+      StateCommand stateCommand0 = (StateCommand)CommandFactory.createCommand(4);
+      assertNotNull(stateCommand0);
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 5 TABLESWITCH L29 Case 4 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 6 TABLESWITCH L29 Case 5 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      StateCommand stateCommand0 = (StateCommand)CommandFactory.createCommand(4);
-      assertNotNull(stateCommand0);
+      EnableDebuggingCommand enableDebuggingCommand0 = (EnableDebuggingCommand)CommandFactory.createCommand(5);
+      assertNotNull(enableDebuggingCommand0);
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 6 TABLESWITCH L29 Case 5 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 7 TABLESWITCH L29 Case 6 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      EnableDebuggingCommand enableDebuggingCommand0 = (EnableDebuggingCommand)CommandFactory.createCommand(5);
-      assertNotNull(enableDebuggingCommand0);
+      DisableDebuggingCommand disableDebuggingCommand0 = (DisableDebuggingCommand)CommandFactory.createCommand(6);
+      assertNotNull(disableDebuggingCommand0);
   }
 
   //Test case number: 8
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 7 TABLESWITCH L29 Case 6 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
    */
   @Test
   public void test8()  throws Throwable  {
-      DisableDebuggingCommand disableDebuggingCommand0 = (DisableDebuggingCommand)CommandFactory.createCommand(6);
-      assertNotNull(disableDebuggingCommand0);
+      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
+      assertNotNull(deployCommand0);
   }
 
   //Test case number: 9
@@ -202,11 +202,11 @@ public class CommandFactoryEvoSuiteTest {
   public void test13()  throws Throwable  {
       // Undeclared exception!
       try {
-        CommandFactory.createCommand((-1));
+        CommandFactory.createCommand(1814);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * command -1 is not supported. 
+         * command 1814 is not supported. 
          */
       }
   }

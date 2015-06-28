@@ -14,14 +14,18 @@ public class DeployResultStatusEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 1 covered goal:
+   * 4 covered goals:
    * 1 com.sap.netweaver.porta.core.DeployResultStatus.toString()Ljava/lang/String;: root-Branch
+   * 2 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I14 Branch 1 IF_ICMPGE L57 - false
+   * 3 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - true
+   * 4 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.getByName("Success");
       String string0 = deployResultStatus0.toString();
-      assertEquals("Error", string0);
+      assertNotNull(string0);
+      assertEquals("Success", string0);
   }
 
   //Test case number: 1
@@ -35,25 +39,12 @@ public class DeployResultStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        DeployResultStatus.getByName("!");
+        DeployResultStatus.getByName("");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * !
+         * 
          */
       }
-  }
-
-  //Test case number: 2
-  /*
-   * 3 covered goals:
-   * 1 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - false
-   * 2 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I14 Branch 1 IF_ICMPGE L57 - false
-   * 3 com.sap.netweaver.porta.core.DeployResultStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/DeployResultStatus;: I25 Branch 2 IFLE L58 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.getByName("Warning");
-      assertEquals(DeployResultStatus.WARNING, deployResultStatus0);
   }
 }

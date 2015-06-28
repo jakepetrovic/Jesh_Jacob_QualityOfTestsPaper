@@ -22,10 +22,10 @@ br.com.jnfe.base.TpSerie
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: br.com.jnfe.base.TpSerie: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 1636 statements, 303 tests.
+<li>50 fitness evaluations, 2 generations, 1503 statements, 288 tests.
 <li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
 <li>Coverage: 6/6 branches, 4/3 methods, 8/8 total goals
-<li>Mutation score: 22%
+<li>Mutation score: 11%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,19 +33,31 @@ br.com.jnfe.base.TpSerie
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  TpSerie.getTpSerie((-1691));
+<span class="nocode"><a name="3">  3: </a></span>  TpSerie.getTpSerie(1000);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: -1691.
+<span class="nocode"><a name="7">  7: </a></span>   * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: 1000.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TpSerie tpSerie0 = TpSerie.getTpSerie(1);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(900, tpSerie0.getSerieFin());
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(1, tpSerie0.getSerieIni());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  TpSerie.getTpSerie((-857));
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: -857.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TpSerie tpSerie0 = TpSerie.getTpSerie(0);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, tpSerie0.getSerieIni());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(1, tpSerie0.getSerieFin());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/* Copyright 2005 I Serv Consultoria Empresarial Ltda.
@@ -127,7 +139,7 @@ br.com.jnfe.base.TpSerie
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4728773757073111178.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2315544340251876346.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -145,7 +157,7 @@ br.com.jnfe.base.TpSerie
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6836
+<li>process_communication_port: 9327
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

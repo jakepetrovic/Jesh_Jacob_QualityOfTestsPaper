@@ -39,8 +39,7 @@ public class CommonNoteEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
-      commonNote0.setOtherInfo("k~");
-      assertEquals("k~", commonNote0.getOtherInfo());
-      assertEquals("k~", commonNote0.getOtherInfoText());
+      commonNote0.setOtherInfo((String) null);
+      assertEquals(" ", commonNote0.getOtherInfoText());
   }
 }

@@ -7,7 +7,7 @@ package nu.staldal.lagoon.core;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import nu.staldal.lagoon.producer.XSLTransformer;
+import nu.staldal.lagoon.producer.IslandSplit;
 
 public class TransformEvoSuiteTest {
 
@@ -19,6 +19,6 @@ public class TransformEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      XSLTransformer xSLTransformer0 = new XSLTransformer();
+      IslandSplit islandSplit0 = new IslandSplit();
   }
 }

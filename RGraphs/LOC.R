@@ -5,10 +5,10 @@ DoubleChecksoniTrust <- read.csv("/Users/kjustice/Documents/UCCS Classes/papers/
 mydata <- DoubleChecksoniTrust
 
 limits <- aes(ymax = mydata$upper, ymin = mydata$lower)
-p = (ggplot(data = mydata, aes(x = variable, fill = Program, y = value)) + geom_bar(position = "dodge", 
+p = (ggplot(data = mydata, aes(x = variable, fill = Program, y = value)) + geom_bar(position = "dodge",
     stat = "identity") + geom_errorbar(limits, width = 0.9, position = "dodge")+ theme_bw()+labs(title="LOC of Test Suites and Source Code", x = "Programs", y="LOC"))
 p = p + guides(fill=guide_legend(title="Code Considered"))
 (p = p + scale_fill_grey(start = 0, end = .9))
 
 ggsave("/Users/kjustice/Documents/UCCS Classes/papers/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC.pdf", height = 7, width = 11)
-#ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC.pdf", height = 7, width = 11)
+#ggsave("D:/Documents/GitHub/Paper/Jesh_Jacob_QualityOfTestsPaper/RGraphs/LOC.pdf", height = 7, width = 17)

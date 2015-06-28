@@ -21,9 +21,10 @@ public class NoteListEventEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Point point0 = new Point(0, 1699);
-      NoteListEvent noteListEvent0 = new NoteListEvent((Object) "java.awt.Point[x=0,y=1699]", point0);
+      Object object0 = new Object();
+      Point point0 = new Point(0, 0);
+      NoteListEvent noteListEvent0 = new NoteListEvent(object0, point0);
       Point point1 = noteListEvent0.getPoint();
-      assertSame(point1, point0);
+      assertEquals(0, point1.x);
   }
 }

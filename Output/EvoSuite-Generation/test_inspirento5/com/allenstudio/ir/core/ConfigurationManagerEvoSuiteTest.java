@@ -8,18 +8,84 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.allenstudio.ir.core.ConfigurationManager;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class ConfigurationManagerEvoSuiteTest {
 
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
 
   //Test case number: 0
+  /*
+   * 2 covered goals:
+   * 1 com.allenstudio.ir.core.ConfigurationManager.writeBack()V: root-Branch
+   * 2 com.allenstudio.ir.core.ConfigurationManager.getInstance()Lcom/allenstudio/ir/core/ConfigurationManager;: I3 Branch 1 IFNULL L65 - false
+   */
+  @Test
+  public void test0()  throws Throwable  {
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+          ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
+          configurationManager0.writeBack();
+          assertEquals("{}", configurationManager0.toString());
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
+  }
+
+  //Test case number: 1
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.core.ConfigurationManager.setProperty(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
+      // Undeclared exception!
+      try {
+        configurationManager0.setProperty("TO,$Ie", "TO,$Ie");
+        fail("Expecting exception: StringIndexOutOfBoundsException");
+      } catch(StringIndexOutOfBoundsException e) {
+        /*
+         * String index out of range: -1
+         */
+      }
+  }
+
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 com.allenstudio.ir.core.ConfigurationManager.readIn()V: I21 Branch 2 IFEQ L79 - true
    * 2 com.allenstudio.ir.core.ConfigurationManager.getInstance()Lcom/allenstudio/ir/core/ConfigurationManager;: I3 Branch 1 IFNULL L65 - false
    */
   @Test
-  public void test0()  throws Throwable  {
+  public void test2()  throws Throwable  {
       ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
       configurationManager0.readIn();
       assertEquals(0, configurationManager0.size());

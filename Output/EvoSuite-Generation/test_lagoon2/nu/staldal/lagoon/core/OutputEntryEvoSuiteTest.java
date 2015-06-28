@@ -87,10 +87,9 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      BasicSplit basicSplit0 = new BasicSplit();
       // Undeclared exception!
       try {
-        outputEntry0.setNext((XMLStreamProducer) basicSplit0);
+        outputEntry0.setNext((XMLStreamProducer) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

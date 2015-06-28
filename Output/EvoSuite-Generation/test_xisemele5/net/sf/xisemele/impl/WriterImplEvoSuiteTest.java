@@ -32,7 +32,7 @@ public class WriterImplEvoSuiteTest {
       Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.attribute("", date0, "");
+        writerImpl0.attribute("*i08_[7e0EP", date0, "*i08_[7e0EP");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -112,7 +112,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("+{WzP.v+KXi~", (Object) null);
+        writerImpl0.element("3?BxW@rXRWbBr,", (Object) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -129,7 +129,7 @@ public class WriterImplEvoSuiteTest {
       Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.element("", date0, "");
+        writerImpl0.element("net.sf.xisemele.within.context.not.permitted", date0, "net.sf.xisemele.within.context.not.permitted");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -176,10 +176,9 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Object object0 = new Object();
       // Undeclared exception!
       try {
-        writerImpl0.attribute("net.sf.xisemele.invalid.name", object0);
+        writerImpl0.attribute("i\"YYl*k27`Skav", "Wed Dec 31 17:00:00 MST 1969");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

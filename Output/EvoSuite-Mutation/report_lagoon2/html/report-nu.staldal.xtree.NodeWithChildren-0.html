@@ -22,52 +22,32 @@ nu.staldal.xtree.NodeWithChildren
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.NodeWithChildren: 100.00%</ul><ul>
-<li>700 fitness evaluations, 15 generations, 3887 statements, 689 tests.
-<li>Time: 0:00:06(Search: 0:00:06, minimization: 0:00:00)
+<li>1900 fitness evaluations, 39 generations, 7374 statements, 1495 tests.
+<li>Time: 0:00:11(Search: 0:00:10, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 7/7 methods, 8/8 total goals
-<li>Mutation score: 23%
+<li>Mutation score: 10%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element {&quot;, &quot;Element {&quot;, (-1660), (-1220));
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
-<span class="nocode"><a name="5">  5: </a></span>Element element1 = element0.getFirstChildElement(&quot;Element {&quot;, &quot;Element {&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, element0.numberOfChildren());
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(element1);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1565);
+<span class="nocode"><a name="2">  2: </a></span>Element element1 = element0.getFirstChildElementOrNull(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(element1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;%ULZAG&quot;, &quot;%ULZAG&quot;, 1423);
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) element0, 1423);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 1423 &gt;= 0
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 9, (-123));
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfChildren());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 642);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  element0.insertChild((Node) null, 0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;`%?L9M'y?w|)iDGP&quot;, &quot;`%?L9M'y?w|)iDGP&quot;, 1201);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 9, (-123));
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild(0);
+<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(0);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -75,10 +55,44 @@ nu.staldal.xtree.NodeWithChildren
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) element0, 1);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * 1 &gt;= 0
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;%ULZAG&quot;, &quot;3-7Upt~DZ&quot;, 1423, 1423);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, element0.getTextContent());
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1565);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  element0.insertChild((Node) null, (-1));
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1), (-1));
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild((-1));
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * -1
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 9, 9);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, element0.numberOfChildren());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -246,7 +260,7 @@ nu.staldal.xtree.NodeWithChildren
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -264,7 +278,7 @@ nu.staldal.xtree.NodeWithChildren
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11106
+<li>process_communication_port: 19138
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

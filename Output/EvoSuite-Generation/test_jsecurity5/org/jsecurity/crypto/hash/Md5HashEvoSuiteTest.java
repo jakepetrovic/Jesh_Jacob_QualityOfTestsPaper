@@ -14,64 +14,55 @@ public class Md5HashEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md5Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Md5Hash.<init>()V: root-Branch
-   * 3 org.jsecurity.crypto.hash.Md5Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Md5Hash;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Md5Hash md5Hash0 = Md5Hash.fromBase64String("");
-      String string0 = md5Hash0.getAlgorithmName();
-      assertEquals("MD5", string0);
-      assertEquals("", md5Hash0.toBase64());
+      Md5Hash md5Hash0 = new Md5Hash((Object) "MD5", (Object) "UTF-8");
+      assertEquals("MD5", md5Hash0.getAlgorithmName());
   }
 
   //Test case number: 1
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md5Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000", (Object) "UTF-8");
-      assertEquals("JzaXM1Sd6Hi+xAtxiz018g==", md5Hash0.toBase64());
+      Md5Hash md5Hash0 = new Md5Hash((Object) "MD5", (Object) "YY1aj1bEIBQvlt/OCtZsHg==", (int) '+');
+      assertEquals("735a43b73d097bf69008fbb06bb294f5", md5Hash0.toHex());
   }
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Md5Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Md5Hash;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md5Hash.<init>()V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "UTF-8", (Object) "UTF-8", 1458);
-      assertEquals("ap7eeGcZTDgYdOPhfsaGBA==", md5Hash0.toBase64());
+      // Undeclared exception!
+      try {
+        Md5Hash.fromBase64String((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 3
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;)V: root-Branch
-   * 2 org.jsecurity.crypto.hash.Md5Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "\uFFFD\uFFFD\uFFFD\u0001\uFFFD/\u000E");
-      assertEquals("MD5", md5Hash0.getAlgorithmName());
-  }
-
-  //Test case number: 4
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md5Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Md5Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Md5Hash.<init>()V: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test3()  throws Throwable  {
       // Undeclared exception!
       try {
-        Md5Hash.fromHexString("MD5");
+        Md5Hash.fromHexString("oVW|u0QR9n$GXEa%");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*

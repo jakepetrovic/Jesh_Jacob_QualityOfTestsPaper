@@ -19,20 +19,30 @@ public class OperationsHelperImplEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - false
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I31 Branch 2 IF_ICMPNE L30 - false
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - true
-   * 4 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
+   * 5 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - true
+   * 3 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - false
+   * 4 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I31 Branch 2 IF_ICMPNE L30 - false
+   * 5 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.insertBefore((Node) iIOMetadataNode0, (Node) null);
-      List<Node> list0 = operationsHelperImpl0.children((Node) iIOMetadataNode1);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+      iIOMetadataNode0.appendChild((Node) iIOMetadataNode0);
+      List<Node> list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
       assertNotNull(list0);
-      assertEquals(1, list0.size());
+      
+      // Undeclared exception!
+      try {
+        operationsHelperImpl0.sublistWithName(list0, "");
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * StringEquals is not supposed to work on a null caller
+         */
+      }
   }
 
   //Test case number: 1
@@ -58,7 +68,7 @@ public class OperationsHelperImplEvoSuiteTest {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
       // Undeclared exception!
       try {
-        operationsHelperImpl0.find((Document) null, "UR</%Rh,Q8o+{~@3KmX");
+        operationsHelperImpl0.find((Document) null, "up[");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -66,71 +76,50 @@ public class OperationsHelperImplEvoSuiteTest {
 
   //Test case number: 3
   /*
-   * 2 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - false
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I19 Branch 11 IFLE L70 - false
+   * 1 covered goal:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - true
    */
   @Test
   public void test3()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
-      linkedList0.add((Node) iIOMetadataNode0);
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "");
-      assertNull(iIOMetadataNode1.getNamespaceURI());
+      Node node0 = operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "m;Fw");
+      assertNull(node0);
   }
 
   //Test case number: 4
   /*
-   * 3 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I19 Branch 11 IFLE L70 - true
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - true
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - false
+   * 1 covered goal:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("/");
       linkedList0.add((Node) iIOMetadataNode0);
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "?36$kFP.~]-34%\r");
-      assertNull(iIOMetadataNode1);
+      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+      // Undeclared exception!
+      try {
+        operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "/");
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * StringEquals is not supposed to work on a null caller
+         */
+      }
   }
 
   //Test case number: 5
   /*
-   * 3 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I25 Branch 13 IFLE L83 - false
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
+   * 2 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
       LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
-      linkedList0.add((Node) iIOMetadataNode0);
-      List<Node> list0 = operationsHelperImpl0.sublistWithName((List<Node>) linkedList0, "");
-      assertNotNull(list0);
-      assertEquals(1, list0.size());
-  }
-
-  //Test case number: 6
-  /*
-   * 4 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I25 Branch 13 IFLE L83 - true
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
-   * 4 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-      LinkedList<Node> linkedList0 = new LinkedList<Node>();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
-      linkedList0.add((Node) iIOMetadataNode0);
-      List<Node> list0 = operationsHelperImpl0.sublistWithName((List<Node>) linkedList0, "J^am NE)D]xM");
-      assertEquals(true, list0.isEmpty());
-      assertNotNull(list0);
+      List<Node> list0 = operationsHelperImpl0.sublistWithName((List<Node>) linkedList0, "m;Fw");
+      assertEquals(0, list0.size());
   }
 }

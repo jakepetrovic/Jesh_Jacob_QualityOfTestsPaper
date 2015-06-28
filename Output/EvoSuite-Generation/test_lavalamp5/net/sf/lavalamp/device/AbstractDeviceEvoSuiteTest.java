@@ -41,7 +41,7 @@ public class AbstractDeviceEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      TimeOfDay timeOfDay0 = new TimeOfDay((-1474), (-1474));
+      TimeOfDay timeOfDay0 = new TimeOfDay((-223), (-223));
       Period period0 = new Period(timeOfDay0, timeOfDay0);
       dummyDevice0.setAlwaysOffPeriod(period0);
       assertEquals("dummy device null", dummyDevice0.toString());
@@ -79,7 +79,7 @@ public class AbstractDeviceEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
       // Undeclared exception!
       try {
         dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
@@ -116,35 +116,34 @@ public class AbstractDeviceEvoSuiteTest {
   /*
    * 4 covered goals:
    * 1 net.sf.lavalamp.device.AbstractDevice.makeActions()V: I17 Branch 1 IFEQ L54 - false
-   * 2 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I25 Branch 3 IFEQ L71 - true
-   * 3 net.sf.lavalamp.device.AbstractDevice.setProperties(Lnet/sf/lavalamp/device/DeviceProperties;)V: root-Branch
-   * 4 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - true
+   * 2 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - true
+   * 3 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I25 Branch 3 IFEQ L71 - true
+   * 4 net.sf.lavalamp.device.AbstractDevice.setProperties(Lnet/sf/lavalamp/device/DeviceProperties;)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
-      DeviceProperties deviceProperties0 = new DeviceProperties();
       DummyDevice dummyDevice0 = new DummyDevice();
+      DeviceProperties deviceProperties0 = new DeviceProperties();
       deviceProperties0.setOnWhenSuccessful(true);
       dummyDevice0.setProperties(deviceProperties0);
-      assertEquals("dummy device null", dummyDevice0.toString());
+      assertNull(deviceProperties0.getClassName());
   }
 
   //Test case number: 8
   /*
-   * 5 covered goals:
-   * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I25 Branch 3 IFEQ L71 - false
+   * 4 covered goals:
+   * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - false
    * 2 net.sf.lavalamp.device.AbstractDevice.<init>()V: root-Branch
    * 3 net.sf.lavalamp.device.AbstractDevice.setProperties(Lnet/sf/lavalamp/device/DeviceProperties;)V: root-Branch
    * 4 net.sf.lavalamp.device.AbstractDevice.makeActions()V: I17 Branch 1 IFEQ L54 - true
-   * 5 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - true
    */
   @Test
   public void test8()  throws Throwable  {
-      DeviceProperties deviceProperties0 = new DeviceProperties();
-      OnError onError0 = OnError.STATUSQUO;
-      deviceProperties0.setOnError(onError0);
       DummyDevice dummyDevice0 = new DummyDevice();
+      DeviceProperties deviceProperties0 = new DeviceProperties();
+      OnError onError0 = OnError.CRASH;
+      deviceProperties0.setOnError(onError0);
       dummyDevice0.setProperties(deviceProperties0);
-      assertNull(deviceProperties0.getPath());
+      assertEquals(false, deviceProperties0.isOnWhenSuccessful());
   }
 }

@@ -19,8 +19,8 @@ public class ModFreteEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ModFrete modFrete0 = ModFrete.SEM_FRETE;
+      ModFrete modFrete0 = ModFrete.TERCEIROS;
       char char0 = modFrete0.getValue();
-      assertEquals('9', char0);
+      assertEquals('2', char0);
   }
 }

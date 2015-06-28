@@ -7,6 +7,7 @@ package net.sf.lavalamp.device.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import net.sf.lavalamp.device.DeviceProperties;
 import net.sf.lavalamp.device.impl.TellStick;
 
 public class TellStickEvoSuiteTest {
@@ -23,7 +24,7 @@ public class TellStickEvoSuiteTest {
       TellStick tellStick0 = new TellStick();
       Runtime runtime0 = Runtime.getRuntime();
       tellStick0.setRuntime(runtime0);
-      assertEquals(3730309120L, runtime0.maxMemory());
+      assertEquals(601882624L, runtime0.totalMemory());
   }
 
   //Test case number: 1
@@ -41,30 +42,12 @@ public class TellStickEvoSuiteTest {
   //Test case number: 2
   /*
    * 3 covered goals:
-   * 1 net.sf.lavalamp.device.impl.TellStick.offString()Ljava/lang/String;: root-Branch
-   * 2 net.sf.lavalamp.device.impl.TellStick.toString()Ljava/lang/String;: root-Branch
-   * 3 net.sf.lavalamp.device.impl.TellStick.turnOff()V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      TellStick tellStick0 = new TellStick();
-      // Undeclared exception!
-      try {
-        tellStick0.turnOff();
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 3
-  /*
-   * 3 covered goals:
    * 1 net.sf.lavalamp.device.impl.TellStick.turnOn()V: root-Branch
    * 2 net.sf.lavalamp.device.impl.TellStick.onString()Ljava/lang/String;: root-Branch
    * 3 net.sf.lavalamp.device.impl.TellStick.toString()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       TellStick tellStick0 = new TellStick();
       // Undeclared exception!
       try {
@@ -74,18 +57,23 @@ public class TellStickEvoSuiteTest {
       }
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
-   * 2 covered goals:
+   * 5 covered goals:
    * 1 net.sf.lavalamp.device.impl.TellStick.exec(Ljava/lang/String;)V: root-Branch
-   * 2 net.sf.lavalamp.device.impl.TellStick.<init>()V: root-Branch
+   * 2 net.sf.lavalamp.device.impl.TellStick.offString()Ljava/lang/String;: root-Branch
+   * 3 net.sf.lavalamp.device.impl.TellStick.toString()Ljava/lang/String;: root-Branch
+   * 4 net.sf.lavalamp.device.impl.TellStick.<init>()V: root-Branch
+   * 5 net.sf.lavalamp.device.impl.TellStick.turnOff()V: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test3()  throws Throwable  {
       TellStick tellStick0 = new TellStick();
+      DeviceProperties deviceProperties0 = new DeviceProperties();
+      tellStick0.setProperties(deviceProperties0);
       // Undeclared exception!
       try {
-        tellStick0.exec("qSkUbG(,RB =");
+        tellStick0.turnOff();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

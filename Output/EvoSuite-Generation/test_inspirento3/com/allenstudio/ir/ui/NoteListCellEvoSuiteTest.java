@@ -33,10 +33,9 @@ public class NoteListCellEvoSuiteTest {
       CommonNote commonNote0 = new CommonNote();
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
-      assertEquals(-1, noteListCell0.getIndexInList());
       
-      noteListCell0.setIndexInList(1);
-      assertEquals(1, noteListCell0.getIndexInList());
+      noteListCell0.setIndexInList(1696);
+      assertEquals(1696, noteListCell0.getIndexInList());
   }
 
   //Test case number: 1
@@ -52,11 +51,11 @@ public class NoteListCellEvoSuiteTest {
       
       Dimension dimension0 = noteListCell0.getMaximumSize();
       assertEquals(true, noteListCell0.isOpaque());
-      assertNotNull(dimension0);
       assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals("java.awt.Dimension[width=2147483647,height=55]", dimension0.toString());
       assertEquals(-1, noteListCell0.getIndexInList());
+      assertEquals("java.awt.Dimension[width=2147483647,height=55]", dimension0.toString());
       assertEquals(3, noteListCell0.getComponentCount());
+      assertNotNull(dimension0);
   }
 
   //Test case number: 2
@@ -71,16 +70,16 @@ public class NoteListCellEvoSuiteTest {
       assertNotNull(noteListCell0);
       
       int int0 = noteListCell0.getIndexInList();
-      assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals((-1), int0);
       assertEquals(true, noteListCell0.isOpaque());
-      assertEquals(3, noteListCell0.countComponents());
+      assertEquals((-1), int0);
+      assertEquals(true, noteListCell0.isBackgroundSet());
+      assertEquals(3, noteListCell0.getComponentCount());
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - true
+   * 1 com.allenstudio.ir.ui.NoteListCell.isSelected()Z: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
@@ -88,16 +87,33 @@ public class NoteListCellEvoSuiteTest {
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
-      noteListCell0.setSelected(false);
+      noteListCell0.isSelected();
       assertEquals(true, noteListCell0.isOpaque());
       assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals(3, noteListCell0.countComponents());
-      assertEquals(false, noteListCell0.isSelected());
       assertEquals(-1, noteListCell0.getIndexInList());
-      assertEquals(3, noteListCell0.getComponentCount());
+      assertEquals(3, noteListCell0.countComponents());
   }
 
   //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - true
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      CommonNote commonNote0 = new CommonNote();
+      NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
+      assertNotNull(noteListCell0);
+      
+      noteListCell0.setSelected(false);
+      assertEquals(false, noteListCell0.isSelected());
+      assertEquals(3, noteListCell0.getComponentCount());
+      assertEquals(-1, noteListCell0.getIndexInList());
+      assertEquals(true, noteListCell0.isBackgroundSet());
+      assertEquals(3, noteListCell0.countComponents());
+  }
+
+  //Test case number: 5
   /*
    * 9 covered goals:
    * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - false
@@ -111,12 +127,13 @@ public class NoteListCellEvoSuiteTest {
    * 9 com.allenstudio.ir.ui.NoteListCell$2.<init>(Lcom/allenstudio/ir/ui/NoteListCell;)V: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test5()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
       noteListCell0.setSelected(true);
       assertEquals(true, noteListCell0.isSelected());
+      assertEquals(3, noteListCell0.countComponents());
   }
 }

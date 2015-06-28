@@ -22,8 +22,8 @@ org.jsecurity.config.TextConfiguration
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.config.TextConfiguration: 90.00%</ul><ul>
-<li>3268 fitness evaluations, 67 generations, 16151 statements, 2235 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>3434 fitness evaluations, 70 generations, 7722 statements, 2518 tests.
+<li>Time: 0:01:05(Search: 0:01:05, minimization: 0:00:00)
 <li>Coverage: 5/6 branches, 5/5 methods, 9/10 total goals
 <li>Mutation score: 0%
 </ul>
@@ -32,16 +32,23 @@ org.jsecurity.config.TextConfiguration
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.init();
-<span class="nocode"><a name="3">  3: </a></span>iniConfiguration0.init();
-<span class="nocode"><a name="4">  4: </a></span>assertNull(iniConfiguration0.getConfig());
+<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setConfig(&quot;XU-y:hZcc&lt;]pa~&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  iniConfiguration0.init();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ResourceException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unable to load from text configuration.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setConfig(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.init();
 <span class="nocode"><a name="3">  3: </a></span>iniConfiguration0.init();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, iniConfiguration0.getConfig());
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniConfiguration0.getConfig());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -111,11 +118,11 @@ org.jsecurity.config.TextConfiguration
 <span class="nocode"><a name="65"> 65: </a></span><span style="background-color: #ffffcc">        StringReader sr = new StringReader(config);</span>
 <span class="nocode"><a name="66"> 66: </a></span>        try {
 <span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">            load(sr);</span>
-<span class="nocode"><a name="68"> 68: </a></span>        } catch (Exception e2) {
-<span class="nocode"><a name="69"> 69: </a></span>            String msg = &quot;Unable to load from text configuration.&quot;;
-<span class="nocode"><a name="70"> 70: </a></span>            throw new ResourceException(msg, e2);
-<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">        }</span>
-<span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">        } catch (Exception e2) {</span>
+<span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Unable to load from text configuration.&quot;;</span>
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">            throw new ResourceException(msg, e2);</span>
+<span class="nocode"><a name="71"> 71: </a></span>        }
+<span class="nocode"><a name="72"> 72: </a></span>    }
 <span class="nocode"><a name="73"> 73: </a></span>
 <span class="nocode"><a name="74"> 74: </a></span>    public void init() throws JSecurityException {
 <span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        SecurityManager securityManager = getSecurityManager();</span>
@@ -134,7 +141,7 @@ org.jsecurity.config.TextConfiguration
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -152,7 +159,7 @@ org.jsecurity.config.TextConfiguration
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15134
+<li>process_communication_port: 19842
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

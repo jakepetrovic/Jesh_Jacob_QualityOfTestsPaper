@@ -19,8 +19,8 @@ public class ModBCSTEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ModBCST modBCST0 = ModBCST.LISTA_NEGATIVA;
+      ModBCST modBCST0 = ModBCST.valueOf("LISTA_NEUTRA");
       char char0 = modBCST0.getValue();
-      assertEquals('1', char0);
+      assertEquals('3', char0);
   }
 }

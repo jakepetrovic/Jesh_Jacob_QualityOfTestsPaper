@@ -24,7 +24,7 @@ public class NullValueEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
-      boolean boolean0 = nullValue0.equals((Object) "");
+      boolean boolean0 = nullValue0.equals((Object) "C/KL*");
       assertEquals(false, boolean0);
   }
 
@@ -82,7 +82,7 @@ public class NullValueEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
-      Date date0 = nullValue0.asDate("");
+      Date date0 = nullValue0.asDate("C/KL*");
       assertNull(date0);
   }
 

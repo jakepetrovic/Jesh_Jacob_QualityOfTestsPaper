@@ -14,8 +14,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
-import org.xml.sax.helpers.AttributesImpl;
-import org.xml.sax.helpers.LocatorImpl;
+import org.xml.sax.ext.Locator2Impl;
 
 public class IslandSplitEvoSuiteTest {
 
@@ -29,10 +28,10 @@ public class IslandSplitEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
-      char[] charArray0 = new char[4];
+      char[] charArray0 = new char[2];
       // Undeclared exception!
       try {
-        islandSplit0.characters(charArray0, (int) '\"', (int) '\"');
+        islandSplit0.characters(charArray0, (int) 's', (int) '\u0000');
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -48,7 +47,7 @@ public class IslandSplitEvoSuiteTest {
       IslandSplit islandSplit0 = new IslandSplit();
       // Undeclared exception!
       try {
-        islandSplit0.skippedEntity("Cannt fid FileStorage for URL ");
+        islandSplit0.skippedEntity("X2}J");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -78,8 +77,8 @@ public class IslandSplitEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
-      islandSplit0.endPrefixMapping("dt8oPDCT!6i");
-      assertNull(islandSplit0.getEntryName());
+      islandSplit0.endPrefixMapping("<");
+      assertEquals(0, islandSplit0.getPosition());
   }
 
   //Test case number: 4
@@ -92,7 +91,7 @@ public class IslandSplitEvoSuiteTest {
       IslandSplit islandSplit0 = new IslandSplit();
       // Undeclared exception!
       try {
-        islandSplit0.processingInstruction((String) null, (String) null);
+        islandSplit0.processingInstruction("", "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -106,10 +105,10 @@ public class IslandSplitEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
-      char[] charArray0 = new char[10];
+      char[] charArray0 = new char[7];
       // Undeclared exception!
       try {
-        islandSplit0.ignorableWhitespace(charArray0, (int) 'B', (int) '\u0000');
+        islandSplit0.ignorableWhitespace(charArray0, (-3), (-3));
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -125,7 +124,7 @@ public class IslandSplitEvoSuiteTest {
       IslandSplit islandSplit0 = new IslandSplit();
       // Undeclared exception!
       try {
-        islandSplit0.startPrefixMapping("(L=XOz';K!'hmRP=3", "(L=XOz';K!'hmRP=3");
+        islandSplit0.startPrefixMapping("Q;Er&,-1UbxS(AI[", "Q;Er&,-1UbxS(AI[");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -141,7 +140,7 @@ public class IslandSplitEvoSuiteTest {
       IslandSplit islandSplit0 = new IslandSplit();
       // Undeclared exception!
       try {
-        islandSplit0.hasBeenUpdated((-8L));
+        islandSplit0.hasBeenUpdated(0L);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -171,10 +170,10 @@ public class IslandSplitEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
-      LocatorImpl locatorImpl0 = new LocatorImpl();
+      Locator2Impl locator2Impl0 = new Locator2Impl();
       // Undeclared exception!
       try {
-        islandSplit0.setDocumentLocator((Locator) locatorImpl0);
+        islandSplit0.setDocumentLocator((Locator) locator2Impl0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -192,11 +191,10 @@ public class IslandSplitEvoSuiteTest {
   public void test10()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
       islandSplit0.init();
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
       // Undeclared exception!
       try {
-        islandSplit0.startElement("M", "M", "M", (Attributes) attributes2Impl0);
+        islandSplit0.startElement("?OM]", "?OM]", "?OM]", (Attributes) attributes2Impl0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -211,11 +209,10 @@ public class IslandSplitEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       IslandSplit islandSplit0 = new IslandSplit();
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
       // Undeclared exception!
       try {
-        islandSplit0.startElement("M", "M", "M", (Attributes) attributes2Impl0);
+        islandSplit0.startElement("?OM]", "?OM]", "?OM]", (Attributes) attributes2Impl0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

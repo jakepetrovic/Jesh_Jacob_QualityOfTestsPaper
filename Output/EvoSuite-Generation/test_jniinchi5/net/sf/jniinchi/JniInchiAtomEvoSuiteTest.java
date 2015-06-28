@@ -15,35 +15,34 @@ public class JniInchiAtomEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiAtom.getImplicitTritium()I: root-Branch
-   * 2 net.sf.jniinchi.JniInchiAtom.<init>(DDDLjava/lang/String;)V: I57 Branch 1 IFNONNULL L117 - true
+   * 2 net.sf.jniinchi.JniInchiAtom.<init>(Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiAtom.<init>(DDDLjava/lang/String;)V: I57 Branch 1 IFNONNULL L117 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), 1636.326401214738, 1636.326401214738, "zx3&\"[av(");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("N`1");
       assertNotNull(jniInchiAtom0);
       
       int int0 = jniInchiAtom0.getImplicitTritium();
-      assertEquals("InChI Atom: zx3&\"[av( [-1.0,1636.326401214738,1636.326401214738] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom: N`1 [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0, int0);
   }
 
   //Test case number: 1
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiAtom.setRadical(Lnet/sf/jniinchi/INCHI_RADICAL;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiAtom.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       INCHI_RADICAL iNCHI_RADICAL0 = INCHI_RADICAL.NONE;
       jniInchiAtom0.setRadical(iNCHI_RADICAL0);
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
-      assertEquals(0, jniInchiAtom0.getCharge());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 2
@@ -53,12 +52,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       double double0 = jniInchiAtom0.getY();
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0.0, double0, 0.01D);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 3
@@ -68,12 +67,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("GCxn%JR");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("^");
       assertNotNull(jniInchiAtom0);
       
-      jniInchiAtom0.setImplicitH(10000);
-      assertEquals(10000, jniInchiAtom0.getImplicitH());
-      assertEquals(0, jniInchiAtom0.getImplicitTritium());
+      jniInchiAtom0.setImplicitH((-111));
+      assertEquals(-111, jniInchiAtom0.getImplicitH());
+      assertEquals("InChI Atom: ^ [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-111 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 4
@@ -83,12 +82,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
-      jniInchiAtom0.setImplicitProtium((-1738));
-      assertEquals(-1738, jniInchiAtom0.getImplicitProtium());
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:-1738 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      jniInchiAtom0.setImplicitProtium(0);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals(0, jniInchiAtom0.getImplicitProtium());
   }
 
   //Test case number: 5
@@ -98,12 +97,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       
-      jniInchiAtom0.setInchiRadical((-676));
-      assertEquals(0, jniInchiAtom0.getCharge());
+      jniInchiAtom0.setInchiRadical(1924);
+      assertEquals(0, jniInchiAtom0.getImplicitDeuterium());
   }
 
   //Test case number: 6
@@ -117,8 +116,8 @@ public class JniInchiAtomEvoSuiteTest {
       assertNotNull(jniInchiAtom0);
       
       int int0 = jniInchiAtom0.getImplicitDeuterium();
-      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0, int0);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 7
@@ -128,12 +127,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("tDoEe0s<gG~wj");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       int int0 = jniInchiAtom0.getCharge();
-      assertEquals("InChI Atom: tDoEe0s<gG~wj [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0, int0);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 8
@@ -143,12 +142,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("GCxn%JR");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       int int0 = jniInchiAtom0.getIsotopicMass();
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0, int0);
-      assertEquals("InChI Atom: GCxn%JR [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 9
@@ -158,12 +157,11 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
-      jniInchiAtom0.setCharge((-344));
-      assertEquals(-344, jniInchiAtom0.getCharge());
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:-344 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      jniInchiAtom0.setCharge(0);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 10
@@ -173,13 +171,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test10()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), 1636.326401214738, 1636.326401214738, "zx3&\"[av(");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
-      assertEquals(0, jniInchiAtom0.getIsotopicMass());
       
-      jniInchiAtom0.setIsotopicMass(1);
-      assertEquals(1, jniInchiAtom0.getIsotopicMass());
-      assertEquals("InChI Atom: zx3&\"[av( [-1.0,1636.326401214738,1636.326401214738] Charge:0 // Iso Mass:1 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      jniInchiAtom0.setIsotopicMass((-1801));
+      assertEquals(-1801, jniInchiAtom0.getIsotopicMass());
+      assertEquals(0.0, jniInchiAtom0.getX(), 0.01D);
   }
 
   //Test case number: 11
@@ -189,12 +186,13 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test11()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("tDoEe0s<gG~wj");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       String string0 = jniInchiAtom0.getElementType();
-      assertEquals("InChI Atom: tDoEe0s<gG~wj [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertNotNull(string0);
+      assertEquals(0, jniInchiAtom0.getCharge());
   }
 
   //Test case number: 12
@@ -204,12 +202,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test12()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       double double0 = jniInchiAtom0.getX();
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(0.0, double0, 0.01D);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 13
@@ -219,11 +217,11 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test13()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       jniInchiAtom0.setImplicitDeuterium(0);
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 14
@@ -233,11 +231,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("tDoEe0s<gG~wj");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       jniInchiAtom0.getInchiRadical();
-      assertEquals("InChI Atom: tDoEe0s<gG~wj [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals(0.0, jniInchiAtom0.getZ(), 0.01D);
   }
 
   //Test case number: 15
@@ -247,12 +246,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test15()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-728.2894259230253), (-728.2894259230253), (-1.0), "W^UN:`mZyH0-98AnA");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       double double0 = jniInchiAtom0.getZ();
-      assertEquals("InChI Atom: W^UN:`mZyH0-98AnA [-728.2894259230253,-728.2894259230253,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
-      assertEquals((-1.0), double0, 0.01D);
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals(0.0, double0, 0.01D);
   }
 
   //Test case number: 16
@@ -262,12 +261,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test16()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("GCxn%JR");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("^");
       assertNotNull(jniInchiAtom0);
       
       int int0 = jniInchiAtom0.getImplicitProtium();
       assertEquals(0, int0);
-      assertEquals("InChI Atom: GCxn%JR [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom: ^ [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 17
@@ -277,12 +276,12 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test17()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("GCxn%JR");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
-      jniInchiAtom0.setImplicitTritium((-734));
-      assertEquals(-734, jniInchiAtom0.getImplicitTritium());
-      assertEquals("InChI Atom: GCxn%JR [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:-734 // Radical: NONE", jniInchiAtom0.getDebugString());
+      jniInchiAtom0.setImplicitTritium((-970));
+      assertEquals(-970, jniInchiAtom0.getImplicitTritium());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:-970 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 18
@@ -307,20 +306,19 @@ public class JniInchiAtomEvoSuiteTest {
    */
   @Test
   public void test19()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("z");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("N`1");
       assertNotNull(jniInchiAtom0);
       
-      jniInchiAtom0.setIsotopicMassShift((-1479));
-      assertEquals(8521, jniInchiAtom0.getIsotopicMass());
-      assertEquals("InChI Atom: z [0.0,0.0,0.0] Charge:0 // Iso Mass:8521 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      jniInchiAtom0.setIsotopicMassShift(0);
+      assertEquals(10000, jniInchiAtom0.getIsotopicMass());
+      assertEquals("InChI Atom: N`1 [0.0,0.0,0.0] Charge:0 // Iso Mass:10000 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
   }
 
   //Test case number: 20
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiAtom.getDebugString()Ljava/lang/String;: root-Branch
    * 2 net.sf.jniinchi.JniInchiAtom.debug()V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiAtom.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test20()  throws Throwable  {
@@ -333,17 +331,18 @@ public class JniInchiAtomEvoSuiteTest {
 
   //Test case number: 21
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiAtom.getRadical()Lnet/sf/jniinchi/INCHI_RADICAL;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiAtom.<init>(DDDLjava/lang/String;)V: I57 Branch 1 IFNONNULL L117 - true
+   * 2 net.sf.jniinchi.JniInchiAtom.<init>(Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiAtom.<init>(DDDLjava/lang/String;)V: I57 Branch 1 IFNONNULL L117 - true
    */
   @Test
   public void test21()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), 1636.326401214738, 1636.326401214738, "zx3&\"[av(");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       assertNotNull(jniInchiAtom0);
       
       jniInchiAtom0.getRadical();
-      assertEquals("InChI Atom: zx3&\"[av( [-1.0,1636.326401214738,1636.326401214738] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
+      assertEquals("InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE", jniInchiAtom0.getDebugString());
       assertEquals(-1, jniInchiAtom0.getImplicitH());
   }
 
@@ -356,7 +355,7 @@ public class JniInchiAtomEvoSuiteTest {
   public void test22()  throws Throwable  {
       JniInchiAtom jniInchiAtom0 = null;
       try {
-        jniInchiAtom0 = new JniInchiAtom((String) null);
+        jniInchiAtom0 = new JniInchiAtom((-731.1225424219566), (-731.1225424219566), (-731.1225424219566), (String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*

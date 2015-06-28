@@ -14,67 +14,67 @@ public class UtilsEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 15 covered goals:
-   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 2 LOOKUPSWITCH L67 Case 36 - true
-   * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 3 LOOKUPSWITCH L67 Case 42 - true
-   * 3 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I16 Branch 1 IF_ICMPGE L64 - true
-   * 4 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I16 Branch 1 IF_ICMPGE L64 - false
-   * 5 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 2 LOOKUPSWITCH L67 Case 36 - false
-   * 6 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 3 LOOKUPSWITCH L67 Case 42 - false
-   * 7 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 4 LOOKUPSWITCH L67 Case 45 - false
-   * 8 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 5 LOOKUPSWITCH L67 Case 47 - false
-   * 9 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 6 LOOKUPSWITCH L67 Case 58 - false
-   * 10 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 7 LOOKUPSWITCH L67 Case 63 - false
-   * 11 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 8 LOOKUPSWITCH L67 Case 92 - false
-   * 12 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 9 LOOKUPSWITCH L67 Case 95 - false
-   * 13 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 10 LOOKUPSWITCH L67 Case 126 - false
-   * 14 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 11 LOOKUPSWITCH L67 Default-Case - true
-   * 15 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 11 LOOKUPSWITCH L67 Default-Case - false
+   * 14 covered goals:
+   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I16 Branch 1 IF_ICMPGE L64 - true
+   * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I16 Branch 1 IF_ICMPGE L64 - false
+   * 3 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 2 LOOKUPSWITCH L67 Case 36 - false
+   * 4 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 3 LOOKUPSWITCH L67 Case 42 - false
+   * 5 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 4 LOOKUPSWITCH L67 Case 45 - false
+   * 6 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 5 LOOKUPSWITCH L67 Case 47 - false
+   * 7 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 6 LOOKUPSWITCH L67 Case 58 - true
+   * 8 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 6 LOOKUPSWITCH L67 Case 58 - false
+   * 9 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 7 LOOKUPSWITCH L67 Case 63 - false
+   * 10 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 8 LOOKUPSWITCH L67 Case 92 - false
+   * 11 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 9 LOOKUPSWITCH L67 Case 95 - false
+   * 12 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 10 LOOKUPSWITCH L67 Case 126 - false
+   * 13 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 11 LOOKUPSWITCH L67 Default-Case - true
+   * 14 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 11 LOOKUPSWITCH L67 Default-Case - false
    */
   @Test
   public void test0()  throws Throwable  {
-      String string0 = Utils.encodePath("SmO$AM*$QrzlL");
-      assertEquals("SmO$$AM_$$QrzlL", string0);
+      String string0 = Utils.encodePath(")QeQ|CI4#t!R:Bw");
       assertNotNull(string0);
+      assertEquals(")QeQ|CI4#t!R~Bw", string0);
   }
 
   //Test case number: 1
+  /*
+   * 3 covered goals:
+   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 2 LOOKUPSWITCH L67 Case 36 - true
+   * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 5 LOOKUPSWITCH L67 Case 47 - true
+   * 3 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 10 LOOKUPSWITCH L67 Case 126 - true
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      String string0 = Utils.encodePath("D~2/=X5t2$rOf8L,");
+      assertNotNull(string0);
+      assertEquals("D~~2-=X5t2$$rOf8L,", string0);
+  }
+
+  //Test case number: 2
+  /*
+   * 2 covered goals:
+   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 3 LOOKUPSWITCH L67 Case 42 - true
+   * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 5 LOOKUPSWITCH L67 Case 47 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      String string0 = Utils.encodePath("P*1SQh/");
+      assertEquals("P_1SQh-", string0);
+      assertNotNull(string0);
+  }
+
+  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 4 LOOKUPSWITCH L67 Case 45 - true
    * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 7 LOOKUPSWITCH L67 Case 63 - true
    */
   @Test
-  public void test1()  throws Throwable  {
-      String string0 = Utils.encodePath("f{-!7?C7,a!>xBq");
-      assertNotNull(string0);
-      assertEquals("f{--!7$C7,a!>xBq", string0);
-  }
-
-  //Test case number: 2
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 5 LOOKUPSWITCH L67 Case 47 - true
-   * 2 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 10 LOOKUPSWITCH L67 Case 126 - true
-   * 3 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 3 LOOKUPSWITCH L67 Case 42 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      String string0 = Utils.encodePath("G3708J/Eh~^}4*|4");
-      assertEquals("G3708J-Eh~~^}4_|4", string0);
-      assertNotNull(string0);
-  }
-
-  //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.util.Utils.encodePath(Ljava/lang/String;)Ljava/lang/String;: I26 Branch 6 LOOKUPSWITCH L67 Case 58 - true
-   */
-  @Test
   public void test3()  throws Throwable  {
-      String string0 = Utils.encodePath("<!f@G9]PW!:Mv");
+      String string0 = Utils.encodePath("#N.^ p5h00?B-{#l");
       assertNotNull(string0);
-      assertEquals("<!f@G9]PW!~Mv", string0);
+      assertEquals("#N.^ p5h00$B--{#l", string0);
   }
 
   //Test case number: 4
@@ -97,53 +97,50 @@ public class UtilsEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      String string0 = Utils.encodePath("G3708J_47_Eh_126__94__125_4_42__124_4");
-      assertEquals("G3708J__47__Eh__126____94____125__4__42____124__4", string0);
+      String string0 = Utils.encodePath("_126__126_");
       assertNotNull(string0);
+      assertEquals("__126____126__", string0);
   }
 
   //Test case number: 5
   /*
-   * 5 covered goals:
+   * 4 covered goals:
    * 1 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 12 IFEQ L116 - true
    * 2 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - true
    * 3 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - false
    * 4 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I60 Branch 14 IFEQ L124 - true
-   * 5 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I60 Branch 14 IFEQ L124 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      String string0 = Utils.encodePathAsIdentifier("/3K%#oAR^WRL-6U$r");
+      String string0 = Utils.encodePathAsIdentifier("~~");
+      assertEquals("_126__126_", string0);
       assertNotNull(string0);
-      assertEquals("_47_3K_37__35_oAR_94_WRL_45_6U$r", string0);
   }
 
   //Test case number: 6
   /*
-   * 5 covered goals:
+   * 4 covered goals:
    * 1 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 12 IFEQ L116 - false
-   * 2 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - true
-   * 3 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - false
-   * 4 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I60 Branch 14 IFEQ L124 - true
-   * 5 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I60 Branch 14 IFEQ L124 - false
+   * 2 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I60 Branch 14 IFEQ L124 - false
+   * 3 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - true
+   * 4 nu.staldal.util.Utils.encodePathAsIdentifier(Ljava/lang/String;)Ljava/lang/String;: I49 Branch 13 IF_ICMPGE L121 - false
    */
   @Test
   public void test6()  throws Throwable  {
-      String string0 = Utils.encodePathAsIdentifier("G3708J/Eh~^}4*|4");
-      assertEquals("G3708J_47_Eh_126__94__125_4_42__124_4", string0);
+      String string0 = Utils.encodePathAsIdentifier("_126__126_");
       assertNotNull(string0);
+      assertEquals("_126__126_", string0);
   }
 
   //Test case number: 7
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I9 Branch 15 IFGE L143 - true
-   * 2 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I21 Branch 16 IFGE L146 - true
-   * 3 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I28 Branch 17 IF_ICMPGE L148 - false
+   * 2 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I21 Branch 16 IFGE L146 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      boolean boolean0 = Utils.absoluteURL("FYD&l~eeN?:L@^N3/\"m");
+      boolean boolean0 = Utils.absoluteURL(")QeQ|CI4#t!R:Bw");
       assertEquals(true, boolean0);
   }
 
@@ -154,32 +151,33 @@ public class UtilsEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      boolean boolean0 = Utils.absoluteURL("/3K%#oAR^WRL-6U$r");
+      boolean boolean0 = Utils.absoluteURL("");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 9
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I21 Branch 16 IFGE L146 - false
+   * 2 covered goals:
+   * 1 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I21 Branch 16 IFGE L146 - true
+   * 2 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I28 Branch 17 IF_ICMPGE L148 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      boolean boolean0 = Utils.absoluteURL("<!f@G9]PW!:Mv");
-      assertEquals(true, boolean0);
+      boolean boolean0 = Utils.absoluteURL("Fx;P*/8$@y=a_KX^:%T");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 10
   /*
    * 3 covered goals:
-   * 1 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I28 Branch 17 IF_ICMPGE L148 - true
+   * 1 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I28 Branch 17 IF_ICMPGE L148 - false
    * 2 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I9 Branch 15 IFGE L143 - true
    * 3 nu.staldal.util.Utils.absoluteURL(Ljava/lang/String;)Z: I21 Branch 16 IFGE L146 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      boolean boolean0 = Utils.absoluteURL("pq9E/L>uJY:PEtg");
-      assertEquals(false, boolean0);
+      boolean boolean0 = Utils.absoluteURL("TS{^Qej:/(");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 11
@@ -197,24 +195,24 @@ public class UtilsEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I4 Branch 18 IFLE L158 - false
-   * 2 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I9 Branch 19 IF_ICMPNE L158 - false
+   * 2 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I9 Branch 19 IF_ICMPNE L158 - true
    */
   @Test
   public void test12()  throws Throwable  {
-      boolean boolean0 = Utils.pseudoAbsoluteURL("/3K%#oAR^WRL-6U$r");
-      assertEquals(true, boolean0);
+      boolean boolean0 = Utils.pseudoAbsoluteURL("~~");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 13
   /*
    * 2 covered goals:
-   * 1 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I9 Branch 19 IF_ICMPNE L158 - true
+   * 1 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I9 Branch 19 IF_ICMPNE L158 - false
    * 2 nu.staldal.util.Utils.pseudoAbsoluteURL(Ljava/lang/String;)Z: I4 Branch 18 IFLE L158 - false
    */
   @Test
   public void test13()  throws Throwable  {
-      boolean boolean0 = Utils.pseudoAbsoluteURL("H");
-      assertEquals(false, boolean0);
+      boolean boolean0 = Utils.pseudoAbsoluteURL("/vn)e `R2`}");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 14
@@ -225,8 +223,8 @@ public class UtilsEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      String string0 = Utils.nChars((int) '8', '8');
-      assertEquals("88888888888888888888888888888888888888888888888888888888", string0);
+      String string0 = Utils.nChars(126, '>');
+      assertEquals(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", string0);
       assertNotNull(string0);
   }
 }

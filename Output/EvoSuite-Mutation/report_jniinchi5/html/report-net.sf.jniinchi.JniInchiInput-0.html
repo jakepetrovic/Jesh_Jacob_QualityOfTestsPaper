@@ -22,24 +22,27 @@ net.sf.jniinchi.JniInchiInput
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiInput: 100.00%</ul><ul>
-<li>200 fitness evaluations, 5 generations, 1206 statements, 397 tests.
-<li>Time: 0:00:09(Search: 0:00:07, minimization: 0:00:01)
+<li>50 fitness evaluations, 2 generations, 664 statements, 228 tests.
+<li>Time: 0:00:08(Search: 0:00:05, minimization: 0:00:02)
 <li>Coverage: 2/2 branches, 6/6 methods, 7/7 total goals
-<li>Mutation score: 67%
+<li>Mutation score: 83%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput(jniInchiStructure0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, jniInchiInput0.getNumBonds());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput();
+<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotSame(jniInchiInput0, jniInchiInput1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput(jniInchiStructure0, (String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, jniInchiInput0.getNumAtoms());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  jniInchiInput0 = new JniInchiInput((JniInchiStructure) null, (String) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -149,7 +152,7 @@ net.sf.jniinchi.JniInchiInput
 <span class="nocode"><a name="73"> 73: </a></span>    public JniInchiInput(JniInchiStructure struct, String opts) throws JniInchiException {
 <span class="nocode"><a name="74"> 74: </a></span>        this(opts);
 <span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        setStructure(struct);</span>
-<span class="nocode"><a name="76"> 76: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="76"> 76: </a></span>    }
 <span class="nocode"><a name="77"> 77: </a></span>
 <span class="nocode"><a name="78"> 78: </a></span>    /**
 <span class="nocode"><a name="79"> 79: </a></span>     * Returns options string.
@@ -163,7 +166,7 @@ net.sf.jniinchi.JniInchiInput
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -181,7 +184,7 @@ net.sf.jniinchi.JniInchiInput
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13794
+<li>process_communication_port: 2992
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

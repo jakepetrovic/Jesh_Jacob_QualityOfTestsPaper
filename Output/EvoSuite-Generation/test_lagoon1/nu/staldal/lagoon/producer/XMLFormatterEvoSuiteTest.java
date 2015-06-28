@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import nu.staldal.lagoon.core.LagoonException;
 import nu.staldal.lagoon.core.Target;
@@ -29,7 +30,7 @@ public class XMLFormatterEvoSuiteTest {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       // Undeclared exception!
       try {
-        xMLFormatter0.hasBeenUpdated(59987L);
+        xMLFormatter0.hasBeenUpdated((-480L));
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -44,9 +45,10 @@ public class XMLFormatterEvoSuiteTest {
   public void test1()  throws Throwable  {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+      ObjectOutputStream objectOutputStream0 = new ObjectOutputStream((OutputStream) byteArrayOutputStream0);
       // Undeclared exception!
       try {
-        xMLFormatter0.start((OutputStream) byteArrayOutputStream0, (Target) null);
+        xMLFormatter0.start((OutputStream) objectOutputStream0, (Target) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -69,6 +71,6 @@ public class XMLFormatterEvoSuiteTest {
   public void test2()  throws Throwable  {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       xMLFormatter0.init();
-      assertNull(xMLFormatter0.getEntryName());
+      assertEquals(0, xMLFormatter0.getPosition());
   }
 }

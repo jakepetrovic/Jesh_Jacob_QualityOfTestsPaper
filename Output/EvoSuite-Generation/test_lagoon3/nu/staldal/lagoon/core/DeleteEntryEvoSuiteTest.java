@@ -22,10 +22,10 @@ public class DeleteEntryEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "LocalName may not be null");
+      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, (String) null);
       // Undeclared exception!
       try {
-        deleteEntry0.build(false);
+        deleteEntry0.build(true);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -38,7 +38,7 @@ public class DeleteEntryEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "LocalName may not be null");
+      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "apx?h(xn}ZL8$2\"^");
       deleteEntry0.destroy();
   }
 
@@ -49,7 +49,7 @@ public class DeleteEntryEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "LocalName may not be null");
+      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "");
       deleteEntry0.afterBuild(false);
   }
 
@@ -61,7 +61,7 @@ public class DeleteEntryEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "LocalName may not be null");
+      DeleteEntry deleteEntry0 = new DeleteEntry((LagoonProcessor) null, "");
       deleteEntry0.beforeBuild(false);
   }
 }

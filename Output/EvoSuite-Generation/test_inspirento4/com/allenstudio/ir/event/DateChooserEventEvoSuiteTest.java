@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import com.allenstudio.ir.event.DateChooserEvent;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class DateChooserEventEvoSuiteTest {
 
@@ -22,10 +23,13 @@ public class DateChooserEventEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1868, 1868, 1427, (-229), (-1189));
-      DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) "Etats-Unis", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-      GregorianCalendar gregorianCalendar1 = (GregorianCalendar)dateChooserEvent0.getFormerDate();
-      assertSame(gregorianCalendar1, gregorianCalendar0);
+      Object object0 = new Object();
+      Locale locale0 = Locale.TRADITIONAL_CHINESE;
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
+      DateChooserEvent dateChooserEvent0 = new DateChooserEvent(object0, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+      dateChooserEvent0.getFormerDate();
+      assertEquals("java.util.GregorianCalendar[time=1433735313527,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=9,HOUR_OF_DAY=21,MINUTE=48,SECOND=33,MILLISECOND=527,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals(1433735313527L, gregorianCalendar0.getTimeInMillis());
   }
 
   //Test case number: 1
@@ -36,9 +40,12 @@ public class DateChooserEventEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1868, 1868, 1427, (-229), (-1189));
-      DateChooserEvent dateChooserEvent0 = new DateChooserEvent((Object) "Etats-Unis", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-      GregorianCalendar gregorianCalendar1 = (GregorianCalendar)dateChooserEvent0.getNewDate();
-      assertEquals(52, gregorianCalendar1.getWeeksInWeekYear());
+      Object object0 = new Object();
+      Locale locale0 = Locale.TRADITIONAL_CHINESE;
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
+      DateChooserEvent dateChooserEvent0 = new DateChooserEvent(object0, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+      dateChooserEvent0.getNewDate();
+      assertEquals(1433735314811L, gregorianCalendar0.getTimeInMillis());
+      assertEquals("java.util.GregorianCalendar[time=1433735314811,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=9,HOUR_OF_DAY=21,MINUTE=48,SECOND=34,MILLISECOND=811,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
   }
 }

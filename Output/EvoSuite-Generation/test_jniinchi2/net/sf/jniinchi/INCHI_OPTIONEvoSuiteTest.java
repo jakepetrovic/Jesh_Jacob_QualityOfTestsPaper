@@ -21,7 +21,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_OPTION.valueOfIgnoreCase("K5'gXb!3l[yQF)n?{");
+      INCHI_OPTION.valueOfIgnoreCase("MNE%!G@620H6zV");
   }
 
   //Test case number: 1
@@ -33,7 +33,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("Compress");
-      assertEquals(INCHI_OPTION.Compress, iNCHI_OPTION0);
+      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("SAbs");
+      assertEquals(INCHI_OPTION.SAbs, iNCHI_OPTION0);
   }
 }

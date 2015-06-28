@@ -22,14 +22,14 @@ public class MessageImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       MessageImpl messageImpl0 = new MessageImpl();
-      Object[] objectArray0 = new Object[6];
+      Object[] objectArray0 = new Object[3];
       // Undeclared exception!
       try {
-        messageImpl0.getMessage("0@-VGNy6K'#m5~X", objectArray0);
+        messageImpl0.getMessage("3#1e%u1R'^Tj2cx=", objectArray0);
         fail("Expecting exception: MissingResourceException");
       } catch(MissingResourceException e) {
         /*
-         * Can't find resource for bundle java.util.PropertyResourceBundle, key 0@-VGNy6K'#m5~X
+         * Can't find resource for bundle java.util.PropertyResourceBundle, key 3#1e%u1R'^Tj2cx=
          */
       }
   }

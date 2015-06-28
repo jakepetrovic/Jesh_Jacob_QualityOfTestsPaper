@@ -7,13 +7,14 @@ package nu.staldal.xtree;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.EmptyStackException;
 import nu.staldal.xtree.Element;
-import nu.staldal.xtree.ProcessingInstruction;
 import nu.staldal.xtree.TreeBuilder;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -21,7 +22,6 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.ext.Attributes2Impl;
-import org.xml.sax.ext.Locator2Impl;
 import org.xml.sax.helpers.AttributesImpl;
 
 public class TreeBuilderEvoSuiteTest {
@@ -37,8 +37,8 @@ public class TreeBuilderEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      char[] charArray0 = new char[9];
-      treeBuilder0.ignorableWhitespace(charArray0, 344, 0);
+      char[] charArray0 = new char[8];
+      treeBuilder0.ignorableWhitespace(charArray0, (int) ')', (int) ')');
   }
 
   //Test case number: 1
@@ -48,93 +48,91 @@ public class TreeBuilderEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
+      TreeBuilder treeBuilder0 = new TreeBuilder();
       treeBuilder0.reset();
   }
 
   //Test case number: 2
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.startDocument()V: root-Branch
+   * 1 nu.staldal.xtree.TreeBuilder.endPrefixMapping(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      treeBuilder0.startDocument();
+      treeBuilder0.endPrefixMapping("");
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.endPrefixMapping(Ljava/lang/String;)V: root-Branch
+   * 1 nu.staldal.xtree.TreeBuilder.skippedEntity(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      treeBuilder0.endPrefixMapping("");
+      treeBuilder0.skippedEntity("!8s96n");
   }
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.skippedEntity(Ljava/lang/String;)V: root-Branch
+   * 4 covered goals:
+   * 1 nu.staldal.xtree.TreeBuilder.fatalError(Lorg/xml/sax/SAXParseException;)V: root-Branch
+   * 2 nu.staldal.xtree.TreeBuilder.parseXML(Lorg/xml/sax/InputSource;Z)Lnu/staldal/xtree/Element;: root-Branch
+   * 3 nu.staldal.xtree.TreeBuilder.setDocumentLocator(Lorg/xml/sax/Locator;)V: root-Branch
+   * 4 nu.staldal.xtree.TreeBuilder.startDocument()V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      treeBuilder0.skippedEntity("O*t");
+      char[] charArray0 = new char[7];
+      CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
+      InputSource inputSource0 = new InputSource((Reader) charArrayReader0);
+      try {
+        TreeBuilder.parseXML(inputSource0, true);
+        fail("Expecting exception: SAXParseException");
+      } catch(SAXParseException e) {
+        /*
+         * Content is not allowed in prolog.
+         */
+      }
   }
 
   //Test case number: 5
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.fatalError(Lorg/xml/sax/SAXParseException;)V: root-Branch
+   * 2 covered goals:
+   * 1 nu.staldal.xtree.TreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 2 nu.staldal.xtree.TreeBuilder.addCharacters()V: I4 Branch 5 IFNULL L196 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder();
+      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
       // Undeclared exception!
       try {
-        treeBuilder0.fatalError((SAXParseException) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        treeBuilder0.endElement("LX,GGwOTY=,", "LX,GGwOTY=,", "$-/\"h542*|^+h?");
+        fail("Expecting exception: EmptyStackException");
+      } catch(EmptyStackException e) {
       }
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.parseXML(Lorg/xml/sax/InputSource;Z)Lnu/staldal/xtree/Element;: root-Branch
+   * 1 nu.staldal.xtree.TreeBuilder.warning(Lorg/xml/sax/SAXParseException;)V: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        TreeBuilder.parseXML((InputSource) null, true);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      TreeBuilder treeBuilder0 = new TreeBuilder();
+      treeBuilder0.warning((SAXParseException) null);
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.TreeBuilder.warning(Lorg/xml/sax/SAXParseException;)V: root-Branch
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder();
-      treeBuilder0.warning((SAXParseException) null);
-  }
-
-  //Test case number: 8
-  /*
-   * 1 covered goal:
    * 1 nu.staldal.xtree.TreeBuilder.error(Lorg/xml/sax/SAXParseException;)V: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder();
+  public void test7()  throws Throwable  {
+      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
       // Undeclared exception!
       try {
         treeBuilder0.error((SAXParseException) null);
@@ -143,60 +141,44 @@ public class TreeBuilderEvoSuiteTest {
       }
   }
 
-  //Test case number: 9
+  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.TreeBuilder.endDocument()V: root-Branch
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
       treeBuilder0.endDocument();
   }
 
-  //Test case number: 10
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.xtree.TreeBuilder.characters([CII)V: I26 Branch 16 IFNULL L332 - false
-   * 2 nu.staldal.xtree.TreeBuilder.setDocumentLocator(Lorg/xml/sax/Locator;)V: root-Branch
-   * 3 nu.staldal.xtree.TreeBuilder.characters([CII)V: I4 Branch 15 IFNONNULL L326 - false
-   */
-  @Test
-  public void test10()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction((String) null, (String) null);
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      treeBuilder0.setDocumentLocator((Locator) processingInstruction0);
-      char[] charArray0 = new char[6];
-      treeBuilder0.characters(charArray0, 0, 0);
-  }
-
-  //Test case number: 11
+  //Test case number: 9
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.fileToInputSource(Ljava/io/File;)Lorg/xml/sax/InputSource;: I19 Branch 1 IF_ICMPNE L90 - false
    * 2 nu.staldal.xtree.TreeBuilder.fileToInputSource(Ljava/io/File;)Lorg/xml/sax/InputSource;: I34 Branch 2 IFNE L93 - false
    */
   @Test
-  public void test11()  throws Throwable  {
-      File file0 = new File("[k:zt8%1j?", "[k:zt8%1j?");
+  public void test9()  throws Throwable  {
+      File file0 = new File("");
       try {
         TreeBuilder.fileToInputSource(file0);
         fail("Expecting exception: FileNotFoundException");
       } catch(FileNotFoundException e) {
         /*
-         * file:///home/jeshkracht/[k:zt8%1j?/[k:zt8%1j?
+         * file:///home/jeshkracht
          */
       }
   }
 
-  //Test case number: 12
+  //Test case number: 10
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.getTree()Lnu/staldal/xtree/Element;: I5 Branch 3 IFNE L171 - true
    * 2 nu.staldal.xtree.TreeBuilder.getTree()Lnu/staldal/xtree/Element;: I17 Branch 4 IFNONNULL L174 - false
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test10()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
       try {
         treeBuilder0.getTree();
@@ -208,22 +190,21 @@ public class TreeBuilderEvoSuiteTest {
       }
   }
 
-  //Test case number: 13
+  //Test case number: 11
   /*
-   * 7 covered goals:
+   * 6 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.getTree()Lnu/staldal/xtree/Element;: I5 Branch 3 IFNE L171 - false
    * 2 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 7 IFNULL L239 - true
    * 3 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I44 Branch 8 IFNONNULL L245 - false
    * 4 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I54 Branch 9 IFNULL L248 - true
    * 5 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I81 Branch 10 IF_ICMPGE L256 - true
    * 6 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IFNULL L275 - true
-   * 7 nu.staldal.xtree.TreeBuilder.addCharacters()V: I4 Branch 5 IFNULL L196 - true
    */
   @Test
-  public void test13()  throws Throwable  {
+  public void test11()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      treeBuilder0.startElement("s1i", "s1i", "s1i", (Attributes) attributes2Impl0);
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      treeBuilder0.startElement("o9-[>>n[q9", "o9-[>>n[q9", "o9-[>>n[q9", (Attributes) attributesImpl0);
       try {
         treeBuilder0.getTree();
         fail("Expecting exception: IllegalStateException");
@@ -234,26 +215,7 @@ public class TreeBuilderEvoSuiteTest {
       }
   }
 
-  //Test case number: 14
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.xtree.TreeBuilder.getTree()Lnu/staldal/xtree/Element;: I17 Branch 4 IFNONNULL L174 - true
-   * 2 nu.staldal.xtree.TreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
-   * 3 nu.staldal.xtree.TreeBuilder.getTree()Lnu/staldal/xtree/Element;: I5 Branch 3 IFNE L171 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      treeBuilder0.startElement("0L{j<tV*(+PRP5&WO", "0L{j<tV*(+PRP5&WO", "", (Attributes) attributesImpl0);
-      treeBuilder0.endElement("0L{j<tV*(+PRP5&WO", "0L{j<tV*(+PRP5&WO", "0L{j<tV*(+PRP5&WO");
-      Element element0 = treeBuilder0.getTree();
-      assertEquals("0L{j<tV*(+PRP5&WO", element0.getNamespaceURI());
-      assertNotNull(element0);
-      assertEquals("0L{j<tV*(+PRP5&WO", element0.getLocalName());
-  }
-
-  //Test case number: 15
+  //Test case number: 12
   /*
    * 4 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.addCharacters()V: I4 Branch 5 IFNULL L196 - false
@@ -262,93 +224,92 @@ public class TreeBuilderEvoSuiteTest {
    * 4 nu.staldal.xtree.TreeBuilder.characters([CII)V: I26 Branch 16 IFNULL L332 - true
    */
   @Test
-  public void test15()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      char[] charArray0 = new char[6];
+  public void test12()  throws Throwable  {
+      TreeBuilder treeBuilder0 = new TreeBuilder();
+      char[] charArray0 = new char[1];
       treeBuilder0.characters(charArray0, 0, 0);
       // Undeclared exception!
       try {
-        treeBuilder0.processingInstruction("0L{j<tV*(+PRP5&WO", "0L{j<tV*(+PRP5&WO");
+        treeBuilder0.processingInstruction("ryWn~~gP1", "ryWn~~gP1");
         fail("Expecting exception: EmptyStackException");
       } catch(EmptyStackException e) {
       }
   }
 
-  //Test case number: 16
+  //Test case number: 13
   /*
-   * 3 covered goals:
-   * 1 nu.staldal.xtree.TreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 17 IFNULL L355 - false
+   * 2 covered goals:
+   * 1 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 7 IFNULL L239 - false
    * 2 nu.staldal.xtree.TreeBuilder.setDocumentLocator(Lorg/xml/sax/Locator;)V: root-Branch
-   * 3 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 7 IFNULL L239 - false
    */
   @Test
-  public void test16()  throws Throwable  {
+  public void test13()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      Locator2Impl locator2Impl0 = new Locator2Impl();
-      treeBuilder0.setDocumentLocator((Locator) locator2Impl0);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      treeBuilder0.startElement("s1i", "s1i", "s1i", (Attributes) attributes2Impl0);
-      treeBuilder0.processingInstruction("s1i", "s1i");
+      Element element0 = new Element("", "", 2042);
+      treeBuilder0.setDocumentLocator((Locator) element0);
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      treeBuilder0.startElement("o9-[>>n[q9", "o9-[>>n[q9", "o9-[>>n[q9", (Attributes) attributesImpl0);
+      assertEquals(0, attributesImpl0.getLength());
   }
 
-  //Test case number: 17
+  //Test case number: 14
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I44 Branch 8 IFNONNULL L245 - true
    */
   @Test
-  public void test17()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
+  public void test14()  throws Throwable  {
+      TreeBuilder treeBuilder0 = new TreeBuilder();
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      treeBuilder0.startElement("YA09", "YA09", "YA09", (Attributes) attributes2Impl0);
-      treeBuilder0.startElement(",Z", ",Z", ".G?MEr[6'(TZm]bN", (Attributes) attributes2Impl0);
+      treeBuilder0.startElement("!8s96n", "!8s96n", "!8s96n", (Attributes) attributes2Impl0);
+      treeBuilder0.startElement("J)ymOoz){\fMGD$", "J)ymOoz){\fMGD$", "J)ymOoz){\fMGD$", (Attributes) attributes2Impl0);
       assertEquals(0, attributes2Impl0.getLength());
   }
 
-  //Test case number: 18
-  /*
-   * 2 covered goals:
-   * 1 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I81 Branch 10 IF_ICMPGE L256 - false
-   * 2 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I105 Branch 11 IFLE L260 - true
-   */
-  @Test
-  public void test18()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      attributes2Impl0.addAttribute("YA09", "YA09", "YA09", "YA09", "J2zJv;");
-      treeBuilder0.startElement("YA09", "YA09", "YA09", (Attributes) attributes2Impl0);
-      assertEquals(1, attributes2Impl0.getLength());
-  }
-
-  //Test case number: 19
+  //Test case number: 15
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IFNULL L275 - false
    * 2 nu.staldal.xtree.TreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 14 IFNONNULL L305 - false
    */
   @Test
-  public void test19()  throws Throwable  {
-      TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-      treeBuilder0.startPrefixMapping(",Z", "YA09");
+  public void test15()  throws Throwable  {
+      TreeBuilder treeBuilder0 = new TreeBuilder();
+      treeBuilder0.startPrefixMapping("95=;Z\"$JSsw]", "95=;Z\"$JSsw]");
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      treeBuilder0.startElement("YA09", "YA09", "YA09", (Attributes) attributes2Impl0);
+      treeBuilder0.startElement("!8s96n", "!8s96n", "!8s96n", (Attributes) attributes2Impl0);
       assertEquals(0, attributes2Impl0.getLength());
   }
 
-  //Test case number: 20
+  //Test case number: 16
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 14 IFNONNULL L305 - true
    * 2 nu.staldal.xtree.TreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 14 IFNONNULL L305 - false
    */
   @Test
-  public void test20()  throws Throwable  {
+  public void test16()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
-      treeBuilder0.startPrefixMapping("", "");
-      treeBuilder0.startPrefixMapping("", "");
+      treeBuilder0.startPrefixMapping("o9-[>>n[q9", "o9-[>>n[q9");
+      treeBuilder0.startPrefixMapping("o9-[>>n[q9", "o9-[>>n[q9");
   }
 
-  //Test case number: 21
+  //Test case number: 17
+  /*
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.TreeBuilder.characters([CII)V: I4 Branch 15 IFNONNULL L326 - true
+   * 2 nu.staldal.xtree.TreeBuilder.characters([CII)V: I4 Branch 15 IFNONNULL L326 - false
+   * 3 nu.staldal.xtree.TreeBuilder.characters([CII)V: I26 Branch 16 IFNULL L332 - true
+   */
+  @Test
+  public void test17()  throws Throwable  {
+      TreeBuilder treeBuilder0 = new TreeBuilder();
+      char[] charArray0 = new char[1];
+      treeBuilder0.characters(charArray0, 0, 0);
+      treeBuilder0.characters(charArray0, 0, (int) '\u0000');
+  }
+
+  //Test case number: 18
   /*
    * 9 covered goals:
    * 1 nu.staldal.xtree.TreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 17 IFNULL L355 - true
@@ -362,10 +323,10 @@ public class TreeBuilderEvoSuiteTest {
    * 9 nu.staldal.xtree.TreeBuilder.addCharacters()V: I4 Branch 5 IFNULL L196 - true
    */
   @Test
-  public void test21()  throws Throwable  {
+  public void test18()  throws Throwable  {
       TreeBuilder treeBuilder0 = new TreeBuilder();
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      treeBuilder0.startElement("s1i", "s1i", "s1i", (Attributes) attributes2Impl0);
-      treeBuilder0.processingInstruction("s1i", "s1i");
+      treeBuilder0.startElement("_b#X]wQP ", "_b#X]wQP ", "_b#X]wQP ", (Attributes) attributes2Impl0);
+      treeBuilder0.processingInstruction("_b#X]wQP ", "_b#X]wQP ");
   }
 }

@@ -15,36 +15,48 @@ public class Md2HashEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Md2Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      Md2Hash md2Hash0 = new Md2Hash((Object) "02b82e99e9ed7e8adbcad79ca27bdeaec8a89dc6a79e8b5b7a7ba500", (Object) "UTF-8", 994);
+      assertEquals("MD2", md2Hash0.getAlgorithmName());
+  }
+
+  //Test case number: 1
+  /*
+   * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md2Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Md2Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Md2Hash.<init>()V: root-Branch
    */
   @Test
-  public void test0()  throws Throwable  {
-      Md2Hash md2Hash0 = Md2Hash.fromBase64String("] to byte array using ");
-      assertEquals("tobytearrayusing", md2Hash0.toBase64());
+  public void test1()  throws Throwable  {
+      Md2Hash md2Hash0 = Md2Hash.fromBase64String("");
+      assertEquals("", md2Hash0.toBase64());
   }
 
-  //Test case number: 1
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md2Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Md2Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Md2Hash.<init>()V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test2()  throws Throwable  {
       Md2Hash md2Hash0 = Md2Hash.fromHexString("");
-      assertEquals("", md2Hash0.toString());
+      assertEquals("MD2", md2Hash0.getAlgorithmName());
   }
 
-  //Test case number: 2
+  //Test case number: 3
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;)V: root-Branch
+   * 1 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Md2Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
-      Md2Hash md2Hash0 = new Md2Hash((Object) "b686f2b5e6abadacaeb229e0");
-      assertEquals("MD2", md2Hash0.getAlgorithmName());
+  public void test3()  throws Throwable  {
+      Md2Hash md2Hash0 = new Md2Hash((Object) "e985836d78bc893792099cddf01d4e7d", (Object) null);
+      assertEquals("10a07b1417ddce986a7bb2f734d020e0", md2Hash0.toHex());
   }
 }

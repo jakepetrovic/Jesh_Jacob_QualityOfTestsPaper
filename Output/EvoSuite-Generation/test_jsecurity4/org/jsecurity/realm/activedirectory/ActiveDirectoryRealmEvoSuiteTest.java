@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.naming.NamingException;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
@@ -54,10 +55,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000", "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
+        activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -71,7 +72,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) null);
+      HashSet<String> hashSet0 = new HashSet<String>();
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) hashSet0);
       assertNotNull(simpleAuthorizationInfo0);
   }
 
@@ -83,8 +85,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[2];
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("", charArray0);
+      char[] charArray0 = new char[7];
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("UPd%u@?q5xn-[Q", charArray0);
       assertNotNull(simpleAuthenticationInfo0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_11", activeDirectoryRealm0.getName());
   }
@@ -97,8 +99,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      HashSet<String> hashSet0 = new HashSet<String>();
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_13", activeDirectoryRealm0.getName());
   }
 
@@ -114,10 +116,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
+      HashSet<String> hashSet0 = new HashSet<String>();
+      hashSet0.add("/;::?");
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
-      HashSet<String> hashSet0 = new HashSet<String>();
-      hashSet0.add("nZ$9qZzQBdI(q");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_17", activeDirectoryRealm0.getName());
   }
@@ -138,12 +140,13 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      HashMap<String, String> hashMap0 = new HashMap<String, String>();
-      hashMap0.put("nZ$9qZzQBdI(q", "nZ$9qZzQBdI(q");
-      activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
       HashSet<String> hashSet0 = new HashSet<String>();
-      hashSet0.add("nZ$9qZzQBdI(q");
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
+      hashSet0.add("/;::?");
+      HashMap<String, String> hashMap0 = new HashMap<String, String>();
+      activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
+      hashMap0.put("/;::?", "/;::?");
+      Collection<String> collection0 = activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_29", activeDirectoryRealm0.getName());
+      assertEquals(1, collection0.size());
   }
 }

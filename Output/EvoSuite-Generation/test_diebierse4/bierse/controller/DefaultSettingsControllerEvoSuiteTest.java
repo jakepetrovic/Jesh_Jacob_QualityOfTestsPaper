@@ -28,8 +28,8 @@ public class DefaultSettingsControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultSettingsController defaultSettingsController0 = new DefaultSettingsController((Model) null, (ISettingsView) null, (IDrinkSettingsView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "caret-end", 0, "caret-end", 0);
+      ActionEvent actionEvent0 = new ActionEvent((Object) defaultSettingsController0, 1082, "5@?60N[\nlnB+");
       defaultSettingsController0.actionPerformed(actionEvent0);
-      assertEquals(0, actionEvent0.getID());
+      assertEquals("5@?60N[\nlnB+", actionEvent0.getActionCommand());
   }
 }

@@ -21,10 +21,10 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "Unknown");
       DeployResultStatus deployResultStatus1 = deployResultMock0.getStatus();
-      assertEquals(3, deployResultStatus1.ordinal());
+      assertSame(deployResultStatus1, deployResultStatus0);
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "Unknown");
       String string0 = deployResultMock0.getStatusDetails();
-      assertEquals("", string0);
+      assertEquals("Unknown", string0);
   }
 }

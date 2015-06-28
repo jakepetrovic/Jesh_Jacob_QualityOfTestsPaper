@@ -22,8 +22,8 @@ net.sf.lavalamp.application.UniversalRunner
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.application.UniversalRunner: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 6619 statements, 294 tests.
-<li>Time: 0:00:04(Search: 0:00:04, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 6117 statements, 278 tests.
+<li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 2/2 methods, 3/3 total goals
 <li>Mutation score: 0%
 </ul>
@@ -44,13 +44,10 @@ net.sf.lavalamp.application.UniversalRunner
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>UniversalRunner universalRunner0 = new UniversalRunner();
-<span class="nocode"><a name="2">  2: </a></span>String[] stringArray0 = new String[2];
+<span class="nocode"><a name="2">  2: </a></span>String[] stringArray0 = new String[3];
 <span class="nocode"><a name="3">  3: </a></span>Console console0 = new Console();
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  universalRunner0.run(stringArray0, (Application) null, console0, (LavaLogger) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
+<span class="nocode"><a name="5">  5: </a></span>universalRunner0.run(stringArray0, (Application) null, console0, lavaLogger0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.application;
@@ -76,7 +73,7 @@ net.sf.lavalamp.application.UniversalRunner
 <span class="nocode"><a name="21"> 21: </a></span>			throws Exception {
 <span class="nocode"><a name="22"> 22: </a></span><span style="background-color: #ffffcc">		if (args.length != 1) {</span>
 <span class="nocode"><a name="23"> 23: </a></span><span style="background-color: #ffffcc">			logger.error(USAGE);</span>
-<span class="nocode"><a name="24"> 24: </a></span>			return;
+<span class="nocode"><a name="24"> 24: </a></span><span style="background-color: #ffffcc">			return;</span>
 <span class="nocode"><a name="25"> 25: </a></span>		}
 <span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">		ApplicationProperties applicationProperties = new ApplicationPropertiesLoader().load(args[0]);</span>
 <span class="nocode"><a name="27"> 27: </a></span>		
@@ -108,7 +105,7 @@ net.sf.lavalamp.application.UniversalRunner
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3656635714330023642.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1615131319000466248.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -126,7 +123,7 @@ net.sf.lavalamp.application.UniversalRunner
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11907
+<li>process_communication_port: 21623
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

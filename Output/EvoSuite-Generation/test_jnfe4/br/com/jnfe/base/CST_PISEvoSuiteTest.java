@@ -19,9 +19,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_04;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_02;
       String string0 = cST_PIS0.getGroup();
-      assertEquals("NT", string0);
+      assertEquals("Aliq", string0);
   }
 
   //Test case number: 1
@@ -31,9 +31,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_04;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       boolean boolean0 = cST_PIS0.isIsento();
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 2
@@ -43,9 +43,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_02;
       String string0 = cST_PIS0.getDesc();
-      assertEquals("Al\u00EDquota por unidade de produto", string0);
+      assertEquals("Al\u00EDquota diferenciada", string0);
   }
 
   //Test case number: 3
@@ -55,9 +55,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_04;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_02;
       String string0 = cST_PIS0.getValue();
-      assertEquals("04", string0);
+      assertEquals("02", string0);
   }
 
   //Test case number: 4
@@ -69,8 +69,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
-      boolean boolean0 = cST_PIS0.isRequiredTag("pPIS");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      boolean boolean0 = cST_PIS0.isRequiredTag("9#~5");
       assertEquals(false, boolean0);
   }
 
@@ -83,8 +83,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
-      boolean boolean0 = cST_PIS0.isRequiredTag("pPIS");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      boolean boolean0 = cST_PIS0.isRequiredTag("qBCProd");
       assertEquals(true, boolean0);
   }
 }

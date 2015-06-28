@@ -26,10 +26,10 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel();
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-594), (-594), (-594));
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(1049, 1049);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-614), 1049);
       defaultTableModelController0.tableChanged(tableModelEvent0);
-      assertEquals(-594, tableModelEvent0.getFirstRow());
+      assertEquals(1049, tableModelEvent0.getLastRow());
   }
 
   //Test case number: 1
@@ -41,15 +41,15 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel();
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(1049, 1049);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 1049, 1049);
       // Undeclared exception!
       try {
         defaultTableModelController0.tableChanged(tableModelEvent0);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 0 >= 0
+         * 1049 >= 1049
          */
       }
   }

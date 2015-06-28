@@ -27,7 +27,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("");
+      Build build0 = new Build("/-WM\u0004|);v");
   }
 
   //Test case number: 1
@@ -39,7 +39,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("");
+      Build build0 = new Build("i$5Ce4QK'huKja+IJ");
       Console console0 = new Console();
   }
 }

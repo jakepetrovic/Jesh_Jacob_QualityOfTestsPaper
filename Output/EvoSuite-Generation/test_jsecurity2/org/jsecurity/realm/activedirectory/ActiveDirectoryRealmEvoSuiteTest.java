@@ -7,25 +7,57 @@ package org.jsecurity.realm.activedirectory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.naming.NamingException;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
-import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.authz.SimpleAuthorizationInfo;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
 import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
 import org.jsecurity.realm.ldap.LdapContextFactory;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class ActiveDirectoryRealmEvoSuiteTest {
+
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
 
 
   //Test case number: 0
@@ -36,15 +68,29 @@ public class ActiveDirectoryRealmEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      // Undeclared exception!
-      try {
-        activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) defaultLdapContextFactory0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+        try {
+          ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
+          char[] charArray0 = new char[8];
+          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("bzVIIF:", charArray0, true, (InetAddress) inet4Address0);
+          DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+          // Undeclared exception!
+          try {
+            activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) defaultLdapContextFactory0);
+            fail("Expecting exception: IllegalStateException");
+          } catch(IllegalStateException e) {
+            /*
+             * A search base must be specified.
+             */
+          }
+        } catch(Throwable t) {
+            // Need to catch declared exceptions
+        }
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
   }
 
   //Test case number: 1
@@ -58,7 +104,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.checkRole((PrincipalCollection) simplePrincipalCollection0, "UTF-8");
+        activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, "C");
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -72,7 +118,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) null);
+      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) linkedHashSet0);
       assertNotNull(simpleAuthorizationInfo0);
   }
 
@@ -84,10 +131,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[19];
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("Tying to get log class from attribute 'org.apache.commons.logging.Log'", charArray0);
+      char[] charArray0 = new char[5];
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("^3f", charArray0);
       assertNotNull(simpleAuthenticationInfo0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_11", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_12", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 4
@@ -100,7 +147,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
       HashSet<String> hashSet0 = new HashSet<String>();
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_13", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_14", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 5
@@ -120,7 +167,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       HashSet<String> hashSet0 = new HashSet<String>();
       hashSet0.add("");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_17", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_18", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 6
@@ -140,11 +187,11 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
-      activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
       hashMap0.put("", "");
+      activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
       HashSet<String> hashSet0 = new HashSet<String>();
       hashSet0.add("");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_29", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_30", activeDirectoryRealm0.getName());
   }
 }

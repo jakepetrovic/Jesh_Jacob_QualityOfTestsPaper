@@ -8,10 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import nu.staldal.xtree.XTreeXMLDataContentHandler;
 
 public class XTreeXMLDataContentHandlerEvoSuiteTest {
@@ -27,11 +29,15 @@ public class XTreeXMLDataContentHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-      // Undeclared exception!
+      File file0 = new File("", "");
+      FileDataSource fileDataSource0 = new FileDataSource(file0);
       try {
-        xTreeXMLDataContentHandler0.getContent((DataSource) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        xTreeXMLDataContentHandler0.getContent((DataSource) fileDataSource0);
+        fail("Expecting exception: FileNotFoundException");
+      } catch(FileNotFoundException e) {
+        /*
+         * / (Is a directory)
+         */
       }
   }
 
@@ -49,24 +55,43 @@ public class XTreeXMLDataContentHandlerEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 5 covered goals:
+   * 4 covered goals:
    * 1 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I37 Branch 1 IFNONNULL L123 - false
    * 2 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I41 Branch 2 IFLE L124 - true
    * 3 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I53 Branch 3 IFEQ L127 - false
    * 4 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I57 Branch 4 IFNE L127 - true
-   * 5 nu.staldal.xtree.XTreeXMLDataContentHandler.<init>()V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
       XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      // Undeclared exception!
       try {
-        xTreeXMLDataContentHandler0.writeTo((Object) "application/x-java-jvm-local-objectref", "application/x-java-jvm-local-objectref", (OutputStream) byteArrayOutputStream0);
-        fail("Expecting exception: ClassCastException");
-      } catch(ClassCastException e) {
+        xTreeXMLDataContentHandler0.writeTo((Object) "application/octet-stream", "application/octet-stream", (OutputStream) null);
+        fail("Expecting exception: IOException");
+      } catch(IOException e) {
         /*
-         * java.lang.String cannot be cast to nu.staldal.xtree.Node
+         * org.xml.sax.SAXException: setResult() must be called prior to startDocument().
+         */
+      }
+  }
+
+  //Test case number: 3
+  /*
+   * 5 covered goals:
+   * 1 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I41 Branch 2 IFLE L124 - false
+   * 2 nu.staldal.xtree.XTreeXMLDataContentHandler.<init>()V: root-Branch
+   * 3 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I37 Branch 1 IFNONNULL L123 - false
+   * 4 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I53 Branch 3 IFEQ L127 - false
+   * 5 nu.staldal.xtree.XTreeXMLDataContentHandler.writeTo(Ljava/lang/Object;Ljava/lang/String;Ljava/io/OutputStream;)V: I57 Branch 4 IFNE L127 - true
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
+      try {
+        xTreeXMLDataContentHandler0.writeTo((Object) xTreeXMLDataContentHandler0, "text/xml", (OutputStream) null);
+        fail("Expecting exception: IOException");
+      } catch(IOException e) {
+        /*
+         * org.xml.sax.SAXException: setResult() must be called prior to startDocument().
          */
       }
   }

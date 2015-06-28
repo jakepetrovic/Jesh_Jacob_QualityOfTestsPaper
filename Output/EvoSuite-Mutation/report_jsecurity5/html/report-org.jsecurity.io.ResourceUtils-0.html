@@ -22,8 +22,8 @@ org.jsecurity.io.ResourceUtils
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.ResourceUtils: 74.19%</ul><ul>
-<li>7660 fitness evaluations, 155 generations, 25677 statements, 4999 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
+<li>10314 fitness evaluations, 208 generations, 29946 statements, 6730 tests.
+<li>Time: 0:01:05(Search: 0:01:04, minimization: 0:00:00)
 <li>Coverage: 22/30 branches, 8/8 methods, 23/31 total goals
 <li>Mutation score: 18%
 </ul>
@@ -32,11 +32,11 @@ org.jsecurity.io.ResourceUtils
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>try {
-<span class="nocode"><a name="2">  2: </a></span>  ResourceUtils.getInputStreamForPath(&quot;classpath:&amp;R'|&quot;);
-<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: IOException&quot;);
-<span class="nocode"><a name="4">  4: </a></span>} catch(IOException e) {
+<span class="nocode"><a name="2">  2: </a></span>  ResourceUtils.getInputStreamForPath(&quot;file:;;Hk&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: FileNotFoundException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(FileNotFoundException e) {
 <span class="nocode"><a name="5">  5: </a></span>  /*
-<span class="nocode"><a name="6">  6: </a></span>   * Resource [classpath:&amp;R'|] could not be found.
+<span class="nocode"><a name="6">  6: </a></span>   * ;;Hk (No such file or directory)
 <span class="nocode"><a name="7">  7: </a></span>   */
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
@@ -47,27 +47,27 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;file:;;Hk&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;classpath:]406~o&gt;`|XQ\&quot;!p&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;classpath:8Al|p&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;url:Ga(N;(Qp$ko&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;url:O[W!V&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;file:?&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.hasResourcePrefix(&quot;Trying to get log class from attribute 'org.apache.commons.logging.Log'&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;classpath:8Al|p&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 8</h3>
@@ -81,12 +81,12 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;url:Ga(N;(Qp$ko&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;url:8Al|p&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;file:?&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ResourceUtils.resourceExists(&quot;ClassW '&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 11</h3>
@@ -95,7 +95,7 @@ org.jsecurity.io.ResourceUtils
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(1250);
+<span class="nocode"><a name="1">  1: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
 <span class="nocode"><a name="2">  2: </a></span>ResourceUtils.close((InputStream) pipedInputStream0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, pipedInputStream0.available());
 </pre>
@@ -284,7 +284,7 @@ org.jsecurity.io.ResourceUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -302,7 +302,7 @@ org.jsecurity.io.ResourceUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14700
+<li>process_communication_port: 9393
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

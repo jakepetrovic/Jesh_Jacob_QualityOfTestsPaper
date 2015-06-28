@@ -22,65 +22,76 @@ nu.staldal.xtree.Text
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.Text: 100.00%</ul><ul>
-<li>4650 fitness evaluations, 94 generations, 45595 statements, 3186 tests.
-<li>Time: 0:00:24(Search: 0:00:23, minimization: 0:00:00)
+<li>7050 fitness evaluations, 142 generations, 72745 statements, 4804 tests.
+<li>Time: 0:00:35(Search: 0:00:34, minimization: 0:00:00)
 <li>Coverage: 12/12 branches, 7/7 methods, 16/16 total goals
-<li>Mutation score: 33%
+<li>Mutation score: 43%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot; expected&quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = text0.getValue();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot; expected&quot;, string0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = text0.asCharArray();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, text0.isWhitespaceNode());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(charArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, text0.getValue());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;!~ !qvK:@ce|F5f&quot;);
-<span class="nocode"><a name="2">  2: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-<span class="nocode"><a name="3">  3: </a></span>text0.toSAX((ContentHandler) defaultHandler2_0);
-<span class="nocode"><a name="4">  4: </a></span>char[] charArray0 = text0.asCharArray();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;!~ !qvK:@ce|F5f&quot;, text0.getValue());
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(charArray0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;:E&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = text0.getValue();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;:E&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[8];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 1, 1, true);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="3">  3: </a></span>text0.toSAX((ContentHandler) defaultHandler2_0);
+<span class="nocode"><a name="4">  4: </a></span>text0.toSAX((ContentHandler) defaultHandler2_0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, text0.getValue());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, text0.isWhitespaceNode());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 1, false);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 1, 1, false);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = text0.isWhitespaceNode();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, (int) '\u0000', (int) '\u0000', true);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 2, false);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\u0000\u0000&quot;, text0.getValue());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 0, false);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = text0.isWhitespaceNode();
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;&quot;, text0.getValue());
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(true, boolean0);
 </pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 1, true);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
-</pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot; expected&quot;);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 2, true);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\u0000\u0000&quot;, text0.getValue());
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;:E&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = text0.isWhitespaceNode();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot; expected&quot;, text0.getValue());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;:E&quot;, text0.getValue());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -217,7 +228,7 @@ nu.staldal.xtree.Text
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -235,7 +246,7 @@ nu.staldal.xtree.Text
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18855
+<li>process_communication_port: 16136
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

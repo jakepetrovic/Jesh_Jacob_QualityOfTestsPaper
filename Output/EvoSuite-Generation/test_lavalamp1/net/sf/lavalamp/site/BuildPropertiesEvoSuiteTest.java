@@ -61,7 +61,7 @@ public class BuildPropertiesEvoSuiteTest {
   public void test3()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
       buildProperties0.setSiteProperties((SiteProperties) null);
-      assertEquals("\n\t\tbuildId=null,  null", buildProperties0.toString());
+      assertNull(buildProperties0.getBuild());
   }
 
   //Test case number: 4
@@ -73,9 +73,9 @@ public class BuildPropertiesEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
-      buildProperties0.setBuild(" getter=");
+      buildProperties0.setBuild("");
       buildProperties0.check();
-      assertEquals("\n\t\tbuildId= getter=,  null", buildProperties0.toString());
+      assertEquals("", buildProperties0.getBuild());
   }
 
   //Test case number: 5

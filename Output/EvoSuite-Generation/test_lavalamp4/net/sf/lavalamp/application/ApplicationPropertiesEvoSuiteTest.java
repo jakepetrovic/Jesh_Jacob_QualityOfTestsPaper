@@ -22,9 +22,8 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setPort((-1336));
-      assertEquals(-1336, applicationProperties0.getPort());
-      assertEquals("debug=false, port=-1336, runInterval=30000, null", applicationProperties0.toString());
+      applicationProperties0.setPort(0);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
   }
 
   //Test case number: 1
@@ -37,6 +36,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       applicationProperties0.getDeviceProperties();
       assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 2
@@ -48,8 +48,8 @@ public class ApplicationPropertiesEvoSuiteTest {
   public void test2()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       int int0 = applicationProperties0.getRunInterval();
-      assertEquals(30000, int0);
       assertEquals(false, applicationProperties0.isDebug());
+      assertEquals(30000, int0);
   }
 
   //Test case number: 3
@@ -86,11 +86,9 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
+      applicationProperties0.setDebug(false);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
       assertEquals(false, applicationProperties0.isDebug());
-      
-      applicationProperties0.setDebug(true);
-      assertEquals(true, applicationProperties0.isDebug());
-      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 6
@@ -101,9 +99,8 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setRunInterval((-1336));
-      assertEquals(-1336, applicationProperties0.getRunInterval());
-      assertEquals("debug=false, port=0, runInterval=-1336, null", applicationProperties0.toString());
+      applicationProperties0.setRunInterval(30000);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
   }
 
   //Test case number: 7

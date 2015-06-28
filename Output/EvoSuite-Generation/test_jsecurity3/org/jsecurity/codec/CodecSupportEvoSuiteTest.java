@@ -7,59 +7,129 @@ package org.jsecurity.codec;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
+import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.UsernamePasswordToken;
-import org.jsecurity.authc.credential.Sha384CredentialsMatcher;
-import org.jsecurity.authc.credential.Sha512CredentialsMatcher;
+import org.jsecurity.authc.credential.Md5CredentialsMatcher;
+import org.jsecurity.authz.Permission;
 import org.jsecurity.codec.CodecException;
 import org.jsecurity.codec.CodecSupport;
 import org.jsecurity.crypto.hash.Md2Hash;
+import org.jsecurity.crypto.hash.Sha384Hash;
+import org.jsecurity.crypto.hash.Sha512Hash;
 
 public class CodecSupportEvoSuiteTest {
 
 
   //Test case number: 0
   /*
+   * 11 covered goals:
+   * 1 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;)[B: root-Branch
+   * 2 org.jsecurity.codec.CodecSupport.toBytes([C)[B: root-Branch
+   * 3 org.jsecurity.codec.CodecSupport.toString([BLjava/lang/String;)Ljava/lang/String;: root-Branch
+   * 4 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;Ljava/lang/String;)[B: root-Branch
+   * 5 org.jsecurity.codec.CodecSupport.<init>()V: root-Branch
+   * 6 org.jsecurity.codec.CodecSupport.toString([B)Ljava/lang/String;: root-Branch
+   * 7 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - true
+   * 8 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I19 Branch 2 IFEQ L164 - true
+   * 9 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - true
+   * 10 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - false
+   * 11 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I42 Branch 4 IFEQ L168 - false
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName("");
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("9A:$[=", "", true, (InetAddress) inet4Address0);
+      HashSet<String> hashSet0 = new HashSet<String>(1);
+      TreeSet<Permission> treeSet0 = new TreeSet<Permission>();
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "9A:$[=", (Object) "", "", (Set<String>) hashSet0, (Set<Permission>) treeSet0);
+      boolean boolean0 = md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 1
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.codec.CodecSupport.toBytes([CLjava/lang/String;)[B: root-Branch
+   * 2 org.jsecurity.codec.CodecSupport.toChars([BLjava/lang/String;)[C: root-Branch
+   * 3 org.jsecurity.codec.CodecSupport.toChars([B)[C: root-Branch
+   * 4 org.jsecurity.codec.CodecSupport.toString([BLjava/lang/String;)Ljava/lang/String;: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      byte[] byteArray0 = new byte[2];
+      char[] charArray0 = CodecSupport.toChars(byteArray0);
+      try {
+        CodecSupport.toBytes(charArray0, "U@%j bf");
+        fail("Expecting exception: CodecException");
+      } catch(CodecException e) {
+        /*
+         * Unable to convert source [\u0000\u0000] to byte array using encoding 'U@%j bf'
+         */
+      }
+  }
+
+  //Test case number: 2
+  /*
    * 8 covered goals:
+   * 1 org.jsecurity.codec.CodecSupport.objectToBytes(Ljava/lang/Object;)[B: root-Branch
+   * 2 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I42 Branch 4 IFEQ L168 - true
+   * 3 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;)[B: root-Branch
+   * 4 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;Ljava/lang/String;)[B: root-Branch
+   * 5 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - true
+   * 6 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I19 Branch 2 IFEQ L164 - true
+   * 7 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - true
+   * 8 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I42 Branch 4 IFEQ L168 - false
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      Object object0 = new Object();
+      Md2Hash md2Hash0 = null;
+      try {
+        md2Hash0 = new Md2Hash((Object) "java.lang.Object@d20afd3", object0);
+        fail("Expecting exception: CodecException");
+      } catch(CodecException e) {
+        /*
+         * The org.jsecurity.crypto.hash.Md2Hash implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.crypto.hash.Md2Hash and override the objectToBytes(Object o) method.
+         */
+      }
+  }
+
+  //Test case number: 3
+  /*
+   * 5 covered goals:
    * 1 org.jsecurity.codec.CodecSupport.objectToString(Ljava/lang/Object;)Ljava/lang/String;: root-Branch
    * 2 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I3 Branch 5 IFNONNULL L188 - true
    * 3 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I19 Branch 6 IFEQ L192 - true
    * 4 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I31 Branch 7 IFEQ L194 - true
    * 5 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I45 Branch 8 IFEQ L196 - true
-   * 6 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;)[B: root-Branch
-   * 7 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;Ljava/lang/String;)[B: root-Branch
-   * 8 org.jsecurity.codec.CodecSupport.<init>()V: root-Branch
    */
   @Test
-  public void test0()  throws Throwable  {
-      Md2Hash md2Hash0 = Md2Hash.fromBase64String("kb}0Wh|Pexm F0V{F");
-      assertNotNull(md2Hash0);
-      
-      String string0 = md2Hash0.toString((Object) md2Hash0);
+  public void test3()  throws Throwable  {
+      Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
+      Object object0 = new Object();
+      String string0 = md5CredentialsMatcher0.toString(object0);
       assertNotNull(string0);
-      assertEquals("91bd1684f7b1985d1500", string0);
   }
 
-  //Test case number: 1
+  //Test case number: 4
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.toBytes([C)[B: root-Branch
-   * 2 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - true
-   * 3 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - false
-   * 4 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I19 Branch 2 IFEQ L164 - true
-   * 5 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - false
    */
   @Test
-  public void test1()  throws Throwable  {
-      Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
-      char[] charArray0 = new char[3];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      // Undeclared exception!
+  public void test4()  throws Throwable  {
+      Sha384Hash sha384Hash0 = null;
       try {
-        sha384CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+        sha384Hash0 = new Sha384Hash((Object) null);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
@@ -68,103 +138,17 @@ public class CodecSupportEvoSuiteTest {
       }
   }
 
-  //Test case number: 2
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.codec.CodecSupport.toBytes([CLjava/lang/String;)[B: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      char[] charArray0 = new char[7];
-      try {
-        CodecSupport.toBytes(charArray0, "\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
-        fail("Expecting exception: CodecException");
-      } catch(CodecException e) {
-        /*
-         * Unable to convert source [\u0000\u0000\u0000\u0000\u0000\u0000\u0000] to byte array using encoding '\u0000\u0000\u0000\u0000\u0000\u0000\u0000'
-         */
-      }
-  }
-
-  //Test case number: 3
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.toString([BLjava/lang/String;)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.codec.CodecSupport.toChars([BLjava/lang/String;)[C: root-Branch
-   * 3 org.jsecurity.codec.CodecSupport.toChars([B)[C: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      byte[] byteArray0 = new byte[6];
-      char[] charArray0 = CodecSupport.toChars(byteArray0);
-      assertNotNull(charArray0);
-  }
-
-  //Test case number: 4
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.objectToBytes(Ljava/lang/Object;)[B: root-Branch
-   * 2 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - true
-   * 3 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I42 Branch 4 IFEQ L168 - true
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      Object object0 = new Object();
-      // Undeclared exception!
-      try {
-        sha512CredentialsMatcher0.toBytes(object0);
-        fail("Expecting exception: CodecException");
-      } catch(CodecException e) {
-        /*
-         * The org.jsecurity.authc.credential.Sha512CredentialsMatcher implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.authc.credential.Sha512CredentialsMatcher and override the objectToBytes(Object o) method.
-         */
-      }
-  }
-
   //Test case number: 5
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.toString([B)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.codec.CodecSupport.toString([BLjava/lang/String;)Ljava/lang/String;: root-Branch
+   * 1 covered goal:
+   * 1 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I3 Branch 5 IFNONNULL L188 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      byte[] byteArray0 = new byte[7];
-      String string0 = CodecSupport.toString(byteArray0);
-      assertEquals("\u0000\u0000\u0000\u0000\u0000\u0000\u0000", string0);
-  }
-
-  //Test case number: 6
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I42 Branch 4 IFEQ L168 - false
-   * 2 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L160 - true
-   * 3 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I19 Branch 2 IFEQ L164 - true
-   * 4 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/Object;)[B: I30 Branch 3 IFEQ L166 - true
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      byte[] byteArray0 = sha512CredentialsMatcher0.toBytes((Object) "[]");
-      assertNotNull(byteArray0);
-  }
-
-  //Test case number: 7
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I3 Branch 5 IFNONNULL L188 - false
-   * 2 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;)[B: root-Branch
-   * 3 org.jsecurity.codec.CodecSupport.toBytes(Ljava/lang/String;Ljava/lang/String;)[B: root-Branch
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      Md2Hash md2Hash0 = Md2Hash.fromBase64String("kb}0Wh|exm F0V{F");
-      assertNotNull(md2Hash0);
-      
+      Sha512Hash sha512Hash0 = new Sha512Hash();
       // Undeclared exception!
       try {
-        md2Hash0.toString((Object) null);
+        sha512Hash0.toString((Object) null);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
@@ -173,7 +157,7 @@ public class CodecSupportEvoSuiteTest {
       }
   }
 
-  //Test case number: 8
+  //Test case number: 6
   /*
    * 5 covered goals:
    * 1 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I45 Branch 8 IFEQ L196 - false
@@ -183,9 +167,9 @@ public class CodecSupportEvoSuiteTest {
    * 5 org.jsecurity.codec.CodecSupport.toString(Ljava/lang/Object;)Ljava/lang/String;: I31 Branch 7 IFEQ L194 - true
    */
   @Test
-  public void test8()  throws Throwable  {
-      Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
-      String string0 = sha384CredentialsMatcher0.toString((Object) "\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
-      assertEquals("\u0000\u0000\u0000\u0000\u0000\u0000\u0000", string0);
+  public void test6()  throws Throwable  {
+      Sha512Hash sha512Hash0 = new Sha512Hash();
+      String string0 = sha512Hash0.toString((Object) "\u0000\u0000\u0000");
+      assertEquals("\u0000\u0000\u0000", string0);
   }
 }

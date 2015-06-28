@@ -22,19 +22,21 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy: 100.00%</ul><ul>
-<li>850 fitness evaluations, 18 generations, 16180 statements, 793 tests.
-<li>Time: 0:00:08(Search: 0:00:07, minimization: 0:00:01)
+<li>500 fitness evaluations, 11 generations, 9177 statements, 557 tests.
+<li>Time: 0:00:06(Search: 0:00:05, minimization: 0:00:00)
 <li>Coverage: 8/8 branches, 3/3 methods, 10/10 total goals
-<li>Mutation score: 36%
+<li>Mutation score: 14%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>AuthenticationInfo authenticationInfo0 = firstSuccessfulAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) null, (AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(authenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;W&quot;, &quot;W&quot;, false, (InetAddress) inet4Address0);
+<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="5">  5: </a></span>AuthenticationInfo authenticationInfo0 = firstSuccessfulAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) hashSet0, (AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="6">  6: </a></span>assertNull(authenticationInfo0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -45,10 +47,9 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;[]&quot;, (Set&lt;String&gt;) null);
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(simpleAccount0, simpleAccount1);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) &quot;\u0001\u02DF\u0001E_\uFFFD\u0001&quot;, (Object) null, &quot;\u0001\u02DF\u0001E_\uFFFD\u0001&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="4">  4: </a></span>assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -60,9 +61,9 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) &quot;[]&quot;, (Object) simpleAccountRealm0, &quot;H+ziy~xY7tPCW&quot;);
-<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) null, (AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0);
 <span class="nocode"><a name="5">  5: </a></span>assertSame(simpleAuthenticationInfo0, simpleAuthenticationInfo1);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -132,7 +133,7 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -150,7 +151,7 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9737
+<li>process_communication_port: 16432
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

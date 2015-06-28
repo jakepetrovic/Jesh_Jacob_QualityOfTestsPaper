@@ -7,7 +7,20 @@ package bierse.view;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import bierse.view.DefaultInfoViewMouseListener;
+import javax.swing.JFrame;
 
 public class DefaultInfoViewMouseListenerEvoSuiteTest {
 
+
+  //Test case number: 0
+  /*
+   * 1 covered goal:
+   * 1 bierse.view.DefaultInfoViewMouseListener.<init>(Ljavax/swing/JFrame;)V: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      DefaultInfoViewMouseListener defaultInfoViewMouseListener0 = new DefaultInfoViewMouseListener((JFrame) null);
+      assertNotNull(defaultInfoViewMouseListener0);
+  }
 }

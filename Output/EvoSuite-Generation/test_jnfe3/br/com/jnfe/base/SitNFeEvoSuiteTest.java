@@ -19,7 +19,7 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.PENDENTE;
+      SitNFe sitNFe0 = SitNFe.DENEGADA;
       boolean boolean0 = sitNFe0.isUsar();
       assertEquals(false, boolean0);
   }
@@ -31,9 +31,9 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.PENDENTE;
+      SitNFe sitNFe0 = SitNFe.DENEGADA;
       boolean boolean0 = sitNFe0.isReenviar();
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 2
@@ -43,8 +43,8 @@ public class SitNFeEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      SitNFe sitNFe0 = SitNFe.PENDENTE;
+      SitNFe sitNFe0 = SitNFe.DENEGADA;
       char char0 = sitNFe0.getValue();
-      assertEquals('P', char0);
+      assertEquals('D', char0);
   }
 }

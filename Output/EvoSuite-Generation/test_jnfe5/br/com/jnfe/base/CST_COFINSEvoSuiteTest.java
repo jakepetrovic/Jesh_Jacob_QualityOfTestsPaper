@@ -19,7 +19,7 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       boolean boolean0 = cST_COFINS0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -31,9 +31,9 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       String string0 = cST_COFINS0.getDesc();
-      assertEquals("Al\u00EDquota por unidade de produto", string0);
+      assertEquals("Al\u00EDquota diferenciada", string0);
   }
 
   //Test case number: 2
@@ -43,9 +43,9 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
       String string0 = cST_COFINS0.getGroup();
-      assertEquals("Qtde", string0);
+      assertEquals("Aliq", string0);
   }
 
   //Test case number: 3
@@ -55,9 +55,9 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_04;
       String string0 = cST_COFINS0.getValue();
-      assertEquals("03", string0);
+      assertEquals("04", string0);
   }
 
   //Test case number: 4
@@ -69,8 +69,8 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
-      boolean boolean0 = cST_COFINS0.isRequiredTag("COFINS_04");
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+      boolean boolean0 = cST_COFINS0.isRequiredTag("COFINS_02");
       assertEquals(false, boolean0);
   }
 
@@ -83,8 +83,8 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_99;
-      boolean boolean0 = cST_COFINS0.isRequiredTag("qBCProd");
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+      boolean boolean0 = cST_COFINS0.isRequiredTag("pCOFINS");
       assertEquals(true, boolean0);
   }
 }

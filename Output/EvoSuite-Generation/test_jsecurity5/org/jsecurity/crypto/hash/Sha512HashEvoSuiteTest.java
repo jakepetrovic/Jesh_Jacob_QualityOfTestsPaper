@@ -20,36 +20,39 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "");
-      assertEquals("cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e", sha512Hash0.toString());
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "UTF-8");
+      assertEquals("ce7ba9a82c602e57507185e7a749f9eb76bce2b0fb87e478e815ab868600be13199fbea902b996458e20ef3cf2d61219e5d1743a1d8a2deddc76bc90d1802ddf", sha512Hash0.toString());
   }
 
   //Test case number: 1
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha512Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha512Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "z-\uFFFD\u0000\uFFFD\u0000\uFFFD", (Object) "33f63bc374f428f597d7f7ba7cc1e21a0b4b44faa727f7c052c5ad0b1aa5303884ea5919a53c0d32b5591f4ded381da16b67f6a2170d81058d7e9bb2ad4a215b", 0);
-      assertEquals("SHA-512", sha512Hash0.getAlgorithmName());
-  }
-
-  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha512Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha512Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha512Hash.<init>()V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        Sha512Hash.fromHexString((String) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        Sha512Hash.fromHexString(" implementation only supports conversion to ");
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Illegal hexadecimal charcter   at index 0
+         */
       }
+  }
+
+  //Test case number: 2
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Sha512Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha512Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "ce7ba9a82c602e57507185e7a749f9eb76bce2b0fb87e478e815ab868600be13199fbea902b996458e20ef3cf2d61219e5d1743a1d8a2deddc76bc90d1802ddf", (Object) "\u0000X\u0000\uFFFD\u0000\u0000\u0000");
+      assertEquals("SHA-512", sha512Hash0.getAlgorithmName());
   }
 
   //Test case number: 3
@@ -60,7 +63,7 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("");
-      assertEquals("", sha512Hash0.toBase64());
+      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("82kRWw9s)u_nSDq<");
+      assertEquals("f369115b0f6cba748300", sha512Hash0.toHex());
   }
 }

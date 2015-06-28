@@ -13,7 +13,7 @@ import nu.staldal.lagoon.core.OutputEntry;
 import nu.staldal.lagoon.core.SourceManager;
 import nu.staldal.lagoon.core.XMLStreamConsumer;
 import nu.staldal.lagoon.core.XMLStreamProducer;
-import nu.staldal.lagoon.producer.BasicSplit;
+import nu.staldal.lagoon.producer.LSSITransformer;
 
 public class OutputEntryEvoSuiteTest {
 
@@ -27,9 +27,9 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      BasicSplit basicSplit0 = new BasicSplit();
-      outputEntry0.setBottomProducer((XMLStreamConsumer) basicSplit0);
-      assertEquals(0, basicSplit0.getPosition());
+      LSSITransformer lSSITransformer0 = new LSSITransformer();
+      outputEntry0.setBottomProducer((XMLStreamConsumer) lSSITransformer0);
+      assertEquals(0, lSSITransformer0.getPosition());
   }
 
   //Test case number: 1
@@ -87,10 +87,9 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      BasicSplit basicSplit0 = new BasicSplit();
       // Undeclared exception!
       try {
-        outputEntry0.setNext((XMLStreamProducer) basicSplit0);
+        outputEntry0.setNext((XMLStreamProducer) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

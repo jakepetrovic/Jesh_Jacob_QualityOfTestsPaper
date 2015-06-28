@@ -64,7 +64,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endAdditiveExpr(1);
+      defaultXPathHandler0.endAdditiveExpr((-1448));
   }
 
   //Test case number: 5
@@ -97,7 +97,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endEqualityExpr(0);
+      defaultXPathHandler0.endEqualityExpr((-1699));
   }
 
   //Test case number: 8
@@ -119,19 +119,18 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endAndExpr(false);
+      defaultXPathHandler0.endAndExpr(true);
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 com.werken.saxpath.DefaultXPathHandler.startTextNodeStep(I)V: root-Branch
-   * 2 com.werken.saxpath.DefaultXPathHandler.<init>()V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.startTextNodeStep(0);
+      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      defaultXPathHandler0.startTextNodeStep((-1));
   }
 
   //Test case number: 11
@@ -142,7 +141,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endRelationalExpr((-304));
+      defaultXPathHandler0.endRelationalExpr((-1));
   }
 
   //Test case number: 12
@@ -180,12 +179,13 @@ public class DefaultXPathHandlerEvoSuiteTest {
 
   //Test case number: 15
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.werken.saxpath.DefaultXPathHandler.startFilterExpr()V: root-Branch
+   * 2 com.werken.saxpath.DefaultXPathHandler.<init>()V: root-Branch
    */
   @Test
   public void test15()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
       defaultXPathHandler0.startFilterExpr();
   }
 
@@ -197,7 +197,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test16()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.startFunction("tyA}`t@ioA:!V}[ ", "tyA}`t@ioA:!V}[ ");
+      defaultXPathHandler0.startFunction(",5T8IOt~o3Jpu", ",5T8IOt~o3Jpu");
   }
 
   //Test case number: 17
@@ -208,7 +208,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test17()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endMultiplicativeExpr(802);
+      defaultXPathHandler0.endMultiplicativeExpr((-1));
   }
 
   //Test case number: 18
@@ -273,7 +273,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
    */
   @Test
   public void test23()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
       defaultXPathHandler0.endTextNodeStep();
   }
 
@@ -284,8 +284,8 @@ public class DefaultXPathHandlerEvoSuiteTest {
    */
   @Test
   public void test24()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.literal("tyA}`t@ioA:!V}[ ");
+      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
+      defaultXPathHandler0.literal("root case:");
   }
 
   //Test case number: 25
@@ -295,7 +295,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
    */
   @Test
   public void test25()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
+      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
       defaultXPathHandler0.endXPath();
   }
 
@@ -306,8 +306,8 @@ public class DefaultXPathHandlerEvoSuiteTest {
    */
   @Test
   public void test26()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.variableReference("", "");
+      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      defaultXPathHandler0.variableReference("d^v(+WU[tqD}DOMn", "d^v(+WU[tqD}DOMn");
   }
 
   //Test case number: 27
@@ -329,7 +329,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test28()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endUnaryExpr((-315));
+      defaultXPathHandler0.endUnaryExpr((-706));
   }
 
   //Test case number: 29
@@ -339,19 +339,18 @@ public class DefaultXPathHandlerEvoSuiteTest {
    */
   @Test
   public void test29()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
       defaultXPathHandler0.endNameStep();
   }
 
   //Test case number: 30
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 com.werken.saxpath.DefaultXPathHandler.endAllNodeStep()V: root-Branch
-   * 2 com.werken.saxpath.DefaultXPathHandler.<init>()V: root-Branch
    */
   @Test
   public void test30()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
+      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
       defaultXPathHandler0.endAllNodeStep();
   }
 
@@ -374,7 +373,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test32()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.endOrExpr(true);
+      defaultXPathHandler0.endOrExpr(false);
   }
 
   //Test case number: 33
@@ -385,7 +384,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test33()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.startNameStep((-1), "", "");
+      defaultXPathHandler0.startNameStep(1926, "root case:", "root case:");
   }
 
   //Test case number: 34
@@ -418,7 +417,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test36()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.startAllNodeStep(0);
+      defaultXPathHandler0.startAllNodeStep((-1));
   }
 
   //Test case number: 37
@@ -429,7 +428,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test37()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.startProcessingInstructionNodeStep(0, "iJ^~l9");
+      defaultXPathHandler0.startProcessingInstructionNodeStep((-399), "\"(*");
   }
 
   //Test case number: 38
@@ -451,7 +450,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test39()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.number((-1394));
+      defaultXPathHandler0.number(0);
   }
 
   //Test case number: 40
@@ -473,17 +472,18 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test41()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.number(357.3819011026468);
+      defaultXPathHandler0.number(1858.4188092548445);
   }
 
   //Test case number: 42
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.werken.saxpath.DefaultXPathHandler.startUnionExpr()V: root-Branch
+   * 2 com.werken.saxpath.DefaultXPathHandler.<init>()V: root-Branch
    */
   @Test
   public void test42()  throws Throwable  {
-      DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
+      DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
       defaultXPathHandler0.startUnionExpr();
   }
 
@@ -506,7 +506,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test44()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = DefaultXPathHandler.Singleton.instance;
-      defaultXPathHandler0.startCommentNodeStep(0);
+      defaultXPathHandler0.startCommentNodeStep((-1));
   }
 
   //Test case number: 45

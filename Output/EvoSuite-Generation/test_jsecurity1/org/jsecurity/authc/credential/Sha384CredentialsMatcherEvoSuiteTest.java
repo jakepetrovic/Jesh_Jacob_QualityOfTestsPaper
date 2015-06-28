@@ -35,14 +35,7 @@ public class Sha384CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
-      // Undeclared exception!
-      try {
-        sha384CredentialsMatcher0.hashProvidedCredentials((Object) null, (Object) null, 10);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Argument for byte conversion cannot be null.
-         */
-      }
+      Sha384Hash sha384Hash0 = (Sha384Hash)sha384CredentialsMatcher0.hashProvidedCredentials((Object) "org.jsecurity.authc.UsernamePasswordToken - \u0001)?t=|$Zk;m.XQ:CUN, rememberMe=false (localhost/127.0.0.1)", (Object) "org.jsecurity.subject.SimplePrincipalCollection@0", (int) (byte) (-28));
+      assertEquals("S8Uheru2PUWVuqctl69fM0Lt+BJQCDu6gU4CSaVwnI9gvfyk7wRBHiCSnfpJq1hM", sha384Hash0.toBase64());
   }
 }

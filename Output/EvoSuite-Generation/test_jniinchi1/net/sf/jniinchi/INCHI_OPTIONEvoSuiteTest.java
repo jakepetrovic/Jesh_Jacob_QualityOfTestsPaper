@@ -21,7 +21,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_OPTION.valueOfIgnoreCase("uSX~");
+      INCHI_OPTION.valueOfIgnoreCase("");
   }
 
   //Test case number: 1
@@ -33,7 +33,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("FixedH");
-      assertEquals(INCHI_OPTION.FixedH, iNCHI_OPTION0);
+      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("ChiralFlagON");
+      assertEquals(INCHI_OPTION.ChiralFlagON, iNCHI_OPTION0);
   }
 }

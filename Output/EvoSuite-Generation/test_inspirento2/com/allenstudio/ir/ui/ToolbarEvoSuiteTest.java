@@ -24,9 +24,9 @@ public class ToolbarEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Toolbar toolbar0 = new Toolbar();
-      assertEquals(0.5F, toolbar0.getAlignmentY(), 0.01F);
-      assertEquals(false, toolbar0.isFloatable());
       assertNotNull(toolbar0);
-      assertEquals(3, toolbar0.getComponentCount());
+      assertEquals(false, toolbar0.isFloatable());
+      assertEquals(3, toolbar0.countComponents());
+      assertEquals(0.5F, toolbar0.getAlignmentY(), 0.01F);
   }
 }

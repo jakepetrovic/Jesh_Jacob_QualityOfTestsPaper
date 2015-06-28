@@ -25,8 +25,8 @@ public class DefaultMenuControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "VERTICAL_SCROLLBAR", (-1446), "VERTICAL_SCROLLBAR", (-241));
+      ActionEvent actionEvent0 = new ActionEvent((Object) "SwingSelectedKey", 9, "SwingSelectedKey", 0L, 1846);
       defaultMenuController0.actionPerformed(actionEvent0);
-      assertEquals(-1446, actionEvent0.getID());
+      assertEquals(0L, actionEvent0.getWhen());
   }
 }

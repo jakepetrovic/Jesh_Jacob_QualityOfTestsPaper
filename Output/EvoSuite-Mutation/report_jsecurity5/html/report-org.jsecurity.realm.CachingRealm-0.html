@@ -22,37 +22,24 @@ org.jsecurity.realm.CachingRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.CachingRealm: 71.43%</ul><ul>
-<li>21658 fitness evaluations, 435 generations, 87699 statements, 13021 tests.
+<li>20916 fitness evaluations, 420 generations, 92281 statements, 12486 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 5/7 methods, 5/7 total goals
-<li>Mutation score: 50%
+<li>Mutation score: 14%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>String string0 = simpleAccountRealm0.getName();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, string0);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;8?,p@'pY3!=T-*&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = simpleAccountRealm0.getName();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;8?,p@'pY3!=T-*&quot;, string0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.setName(&quot;org.jsecurity.realm.SimpleAccountRealm_13569&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_13569&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_4&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm-0-authorization&quot;, simpleAccountRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;8?,p@'pY3!=T-*&quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(simpleAccountRealm0.getAuthorizationCacheName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -144,7 +131,7 @@ org.jsecurity.realm.CachingRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -162,7 +149,7 @@ org.jsecurity.realm.CachingRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20799
+<li>process_communication_port: 18697
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

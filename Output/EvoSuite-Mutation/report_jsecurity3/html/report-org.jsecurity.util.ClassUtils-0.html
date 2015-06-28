@@ -21,34 +21,43 @@ org.jsecurity.util.ClassUtils
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.util.ClassUtils: 69.44%</ul><ul>
-<li>3894 fitness evaluations, 79 generations, 21892 statements, 2749 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 19/30 branches, 10/10 methods, 25/36 total goals
-<li>Mutation score: 4%
+<ul><li>Target class: org.jsecurity.util.ClassUtils: 66.67%</ul><ul>
+<li>4178 fitness evaluations, 85 generations, 19965 statements, 2874 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 18/30 branches, 10/10 methods, 24/36 total goals
+<li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[4];
-<span class="nocode"><a name="2">  2: </a></span>objectArray0[0] = (Object) &quot;org.apache.commons.logging.impl.Log4JLogger&quot;;
-<span class="nocode"><a name="3">  3: </a></span>objectArray0[1] = (Object) &quot;org.apache.commons.logging.impl.Log4JLogger&quot;;
-<span class="nocode"><a name="4">  4: </a></span>objectArray0[2] = (Object) &quot;org.apache.commons.logging.impl.Log4JLogger&quot;;
-<span class="nocode"><a name="5">  5: </a></span>objectArray0[3] = (Object) &quot;org.apache.commons.logging.impl.Log4JLogger&quot;;
-<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  ClassUtils.newInstance(&quot;org.apache.commons.logging.impl.Log4JLogger&quot;, objectArray0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * org/apache/log4j/Category
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = ClassUtils.class;
+<span class="nocode"><a name="2">  2: </a></span>ClassUtils classUtils0 = (ClassUtils)ClassUtils.newInstance(class0);
+<span class="nocode"><a name="3">  3: </a></span>Object[] objectArray0 = new Object[6];
+<span class="nocode"><a name="4">  4: </a></span>objectArray0[0] = (Object) class0;
+<span class="nocode"><a name="5">  5: </a></span>objectArray0[1] = (Object) classUtils0;
+<span class="nocode"><a name="6">  6: </a></span>objectArray0[2] = (Object) classUtils0;
+<span class="nocode"><a name="7">  7: </a></span>objectArray0[3] = (Object) class0;
+<span class="nocode"><a name="8">  8: </a></span>objectArray0[4] = (Object) classUtils0;
+<span class="nocode"><a name="9">  9: </a></span>objectArray0[5] = (Object) class0;
+<span class="nocode"><a name="10"> 10: </a></span>ClassUtils.newInstance((Class) class0, objectArray0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[3];
+<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[5];
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  ClassUtils.newInstance(&quot;N6lEXQH\&quot;_X&amp;&quot;, objectArray0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: UnknownClassException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(UnknownClassException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Unable to load class named [N6lEXQH\&quot;_X&amp;] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[7];
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  ClassUtils.instantiate((Constructor) null, objectArray0);
@@ -59,45 +68,32 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 3</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  ClassUtils.newInstance(&quot;EB*I8Fb\&quot;I`&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  ClassUtils.newInstance(&quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: UnknownClassException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(UnknownClassException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load class named [EB*I8Fb\&quot;I`] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load class named [] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ClassUtils.isAvailable(&quot;] from the current ClassLoader.  &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>InputStream inputStream0 = ClassUtils.getResourceAsStream(&quot;Ot# &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(inputStream0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ClassUtils.isAvailable(&quot;bQYn vf&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = ClassUtils.class;
-<span class="nocode"><a name="2">  2: </a></span>ClassUtils classUtils0 = (ClassUtils)ClassUtils.newInstance(class0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(classUtils0);
+<span class="nocode"><a name="1">  1: </a></span>InputStream inputStream0 = ClassUtils.getResourceAsStream(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(inputStream0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  ClassUtils.newInstance((Class) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Class method parameter cannot be null.
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ClassUtils.isAvailable(&quot;org.apache.commons.logging.LogFactory&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -239,7 +235,7 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="137">137: </a></span>    public static boolean isAvailable(String fullyQualifiedClassName) {
 <span class="nocode"><a name="138">138: </a></span>        try {
 <span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">            forName(fullyQualifiedClassName);</span>
-<span class="nocode"><a name="140">140: </a></span>            return true;
+<span class="nocode"><a name="140">140: </a></span><span style="background-color: #ffffcc">            return true;</span>
 <span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">        } catch (UnknownClassException e) {</span>
 <span class="nocode"><a name="142">142: </a></span><span style="background-color: #ffffcc">            return false;</span>
 <span class="nocode"><a name="143">143: </a></span>        }
@@ -255,8 +251,8 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="153">153: </a></span>
 <span class="nocode"><a name="154">154: </a></span>    public static Object newInstance(Class clazz) {
 <span class="nocode"><a name="155">155: </a></span><span style="background-color: #ffffcc">        if (clazz == null) {</span>
-<span class="nocode"><a name="156">156: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Class method parameter cannot be null.&quot;;</span>
-<span class="nocode"><a name="157">157: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(msg);</span>
+<span class="nocode"><a name="156">156: </a></span>            String msg = &quot;Class method parameter cannot be null.&quot;;
+<span class="nocode"><a name="157">157: </a></span>            throw new IllegalArgumentException(msg);
 <span class="nocode"><a name="158">158: </a></span>        }
 <span class="nocode"><a name="159">159: </a></span>        try {
 <span class="nocode"><a name="160">160: </a></span><span style="background-color: #ffffcc">            return clazz.newInstance();</span>
@@ -277,8 +273,8 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="175">175: </a></span>    public static Constructor getConstructor(Class clazz, Class... argTypes) {
 <span class="nocode"><a name="176">176: </a></span>        try {
 <span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">            return clazz.getConstructor(argTypes);</span>
-<span class="nocode"><a name="178">178: </a></span>        } catch (NoSuchMethodException e) {
-<span class="nocode"><a name="179">179: </a></span>            throw new IllegalStateException(e);
+<span class="nocode"><a name="178">178: </a></span><span style="background-color: #ffffcc">        } catch (NoSuchMethodException e) {</span>
+<span class="nocode"><a name="179">179: </a></span><span style="background-color: #ffffcc">            throw new IllegalStateException(e);</span>
 <span class="nocode"><a name="180">180: </a></span>        }
 <span class="nocode"><a name="181">181: </a></span>
 <span class="nocode"><a name="182">182: </a></span>    }
@@ -298,7 +294,7 @@ org.jsecurity.util.ClassUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -316,7 +312,7 @@ org.jsecurity.util.ClassUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5017
+<li>process_communication_port: 2946
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

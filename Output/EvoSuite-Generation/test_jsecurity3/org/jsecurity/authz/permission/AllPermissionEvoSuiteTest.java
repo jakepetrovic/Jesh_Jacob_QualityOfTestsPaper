@@ -23,7 +23,7 @@ public class AllPermissionEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       AllPermission allPermission0 = new AllPermission();
-      WildcardPermission wildcardPermission0 = new WildcardPermission(",=;");
+      WildcardPermission wildcardPermission0 = new WildcardPermission("#xPE;q4W1", true);
       boolean boolean0 = allPermission0.implies((Permission) wildcardPermission0);
       assertEquals(true, boolean0);
   }

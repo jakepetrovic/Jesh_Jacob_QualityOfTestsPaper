@@ -34,14 +34,14 @@ public class HtmlFormatterEvoSuiteTest {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       HtmlFormatter htmlFormatter0 = new HtmlFormatter((List<Device>) linkedList0);
       DummyDevice dummyDevice0 = new DummyDevice();
-      linkedList0.add((Device) dummyDevice0);
       Builds builds0 = new Builds();
-      Build build0 = new Build("HTpao~lBT)A)");
-      builds0.add(build0);
       dummyDevice0.setBuilds(builds0);
+      linkedList0.add((Device) dummyDevice0);
+      Build build0 = new Build("K$37(ZQ<}$*#hbV*%");
+      builds0.add(build0);
       String string0 = htmlFormatter0.toHtml();
+      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build K$37(ZQ<}$*#hbV*% successful (null)</font></li></ul>", htmlFormatter0.toHtml());
       assertNotNull(string0);
-      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build HTpao~lBT)A) successful (null)</font></li></ul>", htmlFormatter0.toHtml());
-      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build HTpao~lBT)A) successful (null)</font></li></ul>", string0);
+      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build K$37(ZQ<}$*#hbV*% successful (null)</font></li></ul>", string0);
   }
 }

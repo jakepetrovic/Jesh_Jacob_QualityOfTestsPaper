@@ -22,158 +22,158 @@ org.jsecurity.util.StringUtils
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.util.StringUtils: 96.34%</ul><ul>
-<li>9418 fitness evaluations, 190 generations, 115671 statements, 6267 tests.
+<li>8372 fitness evaluations, 169 generations, 110434 statements, 5604 tests.
 <li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
 <li>Coverage: 73/76 branches, 14/14 methods, 79/82 total goals
-<li>Mutation score: 23%
+<li>Mutation score: 26%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>StringUtils stringUtils0 = new StringUtils();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringUtils0);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;$T&amp;jg^ut*&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot;No valid key could be found in line [&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>StringUtils stringUtils0 = new StringUtils();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringUtils0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;] to form a key/value pair.&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot; &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot;] to form a key/value pair.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasLength((String) null);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText((String) null);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase((String) null, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasText(&quot; &quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;which the split location could be determined.&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.hasLength(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;No valid key could be found in line [&quot;, (String) null);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase((String) null, (String) null);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;No valid key could be found in line [&quot;, &quot;-$Z`Je'E?&lt;qu&amp;*zC&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;&lt;}y=gD[)ba&gt;&quot;, &quot;&lt;}y=gD[)ba&gt;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = StringUtils.clean((String) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;&quot;, (String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;&quot;, '[', '\\', 'v', true, true);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;DUDlE$G8d5!d\u0005&quot;, &quot;2LBn1g{(zUdxe&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray((String) null, (String) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = StringUtils.startsWithIgnoreCase(&quot;v&quot;, &quot;=QkSxsff;7QwT&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;No valid key could be found in line [&quot;, &quot;MU6KKeB%nTM&quot;, true, false);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split((String) null, 'w', 'w', 'w');
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;]&quot;, &quot;&quot;, false, true);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;=QkSxsff;7QwTv&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * No valid key could be found in line [=QkSxsff;7QwTv] to form a key/value pair.
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray((String) null, (String) null, false, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot;&lt;}y=gD[)ba&gt;&quot;, &quot;wUjMION:8W&quot;, false, false);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+</pre>
+<h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.tokenizeToStringArray(&quot; &quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
-<h3>Test case 16</h3>
+<h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.toStringArray((Collection) null);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
 </pre>
-<h3>Test case 17</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>try {
-<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;No&quot;);
-<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
-<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
-<span class="nocode"><a name="5">  5: </a></span>  /*
-<span class="nocode"><a name="6">  6: </a></span>   * Unable to determine Key/Value pair from line [No].  There is no space from which the split location could be determined.
-<span class="nocode"><a name="7">  7: </a></span>   */
-<span class="nocode"><a name="8">  8: </a></span>}
-</pre>
-<h3>Test case 18</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
-</pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>try {
-<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;=ndRUi\&quot;8=&quot;);
-<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
-<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
-<span class="nocode"><a name="5">  5: </a></span>  /*
-<span class="nocode"><a name="6">  6: </a></span>   * No valid key could be found in line [=ndRUi\&quot;8=] to form a key/value pair.
-<span class="nocode"><a name="7">  7: </a></span>   */
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot; &quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(stringArray0);
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot;{s. =-div[~A/WOD)&quot;);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.splitKeyValue(&quot;85h\&quot;;-(Pl)t:\&quot; M&lt;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No valid key could be found in line [&quot;, 'E', 'n', 'c', true, false);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
+<span class="nocode"><a name="1">  1: </a></span>try {
+<span class="nocode"><a name="2">  2: </a></span>  StringUtils.splitKeyValue(&quot;'rg-&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fail(&quot;Expecting exception: ParseException&quot;);
+<span class="nocode"><a name="4">  4: </a></span>} catch(ParseException e) {
+<span class="nocode"><a name="5">  5: </a></span>  /*
+<span class="nocode"><a name="6">  6: </a></span>   * Unable to determine Key/Value pair from line ['rg-].  There is no space from which the split location could be determined.
+<span class="nocode"><a name="7">  7: </a></span>   */
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;=ndRUi\&quot;8=&quot;, ' ', '=', 'x');
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;].  There is no space from &quot;, 's', 's', 'p', true, true);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No valid key could be found in line [&quot;, 'U', '2', 'n', true, false);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;] to form a key/value pair.&quot;, '', '.', 'f');
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;bL=L:BR`BV6&quot;, 'j', 'j', ':');
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No corresponding value could be found in line [&quot;, '0', '0', ' ', false, true);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 25</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;Tf|3,J!,&quot;, '|', 's', '.', false, false);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;] to form a key/value pair.&quot;, '.');
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;8{.S/XUQ-aRnDJ-J&quot;, 'D', 'Q');
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;] to form a key/value pair.&quot;, 'm', 'i', 't');
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 <h3>Test case 27</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;7jzhL+,mNETp&quot;);
+<span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = StringUtils.split(&quot;No corresponding value could be found in line [&quot;, 'd', '&lt;', '7', false, false);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(stringArray0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -299,7 +299,7 @@ org.jsecurity.util.StringUtils
 <span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">            return true;</span>
 <span class="nocode"><a name="121">121: </a></span>        }
 <span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">        if (str.length() &lt; prefix.length()) {</span>
-<span class="nocode"><a name="123">123: </a></span>            return false;
+<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">            return false;</span>
 <span class="nocode"><a name="124">124: </a></span>        }
 <span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">        String lcStr = str.substring(0, prefix.length()).toLowerCase();</span>
 <span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">        String lcPrefix = prefix.toLowerCase();</span>
@@ -438,7 +438,7 @@ org.jsecurity.util.StringUtils
 <span class="nocode"><a name="259">259: </a></span><span style="background-color: #ffffcc">        if (split[1].startsWith(&quot;=&quot;)) {</span>
 <span class="nocode"><a name="260">260: </a></span>            //they used spaces followed by an equals followed by zero or more spaces to split the key/value pair, so
 <span class="nocode"><a name="261">261: </a></span>            //remove the equals sign to result in only the key and values in the
-<span class="nocode"><a name="262">262: </a></span><span style="background-color: #ffffcc">            split[1] = clean(split[1].substring(1));</span>
+<span class="nocode"><a name="262">262: </a></span>            split[1] = clean(split[1].substring(1));
 <span class="nocode"><a name="263">263: </a></span>        }
 <span class="nocode"><a name="264">264: </a></span>
 <span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        if (split[0] == null) {</span>
@@ -548,7 +548,7 @@ org.jsecurity.util.StringUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -566,7 +566,7 @@ org.jsecurity.util.StringUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15413
+<li>process_communication_port: 16648
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

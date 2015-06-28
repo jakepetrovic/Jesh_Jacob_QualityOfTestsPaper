@@ -19,8 +19,8 @@ public class IndPagEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      IndPag indPag0 = IndPag.PGTO_A_PRAZO;
+      IndPag indPag0 = IndPag.PGTO_A_VISTA;
       char char0 = indPag0.getValue();
-      assertEquals('1', char0);
+      assertEquals('0', char0);
   }
 }

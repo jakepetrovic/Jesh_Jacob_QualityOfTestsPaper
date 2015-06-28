@@ -19,9 +19,9 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.STARTED;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.UPGRADING;
       String string0 = applicationStatus0.toString();
-      assertEquals("started", string0);
+      assertEquals("upgrading", string0);
   }
 
   //Test case number: 1
@@ -35,24 +35,25 @@ public class ApplicationStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        ApplicationStatus.getByName("STARTED");
+        ApplicationStatus.getByName("h>SB6!{w+OZ");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * STARTED
+         * h>SB6!{w+OZ
          */
       }
   }
 
   //Test case number: 2
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - false
    * 2 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I14 Branch 1 IF_ICMPGE L97 - false
+   * 3 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("started");
-      assertEquals(ApplicationStatus.STARTED, applicationStatus0);
+      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("stopped");
+      assertEquals(ApplicationStatus.STOPPED, applicationStatus0);
   }
 }

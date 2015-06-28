@@ -8,8 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.allenstudio.ir.ui.NoteList;
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import java.awt.Point;
 
 public class NoteListEvoSuiteTest {
 
@@ -29,78 +28,46 @@ public class NoteListEvoSuiteTest {
       NoteList noteList0 = new NoteList();
       // Undeclared exception!
       try {
-        noteList0.select(277, false);
+        noteList0.select((-1123), false);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * No such child: 277
+         * No such child: -1123
          */
       }
   }
 
   //Test case number: 1
   /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteList.getScrollableTracksViewportWidth()Z: root-Branch
+   * 2 covered goals:
+   * 1 com.allenstudio.ir.ui.NoteList.getScrollableTracksViewportHeight()Z: I4 Branch 3 IFNE L143 - true
+   * 2 com.allenstudio.ir.ui.NoteList.getScrollableTracksViewportHeight()Z: I14 Branch 4 IFEQ L146 - true
    */
   @Test
   public void test1()  throws Throwable  {
       NoteList noteList0 = new NoteList();
-      boolean boolean0 = noteList0.getScrollableTracksViewportWidth();
-      assertEquals(5, noteList0.getCellCount());
+      boolean boolean0 = noteList0.getScrollableTracksViewportHeight();
       assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
+      assertEquals(5, noteList0.getCellCount());
       assertEquals(0, noteList0.getSelectedIndex());
   }
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteList.getPreferredScrollableViewportSize()Ljava/awt/Dimension;: root-Branch
+   * 5 covered goals:
+   * 1 com.allenstudio.ir.ui.NoteList.fireCursorEnter(Ljava/lang/Object;Ljava/awt/Point;)V: I4 Branch 12 IFNULL L227 - true
+   * 2 com.allenstudio.ir.ui.NoteList.getCellCount()I: root-Branch
+   * 3 com.allenstudio.ir.ui.NoteList.<init>()V: root-Branch
+   * 4 com.allenstudio.ir.ui.NoteList.addCell(Lcom/allenstudio/ir/ui/NoteListCell;)V: I25 Branch 6 IF_ICMPNE L173 - true
+   * 5 com.allenstudio.ir.ui.NoteList.addCell(Lcom/allenstudio/ir/ui/NoteListCell;)V: I25 Branch 6 IF_ICMPNE L173 - false
    */
   @Test
   public void test2()  throws Throwable  {
       NoteList noteList0 = new NoteList();
-      Dimension dimension0 = noteList0.getPreferredScrollableViewportSize();
-      assertEquals(5, noteList0.getCellCount());
-      assertEquals(0, noteList0.getSelectedIndex());
-      assertNotNull(dimension0);
-      assertEquals(387, dimension0.width);
-  }
-
-  //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteList.getScrollableBlockIncrement(Ljava/awt/Rectangle;II)I: I3 Branch 2 IFNE L134 - false
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      NoteList noteList0 = new NoteList();
-      // Undeclared exception!
-      try {
-        noteList0.getScrollableBlockIncrement((Rectangle) null, 0, 628);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 4
-  /*
-   * 6 covered goals:
-   * 1 com.allenstudio.ir.ui.NoteList.getScrollableTracksViewportHeight()Z: I4 Branch 3 IFNE L143 - true
-   * 2 com.allenstudio.ir.ui.NoteList.getScrollableTracksViewportHeight()Z: I14 Branch 4 IFEQ L146 - true
-   * 3 com.allenstudio.ir.ui.NoteList.getCellCount()I: root-Branch
-   * 4 com.allenstudio.ir.ui.NoteList.<init>()V: root-Branch
-   * 5 com.allenstudio.ir.ui.NoteList.addCell(Lcom/allenstudio/ir/ui/NoteListCell;)V: I25 Branch 6 IF_ICMPNE L173 - true
-   * 6 com.allenstudio.ir.ui.NoteList.addCell(Lcom/allenstudio/ir/ui/NoteListCell;)V: I25 Branch 6 IF_ICMPNE L173 - false
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      NoteList noteList0 = new NoteList();
-      boolean boolean0 = noteList0.getScrollableTracksViewportHeight();
-      assertEquals(5, noteList0.getCellCount());
+      noteList0.fireCursorEnter((Object) null, (Point) null);
       assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
+      assertEquals(5, noteList0.getCellCount());
       assertEquals(0, noteList0.getSelectedIndex());
-      assertEquals(false, boolean0);
   }
 }

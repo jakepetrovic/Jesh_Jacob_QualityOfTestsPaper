@@ -36,8 +36,8 @@ public class TProvinceEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       TProvince tProvince0 = new TProvince();
-      tProvince0.setProvinceName("zWXRi-ET$`B,EH?");
-      assertNull(tProvince0.getProvinceCode());
+      tProvince0.setProvinceName((String) null);
+      assertEquals("provinceCode=null, provinceName=null", tProvince0.toString());
   }
 
   //Test case number: 2
@@ -49,7 +49,7 @@ public class TProvinceEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       TProvince tProvince0 = new TProvince();
-      tProvince0.setProvinceCode("");
-      assertEquals("", tProvince0.getProvinceCode());
+      tProvince0.setProvinceCode("provinceCode=null, provinceName=null");
+      assertEquals("provinceCode=null, provinceName=null", tProvince0.getProvinceCode());
   }
 }

@@ -33,10 +33,10 @@ public class NoteListCellEvoSuiteTest {
       CommonNote commonNote0 = new CommonNote();
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
-      assertEquals(-1, noteListCell0.getIndexInList());
       
-      noteListCell0.setIndexInList(1);
-      assertEquals(1, noteListCell0.getIndexInList());
+      noteListCell0.setIndexInList((-301));
+      assertEquals(-301, noteListCell0.getIndexInList());
+      assertEquals(3, noteListCell0.getComponentCount());
   }
 
   //Test case number: 1
@@ -51,18 +51,18 @@ public class NoteListCellEvoSuiteTest {
       assertNotNull(noteListCell0);
       
       Dimension dimension0 = noteListCell0.getMaximumSize();
-      assertEquals(true, noteListCell0.isOpaque());
-      assertNotNull(dimension0);
       assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals("java.awt.Dimension[width=2147483647,height=55]", dimension0.toString());
       assertEquals(-1, noteListCell0.getIndexInList());
-      assertEquals(3, noteListCell0.getComponentCount());
+      assertNotNull(dimension0);
+      assertEquals(3, noteListCell0.countComponents());
+      assertEquals(true, noteListCell0.isOpaque());
+      assertEquals("java.awt.Dimension[width=2147483647,height=55]", dimension0.toString());
   }
 
   //Test case number: 2
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteListCell.getIndexInList()I: root-Branch
+   * 1 com.allenstudio.ir.ui.NoteListCell.isSelected()Z: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
@@ -70,11 +70,11 @@ public class NoteListCellEvoSuiteTest {
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
-      int int0 = noteListCell0.getIndexInList();
-      assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals((-1), int0);
-      assertEquals(true, noteListCell0.isOpaque());
+      noteListCell0.isSelected();
       assertEquals(3, noteListCell0.countComponents());
+      assertEquals(true, noteListCell0.isOpaque());
+      assertEquals(-1, noteListCell0.getIndexInList());
+      assertEquals(true, noteListCell0.isBackgroundSet());
   }
 
   //Test case number: 3
@@ -90,11 +90,10 @@ public class NoteListCellEvoSuiteTest {
       
       noteListCell0.setSelected(false);
       assertEquals(true, noteListCell0.isOpaque());
-      assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals(3, noteListCell0.countComponents());
       assertEquals(false, noteListCell0.isSelected());
-      assertEquals(-1, noteListCell0.getIndexInList());
       assertEquals(3, noteListCell0.getComponentCount());
+      assertEquals(true, noteListCell0.isBackgroundSet());
+      assertEquals(-1, noteListCell0.getIndexInList());
   }
 
   //Test case number: 4
@@ -118,5 +117,6 @@ public class NoteListCellEvoSuiteTest {
       
       noteListCell0.setSelected(true);
       assertEquals(true, noteListCell0.isSelected());
+      assertEquals(3, noteListCell0.getComponentCount());
   }
 }

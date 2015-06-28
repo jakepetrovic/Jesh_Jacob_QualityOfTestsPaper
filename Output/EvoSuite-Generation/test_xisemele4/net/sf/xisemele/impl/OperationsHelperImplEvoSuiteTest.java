@@ -7,6 +7,7 @@ package net.sf.xisemele.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.LinkedList;
 import java.util.List;
 import javax.imageio.metadata.IIOMetadataNode;
 import net.sf.xisemele.impl.OperationsHelperImpl;
@@ -18,88 +19,114 @@ public class OperationsHelperImplEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - true
+   * 2 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - true
    * 2 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - true
    */
   @Test
   public void test0()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("/");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("?msZA$^X?s");
       List<Node> list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
-      Node node0 = operationsHelperImpl0.nodeWithName(list0, "#+K!Ts}d{FLX``5%");
-      assertNull(node0);
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 1
-  /*
-   * 3 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - false
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I31 Branch 2 IF_ICMPNE L30 - false
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.appendChild((Node) iIOMetadataNode0);
-      List<Node> list0 = operationsHelperImpl0.children((Node) iIOMetadataNode1);
-      assertNotNull(list0);
-      
-      // Undeclared exception!
-      try {
-        operationsHelperImpl0.sublistWithName(list0, (String) null);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * StringEquals is not supposed to work on a null caller
-         */
-      }
-  }
-
-  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 net.sf.xisemele.impl.OperationsHelperImpl.find(Lorg/w3c/dom/Document;Ljava/lang/String;)Lorg/w3c/dom/Node;: I14 Branch 3 IFLE L44 - true
    * 2 net.sf.xisemele.impl.OperationsHelperImpl.find(Lorg/w3c/dom/Document;Ljava/lang/String;)Lorg/w3c/dom/Node;: I87 Branch 8 IFNULL L58 - true
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test1()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
       Node node0 = operationsHelperImpl0.find((Document) null, "/");
       assertNull(node0);
   }
 
-  //Test case number: 3
+  //Test case number: 2
   /*
    * 1 covered goal:
    * 1 net.sf.xisemele.impl.OperationsHelperImpl.find(Lorg/w3c/dom/Document;Ljava/lang/String;)Lorg/w3c/dom/Node;: I14 Branch 3 IFLE L44 - false
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
       // Undeclared exception!
       try {
-        operationsHelperImpl0.find((Document) null, "#+K!Ts}d{FLX``5%");
+        operationsHelperImpl0.find((Document) null, "?msZA$^X?s");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
   }
 
+  //Test case number: 3
+  /*
+   * 2 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - false
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I19 Branch 11 IFLE L70 - false
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+      LinkedList<Node> linkedList0 = new LinkedList<Node>();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("1%");
+      linkedList0.addLast((Node) iIOMetadataNode0);
+      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "1%");
+      assertEquals(1, iIOMetadataNode1.getNodeType());
+  }
+
   //Test case number: 4
   /*
    * 3 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
-   * 2 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
-   * 3 net.sf.xisemele.impl.OperationsHelperImpl.children(Lorg/w3c/dom/Node;)Ljava/util/List;: I19 Branch 1 IF_ICMPGE L28 - true
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I19 Branch 11 IFLE L70 - true
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - true
+   * 3 net.sf.xisemele.impl.OperationsHelperImpl.nodeWithName(Ljava/util/List;Ljava/lang/String;)Lorg/w3c/dom/Node;: I8 Branch 10 IFEQ L69 - false
    */
   @Test
   public void test4()  throws Throwable  {
       OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("/");
-      List<Node> list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
-      List<Node> list1 = operationsHelperImpl0.sublistWithName(list0, "#+K!Ts}d{FLX``5%");
-      assertTrue(list1.equals(list0));
+      LinkedList<Node> linkedList0 = new LinkedList<Node>();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("1%");
+      linkedList0.addLast((Node) iIOMetadataNode0);
+      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List<Node>) linkedList0, "R~");
+      assertNull(iIOMetadataNode1);
+  }
+
+  //Test case number: 5
+  /*
+   * 3 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I25 Branch 13 IFLE L83 - false
+   * 3 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+      LinkedList<Node> linkedList0 = new LinkedList<Node>();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("1%");
+      linkedList0.addLast((Node) iIOMetadataNode0);
+      List<Node> list0 = operationsHelperImpl0.sublistWithName((List<Node>) linkedList0, "1%");
+      assertNotNull(list0);
+      assertEquals(1, list0.size());
+  }
+
+  //Test case number: 6
+  /*
+   * 4 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I25 Branch 13 IFLE L83 - true
+   * 2 net.sf.xisemele.impl.OperationsHelperImpl.<init>()V: root-Branch
+   * 3 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - true
+   * 4 net.sf.xisemele.impl.OperationsHelperImpl.sublistWithName(Ljava/util/List;Ljava/lang/String;)Ljava/util/List;: I14 Branch 12 IFEQ L82 - false
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+      LinkedList<Node> linkedList0 = new LinkedList<Node>();
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("1%");
+      linkedList0.addLast((Node) iIOMetadataNode0);
+      List<Node> list0 = operationsHelperImpl0.sublistWithName((List<Node>) linkedList0, "R~");
+      assertEquals(0, list0.size());
+      assertNotNull(list0);
   }
 }

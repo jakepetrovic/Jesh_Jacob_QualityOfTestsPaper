@@ -21,148 +21,135 @@ nu.staldal.xmlutil.ContentHandlerSnooper
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xmlutil.ContentHandlerSnooper: 100.00%</ul><ul>
-<li>1900 fitness evaluations, 39 generations, 13709 statements, 1377 tests.
-<li>Time: 0:00:25(Search: 0:00:23, minimization: 0:00:02)
+<ul><li>Target class: nu.staldal.xmlutil.ContentHandlerSnooper: 100,00%</ul><ul>
+<li>1850 fitness evaluations, 38 generations, 13328 statements, 1343 tests.
+<li>Time: 0:00:39(Search: 0:00:37, minimization: 0:00:01)
 <li>Coverage: 4/4 branches, 12/12 methods, 14/14 total goals
-<li>Mutation score: 61%
+<li>Mutation score: 16 %
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>PipedReader pipedReader0 = new PipedReader();
-<span class="nocode"><a name="3">  3: </a></span>PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0);
-<span class="nocode"><a name="5">  5: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.skippedEntity(&quot;_g.a05_%&lt;Sr&lt;*uB&quot;);
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.skippedEntity(&quot;&quot;);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, false);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.processingInstruction((String) null, (String) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(59, byteArrayOutputStream0.size());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nprocessingInstruction(null,null)\n&quot;, byteArrayOutputStream0.toString());
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="5">  5: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.processingInstruction(&quot;p-Bv#2&quot;, &quot;p-Bv#2&quot;);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[7];
-<span class="nocode"><a name="3">  3: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0);
-<span class="nocode"><a name="5">  5: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.ignorableWhitespace(charArray0, (int) '&gt;', (int) '&gt;');
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nignorableWhitespace\n&quot;, charArrayWriter0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(46, charArrayWriter0.size());
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[6];
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.ignorableWhitespace(charArray0, 0, (int) 'U');
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nignorableWhitespace\n&quot;, byteArrayOutputStream0.toString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(46, byteArrayOutputStream0.size());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
 <span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.endDocument();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nendDocument\n&quot;, charArrayWriter0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(38, charArrayWriter0.size());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(38, byteArrayOutputStream0.size());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nendDocument\n&quot;, byteArrayOutputStream0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter(1);
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0, true);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
 <span class="nocode"><a name="5">  5: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
 <span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.setDocumentLocator((Locator) locator2Impl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\n&quot;, charArrayWriter0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(26, charArrayWriter0.size());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(26, byteArrayOutputStream0.size());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;New ContentHandlerSnooper\n&quot;, byteArrayOutputStream0.toString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, true);
-<span class="nocode"><a name="5">  5: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.startDocument();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nstartDocument\n&quot;, byteArrayOutputStream0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(40, byteArrayOutputStream0.size());
+<span class="nocode"><a name="1">  1: </a></span>StringWriter stringWriter0 = new StringWriter();
+<span class="nocode"><a name="2">  2: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0, false);
+<span class="nocode"><a name="3">  3: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) null, printWriter0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  contentHandlerSnooper0.startDocument();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, true);
-<span class="nocode"><a name="5">  5: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(41, byteArrayOutputStream0.size());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nendElement(,,)\n&quot;, byteArrayOutputStream0.toString());
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, false);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.startElement((String) null, (String) null, (String) null, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nstartElement(null,null,null)\n&quot;, byteArrayOutputStream0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(55, byteArrayOutputStream0.size());
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.startElement(&quot;F)sy1&lt;&lt;5%#3#&quot;, &quot;F)sy1&lt;&lt;5%#3#&quot;, &quot;F)sy1&lt;&lt;5%#3#&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(0, attributesImpl0.getLength());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.characters(charArray0, (int) '`', (int) '`');
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(37, charArrayWriter0.size());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;New ContentHandlerSnooper\ncharacters\n&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[8];
+<span class="nocode"><a name="6">  6: </a></span>contentHandlerSnooper0.characters(charArray0, (int) '2', (int) 'O');
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.startPrefixMapping(&quot;New ContentHandlerSnooper&quot;, &quot;kx0|aLy&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(81, charArrayWriter0.size());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nstartPrefixMapping(New ContentHandlerSnooper,kx0|aLy)\n&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.startPrefixMapping(&quot;KhNRaM&gt;'cg}'ES g{&quot;, &quot;endElement(&quot;);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(57, charArrayWriter0.size());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nstartPrefixMapping(&lt;default&gt;,)\n&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.startPrefixMapping(&quot;&quot;, &quot;startPrefixMapping(&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nstartPrefixMapping(&lt;default&gt;,startPrefixMapping()\n&quot;, byteArrayOutputStream0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(76, byteArrayOutputStream0.size());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, false);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
-<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.endPrefixMapping(&quot;startPrefixMapping(&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nendPrefixMapping(startPrefixMapping()\n&quot;, byteArrayOutputStream0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(64, byteArrayOutputStream0.size());
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+<span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.endPrefixMapping(&quot;endElement(&quot;);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter(1);
-<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((Writer) charArrayWriter0, true);
-<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
+<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="2">  2: </a></span>BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
 <span class="nocode"><a name="5">  5: </a></span>contentHandlerSnooper0.endPrefixMapping(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(54, charArrayWriter0.size());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;New ContentHandlerSnooper\nendPrefixMapping(&lt;default&gt;)\n&quot;, charArrayWriter0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -251,7 +238,7 @@ nu.staldal.xmlutil.ContentHandlerSnooper
 <span class="nocode"><a name="84"> 84: </a></span>    {
 <span class="nocode"><a name="85"> 85: </a></span><span style="background-color: #ffffcc">		if (DEBUG) out.println(&quot;startDocument&quot;);</span>
 <span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">        ch.startDocument();</span>
-<span class="nocode"><a name="87"> 87: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="87"> 87: </a></span>    }
 <span class="nocode"><a name="88"> 88: </a></span>
 <span class="nocode"><a name="89"> 89: </a></span>    public void endDocument()
 <span class="nocode"><a name="90"> 90: </a></span>        throws SAXException
@@ -338,7 +325,7 @@ nu.staldal.xmlutil.ContentHandlerSnooper
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -356,7 +343,7 @@ nu.staldal.xmlutil.ContentHandlerSnooper
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6178
+<li>process_communication_port: 18109
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

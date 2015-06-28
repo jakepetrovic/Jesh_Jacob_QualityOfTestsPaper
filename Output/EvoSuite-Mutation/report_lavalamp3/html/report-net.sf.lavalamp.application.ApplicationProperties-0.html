@@ -22,7 +22,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.application.ApplicationProperties: 91.67%</ul><ul>
-<li>32148 fitness evaluations, 644 generations, 166419 statements, 19727 tests.
+<li>30564 fitness evaluations, 613 generations, 195640 statements, 18942 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 11/11 methods, 11/12 total goals
 <li>Mutation score: 54%
@@ -34,6 +34,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
 <span class="nocode"><a name="2">  2: </a></span>applicationProperties0.setPort(0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(30000, applicationProperties0.getRunInterval());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -59,8 +60,8 @@ net.sf.lavalamp.application.ApplicationProperties
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
 <span class="nocode"><a name="2">  2: </a></span>String string0 = applicationProperties0.toString();
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -69,7 +70,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>applicationProperties0.setDebug(true);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(true, applicationProperties0.isDebug());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(30000, applicationProperties0.getRunInterval());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;debug=true, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -89,7 +90,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
-<span class="nocode"><a name="2">  2: </a></span>DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[2];
+<span class="nocode"><a name="2">  2: </a></span>DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[1];
 <span class="nocode"><a name="3">  3: </a></span>applicationProperties0.setDeviceProperties(devicePropertiesArray0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
@@ -164,7 +165,7 @@ net.sf.lavalamp.application.ApplicationProperties
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1302785138356621139.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6991366955262283980.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -182,7 +183,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10559
+<li>process_communication_port: 18256
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

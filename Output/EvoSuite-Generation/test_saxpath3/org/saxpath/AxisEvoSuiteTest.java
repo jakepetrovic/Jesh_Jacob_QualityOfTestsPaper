@@ -52,13 +52,12 @@ public class AxisEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 1 TABLESWITCH L115 Case 1 - false
-   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 5 TABLESWITCH L115 Case 5 - true
+   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 14 TABLESWITCH L115 Default-Case - true
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Axis.lookup(5);
-      assertEquals("following-sibling", string0);
-      assertNotNull(string0);
+      String string0 = Axis.lookup(1907);
+      assertNull(string0);
   }
 
   //Test case number: 3
@@ -69,8 +68,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       String string0 = Axis.lookup(2);
-      assertNotNull(string0);
       assertEquals("descendant", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 4
@@ -81,8 +80,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       String string0 = Axis.lookup(3);
-      assertEquals("parent", string0);
       assertNotNull(string0);
+      assertEquals("parent", string0);
   }
 
   //Test case number: 5
@@ -100,104 +99,104 @@ public class AxisEvoSuiteTest {
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 6 TABLESWITCH L115 Case 6 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 5 TABLESWITCH L115 Case 5 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      String string0 = Axis.lookup(6);
-      assertEquals("preceding-sibling", string0);
+      String string0 = Axis.lookup(5);
       assertNotNull(string0);
+      assertEquals("following-sibling", string0);
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 7 TABLESWITCH L115 Case 7 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 6 TABLESWITCH L115 Case 6 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      String string0 = Axis.lookup(7);
-      assertEquals("following", string0);
+      String string0 = Axis.lookup(6);
       assertNotNull(string0);
+      assertEquals("preceding-sibling", string0);
   }
 
   //Test case number: 8
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 8 TABLESWITCH L115 Case 8 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 7 TABLESWITCH L115 Case 7 - true
    */
   @Test
   public void test8()  throws Throwable  {
-      String string0 = Axis.lookup(8);
-      assertEquals("preceding", string0);
+      String string0 = Axis.lookup(7);
+      assertEquals("following", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 9 TABLESWITCH L115 Case 9 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 8 TABLESWITCH L115 Case 8 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      String string0 = Axis.lookup(9);
+      String string0 = Axis.lookup(8);
       assertNotNull(string0);
-      assertEquals("attribute", string0);
+      assertEquals("preceding", string0);
   }
 
   //Test case number: 10
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 10 TABLESWITCH L115 Case 10 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 9 TABLESWITCH L115 Case 9 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      String string0 = Axis.lookup(10);
-      assertEquals("namespace", string0);
+      String string0 = Axis.lookup(9);
       assertNotNull(string0);
+      assertEquals("attribute", string0);
   }
 
   //Test case number: 11
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 11 TABLESWITCH L115 Case 11 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 10 TABLESWITCH L115 Case 10 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      String string0 = Axis.lookup(11);
+      String string0 = Axis.lookup(10);
       assertNotNull(string0);
-      assertEquals("self", string0);
+      assertEquals("namespace", string0);
   }
 
   //Test case number: 12
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 12 TABLESWITCH L115 Case 12 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 11 TABLESWITCH L115 Case 11 - true
    */
   @Test
   public void test12()  throws Throwable  {
-      String string0 = Axis.lookup(12);
-      assertEquals("descendant-or-self", string0);
+      String string0 = Axis.lookup(11);
+      assertEquals("self", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 13
   /*
    * 2 covered goals:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 13 TABLESWITCH L115 Case 13 - true
-   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 14 TABLESWITCH L115 Default-Case - false
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 12 TABLESWITCH L115 Case 12 - true
+   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 13 TABLESWITCH L115 Case 13 - false
    */
   @Test
   public void test13()  throws Throwable  {
-      String string0 = Axis.lookup(13);
-      assertEquals("ancestor-or-self", string0);
+      String string0 = Axis.lookup(12);
+      assertEquals("descendant-or-self", string0);
       assertNotNull(string0);
   }
 
   //Test case number: 14
   /*
    * 14 covered goals:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 14 TABLESWITCH L115 Default-Case - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 13 TABLESWITCH L115 Case 13 - true
    * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 1 TABLESWITCH L115 Case 1 - false
    * 3 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 2 TABLESWITCH L115 Case 2 - false
    * 4 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 3 TABLESWITCH L115 Case 3 - false
@@ -210,12 +209,13 @@ public class AxisEvoSuiteTest {
    * 11 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 10 TABLESWITCH L115 Case 10 - false
    * 12 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 11 TABLESWITCH L115 Case 11 - false
    * 13 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 12 TABLESWITCH L115 Case 12 - false
-   * 14 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 13 TABLESWITCH L115 Case 13 - false
+   * 14 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 14 TABLESWITCH L115 Default-Case - false
    */
   @Test
   public void test14()  throws Throwable  {
-      String string0 = Axis.lookup(0);
-      assertNull(string0);
+      String string0 = Axis.lookup(13);
+      assertEquals("ancestor-or-self", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 15
@@ -237,7 +237,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test15()  throws Throwable  {
-      int int0 = Axis.lookup("reEwf$)clZ%[");
+      int int0 = Axis.lookup("8~7`_@X/");
       assertEquals(0, int0);
   }
 

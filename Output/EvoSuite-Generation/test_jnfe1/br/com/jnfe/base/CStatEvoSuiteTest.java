@@ -20,9 +20,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CStat cStat0 = CStat._266;
+      CStat cStat0 = CStat._215;
       SitNFe sitNFe0 = cStat0.getSitNFe();
-      assertEquals(SitNFe.REJEITADA, sitNFe0);
+      assertEquals("REJEITADA", sitNFe0.name());
   }
 
   //Test case number: 1
@@ -32,9 +32,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CStat cStat0 = CStat._266;
+      CStat cStat0 = CStat._215;
       String string0 = cStat0.getMotivo();
-      assertEquals("S\u00E9rie utilizada n\u00E3o permitida no Web Service", string0);
+      assertEquals("Falha no schema XML", string0);
   }
 
   //Test case number: 2
@@ -44,9 +44,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CStat cStat0 = CStat._266;
+      CStat cStat0 = CStat._215;
       String string0 = cStat0.toString();
       assertNotNull(string0);
-      assertEquals("266", string0);
+      assertEquals("215", string0);
   }
 }

@@ -33,9 +33,9 @@ public class SimpleCredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       SimpleCredentialsMatcher simpleCredentialsMatcher0 = new SimpleCredentialsMatcher();
-      char[] charArray0 = new char[5];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "UTF-8", (Object) null, "UTF-8");
+      char[] charArray0 = new char[4];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(")d5]qw?Z", charArray0, false);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       // Undeclared exception!
       try {
         simpleCredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
@@ -56,8 +56,8 @@ public class SimpleCredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       SimpleCredentialsMatcher simpleCredentialsMatcher0 = new SimpleCredentialsMatcher();
-      boolean boolean0 = simpleCredentialsMatcher0.equals((Object) "org.jsecurity.authc.UsernamePasswordToken - [, rememberMe=false (localhost/127.0.0.1)", (Object) "[");
-      assertEquals(false, boolean0);
+      boolean boolean0 = simpleCredentialsMatcher0.equals((Object) "[]", (Object) "[]");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 2
@@ -69,9 +69,7 @@ public class SimpleCredentialsMatcherEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       SimpleCredentialsMatcher simpleCredentialsMatcher0 = new SimpleCredentialsMatcher();
-      char[] charArray0 = new char[1];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, false);
-      boolean boolean0 = simpleCredentialsMatcher0.equals((Object) usernamePasswordToken0, (Object) usernamePasswordToken0);
+      boolean boolean0 = simpleCredentialsMatcher0.equals((Object) simpleCredentialsMatcher0, (Object) simpleCredentialsMatcher0);
       assertEquals(true, boolean0);
   }
 
@@ -90,8 +88,7 @@ public class SimpleCredentialsMatcherEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       SimpleCredentialsMatcher simpleCredentialsMatcher0 = new SimpleCredentialsMatcher();
-      char[] charArray0 = new char[1];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, false);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("D-!SXkr6#lB@q-", "D-!SXkr6#lB@q-", false);
       Object object0 = simpleCredentialsMatcher0.getCredentials((AuthenticationToken) usernamePasswordToken0);
       assertNotNull(object0);
       

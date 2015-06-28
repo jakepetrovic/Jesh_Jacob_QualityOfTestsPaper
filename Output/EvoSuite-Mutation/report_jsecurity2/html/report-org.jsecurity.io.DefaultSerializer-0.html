@@ -22,18 +22,19 @@ org.jsecurity.io.DefaultSerializer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.DefaultSerializer: 100.00%</ul><ul>
-<li>1350 fitness evaluations, 28 generations, 11285 statements, 1121 tests.
-<li>Time: 0:00:07(Search: 0:00:06, minimization: 0:00:00)
+<li>2550 fitness evaluations, 52 generations, 16145 statements, 1885 tests.
+<li>Time: 0:00:09(Search: 0:00:09, minimization: 0:00:00)
 <li>Coverage: 4/4 branches, 3/3 methods, 5/5 total goals
-<li>Mutation score: 8%
+<li>Mutation score: 24%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultSerializer defaultSerializer0 = new DefaultSerializer();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = defaultSerializer0.serialize((Object) &quot;BXf6/FR(&lt;e-Q_@Tc9(y&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray0);
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = defaultSerializer0.serialize((Object) &quot;=?gA5$hhof]5y=m&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = (String)defaultSerializer0.deserialize(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;=?gA5$hhof]5y=m&quot;, string0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -49,20 +50,6 @@ org.jsecurity.io.DefaultSerializer
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultSerializer defaultSerializer0 = new DefaultSerializer();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[10];
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultSerializer0.deserialize(byteArray0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SerializationException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(SerializationException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Unable to deserialze argument byte array.
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultSerializer defaultSerializer0 = new DefaultSerializer();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -136,12 +123,12 @@ org.jsecurity.io.DefaultSerializer
 <span class="nocode"><a name="58"> 58: </a></span><span style="background-color: #ffffcc">        BufferedInputStream bis = new BufferedInputStream(bais);</span>
 <span class="nocode"><a name="59"> 59: </a></span>        try {
 <span class="nocode"><a name="60"> 60: </a></span><span style="background-color: #ffffcc">            ObjectInputStream ois = new ObjectInputStream(bis);</span>
-<span class="nocode"><a name="61"> 61: </a></span>            Object deserialized = ois.readObject();
-<span class="nocode"><a name="62"> 62: </a></span>            ois.close();
-<span class="nocode"><a name="63"> 63: </a></span>            return deserialized;
-<span class="nocode"><a name="64"> 64: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
-<span class="nocode"><a name="65"> 65: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Unable to deserialze argument byte array.&quot;;</span>
-<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">            throw new SerializationException(msg, e);</span>
+<span class="nocode"><a name="61"> 61: </a></span><span style="background-color: #ffffcc">            Object deserialized = ois.readObject();</span>
+<span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">            ois.close();</span>
+<span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">            return deserialized;</span>
+<span class="nocode"><a name="64"> 64: </a></span>        } catch (Exception e) {
+<span class="nocode"><a name="65"> 65: </a></span>            String msg = &quot;Unable to deserialze argument byte array.&quot;;
+<span class="nocode"><a name="66"> 66: </a></span>            throw new SerializationException(msg, e);
 <span class="nocode"><a name="67"> 67: </a></span>        }
 <span class="nocode"><a name="68"> 68: </a></span>    }
 <span class="nocode"><a name="69"> 69: </a></span>}
@@ -149,7 +136,7 @@ org.jsecurity.io.DefaultSerializer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -167,7 +154,7 @@ org.jsecurity.io.DefaultSerializer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17268
+<li>process_communication_port: 15462
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

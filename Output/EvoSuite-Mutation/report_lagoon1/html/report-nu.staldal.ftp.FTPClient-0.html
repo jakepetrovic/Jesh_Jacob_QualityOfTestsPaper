@@ -21,10 +21,10 @@ nu.staldal.ftp.FTPClient
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.ftp.FTPClient: 5.05%</ul><ul>
-<li>13374 fitness evaluations, 269 generations, 18366 statements, 8790 tests.
+<ul><li>Target class: nu.staldal.ftp.FTPClient: 8.26%</ul><ul>
+<li>13836 fitness evaluations, 278 generations, 16900 statements, 9016 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 10/204 branches, 3/26 methods, 11/218 total goals
+<li>Coverage: 17/204 branches, 3/26 methods, 18/218 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,46 +33,44 @@ nu.staldal.ftp.FTPClient
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;3:G42G_vu&quot;, (-2015), &quot;3:G42G_vu&quot;, &quot;3:G42G_vu&quot;, &quot;3:G42G_vu&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;&quot;, 65560, &quot;&quot;, &quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;[3:G42G_vu]\&quot; \&quot;resolve\&quot;)
-<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;127.0.0.1:21\&quot; \&quot;connect,resolve\&quot;)
+<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="9">  9: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
-<span class="nocode"><a name="10"> 10: </a></span>   * java.lang.SecurityManager.checkConnect(SecurityManager.java:1048)
-<span class="nocode"><a name="11"> 11: </a></span>   * java.net.InetAddress.getAllByName0(InetAddress.java:1238)
-<span class="nocode"><a name="12"> 12: </a></span>   * java.net.InetAddress.getAllByName(InetAddress.java:1162)
-<span class="nocode"><a name="13"> 13: </a></span>   * java.net.InetAddress.getAllByName(InetAddress.java:1098)
-<span class="nocode"><a name="14"> 14: </a></span>   * java.net.InetAddress.getByName(InetAddress.java:1048)
-<span class="nocode"><a name="15"> 15: </a></span>   * java.net.InetSocketAddress.&lt;init&gt;(InetSocketAddress.java:220)
-<span class="nocode"><a name="16"> 16: </a></span>   * java.net.Socket.&lt;init&gt;(Socket.java:208)
-<span class="nocode"><a name="17"> 17: </a></span>   * nu.staldal.ftp.FTPClient.connect(FTPClient.java:200)
-<span class="nocode"><a name="18"> 18: </a></span>   * nu.staldal.ftp.FTPClient.&lt;init&gt;(FTPClient.java:190)
-<span class="nocode"><a name="19"> 19: </a></span>   * sun.reflect.GeneratedConstructorAccessor5.newInstance(Unknown Source)
-<span class="nocode"><a name="20"> 20: </a></span>   * sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-<span class="nocode"><a name="21"> 21: </a></span>   * java.lang.reflect.Constructor.newInstance(Constructor.java:526)
-<span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.ConstructorStatement$1.execute(ConstructorStatement.java:226)
-<span class="nocode"><a name="23"> 23: </a></span>   * org.evosuite.testcase.AbstractStatement.exceptionHandler(AbstractStatement.java:142)
-<span class="nocode"><a name="24"> 24: </a></span>   * org.evosuite.testcase.ConstructorStatement.execute(ConstructorStatement.java:188)
-<span class="nocode"><a name="25"> 25: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:291)
-<span class="nocode"><a name="26"> 26: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:44)
-<span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
-<span class="nocode"><a name="28"> 28: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-<span class="nocode"><a name="29"> 29: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="30"> 30: </a></span>   * java.lang.Thread.run(Thread.java:744)
-<span class="nocode"><a name="31"> 31: </a></span>   */
-<span class="nocode"><a name="32"> 32: </a></span>}
+<span class="nocode"><a name="10"> 10: </a></span>   * java.lang.SecurityManager.checkConnect(SecurityManager.java:1051)
+<span class="nocode"><a name="11"> 11: </a></span>   * java.net.Socket.connect(Socket.java:574)
+<span class="nocode"><a name="12"> 12: </a></span>   * java.net.Socket.connect(Socket.java:528)
+<span class="nocode"><a name="13"> 13: </a></span>   * java.net.Socket.&lt;init&gt;(Socket.java:425)
+<span class="nocode"><a name="14"> 14: </a></span>   * java.net.Socket.&lt;init&gt;(Socket.java:208)
+<span class="nocode"><a name="15"> 15: </a></span>   * nu.staldal.ftp.FTPClient.connect(FTPClient.java:200)
+<span class="nocode"><a name="16"> 16: </a></span>   * nu.staldal.ftp.FTPClient.&lt;init&gt;(FTPClient.java:190)
+<span class="nocode"><a name="17"> 17: </a></span>   * sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+<span class="nocode"><a name="18"> 18: </a></span>   * sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+<span class="nocode"><a name="19"> 19: </a></span>   * java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+<span class="nocode"><a name="20"> 20: </a></span>   * org.evosuite.testcase.ConstructorStatement$1.execute(ConstructorStatement.java:226)
+<span class="nocode"><a name="21"> 21: </a></span>   * org.evosuite.testcase.AbstractStatement.exceptionHandler(AbstractStatement.java:142)
+<span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.ConstructorStatement.execute(ConstructorStatement.java:188)
+<span class="nocode"><a name="23"> 23: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:291)
+<span class="nocode"><a name="24"> 24: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:44)
+<span class="nocode"><a name="25"> 25: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
+<span class="nocode"><a name="26"> 26: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+<span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+<span class="nocode"><a name="28"> 28: </a></span>   * java.lang.Thread.run(Thread.java:745)
+<span class="nocode"><a name="29"> 29: </a></span>   */
+<span class="nocode"><a name="30"> 30: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;ftp://V2U&gt;&lt;Ur]r@iAmmBb&quot;, &quot;ftp://V2U&gt;&lt;Ur]r@iAmmBb&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(StringIndexOutOfBoundsException e) {
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;ftp://4UfM&quot;, &quot;ftp://4UfM&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * String index out of range: -17
+<span class="nocode"><a name="7">  7: </a></span>   * ftp://4UfM
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -80,11 +78,11 @@ nu.staldal.ftp.FTPClient
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;)AqWa&gt;@[m *)|\r&quot;, &quot;)AqWa&gt;@[m *)|\r&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;z/2b@`3C]2xuqB=u&quot;, &quot;z/2b@`3C]2xuqB=u&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * )AqWa&gt;@[m *)|\r
+<span class="nocode"><a name="7">  7: </a></span>   * z/2b@`3C]2xuqB=u
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -92,11 +90,11 @@ nu.staldal.ftp.FTPClient
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;ftp://^qW}#C?&amp;e&quot;, &quot;ftp://^qW}#C?&amp;e&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;ftp://f@nY1p*/L&quot;, &quot;ftp://f@nY1p*/L&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * ftp://^qW}#C?&amp;e
+<span class="nocode"><a name="7">  7: </a></span>   * ftp://f@nY1p*/L
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -104,12 +102,12 @@ nu.staldal.ftp.FTPClient
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;K&lt;k%1X&quot;, 65552, &quot;K&lt;k%1X&quot;, &quot;K&lt;k%1X&quot;, &quot;K&lt;k%1X&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;YNFE&quot;, (-1546), &quot;YNFE&quot;, &quot;YNFE&quot;, &quot;YNFE&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;K&lt;k%1X\&quot; \&quot;resolve\&quot;)
-<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;YNFE\&quot; \&quot;resolve\&quot;)
+<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="9">  9: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
 <span class="nocode"><a name="10"> 10: </a></span>   * java.lang.SecurityManager.checkConnect(SecurityManager.java:1048)
 <span class="nocode"><a name="11"> 11: </a></span>   * java.net.InetAddress.getAllByName0(InetAddress.java:1238)
@@ -120,7 +118,7 @@ nu.staldal.ftp.FTPClient
 <span class="nocode"><a name="16"> 16: </a></span>   * java.net.Socket.&lt;init&gt;(Socket.java:208)
 <span class="nocode"><a name="17"> 17: </a></span>   * nu.staldal.ftp.FTPClient.connect(FTPClient.java:200)
 <span class="nocode"><a name="18"> 18: </a></span>   * nu.staldal.ftp.FTPClient.&lt;init&gt;(FTPClient.java:190)
-<span class="nocode"><a name="19"> 19: </a></span>   * sun.reflect.GeneratedConstructorAccessor5.newInstance(Unknown Source)
+<span class="nocode"><a name="19"> 19: </a></span>   * sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
 <span class="nocode"><a name="20"> 20: </a></span>   * sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 <span class="nocode"><a name="21"> 21: </a></span>   * java.lang.reflect.Constructor.newInstance(Constructor.java:526)
 <span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.ConstructorStatement$1.execute(ConstructorStatement.java:226)
@@ -131,7 +129,7 @@ nu.staldal.ftp.FTPClient
 <span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
 <span class="nocode"><a name="28"> 28: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 <span class="nocode"><a name="29"> 29: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="30"> 30: </a></span>   * java.lang.Thread.run(Thread.java:744)
+<span class="nocode"><a name="30"> 30: </a></span>   * java.lang.Thread.run(Thread.java:745)
 <span class="nocode"><a name="31"> 31: </a></span>   */
 <span class="nocode"><a name="32"> 32: </a></span>}
 </pre>
@@ -139,12 +137,12 @@ nu.staldal.ftp.FTPClient
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPClient fTPClient0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;ftp://^fqW}#C?&amp;e&quot;, 1910, &quot;ftp://^fqW}#C?&amp;e&quot;, &quot;ftp://^fqW}#C?&amp;e&quot;, &quot;ftp://^fqW}#C?&amp;e&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPClient0 = new FTPClient(&quot;jh9mMPh&quot;, 2, &quot;jh9mMPh&quot;, &quot;jh9mMPh&quot;, &quot;jh9mMPh&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;[ftp://^fqW}#C?&amp;e]\&quot; \&quot;resolve\&quot;)
-<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="7">  7: </a></span>   * Security manager blocks (\&quot;java.net.SocketPermission\&quot; \&quot;jh9mMPh\&quot; \&quot;resolve\&quot;)
+<span class="nocode"><a name="8">  8: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="9">  9: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
 <span class="nocode"><a name="10"> 10: </a></span>   * java.lang.SecurityManager.checkConnect(SecurityManager.java:1048)
 <span class="nocode"><a name="11"> 11: </a></span>   * java.net.InetAddress.getAllByName0(InetAddress.java:1238)
@@ -155,7 +153,7 @@ nu.staldal.ftp.FTPClient
 <span class="nocode"><a name="16"> 16: </a></span>   * java.net.Socket.&lt;init&gt;(Socket.java:208)
 <span class="nocode"><a name="17"> 17: </a></span>   * nu.staldal.ftp.FTPClient.connect(FTPClient.java:200)
 <span class="nocode"><a name="18"> 18: </a></span>   * nu.staldal.ftp.FTPClient.&lt;init&gt;(FTPClient.java:190)
-<span class="nocode"><a name="19"> 19: </a></span>   * sun.reflect.GeneratedConstructorAccessor5.newInstance(Unknown Source)
+<span class="nocode"><a name="19"> 19: </a></span>   * sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
 <span class="nocode"><a name="20"> 20: </a></span>   * sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
 <span class="nocode"><a name="21"> 21: </a></span>   * java.lang.reflect.Constructor.newInstance(Constructor.java:526)
 <span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.ConstructorStatement$1.execute(ConstructorStatement.java:226)
@@ -166,7 +164,7 @@ nu.staldal.ftp.FTPClient
 <span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
 <span class="nocode"><a name="28"> 28: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 <span class="nocode"><a name="29"> 29: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="30"> 30: </a></span>   * java.lang.Thread.run(Thread.java:744)
+<span class="nocode"><a name="30"> 30: </a></span>   * java.lang.Thread.run(Thread.java:745)
 <span class="nocode"><a name="31"> 31: </a></span>   */
 <span class="nocode"><a name="32"> 32: </a></span>}
 </pre>
@@ -323,19 +321,19 @@ nu.staldal.ftp.FTPClient
 <span class="nocode"><a name="150">150: </a></span>		{
 <span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">			username = url.substring(userPos+1,hostPos);</span>
 <span class="nocode"><a name="152">152: </a></span><span style="background-color: #ffffcc">			host = url.substring(hostPos+1,(portPos&lt;0) ? pathPos : portPos);</span>
-<span class="nocode"><a name="153">153: </a></span>			port = (portPos&lt;0) ? 21 : Integer.parseInt(url.substring(portPos+1,pathPos));
-<span class="nocode"><a name="154">154: </a></span>			path = url.substring(pathPos+1);
+<span class="nocode"><a name="153">153: </a></span><span style="background-color: #ffffcc">			port = (portPos&lt;0) ? 21 : Integer.parseInt(url.substring(portPos+1,pathPos));</span>
+<span class="nocode"><a name="154">154: </a></span><span style="background-color: #ffffcc">			path = url.substring(pathPos+1);</span>
 <span class="nocode"><a name="155">155: </a></span>		}
 <span class="nocode"><a name="156">156: </a></span>		catch (NumberFormatException e)
 <span class="nocode"><a name="157">157: </a></span>		{
 <span class="nocode"><a name="158">158: </a></span>			throw new MalformedURLException(url);
-<span class="nocode"><a name="159">159: </a></span>		}
+<span class="nocode"><a name="159">159: </a></span><span style="background-color: #ffffcc">		}</span>
 <span class="nocode"><a name="160">160: </a></span>
-<span class="nocode"><a name="161">161: </a></span>		if (port &lt; 0 || port &gt; 65535 ||
+<span class="nocode"><a name="161">161: </a></span><span style="background-color: #ffffcc">		if (port &lt; 0 || port &gt; 65535 ||</span>
 <span class="nocode"><a name="162">162: </a></span>			username.length() &lt; 1 ||
 <span class="nocode"><a name="163">163: </a></span>			host.length() &lt; 1 ||
 <span class="nocode"><a name="164">164: </a></span>			(path.length() &gt; 0 &amp;&amp; path.charAt(path.length()-1) != '/'))
-<span class="nocode"><a name="165">165: </a></span>			throw new MalformedURLException(url);
+<span class="nocode"><a name="165">165: </a></span><span style="background-color: #ffffcc">			throw new MalformedURLException(url);</span>
 <span class="nocode"><a name="166">166: </a></span>			
 <span class="nocode"><a name="167">167: </a></span>		connect(host, port, username, password);
 <span class="nocode"><a name="168">168: </a></span>		initialDir(path);				
@@ -968,7 +966,7 @@ nu.staldal.ftp.FTPClient
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -986,7 +984,7 @@ nu.staldal.ftp.FTPClient
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10185
+<li>process_communication_port: 6006
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -43,7 +43,7 @@ public class JndiLocatorEvoSuiteTest {
   public void test1()  throws Throwable  {
       JndiLocator jndiLocator0 = new JndiLocator();
       try {
-        jndiLocator0.lookup("_3 U@B-QR?&%IY=; Af");
+        jndiLocator0.lookup("java:comp/env/' found.");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -54,6 +54,64 @@ public class JndiLocatorEvoSuiteTest {
 
   //Test case number: 2
   /*
+   * 1 covered goal:
+   * 1 org.jsecurity.jndi.JndiLocator.setJndiEnvironment(Ljava/util/Properties;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      JndiLocator jndiLocator0 = new JndiLocator();
+      jndiLocator0.setJndiEnvironment((Properties) null);
+      assertEquals(false, jndiLocator0.isResourceRef());
+  }
+
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.jndi.JndiLocator.setJndiTemplate(Lorg/jsecurity/jndi/JndiTemplate;)V: I4 Branch 1 IFNULL L67 - true
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      JndiLocator jndiLocator0 = new JndiLocator();
+      jndiLocator0.setJndiTemplate((JndiTemplate) null);
+      assertEquals(false, jndiLocator0.isResourceRef());
+  }
+
+  //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.jndi.JndiLocator.setJndiTemplate(Lorg/jsecurity/jndi/JndiTemplate;)V: I4 Branch 1 IFNULL L67 - false
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      JndiLocator jndiLocator0 = new JndiLocator();
+      Properties properties0 = new Properties();
+      JndiTemplate jndiTemplate0 = new JndiTemplate(properties0);
+      jndiLocator0.setJndiTemplate(jndiTemplate0);
+      assertEquals(false, jndiLocator0.isResourceRef());
+  }
+
+  //Test case number: 5
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L138 - false
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      JndiLocator jndiLocator0 = new JndiLocator();
+      Class<?> class0 = JndiLocator.class;
+      // Undeclared exception!
+      try {
+        jndiLocator0.lookup((String) null, (Class) class0);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * jndiName argument must not be null
+         */
+      }
+  }
+
+  //Test case number: 6
+  /*
    * 6 covered goals:
    * 1 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I36 Branch 3 IFGT L147 - false
    * 2 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I41 Branch 4 IFEQ L149 - true
@@ -63,75 +121,18 @@ public class JndiLocatorEvoSuiteTest {
    * 6 org.jsecurity.jndi.JndiLocator.setResourceRef(Z)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test6()  throws Throwable  {
       JndiLocator jndiLocator0 = new JndiLocator();
       assertEquals(false, jndiLocator0.isResourceRef());
       
+      Class<?> class0 = JndiLocator.class;
       jndiLocator0.setResourceRef(true);
       try {
-        jndiLocator0.lookup("_3 U@B-QR?&%IY=; Af");
+        jndiLocator0.lookup("a", (Class) class0);
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
          * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
-         */
-      }
-  }
-
-  //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiLocator.setJndiEnvironment(Ljava/util/Properties;)V: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      JndiLocator jndiLocator0 = new JndiLocator();
-      jndiLocator0.setJndiEnvironment((Properties) null);
-      assertEquals(false, jndiLocator0.isResourceRef());
-  }
-
-  //Test case number: 4
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiLocator.setJndiTemplate(Lorg/jsecurity/jndi/JndiTemplate;)V: I4 Branch 1 IFNULL L67 - true
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      JndiLocator jndiLocator0 = new JndiLocator();
-      jndiLocator0.setJndiTemplate((JndiTemplate) null);
-      assertEquals(false, jndiLocator0.isResourceRef());
-  }
-
-  //Test case number: 5
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiLocator.setJndiTemplate(Lorg/jsecurity/jndi/JndiTemplate;)V: I4 Branch 1 IFNULL L67 - false
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      JndiLocator jndiLocator0 = new JndiLocator();
-      JndiTemplate jndiTemplate0 = jndiLocator0.getJndiTemplate();
-      assertNotNull(jndiTemplate0);
-      
-      jndiLocator0.setJndiTemplate(jndiTemplate0);
-      assertEquals(false, jndiLocator0.isResourceRef());
-  }
-
-  //Test case number: 6
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L138 - false
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      JndiLocator jndiLocator0 = new JndiLocator();
-      // Undeclared exception!
-      try {
-        jndiLocator0.lookup((String) null);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * jndiName argument must not be null
          */
       }
   }
@@ -152,7 +153,7 @@ public class JndiLocatorEvoSuiteTest {
       
       jndiLocator0.setResourceRef(true);
       try {
-        jndiLocator0.lookup("java:comp/env/!");
+        jndiLocator0.lookup("java:comp/env/' found.");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -177,8 +178,8 @@ public class JndiLocatorEvoSuiteTest {
       assertEquals(false, jndiLocator0.isResourceRef());
       
       jndiLocator0.setResourceRef(true);
-      String string0 = jndiLocator0.convertJndiName("\"Xkb:tY<;E!");
+      String string0 = jndiLocator0.convertJndiName("!11. b:h?z?j@I_$");
       assertEquals(true, jndiLocator0.isResourceRef());
-      assertEquals("\"Xkb:tY<;E!", string0);
+      assertEquals("!11. b:h?z?j@I_$", string0);
   }
 }

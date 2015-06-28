@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.TimeZone;
 import net.sf.lavalamp.device.Period;
 import net.sf.lavalamp.device.TimeOfDay;
 
@@ -25,9 +26,10 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay((-802), (-802));
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 877);
+      Integer integer0 = timeOfDay0.getHours();
       Period period0 = new Period(timeOfDay0, timeOfDay0);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-802), (-802), (-802));
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(877, (int) integer0, (-1));
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
       assertEquals(false, boolean0);
   }
@@ -43,10 +45,11 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay((-802), (-802));
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-802), (-802), (-802));
-      TimeOfDay timeOfDay1 = new TimeOfDay(1007, (-802));
-      Period period0 = new Period(timeOfDay0, timeOfDay1);
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 877);
+      TimeOfDay timeOfDay1 = new TimeOfDay((-1), 0);
+      Period period0 = new Period(timeOfDay1, timeOfDay0);
+      Integer integer0 = timeOfDay1.getHours();
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(877, (int) integer0, (-1));
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
       assertEquals(true, boolean0);
   }
@@ -58,18 +61,19 @@ public class PeriodEvoSuiteTest {
    * 2 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I3 Branch 3 IFNE L38 - false
    * 3 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I9 Branch 4 IFGT L38 - true
    * 4 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I20 Branch 5 IFGT L39 - false
-   * 5 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 6 IFGE L39 - true
+   * 5 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 6 IFGE L39 - false
    */
   @Test
   public void test2()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(2, (-168));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-168), 1891);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1, 1);
+      TimeOfDay timeOfDay1 = new TimeOfDay(1, (-1623));
       Period period0 = new Period(timeOfDay0, timeOfDay1);
-      Locale locale0 = Locale.CHINESE;
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
+      TimeZone timeZone0 = TimeZone.getTimeZone("+-O");
+      Locale locale0 = Locale.PRC;
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(timeZone0, locale0);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals(1398580788209L, gregorianCalendar0.getTimeInMillis());
-      assertEquals(false, boolean0);
+      assertEquals("java.util.GregorianCalendar[time=1433724756130,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"GMT\",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=8,DAY_OF_YEAR=159,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=2,AM_PM=0,HOUR=0,HOUR_OF_DAY=0,MINUTE=52,SECOND=36,MILLISECOND=130,ZONE_OFFSET=0,DST_OFFSET=0]", gregorianCalendar0.toString());
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 3
@@ -79,10 +83,10 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(2, (-168));
-      TimeOfDay timeOfDay1 = new TimeOfDay((-168), 1891);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1, 1);
+      TimeOfDay timeOfDay1 = new TimeOfDay(1, (-1623));
       Period period0 = new Period(timeOfDay0, timeOfDay1);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1891, (-168), 1891, 1, (-168), (-1220));
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-1623), (-1623), 1, (-1623), 1);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
       assertEquals(true, boolean0);
   }
@@ -90,7 +94,7 @@ public class PeriodEvoSuiteTest {
   //Test case number: 4
   /*
    * 6 covered goals:
-   * 1 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 6 IFGE L39 - false
+   * 1 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I25 Branch 6 IFGE L39 - true
    * 2 net.sf.lavalamp.device.Period.isInPeriod(Ljava/util/Calendar;)Z: I19 Branch 1 IFGE L28 - true
    * 3 net.sf.lavalamp.device.Period.isInPeriod(Ljava/util/Calendar;)Z: I33 Branch 2 IFNE L30 - false
    * 4 net.sf.lavalamp.device.Period.isInPeriodWhenEndIsNextDay(Lnet/sf/lavalamp/device/TimeOfDay;)Z: I3 Branch 3 IFNE L38 - false
@@ -99,14 +103,15 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(321, 321);
-      TimeOfDay timeOfDay1 = new TimeOfDay(1685, 1685);
-      Period period0 = new Period(timeOfDay1, timeOfDay0);
-      Locale locale0 = Locale.KOREAN;
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance(locale0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1, 1);
+      TimeZone timeZone0 = TimeZone.getTimeZone("+-O");
+      Locale locale0 = Locale.PRC;
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(timeZone0, locale0);
+      TimeOfDay timeOfDay1 = new TimeOfDay((-1623), (-1623));
+      Period period0 = new Period(timeOfDay0, timeOfDay1);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals(1398580796990L, gregorianCalendar0.getTimeInMillis());
-      assertEquals(true, boolean0);
+      assertEquals("java.util.GregorianCalendar[time=1433724760046,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"GMT\",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=8,DAY_OF_YEAR=159,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=2,AM_PM=0,HOUR=0,HOUR_OF_DAY=0,MINUTE=52,SECOND=40,MILLISECOND=46,ZONE_OFFSET=0,DST_OFFSET=0]", gregorianCalendar0.toString());
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 5
@@ -116,13 +121,12 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(321, 321);
-      TimeOfDay timeOfDay1 = new TimeOfDay(1685, 1685);
-      Locale locale0 = Locale.KOREAN;
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance(locale0);
-      Period period0 = new Period(timeOfDay0, timeOfDay1);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1, 1);
+      TimeOfDay timeOfDay1 = new TimeOfDay(1, (-1634));
+      Period period0 = new Period(timeOfDay1, timeOfDay0);
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
-      assertEquals("java.util.GregorianCalendar[time=1398580802155,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=18,WEEK_OF_MONTH=5,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=0,HOUR_OF_DAY=0,MINUTE=40,SECOND=2,MILLISECOND=155,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals("java.util.GregorianCalendar[time=1433724761676,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"GMT\",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=8,DAY_OF_YEAR=159,DAY_OF_WEEK=2,DAY_OF_WEEK_IN_MONTH=2,AM_PM=0,HOUR=0,HOUR_OF_DAY=0,MINUTE=52,SECOND=41,MILLISECOND=676,ZONE_OFFSET=0,DST_OFFSET=0]", gregorianCalendar0.toString());
       assertEquals(false, boolean0);
   }
 
@@ -138,10 +142,11 @@ public class PeriodEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, (-1687));
-      TimeOfDay timeOfDay1 = new TimeOfDay(0, 0);
-      Period period0 = new Period(timeOfDay0, timeOfDay1);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(0, (-1687), 0, 0, 0, (-1687));
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 877);
+      TimeOfDay timeOfDay1 = new TimeOfDay((-1), 0);
+      Period period0 = new Period(timeOfDay1, timeOfDay0);
+      Integer integer0 = timeOfDay1.getHours();
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(877, (-1), (int) integer0, (-1), (int) integer0);
       boolean boolean0 = period0.isInPeriod((Calendar) gregorianCalendar0);
       assertEquals(false, boolean0);
   }

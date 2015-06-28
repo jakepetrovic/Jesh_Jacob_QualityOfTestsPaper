@@ -33,7 +33,7 @@ public class CommonNoteModelEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       CommonNoteModel commonNoteModel0 = new CommonNoteModel();
-      commonNoteModel0.setSelected(false);
+      commonNoteModel0.setSelected(true);
       assertEquals(false, commonNoteModel0.isSelected());
   }
 

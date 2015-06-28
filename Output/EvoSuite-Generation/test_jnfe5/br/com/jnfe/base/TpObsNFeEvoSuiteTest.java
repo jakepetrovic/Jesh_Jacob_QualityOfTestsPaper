@@ -19,8 +19,8 @@ public class TpObsNFeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpObsNFe tpObsNFe0 = TpObsNFe.CONTRIBUINTE;
+      TpObsNFe tpObsNFe0 = TpObsNFe.FISCO;
       char char0 = tpObsNFe0.getValue();
-      assertEquals('C', char0);
+      assertEquals('F', char0);
   }
 }

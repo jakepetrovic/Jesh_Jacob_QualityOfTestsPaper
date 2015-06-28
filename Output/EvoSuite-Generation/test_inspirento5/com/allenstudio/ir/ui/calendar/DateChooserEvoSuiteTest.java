@@ -34,7 +34,7 @@ public class DateChooserEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       dateChooser0.addDateChooserListener((DateChooserListener) null);
-      assertEquals(false, dateChooser0.getInheritsPopupMenu());
+      assertEquals(2, dateChooser0.getComponentCount());
   }
 
   //Test case number: 1
@@ -51,31 +51,19 @@ public class DateChooserEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.DateChooser.removeDateChooserListener()V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      DateChooser dateChooser0 = new DateChooser();
-      dateChooser0.removeDateChooserListener();
-      assertEquals(true, dateChooser0.isOpaque());
-  }
-
-  //Test case number: 3
-  /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.DateChooser.monthChanged()V: root-Branch
    * 2 com.allenstudio.ir.ui.calendar.DateChooser$5.<init>(Lcom/allenstudio/ir/ui/calendar/DateChooser;Ljava/util/Calendar;)V: root-Branch
    * 3 com.allenstudio.ir.ui.calendar.DateChooser.updateCurrent()V: I4 Branch 3 IFNONNULL L188 - true
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       dateChooser0.monthChanged();
-      assertEquals(false, dateChooser0.isPaintingForPrint());
+      assertEquals(false, dateChooser0.requestFocusInWindow());
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
    * 11 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.DateChooser.fireDateChanged(Ljava/lang/Object;Ljava/util/Calendar;Ljava/util/Calendar;)V: I4 Branch 2 IFNULL L174 - true
@@ -91,13 +79,13 @@ public class DateChooserEvoSuiteTest {
    * 11 com.allenstudio.ir.ui.calendar.DateChooser$4.<init>(Lcom/allenstudio/ir/ui/calendar/DateChooser;)V: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test3()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       assertNotNull(dateChooser0);
       
       GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
-      dateChooser0.fireDateChanged((Object) "SwingDisplayedMnemonicIndexKey", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-      assertEquals(1398597775905L, gregorianCalendar0.getTimeInMillis());
-      assertEquals("java.util.GregorianCalendar[time=1398597775905,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=18,WEEK_OF_MONTH=5,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=5,HOUR_OF_DAY=5,MINUTE=22,SECOND=55,MILLISECOND=905,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      dateChooser0.fireDateChanged((Object) "focusPainted", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+      assertEquals("java.util.GregorianCalendar[time=1433742276121,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=11,HOUR_OF_DAY=23,MINUTE=44,SECOND=36,MILLISECOND=121,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals(1433742276121L, gregorianCalendar0.getTimeInMillis());
   }
 }

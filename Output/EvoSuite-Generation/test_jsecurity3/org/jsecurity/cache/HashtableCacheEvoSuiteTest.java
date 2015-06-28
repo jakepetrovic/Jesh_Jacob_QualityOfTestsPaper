@@ -7,7 +7,6 @@ package org.jsecurity.cache;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.HashSet;
 import java.util.Set;
 import org.jsecurity.cache.CacheException;
 import org.jsecurity.cache.HashtableCache;
@@ -23,9 +22,9 @@ public class HashtableCacheEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("~a3<5@iYDJ`Z T\"LJ");
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
       hashtableCache0.clear();
-      assertEquals(0, hashtableCache0.size());
+      assertEquals("HashtableCache [`T6rL5%%B|-9O-yQr]", hashtableCache0.toString());
   }
 
   //Test case number: 1
@@ -35,22 +34,20 @@ public class HashtableCacheEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("Has!tCce ");
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
       int int0 = hashtableCache0.size();
       assertEquals(0, int0);
   }
 
   //Test case number: 2
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.cache.HashtableCache.get(Ljava/lang/Object;)Ljava/lang/Object;: root-Branch
-   * 2 org.jsecurity.cache.HashtableCache.keys()Ljava/util/Set;: I5 Branch 1 IFGT L76 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("Has!tCce ");
-      Set<Object> set0 = hashtableCache0.keys();
-      Object object0 = hashtableCache0.get((Object) set0);
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
+      Object object0 = hashtableCache0.get((Object) "`T6rL5%%B|-9O-yQr");
       assertNull(object0);
   }
 
@@ -61,8 +58,8 @@ public class HashtableCacheEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("Has!tCce ");
-      hashtableCache0.remove((Object) 0);
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
+      hashtableCache0.remove((Object) "HashtableCache [`T6rL5%%B|-9O-yQr]");
       assertEquals(0, hashtableCache0.size());
   }
 
@@ -73,26 +70,27 @@ public class HashtableCacheEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("~a3<5@iYDJ`Z T\"LJ");
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
       String string0 = hashtableCache0.toString();
       assertNotNull(string0);
-      assertEquals("HashtableCache [~a3<5@iYDJ`Z T\"LJ]", string0);
+      assertEquals("HashtableCache [`T6rL5%%B|-9O-yQr]", string0);
   }
 
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 org.jsecurity.cache.HashtableCache.keys()Ljava/util/Set;: I5 Branch 1 IFGT L76 - false
    * 2 org.jsecurity.cache.HashtableCache.put(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 3 org.jsecurity.cache.HashtableCache.keys()Ljava/util/Set;: I5 Branch 1 IFGT L76 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("~a3<5@iYDJ`Z T\"LJ");
-      HashSet<Set<String>> hashSet0 = new HashSet<Set<String>>();
-      hashtableCache0.put((Object) hashSet0, (Object) hashSet0);
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
       Set<Object> set0 = hashtableCache0.keys();
+      hashtableCache0.put((Object) set0, (Object) "HashtableCache [`T6rL5%%B|-9O-yQr]");
+      Set<Object> set1 = hashtableCache0.keys();
       assertEquals(1, hashtableCache0.size());
-      assertEquals(1, set0.size());
+      assertNotSame(set1, set0);
   }
 
   //Test case number: 6
@@ -102,25 +100,27 @@ public class HashtableCacheEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("Has!tCce ");
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
       Set<Object> set0 = hashtableCache0.values();
-      assertEquals(0, set0.size());
+      assertEquals(true, set0.isEmpty());
   }
 
   //Test case number: 7
   /*
-   * 4 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.cache.HashtableCache.values()Ljava/util/Set;: I5 Branch 2 IFGT L84 - false
    * 2 org.jsecurity.cache.HashtableCache.values()Ljava/util/Set;: I16 Branch 3 IFEQ L86 - true
    * 3 org.jsecurity.cache.HashtableCache.<init>(Ljava/lang/String;)V: root-Branch
    * 4 org.jsecurity.cache.HashtableCache.put(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 5 org.jsecurity.cache.HashtableCache.keys()Ljava/util/Set;: I5 Branch 1 IFGT L76 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      HashtableCache hashtableCache0 = new HashtableCache("~a3<5@iYDJ`Z T\"LJ");
-      HashSet<Set<String>> hashSet0 = new HashSet<Set<String>>();
-      hashtableCache0.put((Object) hashSet0, (Object) hashSet0);
-      hashtableCache0.values();
+      HashtableCache hashtableCache0 = new HashtableCache("`T6rL5%%B|-9O-yQr");
+      Set<Object> set0 = hashtableCache0.keys();
+      hashtableCache0.put((Object) set0, (Object) "HashtableCache [`T6rL5%%B|-9O-yQr]");
+      Set<Object> set1 = hashtableCache0.values();
       assertEquals(1, hashtableCache0.size());
+      assertNotSame(set1, set0);
   }
 }

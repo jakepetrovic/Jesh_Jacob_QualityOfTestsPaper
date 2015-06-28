@@ -21,10 +21,10 @@ net.sf.lavalamp.device.AbstractDevice
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.lavalamp.device.AbstractDevice: 93.75%</ul><ul>
-<li>13198 fitness evaluations, 265 generations, 69648 statements, 8396 tests.
+<ul><li>Target class: net.sf.lavalamp.device.AbstractDevice: 81.25%</ul><ul>
+<li>13404 fitness evaluations, 270 generations, 54661 statements, 8002 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 6/6 branches, 11/12 methods, 15/16 total goals
+<li>Coverage: 4/6 branches, 11/12 methods, 13/16 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -38,9 +38,10 @@ net.sf.lavalamp.device.AbstractDevice
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>Period period0 = new Period((TimeOfDay) null, (TimeOfDay) null);
-<span class="nocode"><a name="3">  3: </a></span>dummyDevice0.setAlwaysOffPeriod(period0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
+<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-431), (-431));
+<span class="nocode"><a name="3">  3: </a></span>Period period0 = new Period(timeOfDay0, timeOfDay0);
+<span class="nocode"><a name="4">  4: </a></span>dummyDevice0.setAlwaysOffPeriod(period0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -51,56 +52,46 @@ net.sf.lavalamp.device.AbstractDevice
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>dummyDevice0.turnOff();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
+<span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
+<span class="nocode"><a name="3">  3: </a></span>dummyDevice0.setProperties(deviceProperties0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  dummyDevice0.isAlwaysOff((Calendar) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>dummyDevice0.turnOff();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
 </pre>
 <h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
+<span class="nocode"><a name="2">  2: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar(0, 0, 0, 0, 0, 0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
 <span class="nocode"><a name="2">  2: </a></span>dummyDevice0.turnOn();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
 </pre>
-<h3>Test case 7</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
 <span class="nocode"><a name="2">  2: </a></span>Builds builds0 = dummyDevice0.getBuilds();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(builds0);
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
 <span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
 <span class="nocode"><a name="3">  3: </a></span>deviceProperties0.setOnWhenSuccessful(true);
 <span class="nocode"><a name="4">  4: </a></span>dummyDevice0.setProperties(deviceProperties0);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;dummy device null&quot;, dummyDevice0.toString());
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="3">  3: </a></span>OnError onError0 = OnError.CRASH;
-<span class="nocode"><a name="4">  4: </a></span>deviceProperties0.setOnError(onError0);
-<span class="nocode"><a name="5">  5: </a></span>dummyDevice0.setProperties(deviceProperties0);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(deviceProperties0.getClassName());
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="3">  3: </a></span>OnError onError0 = OnError.STATUSQUO;
-<span class="nocode"><a name="4">  4: </a></span>deviceProperties0.setOnError(onError0);
-<span class="nocode"><a name="5">  5: </a></span>dummyDevice0.setProperties(deviceProperties0);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(deviceProperties0.getPath());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -172,9 +163,9 @@ net.sf.lavalamp.device.AbstractDevice
 <span class="nocode"><a name="67"> 67: </a></span>		Action errorAction;
 <span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">		OnError onError = properties.getOnError();</span>
 <span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">		if (onError.equals(OnError.CRASH)) {</span>
-<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">			errorAction = new Crash();</span>
+<span class="nocode"><a name="70"> 70: </a></span>			errorAction = new Crash();
 <span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">		} else if (onError.equals(OnError.STATUSQUO)) {</span>
-<span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">			errorAction = new StatusQuo();</span>
+<span class="nocode"><a name="72"> 72: </a></span>			errorAction = new StatusQuo();
 <span class="nocode"><a name="73"> 73: </a></span>		} else {
 <span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">			errorAction = new Blink();</span>
 <span class="nocode"><a name="75"> 75: </a></span>		}
@@ -207,7 +198,7 @@ net.sf.lavalamp.device.AbstractDevice
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1302785138356621139.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6991366955262283980.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -225,7 +216,7 @@ net.sf.lavalamp.device.AbstractDevice
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4547
+<li>process_communication_port: 6936
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

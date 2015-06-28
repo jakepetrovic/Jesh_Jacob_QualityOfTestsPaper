@@ -7,8 +7,15 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import org.jsecurity.authc.AuthenticationInfo;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.authc.SimpleAuthenticationInfo;
+import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Md2CredentialsMatcher;
 import org.jsecurity.crypto.hash.Md2Hash;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class Md2CredentialsMatcherEvoSuiteTest {
 
@@ -22,9 +29,19 @@ public class Md2CredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
-      Md2Hash md2Hash0 = (Md2Hash)md2CredentialsMatcher0.hashProvidedCredentials((Object) "[LOOKUP] Properties file has no entry specifying LogFactory subclass.", (Object) null, (int) 'u');
-      assertNotNull(md2Hash0);
-      assertEquals("c9028503b070516fd7365445e21c429d", md2Hash0.toHex());
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("Help can be found @http://commons.apache.org/logging/troubleshooting.html.", "Help can be found @http://commons.apache.org/logging/troubleshooting.html.", false);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "[]", (Object) "org.jsecurity.authc.UsernamePasswordToken - Help can be found @http://commons.apache.org/logging/troubleshooting.html., rememberMe=false", "org.jsecurity.authc.UsernamePasswordToken - Help can be found @http://commons.apache.org/logging/troubleshooting.html., rememberMe=false");
+      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) "[]");
+      // Undeclared exception!
+      try {
+        md2CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Illegal hexadecimal charcter [ at index 0
+         */
+      }
   }
 
   //Test case number: 1

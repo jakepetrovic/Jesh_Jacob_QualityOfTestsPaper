@@ -11,13 +11,14 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.authz.ModularRealmAuthorizer;
 import org.jsecurity.authz.Permission;
 import org.jsecurity.authz.UnauthorizedException;
-import org.jsecurity.authz.permission.AllPermission;
 import org.jsecurity.authz.permission.PermissionResolver;
+import org.jsecurity.authz.permission.WildcardPermission;
 import org.jsecurity.authz.permission.WildcardPermissionResolver;
 import org.jsecurity.realm.Realm;
 import org.jsecurity.realm.SimpleAccountRealm;
@@ -29,57 +30,62 @@ public class ModularRealmAuthorizerEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 6 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.authz.ModularRealmAuthorizer.getRealms()Ljava/util/Collection;: root-Branch
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.<init>()V: root-Branch
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - true
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I3 Branch 27 IFNULL L228 - false
-   * 5 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I6 Branch 28 IFLE L228 - false
-   * 6 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I21 Branch 29 IF_ICMPGE L229 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.setRealms(Ljava/util/Collection;)V: root-Branch
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.<init>(Ljava/util/Collection;)V: root-Branch
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I8 Branch 3 IFNULL L98 - false
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I11 Branch 4 IFGT L98 - true
    */
   @Test
   public void test0()  throws Throwable  {
+      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("[]");
+      WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
+      modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
+  }
+
+  //Test case number: 1
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I8 Branch 3 IFNULL L98 - true
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.<init>()V: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
       ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("[]");
+      WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
+      modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
+  }
+
+  //Test case number: 2
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I3 Branch 21 IFNULL L193 - false
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I6 Branch 22 IFGT L193 - false
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I15 Branch 23 IFEQ L194 - false
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      String[] stringArray0 = new String[8];
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      WildcardPermission wildcardPermission0 = new WildcardPermission("2QQJv");
+      linkedHashSet0.add((Permission) wildcardPermission0);
       // Undeclared exception!
       try {
-        modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, stringArray0);
+        modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) linkedHashSet0);
         fail("Expecting exception: IllegalStateException");
       } catch(IllegalStateException e) {
         /*
          * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
          */
       }
-  }
-
-  //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I8 Branch 3 IFNULL L98 - true
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-      modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) null);
-  }
-
-  //Test case number: 2
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I8 Branch 3 IFNULL L98 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.setPermissionResolver(Lorg/jsecurity/authz/permission/PermissionResolver;)V: I11 Branch 4 IFGT L98 - true
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.setRealms(Ljava/util/Collection;)V: root-Branch
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.<init>(Ljava/util/Collection;)V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
-      modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_0", simpleAccountRealm0.getName());
   }
 
   //Test case number: 3
@@ -93,42 +99,75 @@ public class ModularRealmAuthorizerEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
+      linkedList0.push((Realm) simpleAccountRealm0);
+      WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
       modularRealmAuthorizer0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_9", simpleAccountRealm0.getName());
   }
 
   //Test case number: 4
   /*
-   * 6 covered goals:
+   * 8 covered goals:
    * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - true
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - false
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 8 IFEQ L115 - true
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.checkPermission(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)V: I6 Branch 25 IFNE L208 - false
-   * 5 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - false
-   * 6 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - true
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 8 IFEQ L115 - true
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I32 Branch 20 IFNE L179 - false
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I3 Branch 17 IFNULL L177 - false
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I6 Branch 18 IFLE L177 - false
+   * 6 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I21 Branch 19 IF_ICMPGE L178 - false
+   * 7 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - true
+   * 8 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      try {
-        modularRealmAuthorizer0.checkPermission((PrincipalCollection) null, "a&|$vlo/z$u)epLeN");
-        fail("Expecting exception: UnauthorizedException");
-      } catch(UnauthorizedException e) {
-        /*
-         * Subject does not have permission [a&|$vlo/z$u)epLeN]
-         */
-      }
+      linkedList0.push((Realm) simpleAccountRealm0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_28", simpleAccountRealm0.getName());
+      
+      String[] stringArray0 = new String[8];
+      stringArray0[0] = "mCB'_";
+      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, stringArray0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 5
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I13 Branch 9 IFEQ L129 - true
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I13 Branch 9 IFEQ L129 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I24 Branch 10 IFEQ L130 - true
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      linkedList0.push((Realm) simpleAccountRealm0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_71", simpleAccountRealm0.getName());
+      
+      WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
+      WildcardPermission wildcardPermission0 = (WildcardPermission)wildcardPermissionResolver0.resolvePermission("I;5U&$cy+T!Yg%");
+      boolean boolean0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, (Permission) wildcardPermission0);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 6
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I3 Branch 11 IFNULL L143 - true
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (String[]) null);
+      assertNotNull(booleanArray0);
+  }
+
+  //Test case number: 7
   /*
    * 4 covered goals:
    * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I21 Branch 13 IF_ICMPGE L145 - true
@@ -137,226 +176,65 @@ public class ModularRealmAuthorizerEvoSuiteTest {
    * 4 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)[Z: I21 Branch 13 IF_ICMPGE L145 - false
    */
   @Test
-  public void test5()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+  public void test7()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      String[] stringArray0 = new String[6];
-      stringArray0[0] = "'. ";
-      stringArray0[1] = "U#zF'c";
-      stringArray0[2] = "U#zF'c";
-      stringArray0[3] = "U#zF'c";
-      stringArray0[4] = "U#zF'c";
-      stringArray0[5] = "U#zF'c";
+      linkedList0.push((Realm) simpleAccountRealm0);
+      String[] stringArray0 = new String[5];
+      stringArray0[0] = "mCB'_";
+      stringArray0[1] = "EwoB:q$IR ";
+      stringArray0[2] = "mCB'_";
+      stringArray0[3] = "mCB'_";
+      stringArray0[4] = "g+U !5lkGnR_jZTN";
       boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, stringArray0);
       assertNotNull(booleanArray0);
   }
 
-  //Test case number: 6
+  //Test case number: 8
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 14 IFNULL L159 - true
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List<Permission>) null);
+      assertNotNull(booleanArray0);
+  }
+
+  //Test case number: 9
   /*
    * 2 covered goals:
    * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 14 IFNULL L159 - false
    * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I6 Branch 15 IFGT L159 - true
    */
   @Test
-  public void test6()  throws Throwable  {
-      TreeSet<Realm> treeSet0 = new TreeSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) treeSet0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
-      boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List<Permission>) linkedList0);
-      assertNotNull(booleanArray0);
-  }
-
-  //Test case number: 7
-  /*
-   * 7 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I32 Branch 20 IFNE L179 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I3 Branch 17 IFNULL L177 - false
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I6 Branch 18 IFLE L177 - false
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)Z: I21 Branch 19 IF_ICMPGE L178 - false
-   * 5 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - true
-   * 6 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - false
-   * 7 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 8 IFEQ L115 - true
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_86", simpleAccountRealm0.getName());
-      
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      String[] stringArray0 = new String[2];
-      stringArray0[0] = "'. ";
-      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, stringArray0);
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 8
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I3 Branch 21 IFNULL L193 - true
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      TreeSet<Realm> treeSet0 = new TreeSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) treeSet0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) null);
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 9
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I3 Branch 21 IFNULL L193 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I6 Branch 22 IFGT L193 - true
-   */
-  @Test
   public void test9()  throws Throwable  {
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
-      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) null, (Collection<Permission>) linkedHashSet0);
-      assertEquals(true, boolean0);
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) null);
+      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
+      boolean[] booleanArray0 = modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, (List<Permission>) linkedList0);
+      assertNotNull(booleanArray0);
   }
 
   //Test case number: 10
   /*
    * 4 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermission(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)V: I6 Branch 26 IFNE L218 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I13 Branch 9 IFEQ L129 - true
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I13 Branch 9 IFEQ L129 - false
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Lorg/jsecurity/authz/Permission;)Z: I24 Branch 10 IFEQ L130 - true
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I6 Branch 15 IFGT L159 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I25 Branch 16 IFEQ L162 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 14 IFNULL L159 - false
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      AllPermission allPermission0 = new AllPermission();
-      try {
-        modularRealmAuthorizer0.checkPermission((PrincipalCollection) null, (Permission) allPermission0);
-        fail("Expecting exception: UnauthorizedException");
-      } catch(UnauthorizedException e) {
-        /*
-         * Subject does not have permission [org.jsecurity.authz.permission.AllPermission@63f3a140]
-         */
-      }
-  }
-
-  //Test case number: 11
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 30 IFNULL L241 - true
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      TreeSet<Realm> treeSet0 = new TreeSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) treeSet0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) null);
-      assertEquals(true, simplePrincipalCollection0.isEmpty());
-  }
-
-  //Test case number: 12
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 30 IFNULL L241 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I12 Branch 31 IFEQ L242 - true
-   */
-  @Test
-  public void test12()  throws Throwable  {
-      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
-      modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) linkedHashSet0);
-      assertEquals(true, linkedHashSet0.isEmpty());
-  }
-
-  //Test case number: 13
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 34 IFNULL L268 - true
-   */
-  @Test
-  public void test13()  throws Throwable  {
       ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
-      boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List<String>) null);
-      assertNotNull(booleanArray0);
-  }
-
-  //Test case number: 14
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 34 IFNULL L268 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I6 Branch 35 IFGT L268 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List<String>) linkedList0);
-      assertNotNull(booleanArray0);
-  }
-
-  //Test case number: 15
-  /*
-   * 7 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I25 Branch 36 IFEQ L271 - true
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 34 IFNULL L268 - false
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I6 Branch 35 IFGT L268 - false
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I25 Branch 36 IFEQ L271 - false
-   * 5 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - true
-   * 6 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - false
-   * 7 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 33 IFEQ L256 - true
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      linkedList0.add("U#zF'c");
-      boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List<String>) linkedList0);
-      assertNotNull(booleanArray0);
-  }
-
-  //Test case number: 16
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I8 Branch 37 IFEQ L286 - true
-   */
-  @Test
-  public void test16()  throws Throwable  {
-      TreeSet<Realm> treeSet0 = new TreeSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) treeSet0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) linkedHashSet0);
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 17
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I8 Branch 37 IFEQ L286 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - false
-   */
-  @Test
-  public void test17()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      linkedList0.add("U#zF'c");
+      LinkedList<Permission> linkedList0 = new LinkedList<Permission>();
+      WildcardPermission wildcardPermission0 = new WildcardPermission("' found.");
+      linkedList0.add((Permission) wildcardPermission0);
       // Undeclared exception!
       try {
-        modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection<String>) linkedList0);
+        modularRealmAuthorizer0.isPermitted((PrincipalCollection) null, (List<Permission>) linkedList0);
         fail("Expecting exception: IllegalStateException");
       } catch(IllegalStateException e) {
         /*
@@ -365,47 +243,201 @@ public class ModularRealmAuthorizerEvoSuiteTest {
       }
   }
 
-  //Test case number: 18
+  //Test case number: 11
   /*
-   * 8 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I19 Branch 38 IFNE L287 - false
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.getRealms()Ljava/util/Collection;: root-Branch
-   * 3 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - true
-   * 4 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - false
-   * 5 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 33 IFEQ L256 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I3 Branch 21 IFNULL L193 - true
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) null);
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 12
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I6 Branch 22 IFGT L193 - true
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.isPermittedAll(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I3 Branch 21 IFNULL L193 - false
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      boolean boolean0 = modularRealmAuthorizer0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) linkedHashSet0);
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 13
+  /*
+   * 7 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermission(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)V: I6 Branch 25 IFNE L208 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I3 Branch 27 IFNULL L228 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I6 Branch 28 IFLE L228 - false
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;[Ljava/lang/String;)V: I21 Branch 29 IF_ICMPGE L229 - false
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - true
+   * 6 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 7 IFEQ L114 - false
+   * 7 org.jsecurity.authz.ModularRealmAuthorizer.isPermitted(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 8 IFEQ L115 - true
+   */
+  @Test
+  public void test13()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      linkedList0.push((Realm) simpleAccountRealm0);
+      String[] stringArray0 = new String[4];
+      stringArray0[0] = "I;5U&$cy+T!Yg%";
+      try {
+        modularRealmAuthorizer0.checkPermissions((PrincipalCollection) null, stringArray0);
+        fail("Expecting exception: UnauthorizedException");
+      } catch(UnauthorizedException e) {
+        /*
+         * Subject does not have permission [I;5U&$cy+T!Yg%]
+         */
+      }
+  }
+
+  //Test case number: 14
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 30 IFNULL L241 - true
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) null);
+      assertEquals(true, simplePrincipalCollection0.isEmpty());
+  }
+
+  //Test case number: 15
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 30 IFNULL L241 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I12 Branch 31 IFEQ L242 - true
+   */
+  @Test
+  public void test15()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) linkedHashSet0);
+      assertEquals(true, linkedHashSet0.isEmpty());
+  }
+
+  //Test case number: 16
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I12 Branch 31 IFEQ L242 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.checkPermissions(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 30 IFNULL L241 - false
+   */
+  @Test
+  public void test16()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      WildcardPermission wildcardPermission0 = new WildcardPermission("|II+Jh +RN%43&ljy", false);
+      linkedHashSet0.add((Permission) wildcardPermission0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      // Undeclared exception!
+      try {
+        modularRealmAuthorizer0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection<Permission>) linkedHashSet0);
+        fail("Expecting exception: IllegalStateException");
+      } catch(IllegalStateException e) {
+        /*
+         * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+         */
+      }
+  }
+
+  //Test case number: 17
+  /*
+   * 7 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - true
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I13 Branch 32 IFEQ L255 - false
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.hasRole(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/String;)Z: I24 Branch 33 IFEQ L256 - true
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I8 Branch 37 IFEQ L286 - false
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I19 Branch 38 IFNE L287 - false
    * 6 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - false
    * 7 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I11 Branch 2 IFLE L82 - true
-   * 8 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I8 Branch 37 IFEQ L286 - false
+   */
+  @Test
+  public void test17()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+      linkedList0.push((Realm) simpleAccountRealm0);
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_174", simpleAccountRealm0.getName());
+      
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) linkedList0, "mCB'_");
+      Set<String> set0 = simplePrincipalCollection0.getRealmNames();
+      boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection<String>) set0);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 18
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 34 IFNULL L268 - true
    */
   @Test
   public void test18()  throws Throwable  {
-      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_188", simpleAccountRealm0.getName());
-      
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      linkedList0.add("U#zF'c");
-      boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) null, (Collection<String>) linkedList0);
-      assertEquals(false, boolean0);
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) null, (List<String>) null);
+      assertNotNull(booleanArray0);
   }
 
   //Test case number: 19
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 40 IFNULL L308 - true
-   * 2 org.jsecurity.authz.ModularRealmAuthorizer.<init>()V: root-Branch
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I3 Branch 34 IFNULL L268 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.hasRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/List;)[Z: I6 Branch 35 IFGT L268 - true
    */
   @Test
   public void test19()  throws Throwable  {
-      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) null);
-      assertEquals(true, simplePrincipalCollection0.isEmpty());
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      boolean[] booleanArray0 = modularRealmAuthorizer0.hasRoles((PrincipalCollection) simplePrincipalCollection0, (List<String>) linkedList0);
+      assertNotNull(booleanArray0);
   }
 
   //Test case number: 20
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.hasAllRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)Z: I8 Branch 37 IFEQ L286 - true
+   */
+  @Test
+  public void test20()  throws Throwable  {
+      LinkedList<Realm> linkedList0 = new LinkedList<Realm>();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedList0);
+      LinkedList<String> linkedList1 = new LinkedList<String>();
+      boolean boolean0 = modularRealmAuthorizer0.hasAllRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) linkedList1);
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 21
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 40 IFNULL L308 - true
+   */
+  @Test
+  public void test21()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "", "");
+      modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) null);
+      assertEquals(false, simplePrincipalCollection0.isEmpty());
+  }
+
+  //Test case number: 22
   /*
    * 4 covered goals:
    * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 40 IFNULL L308 - false
@@ -414,14 +446,37 @@ public class ModularRealmAuthorizerEvoSuiteTest {
    * 4 org.jsecurity.authz.ModularRealmAuthorizer.<init>(Ljava/util/Collection;)V: root-Branch
    */
   @Test
-  public void test20()  throws Throwable  {
+  public void test22()  throws Throwable  {
       LinkedHashSet<Realm> linkedHashSet0 = new LinkedHashSet<Realm>();
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      linkedHashSet0.add((Realm) simpleAccountRealm0);
       ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer((Collection<Realm>) linkedHashSet0);
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) linkedHashSet0, "Wyfi!l'.I]-");
-      LinkedHashSet<String> linkedHashSet1 = new LinkedHashSet<String>();
-      modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) linkedHashSet1);
-      assertEquals("[]", linkedHashSet1.toString());
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) treeSet0);
+      assertEquals(true, simplePrincipalCollection0.isEmpty());
+  }
+
+  //Test case number: 23
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.authz.ModularRealmAuthorizer.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I12 Branch 41 IFEQ L309 - false
+   * 2 org.jsecurity.authz.ModularRealmAuthorizer.getRealms()Ljava/util/Collection;: root-Branch
+   * 3 org.jsecurity.authz.ModularRealmAuthorizer.<init>()V: root-Branch
+   * 4 org.jsecurity.authz.ModularRealmAuthorizer.assertRealmsConfigured()V: I8 Branch 1 IFNULL L82 - true
+   * 5 org.jsecurity.authz.ModularRealmAuthorizer.checkRoles(Lorg/jsecurity/subject/PrincipalCollection;Ljava/util/Collection;)V: I3 Branch 40 IFNULL L308 - false
+   */
+  @Test
+  public void test23()  throws Throwable  {
+      ModularRealmAuthorizer modularRealmAuthorizer0 = new ModularRealmAuthorizer();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) "UTF-8", "");
+      Set<String> set0 = simplePrincipalCollection0.getRealmNames();
+      // Undeclared exception!
+      try {
+        modularRealmAuthorizer0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) set0);
+        fail("Expecting exception: IllegalStateException");
+      } catch(IllegalStateException e) {
+        /*
+         * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authorization operation.
+         */
+      }
   }
 }

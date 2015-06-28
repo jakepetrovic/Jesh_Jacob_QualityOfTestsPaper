@@ -24,7 +24,8 @@ public class NullValueEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
-      boolean boolean0 = nullValue0.equals((Object) null);
+      Object object0 = new Object();
+      boolean boolean0 = nullValue0.equals(object0);
       assertEquals(false, boolean0);
   }
 
@@ -82,7 +83,7 @@ public class NullValueEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
-      Date date0 = nullValue0.asDate((String) null);
+      Date date0 = nullValue0.asDate("");
       assertNull(date0);
   }
 
@@ -95,8 +96,7 @@ public class NullValueEvoSuiteTest {
   public void test6()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
       Class<?> class0 = NullValue.class;
-      NullValue nullValue1 = nullValue0.asType((Class<NullValue>) class0);
-      assertNull(nullValue1);
+      nullValue0.asType((Class<Integer>) class0);
   }
 
   //Test case number: 7

@@ -22,8 +22,8 @@ net.sf.jniinchi.INCHI_STATUS
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_STATUS: 100.00%</ul><ul>
-<li>2550 fitness evaluations, 52 generations, 18778 statements, 1768 tests.
-<li>Time: 0:00:15(Search: 0:00:15, minimization: 0:00:00)
+<li>1100 fitness evaluations, 23 generations, 10980 statements, 859 tests.
+<li>Time: 0:00:12(Search: 0:00:10, minimization: 0:00:01)
 <li>Coverage: 14/14 branches, 2/2 methods, 15/15 total goals
 <li>Mutation score: 80%
 </ul>
@@ -31,9 +31,9 @@ net.sf.jniinchi.INCHI_STATUS
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.FAIL_I2I;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.INVALID_LAYOUT;
 <span class="nocode"><a name="2">  2: </a></span>int int0 = iNCHI_STATUS0.getIndx();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(4, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(3, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -42,8 +42,8 @@ net.sf.jniinchi.INCHI_STATUS
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(4);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_STATUS.FAIL_I2I, iNCHI_STATUS0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(2);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_STATUS.INVALID_VERSION, iNCHI_STATUS0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -57,17 +57,17 @@ net.sf.jniinchi.INCHI_STATUS
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(2);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_STATUS.INVALID_VERSION, iNCHI_STATUS0);
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(3);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_STATUS.INVALID_LAYOUT, iNCHI_STATUS0);
 </pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(4);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_STATUS.FAIL_I2I, iNCHI_STATUS0);
+</pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS.getValue((-1834));
+<span class="nocode"><a name="1">  1: </a></span>INCHI_STATUS.getValue(610908950);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -143,7 +143,7 @@ net.sf.jniinchi.INCHI_STATUS
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8287303538074592099.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7626547542380899941.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -161,7 +161,7 @@ net.sf.jniinchi.INCHI_STATUS
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21897
+<li>process_communication_port: 21755
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

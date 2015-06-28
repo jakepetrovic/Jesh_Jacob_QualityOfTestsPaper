@@ -22,7 +22,7 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      UF.getUF("AC");
+      UF.getUF("RR");
   }
 
   //Test case number: 1
@@ -32,9 +32,9 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      UF uF0 = UF.AC;
+      UF uF0 = UF.RR;
       String string0 = uF0.getNomeUF();
-      assertEquals("Acre", string0);
+      assertEquals("Roraima", string0);
   }
 
   //Test case number: 2

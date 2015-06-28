@@ -16,23 +16,23 @@ public class Md5HashEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md5Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "", (Object) "MD5");
-      assertEquals("7f138a09169b250e9dcb378140907378", md5Hash0.toString());
+      Md5Hash md5Hash0 = new Md5Hash((Object) "", (Object) null, 1926);
+      assertEquals("MD5", md5Hash0.getAlgorithmName());
   }
 
   //Test case number: 1
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
+   * 1 org.jsecurity.crypto.hash.Md5Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "", (Object) "", 0);
-      assertEquals("d41d8cd98f00b204e9800998ecf8427e", md5Hash0.toString());
+      Md5Hash md5Hash0 = new Md5Hash((Object) "7f138a09169b250e9dcb378140907378", (Object) null);
+      assertEquals("02aa3bd0f299031672fd8598e7c32c8c", md5Hash0.toHex());
   }
 
   //Test case number: 2
@@ -44,7 +44,7 @@ public class Md5HashEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       Md5Hash md5Hash0 = Md5Hash.fromBase64String("");
-      assertEquals("", md5Hash0.toString());
+      assertEquals("", md5Hash0.toBase64());
   }
 
   //Test case number: 3
@@ -55,8 +55,8 @@ public class Md5HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) "7f138a09169b250e9dcb378140907378");
-      assertEquals("Aqo70PKZAxZy/YWY58MsjA==", md5Hash0.toBase64());
+      Md5Hash md5Hash0 = new Md5Hash((Object) "MD5");
+      assertEquals("7f138a09169b250e9dcb378140907378", md5Hash0.toHex());
   }
 
   //Test case number: 4
@@ -67,14 +67,7 @@ public class Md5HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Md5Hash.fromHexString("lU^ir/");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal hexadecimal charcter l at index 0
-         */
-      }
+      Md5Hash md5Hash0 = Md5Hash.fromHexString("");
+      assertEquals("", md5Hash0.toString());
   }
 }

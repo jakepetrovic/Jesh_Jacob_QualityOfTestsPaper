@@ -20,8 +20,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384", (Object) "SHA-384", 222);
-      assertEquals("yxL5nKpZo4RdVU0P5JU7xm2h3CkB/a5eHX2H/X1WoWy2qCZCM/hnK45fWJ/TS9c1", sha384Hash0.toBase64());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "", (Object) "SHA-384", (int) (byte)105);
+      assertEquals("41486abcfa6f251e23742c539b12330c07868e598ff76807de14a05032384f0876ef6117698053ca3e890570f6bbfa76", sha384Hash0.toString());
   }
 
   //Test case number: 1
@@ -32,8 +32,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("\u0000\u0000\u0000");
-      assertEquals("", sha384Hash0.toString());
+      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("");
+      assertEquals("", sha384Hash0.toBase64());
   }
 
   //Test case number: 2
@@ -43,8 +43,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "UTF-8");
-      assertEquals("yrZQ9NCRVOcfAB1mtzjinEi2XP1B2g3NkXaQ59S0R8Oh8HevZUR6dq960k5Y29Gw", sha384Hash0.toBase64());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "");
+      assertEquals("OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb", sha384Hash0.toBase64());
   }
 
   //Test case number: 3
@@ -56,7 +56,7 @@ public class Sha384HashEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Sha384Hash sha384Hash0 = Sha384Hash.fromHexString("");
-      assertEquals("SHA-384", sha384Hash0.getAlgorithmName());
+      assertEquals("", sha384Hash0.toString());
   }
 
   //Test case number: 4
@@ -67,7 +67,7 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "86f052a338cb94e695b6f6aeba3da1c7dc418f2b093419cfde5d57fd025e6cd8cdad702d1435f92cd4dd04e4756a9fb1", (Object) "86f052a338cb94e695b6f6aeba3da1c7dc418f2b093419cfde5d57fd025e6cd8cdad702d1435f92cd4dd04e4756a9fb1");
-      assertEquals("0e8fa57204ffb839480df004d42c7500492c4de545ca606246e6f6aea42cf45988584eec0b547d9644637f92210539d9", sha384Hash0.toHex());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "", (Object) "");
+      assertEquals("38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b", sha384Hash0.toString());
   }
 }

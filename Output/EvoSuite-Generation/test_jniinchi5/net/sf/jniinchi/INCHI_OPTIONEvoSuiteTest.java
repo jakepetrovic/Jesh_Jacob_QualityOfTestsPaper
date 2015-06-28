@@ -21,7 +21,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_OPTION.valueOfIgnoreCase(",|ZoRDPf4MO.");
+      INCHI_OPTION.valueOfIgnoreCase("S-SE;O/(TYh#1");
   }
 
   //Test case number: 1
@@ -33,7 +33,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("SAsXYZ");
-      assertEquals(INCHI_OPTION.SAsXYZ, iNCHI_OPTION0);
+      INCHI_OPTION iNCHI_OPTION0 = INCHI_OPTION.valueOfIgnoreCase("SRac");
+      assertEquals(INCHI_OPTION.SRac, iNCHI_OPTION0);
   }
 }

@@ -21,8 +21,9 @@ public class OffEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Off off0 = new Off();
-      off0.setEnd("00:00");
-      assertEquals("[start=00:00, end=00:00]", off0.toString());
+      off0.setEnd("ziWpi");
+      assertEquals("[start=00:00, end=ziWpi]", off0.toString());
+      assertEquals("00:00", off0.getStart());
   }
 
   //Test case number: 1
@@ -33,10 +34,9 @@ public class OffEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Off off0 = new Off();
-      assertEquals("00:00", off0.getStart());
-      
-      off0.setStart("");
-      assertEquals("[start=, end=00:00]", off0.toString());
+      off0.setStart("00:00");
+      assertEquals("[start=00:00, end=00:00]", off0.toString());
+      assertEquals("00:00", off0.getEnd());
   }
 
   //Test case number: 2
@@ -62,8 +62,8 @@ public class OffEvoSuiteTest {
   public void test3()  throws Throwable  {
       Off off0 = new Off();
       String string0 = off0.getStart();
-      assertNotNull(string0);
       assertEquals("[start=00:00, end=00:00]", off0.toString());
+      assertNotNull(string0);
       assertEquals("00:00", string0);
   }
 

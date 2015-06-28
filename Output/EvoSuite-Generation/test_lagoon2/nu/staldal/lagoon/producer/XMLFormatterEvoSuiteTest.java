@@ -29,7 +29,7 @@ public class XMLFormatterEvoSuiteTest {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       // Undeclared exception!
       try {
-        xMLFormatter0.hasBeenUpdated(59987L);
+        xMLFormatter0.hasBeenUpdated(201L);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

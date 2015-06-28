@@ -22,9 +22,9 @@ org.jsecurity.jndi.JndiTemplate
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.jndi.JndiTemplate: 66.67%</ul><ul>
-<li>6052 fitness evaluations, 123 generations, 19158 statements, 4062 tests.
+<li>8336 fitness evaluations, 168 generations, 26746 statements, 5401 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 8/18 branches, 18/19 methods, 20/30 total goals
+<li>Coverage: 8/18 branches, 19/19 methods, 20/30 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,9 +32,7 @@ org.jsecurity.jndi.JndiTemplate
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiTemplate jndiTemplate0 = new JndiTemplate();
-<span class="nocode"><a name="2">  2: </a></span>Properties properties0 = new Properties();
-<span class="nocode"><a name="3">  3: </a></span>jndiTemplate0.setEnvironment(properties0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;{}&quot;, properties0.toString());
+<span class="nocode"><a name="2">  2: </a></span>jndiTemplate0.setEnvironment((Properties) null);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -52,7 +50,7 @@ org.jsecurity.jndi.JndiTemplate
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiTemplate jndiTemplate0 = new JndiTemplate();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  jndiTemplate0.rebind(&quot;-F!lcVyd#YA&lt;ks*&quot;, (Object) jndiTemplate0);
+<span class="nocode"><a name="3">  3: </a></span>  jndiTemplate0.rebind(&quot;Dr#J=+-%2&quot;, &quot;FORMAT&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NoInitialContextException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -64,7 +62,7 @@ org.jsecurity.jndi.JndiTemplate
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiTemplate jndiTemplate0 = new JndiTemplate();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  jndiTemplate0.bind(&quot;5sQBiN@L!{`,*p6&amp;DB&quot;, &quot;KR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  jndiTemplate0.bind(&quot;Jndi object acquired under name '&quot;, &quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NoInitialContextException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -76,15 +74,16 @@ org.jsecurity.jndi.JndiTemplate
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Properties properties0 = new Properties();
 <span class="nocode"><a name="2">  2: </a></span>JndiTemplate jndiTemplate0 = new JndiTemplate(properties0);
-<span class="nocode"><a name="3">  3: </a></span>properties0.put((Object) &quot;/&quot;, (Object) &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  jndiTemplate0.lookup(&quot;E~wuY/G[d(Cc96LHj`&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NoInitialContextException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>properties0.put((Object) &quot;zho&quot;, (Object) &quot;zho&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Class&lt;?&gt; class0 = Properties.class;
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  jndiTemplate0.lookup(&quot;0uq:*dg=&quot;, (Class) class0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NoInitialContextException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -256,7 +255,7 @@ org.jsecurity.jndi.JndiTemplate
 <span class="nocode"><a name="167">167: </a></span>     *                         name bound to JNDI
 <span class="nocode"><a name="168">168: </a></span>     */
 <span class="nocode"><a name="169">169: </a></span>    public Object lookup(String name, Class requiredType) throws NamingException {
-<span class="nocode"><a name="170">170: </a></span>        Object jndiObject = lookup(name);
+<span class="nocode"><a name="170">170: </a></span><span style="background-color: #ffffcc">        Object jndiObject = lookup(name);</span>
 <span class="nocode"><a name="171">171: </a></span>        if (requiredType != null &amp;&amp; !requiredType.isInstance(jndiObject)) {
 <span class="nocode"><a name="172">172: </a></span>            String msg = &quot;Jndi object acquired under name '&quot; + name + &quot;' is of type [&quot; +
 <span class="nocode"><a name="173">173: </a></span>                    jndiObject.getClass().getName() + &quot;] and not assignable to the required type [&quot; +
@@ -328,7 +327,7 @@ org.jsecurity.jndi.JndiTemplate
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -346,7 +345,7 @@ org.jsecurity.jndi.JndiTemplate
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6426
+<li>process_communication_port: 20257
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

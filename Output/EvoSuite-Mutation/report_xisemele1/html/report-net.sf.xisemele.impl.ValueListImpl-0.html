@@ -22,8 +22,8 @@ net.sf.xisemele.impl.ValueListImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.ValueListImpl: 100.00%</ul><ul>
-<li>12400 fitness evaluations, 249 generations, 72227 statements, 7757 tests.
-<li>Time: 0:01:00(Search: 0:00:59, minimization: 0:00:01)
+<li>6450 fitness evaluations, 130 generations, 50675 statements, 3979 tests.
+<li>Time: 0:00:36(Search: 0:00:33, minimization: 0:00:02)
 <li>Coverage: 26/26 branches, 14/14 methods, 27/27 total goals
 <li>Mutation score: 71%
 </ul>
@@ -58,8 +58,8 @@ net.sf.xisemele.impl.ValueListImpl
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="3">  3: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asShort();
@@ -77,8 +77,8 @@ net.sf.xisemele.impl.ValueListImpl
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
-<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Value) null);
-<span class="nocode"><a name="3">  3: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
+<span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.offer((Value) null);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asInteger();
@@ -91,13 +91,13 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;Long&gt; list0 = valueListImpl0.asLong();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.offer((Value) null);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asLong();
@@ -115,8 +115,8 @@ net.sf.xisemele.impl.ValueListImpl
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="3">  3: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asFloat();
@@ -129,13 +129,13 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;Double&gt; list0 = valueListImpl0.asDouble();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.addLast((Value) null);
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asDouble();
@@ -148,7 +148,7 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;BigInteger&gt; list0 = valueListImpl0.asBigInteger();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -167,7 +167,7 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;BigDecimal&gt; list0 = valueListImpl0.asBigDecimal();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -186,7 +186,7 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;Boolean&gt; list0 = valueListImpl0.asBoolean();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -210,8 +210,8 @@ net.sf.xisemele.impl.ValueListImpl
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
-<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Value) null);
-<span class="nocode"><a name="3">  3: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
+<span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asString();
@@ -224,7 +224,7 @@ net.sf.xisemele.impl.ValueListImpl
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="3">  3: </a></span>List&lt;Date&gt; list0 = valueListImpl0.asDate();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -242,17 +242,17 @@ net.sf.xisemele.impl.ValueListImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>List&lt;Date&gt; list0 = valueListImpl0.asDate(&quot;?S/00&amp;&gt;8ArjrIh7&quot;);
+<span class="nocode"><a name="3">  3: </a></span>List&lt;Date&gt; list0 = valueListImpl0.asDate(&quot;53%NLkJZ&lt;Hm&quot;);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="2">  2: </a></span>linkedList0.add((Value) null);
+<span class="nocode"><a name="3">  3: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asDate(&quot;NIgdr=65Y.Q)Nv1\&quot;'&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  valueListImpl0.asDate(&quot;&quot;);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="9">  9: </a></span>}
@@ -261,7 +261,7 @@ net.sf.xisemele.impl.ValueListImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>Class&lt;?&gt; class0 = Boolean.class;
+<span class="nocode"><a name="3">  3: </a></span>Class&lt;?&gt; class0 = Collection.class;
 <span class="nocode"><a name="4">  4: </a></span>List&lt;Integer&gt; list0 = valueListImpl0.asType((Class&lt;Integer&gt;) class0);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(true, list0.isEmpty());
 </pre>
@@ -269,11 +269,11 @@ net.sf.xisemele.impl.ValueListImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Value&gt; linkedList0 = new LinkedList&lt;Value&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ValueListImpl valueListImpl0 = new ValueListImpl((List&lt;Value&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Value) null);
-<span class="nocode"><a name="4">  4: </a></span>Class&lt;?&gt; class0 = Object.class;
+<span class="nocode"><a name="3">  3: </a></span>Class&lt;?&gt; class0 = Double.class;
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Value) null);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  valueListImpl0.asType((Class&lt;Byte&gt;) class0);
+<span class="nocode"><a name="7">  7: </a></span>  valueListImpl0.asType((Class&lt;BigInteger&gt;) class0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="10"> 10: </a></span>}
@@ -465,7 +465,7 @@ net.sf.xisemele.impl.ValueListImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5217558598097753761.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7563696726542208450.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -483,7 +483,7 @@ net.sf.xisemele.impl.ValueListImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2923
+<li>process_communication_port: 15991
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

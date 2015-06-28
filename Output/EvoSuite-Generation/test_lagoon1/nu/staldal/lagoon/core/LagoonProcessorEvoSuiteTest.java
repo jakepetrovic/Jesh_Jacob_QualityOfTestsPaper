@@ -37,11 +37,13 @@ public class LagoonProcessorEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Element element0 = new Element("", "", 1295, 1295);
-      File file0 = new File("");
+      Element element0 = new Element("", "");
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(331);
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, false);
+      File file0 = new File("", "");
       LagoonProcessor lagoonProcessor0 = null;
       try {
-        lagoonProcessor0 = new LagoonProcessor("", element0, file0, "", (PrintWriter) null, (PrintWriter) null);
+        lagoonProcessor0 = new LagoonProcessor("", element0, file0, "", printWriter0, printWriter0);
         fail("Expecting exception: LagoonException");
       } catch(LagoonException e) {
         /*
@@ -67,17 +69,15 @@ public class LagoonProcessorEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Element element0 = new Element("Unable to create directory: ", "Unable to create directory: ");
-      File file0 = new File("Unable to create directory: ", "Unable to create directory: ");
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+      Element element0 = new Element("New asyatarget: ", "New asyatarget: ");
+      File file0 = new File("New asyatarget: ");
       LagoonProcessor lagoonProcessor0 = null;
       try {
-        lagoonProcessor0 = new LagoonProcessor("Unable to create directory: ", element0, file0, "Unable to create directory: ", printWriter0, printWriter0);
+        lagoonProcessor0 = new LagoonProcessor("New asyatarget: ", element0, file0, "New asyatarget: ", (PrintWriter) null, (PrintWriter) null);
         fail("Expecting exception: LagoonException");
       } catch(LagoonException e) {
         /*
-         * sourceDir must be an existing directory: Unable to create directory: /Unable to create directory: 
+         * sourceDir must be an existing directory: New asyatarget: 
          */
       }
   }

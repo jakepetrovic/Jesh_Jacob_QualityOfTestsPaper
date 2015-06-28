@@ -22,10 +22,10 @@ net.sf.xisemele.impl.EditorImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.EditorImpl: 100.00%</ul><ul>
-<li>4650 fitness evaluations, 94 generations, 10541 statements, 3306 tests.
-<li>Time: 0:00:27(Search: 0:00:26, minimization: 0:00:00)
+<li>3100 fitness evaluations, 63 generations, 7461 statements, 2191 tests.
+<li>Time: 0:00:20(Search: 0:00:18, minimization: 0:00:01)
 <li>Coverage: 0/0 branches, 22/22 methods, 22/22 total goals
-<li>Mutation score: 31%
+<li>Mutation score: 35%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,7 +34,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.removeAttribute((String) null);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.removeAttribute(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -42,20 +42,21 @@ net.sf.xisemele.impl.EditorImpl
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.element(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.element(&quot;net.sf.xisemele.remove.root.not.permitted&quot;, object0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date((-1593L));
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.attribute((String) null, date0, (String) null);
+<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.attribute(&quot;&amp;&quot;, date0, &quot;&amp;&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -73,10 +74,10 @@ net.sf.xisemele.impl.EditorImpl
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date((-1670L));
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date(90L);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.element(&quot;=W0M:kj!$v X;&quot;, date0, &quot;=W0M:kj!$v X;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.element(&quot;^;&lt;zw$*qj{=o1TaU=&quot;, date0, &quot;^;&lt;zw$*qj{=o1TaU=&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -86,7 +87,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.defineAsCurrent(&quot;net.sf.xisemele.within.context.not.permitted&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.defineAsCurrent(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -104,10 +105,10 @@ net.sf.xisemele.impl.EditorImpl
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date(266L);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.value(date0, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  editorImpl0.value(date0, &quot;DrE&amp;EH&lt;W+J!&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -137,7 +138,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.attribute(&quot;YdGV'tD&quot;, &quot;YdGV'tD&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.attribute(&quot;eo1_Q&lt;kow@7$&quot;, &quot;eo1_Q&lt;kow@7$&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -187,7 +188,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.rename(&quot;YZ1@0S3G\&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.rename(&quot;x[=}(gM:}&gt;0[_ |zq&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -227,7 +228,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.value((Object) null);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.value((Object) &quot;omP&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -237,7 +238,7 @@ net.sf.xisemele.impl.EditorImpl
 <span class="nocode"><a name="1">  1: </a></span>EditorImpl editorImpl0 = new EditorImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.removeChildren(&quot;I,UV=-&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  editorImpl0.removeChildren((String) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -459,7 +460,7 @@ net.sf.xisemele.impl.EditorImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5217558598097753761.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7563696726542208450.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -477,7 +478,7 @@ net.sf.xisemele.impl.EditorImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13811
+<li>process_communication_port: 2478
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

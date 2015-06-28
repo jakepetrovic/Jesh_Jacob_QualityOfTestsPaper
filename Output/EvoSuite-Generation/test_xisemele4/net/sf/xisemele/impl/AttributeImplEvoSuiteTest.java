@@ -21,7 +21,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("2U", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
       Value value0 = attributeImpl0.value();
       assertNull(value0);
   }
@@ -33,9 +33,9 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("~Rk+t[n=Q4_f", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
       String string0 = attributeImpl0.name();
-      assertEquals("~Rk+t[n=Q4_f", string0);
+      assertEquals("#&-Q9n3%", string0);
   }
 
   //Test case number: 2
@@ -45,7 +45,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("2U", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
       // Undeclared exception!
       try {
         attributeImpl0.hashCode();
@@ -61,8 +61,8 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("~Rk+t[n=Q4_f", (Value) null);
-      boolean boolean0 = attributeImpl0.equals((Object) "~Rk+t[n=Q4_f");
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
+      boolean boolean0 = attributeImpl0.equals((Object) "#&-Q9n3%");
       assertEquals(false, boolean0);
   }
 
@@ -74,7 +74,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("2U", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
       // Undeclared exception!
       try {
         attributeImpl0.equals((Object) attributeImpl0);
@@ -92,7 +92,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("2U", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("#&-Q9n3%", (Value) null);
       AttributeImpl attributeImpl1 = new AttributeImpl("", (Value) null);
       boolean boolean0 = attributeImpl0.equals((Object) attributeImpl1);
       assertEquals(false, boolean0);

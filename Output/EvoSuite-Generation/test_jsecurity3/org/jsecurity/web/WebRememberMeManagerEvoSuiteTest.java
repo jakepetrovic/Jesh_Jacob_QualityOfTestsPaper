@@ -17,15 +17,15 @@ public class WebRememberMeManagerEvoSuiteTest {
   //Test case number: 0
   /*
    * 3 covered goals:
-   * 1 org.jsecurity.web.WebRememberMeManager.getCookieMaxAge()I: root-Branch
+   * 1 org.jsecurity.web.WebRememberMeManager.isCookieSecure()Z: root-Branch
    * 2 org.jsecurity.web.WebRememberMeManager.<init>()V: root-Branch
    * 3 org.jsecurity.web.WebRememberMeManager.assertCookieAttribute()V: I5 Branch 1 IFNE L88 - true
    */
   @Test
   public void test0()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      int int0 = webRememberMeManager0.getCookieMaxAge();
-      assertEquals(94608000, int0);
+      boolean boolean0 = webRememberMeManager0.isCookieSecure();
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 1
@@ -47,8 +47,8 @@ public class WebRememberMeManagerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setCookieSecure(true);
-      assertNull(webRememberMeManager0.getCookiePath());
+      webRememberMeManager0.setCookieSecure(false);
+      assertEquals("rememberMe", webRememberMeManager0.getCookieName());
   }
 
   //Test case number: 3
@@ -90,7 +90,7 @@ public class WebRememberMeManagerEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      byte[] byteArray0 = new byte[42];
+      byte[] byteArray0 = new byte[1];
       // Undeclared exception!
       try {
         webRememberMeManager0.rememberSerializedIdentity(byteArray0);
@@ -106,13 +106,13 @@ public class WebRememberMeManagerEvoSuiteTest {
   /*
    * 3 covered goals:
    * 1 org.jsecurity.web.WebRememberMeManager.assertCookieAttribute()V: I5 Branch 1 IFNE L88 - false
-   * 2 org.jsecurity.web.WebRememberMeManager.isCookieSecure()Z: root-Branch
+   * 2 org.jsecurity.web.WebRememberMeManager.getCookieMaxAge()I: root-Branch
    * 3 org.jsecurity.web.WebRememberMeManager.setIdentityAttribute(Lorg/jsecurity/web/attr/WebAttribute;)V: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      RequestParamAttribute<String> requestParamAttribute0 = new RequestParamAttribute<String>("<");
+      RequestParamAttribute<String> requestParamAttribute0 = new RequestParamAttribute<String>((String) null);
   }
 
   //Test case number: 7
@@ -123,8 +123,8 @@ public class WebRememberMeManagerEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setCookiePath("}S1n~h$O 7");
-      assertEquals("}S1n~h$O 7", webRememberMeManager0.getCookiePath());
+      webRememberMeManager0.setCookiePath("D'CkEx");
+      assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
   }
 
   //Test case number: 8
@@ -147,8 +147,8 @@ public class WebRememberMeManagerEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setCookieName("d?:D");
-      assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
+      webRememberMeManager0.setCookieName("%");
+      assertEquals(false, webRememberMeManager0.isCookieSecure());
   }
 
   //Test case number: 10
@@ -161,7 +161,7 @@ public class WebRememberMeManagerEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setCookieMaxAge(94608000);
-      assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
+      webRememberMeManager0.setCookieMaxAge((int) (byte)5);
+      assertEquals(5, webRememberMeManager0.getCookieMaxAge());
   }
 }

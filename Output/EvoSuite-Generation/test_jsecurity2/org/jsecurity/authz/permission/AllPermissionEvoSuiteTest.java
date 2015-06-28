@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authz.Permission;
 import org.jsecurity.authz.permission.AllPermission;
-import org.jsecurity.authz.permission.WildcardPermission;
 
 public class AllPermissionEvoSuiteTest {
 
@@ -23,8 +22,7 @@ public class AllPermissionEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       AllPermission allPermission0 = new AllPermission();
-      WildcardPermission wildcardPermission0 = new WildcardPermission(",=;");
-      boolean boolean0 = allPermission0.implies((Permission) wildcardPermission0);
+      boolean boolean0 = allPermission0.implies((Permission) null);
       assertEquals(true, boolean0);
   }
 }

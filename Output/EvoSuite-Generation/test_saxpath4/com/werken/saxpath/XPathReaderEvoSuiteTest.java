@@ -16,28 +16,606 @@ public class XPathReaderEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 14 covered goals:
+   * 51 covered goals:
    * 1 com.werken.saxpath.XPathReader.throwSyntaxException(Ljava/lang/String;)V: root-Branch
-   * 2 com.werken.saxpath.XPathReader.setUpParse(Ljava/lang/String;)V: root-Branch
-   * 3 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I22 Branch 127 IFLE L633 - true
-   * 4 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I71 Branch 129 IFLE L651 - true
-   * 5 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I99 Branch 130 IFLE L661 - true
-   * 6 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I127 Branch 131 IFLE L671 - true
-   * 7 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - true
-   * 8 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - false
-   * 9 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - true
-   * 10 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - false
-   * 11 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - true
-   * 12 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - false
-   * 13 com.werken.saxpath.XPathReader.<init>()V: root-Branch
-   * 14 com.werken.saxpath.XPathReader.setXPathHandler(Lorg/saxpath/XPathHandler;)V: root-Branch
+   * 2 com.werken.saxpath.XPathReader.throwUnexpected()V: root-Branch
+   * 3 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - false
+   * 4 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - true
+   * 5 com.werken.saxpath.XPathReader.variableReference()V: I20 Branch 52 IF_ICMPNE L318 - true
+   * 6 com.werken.saxpath.XPathReader.predicateExpr()V: root-Branch
+   * 7 com.werken.saxpath.XPathReader.predicate()V: root-Branch
+   * 8 com.werken.saxpath.XPathReader.<init>()V: root-Branch
+   * 9 com.werken.saxpath.XPathReader.setUpParse(Ljava/lang/String;)V: root-Branch
+   * 10 com.werken.saxpath.XPathReader.setXPathHandler(Lorg/saxpath/XPathHandler;)V: root-Branch
+   * 11 com.werken.saxpath.XPathReader.getXPathHandler()Lorg/saxpath/XPathHandler;: root-Branch
+   * 12 com.werken.saxpath.XPathReader.expr()V: root-Branch
+   * 13 com.werken.saxpath.XPathReader.LA(I)I: root-Branch
+   * 14 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - true
+   * 15 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - false
+   * 16 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - true
+   * 17 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - false
+   * 18 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 163 LOOKUPSWITCH L986 Case 6 - false
+   * 19 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 164 LOOKUPSWITCH L986 Default-Case - true
+   * 20 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - true
+   * 21 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - false
+   * 22 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 2 TABLESWITCH L128 Case 1 - false
+   * 23 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 3 TABLESWITCH L128 Case 2 - false
+   * 24 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 4 TABLESWITCH L128 Case 3 - false
+   * 25 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 5 TABLESWITCH L128 Case 4 - false
+   * 26 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 6 TABLESWITCH L128 Case 5 - false
+   * 27 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 7 TABLESWITCH L128 Case 6 - false
+   * 28 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 8 TABLESWITCH L128 Case 7 - false
+   * 29 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 9 TABLESWITCH L128 Case 8 - false
+   * 30 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 10 TABLESWITCH L128 Case 9 - false
+   * 31 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 11 TABLESWITCH L128 Case 10 - false
+   * 32 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 12 TABLESWITCH L128 Case 11 - false
+   * 33 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 13 TABLESWITCH L128 Case 12 - false
+   * 34 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 14 TABLESWITCH L128 Case 13 - false
+   * 35 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 15 TABLESWITCH L128 Case 14 - false
+   * 36 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 17 TABLESWITCH L128 Case 16 - false
+   * 37 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 18 TABLESWITCH L128 Case 17 - false
+   * 38 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 19 TABLESWITCH L128 Case 18 - false
+   * 39 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 20 TABLESWITCH L128 Case 19 - false
+   * 40 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 21 TABLESWITCH L128 Case 20 - false
+   * 41 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 22 TABLESWITCH L128 Case 21 - false
+   * 42 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 23 TABLESWITCH L128 Case 22 - false
+   * 43 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 24 TABLESWITCH L128 Case 23 - false
+   * 44 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 25 TABLESWITCH L128 Case 24 - false
+   * 45 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 26 TABLESWITCH L128 Case 25 - false
+   * 46 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 27 TABLESWITCH L128 Case 26 - false
+   * 47 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 28 TABLESWITCH L128 Case 27 - false
+   * 48 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 29 TABLESWITCH L128 Case 28 - false
+   * 49 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 30 TABLESWITCH L128 Case 29 - false
+   * 50 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - false
+   * 51 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 32 TABLESWITCH L128 Case 31 - false
    */
   @Test
   public void test0()  throws Throwable  {
       XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("endTextNodeStep");
+      xPathReader0.setUpParse("a_'SFs&:K3$V");
+      xPathReader0.variableReference();
       try {
-        xPathReader0.nodeTypeTest(1);
+        xPathReader0.predicate();
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected ''
+         */
+      }
+  }
+
+  //Test case number: 1
+  /*
+   * 69 covered goals:
+   * 1 com.werken.saxpath.XPathReader.numberDouble()V: root-Branch
+   * 2 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 32 TABLESWITCH L128 Case 31 - true
+   * 3 com.werken.saxpath.XPathReader.pathExpr()V: I21 Branch 34 IF_ICMPEQ L138 - false
+   * 4 com.werken.saxpath.XPathReader.pathExpr()V: I26 Branch 35 IF_ICMPNE L138 - true
+   * 5 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - false
+   * 6 com.werken.saxpath.XPathReader.pathExpr()V: I56 Branch 39 IF_ICMPNE L151 - true
+   * 7 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 45 LOOKUPSWITCH L270 Case 1 - false
+   * 8 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - false
+   * 9 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 47 LOOKUPSWITCH L270 Case 26 - false
+   * 10 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 48 LOOKUPSWITCH L270 Case 27 - false
+   * 11 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - false
+   * 12 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 50 LOOKUPSWITCH L270 Case 31 - true
+   * 13 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 51 LOOKUPSWITCH L270 Default-Case - false
+   * 14 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - true
+   * 15 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - false
+   * 16 com.werken.saxpath.XPathReader.nameTest(I)V: I19 Branch 134 LOOKUPSWITCH L696 Case 15 - true
+   * 17 com.werken.saxpath.XPathReader.nameTest(I)V: I19 Branch 135 LOOKUPSWITCH L696 Default-Case - false
+   * 18 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - false
+   * 19 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - true
+   * 20 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - true
+   * 21 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 84 LOOKUPSWITCH L428 Case 11 - false
+   * 22 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 85 LOOKUPSWITCH L428 Case 12 - false
+   * 23 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 86 LOOKUPSWITCH L428 Default-Case - true
+   * 24 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 108 TABLESWITCH L529 Case 13 - false
+   * 25 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 109 TABLESWITCH L529 Case 14 - false
+   * 26 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - true
+   * 27 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 111 TABLESWITCH L529 Case 16 - false
+   * 28 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 112 TABLESWITCH L529 Case 17 - false
+   * 29 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 113 TABLESWITCH L529 Case 18 - false
+   * 30 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 114 TABLESWITCH L529 Case 19 - false
+   * 31 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 115 TABLESWITCH L529 Case 20 - false
+   * 32 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 116 TABLESWITCH L529 Default-Case - false
+   * 33 com.werken.saxpath.XPathReader.step(Z)V: I31 Branch 117 IF_ICMPNE L544 - true
+   * 34 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 165 LOOKUPSWITCH L1013 Case 17 - false
+   * 35 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 166 LOOKUPSWITCH L1013 Default-Case - true
+   * 36 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 159 LOOKUPSWITCH L952 Case 20 - false
+   * 37 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 160 LOOKUPSWITCH L952 Case 24 - false
+   * 38 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 161 LOOKUPSWITCH L952 Case 25 - false
+   * 39 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 162 LOOKUPSWITCH L952 Default-Case - true
+   * 40 com.werken.saxpath.XPathReader.predicates()V: I6 Branch 143 IF_ICMPNE L765 - true
+   * 41 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 137 LOOKUPSWITCH L709 Case 20 - false
+   * 42 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - true
+   * 43 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - false
+   * 44 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - true
+   * 45 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - false
+   * 46 com.werken.saxpath.XPathReader.steps()V: I5 Branch 88 LOOKUPSWITCH L453 Case 13 - false
+   * 47 com.werken.saxpath.XPathReader.steps()V: I5 Branch 89 LOOKUPSWITCH L453 Case 14 - false
+   * 48 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - true
+   * 49 com.werken.saxpath.XPathReader.steps()V: I5 Branch 91 LOOKUPSWITCH L453 Case 16 - false
+   * 50 com.werken.saxpath.XPathReader.steps()V: I5 Branch 92 LOOKUPSWITCH L453 Case 20 - false
+   * 51 com.werken.saxpath.XPathReader.steps()V: I5 Branch 93 LOOKUPSWITCH L453 Default-Case - false
+   * 52 com.werken.saxpath.XPathReader.steps()V: I28 Branch 94 IF_ICMPEQ L478 - false
+   * 53 com.werken.saxpath.XPathReader.steps()V: I33 Branch 95 IF_ICMPNE L478 - true
+   * 54 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - true
+   * 55 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 123 LOOKUPSWITCH L599 Case 20 - false
+   * 56 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - false
+   * 57 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 125 LOOKUPSWITCH L603 Case 1 - false
+   * 58 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 126 LOOKUPSWITCH L603 Default-Case - true
+   * 59 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 53 TABLESWITCH L336 Case 11 - false
+   * 60 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 54 TABLESWITCH L336 Case 12 - false
+   * 61 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 55 TABLESWITCH L336 Case 13 - false
+   * 62 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 56 TABLESWITCH L336 Case 14 - false
+   * 63 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - true
+   * 64 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 58 TABLESWITCH L336 Case 16 - false
+   * 65 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 59 TABLESWITCH L336 Case 17 - false
+   * 66 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 60 TABLESWITCH L336 Case 18 - false
+   * 67 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 61 TABLESWITCH L336 Case 19 - false
+   * 68 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 62 TABLESWITCH L336 Case 20 - false
+   * 69 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 63 TABLESWITCH L336 Default-Case - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("Z7iw1F:.5 QVDo^+");
+      xPathReader0.multiplicativeExpr();
+      xPathReader0.pathExpr();
+      assertEquals(0, xPathReader0.axisSpecifier());
+  }
+
+  //Test case number: 2
+  /*
+   * 1 covered goal:
+   * 1 com.werken.saxpath.XPathReader.throwInvalidAxis(Ljava/lang/String;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      // Undeclared exception!
+      try {
+        xPathReader0.throwInvalidAxis("*TV");
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 com.werken.saxpath.XPathReader.literal()V: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      // Undeclared exception!
+      try {
+        xPathReader0.literal();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 4
+  /*
+   * 23 covered goals:
+   * 1 com.werken.saxpath.XPathReader.numberInteger()V: root-Branch
+   * 2 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - true
+   * 3 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - true
+   * 4 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - true
+   * 5 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 50 LOOKUPSWITCH L270 Case 31 - false
+   * 6 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - false
+   * 7 com.werken.saxpath.XPathReader.pathExpr()V: I21 Branch 34 IF_ICMPEQ L138 - false
+   * 8 com.werken.saxpath.XPathReader.pathExpr()V: I26 Branch 35 IF_ICMPNE L138 - true
+   * 9 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 151 TABLESWITCH L880 Case 7 - false
+   * 10 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 152 TABLESWITCH L880 Case 8 - false
+   * 11 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 153 TABLESWITCH L880 Case 9 - false
+   * 12 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 154 TABLESWITCH L880 Case 10 - false
+   * 13 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 155 TABLESWITCH L880 Default-Case - true
+   * 14 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 148 LOOKUPSWITCH L851 Case 21 - false
+   * 15 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 149 LOOKUPSWITCH L851 Case 22 - false
+   * 16 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 150 LOOKUPSWITCH L851 Default-Case - true
+   * 17 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 146 LOOKUPSWITCH L829 Case 28 - false
+   * 18 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 147 LOOKUPSWITCH L829 Default-Case - true
+   * 19 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 144 LOOKUPSWITCH L807 Case 29 - false
+   * 20 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 145 LOOKUPSWITCH L807 Default-Case - true
+   * 21 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 156 LOOKUPSWITCH L923 Case 5 - false
+   * 22 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 157 LOOKUPSWITCH L923 Case 6 - false
+   * 23 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - true
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.parse("8d^Y\"d14Y");
+  }
+
+  //Test case number: 5
+  /*
+   * 7 covered goals:
+   * 1 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - false
+   * 2 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - false
+   * 3 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - true
+   * 4 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - true
+   * 5 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - false
+   * 6 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - false
+   * 7 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - true
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      try {
+        xPathReader0.parse("endAdditiveE]pr(");
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected ']'
+         */
+      }
+  }
+
+  //Test case number: 6
+  /*
+   * 1 covered goal:
+   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 8 TABLESWITCH L128 Case 7 - true
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      try {
+        xPathReader0.parse("<%y");
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected '<'
+         */
+      }
+  }
+
+  //Test case number: 7
+  /*
+   * 24 covered goals:
+   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 12 TABLESWITCH L128 Case 11 - true
+   * 2 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 53 TABLESWITCH L336 Case 11 - true
+   * 3 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - false
+   * 4 com.werken.saxpath.XPathReader.locationPath(Z)V: I9 Branch 64 IFEQ L341 - false
+   * 5 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 65 LOOKUPSWITCH L372 Case 11 - true
+   * 6 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 66 LOOKUPSWITCH L372 Case 12 - false
+   * 7 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 67 LOOKUPSWITCH L372 Default-Case - false
+   * 8 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 68 LOOKUPSWITCH L378 Case -1 - false
+   * 9 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 69 LOOKUPSWITCH L378 Case 13 - false
+   * 10 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 70 LOOKUPSWITCH L378 Case 14 - false
+   * 11 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 71 LOOKUPSWITCH L378 Case 15 - false
+   * 12 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 72 LOOKUPSWITCH L378 Case 16 - false
+   * 13 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 73 LOOKUPSWITCH L378 Case 20 - false
+   * 14 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I22 Branch 74 LOOKUPSWITCH L378 Default-Case - true
+   * 15 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 148 LOOKUPSWITCH L851 Case 21 - true
+   * 16 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 150 LOOKUPSWITCH L851 Default-Case - false
+   * 17 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 156 LOOKUPSWITCH L923 Case 5 - true
+   * 18 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - false
+   * 19 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - false
+   * 20 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - true
+   * 21 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - true
+   * 22 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - false
+   * 23 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - false
+   * 24 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - true
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.parse("l+/=I~-e2");
+  }
+
+  //Test case number: 8
+  /*
+   * 1 covered goal:
+   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 18 TABLESWITCH L128 Case 17 - true
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse(" |uXEXRD,ZJDWx*");
+      try {
+        xPathReader0.additiveExpr();
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected '|'
+         */
+      }
+  }
+
+  //Test case number: 9
+  /*
+   * 11 covered goals:
+   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - false
+   * 2 com.werken.saxpath.XPathReader.pathExpr()V: I45 Branch 37 IFEQ L151 - true
+   * 3 com.werken.saxpath.XPathReader.functionCall()V: I14 Branch 42 IF_ICMPNE L224 - true
+   * 4 com.werken.saxpath.XPathReader.arguments()V: I6 Branch 43 IF_ICMPEQ L250 - false
+   * 5 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - true
+   * 6 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I10 Branch 170 IFGT L1066 - false
+   * 7 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I14 Branch 171 IFGT L1066 - false
+   * 8 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I18 Branch 172 IFGT L1066 - false
+   * 9 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I22 Branch 173 IFLE L1066 - true
+   * 10 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - false
+   * 11 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - true
+   */
+  @Test
+  public void test9()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      try {
+        xPathReader0.parse("endAdditiveExpr(");
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected ''
+         */
+      }
+  }
+
+  //Test case number: 10
+  /*
+   * 18 covered goals:
+   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I67 Branch 40 IF_ICMPEQ L161 - false
+   * 2 com.werken.saxpath.XPathReader.pathExpr()V: I72 Branch 41 IF_ICMPNE L161 - true
+   * 3 com.werken.saxpath.XPathReader.arguments()V: I6 Branch 43 IF_ICMPEQ L250 - true
+   * 4 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 45 LOOKUPSWITCH L270 Case 1 - false
+   * 5 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - true
+   * 6 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 47 LOOKUPSWITCH L270 Case 26 - false
+   * 7 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 48 LOOKUPSWITCH L270 Case 27 - false
+   * 8 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - false
+   * 9 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 50 LOOKUPSWITCH L270 Case 31 - false
+   * 10 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 51 LOOKUPSWITCH L270 Default-Case - false
+   * 11 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - true
+   * 12 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I10 Branch 170 IFGT L1066 - false
+   * 13 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I14 Branch 171 IFGT L1066 - false
+   * 14 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I18 Branch 172 IFGT L1066 - false
+   * 15 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I22 Branch 173 IFLE L1066 - true
+   * 16 com.werken.saxpath.XPathReader.functionCall()V: I14 Branch 42 IF_ICMPNE L224 - true
+   * 17 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - false
+   * 18 com.werken.saxpath.XPathReader.pathExpr()V: I45 Branch 37 IFEQ L151 - true
+   */
+  @Test
+  public void test10()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.parse("startXPath()");
+  }
+
+  //Test case number: 11
+  /*
+   * 20 covered goals:
+   * 1 com.werken.saxpath.XPathReader.steps()V: I5 Branch 93 LOOKUPSWITCH L453 Default-Case - true
+   * 2 com.werken.saxpath.XPathReader.expr()V: root-Branch
+   * 3 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 151 TABLESWITCH L880 Case 7 - false
+   * 4 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 152 TABLESWITCH L880 Case 8 - false
+   * 5 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 153 TABLESWITCH L880 Case 9 - false
+   * 6 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 154 TABLESWITCH L880 Case 10 - false
+   * 7 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 155 TABLESWITCH L880 Default-Case - true
+   * 8 com.werken.saxpath.XPathReader.arguments()V: I6 Branch 43 IF_ICMPEQ L250 - false
+   * 9 com.werken.saxpath.XPathReader.arguments()V: I17 Branch 44 IF_ICMPNE L254 - true
+   * 10 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 148 LOOKUPSWITCH L851 Case 21 - false
+   * 11 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 149 LOOKUPSWITCH L851 Case 22 - false
+   * 12 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 150 LOOKUPSWITCH L851 Default-Case - true
+   * 13 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 146 LOOKUPSWITCH L829 Case 28 - false
+   * 14 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 147 LOOKUPSWITCH L829 Default-Case - true
+   * 15 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 144 LOOKUPSWITCH L807 Case 29 - false
+   * 16 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 145 LOOKUPSWITCH L807 Default-Case - true
+   * 17 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 156 LOOKUPSWITCH L923 Case 5 - false
+   * 18 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 157 LOOKUPSWITCH L923 Case 6 - false
+   * 19 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - true
+   * 20 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - false
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("Z7iw1F:.5 QVDo^+");
+      xPathReader0.arguments();
+      try {
+        xPathReader0.relativeLocationPath();
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Expected one of '.', '..', '@', '*', <QName>
+         */
+      }
+  }
+
+  //Test case number: 12
+  /*
+   * 70 covered goals:
+   * 1 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 63 TABLESWITCH L336 Default-Case - true
+   * 2 com.werken.saxpath.XPathReader.throwUnexpected()V: root-Branch
+   * 3 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 165 LOOKUPSWITCH L1013 Case 17 - false
+   * 4 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 166 LOOKUPSWITCH L1013 Default-Case - true
+   * 5 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 159 LOOKUPSWITCH L952 Case 20 - false
+   * 6 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 160 LOOKUPSWITCH L952 Case 24 - false
+   * 7 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 161 LOOKUPSWITCH L952 Case 25 - false
+   * 8 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 162 LOOKUPSWITCH L952 Default-Case - true
+   * 9 com.werken.saxpath.XPathReader.predicates()V: I6 Branch 143 IF_ICMPNE L765 - true
+   * 10 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 163 LOOKUPSWITCH L986 Case 6 - false
+   * 11 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 164 LOOKUPSWITCH L986 Default-Case - true
+   * 12 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - true
+   * 13 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - false
+   * 14 com.werken.saxpath.XPathReader.nameTest(I)V: I19 Branch 134 LOOKUPSWITCH L696 Case 15 - true
+   * 15 com.werken.saxpath.XPathReader.nameTest(I)V: I19 Branch 135 LOOKUPSWITCH L696 Default-Case - false
+   * 16 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - false
+   * 17 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 137 LOOKUPSWITCH L709 Case 20 - false
+   * 18 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - true
+   * 19 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - true
+   * 20 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 2 TABLESWITCH L128 Case 1 - false
+   * 21 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 3 TABLESWITCH L128 Case 2 - false
+   * 22 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 4 TABLESWITCH L128 Case 3 - false
+   * 23 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 5 TABLESWITCH L128 Case 4 - false
+   * 24 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 6 TABLESWITCH L128 Case 5 - false
+   * 25 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 7 TABLESWITCH L128 Case 6 - false
+   * 26 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 8 TABLESWITCH L128 Case 7 - false
+   * 27 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 9 TABLESWITCH L128 Case 8 - false
+   * 28 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 10 TABLESWITCH L128 Case 9 - false
+   * 29 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 11 TABLESWITCH L128 Case 10 - false
+   * 30 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 12 TABLESWITCH L128 Case 11 - false
+   * 31 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 13 TABLESWITCH L128 Case 12 - false
+   * 32 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 14 TABLESWITCH L128 Case 13 - false
+   * 33 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 15 TABLESWITCH L128 Case 14 - false
+   * 34 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - true
+   * 35 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 17 TABLESWITCH L128 Case 16 - false
+   * 36 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 18 TABLESWITCH L128 Case 17 - false
+   * 37 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 19 TABLESWITCH L128 Case 18 - false
+   * 38 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 20 TABLESWITCH L128 Case 19 - false
+   * 39 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 21 TABLESWITCH L128 Case 20 - false
+   * 40 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 22 TABLESWITCH L128 Case 21 - false
+   * 41 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 23 TABLESWITCH L128 Case 22 - false
+   * 42 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 24 TABLESWITCH L128 Case 23 - false
+   * 43 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 25 TABLESWITCH L128 Case 24 - false
+   * 44 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 26 TABLESWITCH L128 Case 25 - false
+   * 45 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 27 TABLESWITCH L128 Case 26 - false
+   * 46 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 28 TABLESWITCH L128 Case 27 - false
+   * 47 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 29 TABLESWITCH L128 Case 28 - false
+   * 48 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 30 TABLESWITCH L128 Case 29 - false
+   * 49 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - false
+   * 50 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 32 TABLESWITCH L128 Case 31 - false
+   * 51 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - false
+   * 52 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - true
+   * 53 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - false
+   * 54 com.werken.saxpath.XPathReader.pathExpr()V: I56 Branch 39 IF_ICMPNE L151 - true
+   * 55 com.werken.saxpath.XPathReader.steps()V: I28 Branch 94 IF_ICMPEQ L478 - false
+   * 56 com.werken.saxpath.XPathReader.steps()V: I33 Branch 95 IF_ICMPNE L478 - true
+   * 57 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 125 LOOKUPSWITCH L603 Case 1 - false
+   * 58 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 126 LOOKUPSWITCH L603 Default-Case - true
+   * 59 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 53 TABLESWITCH L336 Case 11 - false
+   * 60 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 54 TABLESWITCH L336 Case 12 - false
+   * 61 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 55 TABLESWITCH L336 Case 13 - false
+   * 62 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 56 TABLESWITCH L336 Case 14 - false
+   * 63 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - true
+   * 64 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - false
+   * 65 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 58 TABLESWITCH L336 Case 16 - false
+   * 66 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 59 TABLESWITCH L336 Case 17 - false
+   * 67 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 60 TABLESWITCH L336 Case 18 - false
+   * 68 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 61 TABLESWITCH L336 Case 19 - false
+   * 69 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 62 TABLESWITCH L336 Case 20 - false
+   * 70 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 63 TABLESWITCH L336 Default-Case - false
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("Z7iw1F:.5 QVDo^+");
+      xPathReader0.multiplicativeExpr();
+      try {
+        xPathReader0.locationPath(false);
+        fail("Expecting exception: XPathSyntaxException");
+      } catch(XPathSyntaxException e) {
+        /*
+         * Unexpected '.5'
+         */
+      }
+  }
+
+  //Test case number: 13
+  /*
+   * 3 covered goals:
+   * 1 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 65 LOOKUPSWITCH L372 Case 11 - false
+   * 2 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 67 LOOKUPSWITCH L372 Default-Case - true
+   * 3 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 66 LOOKUPSWITCH L372 Case 12 - false
+   */
+  @Test
+  public void test13()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("a_'SFs&:K3$V");
+      xPathReader0.absoluteLocationPath();
+  }
+
+  //Test case number: 14
+  /*
+   * 5 covered goals:
+   * 1 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - true
+   * 2 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - false
+   * 3 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 84 LOOKUPSWITCH L428 Case 11 - false
+   * 4 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 85 LOOKUPSWITCH L428 Case 12 - false
+   * 5 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 86 LOOKUPSWITCH L428 Default-Case - true
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("a_'SFs&:K3$V");
+      xPathReader0.variableReference();
+      xPathReader0.relativeLocationPath();
+      assertEquals(0, xPathReader0.axisSpecifier());
+  }
+
+  //Test case number: 15
+  /*
+   * 4 covered goals:
+   * 1 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - false
+   * 2 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 116 TABLESWITCH L529 Default-Case - true
+   * 3 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - false
+   * 4 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - true
+   */
+  @Test
+  public void test15()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("");
+      xPathReader0.step(true);
+      assertEquals(0, xPathReader0.axisSpecifier());
+  }
+
+  //Test case number: 16
+  /*
+   * 6 covered goals:
+   * 1 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 118 LOOKUPSWITCH L568 Case 15 - false
+   * 2 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 119 LOOKUPSWITCH L568 Case 16 - false
+   * 3 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 120 LOOKUPSWITCH L568 Default-Case - true
+   * 4 com.werken.saxpath.XPathReader.getXPathHandler()Lorg/saxpath/XPathHandler;: root-Branch
+   * 5 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - true
+   * 6 com.werken.saxpath.XPathReader.variableReference()V: I20 Branch 52 IF_ICMPNE L318 - true
+   */
+  @Test
+  public void test16()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("a_'SFs&:K3$V");
+      xPathReader0.variableReference();
+      int int0 = xPathReader0.axisSpecifier();
+      assertEquals(0, int0);
+  }
+
+  //Test case number: 17
+  /*
+   * 29 covered goals:
+   * 1 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 125 LOOKUPSWITCH L603 Case 1 - true
+   * 2 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 126 LOOKUPSWITCH L603 Default-Case - false
+   * 3 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I22 Branch 127 IFLE L633 - true
+   * 4 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I71 Branch 129 IFLE L651 - true
+   * 5 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I99 Branch 130 IFLE L661 - true
+   * 6 com.werken.saxpath.XPathReader.nodeTypeTest(I)V: I127 Branch 131 IFLE L671 - true
+   * 7 com.werken.saxpath.XPathReader.throwSyntaxException(Ljava/lang/String;)V: root-Branch
+   * 8 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 108 TABLESWITCH L529 Case 13 - false
+   * 9 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 109 TABLESWITCH L529 Case 14 - false
+   * 10 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - true
+   * 11 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 111 TABLESWITCH L529 Case 16 - false
+   * 12 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 112 TABLESWITCH L529 Case 17 - false
+   * 13 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 113 TABLESWITCH L529 Case 18 - false
+   * 14 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 114 TABLESWITCH L529 Case 19 - false
+   * 15 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 115 TABLESWITCH L529 Case 20 - false
+   * 16 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 116 TABLESWITCH L529 Default-Case - false
+   * 17 com.werken.saxpath.XPathReader.step(Z)V: I31 Branch 117 IF_ICMPNE L544 - true
+   * 18 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - true
+   * 19 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - false
+   * 20 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - false
+   * 21 com.werken.saxpath.XPathReader.steps()V: I5 Branch 88 LOOKUPSWITCH L453 Case 13 - false
+   * 22 com.werken.saxpath.XPathReader.steps()V: I5 Branch 89 LOOKUPSWITCH L453 Case 14 - false
+   * 23 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - true
+   * 24 com.werken.saxpath.XPathReader.steps()V: I5 Branch 91 LOOKUPSWITCH L453 Case 16 - false
+   * 25 com.werken.saxpath.XPathReader.steps()V: I5 Branch 92 LOOKUPSWITCH L453 Case 20 - false
+   * 26 com.werken.saxpath.XPathReader.steps()V: I5 Branch 93 LOOKUPSWITCH L453 Default-Case - false
+   * 27 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - true
+   * 28 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 123 LOOKUPSWITCH L599 Case 20 - false
+   * 29 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - false
+   */
+  @Test
+  public void test17()  throws Throwable  {
+      XPathReader xPathReader0 = new XPathReader();
+      xPathReader0.setUpParse("startPathExpr()");
+      try {
+        xPathReader0.steps();
         fail("Expecting exception: XPathSyntaxException");
       } catch(XPathSyntaxException e) {
         /*
@@ -46,549 +624,24 @@ public class XPathReaderEvoSuiteTest {
       }
   }
 
-  //Test case number: 1
+  //Test case number: 18
   /*
-   * 96 covered goals:
-   * 1 com.werken.saxpath.XPathReader.predicate()V: root-Branch
-   * 2 com.werken.saxpath.XPathReader.throwUnexpected()V: root-Branch
-   * 3 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 2 TABLESWITCH L128 Case 1 - false
-   * 4 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 3 TABLESWITCH L128 Case 2 - false
-   * 5 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 4 TABLESWITCH L128 Case 3 - false
-   * 6 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 5 TABLESWITCH L128 Case 4 - false
-   * 7 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 6 TABLESWITCH L128 Case 5 - false
-   * 8 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 7 TABLESWITCH L128 Case 6 - false
-   * 9 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 8 TABLESWITCH L128 Case 7 - false
-   * 10 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 9 TABLESWITCH L128 Case 8 - false
-   * 11 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 10 TABLESWITCH L128 Case 9 - false
-   * 12 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 11 TABLESWITCH L128 Case 10 - false
-   * 13 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 12 TABLESWITCH L128 Case 11 - false
-   * 14 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 13 TABLESWITCH L128 Case 12 - false
-   * 15 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 14 TABLESWITCH L128 Case 13 - false
-   * 16 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 15 TABLESWITCH L128 Case 14 - false
-   * 17 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - true
-   * 18 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - false
-   * 19 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 17 TABLESWITCH L128 Case 16 - false
-   * 20 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 18 TABLESWITCH L128 Case 17 - false
-   * 21 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 19 TABLESWITCH L128 Case 18 - false
-   * 22 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 20 TABLESWITCH L128 Case 19 - false
-   * 23 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 21 TABLESWITCH L128 Case 20 - false
-   * 24 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 22 TABLESWITCH L128 Case 21 - false
-   * 25 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 23 TABLESWITCH L128 Case 22 - false
-   * 26 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 24 TABLESWITCH L128 Case 23 - false
-   * 27 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 25 TABLESWITCH L128 Case 24 - false
-   * 28 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 26 TABLESWITCH L128 Case 25 - false
-   * 29 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 27 TABLESWITCH L128 Case 26 - false
-   * 30 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 28 TABLESWITCH L128 Case 27 - false
-   * 31 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 29 TABLESWITCH L128 Case 28 - false
-   * 32 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 30 TABLESWITCH L128 Case 29 - false
-   * 33 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - false
-   * 34 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 32 TABLESWITCH L128 Case 31 - false
-   * 35 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - true
-   * 36 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - false
-   * 37 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - true
-   * 38 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - true
-   * 39 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 53 TABLESWITCH L336 Case 11 - false
-   * 40 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 54 TABLESWITCH L336 Case 12 - false
-   * 41 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 55 TABLESWITCH L336 Case 13 - false
-   * 42 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 56 TABLESWITCH L336 Case 14 - false
-   * 43 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - true
-   * 44 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 58 TABLESWITCH L336 Case 16 - false
-   * 45 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 59 TABLESWITCH L336 Case 17 - false
-   * 46 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 60 TABLESWITCH L336 Case 18 - false
-   * 47 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 61 TABLESWITCH L336 Case 19 - false
-   * 48 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 62 TABLESWITCH L336 Case 20 - false
-   * 49 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 63 TABLESWITCH L336 Default-Case - false
-   * 50 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 84 LOOKUPSWITCH L428 Case 11 - false
-   * 51 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 85 LOOKUPSWITCH L428 Case 12 - false
-   * 52 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 86 LOOKUPSWITCH L428 Default-Case - true
-   * 53 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - false
-   * 54 com.werken.saxpath.XPathReader.steps()V: I5 Branch 88 LOOKUPSWITCH L453 Case 13 - false
-   * 55 com.werken.saxpath.XPathReader.steps()V: I5 Branch 89 LOOKUPSWITCH L453 Case 14 - false
-   * 56 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - true
-   * 57 com.werken.saxpath.XPathReader.steps()V: I5 Branch 91 LOOKUPSWITCH L453 Case 16 - false
-   * 58 com.werken.saxpath.XPathReader.steps()V: I5 Branch 92 LOOKUPSWITCH L453 Case 20 - false
-   * 59 com.werken.saxpath.XPathReader.steps()V: I5 Branch 93 LOOKUPSWITCH L453 Default-Case - false
-   * 60 com.werken.saxpath.XPathReader.steps()V: I28 Branch 94 IF_ICMPEQ L478 - false
-   * 61 com.werken.saxpath.XPathReader.steps()V: I33 Branch 95 IF_ICMPNE L478 - true
-   * 62 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 108 TABLESWITCH L529 Case 13 - false
-   * 63 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 109 TABLESWITCH L529 Case 14 - false
-   * 64 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - true
-   * 65 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 111 TABLESWITCH L529 Case 16 - false
-   * 66 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 112 TABLESWITCH L529 Case 17 - false
-   * 67 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 113 TABLESWITCH L529 Case 18 - false
-   * 68 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 114 TABLESWITCH L529 Case 19 - false
-   * 69 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 115 TABLESWITCH L529 Case 20 - false
-   * 70 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 116 TABLESWITCH L529 Default-Case - false
-   * 71 com.werken.saxpath.XPathReader.step(Z)V: I31 Branch 117 IF_ICMPNE L544 - true
-   * 72 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - true
-   * 73 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 123 LOOKUPSWITCH L599 Case 20 - false
-   * 74 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - false
-   * 75 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 125 LOOKUPSWITCH L603 Case 1 - false
-   * 76 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 126 LOOKUPSWITCH L603 Default-Case - true
-   * 77 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - false
-   * 78 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - true
-   * 79 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - true
-   * 80 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 137 LOOKUPSWITCH L709 Case 20 - false
-   * 81 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - false
-   * 82 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - false
-   * 83 com.werken.saxpath.XPathReader.predicates()V: I6 Branch 143 IF_ICMPNE L765 - true
-   * 84 com.werken.saxpath.XPathReader.predicates()V: I6 Branch 143 IF_ICMPNE L765 - false
-   * 85 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 159 LOOKUPSWITCH L952 Case 20 - true
-   * 86 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 160 LOOKUPSWITCH L952 Case 24 - false
-   * 87 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 161 LOOKUPSWITCH L952 Case 25 - false
-   * 88 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 162 LOOKUPSWITCH L952 Default-Case - false
-   * 89 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 163 LOOKUPSWITCH L986 Case 6 - false
-   * 90 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 164 LOOKUPSWITCH L986 Default-Case - true
-   * 91 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 165 LOOKUPSWITCH L1013 Case 17 - false
-   * 92 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 166 LOOKUPSWITCH L1013 Default-Case - true
-   * 93 com.werken.saxpath.XPathReader.predicateExpr()V: root-Branch
-   * 94 com.werken.saxpath.XPathReader.getXPathHandler()Lorg/saxpath/XPathHandler;: root-Branch
-   * 95 com.werken.saxpath.XPathReader.expr()V: root-Branch
-   * 96 com.werken.saxpath.XPathReader.LA(I)I: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("nPn[b*^4K=N2ujJ");
-      try {
-        xPathReader0.additiveExpr();
-        fail("Expecting exception: XPathSyntaxException");
-      } catch(XPathSyntaxException e) {
-        /*
-         * Unexpected '^4K=N2ujJ'
-         */
-      }
-  }
-
-  //Test case number: 2
-  /*
-   * 1 covered goal:
-   * 1 com.werken.saxpath.XPathReader.numberDouble()V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      // Undeclared exception!
-      try {
-        xPathReader0.numberDouble();
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 3
-  /*
-   * 5 covered goals:
-   * 1 com.werken.saxpath.XPathReader.throwInvalidAxis(Ljava/lang/String;)V: root-Branch
-   * 2 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 118 LOOKUPSWITCH L568 Case 15 - true
-   * 3 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 119 LOOKUPSWITCH L568 Case 16 - false
-   * 4 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 120 LOOKUPSWITCH L568 Default-Case - false
-   * 5 com.werken.saxpath.XPathReader.axisSpecifier()I: I38 Branch 121 IFNE L582 - false
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("text");
-      try {
-        xPathReader0.axisSpecifier();
-        fail("Expecting exception: XPathSyntaxException");
-      } catch(XPathSyntaxException e) {
-        /*
-         * Expected valid axis name instead of [text]
-         */
-      }
-  }
-
-  //Test case number: 4
-  /*
-   * 30 covered goals:
-   * 1 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 51 LOOKUPSWITCH L270 Default-Case - true
-   * 2 com.werken.saxpath.XPathReader.numberInteger()V: root-Branch
-   * 3 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 151 TABLESWITCH L880 Case 7 - false
-   * 4 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 152 TABLESWITCH L880 Case 8 - false
-   * 5 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 153 TABLESWITCH L880 Case 9 - false
-   * 6 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 154 TABLESWITCH L880 Case 10 - false
-   * 7 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 155 TABLESWITCH L880 Default-Case - true
-   * 8 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 45 LOOKUPSWITCH L270 Case 1 - false
-   * 9 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - false
-   * 10 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 47 LOOKUPSWITCH L270 Case 26 - false
-   * 11 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 48 LOOKUPSWITCH L270 Case 27 - false
-   * 12 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - true
-   * 13 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - false
-   * 14 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 50 LOOKUPSWITCH L270 Case 31 - false
-   * 15 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 51 LOOKUPSWITCH L270 Default-Case - false
-   * 16 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 148 LOOKUPSWITCH L851 Case 21 - false
-   * 17 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 149 LOOKUPSWITCH L851 Case 22 - false
-   * 18 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 150 LOOKUPSWITCH L851 Default-Case - true
-   * 19 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 159 LOOKUPSWITCH L952 Case 20 - false
-   * 20 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 162 LOOKUPSWITCH L952 Default-Case - true
-   * 21 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 146 LOOKUPSWITCH L829 Case 28 - false
-   * 22 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 147 LOOKUPSWITCH L829 Default-Case - true
-   * 23 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 144 LOOKUPSWITCH L807 Case 29 - false
-   * 24 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 145 LOOKUPSWITCH L807 Default-Case - true
-   * 25 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 156 LOOKUPSWITCH L923 Case 5 - false
-   * 26 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 157 LOOKUPSWITCH L923 Case 6 - false
-   * 27 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - true
-   * 28 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - true
-   * 29 com.werken.saxpath.XPathReader.pathExpr()V: I21 Branch 34 IF_ICMPEQ L138 - false
-   * 30 com.werken.saxpath.XPathReader.pathExpr()V: I26 Branch 35 IF_ICMPNE L138 - true
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("4}");
-      xPathReader0.orExpr();
-      xPathReader0.filterExpr();
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 5
-  /*
-   * 16 covered goals:
-   * 1 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - true
-   * 2 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - false
-   * 3 com.werken.saxpath.XPathReader.pathExpr()V: I45 Branch 37 IFEQ L151 - true
-   * 4 com.werken.saxpath.XPathReader.pathExpr()V: I67 Branch 40 IF_ICMPEQ L161 - false
-   * 5 com.werken.saxpath.XPathReader.pathExpr()V: I72 Branch 41 IF_ICMPNE L161 - true
-   * 6 com.werken.saxpath.XPathReader.functionCall()V: I14 Branch 42 IF_ICMPNE L224 - true
-   * 7 com.werken.saxpath.XPathReader.arguments()V: I6 Branch 43 IF_ICMPEQ L250 - false
-   * 8 com.werken.saxpath.XPathReader.arguments()V: I17 Branch 44 IF_ICMPNE L254 - true
-   * 9 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - true
-   * 10 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - false
-   * 11 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 165 LOOKUPSWITCH L1013 Case 17 - true
-   * 12 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 166 LOOKUPSWITCH L1013 Default-Case - false
-   * 13 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I10 Branch 170 IFGT L1066 - false
-   * 14 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I14 Branch 171 IFGT L1066 - false
-   * 15 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I18 Branch 172 IFGT L1066 - false
-   * 16 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I22 Branch 173 IFLE L1066 - true
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.parse("gaJ|R(Z7X^15");
-  }
-
-  //Test case number: 6
-  /*
-   * 3 covered goals:
-   * 1 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - false
-   * 2 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 157 LOOKUPSWITCH L923 Case 6 - true
-   * 3 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - false
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      try {
-        xPathReader0.parse("57-H,E'0y2|2@(7");
-        fail("Expecting exception: XPathSyntaxException");
-      } catch(XPathSyntaxException e) {
-        /*
-         * Unexpected ','
-         */
-      }
-  }
-
-  //Test case number: 7
-  /*
-   * 11 covered goals:
-   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 21 TABLESWITCH L128 Case 20 - true
-   * 2 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - false
-   * 3 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 62 TABLESWITCH L336 Case 20 - true
-   * 4 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - false
-   * 5 com.werken.saxpath.XPathReader.steps()V: I5 Branch 92 LOOKUPSWITCH L453 Case 20 - true
-   * 6 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - false
-   * 7 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 115 TABLESWITCH L529 Case 20 - true
-   * 8 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - false
-   * 9 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 123 LOOKUPSWITCH L599 Case 20 - true
-   * 10 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - false
-   * 11 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 137 LOOKUPSWITCH L709 Case 20 - true
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("*7e`%V");
-      xPathReader0.equalityExpr();
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 8
-  /*
-   * 3 covered goals:
-   * 1 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 22 TABLESWITCH L128 Case 21 - true
-   * 2 com.werken.saxpath.XPathReader.throwSyntaxException(Ljava/lang/String;)V: root-Branch
-   * 3 com.werken.saxpath.XPathReader.throwUnexpected()V: root-Branch
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      try {
-        xPathReader0.parse("=b=RsUTwv9jl]ya<,");
-        fail("Expecting exception: XPathSyntaxException");
-      } catch(XPathSyntaxException e) {
-        /*
-         * Unexpected '='
-         */
-      }
-  }
-
-  //Test case number: 9
-  /*
-   * 12 covered goals:
-   * 1 com.werken.saxpath.XPathReader.arguments()V: I6 Branch 43 IF_ICMPEQ L250 - true
-   * 2 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - true
-   * 3 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - false
-   * 4 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I10 Branch 170 IFGT L1066 - false
-   * 5 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I14 Branch 171 IFGT L1066 - false
-   * 6 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I18 Branch 172 IFGT L1066 - false
-   * 7 com.werken.saxpath.XPathReader.isNodeTypeName(Lcom/werken/saxpath/Token;)Z: I22 Branch 173 IFLE L1066 - true
-   * 8 com.werken.saxpath.XPathReader.functionCall()V: I14 Branch 42 IF_ICMPNE L224 - true
-   * 9 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - false
-   * 10 com.werken.saxpath.XPathReader.pathExpr()V: I45 Branch 37 IFEQ L151 - true
-   * 11 com.werken.saxpath.XPathReader.pathExpr()V: I67 Branch 40 IF_ICMPEQ L161 - false
-   * 12 com.werken.saxpath.XPathReader.pathExpr()V: I72 Branch 41 IF_ICMPNE L161 - true
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.parse("endTextNodeStep()");
-  }
-
-  //Test case number: 10
-  /*
-   * 2 covered goals:
-   * 1 com.werken.saxpath.XPathReader.variableReference()V: I20 Branch 52 IF_ICMPNE L318 - true
-   * 2 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - true
-   */
-  @Test
-  public void test10()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("endUnionExpr(");
-      xPathReader0.variableReference();
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 11
-  /*
-   * 3 covered goals:
-   * 1 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 65 LOOKUPSWITCH L372 Case 11 - false
-   * 2 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 66 LOOKUPSWITCH L372 Case 12 - false
-   * 3 com.werken.saxpath.XPathReader.absoluteLocationPath()V: I10 Branch 67 LOOKUPSWITCH L372 Default-Case - true
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("*7e`%V");
-      xPathReader0.absoluteLocationPath();
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 12
-  /*
-   * 14 covered goals:
-   * 1 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - true
-   * 2 com.werken.saxpath.XPathReader.numberInteger()V: root-Branch
-   * 3 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 45 LOOKUPSWITCH L270 Case 1 - false
-   * 4 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 46 LOOKUPSWITCH L270 Case 15 - false
-   * 5 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 47 LOOKUPSWITCH L270 Case 26 - false
-   * 6 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 48 LOOKUPSWITCH L270 Case 27 - false
-   * 7 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 49 LOOKUPSWITCH L270 Case 30 - true
-   * 8 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 50 LOOKUPSWITCH L270 Case 31 - false
-   * 9 com.werken.saxpath.XPathReader.filterExpr()V: I10 Branch 51 LOOKUPSWITCH L270 Default-Case - false
-   * 10 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - false
-   * 11 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - true
-   * 12 com.werken.saxpath.XPathReader.pathExpr()V: I21 Branch 34 IF_ICMPEQ L138 - false
-   * 13 com.werken.saxpath.XPathReader.pathExpr()V: I26 Branch 35 IF_ICMPNE L138 - true
-   * 14 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - false
-   */
-  @Test
-  public void test12()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("4}");
-      xPathReader0.orExpr();
-      xPathReader0.steps();
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 13
-  /*
-   * 3 covered goals:
-   * 1 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 118 LOOKUPSWITCH L568 Case 15 - false
-   * 2 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 120 LOOKUPSWITCH L568 Default-Case - true
-   * 3 com.werken.saxpath.XPathReader.axisSpecifier()I: I9 Branch 119 LOOKUPSWITCH L568 Case 16 - false
-   */
-  @Test
-  public void test13()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("4}");
-      int int0 = xPathReader0.axisSpecifier();
-      assertEquals(0, int0);
-  }
-
-  //Test case number: 14
-  /*
-   * 2 covered goals:
-   * 1 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - true
-   * 2 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - false
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("4}");
-      xPathReader0.nodeTest(1872);
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 15
-  /*
-   * 2 covered goals:
-   * 1 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - true
-   * 2 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - false
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("4}");
-      xPathReader0.nameTest(1871);
-      assertEquals(0, xPathReader0.axisSpecifier());
-  }
-
-  //Test case number: 16
-  /*
-   * 3 covered goals:
+   * 10 covered goals:
    * 1 com.werken.saxpath.XPathReader.abbrStep()V: I5 Branch 140 LOOKUPSWITCH L740 Case 13 - false
    * 2 com.werken.saxpath.XPathReader.abbrStep()V: I5 Branch 141 LOOKUPSWITCH L740 Case 14 - false
    * 3 com.werken.saxpath.XPathReader.abbrStep()V: I5 Branch 142 LOOKUPSWITCH L740 Default-Case - true
+   * 4 com.werken.saxpath.XPathReader.<init>()V: root-Branch
+   * 5 com.werken.saxpath.XPathReader.setUpParse(Ljava/lang/String;)V: root-Branch
+   * 6 com.werken.saxpath.XPathReader.setXPathHandler(Lorg/saxpath/XPathHandler;)V: root-Branch
+   * 7 com.werken.saxpath.XPathReader.LA(I)I: root-Branch
+   * 8 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - false
+   * 9 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - true
+   * 10 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - false
    */
   @Test
-  public void test16()  throws Throwable  {
+  public void test18()  throws Throwable  {
       XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.setUpParse("endUnionExpr(");
+      xPathReader0.setUpParse("a_'SFs&:K3$V");
       xPathReader0.abbrStep();
-  }
-
-  //Test case number: 17
-  /*
-   * 116 covered goals:
-   * 1 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 153 TABLESWITCH L880 Case 9 - true
-   * 2 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 155 TABLESWITCH L880 Default-Case - false
-   * 3 com.werken.saxpath.XPathReader.<init>()V: root-Branch
-   * 4 com.werken.saxpath.XPathReader.setUpParse(Ljava/lang/String;)V: root-Branch
-   * 5 com.werken.saxpath.XPathReader.setXPathHandler(Lorg/saxpath/XPathHandler;)V: root-Branch
-   * 6 com.werken.saxpath.XPathReader.getXPathHandler()Lorg/saxpath/XPathHandler;: root-Branch
-   * 7 com.werken.saxpath.XPathReader.expr()V: root-Branch
-   * 8 com.werken.saxpath.XPathReader.LA(I)I: root-Branch
-   * 9 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 151 TABLESWITCH L880 Case 7 - false
-   * 10 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 152 TABLESWITCH L880 Case 8 - false
-   * 11 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 153 TABLESWITCH L880 Case 9 - false
-   * 12 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 154 TABLESWITCH L880 Case 10 - false
-   * 13 com.werken.saxpath.XPathReader.relationalExpr()V: I18 Branch 155 TABLESWITCH L880 Default-Case - true
-   * 14 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 84 LOOKUPSWITCH L428 Case 11 - false
-   * 15 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 85 LOOKUPSWITCH L428 Case 12 - false
-   * 16 com.werken.saxpath.XPathReader.relativeLocationPath()V: I10 Branch 86 LOOKUPSWITCH L428 Default-Case - true
-   * 17 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 108 TABLESWITCH L529 Case 13 - false
-   * 18 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 109 TABLESWITCH L529 Case 14 - false
-   * 19 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 110 TABLESWITCH L529 Case 15 - true
-   * 20 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 111 TABLESWITCH L529 Case 16 - false
-   * 21 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 112 TABLESWITCH L529 Case 17 - false
-   * 22 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 113 TABLESWITCH L529 Case 18 - false
-   * 23 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 114 TABLESWITCH L529 Case 19 - false
-   * 24 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 115 TABLESWITCH L529 Case 20 - false
-   * 25 com.werken.saxpath.XPathReader.step(Z)V: I9 Branch 116 TABLESWITCH L529 Default-Case - false
-   * 26 com.werken.saxpath.XPathReader.step(Z)V: I31 Branch 117 IF_ICMPNE L544 - true
-   * 27 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 165 LOOKUPSWITCH L1013 Case 17 - false
-   * 28 com.werken.saxpath.XPathReader.unionExpr()V: I18 Branch 166 LOOKUPSWITCH L1013 Default-Case - true
-   * 29 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 148 LOOKUPSWITCH L851 Case 21 - false
-   * 30 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 149 LOOKUPSWITCH L851 Case 22 - false
-   * 31 com.werken.saxpath.XPathReader.equalityExpr()V: I18 Branch 150 LOOKUPSWITCH L851 Default-Case - true
-   * 32 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - true
-   * 33 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I8 Branch 168 IF_ICMPGT L1051 - false
-   * 34 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - true
-   * 35 com.werken.saxpath.XPathReader.LT(I)Lcom/werken/saxpath/Token;: I16 Branch 169 IF_ICMPGE L1053 - false
-   * 36 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 159 LOOKUPSWITCH L952 Case 20 - false
-   * 37 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 160 LOOKUPSWITCH L952 Case 24 - false
-   * 38 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 161 LOOKUPSWITCH L952 Case 25 - false
-   * 39 com.werken.saxpath.XPathReader.multiplicativeExpr()V: I18 Branch 162 LOOKUPSWITCH L952 Default-Case - true
-   * 40 com.werken.saxpath.XPathReader.predicates()V: I6 Branch 143 IF_ICMPNE L765 - true
-   * 41 com.werken.saxpath.XPathReader.parse(Ljava/lang/String;)V: I25 Branch 1 IF_ICMPEQ L109 - true
-   * 42 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 163 LOOKUPSWITCH L986 Case 6 - false
-   * 43 com.werken.saxpath.XPathReader.unaryExpr()V: I14 Branch 164 LOOKUPSWITCH L986 Default-Case - true
-   * 44 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 146 LOOKUPSWITCH L829 Case 28 - false
-   * 45 com.werken.saxpath.XPathReader.andExpr()V: I18 Branch 147 LOOKUPSWITCH L829 Default-Case - true
-   * 46 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 144 LOOKUPSWITCH L807 Case 29 - false
-   * 47 com.werken.saxpath.XPathReader.orExpr()V: I18 Branch 145 LOOKUPSWITCH L807 Default-Case - true
-   * 48 com.werken.saxpath.XPathReader.match(I)Lcom/werken/saxpath/Token;: I19 Branch 167 IF_ICMPNE L1033 - false
-   * 49 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 132 LOOKUPSWITCH L692 Case 18 - false
-   * 50 com.werken.saxpath.XPathReader.nameTest(I)V: I13 Branch 133 LOOKUPSWITCH L692 Default-Case - true
-   * 51 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 136 LOOKUPSWITCH L709 Case 15 - true
-   * 52 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 137 LOOKUPSWITCH L709 Case 20 - false
-   * 53 com.werken.saxpath.XPathReader.nameTest(I)V: I38 Branch 138 LOOKUPSWITCH L709 Default-Case - false
-   * 54 com.werken.saxpath.XPathReader.nameTest(I)V: I62 Branch 139 IFNONNULL L724 - false
-   * 55 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 156 LOOKUPSWITCH L923 Case 5 - false
-   * 56 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 157 LOOKUPSWITCH L923 Case 6 - false
-   * 57 com.werken.saxpath.XPathReader.additiveExpr()V: I18 Branch 158 LOOKUPSWITCH L923 Default-Case - true
-   * 58 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 2 TABLESWITCH L128 Case 1 - false
-   * 59 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 3 TABLESWITCH L128 Case 2 - false
-   * 60 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 4 TABLESWITCH L128 Case 3 - false
-   * 61 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 5 TABLESWITCH L128 Case 4 - false
-   * 62 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 6 TABLESWITCH L128 Case 5 - false
-   * 63 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 7 TABLESWITCH L128 Case 6 - false
-   * 64 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 8 TABLESWITCH L128 Case 7 - false
-   * 65 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 9 TABLESWITCH L128 Case 8 - false
-   * 66 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 10 TABLESWITCH L128 Case 9 - false
-   * 67 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 11 TABLESWITCH L128 Case 10 - false
-   * 68 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 12 TABLESWITCH L128 Case 11 - false
-   * 69 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 13 TABLESWITCH L128 Case 12 - false
-   * 70 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 14 TABLESWITCH L128 Case 13 - false
-   * 71 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 15 TABLESWITCH L128 Case 14 - false
-   * 72 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 16 TABLESWITCH L128 Case 15 - true
-   * 73 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 17 TABLESWITCH L128 Case 16 - false
-   * 74 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 18 TABLESWITCH L128 Case 17 - false
-   * 75 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 19 TABLESWITCH L128 Case 18 - false
-   * 76 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 20 TABLESWITCH L128 Case 19 - false
-   * 77 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 21 TABLESWITCH L128 Case 20 - false
-   * 78 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 22 TABLESWITCH L128 Case 21 - false
-   * 79 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 23 TABLESWITCH L128 Case 22 - false
-   * 80 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 24 TABLESWITCH L128 Case 23 - false
-   * 81 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 25 TABLESWITCH L128 Case 24 - false
-   * 82 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 26 TABLESWITCH L128 Case 25 - false
-   * 83 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 27 TABLESWITCH L128 Case 26 - false
-   * 84 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 28 TABLESWITCH L128 Case 27 - false
-   * 85 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 29 TABLESWITCH L128 Case 28 - false
-   * 86 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 30 TABLESWITCH L128 Case 29 - false
-   * 87 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 31 TABLESWITCH L128 Case 30 - false
-   * 88 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 32 TABLESWITCH L128 Case 31 - false
-   * 89 com.werken.saxpath.XPathReader.pathExpr()V: I10 Branch 33 TABLESWITCH L128 Default-Case - false
-   * 90 com.werken.saxpath.XPathReader.pathExpr()V: I39 Branch 36 IF_ICMPNE L151 - true
-   * 91 com.werken.saxpath.XPathReader.pathExpr()V: I51 Branch 38 IF_ICMPNE L151 - true
-   * 92 com.werken.saxpath.XPathReader.steps()V: I5 Branch 87 LOOKUPSWITCH L453 Case -1 - false
-   * 93 com.werken.saxpath.XPathReader.steps()V: I5 Branch 88 LOOKUPSWITCH L453 Case 13 - false
-   * 94 com.werken.saxpath.XPathReader.steps()V: I5 Branch 89 LOOKUPSWITCH L453 Case 14 - false
-   * 95 com.werken.saxpath.XPathReader.steps()V: I5 Branch 90 LOOKUPSWITCH L453 Case 15 - true
-   * 96 com.werken.saxpath.XPathReader.steps()V: I5 Branch 91 LOOKUPSWITCH L453 Case 16 - false
-   * 97 com.werken.saxpath.XPathReader.steps()V: I5 Branch 92 LOOKUPSWITCH L453 Case 20 - false
-   * 98 com.werken.saxpath.XPathReader.steps()V: I5 Branch 93 LOOKUPSWITCH L453 Default-Case - false
-   * 99 com.werken.saxpath.XPathReader.steps()V: I28 Branch 94 IF_ICMPEQ L478 - false
-   * 100 com.werken.saxpath.XPathReader.steps()V: I33 Branch 95 IF_ICMPNE L478 - true
-   * 101 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 122 LOOKUPSWITCH L599 Case 15 - true
-   * 102 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 123 LOOKUPSWITCH L599 Case 20 - false
-   * 103 com.werken.saxpath.XPathReader.nodeTest(I)V: I5 Branch 124 LOOKUPSWITCH L599 Default-Case - false
-   * 104 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 125 LOOKUPSWITCH L603 Case 1 - false
-   * 105 com.werken.saxpath.XPathReader.nodeTest(I)V: I11 Branch 126 LOOKUPSWITCH L603 Default-Case - true
-   * 106 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 53 TABLESWITCH L336 Case 11 - false
-   * 107 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 54 TABLESWITCH L336 Case 12 - false
-   * 108 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 55 TABLESWITCH L336 Case 13 - false
-   * 109 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 56 TABLESWITCH L336 Case 14 - false
-   * 110 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 57 TABLESWITCH L336 Case 15 - true
-   * 111 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 58 TABLESWITCH L336 Case 16 - false
-   * 112 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 59 TABLESWITCH L336 Case 17 - false
-   * 113 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 60 TABLESWITCH L336 Case 18 - false
-   * 114 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 61 TABLESWITCH L336 Case 19 - false
-   * 115 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 62 TABLESWITCH L336 Case 20 - false
-   * 116 com.werken.saxpath.XPathReader.locationPath(Z)V: I5 Branch 63 TABLESWITCH L336 Default-Case - false
-   */
-  @Test
-  public void test17()  throws Throwable  {
-      XPathReader xPathReader0 = new XPathReader();
-      xPathReader0.parse("nw>i");
   }
 }

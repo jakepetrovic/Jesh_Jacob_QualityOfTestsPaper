@@ -28,7 +28,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("");
+      Build build0 = new Build("SBWU[~i v*Vn#KLX]");
       Bamboo3RestApi bamboo3RestApi0 = new Bamboo3RestApi();
   }
 
@@ -41,7 +41,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("[IPLF!8zvUg)P<Z|?+");
+      Build build0 = new Build("D6F");
       Console console0 = new Console();
   }
 }

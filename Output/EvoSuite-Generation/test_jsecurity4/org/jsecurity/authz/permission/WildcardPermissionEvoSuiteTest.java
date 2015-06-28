@@ -53,17 +53,18 @@ public class WildcardPermissionEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 4 covered goals:
-   * 1 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I61 Branch 4 IFNE L144 - true
-   * 2 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I72 Branch 5 IFLE L148 - false
+   * 5 covered goals:
+   * 1 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I72 Branch 5 IFLE L148 - false
+   * 2 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - true
    * 3 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I11 Branch 2 IFNE L132 - true
    * 4 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I46 Branch 3 IFEQ L141 - false
+   * 5 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I61 Branch 4 IFNE L144 - false
    */
   @Test
   public void test2()  throws Throwable  {
       WildcardPermission wildcardPermission0 = null;
       try {
-        wildcardPermission0 = new WildcardPermission(",", true);
+        wildcardPermission0 = new WildcardPermission(",");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
@@ -93,14 +94,12 @@ public class WildcardPermissionEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 7 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I4 Branch 8 IFNE L181 - false
    * 2 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - true
-   * 4 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - false
-   * 5 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I61 Branch 4 IFNE L144 - false
-   * 6 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I72 Branch 5 IFLE L148 - true
-   * 7 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I95 Branch 6 IFLE L155 - true
+   * 3 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - false
+   * 4 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I72 Branch 5 IFLE L148 - true
+   * 5 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I95 Branch 6 IFLE L155 - true
    */
   @Test
   public void test4()  throws Throwable  {
@@ -114,20 +113,21 @@ public class WildcardPermissionEvoSuiteTest {
 
   //Test case number: 5
   /*
-   * 6 covered goals:
+   * 7 covered goals:
    * 1 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I44 Branch 10 IF_ICMPGE L194 - false
-   * 2 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I62 Branch 11 IFGT L200 - true
-   * 3 org.jsecurity.authz.permission.WildcardPermission.getParts()Ljava/util/List;: root-Branch
-   * 4 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I4 Branch 8 IFNE L181 - true
-   * 5 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I31 Branch 9 IFEQ L190 - false
-   * 6 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I44 Branch 10 IF_ICMPGE L194 - true
+   * 2 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;)V: root-Branch
+   * 3 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I62 Branch 11 IFGT L200 - true
+   * 4 org.jsecurity.authz.permission.WildcardPermission.getParts()Ljava/util/List;: root-Branch
+   * 5 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I4 Branch 8 IFNE L181 - true
+   * 6 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I31 Branch 9 IFEQ L190 - false
+   * 7 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I44 Branch 10 IF_ICMPGE L194 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      WildcardPermission wildcardPermission0 = new WildcardPermission("*", false);
+      WildcardPermission wildcardPermission0 = new WildcardPermission("*");
       assertNotNull(wildcardPermission0);
       
-      WildcardPermission wildcardPermission1 = new WildcardPermission(":E [8KEitz", false);
+      WildcardPermission wildcardPermission1 = new WildcardPermission("CIg>CCW:11e");
       boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission1);
       assertEquals(true, boolean0);
   }
@@ -142,7 +142,7 @@ public class WildcardPermissionEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      WildcardPermission wildcardPermission0 = new WildcardPermission("Wildcard string cannot contain only dividers. Make sure permission strings are properly formatted.");
+      WildcardPermission wildcardPermission0 = new WildcardPermission("Wildcard string cannot be null or empty. Mace sure permissio strings are properly foratted.", false);
       assertNotNull(wildcardPermission0);
       
       boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission0);
@@ -154,13 +154,13 @@ public class WildcardPermissionEvoSuiteTest {
    * 16 covered goals:
    * 1 org.jsecurity.authz.permission.WildcardPermission.implies(Lorg/jsecurity/authz/Permission;)Z: I66 Branch 12 IFGT L200 - false
    * 2 org.jsecurity.authz.permission.WildcardPermission.getParts()Ljava/util/List;: root-Branch
-   * 3 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;)V: root-Branch
-   * 4 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - true
-   * 5 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - false
-   * 6 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I7 Branch 1 IFNULL L132 - false
-   * 7 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I11 Branch 2 IFNE L132 - true
-   * 8 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I46 Branch 3 IFEQ L141 - true
-   * 9 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I46 Branch 3 IFEQ L141 - false
+   * 3 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - true
+   * 4 org.jsecurity.authz.permission.WildcardPermission.lowercase(Ljava/util/Set;)Ljava/util/Set;: I16 Branch 7 IFEQ L162 - false
+   * 5 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I7 Branch 1 IFNULL L132 - false
+   * 6 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I11 Branch 2 IFNE L132 - true
+   * 7 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I46 Branch 3 IFEQ L141 - true
+   * 8 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I46 Branch 3 IFEQ L141 - false
+   * 9 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I61 Branch 4 IFNE L144 - true
    * 10 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I61 Branch 4 IFNE L144 - false
    * 11 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I72 Branch 5 IFLE L148 - true
    * 12 org.jsecurity.authz.permission.WildcardPermission.<init>(Ljava/lang/String;Z)V: I95 Branch 6 IFLE L155 - true
@@ -171,10 +171,10 @@ public class WildcardPermissionEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      WildcardPermission wildcardPermission0 = new WildcardPermission("Wildcard string cannot contain only dividers. Make sure permission strings are properly formatted.");
+      WildcardPermission wildcardPermission0 = new WildcardPermission("Wildcard string cannot be null or empty. Mace sure permissio strings are properly foratted.", false);
       assertNotNull(wildcardPermission0);
       
-      WildcardPermission wildcardPermission1 = new WildcardPermission("lhL9rAemnT4_{C *o>u");
+      WildcardPermission wildcardPermission1 = new WildcardPermission("Wildcard string cannot be null or empty. Mace sure permissio strings are properly foratted.", true);
       boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission1);
       assertEquals(false, boolean0);
   }

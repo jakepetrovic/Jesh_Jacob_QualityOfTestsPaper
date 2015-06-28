@@ -21,45 +21,44 @@ org.jsecurity.io.IniResource
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.io.IniResource: 62.50%</ul><ul>
-<li>49 fitness evaluations, 2 generations, 1368 statements, 298 tests.
-<li>Time: 0:01:08(Search: 0:01:06, minimization: 0:00:02)
-<li>Coverage: 12/24 branches, 11/11 methods, 20/32 total goals
-<li>Mutation score: 6%
+<ul><li>Target class: org.jsecurity.io.IniResource: 68.75%</ul><ul>
+<li>568 fitness evaluations, 13 generations, 3477 statements, 623 tests.
+<li>Time: 0:01:05(Search: 0:01:03, minimization: 0:00:01)
+<li>Coverage: 15/24 branches, 10/11 methods, 22/32 total goals
+<li>Mutation score: 19%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
-<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, Map&lt;String, String&gt;&gt; hashMap0 = new HashMap&lt;String, Map&lt;String, String&gt;&gt;();
-<span class="nocode"><a name="3">  3: </a></span>iniResource0.setSections((Map&lt;String, Map&lt;String, String&gt;&gt;) hashMap0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, hashMap0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>Map&lt;String, Map&lt;String, String&gt;&gt; map0 = iniResource0.getSections();
+<span class="nocode"><a name="3">  3: </a></span>iniResource0.setSections(map0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;jT&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;)&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [jT]
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [)]
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[8];
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
 <span class="nocode"><a name="2">  2: </a></span>CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
-<span class="nocode"><a name="3">  3: </a></span>PushbackReader pushbackReader0 = new PushbackReader((Reader) charArrayReader0);
-<span class="nocode"><a name="4">  4: </a></span>IniResource iniResource0 = new IniResource((Reader) pushbackReader0);
-<span class="nocode"><a name="5">  5: </a></span>assertNull(iniResource0.getCharsetName());
+<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((Reader) charArrayReader0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BufferedInputStream bufferedInputStream0 = new BufferedInputStream((InputStream) null);
-<span class="nocode"><a name="2">  2: </a></span>IniResource iniResource0 = new IniResource((InputStream) bufferedInputStream0);
+<span class="nocode"><a name="1">  1: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="2">  2: </a></span>IniResource iniResource0 = new IniResource((InputStream) pipedInputStream0);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(iniResource0.getCharsetName());
 </pre>
 <h3>Test case 5</h3>
@@ -76,36 +75,40 @@ org.jsecurity.io.IniResource
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Scanner scanner0 = new Scanner(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>IniResource iniResource0 = new IniResource(scanner0);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(iniResource0.getCharsetName());
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
-<span class="nocode"><a name="2">  2: </a></span>Map&lt;String, Map&lt;String, String&gt;&gt; map0 = iniResource0.getSections();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, map0.size());
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[8];
-<span class="nocode"><a name="2">  2: </a></span>charArray0[0] = ']';
-<span class="nocode"><a name="3">  3: </a></span>CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
-<span class="nocode"><a name="4">  4: </a></span>PushbackReader pushbackReader0 = new PushbackReader((Reader) charArrayReader0);
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
+<span class="nocode"><a name="2">  2: </a></span>byteArray0[0] = (byte)84;
+<span class="nocode"><a name="3">  3: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>PushbackInputStream pushbackInputStream0 = new PushbackInputStream((InputStream) byteArrayInputStream0, 253);
 <span class="nocode"><a name="5">  5: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  iniResource0 = new IniResource((Reader) pushbackReader0);
+<span class="nocode"><a name="7">  7: </a></span>  iniResource0 = new IniResource((InputStream) pushbackInputStream0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Unable to read key value pair for line []].
+<span class="nocode"><a name="11"> 11: </a></span>   * Unable to load data from input stream [java.io.PushbackInputStream@1fe7dfbc].
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
+<span class="nocode"><a name="14"> 14: </a></span>assertEquals(0, byteArrayInputStream0.available());
+<span class="nocode"><a name="15"> 15: </a></span>assertEquals(-1, byteArrayInputStream0.read());
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="2">  2: </a></span>charArray0[0] = 'M';
+<span class="nocode"><a name="3">  3: </a></span>charArray0[2] = ' ';
+<span class="nocode"><a name="4">  4: </a></span>charArray0[3] = '%';
+<span class="nocode"><a name="5">  5: </a></span>CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
+<span class="nocode"><a name="6">  6: </a></span>IniResource iniResource0 = new IniResource((Reader) charArrayReader0);
+</pre>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = IniResource.getSectionName((String) null);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = IniResource.isSectionHeader(&quot;[the chosen logfactory implementation does not extend logfactory. please check your configuration.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -178,8 +181,8 @@ org.jsecurity.io.IniResource
 <span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="69"> 69: </a></span>
 <span class="nocode"><a name="70"> 70: </a></span>    public IniResource(Scanner s) {
-<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">        load(s);</span>
-<span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="71"> 71: </a></span>        load(s);
+<span class="nocode"><a name="72"> 72: </a></span>    }
 <span class="nocode"><a name="73"> 73: </a></span>
 <span class="nocode"><a name="74"> 74: </a></span>    public Map&lt;String, Map&lt;String, String&gt;&gt; getSections() {
 <span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        return sections;</span>
@@ -219,16 +222,16 @@ org.jsecurity.io.IniResource
 <span class="nocode"><a name="109">109: </a></span>                //normal line - split it into Key Value pairs and add it to the section:
 <span class="nocode"><a name="110">110: </a></span>                try {
 <span class="nocode"><a name="111">111: </a></span><span style="background-color: #ffffcc">                    String[] keyValue = splitKeyValue(line);</span>
-<span class="nocode"><a name="112">112: </a></span>                    section.put(keyValue[0], keyValue[1]);
+<span class="nocode"><a name="112">112: </a></span><span style="background-color: #ffffcc">                    section.put(keyValue[0], keyValue[1]);</span>
 <span class="nocode"><a name="113">113: </a></span><span style="background-color: #ffffcc">                } catch (ParseException e) {</span>
 <span class="nocode"><a name="114">114: </a></span><span style="background-color: #ffffcc">                    String msg = &quot;Unable to read key value pair for line [&quot; + line + &quot;].&quot;;</span>
 <span class="nocode"><a name="115">115: </a></span><span style="background-color: #ffffcc">                    throw new ResourceException(msg, e);</span>
-<span class="nocode"><a name="116">116: </a></span>                }
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">                }</span>
 <span class="nocode"><a name="117">117: </a></span>            }
-<span class="nocode"><a name="118">118: </a></span>        }
+<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">        }</span>
 <span class="nocode"><a name="119">119: </a></span>
 <span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">        if (!section.isEmpty()) {</span>
-<span class="nocode"><a name="121">121: </a></span>            sections.put(currSectionName, section);
+<span class="nocode"><a name="121">121: </a></span><span style="background-color: #ffffcc">            sections.put(currSectionName, section);</span>
 <span class="nocode"><a name="122">122: </a></span>        }
 <span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="124">124: </a></span>
@@ -249,7 +252,7 @@ org.jsecurity.io.IniResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -267,7 +270,7 @@ org.jsecurity.io.IniResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20460
+<li>process_communication_port: 6534
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

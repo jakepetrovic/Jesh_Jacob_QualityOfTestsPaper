@@ -19,8 +19,8 @@ public class RegimeEspecialTributarioEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      RegimeEspecialTributario regimeEspecialTributario0 = RegimeEspecialTributario.MICROEMPRESARIO_INDIVIDUAL;
+      RegimeEspecialTributario regimeEspecialTributario0 = RegimeEspecialTributario.NA;
       char char0 = regimeEspecialTributario0.getValue();
-      assertEquals('5', char0);
+      assertEquals('0', char0);
   }
 }

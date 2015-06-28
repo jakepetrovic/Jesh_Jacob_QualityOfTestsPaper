@@ -19,9 +19,9 @@ public class INCHI_RETEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
       int int0 = iNCHI_RET0.getIndx();
-      assertEquals(4, int0);
+      assertEquals(5, int0);
   }
 
   //Test case number: 1
@@ -47,11 +47,12 @@ public class INCHI_RETEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 1 TABLESWITCH L101 Case -2 - false
-   * 2 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 9 TABLESWITCH L101 Default-Case - true
+   * 2 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 8 TABLESWITCH L101 Case 5 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_RET.getValue(985);
+      INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(5);
+      assertEquals(INCHI_RET.BUSY, iNCHI_RET0);
   }
 
   //Test case number: 3
@@ -113,7 +114,7 @@ public class INCHI_RETEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 7 TABLESWITCH L101 Case 4 - true
-   * 2 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 8 TABLESWITCH L101 Case 5 - false
+   * 2 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 9 TABLESWITCH L101 Default-Case - false
    */
   @Test
   public void test8()  throws Throwable  {
@@ -124,7 +125,7 @@ public class INCHI_RETEvoSuiteTest {
   //Test case number: 9
   /*
    * 9 covered goals:
-   * 1 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 8 TABLESWITCH L101 Case 5 - true
+   * 1 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 9 TABLESWITCH L101 Default-Case - true
    * 2 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 1 TABLESWITCH L101 Case -2 - false
    * 3 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 2 TABLESWITCH L101 Case -1 - false
    * 4 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 3 TABLESWITCH L101 Case 0 - false
@@ -132,11 +133,10 @@ public class INCHI_RETEvoSuiteTest {
    * 6 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 5 TABLESWITCH L101 Case 2 - false
    * 7 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 6 TABLESWITCH L101 Case 3 - false
    * 8 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 7 TABLESWITCH L101 Case 4 - false
-   * 9 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 9 TABLESWITCH L101 Default-Case - false
+   * 9 net.sf.jniinchi.INCHI_RET.getValue(I)Lnet/sf/jniinchi/INCHI_RET;: I3 Branch 8 TABLESWITCH L101 Case 5 - false
    */
   @Test
   public void test9()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.getValue(5);
-      assertEquals(INCHI_RET.BUSY, iNCHI_RET0);
+      INCHI_RET.getValue((-1564));
   }
 }

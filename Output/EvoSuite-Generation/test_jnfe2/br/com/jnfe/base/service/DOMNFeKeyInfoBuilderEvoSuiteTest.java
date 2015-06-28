@@ -24,9 +24,9 @@ public class DOMNFeKeyInfoBuilderEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeKeyInfoBuilder dOMNFeKeyInfoBuilder0 = new DOMNFeKeyInfoBuilder();
-      DOMXMLSignatureFactory dOMXMLSignatureFactory0 = new DOMXMLSignatureFactory();
+      DOMXMLSignatureFactory dOMXMLSignatureFactory0 = (DOMXMLSignatureFactory)XMLSignatureFactory.getInstance();
       dOMNFeKeyInfoBuilder0.setXMLSignatureFactory((XMLSignatureFactory) dOMXMLSignatureFactory0);
-      assertNull(dOMXMLSignatureFactory0.getMechanismType());
+      assertEquals("DOM", dOMXMLSignatureFactory0.getMechanismType());
   }
 
   //Test case number: 1

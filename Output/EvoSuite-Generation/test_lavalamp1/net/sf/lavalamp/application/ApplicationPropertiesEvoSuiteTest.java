@@ -22,9 +22,9 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setPort((-3));
-      assertEquals("debug=false, port=-3, runInterval=30000, null", applicationProperties0.toString());
-      assertEquals(-3, applicationProperties0.getPort());
+      applicationProperties0.setPort(0);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 1
@@ -90,7 +90,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       
       applicationProperties0.setDebug(true);
       assertEquals(true, applicationProperties0.isDebug());
-      assertEquals("debug=true, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 6
@@ -101,8 +101,9 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setRunInterval((-3));
-      assertEquals(-3, applicationProperties0.getRunInterval());
+      assertEquals(30000, applicationProperties0.getRunInterval());
+      
+      applicationProperties0.setRunInterval(0);
       assertEquals(false, applicationProperties0.isDebug());
   }
 
@@ -115,8 +116,8 @@ public class ApplicationPropertiesEvoSuiteTest {
   public void test7()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       int int0 = applicationProperties0.getPort();
-      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
       assertEquals(0, int0);
+      assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
   }
 
   //Test case number: 8
@@ -129,7 +130,7 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[3];
+      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[1];
       applicationProperties0.setDeviceProperties(devicePropertiesArray0);
       // Undeclared exception!
       try {

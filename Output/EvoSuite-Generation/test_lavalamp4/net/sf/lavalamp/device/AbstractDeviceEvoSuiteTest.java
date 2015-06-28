@@ -76,7 +76,7 @@ public class AbstractDeviceEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(100, 100, 100, 100, 100, 100);
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
       // Undeclared exception!
       try {
         dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
@@ -123,26 +123,10 @@ public class AbstractDeviceEvoSuiteTest {
       DeviceProperties deviceProperties0 = new DeviceProperties();
       deviceProperties0.setOnWhenSuccessful(true);
       dummyDevice0.setProperties(deviceProperties0);
-      assertNull(deviceProperties0.getClassName());
+      assertEquals("dummy device null", dummyDevice0.toString());
   }
 
   //Test case number: 8
-  /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - false
-   * 2 net.sf.lavalamp.device.AbstractDevice.makeActions()V: I17 Branch 1 IFEQ L54 - true
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      DummyDevice dummyDevice0 = new DummyDevice();
-      DeviceProperties deviceProperties0 = new DeviceProperties();
-      OnError onError0 = OnError.CRASH;
-      deviceProperties0.setOnError(onError0);
-      dummyDevice0.setProperties(deviceProperties0);
-      assertNull(deviceProperties0.getPath());
-  }
-
-  //Test case number: 9
   /*
    * 5 covered goals:
    * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I25 Branch 3 IFEQ L71 - false
@@ -152,12 +136,12 @@ public class AbstractDeviceEvoSuiteTest {
    * 5 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - true
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
       DeviceProperties deviceProperties0 = new DeviceProperties();
       OnError onError0 = OnError.STATUSQUO;
       deviceProperties0.setOnError(onError0);
       dummyDevice0.setProperties(deviceProperties0);
-      assertNull(deviceProperties0.getPath());
+      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=STATUSQUO, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
 }

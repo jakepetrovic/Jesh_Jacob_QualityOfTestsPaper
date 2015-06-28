@@ -14,13 +14,14 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
-import org.jsecurity.authc.AuthenticationException;
+import javax.naming.NamingException;
 import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
-import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.authz.SimpleAuthorizationInfo;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
+import org.jsecurity.realm.ldap.LdapContextFactory;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
 
@@ -36,10 +37,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("[BAD CL TREE] ", "[BAD CL TREE] ", true);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("ZasQBF", "ZasQBF", false);
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+        activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -53,11 +54,11 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "[]", (Object) "[]", "[]");
+      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAccount0.getPrincipals();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) treeSet0);
+        activeDirectoryRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -84,8 +85,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[6];
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("|Gl", charArray0);
+      char[] charArray0 = new char[7];
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("No user-specified Log implementation; pe{forming disNovery using the standard supported logging implementations...", charArray0);
       assertNotNull(simpleAuthenticationInfo0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_12", activeDirectoryRealm0.getName());
   }
@@ -118,7 +119,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
       TreeSet<String> treeSet0 = new TreeSet<String>();
-      treeSet0.add("$geg2|QAzo;p%Hp<75");
+      treeSet0.add(",Oz%?}_McRK");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_18", activeDirectoryRealm0.getName());
   }
@@ -142,10 +143,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
       TreeSet<String> treeSet0 = new TreeSet<String>();
-      treeSet0.add("$geg2|QAzo;p%Hp<75");
-      hashMap0.put("$geg2|QAzo;p%Hp<75", "$geg2|QAzo;p%Hp<75");
+      hashMap0.put("+", "+");
+      treeSet0.add("+");
       Collection<String> collection0 = activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_30", activeDirectoryRealm0.getName());
-      assertEquals(1, collection0.size());
+      assertEquals(false, collection0.isEmpty());
   }
 }

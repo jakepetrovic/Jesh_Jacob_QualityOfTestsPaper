@@ -19,8 +19,8 @@ public class ModBCEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ModBC modBC0 = ModBC.OPERACAO;
+      ModBC modBC0 = ModBC.MARGEM;
       char char0 = modBC0.getValue();
-      assertEquals('3', char0);
+      assertEquals('0', char0);
   }
 }

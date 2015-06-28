@@ -7,6 +7,9 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import org.jsecurity.authc.AuthenticationInfo;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Sha1CredentialsMatcher;
 import org.jsecurity.crypto.hash.Sha1Hash;
 
@@ -22,8 +25,14 @@ public class Sha1CredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Sha1CredentialsMatcher sha1CredentialsMatcher0 = new Sha1CredentialsMatcher();
-      Sha1Hash sha1Hash0 = (Sha1Hash)sha1CredentialsMatcher0.hashProvidedCredentials((Object) "[]", (Object) "localhost", 1);
-      assertEquals("Nf8muaSdcoLOZu6VpYtUHiEUBM8=", sha1Hash0.toBase64());
+      char[] charArray0 = new char[2];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
+      // Undeclared exception!
+      try {
+        sha1CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 1

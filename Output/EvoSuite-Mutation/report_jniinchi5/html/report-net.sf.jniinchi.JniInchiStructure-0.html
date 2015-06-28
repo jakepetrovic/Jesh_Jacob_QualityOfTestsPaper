@@ -22,8 +22,8 @@ net.sf.jniinchi.JniInchiStructure
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiStructure: 100.00%</ul><ul>
-<li>500 fitness evaluations, 11 generations, 3941 statements, 508 tests.
-<li>Time: 0:00:09(Search: 0:00:07, minimization: 0:00:01)
+<li>200 fitness evaluations, 5 generations, 3073 statements, 400 tests.
+<li>Time: 0:00:07(Search: 0:00:04, minimization: 0:00:03)
 <li>Coverage: 4/4 branches, 15/15 methods, 17/17 total goals
 <li>Mutation score: 45%
 </ul>
@@ -32,97 +32,99 @@ net.sf.jniinchi.JniInchiStructure
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
-<span class="nocode"><a name="4">  4: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
-<span class="nocode"><a name="5">  5: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
-<span class="nocode"><a name="6">  6: </a></span>int int0 = jniInchiStructure0.getStereo0DIndex(jniInchiStereo0D0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals((-1), int0);
+<span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStructure0.getStereo0DIndex((JniInchiStereo0D) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals((-1), int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getStereo0D(563);
+<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getStereo0D(0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(IndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Index: 563, Size: 0
+<span class="nocode"><a name="8">  8: </a></span>   * Index: 0, Size: 0
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.ODD;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_PARITY0);
-<span class="nocode"><a name="4">  4: </a></span>jniInchiStructure0.addStereo0D(jniInchiStereo0D0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, jniInchiStructure0.getNumStereo0D());
+<span class="nocode"><a name="2">  2: </a></span>JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, 1886, 1886);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiStructure0.addStereo0D(jniInchiStereo0D0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, jniInchiStructure0.getNumStereo0D());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[1];
-<span class="nocode"><a name="3">  3: </a></span>jniInchiStructure0.addBonds(jniInchiBondArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, jniInchiStructure0.getNumBonds());
+<span class="nocode"><a name="2">  2: </a></span>jniInchiStructure0.setStructure(jniInchiStructure0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, jniInchiStructure0.getNumBonds());
 </pre>
 <h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[2];
-<span class="nocode"><a name="3">  3: </a></span>jniInchiStructure0.addAtoms(jniInchiAtomArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(2, jniInchiStructure0.getNumAtoms());
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>jniInchiStructure0.setStructure(jniInchiStructure0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, jniInchiStructure0.getNumStereo0D());
-</pre>
-<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStructure0.getNumAtoms();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStructure0.getNumBonds();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getAtom((-6));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getAtom(1);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Index: 1, Size: 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 10</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStructure0.getNumStereo0D();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
-<h3>Test case 11</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>int int0 = jniInchiStructure0.getAtomIndex((JniInchiAtom) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals((-1), int0);
+<span class="nocode"><a name="2">  2: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), (-1.0), (-1.0), &quot;OPIEMAV&quot;);
+<span class="nocode"><a name="3">  3: </a></span>int int0 = jniInchiStructure0.getAtomIndex(jniInchiAtom0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals((-1), int0);
 </pre>
-<h3>Test case 12</h3>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getBond((-1872));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  jniInchiStructure0.getBond(0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Index: 0, Size: 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
+<span class="nocode"><a name="2">  2: </a></span>JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[1];
+<span class="nocode"><a name="3">  3: </a></span>jniInchiStructure0.addAtoms(jniInchiAtomArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, jniInchiStructure0.getNumAtoms());
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
+<span class="nocode"><a name="2">  2: </a></span>JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[8];
+<span class="nocode"><a name="3">  3: </a></span>jniInchiStructure0.addBonds(jniInchiBondArray0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(8, jniInchiStructure0.getNumBonds());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -295,7 +297,7 @@ net.sf.jniinchi.JniInchiStructure
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -313,7 +315,7 @@ net.sf.jniinchi.JniInchiStructure
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7516
+<li>process_communication_port: 2373
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

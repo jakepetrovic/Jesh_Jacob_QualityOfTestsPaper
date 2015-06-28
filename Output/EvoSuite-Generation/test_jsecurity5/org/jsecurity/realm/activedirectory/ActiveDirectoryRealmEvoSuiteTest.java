@@ -9,16 +9,14 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.TreeSet;
 import javax.naming.NamingException;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
-import org.jsecurity.authc.UsernamePasswordToken;
-import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.authz.SimpleAuthorizationInfo;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
 import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
@@ -38,17 +36,12 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[8];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0, true);
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) defaultLdapContextFactory0);
-        fail("Expecting exception: IllegalStateException");
-      } catch(IllegalStateException e) {
-        /*
-         * A search base must be specified.
-         */
+        activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) null, (LdapContextFactory) defaultLdapContextFactory0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
@@ -61,9 +54,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   public void test1()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.checkPermission((PrincipalCollection) simplePrincipalCollection0, "LDAP naming error while attempting to retrieve authorization for user [");
+        activeDirectoryRealm0.queryForAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0, (LdapContextFactory) defaultLdapContextFactory0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -77,8 +71,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) linkedHashSet0);
+      HashSet<String> hashSet0 = new HashSet<String>();
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) hashSet0);
       assertNotNull(simpleAuthorizationInfo0);
   }
 
@@ -90,10 +84,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[17];
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("' from classloaer ", charArray0);
+      char[] charArray0 = new char[9];
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("%H2$1!2N)x\"v_y", charArray0);
       assertNotNull(simpleAuthenticationInfo0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_12", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_9", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 4
@@ -104,9 +98,9 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_14", activeDirectoryRealm0.getName());
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) linkedList0);
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_11", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 5
@@ -121,12 +115,12 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      treeSet0.add("LDAP naming error while attempting to retrieve authorization for user [");
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_18", activeDirectoryRealm0.getName());
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      linkedList0.add((String) null);
+      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) linkedList0);
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_15", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 6
@@ -145,12 +139,12 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      treeSet0.add("LDAP naming error while attempting to retrieve authorization for user [");
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
+      hashMap0.put((String) null, "byte[] if the source is of type byte[], char[] or String.  The instance provided as a method ");
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
-      hashMap0.put("LDAP naming error while attempting to retrieve authorization for user [", "LDAP naming error while attempting to retrieve authorization for user [");
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_30", activeDirectoryRealm0.getName());
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      linkedList0.add((String) null);
+      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) linkedList0);
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_27", activeDirectoryRealm0.getName());
   }
 }

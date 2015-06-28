@@ -40,7 +40,7 @@ public class LifecycleManagerMockEvoSuiteTest {
   public void test1()  throws Throwable  {
       LifecycleManagerMock lifecycleManagerMock0 = new LifecycleManagerMock();
       ServerState serverState0 = lifecycleManagerMock0.getState();
-      assertEquals(0, serverState0.ordinal());
+      assertEquals(ServerState.STOPPED, serverState0);
   }
 
   //Test case number: 2
@@ -52,7 +52,7 @@ public class LifecycleManagerMockEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       LifecycleManagerMock lifecycleManagerMock0 = new LifecycleManagerMock();
-      lifecycleManagerMock0.disableDebugging("");
+      lifecycleManagerMock0.disableDebugging("*.8Df,O}A)]sYsV-*Nm");
       assertEquals(ServerState.STOPPED, lifecycleManagerMock0.getState());
   }
 }

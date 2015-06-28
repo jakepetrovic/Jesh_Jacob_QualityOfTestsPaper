@@ -32,16 +32,16 @@ public class HtmlFormatterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
-      HtmlFormatter htmlFormatter0 = new HtmlFormatter((List<Device>) linkedList0);
       DummyDevice dummyDevice0 = new DummyDevice();
-      Builds builds0 = new Builds();
-      Build build0 = new Build("J]% r#g&.v4");
-      builds0.add(build0);
-      dummyDevice0.setBuilds(builds0);
       linkedList0.push((Device) dummyDevice0);
+      Builds builds0 = new Builds();
+      dummyDevice0.setBuilds(builds0);
+      HtmlFormatter htmlFormatter0 = new HtmlFormatter((List<Device>) linkedList0);
+      Build build0 = new Build("q1t|V,7t2K~&d?;%");
+      builds0.add(build0);
       String string0 = htmlFormatter0.toHtml();
-      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build J]% r#g&.v4 successful (null)</font></li></ul>", htmlFormatter0.toHtml());
       assertNotNull(string0);
-      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build J]% r#g&.v4 successful (null)</font></li></ul>", string0);
+      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build q1t|V,7t2K~&d?;% successful (null)</font></li></ul>", htmlFormatter0.toHtml());
+      assertEquals("<h2>dummy device null</h2><ul><li><font color='green'> build q1t|V,7t2K~&d?;% successful (null)</font></li></ul>", string0);
   }
 }

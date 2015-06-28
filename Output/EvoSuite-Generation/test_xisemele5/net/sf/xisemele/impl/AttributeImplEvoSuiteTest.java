@@ -21,7 +21,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKYQ{j>>'.7%6", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Y3/0)$!}I&shkeJAG", (Value) null);
       Value value0 = attributeImpl0.value();
       assertNull(value0);
   }
@@ -33,9 +33,9 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKSQ#j>>'.$%Y", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Y3/0)$!}I&shkeJAG", (Value) null);
       String string0 = attributeImpl0.name();
-      assertEquals("4C-vKSQ#j>>'.$%Y", string0);
+      assertEquals("Y3/0)$!}I&shkeJAG", string0);
   }
 
   //Test case number: 2
@@ -45,7 +45,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKSQ#j>>'.$%Y", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Y3/0)$!}I&shkeJAG", (Value) null);
       // Undeclared exception!
       try {
         attributeImpl0.hashCode();
@@ -61,8 +61,9 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKSQ#j>>'.$%Y", (Value) null);
-      boolean boolean0 = attributeImpl0.equals((Object) "");
+      AttributeImpl attributeImpl0 = new AttributeImpl("", (Value) null);
+      Object object0 = new Object();
+      boolean boolean0 = attributeImpl0.equals(object0);
       assertEquals(false, boolean0);
   }
 
@@ -74,7 +75,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKSQ#j>>'.$%Y", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("", (Value) null);
       // Undeclared exception!
       try {
         attributeImpl0.equals((Object) attributeImpl0);
@@ -92,7 +93,7 @@ public class AttributeImplEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      AttributeImpl attributeImpl0 = new AttributeImpl("4C-vKSQ#j>>'.$%Y", (Value) null);
+      AttributeImpl attributeImpl0 = new AttributeImpl("Y3/0)$!}I&shkeJAG", (Value) null);
       AttributeImpl attributeImpl1 = new AttributeImpl("", (Value) null);
       boolean boolean0 = attributeImpl0.equals((Object) attributeImpl1);
       assertEquals(false, boolean0);

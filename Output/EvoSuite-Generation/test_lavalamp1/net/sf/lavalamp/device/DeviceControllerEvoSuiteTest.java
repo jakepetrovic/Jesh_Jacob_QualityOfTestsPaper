@@ -11,11 +11,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TimeZone;
+import java.util.Locale;
 import net.sf.lavalamp.LavaLogger;
 import net.sf.lavalamp.device.Device;
 import net.sf.lavalamp.device.DeviceController;
 import net.sf.lavalamp.device.DummyDevice;
+import net.sf.lavalamp.device.Period;
+import net.sf.lavalamp.device.TimeOfDay;
 import net.sf.lavalamp.site.Builds;
 import net.sf.lavalamp.site.MissingBuildException;
 
@@ -47,11 +49,11 @@ public class DeviceControllerEvoSuiteTest {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       try {
-        deviceController0.setStatusForBuild("*", true);
+        deviceController0.setStatusForBuild("W7)7j3IP;hK^", true);
         fail("Expecting exception: MissingBuildException");
       } catch(MissingBuildException e) {
         /*
-         * * not found
+         * W7)7j3IP;hK^ not found
          */
       }
   }
@@ -78,11 +80,12 @@ public class DeviceControllerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
+      DummyDevice dummyDevice0 = new DummyDevice();
+      linkedList0.add((Device) dummyDevice0);
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      linkedList0.add((Device) null);
       // Undeclared exception!
       try {
-        deviceController0.setStatusForBuild("<6M", true);
+        deviceController0.setStatusForBuild("W7)7j3IP;hK^", true);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -97,24 +100,29 @@ public class DeviceControllerEvoSuiteTest {
   public void test4()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
+      Locale locale0 = Locale.ROOT;
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
       deviceController0.switchDevices((Calendar) gregorianCalendar0);
-      assertEquals(1398571596705L, gregorianCalendar0.getTimeInMillis());
-      assertEquals("java.util.GregorianCalendar[time=1398571596705,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=26,DAY_OF_YEAR=116,DAY_OF_WEEK=7,DAY_OF_WEEK_IN_MONTH=4,AM_PM=1,HOUR=10,HOUR_OF_DAY=22,MINUTE=6,SECOND=36,MILLISECOND=705,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals("java.util.GregorianCalendar[time=1433715328352,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=24,WEEK_OF_MONTH=2,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=4,HOUR_OF_DAY=16,MINUTE=15,SECOND=28,MILLISECOND=352,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      assertEquals(1433715328352L, gregorianCalendar0.getTimeInMillis());
   }
 
   //Test case number: 5
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.device.DeviceController.switchDevice(Ljava/util/Calendar;Ljava/util/List;Lnet/sf/lavalamp/device/Device;)V: I23 Branch 3 IFEQ L73 - true
+   * 2 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
    */
   @Test
   public void test5()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
-      linkedList0.add((Device) null);
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      TimeZone timeZone0 = TimeZone.getDefault();
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance(timeZone0);
+      DummyDevice dummyDevice0 = new DummyDevice();
+      linkedList0.add((Device) dummyDevice0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(0, 403);
+      Period period0 = new Period(timeOfDay0, timeOfDay0);
+      dummyDevice0.setAlwaysOffPeriod(period0);
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(403, 403, 403);
       // Undeclared exception!
       try {
         deviceController0.switchDevices((Calendar) gregorianCalendar0);
@@ -131,14 +139,13 @@ public class DeviceControllerEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
+      DummyDevice dummyDevice0 = new DummyDevice();
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      LinkedList<String> linkedList1 = new LinkedList<String>();
       Builds builds0 = new Builds();
-      DummyDevice dummyDevice0 = new DummyDevice();
       // Undeclared exception!
       try {
-        deviceController0.turnOffOrOn((List<String>) linkedList1, builds0, (Device) dummyDevice0);
+        deviceController0.turnOffOrOn((List<String>) null, builds0, (Device) dummyDevice0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

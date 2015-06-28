@@ -22,8 +22,8 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.core.mock.ApplicationMock: 100.00%</ul><ul>
-<li>1050 fitness evaluations, 22 generations, 4596 statements, 905 tests.
-<li>Time: 0:00:13(Search: 0:00:11, minimization: 0:00:01)
+<li>1300 fitness evaluations, 27 generations, 5915 statements, 1013 tests.
+<li>Time: 0:00:14(Search: 0:00:12, minimization: 0:00:02)
 <li>Coverage: 2/2 branches, 18/18 methods, 19/19 total goals
 <li>Mutation score: 91%
 </ul>
@@ -31,124 +31,123 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;#hOUu&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setName(&quot;#hOUu&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '#hOUu', vendor: 'sap.com'|#hOUu|sap.com|7.1003.20140427111438.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setName(&quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031625.0000|SAP AG|started&quot;, applicationMock0.toString());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;#hOUu&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>applicationMock0.getStatus();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '#hOUu', vendor: 'sap.com'|#hOUu|sap.com|7.1003.20140427111439.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '#hOUu', vendor: 'sap.com'&quot;, applicationMock0.getId());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031626.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;SAP AG&quot;, applicationMock0.getLocation());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.getName();
 <span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111440.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;sap.com&quot;, applicationMock0.getVendor());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031627.0000|SAP AG|started&quot;, applicationMock0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File((File) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.getLocation();
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111440.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;SAP AG&quot;, string0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031627.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;SAP AG&quot;, string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;=mj=;?,{ &quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setVendor(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '=mj=;?,{ ', vendor: 'sap.com'|=mj=;?,{ ||7.1003.20140427111441.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setVendor(&quot;/home/jeshkracht&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||/home/jeshkracht|7.1003.20150608031628.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;7.1003.20150608031628.0000&quot;, applicationMock0.getVersion());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;q-|Y&quot;, &quot;q-|Y&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setVersion(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com||SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setVersion(&quot;q-|Y&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: 'q-|Y', vendor: 'sap.com'|q-|Y|sap.com|q-|Y|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: 'q-|Y', vendor: 'sap.com'&quot;, applicationMock0.getId());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>int int0 = applicationMock0.hashCode();
 <span class="nocode"><a name="6">  6: </a></span>assertEquals((-132277850), int0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111442.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031629.0000|SAP AG|started&quot;, applicationMock0.toString());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;=mj=;?,{ &quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>ApplicationStatus applicationStatus0 = ApplicationStatus.UNKNOWN;
+<span class="nocode"><a name="5">  5: </a></span>ApplicationStatus applicationStatus0 = ApplicationStatus.STARTING;
 <span class="nocode"><a name="6">  6: </a></span>applicationMock0.setStatus(applicationStatus0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '=mj=;?,{ ', vendor: 'sap.com'|=mj=;?,{ |sap.com|7.1003.20140427111442.0000|SAP AG|unknown&quot;, applicationMock0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;name: '=mj=;?,{ ', vendor: 'sap.com'&quot;, applicationMock0.getId());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031629.0000|SAP AG|starting&quot;, applicationMock0.toString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;7.1003.20150608031629.0000&quot;, applicationMock0.getVersion());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;.0000&quot;, &quot;.0000&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.getVersion();
 <span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111443.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;7.1003.20140427111443.0000&quot;, string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031630.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;7.1003.20150608031630.0000&quot;, string0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;=mj=;?,{ &quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setId(&quot;=mj=;?,{ &quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;=mj=;?,{ |=mj=;?,{ |sap.com|7.1003.20140427111443.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;=mj=;?,{ &quot;, applicationMock0.getName());
+<span class="nocode"><a name="5">  5: </a></span>applicationMock0.setId(&quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;||sap.com|7.1003.20150608031631.0000|SAP AG|started&quot;, applicationMock0.toString());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;#hOUu&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File((File) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;SAP AG&quot;, applicationMock0.getLocation());
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="5">  5: </a></span>
 <span class="nocode"><a name="6">  6: </a></span>applicationMock0.setLocation(&quot;&quot;);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '#hOUu', vendor: 'sap.com'|#hOUu|sap.com|7.1003.20140427111444.0000||started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'&quot;, applicationMock0.getId());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;eyUaap&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;unknown&quot;);
 <span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  applicationMock0.equals((Object) &quot;:&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  applicationMock0.equals((Object) &quot;name: 'unknown', vendor: 'sap.com'|unknown|sap.com|unknown|SAP AG|started&quot;);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ClassCastException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(ClassCastException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
@@ -163,8 +162,8 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.toString();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111445.0000|SAP AG|started&quot;, string0);
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031632.0000|SAP AG|started&quot;, string0);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -173,8 +172,8 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.getId();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111446.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031633.0000|SAP AG|started&quot;, applicationMock0.toString());
 <span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'&quot;, string0);
 </pre>
 <h3>Test case 15</h3>
@@ -184,9 +183,15 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>String string0 = applicationMock0.getVendor();
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20140427111446.0000|SAP AG|started&quot;, applicationMock0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;sap.com&quot;, string0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031633.0000|SAP AG|started&quot;, applicationMock0.toString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;sap.com&quot;, string0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;.wy8T/&quot;, &quot;.wy8T/&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ApplicationMock applicationMock0 = new ApplicationMock(file0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(applicationMock0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;name: '', vendor: 'sap.com'||sap.com|7.1003.20150608031634.0000|SAP AG|started&quot;, applicationMock0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*******************************************************************************
@@ -306,7 +311,7 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4086536237158660057.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4236573649718441842.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -324,7 +329,7 @@ com.sap.netweaver.porta.core.mock.ApplicationMock
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3941
+<li>process_communication_port: 5618
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

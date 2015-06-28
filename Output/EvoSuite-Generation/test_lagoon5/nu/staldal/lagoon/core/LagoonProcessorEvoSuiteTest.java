@@ -7,10 +7,8 @@ package nu.staldal.lagoon.core;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import nu.staldal.lagoon.core.AuthenticationException;
 import nu.staldal.lagoon.core.AuthenticationMissingException;
@@ -37,7 +35,7 @@ public class LagoonProcessorEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Element element0 = new Element("", "", 1295, 1295);
+      Element element0 = new Element("", "");
       File file0 = new File("");
       LagoonProcessor lagoonProcessor0 = null;
       try {
@@ -67,17 +65,14 @@ public class LagoonProcessorEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Element element0 = new Element("Unable to create directory: ", "Unable to create directory: ");
-      File file0 = new File("Unable to create directory: ", "Unable to create directory: ");
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+      File file0 = new File("Unknown entry in sitemap: ", "Unknown entry in sitemap: ");
       LagoonProcessor lagoonProcessor0 = null;
       try {
-        lagoonProcessor0 = new LagoonProcessor("Unable to create directory: ", element0, file0, "Unable to create directory: ", printWriter0, printWriter0);
+        lagoonProcessor0 = new LagoonProcessor("Unknown entry in sitemap: ", (Element) null, file0, "Unknown entry in sitemap: ", (PrintWriter) null, (PrintWriter) null);
         fail("Expecting exception: LagoonException");
       } catch(LagoonException e) {
         /*
-         * sourceDir must be an existing directory: Unable to create directory: /Unable to create directory: 
+         * sourceDir must be an existing directory: Unknown entry in sitemap: /Unknown entry in sitemap: 
          */
       }
   }

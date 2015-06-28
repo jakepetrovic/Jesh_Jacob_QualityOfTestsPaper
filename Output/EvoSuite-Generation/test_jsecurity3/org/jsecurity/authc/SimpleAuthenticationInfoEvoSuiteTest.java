@@ -7,15 +7,10 @@ package org.jsecurity.authc;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
-import org.jsecurity.authz.Permission;
-import org.jsecurity.subject.MutablePrincipalCollection;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
 
@@ -24,57 +19,73 @@ public class SimpleAuthenticationInfoEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 10 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.getCredentials()Ljava/lang/Object;: root-Branch
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/Object;)V: root-Branch
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.getPrincipals()Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
-   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.<init>()V: root-Branch
-   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I3 Branch 1 IFNULL L114 - false
-   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - false
-   * 7 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I10 Branch 3 IFEQ L114 - true
-   * 8 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - false
-   * 9 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - true
-   * 10 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I70 Branch 7 IFNONNULL L135 - false
+   * 15 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I83 Branch 8 IFNE L140 - true
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I111 Branch 9 IFEQ L148 - false
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.setCredentials(Ljava/lang/Object;)V: root-Branch
+   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I70 Branch 7 IFNONNULL L135 - true
+   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I83 Branch 8 IFNE L140 - false
+   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I111 Branch 9 IFEQ L148 - true
+   * 7 org.jsecurity.authc.SimpleAuthenticationInfo.getCredentials()Ljava/lang/Object;: root-Branch
+   * 8 org.jsecurity.authc.SimpleAuthenticationInfo.getPrincipals()Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 9 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V: root-Branch
+   * 10 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I3 Branch 1 IFNULL L114 - false
+   * 11 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - false
+   * 12 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I10 Branch 3 IFEQ L114 - true
+   * 13 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - true
+   * 14 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I31 Branch 5 IFEQ L121 - false
+   * 15 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - true
    */
   @Test
   public void test0()  throws Throwable  {
       Object object0 = new Object();
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      SimpleAccount simpleAccount0 = new SimpleAccount(object0, object0, "");
-      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAccount0);
-      assertEquals(false, simpleAccount0.isLocked());
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, "");
+      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
+      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
   }
 
   //Test case number: 1
   /*
-   * 10 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I83 Branch 8 IFNE L140 - true
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I111 Branch 9 IFEQ L148 - false
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.setCredentials(Ljava/lang/Object;)V: root-Branch
-   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - true
-   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I70 Branch 7 IFNONNULL L135 - true
-   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I83 Branch 8 IFNE L140 - false
-   * 7 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I111 Branch 9 IFEQ L148 - true
-   * 8 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V: root-Branch
-   * 9 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - true
-   * 10 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I31 Branch 5 IFEQ L121 - false
+   * 3 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - true
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/Object;)V: root-Branch
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.<init>()V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      Object object0 = new Object();
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, object0, "aTt/?x)");
-      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
-      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
+      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo1);
+      assertNotSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
   }
 
   //Test case number: 2
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L168 - false
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I29 Branch 13 IFNE L168 - true
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.setPrincipals(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
+   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - false
+   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I11 Branch 11 IFNE L164 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      simpleAuthenticationInfo0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0);
+      boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 3
   /*
    * 1 covered goal:
    * 1 org.jsecurity.authc.SimpleAuthenticationInfo.toString()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test3()  throws Throwable  {
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       // Undeclared exception!
       try {
@@ -84,155 +95,118 @@ public class SimpleAuthenticationInfoEvoSuiteTest {
       }
   }
 
-  //Test case number: 3
+  //Test case number: 4
   /*
    * 1 covered goal:
    * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I3 Branch 1 IFNULL L114 - true
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test4()  throws Throwable  {
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       simpleAuthenticationInfo0.merge((AuthenticationInfo) null);
   }
 
-  //Test case number: 4
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - true
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
-  }
-
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I10 Branch 3 IFEQ L114 - false
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/Object;)V: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      Object object0 = new Object();
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, object0, "aTt/?x)");
-      TreeSet<String> treeSet0 = new TreeSet<String>();
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>(1451);
-      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0, (Set<String>) treeSet0, (Set<Permission>) linkedHashSet0);
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) true);
       simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAccount0);
       assertEquals(false, simpleAccount0.isLocked());
   }
 
   //Test case number: 6
   /*
-   * 10 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - false
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.hashCode()I: I4 Branch 15 IFNULL L178 - false
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.getCredentials()Ljava/lang/Object;: root-Branch
-   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.getPrincipals()Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
-   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I3 Branch 1 IFNULL L114 - false
-   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - false
-   * 7 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I10 Branch 3 IFEQ L114 - true
-   * 8 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - true
-   * 9 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I31 Branch 5 IFEQ L121 - false
-   * 10 org.jsecurity.authc.SimpleAuthenticationInfo.setPrincipals(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
+   * 3 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - false
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I70 Branch 7 IFNONNULL L135 - false
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       Object object0 = new Object();
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, object0, "aTt/?x)");
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
-      SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) simpleAuthenticationInfo0, "aTt/?x)");
-      assertNotNull(simplePrincipalCollection1);
-      
-      simpleAuthenticationInfo1.setPrincipals((PrincipalCollection) simplePrincipalCollection1);
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo(object0, object0, "");
       simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo1);
-      assertFalse(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo1));
-      assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+      assertTrue(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+      assertTrue(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo1));
   }
 
   //Test case number: 7
   /*
-   * 4 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - true
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I11 Branch 11 IFNE L164 - true
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L168 - true
-   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I34 Branch 14 IFNULL L168 - false
+   * 8 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I63 Branch 6 IFNONNULL L131 - false
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.getCredentials()Ljava/lang/Object;: root-Branch
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.getPrincipals()Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I3 Branch 1 IFNULL L114 - false
+   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I6 Branch 2 IFNULL L114 - false
+   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I10 Branch 3 IFEQ L114 - true
+   * 7 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I18 Branch 4 IFNONNULL L118 - true
+   * 8 org.jsecurity.authc.SimpleAuthenticationInfo.merge(Lorg/jsecurity/authc/AuthenticationInfo;)V: I31 Branch 5 IFEQ L121 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedHashSet<Collection<MutablePrincipalCollection>> linkedHashSet0 = new LinkedHashSet<Collection<MutablePrincipalCollection>>();
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, (Object) linkedHashSet0, "_faN*k)");
-      assertNotNull(simpleAuthenticationInfo1);
-      
-      boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
-      assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-      assertEquals(false, boolean0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "[]", (Object) "[]", "[]");
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "[]", (Object) null, "[]");
+      simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAccount0);
+      assertEquals(false, simpleAccount0.isCredentialsExpired());
   }
 
   //Test case number: 8
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I11 Branch 11 IFNE L164 - false
+   * 6 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - true
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I11 Branch 11 IFNE L164 - true
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L168 - true
+   * 4 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I34 Branch 14 IFNULL L168 - false
+   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.hashCode()I: I4 Branch 15 IFNULL L178 - true
+   * 6 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      Object object0 = new Object();
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, object0, "aTt/?x)");
-      boolean boolean0 = simpleAuthenticationInfo0.equals(object0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) simpleAuthenticationInfo0, (Object) simpleAuthenticationInfo0, "4Wh2HKCa%l{T@w^'+");
+      assertNotNull(simpleAuthenticationInfo1);
+      
+      boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
+      assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
       assertEquals(false, boolean0);
   }
 
   //Test case number: 9
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L168 - false
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I29 Branch 13 IFNE L168 - false
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I11 Branch 11 IFNE L164 - false
    */
   @Test
   public void test9()  throws Throwable  {
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedHashSet<Collection<MutablePrincipalCollection>> linkedHashSet0 = new LinkedHashSet<Collection<MutablePrincipalCollection>>();
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, (Object) linkedHashSet0, "_faN*k)");
-      assertNotNull(simpleAuthenticationInfo1);
-      
-      simpleAuthenticationInfo0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
-      boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
-      assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0);
+      boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simplePrincipalCollection0);
       assertEquals(false, boolean0);
   }
 
   //Test case number: 10
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I29 Branch 13 IFNE L168 - true
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.setPrincipals(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
-   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/String;)V: root-Branch
+   * 4 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I29 Branch 13 IFNE L168 - false
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.<init>(Lorg/jsecurity/subject/PrincipalCollection;Ljava/lang/Object;)V: root-Branch
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - true
    * 4 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L168 - false
-   * 5 org.jsecurity.authc.SimpleAuthenticationInfo.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L163 - false
    */
   @Test
   public void test10()  throws Throwable  {
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      LinkedHashSet<Collection<MutablePrincipalCollection>> linkedHashSet0 = new LinkedHashSet<Collection<MutablePrincipalCollection>>();
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, (Object) linkedHashSet0, "_faNukj;");
-      assertNotNull(simpleAuthenticationInfo1);
-      
-      simpleAuthenticationInfo1.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
-      assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-      
-      simpleAuthenticationInfo0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
+      Set<Object> set0 = simplePrincipalCollection0.asSet();
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) set0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
       boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
-      assertTrue(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo1));
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 11
@@ -253,14 +227,17 @@ public class SimpleAuthenticationInfoEvoSuiteTest {
 
   //Test case number: 12
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.hashCode()I: I4 Branch 15 IFNULL L178 - true
-   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.<init>()V: root-Branch
+   * 3 covered goals:
+   * 1 org.jsecurity.authc.SimpleAuthenticationInfo.hashCode()I: I4 Branch 15 IFNULL L178 - false
+   * 2 org.jsecurity.authc.SimpleAuthenticationInfo.setPrincipals(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
+   * 3 org.jsecurity.authc.SimpleAuthenticationInfo.<init>()V: root-Branch
    */
   @Test
   public void test12()  throws Throwable  {
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) simpleAuthenticationInfo0, "aTt/?x)");
-      assertEquals(false, simplePrincipalCollection0.isEmpty());
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      simpleAuthenticationInfo0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
+      int int0 = simpleAuthenticationInfo0.hashCode();
+      assertEquals(250489235, int0);
   }
 }

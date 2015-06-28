@@ -7,8 +7,10 @@ package org.jsecurity.io;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.PipedInputStream;
+import java.io.PipedReader;
+import java.io.Reader;
 import org.jsecurity.io.IniResource;
 import org.jsecurity.io.ResourceException;
 
@@ -26,22 +28,55 @@ public class TextResourceEvoSuiteTest {
   public void test0()  throws Throwable  {
       IniResource iniResource0 = null;
       try {
-        iniResource0 = new IniResource("XMTS0Cp/rxpHVvuMqVy", "XMTS0Cp/rxpHVvuMqVy");
+        iniResource0 = new IniResource("", "");
         fail("Expecting exception: ResourceException");
       } catch(ResourceException e) {
         /*
-         * Unable to load text resource from the resource path [XMTS0Cp/rxpHVvuMqVy]
+         * Unable to load text resource from the resource path []
          */
       }
   }
 
   //Test case number: 1
   /*
+   * 2 covered goals:
+   * 1 org.jsecurity.io.TextResource.getCharsetName()Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.io.TextResource.doLoad(Ljava/io/InputStream;)V: I8 Branch 2 IFNULL L85 - true
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      IniResource iniResource0 = null;
+      try {
+        iniResource0 = new IniResource((InputStream) null);
+        fail("Expecting exception: ResourceException");
+      } catch(ResourceException e) {
+        /*
+         * Unable to load data from input stream [null].
+         */
+      }
+  }
+
+  //Test case number: 2
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.io.TextResource.doLoad(Ljava/io/BufferedReader;)V: root-Branch
+   * 2 org.jsecurity.io.TextResource.load(Ljava/io/Reader;)V: I4 Branch 3 IFEQ L95 - false
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      PipedReader pipedReader0 = new PipedReader();
+      BufferedReader bufferedReader0 = new BufferedReader((Reader) pipedReader0);
+      IniResource iniResource0 = new IniResource((Reader) bufferedReader0);
+      assertNull(iniResource0.getCharsetName());
+  }
+
+  //Test case number: 3
+  /*
    * 1 covered goal:
    * 1 org.jsecurity.io.TextResource.load(Ljava/lang/String;)V: I3 Branch 1 IFNONNULL L71 - false
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test3()  throws Throwable  {
       IniResource iniResource0 = null;
       try {
         iniResource0 = new IniResource((String) null);
@@ -53,20 +88,22 @@ public class TextResourceEvoSuiteTest {
       }
   }
 
-  //Test case number: 2
+  //Test case number: 4
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.io.TextResource.doLoad(Ljava/io/InputStream;)V: I8 Branch 2 IFNULL L85 - true
+   * 4 covered goals:
+   * 1 org.jsecurity.io.TextResource.doLoad(Ljava/io/InputStream;)V: I8 Branch 2 IFNULL L85 - false
    * 2 org.jsecurity.io.TextResource.<init>()V: root-Branch
    * 3 org.jsecurity.io.TextResource.getCharsetName()Ljava/lang/String;: root-Branch
-   * 4 org.jsecurity.io.TextResource.doLoad(Ljava/io/BufferedReader;)V: root-Branch
-   * 5 org.jsecurity.io.TextResource.load(Ljava/io/Reader;)V: I4 Branch 3 IFEQ L95 - true
+   * 4 org.jsecurity.io.TextResource.setCharsetName(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test4()  throws Throwable  {
       IniResource iniResource0 = new IniResource();
-      PipedInputStream pipedInputStream0 = new PipedInputStream();
-      iniResource0.load((InputStream) pipedInputStream0);
-      assertEquals(0, pipedInputStream0.available());
+      iniResource0.setCharsetName("");
+      try {
+        iniResource0.doLoad((InputStream) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 }

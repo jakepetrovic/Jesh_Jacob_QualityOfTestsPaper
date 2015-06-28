@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import org.jsecurity.io.ResourceUtils;
 
@@ -18,16 +16,17 @@ public class ResourceUtilsEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 5 covered goals:
+   * 6 covered goals:
    * 1 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
    * 2 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
    * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
-   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - false
-   * 5 org.jsecurity.io.ResourceUtils.loadFromUrl(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 13 IFEQ L151 - true
+   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
+   * 5 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - false
+   * 6 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("url:java.lang.String");
+      boolean boolean0 = ResourceUtils.resourceExists("file:");
       assertEquals(false, boolean0);
   }
 
@@ -44,14 +43,15 @@ public class ResourceUtilsEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 3 covered goals:
+   * 4 covered goals:
    * 1 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I3 Branch 1 IFNULL L74 - false
    * 2 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I8 Branch 2 IFGT L74 - false
-   * 3 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I13 Branch 3 IFGT L74 - true
+   * 3 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I13 Branch 3 IFGT L74 - false
+   * 4 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I18 Branch 4 IFLE L74 - false
    */
   @Test
   public void test2()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("url:java.lang.String");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("file:");
       assertEquals(true, boolean0);
   }
 
@@ -62,19 +62,18 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("classpath:wP@5|KC");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("classpath: = '");
       assertEquals(true, boolean0);
   }
 
   //Test case number: 4
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I13 Branch 3 IFGT L74 - false
-   * 2 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I18 Branch 4 IFLE L74 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.io.ResourceUtils.hasResourcePrefix(Ljava/lang/String;)Z: I13 Branch 3 IFGT L74 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("file:' was found in cassoader ");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("url:#7dBs'tH*qf");
       assertEquals(true, boolean0);
   }
 
@@ -88,7 +87,7 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("xO^j+:o");
       assertEquals(false, boolean0);
   }
 
@@ -116,43 +115,36 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("classpath:wP@5|KC");
+      boolean boolean0 = ResourceUtils.resourceExists("classpath: = '");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 8
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
-   * 2 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - false
-   * 3 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
-   * 4 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 5 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
+   * 3 covered goals:
+   * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - false
+   * 2 org.jsecurity.io.ResourceUtils.loadFromUrl(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 13 IFEQ L151 - true
+   * 3 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("file:' was found in cassoader ");
+      boolean boolean0 = ResourceUtils.resourceExists("url:#7dBs'tH*qf");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 9
   /*
-   * 4 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - true
    * 2 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
    * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
    * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
+   * 5 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      try {
-        ResourceUtils.getInputStreamForPath("");
-        fail("Expecting exception: FileNotFoundException");
-      } catch(FileNotFoundException e) {
-        /*
-         *  (No such file or directory)
-         */
-      }
+      boolean boolean0 = ResourceUtils.resourceExists("xO^j+:o");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 10
@@ -172,9 +164,9 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test11()  throws Throwable  {
-      byte[] byteArray0 = new byte[10];
-      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0, (int) (byte)0, (int) (byte) (-69));
+      byte[] byteArray0 = new byte[8];
+      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0, (int) (byte)0, (int) (byte)78);
       ResourceUtils.close((InputStream) byteArrayInputStream0);
-      assertEquals(-1, byteArrayInputStream0.read());
+      assertEquals(6, byteArrayInputStream0.available());
   }
 }

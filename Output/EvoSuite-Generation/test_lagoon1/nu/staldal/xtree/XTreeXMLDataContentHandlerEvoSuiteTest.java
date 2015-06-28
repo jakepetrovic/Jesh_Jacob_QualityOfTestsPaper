@@ -9,9 +9,12 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import nu.staldal.xtree.XTreeXMLDataContentHandler;
 
 public class XTreeXMLDataContentHandlerEvoSuiteTest {
@@ -27,11 +30,14 @@ public class XTreeXMLDataContentHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-      // Undeclared exception!
+      FileDataSource fileDataSource0 = new FileDataSource("");
       try {
-        xTreeXMLDataContentHandler0.getContent((DataSource) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        xTreeXMLDataContentHandler0.getContent((DataSource) fileDataSource0);
+        fail("Expecting exception: FileNotFoundException");
+      } catch(FileNotFoundException e) {
+        /*
+         *  (No such file or directory)
+         */
       }
   }
 
@@ -60,9 +66,10 @@ public class XTreeXMLDataContentHandlerEvoSuiteTest {
   public void test2()  throws Throwable  {
       XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
       ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+      ObjectOutputStream objectOutputStream0 = new ObjectOutputStream((OutputStream) byteArrayOutputStream0);
       // Undeclared exception!
       try {
-        xTreeXMLDataContentHandler0.writeTo((Object) "application/x-java-jvm-local-objectref", "application/x-java-jvm-local-objectref", (OutputStream) byteArrayOutputStream0);
+        xTreeXMLDataContentHandler0.writeTo((Object) "4_%/$BRHDZOQ", "4_%/$brhDzoQ", (OutputStream) objectOutputStream0);
         fail("Expecting exception: ClassCastException");
       } catch(ClassCastException e) {
         /*

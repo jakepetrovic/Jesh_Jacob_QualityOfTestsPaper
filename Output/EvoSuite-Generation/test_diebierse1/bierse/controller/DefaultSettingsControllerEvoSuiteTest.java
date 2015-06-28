@@ -28,8 +28,8 @@ public class DefaultSettingsControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultSettingsController defaultSettingsController0 = new DefaultSettingsController((Model) null, (ISettingsView) null, (IDrinkSettingsView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "ACTIVATED", 0, "[]", (long) 0, 0);
+      ActionEvent actionEvent0 = new ActionEvent((Object) "AccessibleHypertextOffset", (-1775), "AccessibleHypertextOffset", 0L, (-1775));
       defaultSettingsController0.actionPerformed(actionEvent0);
-      assertEquals("java.awt.event.ActionEvent[unknown type,cmd=[],when=0,modifiers=] on ACTIVATED", actionEvent0.toString());
+      assertEquals(0L, actionEvent0.getWhen());
   }
 }

@@ -15,66 +15,48 @@ public class Sha1HashEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>(Ljava/lang/Object;)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha1Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "a12ef1db4c10b31274b9dd504f011a9a68e4d3a5", (Object) null);
-      assertEquals("c4Kh5NfNc/zAPvMEiHPmDi47pmY=", sha1Hash0.toBase64());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1");
+      assertEquals("c571b86549e49bf223cf648388c46288c2241b5a", sha1Hash0.toString());
   }
 
   //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>(Ljava/lang/Object;)V: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1");
-      assertEquals("xXG4ZUnkm/Ijz2SDiMRiiMIkG1o=", sha1Hash0.toBase64());
-  }
-
-  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>()V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha1Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
-      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("z/");
-      assertEquals("0000", sha1Hash0.toHex());
+  public void test1()  throws Throwable  {
+      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("");
+      assertEquals("", sha1Hash0.toBase64());
   }
 
-  //Test case number: 3
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha1Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha1Hash.<init>()V: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Sha1Hash.fromHexString("z/");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal hexadecimal charcter z at index 0
-         */
-      }
+  public void test2()  throws Throwable  {
+      Sha1Hash sha1Hash0 = Sha1Hash.fromHexString("");
+      assertEquals("", sha1Hash0.toBase64());
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha1Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1", (Object) null, 1602);
-      assertEquals("a12ef1db4c10b31274b9dd504f011a9a68e4d3a5", sha1Hash0.toHex());
+  public void test3()  throws Throwable  {
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "\u0000", (Object) "c571b86549e49bf223cf648388c46288c2241b5a", (-1));
+      assertEquals("754c622711b2b4837e9e0b4845f88dbdc9576b2e", sha1Hash0.toHex());
   }
 }

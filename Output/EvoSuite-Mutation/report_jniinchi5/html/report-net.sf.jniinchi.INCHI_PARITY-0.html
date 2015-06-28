@@ -22,8 +22,8 @@ net.sf.jniinchi.INCHI_PARITY
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_PARITY: 100.00%</ul><ul>
-<li>2550 fitness evaluations, 52 generations, 19789 statements, 1678 tests.
-<li>Time: 0:00:15(Search: 0:00:14, minimization: 0:00:01)
+<li>1350 fitness evaluations, 28 generations, 10801 statements, 1043 tests.
+<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:00)
 <li>Coverage: 12/12 branches, 2/2 methods, 13/13 total goals
 <li>Mutation score: 74%
 </ul>
@@ -31,9 +31,9 @@ net.sf.jniinchi.INCHI_PARITY
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
 <span class="nocode"><a name="2">  2: </a></span>int int0 = iNCHI_PARITY0.getIndx();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(2, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(4, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -42,8 +42,8 @@ net.sf.jniinchi.INCHI_PARITY
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(4);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_PARITY.UNDEFINED, iNCHI_PARITY0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -57,12 +57,12 @@ net.sf.jniinchi.INCHI_PARITY
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(4);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_PARITY.UNDEFINED, iNCHI_PARITY0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY.getValue((-1962));
+<span class="nocode"><a name="1">  1: </a></span>INCHI_PARITY.getValue(1706);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -156,7 +156,7 @@ net.sf.jniinchi.INCHI_PARITY
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -174,7 +174,7 @@ net.sf.jniinchi.INCHI_PARITY
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5601
+<li>process_communication_port: 8307
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

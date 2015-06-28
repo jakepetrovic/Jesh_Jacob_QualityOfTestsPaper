@@ -22,30 +22,29 @@ org.jsecurity.io.AbstractResource
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.AbstractResource: 57.14%</ul><ul>
-<li>32 fitness evaluations, 2 generations, 707 statements, 175 tests.
-<li>Time: 0:01:07(Search: 0:01:06, minimization: 0:00:00)
+<li>564 fitness evaluations, 13 generations, 2800 statements, 611 tests.
+<li>Time: 0:01:02(Search: 0:01:02, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 4/6 methods, 4/7 total goals
-<li>Mutation score: 5%
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[9];
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
-<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((InputStream) byteArrayInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, byteArrayInputStream0.read());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, byteArrayInputStream0.available());
+<span class="nocode"><a name="1">  1: </a></span>FileDescriptor fileDescriptor0 = FileDescriptor.out;
+<span class="nocode"><a name="2">  2: </a></span>FileInputStream fileInputStream0 = new FileInputStream(fileDescriptor0);
+<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((InputStream) fileInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;4HKn(l:mg&quot;, &quot;4HKn(l:mg&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;={g&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [4HKn(l:mg]
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [={g]
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -125,7 +124,7 @@ org.jsecurity.io.AbstractResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -143,7 +142,7 @@ org.jsecurity.io.AbstractResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17219
+<li>process_communication_port: 11802
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

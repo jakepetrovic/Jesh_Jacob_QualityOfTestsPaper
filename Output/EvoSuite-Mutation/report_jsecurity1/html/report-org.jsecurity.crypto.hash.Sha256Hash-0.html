@@ -21,42 +21,40 @@ org.jsecurity.crypto.hash.Sha256Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Sha256Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3888 statements, 308 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:01)
-<li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
+<ul><li>Target class: org.jsecurity.crypto.hash.Sha256Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3153 statements, 249 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
 <li>Mutation score: 44%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha256Hash.fromHexString((String) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;P&lt;UPm+aLOwO5p/|ht.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;3d43e6f9a2cec0ee69000000&quot;, sha256Hash0.toHex());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;, (Object) &quot;UTF-8&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;faaa60e360eacff4ff75e7b813c2c0bd17ba55ca59efa0327a77c4c9e15c5fb2&quot;, sha256Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;3d43e6f9a2cec0ee69000000&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;oN+yWNMmOTg2arHbidRjHWHy65LIxxBg3kgqYuBgGig=&quot;, sha256Hash0.toBase64());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;z78C9@k&gt;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;cfbf020000&quot;, sha256Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Sha256Hash.fromHexString(&quot;yv&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter y at index 0
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;z78CAAA=&quot;, (Object) &quot;z78CAAA=&quot;, (-1));
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ec59871c09794ae9beb4858e3bd691c78b86b1361f95aaffc5297a86a1cff1a2&quot;, sha256Hash0.toHex());
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;cfbf020000&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;gN6mjlOKcvorBdH02/YZPyg/HWizu/vQRX1yY8DHFgw=&quot;, sha256Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;\uFFFDi\uFFFD\u0000\u0001\u0000\u0000\uFFFD\uFFFD\uFFFD&quot;, (Object) &quot;SHA-256&quot;, (int) (byte) (-74));
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;e8d6fabd568b5b2eec13bd67043da619382f5679074331a71b7e4398170e821c&quot;, sha256Hash0.toHex());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -109,7 +107,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <span class="nocode"><a name="48"> 48: </a></span>
 <span class="nocode"><a name="49"> 49: </a></span>    public Sha256Hash(Object source, Object salt) {
 <span class="nocode"><a name="50"> 50: </a></span>        super(source, salt);
-<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="51"> 51: </a></span>    }
 <span class="nocode"><a name="52"> 52: </a></span>
 <span class="nocode"><a name="53"> 53: </a></span>    public Sha256Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="54"> 54: </a></span>        super(source, salt, hashIterations);
@@ -137,7 +135,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -155,7 +153,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2557
+<li>process_communication_port: 21915
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

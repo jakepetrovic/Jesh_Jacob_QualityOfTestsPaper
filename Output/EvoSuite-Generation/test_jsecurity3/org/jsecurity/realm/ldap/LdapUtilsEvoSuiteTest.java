@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 import org.jsecurity.realm.ldap.LdapUtils;
@@ -47,9 +48,10 @@ public class LdapUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      BasicAttribute basicAttribute0 = new BasicAttribute("2.16.840.1.113730.3.4.2", "2.16.840.1.113730.3.4.2");
+      BasicAttributes basicAttributes0 = new BasicAttributes("s.yO<H(4L;g69{LD%-`", (Object) "java.naming.provider.url", true);
+      BasicAttribute basicAttribute0 = (BasicAttribute)basicAttributes0.put("s.yO<H(4L;g69{LD%-`", "java.naming.provider.url");
       Collection<String> collection0 = LdapUtils.getAllAttributeValues((Attribute) basicAttribute0);
       assertNotNull(collection0);
-      assertEquals(1, collection0.size());
+      assertEquals(false, collection0.isEmpty());
   }
 }

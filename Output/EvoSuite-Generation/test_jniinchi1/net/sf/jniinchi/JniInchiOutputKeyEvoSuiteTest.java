@@ -23,10 +23,10 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.NOT_ENOUGH_MEMORY;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "]e~z{:P]H3[Q)@H");
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "");
       String string0 = jniInchiOutputKey0.getKey();
-      assertEquals("]e~z{:P]H3[Q)@H", string0);
+      assertEquals("", string0);
   }
 
   //Test case number: 1
@@ -37,35 +37,22 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "");
       INCHI_KEY iNCHI_KEY1 = jniInchiOutputKey0.getReturnStatus();
-      assertEquals("INVALID_INCHI", iNCHI_KEY1.toString());
+      assertSame(iNCHI_KEY1, iNCHI_KEY0);
   }
 
   //Test case number: 2
-  /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(ILjava/lang/String;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
-   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(0, "]e~z{:P]H3[Q)@H");
-      assertEquals("]e~z{:P]H3[Q)@H", jniInchiOutputKey0.getKey());
-  }
-
-  //Test case number: 3
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I7 Branch 1 IFNONNULL L32 - false
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
-        jniInchiOutputKey0 = new JniInchiOutputKey(6, "b*.Z4zk\"tGX|");
+        jniInchiOutputKey0 = new JniInchiOutputKey(1164, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*
@@ -74,15 +61,14 @@ public class JniInchiOutputKeyEvoSuiteTest {
       }
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - false
-   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I7 Branch 1 IFNONNULL L32 - true
-   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
+   * 2 covered goals:
+   * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
+   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - false
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test3()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
         jniInchiOutputKey0 = new JniInchiOutputKey(0, (String) null);
@@ -92,5 +78,19 @@ public class JniInchiOutputKeyEvoSuiteTest {
          * Null InChIkey
          */
       }
+  }
+
+  //Test case number: 4
+  /*
+   * 3 covered goals:
+   * 1 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I23 Branch 3 IFNONNULL L37 - true
+   * 2 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I7 Branch 1 IFNONNULL L32 - true
+   * 3 net.sf.jniinchi.JniInchiOutputKey.<init>(Lnet/sf/jniinchi/INCHI_KEY;Ljava/lang/String;)V: I19 Branch 2 IF_ACMPNE L36 - false
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.OK;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "");
+      assertEquals(INCHI_KEY.OK, jniInchiOutputKey0.getReturnStatus());
   }
 }

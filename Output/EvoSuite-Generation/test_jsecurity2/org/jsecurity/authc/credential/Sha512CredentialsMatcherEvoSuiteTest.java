@@ -7,8 +7,17 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.HashSet;
+import java.util.Set;
+import org.jsecurity.authc.AuthenticationInfo;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Sha512CredentialsMatcher;
+import org.jsecurity.authz.Permission;
 import org.jsecurity.crypto.hash.Sha512Hash;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class Sha512CredentialsMatcherEvoSuiteTest {
 
@@ -35,7 +44,18 @@ public class Sha512CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      Sha512Hash sha512Hash0 = (Sha512Hash)sha512CredentialsMatcher0.hashProvidedCredentials((Object) "u\u0000", (Object) "u\u0000", (int) (byte)117);
-      assertEquals("4f82511b68d3da9218bba41c41ddd9697f5074a6093dfb252380c47e2d85263fc8dabf9f1e717e3cf2cafa61da02ae61f77ffa5cacb23d22fb78d086648746b8", sha512Hash0.toHex());
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(";)P", ";)P");
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      HashSet<Permission> hashSet0 = new HashSet<Permission>();
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) "[]", (Set<String>) null, (Set<Permission>) hashSet0);
+      // Undeclared exception!
+      try {
+        sha512CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Illegal hexadecimal charcter [ at index 0
+         */
+      }
   }
 }

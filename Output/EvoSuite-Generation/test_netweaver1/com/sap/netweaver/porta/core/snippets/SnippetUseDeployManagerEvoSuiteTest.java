@@ -28,7 +28,7 @@ public class SnippetUseDeployManagerEvoSuiteTest {
       SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
       AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
       Credentials credentials0 = snippetUseDeployManager0.getCredentials(authenticationReason0);
-      assertEquals("<pass>", credentials0.getPassword());
+      assertEquals("<user>", credentials0.getUser());
   }
 
   //Test case number: 1

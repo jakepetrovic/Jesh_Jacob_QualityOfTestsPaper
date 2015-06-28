@@ -7,32 +7,7 @@ package com.sap.netweaver.porta.mon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import com.sap.netweaver.porta.mon.PortaMon;
-import java.io.BufferedReader;
-import java.util.Properties;
 
 public class PortaMonEvoSuiteTest {
 
-
-  //Test case number: 0
-  /*
-   * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.PortaMon.getServerProps()Ljava/util/Properties;: root-Branch
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      Properties properties0 = PortaMon.getServerProps();
-      assertNull(properties0);
-  }
-
-  //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.PortaMon.getIn()Ljava/io/BufferedReader;: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      BufferedReader bufferedReader0 = PortaMon.getIn();
-      assertNull(bufferedReader0);
-  }
 }

@@ -17,49 +17,53 @@ public class PropertiesRealmEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.realm.text.PropertiesRealm.destroy()V: I4 Branch 5 IFNULL L151 - true
+   * 1 org.jsecurity.realm.text.PropertiesRealm.setReloadIntervalSeconds(I)V: root-Branch
    * 2 org.jsecurity.realm.text.PropertiesRealm.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       PropertiesRealm propertiesRealm0 = new PropertiesRealm();
-      propertiesRealm0.destroy();
+      propertiesRealm0.setReloadIntervalSeconds(1302);
       assertEquals("org.jsecurity.realm.text.PropertiesRealm_0", propertiesRealm0.getName());
   }
 
   //Test case number: 1
   /*
-   * 23 covered goals:
-   * 1 org.jsecurity.realm.text.PropertiesRealm.getName(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.realm.text.PropertiesRealm.getRolename(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 3 org.jsecurity.realm.text.PropertiesRealm.getUsername(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 4 org.jsecurity.realm.text.PropertiesRealm.<init>(Lorg/jsecurity/cache/CacheManager;)V: I27 Branch 1 IFNONNULL L124 - true
-   * 5 org.jsecurity.realm.text.PropertiesRealm.afterRoleCacheSet()V: I14 Branch 2 IFEQ L135 - false
-   * 6 org.jsecurity.realm.text.PropertiesRealm.afterRoleCacheSet()V: I48 Branch 3 IFLE L144 - true
-   * 7 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I4 Branch 9 IFNULL L221 - false
-   * 8 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I8 Branch 10 IFNE L221 - true
-   * 9 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I20 Branch 11 IFEQ L226 - true
-   * 10 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I14 Branch 12 IFEQ L240 - true
-   * 11 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I38 Branch 13 IFEQ L245 - true
-   * 12 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I68 Branch 15 IFEQ L254 - true
-   * 13 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I21 Branch 23 IFEQ L321 - true
-   * 14 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I21 Branch 23 IFEQ L321 - false
-   * 15 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I40 Branch 24 IFEQ L325 - true
-   * 16 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I64 Branch 25 IFEQ L329 - true
-   * 17 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I64 Branch 25 IFEQ L329 - false
-   * 18 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I90 Branch 26 IFEQ L332 - false
-   * 19 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I3 Branch 27 IFNULL L352 - false
-   * 20 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I8 Branch 28 IFLE L352 - true
-   * 21 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I8 Branch 28 IFLE L352 - false
-   * 22 org.jsecurity.realm.text.PropertiesRealm.isRolename(Ljava/lang/String;)Z: I3 Branch 29 IFNULL L356 - false
-   * 23 org.jsecurity.realm.text.PropertiesRealm.isRolename(Ljava/lang/String;)Z: I8 Branch 30 IFLE L356 - false
+   * 24 covered goals:
+   * 1 org.jsecurity.realm.text.PropertiesRealm.setResourcePath(Ljava/lang/String;)V: root-Branch
+   * 2 org.jsecurity.realm.text.PropertiesRealm.getName(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: root-Branch
+   * 3 org.jsecurity.realm.text.PropertiesRealm.getRolename(Ljava/lang/String;)Ljava/lang/String;: root-Branch
+   * 4 org.jsecurity.realm.text.PropertiesRealm.getUsername(Ljava/lang/String;)Ljava/lang/String;: root-Branch
+   * 5 org.jsecurity.realm.text.PropertiesRealm.<init>(Lorg/jsecurity/cache/CacheManager;)V: I27 Branch 1 IFNONNULL L124 - true
+   * 6 org.jsecurity.realm.text.PropertiesRealm.afterRoleCacheSet()V: I14 Branch 2 IFEQ L135 - false
+   * 7 org.jsecurity.realm.text.PropertiesRealm.afterRoleCacheSet()V: I48 Branch 3 IFLE L144 - true
+   * 8 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I4 Branch 9 IFNULL L221 - false
+   * 9 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I8 Branch 10 IFNE L221 - true
+   * 10 org.jsecurity.realm.text.PropertiesRealm.loadProperties()V: I20 Branch 11 IFEQ L226 - true
+   * 11 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I14 Branch 12 IFEQ L240 - true
+   * 12 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I38 Branch 13 IFEQ L245 - true
+   * 13 org.jsecurity.realm.text.PropertiesRealm.loadProperties(Ljava/lang/String;)Ljava/util/Properties;: I68 Branch 15 IFEQ L254 - true
+   * 14 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I21 Branch 23 IFEQ L321 - true
+   * 15 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I21 Branch 23 IFEQ L321 - false
+   * 16 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I40 Branch 24 IFEQ L325 - true
+   * 17 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I64 Branch 25 IFEQ L329 - true
+   * 18 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I64 Branch 25 IFEQ L329 - false
+   * 19 org.jsecurity.realm.text.PropertiesRealm.createRealmEntitiesFromProperties(Ljava/util/Properties;)V: I90 Branch 26 IFEQ L332 - false
+   * 20 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I3 Branch 27 IFNULL L352 - false
+   * 21 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I8 Branch 28 IFLE L352 - true
+   * 22 org.jsecurity.realm.text.PropertiesRealm.isUsername(Ljava/lang/String;)Z: I8 Branch 28 IFLE L352 - false
+   * 23 org.jsecurity.realm.text.PropertiesRealm.isRolename(Ljava/lang/String;)Z: I3 Branch 29 IFNULL L356 - false
+   * 24 org.jsecurity.realm.text.PropertiesRealm.isRolename(Ljava/lang/String;)Z: I8 Branch 30 IFLE L356 - false
    */
   @Test
   public void test1()  throws Throwable  {
       HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
       PropertiesRealm propertiesRealm0 = new PropertiesRealm((CacheManager) hashtableCacheManager0);
-      assertEquals("org.jsecurity.realm.text.PropertiesRealm_11", propertiesRealm0.getName());
       assertNotNull(propertiesRealm0);
+      
+      propertiesRealm0.setResourcePath(",vOGF");
+      assertEquals("org.jsecurity.realm.text.PropertiesRealm_12", propertiesRealm0.getName());
+      assertEquals("org.jsecurity.realm.text.PropertiesRealm-0-authorization", propertiesRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 2
@@ -83,13 +87,13 @@ public class PropertiesRealmEvoSuiteTest {
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.realm.text.PropertiesRealm.startReloadThread()V: I4 Branch 7 IFLE L162 - false
+   * 1 org.jsecurity.realm.text.PropertiesRealm.destroy()V: I4 Branch 5 IFNULL L151 - true
    */
   @Test
   public void test3()  throws Throwable  {
       PropertiesRealm propertiesRealm0 = new PropertiesRealm();
-      propertiesRealm0.startReloadThread();
-      assertEquals("org.jsecurity.realm.text.PropertiesRealm_122", propertiesRealm0.getName());
+      propertiesRealm0.destroy();
+      assertEquals("org.jsecurity.realm.text.PropertiesRealm_123", propertiesRealm0.getName());
   }
 
   //Test case number: 4
@@ -103,6 +107,6 @@ public class PropertiesRealmEvoSuiteTest {
   public void test4()  throws Throwable  {
       PropertiesRealm propertiesRealm0 = new PropertiesRealm();
       propertiesRealm0.run();
-      assertEquals("org.jsecurity.realm.text.PropertiesRealm_150", propertiesRealm0.getName());
+      assertEquals("org.jsecurity.realm.text.PropertiesRealm_134", propertiesRealm0.getName());
   }
 }

@@ -18,26 +18,12 @@ public class CoreModuleImplEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.setAuthenticationCallback(Lcom/sap/netweaver/porta/core/AuthenticationCallback;)V: root-Branch
-   * 2 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.<init>(Ljava/lang/String;I)V: root-Branch
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("#", 1801);
-      SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
-      deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
-      assertEquals(false, deployManagerImpl0.initialized());
-  }
-
-  //Test case number: 1
-  /*
-   * 2 covered goals:
    * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.checkInitialized()V: I4 Branch 1 IFNE L38 - false
    * 2 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.<init>(Ljava/lang/String;I)V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("#", 1801);
+  public void test0()  throws Throwable  {
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("Inta", 9);
       // Undeclared exception!
       try {
         deployManagerImpl0.checkInitialized();
@@ -47,5 +33,19 @@ public class CoreModuleImplEvoSuiteTest {
          * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
          */
       }
+  }
+
+  //Test case number: 1
+  /*
+   * 2 covered goals:
+   * 1 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.setAuthenticationCallback(Lcom/sap/netweaver/porta/core/AuthenticationCallback;)V: root-Branch
+   * 2 com.sap.netweaver.porta.core.nw7.CoreModuleImpl.<init>(Ljava/lang/String;I)V: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("KbU{i(a", 1529);
+      SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
+      deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
+      assertEquals(false, deployManagerImpl0.initialized());
   }
 }

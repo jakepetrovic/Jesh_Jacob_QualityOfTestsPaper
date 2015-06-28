@@ -19,9 +19,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
       String string0 = cST_PIS0.getGroup();
-      assertEquals("Aliq", string0);
+      assertEquals("Qtde", string0);
   }
 
   //Test case number: 1
@@ -31,7 +31,7 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
       boolean boolean0 = cST_PIS0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -43,9 +43,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
       String string0 = cST_PIS0.getDesc();
-      assertEquals("Al\u00EDquota normal", string0);
+      assertEquals("Outras opera\u00E7\u00F5es", string0);
   }
 
   //Test case number: 3
@@ -55,9 +55,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
       String string0 = cST_PIS0.getValue();
-      assertEquals("01", string0);
+      assertEquals("99", string0);
   }
 
   //Test case number: 4
@@ -69,8 +69,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
-      boolean boolean0 = cST_PIS0.isRequiredTag("Aliq");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      boolean boolean0 = cST_PIS0.isRequiredTag("99");
       assertEquals(false, boolean0);
   }
 
@@ -82,8 +82,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
-      boolean boolean0 = cST_PIS0.isRequiredTag("qBCProd");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_99;
+      boolean boolean0 = cST_PIS0.isRequiredTag("vBC");
       assertEquals(true, boolean0);
   }
 }

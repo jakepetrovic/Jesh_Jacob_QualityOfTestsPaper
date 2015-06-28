@@ -7,7 +7,6 @@ package net.sf.jniinchi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import net.sf.jniinchi.INCHI_RET;
 import net.sf.jniinchi.JniInchiInput;
 import net.sf.jniinchi.JniInchiInputData;
 
@@ -22,9 +21,9 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "");
-      jniInchiInputData0.getInput();
-      assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-762), (JniInchiInput) null, (-762), "=m$QUKhom)N T^)U");
+      JniInchiInput jniInchiInput0 = jniInchiInputData0.getInput();
+      assertNull(jniInchiInput0);
   }
 
   //Test case number: 1
@@ -34,9 +33,8 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "");
-      INCHI_RET iNCHI_RET0 = jniInchiInputData0.getReturnValue();
-      assertEquals(INCHI_RET.OKAY, iNCHI_RET0);
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-762), (JniInchiInput) null, (-762), "=m$QUKhom)N T^)U");
+      jniInchiInputData0.getReturnValue();
   }
 
   //Test case number: 2
@@ -47,9 +45,8 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(0, (JniInchiInput) null, 0, "");
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-762), (JniInchiInput) null, (-762), "=m$QUKhom)N T^)U");
       String string0 = jniInchiInputData0.getErrorMessage();
-      assertEquals(INCHI_RET.OKAY, jniInchiInputData0.getReturnValue());
-      assertNotNull(string0);
+      assertEquals("=m$QUKhom)N T^)U", string0);
   }
 }

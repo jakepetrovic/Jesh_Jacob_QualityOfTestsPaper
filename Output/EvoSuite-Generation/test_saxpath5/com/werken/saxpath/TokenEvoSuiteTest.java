@@ -24,11 +24,11 @@ public class TokenEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Token token0 = new Token(0, "", 0, 0);
+      Token token0 = new Token(0, "F|S+ha#4B-oR'", 0, 0);
       int int0 = token0.getTokenType();
-      assertEquals(0, int0);
-      assertEquals(0, token0.getTokenEnd());
       assertEquals(0, token0.getTokenBegin());
+      assertEquals(0, token0.getTokenEnd());
+      assertEquals(0, int0);
   }
 
   //Test case number: 1
@@ -46,9 +46,15 @@ public class TokenEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Token token0 = new Token(0, "", 0, 0);
-      String string0 = token0.toString();
-      assertEquals("[ (0) ()", string0);
-      assertNotNull(string0);
+      Token token0 = new Token((-1057), "", 0, 884);
+      // Undeclared exception!
+      try {
+        token0.toString();
+        fail("Expecting exception: StringIndexOutOfBoundsException");
+      } catch(StringIndexOutOfBoundsException e) {
+        /*
+         * String index out of range: 884
+         */
+      }
   }
 }

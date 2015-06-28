@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.PrintStream;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import net.sf.lavalamp.LavaLogger;
 
 public class LavaLoggerEvoSuiteTest {
@@ -26,20 +27,21 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 net.sf.lavalamp.LavaLogger.info(Ljava/util/Calendar;Ljava/lang/String;)V: root-Branch
    * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
-   * 3 net.sf.lavalamp.LavaLogger.info(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-1), (-1), (-1), (-1), 159);
       // Undeclared exception!
       try {
-        lavaLogger0.info("T?jdhY-fj1/[k9='@]");
+        lavaLogger0.info((Calendar) gregorianCalendar0, "$Gr(RSd:b");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
+      assertEquals("java.util.GregorianCalendar[time=-62201748060000,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=0,YEAR=3,MONTH=10,WEEK_OF_YEAR=48,WEEK_OF_MONTH=5,DAY_OF_MONTH=29,DAY_OF_YEAR=333,DAY_OF_WEEK=6,DAY_OF_WEEK_IN_MONTH=5,AM_PM=0,HOUR=1,HOUR_OF_DAY=1,MINUTE=39,SECOND=0,MILLISECOND=0,ZONE_OFFSET=-25200000,DST_OFFSET=0]", gregorianCalendar0.toString());
   }
 
   //Test case number: 2
@@ -51,7 +53,7 @@ public class LavaLoggerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
-      lavaLogger0.debug("V+\"Qt");
+      lavaLogger0.debug("");
   }
 
   //Test case number: 3
@@ -72,17 +74,16 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/util/Calendar;Ljava/lang/String;)V: root-Branch
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/lang/String;)V: root-Branch
+   * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
-      Calendar calendar0 = null;
-      String string0 = "V+\"Qt";
       // Undeclared exception!
       try {
-        lavaLogger0.error(calendar0, string0);
+        lavaLogger0.error("~ii/'&v?(");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -90,38 +91,21 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 5
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/lang/String;)V: root-Branch
-   * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.LavaLogger.setOut(Ljava/io/PrintStream;)V: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
-      LavaLogger lavaLogger0 = new LavaLogger();
-      // Undeclared exception!
-      try {
-        lavaLogger0.error("");
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      LavaLogger.setOut((PrintStream) null);
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 net.sf.lavalamp.LavaLogger.setOut(Ljava/io/PrintStream;)V: root-Branch
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      LavaLogger.setOut((PrintStream) null);
-  }
-
-  //Test case number: 7
-  /*
-   * 1 covered goal:
    * 1 net.sf.lavalamp.LavaLogger.setDebug(Z)V: root-Branch
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test6()  throws Throwable  {
       LavaLogger.setDebug(false);
   }
 }

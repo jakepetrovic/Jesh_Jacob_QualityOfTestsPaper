@@ -32,13 +32,15 @@ public class DevicePropertiesEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceProperties.getOnError()Lnet/sf/lavalamp/device/OnError;: root-Branch
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.device.DeviceProperties.setOnError(Lnet/sf/lavalamp/device/OnError;)V: root-Branch
+   * 2 net.sf.lavalamp.device.DeviceProperties.getOnError()Lnet/sf/lavalamp/device/OnError;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.getOnError();
+      OnError onError0 = deviceProperties0.getOnError();
+      deviceProperties0.setOnError(onError0);
       assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
 
@@ -57,14 +59,13 @@ public class DevicePropertiesEvoSuiteTest {
 
   //Test case number: 3
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.lavalamp.device.DeviceProperties.setOff(Lnet/sf/lavalamp/properties/Off;)V: root-Branch
-   * 2 net.sf.lavalamp.device.DeviceProperties.getOff()Lnet/sf/lavalamp/properties/Off;: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      Off off0 = deviceProperties0.getOff();
+      Off off0 = new Off();
       deviceProperties0.setOff(off0);
       assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
@@ -84,38 +85,38 @@ public class DevicePropertiesEvoSuiteTest {
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceProperties.getIdentity()Ljava/lang/String;: root-Branch
+   * 1 net.sf.lavalamp.device.DeviceProperties.getOff()Lnet/sf/lavalamp/properties/Off;: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.getIdentity();
+      Off off0 = deviceProperties0.getOff();
+      assertNotNull(off0);
       assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceProperties.setOnWhenSuccessful(Z)V: root-Branch
+   * 1 net.sf.lavalamp.device.DeviceProperties.getIdentity()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.setOnWhenSuccessful(false);
+      deviceProperties0.getIdentity();
       assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceProperties.setOnError(Lnet/sf/lavalamp/device/OnError;)V: root-Branch
+   * 1 net.sf.lavalamp.device.DeviceProperties.setOnWhenSuccessful(Z)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      OnError onError0 = OnError.CRASH;
-      deviceProperties0.setOnError(onError0);
-      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=CRASH, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
+      deviceProperties0.setOnWhenSuccessful(false);
+      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
   }
 
   //Test case number: 8
@@ -128,6 +129,7 @@ public class DevicePropertiesEvoSuiteTest {
       DeviceProperties deviceProperties0 = new DeviceProperties();
       deviceProperties0.getClassName();
       assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
+      assertEquals(false, deviceProperties0.isOnWhenSuccessful());
   }
 
   //Test case number: 9
@@ -138,8 +140,8 @@ public class DevicePropertiesEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.setPath("#(EVeN%K~?`}FGV");
-      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=#(EVeN%K~?`}FGVnull", deviceProperties0.toString());
+      deviceProperties0.setPath("");
+      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=null", deviceProperties0.toString());
   }
 
   //Test case number: 10
@@ -152,7 +154,7 @@ public class DevicePropertiesEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.setIdentity("\n\tdevice=null, className=#(EVeN%K~?`}FGV,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=#(EVeN%K~?`}FGVnull");
+      deviceProperties0.setIdentity("|t.S,<DZ1S-");
       // Undeclared exception!
       try {
         deviceProperties0.check();
@@ -210,18 +212,17 @@ public class DevicePropertiesEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       DeviceProperties deviceProperties0 = new DeviceProperties();
-      deviceProperties0.setClassName("#(EVeN%K~?`}FGV");
-      BuildProperties[] buildPropertiesArray0 = new BuildProperties[5];
+      deviceProperties0.setClassName("|t.S,<DZ1S-");
+      BuildProperties[] buildPropertiesArray0 = new BuildProperties[4];
       BuildProperties buildProperties0 = new BuildProperties();
       buildPropertiesArray0[0] = buildProperties0;
-      buildPropertiesArray0[1] = buildPropertiesArray0[0];
-      buildPropertiesArray0[2] = buildProperties0;
-      buildPropertiesArray0[3] = buildProperties0;
-      buildPropertiesArray0[4] = buildProperties0;
-      buildProperties0.setBuild("#(EVeN%K~?`}FGV");
-      deviceProperties0.setIdentity("\n\tdevice=null, className=#(EVeN%K~?`}FGV,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=#(EVeN%K~?`}FGVnull");
+      buildPropertiesArray0[1] = buildProperties0;
+      buildProperties0.setBuild("|t.S,<DZ1S-");
       deviceProperties0.setBuildProperties(buildPropertiesArray0);
+      buildPropertiesArray0[2] = buildProperties0;
+      buildPropertiesArray0[3] = buildPropertiesArray0[0];
+      deviceProperties0.setIdentity("|t.S,<DZ1S-");
       deviceProperties0.check();
-      assertEquals("\n\tdevice=\n\tdevice=null, className=#(EVeN%K~?`}FGV,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=#(EVeN%K~?`}FGVnull, className=#(EVeN%K~?`}FGV,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=null[\n\t\tbuildId=#(EVeN%K~?`}FGV,  null, \n\t\tbuildId=#(EVeN%K~?`}FGV,  null, \n\t\tbuildId=#(EVeN%K~?`}FGV,  null, \n\t\tbuildId=#(EVeN%K~?`}FGV,  null, \n\t\tbuildId=#(EVeN%K~?`}FGV,  null]", deviceProperties0.toString());
+      assertEquals("\n\tdevice=|t.S,<DZ1S-, className=|t.S,<DZ1S-,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=null[\n\t\tbuildId=|t.S,<DZ1S-,  null, \n\t\tbuildId=|t.S,<DZ1S-,  null, \n\t\tbuildId=|t.S,<DZ1S-,  null, \n\t\tbuildId=|t.S,<DZ1S-,  null]", deviceProperties0.toString());
   }
 }

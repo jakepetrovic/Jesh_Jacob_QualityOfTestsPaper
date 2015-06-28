@@ -21,11 +21,11 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       String string0 = build0.getIdentity();
       assertNotNull(string0);
       assertEquals(true, build0.isSuccessful());
-      assertEquals("<font color='green'> build XLD-g(WQd3 successful (null)</font>", build0.toString());
+      assertEquals("<font color='green'> build  successful (null)</font>", build0.toString());
   }
 
   //Test case number: 1
@@ -35,7 +35,7 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       build0.getBuildSite();
   }
 
@@ -46,7 +46,7 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       boolean boolean0 = build0.isSuccessful();
       assertEquals(true, boolean0);
   }
@@ -58,10 +58,10 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       build0.setBuildSite((BuildSite) null);
-      assertEquals("<font color='green'> build XLD-g(WQd3 successful (null)</font>", build0.toString());
       assertEquals(true, build0.isSuccessful());
+      assertEquals("<font color='green'> build  successful (null)</font>", build0.toString());
   }
 
   //Test case number: 4
@@ -72,13 +72,13 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       assertEquals(true, build0.isSuccessful());
       
       build0.setSuccessful(false);
       String string0 = build0.toString();
       assertEquals(false, build0.isSuccessful());
-      assertEquals("<font color='red'> build XLD-g(WQd3 failed (null)</font>", string0);
+      assertEquals("<font color='red'> build  failed (null)</font>", string0);
   }
 
   //Test case number: 5
@@ -89,9 +89,9 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      Build build0 = new Build("XLD-g(WQd3");
+      Build build0 = new Build("");
       String string0 = build0.toString();
       assertNotNull(string0);
-      assertEquals("<font color='green'> build XLD-g(WQd3 successful (null)</font>", string0);
+      assertEquals("<font color='green'> build  successful (null)</font>", string0);
   }
 }

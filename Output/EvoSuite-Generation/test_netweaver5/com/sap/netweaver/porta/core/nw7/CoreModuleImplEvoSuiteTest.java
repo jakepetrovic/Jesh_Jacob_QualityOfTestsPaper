@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.sap.netweaver.porta.core.AuthenticationCallback;
 import com.sap.netweaver.porta.core.CoreException;
-import com.sap.netweaver.porta.core.NotAuthorizedException;
 import com.sap.netweaver.porta.core.nw7.DeployManagerImpl;
 import com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager;
 
@@ -24,14 +23,13 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("<dPss", 15);
-      // Undeclared exception!
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("$C+WeX>vISy\":t", (-778));
       try {
-        deployManagerImpl0.getApplications();
-        fail("Expecting exception: NoClassDefFoundError");
-      } catch(NoClassDefFoundError e) {
+        deployManagerImpl0.checkInitialized();
+        fail("Expecting exception: CoreException");
+      } catch(CoreException e) {
         /*
-         * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
+         * java.net.MalformedURLException: Invalid port number :-27787
          */
       }
   }
@@ -44,7 +42,7 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("]yk@k>wux{ 7L>", (-1756));
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("(", (-19));
       SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
       deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
       assertEquals(false, deployManagerImpl0.initialized());

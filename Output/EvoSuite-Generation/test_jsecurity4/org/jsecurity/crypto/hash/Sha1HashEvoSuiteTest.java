@@ -20,8 +20,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1", (Object) "487035");
-      assertEquals("81523214d2daaa3bbd1249913f7fc6f98848ae59", sha1Hash0.toString());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "", (Object) null);
+      assertEquals("da39a3ee5e6b4b0d3255bfef95601890afd80709", sha1Hash0.toString());
   }
 
   //Test case number: 1
@@ -31,8 +31,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1");
-      assertEquals("c571b86549e49bf223cf648388c46288c2241b5a", sha1Hash0.toString());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "UTF-8");
+      assertEquals("663b90c899fa25a111067be0c22ffc64dcf581c2", sha1Hash0.toString());
   }
 
   //Test case number: 2
@@ -43,15 +43,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Sha1Hash.fromHexString("Q)a2p");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Odd number of characters.
-         */
-      }
+      Sha1Hash sha1Hash0 = Sha1Hash.fromHexString("");
+      assertEquals("", sha1Hash0.toBase64());
   }
 
   //Test case number: 3
@@ -62,8 +55,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("SHA-1");
-      assertEquals("487035", sha1Hash0.toHex());
+      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("'.");
+      assertEquals("", sha1Hash0.toBase64());
   }
 
   //Test case number: 4
@@ -74,7 +67,7 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "UTF-8", (Object) "\u001D\u0000\uFFFD", (int) (byte) (-1));
-      assertEquals("SHA-1", sha1Hash0.getAlgorithmName());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "", (Object) "SHA-1", (-1519));
+      assertEquals("c571b86549e49bf223cf648388c46288c2241b5a", sha1Hash0.toString());
   }
 }

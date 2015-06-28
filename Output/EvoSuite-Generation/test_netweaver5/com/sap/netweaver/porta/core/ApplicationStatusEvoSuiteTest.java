@@ -19,9 +19,9 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.UNKNOWN;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.IMPLICIT_STOPPED;
       String string0 = applicationStatus0.toString();
-      assertEquals("unknown", string0);
+      assertEquals("implicit stopped", string0);
   }
 
   //Test case number: 1
@@ -35,11 +35,11 @@ public class ApplicationStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        ApplicationStatus.getByName("STARTING");
+        ApplicationStatus.getByName("");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * STARTING
+         * 
          */
       }
   }
@@ -53,7 +53,7 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("unknown");
-      assertEquals(ApplicationStatus.UNKNOWN, applicationStatus0);
+      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("implicit stopped");
+      assertEquals(ApplicationStatus.IMPLICIT_STOPPED, applicationStatus0);
   }
 }

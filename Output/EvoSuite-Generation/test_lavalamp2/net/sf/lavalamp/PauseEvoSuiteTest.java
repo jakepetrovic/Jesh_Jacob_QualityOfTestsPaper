@@ -21,14 +21,6 @@ public class PauseEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Pause pause0 = new Pause();
-      // Undeclared exception!
-      try {
-        pause0.sleep((-318L));
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * timeout value is negative
-         */
-      }
+      pause0.sleep(853L);
   }
 }

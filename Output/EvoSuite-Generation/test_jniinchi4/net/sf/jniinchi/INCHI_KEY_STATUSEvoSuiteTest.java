@@ -98,6 +98,6 @@ public class INCHI_KEY_STATUSEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_KEY_STATUS.getValue(1489416726);
+      INCHI_KEY_STATUS.getValue(367267817);
   }
 }

@@ -11,7 +11,6 @@ import org.jsecurity.crypto.hash.Md2Hash;
 import org.jsecurity.crypto.hash.Md5Hash;
 import org.jsecurity.crypto.hash.Sha1Hash;
 import org.jsecurity.crypto.hash.Sha256Hash;
-import org.jsecurity.crypto.hash.Sha384Hash;
 import org.jsecurity.crypto.hash.Sha512Hash;
 
 public class AbstractHashEvoSuiteTest {
@@ -19,43 +18,38 @@ public class AbstractHashEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - true
-   * 2 org.jsecurity.crypto.hash.AbstractHash.hashCode()I: root-Branch
-   * 3 org.jsecurity.crypto.hash.AbstractHash.<init>()V: root-Branch
-   * 4 org.jsecurity.crypto.hash.AbstractHash.getBytes()[B: root-Branch
-   * 5 org.jsecurity.crypto.hash.AbstractHash.setBytes([B)V: root-Branch
-   * 6 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - false
+   * 4 covered goals:
+   * 1 org.jsecurity.crypto.hash.AbstractHash.hashCode()I: root-Branch
+   * 2 org.jsecurity.crypto.hash.AbstractHash.<init>()V: root-Branch
+   * 3 org.jsecurity.crypto.hash.AbstractHash.getBytes()[B: root-Branch
+   * 4 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(" |");
-      sha256Hash0.hashCode();
-      String string0 = sha256Hash0.toHex();
-      assertEquals("", string0);
+      Sha1Hash sha1Hash0 = new Sha1Hash();
+      // Undeclared exception!
+      try {
+        sha1Hash0.hashCode();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 1
   /*
-   * 7 covered goals:
-   * 1 org.jsecurity.crypto.hash.AbstractHash.hash([B)[B: root-Branch
-   * 2 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - true
-   * 3 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
-   * 4 org.jsecurity.crypto.hash.AbstractHash.getDigest(Ljava/lang/String;)Ljava/security/MessageDigest;: root-Branch
+   * 6 covered goals:
+   * 1 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.AbstractHash.getDigest(Ljava/lang/String;)Ljava/security/MessageDigest;: root-Branch
+   * 3 org.jsecurity.crypto.hash.AbstractHash.setBytes([B)V: root-Branch
+   * 4 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: I32 Branch 1 IFNULL L121 - false
    * 5 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - false
    * 6 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I39 Branch 3 IF_ICMPGE L207 - true
-   * 7 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: I32 Branch 1 IFNULL L121 - false
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "znupqCxgLldQcYXnp0n563a84rD7h+R46BWrhoYAvhMZn76pArmWRY4g7zzy1hIZ5dF0Oh2KLe3cdryQ0YAt3w==", (Object) "MD2");
-      assertNotNull(sha256Hash0);
-      
-      byte[] byteArray0 = new byte[1];
-      byte[] byteArray1 = sha256Hash0.hash(byteArray0);
-      assertNotNull(byteArray1);
-      assertEquals("d67fa2ffd7d034c270a071763906cc54c8329b0de2d38261282a9f95dbcb6a1d", sha256Hash0.toHex());
-      assertEquals("1n+i/9fQNMJwoHF2OQbMVMgymw3i04JhKCqfldvLah0=", sha256Hash0.toBase64());
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "", (Object) "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000");
+      assertNotNull(sha512Hash0);
+      assertEquals("G3QJzPDVo006d+qr+p/idCdlW+kpcSfulSKqG/QEbU+UWYNngWnLGnNI7crEfvDZ4skkEw5bzF8NlJN4UsQvGw==", sha512Hash0.toBase64());
   }
 
   //Test case number: 2
@@ -65,33 +59,46 @@ public class AbstractHashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Md2Hash md2Hash0 = Md2Hash.fromHexString("");
-      byte[] byteArray0 = new byte[3];
-      byte[] byteArray1 = new byte[8];
-      byte[] byteArray2 = md2Hash0.hash(byteArray0, byteArray1);
-      assertNotNull(byteArray2);
-      assertNotSame(byteArray2, byteArray1);
-      assertNotSame(byteArray2, byteArray0);
+      Md5Hash md5Hash0 = Md5Hash.fromBase64String("Argument for byte conversion cannot be null.");
+      byte[] byteArray0 = new byte[10];
+      byte[] byteArray1 = md5Hash0.hash(byteArray0, byteArray0);
+      assertNotNull(byteArray1);
+      assertNotSame(byteArray0, byteArray1);
   }
 
   //Test case number: 3
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.AbstractHash.toString()Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - false
+   * 1 org.jsecurity.crypto.hash.AbstractHash.hash([B)[B: root-Branch
+   * 2 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash();
-      // Undeclared exception!
-      try {
-        sha384Hash0.toString();
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("");
+      byte[] byteArray0 = new byte[8];
+      byte[] byteArray1 = sha512Hash0.hash(byteArray0);
+      assertNotSame(byteArray1, byteArray0);
+      assertNotNull(byteArray1);
   }
 
   //Test case number: 4
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - true
+   * 2 org.jsecurity.crypto.hash.AbstractHash.toString()Ljava/lang/String;: root-Branch
+   * 3 org.jsecurity.crypto.hash.AbstractHash.toHex()Ljava/lang/String;: I4 Branch 4 IFNONNULL L224 - false
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("");
+      String string0 = sha512Hash0.toString();
+      String string1 = sha512Hash0.toString();
+      assertEquals("", string1);
+      assertNotNull(string1);
+      assertSame(string1, string0);
+  }
+
+  //Test case number: 5
   /*
    * 3 covered goals:
    * 1 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;)V: root-Branch
@@ -99,68 +106,70 @@ public class AbstractHashEvoSuiteTest {
    * 3 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - true
    */
   @Test
-  public void test4()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "UTF-8");
-      assertNotNull(sha512Hash0);
-      assertEquals("ce7ba9a82c602e57507185e7a749f9eb76bce2b0fb87e478e815ab868600be13199fbea902b996458e20ef3cf2d61219e5d1743a1d8a2deddc76bc90d1802ddf", sha512Hash0.toHex());
-  }
-
-  //Test case number: 5
-  /*
-   * 5 covered goals:
-   * 1 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I39 Branch 3 IF_ICMPGE L207 - false
-   * 2 org.jsecurity.crypto.hash.AbstractHash.getDigest(Ljava/lang/String;)Ljava/security/MessageDigest;: root-Branch
-   * 3 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - false
-   * 4 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I39 Branch 3 IF_ICMPGE L207 - true
-   * 5 org.jsecurity.crypto.hash.AbstractHash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: I32 Branch 1 IFNULL L121 - false
-   */
-  @Test
   public void test5()  throws Throwable  {
-      Md5Hash md5Hash0 = new Md5Hash((Object) " |", (Object) "MD5", 398);
-      assertNotNull(md5Hash0);
-      assertEquals("3674e23f019cde7c81f128f51f109e26", md5Hash0.toHex());
+      Md2Hash md2Hash0 = new Md2Hash((Object) "ArgumentforbyteconversioncannotbenulAA==");
+      assertNotNull(md2Hash0);
+      assertEquals("Fgd5hZ8R8jtzK0g3M6XJvg==", md2Hash0.toBase64());
   }
 
   //Test case number: 6
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.crypto.hash.AbstractHash.toBase64()Ljava/lang/String;: I4 Branch 5 IFNONNULL L240 - true
-   * 2 org.jsecurity.crypto.hash.AbstractHash.toBase64()Ljava/lang/String;: I4 Branch 5 IFNONNULL L240 - false
-   * 3 org.jsecurity.crypto.hash.AbstractHash.setBytes([B)V: root-Branch
+   * 4 covered goals:
+   * 1 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I39 Branch 3 IF_ICMPGE L207 - false
+   * 2 org.jsecurity.crypto.hash.AbstractHash.getDigest(Ljava/lang/String;)Ljava/security/MessageDigest;: root-Branch
+   * 3 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I10 Branch 2 IFNULL L200 - false
+   * 4 org.jsecurity.crypto.hash.AbstractHash.hash([B[BI)[B: I39 Branch 3 IF_ICMPGE L207 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(" |");
-      String string0 = sha256Hash0.toBase64();
-      String string1 = sha256Hash0.toBase64();
-      assertEquals("", string1);
-      assertNotNull(string1);
-      assertSame(string1, string0);
+      Md2Hash md2Hash0 = Md2Hash.fromBase64String("X15nU03}aG");
+      byte[] byteArray0 = new byte[5];
+      byte[] byteArray1 = md2Hash0.hash(byteArray0, byteArray0, 415);
+      assertNotSame(byteArray0, byteArray1);
+      assertNotNull(byteArray1);
   }
 
   //Test case number: 7
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.AbstractHash.toBase64()Ljava/lang/String;: I4 Branch 5 IFNONNULL L240 - true
+   * 2 org.jsecurity.crypto.hash.AbstractHash.toBase64()Ljava/lang/String;: I4 Branch 5 IFNONNULL L240 - false
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("Argument for byte conversion cannot be null.");
+      String string0 = sha256Hash0.toBase64();
+      String string1 = sha256Hash0.toBase64();
+      assertNotNull(string1);
+      assertSame(string1, string0);
+      assertEquals("ArgumentforbyteconversioncannotbenulAA==", string1);
+  }
+
+  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 org.jsecurity.crypto.hash.AbstractHash.equals(Ljava/lang/Object;)Z: I4 Branch 6 IFEQ L265 - true
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test8()  throws Throwable  {
       Sha1Hash sha1Hash0 = new Sha1Hash();
-      boolean boolean0 = sha1Hash0.equals((Object) "");
+      boolean boolean0 = sha1Hash0.equals((Object) null);
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 8
+  //Test case number: 9
   /*
-   * 3 covered goals:
+   * 4 covered goals:
    * 1 org.jsecurity.crypto.hash.AbstractHash.equals(Ljava/lang/Object;)Z: I4 Branch 6 IFEQ L265 - false
    * 2 org.jsecurity.crypto.hash.AbstractHash.<init>()V: root-Branch
    * 3 org.jsecurity.crypto.hash.AbstractHash.getBytes()[B: root-Branch
+   * 4 org.jsecurity.crypto.hash.AbstractHash.setBytes([B)V: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash();
-      boolean boolean0 = sha1Hash0.equals((Object) sha1Hash0);
+  public void test9()  throws Throwable  {
+      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("Argument for byte conversion cannot be null.");
+      Md5Hash md5Hash0 = Md5Hash.fromBase64String("Argument for byte conversion cannot be null.");
+      boolean boolean0 = sha256Hash0.equals((Object) md5Hash0);
       assertEquals(true, boolean0);
   }
 }

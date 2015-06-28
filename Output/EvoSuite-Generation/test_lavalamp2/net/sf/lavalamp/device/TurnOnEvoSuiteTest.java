@@ -7,8 +7,10 @@ package net.sf.lavalamp.device;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.LinkedList;
 import java.util.List;
 import net.sf.lavalamp.device.Device;
+import net.sf.lavalamp.device.DummyDevice;
 import net.sf.lavalamp.device.TurnOn;
 
 public class TurnOnEvoSuiteTest {
@@ -23,11 +25,10 @@ public class TurnOnEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       TurnOn turnOn0 = new TurnOn();
-      // Undeclared exception!
-      try {
-        turnOn0.perform((List<String>) null, (Device) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      LinkedList<String> linkedList0 = new LinkedList<String>();
+      DummyDevice dummyDevice0 = new DummyDevice();
+      turnOn0.perform((List<String>) linkedList0, (Device) dummyDevice0);
+      assertEquals(false, linkedList0.isEmpty());
+      assertEquals("[dummy device null turned on]", linkedList0.toString());
   }
 }

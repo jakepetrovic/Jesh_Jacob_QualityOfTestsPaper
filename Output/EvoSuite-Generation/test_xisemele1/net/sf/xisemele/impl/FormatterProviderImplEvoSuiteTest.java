@@ -37,7 +37,7 @@ public class FormatterProviderImplEvoSuiteTest {
   public void test1()  throws Throwable  {
       FormatterProviderImpl formatterProviderImpl0 = new FormatterProviderImpl();
       Class<?> class0 = Date.class;
-      Formatter<Formatter<Formatter<String>>> formatter0 = formatterProviderImpl0.getFormatter(class0);
+      Formatter<Object> formatter0 = formatterProviderImpl0.getFormatter(class0);
       assertNull(formatter0);
   }
 }

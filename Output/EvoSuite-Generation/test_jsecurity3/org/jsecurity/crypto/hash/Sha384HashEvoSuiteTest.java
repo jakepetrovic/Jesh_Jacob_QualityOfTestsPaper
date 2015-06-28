@@ -20,8 +20,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "08ddafea8e4b457d5d9a7dd777b898219ccf1ac2ae6be48e358b3598df1e0688c5c504c964460f134c3633dcd6f9dd57", (Object) "\u0000\uFFFD\u0000\uFFFD\u0000\u0000\uFFFD", (int) (byte)0);
-      assertEquals("5edf4598df6dd358365813a10b04486cfed77faee9377b27a7e3fa530b96e22955e4163975e0a6bbb2399d6893e4efcb", sha384Hash0.toString());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384", (Object) "SHA-384", 1288);
+      assertEquals("f6f2b3cf77e078ba56f6f14281e82fb0293805b99bb4670a629824c0c3694644b08b7dbd2e4363036642aeffe8dd51f0", sha384Hash0.toHex());
   }
 
   //Test case number: 1
@@ -32,8 +32,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("");
-      assertEquals("", sha384Hash0.toBase64());
+      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("' MessageDigest instance available on the current JVM.");
+      assertEquals("31eb2c6a07838a07acb629ecb5a9dc79abda8a569b95ea27b6179cbabade9ed25500", sha384Hash0.toString());
   }
 
   //Test case number: 2
@@ -43,8 +43,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "] to byte array using ");
-      assertEquals("SHA-384", sha384Hash0.getAlgorithmName());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "\uFFFD\t");
+      assertEquals("d374b1ea405dec6c732aeba552916a11897fd1a316aef327304602d78172c5578c67785477f78d2fa9b6a90f973d82b1", sha384Hash0.toString());
   }
 
   //Test case number: 3
@@ -55,8 +55,15 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromHexString("");
-      assertEquals("", sha384Hash0.toBase64());
+      // Undeclared exception!
+      try {
+        Sha384Hash.fromHexString("]VxMPkJs");
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Odd number of characters.
+         */
+      }
   }
 
   //Test case number: 4
@@ -67,7 +74,7 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "", (Object) "SHA-384");
-      assertEquals("hvBSozjLlOaVtvauuj2hx9xBjysJNBnP3l1X/QJebNjNrXAtFDX5LNTdBOR1ap+x", sha384Hash0.toBase64());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "UTF-8", (Object) "d374b1ea405dec6c732aeba552916a11897fd1a316aef327304602d78172c5578c67785477f78d2fa9b6a90f973d82b1");
+      assertEquals("oVFjc3FranZ08CLL5ceQ3hSF4nNQKuDL3FnbdFh6rRWo2+RjHr99AKbrH+FYizsB", sha384Hash0.toBase64());
   }
 }

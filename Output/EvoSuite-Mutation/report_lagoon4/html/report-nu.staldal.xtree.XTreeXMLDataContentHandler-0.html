@@ -22,7 +22,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.XTreeXMLDataContentHandler: 66.67%</ul><ul>
-<li>7918 fitness evaluations, 160 generations, 24077 statements, 5047 tests.
+<li>9002 fitness evaluations, 182 generations, 25269 statements, 5720 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/8 branches, 5/5 methods, 8/12 total goals
 <li>Mutation score: 10%
@@ -32,13 +32,13 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-<span class="nocode"><a name="2">  2: </a></span>FileDataSource fileDataSource0 = new FileDataSource(&quot;`IvM`S-Wdn&quot;);
+<span class="nocode"><a name="2">  2: </a></span>FileDataSource fileDataSource0 = new FileDataSource(&quot;IPeIjhEckE&gt;&lt;N#&gt;!&quot;);
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  xTreeXMLDataContentHandler0.getContent((DataSource) fileDataSource0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: FileNotFoundException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(FileNotFoundException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * `IvM`S-Wdn (No such file or directory)
+<span class="nocode"><a name="8">  8: </a></span>   * IPeIjhEckE&gt;&lt;N#&gt;! (No such file or directory)
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -51,16 +51,14 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XTreeXMLDataContentHandler xTreeXMLDataContentHandler0 = new XTreeXMLDataContentHandler();
-<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xTreeXMLDataContentHandler0.writeTo((Object) &quot;application/x-java-remote-object&quot;, &quot;application/x-java-remote-object&quot;, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ClassCastException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ClassCastException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * java.lang.String cannot be cast to nu.staldal.xtree.Node
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  xTreeXMLDataContentHandler0.writeTo((Object) &quot;application/x-java-jvm-local-objectref&quot;, &quot;application/x-java-jvm-local-objectref&quot;, (OutputStream) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IOException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IOException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * org.xml.sax.SAXException: setResult() must be called prior to startDocument().
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -204,16 +202,16 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">			th.getTransformer().setOutputProperty(OutputKeys.MEDIA_TYPE, mimeTypeString);</span>
 <span class="nocode"><a name="140">140: </a></span>			
 <span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">			th.startDocument();</span>
-<span class="nocode"><a name="142">142: </a></span><span style="background-color: #ffffcc">			((Node)obj).toSAX(new ContentHandlerFixer(th, true));</span>
+<span class="nocode"><a name="142">142: </a></span>			((Node)obj).toSAX(new ContentHandlerFixer(th, true));
 <span class="nocode"><a name="143">143: </a></span>			th.endDocument();
 <span class="nocode"><a name="144">144: </a></span>		}
 <span class="nocode"><a name="145">145: </a></span>		catch (TransformerConfigurationException e)
 <span class="nocode"><a name="146">146: </a></span>		{
 <span class="nocode"><a name="147">147: </a></span>			throw new Error(e.toString());	
 <span class="nocode"><a name="148">148: </a></span>		}
-<span class="nocode"><a name="149">149: </a></span>		catch (SAXException e)
+<span class="nocode"><a name="149">149: </a></span><span style="background-color: #ffffcc">		catch (SAXException e)</span>
 <span class="nocode"><a name="150">150: </a></span>		{
-<span class="nocode"><a name="151">151: </a></span>			throw new IOException(e.toString());	
+<span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">			throw new IOException(e.toString());	</span>
 <span class="nocode"><a name="152">152: </a></span>		}
 <span class="nocode"><a name="153">153: </a></span>	}
 <span class="nocode"><a name="154">154: </a></span>}
@@ -222,7 +220,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -240,7 +238,7 @@ nu.staldal.xtree.XTreeXMLDataContentHandler
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9929
+<li>process_communication_port: 2425
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

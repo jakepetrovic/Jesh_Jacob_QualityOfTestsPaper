@@ -27,7 +27,7 @@ public class KeyMapComboBoxModelEvoSuiteTest {
   //Test case number: 1
   /*
    * 13 covered goals:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 1 TABLESWITCH L56 Case 112 - false
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 1 TABLESWITCH L56 Case 112 - true
    * 2 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 2 TABLESWITCH L56 Case 113 - false
    * 3 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 3 TABLESWITCH L56 Case 114 - false
    * 4 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 4 TABLESWITCH L56 Case 115 - false
@@ -37,77 +37,77 @@ public class KeyMapComboBoxModelEvoSuiteTest {
    * 8 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 8 TABLESWITCH L56 Case 119 - false
    * 9 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 9 TABLESWITCH L56 Case 120 - false
    * 10 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 10 TABLESWITCH L56 Case 121 - false
-   * 11 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 11 TABLESWITCH L56 Case 122 - true
+   * 11 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 11 TABLESWITCH L56 Case 122 - false
    * 12 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 12 TABLESWITCH L56 Case 123 - false
    * 13 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 13 TABLESWITCH L56 Default-Case - false
    */
   @Test
   public void test1()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(122);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(112);
       assertNotNull(myKeyMap0);
-      assertEquals(122, myKeyMap0.getCode());
+      assertEquals("F1", myKeyMap0.getText());
   }
 
   //Test case number: 2
   /*
    * 2 covered goals:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 2 TABLESWITCH L56 Case 113 - true
-   * 2 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 11 TABLESWITCH L56 Case 122 - false
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 1 TABLESWITCH L56 Case 112 - false
+   * 2 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 9 TABLESWITCH L56 Case 120 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(113);
-      assertEquals("F2", myKeyMap0.toString());
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(120);
       assertNotNull(myKeyMap0);
+      assertEquals("F9", myKeyMap0.getText());
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 4 TABLESWITCH L56 Case 115 - true
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 3 TABLESWITCH L56 Case 114 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(115);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(114);
+      assertEquals("F3", myKeyMap0.getText());
       assertNotNull(myKeyMap0);
-      assertEquals("F4", myKeyMap0.getText());
   }
 
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 7 TABLESWITCH L56 Case 118 - true
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 6 TABLESWITCH L56 Case 117 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(118);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(117);
       assertNotNull(myKeyMap0);
-      assertEquals("F7", myKeyMap0.toString());
+      assertEquals("F6", myKeyMap0.toString());
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 9 TABLESWITCH L56 Case 120 - true
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 7 TABLESWITCH L56 Case 118 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(120);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(118);
       assertNotNull(myKeyMap0);
-      assertEquals("F9", myKeyMap0.toString());
+      assertEquals(118, myKeyMap0.getCode());
   }
 
   //Test case number: 6
   /*
    * 2 covered goals:
-   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 10 TABLESWITCH L56 Case 121 - true
+   * 1 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 12 TABLESWITCH L56 Case 123 - true
    * 2 bierse.view.KeyMapComboBoxModel.getMyKeyMapForKeyCode(I)Lbierse/view/MyKeyMap;: I3 Branch 13 TABLESWITCH L56 Default-Case - false
    */
   @Test
   public void test6()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(121);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(123);
       assertNotNull(myKeyMap0);
-      assertEquals("F10", myKeyMap0.toString());
+      assertEquals(123, myKeyMap0.getCode());
   }
 
   //Test case number: 7
@@ -129,7 +129,7 @@ public class KeyMapComboBoxModelEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(665);
+      MyKeyMap myKeyMap0 = KeyMapComboBoxModel.getMyKeyMapForKeyCode(1400);
       assertNull(myKeyMap0);
   }
 }

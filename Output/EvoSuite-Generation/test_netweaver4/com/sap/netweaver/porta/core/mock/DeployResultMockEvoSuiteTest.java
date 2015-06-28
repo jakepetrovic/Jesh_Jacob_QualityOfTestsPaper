@@ -21,10 +21,10 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "97Rm,Epf\t1?(YF^f4");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
       DeployResultStatus deployResultStatus1 = deployResultMock0.getStatus();
-      assertEquals(3, deployResultStatus1.ordinal());
+      assertEquals("SUCCESS", deployResultStatus1.name());
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
       String string0 = deployResultMock0.getStatusDetails();
-      assertEquals("", string0);
+      assertNull(string0);
   }
 }

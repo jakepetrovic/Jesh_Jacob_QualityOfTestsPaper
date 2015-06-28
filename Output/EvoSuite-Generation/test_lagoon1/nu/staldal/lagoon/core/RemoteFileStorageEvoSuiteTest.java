@@ -17,7 +17,7 @@ public class RemoteFileStorageEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 nu.staldal.lagoon.core.RemoteFileStorage.closeDateFile()V: root-Branch
+   * 1 nu.staldal.lagoon.core.RemoteFileStorage.fileModified(Ljava/lang/String;)V: root-Branch
    * 2 nu.staldal.lagoon.core.RemoteFileStorage.<init>()V: root-Branch
    */
   @Test
@@ -25,7 +25,7 @@ public class RemoteFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.close();
+        fTPFileStorage0.fileModified("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -34,7 +34,7 @@ public class RemoteFileStorageEvoSuiteTest {
   //Test case number: 1
   /*
    * 2 covered goals:
-   * 1 nu.staldal.lagoon.core.RemoteFileStorage.fileModified(Ljava/lang/String;)V: root-Branch
+   * 1 nu.staldal.lagoon.core.RemoteFileStorage.closeDateFile()V: root-Branch
    * 2 nu.staldal.lagoon.core.RemoteFileStorage.<init>()V: root-Branch
    */
   @Test
@@ -42,7 +42,7 @@ public class RemoteFileStorageEvoSuiteTest {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       // Undeclared exception!
       try {
-        sSHFileStorage0.fileModified("user.home");
+        sSHFileStorage0.closeDateFile();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

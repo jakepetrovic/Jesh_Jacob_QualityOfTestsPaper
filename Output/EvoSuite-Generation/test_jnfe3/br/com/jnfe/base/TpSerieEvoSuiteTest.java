@@ -14,39 +14,59 @@ public class TpSerieEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
-   * 1 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I14 Branch 1 IF_ICMPGE L67 - true
-   * 2 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I24 Branch 2 IF_ICMPLT L68 - true
-   * 3 br.com.jnfe.base.TpSerie.getSerieIni()I: root-Branch
+   * 6 covered goals:
+   * 1 br.com.jnfe.base.TpSerie.getSerieIni()I: root-Branch
+   * 2 br.com.jnfe.base.TpSerie.getSerieFin()I: root-Branch
+   * 3 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I14 Branch 1 IF_ICMPGE L67 - true
    * 4 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I14 Branch 1 IF_ICMPGE L67 - false
+   * 5 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I24 Branch 2 IF_ICMPLT L68 - false
+   * 6 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I28 Branch 3 IF_ICMPGE L68 - true
    */
   @Test
   public void test0()  throws Throwable  {
       // Undeclared exception!
       try {
-        TpSerie.getTpSerie((-1691));
+        TpSerie.getTpSerie(1000);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: -1691.
+         * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: 1000.
          */
       }
   }
 
   //Test case number: 1
   /*
-   * 6 covered goals:
-   * 1 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I28 Branch 3 IF_ICMPGE L68 - true
+   * 2 covered goals:
+   * 1 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I24 Branch 2 IF_ICMPLT L68 - true
+   * 2 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I14 Branch 1 IF_ICMPGE L67 - true
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      // Undeclared exception!
+      try {
+        TpSerie.getTpSerie((-857));
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * N\u00E3o h\u00E1 tipo de s\u00E9rie para esta s\u00E9rie: -857.
+         */
+      }
+  }
+
+  //Test case number: 2
+  /*
+   * 5 covered goals:
+   * 1 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I28 Branch 3 IF_ICMPGE L68 - false
    * 2 br.com.jnfe.base.TpSerie.getSerieIni()I: root-Branch
    * 3 br.com.jnfe.base.TpSerie.getSerieFin()I: root-Branch
    * 4 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I14 Branch 1 IF_ICMPGE L67 - false
    * 5 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I24 Branch 2 IF_ICMPLT L68 - false
-   * 6 br.com.jnfe.base.TpSerie.getTpSerie(I)Lbr/com/jnfe/base/TpSerie;: I28 Branch 3 IF_ICMPGE L68 - false
    */
   @Test
-  public void test1()  throws Throwable  {
-      TpSerie tpSerie0 = TpSerie.getTpSerie(1);
-      assertEquals(900, tpSerie0.getSerieFin());
-      assertEquals(1, tpSerie0.getSerieIni());
+  public void test2()  throws Throwable  {
+      TpSerie tpSerie0 = TpSerie.getTpSerie(0);
+      assertEquals(0, tpSerie0.getSerieIni());
+      assertEquals(1, tpSerie0.getSerieFin());
   }
 }

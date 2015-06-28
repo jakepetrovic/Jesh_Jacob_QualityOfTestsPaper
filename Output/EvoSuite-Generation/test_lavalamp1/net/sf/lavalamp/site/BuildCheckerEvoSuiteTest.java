@@ -13,7 +13,7 @@ import net.sf.lavalamp.site.BuildChecker;
 import net.sf.lavalamp.site.BuildSite;
 import net.sf.lavalamp.site.Console;
 import net.sf.lavalamp.site.LoginFailedException;
-import net.sf.lavalamp.site.impl.Hudson;
+import net.sf.lavalamp.site.impl.BambooRestApi;
 import org.evosuite.testcase.CodeUnderTestException;
 
 public class BuildCheckerEvoSuiteTest {
@@ -28,8 +28,8 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("/Xsn&f Wb/\"F?g%");
-      Hudson hudson0 = new Hudson();
+      Build build0 = new Build("");
+      BambooRestApi bambooRestApi0 = new BambooRestApi();
   }
 
   //Test case number: 1
@@ -41,7 +41,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build((String) null);
+      Build build0 = new Build("2N!`K]nq");
       Console console0 = new Console();
   }
 }

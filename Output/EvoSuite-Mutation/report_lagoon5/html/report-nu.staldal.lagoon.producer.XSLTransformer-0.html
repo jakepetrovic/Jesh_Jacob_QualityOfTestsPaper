@@ -22,7 +22,7 @@ nu.staldal.lagoon.producer.XSLTransformer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.producer.XSLTransformer: 11.32%</ul><ul>
-<li>17974 fitness evaluations, 361 generations, 39641 statements, 10136 tests.
+<li>19050 fitness evaluations, 382 generations, 40564 statements, 11146 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 5/50 branches, 7/11 methods, 6/53 total goals
 <li>Mutation score: 1%
@@ -46,21 +46,21 @@ nu.staldal.lagoon.producer.XSLTransformer
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XSLTransformer xSLTransformer0 = new XSLTransformer();
 <span class="nocode"><a name="2">  2: </a></span>xSLTransformer0.afterBuild();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xSLTransformer0.getPosition());
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xSLTransformer0.getEntryName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XSLTransformer xSLTransformer0 = new XSLTransformer();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xSLTransformer0.hasBeenUpdated((-628L));
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = xSLTransformer0.hasBeenUpdated((-1L));
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XSLTransformer xSLTransformer0 = new XSLTransformer();
-<span class="nocode"><a name="2">  2: </a></span>DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+<span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xSLTransformer0.start((ContentHandler) defaultHandler2_0, (Target) null);
+<span class="nocode"><a name="5">  5: </a></span>  xSLTransformer0.start((ContentHandler) xMLFilterImpl0, (Target) null);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(RuntimeException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
@@ -388,7 +388,7 @@ nu.staldal.lagoon.producer.XSLTransformer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -406,7 +406,7 @@ nu.staldal.lagoon.producer.XSLTransformer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16401
+<li>process_communication_port: 19856
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

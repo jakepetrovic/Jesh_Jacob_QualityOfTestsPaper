@@ -21,10 +21,10 @@ public class DeployResultImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, " w2hkW");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "oxMBq ^dJ+{W)<^");
       DeployResultStatus deployResultStatus1 = deployResultImpl0.getStatus();
-      assertEquals(2, deployResultStatus1.ordinal());
+      assertEquals("Unknown", deployResultStatus1.toString());
   }
 
   //Test case number: 1
@@ -36,8 +36,8 @@ public class DeployResultImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "");
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "k^");
       String string0 = deployResultImpl0.getStatusDetails();
-      assertEquals("", string0);
+      assertEquals("k^", string0);
   }
 }

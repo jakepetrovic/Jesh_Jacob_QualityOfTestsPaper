@@ -22,7 +22,7 @@ public class DefaultSerializerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultSerializer defaultSerializer0 = new DefaultSerializer();
-      byte[] byteArray0 = defaultSerializer0.serialize((Object) "r");
+      byte[] byteArray0 = defaultSerializer0.serialize((Object) "");
       assertNotNull(byteArray0);
   }
 
@@ -53,7 +53,7 @@ public class DefaultSerializerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DefaultSerializer defaultSerializer0 = new DefaultSerializer();
-      byte[] byteArray0 = new byte[8];
+      byte[] byteArray0 = new byte[3];
       try {
         defaultSerializer0.deserialize(byteArray0);
         fail("Expecting exception: SerializationException");

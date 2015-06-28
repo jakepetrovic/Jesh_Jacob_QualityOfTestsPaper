@@ -16,15 +16,24 @@ public class TextAreaWriterEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.lagoon.TextAreaWriter.write(I)V: root-Branch
-   * 2 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
+   * 4 covered goals:
+   * 1 nu.staldal.lagoon.TextAreaWriter.flush()V: I11 Branch 1 IF_ICMPNE L664 - false
+   * 2 nu.staldal.lagoon.TextAreaWriter.write(I)V: root-Branch
+   * 3 nu.staldal.lagoon.TextAreaWriter.write([CII)V: root-Branch
+   * 4 nu.staldal.lagoon.TextAreaWriter.<init>(Ljava/awt/TextArea;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      TextAreaWriter textAreaWriter1 = (TextAreaWriter)textAreaWriter0.append('\u000E');
-      assertSame(textAreaWriter1, textAreaWriter0);
+      textAreaWriter0.write(13);
+      char[] charArray0 = new char[1];
+      textAreaWriter0.write(charArray0);
+      // Undeclared exception!
+      try {
+        textAreaWriter0.flush();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 1
@@ -37,7 +46,7 @@ public class TextAreaWriterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      textAreaWriter0.append((CharSequence) "select-word");
+      textAreaWriter0.append((CharSequence) "chooserPanels");
       // Undeclared exception!
       try {
         textAreaWriter0.close();

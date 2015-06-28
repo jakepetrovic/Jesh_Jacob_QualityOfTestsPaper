@@ -33,7 +33,7 @@ public class InspirentoUtilitiesEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      String[] stringArray0 = InspirentoUtilities.tokenize(" QUo/jc^");
+      String[] stringArray0 = InspirentoUtilities.tokenize("%c_<6?|IHnQ~Mrs2");
       assertNotNull(stringArray0);
   }
 
@@ -47,23 +47,23 @@ public class InspirentoUtilitiesEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      String[] stringArray0 = InspirentoUtilities.tokenize("hD6~Y", "NW[!K");
+      String[] stringArray0 = InspirentoUtilities.tokenize("3.r!T 9<!k.YC3l'.O", ":j(U%+");
       assertNotNull(stringArray0);
   }
 
   //Test case number: 3
   /*
    * 5 covered goals:
-   * 1 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I8 Branch 5 IF_ICMPGE L125 - false
-   * 2 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I15 Branch 6 IF_ICMPNE L126 - true
-   * 3 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I15 Branch 6 IF_ICMPNE L126 - false
-   * 4 com.allenstudio.ir.util.InspirentoUtilities.escapeText(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 5 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I8 Branch 5 IF_ICMPGE L125 - true
+   * 1 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I15 Branch 6 IF_ICMPNE L126 - false
+   * 2 com.allenstudio.ir.util.InspirentoUtilities.escapeText(Ljava/lang/String;)Ljava/lang/String;: root-Branch
+   * 3 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I8 Branch 5 IF_ICMPGE L125 - true
+   * 4 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I8 Branch 5 IF_ICMPGE L125 - false
+   * 5 com.allenstudio.ir.util.InspirentoUtilities.stringReplaceAll(Ljava/lang/StringBuffer;CLjava/lang/String;)Ljava/lang/StringBuffer;: I15 Branch 6 IF_ICMPNE L126 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      String string0 = InspirentoUtilities.escapeText("Gp]l<");
-      assertEquals("Gp]l&lt;", string0);
+      String string0 = InspirentoUtilities.escapeText("3.r!T 9<!k.YC3l'.O");
+      assertEquals("3.r!T 9&lt;!k.YC3l&apos;.O", string0);
       assertNotNull(string0);
   }
 }

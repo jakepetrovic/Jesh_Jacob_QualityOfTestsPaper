@@ -24,8 +24,9 @@ public class StatusBarEvoSuiteTest {
       StatusBar statusBar0 = new StatusBar();
       assertNotNull(statusBar0);
       
-      statusBar0.displayTooltip((String) null);
-      assertEquals(1, statusBar0.getComponentCount());
+      statusBar0.displayTooltip("^n%");
       assertEquals("com.allenstudio.ir.ui.StatusBar[,0,0,0x0,invalid,layout=java.awt.BorderLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=]", statusBar0.toString());
+      assertEquals(1, statusBar0.getComponentCount());
+      assertEquals(1, statusBar0.countComponents());
   }
 }

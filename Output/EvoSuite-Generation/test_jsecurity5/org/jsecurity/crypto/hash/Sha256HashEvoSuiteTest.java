@@ -15,63 +15,48 @@ public class Sha256HashEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha256Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("");
+      assertEquals("", sha256Hash0.toHex());
+  }
+
+  //Test case number: 1
+  /*
+   * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha256Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    */
   @Test
-  public void test0()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "SHA-256", (Object) "\uFFFD\uFFFD\u0000\u0000");
-      assertEquals("9d4d4565d16e81ab0b87ea0889d8d5a4891a012953e57ba16989f0e9b7639f56", sha256Hash0.toString());
+  public void test1()  throws Throwable  {
+      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "", (Object) "\u0014\u0000\u0000\uFFFD\u0000\uFFFDO");
+      assertEquals("129f11fb5603be89434642b46d8996448da58660784e65db0fa5f762387be8f9", sha256Hash0.toString());
   }
 
-  //Test case number: 1
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha256Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Sha256Hash.fromHexString((String) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 2
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha256Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha256Hash;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha256Hash.<init>()V: root-Branch
-   */
-  @Test
   public void test2()  throws Throwable  {
-      Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String("No native '");
-      assertEquals("Nonative", sha256Hash0.toBase64());
+      Sha256Hash sha256Hash0 = Sha256Hash.fromHexString("");
+      assertEquals("", sha256Hash0.toString());
   }
 
   //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Sha256Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "\uFFFD\uFFFD\u0000\u0000", (Object) "u9B8T8AsmblxJP6/Qse2O1ARwN8o1An7tIa1qdLmFeo=", (-1));
-      assertEquals("f6edc2d1809c62db69b7387aa52906c94fed952c88b34868198292c259d5cd92", sha256Hash0.toHex());
-  }
-
-  //Test case number: 4
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha256Hash.<init>(Ljava/lang/Object;)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha256Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
-      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "SHA-256");
-      assertEquals("bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea", sha256Hash0.toHex());
+  public void test3()  throws Throwable  {
+      Sha256Hash sha256Hash0 = new Sha256Hash((Object) "");
+      assertEquals("47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=", sha256Hash0.toBase64());
   }
 }

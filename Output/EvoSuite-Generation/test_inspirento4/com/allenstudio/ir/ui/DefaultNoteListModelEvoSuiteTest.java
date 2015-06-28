@@ -72,11 +72,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.getElementAt((-1));
+        defaultNoteListModel0.getElementAt(0);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * -1
+         * 0 >= 0
          */
       }
   }
@@ -91,9 +91,12 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.fireContentChanged((Object) "ToolTipText", 1);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        defaultNoteListModel0.fireContentChanged((Object) null, (-4));
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * null source
+         */
       }
   }
 
@@ -117,14 +120,13 @@ public class DefaultNoteListModelEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.insertElementAt((AbstractNote) commonNote0, 10);
+        defaultNoteListModel0.insertElementAt((AbstractNote) null, 12);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 10 > 0
+         * 12 > 0
          */
       }
   }
@@ -164,11 +166,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.elementAt(0);
+        defaultNoteListModel0.elementAt((-334));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 0 >= 0
+         * -334
          */
       }
   }
@@ -183,11 +185,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.get((-468));
+        defaultNoteListModel0.get(1905);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * -468
+         * 1905 >= 0
          */
       }
   }
@@ -201,7 +203,7 @@ public class DefaultNoteListModelEvoSuiteTest {
   public void test11()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
-      assertEquals(10, defaultNoteListModel0.capacity());
+      assertEquals(0, defaultNoteListModel0.size());
   }
 
   //Test case number: 12
@@ -214,11 +216,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.remove(588);
+        defaultNoteListModel0.remove((-1685));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 588 >= 0
+         * -1685
          */
       }
   }
@@ -232,8 +234,15 @@ public class DefaultNoteListModelEvoSuiteTest {
   public void test13()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       CommonNote commonNote0 = new CommonNote();
-      int int0 = defaultNoteListModel0.indexOf((AbstractNote) commonNote0, 79);
-      assertEquals((-1), int0);
+      // Undeclared exception!
+      try {
+        defaultNoteListModel0.indexOf((AbstractNote) commonNote0, (-429));
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * -429
+         */
+      }
   }
 
   //Test case number: 14
@@ -268,7 +277,8 @@ public class DefaultNoteListModelEvoSuiteTest {
   @Test
   public void test16()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      boolean boolean0 = defaultNoteListModel0.contains((AbstractNote) null);
+      CommonNote commonNote0 = new CommonNote();
+      boolean boolean0 = defaultNoteListModel0.contains((AbstractNote) commonNote0);
       assertEquals(false, boolean0);
   }
 
@@ -280,13 +290,14 @@ public class DefaultNoteListModelEvoSuiteTest {
   @Test
   public void test17()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+      CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.setElementAt((AbstractNote) null, 220);
+        defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, 1850);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 220 >= 0
+         * 1850 >= 0
          */
       }
   }
@@ -300,7 +311,7 @@ public class DefaultNoteListModelEvoSuiteTest {
   public void test18()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       defaultNoteListModel0.removeNoteListDataListener();
-      assertEquals(0, defaultNoteListModel0.size());
+      assertEquals(10, defaultNoteListModel0.capacity());
   }
 
   //Test case number: 19
@@ -313,11 +324,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.removeElementAt(1495);
+        defaultNoteListModel0.removeElementAt((-706));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 1495 >= 0
+         * Array index out of range: -706
          */
       }
   }
@@ -330,8 +341,7 @@ public class DefaultNoteListModelEvoSuiteTest {
   @Test
   public void test20()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      CommonNote commonNote0 = new CommonNote();
-      int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0, (-1));
+      int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) null, (-334));
       assertEquals((-1), int0);
   }
 
@@ -391,7 +401,7 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.fireItemRemoved((Object) "javax.swing.undo.UndoManager@bb304f9 hasBeenDone: true alive: true inProgress: true edits: [] limit: 100 indexOfNextAdd: 0", (-1));
+        defaultNoteListModel0.fireItemRemoved((Object) "borderPainted", 1905);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -407,11 +417,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.set(1, (AbstractNote) null);
+        defaultNoteListModel0.set(0, (AbstractNote) null);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 1 >= 0
+         * 0 >= 0
          */
       }
   }

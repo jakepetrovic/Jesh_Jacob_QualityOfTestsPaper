@@ -16,8 +16,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
-import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.ext.Locator2Impl;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 public class BasicSplitEvoSuiteTest {
 
@@ -49,7 +49,7 @@ public class BasicSplitEvoSuiteTest {
       BasicSplit basicSplit0 = new BasicSplit();
       Locator2Impl locator2Impl0 = new Locator2Impl();
       basicSplit0.setDocumentLocator((Locator) locator2Impl0);
-      assertNull(locator2Impl0.getPublicId());
+      assertEquals(0, locator2Impl0.getLineNumber());
   }
 
   //Test case number: 2
@@ -63,9 +63,9 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
       try {
-        basicSplit0.start((ContentHandler) defaultHandler2_0, (Target) null);
+        basicSplit0.start((ContentHandler) xMLFilterImpl0, (Target) null);
         fail("Expecting exception: SAXException");
       } catch(SAXException e) {
       }
@@ -97,7 +97,7 @@ public class BasicSplitEvoSuiteTest {
       BasicSplit basicSplit0 = new BasicSplit();
       // Undeclared exception!
       try {
-        basicSplit0.hasBeenUpdated((long) '\u0000');
+        basicSplit0.hasBeenUpdated(1162L);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -144,7 +144,7 @@ public class BasicSplitEvoSuiteTest {
       BasicSplit basicSplit0 = new BasicSplit();
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
       basicSplit0.startElement("", "", "", (Attributes) attributes2Impl0);
-      assertNull(basicSplit0.getEntryName());
+      assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 8
@@ -156,7 +156,7 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      basicSplit0.endElement("", "", "");
+      basicSplit0.endElement("no source file specified", "no source file specified", "gin;(0rYDj[u/");
       assertEquals(0, basicSplit0.getPosition());
   }
 
@@ -170,7 +170,7 @@ public class BasicSplitEvoSuiteTest {
       BasicSplit basicSplit0 = new BasicSplit();
       // Undeclared exception!
       try {
-        basicSplit0.startPrefixMapping("jxA%i#5sl", "jxA%i#5sl");
+        basicSplit0.startPrefixMapping("no source file specified", (String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -186,7 +186,7 @@ public class BasicSplitEvoSuiteTest {
       BasicSplit basicSplit0 = new BasicSplit();
       // Undeclared exception!
       try {
-        basicSplit0.endPrefixMapping((String) null);
+        basicSplit0.endPrefixMapping("tp^g>ALK.4ORa,`AepA");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -200,9 +200,9 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      char[] charArray0 = new char[10];
-      basicSplit0.characters(charArray0, (int) '8', 1);
-      assertEquals(0, basicSplit0.getPosition());
+      char[] charArray0 = new char[9];
+      basicSplit0.characters(charArray0, (-9), (int) '\u0000');
+      assertNull(basicSplit0.getEntryName());
   }
 
   //Test case number: 12
@@ -213,8 +213,8 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      char[] charArray0 = new char[5];
-      basicSplit0.ignorableWhitespace(charArray0, (int) '\u0000', 440);
+      char[] charArray0 = new char[1];
+      basicSplit0.ignorableWhitespace(charArray0, (int) '1', 126);
       assertNull(basicSplit0.getEntryName());
   }
 
@@ -226,7 +226,7 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      basicSplit0.processingInstruction("", "");
+      basicSplit0.processingInstruction((String) null, (String) null);
       assertNull(basicSplit0.getEntryName());
   }
 
@@ -239,7 +239,7 @@ public class BasicSplitEvoSuiteTest {
   @Test
   public void test14()  throws Throwable  {
       BasicSplit basicSplit0 = new BasicSplit();
-      basicSplit0.skippedEntity("jxA%i#5sl");
-      assertNull(basicSplit0.getEntryName());
+      basicSplit0.skippedEntity("Cannot find FileStorage for URL ");
+      assertEquals(0, basicSplit0.getPosition());
   }
 }

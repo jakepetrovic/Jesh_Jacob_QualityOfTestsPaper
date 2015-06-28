@@ -19,8 +19,8 @@ public class TpNFEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpNF tpNF0 = TpNF.SAIDA;
+      TpNF tpNF0 = TpNF.ENTRADA;
       char char0 = tpNF0.getValue();
-      assertEquals('1', char0);
+      assertEquals('0', char0);
   }
 }

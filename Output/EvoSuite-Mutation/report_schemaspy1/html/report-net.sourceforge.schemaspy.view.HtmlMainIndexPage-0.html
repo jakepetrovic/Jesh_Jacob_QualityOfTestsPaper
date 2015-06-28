@@ -1,0 +1,648 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+net.sourceforge.schemaspy.view.HtmlMainIndexPage
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: net.sourceforge.schemaspy.view.HtmlMainIndexPage: 5.15%</ul><ul>
+<li>14856 fitness evaluations, 299 generations, 50082 statements, 9541 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 1/92 branches, 6/10 methods, 5/97 total goals
+<li>Mutation score: 1%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HtmlMainIndexPage htmlMainIndexPage0 = HtmlMainIndexPage.getInstance();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(htmlMainIndexPage0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = htmlMainIndexPage0.isMainIndex();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HtmlMainIndexPage htmlMainIndexPage0 = HtmlMainIndexPage.getInstance();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  htmlMainIndexPage0.writeRemotesFooter((LineWriter) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HtmlMainIndexPage htmlMainIndexPage0 = HtmlMainIndexPage.getInstance();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Table&gt; hashSet0 = new HashSet&lt;Table&gt;();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  htmlMainIndexPage0.write((Database) null, (Collection&lt;Table&gt;) hashSet0, (Collection&lt;Table&gt;) hashSet0, (LineWriter) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> * This file is a part of the SchemaSpy project (http://schemaspy.sourceforge.net).
+<span class="nocode"><a name="3">  3: </a></span> * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 John Currier
+<span class="nocode"><a name="4">  4: </a></span> *
+<span class="nocode"><a name="5">  5: </a></span> * SchemaSpy is free software; you can redistribute it and/or
+<span class="nocode"><a name="6">  6: </a></span> * modify it under the terms of the GNU Lesser General Public
+<span class="nocode"><a name="7">  7: </a></span> * License as published by the Free Software Foundation; either
+<span class="nocode"><a name="8">  8: </a></span> * version 2.1 of the License, or (at your option) any later version.
+<span class="nocode"><a name="9">  9: </a></span> *
+<span class="nocode"><a name="10"> 10: </a></span> * SchemaSpy is distributed in the hope that it will be useful,
+<span class="nocode"><a name="11"> 11: </a></span> * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="nocode"><a name="12"> 12: </a></span> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<span class="nocode"><a name="13"> 13: </a></span> * Lesser General Public License for more details.
+<span class="nocode"><a name="14"> 14: </a></span> *
+<span class="nocode"><a name="15"> 15: </a></span> * You should have received a copy of the GNU Lesser General Public
+<span class="nocode"><a name="16"> 16: </a></span> * License along with this library; if not, write to the Free Software
+<span class="nocode"><a name="17"> 17: </a></span> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+<span class="nocode"><a name="18"> 18: </a></span> */
+<span class="nocode"><a name="19"> 19: </a></span>package net.sourceforge.schemaspy.view;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>import java.io.IOException;
+<span class="nocode"><a name="22"> 22: </a></span>import java.text.NumberFormat;
+<span class="nocode"><a name="23"> 23: </a></span>import java.util.ArrayList;
+<span class="nocode"><a name="24"> 24: </a></span>import java.util.Collection;
+<span class="nocode"><a name="25"> 25: </a></span>import java.util.Comparator;
+<span class="nocode"><a name="26"> 26: </a></span>import java.util.List;
+<span class="nocode"><a name="27"> 27: </a></span>import java.util.TreeSet;
+<span class="nocode"><a name="28"> 28: </a></span>import net.sourceforge.schemaspy.Config;
+<span class="nocode"><a name="29"> 29: </a></span>import net.sourceforge.schemaspy.model.Database;
+<span class="nocode"><a name="30"> 30: </a></span>import net.sourceforge.schemaspy.model.Table;
+<span class="nocode"><a name="31"> 31: </a></span>import net.sourceforge.schemaspy.util.HtmlEncoder;
+<span class="nocode"><a name="32"> 32: </a></span>import net.sourceforge.schemaspy.util.LineWriter;
+<span class="nocode"><a name="33"> 33: </a></span>
+<span class="nocode"><a name="34"> 34: </a></span>/**
+<span class="nocode"><a name="35"> 35: </a></span> * The main index that contains all tables and views that were evaluated
+<span class="nocode"><a name="36"> 36: </a></span> *
+<span class="nocode"><a name="37"> 37: </a></span> * @author John Currier
+<span class="nocode"><a name="38"> 38: </a></span> */
+<span class="nocode"><a name="39"> 39: </a></span>public class HtmlMainIndexPage extends HtmlFormatter {
+<span class="nocode"><a name="40"> 40: </a></span>    private static HtmlMainIndexPage instance = new HtmlMainIndexPage();
+<span class="nocode"><a name="41"> 41: </a></span>    private final NumberFormat integerFormatter = NumberFormat.getIntegerInstance();
+<span class="nocode"><a name="42"> 42: </a></span>
+<span class="nocode"><a name="43"> 43: </a></span>    /**
+<span class="nocode"><a name="44"> 44: </a></span>     * Singleton: Don't allow instantiation
+<span class="nocode"><a name="45"> 45: </a></span>     */
+<span class="nocode"><a name="46"> 46: </a></span>    private HtmlMainIndexPage() {
+<span class="nocode"><a name="47"> 47: </a></span>    }
+<span class="nocode"><a name="48"> 48: </a></span>
+<span class="nocode"><a name="49"> 49: </a></span>    /**
+<span class="nocode"><a name="50"> 50: </a></span>     * Singleton accessor
+<span class="nocode"><a name="51"> 51: </a></span>     *
+<span class="nocode"><a name="52"> 52: </a></span>     * @return the singleton instance
+<span class="nocode"><a name="53"> 53: </a></span>     */
+<span class="nocode"><a name="54"> 54: </a></span>    public static HtmlMainIndexPage getInstance() {
+<span class="nocode"><a name="55"> 55: </a></span><span style="background-color: #ffffcc">        return instance;</span>
+<span class="nocode"><a name="56"> 56: </a></span>    }
+<span class="nocode"><a name="57"> 57: </a></span>
+<span class="nocode"><a name="58"> 58: </a></span>    public void write(Database database, Collection&lt;Table&gt; tables, Collection&lt;Table&gt; remotes, LineWriter html) throws IOException {
+<span class="nocode"><a name="59"> 59: </a></span><span style="background-color: #ffffcc">        Comparator&lt;Table&gt; sorter = new Comparator&lt;Table&gt;() {</span>
+<span class="nocode"><a name="60"> 60: </a></span>            public int compare(Table table1, Table table2) {
+<span class="nocode"><a name="61"> 61: </a></span>                return table1.compareTo(table2);
+<span class="nocode"><a name="62"> 62: </a></span>            }
+<span class="nocode"><a name="63"> 63: </a></span>        };
+<span class="nocode"><a name="64"> 64: </a></span>        // sort tables and remotes by name
+<span class="nocode"><a name="65"> 65: </a></span><span style="background-color: #ffffcc">        Collection&lt;Table&gt; tmp = new TreeSet&lt;Table&gt;(sorter);</span>
+<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">        tmp.addAll(tables);</span>
+<span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">        tables = tmp;</span>
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">        tmp = new TreeSet&lt;Table&gt;(sorter);</span>
+<span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">        tmp.addAll(remotes);</span>
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">        remotes = tmp;</span>
+<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">        tmp = null;</span>
+<span class="nocode"><a name="72"> 72: </a></span>
+<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">        boolean showIds = false;</span>
+<span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">        int numViews = 0;</span>
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        boolean hasComments = false;</span>
+<span class="nocode"><a name="76"> 76: </a></span>
+<span class="nocode"><a name="77"> 77: </a></span><span style="background-color: #ffffcc">        for (Table table : tables) {</span>
+<span class="nocode"><a name="78"> 78: </a></span>            if (table.isView())
+<span class="nocode"><a name="79"> 79: </a></span>                ++numViews;
+<span class="nocode"><a name="80"> 80: </a></span>            showIds |= table.getId() != null;
+<span class="nocode"><a name="81"> 81: </a></span>            if (table.getComments() != null)
+<span class="nocode"><a name="82"> 82: </a></span>                hasComments = true;
+<span class="nocode"><a name="83"> 83: </a></span>        }
+<span class="nocode"><a name="84"> 84: </a></span>
+<span class="nocode"><a name="85"> 85: </a></span><span style="background-color: #ffffcc">        writeLocalsHeader(database, tables.size() - numViews, numViews, showIds, hasComments, html);</span>
+<span class="nocode"><a name="86"> 86: </a></span>
+<span class="nocode"><a name="87"> 87: </a></span>        int numTableCols = 0;
+<span class="nocode"><a name="88"> 88: </a></span>        int numViewCols = 0;
+<span class="nocode"><a name="89"> 89: </a></span>        long numRows = 0;
+<span class="nocode"><a name="90"> 90: </a></span>        for (Table table : tables) {
+<span class="nocode"><a name="91"> 91: </a></span>            writeLineItem(table, showIds, html);
+<span class="nocode"><a name="92"> 92: </a></span>
+<span class="nocode"><a name="93"> 93: </a></span>            if (!table.isView())
+<span class="nocode"><a name="94"> 94: </a></span>                numTableCols += table.getColumns().size();
+<span class="nocode"><a name="95"> 95: </a></span>            else
+<span class="nocode"><a name="96"> 96: </a></span>                numViewCols += table.getColumns().size();
+<span class="nocode"><a name="97"> 97: </a></span>            numRows += table.getNumRows() &gt; 0 ? table.getNumRows() : 0;
+<span class="nocode"><a name="98"> 98: </a></span>        }
+<span class="nocode"><a name="99"> 99: </a></span>
+<span class="nocode"><a name="100">100: </a></span>        writeLocalsFooter(tables.size() - numViews, numTableCols, numViews, numViewCols, numRows, html);
+<span class="nocode"><a name="101">101: </a></span>
+<span class="nocode"><a name="102">102: </a></span>        if (!remotes.isEmpty()) {
+<span class="nocode"><a name="103">103: </a></span>            writeRemotesHeader(database, showIds, hasComments, html);
+<span class="nocode"><a name="104">104: </a></span>
+<span class="nocode"><a name="105">105: </a></span>            for (Table table : remotes) {
+<span class="nocode"><a name="106">106: </a></span>                writeLineItem(table, showIds, html);
+<span class="nocode"><a name="107">107: </a></span>            }
+<span class="nocode"><a name="108">108: </a></span>
+<span class="nocode"><a name="109">109: </a></span>            writeRemotesFooter(html);
+<span class="nocode"><a name="110">110: </a></span>        }
+<span class="nocode"><a name="111">111: </a></span>
+<span class="nocode"><a name="112">112: </a></span>        writeFooter(html);
+<span class="nocode"><a name="113">113: </a></span>    }
+<span class="nocode"><a name="114">114: </a></span>
+<span class="nocode"><a name="115">115: </a></span>    private void writeLocalsHeader(Database db, int numberOfTables, int numberOfViews, boolean showIds, boolean hasComments, LineWriter html) throws IOException {
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">        List&lt;String&gt; javascript = new ArrayList&lt;String&gt;();</span>
+<span class="nocode"><a name="117">117: </a></span>
+<span class="nocode"><a name="118">118: </a></span>        // we can't use the hard-coded even odd technique that we use
+<span class="nocode"><a name="119">119: </a></span>        // everywhere else because we're dynamically changing the visibility
+<span class="nocode"><a name="120">120: </a></span>        // of tables/views within the list
+<span class="nocode"><a name="121">121: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;$(function(){&quot;);</span>
+<span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  associate($('#showTables'), $('.tbl'));&quot;);</span>
+<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  associate($('#showViews'),  $('.view'));&quot;);</span>
+<span class="nocode"><a name="124">124: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  jQuery.fn.alternateRowColors = function() {&quot;);</span>
+<span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;    $('tbody tr:visible').each(function(i) {&quot;);</span>
+<span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;      if (i % 2 == 0) {&quot;);</span>
+<span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;        $(this).removeClass('even').addClass('odd');&quot;);</span>
+<span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;      } else {&quot;);</span>
+<span class="nocode"><a name="129">129: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;        $(this).removeClass('odd').addClass('even');&quot;);</span>
+<span class="nocode"><a name="130">130: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;      }&quot;);</span>
+<span class="nocode"><a name="131">131: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;    });&quot;);</span>
+<span class="nocode"><a name="132">132: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;    return this;&quot;);</span>
+<span class="nocode"><a name="133">133: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  };&quot;);</span>
+<span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  $('#showTables, #showViews').click(function() {&quot;);</span>
+<span class="nocode"><a name="135">135: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;    $('table.dataTable').alternateRowColors();&quot;);</span>
+<span class="nocode"><a name="136">136: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  });&quot;);</span>
+<span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;  $('table.dataTable').alternateRowColors();&quot;);</span>
+<span class="nocode"><a name="138">138: </a></span><span style="background-color: #ffffcc">        javascript.add(&quot;})&quot;);</span>
+<span class="nocode"><a name="139">139: </a></span>
+<span class="nocode"><a name="140">140: </a></span><span style="background-color: #ffffcc">        writeHeader(db, null, null, javascript, html);</span>
+<span class="nocode"><a name="141">141: </a></span>        html.writeln(&quot;&lt;table width='100%'&gt;&quot;);
+<span class="nocode"><a name="142">142: </a></span>        html.writeln(&quot; &lt;tr&gt;&lt;td class='container'&gt;&quot;);
+<span class="nocode"><a name="143">143: </a></span>        writeGeneratedOn(db.getConnectTime(), html);
+<span class="nocode"><a name="144">144: </a></span>        html.writeln(&quot; &lt;/td&gt;&lt;/tr&gt;&quot;);
+<span class="nocode"><a name="145">145: </a></span>        html.writeln(&quot; &lt;tr&gt;&quot;);
+<span class="nocode"><a name="146">146: </a></span>        html.write(&quot;  &lt;td class='container'&gt;Database Type: &quot;);
+<span class="nocode"><a name="147">147: </a></span>        html.write(db.getDatabaseProduct());
+<span class="nocode"><a name="148">148: </a></span>        html.writeln(&quot;  &lt;/td&gt;&quot;);
+<span class="nocode"><a name="149">149: </a></span>        html.writeln(&quot;  &lt;td class='container' align='right' valign='top' rowspan='3'&gt;&quot;);
+<span class="nocode"><a name="150">150: </a></span>        if (sourceForgeLogoEnabled())
+<span class="nocode"><a name="151">151: </a></span>            html.writeln(&quot;    &lt;a href='http://sourceforge.net' target='_blank'&gt;&lt;img src='http://sourceforge.net/sflogo.php?group_id=137197&amp;amp;type=1' alt='SourceForge.net' border='0' height='31' width='88'&gt;&lt;/a&gt;&lt;br&gt;&quot;);
+<span class="nocode"><a name="152">152: </a></span>        html.writeln(&quot;    &lt;br&gt;&quot;);
+<span class="nocode"><a name="153">153: </a></span>        html.writeln(&quot;  &lt;/td&gt;&quot;);
+<span class="nocode"><a name="154">154: </a></span>        html.writeln(&quot; &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="155">155: </a></span>        html.writeln(&quot; &lt;tr&gt;&quot;);
+<span class="nocode"><a name="156">156: </a></span>        html.write(&quot;  &lt;td class='container'&gt;&quot;);
+<span class="nocode"><a name="157">157: </a></span>        String xmlName = db.getName();
+<span class="nocode"><a name="158">158: </a></span>        if (db.getSchema() != null)
+<span class="nocode"><a name="159">159: </a></span>            xmlName += '.' + db.getSchema();
+<span class="nocode"><a name="160">160: </a></span>        else if (db.getCatalog() != null)
+<span class="nocode"><a name="161">161: </a></span>            xmlName += '.' + db.getCatalog();
+<span class="nocode"><a name="162">162: </a></span>        html.write(&quot;&lt;br&gt;&lt;a href='&quot; + xmlName + &quot;.xml' title='XML Representation'&gt;XML Representation&lt;/a&gt;&quot;);
+<span class="nocode"><a name="163">163: </a></span>        html.write(&quot;&lt;br&gt;&lt;a href='insertionOrder.txt' title='Useful for loading data into a database'&gt;Insertion Order&lt;/a&gt;&amp;nbsp;&quot;);
+<span class="nocode"><a name="164">164: </a></span>        html.write(&quot;&lt;a href='deletionOrder.txt' title='Useful for purging data from a database'&gt;Deletion Order&lt;/a&gt;&quot;);
+<span class="nocode"><a name="165">165: </a></span>        html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="166">166: </a></span>        html.writeln(&quot; &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="167">167: </a></span>        html.writeln(&quot;&lt;/table&gt;&quot;);
+<span class="nocode"><a name="168">168: </a></span>
+<span class="nocode"><a name="169">169: </a></span>        html.writeln(&quot;&lt;div class='indent'&gt;&quot;);
+<span class="nocode"><a name="170">170: </a></span>        html.write(&quot;&lt;p&gt;&quot;);
+<span class="nocode"><a name="171">171: </a></span>        html.write(&quot;&lt;b&gt;&quot;);
+<span class="nocode"><a name="172">172: </a></span>        if (numberOfViews == 0) {
+<span class="nocode"><a name="173">173: </a></span>            html.writeln(&quot;&lt;label for='showTables' style='display:none;'&gt;&lt;input type='checkbox' id='showTables' checked&gt;&lt;/label&gt;&quot;);
+<span class="nocode"><a name="174">174: </a></span>        } else if (numberOfTables == 0) {
+<span class="nocode"><a name="175">175: </a></span>            html.writeln(&quot;&lt;label for='showViews' style='display:none;'&gt;&lt;input type='checkbox' id='showViews' checked&gt;&lt;/label&gt;&quot;);
+<span class="nocode"><a name="176">176: </a></span>        } else {
+<span class="nocode"><a name="177">177: </a></span>            html.write(&quot;&lt;label for='showTables'&gt;&lt;input type='checkbox' id='showTables' checked&gt;Tables&lt;/label&gt;&quot;);
+<span class="nocode"><a name="178">178: </a></span>            html.write(&quot; &lt;label for='showViews'&gt;&lt;input type='checkbox' id='showViews' checked&gt;Views&lt;/label&gt;&quot;);
+<span class="nocode"><a name="179">179: </a></span>        }
+<span class="nocode"><a name="180">180: </a></span>
+<span class="nocode"><a name="181">181: </a></span>        html.writeln(&quot; &lt;label for='showComments'&gt;&lt;input type=checkbox &quot; + (hasComments  ? &quot;checked &quot; : &quot;&quot;) + &quot;id='showComments'&gt;Comments&lt;/label&gt;&quot;);
+<span class="nocode"><a name="182">182: </a></span>        html.writeln(&quot;&lt;/b&gt;&quot;);
+<span class="nocode"><a name="183">183: </a></span>
+<span class="nocode"><a name="184">184: </a></span>        html.writeln(&quot;&lt;table class='dataTable' border='1' rules='groups'&gt;&quot;);
+<span class="nocode"><a name="185">185: </a></span>        int numGroups = 4 + (showIds ? 1 : 0) + (displayNumRows ? 1 : 0);
+<span class="nocode"><a name="186">186: </a></span>        for (int i = 0; i &lt; numGroups; ++i)
+<span class="nocode"><a name="187">187: </a></span>            html.writeln(&quot;&lt;colgroup&gt;&quot;);
+<span class="nocode"><a name="188">188: </a></span>        html.writeln(&quot;&lt;colgroup class='comment'&gt;&quot;);
+<span class="nocode"><a name="189">189: </a></span>        html.writeln(&quot;&lt;thead align='left'&gt;&quot;);
+<span class="nocode"><a name="190">190: </a></span>        html.writeln(&quot;&lt;tr&gt;&quot;);
+<span class="nocode"><a name="191">191: </a></span>        String tableHeading;
+<span class="nocode"><a name="192">192: </a></span>        if (numberOfViews == 0)
+<span class="nocode"><a name="193">193: </a></span>            tableHeading = &quot;Table&quot;;
+<span class="nocode"><a name="194">194: </a></span>        else if (numberOfTables == 0)
+<span class="nocode"><a name="195">195: </a></span>            tableHeading = &quot;View&quot;;
+<span class="nocode"><a name="196">196: </a></span>        else
+<span class="nocode"><a name="197">197: </a></span>            tableHeading = &quot;Table / View&quot;;
+<span class="nocode"><a name="198">198: </a></span>        html.writeln(&quot;  &lt;th valign='bottom'&gt;&quot; + tableHeading + &quot;&lt;/th&gt;&quot;);
+<span class="nocode"><a name="199">199: </a></span>        if (showIds)
+<span class="nocode"><a name="200">200: </a></span>            html.writeln(&quot;  &lt;th align='center' valign='bottom'&gt;ID&lt;/th&gt;&quot;);
+<span class="nocode"><a name="201">201: </a></span>        html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Children&lt;/th&gt;&quot;);
+<span class="nocode"><a name="202">202: </a></span>        html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Parents&lt;/th&gt;&quot;);
+<span class="nocode"><a name="203">203: </a></span>        html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Columns&lt;/th&gt;&quot;);
+<span class="nocode"><a name="204">204: </a></span>        if (displayNumRows)
+<span class="nocode"><a name="205">205: </a></span>            html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Rows&lt;/th&gt;&quot;);
+<span class="nocode"><a name="206">206: </a></span>        html.writeln(&quot;  &lt;th class='comment' align='left' valign='bottom'&gt;Comments&lt;/th&gt;&quot;);
+<span class="nocode"><a name="207">207: </a></span>        html.writeln(&quot;&lt;/tr&gt;&quot;);
+<span class="nocode"><a name="208">208: </a></span>        html.writeln(&quot;&lt;/thead&gt;&quot;);
+<span class="nocode"><a name="209">209: </a></span>        html.writeln(&quot;&lt;tbody&gt;&quot;);
+<span class="nocode"><a name="210">210: </a></span>    }
+<span class="nocode"><a name="211">211: </a></span>
+<span class="nocode"><a name="212">212: </a></span>    private void writeRemotesHeader(Database db, boolean showIds, boolean hasComments, LineWriter html) throws IOException {
+<span class="nocode"><a name="213">213: </a></span>        html.writeln(&quot;&lt;p&gt;&lt;br&gt;&lt;b&gt;Related tables in other schemas&lt;/b&gt;&quot;);
+<span class="nocode"><a name="214">214: </a></span>        html.writeln(&quot;&lt;table class='dataTable' border='1' rules='groups'&gt;&quot;);
+<span class="nocode"><a name="215">215: </a></span>        int numGroups = 3 + (showIds ? 1 : 0);
+<span class="nocode"><a name="216">216: </a></span>        for (int i = 0; i &lt; numGroups; ++i)
+<span class="nocode"><a name="217">217: </a></span>            html.writeln(&quot;&lt;colgroup&gt;&quot;);
+<span class="nocode"><a name="218">218: </a></span>        html.writeln(&quot;&lt;colgroup class='comment'&gt;&quot;);
+<span class="nocode"><a name="219">219: </a></span>        html.writeln(&quot;&lt;thead align='left'&gt;&quot;);
+<span class="nocode"><a name="220">220: </a></span>        html.writeln(&quot;&lt;tr&gt;&quot;);
+<span class="nocode"><a name="221">221: </a></span>        html.writeln(&quot;  &lt;th rowspan='2'&gt;Table&lt;/th&gt;&quot;);
+<span class="nocode"><a name="222">222: </a></span>        if (showIds)
+<span class="nocode"><a name="223">223: </a></span>            html.writeln(&quot;  &lt;th align='center' valign='bottom' rowspan='2'&gt;ID&lt;/th&gt;&quot;);
+<span class="nocode"><a name="224">224: </a></span>        html.writeln(&quot;  &lt;th valign='bottom' colspan='2' style='text-align: center;'&gt;In this schema&lt;/th&gt;&quot;);
+<span class="nocode"><a name="225">225: </a></span>        html.writeln(&quot;  &lt;th class='comment' align='left' valign='bottom' rowspan='2'&gt;Comments&lt;/th&gt;&quot;);
+<span class="nocode"><a name="226">226: </a></span>        html.writeln(&quot;&lt;/tr&gt;&quot;);
+<span class="nocode"><a name="227">227: </a></span>        html.writeln(&quot;&lt;tr&gt;&quot;);
+<span class="nocode"><a name="228">228: </a></span>        html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Children&lt;/th&gt;&quot;);
+<span class="nocode"><a name="229">229: </a></span>        html.writeln(&quot;  &lt;th align='right' valign='bottom'&gt;Parents&lt;/th&gt;&quot;);
+<span class="nocode"><a name="230">230: </a></span>        html.writeln(&quot;&lt;/tr&gt;&quot;);
+<span class="nocode"><a name="231">231: </a></span>        html.writeln(&quot;&lt;/thead&gt;&quot;);
+<span class="nocode"><a name="232">232: </a></span>        html.writeln(&quot;&lt;tbody&gt;&quot;);
+<span class="nocode"><a name="233">233: </a></span>    }
+<span class="nocode"><a name="234">234: </a></span>
+<span class="nocode"><a name="235">235: </a></span>    private void writeLineItem(Table table, boolean showIds, LineWriter html) throws IOException {
+<span class="nocode"><a name="236">236: </a></span>        html.write(&quot; &lt;tr class='&quot; + (table.isView() ? &quot;view&quot; : &quot;tbl&quot;) + &quot;' valign='top'&gt;&quot;);
+<span class="nocode"><a name="237">237: </a></span>        html.write(&quot;  &lt;td class='detail'&gt;&quot;);
+<span class="nocode"><a name="238">238: </a></span>
+<span class="nocode"><a name="239">239: </a></span>        String tableName = table.getName();
+<span class="nocode"><a name="240">240: </a></span>
+<span class="nocode"><a name="241">241: </a></span>        if (table.isRemote() &amp;&amp; !Config.getInstance().isOneOfMultipleSchemas()) {
+<span class="nocode"><a name="242">242: </a></span>            html.write(table.getContainer());
+<span class="nocode"><a name="243">243: </a></span>            html.write('.');
+<span class="nocode"><a name="244">244: </a></span>            html.write(tableName);
+<span class="nocode"><a name="245">245: </a></span>        } else {
+<span class="nocode"><a name="246">246: </a></span>            if (table.isRemote()) {
+<span class="nocode"><a name="247">247: </a></span>                html.write(&quot;&lt;a href='../&quot; + urlEncode(table.getContainer()) + &quot;/index.html'&gt;&quot;);
+<span class="nocode"><a name="248">248: </a></span>                html.write(table.getContainer());
+<span class="nocode"><a name="249">249: </a></span>                html.write(&quot;&lt;/a&gt;.&quot;);
+<span class="nocode"><a name="250">250: </a></span>            }
+<span class="nocode"><a name="251">251: </a></span>            html.write(&quot;&lt;a href='tables/&quot;);
+<span class="nocode"><a name="252">252: </a></span>            if (table.isRemote()) {
+<span class="nocode"><a name="253">253: </a></span>                html.write(&quot;../../&quot; + urlEncode(table.getContainer()) + &quot;/tables/&quot;);
+<span class="nocode"><a name="254">254: </a></span>            }
+<span class="nocode"><a name="255">255: </a></span>            html.write(urlEncode(tableName));
+<span class="nocode"><a name="256">256: </a></span>            html.write(&quot;.html'&gt;&quot;);
+<span class="nocode"><a name="257">257: </a></span>            html.write(tableName);
+<span class="nocode"><a name="258">258: </a></span>            html.write(&quot;&lt;/a&gt;&quot;);
+<span class="nocode"><a name="259">259: </a></span>        }
+<span class="nocode"><a name="260">260: </a></span>
+<span class="nocode"><a name="261">261: </a></span>        html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="262">262: </a></span>
+<span class="nocode"><a name="263">263: </a></span>        if (showIds) {
+<span class="nocode"><a name="264">264: </a></span>            html.write(&quot;  &lt;td class='detail' align='right'&gt;&quot;);
+<span class="nocode"><a name="265">265: </a></span>            Object id = table.getId();
+<span class="nocode"><a name="266">266: </a></span>            if (id != null)
+<span class="nocode"><a name="267">267: </a></span>                html.write(String.valueOf(id));
+<span class="nocode"><a name="268">268: </a></span>            else
+<span class="nocode"><a name="269">269: </a></span>                html.writeln(&quot;&amp;nbsp;&quot;);
+<span class="nocode"><a name="270">270: </a></span>            html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="271">271: </a></span>        }
+<span class="nocode"><a name="272">272: </a></span>
+<span class="nocode"><a name="273">273: </a></span>        html.write(&quot;  &lt;td class='detail' align='right'&gt;&quot;);
+<span class="nocode"><a name="274">274: </a></span>        int numRelatives = table.getNumNonImpliedChildren();
+<span class="nocode"><a name="275">275: </a></span>        if (numRelatives != 0)
+<span class="nocode"><a name="276">276: </a></span>            html.write(String.valueOf(integerFormatter.format(numRelatives)));
+<span class="nocode"><a name="277">277: </a></span>        html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="278">278: </a></span>        html.write(&quot;  &lt;td class='detail' align='right'&gt;&quot;);
+<span class="nocode"><a name="279">279: </a></span>        numRelatives = table.getNumNonImpliedParents();
+<span class="nocode"><a name="280">280: </a></span>        if (numRelatives != 0)
+<span class="nocode"><a name="281">281: </a></span>            html.write(String.valueOf(integerFormatter.format(numRelatives)));
+<span class="nocode"><a name="282">282: </a></span>        html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="283">283: </a></span>
+<span class="nocode"><a name="284">284: </a></span>        if (!table.isRemote()) {
+<span class="nocode"><a name="285">285: </a></span>            html.write(&quot;  &lt;td class='detail' align='right'&gt;&quot;);
+<span class="nocode"><a name="286">286: </a></span>            html.write(String.valueOf(integerFormatter.format(table.getColumns().size())));
+<span class="nocode"><a name="287">287: </a></span>            html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="288">288: </a></span>
+<span class="nocode"><a name="289">289: </a></span>            if (displayNumRows) {
+<span class="nocode"><a name="290">290: </a></span>                html.write(&quot;  &lt;td class='detail' align='right'&gt;&quot;);
+<span class="nocode"><a name="291">291: </a></span>                if (!table.isView()) {
+<span class="nocode"><a name="292">292: </a></span>                    if (table.getNumRows() &gt;= 0)
+<span class="nocode"><a name="293">293: </a></span>                        html.write(String.valueOf(integerFormatter.format(table.getNumRows())));
+<span class="nocode"><a name="294">294: </a></span>                    else
+<span class="nocode"><a name="295">295: </a></span>                        html.write(&quot;&lt;span title='Row count not available'&gt;&amp;nbsp;&lt;/span&gt;&quot;);
+<span class="nocode"><a name="296">296: </a></span>                } else
+<span class="nocode"><a name="297">297: </a></span>                    html.write(&quot;&lt;span title='Views contain no real rows'&gt;view&lt;/span&gt;&quot;);
+<span class="nocode"><a name="298">298: </a></span>                html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="299">299: </a></span>            }
+<span class="nocode"><a name="300">300: </a></span>        }
+<span class="nocode"><a name="301">301: </a></span>
+<span class="nocode"><a name="302">302: </a></span>        html.write(&quot;  &lt;td class='comment detail'&gt;&quot;);
+<span class="nocode"><a name="303">303: </a></span>        String comments = table.getComments();
+<span class="nocode"><a name="304">304: </a></span>        if (comments != null) {
+<span class="nocode"><a name="305">305: </a></span>            if (encodeComments)
+<span class="nocode"><a name="306">306: </a></span>                for (int i = 0; i &lt; comments.length(); ++i)
+<span class="nocode"><a name="307">307: </a></span>                    html.write(HtmlEncoder.encodeToken(comments.charAt(i)));
+<span class="nocode"><a name="308">308: </a></span>            else
+<span class="nocode"><a name="309">309: </a></span>                html.write(comments);
+<span class="nocode"><a name="310">310: </a></span>        }
+<span class="nocode"><a name="311">311: </a></span>        html.writeln(&quot;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="312">312: </a></span>        html.writeln(&quot;  &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="313">313: </a></span>    }
+<span class="nocode"><a name="314">314: </a></span>
+<span class="nocode"><a name="315">315: </a></span>    protected void writeLocalsFooter(int numTables, int numTableCols, int numViews, int numViewCols, long numRows, LineWriter html) throws IOException {
+<span class="nocode"><a name="316">316: </a></span>        html.writeln(&quot;  &lt;tr&gt;&quot;);
+<span class="nocode"><a name="317">317: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="318">318: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="319">319: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="320">320: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="321">321: </a></span>        if (displayNumRows)
+<span class="nocode"><a name="322">322: </a></span>            html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="323">323: </a></span>        html.writeln(&quot;    &lt;td class='comment detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="324">324: </a></span>        html.writeln(&quot;  &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="325">325: </a></span>        String name = numTables == 1 ? &quot; Table&quot; : &quot; Tables&quot;;
+<span class="nocode"><a name="326">326: </a></span>        html.writeln(&quot;  &lt;tr class='tbl'&gt;&quot;);
+<span class="nocode"><a name="327">327: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&lt;b&gt;&quot; + integerFormatter.format(numTables) + name + &quot;&lt;/b&gt;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="328">328: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="329">329: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="330">330: </a></span>        html.writeln(&quot;    &lt;td class='detail' align='right'&gt;&lt;b&gt;&quot; + integerFormatter.format(numTableCols) + &quot;&lt;/b&gt;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="331">331: </a></span>        if (displayNumRows)
+<span class="nocode"><a name="332">332: </a></span>            html.writeln(&quot;    &lt;td class='detail' align='right'&gt;&lt;b&gt;&quot; + integerFormatter.format(numRows) + &quot;&lt;/b&gt;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="333">333: </a></span>        html.writeln(&quot;    &lt;td class='comment detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="334">334: </a></span>        html.writeln(&quot;  &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="335">335: </a></span>        name = numViews == 1 ? &quot; View&quot; : &quot; Views&quot;;
+<span class="nocode"><a name="336">336: </a></span>        html.writeln(&quot;  &lt;tr class='view'&gt;&quot;);
+<span class="nocode"><a name="337">337: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&lt;b&gt;&quot; + integerFormatter.format(numViews) + name + &quot;&lt;/b&gt;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="338">338: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="339">339: </a></span>        html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="340">340: </a></span>        html.writeln(&quot;    &lt;td class='detail' align='right'&gt;&lt;b&gt;&quot; + integerFormatter.format(numViewCols) + &quot;&lt;/b&gt;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="341">341: </a></span>        if (displayNumRows)
+<span class="nocode"><a name="342">342: </a></span>            html.writeln(&quot;    &lt;td class='detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="343">343: </a></span>        html.writeln(&quot;    &lt;td class='comment detail'&gt;&amp;nbsp;&lt;/td&gt;&quot;);
+<span class="nocode"><a name="344">344: </a></span>        html.writeln(&quot;  &lt;/tr&gt;&quot;);
+<span class="nocode"><a name="345">345: </a></span>        html.writeln(&quot;&lt;/tbody&gt;&quot;);
+<span class="nocode"><a name="346">346: </a></span>        html.writeln(&quot;&lt;/table&gt;&quot;);
+<span class="nocode"><a name="347">347: </a></span>    }
+<span class="nocode"><a name="348">348: </a></span>
+<span class="nocode"><a name="349">349: </a></span>    protected void writeRemotesFooter(LineWriter html) throws IOException {
+<span class="nocode"><a name="350">350: </a></span><span style="background-color: #ffffcc">        html.writeln(&quot;&lt;/tbody&gt;&quot;);</span>
+<span class="nocode"><a name="351">351: </a></span>        html.writeln(&quot;&lt;/table&gt;&quot;);
+<span class="nocode"><a name="352">352: </a></span>    }
+<span class="nocode"><a name="353">353: </a></span>
+<span class="nocode"><a name="354">354: </a></span>    @Override
+<span class="nocode"><a name="355">355: </a></span>    protected boolean isMainIndex() {
+<span class="nocode"><a name="356">356: </a></span><span style="background-color: #ffffcc">        return true;</span>
+<span class="nocode"><a name="357">357: </a></span>    }
+<span class="nocode"><a name="358">358: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree8214871319239619351.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 8852
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: net
+<li>TARGET_CLASS: net.sourceforge.schemaspy.view.HtmlMainIndexPage
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/36_schemaspy/schemaspy.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

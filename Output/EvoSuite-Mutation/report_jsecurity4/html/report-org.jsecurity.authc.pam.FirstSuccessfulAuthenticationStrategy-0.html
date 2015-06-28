@@ -22,52 +22,49 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy: 100.00%</ul><ul>
-<li>300 fitness evaluations, 7 generations, 8584 statements, 439 tests.
-<li>Time: 0:00:06(Search: 0:00:05, minimization: 0:00:00)
+<li>900 fitness evaluations, 19 generations, 11632 statements, 769 tests.
+<li>Time: 0:00:08(Search: 0:00:07, minimization: 0:00:00)
 <li>Coverage: 8/8 branches, 3/3 methods, 10/10 total goals
-<li>Mutation score: 64%
+<li>Mutation score: 14%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[2];
-<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="5">  5: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByAddress(&quot;&quot;, byteArray0);
-<span class="nocode"><a name="6">  6: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, (InetAddress) inet4Address0);
-<span class="nocode"><a name="7">  7: </a></span>AuthenticationInfo authenticationInfo0 = firstSuccessfulAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) hashSet0, (AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="8">  8: </a></span>assertNull(authenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[3];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;].&quot;, charArray0);
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Realm&gt; treeSet0 = new TreeSet&lt;Realm&gt;();
+<span class="nocode"><a name="5">  5: </a></span>AuthenticationInfo authenticationInfo0 = firstSuccessfulAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) treeSet0, (AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="6">  6: </a></span>assertNull(authenticationInfo0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAccount0, (AuthenticationInfo) null);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount1.isCredentialsExpired());
+<span class="nocode"><a name="2">  2: </a></span>AuthenticationInfo authenticationInfo0 = firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) null, (AuthenticationInfo) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(authenticationInfo0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
 <span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) null, (AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="4">  4: </a></span>assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="4">  4: </a></span>assertSame(simpleAuthenticationInfo0, simpleAuthenticationInfo1);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
 <span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) null);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0);
 <span class="nocode"><a name="5">  5: </a></span>assertSame(simpleAuthenticationInfo0, simpleAuthenticationInfo1);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) &quot;VKU\u0000\uFFFD\uFFFD\uFFFD&quot;, (Object) &quot;org.jsecurity.realm.SimpleAccountRealm_210&quot;, &quot;org.jsecurity.realm.SimpleAccountRealm_210&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="4">  4: </a></span>assertSame(simpleAuthenticationInfo0, simpleAuthenticationInfo1);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;\uFFFD\u0000&quot;, (Object) &quot;\uFFFD\u0000&quot;, &quot;\uFFFD\u0000&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)firstSuccessfulAuthenticationStrategy0.merge((AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simpleAccount1.isLocked());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -136,7 +133,7 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -154,7 +151,7 @@ org.jsecurity.authc.pam.FirstSuccessfulAuthenticationStrategy
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10147
+<li>process_communication_port: 11648
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

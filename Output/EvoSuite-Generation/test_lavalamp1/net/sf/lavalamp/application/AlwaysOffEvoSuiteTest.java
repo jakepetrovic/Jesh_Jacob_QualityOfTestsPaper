@@ -7,22 +7,7 @@ package net.sf.lavalamp.application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import net.sf.lavalamp.Pause;
-import net.sf.lavalamp.application.AlwaysOff;
-import net.sf.lavalamp.application.WebRun;
 
 public class AlwaysOffEvoSuiteTest {
 
-
-  //Test case number: 0
-  /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.application.AlwaysOff.<init>(Lnet/sf/lavalamp/application/WebRun;Lnet/sf/lavalamp/Pause;)V: root-Branch
-   */
-  @Test
-  public void test0()  throws Throwable  {
-      Pause pause0 = new Pause();
-      AlwaysOff alwaysOff0 = new AlwaysOff((WebRun) null, pause0);
-      assertEquals(Thread.State.NEW, alwaysOff0.getState());
-  }
 }

@@ -47,7 +47,7 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_STEREOTYPE.getValue(1213);
+      INCHI_STEREOTYPE.getValue(1892893660);
   }
 
   //Test case number: 3

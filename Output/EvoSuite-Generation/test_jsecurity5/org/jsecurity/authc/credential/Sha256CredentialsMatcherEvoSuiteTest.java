@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Sha256CredentialsMatcher;
 import org.jsecurity.crypto.hash.Sha256Hash;
@@ -39,16 +38,13 @@ public class Sha256CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha256CredentialsMatcher sha256CredentialsMatcher0 = new Sha256CredentialsMatcher();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", "", true);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      char[] charArray0 = new char[4];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
       // Undeclared exception!
       try {
-        sha256CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Argument for byte conversion cannot be null.
-         */
+        sha256CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

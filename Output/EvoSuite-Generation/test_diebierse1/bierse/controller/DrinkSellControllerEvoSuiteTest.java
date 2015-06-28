@@ -7,7 +7,30 @@ package bierse.controller;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import bierse.controller.DrinkSellController;
+import bierse.model.Model;
+import bierse.view.IDrinkSellView;
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import javax.swing.JSeparator;
+import javax.swing.JToolTip;
 
 public class DrinkSellControllerEvoSuiteTest {
 
+
+  //Test case number: 0
+  /*
+   * 2 covered goals:
+   * 1 bierse.controller.DrinkSellController.keyTyped(Ljava/awt/event/KeyEvent;)V: root-Branch
+   * 2 bierse.controller.DrinkSellController.<init>(Lbierse/model/Model;Lbierse/view/IDrinkSellView;)V: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      DrinkSellController drinkSellController0 = new DrinkSellController((Model) null, (IDrinkSellView) null);
+      JSeparator jSeparator0 = new JSeparator();
+      JToolTip jToolTip0 = jSeparator0.createToolTip();
+      KeyEvent keyEvent0 = new KeyEvent((Component) jToolTip0, 0, 46L, 770, 1306, 'a');
+      drinkSellController0.keyTyped(keyEvent0);
+      assertEquals(0, keyEvent0.getID());
+  }
 }

@@ -22,29 +22,29 @@ nu.staldal.lagoon.TextAreaWriter
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.TextAreaWriter: 83.33%</ul><ul>
-<li>7402 fitness evaluations, 150 generations, 24892 statements, 4873 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>8038 fitness evaluations, 162 generations, 32557 statements, 5393 tests.
+<li>Time: 0:01:03(Search: 0:01:03, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 5/5 methods, 5/6 total goals
-<li>Mutation score: 0%
+<li>Mutation score: 1%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>textAreaWriter0.write((int) '\u0000');
+<span class="nocode"><a name="2">  2: </a></span>TextAreaWriter textAreaWriter1 = (TextAreaWriter)textAreaWriter0.append('\u0000');
+<span class="nocode"><a name="3">  3: </a></span>assertSame(textAreaWriter0, textAreaWriter1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[6];
-<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write(charArray0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  textAreaWriter0.flush();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>textAreaWriter0.write(&quot;xskLO/3Nv$XBS&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  textAreaWriter0.flush();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -65,7 +65,7 @@ nu.staldal.lagoon.TextAreaWriter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -83,7 +83,7 @@ nu.staldal.lagoon.TextAreaWriter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5478
+<li>process_communication_port: 12785
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

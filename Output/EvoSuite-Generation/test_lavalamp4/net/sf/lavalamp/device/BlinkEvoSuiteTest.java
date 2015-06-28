@@ -7,11 +7,8 @@ package net.sf.lavalamp.device;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.List;
 import net.sf.lavalamp.Pause;
 import net.sf.lavalamp.device.Blink;
-import net.sf.lavalamp.device.Device;
-import net.sf.lavalamp.device.DummyDevice;
 
 public class BlinkEvoSuiteTest {
 
@@ -27,23 +24,5 @@ public class BlinkEvoSuiteTest {
       Blink blink0 = new Blink();
       Pause pause0 = new Pause();
       blink0.setPause(pause0);
-  }
-
-  //Test case number: 1
-  /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.Blink.perform(Ljava/util/List;Lnet/sf/lavalamp/device/Device;)V: I7 Branch 1 IF_ICMPGE L14 - false
-   * 2 net.sf.lavalamp.device.Blink.<init>()V: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      Blink blink0 = new Blink();
-      DummyDevice dummyDevice0 = new DummyDevice();
-      // Undeclared exception!
-      try {
-        blink0.perform((List<String>) null, (Device) dummyDevice0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
   }
 }

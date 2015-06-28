@@ -22,10 +22,10 @@ org.jsecurity.jndi.JndiLocator
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.jndi.JndiLocator: 86.96%</ul><ul>
-<li>17366 fitness evaluations, 349 generations, 76955 statements, 11231 tests.
+<li>15234 fitness evaluations, 306 generations, 65851 statements, 9779 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 13/16 branches, 10/10 methods, 20/23 total goals
-<li>Mutation score: 19%
+<li>Mutation score: 9%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -39,7 +39,7 @@ org.jsecurity.jndi.JndiLocator
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiLocator jndiLocator0 = new JndiLocator();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  jndiLocator0.lookup(&quot;Z&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  jndiLocator0.lookup(&quot;: &quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NoInitialContextException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -54,7 +54,7 @@ org.jsecurity.jndi.JndiLocator
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>jndiLocator0.setResourceRef(true);
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  jndiLocator0.lookup(&quot;,S&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  jndiLocator0.lookup(&quot;: &quot;);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(NoInitialContextException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
@@ -65,9 +65,8 @@ org.jsecurity.jndi.JndiLocator
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiLocator jndiLocator0 = new JndiLocator();
-<span class="nocode"><a name="2">  2: </a></span>Properties properties0 = new Properties();
-<span class="nocode"><a name="3">  3: </a></span>jndiLocator0.setJndiEnvironment(properties0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, jndiLocator0.isResourceRef());
+<span class="nocode"><a name="2">  2: </a></span>jndiLocator0.setJndiEnvironment((Properties) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, jndiLocator0.isResourceRef());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -87,15 +86,8 @@ org.jsecurity.jndi.JndiLocator
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JndiLocator jndiLocator0 = new JndiLocator();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jndiLocator0.lookup((String) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * jndiName argument must not be null
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = JndiLocator.class;
+<span class="nocode"><a name="3">  3: </a></span>jndiLocator0.lookup((String) null, (Class) class0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -103,9 +95,14 @@ org.jsecurity.jndi.JndiLocator
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, jndiLocator0.isResourceRef());
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>jndiLocator0.setResourceRef(true);
-<span class="nocode"><a name="5">  5: </a></span>String string0 = jndiLocator0.convertJndiName(&quot;java:comp/env/a&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, jndiLocator0.isResourceRef());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;java:comp/env/a&quot;, string0);
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  jndiLocator0.lookup(&quot;g`Km^@cL*&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoInitialContextException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NoInitialContextException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -113,9 +110,9 @@ org.jsecurity.jndi.JndiLocator
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, jndiLocator0.isResourceRef());
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>jndiLocator0.setResourceRef(true);
-<span class="nocode"><a name="5">  5: </a></span>String string0 = jndiLocator0.convertJndiName(&quot;:~q_d8%F(x&lt;?h&quot;);
+<span class="nocode"><a name="5">  5: </a></span>String string0 = jndiLocator0.convertJndiName(&quot;java:comp/env/,Q$].9e#OIL&quot;);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(true, jndiLocator0.isResourceRef());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;:~q_d8%F(x&lt;?h&quot;, string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;java:comp/env/,Q$].9e#OIL&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -304,7 +301,7 @@ org.jsecurity.jndi.JndiLocator
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -322,7 +319,7 @@ org.jsecurity.jndi.JndiLocator
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14084
+<li>process_communication_port: 5313
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

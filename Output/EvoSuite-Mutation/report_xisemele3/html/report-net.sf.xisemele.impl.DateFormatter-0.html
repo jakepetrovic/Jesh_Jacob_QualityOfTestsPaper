@@ -22,8 +22,8 @@ net.sf.xisemele.impl.DateFormatter
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.DateFormatter: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 681 statements, 279 tests.
-<li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 625 statements, 266 tests.
+<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 4/4 methods, 4/4 total goals
 <li>Mutation score: 50%
 </ul>
@@ -33,18 +33,18 @@ net.sf.xisemele.impl.DateFormatter
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>Class&lt;Date&gt; class0 = dateFormatter0.type();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, class0.isAnnotation());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(1, class0.getModifiers());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  dateFormatter0.parse(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  dateFormatter0.parse(&quot;X^1[x]_&lt;,pH|J&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: FormatterException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(FormatterException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \&quot;java.util.Date\&quot; para o valor \&quot;\&quot;
+<span class="nocode"><a name="8">  8: </a></span>   * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \&quot;java.util.Date\&quot; para o valor \&quot;X^1[x]_&lt;,pH|J\&quot;
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -54,7 +54,7 @@ net.sf.xisemele.impl.DateFormatter
 <span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
 <span class="nocode"><a name="3">  3: </a></span>String string0 = dateFormatter0.format(date0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1398769877280L, date0.getTime());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433854846090L, date0.getTime());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -123,7 +123,7 @@ net.sf.xisemele.impl.DateFormatter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3917768113174710678.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8252444774209989484.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -141,7 +141,7 @@ net.sf.xisemele.impl.DateFormatter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20813
+<li>process_communication_port: 2729
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

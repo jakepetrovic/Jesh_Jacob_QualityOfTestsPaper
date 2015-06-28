@@ -34,7 +34,7 @@ public class DateChooserEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       dateChooser0.addDateChooserListener((DateChooserListener) null);
-      assertEquals(false, dateChooser0.isPaintingTile());
+      assertEquals(false, dateChooser0.isCursorSet());
   }
 
   //Test case number: 1
@@ -58,7 +58,7 @@ public class DateChooserEvoSuiteTest {
   public void test2()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       dateChooser0.removeDateChooserListener();
-      assertEquals(0, dateChooser0.getY());
+      assertNull(dateChooser0.getName());
   }
 
   //Test case number: 3
@@ -72,7 +72,7 @@ public class DateChooserEvoSuiteTest {
   public void test3()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
       dateChooser0.monthChanged();
-      assertEquals(2, dateChooser0.countComponents());
+      assertEquals(0, dateChooser0.getDebugGraphicsOptions());
   }
 
   //Test case number: 4
@@ -93,11 +93,8 @@ public class DateChooserEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DateChooser dateChooser0 = new DateChooser();
-      assertNotNull(dateChooser0);
-      
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
-      dateChooser0.fireDateChanged((Object) "SwingLargeIconKey", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-      assertEquals(1398595145815L, gregorianCalendar0.getTimeInMillis());
-      assertEquals("java.util.GregorianCalendar[time=1398595145815,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=18,WEEK_OF_MONTH=5,DAY_OF_MONTH=27,DAY_OF_YEAR=117,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=4,AM_PM=0,HOUR=4,HOUR_OF_DAY=4,MINUTE=39,SECOND=5,MILLISECOND=815,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar(1, 0, 142);
+      dateChooser0.fireDateChanged((Object) "ToolTipText", (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+      assertEquals(true, dateChooser0.isOptimizedDrawingEnabled());
   }
 }

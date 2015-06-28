@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Date;
-import net.sf.xisemele.exception.FormatterException;
 import net.sf.xisemele.impl.DateFormatter;
 
 public class DateFormatterEvoSuiteTest {
@@ -24,7 +23,7 @@ public class DateFormatterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
       Class<Date> class0 = dateFormatter0.type();
-      assertEquals(false, class0.isArray());
+      assertEquals(false, class0.isAnonymousClass());
   }
 
   //Test case number: 1
@@ -34,15 +33,12 @@ public class DateFormatterEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DateFormatter dateFormatter0 = new DateFormatter("msS");
+      DateFormatter dateFormatter0 = new DateFormatter("");
       // Undeclared exception!
       try {
-        dateFormatter0.parse("msS");
-        fail("Expecting exception: FormatterException");
-      } catch(FormatterException e) {
-        /*
-         * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \"java.util.Date\" para o valor \"msS\"
-         */
+        dateFormatter0.parse((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
@@ -55,8 +51,9 @@ public class DateFormatterEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
-      Date date0 = new Date((-102L));
+      Date date0 = new Date();
       String string0 = dateFormatter0.format(date0);
-      assertEquals("", string0);
+      assertNotNull(string0);
+      assertEquals(1433850828726L, date0.getTime());
   }
 }

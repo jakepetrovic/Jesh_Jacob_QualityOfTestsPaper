@@ -21,10 +21,10 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "j2DO3U");
       DeployResultStatus deployResultStatus1 = deployResultMock0.getStatus();
-      assertSame(deployResultStatus0, deployResultStatus1);
+      assertEquals("Success", deployResultStatus1.toString());
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultMockEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "j2DO3U");
       String string0 = deployResultMock0.getStatusDetails();
-      assertNull(string0);
+      assertEquals("j2DO3U", string0);
   }
 }

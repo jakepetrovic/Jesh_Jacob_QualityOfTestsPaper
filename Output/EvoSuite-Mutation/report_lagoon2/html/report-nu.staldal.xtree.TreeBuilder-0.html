@@ -21,11 +21,11 @@ nu.staldal.xtree.TreeBuilder
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xtree.TreeBuilder: 87.50%</ul><ul>
-<li>7732 fitness evaluations, 156 generations, 64274 statements, 5130 tests.
+<ul><li>Target class: nu.staldal.xtree.TreeBuilder: 75.00%</ul><ul>
+<li>7680 fitness evaluations, 155 generations, 54718 statements, 4996 tests.
 <li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
-<li>Coverage: 28/34 branches, 21/21 methods, 42/48 total goals
-<li>Mutation score: 4%
+<li>Coverage: 22/34 branches, 21/21 methods, 36/48 total goals
+<li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,7 +33,7 @@ nu.staldal.xtree.TreeBuilder
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
 <span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[8];
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.ignorableWhitespace(charArray0, (int) 'n', (int) 'n');
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.ignorableWhitespace(charArray0, (int) ')', (int) ')');
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -43,45 +43,45 @@ nu.staldal.xtree.TreeBuilder
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.startDocument();
+<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.endPrefixMapping(&quot;&quot;);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.endPrefixMapping(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.skippedEntity(&quot;!8s96n&quot;);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.skippedEntity(&quot;$[dzmc&quot;);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="2">  2: </a></span>CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
+<span class="nocode"><a name="3">  3: </a></span>InputSource inputSource0 = new InputSource((Reader) charArrayReader0);
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  TreeBuilder.parseXML(inputSource0, true);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Content is not allowed in prolog.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  treeBuilder0.fatalError((SAXParseException) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="4">  4: </a></span>  treeBuilder0.endElement(&quot;LX,GGwOTY=,&quot;, &quot;LX,GGwOTY=,&quot;, &quot;$-/\&quot;h542*|^+h?&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(EmptyStackException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>InputSource inputSource0 = new InputSource();
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  TreeBuilder.parseXML(inputSource0, true);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
 <span class="nocode"><a name="2">  2: </a></span>treeBuilder0.warning((SAXParseException) null);
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  treeBuilder0.error((SAXParseException) null);
@@ -89,47 +89,24 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 10</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
 <span class="nocode"><a name="2">  2: </a></span>treeBuilder0.endDocument();
 </pre>
-<h3>Test case 11</h3>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;#&quot;, &quot;#&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
 <span class="nocode"><a name="3">  3: </a></span>  TreeBuilder.fileToInputSource(file0);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: FileNotFoundException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(FileNotFoundException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * file:///home/jeshkracht/#/#
+<span class="nocode"><a name="7">  7: </a></span>   * file:///home/jeshkracht
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 12</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.endElement(&quot;&quot;, &quot;&quot;, &quot;rj.;UFbj/&quot;);
-<span class="nocode"><a name="5">  5: </a></span>Element element0 = treeBuilder0.getTree();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, element0.numberOfAttributes());
-</pre>
-<h3>Test case 13</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;lNT0/T!za-&quot;, &quot;lNT0/T!za-&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  treeBuilder0.getTree();
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * All elements are not yet ended
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 14</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -141,94 +118,76 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  treeBuilder0.getTree();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * All elements are not yet ended
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.characters(charArray0, 0, 0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  treeBuilder0.processingInstruction(&quot;ryWn~~gP1&quot;, &quot;ryWn~~gP1&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(EmptyStackException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
+<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 2042);
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.setDocumentLocator((Locator) element0);
+<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="5">  5: </a></span>treeBuilder0.startElement(&quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
+</pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.characters(charArray0, 0, 1);
-<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  treeBuilder0.startElement(&quot;BeV@F:?`I8Pk76Hxit&quot;, &quot;BeV@F:?`I8Pk76Hxit&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(EmptyStackException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;!8s96n&quot;, &quot;!8s96n&quot;, &quot;!8s96n&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.startElement(&quot;J)ymOoz){\fMGD$&quot;, &quot;J)ymOoz){\fMGD$&quot;, &quot;J)ymOoz){\fMGD$&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.characters(charArray0, 0, 0);
-<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="5">  5: </a></span>treeBuilder0.startElement(&quot;BeV@F:?`I8Pk76Hxit&quot;, &quot;BeV@F:?`I8Pk76Hxit&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
+<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.startPrefixMapping(&quot;95=;Z\&quot;$JSsw]&quot;, &quot;95=;Z\&quot;$JSsw]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.startElement(&quot;!8s96n&quot;, &quot;!8s96n&quot;, &quot;!8s96n&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
+<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.startPrefixMapping(&quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;);
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startPrefixMapping(&quot;o9-[&gt;&gt;n[q9&quot;, &quot;o9-[&gt;&gt;n[q9&quot;);
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>attributes2Impl0.addAttribute(&quot;&quot;, &quot;Dk.(?(N-)4oo6q&amp;zAq:&quot;, &quot;&quot;, &quot;Dk.(?(N-)4oo6q&amp;zAq:&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, attributes2Impl0.getLength());
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.characters(charArray0, 0, 0);
+<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.characters(charArray0, 0, (int) '\u0000');
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributesImpl0.getLength());
-</pre>
-<h3>Test case 20</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder((URL) null);
-<span class="nocode"><a name="2">  2: </a></span>treeBuilder0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startPrefixMapping(&quot;lPsSZ'c/Y\&quot;zIbdX\&quot;N&quot;, &quot;gvh4F?$E|&quot;);
-</pre>
-<h3>Test case 21</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.characters(charArray0, 0, 0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  treeBuilder0.characters(charArray0, 1, (int) '&amp;');
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 22</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
-<span class="nocode"><a name="3">  3: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
-<span class="nocode"><a name="4">  4: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl((Locator) locatorImpl0);
-<span class="nocode"><a name="5">  5: </a></span>treeBuilder0.setDocumentLocator((Locator) locator2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>treeBuilder0.characters(charArray0, 0, 0);
-</pre>
-<h3>Test case 23</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
 <span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.processingInstruction(&quot;&quot;, &quot;&quot;);
-</pre>
-<h3>Test case 24</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeBuilder treeBuilder0 = new TreeBuilder();
-<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0);
-<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.setDocumentLocator((Locator) element0);
-<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="5">  5: </a></span>treeBuilder0.startElement(&quot;&quot;, &quot;lNT0/T!za-&quot;, &quot;lNT0/T!za-&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>treeBuilder0.processingInstruction(&quot;&quot;, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>treeBuilder0.startElement(&quot;_b#X]wQP &quot;, &quot;_b#X]wQP &quot;, &quot;_b#X]wQP &quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>treeBuilder0.processingInstruction(&quot;_b#X]wQP &quot;, &quot;_b#X]wQP &quot;);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -407,7 +366,7 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">		if (rootElement == null)</span>
 <span class="nocode"><a name="175">175: </a></span><span style="background-color: #ffffcc">			throw new IllegalStateException(&quot;No root element&quot;);</span>
 <span class="nocode"><a name="176">176: </a></span>
-<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">		return rootElement;</span>
+<span class="nocode"><a name="177">177: </a></span>		return rootElement;
 <span class="nocode"><a name="178">178: </a></span>	}
 <span class="nocode"><a name="179">179: </a></span>	
 <span class="nocode"><a name="180">180: </a></span>	
@@ -428,7 +387,7 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="195">195: </a></span>    {
 <span class="nocode"><a name="196">196: </a></span><span style="background-color: #ffffcc">        if ((textBuffer != null) &amp;&amp; (textBuffer.length() &gt; 0))</span>
 <span class="nocode"><a name="197">197: </a></span>        {
-<span class="nocode"><a name="198">198: </a></span><span style="background-color: #ffffcc">            Element parent = (Element)elementStack.peek();</span>
+<span class="nocode"><a name="198">198: </a></span>            Element parent = (Element)elementStack.peek();
 <span class="nocode"><a name="199">199: </a></span>			Node node = new Text(textBuffer.toString());
 <span class="nocode"><a name="200">200: </a></span>			node.setSystemId(textSystemId);
 <span class="nocode"><a name="201">201: </a></span>			node.setLine(textLine);
@@ -488,9 +447,9 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="255">255: </a></span>
 <span class="nocode"><a name="256">256: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; atts.getLength(); i++)</span>
 <span class="nocode"><a name="257">257: </a></span>        {
-<span class="nocode"><a name="258">258: </a></span><span style="background-color: #ffffcc">            el.addAttribute(atts.getURI(i), atts.getLocalName(i),</span>
+<span class="nocode"><a name="258">258: </a></span>            el.addAttribute(atts.getURI(i), atts.getLocalName(i),
 <span class="nocode"><a name="259">259: </a></span>            	atts.getType(i), atts.getValue(i));
-<span class="nocode"><a name="260">260: </a></span><span style="background-color: #ffffcc">            if (atts.getURI(i).equals(Node.XML_NS) &amp;&amp;</span>
+<span class="nocode"><a name="260">260: </a></span>            if (atts.getURI(i).equals(Node.XML_NS) &amp;&amp;
 <span class="nocode"><a name="261">261: </a></span>            		atts.getLocalName(i).equals(&quot;base&quot;))
 <span class="nocode"><a name="262">262: </a></span>            {
 <span class="nocode"><a name="263">263: </a></span>				try {
@@ -526,7 +485,7 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="293">293: </a></span>            +localName+','+qname+')');
 <span class="nocode"><a name="294">294: </a></span>
 <span class="nocode"><a name="295">295: </a></span><span style="background-color: #ffffcc">		elementStack.pop();</span>
-<span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="296">296: </a></span>    }
 <span class="nocode"><a name="297">297: </a></span>
 <span class="nocode"><a name="298">298: </a></span>    public void startPrefixMapping(String prefix, String uri)
 <span class="nocode"><a name="299">299: </a></span>        throws SAXException
@@ -564,9 +523,9 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="331">331: </a></span><span style="background-color: #ffffcc">        textBuffer.append(ch, start, length);</span>
 <span class="nocode"><a name="332">332: </a></span><span style="background-color: #ffffcc">		if (locator != null)</span>
 <span class="nocode"><a name="333">333: </a></span>		{
-<span class="nocode"><a name="334">334: </a></span><span style="background-color: #ffffcc">			textSystemId = locator.getSystemId();</span>
-<span class="nocode"><a name="335">335: </a></span><span style="background-color: #ffffcc">			textLine = locator.getLineNumber();</span>
-<span class="nocode"><a name="336">336: </a></span><span style="background-color: #ffffcc">			textColumn = locator.getColumnNumber();</span>
+<span class="nocode"><a name="334">334: </a></span>			textSystemId = locator.getSystemId();
+<span class="nocode"><a name="335">335: </a></span>			textLine = locator.getLineNumber();
+<span class="nocode"><a name="336">336: </a></span>			textColumn = locator.getColumnNumber();
 <span class="nocode"><a name="337">337: </a></span>		}
 <span class="nocode"><a name="338">338: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="339">339: </a></span>
@@ -587,9 +546,9 @@ nu.staldal.xtree.TreeBuilder
 <span class="nocode"><a name="354">354: </a></span><span style="background-color: #ffffcc">		Node node = new ProcessingInstruction(target, data);</span>
 <span class="nocode"><a name="355">355: </a></span><span style="background-color: #ffffcc">		if (locator != null)</span>
 <span class="nocode"><a name="356">356: </a></span>		{
-<span class="nocode"><a name="357">357: </a></span><span style="background-color: #ffffcc">			node.setSystemId(locator.getSystemId());</span>
-<span class="nocode"><a name="358">358: </a></span><span style="background-color: #ffffcc">			node.setLine(locator.getLineNumber());</span>
-<span class="nocode"><a name="359">359: </a></span><span style="background-color: #ffffcc">			node.setColumn(locator.getColumnNumber());</span>
+<span class="nocode"><a name="357">357: </a></span>			node.setSystemId(locator.getSystemId());
+<span class="nocode"><a name="358">358: </a></span>			node.setLine(locator.getLineNumber());
+<span class="nocode"><a name="359">359: </a></span>			node.setColumn(locator.getColumnNumber());
 <span class="nocode"><a name="360">360: </a></span>		}
 <span class="nocode"><a name="361">361: </a></span><span style="background-color: #ffffcc">		parent.addChild(node);</span>
 <span class="nocode"><a name="362">362: </a></span><span style="background-color: #ffffcc">    }</span>
@@ -623,7 +582,7 @@ nu.staldal.xtree.TreeBuilder
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -641,7 +600,7 @@ nu.staldal.xtree.TreeBuilder
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12957
+<li>process_communication_port: 9484
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

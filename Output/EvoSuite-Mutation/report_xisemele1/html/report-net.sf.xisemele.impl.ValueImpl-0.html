@@ -22,16 +22,16 @@ net.sf.xisemele.impl.ValueImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.ValueImpl: 68.18%</ul><ul>
-<li>12076 fitness evaluations, 243 generations, 37090 statements, 7993 tests.
+<li>12338 fitness evaluations, 248 generations, 37571 statements, 8057 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/4 branches, 30/42 methods, 30/44 total goals
-<li>Mutation score: 17%
+<li>Mutation score: 12%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;messages&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;|&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asShort();
@@ -41,7 +41,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;{\&quot;c:BjMuf5Aze&gt;Z&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;y#)3&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asByte();
@@ -51,13 +51,18 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;iuHR8W&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = ValueImpl.class;
-<span class="nocode"><a name="3">  3: </a></span>valueImpl0.asType((Class&lt;Boolean&gt;) class0);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = Float.class;
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  valueImpl0.asType((Class&lt;Byte&gt;) class0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;{\&quot;c:BjMuf5Aze&gt;Z&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asLong();
@@ -67,7 +72,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;-|um61oC9x;r&gt;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;bB&amp;^&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asDate();
@@ -77,17 +82,18 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot; C$DU*&quot;);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asInteger();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>String string0 = &quot;net.sf.xisemele.formattzr.not.confR\\ured&quot;;
+<span class="nocode"><a name="2">  2: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, string0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  valueImpl0.asInteger();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asString();
@@ -97,7 +103,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;net.sf.xlseme^e.formatter.not.configured&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asDouble();
@@ -107,7 +113,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;LR&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asFloat();
@@ -117,7 +123,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asBigDecimal();
@@ -127,7 +133,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;^:Wj:J&amp;sMz6gq&gt;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asBigInteger();
@@ -137,7 +143,7 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;net.sf.xisemee.formatter.noV.configured&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asBoolean();
@@ -147,35 +153,36 @@ net.sf.xisemele.impl.ValueImpl
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;{\&quot;c:BjMuf5Aze&gt;Z&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, (String) null);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = valueImpl0.toString();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;{\&quot;c:BjMuf5Aze&gt;Z&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(string0);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;^:Wj:J&amp;sMz6gq&gt;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>int int0 = valueImpl0.hashCode();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(715927383, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;z8D`pS;!%CXL&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;I,M{XK&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asDate(&quot;z8D`pS;!%CXL&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  valueImpl0.asDate(&quot;I,M{XK&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot; C$DU*&quot;);
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = valueImpl0.equals((Object) &quot;751&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = new BigDecimal(1.0);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = valueImpl0.equals((Object) bigDecimal0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;^:Wj:J&amp;sMz6gq&gt;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ValueImpl valueImpl0 = new ValueImpl((Factory) null, (FormatterProvider) null, &quot;bB&amp;^&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = valueImpl0.equals((Object) valueImpl0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
@@ -450,7 +457,7 @@ net.sf.xisemele.impl.ValueImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5217558598097753761.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7563696726542208450.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -468,7 +475,7 @@ net.sf.xisemele.impl.ValueImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19539
+<li>process_communication_port: 21305
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -21,38 +21,33 @@ net.sf.jniinchi.JniInchiOutputKey
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.jniinchi.JniInchiOutputKey: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 2273 statements, 281 tests.
+<ul><li>Target class: net.sf.jniinchi.JniInchiOutputKey: 88.89%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 2358 statements, 279 tests.
 <li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:00)
-<li>Coverage: 6/6 branches, 4/4 methods, 9/9 total goals
+<li>Coverage: 6/6 branches, 3/4 methods, 8/9 total goals
 <li>Mutation score: 62%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.NOT_ENOUGH_MEMORY;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, &quot;]e~z{:P]H3[Q)@H&quot;);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>String string0 = jniInchiOutputKey0.getKey();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;]e~z{:P]H3[Q)@H&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI;
-<span class="nocode"><a name="2">  2: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>INCHI_KEY iNCHI_KEY1 = jniInchiOutputKey0.getReturnStatus();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;INVALID_INCHI&quot;, iNCHI_KEY1.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertSame(iNCHI_KEY1, iNCHI_KEY0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(0, &quot;]e~z{:P]H3[Q)@H&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;]e~z{:P]H3[Q)@H&quot;, jniInchiOutputKey0.getKey());
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiOutputKey jniInchiOutputKey0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  jniInchiOutputKey0 = new JniInchiOutputKey(6, &quot;b*.Z4zk\&quot;tGX|&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  jniInchiOutputKey0 = new JniInchiOutputKey(1164, &quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -60,7 +55,7 @@ net.sf.jniinchi.JniInchiOutputKey
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiOutputKey jniInchiOutputKey0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -71,6 +66,12 @@ net.sf.jniinchi.JniInchiOutputKey
 <span class="nocode"><a name="7">  7: </a></span>   * Null InChIkey
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.OK;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(INCHI_KEY.OK, jniInchiOutputKey0.getReturnStatus());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -101,7 +102,7 @@ net.sf.jniinchi.JniInchiOutputKey
 <span class="nocode"><a name="26"> 26: </a></span>
 <span class="nocode"><a name="27"> 27: </a></span>	public JniInchiOutputKey(final int ret, final String key) throws JniInchiException {
 <span class="nocode"><a name="28"> 28: </a></span>		this(INCHI_KEY.getValue(ret), key);
-<span class="nocode"><a name="29"> 29: </a></span><span style="background-color: #ffffcc">	}</span>
+<span class="nocode"><a name="29"> 29: </a></span>	}
 <span class="nocode"><a name="30"> 30: </a></span>
 <span class="nocode"><a name="31"> 31: </a></span>	public JniInchiOutputKey(final INCHI_KEY retStatus, final String key) throws JniInchiException {
 <span class="nocode"><a name="32"> 32: </a></span><span style="background-color: #ffffcc">		if (retStatus == null) {</span>
@@ -132,7 +133,7 @@ net.sf.jniinchi.JniInchiOutputKey
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2966106683360006431.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7807429960142163071.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -150,7 +151,7 @@ net.sf.jniinchi.JniInchiOutputKey
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7456
+<li>process_communication_port: 3946
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

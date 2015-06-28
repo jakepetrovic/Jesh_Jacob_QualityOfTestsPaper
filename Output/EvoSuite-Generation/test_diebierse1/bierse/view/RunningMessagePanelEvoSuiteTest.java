@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import bierse.view.RunningMessagePanel;
-import java.awt.event.ActionEvent;
 
 public class RunningMessagePanelEvoSuiteTest {
 
@@ -21,12 +20,12 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", (-12));
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("6", (-799));
       assertNotNull(runningMessagePanel0);
       
       int int0 = runningMessagePanel0.getStringHeight();
+      assertEquals(12, runningMessagePanel0.getStringWidth());
       assertEquals(24, int0);
-      assertEquals(0, runningMessagePanel0.getStringWidth());
   }
 
   //Test case number: 1
@@ -36,12 +35,12 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel(">Ld'ENsi_S", 1035);
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("6", (-799));
       assertNotNull(runningMessagePanel0);
       
-      runningMessagePanel0.setSpeed(1014);
-      assertEquals(120, runningMessagePanel0.getStringWidth());
+      runningMessagePanel0.setSpeed(24);
       assertEquals(24, runningMessagePanel0.getStringHeight());
+      assertEquals(12, runningMessagePanel0.getStringWidth());
   }
 
   //Test case number: 2
@@ -51,43 +50,27 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("sn9q", 893);
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("l", 0);
       assertNotNull(runningMessagePanel0);
       
-      runningMessagePanel0.setMessage("m$");
-      assertEquals(24, runningMessagePanel0.getStringWidth());
+      runningMessagePanel0.setMessage("l");
+      assertEquals(12, runningMessagePanel0.getStringWidth());
       assertEquals(24, runningMessagePanel0.getStringHeight());
   }
 
   //Test case number: 3
   /*
-   * 1 covered goal:
-   * 1 bierse.view.RunningMessagePanel.getStringWidth()I: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel(">Ld'ENsi_S", 1035);
-      assertNotNull(runningMessagePanel0);
-      
-      int int0 = runningMessagePanel0.getStringWidth();
-      assertEquals(24, runningMessagePanel0.getStringHeight());
-      assertEquals(120, int0);
-  }
-
-  //Test case number: 4
-  /*
    * 2 covered goals:
-   * 1 bierse.view.RunningMessagePanel.actionPerformed(Ljava/awt/event/ActionEvent;)V: I26 Branch 3 IFGE L60 - true
+   * 1 bierse.view.RunningMessagePanel.getStringWidth()I: root-Branch
    * 2 bierse.view.RunningMessagePanel.<init>(Ljava/lang/String;I)V: I55 Branch 1 IFNONNULL L40 - true
    */
   @Test
-  public void test4()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("@G", (-1));
+  public void test3()  throws Throwable  {
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("A\"vC#99-C{", 30);
       assertNotNull(runningMessagePanel0);
       
-      ActionEvent actionEvent0 = new ActionEvent((Object) "page-down", 0, "@G", 536L, 0);
-      runningMessagePanel0.actionPerformed(actionEvent0);
+      int int0 = runningMessagePanel0.getStringWidth();
+      assertEquals(132, int0);
       assertEquals(24, runningMessagePanel0.getStringHeight());
-      assertEquals(24, runningMessagePanel0.getStringWidth());
   }
 }

@@ -25,10 +25,9 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("OL@;#(C>r]O`-yV");
       // Undeclared exception!
       try {
-        operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, "wE7-D^mKiz}#%@?h/[Q");
+        operationsImpl0.numberOfChildren((Node) null, ", E.7E");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -76,7 +75,7 @@ public class OperationsImplEvoSuiteTest {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       // Undeclared exception!
       try {
-        operationsImpl0.attributeValue((Node) null, "PI%-van[MU");
+        operationsImpl0.attributeValue((Node) null, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -90,10 +89,9 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.child((Node) iIOMetadataNode0, "");
+        operationsImpl0.child((Node) null, "e,d");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -107,7 +105,7 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("net.sf.xisemele.element.not.found");
       // Undeclared exception!
       try {
         operationsImpl0.children((Node) iIOMetadataNode0);
@@ -123,8 +121,8 @@ public class OperationsImplEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("_~tQt");
       List<Node> list0 = operationsImpl0.attributes((Node) iIOMetadataNode0);
       assertEquals(true, list0.isEmpty());
   }
@@ -137,7 +135,7 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("_~tQt");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, "");
       assertEquals(false, boolean0);
   }
@@ -157,20 +155,15 @@ public class OperationsImplEvoSuiteTest {
 
   //Test case number: 9
   /*
-   * 4 covered goals:
-   * 1 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I16 Branch 13 IFNULL L170 - false
-   * 2 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I20 Branch 14 IF_ICMPNE L170 - false
-   * 3 net.sf.xisemele.impl.OperationsImpl.<init>(Lnet/sf/xisemele/impl/OperationsHelper;)V: root-Branch
-   * 4 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I16 Branch 13 IFNULL L170 - true
+   * 2 covered goals:
+   * 1 net.sf.xisemele.impl.OperationsImpl.path(Lorg/w3c/dom/Node;)Ljava/lang/String;: I16 Branch 13 IFNULL L170 - true
+   * 2 net.sf.xisemele.impl.OperationsImpl.<init>(Lnet/sf/xisemele/impl/OperationsHelper;)V: root-Branch
    */
   @Test
   public void test9()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("_~tQt");
-      IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.cloneNode(false);
-      IIOMetadataNode iIOMetadataNode2 = (IIOMetadataNode)iIOMetadataNode0.appendChild((Node) iIOMetadataNode1);
-      String string0 = operationsImpl0.path((Node) iIOMetadataNode2);
-      assertNotNull(string0);
-      assertEquals("_~tQt/_~tQt", string0);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
+      String string0 = operationsImpl0.path((Node) iIOMetadataNode0);
+      assertEquals("", string0);
   }
 }

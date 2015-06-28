@@ -56,9 +56,10 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ZERO;
+      BigDecimal bigDecimal0 = BigDecimal.TEN;
       BigDecimal bigDecimal1 = nFeCalculatorImpl0.internalCalculate(bigDecimal0, bigDecimal0);
-      assertSame(bigDecimal0, bigDecimal1);
+      assertNotNull(bigDecimal1);
+      assertEquals(1, bigDecimal1.intValueExact());
   }
 
   //Test case number: 3
@@ -70,9 +71,9 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ONE;
+      BigDecimal bigDecimal0 = BigDecimal.TEN;
       nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
-      assertEquals(1, bigDecimal0.signum());
+      assertEquals(10, bigDecimal0.intValue());
   }
 
   //Test case number: 4
@@ -104,7 +105,7 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ZERO;
+      BigDecimal bigDecimal0 = BigDecimal.TEN;
       // Undeclared exception!
       try {
         nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);

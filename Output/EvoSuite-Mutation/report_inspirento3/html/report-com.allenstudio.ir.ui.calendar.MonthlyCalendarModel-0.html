@@ -22,7 +22,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendarModel
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.calendar.MonthlyCalendarModel: 71.43%</ul><ul>
-<li>39118 fitness evaluations, 784 generations, 149476 statements, 24247 tests.
+<li>38122 fitness evaluations, 764 generations, 90199 statements, 23757 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/4 branches, 5/5 methods, 5/7 total goals
 <li>Mutation score: 18%
@@ -34,8 +34,8 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendarModel
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendarModel0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>monthlyCalendarModel0.setSelectedDate(16);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(16, monthlyCalendarModel0.getSelectedDate());
+<span class="nocode"><a name="4">  4: </a></span>monthlyCalendarModel0.setSelectedDate((-112));
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-112, monthlyCalendarModel0.getSelectedDate());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -48,13 +48,20 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendarModel
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = monthlyCalendarModel0.isMarked(16);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  monthlyCalendarModel0.isMarked(0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * -1
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
-<span class="nocode"><a name="2">  2: </a></span>monthlyCalendarModel0.setMarked(16, false);
+<span class="nocode"><a name="2">  2: </a></span>monthlyCalendarModel0.setMarked(24, true);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, monthlyCalendarModel0.getSelectedDate());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -124,7 +131,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendarModel
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2170945897173101075.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5277402201953676720.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -142,7 +149,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendarModel
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13509
+<li>process_communication_port: 2079
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

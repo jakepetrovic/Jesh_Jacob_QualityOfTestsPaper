@@ -15,59 +15,52 @@ public class Sha384HashEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha384Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   * 1 org.jsecurity.crypto.hash.Sha384Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha384Hash;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha384Hash.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "86f052a338cb94e695b6f6aeba3da1c7dc418f2b093419cfde5d57fd025e6cd8cdad702d1435f92cd4dd04e4756a9fb1", (Object) null, (-1624));
-      assertEquals("SHA-384", sha384Hash0.getAlgorithmName());
+      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("SHA-384");
+      assertEquals("SHA3AAA=", sha384Hash0.toBase64());
   }
 
   //Test case number: 1
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha384Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha384Hash;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha384Hash.<init>()V: root-Branch
+   * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha384Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("[3H}v$?v{*tVy~ft");
-      assertEquals("dc7befb55c9f00", sha384Hash0.toHex());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "UTF-8");
+      assertEquals("yrZQ9NCRVOcfAB1mtzjinEi2XP1B2g3NkXaQ59S0R8Oh8HevZUR6dq960k5Y29Gw", sha384Hash0.toBase64());
   }
 
   //Test case number: 2
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;)V: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "dc7befb55c9f00");
-      assertEquals("bviLuc0wFr9Bm5M4KKJy/6XvLVsUUk4+LoKYca6M67xOfoPA2bQP2XA8B2YTOpNQ", sha384Hash0.toBase64());
-  }
-
-  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha384Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha384Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha384Hash.<init>()V: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromHexString("");
-      assertEquals("", sha384Hash0.toBase64());
+  public void test2()  throws Throwable  {
+      // Undeclared exception!
+      try {
+        Sha384Hash.fromHexString((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
-  //Test case number: 4
+  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha384Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "", (Object) "SHA-384");
-      assertEquals("SHA-384", sha384Hash0.getAlgorithmName());
+  public void test3()  throws Throwable  {
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384", (Object) "SHA3AAA=");
+      assertEquals("b566761e5938e7e9ba6c4827c9cd66908789a8c3981f93d532a2959a97db087ba1d8bb30026cc7f20a072efb50b032ff", sha384Hash0.toHex());
   }
 }

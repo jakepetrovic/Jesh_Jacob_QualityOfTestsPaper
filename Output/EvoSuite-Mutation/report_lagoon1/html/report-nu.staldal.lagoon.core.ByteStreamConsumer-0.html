@@ -22,8 +22,8 @@ nu.staldal.lagoon.core.ByteStreamConsumer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.ByteStreamConsumer: 100.00%</ul><ul>
-<li>2200 fitness evaluations, 45 generations, 9009 statements, 1544 tests.
-<li>Time: 0:00:18(Search: 0:00:17, minimization: 0:00:00)
+<li>1800 fitness evaluations, 37 generations, 8027 statements, 1345 tests.
+<li>Time: 0:00:14(Search: 0:00:13, minimization: 0:00:00)
 <li>Coverage: 6/6 branches, 6/6 methods, 9/9 total goals
 <li>Mutation score: 0%
 </ul>
@@ -33,35 +33,35 @@ nu.staldal.lagoon.core.ByteStreamConsumer
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
 <span class="nocode"><a name="2">  2: </a></span>xMLParse0.doBeforeBuild();
-<span class="nocode"><a name="3">  3: </a></span>assertNull(xMLParse0.getEntryName());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
-<span class="nocode"><a name="2">  2: </a></span>XMLFormatter xMLFormatter0 = new XMLFormatter();
-<span class="nocode"><a name="3">  3: </a></span>xMLParse0.setNext((ByteStreamProducer) xMLFormatter0);
-<span class="nocode"><a name="4">  4: </a></span>xMLParse0.doDestroy();
-<span class="nocode"><a name="5">  5: </a></span>assertNull(xMLParse0.getEntryName());
+<span class="nocode"><a name="2">  2: </a></span>FileRead fileRead0 = new FileRead();
+<span class="nocode"><a name="3">  3: </a></span>xMLParse0.setNext((ByteStreamProducer) fileRead0);
+<span class="nocode"><a name="4">  4: </a></span>xMLParse0.doBeforeBuild();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xMLParse0.getPosition());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
 <span class="nocode"><a name="2">  2: </a></span>xMLParse0.doDestroy();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xMLParse0.getEntryName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
 <span class="nocode"><a name="2">  2: </a></span>XMLFormatter xMLFormatter0 = new XMLFormatter();
 <span class="nocode"><a name="3">  3: </a></span>xMLParse0.setNext((ByteStreamProducer) xMLFormatter0);
-<span class="nocode"><a name="4">  4: </a></span>xMLParse0.doBeforeBuild();
-<span class="nocode"><a name="5">  5: </a></span>assertNull(xMLParse0.getEntryName());
+<span class="nocode"><a name="4">  4: </a></span>xMLParse0.doDestroy();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xMLParse0.getPosition());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
 <span class="nocode"><a name="2">  2: </a></span>xMLParse0.doAfterBuild();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
+<span class="nocode"><a name="3">  3: </a></span>assertNull(xMLParse0.getEntryName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -182,7 +182,7 @@ nu.staldal.lagoon.core.ByteStreamConsumer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -200,7 +200,7 @@ nu.staldal.lagoon.core.ByteStreamConsumer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15152
+<li>process_communication_port: 16781
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -22,7 +22,7 @@ org.saxpath.Axis
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.saxpath.Axis: 100.00%</ul><ul>
-<li>1400 fitness evaluations, 29 generations, 26605 statements, 1138 tests.
+<li>1450 fitness evaluations, 30 generations, 24428 statements, 1101 tests.
 <li>Time: 0:00:20(Search: 0:00:16, minimization: 0:00:04)
 <li>Coverage: 54/54 branches, 3/3 methods, 55/55 total goals
 <li>Mutation score: 92%
@@ -42,21 +42,20 @@ org.saxpath.Axis
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(5);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;following-sibling&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(1907);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(2);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;descendant&quot;, string0);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;descendant&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(3);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;parent&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;parent&quot;, string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -66,60 +65,61 @@ org.saxpath.Axis
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(6);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;preceding-sibling&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(5);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;following-sibling&quot;, string0);
 </pre>
 <h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(6);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;preceding-sibling&quot;, string0);
+</pre>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(7);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;following&quot;, string0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(8);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;preceding&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;preceding&quot;, string0);
 </pre>
-<h3>Test case 10</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(9);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;attribute&quot;, string0);
 </pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(10);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;namespace&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-</pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(11);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(10);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;self&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;namespace&quot;, string0);
 </pre>
 <h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(11);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;self&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+</pre>
+<h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(12);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;descendant-or-self&quot;, string0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(13);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ancestor-or-self&quot;, string0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Axis.lookup(0);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
-</pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>int int0 = Axis.lookup(&quot;reEwf$)clZ%[&quot;);
+<span class="nocode"><a name="1">  1: </a></span>int int0 = Axis.lookup(&quot;8~7`_@X/&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 17</h3>
@@ -193,7 +193,7 @@ org.saxpath.Axis
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3669150530819866557.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7592076675281764620.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -211,7 +211,7 @@ org.saxpath.Axis
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2684
+<li>process_communication_port: 16576
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

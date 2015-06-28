@@ -16,16 +16,57 @@ public class StringUtilsEvoSuiteTest {
 
   //Test case number: 0
   /*
+   * 13 covered goals:
+   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CC)[Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCC)[Ljava/lang/String;: root-Branch
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;)[Ljava/lang/String;: root-Branch
+   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;C)[Ljava/lang/String;: root-Branch
+   * 5 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - false
+   * 6 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - true
+   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - true
+   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - true
+   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - false
+   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - true
+   * 11 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - true
+   * 12 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - true
+   * 13 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - false
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      String[] stringArray0 = StringUtils.split("$T&jg^ut*");
+      assertNotNull(stringArray0);
+  }
+
+  //Test case number: 1
+  /*
    * 1 covered goal:
    * 1 org.jsecurity.util.StringUtils.<init>()V: root-Branch
    */
   @Test
-  public void test0()  throws Throwable  {
+  public void test1()  throws Throwable  {
       StringUtils stringUtils0 = new StringUtils();
       assertNotNull(stringUtils0);
   }
 
-  //Test case number: 1
+  //Test case number: 2
+  /*
+   * 8 covered goals:
+   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I3 Branch 12 IFNONNULL L205 - true
+   * 3 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I26 Branch 13 IFEQ L210 - true
+   * 4 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I26 Branch 13 IFEQ L210 - false
+   * 5 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I35 Branch 14 IFEQ L212 - false
+   * 6 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I44 Branch 15 IFEQ L215 - false
+   * 7 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I47 Branch 16 IFLE L215 - false
+   * 8 org.jsecurity.util.StringUtils.toStringArray(Ljava/util/Collection;)[Ljava/lang/String;: I3 Branch 17 IFNONNULL L234 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      String[] stringArray0 = StringUtils.tokenizeToStringArray("] to form a key/value pair.", "");
+      assertNotNull(stringArray0);
+  }
+
+  //Test case number: 3
   /*
    * 5 covered goals:
    * 1 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I4 Branch 1 IFNE L72 - true
@@ -35,62 +76,62 @@ public class StringUtilsEvoSuiteTest {
    * 5 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I6 Branch 5 IFLE L100 - false
    */
   @Test
-  public void test1()  throws Throwable  {
-      boolean boolean0 = StringUtils.hasText("No valid key could be found in line [");
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 2
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I4 Branch 1 IFNE L72 - false
-   * 2 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I6 Branch 5 IFLE L100 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      boolean boolean0 = StringUtils.hasText("");
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 3
-  /*
-   * 6 covered goals:
-   * 1 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I21 Branch 2 IF_ICMPGE L76 - true
-   * 2 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I28 Branch 3 IFNE L77 - true
-   * 3 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I4 Branch 1 IFNE L72 - true
-   * 4 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I21 Branch 2 IF_ICMPGE L76 - false
-   * 5 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I3 Branch 4 IFNULL L100 - false
-   * 6 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I6 Branch 5 IFLE L100 - false
-   */
-  @Test
   public void test3()  throws Throwable  {
-      boolean boolean0 = StringUtils.hasText(" ");
-      assertEquals(false, boolean0);
+      boolean boolean0 = StringUtils.hasText("] to form a key/value pair.");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I3 Branch 4 IFNULL L100 - true
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I4 Branch 1 IFNE L72 - false
+   * 2 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I3 Branch 4 IFNULL L100 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      boolean boolean0 = StringUtils.hasLength((String) null);
+      boolean boolean0 = StringUtils.hasText((String) null);
       assertEquals(false, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I3 Branch 6 IFNULL L116 - true
+   * 5 covered goals:
+   * 1 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I21 Branch 2 IF_ICMPGE L76 - true
+   * 2 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I28 Branch 3 IFNE L77 - true
+   * 3 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I4 Branch 1 IFNE L72 - true
+   * 4 org.jsecurity.util.StringUtils.hasText(Ljava/lang/String;)Z: I21 Branch 2 IF_ICMPGE L76 - false
+   * 5 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I6 Branch 5 IFLE L100 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      boolean boolean0 = StringUtils.startsWithIgnoreCase((String) null, "");
+      boolean boolean0 = StringUtils.hasText(" ");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 6
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I6 Branch 5 IFLE L100 - true
+   * 2 org.jsecurity.util.StringUtils.hasLength(Ljava/lang/String;)Z: I3 Branch 4 IFNULL L100 - false
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      boolean boolean0 = StringUtils.hasLength("");
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 7
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I3 Branch 6 IFNULL L116 - true
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      boolean boolean0 = StringUtils.startsWithIgnoreCase((String) null, (String) null);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 8
   /*
    * 3 covered goals:
    * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I3 Branch 6 IFNULL L116 - false
@@ -98,102 +139,106 @@ public class StringUtilsEvoSuiteTest {
    * 3 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I16 Branch 8 IFLE L119 - false
    */
   @Test
-  public void test6()  throws Throwable  {
-      boolean boolean0 = StringUtils.startsWithIgnoreCase("which the split location could be determined.", "");
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 7
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I5 Branch 7 IFNONNULL L116 - false
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      boolean boolean0 = StringUtils.startsWithIgnoreCase("No valid key could be found in line [", (String) null);
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 8
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I16 Branch 8 IFLE L119 - true
-   * 2 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I27 Branch 9 IF_ICMPGE L122 - true
-   * 3 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I3 Branch 6 IFNULL L116 - false
-   * 4 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I5 Branch 7 IFNONNULL L116 - true
-   */
-  @Test
   public void test8()  throws Throwable  {
-      boolean boolean0 = StringUtils.startsWithIgnoreCase("No valid key could be found in line [", "-$Z`Je'E?<qu&*zC");
-      assertEquals(false, boolean0);
+      boolean boolean0 = StringUtils.startsWithIgnoreCase("<}y=gD[)ba>", "<}y=gD[)ba>");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - true
+   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I5 Branch 7 IFNONNULL L116 - false
    */
   @Test
   public void test9()  throws Throwable  {
-      String string0 = StringUtils.clean((String) null);
-      assertNull(string0);
+      boolean boolean0 = StringUtils.startsWithIgnoreCase("", (String) null);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 10
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - false
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - false
-   * 3 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - false
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I16 Branch 8 IFLE L119 - true
+   * 2 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I27 Branch 9 IF_ICMPGE L122 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("", '[', '\\', 'v', true, true);
-      assertNull(stringArray0);
+      boolean boolean0 = StringUtils.startsWithIgnoreCase("DUDlE$G8d5!d\u0005", "2LBn1g{(zUdxe");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 11
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I3 Branch 12 IFNONNULL L205 - false
-   * 2 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;: root-Branch
+   * 4 covered goals:
+   * 1 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I27 Branch 9 IF_ICMPGE L122 - false
+   * 2 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I3 Branch 6 IFNULL L116 - false
+   * 3 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I5 Branch 7 IFNONNULL L116 - true
+   * 4 org.jsecurity.util.StringUtils.startsWithIgnoreCase(Ljava/lang/String;Ljava/lang/String;)Z: I16 Branch 8 IFLE L119 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      String[] stringArray0 = StringUtils.tokenizeToStringArray((String) null, (String) null);
-      assertNull(stringArray0);
+      boolean boolean0 = StringUtils.startsWithIgnoreCase("v", "=QkSxsff;7QwT");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 12
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I26 Branch 13 IFEQ L210 - false
-   * 2 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I35 Branch 14 IFEQ L212 - false
-   * 3 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I44 Branch 15 IFEQ L215 - true
-   * 4 org.jsecurity.util.StringUtils.toStringArray(Ljava/util/Collection;)[Ljava/lang/String;: I3 Branch 17 IFNONNULL L234 - true
-   * 5 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I3 Branch 12 IFNONNULL L205 - true
-   * 6 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I26 Branch 13 IFEQ L210 - true
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - true
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - false
    */
   @Test
   public void test12()  throws Throwable  {
-      String[] stringArray0 = StringUtils.tokenizeToStringArray("No valid key could be found in line [", "MU6KKeB%nTM", true, false);
-      assertNotNull(stringArray0);
+      String[] stringArray0 = StringUtils.split((String) null, 'w', 'w', 'w');
+      assertNull(stringArray0);
   }
 
   //Test case number: 13
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I35 Branch 14 IFEQ L212 - true
-   * 2 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I44 Branch 15 IFEQ L215 - false
-   * 3 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I47 Branch 16 IFLE L215 - false
+   * 6 covered goals:
+   * 1 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - false
+   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - true
+   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - false
+   * 4 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I38 Branch 20 IF_ICMPEQ L249 - true
+   * 5 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I88 Branch 21 IFLE L259 - true
+   * 6 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I105 Branch 22 IFNONNULL L265 - false
    */
   @Test
   public void test13()  throws Throwable  {
-      String[] stringArray0 = StringUtils.tokenizeToStringArray("]", "", false, true);
-      assertNotNull(stringArray0);
+      try {
+        StringUtils.splitKeyValue("=QkSxsff;7QwTv");
+        fail("Expecting exception: ParseException");
+      } catch(ParseException e) {
+        /*
+         * No valid key could be found in line [=QkSxsff;7QwTv] to form a key/value pair.
+         */
+      }
   }
 
   //Test case number: 14
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I3 Branch 12 IFNONNULL L205 - false
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      String[] stringArray0 = StringUtils.tokenizeToStringArray((String) null, (String) null, false, false);
+      assertNull(stringArray0);
+  }
+
+  //Test case number: 15
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I35 Branch 14 IFEQ L212 - true
+   * 2 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I44 Branch 15 IFEQ L215 - true
+   */
+  @Test
+  public void test15()  throws Throwable  {
+      String[] stringArray0 = StringUtils.tokenizeToStringArray("<}y=gD[)ba>", "wUjMION:8W", false, false);
+      assertNotNull(stringArray0);
+  }
+
+  //Test case number: 16
   /*
    * 8 covered goals:
    * 1 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I47 Branch 16 IFLE L215 - true
@@ -206,211 +251,168 @@ public class StringUtilsEvoSuiteTest {
    * 8 org.jsecurity.util.StringUtils.tokenizeToStringArray(Ljava/lang/String;Ljava/lang/String;ZZ)[Ljava/lang/String;: I44 Branch 15 IFEQ L215 - false
    */
   @Test
-  public void test14()  throws Throwable  {
+  public void test16()  throws Throwable  {
       String[] stringArray0 = StringUtils.tokenizeToStringArray(" ", "");
       assertNotNull(stringArray0);
-  }
-
-  //Test case number: 15
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.toStringArray(Ljava/util/Collection;)[Ljava/lang/String;: I3 Branch 17 IFNONNULL L234 - false
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      String[] stringArray0 = StringUtils.toStringArray((Collection) null);
-      assertNull(stringArray0);
-  }
-
-  //Test case number: 16
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - true
-   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - false
-   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I38 Branch 20 IF_ICMPEQ L249 - false
-   * 4 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - true
-   */
-  @Test
-  public void test16()  throws Throwable  {
-      try {
-        StringUtils.splitKeyValue("No");
-        fail("Expecting exception: ParseException");
-      } catch(ParseException e) {
-        /*
-         * Unable to determine Key/Value pair from line [No].  There is no space from which the split location could be determined.
-         */
-      }
   }
 
   //Test case number: 17
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - false
+   * 1 org.jsecurity.util.StringUtils.toStringArray(Ljava/util/Collection;)[Ljava/lang/String;: I3 Branch 17 IFNONNULL L234 - false
    */
   @Test
   public void test17()  throws Throwable  {
-      String[] stringArray0 = StringUtils.splitKeyValue("");
+      String[] stringArray0 = StringUtils.toStringArray((Collection) null);
       assertNull(stringArray0);
   }
 
   //Test case number: 18
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I38 Branch 20 IF_ICMPEQ L249 - true
-   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I105 Branch 22 IFNONNULL L265 - false
-   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - false
-   * 4 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I88 Branch 21 IFLE L259 - true
-   * 5 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - false
+   * 2 covered goals:
+   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - false
+   * 2 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - false
    */
   @Test
   public void test18()  throws Throwable  {
-      try {
-        StringUtils.splitKeyValue("=ndRUi\"8=");
-        fail("Expecting exception: ParseException");
-      } catch(ParseException e) {
-        /*
-         * No valid key could be found in line [=ndRUi\"8=] to form a key/value pair.
-         */
-      }
+      String[] stringArray0 = StringUtils.splitKeyValue(" ");
+      assertNull(stringArray0);
   }
 
   //Test case number: 19
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I88 Branch 21 IFLE L259 - false
-   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - true
-   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - true
-   * 4 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I105 Branch 22 IFNONNULL L265 - true
-   * 5 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I132 Branch 23 IFNONNULL L269 - true
+   * 4 covered goals:
+   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - true
+   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I105 Branch 22 IFNONNULL L265 - true
+   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I132 Branch 23 IFNONNULL L269 - true
+   * 4 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I88 Branch 21 IFLE L259 - true
    */
   @Test
   public void test19()  throws Throwable  {
-      String[] stringArray0 = StringUtils.splitKeyValue("{s. =-div[~A/WOD)");
+      String[] stringArray0 = StringUtils.splitKeyValue("85h\";-(Pl)t:\" M<");
       assertNotNull(stringArray0);
   }
 
   //Test case number: 20
   /*
-   * 18 covered goals:
-   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - false
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - true
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - false
-   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I58 Branch 28 IF_ICMPLE L330 - false
-   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I65 Branch 29 IF_ICMPNE L330 - true
-   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - true
-   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - false
-   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - false
-   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - false
-   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - false
-   * 11 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - false
-   * 12 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - true
-   * 13 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - true
-   * 14 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - true
-   * 15 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - false
-   * 16 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - true
-   * 17 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - true
-   * 18 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - true
+   * 3 covered goals:
+   * 1 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I38 Branch 20 IF_ICMPEQ L249 - false
+   * 2 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I8 Branch 18 IFNONNULL L242 - true
+   * 3 org.jsecurity.util.StringUtils.splitKeyValue(Ljava/lang/String;)[Ljava/lang/String;: I25 Branch 19 IF_ICMPEQ L246 - false
    */
   @Test
   public void test20()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("No valid key could be found in line [", 'E', 'n', 'c', true, false);
-      assertNotNull(stringArray0);
+      try {
+        StringUtils.splitKeyValue("'rg-");
+        fail("Expecting exception: ParseException");
+      } catch(ParseException e) {
+        /*
+         * Unable to determine Key/Value pair from line ['rg-].  There is no space from which the split location could be determined.
+         */
+      }
   }
 
   //Test case number: 21
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I58 Branch 28 IF_ICMPLE L330 - true
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - true
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - false
+   * 11 covered goals:
+   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - false
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I58 Branch 28 IF_ICMPLE L330 - false
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I65 Branch 29 IF_ICMPNE L330 - true
    * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - true
-   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCC)[Ljava/lang/String;: root-Branch
-   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - false
+   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - false
+   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - false
+   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - false
+   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - false
+   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - true
+   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - false
+   * 11 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - false
    */
   @Test
   public void test21()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("=ndRUi\"8=", ' ', '=', 'x');
+      String[] stringArray0 = StringUtils.split("].  There is no space from ", 's', 's', 'p', true, true);
       assertNotNull(stringArray0);
   }
 
   //Test case number: 22
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - true
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - false
+   * 3 covered goals:
+   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I58 Branch 28 IF_ICMPLE L330 - true
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - true
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - true
    */
   @Test
   public void test22()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("No valid key could be found in line [", 'U', '2', 'n', true, false);
+      String[] stringArray0 = StringUtils.split("] to form a key/value pair.", '', '.', 'f');
       assertNotNull(stringArray0);
   }
 
   //Test case number: 23
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - true
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - false
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - false
+   * 1 covered goal:
+   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - true
    */
   @Test
   public void test23()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("bL=L:BR`BV6", 'j', 'j', ':');
+      String[] stringArray0 = StringUtils.split("No corresponding value could be found in line [", '0', '0', ' ', false, true);
       assertNotNull(stringArray0);
   }
 
   //Test case number: 24
   /*
-   * 4 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - false
    * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I133 Branch 36 IFNE L348 - false
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I142 Branch 37 IFEQ L350 - true
-   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - true
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I142 Branch 37 IFEQ L350 - false
+   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CC)[Ljava/lang/String;: root-Branch
+   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;C)[Ljava/lang/String;: root-Branch
    */
   @Test
   public void test24()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("Tf|3,J!,", '|', 's', '.', false, false);
+      String[] stringArray0 = StringUtils.split("] to form a key/value pair.", '.');
       assertNotNull(stringArray0);
   }
 
   //Test case number: 25
   /*
-   * 6 covered goals:
+   * 12 covered goals:
    * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I133 Branch 36 IFNE L348 - true
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - false
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - true
-   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - false
-   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - true
-   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CC)[Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCC)[Ljava/lang/String;: root-Branch
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - false
+   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I52 Branch 27 IFEQ L330 - false
+   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I58 Branch 28 IF_ICMPLE L330 - false
+   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I65 Branch 29 IF_ICMPNE L330 - true
+   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I83 Branch 30 IFNE L338 - true
+   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I93 Branch 31 IFEQ L339 - true
+   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - false
+   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I109 Branch 33 IFNE L344 - false
+   * 11 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I119 Branch 34 IFEQ L345 - true
+   * 12 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - false
    */
   @Test
   public void test25()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("8{.S/XUQ-aRnDJ-J", 'D', 'Q');
+      String[] stringArray0 = StringUtils.split("] to form a key/value pair.", 'm', 'i', 't');
       assertNotNull(stringArray0);
   }
 
   //Test case number: 26
   /*
-   * 16 covered goals:
-   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I142 Branch 37 IFEQ L350 - false
-   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CC)[Ljava/lang/String;: root-Branch
-   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCC)[Ljava/lang/String;: root-Branch
-   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;)[Ljava/lang/String;: root-Branch
-   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;C)[Ljava/lang/String;: root-Branch
-   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - true
-   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - true
-   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - false
-   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - true
-   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - true
-   * 11 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - true
-   * 12 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - false
-   * 13 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I133 Branch 36 IFNE L348 - false
-   * 14 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - false
-   * 15 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - false
-   * 16 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - true
+   * 12 covered goals:
+   * 1 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I142 Branch 37 IFEQ L350 - true
+   * 2 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I181 Branch 38 IFEQ L360 - true
+   * 3 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I8 Branch 24 IFNONNULL L316 - true
+   * 4 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - true
+   * 5 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I37 Branch 25 IF_ICMPGE L324 - false
+   * 6 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I48 Branch 26 IF_ICMPNE L327 - true
+   * 7 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I105 Branch 32 IF_ICMPNE L343 - true
+   * 8 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - true
+   * 9 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I131 Branch 35 IF_ICMPNE L348 - false
+   * 10 org.jsecurity.util.StringUtils.split(Ljava/lang/String;CCCZZ)[Ljava/lang/String;: I133 Branch 36 IFNE L348 - false
+   * 11 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I7 Branch 10 IFNULL L149 - false
+   * 12 org.jsecurity.util.StringUtils.clean(Ljava/lang/String;)Ljava/lang/String;: I18 Branch 11 IFLE L151 - true
    */
   @Test
   public void test26()  throws Throwable  {
-      String[] stringArray0 = StringUtils.split("7jzhL+,mNETp");
+      String[] stringArray0 = StringUtils.split("No corresponding value could be found in line [", 'd', '<', '7', false, false);
       assertNotNull(stringArray0);
   }
 }

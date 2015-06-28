@@ -22,51 +22,58 @@ nu.staldal.xtree.Text
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.Text: 100.00%</ul><ul>
-<li>2200 fitness evaluations, 45 generations, 26225 statements, 1652 tests.
-<li>Time: 0:00:15(Search: 0:00:14, minimization: 0:00:00)
+<li>7150 fitness evaluations, 144 generations, 91741 statements, 4884 tests.
+<li>Time: 0:00:33(Search: 0:00:33, minimization: 0:00:00)
 <li>Coverage: 12/12 branches, 7/7 methods, 16/16 total goals
-<li>Mutation score: 48%
+<li>Mutation score: 41%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;Attribute &quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = text0.getValue();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Attribute &quot;, string0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = text0.asCharArray();
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(charArray0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>Text text1 = new Text(text0.charArrayCache, (int) '\u0000', 0, false);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(text1);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, text0.isWhitespaceNode());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;&quot;, text0.getValue());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="3">  3: </a></span>text0.toSAX((ContentHandler) xMLFilterImpl0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, text0.isWhitespaceNode());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, text0.getValue());
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 1, 1, true);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>String string0 = text0.getValue();
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;\u0000&quot;, string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 1, 1, false);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;HnP*I&quot;);
+<span class="nocode"><a name="2">  2: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+<span class="nocode"><a name="3">  3: </a></span>text0.toSAX((ContentHandler) xMLReaderAdapter0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;HnP*I&quot;, text0.getValue());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 1, true);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = text0.isWhitespaceNode();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 0, false);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, text0.getValue());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 0, 0, true);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, text0.getValue());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = text0.asCharArray();
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(charArray0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>Text text1 = new Text(charArray0, 0, 0, true);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, text0.isWhitespaceNode());
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(text1);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;&quot;, text0.getValue());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -80,19 +87,20 @@ nu.staldal.xtree.Text
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = text0.isWhitespaceNode();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[2];
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(charArray0, 1, 1, true);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(text0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = text0.isWhitespaceNode();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;\u0000&quot;, text0.getValue());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="2">  2: </a></span>charArray0[0] = ':';
-<span class="nocode"><a name="3">  3: </a></span>Text text0 = new Text(charArray0, 0, 1, false);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(text0);
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = text0.isWhitespaceNode();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;HnP*I&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = text0.isWhitespaceNode();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;HnP*I&quot;, text0.getValue());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -228,7 +236,7 @@ nu.staldal.xtree.Text
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -246,7 +254,7 @@ nu.staldal.xtree.Text
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9517
+<li>process_communication_port: 7785
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

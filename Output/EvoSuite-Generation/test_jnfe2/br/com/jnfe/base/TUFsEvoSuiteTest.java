@@ -26,7 +26,7 @@ public class TUFsEvoSuiteTest {
       TUFs tUFs0 = new TUFs();
       List<TProvince> list0 = tUFs0.getProvinces();
       List<TProvince> list1 = tUFs0.getProvinces();
-      assertSame(list1, list0);
       assertNotNull(list1);
+      assertSame(list1, list0);
   }
 }

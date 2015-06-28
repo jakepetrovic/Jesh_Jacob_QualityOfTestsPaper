@@ -85,6 +85,6 @@ public class INCHI_RADICALEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_RADICAL.getValue(1458);
+      INCHI_RADICAL.getValue(37);
   }
 }

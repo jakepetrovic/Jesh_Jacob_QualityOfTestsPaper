@@ -8,7 +8,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.InputStream;
+import java.io.LineNumberReader;
 import java.io.PipedInputStream;
+import java.io.PipedReader;
+import java.io.Reader;
 import org.jsecurity.io.IniResource;
 import org.jsecurity.io.ResourceException;
 
@@ -26,9 +29,10 @@ public class TextResourceEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
+      IniResource iniResource0 = new IniResource();
       PipedInputStream pipedInputStream0 = new PipedInputStream();
-      IniResource iniResource0 = new IniResource((InputStream) pipedInputStream0);
-      assertNull(iniResource0.getCharsetName());
+      iniResource0.doLoad((InputStream) pipedInputStream0);
+      assertEquals(0, pipedInputStream0.available());
   }
 
   //Test case number: 1
@@ -41,32 +45,45 @@ public class TextResourceEvoSuiteTest {
   public void test1()  throws Throwable  {
       IniResource iniResource0 = null;
       try {
-        iniResource0 = new IniResource("}t%jBCeG])0:HS}yte", "}t%jBCeG])0:HS}yte");
+        iniResource0 = new IniResource("3)7a:Eew%o%4nI rNDE", "3)7a:Eew%o%4nI rNDE");
         fail("Expecting exception: ResourceException");
       } catch(ResourceException e) {
         /*
-         * Unable to load text resource from the resource path [}t%jBCeG])0:HS}yte]
+         * Unable to load text resource from the resource path [3)7a:Eew%o%4nI rNDE]
          */
       }
   }
 
   //Test case number: 2
   /*
-   * 3 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.io.TextResource.load(Ljava/lang/String;)V: I3 Branch 1 IFNONNULL L71 - false
-   * 2 org.jsecurity.io.TextResource.<init>()V: root-Branch
-   * 3 org.jsecurity.io.TextResource.setCharsetName(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
       IniResource iniResource0 = null;
       try {
-        iniResource0 = new IniResource((String) null, (String) null);
+        iniResource0 = new IniResource((String) null);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
          * 'resourcePath' argument cannot be null.
          */
       }
+  }
+
+  //Test case number: 3
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.io.TextResource.load(Ljava/io/Reader;)V: I4 Branch 3 IFEQ L95 - false
+   * 2 org.jsecurity.io.TextResource.<init>()V: root-Branch
+   * 3 org.jsecurity.io.TextResource.doLoad(Ljava/io/BufferedReader;)V: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      PipedReader pipedReader0 = new PipedReader();
+      LineNumberReader lineNumberReader0 = new LineNumberReader((Reader) pipedReader0);
+      IniResource iniResource0 = new IniResource((Reader) lineNumberReader0);
+      assertNull(iniResource0.getCharsetName());
   }
 }

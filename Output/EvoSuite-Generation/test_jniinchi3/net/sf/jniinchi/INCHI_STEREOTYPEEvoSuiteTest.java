@@ -19,9 +19,9 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.ALLENE;
       int int0 = iNCHI_STEREOTYPE0.getIndx();
-      assertEquals(1, int0);
+      assertEquals(3, int0);
   }
 
   //Test case number: 1
@@ -85,6 +85,6 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_STEREOTYPE.getValue((-1483));
+      INCHI_STEREOTYPE.getValue(1451531589);
   }
 }

@@ -14,126 +14,188 @@ public class AntPathMatcherEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStart(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
-   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - false
-   * 3 org.jsecurity.util.AntPathMatcher.<init>()V: root-Branch
+   * 43 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matches(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 2 org.jsecurity.util.AntPathMatcher.<init>()V: root-Branch
+   * 3 org.jsecurity.util.AntPathMatcher.match(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - true
+   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - true
+   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - false
+   * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - false
+   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I72 Branch 7 IFLE L127 - true
+   * 9 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - true
+   * 10 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I102 Branch 9 IF_ICMPLE L137 - false
+   * 11 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - false
+   * 12 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - true
+   * 13 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I125 Branch 12 IFGT L140 - false
+   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - false
+   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - true
+   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - false
+   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - true
+   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - true
+   * 19 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - true
+   * 20 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - false
+   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I142 Branch 49 IF_ICMPGT L287 - false
+   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - false
+   * 23 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - true
+   * 24 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - true
+   * 25 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - true
+   * 26 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - false
+   * 27 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I209 Branch 56 IF_ICMPGT L308 - false
+   * 28 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - true
+   * 29 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - false
+   * 30 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - true
+   * 31 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I237 Branch 59 IF_ICMPLE L317 - true
+   * 32 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - true
+   * 33 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - true
+   * 34 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - false
+   * 35 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I438 Branch 73 IF_ICMPEQ L374 - true
+   * 36 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - true
+   * 37 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - false
+   * 38 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - true
+   * 39 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I57 Branch 77 IF_ICMPLT L408 - false
+   * 40 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I61 Branch 78 IFGT L409 - false
+   * 41 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I63 Branch 79 IFNE L409 - false
+   * 42 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - false
+   * 43 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - true
    */
   @Test
   public void test0()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("**", "/**");
-      assertEquals(false, boolean0);
+      String string0 = "]~l|*yXch7\\8xhP?";
+      String string1 = antPathMatcher0.extractPathWithinPattern(string0, string0);
+      assertNotNull(string1);
+      assertEquals("/]~l|*yXch7\\8xhP?", string1);
+      
+      boolean boolean0 = antPathMatcher0.matches(string1, string1);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 1
+  /*
+   * 8 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStart(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - false
+   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - true
+   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - false
+   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - true
+   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - false
+   * 7 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - false
+   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I109 Branch 46 IF_ICMPEQ L273 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      boolean boolean0 = antPathMatcher0.matchStart("]", "*");
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 2
   /*
    * 1 covered goal:
    * 1 org.jsecurity.util.AntPathMatcher.setPathSeparator(Ljava/lang/String;)V: I4 Branch 1 IFNULL L80 - true
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test2()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
       antPathMatcher0.setPathSeparator((String) null);
   }
 
-  //Test case number: 2
+  //Test case number: 3
   /*
-   * 25 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - true
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - false
-   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I142 Branch 49 IF_ICMPGT L287 - false
-   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - false
-   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - true
-   * 7 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - false
-   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I178 Branch 53 IF_ICMPGT L299 - true
-   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I178 Branch 53 IF_ICMPGT L299 - false
-   * 10 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I185 Branch 54 IF_ICMPEQ L300 - true
-   * 11 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - true
-   * 12 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - true
-   * 13 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - false
-   * 14 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - false
-   * 15 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I72 Branch 7 IFLE L127 - true
-   * 16 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - true
-   * 17 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I102 Branch 9 IF_ICMPLE L137 - false
-   * 18 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - false
-   * 19 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - true
-   * 20 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I125 Branch 12 IFGT L140 - false
-   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - false
-   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - true
-   * 23 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - false
-   * 24 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - true
-   * 25 org.jsecurity.util.AntPathMatcher.setPathSeparator(Ljava/lang/String;)V: I4 Branch 1 IFNULL L80 - false
+   * 2 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - false
+   * 2 org.jsecurity.util.AntPathMatcher.setPathSeparator(Ljava/lang/String;)V: I4 Branch 1 IFNULL L80 - false
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test3()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("5}1-U");
-      boolean boolean0 = antPathMatcher0.doMatch("/**", "/", true);
+      antPathMatcher0.setPathSeparator("-&ma");
+      boolean boolean0 = antPathMatcher0.doMatch("-&ma", "-&ma", true);
       assertEquals(true, boolean0);
   }
 
-  //Test case number: 3
+  //Test case number: 4
   /*
    * 1 covered goal:
    * 1 org.jsecurity.util.AntPathMatcher.isPattern(Ljava/lang/String;)Z: I6 Branch 2 IF_ICMPNE L85 - true
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test4()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.isPattern("**");
+      String string0 = "]~l|*yXch7\\8xhP?";
+      String string1 = antPathMatcher0.extractPathWithinPattern(string0, string0);
+      assertEquals("/]~l|*yXch7\\8xhP?", string1);
+      assertNotNull(string1);
+      
+      boolean boolean0 = antPathMatcher0.isPattern(string1);
       assertEquals(true, boolean0);
   }
 
-  //Test case number: 4
+  //Test case number: 5
   /*
    * 2 covered goals:
    * 1 org.jsecurity.util.AntPathMatcher.isPattern(Ljava/lang/String;)Z: I6 Branch 2 IF_ICMPNE L85 - false
    * 2 org.jsecurity.util.AntPathMatcher.isPattern(Ljava/lang/String;)Z: I11 Branch 3 IF_ICMPEQ L85 - true
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test5()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.isPattern("5}1-U");
+      boolean boolean0 = antPathMatcher0.isPattern("m");
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 5
+  //Test case number: 6
   /*
    * 2 covered goals:
    * 1 org.jsecurity.util.AntPathMatcher.isPattern(Ljava/lang/String;)Z: I11 Branch 3 IF_ICMPEQ L85 - false
    * 2 org.jsecurity.util.AntPathMatcher.isPattern(Ljava/lang/String;)Z: I6 Branch 2 IF_ICMPNE L85 - false
    */
   @Test
-  public void test5()  throws Throwable  {
+  public void test6()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.isPattern("6pIrRvfxJ$+O&L1Lp/a0:C(BX3>?+O&L1Lpe@E0R");
+      boolean boolean0 = antPathMatcher0.isPattern("?s\"");
       assertEquals(true, boolean0);
   }
 
-  //Test case number: 6
+  //Test case number: 7
   /*
-   * 10 covered goals:
+   * 1 covered goal:
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - false
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      String string0 = "]~l|*yXch7\\8xhP?";
+      String string1 = antPathMatcher0.extractPathWithinPattern(string0, string0);
+      assertNotNull(string1);
+      assertEquals("/]~l|*yXch7\\8xhP?", string1);
+      
+      String string2 = "";
+      boolean boolean0 = antPathMatcher0.match(string1, string2);
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 8
+  /*
+   * 8 covered goals:
    * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - true
    * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - true
    * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I135 Branch 13 IFNE L143 - true
    * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I144 Branch 14 IF_ICMPNE L146 - false
-   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - false
-   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I155 Branch 16 IFLE L146 - true
+   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - true
+   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I167 Branch 17 IF_ICMPGT L150 - true
    * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I167 Branch 17 IF_ICMPGT L150 - false
-   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - false
-   * 9 org.jsecurity.util.AntPathMatcher.matches(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
-   * 10 org.jsecurity.util.AntPathMatcher.match(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - true
    */
   @Test
-  public void test6()  throws Throwable  {
+  public void test8()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matches("*", "");
-      assertEquals(false, boolean0);
+      boolean boolean0 = antPathMatcher0.match("**", "");
+      assertEquals(true, boolean0);
   }
 
-  //Test case number: 7
+  //Test case number: 9
   /*
    * 12 covered goals:
    * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I72 Branch 7 IFLE L127 - false
@@ -150,138 +212,85 @@ public class AntPathMatcherEvoSuiteTest {
    * 12 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I465 Branch 39 IFGT L227 - true
    */
   @Test
-  public void test7()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("**", "5}1-U");
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 8
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - false
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - false
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - true
-   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - false
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("5}1-U", "**");
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 9
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - false
-   */
-  @Test
   public void test9()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("");
-      boolean boolean0 = antPathMatcher0.doMatch("", "", false);
+      boolean boolean0 = antPathMatcher0.match("**", "**");
       assertEquals(true, boolean0);
   }
 
   //Test case number: 10
   /*
-   * 4 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I125 Branch 12 IFGT L140 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - false
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - true
-   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - false
-   */
-  @Test
-  public void test10()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("*", "v|/");
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 11
-  /*
    * 1 covered goal:
    * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I135 Branch 13 IFNE L143 - false
    */
   @Test
+  public void test10()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      boolean boolean0 = antPathMatcher0.matchStart("KBSv5pG@<_}", "");
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 11
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I144 Branch 14 IF_ICMPNE L146 - true
+   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - false
+   */
+  @Test
   public void test11()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("H>!Twk%Dv/^:", "");
-      assertEquals(true, boolean0);
+      boolean boolean0 = antPathMatcher0.matches("Unable to determine Key/Value pair from line [", "");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 12
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I144 Branch 14 IF_ICMPNE L146 - true
+   * 4 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - false
+   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I155 Branch 16 IFLE L146 - true
+   * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I167 Branch 17 IF_ICMPGT L150 - false
+   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - false
    */
   @Test
   public void test12()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("H>!Twk%Dv/^:", "");
+      boolean boolean0 = antPathMatcher0.doMatch("*", "", true);
       assertEquals(false, boolean0);
   }
 
   //Test case number: 13
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - true
-   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - false
+   * 6 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I155 Branch 16 IFLE L146 - false
+   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - true
+   * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - true
+   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I135 Branch 13 IFNE L143 - true
+   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I144 Branch 14 IF_ICMPNE L146 - false
+   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - false
    */
   @Test
   public void test13()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("Q", "");
-      assertEquals(false, boolean0);
+      antPathMatcher0.setPathSeparator("");
+      boolean boolean0 = antPathMatcher0.doMatch("*", "", true);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 14
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I155 Branch 16 IFLE L146 - false
-   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - false
+   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I192 Branch 19 IF_ICMPLE L156 - false
+   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - false
    */
   @Test
   public void test14()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("");
-      boolean boolean0 = antPathMatcher0.matches("*", "");
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 15
-  /*
-   * 8 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I167 Branch 17 IF_ICMPGT L150 - true
-   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I175 Branch 18 IFGT L151 - true
-   * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - true
-   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - true
-   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I135 Branch 13 IFNE L143 - true
-   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I144 Branch 14 IF_ICMPNE L146 - false
-   * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I150 Branch 15 IFLE L146 - true
-   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I167 Branch 17 IF_ICMPGT L150 - false
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("**", "");
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 16
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I192 Branch 19 IF_ICMPLE L156 - false
-   */
-  @Test
-  public void test16()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("", "**");
+      antPathMatcher0.setPathSeparator("-&ma");
+      boolean boolean0 = antPathMatcher0.doMatch("*", "Z8|hS~_-a(\"IL`B", false);
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 17
+  //Test case number: 15
   /*
    * 5 covered goals:
    * 1 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I200 Branch 20 IFNE L159 - false
@@ -291,303 +300,288 @@ public class AntPathMatcherEvoSuiteTest {
    * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I192 Branch 19 IF_ICMPLE L156 - true
    */
   @Test
+  public void test15()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      boolean boolean0 = antPathMatcher0.matchStart("**", "**");
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 16
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - false
+   */
+  @Test
+  public void test16()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      antPathMatcher0.setPathSeparator("].  There is no space from ");
+      boolean boolean0 = antPathMatcher0.matches("'`", "/ac)mLNY?RuoD6hSd");
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 17
+  /*
+   * 9 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - true
+   * 2 org.jsecurity.util.AntPathMatcher.matchStart(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - true
+   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - false
+   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - true
+   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - true
+   * 7 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - false
+   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - false
+   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I109 Branch 46 IF_ICMPEQ L273 - true
+   */
+  @Test
   public void test17()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("/**", "/**");
+      boolean boolean0 = antPathMatcher0.matchStart("ac)mLNY?RuoD6hSd", "ac)mLNY?RuoD6hSd");
       assertEquals(true, boolean0);
   }
 
   //Test case number: 18
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - true
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - true
-   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - false
-   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - false
-   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I109 Branch 46 IF_ICMPEQ L273 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - true
    */
   @Test
   public void test18()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("6pIrRvfxJ$+O&L1Lp/a0:C(BX3>?+O&L1Lpe@E0R", "6pIrRvfxJ$+O&L1Lp/a0:C(BX3>?+O&L1Lpe@E0R");
+      boolean boolean0 = antPathMatcher0.doMatch("WiTC6?,7aKS*v~1", "WiTC6?,7aKS*v~1", true);
       assertEquals(true, boolean0);
   }
 
   //Test case number: 19
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I109 Branch 46 IF_ICMPEQ L273 - false
+   * 2 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - false
+   * 2 org.jsecurity.util.AntPathMatcher.matches(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
    */
   @Test
   public void test19()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.doMatch("]", "Q", false);
+      boolean boolean0 = antPathMatcher0.matches("V9)-$4vB^.wEJ**", "*");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 20
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I142 Branch 49 IF_ICMPGT L287 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - true
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I185 Branch 54 IF_ICMPEQ L300 - false
-   * 4 org.jsecurity.util.AntPathMatcher.matches(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
-   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - false
-   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I178 Branch 53 IF_ICMPGT L299 - false
+   * 4 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - false
+   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I178 Branch 53 IF_ICMPGT L299 - true
+   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I178 Branch 53 IF_ICMPGT L299 - false
+   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I185 Branch 54 IF_ICMPEQ L300 - true
    */
   @Test
   public void test20()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matches("?0CzdgQDmj*/", "Q");
-      assertEquals(false, boolean0);
+      boolean boolean0 = antPathMatcher0.doMatch("-&ma*", "-&ma", true);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 21
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - false
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - false
    */
   @Test
   public void test21()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("");
-      boolean boolean0 = antPathMatcher0.match("/**", "**");
+      boolean boolean0 = antPathMatcher0.match("*V9)-$4v5B^.wEvJ**n", "No valid key could be found in line [");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 22
   /*
-   * 25 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - true
-   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - false
-   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I209 Branch 56 IF_ICMPGT L308 - false
-   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - true
-   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - false
-   * 7 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - true
-   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I237 Branch 59 IF_ICMPLE L317 - true
-   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - true
-   * 10 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - false
-   * 11 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I272 Branch 63 IF_ICMPGT L330 - false
-   * 12 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I286 Branch 64 IF_ICMPGT L332 - false
-   * 13 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - true
-   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - false
-   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - true
-   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I347 Branch 67 IF_ICMPGT L349 - false
-   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - true
-   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - false
-   * 19 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I370 Branch 69 IF_ICMPEQ L352 - false
-   * 20 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - true
-   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - false
-   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I406 Branch 71 IF_ICMPNE L363 - true
-   * 23 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - true
-   * 24 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - false
-   * 25 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I438 Branch 73 IF_ICMPEQ L374 - true
+   * 18 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - false
+   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I272 Branch 63 IF_ICMPGT L330 - false
+   * 3 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I286 Branch 64 IF_ICMPGT L332 - false
+   * 4 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - true
+   * 5 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - false
+   * 6 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - true
+   * 7 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I347 Branch 67 IF_ICMPGT L349 - false
+   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - true
+   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - false
+   * 10 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I370 Branch 69 IF_ICMPEQ L352 - false
+   * 11 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - true
+   * 12 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - false
+   * 13 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I406 Branch 71 IF_ICMPNE L363 - true
+   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - true
+   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - false
+   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I142 Branch 49 IF_ICMPGT L287 - false
+   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - false
+   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - true
    */
   @Test
   public void test22()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("*1k`eff$R5m*?W}~R", "*1k`eff$R5m*?W}~R");
+      boolean boolean0 = antPathMatcher0.doMatch("g*>zd5'j*8BMU,r*3v", "g*>zd5'j*8BMU,r*3v", false);
       assertEquals(true, boolean0);
   }
 
   //Test case number: 23
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - false
-   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - false
+   * 22 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - false
+   * 2 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - true
+   * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - true
+   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I102 Branch 9 IF_ICMPLE L137 - false
+   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - false
+   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - true
+   * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I125 Branch 12 IFGT L140 - false
+   * 8 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - false
+   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I209 Branch 56 IF_ICMPGT L308 - false
+   * 10 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - false
+   * 11 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - true
+   * 12 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - true
+   * 13 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I347 Branch 67 IF_ICMPGT L349 - false
+   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - true
+   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - false
+   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I370 Branch 69 IF_ICMPEQ L352 - false
+   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - true
+   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - false
+   * 19 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I406 Branch 71 IF_ICMPNE L363 - true
+   * 20 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - true
+   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - false
+   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I438 Branch 73 IF_ICMPEQ L374 - true
    */
   @Test
   public void test23()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("*1k`eff$R5m*?W}~R", "].  There is no space from ");
-      assertEquals(false, boolean0);
+      boolean boolean0 = antPathMatcher0.match("*V9)-$4v5B^.wEvJ**n", "*V9)-$4v5B^.wEvJ**n");
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 24
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - false
-   * 2 org.jsecurity.util.AntPathMatcher.match(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 22 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I347 Branch 67 IF_ICMPGT L349 - true
+   * 2 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I406 Branch 71 IF_ICMPNE L363 - false
+   * 3 org.jsecurity.util.AntPathMatcher.match(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
+   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - true
+   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - false
+   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - false
+   * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I72 Branch 7 IFLE L127 - true
+   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - false
+   * 9 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - false
+   * 10 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - false
+   * 11 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - true
+   * 12 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - true
+   * 13 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - true
+   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - true
+   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - true
+   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I237 Branch 59 IF_ICMPLE L317 - true
+   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - false
+   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I272 Branch 63 IF_ICMPGT L330 - false
+   * 19 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I286 Branch 64 IF_ICMPGT L332 - false
+   * 20 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - true
+   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - false
+   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - true
    */
   @Test
   public void test24()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.match("(NFk|j4**", "(NFk|j4**");
-      assertEquals(true, boolean0);
+      boolean boolean0 = antPathMatcher0.match("*V9)-$4v5B^.wEJ**", "_).HX8'");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 25
   /*
-   * 53 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I370 Branch 69 IF_ICMPEQ L352 - true
-   * 2 org.jsecurity.util.AntPathMatcher.matchStart(Ljava/lang/String;Ljava/lang/String;)Z: root-Branch
-   * 3 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I12 Branch 4 IF_ICMPEQ L112 - true
-   * 4 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - true
-   * 5 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I57 Branch 5 IF_ICMPGT L125 - false
-   * 6 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I60 Branch 6 IF_ICMPGT L125 - false
-   * 7 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I72 Branch 7 IFLE L127 - true
-   * 8 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I84 Branch 8 IFNE L130 - true
-   * 9 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I102 Branch 9 IF_ICMPLE L137 - false
-   * 10 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I107 Branch 10 IF_ICMPLE L139 - false
-   * 11 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I114 Branch 11 IFLE L140 - true
-   * 12 org.jsecurity.util.AntPathMatcher.doMatch(Ljava/lang/String;Ljava/lang/String;Z)Z: I125 Branch 12 IFGT L140 - false
-   * 13 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - true
-   * 14 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I50 Branch 40 IF_ICMPGE L258 - false
-   * 15 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - true
-   * 16 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I59 Branch 41 IF_ICMPNE L259 - false
-   * 17 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - true
-   * 18 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I74 Branch 42 IFNE L265 - false
-   * 19 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I79 Branch 43 IF_ICMPEQ L267 - true
-   * 20 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - true
-   * 21 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I91 Branch 44 IF_ICMPGT L270 - false
-   * 22 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I102 Branch 45 IF_ICMPEQ L272 - false
-   * 23 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I109 Branch 46 IF_ICMPEQ L273 - true
-   * 24 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I125 Branch 47 IFNE L282 - true
-   * 25 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - true
-   * 26 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I139 Branch 48 IF_ICMPEQ L287 - false
-   * 27 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I142 Branch 49 IF_ICMPGT L287 - false
-   * 28 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I147 Branch 50 IF_ICMPEQ L288 - false
-   * 29 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I154 Branch 51 IF_ICMPEQ L289 - true
-   * 30 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I170 Branch 52 IF_ICMPLE L296 - true
-   * 31 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - true
-   * 32 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I206 Branch 55 IF_ICMPEQ L308 - false
-   * 33 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I209 Branch 56 IF_ICMPGT L308 - false
-   * 34 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I214 Branch 57 IF_ICMPEQ L309 - false
-   * 35 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I221 Branch 58 IF_ICMPEQ L310 - true
-   * 36 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I237 Branch 59 IF_ICMPLE L317 - true
-   * 37 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - true
-   * 38 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I269 Branch 62 IF_ICMPEQ L330 - false
-   * 39 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I272 Branch 63 IF_ICMPGT L330 - false
-   * 40 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I286 Branch 64 IF_ICMPGT L332 - false
-   * 41 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - true
-   * 42 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I293 Branch 65 IF_ICMPNE L333 - false
-   * 43 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I311 Branch 66 IF_ICMPNE L338 - true
-   * 44 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I347 Branch 67 IF_ICMPGT L349 - false
-   * 45 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - true
-   * 46 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I355 Branch 68 IF_ICMPGE L350 - false
-   * 47 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I370 Branch 69 IF_ICMPEQ L352 - false
-   * 48 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - true
-   * 49 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I381 Branch 70 IF_ICMPEQ L353 - false
-   * 50 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I406 Branch 71 IF_ICMPNE L363 - true
-   * 51 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - true
-   * 52 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I431 Branch 72 IF_ICMPGT L373 - false
-   * 53 org.jsecurity.util.AntPathMatcher.matchStrings(Ljava/lang/String;Ljava/lang/String;)Z: I438 Branch 73 IF_ICMPEQ L374 - true
+   * 5 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - false
+   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I61 Branch 78 IFGT L409 - true
+   * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I63 Branch 79 IFNE L409 - true
+   * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - false
+   * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - true
    */
   @Test
   public void test25()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      boolean boolean0 = antPathMatcher0.matchStart("u[/u/&C*0k?*<", "u[/u/&C*0k?*<");
-      assertEquals(true, boolean0);
+      String string0 = "KBSv5pG@<_}%/(sZjA 0o[5>~(){0^";
+      antPathMatcher0.setPathSeparator(string0);
+      String string1 = "WiTC6?,7aKS*v~1";
+      String string2 = antPathMatcher0.extractPathWithinPattern(string1, string1);
+      assertEquals("iTC6?,7aKBSv5pG@<_}%/(sZjA 0o[5>~(){0^*", string2);
+      assertNotNull(string2);
   }
 
   //Test case number: 26
   /*
-   * 9 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - false
-   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I63 Branch 79 IFNE L409 - true
-   * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - true
-   * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - false
-   * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - false
-   * 6 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - true
-   * 7 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I57 Branch 77 IF_ICMPLT L408 - false
-   * 8 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I61 Branch 78 IFGT L409 - false
-   * 9 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - true
+   * 2 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I57 Branch 77 IF_ICMPLT L408 - true
+   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - false
    */
   @Test
   public void test26()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      String string0 = antPathMatcher0.extractPathWithinPattern("6pIrRvfxJ$+O&L1Lp/a0:C(BX3>?+O&L1Lpe@E0R", "6pIrRvfxJ$+O&L1Lp/a0:C(BX3>?+O&L1Lpe@E0R");
-      assertEquals("a0:C(BX3>?+O&L1Lpe@E0R", string0);
-      assertNotNull(string0);
-  }
-
-  //Test case number: 27
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I57 Branch 77 IF_ICMPLT L408 - true
-   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - true
-   * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - true
-   */
-  @Test
-  public void test27()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("].  There is no space from ");
-      String string0 = antPathMatcher0.extractPathWithinPattern("*1k`eff$R5m*?W}~R", "].  There is no space from ");
+      String string0 = antPathMatcher0.extractPathWithinPattern("-W4iY?>s&pqo/n<]I", "");
       assertNotNull(string0);
       assertEquals("", string0);
   }
 
-  //Test case number: 28
-  /*
-   * 5 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I61 Branch 78 IFGT L409 - true
-   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - false
-   * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - false
-   * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I63 Branch 79 IFNE L409 - false
-   * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - false
-   */
-  @Test
-  public void test28()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("No corresponding value could be found in line [");
-      String string0 = antPathMatcher0.extractPathWithinPattern("]?0CzdgQDmj*/", "u[/u/&C*0k?*<");
-      assertNotNull(string0);
-      assertEquals("No corresponding value could be found in line [/No corresponding value could be found in line [/&C*0k?*<", string0);
-  }
-
-  //Test case number: 29
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - true
-   * 2 org.jsecurity.util.AntPathMatcher.setPathSeparator(Ljava/lang/String;)V: I4 Branch 1 IFNULL L80 - false
-   */
-  @Test
-  public void test29()  throws Throwable  {
-      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      antPathMatcher0.setPathSeparator("");
-      String string0 = antPathMatcher0.extractPathWithinPattern("**", "**");
-      assertEquals("**", string0);
-      assertNotNull(string0);
-  }
-
-  //Test case number: 30
+  //Test case number: 27
   /*
    * 8 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I105 Branch 82 IFGT L419 - true
-   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - false
+   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - false
+   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I105 Branch 82 IFGT L419 - true
    * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - true
    * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I57 Branch 77 IF_ICMPLT L408 - false
    * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I61 Branch 78 IFGT L409 - false
    * 6 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I63 Branch 79 IFNE L409 - false
-   * 7 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - false
-   * 8 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - false
+   * 7 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - true
+   * 8 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I69 Branch 80 IFGT L409 - false
    */
   @Test
-  public void test30()  throws Throwable  {
+  public void test27()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      String string0 = antPathMatcher0.extractPathWithinPattern("*", "] to form a key/value pair.");
-      assertNotNull(string0);
-      assertEquals("/] to form a key/value pair.", string0);
+      String string0 = "]~l|*yXch7\\8xhP?";
+      String string1 = antPathMatcher0.extractPathWithinPattern(string0, string0);
+      assertNotNull(string1);
+      assertEquals("/]~l|*yXch7\\8xhP?", string1);
+      
+      String string2 = "KBSv5pG@<_}%/(sZjA 0o[5>~(){0^";
+      String string3 = antPathMatcher0.extractPathWithinPattern(string1, string2);
+      assertNotNull(string3);
+      assertEquals("KBSv5pG@<_}%/(sZjA 0o[5>~(){0^", string3);
   }
 
-  //Test case number: 31
+  //Test case number: 28
   /*
-   * 7 covered goals:
-   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I107 Branch 83 IFLE L419 - false
-   * 2 org.jsecurity.util.AntPathMatcher.<init>()V: root-Branch
-   * 3 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - true
-   * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - true
-   * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - false
-   * 6 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I105 Branch 82 IFGT L419 - false
-   * 7 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I107 Branch 83 IFLE L419 - true
+   * 2 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I105 Branch 82 IFGT L419 - false
+   * 2 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I107 Branch 83 IFLE L419 - true
    */
   @Test
-  public void test31()  throws Throwable  {
+  public void test28()  throws Throwable  {
       AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-      String string0 = antPathMatcher0.extractPathWithinPattern("", "H>!Twk%Dv/^:");
+      String string0 = "]~l|*yXch7\\8xhP?";
+      String string1 = "";
+      String string2 = antPathMatcher0.extractPathWithinPattern(string1, string0);
+      assertEquals("]~l|*yXch7\\8xhP?", string2);
+      assertNotNull(string2);
+  }
+
+  //Test case number: 29
+  /*
+   * 10 covered goals:
+   * 1 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I107 Branch 83 IFLE L419 - false
+   * 2 org.jsecurity.util.AntPathMatcher.<init>()V: root-Branch
+   * 3 org.jsecurity.util.AntPathMatcher.setPathSeparator(Ljava/lang/String;)V: I4 Branch 1 IFNULL L80 - false
+   * 4 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - true
+   * 5 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I32 Branch 74 IF_ICMPGE L406 - false
+   * 6 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 75 IF_ICMPGT L408 - false
+   * 7 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I50 Branch 76 IF_ICMPLE L408 - true
+   * 8 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - true
+   * 9 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I101 Branch 81 IF_ICMPGE L418 - false
+   * 10 org.jsecurity.util.AntPathMatcher.extractPathWithinPattern(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I105 Branch 82 IFGT L419 - false
+   */
+  @Test
+  public void test29()  throws Throwable  {
+      AntPathMatcher antPathMatcher0 = new AntPathMatcher();
+      antPathMatcher0.setPathSeparator("].  There is no space from ");
+      String string0 = antPathMatcher0.extractPathWithinPattern("'`", "/ac)mLNY?RuoD6hSd");
+      assertEquals("].  There is no space from )].  There is no space from LNY?Ru].  There is no space from D6].  There is no space from Sd", string0);
       assertNotNull(string0);
-      assertEquals("H>!Twk%Dv/^:", string0);
   }
 }

@@ -22,8 +22,8 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.ldap.AbstractLdapRealm: 66.67%</ul><ul>
-<li>18454 fitness evaluations, 371 generations, 94727 statements, 11339 tests.
-<li>Time: 0:01:01(Search: 0:01:00, minimization: 0:00:00)
+<li>14946 fitness evaluations, 300 generations, 81948 statements, 9515 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 3/8 branches, 8/10 methods, 10/15 total goals
 <li>Mutation score: 38%
 </ul>
@@ -32,46 +32,48 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setUrl(&quot;2`v*PbXx&amp;E&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase(&quot;\&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase((String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_1&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword((String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword(&quot;2`v*PbXx&amp;E&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_2&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;N#=BA~FQ*0l~Dh8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;Zw7V\u0007ia&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;N#=BA~FQ*0l~Dh8&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;Y=MS[:3f~&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_4&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
 <span class="nocode"><a name="2">  2: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
 <span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setLdapContextFactory((LdapContextFactory) defaultLdapContextFactory0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_5&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="4">  4: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="4">  4: </a></span>activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm-0-authorization&quot;, activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -318,7 +320,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -336,7 +338,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15316
+<li>process_communication_port: 20831
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

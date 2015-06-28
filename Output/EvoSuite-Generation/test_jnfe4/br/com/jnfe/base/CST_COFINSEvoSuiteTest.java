@@ -19,7 +19,7 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       boolean boolean0 = cST_COFINS0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -31,9 +31,9 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_99;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       String string0 = cST_COFINS0.getDesc();
-      assertEquals("Outras opera\u00E7\u00F5es", string0);
+      assertEquals("Al\u00EDquota diferenciada", string0);
   }
 
   //Test case number: 2
@@ -43,7 +43,7 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       String string0 = cST_COFINS0.getGroup();
       assertEquals("Aliq", string0);
   }
@@ -55,9 +55,9 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_99;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
       String string0 = cST_COFINS0.getValue();
-      assertEquals("99", string0);
+      assertEquals("02", string0);
   }
 
   //Test case number: 4
@@ -69,21 +69,22 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
-      boolean boolean0 = cST_COFINS0.isRequiredTag("[");
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+      boolean boolean0 = cST_COFINS0.isRequiredTag("+uGoaAE;f7,Tq");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - false
    * 2 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - false
+   * 3 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
-      boolean boolean0 = cST_COFINS0.isRequiredTag("qBCProd");
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+      boolean boolean0 = cST_COFINS0.isRequiredTag("pCOFINS");
       assertEquals(true, boolean0);
   }
 }

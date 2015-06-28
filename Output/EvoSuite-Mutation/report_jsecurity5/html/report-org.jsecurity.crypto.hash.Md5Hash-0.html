@@ -21,41 +21,38 @@ org.jsecurity.crypto.hash.Md5Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Md5Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3963 statements, 288 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
-<li>Mutation score: 44%
+<ul><li>Target class: org.jsecurity.crypto.hash.Md5Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3467 statements, 256 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:01)
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
+<li>Mutation score: 56%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = md5Hash0.getAlgorithmName();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;MD5&quot;, string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, md5Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;MD5&quot;, (Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD5&quot;, md5Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, (Object) &quot;UTF-8&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;JzaXM1Sd6Hi+xAtxiz018g==&quot;, md5Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;MD5&quot;, (Object) &quot;YY1aj1bEIBQvlt/OCtZsHg==&quot;, (int) '+');
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;735a43b73d097bf69008fbb06bb294f5&quot;, md5Hash0.toHex());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, 1458);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ap7eeGcZTDgYdOPhfsaGBA==&quot;, md5Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Md5Hash.fromBase64String((String) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;\uFFFD\uFFFD\uFFFD\u0001\uFFFD/\u000E&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD5&quot;, md5Hash0.getAlgorithmName());
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Md5Hash.fromHexString(&quot;MD5&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  Md5Hash.fromHexString(&quot;oVW|u0QR9n$GXEa%&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -108,7 +105,7 @@ org.jsecurity.crypto.hash.Md5Hash
 <span class="nocode"><a name="42"> 42: </a></span>
 <span class="nocode"><a name="43"> 43: </a></span>    public Md5Hash(Object source) {
 <span class="nocode"><a name="44"> 44: </a></span>        super(source);
-<span class="nocode"><a name="45"> 45: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="45"> 45: </a></span>    }
 <span class="nocode"><a name="46"> 46: </a></span>
 <span class="nocode"><a name="47"> 47: </a></span>    public Md5Hash(Object source, Object salt) {
 <span class="nocode"><a name="48"> 48: </a></span>        super(source, salt);
@@ -131,14 +128,14 @@ org.jsecurity.crypto.hash.Md5Hash
 <span class="nocode"><a name="65"> 65: </a></span>    public static Md5Hash fromBase64String(String base64) {
 <span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">        Md5Hash hash = new Md5Hash();</span>
 <span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">        hash.setBytes(Base64.decode(base64));</span>
-<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">        return hash;</span>
+<span class="nocode"><a name="68"> 68: </a></span>        return hash;
 <span class="nocode"><a name="69"> 69: </a></span>    }
 <span class="nocode"><a name="70"> 70: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -156,7 +153,7 @@ org.jsecurity.crypto.hash.Md5Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14578
+<li>process_communication_port: 16163
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

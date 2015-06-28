@@ -7,7 +7,7 @@ package net.sf.lavalamp.site;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import net.sf.lavalamp.site.DummyRestGetter;
+import net.sf.lavalamp.site.DummyRemoteGetter;
 
 public class AbstractGetterEvoSuiteTest {
 
@@ -19,6 +19,6 @@ public class AbstractGetterEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DummyRestGetter dummyRestGetter0 = new DummyRestGetter();
+      DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
   }
 }

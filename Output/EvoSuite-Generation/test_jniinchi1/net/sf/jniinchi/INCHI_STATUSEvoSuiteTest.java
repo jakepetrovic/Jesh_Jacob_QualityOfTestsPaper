@@ -45,11 +45,12 @@ public class INCHI_STATUSEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 1 TABLESWITCH L51 Case -1 - false
-   * 2 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 7 TABLESWITCH L51 Default-Case - true
+   * 2 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 6 TABLESWITCH L51 Case 4 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_STATUS.getValue(377);
+      INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(4);
+      assertEquals(INCHI_STATUS.FAIL_I2I, iNCHI_STATUS0);
   }
 
   //Test case number: 3
@@ -89,7 +90,7 @@ public class INCHI_STATUSEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 5 TABLESWITCH L51 Case 3 - true
-   * 2 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 6 TABLESWITCH L51 Case 4 - false
+   * 2 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 7 TABLESWITCH L51 Default-Case - false
    */
   @Test
   public void test6()  throws Throwable  {
@@ -100,17 +101,16 @@ public class INCHI_STATUSEvoSuiteTest {
   //Test case number: 7
   /*
    * 7 covered goals:
-   * 1 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 6 TABLESWITCH L51 Case 4 - true
+   * 1 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 7 TABLESWITCH L51 Default-Case - true
    * 2 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 1 TABLESWITCH L51 Case -1 - false
    * 3 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 2 TABLESWITCH L51 Case 0 - false
    * 4 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 3 TABLESWITCH L51 Case 1 - false
    * 5 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 4 TABLESWITCH L51 Case 2 - false
    * 6 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 5 TABLESWITCH L51 Case 3 - false
-   * 7 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 7 TABLESWITCH L51 Default-Case - false
+   * 7 net.sf.jniinchi.INCHI_STATUS.getValue(I)Lnet/sf/jniinchi/INCHI_STATUS;: I3 Branch 6 TABLESWITCH L51 Case 4 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.getValue(4);
-      assertEquals(INCHI_STATUS.FAIL_I2I, iNCHI_STATUS0);
+      INCHI_STATUS.getValue(1892893660);
   }
 }

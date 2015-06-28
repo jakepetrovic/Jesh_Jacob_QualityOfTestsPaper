@@ -22,79 +22,68 @@ nu.staldal.xtree.NodeWithChildren
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.NodeWithChildren: 100.00%</ul><ul>
-<li>1050 fitness evaluations, 22 generations, 5169 statements, 897 tests.
-<li>Time: 0:00:08(Search: 0:00:07, minimization: 0:00:00)
+<li>850 fitness evaluations, 18 generations, 5037 statements, 777 tests.
+<li>Time: 0:00:07(Search: 0:00:07, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 7/7 methods, 8/8 total goals
-<li>Mutation score: 8%
+<li>Mutation score: 17%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;LocalName may not be null&quot;, &quot;LocalName may not be null&quot;);
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.getFirstChildElement(&quot;LocalName may not be null&quot;, &quot;LocalName may not be null&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(SAXParseException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Element {LocalName may not be null}LocalName may not be null expected
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0, 0);
+<span class="nocode"><a name="2">  2: </a></span>Element element1 = element0.getFirstChildElementOrNull(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(element1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Kyy5&quot;, &quot;Kyy5&quot;, 387, 387);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-23), (-23));
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  element0.addChild((Node) null);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfChildren());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;space&quot;, &quot;space&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;RgZHR1LNwTR'DB9&quot;, &quot;RgZHR1LNwTR'DB9&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(0);
+<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(1);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 0 &gt;= 0
+<span class="nocode"><a name="7">  7: </a></span>   * 1 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 527, (-2));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;zL(aH*DXxdE%X&amp;|AN2@&quot;, &quot;zL(aH*DXxdE%X&amp;|AN2@&quot;, 0, 0);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, (-1));
+<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, 112);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * -1
+<span class="nocode"><a name="7">  7: </a></span>   * 112 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;^}vz/cBp+|b&quot;, &quot;^}vz/cBp+|b&quot;, (-1360));
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.insertChild((Node) element0, (-208));
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-23), (-23));
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.insertChild((Node) element0, 0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfChildren());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;OPXQN7&quot;, &quot;OPXQN7&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild(1669);
+<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild(1);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 1669 &gt;= 0
+<span class="nocode"><a name="7">  7: </a></span>   * 1 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -195,8 +184,8 @@ nu.staldal.xtree.NodeWithChildren
 <span class="nocode"><a name="94"> 94: </a></span>    public void addChild(Node newChild)
 <span class="nocode"><a name="95"> 95: </a></span>    {
 <span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">        newChild.setParent(this);</span>
-<span class="nocode"><a name="97"> 97: </a></span>        children.addElement(newChild);
-<span class="nocode"><a name="98"> 98: </a></span>    }
+<span class="nocode"><a name="97"> 97: </a></span><span style="background-color: #ffffcc">        children.addElement(newChild);</span>
+<span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="99"> 99: </a></span>	
 <span class="nocode"><a name="100">100: </a></span>
 <span class="nocode"><a name="101">101: </a></span>	/**
@@ -256,7 +245,7 @@ nu.staldal.xtree.NodeWithChildren
 <span class="nocode"><a name="155">155: </a></span>    {
 <span class="nocode"><a name="156">156: </a></span><span style="background-color: #ffffcc">        newChild.setParent(this);</span>
 <span class="nocode"><a name="157">157: </a></span><span style="background-color: #ffffcc">        children.insertElementAt(newChild, index);</span>
-<span class="nocode"><a name="158">158: </a></span>    }
+<span class="nocode"><a name="158">158: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="159">159: </a></span>	
 <span class="nocode"><a name="160">160: </a></span>}
 <span class="nocode"><a name="161">161: </a></span>
@@ -264,7 +253,7 @@ nu.staldal.xtree.NodeWithChildren
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -282,7 +271,7 @@ nu.staldal.xtree.NodeWithChildren
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13002
+<li>process_communication_port: 20054
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

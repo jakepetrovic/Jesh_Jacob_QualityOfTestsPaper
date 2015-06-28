@@ -21,29 +21,30 @@ org.jsecurity.io.TextResource
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.io.TextResource: 42.11%</ul><ul>
-<li>33 fitness evaluations, 2 generations, 677 statements, 181 tests.
-<li>Time: 0:01:06(Search: 0:01:06, minimization: 0:00:00)
-<li>Coverage: 4/10 branches, 7/12 methods, 8/19 total goals
-<li>Mutation score: 4%
+<ul><li>Target class: org.jsecurity.io.TextResource: 47.37%</ul><ul>
+<li>698 fitness evaluations, 15 generations, 2882 statements, 659 tests.
+<li>Time: 0:01:04(Search: 0:01:04, minimization: 0:00:00)
+<li>Coverage: 5/10 branches, 7/12 methods, 9/19 total goals
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
-<span class="nocode"><a name="2">  2: </a></span>IniResource iniResource0 = new IniResource((InputStream) pipedInputStream0);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(iniResource0.getCharsetName());
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="3">  3: </a></span>iniResource0.doLoad((InputStream) pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, pipedInputStream0.available());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;}t%jBCeG])0:HS}yte&quot;, &quot;}t%jBCeG])0:HS}yte&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;3)7a:Eew%o%4nI rNDE&quot;, &quot;3)7a:Eew%o%4nI rNDE&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [}t%jBCeG])0:HS}yte]
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [3)7a:Eew%o%4nI rNDE]
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -51,13 +52,20 @@ org.jsecurity.io.TextResource
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource((String) null, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource((String) null);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
 <span class="nocode"><a name="7">  7: </a></span>   * 'resourcePath' argument cannot be null.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>PipedReader pipedReader0 = new PipedReader();
+<span class="nocode"><a name="2">  2: </a></span>LineNumberReader lineNumberReader0 = new LineNumberReader((Reader) pipedReader0);
+<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((Reader) lineNumberReader0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -155,7 +163,7 @@ org.jsecurity.io.TextResource
 <span class="nocode"><a name="93"> 93: </a></span>    public void load(Reader reader) {
 <span class="nocode"><a name="94"> 94: </a></span>        BufferedReader br;
 <span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">        if (reader instanceof BufferedReader) {</span>
-<span class="nocode"><a name="96"> 96: </a></span>            br = (BufferedReader) reader;
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">            br = (BufferedReader) reader;</span>
 <span class="nocode"><a name="97"> 97: </a></span>        } else {
 <span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">            br = new BufferedReader(reader);</span>
 <span class="nocode"><a name="99"> 99: </a></span>        }
@@ -188,7 +196,7 @@ org.jsecurity.io.TextResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -206,7 +214,7 @@ org.jsecurity.io.TextResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12513
+<li>process_communication_port: 17889
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

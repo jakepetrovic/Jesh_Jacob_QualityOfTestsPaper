@@ -15,8 +15,6 @@ import org.xml.sax.HandlerBase;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
-import org.xml.sax.ext.Locator2Impl;
-import org.xml.sax.helpers.AttributesImpl;
 
 public class DocumentHandlerAdapterEvoSuiteTest {
 
@@ -31,7 +29,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test0()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.endPrefixMapping((String) null);
+      documentHandlerAdapter0.endPrefixMapping("");
   }
 
   //Test case number: 1
@@ -43,7 +41,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test1()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.processingInstruction("", "o>(Y");
+      documentHandlerAdapter0.processingInstruction("", "");
   }
 
   //Test case number: 2
@@ -55,7 +53,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test2()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.skippedEntity((String) null);
+      documentHandlerAdapter0.skippedEntity("m-}z0 $${{sQmIN|[H");
   }
 
   //Test case number: 3
@@ -79,8 +77,8 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test4()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      char[] charArray0 = new char[3];
-      documentHandlerAdapter0.characters(charArray0, (int) '\u0000', (int) '\u0000');
+      char[] charArray0 = new char[7];
+      documentHandlerAdapter0.characters(charArray0, (-1210), (int) 'T');
   }
 
   //Test case number: 5
@@ -92,9 +90,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test5()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      Locator2Impl locator2Impl0 = new Locator2Impl();
-      documentHandlerAdapter0.setDocumentLocator((Locator) locator2Impl0);
-      assertNull(locator2Impl0.getSystemId());
+      documentHandlerAdapter0.setDocumentLocator((Locator) null);
   }
 
   //Test case number: 6
@@ -106,8 +102,8 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test6()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      char[] charArray0 = new char[1];
-      documentHandlerAdapter0.ignorableWhitespace(charArray0, (int) '[', (int) '[');
+      char[] charArray0 = new char[3];
+      documentHandlerAdapter0.ignorableWhitespace(charArray0, (int) '\u0000', 1143);
   }
 
   //Test case number: 7
@@ -124,186 +120,174 @@ public class DocumentHandlerAdapterEvoSuiteTest {
 
   //Test case number: 8
   /*
-   * 8 covered goals:
+   * 14 covered goals:
    * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - true
    * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L109 - false
    * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - true
    * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I38 Branch 4 IFNONNULL L114 - false
    * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I42 Branch 5 IFNULL L116 - false
    * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I46 Branch 6 IF_ICMPGE L116 - true
-   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I62 Branch 7 IFNULL L123 - true
-   * 8 nu.staldal.xmlutil.DocumentHandlerAdapter.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 25 IFNE L217 - false
+   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I62 Branch 7 IFNULL L123 - false
+   * 8 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I66 Branch 8 IFLE L123 - false
+   * 9 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - false
+   * 10 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - true
+   * 11 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - true
+   * 12 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - false
+   * 13 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I245 Branch 16 IFNE L161 - false
+   * 14 nu.staldal.xmlutil.DocumentHandlerAdapter.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 25 IFNE L217 - false
    */
   @Test
   public void test8()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      documentHandlerAdapter0.startPrefixMapping("", "");
-      // Undeclared exception!
-      try {
-        documentHandlerAdapter0.startElement("J3", "J3", "", (Attributes) attributes2Impl0);
-        fail("Expecting exception: Error");
-      } catch(Error e) {
-        /*
-         * no prefix for 'J3'
-         */
-      }
+      documentHandlerAdapter0.startPrefixMapping("", "rP1G}3N]");
+      documentHandlerAdapter0.startElement("rP1G}3N]", "rP1G}3N]", "", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 9
   /*
-   * 6 covered goals:
+   * 3 covered goals:
    * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L109 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I46 Branch 6 IF_ICMPGE L116 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - true
-   * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - true
-   * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - false
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I62 Branch 7 IFNULL L123 - true
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - false
    */
   @Test
   public void test9()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      documentHandlerAdapter0.startElement("", (String) null, (String) null, (Attributes) attributes2Impl0);
-      assertEquals(0, attributes2Impl0.getLength());
+      // Undeclared exception!
+      try {
+        documentHandlerAdapter0.startElement("#a@PH$<TE", "#a@PH$<TE", (String) null, (Attributes) attributes2Impl0);
+        fail("Expecting exception: Error");
+      } catch(Error e) {
+        /*
+         * no prefix for '#a@PH$<TE'
+         */
+      }
   }
 
   //Test case number: 10
   /*
-   * 4 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I38 Branch 4 IFNONNULL L114 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - true
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I245 Branch 16 IFNE L161 - true
+   * 1 covered goal:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - false
    */
   @Test
   public void test10()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.startPrefixMapping("5-#G8ovGP>", "5-#G8ovGP>");
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      documentHandlerAdapter0.startElement("5-#G8ovGP>", "o>(Y", "", (Attributes) attributesImpl0);
-      assertEquals(0, attributesImpl0.getLength());
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      documentHandlerAdapter0.startElement("", "Lz9h!Y-+.2Nsxr-ES", "3%8=OMy", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 11
   /*
-   * 5 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I62 Branch 7 IFNULL L123 - false
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I66 Branch 8 IFLE L123 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I245 Branch 16 IFNE L161 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - false
-   * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - false
+   * 4 covered goals:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I38 Branch 4 IFNONNULL L114 - true
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - true
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I245 Branch 16 IFNE L161 - true
+   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - false
    */
   @Test
   public void test11()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
+      documentHandlerAdapter0.startPrefixMapping("{5q&5mNbZ5]FE6E", "");
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      documentHandlerAdapter0.startPrefixMapping("", "J3");
-      documentHandlerAdapter0.startElement("J3", "J3", "", (Attributes) attributes2Impl0);
+      documentHandlerAdapter0.startElement("", "{5q&5mNbZ5]FE6E", "", (Attributes) attributes2Impl0);
       assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 12
   /*
    * 7 covered goals:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I46 Branch 6 IF_ICMPGE L116 - false
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - false
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L109 - false
+   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - true
+   * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I95 Branch 9 IFNE L130 - false
+   * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - true
+   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - true
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      HandlerBase handlerBase0 = new HandlerBase();
+      DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      documentHandlerAdapter0.startElement("", "", "", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
+  }
+
+  //Test case number: 13
+  /*
+   * 7 covered goals:
    * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I66 Branch 8 IFLE L123 - true
    * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - true
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - true
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L109 - true
    * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I38 Branch 4 IFNONNULL L114 - false
    * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I42 Branch 5 IFNULL L116 - false
    * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I46 Branch 6 IF_ICMPGE L116 - true
    * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I62 Branch 7 IFNULL L123 - false
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test13()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.startPrefixMapping("", "o>(Y");
-      AttributesImpl attributesImpl0 = new AttributesImpl();
+      documentHandlerAdapter0.startPrefixMapping("", ">ggYNqTdpQ+Pk$4v(5_");
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
       // Undeclared exception!
       try {
-        documentHandlerAdapter0.startElement("5-#G8ovGP>", "o>(Y", "", (Attributes) attributesImpl0);
+        documentHandlerAdapter0.startElement("#a@PH$<TE", "#a@PH$<TE", (String) null, (Attributes) attributes2Impl0);
         fail("Expecting exception: Error");
       } catch(Error e) {
         /*
-         * no prefix for '5-#G8ovGP>'
+         * no prefix for '#a@PH$<TE'
          */
       }
   }
 
-  //Test case number: 13
-  /*
-   * 5 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - false
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I137 Branch 11 IFNULL L137 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I140 Branch 12 IFNE L137 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I157 Branch 13 IFNE L141 - false
-   * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - false
-   */
-  @Test
-  public void test13()  throws Throwable  {
-      HandlerBase handlerBase0 = new HandlerBase();
-      DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      attributes2Impl0.addAttribute("", "", "", "xmlns:", "");
-      documentHandlerAdapter0.startElement("xmlns:", "xmlns:", "xmlns:", (Attributes) attributes2Impl0);
-      assertEquals(1, attributes2Impl0.getLength());
-  }
-
   //Test case number: 14
   /*
-   * 3 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I137 Branch 11 IFNULL L137 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I157 Branch 13 IFNE L141 - true
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I173 Branch 14 IFNONNULL L148 - false
+   * 1 covered goal:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - true
    */
   @Test
   public void test14()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      attributes2Impl0.addAttribute(",Azk=&", (String) null, (String) null, "xmlns:", (String) null);
       // Undeclared exception!
       try {
-        documentHandlerAdapter0.startElement("xmlns:", (String) null, "xmlns:", (Attributes) attributes2Impl0);
-        fail("Expecting exception: Error");
-      } catch(Error e) {
-        /*
-         * no attribute prefix for ',Azk=&'
-         */
+        documentHandlerAdapter0.endElement((String) null, (String) null, (String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
   //Test case number: 15
   /*
-   * 8 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I140 Branch 12 IFNE L137 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L102 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L109 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L109 - false
-   * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - true
-   * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I127 Branch 10 IF_ICMPGE L134 - false
-   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I137 Branch 11 IFNULL L137 - false
-   * 8 nu.staldal.xmlutil.DocumentHandlerAdapter.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I227 Branch 15 IFEQ L157 - true
+   * 2 covered goals:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - false
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 18 IFLE L182 - false
    */
   @Test
   public void test15()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      attributes2Impl0.addAttribute("Z8L(C5U*y32)xpA'L", "xmlns:", "xmlns:", "xmlns:", "xmlns:");
-      documentHandlerAdapter0.startElement("xmlns:", "xmlns:", "xmlns:", (Attributes) attributes2Impl0);
-      assertEquals(1, attributes2Impl0.getLength());
+      // Undeclared exception!
+      try {
+        documentHandlerAdapter0.endElement("*BGi?q:gD~", "*BGi?q:gD~", "*BGi?q:gD~");
+        fail("Expecting exception: EmptyStackException");
+      } catch(EmptyStackException e) {
+      }
   }
 
   //Test case number: 16
   /*
    * 5 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - true
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 18 IFLE L182 - true
    * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 19 IFNONNULL L187 - false
    * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I27 Branch 20 IFNULL L189 - false
    * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I31 Branch 21 IF_ICMPGE L189 - true
@@ -315,11 +299,11 @@ public class DocumentHandlerAdapterEvoSuiteTest {
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
       // Undeclared exception!
       try {
-        documentHandlerAdapter0.endElement("xlns:", "xlns:", (String) null);
+        documentHandlerAdapter0.endElement("<4S", "", "");
         fail("Expecting exception: Error");
       } catch(Error e) {
         /*
-         * no prefix for 'xlns:'
+         * no prefix for '<4S'
          */
       }
   }
@@ -327,28 +311,22 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   //Test case number: 17
   /*
    * 2 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - false
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 18 IFLE L182 - false
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 19 IFNONNULL L187 - true
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - true
    */
   @Test
   public void test17()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      // Undeclared exception!
-      try {
-        documentHandlerAdapter0.endElement("J3", "J3", "J3");
-        fail("Expecting exception: EmptyStackException");
-      } catch(EmptyStackException e) {
-      }
+      documentHandlerAdapter0.startPrefixMapping("bg2 ';3", "bg2 ';3");
+      documentHandlerAdapter0.endElement("bg2 ';3", "", "");
   }
 
   //Test case number: 18
   /*
-   * 4 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 18 IFLE L182 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I31 Branch 21 IF_ICMPGE L189 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - false
-   * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - false
+   * 2 covered goals:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I31 Branch 21 IF_ICMPGE L189 - false
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - false
    */
   @Test
   public void test18()  throws Throwable  {
@@ -356,7 +334,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
       // Undeclared exception!
       try {
-        documentHandlerAdapter0.endElement("", "5-#G8ovGP>", "");
+        documentHandlerAdapter0.endElement("", "", "");
         fail("Expecting exception: EmptyStackException");
       } catch(EmptyStackException e) {
       }
@@ -364,35 +342,44 @@ public class DocumentHandlerAdapterEvoSuiteTest {
 
   //Test case number: 19
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 19 IFNONNULL L187 - true
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - true
+   * 3 covered goals:
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I47 Branch 22 IFNULL L196 - false
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I51 Branch 23 IFLE L196 - false
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - false
    */
   @Test
   public void test19()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.startPrefixMapping("xlns:", "xlns:");
-      documentHandlerAdapter0.endElement("xlns:", "xlns:", (String) null);
+      documentHandlerAdapter0.startPrefixMapping("", "Lz9h!Y-+.2Nsxr-ES");
+      documentHandlerAdapter0.endElement("Lz9h!Y-+.2Nsxr-ES", "Lz9h!Y-+.2Nsxr-ES", "");
   }
 
   //Test case number: 20
   /*
    * 7 covered goals:
-   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I47 Branch 22 IFNULL L196 - false
-   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I51 Branch 23 IFLE L196 - false
-   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - true
+   * 1 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I51 Branch 23 IFLE L196 - true
+   * 2 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 17 IFNULL L182 - false
+   * 3 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 18 IFLE L182 - true
    * 4 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I23 Branch 19 IFNONNULL L187 - false
    * 5 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I27 Branch 20 IFNULL L189 - false
    * 6 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I31 Branch 21 IF_ICMPGE L189 - true
-   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I80 Branch 24 IFNE L203 - false
+   * 7 nu.staldal.xmlutil.DocumentHandlerAdapter.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I47 Branch 22 IFNULL L196 - false
    */
   @Test
   public void test20()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
       documentHandlerAdapter0.startPrefixMapping("", "xmlns:");
-      documentHandlerAdapter0.endElement("xmlns:", "xmlns:", (String) null);
+      // Undeclared exception!
+      try {
+        documentHandlerAdapter0.endElement("{5q&5mNbZ5]FE6E", "{5q&5mNbZ5]FE6E", "");
+        fail("Expecting exception: Error");
+      } catch(Error e) {
+        /*
+         * no prefix for '{5q&5mNbZ5]FE6E'
+         */
+      }
   }
 
   //Test case number: 21
@@ -406,7 +393,7 @@ public class DocumentHandlerAdapterEvoSuiteTest {
   public void test21()  throws Throwable  {
       HandlerBase handlerBase0 = new HandlerBase();
       DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-      documentHandlerAdapter0.startPrefixMapping("", "");
-      documentHandlerAdapter0.startPrefixMapping("", "J3");
+      documentHandlerAdapter0.startPrefixMapping("Lz9h!Y-+.2Nsxr-ES", "3%8=OMy");
+      documentHandlerAdapter0.startPrefixMapping("", "Lz9h!Y-+.2Nsxr-ES");
   }
 }

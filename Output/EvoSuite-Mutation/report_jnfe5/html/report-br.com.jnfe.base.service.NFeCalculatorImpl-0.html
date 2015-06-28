@@ -22,10 +22,10 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: br.com.jnfe.base.service.NFeCalculatorImpl: 44.44%</ul><ul>
-<li>8382 fitness evaluations, 169 generations, 33444 statements, 5460 tests.
+<li>9462 fitness evaluations, 191 generations, 34359 statements, 6072 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/14 branches, 6/9 methods, 8/18 total goals
-<li>Mutation score: 4%
+<li>Mutation score: 9%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -52,16 +52,17 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.ZERO;
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = new BigDecimal((-1338));
 <span class="nocode"><a name="3">  3: </a></span>BigDecimal bigDecimal1 = nFeCalculatorImpl0.internalCalculate(bigDecimal0, bigDecimal0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, bigDecimal1.signum());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(bigDecimal1);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(17902, bigDecimal1.intValue());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.ZERO;
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = new BigDecimal((-1338));
 <span class="nocode"><a name="3">  3: </a></span>nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0.0F, bigDecimal0.floatValue(), 0.01F);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;-1338&quot;, bigDecimal0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -79,17 +80,16 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigInteger bigInteger0 = BigInteger.ZERO;
-<span class="nocode"><a name="3">  3: </a></span>BigDecimal bigDecimal0 = new BigDecimal(bigInteger0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Valor da base de c\u00E1lculo n\u00E3o pode ser nulo
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = new BigDecimal(1500);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Valor da base de c\u00E1lculo n\u00E3o pode ser nulo
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package br.com.jnfe.base.service;
@@ -217,7 +217,7 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7265367937148873017.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2561159035254289937.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -235,7 +235,7 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16590
+<li>process_communication_port: 12097
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

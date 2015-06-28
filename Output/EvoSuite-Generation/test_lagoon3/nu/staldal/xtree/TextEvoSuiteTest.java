@@ -10,67 +10,69 @@ import static org.junit.Assert.*;
 import nu.staldal.xtree.Text;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.XMLFilterImpl;
+import org.xml.sax.ext.DefaultHandler2;
 
 public class TextEvoSuiteTest {
 
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.xtree.Text.getValue()Ljava/lang/String;: root-Branch
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.Text.asCharArray()[C: root-Branch
    * 2 nu.staldal.xtree.Text.<init>(Ljava/lang/String;)V: root-Branch
+   * 3 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      Text text0 = new Text("Attribute ");
-      String string0 = text0.getValue();
-      assertEquals("Attribute ", string0);
-      assertNotNull(string0);
+      Text text0 = new Text("");
+      char[] charArray0 = text0.asCharArray();
+      assertEquals(true, text0.isWhitespaceNode());
+      assertNotNull(charArray0);
+      assertEquals("", text0.getValue());
   }
 
   //Test case number: 1
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.xtree.Text.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
-   * 2 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - false
+   * 1 covered goal:
+   * 1 nu.staldal.xtree.Text.getValue()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Text text0 = new Text("");
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      text0.toSAX((ContentHandler) xMLFilterImpl0);
-      assertEquals(true, text0.isWhitespaceNode());
-      assertEquals("", text0.getValue());
+      Text text0 = new Text(":E");
+      String string0 = text0.getValue();
+      assertEquals(":E", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - true
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - true
+   * 2 nu.staldal.xtree.Text.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   * 3 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - false
    */
   @Test
   public void test2()  throws Throwable  {
-      char[] charArray0 = new char[5];
-      Text text0 = new Text(charArray0, 1, 1, false);
-      assertNotNull(text0);
-      assertEquals("\u0000", text0.getValue());
+      Text text0 = new Text("");
+      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
+      text0.toSAX((ContentHandler) defaultHandler2_0);
+      text0.toSAX((ContentHandler) defaultHandler2_0);
+      assertEquals("", text0.getValue());
+      assertEquals(true, text0.isWhitespaceNode());
   }
 
   //Test case number: 3
   /*
-   * 6 covered goals:
-   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - false
-   * 2 nu.staldal.xtree.Text.isWhitespaceNode()Z: I17 Branch 6 IF_ICMPLE L123 - true
-   * 3 nu.staldal.xtree.Text.<init>([CIIZ)V: I23 Branch 3 IFNE L70 - true
-   * 4 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - true
-   * 5 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - false
-   * 6 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - false
+   * 4 covered goals:
+   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I17 Branch 6 IF_ICMPLE L123 - true
+   * 2 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - true
+   * 3 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - true
+   * 4 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - false
    */
   @Test
   public void test3()  throws Throwable  {
-      char[] charArray0 = new char[1];
-      Text text0 = new Text(charArray0, 0, 1, true);
+      char[] charArray0 = new char[5];
+      Text text0 = new Text(charArray0, 1, 1, false);
       assertNotNull(text0);
       
       boolean boolean0 = text0.isWhitespaceNode();
@@ -80,65 +82,63 @@ public class TextEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - true
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - false
+   * 2 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - false
+   * 3 nu.staldal.xtree.Text.<init>([CIIZ)V: I23 Branch 3 IFNE L70 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      char[] charArray0 = new char[5];
-      Text text0 = new Text(charArray0, 0, 0, true);
-      assertEquals("", text0.getValue());
+      char[] charArray0 = new char[2];
+      Text text0 = new Text(charArray0, 0, 2, false);
+      assertEquals("\u0000\u0000", text0.getValue());
       assertNotNull(text0);
   }
 
   //Test case number: 5
   /*
-   * 3 covered goals:
-   * 1 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - true
-   * 2 nu.staldal.xtree.Text.asCharArray()[C: root-Branch
-   * 3 nu.staldal.xtree.Text.obtainCharArray()V: I4 Branch 4 IFNONNULL L96 - false
+   * 2 covered goals:
+   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - true
+   * 2 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      Text text0 = new Text("");
-      char[] charArray0 = text0.asCharArray();
-      assertNotNull(charArray0);
+      char[] charArray0 = new char[5];
+      Text text0 = new Text(charArray0, 0, 0, false);
+      assertNotNull(text0);
       
-      char[] charArray1 = text0.asCharArray();
-      assertSame(charArray1, charArray0);
-      assertEquals(true, text0.isWhitespaceNode());
+      boolean boolean0 = text0.isWhitespaceNode();
+      assertEquals("", text0.getValue());
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 6
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - true
-   * 2 nu.staldal.xtree.Text.<init>(Ljava/lang/String;)V: root-Branch
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.Text.<init>([CIIZ)V: I23 Branch 3 IFNE L70 - true
+   * 2 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - false
+   * 3 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - false
    */
   @Test
   public void test6()  throws Throwable  {
-      Text text0 = new Text("");
-      boolean boolean0 = text0.isWhitespaceNode();
-      assertEquals(true, boolean0);
+      char[] charArray0 = new char[2];
+      Text text0 = new Text(charArray0, 0, 2, true);
+      assertNotNull(text0);
+      assertEquals("\u0000\u0000", text0.getValue());
   }
 
   //Test case number: 7
   /*
-   * 5 covered goals:
-   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I17 Branch 6 IF_ICMPLE L123 - false
-   * 2 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - false
-   * 3 nu.staldal.xtree.Text.<init>([CIIZ)V: I17 Branch 1 IFNE L70 - false
-   * 4 nu.staldal.xtree.Text.<init>([CIIZ)V: I21 Branch 2 IF_ICMPNE L70 - false
-   * 5 nu.staldal.xtree.Text.<init>([CIIZ)V: I23 Branch 3 IFNE L70 - false
+   * 3 covered goals:
+   * 1 nu.staldal.xtree.Text.isWhitespaceNode()Z: I9 Branch 5 IF_ICMPGE L121 - false
+   * 2 nu.staldal.xtree.Text.isWhitespaceNode()Z: I17 Branch 6 IF_ICMPLE L123 - false
+   * 3 nu.staldal.xtree.Text.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
-      char[] charArray0 = new char[1];
-      charArray0[0] = ':';
-      Text text0 = new Text(charArray0, 0, 1, false);
-      assertNotNull(text0);
-      
+      Text text0 = new Text(":E");
       boolean boolean0 = text0.isWhitespaceNode();
+      assertEquals(":E", text0.getValue());
       assertEquals(false, boolean0);
   }
 }

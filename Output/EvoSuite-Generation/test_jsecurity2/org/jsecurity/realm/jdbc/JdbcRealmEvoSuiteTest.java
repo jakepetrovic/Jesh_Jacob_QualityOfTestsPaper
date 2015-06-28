@@ -9,11 +9,17 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.LinkedHashSet;
 import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.sql.DataSource;
 import org.jsecurity.authc.AccountException;
 import org.jsecurity.authc.AuthenticationException;
@@ -23,8 +29,33 @@ import org.jsecurity.authz.AuthorizationException;
 import org.jsecurity.realm.jdbc.JdbcRealm;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class JdbcRealmEvoSuiteTest {
+
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
 
 
   //Test case number: 0
@@ -36,7 +67,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setUserRolesQuery("m,@NY6 }:d;:2");
+      jdbcRealm0.setUserRolesQuery((String) null);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_0", jdbcRealm0.getName());
   }
 
@@ -48,7 +79,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setPermissionsLookupEnabled(false);
+      jdbcRealm0.setPermissionsLookupEnabled(true);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_5", jdbcRealm0.getName());
   }
 
@@ -60,7 +91,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setPermissionsQuery("m,@NY6 }:d;:2");
+      jdbcRealm0.setPermissionsQuery((String) null);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_13", jdbcRealm0.getName());
   }
 
@@ -72,8 +103,8 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      char[] charArray0 = new char[4];
-      jdbcRealm0.buildAuthenticationInfo("", charArray0);
+      char[] charArray0 = new char[1];
+      jdbcRealm0.buildAuthenticationInfo("{wykI3:v?OUU", charArray0);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_18", jdbcRealm0.getName());
   }
 
@@ -97,7 +128,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setAuthenticationQuery("");
+      jdbcRealm0.setAuthenticationQuery("org.jsecurity.realm.jdbc.JdbcRealm_12822");
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_29", jdbcRealm0.getName());
   }
 
@@ -108,16 +139,25 @@ public class JdbcRealmEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      JdbcRealm jdbcRealm0 = new JdbcRealm();
-      char[] charArray0 = new char[1];
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("UTF-8", charArray0, false, (InetAddress) inet4Address0);
-      // Undeclared exception!
-      try {
-        jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+        try {
+          JdbcRealm jdbcRealm0 = new JdbcRealm();
+          char[] charArray0 = new char[5];
+          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("@", charArray0, (InetAddress) inet4Address0);
+          // Undeclared exception!
+          try {
+            jdbcRealm0.doGetAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+            fail("Expecting exception: NullPointerException");
+          } catch(NullPointerException e) {
+          }
+        } catch(Throwable t) {
+            // Need to catch declared exceptions
+        }
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
   }
 
   //Test case number: 7
@@ -127,8 +167,8 @@ public class JdbcRealmEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, "m,@NY6 }:d;:2", true);
       try {
         jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
         fail("Expecting exception: AccountException");
@@ -147,12 +187,10 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) usernamePasswordToken0, "SHA-512");
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        jdbcRealm0.checkRoles((PrincipalCollection) simplePrincipalCollection0, (Collection<String>) linkedHashSet0);
+        jdbcRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -179,15 +217,34 @@ public class JdbcRealmEvoSuiteTest {
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.realm.jdbc.JdbcRealm.getPermissions(Ljava/sql/Connection;Ljava/lang/String;Ljava/util/Collection;)Ljava/util/Set;: I22 Branch 11 IFEQ L334 - true
-   * 2 org.jsecurity.realm.jdbc.JdbcRealm.<init>()V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      jdbcRealm0.getPermissions((Connection) null, "I5X", (Collection<String>) linkedHashSet0);
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      jdbcRealm0.getPermissions((Connection) null, "@", (Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_68", jdbcRealm0.getName());
+  }
+
+  //Test case number: 11
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.realm.jdbc.JdbcRealm.getPermissions(Ljava/sql/Connection;Ljava/lang/String;Ljava/util/Collection;)Ljava/util/Set;: I22 Branch 11 IFEQ L334 - false
+   * 2 org.jsecurity.realm.jdbc.JdbcRealm.<init>()V: root-Branch
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      JdbcRealm jdbcRealm0 = new JdbcRealm();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) usernamePasswordToken0, "'@<sxa#/S/NPi.{");
+      Set<String> set0 = simplePrincipalCollection0.getRealmNames();
+      // Undeclared exception!
+      try {
+        jdbcRealm0.getPermissions((Connection) null, "'@<sxa#/S/NPi.{", (Collection<String>) set0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 }

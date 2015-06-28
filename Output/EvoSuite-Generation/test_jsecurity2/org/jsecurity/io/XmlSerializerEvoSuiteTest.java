@@ -14,16 +14,17 @@ public class XmlSerializerEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - true
-   * 2 org.jsecurity.io.XmlSerializer.<init>()V: root-Branch
+   * 3 covered goals:
+   * 1 org.jsecurity.io.XmlSerializer.deserialize([B)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L71 - true
+   * 2 org.jsecurity.io.XmlSerializer.serialize(Ljava/lang/Object;)[B: I3 Branch 1 IFNONNULL L49 - true
+   * 3 org.jsecurity.io.XmlSerializer.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
-      Object object0 = new Object();
-      byte[] byteArray0 = xmlSerializer0.serialize(object0);
-      assertNotNull(byteArray0);
+      byte[] byteArray0 = xmlSerializer0.serialize((Object) "0ZN");
+      String string0 = (String)xmlSerializer0.deserialize(byteArray0);
+      assertEquals("0ZN", string0);
   }
 
   //Test case number: 1
@@ -47,32 +48,12 @@ public class XmlSerializerEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.io.XmlSerializer.deserialize([B)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L71 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      XmlSerializer xmlSerializer0 = new XmlSerializer();
-      byte[] byteArray0 = new byte[1];
-      // Undeclared exception!
-      try {
-        xmlSerializer0.deserialize(byteArray0);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * 0
-         */
-      }
-  }
-
-  //Test case number: 3
-  /*
    * 2 covered goals:
    * 1 org.jsecurity.io.XmlSerializer.deserialize([B)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L71 - false
    * 2 org.jsecurity.io.XmlSerializer.<init>()V: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test2()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
       // Undeclared exception!
       try {

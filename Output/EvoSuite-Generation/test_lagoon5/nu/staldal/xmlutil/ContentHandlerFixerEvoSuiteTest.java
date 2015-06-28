@@ -14,7 +14,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
-import org.xml.sax.ext.DefaultHandler2;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.LocatorImpl;
@@ -26,15 +25,17 @@ public class ContentHandlerFixerEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
+   * 4 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.endPrefixMapping(Ljava/lang/String;)V: root-Branch
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;ZZ)V: root-Branch
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;Z)V: root-Branch
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;ZZ)V: root-Branch
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;Z)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
-      contentHandlerFixer0.endPrefixMapping("xmln:");
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      contentHandlerFixer0.endPrefixMapping("/l=Q9+y&i]$$<VP,14");
   }
 
   //Test case number: 1
@@ -45,15 +46,14 @@ public class ContentHandlerFixerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
       contentHandlerFixer0.startDocument();
   }
 
   //Test case number: 2
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.skippedEntity(Ljava/lang/String;)V: root-Branch
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
@@ -69,10 +69,10 @@ public class ContentHandlerFixerEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
-      char[] charArray0 = new char[1];
-      contentHandlerFixer0.characters(charArray0, 0, 1);
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      char[] charArray0 = new char[6];
+      contentHandlerFixer0.characters(charArray0, (int) '.', (int) '.');
   }
 
   //Test case number: 4
@@ -94,10 +94,10 @@ public class ContentHandlerFixerEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
       char[] charArray0 = new char[1];
-      contentHandlerFixer0.ignorableWhitespace(charArray0, (int) '\u0000', 712);
+      contentHandlerFixer0.ignorableWhitespace(charArray0, 0, 0);
   }
 
   //Test case number: 6
@@ -108,8 +108,8 @@ public class ContentHandlerFixerEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false);
-      contentHandlerFixer0.processingInstruction("  MeA3&Y-1fjlk`", "  MeA3&Y-1fjlk`");
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      contentHandlerFixer0.processingInstruction("|S#", "|S#");
   }
 
   //Test case number: 7
@@ -119,203 +119,31 @@ public class ContentHandlerFixerEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
       LocatorImpl locatorImpl0 = new LocatorImpl();
       contentHandlerFixer0.setDocumentLocator((Locator) locatorImpl0);
-      assertNull(locatorImpl0.getSystemId());
+      assertNull(locatorImpl0.getPublicId());
   }
 
   //Test case number: 8
   /*
-   * 22 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.genPrefix()Ljava/lang/String;: root-Branch
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - true
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - false
-   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I60 Branch 6 IFNULL L164 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - false
-   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I67 Branch 8 IFNULL L164 - false
-   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I71 Branch 9 IF_ICMPGE L164 - true
-   * 11 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - false
-   * 12 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I91 Branch 11 IFLE L172 - true
-   * 13 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - true
-   * 14 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - true
-   * 15 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - false
-   * 16 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - true
-   * 17 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - false
-   * 18 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I278 Branch 21 IFNE L219 - true
-   * 19 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I278 Branch 21 IFNE L219 - false
-   * 20 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - false
-   * 21 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I322 Branch 23 IFEQ L232 - false
-   * 22 nu.staldal.xmlutil.ContentHandlerFixer.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 39 IFNE L307 - false
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
-      contentHandlerFixer0.startPrefixMapping("", "xmln:");
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      // Undeclared exception!
-      try {
-        contentHandlerFixer0.startElement("", "", "", (Attributes) attributesImpl0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 9
-  /*
-   * 6 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I67 Branch 8 IFNULL L164 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I322 Branch 23 IFEQ L232 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - true
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - false
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      // Undeclared exception!
-      try {
-        contentHandlerFixer0.startElement("", "", "", (Attributes) attributesImpl0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 10
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - true
-   */
-  @Test
-  public void test10()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      // Undeclared exception!
-      try {
-        contentHandlerFixer0.startElement((String) null, (String) null, (String) null, (Attributes) attributesImpl0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
-  }
-
-  //Test case number: 11
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - false
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      contentHandlerFixer0.startElement("v)#RFKsOfc", "v)#RFKsOfc", "v)#RFKsOfc", (Attributes) attributesImpl0);
-      assertEquals(0, attributesImpl0.getLength());
-  }
-
-  //Test case number: 12
-  /*
-   * 5 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - false
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - true
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - false
-   */
-  @Test
-  public void test12()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      contentHandlerFixer0.startElement("", "", "", (Attributes) attributesImpl0);
-      assertEquals(0, attributesImpl0.getLength());
-  }
-
-  //Test case number: 13
-  /*
-   * 2 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - true
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - true
-   */
-  @Test
-  public void test13()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
-      contentHandlerFixer0.startPrefixMapping(" E&Iv)dW-", " E&Iv)dW-");
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      contentHandlerFixer0.startElement(" E&Iv)dW-", "", "", (Attributes) attributes2Impl0);
-      assertEquals(0, attributes2Impl0.getLength());
-  }
-
-  //Test case number: 14
-  /*
-   * 11 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - true
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I103 Branch 35 IFNE L284 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 26 IFLE L254 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - true
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I127 Branch 36 IFEQ L287 - true
-   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I140 Branch 37 IFNE L289 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - true
-   * 9 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - false
-   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - true
-   * 11 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-      contentHandlerFixer0.startElement("$O~Wj=2(e", "$O~Wj=2(e", "", (Attributes) attributes2Impl0);
-      contentHandlerFixer0.endElement("$O~Wj=2(e", "", "");
-  }
-
-  //Test case number: 15
-  /*
-   * 4 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I91 Branch 11 IFLE L172 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - false
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      contentHandlerFixer0.startPrefixMapping("", "$O~Wj=2(e");
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-      contentHandlerFixer0.startElement("$O~Wj=2(e", "$O~Wj=2(e", "", (Attributes) attributes2Impl0);
-      assertEquals(0, attributes2Impl0.getLength());
-  }
-
-  //Test case number: 16
-  /*
    * 20 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I159 Branch 14 IFNULL L188 - false
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I162 Branch 15 IFNE L188 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I179 Branch 16 IFEQ L192 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.genPrefix()Ljava/lang/String;: root-Branch
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - false
-   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - true
-   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - true
-   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - false
-   * 11 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I60 Branch 6 IFNULL L164 - false
-   * 12 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - true
-   * 13 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - true
-   * 14 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - true
-   * 15 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - true
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - true
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.genPrefix()Ljava/lang/String;: root-Branch
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - false
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - false
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - true
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - false
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - true
+   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - true
+   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - false
+   * 11 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I159 Branch 14 IFNULL L188 - false
+   * 12 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I162 Branch 15 IFNE L188 - false
+   * 13 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I179 Branch 16 IFEQ L192 - false
+   * 14 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I182 Branch 17 IFEQ L192 - true
+   * 15 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I198 Branch 18 IFNONNULL L199 - false
    * 16 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - true
    * 17 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - false
    * 18 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I322 Branch 23 IFEQ L232 - true
@@ -323,63 +151,184 @@ public class ContentHandlerFixerEvoSuiteTest {
    * 20 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - true
    */
   @Test
-  public void test16()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      attributesImpl0.addAttribute("", "", "", "", "$O~Wj=2(e");
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-      contentHandlerFixer0.startElement("$O~Wj=2(e", "$O~Wj=2(e", "", (Attributes) attributes2Impl0);
+  public void test8()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      attributes2Impl0.addAttribute("/l=Q9+y&i]$$<VP,14", "/l=Q9+y&i]$$<VP,14", "", "/l=Q9+y&i]$$<VP,14", "");
+      contentHandlerFixer0.startElement("", "", "/l=Q9+y&i]$$<VP,14", (Attributes) attributes2Impl0);
+      contentHandlerFixer0.startElement("", "", "", (Attributes) attributes2Impl0);
       assertEquals(1, attributes2Impl0.getLength());
   }
 
-  //Test case number: 17
+  //Test case number: 9
   /*
-   * 4 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - true
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - false
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I127 Branch 36 IFEQ L287 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I140 Branch 37 IFNE L289 - true
+   * 9 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I67 Branch 8 IFNULL L164 - false
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I71 Branch 9 IF_ICMPGE L164 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - false
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I91 Branch 11 IFLE L172 - true
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I60 Branch 6 IFNULL L164 - false
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - false
+   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 39 IFNE L307 - false
    */
   @Test
-  public void test17()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler2_0, true, true);
+  public void test9()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      contentHandlerFixer0.startPrefixMapping("", " ");
+      contentHandlerFixer0.startElement("", "", "", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
+  }
+
+  //Test case number: 10
+  /*
+   * 3 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I159 Branch 14 IFNULL L188 - true
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - false
+   */
+  @Test
+  public void test10()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, false, true);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      attributes2Impl0.addAttribute((String) null, (String) null, (String) null, (String) null, (String) null);
       // Undeclared exception!
       try {
-        contentHandlerFixer0.endElement((String) null, (String) null, (String) null);
-        fail("Expecting exception: EmptyStackException");
-      } catch(EmptyStackException e) {
+        contentHandlerFixer0.startElement((String) null, (String) null, (String) null, (Attributes) attributes2Impl0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 18
+  //Test case number: 11
+  /*
+   * 8 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I162 Branch 15 IFNE L188 - true
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I87 Branch 10 IFNULL L172 - true
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - true
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I278 Branch 21 IFNE L219 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - true
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - false
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0, true);
+      ContentHandlerFixer contentHandlerFixer1 = new ContentHandlerFixer((ContentHandler) contentHandlerFixer0, true);
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      contentHandlerFixer1.startElement("O*", "O*", "", (Attributes) attributesImpl0);
+      assertFalse(contentHandlerFixer0.equals(contentHandlerFixer1));
+  }
+
+  //Test case number: 12
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I179 Branch 16 IFEQ L192 - true
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      attributes2Impl0.addAttribute("", "", "", "", "");
+      contentHandlerFixer0.startElement("", "", "/l=Q9+y&i]$$<VP,14", (Attributes) attributes2Impl0);
+      assertEquals(1, attributes2Impl0.getLength());
+  }
+
+  //Test case number: 13
+  /*
+   * 21 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I198 Branch 18 IFNONNULL L199 - true
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.genPrefix()Ljava/lang/String;: root-Branch
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - false
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - true
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I32 Branch 4 IFEQ L154 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I49 Branch 5 IFNONNULL L161 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I60 Branch 6 IFNULL L164 - false
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I64 Branch 7 IF_ICMPGE L164 - false
+   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I67 Branch 8 IFNULL L164 - true
+   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I117 Branch 12 IFNE L181 - false
+   * 11 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - false
+   * 12 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I159 Branch 14 IFNULL L188 - false
+   * 13 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I162 Branch 15 IFNE L188 - false
+   * 14 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I179 Branch 16 IFEQ L192 - false
+   * 15 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I182 Branch 17 IFEQ L192 - true
+   * 16 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I198 Branch 18 IFNONNULL L199 - false
+   * 17 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - true
+   * 18 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - false
+   * 19 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I322 Branch 23 IFEQ L232 - true
+   * 20 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I322 Branch 23 IFEQ L232 - false
+   * 21 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - true
+   */
+  @Test
+  public void test13()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      attributes2Impl0.addAttribute(" ", " ", "", " ", "");
+      contentHandlerFixer0.startElement(" ", "", " ", (Attributes) attributes2Impl0);
+      contentHandlerFixer0.startElement("", "", "", (Attributes) attributes2Impl0);
+      assertEquals(1, attributes2Impl0.getLength());
+  }
+
+  //Test case number: 14
+  /*
+   * 10 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I278 Branch 21 IFNE L219 - false
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 1 IFNE L143 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I18 Branch 2 IFNULL L150 - false
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I21 Branch 3 IFLE L150 - false
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I149 Branch 13 IF_ICMPGE L185 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I250 Branch 19 IFEQ L211 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - true
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I260 Branch 20 IFEQ L215 - false
+   * 9 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I312 Branch 22 IFNE L230 - true
+   * 10 nu.staldal.xmlutil.ContentHandlerFixer.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I352 Branch 24 IFEQ L243 - false
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0, true, true);
+      contentHandlerFixer0.startPrefixMapping("", "");
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      contentHandlerFixer0.startElement("A#/Z0C{H", "A#/Z0C{H", "A#/Z0C{H", (Attributes) attributesImpl0);
+      assertEquals(0, attributesImpl0.getLength());
+  }
+
+  //Test case number: 15
   /*
    * 7 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - false
    * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 26 IFLE L254 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - true
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - false
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I45 Branch 29 IFNULL L268 - false
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - true
-   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I72 Branch 33 IFNULL L276 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - true
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I72 Branch 33 IFNULL L276 - true
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I45 Branch 29 IFNULL L268 - false
    */
   @Test
-  public void test18()  throws Throwable  {
+  public void test15()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
       ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
       // Undeclared exception!
       try {
-        contentHandlerFixer0.endElement("$O~Wj=2(e", "", "");
+        contentHandlerFixer0.endElement(".$ns", "", "");
         fail("Expecting exception: Error");
       } catch(Error e) {
         /*
-         * No prefix for $O~Wj=2(e
+         * No prefix for .$ns
          */
       }
   }
 
-  //Test case number: 19
+  //Test case number: 16
   /*
    * 5 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 26 IFLE L254 - false
@@ -389,50 +338,78 @@ public class ContentHandlerFixerEvoSuiteTest {
    * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - false
    */
   @Test
-  public void test19()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
-      // Undeclared exception!
-      try {
-        contentHandlerFixer0.endElement(" E&Iv)dW-", " E&Iv)dW-", " E&Iv)dW-");
-        fail("Expecting exception: EmptyStackException");
-      } catch(EmptyStackException e) {
-      }
-  }
-
-  //Test case number: 20
-  /*
-   * 3 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I52 Branch 31 IFNULL L268 - true
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I103 Branch 35 IFNE L284 - false
-   */
-  @Test
-  public void test20()  throws Throwable  {
+  public void test16()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
       ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
       // Undeclared exception!
       try {
-        contentHandlerFixer0.endElement("", "", "");
+        contentHandlerFixer0.endElement("/l=Q9+y&i]$$<VP,J14", "/l=Q9+y&i]$$<VP,J14", "M)-WoSori>-MlDK");
         fail("Expecting exception: EmptyStackException");
       } catch(EmptyStackException e) {
       }
   }
 
-  //Test case number: 21
+  //Test case number: 17
   /*
-   * 5 covered goals:
+   * 6 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - true
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I103 Branch 35 IFNE L284 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - true
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I140 Branch 37 IFNE L289 - false
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - false
+   */
+  @Test
+  public void test17()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      contentHandlerFixer0.startPrefixMapping("THpfd~", "THpfd~");
+      contentHandlerFixer0.endElement("THpfd~", (String) null, (String) null);
+  }
+
+  //Test case number: 18
+  /*
+   * 7 covered goals:
+   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - false
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I52 Branch 31 IFNULL L268 - true
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I103 Branch 35 IFNE L284 - false
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - false
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I127 Branch 36 IFEQ L287 - true
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I127 Branch 36 IFEQ L287 - false
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I140 Branch 37 IFNE L289 - true
+   */
+  @Test
+  public void test18()  throws Throwable  {
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0, true, true);
+      ContentHandlerFixer contentHandlerFixer1 = new ContentHandlerFixer((ContentHandler) contentHandlerFixer0, true);
+      // Undeclared exception!
+      try {
+        contentHandlerFixer1.endElement("", "", "");
+        fail("Expecting exception: EmptyStackException");
+      } catch(EmptyStackException e) {
+      }
+  }
+
+  //Test case number: 19
+  /*
+   * 10 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I52 Branch 31 IFNULL L268 - false
    * 2 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I56 Branch 32 IF_ICMPGE L268 - true
    * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I72 Branch 33 IFNULL L276 - false
    * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I76 Branch 34 IFLE L276 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - false
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - false
+   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 26 IFLE L254 - true
+   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - true
+   * 8 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - false
+   * 9 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I45 Branch 29 IFNULL L268 - false
+   * 10 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - false
    */
   @Test
-  public void test21()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) defaultHandler0);
-      contentHandlerFixer0.startPrefixMapping("", "$O~Wj=2(e");
+  public void test19()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      contentHandlerFixer0.startPrefixMapping("", "/l=Q9+y&i]$$<VP,14");
       // Undeclared exception!
       try {
         contentHandlerFixer0.endElement("", "", "");
@@ -444,44 +421,20 @@ public class ContentHandlerFixerEvoSuiteTest {
       }
   }
 
-  //Test case number: 22
+  //Test case number: 20
   /*
-   * 14 covered goals:
-   * 1 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I76 Branch 34 IFLE L276 - false
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;)V: root-Branch
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I3 Branch 25 IFNULL L254 - false
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I6 Branch 26 IFLE L254 - true
-   * 5 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I17 Branch 27 IFEQ L258 - true
-   * 6 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I34 Branch 28 IFNONNULL L265 - false
-   * 7 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I45 Branch 29 IFNULL L268 - false
-   * 8 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I49 Branch 30 IF_ICMPGE L268 - true
-   * 9 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I72 Branch 33 IFNULL L276 - false
-   * 10 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I103 Branch 35 IFNE L284 - false
-   * 11 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I127 Branch 36 IFEQ L287 - true
-   * 12 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I140 Branch 37 IFNE L289 - false
-   * 13 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - true
-   * 14 nu.staldal.xmlutil.ContentHandlerFixer.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I150 Branch 38 IFEQ L291 - false
-   */
-  @Test
-  public void test22()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLFilterImpl0);
-      contentHandlerFixer0.startPrefixMapping("", "$O~Wj=2(e");
-      contentHandlerFixer0.endElement("$O~Wj=2(e", "", "");
-  }
-
-  //Test case number: 23
-  /*
-   * 4 covered goals:
+   * 5 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerFixer.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 39 IFNE L307 - true
-   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;ZZ)V: root-Branch
-   * 3 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;Z)V: root-Branch
-   * 4 nu.staldal.xmlutil.ContentHandlerFixer.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 39 IFNE L307 - false
+   * 2 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   * 3 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;ZZ)V: root-Branch
+   * 4 nu.staldal.xmlutil.ContentHandlerFixer.<init>(Lorg/xml/sax/ContentHandler;Z)V: root-Branch
+   * 5 nu.staldal.xmlutil.ContentHandlerFixer.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 39 IFNE L307 - false
    */
   @Test
-  public void test23()  throws Throwable  {
-      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) null, true);
-      contentHandlerFixer0.startPrefixMapping("", "");
-      contentHandlerFixer0.startPrefixMapping("", "Re9G<QeHzmxPR");
+  public void test20()  throws Throwable  {
+      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
+      ContentHandlerFixer contentHandlerFixer0 = new ContentHandlerFixer((ContentHandler) xMLReaderAdapter0);
+      contentHandlerFixer0.startPrefixMapping("THpfd~", "THpfd~");
+      contentHandlerFixer0.startPrefixMapping("/l=Q9+y&i]$$<VP,14", "/l=Q9+y&i]$$<VP,14");
   }
 }

@@ -26,7 +26,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, "$O'");
+      AuthCallback authCallback0 = new AuthCallback(false, "*");
       AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
       // Undeclared exception!
       try {
@@ -50,7 +50,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, "System authorization required");
+      AuthCallback authCallback0 = new AuthCallback(false, "Authorization required");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {
@@ -71,8 +71,8 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
+      AuthCallback authCallback0 = new AuthCallback(false, "Adm&nisyrator credentials needed. ");
       AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
-      AuthCallback authCallback0 = new AuthCallback(false, "(>J");
       // Undeclared exception!
       try {
         authCallback0.getCredentials(authenticationReason0);
@@ -96,7 +96,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "SAP System Aminitrator credentials needed. ");
+      AuthCallback authCallback0 = new AuthCallback(true, "HEP-;k");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {

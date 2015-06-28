@@ -21,74 +21,70 @@ net.sf.xisemele.impl.OperationsHelperImpl
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.xisemele.impl.OperationsHelperImpl: 48.15%</ul><ul>
-<li>5104 fitness evaluations, 104 generations, 25771 statements, 3346 tests.
+<ul><li>Target class: net.sf.xisemele.impl.OperationsHelperImpl: 37.04%</ul><ul>
+<li>5408 fitness evaluations, 110 generations, 24506 statements, 3483 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 12/26 branches, 5/5 methods, 13/27 total goals
-<li>Mutation score: 22%
+<li>Coverage: 9/26 branches, 5/5 methods, 10/27 total goals
+<li>Mutation score: 21%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="2">  2: </a></span>Node node0 = operationsHelperImpl0.find((Document) null, &quot;/&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(node0);
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="3">  3: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>Node node0 = operationsHelperImpl0.nodeWithName(list0, &quot;2Y.i~6gwa&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertNull(node0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="2">  2: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="3">  3: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
+<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.appendChild((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.children((Node) iIOMetadataNode1);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, list0.isEmpty());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  operationsHelperImpl0.find((Document) null, &quot;:Mwget)89jB:EqA'\&quot;/&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>Node node0 = operationsHelperImpl0.find((Document) null, &quot;/&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(node0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;.ye_&quot;);
-<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List&lt;Node&gt;) linkedList0, &quot;.ye_&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(iIOMetadataNode1.getPrefix());
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  operationsHelperImpl0.find((Document) null, &quot;`&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;v.ye_&quot;);
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)operationsHelperImpl0.nodeWithName((List&lt;Node&gt;) linkedList0, &quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(iIOMetadataNode1);
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="3">  3: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.children((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>List&lt;Node&gt; list1 = operationsHelperImpl0.sublistWithName(list0, &quot;2Y.i~6gwa&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, list1.isEmpty());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;.ye_&quot;);
-<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.sublistWithName((List&lt;Node&gt;) linkedList0, &quot;.ye_&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, list0.size());
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(list0);
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>OperationsHelperImpl operationsHelperImpl0 = new OperationsHelperImpl();
 <span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;v.ye_&quot;);
+<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
 <span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>List&lt;Node&gt; list0 = operationsHelperImpl0.sublistWithName((List&lt;Node&gt;) linkedList0, &quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(list0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(0, list0.size());
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  operationsHelperImpl0.sublistWithName((List&lt;Node&gt;) linkedList0, (String) null);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * StringEquals is not supposed to work on a null caller
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -119,9 +115,9 @@ net.sf.xisemele.impl.OperationsHelperImpl
 <span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">      ArrayList&lt;Node&gt; children = new ArrayList&lt;Node&gt;();</span>
 <span class="nocode"><a name="27"> 27: </a></span><span style="background-color: #ffffcc">      NodeList nodeList = node.getChildNodes();</span>
 <span class="nocode"><a name="28"> 28: </a></span><span style="background-color: #ffffcc">      for (int index = 0; index &lt; nodeList.getLength(); index++) {</span>
-<span class="nocode"><a name="29"> 29: </a></span>         Node item = nodeList.item(index);
-<span class="nocode"><a name="30"> 30: </a></span>         if (item.getNodeType() == Node.ELEMENT_NODE) {
-<span class="nocode"><a name="31"> 31: </a></span>            children.add(item);
+<span class="nocode"><a name="29"> 29: </a></span><span style="background-color: #ffffcc">         Node item = nodeList.item(index);</span>
+<span class="nocode"><a name="30"> 30: </a></span><span style="background-color: #ffffcc">         if (item.getNodeType() == Node.ELEMENT_NODE) {</span>
+<span class="nocode"><a name="31"> 31: </a></span><span style="background-color: #ffffcc">            children.add(item);</span>
 <span class="nocode"><a name="32"> 32: </a></span>         }
 <span class="nocode"><a name="33"> 33: </a></span>      }
 <span class="nocode"><a name="34"> 34: </a></span><span style="background-color: #ffffcc">      return children;</span>
@@ -160,10 +156,10 @@ net.sf.xisemele.impl.OperationsHelperImpl
 <span class="nocode"><a name="67"> 67: </a></span>    */
 <span class="nocode"><a name="68"> 68: </a></span>   public Node nodeWithName(List&lt;Node&gt; nodes, String name) {
 <span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">      for (Node node : nodes) {</span>
-<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">         if (node.getNodeName().equals(name)) {</span>
-<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">            return node;</span>
+<span class="nocode"><a name="70"> 70: </a></span>         if (node.getNodeName().equals(name)) {
+<span class="nocode"><a name="71"> 71: </a></span>            return node;
 <span class="nocode"><a name="72"> 72: </a></span>         }
-<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">      }</span>
+<span class="nocode"><a name="73"> 73: </a></span>      }
 <span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">      return null;</span>
 <span class="nocode"><a name="75"> 75: </a></span>   }
 <span class="nocode"><a name="76"> 76: </a></span>
@@ -174,9 +170,9 @@ net.sf.xisemele.impl.OperationsHelperImpl
 <span class="nocode"><a name="81"> 81: </a></span><span style="background-color: #ffffcc">      ArrayList&lt;Node&gt; sublist = new ArrayList&lt;Node&gt;();</span>
 <span class="nocode"><a name="82"> 82: </a></span><span style="background-color: #ffffcc">      for (Node node : nodes) {</span>
 <span class="nocode"><a name="83"> 83: </a></span><span style="background-color: #ffffcc">         if (node.getNodeName().equals(name)) {</span>
-<span class="nocode"><a name="84"> 84: </a></span><span style="background-color: #ffffcc">            sublist.add(node);</span>
+<span class="nocode"><a name="84"> 84: </a></span>            sublist.add(node);
 <span class="nocode"><a name="85"> 85: </a></span>         }
-<span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">      }</span>
+<span class="nocode"><a name="86"> 86: </a></span>      }
 <span class="nocode"><a name="87"> 87: </a></span><span style="background-color: #ffffcc">      return sublist;</span>
 <span class="nocode"><a name="88"> 88: </a></span>   }
 <span class="nocode"><a name="89"> 89: </a></span>}
@@ -184,7 +180,7 @@ net.sf.xisemele.impl.OperationsHelperImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3704626444237955745.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3203091113678245375.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -202,7 +198,7 @@ net.sf.xisemele.impl.OperationsHelperImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10820
+<li>process_communication_port: 7943
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

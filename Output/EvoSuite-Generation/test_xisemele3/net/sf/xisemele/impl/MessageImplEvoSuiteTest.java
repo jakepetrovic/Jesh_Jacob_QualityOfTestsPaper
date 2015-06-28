@@ -25,11 +25,11 @@ public class MessageImplEvoSuiteTest {
       Object[] objectArray0 = new Object[7];
       // Undeclared exception!
       try {
-        messageImpl0.getMessage("", objectArray0);
+        messageImpl0.getMessage("$d|('tusl", objectArray0);
         fail("Expecting exception: MissingResourceException");
       } catch(MissingResourceException e) {
         /*
-         * Can't find resource for bundle java.util.PropertyResourceBundle, key 
+         * Can't find resource for bundle java.util.PropertyResourceBundle, key $d|('tusl
          */
       }
   }

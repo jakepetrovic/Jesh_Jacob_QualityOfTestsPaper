@@ -32,7 +32,7 @@ public class WriterImplEvoSuiteTest {
       Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.attribute("T.(hAi1^$5fSPA", date0, "T.(hAi1^$5fSPA");
+        writerImpl0.attribute("", date0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -48,7 +48,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("");
+        writerImpl0.element("@3&");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -110,9 +110,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
+      Object object0 = new Object();
       // Undeclared exception!
       try {
-        writerImpl0.element("", "");
+        writerImpl0.element("", object0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -129,7 +130,7 @@ public class WriterImplEvoSuiteTest {
       Date date0 = new Date();
       // Undeclared exception!
       try {
-        writerImpl0.element("7lr97$bb}$!", date0, "7lr97$bb}$!");
+        writerImpl0.element(">9", date0, ">9");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -178,7 +179,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.attribute("", "Wed Dec 31 17:00:00 MST 1969");
+        writerImpl0.attribute("u|M^ /@OA'n", "u|M^ /@OA'n");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -7,14 +7,13 @@ package org.jsecurity.io;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.CharArrayReader;
 import java.io.InputStream;
-import java.io.PushbackReader;
+import java.io.PipedInputStream;
+import java.io.PushbackInputStream;
 import java.io.Reader;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import org.jsecurity.io.IniResource;
 import org.jsecurity.io.ResourceException;
 
@@ -23,16 +22,17 @@ public class IniResourceEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 org.jsecurity.io.IniResource.setSections(Ljava/util/Map;)V: root-Branch
-   * 2 org.jsecurity.io.IniResource.<init>()V: root-Branch
+   * 2 org.jsecurity.io.IniResource.getSections()Ljava/util/Map;: root-Branch
+   * 3 org.jsecurity.io.IniResource.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       IniResource iniResource0 = new IniResource();
-      HashMap<String, Map<String, String>> hashMap0 = new HashMap<String, Map<String, String>>();
-      iniResource0.setSections((Map<String, Map<String, String>>) hashMap0);
-      assertEquals(true, hashMap0.isEmpty());
+      Map<String, Map<String, String>> map0 = iniResource0.getSections();
+      iniResource0.setSections(map0);
+      assertNull(iniResource0.getCharsetName());
   }
 
   //Test case number: 1
@@ -44,11 +44,11 @@ public class IniResourceEvoSuiteTest {
   public void test1()  throws Throwable  {
       IniResource iniResource0 = null;
       try {
-        iniResource0 = new IniResource("jT");
+        iniResource0 = new IniResource(")");
         fail("Expecting exception: ResourceException");
       } catch(ResourceException e) {
         /*
-         * Unable to load text resource from the resource path [jT]
+         * Unable to load text resource from the resource path [)]
          */
       }
   }
@@ -64,22 +64,22 @@ public class IniResourceEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      char[] charArray0 = new char[8];
+      char[] charArray0 = new char[5];
       CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
-      PushbackReader pushbackReader0 = new PushbackReader((Reader) charArrayReader0);
-      IniResource iniResource0 = new IniResource((Reader) pushbackReader0);
+      IniResource iniResource0 = new IniResource((Reader) charArrayReader0);
       assertNull(iniResource0.getCharsetName());
   }
 
   //Test case number: 3
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 org.jsecurity.io.IniResource.<init>(Ljava/io/InputStream;)V: root-Branch
+   * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      BufferedInputStream bufferedInputStream0 = new BufferedInputStream((InputStream) null);
-      IniResource iniResource0 = new IniResource((InputStream) bufferedInputStream0);
+      PipedInputStream pipedInputStream0 = new PipedInputStream();
+      IniResource iniResource0 = new IniResource((InputStream) pipedInputStream0);
       assertNull(iniResource0.getCharsetName());
   }
 
@@ -103,34 +103,7 @@ public class IniResourceEvoSuiteTest {
 
   //Test case number: 5
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.io.IniResource.<init>(Ljava/util/Scanner;)V: root-Branch
-   * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - true
-   * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - true
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      Scanner scanner0 = new Scanner("");
-      IniResource iniResource0 = new IniResource(scanner0);
-      assertNull(iniResource0.getCharsetName());
-  }
-
-  //Test case number: 6
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.io.IniResource.getSections()Ljava/util/Map;: root-Branch
-   * 2 org.jsecurity.io.IniResource.<init>()V: root-Branch
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      IniResource iniResource0 = new IniResource();
-      Map<String, Map<String, String>> map0 = iniResource0.getSections();
-      assertEquals(0, map0.size());
-  }
-
-  //Test case number: 7
-  /*
-   * 9 covered goals:
+   * 8 covered goals:
    * 1 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I24 Branch 2 IFNULL L92 - false
    * 2 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I29 Branch 3 IFGT L92 - false
    * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I34 Branch 4 IFLE L92 - true
@@ -138,35 +111,72 @@ public class IniResourceEvoSuiteTest {
    * 5 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I8 Branch 9 IFNULL L127 - false
    * 6 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I13 Branch 10 IFLE L127 - true
    * 7 org.jsecurity.io.IniResource.getSectionName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 12 IFEQ L132 - true
-   * 8 org.jsecurity.io.IniResource.<init>(Ljava/io/Reader;)V: root-Branch
-   * 9 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
+   * 8 org.jsecurity.io.IniResource.<init>(Ljava/io/InputStream;)V: root-Branch
    */
   @Test
-  public void test7()  throws Throwable  {
-      char[] charArray0 = new char[8];
-      charArray0[0] = ']';
-      CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
-      PushbackReader pushbackReader0 = new PushbackReader((Reader) charArrayReader0);
+  public void test5()  throws Throwable  {
+      byte[] byteArray0 = new byte[8];
+      byteArray0[0] = (byte)84;
+      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
+      PushbackInputStream pushbackInputStream0 = new PushbackInputStream((InputStream) byteArrayInputStream0, 253);
       IniResource iniResource0 = null;
       try {
-        iniResource0 = new IniResource((Reader) pushbackReader0);
+        iniResource0 = new IniResource((InputStream) pushbackInputStream0);
         fail("Expecting exception: ResourceException");
       } catch(ResourceException e) {
         /*
-         * Unable to read key value pair for line []].
+         * Unable to load data from input stream [java.io.PushbackInputStream@1b3b9b36].
          */
       }
+      assertEquals(0, byteArrayInputStream0.available());
+      assertEquals(-1, byteArrayInputStream0.read());
   }
 
-  //Test case number: 8
+  //Test case number: 6
+  /*
+   * 9 covered goals:
+   * 1 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I141 Branch 8 IFGT L120 - false
+   * 2 org.jsecurity.io.IniResource.<init>(Ljava/io/Reader;)V: root-Branch
+   * 3 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - true
+   * 4 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I14 Branch 1 IFEQ L88 - false
+   * 5 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I24 Branch 2 IFNULL L92 - false
+   * 6 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I29 Branch 3 IFGT L92 - false
+   * 7 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I34 Branch 4 IFLE L92 - true
+   * 8 org.jsecurity.io.IniResource.load(Ljava/util/Scanner;)V: I47 Branch 5 IFNULL L98 - true
+   * 9 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I13 Branch 10 IFLE L127 - true
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      char[] charArray0 = new char[5];
+      charArray0[0] = 'M';
+      charArray0[2] = ' ';
+      charArray0[3] = '%';
+      CharArrayReader charArrayReader0 = new CharArrayReader(charArray0);
+      IniResource iniResource0 = new IniResource((Reader) charArrayReader0);
+  }
+
+  //Test case number: 7
   /*
    * 2 covered goals:
    * 1 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I8 Branch 9 IFNULL L127 - true
    * 2 org.jsecurity.io.IniResource.getSectionName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 12 IFEQ L132 - true
    */
   @Test
-  public void test8()  throws Throwable  {
+  public void test7()  throws Throwable  {
       String string0 = IniResource.getSectionName((String) null);
       assertNull(string0);
+  }
+
+  //Test case number: 8
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I13 Branch 10 IFLE L127 - false
+   * 2 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I17 Branch 11 IFLE L127 - true
+   * 3 org.jsecurity.io.IniResource.isSectionHeader(Ljava/lang/String;)Z: I8 Branch 9 IFNULL L127 - false
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      boolean boolean0 = IniResource.isSectionHeader("[the chosen logfactory implementation does not extend logfactory. please check your configuration.");
+      assertEquals(false, boolean0);
   }
 }

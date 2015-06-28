@@ -7,6 +7,7 @@ package org.jsecurity.subject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import org.jsecurity.authc.AuthenticationException;
 import org.jsecurity.authc.AuthenticationInfo;
@@ -35,8 +36,7 @@ public class AbstractRememberMeManagerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      char[] charArray0 = new char[8];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
       // Undeclared exception!
       try {
         webRememberMeManager0.onFailedLogin((AuthenticationToken) usernamePasswordToken0, (AuthenticationException) null);
@@ -50,21 +50,24 @@ public class AbstractRememberMeManagerEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 3 covered goals:
+   * 6 covered goals:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
-   * 3 org.jsecurity.subject.AbstractRememberMeManager.getIdentityToRemember(Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 2 org.jsecurity.subject.AbstractRememberMeManager.serialize(Lorg/jsecurity/subject/PrincipalCollection;)[B: root-Branch
+   * 3 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
+   * 4 org.jsecurity.subject.AbstractRememberMeManager.getSerializer()Lorg/jsecurity/io/Serializer;: root-Branch
+   * 5 org.jsecurity.subject.AbstractRememberMeManager.getIdentityToRemember(Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 6 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/subject/PrincipalCollection;)V: I32 Branch 7 IFEQ L179 - false
    */
   @Test
   public void test1()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("2CoafZ$TQ", "2CoafZ$TQ", (InetAddress) null);
-      // Undeclared exception!
-      try {
-        webRememberMeManager0.rememberIdentity((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      char[] charArray0 = new char[5];
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("[BAD CL TREE] ", charArray0, false, (InetAddress) inet4Address0);
+      Object object0 = new Object();
+      SimpleAccount simpleAccount0 = new SimpleAccount(object0, (Object) '', "[BAD CL TREE] ");
+      webRememberMeManager0.rememberIdentity((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+      assertEquals(false, simpleAccount0.isLocked());
   }
 
   //Test case number: 2
@@ -76,7 +79,7 @@ public class AbstractRememberMeManagerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setEncryptionCipherKeyBase64("[ENV] Security setting prevent interrogation of system classpaths.");
+      webRememberMeManager0.setEncryptionCipherKeyBase64("N2'Bww<B.~X]=");
       assertNull(webRememberMeManager0.getCookiePath());
   }
 
@@ -91,7 +94,7 @@ public class AbstractRememberMeManagerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setCipherKeyBase64("QEV5{)5a3$");
+      webRememberMeManager0.setCipherKeyBase64("");
       assertNull(webRememberMeManager0.getCookiePath());
   }
 
@@ -110,72 +113,44 @@ public class AbstractRememberMeManagerEvoSuiteTest {
 
   //Test case number: 5
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.serialize(Lorg/jsecurity/subject/PrincipalCollection;)[B: root-Branch
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.getSerializer()Lorg/jsecurity/io/Serializer;: root-Branch
-   * 3 org.jsecurity.subject.AbstractRememberMeManager.getCipher()Lorg/jsecurity/crypto/Cipher;: root-Branch
-   * 4 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/subject/PrincipalCollection;)V: I10 Branch 6 IFNULL L174 - false
-   * 5 org.jsecurity.subject.AbstractRememberMeManager.encrypt([B)[B: I12 Branch 12 IFNULL L236 - false
-   * 6 org.jsecurity.subject.AbstractRememberMeManager.getEncryptionCipherKey()[B: root-Branch
+   * 1 covered goal:
+   * 1 org.jsecurity.subject.AbstractRememberMeManager.setDecryptionCipherKeyBase64(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-      Object object0 = new Object();
-      SimpleAccount simpleAccount0 = new SimpleAccount((Object) simplePrincipalCollection0, object0, "org.apache.commons.logging.impl.LogFactoryImpl");
-      // Undeclared exception!
-      try {
-        webRememberMeManager0.rememberIdentity((AuthenticationInfo) simpleAccount0);
-        fail("Expecting exception: NoClassDefFoundError");
-      } catch(NoClassDefFoundError e) {
-        /*
-         * Could not initialize class org.jsecurity.web.WebUtils
-         */
-      }
+      webRememberMeManager0.setDecryptionCipherKeyBase64("");
+      assertNull(webRememberMeManager0.getCookiePath());
   }
 
   //Test case number: 6
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.setDecryptionCipherKeyBase64(Ljava/lang/String;)V: root-Branch
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.setDecryptionCipherKey([B)V: root-Branch
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      webRememberMeManager0.setDecryptionCipherKeyBase64("'u6DOa;P");
-      assertEquals(false, webRememberMeManager0.isCookieSecure());
-  }
-
-  //Test case number: 7
   /*
    * 1 covered goal:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.setEncryptionCipherKeyHex(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test6()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
       // Undeclared exception!
       try {
-        webRememberMeManager0.setEncryptionCipherKeyHex("P >3b:PU32~OW^");
+        webRememberMeManager0.setEncryptionCipherKeyHex(" _*=U_4+TE$}");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * Odd number of characters.
+         * Illegal hexadecimal charcter   at index 0
          */
       }
   }
 
-  //Test case number: 8
+  //Test case number: 7
   /*
    * 1 covered goal:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.deserialize([B)Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
+  public void test7()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      byte[] byteArray0 = new byte[6];
+      byte[] byteArray0 = new byte[2];
       // Undeclared exception!
       try {
         webRememberMeManager0.deserialize(byteArray0);
@@ -187,36 +162,31 @@ public class AbstractRememberMeManagerEvoSuiteTest {
       }
   }
 
-  //Test case number: 9
+  //Test case number: 8
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.setDecryptionCipherKeyHex(Ljava/lang/String;)V: root-Branch
+   * 2 org.jsecurity.subject.AbstractRememberMeManager.setDecryptionCipherKey([B)V: root-Branch
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      // Undeclared exception!
-      try {
-        webRememberMeManager0.setDecryptionCipherKeyHex("Terminating logging for this context. ");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal hexadecimal charcter T at index 0
-         */
-      }
+      webRememberMeManager0.setDecryptionCipherKeyHex("");
+      assertEquals("rememberMe", webRememberMeManager0.getCookieName());
   }
 
-  //Test case number: 10
+  //Test case number: 9
   /*
    * 1 covered goal:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.onLogout(Lorg/jsecurity/subject/PrincipalCollection;)V: root-Branch
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test9()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        webRememberMeManager0.onLogout((PrincipalCollection) null);
+        webRememberMeManager0.onLogout((PrincipalCollection) simplePrincipalCollection0);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -225,34 +195,53 @@ public class AbstractRememberMeManagerEvoSuiteTest {
       }
   }
 
-  //Test case number: 11
+  //Test case number: 10
   /*
    * 1 covered goal:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.setSerializer(Lorg/jsecurity/io/Serializer;)V: root-Branch
    */
   @Test
-  public void test11()  throws Throwable  {
+  public void test10()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      DefaultSerializer defaultSerializer0 = (DefaultSerializer)webRememberMeManager0.getSerializer();
+      DefaultSerializer defaultSerializer0 = new DefaultSerializer();
       webRememberMeManager0.setSerializer((Serializer) defaultSerializer0);
       assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
   }
 
-  //Test case number: 12
+  //Test case number: 11
   /*
    * 1 covered goal:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.setCipherKeyHex(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test11()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
       // Undeclared exception!
       try {
-        webRememberMeManager0.setCipherKeyHex("[BAD CL TREE] ");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
+        webRememberMeManager0.setCipherKeyHex((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 12
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.subject.AbstractRememberMeManager.getDecryptionCipherKey()[B: root-Branch
+   * 2 org.jsecurity.subject.AbstractRememberMeManager.decrypt([B)[B: I12 Branch 13 IFNULL L245 - false
+   * 3 org.jsecurity.subject.AbstractRememberMeManager.getCipher()Lorg/jsecurity/crypto/Cipher;: root-Branch
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+      byte[] byteArray0 = new byte[6];
+      // Undeclared exception!
+      try {
+        webRememberMeManager0.decrypt(byteArray0);
+        fail("Expecting exception: IllegalStateException");
+      } catch(IllegalStateException e) {
         /*
-         * Illegal hexadecimal charcter [ at index 0
+         * Unable to crypt bytes with cipher [javax.crypto.Cipher@162c40eb].
          */
       }
   }
@@ -274,48 +263,58 @@ public class AbstractRememberMeManagerEvoSuiteTest {
    * 3 covered goals:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I3 Branch 1 IFNULL L139 - false
    * 2 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I6 Branch 2 IFEQ L139 - false
-   * 3 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I10 Branch 3 IFEQ L139 - true
+   * 3 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I10 Branch 3 IFEQ L139 - false
    */
   @Test
   public void test14()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      char[] charArray0 = new char[9];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, (InetAddress) null);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", "[ERROR] LogFactory: Load of custom hashtable failed", true);
       boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
-      assertEquals(false, boolean0);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 15
   /*
    * 3 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I10 Branch 3 IFEQ L139 - false
+   * 1 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I10 Branch 3 IFEQ L139 - true
    * 2 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I3 Branch 1 IFNULL L139 - false
    * 3 org.jsecurity.subject.AbstractRememberMeManager.isRememberMe(Lorg/jsecurity/authc/AuthenticationToken;)Z: I6 Branch 2 IFEQ L139 - false
    */
   @Test
   public void test15()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("t[5ZW", "", true, (InetAddress) null);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("IcBE", "");
       boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 16
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/subject/PrincipalCollection;)V: I32 Branch 7 IFEQ L179 - false
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.serialize(Lorg/jsecurity/subject/PrincipalCollection;)[B: root-Branch
-   * 3 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
-   * 4 org.jsecurity.subject.AbstractRememberMeManager.getSerializer()Lorg/jsecurity/io/Serializer;: root-Branch
-   * 5 org.jsecurity.subject.AbstractRememberMeManager.getIdentityToRemember(Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 8 covered goals:
+   * 1 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/subject/PrincipalCollection;)V: I10 Branch 6 IFNULL L174 - false
+   * 2 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
+   * 3 org.jsecurity.subject.AbstractRememberMeManager.getEncryptionCipherKey()[B: root-Branch
+   * 4 org.jsecurity.subject.AbstractRememberMeManager.serialize(Lorg/jsecurity/subject/PrincipalCollection;)[B: root-Branch
+   * 5 org.jsecurity.subject.AbstractRememberMeManager.rememberIdentity(Lorg/jsecurity/authc/AuthenticationInfo;)V: root-Branch
+   * 6 org.jsecurity.subject.AbstractRememberMeManager.getSerializer()Lorg/jsecurity/io/Serializer;: root-Branch
+   * 7 org.jsecurity.subject.AbstractRememberMeManager.getIdentityToRemember(Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/subject/PrincipalCollection;: root-Branch
+   * 8 org.jsecurity.subject.AbstractRememberMeManager.encrypt([B)[B: I12 Branch 12 IFNULL L236 - false
    */
   @Test
   public void test16()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      Object object0 = new Object();
-      SimpleAccount simpleAccount0 = new SimpleAccount(object0, object0, "org.apache.commons.logging.impl.LogFactoryImpl");
-      webRememberMeManager0.rememberIdentity((AuthenticationInfo) simpleAccount0);
-      assertEquals("rememberMe", webRememberMeManager0.getCookieName());
+      char[] charArray0 = new char[5];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("Ua|y@PTZn%KC`v-Px", charArray0);
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "rememberMe", (Object) null, "Ua|y@PTZn%KC`v-Px");
+      // Undeclared exception!
+      try {
+        webRememberMeManager0.rememberIdentity((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+        fail("Expecting exception: NoClassDefFoundError");
+      } catch(NoClassDefFoundError e) {
+        /*
+         * Could not initialize class org.jsecurity.web.WebUtils
+         */
+      }
   }
 
   //Test case number: 17
@@ -339,54 +338,18 @@ public class AbstractRememberMeManagerEvoSuiteTest {
 
   //Test case number: 18
   /*
-   * 2 covered goals:
+   * 4 covered goals:
    * 1 org.jsecurity.subject.AbstractRememberMeManager.encrypt([B)[B: I12 Branch 12 IFNULL L236 - true
    * 2 org.jsecurity.subject.AbstractRememberMeManager.setCipher(Lorg/jsecurity/crypto/Cipher;)V: root-Branch
+   * 3 org.jsecurity.subject.AbstractRememberMeManager.getCipher()Lorg/jsecurity/crypto/Cipher;: root-Branch
+   * 4 org.jsecurity.subject.AbstractRememberMeManager.<init>()V: root-Branch
    */
   @Test
   public void test18()  throws Throwable  {
       WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      byte[] byteArray0 = new byte[6];
+      byte[] byteArray0 = new byte[10];
       webRememberMeManager0.setCipher((Cipher) null);
       byte[] byteArray1 = webRememberMeManager0.encrypt(byteArray0);
       assertSame(byteArray1, byteArray0);
-  }
-
-  //Test case number: 19
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.decrypt([B)[B: I12 Branch 13 IFNULL L245 - true
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.setCipher(Lorg/jsecurity/crypto/Cipher;)V: root-Branch
-   */
-  @Test
-  public void test19()  throws Throwable  {
-      WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      byte[] byteArray0 = new byte[6];
-      webRememberMeManager0.setCipher((Cipher) null);
-      byte[] byteArray1 = webRememberMeManager0.decrypt(byteArray0);
-      assertSame(byteArray1, byteArray0);
-  }
-
-  //Test case number: 20
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.subject.AbstractRememberMeManager.decrypt([B)[B: I12 Branch 13 IFNULL L245 - false
-   * 2 org.jsecurity.subject.AbstractRememberMeManager.getCipher()Lorg/jsecurity/crypto/Cipher;: root-Branch
-   * 3 org.jsecurity.subject.AbstractRememberMeManager.<init>()V: root-Branch
-   * 4 org.jsecurity.subject.AbstractRememberMeManager.getDecryptionCipherKey()[B: root-Branch
-   */
-  @Test
-  public void test20()  throws Throwable  {
-      WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-      byte[] byteArray0 = new byte[6];
-      // Undeclared exception!
-      try {
-        webRememberMeManager0.decrypt(byteArray0);
-        fail("Expecting exception: IllegalStateException");
-      } catch(IllegalStateException e) {
-        /*
-         * Unable to crypt bytes with cipher [javax.crypto.Cipher@79936e59].
-         */
-      }
   }
 }

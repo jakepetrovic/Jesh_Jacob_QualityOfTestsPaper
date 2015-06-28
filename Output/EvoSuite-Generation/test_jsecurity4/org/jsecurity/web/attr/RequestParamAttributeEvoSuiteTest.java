@@ -19,7 +19,7 @@ public class RequestParamAttributeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      RequestParamAttribute<RequestParamAttribute<Object>> requestParamAttribute0 = new RequestParamAttribute<RequestParamAttribute<Object>>("");
+      RequestParamAttribute<Integer> requestParamAttribute0 = new RequestParamAttribute<Integer>("1");
   }
 
   //Test case number: 1
@@ -29,6 +29,6 @@ public class RequestParamAttributeEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      RequestParamAttribute<RequestParamAttribute<String>> requestParamAttribute0 = new RequestParamAttribute<RequestParamAttribute<String>>();
+      RequestParamAttribute<Object> requestParamAttribute0 = new RequestParamAttribute<Object>();
   }
 }

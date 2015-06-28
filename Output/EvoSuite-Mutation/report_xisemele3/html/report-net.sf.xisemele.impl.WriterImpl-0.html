@@ -22,8 +22,8 @@ net.sf.xisemele.impl.WriterImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.WriterImpl: 100.00%</ul><ul>
-<li>450 fitness evaluations, 10 generations, 1846 statements, 531 tests.
-<li>Time: 0:00:07(Search: 0:00:06, minimization: 0:00:00)
+<li>850 fitness evaluations, 18 generations, 2789 statements, 814 tests.
+<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 11/11 methods, 11/11 total goals
 <li>Mutation score: 28%
 </ul>
@@ -32,19 +32,20 @@ net.sf.xisemele.impl.WriterImpl
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.attribute(&quot;$f5eh?F!$zA~,~B&quot;, (Date) null, &quot;$f5eh?F!$zA~,~B&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  writerImpl0.attribute(&quot;8&quot;, date0, &quot;8&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.element(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.element(&quot;IU7Jxn4F)+bd]xN&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -84,7 +85,7 @@ net.sf.xisemele.impl.WriterImpl
 <span class="nocode"><a name="1">  1: </a></span>WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.element(&quot;P&amp;0B@6FM&quot;, &quot;P&amp;0B@6FM&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.element(&quot;&quot;, &quot;Tue Jun 09 07:26:57 MDT 2015&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -92,10 +93,10 @@ net.sf.xisemele.impl.WriterImpl
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date(0L);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  writerImpl0.element(&quot;net.sf.xisemele.invalid.name&quot;, date0, &quot;net.sf.xisemele.invalid.name&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  writerImpl0.element(&quot;]$d3EUcQh##&gt;s&quot;, date0, &quot;&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -123,13 +124,12 @@ net.sf.xisemele.impl.WriterImpl
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  writerImpl0.attribute(&quot;net.sf.xisemele.root.duplicate&quot;, object0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  writerImpl0.attribute(&quot;net.sf.xisemele.within.context.not.permitted&quot;, &quot;net.sf.xisemele.within.context.not.permitted&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -258,7 +258,7 @@ net.sf.xisemele.impl.WriterImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3917768113174710678.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8252444774209989484.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -276,7 +276,7 @@ net.sf.xisemele.impl.WriterImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18031
+<li>process_communication_port: 6899
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

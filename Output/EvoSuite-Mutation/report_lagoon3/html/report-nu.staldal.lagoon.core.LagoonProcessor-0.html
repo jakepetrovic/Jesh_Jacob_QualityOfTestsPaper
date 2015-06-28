@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.LagoonProcessor: 11.81%</ul><ul>
-<li>8278 fitness evaluations, 167 generations, 27729 statements, 5714 tests.
+<li>7126 fitness evaluations, 144 generations, 23767 statements, 4805 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 15/116 branches, 2/24 methods, 15/127 total goals
 <li>Mutation score: 0%
@@ -31,7 +31,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 678);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>LagoonProcessor lagoonProcessor0 = null;
 <span class="nocode"><a name="4">  4: </a></span>try {
@@ -45,16 +45,27 @@ nu.staldal.lagoon.core.LagoonProcessor
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;4CZ=X&amp;[UA||:Q&quot;, &quot;4CZ=X&amp;[UA||:Q&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;giMM6k^FUN(_m~[&gt;nu&quot;, &quot;giMM6k^FUN(_m~[&gt;nu&quot;, 922, 922);
+<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;giMM6k^FUN(_m~[&gt;nu&quot;);
+<span class="nocode"><a name="3">  3: </a></span>LagoonProcessor lagoonProcessor0 = null;
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;giMM6k^FUN(_m~[&gt;nu&quot;, element0, file0, &quot;giMM6k^FUN(_m~[&gt;nu&quot;, (PrintWriter) null, (PrintWriter) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(LagoonException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * sourceDir must be an existing directory: giMM6k^FUN(_m~[&gt;nu
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Illegal producer config file: &quot;, &quot;Illegal producer config file: &quot;, 444);
 <span class="nocode"><a name="2">  2: </a></span>LagoonProcessor lagoonProcessor0 = null;
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;4CZ=X&amp;[UA||:Q&quot;, (Element) null, file0, &quot;4CZ=X&amp;[UA||:Q&quot;, (PrintWriter) null, (PrintWriter) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(LagoonException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * sourceDir must be an existing directory: 4CZ=X&amp;[UA||:Q/4CZ=X&amp;[UA||:Q
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;Illegal producer config file: &quot;, element0, (File) null, &quot;Illegal producer config file: &quot;, (PrintWriter) null, (PrintWriter) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -791,7 +802,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -809,7 +820,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16490
+<li>process_communication_port: 15617
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

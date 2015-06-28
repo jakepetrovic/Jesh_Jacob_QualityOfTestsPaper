@@ -53,7 +53,7 @@ public class XmlSerializerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       XmlSerializer xmlSerializer0 = new XmlSerializer();
-      byte[] byteArray0 = new byte[3];
+      byte[] byteArray0 = new byte[1];
       // Undeclared exception!
       try {
         xmlSerializer0.deserialize(byteArray0);

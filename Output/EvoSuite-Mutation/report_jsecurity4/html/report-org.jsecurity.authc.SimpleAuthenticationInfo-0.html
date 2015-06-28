@@ -22,119 +22,130 @@ org.jsecurity.authc.SimpleAuthenticationInfo
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.SimpleAuthenticationInfo: 97.37%</ul><ul>
-<li>14584 fitness evaluations, 293 generations, 86754 statements, 8655 tests.
+<li>18308 fitness evaluations, 368 generations, 92835 statements, 11216 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 29/30 branches, 11/11 methods, 37/38 total goals
-<li>Mutation score: 73%
+<li>Mutation score: 53%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;W.P#p*=H:]y!tH&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;,&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
 <span class="nocode"><a name="4">  4: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="5">  5: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  simpleAuthenticationInfo0.toString();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="4">  4: </a></span>simpleAuthenticationInfo0.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) null);
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = simpleAuthenticationInfo0.toString();
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="2">  2: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) null);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="4">  4: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo1);
+<span class="nocode"><a name="5">  5: </a></span>assertFalse(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo1));
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) null);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) simplePrincipalCollection0, (Object) null, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(simpleAuthenticationInfo1);
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo1);
-<span class="nocode"><a name="7">  7: </a></span>assertTrue(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, object0);
+<span class="nocode"><a name="5">  5: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simpleAccount0.isLocked());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;W.P#p*=H:]y!tH&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, object0);
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals(object0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) &quot;[]&quot;, (Object) null, &quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simpleAuthenticationInfo1);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo1);
+<span class="nocode"><a name="6">  6: </a></span>assertTrue(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+<span class="nocode"><a name="7">  7: </a></span>assertTrue(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo1));
 </pre>
 <h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;principals argument cannot be an empty collection.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals(object0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
 <span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
 <span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
 </pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo2 = new SimpleAuthenticationInfo((Object) &quot;[]&quot;, (Object) simpleAuthenticationInfo1, &quot;[]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>simpleAuthenticationInfo0.merge((AuthenticationInfo) simpleAuthenticationInfo2);
-<span class="nocode"><a name="5">  5: </a></span>assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-<span class="nocode"><a name="6">  6: </a></span>
-<span class="nocode"><a name="7">  7: </a></span>HashSet&lt;?&gt; hashSet0 = (HashSet&lt;?&gt;)simpleAuthenticationInfo0.getCredentials();
-<span class="nocode"><a name="8">  8: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) hashSet0);
-<span class="nocode"><a name="9">  9: </a></span>assertTrue(simpleAuthenticationInfo0.equals(simpleAuthenticationInfo2));
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, boolean0);
-</pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) simplePrincipalCollection0);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>simpleAuthenticationInfo1.setPrincipals((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="7">  7: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
-<span class="nocode"><a name="8">  8: </a></span>assertTrue(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>List&lt;Object&gt; list0 = simplePrincipalCollection0.asList();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) list0);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) &quot;[]&quot;, (Object) &quot;[]&quot;, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
-<span class="nocode"><a name="4">  4: </a></span>assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) simplePrincipalCollection0, &quot;R:^7&quot;);
+<span class="nocode"><a name="3">  3: </a></span>LinkedHashSet&lt;SimpleAuthenticationInfo&gt; linkedHashSet0 = new LinkedHashSet&lt;SimpleAuthenticationInfo&gt;();
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="5">  5: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet1 = new LinkedHashSet&lt;Permission&gt;();
+<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection1, (Object) linkedHashSet0, (Set&lt;String&gt;) treeSet0, (Set&lt;Permission&gt;) linkedHashSet1);
+<span class="nocode"><a name="7">  7: </a></span>List&lt;Object&gt; list0 = simplePrincipalCollection1.asList();
+<span class="nocode"><a name="8">  8: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection1, (Object) list0);
+<span class="nocode"><a name="9">  9: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="10"> 10: </a></span>assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+<span class="nocode"><a name="11"> 11: </a></span>
+<span class="nocode"><a name="12"> 12: </a></span>simpleAuthenticationInfo1.merge((AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="13"> 13: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
+<span class="nocode"><a name="14"> 14: </a></span>assertTrue(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+<span class="nocode"><a name="15"> 15: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = new SimpleAuthenticationInfo((Object) &quot;[]&quot;, (Object) null, &quot;[]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simpleAuthenticationInfo1);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAuthenticationInfo0.equals((Object) simpleAuthenticationInfo1);
+<span class="nocode"><a name="6">  6: </a></span>assertFalse(simpleAuthenticationInfo1.equals(simpleAuthenticationInfo0));
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = simpleAuthenticationInfo0.hashCode();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
-<h3>Test case 13</h3>
+<h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;W.P#p*=H:]y!tH&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, object0);
-<span class="nocode"><a name="4">  4: </a></span>int int0 = simpleAuthenticationInfo0.hashCode();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals((-1836417059), int0);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo(object0, object0, &quot;,&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) simpleAuthenticationInfo0, &quot;,&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -330,7 +341,7 @@ org.jsecurity.authc.SimpleAuthenticationInfo
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -348,7 +359,7 @@ org.jsecurity.authc.SimpleAuthenticationInfo
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11162
+<li>process_communication_port: 8328
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

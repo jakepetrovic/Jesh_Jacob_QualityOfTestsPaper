@@ -22,7 +22,7 @@ org.jsecurity.cache.HashtableCache
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.cache.HashtableCache: 92.31%</ul><ul>
-<li>25054 fitness evaluations, 503 generations, 151660 statements, 15101 tests.
+<li>26608 fitness evaluations, 534 generations, 213229 statements, 15943 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 5/6 branches, 9/9 methods, 12/13 total goals
 <li>Mutation score: 56%
@@ -31,64 +31,65 @@ org.jsecurity.cache.HashtableCache
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;HashtableCache [&quot;);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>hashtableCache0.clear();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;HashtableCache [HashtableCache []&quot;, hashtableCache0.toString());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, hashtableCache0.size());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>int int0 = hashtableCache0.size();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Object object0 = hashtableCache0.get((Object) &quot;HashtableCache [B]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(object0);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>Object object1 = hashtableCache0.get(object0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(object1);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
-<span class="nocode"><a name="2">  2: </a></span>hashtableCache0.remove((Object) &quot;B&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;HashtableCache [B]&quot;, hashtableCache0.toString());
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>hashtableCache0.remove(object0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;HashtableCache [2?pqQX!Cy=L]&quot;, hashtableCache0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = hashtableCache0.toString();
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;HashtableCache [B]&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;HashtableCache [2?pqQX!Cy=L]&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;Integer&gt; treeSet0 = new TreeSet&lt;Integer&gt;();
-<span class="nocode"><a name="3">  3: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>hashtableCache0.put((Object) treeSet0, (Object) hashSet0);
-<span class="nocode"><a name="5">  5: </a></span>hashtableCache0.keys();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, hashtableCache0.size());
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>hashtableCache0.put(object0, object0);
+<span class="nocode"><a name="4">  4: </a></span>hashtableCache0.keys();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, hashtableCache0.size());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>Set&lt;Object&gt; set0 = hashtableCache0.keys();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, set0.size());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;HashtableCache [&quot;);
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
 <span class="nocode"><a name="2">  2: </a></span>Set&lt;Object&gt; set0 = hashtableCache0.values();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, set0.isEmpty());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;B&quot;);
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;Integer&gt; treeSet0 = new TreeSet&lt;Integer&gt;();
-<span class="nocode"><a name="3">  3: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>hashtableCache0.put((Object) treeSet0, (Object) hashSet0);
-<span class="nocode"><a name="5">  5: </a></span>hashtableCache0.values();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, hashtableCache0.size());
+<span class="nocode"><a name="1">  1: </a></span>HashtableCache hashtableCache0 = new HashtableCache(&quot;2?pqQX!Cy=L&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>hashtableCache0.put(object0, object0);
+<span class="nocode"><a name="4">  4: </a></span>Set&lt;Object&gt; set0 = hashtableCache0.values();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, hashtableCache0.size());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, set0.isEmpty());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -194,7 +195,7 @@ org.jsecurity.cache.HashtableCache
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -212,7 +213,7 @@ org.jsecurity.cache.HashtableCache
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9809
+<li>process_communication_port: 10467
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

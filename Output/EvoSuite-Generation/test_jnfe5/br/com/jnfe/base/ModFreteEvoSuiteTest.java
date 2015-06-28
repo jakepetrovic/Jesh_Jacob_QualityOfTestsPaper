@@ -19,8 +19,8 @@ public class ModFreteEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ModFrete modFrete0 = ModFrete.DESTINATARIO;
+      ModFrete modFrete0 = ModFrete.valueOf("EMITENTE");
       char char0 = modFrete0.getValue();
-      assertEquals('1', char0);
+      assertEquals('0', char0);
   }
 }

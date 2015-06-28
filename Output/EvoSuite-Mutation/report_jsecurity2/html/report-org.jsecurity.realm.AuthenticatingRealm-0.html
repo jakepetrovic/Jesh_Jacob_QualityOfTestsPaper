@@ -22,10 +22,10 @@ org.jsecurity.realm.AuthenticatingRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.AuthenticatingRealm: 42.86%</ul><ul>
-<li>17834 fitness evaluations, 358 generations, 97777 statements, 10983 tests.
+<li>15394 fitness evaluations, 309 generations, 99378 statements, 9835 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/12 branches, 6/11 methods, 9/21 total goals
-<li>Mutation score: 14%
+<li>Mutation score: 21%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,37 +33,34 @@ org.jsecurity.realm.AuthenticatingRealm
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>SimpleCredentialsMatcher simpleCredentialsMatcher0 = (SimpleCredentialsMatcher)simpleAccountRealm0.getCredentialsMatcher();
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simpleCredentialsMatcher0);
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setCredentialsMatcher((CredentialsMatcher) simpleCredentialsMatcher0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
-<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setCredentialsMatcher((CredentialsMatcher) sha384CredentialsMatcher0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_2&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = AuthenticationInfo.class;
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setAuthenticationTokenClass(class0);
+<span class="nocode"><a name="4">  4: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;Could not instantiate Log '&quot;, charArray0, true);
+<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = simpleAccountRealm0.supports((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_2&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;)qN0]z&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = Class.class;
-<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setAuthenticationTokenClass(class0);
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.supports((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;Could not instantiate Log '&quot;, charArray0, true);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.supports((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_10&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;)qN0]z&quot;);
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAccountRealm0.supports((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = simpleAccountRealm0.supports((AuthenticationToken) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_19&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_18&quot;, simpleAccountRealm0.getName());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -307,7 +304,7 @@ org.jsecurity.realm.AuthenticatingRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -325,7 +322,7 @@ org.jsecurity.realm.AuthenticatingRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2001
+<li>process_communication_port: 4787
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

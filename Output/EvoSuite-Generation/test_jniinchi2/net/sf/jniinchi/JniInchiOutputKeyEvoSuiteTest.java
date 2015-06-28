@@ -24,9 +24,9 @@ public class JniInchiOutputKeyEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI_PREFIX;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "hFn=~%6y");
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
       String string0 = jniInchiOutputKey0.getKey();
-      assertEquals("hFn=~%6y", string0);
+      assertNull(string0);
   }
 
   //Test case number: 1
@@ -38,9 +38,9 @@ public class JniInchiOutputKeyEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI_PREFIX;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "hFn=~%6y");
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
       INCHI_KEY iNCHI_KEY1 = jniInchiOutputKey0.getReturnStatus();
-      assertEquals("INVALID_INCHI_PREFIX", iNCHI_KEY1.toString());
+      assertSame(iNCHI_KEY0, iNCHI_KEY1);
   }
 
   //Test case number: 2
@@ -52,8 +52,8 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(0, "/{^Lbf\"BPcxcX]u}");
-      assertEquals("/{^Lbf\"BPcxcX]u}", jniInchiOutputKey0.getKey());
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(0, "M");
+      assertEquals(INCHI_KEY.OK, jniInchiOutputKey0.getReturnStatus());
   }
 
   //Test case number: 3
@@ -65,7 +65,7 @@ public class JniInchiOutputKeyEvoSuiteTest {
   public void test3()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
-        jniInchiOutputKey0 = new JniInchiOutputKey((-1534), "");
+        jniInchiOutputKey0 = new JniInchiOutputKey((-1), "KqyR'b%VXU|7Gx:");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*

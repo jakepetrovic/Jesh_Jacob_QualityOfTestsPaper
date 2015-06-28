@@ -21,10 +21,10 @@ bierse.view.DefaultInfoViewMouseListener
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: bierse.view.DefaultInfoViewMouseListener: 9.09%</ul><ul>
-<li>7 fitness evaluations, 2 generations, 90 statements, 34 tests.
-<li>Time: 0:01:02(Search: 0:01:02, minimization: 0:00:00)
-<li>Coverage: 0/4 branches, 1/8 methods, 1/11 total goals
+<ul><li>Target class: bierse.view.DefaultInfoViewMouseListener: 18.18%</ul><ul>
+<li>52 fitness evaluations, 3 generations, 919 statements, 276 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 0/4 branches, 2/8 methods, 2/11 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,7 +32,12 @@ bierse.view.DefaultInfoViewMouseListener
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultInfoViewMouseListener defaultInfoViewMouseListener0 = new DefaultInfoViewMouseListener((JFrame) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(defaultInfoViewMouseListener0);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultInfoViewMouseListener0.mouseDragged((MouseEvent) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.view;
@@ -60,7 +65,7 @@ bierse.view.DefaultInfoViewMouseListener
 <span class="nocode"><a name="23"> 23: </a></span>	
 <span class="nocode"><a name="24"> 24: </a></span>	@Override
 <span class="nocode"><a name="25"> 25: </a></span>	public void mouseDragged(MouseEvent e) {
-<span class="nocode"><a name="26"> 26: </a></span>		Point newPoint = e.getLocationOnScreen();
+<span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">		Point newPoint = e.getLocationOnScreen();</span>
 <span class="nocode"><a name="27"> 27: </a></span>		double x = newPoint.getX() - clickPoint.getX();
 <span class="nocode"><a name="28"> 28: </a></span>		double y = newPoint.getY() - clickPoint.getY();
 <span class="nocode"><a name="29"> 29: </a></span>		double newX = startFrameLoc.getX() + x;
@@ -102,7 +107,7 @@ bierse.view.DefaultInfoViewMouseListener
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2903336665479640061.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6820260297764331508.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -120,7 +125,7 @@ bierse.view.DefaultInfoViewMouseListener
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21524
+<li>process_communication_port: 17001
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

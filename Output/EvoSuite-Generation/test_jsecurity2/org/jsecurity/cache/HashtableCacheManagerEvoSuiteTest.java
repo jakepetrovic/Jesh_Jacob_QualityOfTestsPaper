@@ -21,6 +21,6 @@ public class HashtableCacheManagerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      hashtableCacheManager0.getCache("");
+      hashtableCacheManager0.getCache("Yb}7+-.Y\"!O(\"i");
   }
 }

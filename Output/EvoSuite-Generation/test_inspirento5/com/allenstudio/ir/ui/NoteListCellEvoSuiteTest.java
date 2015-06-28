@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import com.allenstudio.ir.core.plugins.AbstractNote;
 import com.allenstudio.ir.core.plugins.CommonNote;
 import com.allenstudio.ir.ui.NoteListCell;
+import java.awt.Graphics;
 
 public class NoteListCellEvoSuiteTest {
 
@@ -17,7 +18,7 @@ public class NoteListCellEvoSuiteTest {
   //Test case number: 0
   /*
    * 9 covered goals:
-   * 1 com.allenstudio.ir.ui.NoteListCell.getIndexInList()I: root-Branch
+   * 1 com.allenstudio.ir.ui.NoteListCell.setIndexInList(I)V: root-Branch
    * 2 com.allenstudio.ir.ui.NoteListCell$1.<init>(Lcom/allenstudio/ir/ui/NoteListCell;)V: root-Branch
    * 3 com.allenstudio.ir.ui.NoteListCell.<init>(Lcom/allenstudio/ir/core/plugins/AbstractNote;)V: root-Branch
    * 4 com.allenstudio.ir.ui.NoteListCell.createFeaturePane(Ljava/lang/String;)Ljavax/swing/JToolBar;: root-Branch
@@ -33,16 +34,14 @@ public class NoteListCellEvoSuiteTest {
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
-      int int0 = noteListCell0.getIndexInList();
-      assertEquals(true, noteListCell0.isOpaque());
-      assertEquals(3, noteListCell0.countComponents());
-      assertEquals((-1), int0);
+      noteListCell0.setIndexInList((-1636));
+      assertEquals(-1636, noteListCell0.getIndexInList());
   }
 
   //Test case number: 1
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - true
+   * 1 com.allenstudio.ir.ui.NoteListCell.paintComponent(Ljava/awt/Graphics;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
@@ -50,15 +49,35 @@ public class NoteListCellEvoSuiteTest {
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
-      noteListCell0.setSelected(false);
-      assertEquals(false, noteListCell0.isSelected());
-      assertEquals(true, noteListCell0.isOpaque());
-      assertEquals(true, noteListCell0.isBackgroundSet());
-      assertEquals(3, noteListCell0.getComponentCount());
-      assertEquals(-1, noteListCell0.getIndexInList());
+      // Undeclared exception!
+      try {
+        noteListCell0.paintComponent((Graphics) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 2
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      CommonNote commonNote0 = new CommonNote();
+      NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
+      assertNotNull(noteListCell0);
+      
+      noteListCell0.setSelected(false);
+      assertEquals(3, noteListCell0.getComponentCount());
+      assertEquals(-1, noteListCell0.getIndexInList());
+      assertEquals(true, noteListCell0.isOpaque());
+      assertEquals(false, noteListCell0.isSelected());
+      assertEquals(true, noteListCell0.isBackgroundSet());
+      assertEquals(3, noteListCell0.countComponents());
+  }
+
+  //Test case number: 3
   /*
    * 9 covered goals:
    * 1 com.allenstudio.ir.ui.NoteListCell.setSelected(Z)V: I8 Branch 13 IFEQ L197 - false
@@ -72,13 +91,12 @@ public class NoteListCellEvoSuiteTest {
    * 9 com.allenstudio.ir.ui.NoteListCell$2.<init>(Lcom/allenstudio/ir/ui/NoteListCell;)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test3()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
       NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
       assertNotNull(noteListCell0);
       
       noteListCell0.setSelected(true);
       assertEquals(true, noteListCell0.isSelected());
-      assertEquals(3, noteListCell0.getComponentCount());
   }
 }

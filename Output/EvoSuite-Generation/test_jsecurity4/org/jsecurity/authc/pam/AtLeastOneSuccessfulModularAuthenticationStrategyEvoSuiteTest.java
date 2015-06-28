@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import org.jsecurity.authc.AuthenticationException;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy;
@@ -27,7 +28,8 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
+      char[] charArray0 = new char[10];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("SHA-1", charArray0, true);
       try {
         atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
         fail("Expecting exception: AuthenticationException");
@@ -42,30 +44,13 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   /*
    * 3 covered goals:
    * 1 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I3 Branch 1 IFNULL L53 - false
-   * 2 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I6 Branch 2 IFNULL L53 - false
-   * 3 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 3 IFNE L55 - true
+   * 2 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I6 Branch 2 IFNULL L53 - true
+   * 3 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 3 IFNE L55 - false
    */
   @Test
   public void test1()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "\u0001\u0000#\uFFFD\uFFFD\u0000\u0000(\uFFFD\uFFFD", (Object) null, "");
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
-      assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
-  }
-
-  //Test case number: 2
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I6 Branch 2 IFNULL L53 - true
-   * 2 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.<init>()V: root-Branch
-   * 3 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I3 Branch 1 IFNULL L53 - false
-   * 4 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 3 IFNE L55 - false
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      char[] charArray0 = new char[9];
+      char[] charArray0 = new char[10];
       UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       try {
@@ -76,5 +61,21 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
          * Authentication token of type [class org.jsecurity.authc.UsernamePasswordToken] could not be authenticated by any configured realms.  Please ensure that at least one realm can authenticate these tokens.
          */
       }
+  }
+
+  //Test case number: 2
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I6 Branch 2 IFNULL L53 - false
+   * 2 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I16 Branch 3 IFNE L55 - true
+   * 3 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.<init>()V: root-Branch
+   * 4 org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy.afterAllAttempts(Lorg/jsecurity/authc/AuthenticationToken;Lorg/jsecurity/authc/AuthenticationInfo;)Lorg/jsecurity/authc/AuthenticationInfo;: I3 Branch 1 IFNULL L53 - false
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
+      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "HashtableCache [i: MP{J]", (Object) "i: MP{J", "HashtableCache [i: MP{J]");
+      SimpleAccount simpleAccount1 = (SimpleAccount)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) null, (AuthenticationInfo) simpleAccount0);
+      assertSame(simpleAccount0, simpleAccount1);
   }
 }

@@ -21,10 +21,10 @@ com.allenstudio.ir.ui.NoteList
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.ui.NoteList: 28.95%</ul><ul>
-<li>458 fitness evaluations, 11 generations, 5295 statements, 523 tests.
-<li>Time: 0:01:07(Search: 0:01:02, minimization: 0:00:05)
-<li>Coverage: 6/26 branches, 9/23 methods, 11/38 total goals
+<ul><li>Target class: com.allenstudio.ir.ui.NoteList: 23.68%</ul><ul>
+<li>496 fitness evaluations, 11 generations, 5299 statements, 488 tests.
+<li>Time: 0:01:04(Search: 0:01:03, minimization: 0:00:01)
+<li>Coverage: 6/26 branches, 7/23 methods, 9/38 total goals
 <li>Mutation score: 33%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,46 +32,29 @@ com.allenstudio.ir.ui.NoteList
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = noteList0.getScrollableTracksViewportWidth();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, noteList0.getSelectedIndex());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(5, noteList0.getCellCount());
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  noteList0.select((-1123), false);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * No such child: -1123
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>noteList0.removeListEventListener();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, noteList0.getSelectedIndex());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(5, noteList0.getCellCount());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = noteList0.getScrollableTracksViewportHeight();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(5, noteList0.getCellCount());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, noteList0.getSelectedIndex());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = noteList0.getScrollableTracksViewportHeight();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, noteList0.getSelectedIndex());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(5, noteList0.getCellCount());
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  noteList0.select(88, false);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * No such child: 88
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>noteList0.fireCursorExit((Object) null, (Point) null);
+<span class="nocode"><a name="2">  2: </a></span>noteList0.fireCursorEnter((Object) null, (Point) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(5, noteList0.getCellCount());
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(0, noteList0.getSelectedIndex());
@@ -215,7 +198,7 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="136">136: </a></span>    }
 <span class="nocode"><a name="137">137: </a></span>
 <span class="nocode"><a name="138">138: </a></span>    public boolean getScrollableTracksViewportWidth() {
-<span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">        return true;</span>
+<span class="nocode"><a name="139">139: </a></span>        return true;
 <span class="nocode"><a name="140">140: </a></span>    }
 <span class="nocode"><a name="141">141: </a></span>
 <span class="nocode"><a name="142">142: </a></span>    public boolean getScrollableTracksViewportHeight() {
@@ -263,8 +246,8 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="184">184: </a></span>    }
 <span class="nocode"><a name="185">185: </a></span>    
 <span class="nocode"><a name="186">186: </a></span>    public void removeListEventListener() {
-<span class="nocode"><a name="187">187: </a></span><span style="background-color: #ffffcc">        this.listenerList = null;</span>
-<span class="nocode"><a name="188">188: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="187">187: </a></span>        this.listenerList = null;
+<span class="nocode"><a name="188">188: </a></span>    }
 <span class="nocode"><a name="189">189: </a></span>    
 <span class="nocode"><a name="190">190: </a></span>    /**
 <span class="nocode"><a name="191">191: </a></span>     * Selects or deselects a cell in this
@@ -303,24 +286,24 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="224">224: </a></span>    }
 <span class="nocode"><a name="225">225: </a></span>    
 <span class="nocode"><a name="226">226: </a></span>    protected void fireCursorEnter(Object source, Point p) {
-<span class="nocode"><a name="227">227: </a></span>        if (listListener != null) {
+<span class="nocode"><a name="227">227: </a></span><span style="background-color: #ffffcc">        if (listListener != null) {</span>
 <span class="nocode"><a name="228">228: </a></span>            listListener.cursorEnterCell(new NoteListEvent(
 <span class="nocode"><a name="229">229: </a></span>                    source, p));
 <span class="nocode"><a name="230">230: </a></span>        }
-<span class="nocode"><a name="231">231: </a></span>    }
+<span class="nocode"><a name="231">231: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="232">232: </a></span>
 <span class="nocode"><a name="233">233: </a></span>    protected void fireCursorExit(Object source, Point p) {
-<span class="nocode"><a name="234">234: </a></span><span style="background-color: #ffffcc">        if (listListener != null) {</span>
+<span class="nocode"><a name="234">234: </a></span>        if (listListener != null) {
 <span class="nocode"><a name="235">235: </a></span>            listListener.cursorExitCell(new NoteListEvent(
 <span class="nocode"><a name="236">236: </a></span>                    source, p));
 <span class="nocode"><a name="237">237: </a></span>        }
-<span class="nocode"><a name="238">238: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="238">238: </a></span>    }
 <span class="nocode"><a name="239">239: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2170945897173101075.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5277402201953676720.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -338,7 +321,7 @@ com.allenstudio.ir.ui.NoteList
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11781
+<li>process_communication_port: 2913
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -19,9 +19,9 @@ public class ModeloNFeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ModeloNFe modeloNFe0 = ModeloNFe._2D;
+      ModeloNFe modeloNFe0 = ModeloNFe._01;
       String string0 = modeloNFe0.toString();
       assertNotNull(string0);
-      assertEquals("2D", string0);
+      assertEquals("01", string0);
   }
 }

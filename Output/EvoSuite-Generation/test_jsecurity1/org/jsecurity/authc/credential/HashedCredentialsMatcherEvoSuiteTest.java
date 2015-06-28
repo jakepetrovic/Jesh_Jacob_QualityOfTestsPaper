@@ -19,13 +19,13 @@ import java.util.concurrent.TimeUnit;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
-import org.jsecurity.authc.credential.Md5CredentialsMatcher;
-import org.jsecurity.authc.credential.Sha1CredentialsMatcher;
+import org.jsecurity.authc.credential.Md2CredentialsMatcher;
 import org.jsecurity.authc.credential.Sha256CredentialsMatcher;
-import org.jsecurity.authc.credential.Sha512CredentialsMatcher;
-import org.jsecurity.authz.Permission;
-import org.jsecurity.crypto.hash.Sha256Hash;
+import org.jsecurity.authc.credential.Sha384CredentialsMatcher;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,8 +33,28 @@ import org.junit.BeforeClass;
 
 public class HashedCredentialsMatcherEvoSuiteTest {
 
-  private static ExecutorService executor;
-    
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
+
   //Test case number: 0
   /*
    * 6 covered goals:
@@ -47,47 +67,52 @@ public class HashedCredentialsMatcherEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
+      Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
+      assertEquals(false, sha384CredentialsMatcher0.isHashSalted());
+      
+      sha384CredentialsMatcher0.setHashSalted(true);
+      char[] charArray0 = new char[6];
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("SHA-1", charArray0, (InetAddress) inet4Address0);
+      sha384CredentialsMatcher0.getCredentials((AuthenticationToken) usernamePasswordToken0);
+      assertEquals(true, sha384CredentialsMatcher0.isHashSalted());
+      assertEquals(1, sha384CredentialsMatcher0.getHashIterations());
+  }
+
+  //Test case number: 1
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.authc.credential.HashedCredentialsMatcher.isStoredCredentialsHexEncoded()Z: root-Branch
+   * 2 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationToken;)Ljava/lang/Object;: I9 Branch 2 IFEQ L209 - true
+   * 3 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I15 Branch 3 IFNE L238 - true
+   * 4 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I23 Branch 5 IFEQ L241 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
     Future<?> future = executor.submit(new Runnable(){ 
             public void run() { 
         try {
+          Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
           Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
-          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("K<-M*l", "K<-M*l", false, (InetAddress) inet4Address0);
-          Sha1CredentialsMatcher sha1CredentialsMatcher0 = new Sha1CredentialsMatcher();
-          assertEquals(false, sha1CredentialsMatcher0.isHashSalted());
-          
-          sha1CredentialsMatcher0.setHashSalted(true);
-          sha1CredentialsMatcher0.getCredentials((AuthenticationToken) usernamePasswordToken0);
-          assertEquals(true, sha1CredentialsMatcher0.isHashSalted());
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("%", "%", (InetAddress) inet4Address0);
+          SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+          HashSet<String> hashSet0 = new HashSet<String>();
+          SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) "%", (Set<String>) hashSet0);
+          // Undeclared exception!
+          try {
+            md2CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+            fail("Expecting exception: IllegalArgumentException");
+          } catch(IllegalArgumentException e) {
+            /*
+             * Odd number of characters.
+             */
+          }
         } catch(Throwable t) {
             // Need to catch declared exceptions
         }
       } 
     }); 
     future.get(6000, TimeUnit.MILLISECONDS); 
-  }
-
-  //Test case number: 1
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authc.credential.HashedCredentialsMatcher.isStoredCredentialsHexEncoded()Z: root-Branch
-   * 2 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I15 Branch 3 IFNE L238 - true
-   * 3 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I23 Branch 5 IFEQ L241 - false
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-      HashSet<String> hashSet0 = new HashSet<String>();
-      HashSet<Permission> hashSet1 = new HashSet<Permission>((int) (byte)94);
-      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "\u0000\u0000\u0000", (Object) "\u0000\u0000\u0000", "\u0000\u0000\u0000", (Set<String>) hashSet0, (Set<Permission>) hashSet1);
-      // Undeclared exception!
-      try {
-        md5CredentialsMatcher0.getCredentials((AuthenticationInfo) simpleAccount0);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Odd number of characters.
-         */
-      }
   }
 
   //Test case number: 2
@@ -97,9 +122,9 @@ public class HashedCredentialsMatcherEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      sha512CredentialsMatcher0.setHashIterations((int) (byte)124);
-      assertEquals(124, sha512CredentialsMatcher0.getHashIterations());
+      Sha256CredentialsMatcher sha256CredentialsMatcher0 = new Sha256CredentialsMatcher();
+      sha256CredentialsMatcher0.setHashIterations(114);
+      assertEquals(114, sha256CredentialsMatcher0.getHashIterations());
   }
 
   //Test case number: 3
@@ -109,60 +134,36 @@ public class HashedCredentialsMatcherEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      sha512CredentialsMatcher0.setHashIterations((-1634));
-      assertEquals(true, sha512CredentialsMatcher0.isStoredCredentialsHexEncoded());
-      assertEquals(1, sha512CredentialsMatcher0.getHashIterations());
-      assertEquals(false, sha512CredentialsMatcher0.isHashSalted());
+      Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
+      md2CredentialsMatcher0.setHashIterations((-8));
+      assertEquals(1, md2CredentialsMatcher0.getHashIterations());
+      assertEquals(true, md2CredentialsMatcher0.isStoredCredentialsHexEncoded());
+      assertEquals(false, md2CredentialsMatcher0.isHashSalted());
   }
 
   //Test case number: 4
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationToken;)Ljava/lang/Object;: I9 Branch 2 IFEQ L209 - true
+   * 8 covered goals:
+   * 1 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I23 Branch 5 IFEQ L241 - true
    * 2 org.jsecurity.authc.credential.HashedCredentialsMatcher.getHashIterations()I: root-Branch
    * 3 org.jsecurity.authc.credential.HashedCredentialsMatcher.isHashSalted()Z: root-Branch
+   * 4 org.jsecurity.authc.credential.HashedCredentialsMatcher.<init>()V: root-Branch
+   * 5 org.jsecurity.authc.credential.HashedCredentialsMatcher.setStoredCredentialsHexEncoded(Z)V: root-Branch
+   * 6 org.jsecurity.authc.credential.HashedCredentialsMatcher.isStoredCredentialsHexEncoded()Z: root-Branch
+   * 7 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationToken;)Ljava/lang/Object;: I9 Branch 2 IFEQ L209 - true
+   * 8 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I15 Branch 3 IFNE L238 - true
    */
   @Test
   public void test4()  throws Throwable  {
-    Future<?> future = executor.submit(new Runnable(){ 
-            public void run() { 
-        try {
-          Sha256CredentialsMatcher sha256CredentialsMatcher0 = new Sha256CredentialsMatcher();
-          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
-          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("K<-M*l", "K<-M*l", false, (InetAddress) inet4Address0);
-          Sha256Hash sha256Hash0 = (Sha256Hash)sha256CredentialsMatcher0.getCredentials((AuthenticationToken) usernamePasswordToken0);
-          assertEquals(1, sha256CredentialsMatcher0.getHashIterations());
-          assertNotNull(sha256Hash0);
-          assertEquals(true, sha256CredentialsMatcher0.isStoredCredentialsHexEncoded());
-          assertEquals("a20b97dbc471d3165cc519859c399a5ee9214e7cd3203ab5891ec086e3a8828d", sha256Hash0.toHex());
-        } catch(Throwable t) {
-            // Need to catch declared exceptions
-        }
-      } 
-    }); 
-    future.get(6000, TimeUnit.MILLISECONDS); 
-  }
-
-  //Test case number: 5
-  /*
-   * 5 covered goals:
-   * 1 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I23 Branch 5 IFEQ L241 - true
-   * 2 org.jsecurity.authc.credential.HashedCredentialsMatcher.<init>()V: root-Branch
-   * 3 org.jsecurity.authc.credential.HashedCredentialsMatcher.setStoredCredentialsHexEncoded(Z)V: root-Branch
-   * 4 org.jsecurity.authc.credential.HashedCredentialsMatcher.isStoredCredentialsHexEncoded()Z: root-Branch
-   * 5 org.jsecurity.authc.credential.HashedCredentialsMatcher.getCredentials(Lorg/jsecurity/authc/AuthenticationInfo;)Ljava/lang/Object;: I15 Branch 3 IFNE L238 - true
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-      assertEquals(true, md5CredentialsMatcher0.isStoredCredentialsHexEncoded());
+      Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
+      assertEquals(true, sha384CredentialsMatcher0.isStoredCredentialsHexEncoded());
       
-      HashSet<String> hashSet0 = new HashSet<String>();
-      md5CredentialsMatcher0.setStoredCredentialsHexEncoded(false);
-      HashSet<Permission> hashSet1 = new HashSet<Permission>(1);
-      SimpleAccount simpleAccount0 = new SimpleAccount((Object) "\u0000\u0000\u0000\u0000\u0000", (Object) "\u0000\u0000\u0000\u0000\u0000", "\u0000\u0000\u0000\u0000\u0000", (Set<String>) hashSet0, (Set<Permission>) hashSet1);
-      md5CredentialsMatcher0.getCredentials((AuthenticationInfo) simpleAccount0);
-      assertEquals(false, md5CredentialsMatcher0.isStoredCredentialsHexEncoded());
+      char[] charArray0 = new char[8];
+      sha384CredentialsMatcher0.setStoredCredentialsHexEncoded(false);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("Attempting to load user-specified log class '", charArray0, false);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "org.jsecurity.authc.UsernamePasswordToken - Attempting to load user-specified log class ', rememberMe=false", (Object) "org.jsecurity.authc.UsernamePasswordToken - Attempting to load user-specified log class ', rememberMe=false", "Attempting to load user-specified log class '");
+      sha384CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+      assertEquals(false, sha384CredentialsMatcher0.isStoredCredentialsHexEncoded());
+      assertEquals(1, sha384CredentialsMatcher0.getHashIterations());
   }
 }

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.lavalamp.site.Build;
 import net.sf.lavalamp.site.BuildSite;
+import net.sf.lavalamp.site.impl.BambooRestApi;
 
 public class BuildEvoSuiteTest {
 
@@ -21,11 +22,11 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Build build0 = new Build("U-");
+      Build build0 = new Build("build site %s");
       String string0 = build0.getIdentity();
       assertEquals(true, build0.isSuccessful());
       assertNotNull(string0);
-      assertEquals("<font color='green'> build U- successful (null)</font>", build0.toString());
+      assertEquals("<font color='green'> build build site %s successful (null)</font>", build0.toString());
   }
 
   //Test case number: 1
@@ -35,7 +36,7 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Build build0 = new Build("U-");
+      Build build0 = new Build((String) null);
       build0.getBuildSite();
   }
 
@@ -46,7 +47,7 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Build build0 = new Build("U-");
+      Build build0 = new Build((String) null);
       boolean boolean0 = build0.isSuccessful();
       assertEquals(true, boolean0);
   }
@@ -58,10 +59,9 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Build build0 = new Build("U-");
-      build0.setBuildSite((BuildSite) null);
-      assertEquals(true, build0.isSuccessful());
-      assertEquals("<font color='green'> build U- successful (null)</font>", build0.toString());
+      Build build0 = new Build((String) null);
+      BambooRestApi bambooRestApi0 = new BambooRestApi();
+      build0.setBuildSite((BuildSite) bambooRestApi0);
   }
 
   //Test case number: 4
@@ -72,13 +72,13 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Build build0 = new Build("U-");
+      Build build0 = new Build("build site %s");
       assertEquals(true, build0.isSuccessful());
       
       build0.setSuccessful(false);
       String string0 = build0.toString();
       assertEquals(false, build0.isSuccessful());
-      assertEquals("<font color='red'> build U- failed (null)</font>", string0);
+      assertEquals("<font color='red'> build build site %s failed (null)</font>", string0);
   }
 
   //Test case number: 5
@@ -89,9 +89,9 @@ public class BuildEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      Build build0 = new Build("damRM\"cb@a#");
+      Build build0 = new Build("build site %s");
       String string0 = build0.toString();
-      assertEquals(true, build0.isSuccessful());
+      assertEquals("<font color='green'> build build site %s successful (null)</font>", string0);
       assertNotNull(string0);
   }
 }

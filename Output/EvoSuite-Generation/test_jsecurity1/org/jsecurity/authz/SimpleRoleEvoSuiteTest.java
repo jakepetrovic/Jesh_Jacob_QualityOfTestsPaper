@@ -30,72 +30,68 @@ public class SimpleRoleEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      HashSet<Permission> hashSet0 = new HashSet<Permission>();
-      SimpleRole simpleRole0 = new SimpleRole("M?S3", (Set<Permission>) hashSet0);
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      SimpleRole simpleRole0 = new SimpleRole("Y4Fo*luHU/aimD", (Set<Permission>) linkedHashSet0);
       int int0 = simpleRole0.hashCode();
-      assertEquals(2357074, int0);
+      assertEquals(836411634, int0);
   }
 
   //Test case number: 1
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 org.jsecurity.authz.SimpleRole.toString()Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.authz.SimpleRole.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      HashSet<Permission> hashSet0 = new HashSet<Permission>();
-      SimpleRole simpleRole0 = new SimpleRole("M?S3", (Set<Permission>) hashSet0);
+      SimpleRole simpleRole0 = new SimpleRole("");
       String string0 = simpleRole0.toString();
-      assertEquals("M?S3", string0);
+      assertEquals("", string0);
   }
 
   //Test case number: 2
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I3 Branch 2 IFNULL L76 - true
-   * 2 org.jsecurity.authz.SimpleRole.<init>(Ljava/lang/String;)V: root-Branch
+   * 1 org.jsecurity.authz.SimpleRole.hashCode()I: I4 Branch 9 IFNULL L99 - true
+   * 2 org.jsecurity.authz.SimpleRole.<init>()V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole("");
-      simpleRole0.addAll((Collection<Permission>) null);
-      assertEquals("", simpleRole0.getName());
+      SimpleRole simpleRole0 = new SimpleRole();
+      int int0 = simpleRole0.hashCode();
+      assertEquals(0, int0);
   }
 
   //Test case number: 3
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - false
-   * 2 org.jsecurity.authz.SimpleRole.getPermissions()Ljava/util/Set;: root-Branch
-   * 3 org.jsecurity.authz.SimpleRole.<init>()V: root-Branch
+   * 5 covered goals:
+   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I6 Branch 3 IFGT L76 - false
+   * 2 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I15 Branch 4 IFNONNULL L78 - true
+   * 3 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - true
+   * 4 org.jsecurity.authz.SimpleRole.getPermissions()Ljava/util/Set;: root-Branch
+   * 5 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I3 Branch 2 IFNULL L76 - false
    */
   @Test
   public void test3()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole();
-      AllPermission allPermission0 = new AllPermission();
-      simpleRole0.add((Permission) allPermission0);
-      assertNull(simpleRole0.getName());
+      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      SimpleRole simpleRole0 = new SimpleRole("Y4Fo*luHU/aimD", (Set<Permission>) linkedHashSet0);
+      WildcardPermission wildcardPermission0 = new WildcardPermission("V+b");
+      simpleRole0.add((Permission) wildcardPermission0);
+      simpleRole0.addAll((Collection<Permission>) linkedHashSet0);
+      assertEquals(false, linkedHashSet0.isEmpty());
+      assertEquals(1, linkedHashSet0.size());
   }
 
   //Test case number: 4
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I11 Branch 6 IFGT L88 - false
-   * 2 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I20 Branch 7 IFEQ L89 - false
-   * 3 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I30 Branch 8 IFEQ L90 - false
-   * 4 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I8 Branch 5 IFNULL L88 - false
-   * 5 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I3 Branch 2 IFNULL L76 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      HashSet<Permission> hashSet0 = new HashSet<Permission>();
-      SimpleRole simpleRole0 = new SimpleRole("M?S3", (Set<Permission>) hashSet0);
-      AllPermission allPermission0 = new AllPermission();
-      simpleRole0.add((Permission) allPermission0);
-      WildcardPermission wildcardPermission0 = new WildcardPermission("[#'/Kr-`Iyb'c0D)n)");
-      boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
-      assertEquals(false, hashSet0.isEmpty());
-      assertEquals(true, boolean0);
+      SimpleRole simpleRole0 = new SimpleRole("");
+      simpleRole0.addAll((Collection<Permission>) null);
+      assertEquals("", simpleRole0.toString());
   }
 
   //Test case number: 5
@@ -106,71 +102,76 @@ public class SimpleRoleEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole("");
       LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
+      SimpleRole simpleRole0 = new SimpleRole("Y4Fo*luHU/aimD", (Set<Permission>) linkedHashSet0);
       simpleRole0.addAll((Collection<Permission>) linkedHashSet0);
-      assertEquals(0, linkedHashSet0.size());
+      assertEquals("[]", linkedHashSet0.toString());
   }
 
   //Test case number: 6
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I6 Branch 3 IFGT L76 - false
-   * 2 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I15 Branch 4 IFNONNULL L78 - false
+   * 4 covered goals:
+   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I15 Branch 4 IFNONNULL L78 - false
+   * 2 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I3 Branch 2 IFNULL L76 - false
+   * 3 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I6 Branch 3 IFGT L76 - false
+   * 4 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - false
    */
   @Test
   public void test6()  throws Throwable  {
       SimpleRole simpleRole0 = new SimpleRole("");
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
-      WildcardPermission wildcardPermission0 = new WildcardPermission(".", true);
-      linkedHashSet0.add((Permission) wildcardPermission0);
-      simpleRole0.addAll((Collection<Permission>) linkedHashSet0);
-      assertEquals("", simpleRole0.getName());
+      SimpleRole simpleRole1 = new SimpleRole("", (Set<Permission>) null);
+      AllPermission allPermission0 = new AllPermission();
+      simpleRole1.add((Permission) allPermission0);
+      Set<Permission> set0 = simpleRole1.getPermissions();
+      assertNotNull(set0);
+      
+      simpleRole0.addAll((Collection<Permission>) set0);
+      assertTrue(simpleRole1.equals(simpleRole0));
+      assertTrue(simpleRole0.equals(simpleRole1));
+      assertEquals(1, set0.size());
   }
 
   //Test case number: 7
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I15 Branch 4 IFNONNULL L78 - true
-   * 2 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I3 Branch 2 IFNULL L76 - false
-   * 3 org.jsecurity.authz.SimpleRole.addAll(Ljava/util/Collection;)V: I6 Branch 3 IFGT L76 - false
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole();
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
-      simpleRole0.setPermissions((Set<Permission>) linkedHashSet0);
-      WildcardPermission wildcardPermission0 = new WildcardPermission("pFE{`3'\"", true);
-      simpleRole0.add((Permission) wildcardPermission0);
-      simpleRole0.addAll((Collection<Permission>) linkedHashSet0);
-      assertEquals(false, linkedHashSet0.isEmpty());
-      assertEquals(1, linkedHashSet0.size());
-  }
-
-  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I8 Branch 5 IFNULL L88 - true
    */
   @Test
-  public void test8()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole("");
+  public void test7()  throws Throwable  {
+      SimpleRole simpleRole0 = new SimpleRole("r&~>`D`=z$/M0g");
       AllPermission allPermission0 = new AllPermission();
       boolean boolean0 = simpleRole0.isPermitted((Permission) allPermission0);
       assertEquals(false, boolean0);
   }
 
+  //Test case number: 8
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I8 Branch 5 IFNULL L88 - false
+   * 2 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I11 Branch 6 IFGT L88 - false
+   * 3 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I20 Branch 7 IFEQ L89 - false
+   * 4 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I30 Branch 8 IFEQ L90 - false
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      SimpleRole simpleRole0 = new SimpleRole("");
+      AllPermission allPermission0 = new AllPermission();
+      simpleRole0.add((Permission) allPermission0);
+      boolean boolean0 = simpleRole0.isPermitted((Permission) allPermission0);
+      assertEquals(true, boolean0);
+  }
+
   //Test case number: 9
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I8 Branch 5 IFNULL L88 - false
-   * 2 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I11 Branch 6 IFGT L88 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I11 Branch 6 IFGT L88 - true
    */
   @Test
   public void test9()  throws Throwable  {
+      SimpleRole simpleRole0 = new SimpleRole("r&~>`D`=z$/M0g");
+      WildcardPermission wildcardPermission0 = new WildcardPermission("8P~J6E}'<}|");
       HashSet<Permission> hashSet0 = new HashSet<Permission>();
-      SimpleRole simpleRole0 = new SimpleRole("M?S3", (Set<Permission>) hashSet0);
-      WildcardPermission wildcardPermission0 = new WildcardPermission("[#'/Kr-`Iyb'c0D)n)");
+      simpleRole0.setPermissions((Set<Permission>) hashSet0);
       boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
       assertEquals(false, boolean0);
   }
@@ -184,46 +185,33 @@ public class SimpleRoleEvoSuiteTest {
    * 4 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I8 Branch 5 IFNULL L88 - false
    * 5 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I11 Branch 6 IFGT L88 - false
    * 6 org.jsecurity.authz.SimpleRole.isPermitted(Lorg/jsecurity/authz/Permission;)Z: I20 Branch 7 IFEQ L89 - false
-   * 7 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - true
+   * 7 org.jsecurity.authz.SimpleRole.add(Lorg/jsecurity/authz/Permission;)V: I8 Branch 1 IFNONNULL L68 - false
    */
   @Test
   public void test10()  throws Throwable  {
-      HashSet<Permission> hashSet0 = new HashSet<Permission>();
-      SimpleRole simpleRole0 = new SimpleRole("M?S3", (Set<Permission>) hashSet0);
-      WildcardPermission wildcardPermission0 = new WildcardPermission("[#'/Kr-`Iyb'c0D)n)");
+      SimpleRole simpleRole0 = new SimpleRole("r&~>`D`=z$/M0g");
+      WildcardPermission wildcardPermission0 = new WildcardPermission("8P~J6E}'<}|");
       simpleRole0.add((Permission) wildcardPermission0);
-      WildcardPermission wildcardPermission1 = new WildcardPermission("[#'/Kr-`Iyb'c0D)n)", true);
-      boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission1);
-      assertEquals(1, hashSet0.size());
+      AllPermission allPermission0 = new AllPermission();
+      boolean boolean0 = simpleRole0.isPermitted((Permission) allPermission0);
       assertEquals(false, boolean0);
   }
 
   //Test case number: 11
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.authz.SimpleRole.hashCode()I: I4 Branch 9 IFNULL L99 - true
+   * 3 covered goals:
+   * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L103 - true
+   * 2 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I13 Branch 11 IFEQ L106 - true
+   * 3 org.jsecurity.authz.SimpleRole.<init>(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole();
-      int int0 = simpleRole0.hashCode();
-      assertEquals(0, int0);
-  }
-
-  //Test case number: 12
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L103 - true
-   * 2 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I13 Branch 11 IFEQ L106 - true
-   */
-  @Test
-  public void test12()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole();
-      boolean boolean0 = simpleRole0.equals((Object) "pFE{`3'\"");
+      SimpleRole simpleRole0 = new SimpleRole("");
+      boolean boolean0 = simpleRole0.equals((Object) "");
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 13
+  //Test case number: 12
   /*
    * 4 covered goals:
    * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I13 Branch 11 IFEQ L106 - false
@@ -232,29 +220,30 @@ public class SimpleRoleEvoSuiteTest {
    * 4 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L103 - false
    */
   @Test
+  public void test12()  throws Throwable  {
+      SimpleRole simpleRole0 = new SimpleRole();
+      SimpleRole simpleRole1 = new SimpleRole();
+      boolean boolean0 = simpleRole0.equals((Object) simpleRole1);
+      assertEquals(true, boolean0);
+  }
+
+  //Test case number: 13
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L109 - false
+   * 2 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L103 - true
+   */
+  @Test
   public void test13()  throws Throwable  {
       SimpleRole simpleRole0 = new SimpleRole();
       SimpleRole simpleRole1 = new SimpleRole();
+      simpleRole1.setName("[]");
       boolean boolean0 = simpleRole1.equals((Object) simpleRole0);
+      assertFalse(simpleRole0.equals(simpleRole1));
       assertEquals(true, boolean0);
   }
 
   //Test case number: 14
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L109 - false
-   * 2 org.jsecurity.authz.SimpleRole.<init>(Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I4 Branch 10 IF_ACMPNE L103 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      SimpleRole simpleRole0 = new SimpleRole();
-      SimpleRole simpleRole1 = new SimpleRole("");
-      boolean boolean0 = simpleRole1.equals((Object) simpleRole0);
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 15
   /*
    * 9 covered goals:
    * 1 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I33 Branch 13 IFNONNULL L109 - true
@@ -268,12 +257,11 @@ public class SimpleRoleEvoSuiteTest {
    * 9 org.jsecurity.authz.SimpleRole.equals(Ljava/lang/Object;)Z: I23 Branch 12 IFNULL L109 - true
    */
   @Test
-  public void test15()  throws Throwable  {
+  public void test14()  throws Throwable  {
       SimpleRole simpleRole0 = new SimpleRole();
-      LinkedHashSet<Permission> linkedHashSet0 = new LinkedHashSet<Permission>();
-      SimpleRole simpleRole1 = new SimpleRole("*", (Set<Permission>) linkedHashSet0);
+      SimpleRole simpleRole1 = new SimpleRole("IoyZ9j", (Set<Permission>) null);
       boolean boolean0 = simpleRole0.equals((Object) simpleRole1);
-      assertEquals(false, boolean0);
       assertTrue(simpleRole1.equals(simpleRole0));
+      assertEquals(false, boolean0);
   }
 }

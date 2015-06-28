@@ -19,9 +19,9 @@ public class FaultReasonsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      FaultReasons faultReasons0 = FaultReasons.FAULT_INVALID_CREDENTIALS;
+      FaultReasons faultReasons0 = FaultReasons.FAULT_UNAUTHORIZED;
       String string0 = faultReasons0.getFaultReason();
-      assertEquals("Invalid Credentials", string0);
+      assertEquals("(401)Unauthorized", string0);
   }
 
   //Test case number: 1
@@ -31,8 +31,8 @@ public class FaultReasonsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      FaultReasons faultReasons0 = FaultReasons.FAULT_INVALID_CREDENTIALS;
+      FaultReasons faultReasons0 = FaultReasons.FAULT_UNAUTHORIZED;
       String string0 = faultReasons0.toString();
-      assertEquals("Invalid Credentials", string0);
+      assertEquals("(401)Unauthorized", string0);
   }
 }

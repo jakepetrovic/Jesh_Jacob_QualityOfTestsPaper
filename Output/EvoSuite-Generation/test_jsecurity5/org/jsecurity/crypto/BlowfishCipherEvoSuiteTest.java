@@ -16,60 +16,62 @@ public class BlowfishCipherEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 7 covered goals:
+   * 6 covered goals:
    * 1 org.jsecurity.crypto.BlowfishCipher.crypt(Ljavax/crypto/Cipher;[B)[B: root-Branch
    * 2 org.jsecurity.crypto.BlowfishCipher.newCipherInstance()Ljavax/crypto/Cipher;: root-Branch
-   * 3 org.jsecurity.crypto.BlowfishCipher.getKey()Ljava/security/Key;: root-Branch
-   * 4 org.jsecurity.crypto.BlowfishCipher.init(Ljavax/crypto/Cipher;ILjava/security/Key;)V: root-Branch
-   * 5 org.jsecurity.crypto.BlowfishCipher.decrypt([B[B)[B: I4 Branch 4 IFEQ L135 - true
-   * 6 org.jsecurity.crypto.BlowfishCipher.crypt([BI[B)[B: I8 Branch 6 IFNONNULL L207 - false
-   * 7 org.jsecurity.crypto.BlowfishCipher.<init>()V: root-Branch
+   * 3 org.jsecurity.crypto.BlowfishCipher.init(Ljavax/crypto/Cipher;ILjava/security/Key;)V: root-Branch
+   * 4 org.jsecurity.crypto.BlowfishCipher.decrypt([B[B)[B: I4 Branch 4 IFEQ L135 - true
+   * 5 org.jsecurity.crypto.BlowfishCipher.crypt([BI[B)[B: I8 Branch 6 IFNONNULL L207 - true
+   * 6 org.jsecurity.crypto.BlowfishCipher.<init>()V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       BlowfishCipher blowfishCipher0 = new BlowfishCipher();
+      byte[] byteArray0 = new byte[3];
+      byte[] byteArray1 = new byte[9];
       // Undeclared exception!
       try {
-        blowfishCipher0.decrypt((byte[]) null, (byte[]) null);
+        blowfishCipher0.decrypt(byteArray0, byteArray1);
         fail("Expecting exception: IllegalStateException");
       } catch(IllegalStateException e) {
         /*
-         * Unable to crypt bytes with cipher [javax.crypto.Cipher@390a31a2].
+         * Unable to crypt bytes with cipher [javax.crypto.Cipher@3487968a].
          */
       }
   }
 
   //Test case number: 1
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.crypto.BlowfishCipher.setKey(Ljava/security/Key;)V: root-Branch
-   * 2 org.jsecurity.crypto.BlowfishCipher.generateNewKey(I)Ljava/security/Key;: root-Branch
-   * 3 org.jsecurity.crypto.BlowfishCipher.generateNewKey()Ljava/security/Key;: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      BlowfishCipher blowfishCipher0 = new BlowfishCipher();
-      SecretKeySpec secretKeySpec0 = (SecretKeySpec)BlowfishCipher.generateNewKey();
-      blowfishCipher0.setKey((Key) secretKeySpec0);
-      assertEquals("Blowfish", secretKeySpec0.getAlgorithm());
-  }
-
-  //Test case number: 2
-  /*
    * 6 covered goals:
-   * 1 org.jsecurity.crypto.BlowfishCipher.encrypt([B[B)[B: I12 Branch 1 IFEQ L123 - true
-   * 2 org.jsecurity.crypto.BlowfishCipher.crypt([BI[B)[B: I8 Branch 6 IFNONNULL L207 - true
-   * 3 org.jsecurity.crypto.BlowfishCipher.<init>()V: root-Branch
+   * 1 org.jsecurity.crypto.BlowfishCipher.getKey()Ljava/security/Key;: root-Branch
+   * 2 org.jsecurity.crypto.BlowfishCipher.encrypt([B[B)[B: I12 Branch 1 IFEQ L123 - true
+   * 3 org.jsecurity.crypto.BlowfishCipher.crypt([BI[B)[B: I8 Branch 6 IFNONNULL L207 - false
    * 4 org.jsecurity.crypto.BlowfishCipher.crypt(Ljavax/crypto/Cipher;[B)[B: root-Branch
    * 5 org.jsecurity.crypto.BlowfishCipher.newCipherInstance()Ljavax/crypto/Cipher;: root-Branch
    * 6 org.jsecurity.crypto.BlowfishCipher.init(Ljavax/crypto/Cipher;ILjava/security/Key;)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test1()  throws Throwable  {
       BlowfishCipher blowfishCipher0 = new BlowfishCipher();
       byte[] byteArray0 = new byte[4];
-      byte[] byteArray1 = blowfishCipher0.encrypt(byteArray0, byteArray0);
-      assertNotSame(byteArray0, byteArray1);
+      byte[] byteArray1 = blowfishCipher0.encrypt(byteArray0, (byte[]) null);
       assertNotNull(byteArray1);
+      assertNotSame(byteArray1, byteArray0);
+  }
+
+  //Test case number: 2
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.crypto.BlowfishCipher.setKey(Ljava/security/Key;)V: root-Branch
+   * 2 org.jsecurity.crypto.BlowfishCipher.generateNewKey(I)Ljava/security/Key;: root-Branch
+   * 3 org.jsecurity.crypto.BlowfishCipher.<init>()V: root-Branch
+   * 4 org.jsecurity.crypto.BlowfishCipher.generateNewKey()Ljava/security/Key;: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      BlowfishCipher blowfishCipher0 = new BlowfishCipher();
+      SecretKeySpec secretKeySpec0 = (SecretKeySpec)BlowfishCipher.generateNewKey();
+      blowfishCipher0.setKey((Key) secretKeySpec0);
+      assertEquals("RAW", secretKeySpec0.getFormat());
   }
 }

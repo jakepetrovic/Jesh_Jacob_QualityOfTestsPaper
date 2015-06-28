@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+dk.statsbiblioteket.summa.common.strings.LowercaseMap
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: dk.statsbiblioteket.summa.common.strings.LowercaseMap: 62.50%</ul><ul>
+<li>1036 fitness evaluations, 22 generations, 4050 statements, 916 tests.
+<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>Coverage: 8/14 branches, 3/3 methods, 10/16 total goals
+<li>Mutation score: 36%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>LowercaseMap lowercaseMap0 = new LowercaseMap();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(lowercaseMap0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="2">  2: </a></span>hashMap0.put(&quot;&quot;, &quot;(X.g7SH&quot;);
+<span class="nocode"><a name="3">  3: </a></span>LowercaseMap.getLowercaseMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;{=(X.g7SH, D=d, E=e, F=f, G=g, A=a, B=b, C=c, L=l, M=m, N=n, O=o, H=h, I=i, J=j, K=k, U=u, T=t, W=w, V=v, Q=q, P=p, S=s, R=r, Y=y, X=x, Z=z, \u00CD=\u00ED, \u00CC=\u00EC, \u00CF=\u00EF, \u00CE=\u00EE, \u00C9=\u00E9, \u00C8=\u00E8, \u00CB=\u00EB, \u00CA=\u00EA, \u00C5=\u00E5, \u00C4=\u00E4, \u00C7=\u00E7, \u00C6=\u00E6, \u00C1=\u00E1, \u00C0=\u00E0, \u00C3=\u00E3, \u00C2=\u00E2, \u00DC=\u00FC, \u00DD=\u00FD, \u00DE=\u00FE, \u00D8=\u00F8, \u00D9=\u00F9, \u00DA=\u00FA, \u00DB=\u00FB, \u00D4=\u00F4, \u00D5=\u00F5, \u00D6=\u00F6, \u00D0=\u00F0, \u00D1=\u00F1, \u00D2=\u00F2, \u00D3=\u00F3, \u0112=\u0113, \u0110=\u0111, \u0116=\u0117, \u0114=\u0115, \u011A=\u011B, \u0118=\u0119, \u011E=\u011F, \u011C=\u011D, \u0102=\u0103, \u0100=\u0101, \u0106=\u0107, \u0104=\u0105, \u010A=\u010B, \u0108=\u0109, \u010E=\u010F, \u010C=\u010D, \uFF23=\uFF43, \uFF22=\uFF42, \u0130=i, \uFF21=\uFF41, \u0132=\u0133, \uFF27=\uFF47, \uFF26=\uFF46, \u0134=\u0135, \uFF25=\uFF45, \uFF24=\uFF44, \u0136=\u0137, \uFF2B=\uFF4B, \u0139=\u013A, \uFF2A=\uFF4A, \uFF29=\uFF49, \u013B=\u013C, \uFF28=\uFF48, \uFF2F=\uFF4F, \u013D=\u013E, \uFF2E=\uFF4E, \uFF2D=\uFF4D, \u013F=\u0140, \uFF2C=\uFF4C, \uFF32=\uFF52, \u0120=\u0121, \uFF33=\uFF53, \uFF30=\uFF50, \u0122=\u0123, \uFF31=\uFF51, \uFF36=\uFF56, \u0124=\u0125, \uFF37=\uFF57, \uFF34=\uFF54, \u0126=\u0127, \uFF35=\uFF55, \uFF3A=\uFF5A, \u0128=\u0129, \uFF38=\uFF58, \u012A=\u012B, \uFF39=\uFF59, \u012C=\u012D, \u012E=\u012F, \u0156=\u0157, \u0154=\u0155, \u0152=\u0153, \u0150=\u0151, \u015E=\u015F, \u015C=\u015D, \u015A=\u015B, \u0158=\u0159, \u0147=\u0148, \u0145=\u0146, \u0143=\u0144, \u0141=\u0142, \u014E=\u014F, \u014C=\u014D, \u014A=\u014B, \u0174=\u0175, \u0176=\u0177, \u0170=\u0171, \u0172=\u0173, \u017D=\u017E, \u0179=\u017A, \u0178=\u00FF, \u017B=\u017C, \u0164=\u0165, \u0166=\u0167, \u0160=\u0161, \u0162=\u0163, \u016C=\u016D, \u016E=\u016F, \u0168=\u0169, \u016A=\u016B, \u10AA=\u2D0A, \u10AB=\u2D0B, \u0198=\u0199, \u10A8=\u2D08, \u10A9=\u2D09, \u10AE=\u2D0E, \u019F=\u0275, \u10AF=\u2D0F, \u019C=\u026F, \u10AC=\u2D0C, \u019D=\u0272, \u10AD=\u2D0D, \u10A2=\u2D02, \u0193=\u0260, \u10A3=\u2D03, \u0190=\u025B, \u10A0=\u2D00, \u0191=\u0192, \u10A1=\u2D01, \u0196=\u0269, \u10A6=\u2D06, \u0197=\u0268, \u10A7=\u2D07, \u0194=\u0263, \u10A4=\u2D04, \u10A5=\u2D05, \u018B=\u018C, \u10BB=\u2D1B, \u018A=\u0257, \u10BA=\u2D1A, \u0189=\u0256, \u10B9=\u2D19, \u10B8=\u2D18, \u018F=\u0259, \u10BF=\u2D1F, \u018E=\u01DD, \u10BE=\u2D1E, \u10BD=\u2D1D, \u10BC=\u2D1C, \u10B3=\u2D13, \u0182=\u0183, \u10B2=\u2D12, \u0181=\u0253, \u10B1=\u2D11, \u10B0=\u2D10, \u0187=\u0188, \u10B7=\u2D17, \u0186=\u0254, \u10B6=\u2D16, \u10B5=\u2D15, \u0184=\u0185, \u10B4=\u2D14, \u01B8=\u01B9, \u01BC=\u01BD, \u01B1=\u028A, \u01B2=\u028B, \u01B3=\u01B4, \u01B5=\u01B6, \u01B7=\u0292, \u01A9=\u0283, \u01AC=\u01AD, \u01AF=\u01B0, \u01AE=\u0288, \u01A0=\u01A1, \u01A2=\u01A3, \u01A4=\u01A5, \u01A7=\u01A8, \u01A6=\u0280, \u01DE=\u01DF, \u01DB=\u01DC, \u01D9=\u01DA, \u01D7=\u01D8, \u01D5=\u01D6, \u01D3=\u01D4, \u01D1=\u01D2, \u01CF=\u01D0, \u01CD=\u01CE, \u01CB=\u01CC, \u01CA=\u01CC, \u01C8=\u01C9, \u01C7=\u01C9, \u01C5=\u01C6, \u01C4=\u01C6, \u01FC=\u01FD, \u01FE=\u01FF, \u01F8=\u01F9, \u01FA=\u01FB, \u01F4=\u01F5, \u10C4=\u2D24, \u10C5=\u2D25, \u01F6=\u0195, \u01F7=\u01BF, \u10C0=\u2D20, \u01F1=\u01F3, \u10C1=\u2D21, \u01F2=\u01F3, \u10C2=\u2D22, \u10C3=\u2D23, \u01EC=\u01ED, \u01EE=\u01EF, \u01E8=\u01E9, \u01EA=\u01EB, \u01E4=\u01E5, \u01E6=\u01E7, \u01E0=\u01E1, \u01E2=\u01E3, \u0226=\u0227, \u0224=\u0225, \u0222=\u0223, \u0220=\u019E, \u022E=\u022F, \u022C=\u022D, \u022A=\u022B, \u0228=\u0229, \u0232=\u0233, \u0230=\u0231, \u023E=\u2C66, \u023D=\u019A, \u023B=\u023C, \u023A=\u2C65, \u0204=\u0205, \u0206=\u0207, \u0200=\u0201, \u0202=\u0203, \u020C=\u020D, \u020E=\u020F, \u0208=\u0209, \u020A=\u020B, \u0214=\u0215, \u0216=\u0217, \u0210=\u0211, \u0212=\u0213, \u021C=\u021D, \u021E=\u021F, \u0218=\u0219, \u021A=\u021B, \u0241=\u0242, \u0243=\u0180, \u0244=\u0289, \u0245=\u028C, \u0246=\u0247, \u0248=\u0249, \u024A=\u024B, \u024C=\u024D, \u024E=\u024F, \u2166=\u2176, \u2167=\u2177, \u2164=\u2174, \u2165=\u2175, \u2162=\u2172, \u2163=\u2173, \u2160=\u2170, \u2161=\u2171, \u216E=\u217E, \u216F=\u217F, \u216C=\u217C, \u216D=\u217D, \u216A=\u217A, \u216B=\u217B, \u2168=\u2178, \u2169=\u2179, \u0370=\u0371, \u0372=\u0373, \u0376=\u0377, \u2132=\u214E, \u2126=\u03C9, \u212A=k, \u212B=\u00E5, \u03A9=\u03C9, \u03A8=\u03C8, \u03AB=\u03CB, \u03AA=\u03CA, \u03A5=\u03C5, \u03A4=\u03C4, \u03A7=\u03C7, \u03A6=\u03C6, \u03A1=\u03C1, \u03A0=\u03C0, \u03A3=\u03C3, \u039E=\u03BE, \u039F=\u03BF, \u039C=\u03BC, \u039D=\u03BD, \u039A=\u03BA, \u039B=\u03BB, \u0398=\u03B8, \u0399=\u03B9, \u0396=\u03B6, \u0397=\u03B7, \u0394=\u03B4, \u0395=\u03B5, \u0392=\u03B2, \u0393=\u03B3, \u0391=\u03B1, \u038F=\u03CE, \u038E=\u03CD, \u038C=\u03CC, \u038A=\u03AF, \u0389=\u03AE, \u0388=\u03AD, \u0386=\u03AC, \u03F9=\u03F2, \u03FA=\u03FB, \u03FD=\u037B, \u03FE=\u037C, \u03FF=\u037D, \u03F4=\u03B8, \u03F7=\u03F8, \u03E8=\u03E9, \u03EA=\u03EB, \u03EC=\u03ED, \u03EE=\u03EF, \u03E0=\u03E1, \u2183=\u2184, \u03E2=\u03E3, \u03E4=\u03E5, \u03E6=\u03E7, \u03DA=\u03DB, \u03D8=\u03D9, \u03DE=\u03DF, \u03DC=\u03DD, \u03CF=\u03D7, \uA736=\uA737, \uA734=\uA735, \uA732=\uA733, \uA73E=\uA73F, \uA73C=\uA73D, \uA73A=\uA73B, \uA738=\uA739, \uA726=\uA727, \uA724=\uA725, \uA722=\uA723, \uA72E=\uA72F, \uA72C=\uA72D, \uA72A=\uA72B, \uA728=\uA729, \u046E=\u046F, \u046C=\u046D, \u046A=\u046B, \u0468=\u0469, \u0466=\u0467, \u0464=\u0465, \u0462=\u0463, \u0460=\u0461, \u047E=\u047F, \u047C=\u047D, \u047A=\u047B, \u0478=\u0479, \u0476=\u0477, \u0474=\u0475, \u0472=\u0473, \u0470=\u0471, \u0408=\u0458, \u0409=\u0459, \u040A=\u045A, \u040B=\u045B, \u040C=\u045C, \u040D=\u045D, \u040E=\u045E, \u040F=\u045F, \uA77B=\uA77C, \u0400=\u0450, \u0401=\u0451, \uA779=\uA77A, \u0402=\u0452, \u0403=\u0453, \u0404=\u0454, \uA77E=\uA77F, \u0405=\u0455, \uA77D=\u1D79, \u0406=\u0456, \u0407=\u0457, \uA762=\uA763, \u0419=\u0439, \u0418=\u0438, \uA760=\uA761, \u041B=\u043B, \u041A=\u043A, \uA766=\uA767, \u041D=\u043D, \u041C=\u043C, \uA764=\uA765, \u041F=\u043F, \u041E=\u043E, \uA76A=\uA76B, \u0411=\u0431, \u0410=\u0430, \uA768=\uA769, \u0413=\u0433, \u0412=\u0432, \uA76E=\uA76F, \u0415=\u0435, \u0414=\u0434, \uA76C=\uA76D, \u0417=\u0437, \u0416=\u0436, \u042A=\u044A, \uA750=\uA751, \u042B=\u044B, \u0428=\u0448, \uA752=\uA753, \u0429=\u0449, \u042E=\u044E, \uA754=\uA755, \u042F=\u044F, \u042C=\u044C, \uA756=\uA757, \u042D=\u044D, \u0422=\u0442, \uA758=\uA759, \u0423=\u0443, \u0420=\u0440, \uA75A=\uA75B, \u0421=\u0441, \u0426=\u0446, \uA75C=\uA75D, \u0427=\u0447, \u0424=\u0444, \uA75E=\uA75F, \u0425=\u0445, \uA740=\uA741, \uA742=\uA743, \uA744=\uA745, \uA746=\uA747, \uA748=\uA749, \uA74A=\uA74B, \uA74C=\uA74D, \uA74E=\uA74F, \u04C5=\u04C6, \u04C7=\u04C8, \u04C1=\u04C2, \u04C0=\u04CF, \u04C3=\u04C4, \u04CD=\u04CE, \u04C9=\u04CA, \u04CB=\u04CC, \u04D4=\u04D5, \u04D6=\u04D7, \u04D0=\u04D1, \u04D2=\u04D3, \uA7A8=\uA7A9, \u04DC=\u04DD, \uA7A6=\uA7A7, \u04DE=\u04DF, \uA7A4=\uA7A5, \u04D8=\u04D9, \uA7A2=\uA7A3, \u04DA=\u04DB, \uA7A0=\uA7A1, \u04E6=\u04E7, \u04E4=\u04E5, \u04E2=\u04E3, \u04E0=\u04E1, \u04EE=\u04EF, \u04EC=\u04ED, \uA790=\uA791, \u04EA=\u04EB, \u04E8=\u04E9, \uA78D=\u0265, \u04F6=\u04F7, \u04F4=\u04F5, \u04F2=\u04F3, \uA78B=\uA78C, \u04F0=\u04F1, \u04FE=\u04FF, \uA784=\uA785, \u04FC=\u04FD, \uA786=\uA787, \u04FA=\u04FB, \uA780=\uA781, \u04F8=\u04F9, \uA782=\uA783, \u0480=\u0481, \u048A=\u048B, \u048C=\u048D, \u048E=\u048F, \u0490=\u0491, \u0492=\u0493, \u0494=\u0495, \u0496=\u0497, \u0498=\u0499, \u049A=\u049B, \u049C=\u049D, \u049E=\u049F, \u04A2=\u04A3, \u04A0=\u04A1, \u04A6=\u04A7, \u04A4=\u04A5, \u04AA=\u04AB, \u04A8=\u04A9, \u04AE=\u04AF, \u04AC=\u04AD, \u04B2=\u04B3, \u04B0=\u04B1, \u04B6=\u04B7, \u04B4=\u04B5, \u04BA=\u04BB, \u04B8=\u04B9, \u04BE=\u04BF, \u04BC=\u04BD, \u0556=\u0586, \u0555=\u0585, \u0554=\u0584, \u0553=\u0583, \u0552=\u0582, \u0551=\u0581, \u0550=\u0580, \u054E=\u057E, \u054F=\u057F, \u054C=\u057C, \u054D=\u057D, \u054A=\u057A, \u054B=\u057B, \u0548=\u0578, \u0549=\u0579, \u0546=\u0576, \u0547=\u0577, \u0544=\u0574, \u0545=\u0575, \u0542=\u0572, \u0543=\u0573, \u0540=\u0570, \u0541=\u0571, \uA660=\uA661, \u051A=\u051B, \uA662=\uA663, \u0518=\u0519, \uA664=\uA665, \u051E=\u051F, \uA666=\uA667, \u051C=\u051D, \uA668=\uA669, \u0512=\u0513, \uA66A=\uA66B, \u0510=\u0511, \uA66C=\uA66D, \u0516=\u0517, \u0514=\u0515, \u050A=\u050B, \u0508=\u0509, \u050E=\u050F, \u050C=\u050D, \u0502=\u0503, \u0500=\u0501, \u0506=\u0507, \u0504=\u0505, \uA642=\uA643, \u0539=\u0569, \u0538=\u0568, \uA640=\uA641, \u053B=\u056B, \u053A=\u056A, \uA646=\uA647, \u053D=\u056D, \u053C=\u056C, \uA644=\uA645, \u053F=\u056F, \u053E=\u056E, \uA64A=\uA64B, \u0531=\u0561, \uA648=\uA649, \u0533=\u0563, \u0532=\u0562, \uA64E=\uA64F, \u0535=\u0565, \u0534=\u0564, \uA64C=\uA64D, \u0537=\u0567, \u0536=\u0566, \uA652=\uA653, \uA650=\uA651, \uA656=\uA657, \uA654=\uA655, \u0520=\u0521, \uA65A=\uA65B, \u0522=\u0523, \uA658=\uA659, \u0524=\u0525, \uA65E=\uA65F, \u0526=\u0527, \uA65C=\uA65D, \uA68E=\uA68F, \uA68C=\uA68D, \uA68A=\uA68B, \uA688=\uA689, \uA686=\uA687, \uA684=\uA685, \uA682=\uA683, \uA680=\uA681, \uA696=\uA697, \uA694=\uA695, \uA692=\uA693, \uA690=\uA691, \u2C92=\u2C93, \u2C90=\u2C91, \u2C96=\u2C97, \u2C94=\u2C95, \u2C9A=\u2C9B, \u1FCA=\u1F74, \u1FCB=\u1F75, \u2C98=\u2C99, \u1FC8=\u1F72, \u1FC9=\u1F73, \u2C9E=\u2C9F, \u2C9C=\u2C9D, \u1FCC=\u1FC3, \u2C82=\u2C83, \u2C80=\u2C81, \u2C86=\u2C87, \u2C84=\u2C85, \u1FDB=\u1F77, \u2C8A=\u2C8B, \u1FDA=\u1F76, \u1FD9=\u1FD1, \u2C88=\u2C89, \u1FD8=\u1FD0, \u2C8E=\u2C8F, \u2C8C=\u2C8D, \u2CB0=\u2CB1, \u2CB2=\u2CB3, \u2CB4=\u2CB5, \u2CB6=\u2CB7, \u2CB8=\u2CB9, \u1FE8=\u1FE0, \u1FE9=\u1FE1, \u2CBA=\u2CBB, \u1FEA=\u1F7A, \u1FEB=\u1F7B, \u2CBC=\u2CBD, \u1FEC=\u1FE5, \u2CBE=\u2CBF, \u2CA0=\u2CA1, \u2CA2=\u2CA3, \u2CA4=\u2CA5, \u2CA6=\u2CA7, \u1FF9=\u1F79, \u2CA8=\u2CA9, \u1FF8=\u1F78, \u1FFB=\u1F7D, \u2CAA=\u2CAB, \u1FFA=\u1F7C, \u2CAC=\u2CAD, \u1FFC=\u1FF3, \u2CAE=\u2CAF, \u2CD6=\u2CD7, \u2CD4=\u2CD5, \u2CD2=\u2CD3, \u2CD0=\u2CD1, \u2CDE=\u2CDF, \u1F8E=\u1F86, \u1F8F=\u1F87, \u2CDC=\u2CDD, \u1F8C=\u1F84, \u1F8D=\u1F85, \u2CDA=\u2CDB, \u1F8A=\u1F82, \u1F8B=\u1F83, \u2CD8=\u2CD9, \u1F88=\u1F80, \u1F89=\u1F81, \u2CC6=\u2CC7, \u2CC4=\u2CC5, \u2CC2=\u2CC3, \u2CC0=\u2CC1, \u1F9F=\u1F97, \u2CCE=\u2CCF, \u1F9E=\u1F96, \u1F9D=\u1F95, \u2CCC=\u2CCD, \u1F9C=\u1F94, \u1F9B=\u1F93, \u2CCA=\u2CCB, \u1F9A=\u1F92, \u1F99=\u1F91, \u2CC8=\u2CC9, \u1F98=\u1F90, \u1FAC=\u1FA4, \u1FAD=\u1FA5, \u1FAE=\u1FA6, \u1FAF=\u1FA7, \u1FA8=\u1FA0, \u1FA9=\u1FA1, \u1FAA=\u1FA2, \u1FAB=\u1FA3, \u2CE0=\u2CE1, \u2CE2=\u2CE3, \u2CED=\u2CEE, \u1FBC=\u1FB3, \u1FB9=\u1FB1, \u1FB8=\u1FB0, \u2CEB=\u2CEC, \u1FBB=\u1F71, \u1FBA=\u1F70, \u2C1B=\u2C4B, \u1F4B=\u1F43, \u2C1A=\u2C4A, \u1F4A=\u1F42, \u2C19=\u2C49, \u1F49=\u1F41, \u2C18=\u2C48, \u1F48=\u1F40, \u2C1F=\u2C4F, \u2C1E=\u2C4E, \u2C1D=\u2C4D, \u1F4D=\u1F45, \u2C1C=\u2C4C, \u1F4C=\u1F44, \u2C13=\u2C43, \u2C12=\u2C42, \u2C11=\u2C41, \u2C10=\u2C40, \u2C17=\u2C47, \u2C16=\u2C46, \u2C15=\u2C45, \u2C14=\u2C44, \u2C0A=\u2C3A, \u2C0B=\u2C3B, \u1F5B=\u1F53, \u2C08=\u2C38, \u2C09=\u2C39, \u1F59=\u1F51, \u2C0E=\u2C3E, \u2C0F=\u2C3F, \u1F5F=\u1F57, \u2C0C=\u2C3C, \u2C0D=\u2C3D, \u1F5D=\u1F55, \u2C02=\u2C32, \u2C03=\u2C33, \u2C00=\u2C30, \u2C01=\u2C31, \u2C06=\u2C36, \u2C07=\u2C37, \u2C04=\u2C34, \u2C05=\u2C35, \u1F69=\u1F61, \u1F68=\u1F60, \u1F6B=\u1F63, \u1F6A=\u1F62, \u1F6D=\u1F65, \u1F6C=\u1F64, \u1F6F=\u1F67, \u1F6E=\u1F66, \u2C28=\u2C58, \u2C29=\u2C59, \u2C2A=\u2C5A, \u2C2B=\u2C5B, \u2C2C=\u2C5C, \u2C2D=\u2C5D, \u2C2E=\u2C5E, \u24B6=\u24D0, \u24B7=\u24D1, \u2C20=\u2C50, \u24B8=\u24D2, \u2C21=\u2C51, \u24B9=\u24D3, \u2C22=\u2C52, \u24BA=\u24D4, \u2C23=\u2C53, \u24BB=\u24D5, \u2C24=\u2C54, \u24BC=\u24D6, \u2C25=\u2C55, \u24BD=\u24D7, \u2C26=\u2C56, \u24BE=\u24D8, \u2C27=\u2C57, \u24BF=\u24D9, \u1F0F=\u1F07, \u24C7=\u24E1, \u1F0E=\u1F06, \u24C6=\u24E0, \u1F0D=\u1F05, \u24C5=\u24DF, \u1F0C=\u1F04, \u24C4=\u24DE, \u1F0B=\u1F03, \u24C3=\u24DD, \u1F0A=\u1F02, \u24C2=\u24DC, \u1F09=\u1F01, \u24C1=\u24DB, \u1F08=\u1F00, \u24C0=\u24DA, \u24CF=\u24E9, \u24CE=\u24E8, \u24CD=\u24E7, \u24CC=\u24E6, \u24CB=\u24E5, \u24CA=\u24E4, \u24C9=\u24E3, \u24C8=\u24E2, \u1F1C=\u1F14, \u1F1D=\u1F15, \u1F1A=\u1F12, \u1F1B=\u1F13, \u1F18=\u1F10, \u1F19=\u1F11, \u1F2D=\u1F25, \u1F2C=\u1F24, \u2C7F=\u0240, \u1F2F=\u1F27, \u2C7E=\u023F, \u1F2E=\u1F26, \u1F29=\u1F21, \u1F28=\u1F20, \u1F2B=\u1F23, \u1F2A=\u1F22, \u2C75=\u2C76, \u2C70=\u0252, \u2C72=\u2C73, \u1F3C=\u1F34, \u2C6D=\u0251, \u1F3D=\u1F35, \u2C6E=\u0271, \u1F3E=\u1F36, \u2C6F=\u0250, \u1F3F=\u1F37, \u1F38=\u1F30, \u2C69=\u2C6A, \u1F39=\u1F31, \u1F3A=\u1F32, \u2C6B=\u2C6C, \u1F3B=\u1F33, \u2C64=\u027D, \u2C67=\u2C68, \u2C60=\u2C61, \u2C62=\u026B, \u2C63=\u1D7D, \u1ED0=\u1ED1, \u1ED2=\u1ED3, \u1ED4=\u1ED5, \u1ED6=\u1ED7, \u1ED8=\u1ED9, \u1EDA=\u1EDB, \u1EDC=\u1EDD, \u1EDE=\u1EDF, \u1EC0=\u1EC1, \u1EC2=\u1EC3, \u1EC4=\u1EC5, \u1EC6=\u1EC7, \u1EC8=\u1EC9, \u1ECA=\u1ECB, \u1ECC=\u1ECD, \u1ECE=\u1ECF, \u1EF2=\u1EF3, \u1EF0=\u1EF1, \u1EF6=\u1EF7, \u1EF4=\u1EF5, \u1EFA=\u1EFB, \u1EF8=\u1EF9, \u1EFE=\u1EFF, \u1EFC=\u1EFD, \u1EE2=\u1EE3, \u1EE0=\u1EE1, \u1EE6=\u1EE7, \u1EE4=\u1EE5, \u1EEA=\u1EEB, \u1EE8=\u1EE9, \u1EEE=\u1EEF, \u1EEC=\u1EED, \u1E94=\u1E95, \u1E90=\u1E91, \u1E92=\u1E93, \u1E9E=\u00DF, \u1E84=\u1E85, \u1E86=\u1E87, \u1E80=\u1E81, \u1E82=\u1E83, \u1E8C=\u1E8D, \u1E8E=\u1E8F, \u1E88=\u1E89, \u1E8A=\u1E8B, \u1EB6=\u1EB7, \u1EB4=\u1EB5, \u1EB2=\u1EB3, \u1EB0=\u1EB1, \u1EBE=\u1EBF, \u1EBC=\u1EBD, \u1EBA=\u1EBB, \u1EB8=\u1EB9, \u1EA6=\u1EA7, \u1EA4=\u1EA5, \u1EA2=\u1EA3, \u1EA0=\u1EA1, \u1EAE=\u1EAF, \u1EAC=\u1EAD, \u1EAA=\u1EAB, \u1EA8=\u1EA9, \u1E58=\u1E59, \u1E5A=\u1E5B, \u1E5C=\u1E5D, \u1E5E=\u1E5F, \u1E50=\u1E51, \u1E52=\u1E53, \u1E54=\u1E55, \u1E56=\u1E57, \u1E48=\u1E49, \u1E4A=\u1E4B, \u1E4C=\u1E4D, \u1E4E=\u1E4F, \u1E40=\u1E41, \u1E42=\u1E43, \u1E44=\u1E45, \u1E46=\u1E47, \u1E7A=\u1E7B, \u1E78=\u1E79, \u1E7E=\u1E7F, \u1E7C=\u1E7D, \u1E72=\u1E73, \u1E70=\u1E71, \u1E76=\u1E77, \u1E74=\u1E75, \u1E6A=\u1E6B, \u1E68=\u1E69, \u1E6E=\u1E6F, \u1E6C=\u1E6D, \u1E62=\u1E63, \u1E60=\u1E61, \u1E66=\u1E67, \u1E64=\u1E65, \u1E1C=\u1E1D, \u1E1E=\u1E1F, \u1E18=\u1E19, \u1E1A=\u1E1B, \u1E14=\u1E15, \u1E16=\u1E17, \u1E10=\u1E11, \u1E12=\u1E13, \u1E0C=\u1E0D, \u1E0E=\u1E0F, \u1E08=\u1E09, \u1E0A=\u1E0B, \u1E04=\u1E05, \u1E06=\u1E07, \u1E00=\u1E01, \u1E02=\u1E03, \u1E3E=\u1E3F, \u1E3C=\u1E3D, \u1E3A=\u1E3B, \u1E38=\u1E39, \u1E36=\u1E37, \u1E34=\u1E35, \u1E32=\u1E33, \u1E30=\u1E31, \u1E2E=\u1E2F, \u1E2C=\u1E2D, \u1E2A=\u1E2B, \u1E28=\u1E29, \u1E26=\u1E27, \u1E24=\u1E25, \u1E22=\u1E23, \u1E20=\u1E21}&quot;, hashMap0.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(999, hashMap0.size());
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="2">  2: </a></span>LowercaseMap.getLowercaseMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  LowercaseMap.getLowercaseMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<span class="nocode"><a name="3">  3: </a></span> *  you may not use this file except in compliance with the License.
+<span class="nocode"><a name="4">  4: </a></span> *  You may obtain a copy of the License at
+<span class="nocode"><a name="5">  5: </a></span> *
+<span class="nocode"><a name="6">  6: </a></span> *      http://www.apache.org/licenses/LICENSE-2.0
+<span class="nocode"><a name="7">  7: </a></span> *
+<span class="nocode"><a name="8">  8: </a></span> *  Unless required by applicable law or agreed to in writing, software
+<span class="nocode"><a name="9">  9: </a></span> *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="nocode"><a name="10"> 10: </a></span> *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="nocode"><a name="11"> 11: </a></span> *  See the License for the specific language governing permissions and
+<span class="nocode"><a name="12"> 12: </a></span> *  limitations under the License.
+<span class="nocode"><a name="13"> 13: </a></span> *
+<span class="nocode"><a name="14"> 14: </a></span> */
+<span class="nocode"><a name="15"> 15: </a></span>package dk.statsbiblioteket.summa.common.strings;
+<span class="nocode"><a name="16"> 16: </a></span>
+<span class="nocode"><a name="17"> 17: </a></span>import dk.statsbiblioteket.util.qa.QAInfo;
+<span class="nocode"><a name="18"> 18: </a></span>import org.apache.commons.logging.Log;
+<span class="nocode"><a name="19"> 19: </a></span>import org.apache.commons.logging.LogFactory;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>import java.util.HashMap;
+<span class="nocode"><a name="22"> 22: </a></span>import java.util.Locale;
+<span class="nocode"><a name="23"> 23: </a></span>import java.util.Map;
+<span class="nocode"><a name="24"> 24: </a></span>
+<span class="nocode"><a name="25"> 25: </a></span>/**
+<span class="nocode"><a name="26"> 26: </a></span> * Has a base map from char -&gt; char which converts all chars from 0 to 65535 to
+<span class="nocode"><a name="27"> 27: </a></span> * lowercase. Given a map char -&gt; char or char -&gt; char[], and ensures that all
+<span class="nocode"><a name="28"> 28: </a></span> * rules handles both upper- and lowercase to the same result. Also ensures that
+<span class="nocode"><a name="29"> 29: </a></span> * the result is always lowercase.
+<span class="nocode"><a name="30"> 30: </a></span> */
+<span class="nocode"><a name="31"> 31: </a></span>@QAInfo(level = QAInfo.Level.NORMAL,
+<span class="nocode"><a name="32"> 32: </a></span>        state = QAInfo.State.IN_DEVELOPMENT,
+<span class="nocode"><a name="33"> 33: </a></span>        author = &quot;te&quot;)
+<span class="nocode"><a name="34"> 34: </a></span>public class LowercaseMap {
+<span class="nocode"><a name="35"> 35: </a></span>    private static Log log = LogFactory.getLog(LowercaseMap.class);
+<span class="nocode"><a name="36"> 36: </a></span>
+<span class="nocode"><a name="37"> 37: </a></span>    private static Map&lt;String, String&gt; LOWER;
+<span class="nocode"><a name="38"> 38: </a></span>    static { // Create lower
+<span class="nocode"><a name="39"> 39: </a></span>        LOWER = new HashMap&lt;String, String&gt;(65535);
+<span class="nocode"><a name="40"> 40: </a></span>        for (int cInt = 0 ; cInt &lt; Character.MAX_VALUE ; cInt++) {
+<span class="nocode"><a name="41"> 41: </a></span>            String s = String.valueOf((char)cInt);
+<span class="nocode"><a name="42"> 42: </a></span>            if (!toLower(s).equals(s)) {
+<span class="nocode"><a name="43"> 43: </a></span>                LOWER.put(s, toLower(s));
+<span class="nocode"><a name="44"> 44: </a></span>            }
+<span class="nocode"><a name="45"> 45: </a></span>        }
+<span class="nocode"><a name="46"> 46: </a></span>        log.trace(&quot;Finished constructing base TOLOWER with &quot; + LOWER.size() + &quot; rules&quot;);
+<span class="nocode"><a name="47"> 47: </a></span>    }
+<span class="nocode"><a name="48"> 48: </a></span>
+<span class="nocode"><a name="49"> 49: </a></span>    // Technically speaking we should do this with a custom Locale.
+<span class="nocode"><a name="50"> 50: </a></span>    private static String toLower(String in) {
+<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">        return in.toLowerCase(Locale.ENGLISH);</span>
+<span class="nocode"><a name="52"> 52: </a></span>    }
+<span class="nocode"><a name="53"> 53: </a></span>
+<span class="nocode"><a name="54"> 54: </a></span>    /**
+<span class="nocode"><a name="55"> 55: </a></span>     * Extends and updates the rules in the given replaceMap so that it converts
+<span class="nocode"><a name="56"> 56: </a></span>     * every output to lowercase. For all chars without rules, a new rule is
+<span class="nocode"><a name="57"> 57: </a></span>     * added if the value should be different from the source.
+<span class="nocode"><a name="58"> 58: </a></span>     * &lt;/p&gt;&lt;p&gt;
+<span class="nocode"><a name="59"> 59: </a></span>     * The replaceMap itself is not changed.
+<span class="nocode"><a name="60"> 60: </a></span>     * @param replaceMap a map with replacements. The keys must be of length 1.
+<span class="nocode"><a name="61"> 61: </a></span>     * @return a map conforming to the given rules.
+<span class="nocode"><a name="62"> 62: </a></span>     * @throws IllegalArgumentException if one or more keys are not of length 1.
+<span class="nocode"><a name="63"> 63: </a></span>     */
+<span class="nocode"><a name="64"> 64: </a></span>    public static Map&lt;String, String&gt; getLowercaseMap(
+<span class="nocode"><a name="65"> 65: </a></span>            Map&lt;String, String&gt; replaceMap) {
+<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">        Map&lt;String, String&gt; result = new HashMap&lt;String, String&gt;(replaceMap.size() * 2 + LOWER.size());</span>
+<span class="nocode"><a name="67"> 67: </a></span>        // Handle existing
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">        for (Map.Entry&lt;String, String&gt; entry: replaceMap.entrySet()) {</span>
+<span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">            String key = entry.getKey();</span>
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">            String value = toLower(entry.getValue());</span>
+<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">            if (!key.equals(toLower(key))) {</span>
+<span class="nocode"><a name="72"> 72: </a></span>                // Check for alternative value
+<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">                String lowerValue = toLower(replaceMap.get(toLower(key)));</span>
+<span class="nocode"><a name="74"> 74: </a></span>//                if (!lowerValue.)
+<span class="nocode"><a name="75"> 75: </a></span>            }
+<span class="nocode"><a name="76"> 76: </a></span>            // Ensure destination is lowercase
+<span class="nocode"><a name="77"> 77: </a></span><span style="background-color: #ffffcc">            if (!value.equals(toLower(value))) {</span>
+<span class="nocode"><a name="78"> 78: </a></span>                value = toLower(value);
+<span class="nocode"><a name="79"> 79: </a></span>                entry.setValue(toLower(entry.getValue()));
+<span class="nocode"><a name="80"> 80: </a></span>            }
+<span class="nocode"><a name="81"> 81: </a></span>            // Check for both upper- and lowercase keys
+<span class="nocode"><a name="82"> 82: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="83"> 83: </a></span>
+<span class="nocode"><a name="84"> 84: </a></span>        // Fill missing
+<span class="nocode"><a name="85"> 85: </a></span><span style="background-color: #ffffcc">        for (Map.Entry&lt;String, String&gt; entry: LOWER.entrySet()) {</span>
+<span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">            if (!replaceMap.containsKey(entry.getKey())) {</span>
+<span class="nocode"><a name="87"> 87: </a></span><span style="background-color: #ffffcc">                replaceMap.put(entry.getKey(), entry.getValue());</span>
+<span class="nocode"><a name="88"> 88: </a></span>            }
+<span class="nocode"><a name="89"> 89: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="90"> 90: </a></span><span style="background-color: #ffffcc">        return null;</span>
+<span class="nocode"><a name="91"> 91: </a></span>    }
+<span class="nocode"><a name="92"> 92: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree9222523088879949226.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 21214
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: dk
+<li>TARGET_CLASS: dk.statsbiblioteket.summa.common.strings.LowercaseMap
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/44_summa/summa.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

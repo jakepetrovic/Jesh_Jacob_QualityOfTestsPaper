@@ -19,9 +19,9 @@ public class DeployResultStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
       String string0 = deployResultStatus0.toString();
-      assertEquals("Error", string0);
+      assertEquals("Success", string0);
   }
 
   //Test case number: 1
@@ -35,11 +35,11 @@ public class DeployResultStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        DeployResultStatus.getByName("SUCCESS");
+        DeployResultStatus.getByName("6$%");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * SUCCESS
+         * 6$%
          */
       }
   }

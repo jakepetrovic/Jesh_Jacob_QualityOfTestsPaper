@@ -30,7 +30,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Byte> list0 = valueListImpl0.asByte();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 1
@@ -42,7 +42,7 @@ public class ValueListImplEvoSuiteTest {
   public void test1()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      linkedList0.add((Value) null);
+      linkedList0.offerLast((Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asByte();
@@ -61,7 +61,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Short> list0 = valueListImpl0.asShort();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 3
@@ -92,7 +92,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Integer> list0 = valueListImpl0.asInteger();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 5
@@ -123,7 +123,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Long> list0 = valueListImpl0.asLong();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 7
@@ -185,7 +185,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Double> list0 = valueListImpl0.asDouble();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 11
@@ -196,8 +196,8 @@ public class ValueListImplEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
+      linkedList0.add((Value) null);
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      linkedList0.offerFirst((Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asDouble();
@@ -216,7 +216,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<BigInteger> list0 = valueListImpl0.asBigInteger();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 13
@@ -247,7 +247,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<BigDecimal> list0 = valueListImpl0.asBigDecimal();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 15
@@ -278,7 +278,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Boolean> list0 = valueListImpl0.asBoolean();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 17
@@ -289,8 +289,8 @@ public class ValueListImplEvoSuiteTest {
   @Test
   public void test17()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      linkedList0.addFirst((Value) null);
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
+      linkedList0.add((Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asBoolean();
@@ -321,7 +321,7 @@ public class ValueListImplEvoSuiteTest {
   public void test19()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      linkedList0.offer((Value) null);
+      linkedList0.push((Value) null);
       // Undeclared exception!
       try {
         valueListImpl0.asString();
@@ -340,7 +340,7 @@ public class ValueListImplEvoSuiteTest {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       List<Date> list0 = valueListImpl0.asDate();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 21
@@ -351,8 +351,8 @@ public class ValueListImplEvoSuiteTest {
   @Test
   public void test21()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
+      ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       // Undeclared exception!
       try {
         valueListImpl0.asDate();
@@ -370,7 +370,7 @@ public class ValueListImplEvoSuiteTest {
   public void test22()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      List<Date> list0 = valueListImpl0.asDate("tcswM,Mo,C~KXR");
+      List<Date> list0 = valueListImpl0.asDate("ea|AlN}N8sQ(Sj");
       assertEquals(true, list0.isEmpty());
   }
 
@@ -386,7 +386,7 @@ public class ValueListImplEvoSuiteTest {
       linkedList0.add((Value) null);
       // Undeclared exception!
       try {
-        valueListImpl0.asDate("tcswM,Mo,C~KXR");
+        valueListImpl0.asDate("=P");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -401,8 +401,8 @@ public class ValueListImplEvoSuiteTest {
   public void test24()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
-      Class<?> class0 = ValueListImpl.class;
-      List<Short> list0 = valueListImpl0.asType((Class<Short>) class0);
+      Class<?> class0 = String.class;
+      List<Long> list0 = valueListImpl0.asType((Class<Long>) class0);
       assertEquals(true, list0.isEmpty());
   }
 
@@ -415,12 +415,12 @@ public class ValueListImplEvoSuiteTest {
   @Test
   public void test25()  throws Throwable  {
       LinkedList<Value> linkedList0 = new LinkedList<Value>();
-      Class<?> class0 = ValueListImpl.class;
       ValueListImpl valueListImpl0 = new ValueListImpl((List<Value>) linkedList0);
       linkedList0.add((Value) null);
+      Class<?> class0 = Boolean.class;
       // Undeclared exception!
       try {
-        valueListImpl0.asType((Class<Value>) class0);
+        valueListImpl0.asType((Class<Byte>) class0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

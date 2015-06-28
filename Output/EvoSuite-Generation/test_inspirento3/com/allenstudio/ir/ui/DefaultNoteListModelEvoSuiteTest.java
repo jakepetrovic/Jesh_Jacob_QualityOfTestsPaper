@@ -21,8 +21,8 @@ public class DefaultNoteListModelEvoSuiteTest {
   /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.DefaultNoteListModel.fireItemAdded(Ljava/lang/Object;I)V: root-Branch
-   * 2 com.allenstudio.ir.ui.DefaultNoteListModel.insertElementAt(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)V: root-Branch
-   * 3 com.allenstudio.ir.ui.DefaultNoteListModel.<init>()V: root-Branch
+   * 2 com.allenstudio.ir.ui.DefaultNoteListModel.<init>()V: root-Branch
+   * 3 com.allenstudio.ir.ui.DefaultNoteListModel.addElement(Lcom/allenstudio/ir/core/plugins/AbstractNote;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
@@ -30,7 +30,7 @@ public class DefaultNoteListModelEvoSuiteTest {
       CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.insertElementAt((AbstractNote) commonNote0, 0);
+        defaultNoteListModel0.addElement((AbstractNote) commonNote0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -72,11 +72,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.getElementAt((-1628));
+        defaultNoteListModel0.getElementAt(0);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * -1628
+         * 0 >= 0
          */
       }
   }
@@ -91,9 +91,12 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.fireContentChanged((Object) true, 1680);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        defaultNoteListModel0.fireContentChanged((Object) null, (-4));
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * null source
+         */
       }
   }
 
@@ -112,62 +115,62 @@ public class DefaultNoteListModelEvoSuiteTest {
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.toString()Ljava/lang/String;: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.insertElementAt(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)V: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      String string0 = defaultNoteListModel0.toString();
-      assertEquals("[]", string0);
+      // Undeclared exception!
+      try {
+        defaultNoteListModel0.insertElementAt((AbstractNote) null, 12);
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * 12 > 0
+         */
+      }
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.lastIndexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;)I: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.toString()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
+      DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+      String string0 = defaultNoteListModel0.toString();
+      assertEquals("[]", string0);
+  }
+
+  //Test case number: 8
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.lastIndexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;)I: root-Branch
+   */
+  @Test
+  public void test8()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       CommonNote commonNote0 = new CommonNote();
       int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0);
       assertEquals((-1), int0);
   }
 
-  //Test case number: 8
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.elementAt(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      // Undeclared exception!
-      try {
-        defaultNoteListModel0.elementAt((-1));
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * -1
-         */
-      }
-  }
-
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.get(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.elementAt(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
    */
   @Test
   public void test9()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.get(0);
+        defaultNoteListModel0.elementAt((-334));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 0 >= 0
+         * -334
          */
       }
   }
@@ -175,151 +178,157 @@ public class DefaultNoteListModelEvoSuiteTest {
   //Test case number: 10
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.addNoteListDataListener(Lcom/allenstudio/ir/event/NoteListDataListener;)V: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.get(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
-      assertEquals(0, defaultNoteListModel0.size());
+      // Undeclared exception!
+      try {
+        defaultNoteListModel0.get(1905);
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * 1905 >= 0
+         */
+      }
   }
 
   //Test case number: 11
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.remove(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.addNoteListDataListener(Lcom/allenstudio/ir/event/NoteListDataListener;)V: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      // Undeclared exception!
-      try {
-        defaultNoteListModel0.remove(0);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * 0 >= 0
-         */
-      }
+      defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
+      assertEquals(0, defaultNoteListModel0.size());
   }
 
   //Test case number: 12
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.indexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)I: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.remove(I)Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
    */
   @Test
   public void test12()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      CommonNote commonNote0 = new CommonNote();
-      int int0 = defaultNoteListModel0.indexOf((AbstractNote) commonNote0, 93);
-      assertEquals((-1), int0);
+      // Undeclared exception!
+      try {
+        defaultNoteListModel0.remove((-1685));
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * -1685
+         */
+      }
   }
 
   //Test case number: 13
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.getSize()I: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.indexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)I: root-Branch
    */
   @Test
   public void test13()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      int int0 = defaultNoteListModel0.getSize();
-      assertEquals(0, int0);
+      CommonNote commonNote0 = new CommonNote();
+      // Undeclared exception!
+      try {
+        defaultNoteListModel0.indexOf((AbstractNote) commonNote0, (-429));
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * -429
+         */
+      }
   }
 
   //Test case number: 14
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.toArray()[Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.getSize()I: root-Branch
    */
   @Test
   public void test14()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      AbstractNote[] abstractNoteArray0 = defaultNoteListModel0.toArray();
-      assertNotNull(abstractNoteArray0);
+      int int0 = defaultNoteListModel0.getSize();
+      assertEquals(0, int0);
   }
 
   //Test case number: 15
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.contains(Lcom/allenstudio/ir/core/plugins/AbstractNote;)Z: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.toArray()[Lcom/allenstudio/ir/core/plugins/AbstractNote;: root-Branch
    */
   @Test
   public void test15()  throws Throwable  {
+      DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+      AbstractNote[] abstractNoteArray0 = defaultNoteListModel0.toArray();
+      assertNotNull(abstractNoteArray0);
+  }
+
+  //Test case number: 16
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.contains(Lcom/allenstudio/ir/core/plugins/AbstractNote;)Z: root-Branch
+   */
+  @Test
+  public void test16()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       CommonNote commonNote0 = new CommonNote();
       boolean boolean0 = defaultNoteListModel0.contains((AbstractNote) commonNote0);
       assertEquals(false, boolean0);
   }
 
-  //Test case number: 16
+  //Test case number: 17
   /*
    * 1 covered goal:
    * 1 com.allenstudio.ir.ui.DefaultNoteListModel.setElementAt(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)V: root-Branch
    */
   @Test
-  public void test16()  throws Throwable  {
+  public void test17()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, 1);
+        defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, 1850);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 1 >= 0
+         * 1850 >= 0
          */
       }
-  }
-
-  //Test case number: 17
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.removeNoteListDataListener()V: root-Branch
-   */
-  @Test
-  public void test17()  throws Throwable  {
-      DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      defaultNoteListModel0.removeNoteListDataListener();
-      assertEquals(true, defaultNoteListModel0.isEmpty());
   }
 
   //Test case number: 18
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.removeElementAt(I)V: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.removeNoteListDataListener()V: root-Branch
    */
   @Test
   public void test18()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      // Undeclared exception!
-      try {
-        defaultNoteListModel0.removeElementAt(15);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * 15 >= 0
-         */
-      }
+      defaultNoteListModel0.removeNoteListDataListener();
+      assertEquals(10, defaultNoteListModel0.capacity());
   }
 
   //Test case number: 19
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.lastIndexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)I: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.removeElementAt(I)V: root-Branch
    */
   @Test
   public void test19()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0, 1);
-        fail("Expecting exception: IndexOutOfBoundsException");
-      } catch(IndexOutOfBoundsException e) {
+        defaultNoteListModel0.removeElementAt((-706));
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 1 >= 0
+         * Array index out of range: -706
          */
       }
   }
@@ -327,17 +336,13 @@ public class DefaultNoteListModelEvoSuiteTest {
   //Test case number: 20
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.addElement(Lcom/allenstudio/ir/core/plugins/AbstractNote;)V: root-Branch
+   * 1 com.allenstudio.ir.ui.DefaultNoteListModel.lastIndexOf(Lcom/allenstudio/ir/core/plugins/AbstractNote;I)I: root-Branch
    */
   @Test
   public void test20()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-      // Undeclared exception!
-      try {
-        defaultNoteListModel0.addElement((AbstractNote) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) null, (-334));
+      assertEquals((-1), int0);
   }
 
   //Test case number: 21
@@ -349,9 +354,10 @@ public class DefaultNoteListModelEvoSuiteTest {
   @Test
   public void test21()  throws Throwable  {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+      CommonNote commonNote0 = new CommonNote();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.add(0, (AbstractNote) null);
+        defaultNoteListModel0.add(0, (AbstractNote) commonNote0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -395,7 +401,7 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.fireItemRemoved((Object) "ToolTipText", (-1));
+        defaultNoteListModel0.fireItemRemoved((Object) "borderPainted", 1905);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -411,11 +417,11 @@ public class DefaultNoteListModelEvoSuiteTest {
       DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
       // Undeclared exception!
       try {
-        defaultNoteListModel0.set((-1), (AbstractNote) null);
+        defaultNoteListModel0.set(0, (AbstractNote) null);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * -1
+         * 0 >= 0
          */
       }
   }

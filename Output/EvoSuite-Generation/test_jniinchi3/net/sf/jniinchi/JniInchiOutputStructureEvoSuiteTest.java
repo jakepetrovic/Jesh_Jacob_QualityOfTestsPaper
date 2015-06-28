@@ -15,16 +15,18 @@ public class JniInchiOutputStructureEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
+   * 6 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputStructure.getReturnStatus()Lnet/sf/jniinchi/INCHI_RET;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputStructure.<init>(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiOutputStructure.setMessage(Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiOutputStructure.<init>(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
+   * 4 net.sf.jniinchi.JniInchiOutputStructure.setLog(Ljava/lang/String;)V: root-Branch
+   * 5 net.sf.jniinchi.JniInchiOutputStructure.setWarningFlags(JJJJ)V: root-Branch
+   * 6 net.sf.jniinchi.JniInchiOutputStructure.<init>(ILjava/lang/String;Ljava/lang/String;JJJJ)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.ERROR;
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
-      INCHI_RET iNCHI_RET1 = jniInchiOutputStructure0.getReturnStatus();
-      assertSame(iNCHI_RET1, iNCHI_RET0);
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(407, "ODD", "ODD", (long) 407, (long) 407, 0L, 0L);
+      jniInchiOutputStructure0.getReturnStatus();
   }
 
   //Test case number: 1
@@ -34,26 +36,22 @@ public class JniInchiOutputStructureEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.ERROR;
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(407, "ODD", "ODD", (long) 407, (long) 407, 0L, 0L);
       String string0 = jniInchiOutputStructure0.getLog();
-      assertNull(string0);
+      assertEquals("ODD", string0);
   }
 
   //Test case number: 2
   /*
-   * 5 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutputStructure.getMessage()Ljava/lang/String;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputStructure.setMessage(Ljava/lang/String;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiOutputStructure.setLog(Ljava/lang/String;)V: root-Branch
-   * 4 net.sf.jniinchi.JniInchiOutputStructure.setWarningFlags(JJJJ)V: root-Branch
-   * 5 net.sf.jniinchi.JniInchiOutputStructure.<init>(ILjava/lang/String;Ljava/lang/String;JJJJ)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure((-4), "9n.:", "9n.:", (long) (-4), (long) (-4), (long) (-4), (long) (-4));
+      INCHI_RET iNCHI_RET0 = INCHI_RET.WARNING;
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
       String string0 = jniInchiOutputStructure0.getMessage();
-      assertEquals("9n.:", string0);
+      assertNull(string0);
   }
 
   //Test case number: 3
@@ -63,41 +61,39 @@ public class JniInchiOutputStructureEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(407, "ODD", "ODD", (long) 407, (long) 407, 0L, 0L);
       long[][] longArray0 = jniInchiOutputStructure0.getWarningFlags();
       assertNotNull(longArray0);
   }
 
   //Test case number: 4
   /*
-   * 1 covered goal:
+   * 5 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputStructure.setWarningFlags([[J)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiOutputStructure.setMessage(Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiOutputStructure.setLog(Ljava/lang/String;)V: root-Branch
+   * 4 net.sf.jniinchi.JniInchiOutputStructure.setWarningFlags(JJJJ)V: root-Branch
+   * 5 net.sf.jniinchi.JniInchiOutputStructure.<init>(ILjava/lang/String;Ljava/lang/String;JJJJ)V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.EOF;
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
-      long[][] longArray0 = new long[9][8];
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure((-1), "", "", 0L, (long) (-1), (long) (-1), 0L);
+      long[][] longArray0 = new long[9][3];
       jniInchiOutputStructure0.setWarningFlags(longArray0);
-      assertEquals(0, jniInchiOutputStructure0.getNumAtoms());
+      assertEquals(0, jniInchiOutputStructure0.getNumBonds());
   }
 
   //Test case number: 5
   /*
-   * 6 covered goals:
+   * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutputStructure.setRetStatus(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutputStructure.setMessage(Ljava/lang/String;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiOutputStructure.<init>(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
-   * 4 net.sf.jniinchi.JniInchiOutputStructure.setLog(Ljava/lang/String;)V: root-Branch
-   * 5 net.sf.jniinchi.JniInchiOutputStructure.setWarningFlags(JJJJ)V: root-Branch
-   * 6 net.sf.jniinchi.JniInchiOutputStructure.<init>(ILjava/lang/String;Ljava/lang/String;JJJJ)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiOutputStructure.<init>(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
-      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure((-4), "9n.:", "9n.:", (long) (-4), (long) (-4), (long) (-4), (long) (-4));
       INCHI_RET iNCHI_RET0 = INCHI_RET.WARNING;
+      JniInchiOutputStructure jniInchiOutputStructure0 = new JniInchiOutputStructure(iNCHI_RET0);
       jniInchiOutputStructure0.setRetStatus(iNCHI_RET0);
-      assertEquals(0, jniInchiOutputStructure0.getNumBonds());
+      assertEquals(0, jniInchiOutputStructure0.getNumStereo0D());
   }
 }

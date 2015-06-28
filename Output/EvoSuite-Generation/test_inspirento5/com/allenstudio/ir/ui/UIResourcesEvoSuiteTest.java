@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.allenstudio.ir.ui.UIResources;
-import java.util.MissingResourceException;
 
 public class UIResourcesEvoSuiteTest {
 
@@ -22,12 +21,9 @@ public class UIResourcesEvoSuiteTest {
   public void test0()  throws Throwable  {
       // Undeclared exception!
       try {
-        UIResources.getString("com.allenstudio.ir.ui.resources.Inspirento");
-        fail("Expecting exception: MissingResourceException");
-      } catch(MissingResourceException e) {
-        /*
-         * Can't find resource for bundle java.util.PropertyResourceBundle, key com.allenstudio.ir.ui.resources.Inspirento
-         */
+        UIResources.getString((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 

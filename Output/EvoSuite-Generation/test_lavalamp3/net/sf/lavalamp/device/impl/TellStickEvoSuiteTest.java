@@ -23,7 +23,7 @@ public class TellStickEvoSuiteTest {
       TellStick tellStick0 = new TellStick();
       Runtime runtime0 = Runtime.getRuntime();
       tellStick0.setRuntime(runtime0);
-      assertEquals(707788800L, runtime0.totalMemory());
+      assertEquals("TellStick null ", tellStick0.toString());
   }
 
   //Test case number: 1

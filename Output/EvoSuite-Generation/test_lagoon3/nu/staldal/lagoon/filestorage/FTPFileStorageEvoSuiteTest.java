@@ -65,7 +65,7 @@ public class FTPFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.createFile((String) null);
+        fTPFileStorage0.createFile("]+W-8)%LvD2R P'd");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -122,7 +122,7 @@ public class FTPFileStorageEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
       FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler("", (OutputStream) byteArrayOutputStream0);
       // Undeclared exception!
       try {

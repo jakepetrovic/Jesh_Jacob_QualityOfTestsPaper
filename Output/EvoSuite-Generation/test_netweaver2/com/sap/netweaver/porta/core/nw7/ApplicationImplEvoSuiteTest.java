@@ -145,7 +145,8 @@ public class ApplicationImplEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       ApplicationImpl applicationImpl0 = new ApplicationImpl((Application) null);
-      boolean boolean0 = applicationImpl0.equals((Object) "Xe)2,MI*JbQZi@A^[");
+      Object object0 = new Object();
+      boolean boolean0 = applicationImpl0.equals(object0);
       assertEquals(false, boolean0);
   }
 

@@ -7,10 +7,8 @@ package nu.staldal.lagoon.core;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import nu.staldal.lagoon.core.AuthenticationException;
 import nu.staldal.lagoon.core.AuthenticationMissingException;
@@ -37,8 +35,8 @@ public class LagoonProcessorEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Element element0 = new Element("", "", 1295, 1295);
-      File file0 = new File("");
+      Element element0 = new Element("", "");
+      File file0 = new File("", "");
       LagoonProcessor lagoonProcessor0 = null;
       try {
         lagoonProcessor0 = new LagoonProcessor("", element0, file0, "", (PrintWriter) null, (PrintWriter) null);
@@ -52,33 +50,49 @@ public class LagoonProcessorEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 11 covered goals:
+   * 4 covered goals:
    * 1 nu.staldal.lagoon.core.LagoonProcessor.<init>(Ljava/lang/String;Lnu/staldal/xtree/Element;Ljava/io/File;Ljava/lang/String;Ljava/io/PrintWriter;Ljava/io/PrintWriter;)V: I98 Branch 4 IFNE L123 - false
-   * 2 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I14 Branch 44 IF_ICMPGE L607 - true
-   * 3 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I46 Branch 45 IFNONNULL L616 - false
-   * 4 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I68 Branch 47 IF_ACMPNE L625 - true
-   * 5 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I94 Branch 48 IFNONNULL L630 - false
-   * 6 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I58 Branch 46 IFNONNULL L622 - false
-   * 7 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I113 Branch 49 IFNONNULL L639 - true
-   * 8 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I139 Branch 50 IFNONNULL L644 - true
-   * 9 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I169 Branch 51 IFNE L652 - true
-   * 10 nu.staldal.lagoon.core.LagoonProcessor.<init>(Ljava/lang/String;Lnu/staldal/xtree/Element;Ljava/io/File;Ljava/lang/String;Ljava/io/PrintWriter;Ljava/io/PrintWriter;)V: I51 Branch 1 IFNONNULL L112 - true
-   * 11 nu.staldal.lagoon.core.LagoonProcessor.<init>(Ljava/lang/String;Lnu/staldal/xtree/Element;Ljava/io/File;Ljava/lang/String;Ljava/io/PrintWriter;Ljava/io/PrintWriter;)V: I71 Branch 2 IFEQ L116 - true
+   * 2 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I14 Branch 44 IF_ICMPGE L607 - false
+   * 3 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I68 Branch 47 IF_ACMPNE L625 - false
+   * 4 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I94 Branch 48 IFNONNULL L630 - true
    */
   @Test
   public void test1()  throws Throwable  {
-      Element element0 = new Element("Unable to create directory: ", "Unable to create directory: ");
-      File file0 = new File("Unable to create directory: ", "Unable to create directory: ");
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+      Element element0 = new Element("giMM6k^FUN(_m~[>nu", "giMM6k^FUN(_m~[>nu", 922, 922);
+      File file0 = new File("giMM6k^FUN(_m~[>nu");
       LagoonProcessor lagoonProcessor0 = null;
       try {
-        lagoonProcessor0 = new LagoonProcessor("Unable to create directory: ", element0, file0, "Unable to create directory: ", printWriter0, printWriter0);
+        lagoonProcessor0 = new LagoonProcessor("giMM6k^FUN(_m~[>nu", element0, file0, "giMM6k^FUN(_m~[>nu", (PrintWriter) null, (PrintWriter) null);
         fail("Expecting exception: LagoonException");
       } catch(LagoonException e) {
         /*
-         * sourceDir must be an existing directory: Unable to create directory: /Unable to create directory: 
+         * sourceDir must be an existing directory: giMM6k^FUN(_m~[>nu
          */
+      }
+  }
+
+  //Test case number: 2
+  /*
+   * 10 covered goals:
+   * 1 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I14 Branch 44 IF_ICMPGE L607 - true
+   * 2 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I46 Branch 45 IFNONNULL L616 - false
+   * 3 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I68 Branch 47 IF_ACMPNE L625 - true
+   * 4 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I94 Branch 48 IFNONNULL L630 - false
+   * 5 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I58 Branch 46 IFNONNULL L622 - false
+   * 6 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I113 Branch 49 IFNONNULL L639 - true
+   * 7 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I139 Branch 50 IFNONNULL L644 - true
+   * 8 nu.staldal.lagoon.core.LagoonProcessor.createFileStorage(Ljava/lang/String;)Lnu/staldal/lagoon/core/FileStorage;: I169 Branch 51 IFNE L652 - true
+   * 9 nu.staldal.lagoon.core.LagoonProcessor.<init>(Ljava/lang/String;Lnu/staldal/xtree/Element;Ljava/io/File;Ljava/lang/String;Ljava/io/PrintWriter;Ljava/io/PrintWriter;)V: I51 Branch 1 IFNONNULL L112 - true
+   * 10 nu.staldal.lagoon.core.LagoonProcessor.<init>(Ljava/lang/String;Lnu/staldal/xtree/Element;Ljava/io/File;Ljava/lang/String;Ljava/io/PrintWriter;Ljava/io/PrintWriter;)V: I71 Branch 2 IFEQ L116 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      Element element0 = new Element("Illegal producer config file: ", "Illegal producer config file: ", 444);
+      LagoonProcessor lagoonProcessor0 = null;
+      try {
+        lagoonProcessor0 = new LagoonProcessor("Illegal producer config file: ", element0, (File) null, "Illegal producer config file: ", (PrintWriter) null, (PrintWriter) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

@@ -20,9 +20,9 @@ public class DebugSessionInfoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo((String) null, 0);
+      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("w% qZ&B", (-653));
       int int0 = debugSessionInfo0.getPort();
-      assertEquals(0, int0);
+      assertEquals((-653), int0);
   }
 
   //Test case number: 1
@@ -33,8 +33,9 @@ public class DebugSessionInfoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo((String) null, 0);
-      debugSessionInfo0.getKey();
-      assertEquals(0, debugSessionInfo0.getPort());
+      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("w% qZ&B", (-653));
+      String string0 = debugSessionInfo0.getKey();
+      assertNotNull(string0);
+      assertEquals(-653, debugSessionInfo0.getPort());
   }
 }

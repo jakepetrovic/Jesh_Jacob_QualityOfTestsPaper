@@ -52,7 +52,7 @@ public class LifecycleManagerMockEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       LifecycleManagerMock lifecycleManagerMock0 = new LifecycleManagerMock();
-      lifecycleManagerMock0.disableDebugging("");
+      lifecycleManagerMock0.disableDebugging("B");
       assertEquals(ServerState.STOPPED, lifecycleManagerMock0.getState());
   }
 }

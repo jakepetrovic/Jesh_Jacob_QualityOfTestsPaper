@@ -7,9 +7,6 @@ package org.jsecurity.realm.ldap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import org.jsecurity.cache.Cache;
-import org.jsecurity.cache.HashtableCache;
-import org.jsecurity.cache.HashtableCacheManager;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
 import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
 import org.jsecurity.realm.ldap.LdapContextFactory;
@@ -26,7 +23,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setUrl("2");
+      activeDirectoryRealm0.setUrl("Y?H!lL\"c|e");
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_0", activeDirectoryRealm0.getName());
   }
 
@@ -38,7 +35,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSearchBase("4|{AQwW");
+      activeDirectoryRealm0.setSearchBase("p{!?:D1i D]:q|[");
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_1", activeDirectoryRealm0.getName());
   }
 
@@ -50,7 +47,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSystemPassword("2");
+      activeDirectoryRealm0.setSystemPassword("Y?H!lL\"c|e");
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_2", activeDirectoryRealm0.getName());
   }
 
@@ -62,8 +59,8 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setPrincipalSuffix("2");
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_3", activeDirectoryRealm0.getName());
+      activeDirectoryRealm0.setPrincipalSuffix("]. ; ");
+      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 4
@@ -74,8 +71,8 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSystemUsername("4|{AQwW");
-      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+      activeDirectoryRealm0.setSystemUsername("q#==");
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_4", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 5
@@ -102,9 +99,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache("91IhRNd?6}`qeKY:|t ");
-      activeDirectoryRealm0.setAuthorizationCache((Cache) hashtableCache0);
+      activeDirectoryRealm0.afterAuthorizationCacheSet();
       activeDirectoryRealm0.afterAuthorizationCacheSet();
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6", activeDirectoryRealm0.getName());
   }

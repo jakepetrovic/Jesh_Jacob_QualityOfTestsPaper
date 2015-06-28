@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.jniinchi.INCHI_PARITY;
-import net.sf.jniinchi.INCHI_STEREOTYPE;
 import net.sf.jniinchi.JniInchiAtom;
 import net.sf.jniinchi.JniInchiBond;
 import net.sf.jniinchi.JniInchiStereo0D;
@@ -26,7 +25,9 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, 0, 0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.NONE;
+      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
       int int0 = jniInchiStructure0.getStereo0DIndex(jniInchiStereo0D0);
       assertEquals((-1), int0);
   }
@@ -41,11 +42,11 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getStereo0D(1113);
+        jniInchiStructure0.getStereo0D(0);
         fail("Expecting exception: IndexOutOfBoundsException");
       } catch(IndexOutOfBoundsException e) {
         /*
-         * Index: 1113, Size: 0
+         * Index: 0, Size: 0
          */
       }
   }
@@ -58,9 +59,9 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.ODD;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.NONE;
+      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
       jniInchiStructure0.addStereo0D(jniInchiStereo0D0);
       assertEquals(1, jniInchiStructure0.getNumStereo0D());
   }
@@ -111,11 +112,11 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getAtom(1);
+        jniInchiStructure0.getAtom(0);
         fail("Expecting exception: IndexOutOfBoundsException");
       } catch(IndexOutOfBoundsException e) {
         /*
-         * Index: 1, Size: 0
+         * Index: 0, Size: 0
          */
       }
   }
@@ -140,7 +141,8 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      int int0 = jniInchiStructure0.getAtomIndex((JniInchiAtom) null);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      int int0 = jniInchiStructure0.getAtomIndex(jniInchiAtom0);
       assertEquals((-1), int0);
   }
 
@@ -173,9 +175,9 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[9];
+      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[7];
       jniInchiStructure0.addAtoms(jniInchiAtomArray0);
-      assertEquals(9, jniInchiStructure0.getNumAtoms());
+      assertEquals(7, jniInchiStructure0.getNumAtoms());
   }
 
   //Test case number: 11
@@ -189,8 +191,8 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[7];
+      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[2];
       jniInchiStructure0.addBonds(jniInchiBondArray0);
-      assertEquals(7, jniInchiStructure0.getNumBonds());
+      assertEquals(2, jniInchiStructure0.getNumBonds());
   }
 }

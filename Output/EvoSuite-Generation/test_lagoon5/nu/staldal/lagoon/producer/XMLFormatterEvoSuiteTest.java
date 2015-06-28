@@ -7,7 +7,6 @@ package nu.staldal.lagoon.producer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import nu.staldal.lagoon.core.LagoonException;
@@ -29,7 +28,7 @@ public class XMLFormatterEvoSuiteTest {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       // Undeclared exception!
       try {
-        xMLFormatter0.hasBeenUpdated(59987L);
+        xMLFormatter0.hasBeenUpdated(3L);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -43,10 +42,9 @@ public class XMLFormatterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
       // Undeclared exception!
       try {
-        xMLFormatter0.start((OutputStream) byteArrayOutputStream0, (Target) null);
+        xMLFormatter0.start((OutputStream) null, (Target) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -69,6 +67,6 @@ public class XMLFormatterEvoSuiteTest {
   public void test2()  throws Throwable  {
       XMLFormatter xMLFormatter0 = new XMLFormatter();
       xMLFormatter0.init();
-      assertNull(xMLFormatter0.getEntryName());
+      assertEquals(0, xMLFormatter0.getPosition());
   }
 }

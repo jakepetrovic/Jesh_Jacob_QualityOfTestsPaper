@@ -19,9 +19,9 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      UF uF0 = UF.GO;
+      UF uF0 = UF.AP;
       String string0 = uF0.getNomeUF();
-      assertEquals("Goi\u00E1s", string0);
+      assertEquals("Amap\u00E1", string0);
   }
 
   //Test case number: 1
@@ -34,7 +34,7 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      UF.getUF("Maranh\u00E3o");
+      UF.getUF((String) null);
   }
 
   //Test case number: 2
@@ -47,7 +47,7 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      UF uF0 = UF.getUF("12");
-      assertEquals(UF.AC, uF0);
+      UF uF0 = UF.getUF("32");
+      assertEquals(UF.ES, uF0);
   }
 }

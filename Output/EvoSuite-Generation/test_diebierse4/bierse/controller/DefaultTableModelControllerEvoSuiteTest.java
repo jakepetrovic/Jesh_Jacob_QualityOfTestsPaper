@@ -26,11 +26,11 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      Object[] objectArray0 = new Object[27];
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 0);
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-252), (-252));
+      Object[][] objectArray0 = new Object[5][1];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[1]);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-1165), (-1165), (-1165), (-1165));
       defaultTableModelController0.tableChanged(tableModelEvent0);
-      assertEquals(-252, tableModelEvent0.getLastRow());
+      assertEquals(-1165, tableModelEvent0.getType());
   }
 
   //Test case number: 1
@@ -42,17 +42,14 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      Object[] objectArray0 = new Object[27];
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 0);
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 0);
+      Object[][] objectArray0 = new Object[5][1];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[1]);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
       // Undeclared exception!
       try {
         defaultTableModelController0.tableChanged(tableModelEvent0);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * 0 >= 0
-         */
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 }

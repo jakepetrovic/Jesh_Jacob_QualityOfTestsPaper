@@ -21,57 +21,59 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.realm.ldap.AbstractLdapRealm: 66.67%</ul><ul>
-<li>19066 fitness evaluations, 383 generations, 103846 statements, 12044 tests.
+<ul><li>Target class: org.jsecurity.realm.ldap.AbstractLdapRealm: 73.33%</ul><ul>
+<li>18116 fitness evaluations, 364 generations, 107828 statements, 11361 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 3/8 branches, 8/10 methods, 10/15 total goals
-<li>Mutation score: 38%
+<li>Coverage: 4/8 branches, 9/10 methods, 11/15 total goals
+<li>Mutation score: 60%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setUrl(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="5">  5: </a></span>activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="6">  6: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;, true);
+<span class="nocode"><a name="7">  7: </a></span>activeDirectoryRealm0.doGetAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm-0-authorization&quot;, activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_0&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase(&quot;+]|&lt;A?e[cY=WRR+&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword(&quot;vo6w&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword(&quot;+]|&lt;A?e[cY=WRR+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_2&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;+]|&lt;A?e[cY=WRR+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_27&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_4&quot;, activeDirectoryRealm0.getName());
-</pre>
-<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
 <span class="nocode"><a name="2">  2: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
 <span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setLdapContextFactory((LdapContextFactory) defaultLdapContextFactory0);
 <span class="nocode"><a name="4">  4: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
-<h3>Test case 7</h3>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="4">  4: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_29&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm-25-authorization&quot;, activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -259,17 +261,17 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <span class="nocode"><a name="183">183: </a></span>
 <span class="nocode"><a name="184">184: </a></span>
 <span class="nocode"><a name="185">185: </a></span>    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-<span class="nocode"><a name="186">186: </a></span>        AuthenticationInfo info = null;
+<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">        AuthenticationInfo info = null;</span>
 <span class="nocode"><a name="187">187: </a></span>        try {
-<span class="nocode"><a name="188">188: </a></span>            info = queryForAuthenticationInfo(token, this.ldapContextFactory);
-<span class="nocode"><a name="189">189: </a></span>        } catch (NamingException e) {
-<span class="nocode"><a name="190">190: </a></span>            if (log.isErrorEnabled()) {
-<span class="nocode"><a name="191">191: </a></span>                final String message = &quot;LDAP naming error while attempting to authenticate user.&quot;;
-<span class="nocode"><a name="192">192: </a></span>                log.error(message, e);
+<span class="nocode"><a name="188">188: </a></span><span style="background-color: #ffffcc">            info = queryForAuthenticationInfo(token, this.ldapContextFactory);</span>
+<span class="nocode"><a name="189">189: </a></span><span style="background-color: #ffffcc">        } catch (NamingException e) {</span>
+<span class="nocode"><a name="190">190: </a></span><span style="background-color: #ffffcc">            if (log.isErrorEnabled()) {</span>
+<span class="nocode"><a name="191">191: </a></span><span style="background-color: #ffffcc">                final String message = &quot;LDAP naming error while attempting to authenticate user.&quot;;</span>
+<span class="nocode"><a name="192">192: </a></span><span style="background-color: #ffffcc">                log.error(message, e);</span>
 <span class="nocode"><a name="193">193: </a></span>            }
 <span class="nocode"><a name="194">194: </a></span>        }
 <span class="nocode"><a name="195">195: </a></span>
-<span class="nocode"><a name="196">196: </a></span>        return info;
+<span class="nocode"><a name="196">196: </a></span><span style="background-color: #ffffcc">        return info;</span>
 <span class="nocode"><a name="197">197: </a></span>    }
 <span class="nocode"><a name="198">198: </a></span>
 <span class="nocode"><a name="199">199: </a></span>
@@ -318,7 +320,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -336,7 +338,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19471
+<li>process_communication_port: 7056
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

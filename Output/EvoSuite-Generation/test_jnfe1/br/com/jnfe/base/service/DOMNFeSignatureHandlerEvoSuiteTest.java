@@ -31,10 +31,10 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("WGuLr)Y;?5oiN");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("?l6");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
       try {
-        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "WGuLr)Y;?5oiN");
+        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "?l6");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -72,8 +72,8 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("WGuLr)Y;?5oiN");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("[_LEnMKsK/\"");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
-      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "");
+      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "S|Lcr-xF2");
   }
 }

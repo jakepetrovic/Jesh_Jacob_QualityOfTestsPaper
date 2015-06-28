@@ -7,7 +7,6 @@ package net.sf.jniinchi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import net.sf.jniinchi.INCHI_RET;
 import net.sf.jniinchi.JniInchiInput;
 import net.sf.jniinchi.JniInchiInputData;
 
@@ -22,11 +21,9 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiInput jniInchiInput0 = new JniInchiInput();
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-1), jniInchiInput0, (-1), "DOUBLEBOND");
-      JniInchiInput jniInchiInput1 = jniInchiInputData0.getInput();
-      assertNotNull(jniInchiInput1);
-      assertEquals(INCHI_RET.EOF, jniInchiInputData0.getReturnValue());
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(1532, (JniInchiInput) null, (-1), "");
+      JniInchiInput jniInchiInput0 = jniInchiInputData0.getInput();
+      assertNull(jniInchiInput0);
   }
 
   //Test case number: 1
@@ -36,10 +33,8 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiInput jniInchiInput0 = new JniInchiInput();
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-1), jniInchiInput0, (-1), "DOUBLEBOND");
-      INCHI_RET iNCHI_RET0 = jniInchiInputData0.getReturnValue();
-      assertEquals(INCHI_RET.EOF, iNCHI_RET0);
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(1532, (JniInchiInput) null, (-1), "");
+      jniInchiInputData0.getReturnValue();
   }
 
   //Test case number: 2
@@ -50,10 +45,8 @@ public class JniInchiInputDataEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiInput jniInchiInput0 = new JniInchiInput();
-      JniInchiInputData jniInchiInputData0 = new JniInchiInputData((-1), jniInchiInput0, (-1), "DOUBLEBOND");
+      JniInchiInputData jniInchiInputData0 = new JniInchiInputData(1532, (JniInchiInput) null, (-1), "");
       String string0 = jniInchiInputData0.getErrorMessage();
-      assertNotNull(string0);
-      assertEquals(INCHI_RET.EOF, jniInchiInputData0.getReturnValue());
+      assertEquals("", string0);
   }
 }

@@ -19,8 +19,8 @@ public class ContribICMSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ContribICMS contribICMS0 = ContribICMS.ICMS;
+      ContribICMS contribICMS0 = ContribICMS.ISENTO;
       char char0 = contribICMS0.getValue();
-      assertEquals('C', char0);
+      assertEquals('I', char0);
   }
 }

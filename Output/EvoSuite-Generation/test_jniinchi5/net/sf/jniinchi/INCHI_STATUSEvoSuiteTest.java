@@ -19,9 +19,9 @@ public class INCHI_STATUSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.FAIL_I2I;
+      INCHI_STATUS iNCHI_STATUS0 = INCHI_STATUS.INVALID_LAYOUT;
       int int0 = iNCHI_STATUS0.getIndx();
-      assertEquals(4, int0);
+      assertEquals(3, int0);
   }
 
   //Test case number: 1
@@ -111,6 +111,6 @@ public class INCHI_STATUSEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      INCHI_STATUS.getValue(639);
+      INCHI_STATUS.getValue(992546556);
   }
 }

@@ -11,14 +11,16 @@ import com.allenstudio.ir.ui.calendar.MonthlyCalendar;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.util.GregorianCalendar;
 import javax.swing.JComponent;
-import javax.swing.JToolBar;
-import javax.swing.JToolTip;
+import javax.swing.JFormattedTextField;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
 import javax.swing.border.Border;
-import javax.swing.border.SoftBevelBorder;
+import javax.swing.plaf.BorderUIResource;
 
 public class MonthlyCalendarEvoSuiteTest {
 
@@ -45,67 +47,14 @@ public class MonthlyCalendarEvoSuiteTest {
       assertNotNull(monthlyCalendar0);
       
       boolean boolean0 = monthlyCalendar0.getWeekStartOnSunday();
-      assertEquals(4, monthlyCalendar0.getMonth());
       assertEquals(true, boolean0);
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
       assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-      assertEquals(2014, monthlyCalendar0.getYear());
+      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
+      assertEquals(2015, monthlyCalendar0.getYear());
+      assertEquals(6, monthlyCalendar0.getMonth());
   }
 
   //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setWeekStartOnSunday(Z)V: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      monthlyCalendar0.setWeekStartOnSunday(false);
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals(2014, monthlyCalendar0.getYear());
-  }
-
-  //Test case number: 2
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getHighlightBackground()Ljava/awt/Color;: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      Color color0 = monthlyCalendar0.getHighlightBackground();
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals(2014, monthlyCalendar0.getYear());
-      assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
-      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-      assertNotNull(color0);
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-      assertEquals(227, color0.getBlue());
-  }
-
-  //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setDateForeground(Ljava/awt/Color;)V: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      Color color0 = Color.lightGray;
-      monthlyCalendar0.setDateForeground(color0);
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals(2014, monthlyCalendar0.getYear());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-  }
-
-  //Test case number: 4
   /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setBorder(Ljavax/swing/border/Border;)V: root-Branch
@@ -113,90 +62,93 @@ public class MonthlyCalendarEvoSuiteTest {
    * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.resize()V: I63 Branch 20 IFNONNULL L409 - false
    */
   @Test
+  public void test1()  throws Throwable  {
+      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
+      assertNotNull(monthlyCalendar0);
+      
+      JFormattedTextField jFormattedTextField0 = new JFormattedTextField();
+      BorderUIResource.CompoundBorderUIResource borderUIResource_CompoundBorderUIResource0 = (BorderUIResource.CompoundBorderUIResource)jFormattedTextField0.getBorder();
+      monthlyCalendar0.setBorder((Border) borderUIResource_CompoundBorderUIResource0);
+      assertEquals(6, monthlyCalendar0.getMonth());
+      assertEquals(2015, monthlyCalendar0.getYear());
+  }
+
+  //Test case number: 2
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setHeaderForeground(Ljava/awt/Color;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
+      assertNotNull(monthlyCalendar0);
+      
+      monthlyCalendar0.setHeaderForeground((Color) null);
+      assertEquals(2015, monthlyCalendar0.getYear());
+      assertEquals(6, monthlyCalendar0.getMonth());
+      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
+      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
+  }
+
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getDateBackground()Ljava/awt/Color;: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
+      assertNotNull(monthlyCalendar0);
+      
+      Color color0 = monthlyCalendar0.getDateBackground();
+      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
+      assertEquals(2015, monthlyCalendar0.getYear());
+      assertEquals(6, monthlyCalendar0.getMonth());
+      assertEquals(255, color0.getGreen());
+      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
+  }
+
+  //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setHeaderBackground(Ljava/awt/Color;)V: root-Branch
+   */
+  @Test
   public void test4()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
       
-      SoftBevelBorder softBevelBorder0 = new SoftBevelBorder(0);
-      monthlyCalendar0.setBorder((Border) softBevelBorder0);
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals(2014, monthlyCalendar0.getYear());
+      monthlyCalendar0.setHeaderBackground((Color) null);
+      assertEquals(6, monthlyCalendar0.getMonth());
+      assertEquals(2015, monthlyCalendar0.getYear());
+      assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
+      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
+      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
   }
 
   //Test case number: 5
   /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getHighlightForeground()Ljava/awt/Color;: root-Branch
+   * 2 covered goals:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMonth(I)V: I4 Branch 7 IF_ICMPLT L216 - false
+   * 2 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMonth(I)V: I7 Branch 8 IF_ICMPLE L216 - false
    */
   @Test
   public void test5()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
-      Color color0 = monthlyCalendar0.getHighlightForeground();
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-      assertEquals(255, color0.getBlue());
-      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-      assertEquals(2014, monthlyCalendar0.getYear());
+      // Undeclared exception!
+      try {
+        monthlyCalendar0.setMonth(1061);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Invalid month specified!
+         */
+      }
   }
 
   //Test case number: 6
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getHeaderComponent()Ljavax/swing/JComponent;: root-Branch
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      monthlyCalendar0.getHeaderComponent();
-      assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-      assertEquals(2014, monthlyCalendar0.getYear());
-      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-      assertEquals(4, monthlyCalendar0.getMonth());
-  }
-
-  //Test case number: 7
-  /*
-   * 1 covered goal:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getHeaderFont()Ljava/awt/Font;: root-Branch
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      Font font0 = monthlyCalendar0.getHeaderFont();
-      assertNotNull(font0);
-      assertEquals(2014, monthlyCalendar0.getYear());
-      assertEquals("java.awt.Font[family=Dialog,name=Dialog,style=plain,size=11]", font0.toString());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-      assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-      assertEquals(4, monthlyCalendar0.getMonth());
-  }
-
-  //Test case number: 8
-  /*
-   * 3 covered goals:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I3 Branch 1 IFEQ L176 - true
-   * 2 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I21 Branch 3 IFNE L179 - false
-   * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I24 Branch 4 IFEQ L179 - false
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-      assertNotNull(monthlyCalendar0);
-      
-      monthlyCalendar0.setMouseListeningEnabled(false);
-      assertEquals(false, monthlyCalendar0.getMouseListeningEnabled());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
-  }
-
-  //Test case number: 9
   /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setCellDimension(Ljava/awt/Dimension;)V: I4 Branch 18 IFNULL L374 - true
@@ -204,17 +156,17 @@ public class MonthlyCalendarEvoSuiteTest {
    * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.resize()V: I63 Branch 20 IFNONNULL L409 - false
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test6()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
-      JToolBar jToolBar0 = new JToolBar();
-      Dimension dimension0 = jToolBar0.getMaximumSize();
+      JSeparator jSeparator0 = new JSeparator();
+      Dimension dimension0 = jSeparator0.getPreferredSize();
       monthlyCalendar0.setCellDimension(dimension0);
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=126,height=28]]", monthlyCalendar0.toString());
+      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=0,height=14]]", monthlyCalendar0.toString());
   }
 
-  //Test case number: 10
+  //Test case number: 7
   /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.resize()V: I63 Branch 20 IFNONNULL L409 - true
@@ -222,17 +174,17 @@ public class MonthlyCalendarEvoSuiteTest {
    * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.resize()V: I8 Branch 19 IFNULL L400 - true
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test7()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
-      JToolTip jToolTip0 = new JToolTip();
-      monthlyCalendar0.setHeaderComponent((JComponent) jToolTip0);
-      assertEquals(2, jToolTip0.getHeight());
-      assertEquals(4, monthlyCalendar0.getMonth());
+      JRadioButtonMenuItem jRadioButtonMenuItem0 = new JRadioButtonMenuItem("<");
+      monthlyCalendar0.setHeaderComponent((JComponent) jRadioButtonMenuItem0);
+      assertEquals(1, monthlyCalendar0.countComponents());
+      assertEquals(2015, monthlyCalendar0.getYear());
   }
 
-  //Test case number: 11
+  //Test case number: 8
   /*
    * 4 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.paintComponent(Ljava/awt/Graphics;)V: I9 Branch 22 IFNONNULL L468 - false
@@ -241,7 +193,7 @@ public class MonthlyCalendarEvoSuiteTest {
    * 4 com.allenstudio.ir.ui.calendar.MonthlyCalendar.paintSymbol(Ljava/awt/Graphics;Ljava/awt/Font;Ljava/awt/Color;Ljava/awt/Color;Ljava/lang/String;IIII)V: I3 Branch 40 IFNONNULL L526 - true
    */
   @Test
-  public void test11()  throws Throwable  {
+  public void test8()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
@@ -253,7 +205,7 @@ public class MonthlyCalendarEvoSuiteTest {
       }
   }
 
-  //Test case number: 12
+  //Test case number: 9
   /*
    * 3 covered goals:
    * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getSelectedDate()Ljava/util/Calendar;: I34 Branch 41 IF_ICMPLE L561 - false
@@ -261,44 +213,69 @@ public class MonthlyCalendarEvoSuiteTest {
    * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.getDayOfMonth(II)I: I67 Branch 59 IFNE L704 - true
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test9()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
-      monthlyCalendar0.getSelectedDate();
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)monthlyCalendar0.getSelectedDate();
       assertEquals(30, monthlyCalendar0.getSelectedDay());
+      assertEquals(1435729631143L, gregorianCalendar0.getTimeInMillis());
   }
 
-  //Test case number: 13
+  //Test case number: 10
   /*
-   * 16 covered goals:
-   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mouseDragged(Ljava/awt/event/MouseEvent;)V: I5 Branch 50 IF_ACMPEQ L665 - true
-   * 2 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mousePositionChanged(Ljava/awt/event/MouseEvent;)V: I36 Branch 51 IFLT L678 - false
-   * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mousePositionChanged(Ljava/awt/event/MouseEvent;)V: I39 Branch 52 IF_ICMPGE L678 - false
-   * 4 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mousePositionChanged(Ljava/awt/event/MouseEvent;)V: I41 Branch 53 IFLT L678 - true
-   * 5 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mousePositionChanged(Ljava/awt/event/MouseEvent;)V: I50 Branch 55 IF_ICMPEQ L679 - true
-   * 6 com.allenstudio.ir.ui.calendar.MonthlyCalendar.<init>()V: root-Branch
-   * 7 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I19 Branch 12 IF_ICMPNE L246 - true
-   * 8 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I65 Branch 14 IFEQ L256 - false
-   * 9 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I88 Branch 15 IF_ICMPGE L261 - true
-   * 10 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I88 Branch 15 IF_ICMPGE L261 - false
-   * 11 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I107 Branch 16 IF_ICMPGE L264 - true
-   * 12 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I107 Branch 16 IF_ICMPGE L264 - false
-   * 13 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I132 Branch 17 IF_ICMPGE L267 - true
-   * 14 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I132 Branch 17 IF_ICMPGE L267 - false
-   * 15 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I3 Branch 1 IFEQ L176 - false
-   * 16 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I6 Branch 2 IFNE L176 - false
+   * 2 covered goals:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mouseClicked(Ljava/awt/event/MouseEvent;)V: I5 Branch 44 IF_ACMPEQ L602 - true
+   * 2 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mouseClicked(Ljava/awt/event/MouseEvent;)V: I43 Branch 45 IFLT L612 - false
    */
   @Test
-  public void test13()  throws Throwable  {
+  public void test10()  throws Throwable  {
       MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
       assertNotNull(monthlyCalendar0);
       
-      MouseEvent mouseEvent0 = new MouseEvent((Component) monthlyCalendar0, 20, 1L, 0, 0, 0, 0, 1508, 0, true, 0);
-      monthlyCalendar0.mouseDragged(mouseEvent0);
-      assertEquals("java.awt.event.MouseEvent[unknown type,(0,0),absolute(0,1508),button=0,clickCount=0] on com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", mouseEvent0.toString());
-      assertEquals(2014, monthlyCalendar0.getYear());
-      assertEquals(4, monthlyCalendar0.getMonth());
-      assertEquals("com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]", monthlyCalendar0.toString());
+      MouseWheelEvent mouseWheelEvent0 = new MouseWheelEvent((Component) monthlyCalendar0, (-96), 0L, (-96), (-96), 30, 0, (-96), (-96), true, 0, 842, 227);
+      // Undeclared exception!
+      try {
+        monthlyCalendar0.mouseClicked((MouseEvent) mouseWheelEvent0);
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
+        /*
+         * -3
+         */
+      }
+  }
+
+  //Test case number: 11
+  /*
+   * 12 covered goals:
+   * 1 com.allenstudio.ir.ui.calendar.MonthlyCalendar.mouseMoved(Ljava/awt/event/MouseEvent;)V: I5 Branch 49 IF_ACMPEQ L652 - false
+   * 2 com.allenstudio.ir.ui.calendar.MonthlyCalendar.<init>()V: root-Branch
+   * 3 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I19 Branch 12 IF_ICMPNE L246 - true
+   * 4 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I65 Branch 14 IFEQ L256 - false
+   * 5 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I88 Branch 15 IF_ICMPGE L261 - true
+   * 6 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I88 Branch 15 IF_ICMPGE L261 - false
+   * 7 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I107 Branch 16 IF_ICMPGE L264 - true
+   * 8 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I107 Branch 16 IF_ICMPGE L264 - false
+   * 9 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I132 Branch 17 IF_ICMPGE L267 - true
+   * 10 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setYearMonth(Ljava/util/Calendar;)V: I132 Branch 17 IF_ICMPGE L267 - false
+   * 11 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I3 Branch 1 IFEQ L176 - false
+   * 12 com.allenstudio.ir.ui.calendar.MonthlyCalendar.setMouseListeningEnabled(Z)V: I6 Branch 2 IFNE L176 - false
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
+      assertNotNull(monthlyCalendar0);
+      
+      JRadioButtonMenuItem jRadioButtonMenuItem0 = new JRadioButtonMenuItem("<");
+      MouseEvent mouseEvent0 = new MouseEvent((Component) jRadioButtonMenuItem0, 134, (-1675L), 134, 134, 134, 134, false);
+      // Undeclared exception!
+      try {
+        monthlyCalendar0.mouseMoved(mouseEvent0);
+        fail("Expecting exception: RuntimeException");
+      } catch(RuntimeException e) {
+        /*
+         * You are not supposed to install 'this' mouse motion handler to any component other than itself.
+         */
+      }
   }
 }

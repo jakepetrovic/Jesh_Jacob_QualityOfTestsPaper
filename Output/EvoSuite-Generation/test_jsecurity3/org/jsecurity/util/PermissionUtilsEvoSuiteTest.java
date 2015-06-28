@@ -39,7 +39,7 @@ public class PermissionUtilsEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
-      Set<Permission> set0 = PermissionUtils.resolveDelimitedPermissions("^5.F.bKVG", (PermissionResolver) wildcardPermissionResolver0);
+      Set<Permission> set0 = PermissionUtils.resolveDelimitedPermissions("sw1?2", (PermissionResolver) wildcardPermissionResolver0);
       assertNotNull(set0);
       assertEquals(1, set0.size());
   }

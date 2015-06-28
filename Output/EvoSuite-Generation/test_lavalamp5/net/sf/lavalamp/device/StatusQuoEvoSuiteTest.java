@@ -7,6 +7,7 @@ package net.sf.lavalamp.device;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.LinkedList;
 import java.util.List;
 import net.sf.lavalamp.device.Device;
 import net.sf.lavalamp.device.DummyDevice;
@@ -24,7 +25,8 @@ public class StatusQuoEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       StatusQuo statusQuo0 = new StatusQuo();
+      LinkedList<String> linkedList0 = new LinkedList<String>();
       DummyDevice dummyDevice0 = new DummyDevice();
-      statusQuo0.perform((List<String>) null, (Device) dummyDevice0);
+      statusQuo0.perform((List<String>) linkedList0, (Device) dummyDevice0);
   }
 }

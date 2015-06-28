@@ -25,34 +25,45 @@ public class BuildsEvoSuiteTest {
   public void test0()  throws Throwable  {
       Builds builds0 = new Builds();
       List<Build> list0 = builds0.getBuilds();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 1
   /*
    * 4 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - false
-   * 2 net.sf.lavalamp.site.Builds.allSuccessful()Z: I40 Branch 2 IFNE L31 - true
-   * 3 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
-   * 4 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
+   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
+   * 2 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
+   * 3 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
+   * 4 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
    */
   @Test
   public void test1()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("E3._5<:Yu");
+      Build build0 = new Build("%s%s/%s/lastBuild/buildNumber");
       builds0.add(build0);
-      boolean boolean0 = builds0.allSuccessful();
-      assertEquals(true, boolean0);
+      String string0 = "W0.F\\8&dQ8{";
+      try {
+        builds0.getBuild(string0);
+        fail("Expecting exception: MissingBuildException");
+      } catch(MissingBuildException e) {
+        /*
+         * W0.F\\8&dQ8{ not found
+         */
+      }
   }
 
   //Test case number: 2
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
+   * 3 covered goals:
+   * 1 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - false
+   * 2 net.sf.lavalamp.site.Builds.allSuccessful()Z: I40 Branch 2 IFNE L31 - true
+   * 3 net.sf.lavalamp.site.Builds.allSuccessful()Z: I9 Branch 1 IFEQ L28 - true
    */
   @Test
   public void test2()  throws Throwable  {
       Builds builds0 = new Builds();
+      Build build0 = new Build("UTF-8");
+      builds0.add(build0);
       boolean boolean0 = builds0.allSuccessful();
       assertEquals(true, boolean0);
   }
@@ -66,7 +77,7 @@ public class BuildsEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("6GzEkDV<?W{xJ`4vOL");
+      Build build0 = new Build("UTF-8");
       builds0.add(build0);
       build0.setSuccessful(false);
       boolean boolean0 = builds0.allSuccessful();
@@ -76,33 +87,12 @@ public class BuildsEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
-   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - false
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
    */
   @Test
   public void test4()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("E3._5<:Yu");
-      builds0.add(build0);
-      Build build1 = builds0.getBuild("E3._5<:Yu");
-      assertEquals(true, build1.isSuccessful());
-  }
-
-  //Test case number: 5
-  /*
-   * 5 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
-   * 2 net.sf.lavalamp.site.Builds.<init>()V: root-Branch
-   * 3 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
-   * 4 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
-   * 5 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      Builds builds0 = new Builds();
-      Build build0 = new Build("E3._5<:Yu");
-      builds0.add(build0);
       try {
         builds0.getBuild("");
         fail("Expecting exception: MissingBuildException");
@@ -111,5 +101,23 @@ public class BuildsEvoSuiteTest {
          *  not found
          */
       }
+  }
+
+  //Test case number: 5
+  /*
+   * 4 covered goals:
+   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
+   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - false
+   * 3 net.sf.lavalamp.site.Builds.<init>()V: root-Branch
+   * 4 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      Builds builds0 = new Builds();
+      String string0 = "%s%s/%s/lastBuild/buildNumber";
+      Build build0 = new Build("%s%s/%s/lastBuild/buildNumber");
+      builds0.add(build0);
+      Build build1 = builds0.getBuild(string0);
+      assertEquals("<font color='green'> build %s%s/%s/lastBuild/buildNumber successful (null)</font>", build1.toString());
   }
 }

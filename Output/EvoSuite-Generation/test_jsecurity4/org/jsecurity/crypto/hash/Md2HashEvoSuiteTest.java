@@ -16,12 +16,12 @@ public class Md2HashEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md2Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      Md2Hash md2Hash0 = new Md2Hash((Object) "", (Object) "\u0001\u0004T");
-      assertEquals("992d2722784f14024d7edc4834f76fec", md2Hash0.toHex());
+      Md2Hash md2Hash0 = new Md2Hash((Object) "");
+      assertEquals("g1Dlo+JMFT3yJ1yfgGkncw==", md2Hash0.toBase64());
   }
 
   //Test case number: 1
@@ -44,34 +44,19 @@ public class Md2HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Md2Hash.fromHexString((String) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      Md2Hash md2Hash0 = Md2Hash.fromHexString("");
+      assertEquals("", md2Hash0.toBase64());
   }
 
   //Test case number: 3
-  /*
-   * 1 covered goal:
-   * 1 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;)V: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      Md2Hash md2Hash0 = new Md2Hash((Object) "ab8e5ccdec47cc195d965629ca0d36f7");
-      assertEquals("6cb8b642ddca351d43236a6a329bb24e", md2Hash0.toHex());
-  }
-
-  //Test case number: 4
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Md2Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Md2Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
-      Md2Hash md2Hash0 = new Md2Hash((Object) "\u0001\uFFFD\uFFFD\u0000\u0000", (Object) "MD2", (int) (byte)1);
-      assertEquals("zz47rLq8CzHRHI+5g+7tVw==", md2Hash0.toBase64());
+  public void test3()  throws Throwable  {
+      Md2Hash md2Hash0 = new Md2Hash((Object) "MD2", (Object) "MD2", 433);
+      assertEquals("avOCgRmwOysH6KfGqHchqw==", md2Hash0.toBase64());
   }
 }

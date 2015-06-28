@@ -21,27 +21,64 @@ nu.staldal.lagoon.core.Sitemap
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.core.Sitemap: 0.88%</ul><ul>
-<li>8822 fitness evaluations, 178 generations, 25144 statements, 5971 tests.
+<ul><li>Target class: nu.staldal.lagoon.core.Sitemap: 8.85%</ul><ul>
+<li>8590 fitness evaluations, 173 generations, 54827 statements, 5768 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 1/106 branches, 1/11 methods, 1/113 total goals
-<li>Mutation score: 1%
+<li>Coverage: 6/106 branches, 7/11 methods, 10/113 total goals
+<li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;si}`fa%&quot;, &quot;si}`fa%&quot;);
-<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;si}`fa%&quot;, &quot;si}`fa%&quot;);
-<span class="nocode"><a name="3">  3: </a></span>Sitemap sitemap0 = null;
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  sitemap0 = new Sitemap((LagoonProcessor) null, element0, file0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(LagoonException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * root element must be &lt;sitemap&gt;
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;sitemap&quot;, &quot;sitemap&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Sitemap sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="3">  3: </a></span>Enumeration&lt;Object&gt; enumeration0 = sitemap0.getTargets();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, enumeration0.hasMoreElements());
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;sitemap&quot;, &quot;sitemap&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Sitemap sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = sitemap0.getProperty(&quot;Y6&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(string0);
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;sitemap&quot;, &quot;sitemap&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Sitemap sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="3">  3: </a></span>sitemap0.destroy();
+<span class="nocode"><a name="4">  4: </a></span>assertNull(sitemap0.getSiteName());
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;sitemap&quot;, &quot;sitemap&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Sitemap sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = sitemap0.getSiteName();
+<span class="nocode"><a name="4">  4: </a></span>assertNull(string0);
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Y6&quot;, &quot;Y6&quot;, (-1404));
+<span class="nocode"><a name="2">  2: </a></span>Sitemap sitemap0 = null;
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(LagoonException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * root element must be &lt;sitemap&gt;
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;sitemap&quot;, &quot;sitemap&quot;);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
+<span class="nocode"><a name="3">  3: </a></span>Sitemap sitemap0 = new Sitemap((LagoonProcessor) null, element0, (File) null);
+<span class="nocode"><a name="4">  4: </a></span>Text text0 = new Text(charArray0, 0, 1, true);
+<span class="nocode"><a name="5">  5: </a></span>element0.addChild((Node) text0);
+<span class="nocode"><a name="6">  6: </a></span>sitemap0.init();
+<span class="nocode"><a name="7">  7: </a></span>assertNull(sitemap0.getSiteName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -138,28 +175,28 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="92"> 92: </a></span><span style="background-color: #ffffcc">			throw new LagoonException(&quot;root element must be &lt;sitemap&gt;&quot;);	</span>
 <span class="nocode"><a name="93"> 93: </a></span>		}
 <span class="nocode"><a name="94"> 94: </a></span>						
-<span class="nocode"><a name="95"> 95: </a></span>		siteName = sitemapTree.getAttrValueOrNull(&quot;name&quot;);
+<span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">		siteName = sitemapTree.getAttrValueOrNull(&quot;name&quot;);</span>
 <span class="nocode"><a name="96"> 96: </a></span>
-<span class="nocode"><a name="97"> 97: </a></span>        this.processor = processor;
-<span class="nocode"><a name="98"> 98: </a></span>        this.sourceDir = sourceDir;
-<span class="nocode"><a name="99"> 99: </a></span>		this.sitemapTree = sitemapTree;
+<span class="nocode"><a name="97"> 97: </a></span><span style="background-color: #ffffcc">        this.processor = processor;</span>
+<span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">        this.sourceDir = sourceDir;</span>
+<span class="nocode"><a name="99"> 99: </a></span><span style="background-color: #ffffcc">		this.sitemapTree = sitemapTree;</span>
 <span class="nocode"><a name="100">100: </a></span>		
-<span class="nocode"><a name="101">101: </a></span>        entries = new Hashtable();
-<span class="nocode"><a name="102">102: </a></span>		entryVector = new Vector();
-<span class="nocode"><a name="103">103: </a></span>		parts = new Hashtable();
-<span class="nocode"><a name="104">104: </a></span>		outputs = new Hashtable();
-<span class="nocode"><a name="105">105: </a></span>		projectProperties = new Hashtable();
-<span class="nocode"><a name="106">106: </a></span>	}
+<span class="nocode"><a name="101">101: </a></span><span style="background-color: #ffffcc">        entries = new Hashtable();</span>
+<span class="nocode"><a name="102">102: </a></span><span style="background-color: #ffffcc">		entryVector = new Vector();</span>
+<span class="nocode"><a name="103">103: </a></span><span style="background-color: #ffffcc">		parts = new Hashtable();</span>
+<span class="nocode"><a name="104">104: </a></span><span style="background-color: #ffffcc">		outputs = new Hashtable();</span>
+<span class="nocode"><a name="105">105: </a></span><span style="background-color: #ffffcc">		projectProperties = new Hashtable();</span>
+<span class="nocode"><a name="106">106: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="107">107: </a></span>	
 <span class="nocode"><a name="108">108: </a></span>	public void init()
 <span class="nocode"><a name="109">109: </a></span>        throws LagoonException, java.io.IOException
 <span class="nocode"><a name="110">110: </a></span>	{
-<span class="nocode"><a name="111">111: </a></span>        currentFile = null;
+<span class="nocode"><a name="111">111: </a></span><span style="background-color: #ffffcc">        currentFile = null;</span>
 <span class="nocode"><a name="112">112: </a></span>	
-<span class="nocode"><a name="113">113: </a></span>		for (int i = 0; i&lt;sitemapTree.numberOfChildren(); i++)
+<span class="nocode"><a name="113">113: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i&lt;sitemapTree.numberOfChildren(); i++)</span>
 <span class="nocode"><a name="114">114: </a></span>		{
-<span class="nocode"><a name="115">115: </a></span>			Node node = sitemapTree.getChild(i);
-<span class="nocode"><a name="116">116: </a></span>			if (!(node instanceof Element)) continue;
+<span class="nocode"><a name="115">115: </a></span><span style="background-color: #ffffcc">			Node node = sitemapTree.getChild(i);</span>
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">			if (!(node instanceof Element)) continue;</span>
 <span class="nocode"><a name="117">117: </a></span>			Element entry = (Element)node;
 <span class="nocode"><a name="118">118: </a></span>				
 <span class="nocode"><a name="119">119: </a></span>			if (entry.getLocalName().equals(&quot;file&quot;))
@@ -327,19 +364,19 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="281">281: </a></span>	        currentFile = null;
 <span class="nocode"><a name="282">282: </a></span>		}
 <span class="nocode"><a name="283">283: </a></span>		
-<span class="nocode"><a name="284">284: </a></span>		sitemapTree = null;
-<span class="nocode"><a name="285">285: </a></span>    }
+<span class="nocode"><a name="284">284: </a></span><span style="background-color: #ffffcc">		sitemapTree = null;</span>
+<span class="nocode"><a name="285">285: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="286">286: </a></span>
 <span class="nocode"><a name="287">287: </a></span>
 <span class="nocode"><a name="288">288: </a></span>	public void destroy()
 <span class="nocode"><a name="289">289: </a></span>        throws java.io.IOException
 <span class="nocode"><a name="290">290: </a></span>    {
-<span class="nocode"><a name="291">291: </a></span>        for (Enumeration e = getEntries(); e.hasMoreElements(); )
+<span class="nocode"><a name="291">291: </a></span><span style="background-color: #ffffcc">        for (Enumeration e = getEntries(); e.hasMoreElements(); )</span>
 <span class="nocode"><a name="292">292: </a></span>        {
 <span class="nocode"><a name="293">293: </a></span>            SitemapEntry ent = (SitemapEntry)e.nextElement();
 <span class="nocode"><a name="294">294: </a></span>            ent.destroy();    
 <span class="nocode"><a name="295">295: </a></span>        }
-<span class="nocode"><a name="296">296: </a></span>    }
+<span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="297">297: </a></span>    
 <span class="nocode"><a name="298">298: </a></span>    
 <span class="nocode"><a name="299">299: </a></span>    /**
@@ -347,7 +384,7 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="301">301: </a></span>     */
 <span class="nocode"><a name="302">302: </a></span>    public String getSiteName()
 <span class="nocode"><a name="303">303: </a></span>    {
-<span class="nocode"><a name="304">304: </a></span>        return siteName;
+<span class="nocode"><a name="304">304: </a></span><span style="background-color: #ffffcc">        return siteName;</span>
 <span class="nocode"><a name="305">305: </a></span>    }
 <span class="nocode"><a name="306">306: </a></span>
 <span class="nocode"><a name="307">307: </a></span>	
@@ -356,7 +393,7 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="310">310: </a></span>     */
 <span class="nocode"><a name="311">311: </a></span>    public Enumeration getTargets()
 <span class="nocode"><a name="312">312: </a></span>    {
-<span class="nocode"><a name="313">313: </a></span>        return entries.keys();
+<span class="nocode"><a name="313">313: </a></span><span style="background-color: #ffffcc">        return entries.keys();</span>
 <span class="nocode"><a name="314">314: </a></span>    }
 <span class="nocode"><a name="315">315: </a></span>
 <span class="nocode"><a name="316">316: </a></span>
@@ -365,7 +402,7 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="319">319: </a></span>     */
 <span class="nocode"><a name="320">320: </a></span>    public Enumeration getEntries()
 <span class="nocode"><a name="321">321: </a></span>    {
-<span class="nocode"><a name="322">322: </a></span>        return entryVector.elements();
+<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">        return entryVector.elements();</span>
 <span class="nocode"><a name="323">323: </a></span>    }
 <span class="nocode"><a name="324">324: </a></span>
 <span class="nocode"><a name="325">325: </a></span>
@@ -421,7 +458,7 @@ nu.staldal.lagoon.core.Sitemap
 <span class="nocode"><a name="375">375: </a></span>	 */
 <span class="nocode"><a name="376">376: </a></span>	String getProperty(String key)
 <span class="nocode"><a name="377">377: </a></span>	{
-<span class="nocode"><a name="378">378: </a></span>		return (String)projectProperties.get(key);	
+<span class="nocode"><a name="378">378: </a></span><span style="background-color: #ffffcc">		return (String)projectProperties.get(key);	</span>
 <span class="nocode"><a name="379">379: </a></span>	}
 <span class="nocode"><a name="380">380: </a></span>	
 <span class="nocode"><a name="381">381: </a></span>	
@@ -531,7 +568,7 @@ nu.staldal.lagoon.core.Sitemap
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -549,7 +586,7 @@ nu.staldal.lagoon.core.Sitemap
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4125
+<li>process_communication_port: 2269
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

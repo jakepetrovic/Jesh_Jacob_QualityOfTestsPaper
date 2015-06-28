@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.JSecurityException;
 import org.jsecurity.config.IniConfiguration;
-import org.jsecurity.io.ResourceException;
 
 public class TextConfigurationEvoSuiteTest {
 
@@ -45,14 +44,8 @@ public class TextConfigurationEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       IniConfiguration iniConfiguration0 = new IniConfiguration();
-      iniConfiguration0.setConfig("0EZ|J<0A}hu-Z");
-      try {
-        iniConfiguration0.init();
-        fail("Expecting exception: ResourceException");
-      } catch(ResourceException e) {
-        /*
-         * Unable to load from text configuration.
-         */
-      }
+      iniConfiguration0.setConfig("' is not available via classloader ");
+      iniConfiguration0.init();
+      assertEquals("' is not available via classloader ", iniConfiguration0.getConfig());
   }
 }

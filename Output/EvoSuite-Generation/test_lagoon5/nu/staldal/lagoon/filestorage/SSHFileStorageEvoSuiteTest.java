@@ -7,10 +7,10 @@ package nu.staldal.lagoon.filestorage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
+import java.io.PrintStream;
 import java.net.MalformedURLException;
 import nu.staldal.lagoon.core.LagoonContext;
 import nu.staldal.lagoon.filestorage.SSHFileStorage;
@@ -45,7 +45,7 @@ public class SSHFileStorageEvoSuiteTest {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       // Undeclared exception!
       try {
-        sSHFileStorage0.deleteFile("wnPjvofw");
+        sSHFileStorage0.deleteFile("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -88,8 +88,9 @@ public class SSHFileStorageEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-      SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler("", (Process) null, (OutputStream) pipedOutputStream0);
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(0);
+      PrintStream printStream0 = new PrintStream((OutputStream) byteArrayOutputStream0);
+      SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler("$?6,H*;kPYhRz", (Process) null, (OutputStream) printStream0);
       // Undeclared exception!
       try {
         sSHFileStorage_SSHOutputHandler0.commit();
@@ -106,10 +107,9 @@ public class SSHFileStorageEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-      PipedInputStream pipedInputStream0 = new PipedInputStream(1350);
-      PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
-      SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler((String) null, (Process) null, (OutputStream) pipedOutputStream0);
+      SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler("ssh:/2/rm", (Process) null, (OutputStream) byteArrayOutputStream0);
       // Undeclared exception!
       try {
         sSHFileStorage_SSHOutputHandler0.discard();
@@ -128,11 +128,11 @@ public class SSHFileStorageEvoSuiteTest {
   public void test6()  throws Throwable  {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       try {
-        sSHFileStorage0.open("ssh://d", (LagoonContext) null, "ssh://d");
+        sSHFileStorage0.open("ssh://!K[GH+?8&", (LagoonContext) null, "ssh://!K[GH+?8&");
         fail("Expecting exception: MalformedURLException");
       } catch(MalformedURLException e) {
         /*
-         * ssh://d
+         * ssh://!K[GH+?8&
          */
       }
   }
@@ -146,32 +146,54 @@ public class SSHFileStorageEvoSuiteTest {
   public void test7()  throws Throwable  {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       try {
-        sSHFileStorage0.open("|", (LagoonContext) null, "|");
+        sSHFileStorage0.open("", (LagoonContext) null, "");
         fail("Expecting exception: MalformedURLException");
       } catch(MalformedURLException e) {
         /*
-         * |
+         * 
          */
       }
   }
 
   //Test case number: 8
   /*
-   * 1 covered goal:
-   * 1 nu.staldal.lagoon.filestorage.SSHFileStorage.createFile(Ljava/lang/String;)Lnu/staldal/lagoon/core/OutputHandler;: I25 Branch 18 IFGE L198 - true
+   * 4 covered goals:
+   * 1 nu.staldal.lagoon.filestorage.SSHFileStorage.open(Ljava/lang/String;Lnu/staldal/lagoon/core/LagoonContext;Ljava/lang/String;)V: I27 Branch 6 IFGE L126 - true
+   * 2 nu.staldal.lagoon.filestorage.SSHFileStorage.open(Ljava/lang/String;Lnu/staldal/lagoon/core/LagoonContext;Ljava/lang/String;)V: I49 Branch 7 IFGE L129 - false
+   * 3 nu.staldal.lagoon.filestorage.SSHFileStorage.open(Ljava/lang/String;Lnu/staldal/lagoon/core/LagoonContext;Ljava/lang/String;)V: I77 Branch 8 IFGE L136 - false
+   * 4 nu.staldal.lagoon.filestorage.SSHFileStorage.open(Ljava/lang/String;Lnu/staldal/lagoon/core/LagoonContext;Ljava/lang/String;)V: I6 Branch 5 IFGT L121 - true
    */
   @Test
   public void test8()  throws Throwable  {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       // Undeclared exception!
       try {
-        sSHFileStorage0.createFile("80<5_'/k");
+        sSHFileStorage0.open("ssh://0m* sVf1K7@ee~", (LagoonContext) null, "ssh://0m* sVf1K7@ee~");
+        fail("Expecting exception: StringIndexOutOfBoundsException");
+      } catch(StringIndexOutOfBoundsException e) {
+        /*
+         * String index out of range: -18
+         */
+      }
+  }
+
+  //Test case number: 9
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.lagoon.filestorage.SSHFileStorage.createFile(Ljava/lang/String;)Lnu/staldal/lagoon/core/OutputHandler;: I25 Branch 18 IFGE L198 - true
+   */
+  @Test
+  public void test9()  throws Throwable  {
+      SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
+      // Undeclared exception!
+      try {
+        sSHFileStorage0.createFile("sshE//!K[GH+?8&");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 9
+  //Test case number: 10
   /*
    * 6 covered goals:
    * 1 nu.staldal.lagoon.filestorage.SSHFileStorage.createFile(Ljava/lang/String;)Lnu/staldal/lagoon/core/OutputHandler;: I25 Branch 18 IFGE L198 - false
@@ -182,11 +204,11 @@ public class SSHFileStorageEvoSuiteTest {
    * 6 nu.staldal.lagoon.filestorage.SSHFileStorage.runSSH([Ljava/lang/String;)Ljava/lang/Process;: I92 Branch 4 IFLE L84 - true
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test10()  throws Throwable  {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       // Undeclared exception!
       try {
-        sSHFileStorage0.createFile("9[");
+        sSHFileStorage0.createFile("");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

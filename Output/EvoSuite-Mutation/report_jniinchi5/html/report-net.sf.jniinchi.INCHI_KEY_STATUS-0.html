@@ -22,18 +22,18 @@ net.sf.jniinchi.INCHI_KEY_STATUS
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_KEY_STATUS: 100.00%</ul><ul>
-<li>450 fitness evaluations, 10 generations, 5104 statements, 542 tests.
-<li>Time: 0:00:06(Search: 0:00:05, minimization: 0:00:00)
+<li>2050 fitness evaluations, 42 generations, 12117 statements, 1477 tests.
+<li>Time: 0:00:13(Search: 0:00:12, minimization: 0:00:00)
 <li>Coverage: 12/12 branches, 2/2 methods, 13/13 total goals
-<li>Mutation score: 77%
+<li>Mutation score: 71%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.INVALID_VERSION;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.getValue(0);
 <span class="nocode"><a name="2">  2: </a></span>int int0 = iNCHI_KEY_STATUS0.getIndx();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(3, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -42,27 +42,22 @@ net.sf.jniinchi.INCHI_KEY_STATUS
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS.getValue(1759385261);
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.getValue(0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY_STATUS.VALID_STANDARD, iNCHI_KEY_STATUS0);
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.getValue(1);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY_STATUS.INVALID_LENGTH, iNCHI_KEY_STATUS0);
 </pre>
-<h3>Test case 6</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.getValue(2);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY_STATUS.INVALID_LAYOUT, iNCHI_KEY_STATUS0);
 </pre>
-<h3>Test case 7</h3>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.getValue(3);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY_STATUS.INVALID_VERSION, iNCHI_KEY_STATUS0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY_STATUS.getValue((-4));
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -151,7 +146,7 @@ net.sf.jniinchi.INCHI_KEY_STATUS
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -169,7 +164,7 @@ net.sf.jniinchi.INCHI_KEY_STATUS
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7580
+<li>process_communication_port: 7728
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

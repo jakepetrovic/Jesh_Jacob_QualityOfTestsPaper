@@ -22,7 +22,7 @@ bierse.controller.DefaultTableModelController
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: bierse.controller.DefaultTableModelController: 42.86%</ul><ul>
-<li>4966 fitness evaluations, 101 generations, 29411 statements, 3352 tests.
+<li>5996 fitness evaluations, 121 generations, 33070 statements, 3966 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/6 branches, 2/2 methods, 3/7 total goals
 <li>Mutation score: 0%
@@ -32,27 +32,24 @@ bierse.controller.DefaultTableModelController
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[27];
-<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 0);
-<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-252), (-252));
+<span class="nocode"><a name="2">  2: </a></span>Object[][] objectArray0 = new Object[5][1];
+<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[1]);
+<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-1165), (-1165), (-1165), (-1165));
 <span class="nocode"><a name="5">  5: </a></span>defaultTableModelController0.tableChanged(tableModelEvent0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-252, tableModelEvent0.getLastRow());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1165, tableModelEvent0.getType());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[27];
-<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, 0);
-<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 0);
+<span class="nocode"><a name="2">  2: </a></span>Object[][] objectArray0 = new Object[5][1];
+<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[1]);
+<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
 <span class="nocode"><a name="7">  7: </a></span>  defaultTableModelController0.tableChanged(tableModelEvent0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * 0 &gt;= 0
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.controller;
@@ -81,7 +78,7 @@ bierse.controller.DefaultTableModelController
 <span class="nocode"><a name="24"> 24: </a></span><span style="background-color: #ffffcc">		if(row &gt;= 0) {</span>
 <span class="nocode"><a name="25"> 25: </a></span><span style="background-color: #ffffcc">			TableModel tm = (TableModel)e.getSource();</span>
 <span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">			String name = (String)tm.getValueAt(row, IDrinkSellView.TABLE_INDEX_NAME);</span>
-<span class="nocode"><a name="27"> 27: </a></span>			for(Drink d : model.getLstUsedDrink()) {
+<span class="nocode"><a name="27"> 27: </a></span><span style="background-color: #ffffcc">			for(Drink d : model.getLstUsedDrink()) {</span>
 <span class="nocode"><a name="28"> 28: </a></span>				if(d.getName().equals(name)) {
 <span class="nocode"><a name="29"> 29: </a></span>					d.setKeepPrice((Boolean)tm.getValueAt(row, IDrinkSellView.TABLE_INDEX_KEEP_PRICE));
 <span class="nocode"><a name="30"> 30: </a></span>				}
@@ -94,7 +91,7 @@ bierse.controller.DefaultTableModelController
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2903336665479640061.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6820260297764331508.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -112,7 +109,7 @@ bierse.controller.DefaultTableModelController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8013
+<li>process_communication_port: 2275
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -24,9 +24,7 @@ public class JndiTemplateEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JndiTemplate jndiTemplate0 = new JndiTemplate();
-      Properties properties0 = new Properties();
-      jndiTemplate0.setEnvironment(properties0);
-      assertEquals("{}", properties0.toString());
+      jndiTemplate0.setEnvironment((Properties) null);
   }
 
   //Test case number: 1
@@ -63,7 +61,7 @@ public class JndiTemplateEvoSuiteTest {
   public void test2()  throws Throwable  {
       JndiTemplate jndiTemplate0 = new JndiTemplate();
       try {
-        jndiTemplate0.rebind("-F!lcVyd#YA<ks*", (Object) jndiTemplate0);
+        jndiTemplate0.rebind("Dr#J=+-%2", "FORMAT");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -85,7 +83,7 @@ public class JndiTemplateEvoSuiteTest {
   public void test3()  throws Throwable  {
       JndiTemplate jndiTemplate0 = new JndiTemplate();
       try {
-        jndiTemplate0.bind("5sQBiN@L!{`,*p6&DB", "KR");
+        jndiTemplate0.bind("Jndi object acquired under name '", "");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -110,9 +108,10 @@ public class JndiTemplateEvoSuiteTest {
   public void test4()  throws Throwable  {
       Properties properties0 = new Properties();
       JndiTemplate jndiTemplate0 = new JndiTemplate(properties0);
-      properties0.put((Object) "/", (Object) "");
+      properties0.put((Object) "zho", (Object) "zho");
+      Class<?> class0 = Properties.class;
       try {
-        jndiTemplate0.lookup("E~wuY/G[d(Cc96LHj`");
+        jndiTemplate0.lookup("0uq:*dg=", (Class) class0);
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*

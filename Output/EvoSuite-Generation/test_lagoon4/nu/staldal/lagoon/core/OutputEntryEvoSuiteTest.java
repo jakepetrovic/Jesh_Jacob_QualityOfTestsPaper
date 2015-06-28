@@ -13,7 +13,8 @@ import nu.staldal.lagoon.core.OutputEntry;
 import nu.staldal.lagoon.core.SourceManager;
 import nu.staldal.lagoon.core.XMLStreamConsumer;
 import nu.staldal.lagoon.core.XMLStreamProducer;
-import nu.staldal.lagoon.producer.BasicSplit;
+import nu.staldal.lagoon.producer.XMLFormatter;
+import nu.staldal.lagoon.producer.XSLTransformer;
 
 public class OutputEntryEvoSuiteTest {
 
@@ -27,9 +28,9 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      BasicSplit basicSplit0 = new BasicSplit();
-      outputEntry0.setBottomProducer((XMLStreamConsumer) basicSplit0);
-      assertEquals(0, basicSplit0.getPosition());
+      XMLFormatter xMLFormatter0 = new XMLFormatter();
+      outputEntry0.setBottomProducer((XMLStreamConsumer) xMLFormatter0);
+      assertEquals(0, xMLFormatter0.getPosition());
   }
 
   //Test case number: 1
@@ -52,7 +53,9 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      outputEntry0.setMyProducer((ByteStreamProducer) null);
+      XMLFormatter xMLFormatter0 = new XMLFormatter();
+      outputEntry0.setMyProducer((ByteStreamProducer) xMLFormatter0);
+      assertNull(xMLFormatter0.getEntryName());
   }
 
   //Test case number: 3
@@ -87,10 +90,10 @@ public class OutputEntryEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       OutputEntry outputEntry0 = new OutputEntry();
-      BasicSplit basicSplit0 = new BasicSplit();
+      XSLTransformer xSLTransformer0 = new XSLTransformer();
       // Undeclared exception!
       try {
-        outputEntry0.setNext((XMLStreamProducer) basicSplit0);
+        outputEntry0.setNext((XMLStreamProducer) xSLTransformer0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

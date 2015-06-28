@@ -21,45 +21,41 @@ org.jsecurity.crypto.hash.Md2Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Md2Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3795 statements, 298 tests.
-<li>Time: 0:00:04(Search: 0:00:02, minimization: 0:00:01)
-<li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
+<ul><li>Target class: org.jsecurity.crypto.hash.Md2Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3711 statements, 286 tests.
+<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:01)
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
 <li>Mutation score: 44%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;MD2&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;8eecf0d23d248b0e6223b8a10ddbf1e5&quot;, md2Hash0.toHex());
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = Md2Hash.fromBase64String(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, md2Hash0.toHex());
 </pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = CodecSupport.PREFERRED_ENCODING;
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  Md2Hash.fromHexString(string0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Md2Hash.fromHexString(&quot;\u0005)\uFFFD\u0000j\uFFFD\uFFFD\uFFFD&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter \u0005 at index 0
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;6e7125b78644568854bc55d4e8b8a497&quot;, md2Hash0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;juzw0j0kiw5iI7ihDdvx5Q==&quot;, (Object) &quot;MD2&quot;, (-10));
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;d4dd8349a17909dbfd8070e77dca8ca4&quot;, md2Hash0.toHex());
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;MD2&quot;, (Object) &quot;MD2&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ab8e5ccdec47cc195d965629ca0d36f7&quot;, md2Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;MD2&quot;, (Object) &quot;MD2&quot;, 1269);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD2&quot;, md2Hash0.getAlgorithmName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -110,7 +106,7 @@ org.jsecurity.crypto.hash.Md2Hash
 <span class="nocode"><a name="46"> 46: </a></span>
 <span class="nocode"><a name="47"> 47: </a></span>    public Md2Hash(Object source, Object salt) {
 <span class="nocode"><a name="48"> 48: </a></span>        super(source, salt);
-<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="49"> 49: </a></span>    }
 <span class="nocode"><a name="50"> 50: </a></span>
 <span class="nocode"><a name="51"> 51: </a></span>    public Md2Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="52"> 52: </a></span>        super(source, salt, hashIterations);
@@ -136,7 +132,7 @@ org.jsecurity.crypto.hash.Md2Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -154,7 +150,7 @@ org.jsecurity.crypto.hash.Md2Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5976
+<li>process_communication_port: 11273
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

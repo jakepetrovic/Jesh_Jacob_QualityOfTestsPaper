@@ -21,14 +21,22 @@ bierse.view.DefaultInfoViewMouseListener
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: bierse.view.DefaultInfoViewMouseListener: 0.00%</ul><ul>
-<li>0 fitness evaluations, 2 generations, 0 statements, 0 tests.
-<li>Time: 0:01:12(Search: 0:01:09, minimization: 0:00:03)
-<li>Coverage: 0/4 branches, 0/8 methods, 0/11 total goals
-<li>Mutation score: 100%
+<ul><li>Target class: bierse.view.DefaultInfoViewMouseListener: 18.18%</ul><ul>
+<li>146 fitness evaluations, 4 generations, 925 statements, 321 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 1/4 branches, 2/8 methods, 2/11 total goals
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultInfoViewMouseListener defaultInfoViewMouseListener0 = new DefaultInfoViewMouseListener((JFrame) null);
+<span class="nocode"><a name="2">  2: </a></span>JDesktopPane jDesktopPane0 = new JDesktopPane();
+<span class="nocode"><a name="3">  3: </a></span>MouseEvent mouseEvent0 = new MouseEvent((Component) jDesktopPane0, 1, (-963L), (-1664), 1, 600, 0, true);
+<span class="nocode"><a name="4">  4: </a></span>defaultInfoViewMouseListener0.mouseClicked(mouseEvent0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, mouseEvent0.isControlDown());
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.view;
 <span class="nocode"><a name="2">  2: </a></span>
@@ -49,9 +57,9 @@ bierse.view.DefaultInfoViewMouseListener
 <span class="nocode"><a name="17"> 17: </a></span>	private JFrame defaultInfoFrame;
 <span class="nocode"><a name="18"> 18: </a></span>	
 <span class="nocode"><a name="19"> 19: </a></span>	public DefaultInfoViewMouseListener(JFrame defaultInfoFrame) {
-<span class="nocode"><a name="20"> 20: </a></span>		this.defaultInfoFrame = defaultInfoFrame;
-<span class="nocode"><a name="21"> 21: </a></span>		prevSize = new Dimension(800, 600);
-<span class="nocode"><a name="22"> 22: </a></span>	}
+<span class="nocode"><a name="20"> 20: </a></span><span style="background-color: #ffffcc">		this.defaultInfoFrame = defaultInfoFrame;</span>
+<span class="nocode"><a name="21"> 21: </a></span><span style="background-color: #ffffcc">		prevSize = new Dimension(800, 600);</span>
+<span class="nocode"><a name="22"> 22: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="23"> 23: </a></span>	
 <span class="nocode"><a name="24"> 24: </a></span>	@Override
 <span class="nocode"><a name="25"> 25: </a></span>	public void mouseDragged(MouseEvent e) {
@@ -68,7 +76,7 @@ bierse.view.DefaultInfoViewMouseListener
 <span class="nocode"><a name="36"> 36: </a></span>
 <span class="nocode"><a name="37"> 37: </a></span>	@Override
 <span class="nocode"><a name="38"> 38: </a></span>	public void mouseClicked(MouseEvent e) {
-<span class="nocode"><a name="39"> 39: </a></span>		if (e.getClickCount() == 2) {
+<span class="nocode"><a name="39"> 39: </a></span><span style="background-color: #ffffcc">		if (e.getClickCount() == 2) {</span>
 <span class="nocode"><a name="40"> 40: </a></span>			if (defaultInfoFrame.getExtendedState() != JFrame.MAXIMIZED_BOTH) {
 <span class="nocode"><a name="41"> 41: </a></span>				prevSize = defaultInfoFrame.getSize();
 <span class="nocode"><a name="42"> 42: </a></span>				defaultInfoFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -76,7 +84,7 @@ bierse.view.DefaultInfoViewMouseListener
 <span class="nocode"><a name="44"> 44: </a></span>				defaultInfoFrame.setSize(prevSize);
 <span class="nocode"><a name="45"> 45: </a></span>			}
 <span class="nocode"><a name="46"> 46: </a></span>		}
-<span class="nocode"><a name="47"> 47: </a></span>	}
+<span class="nocode"><a name="47"> 47: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="48"> 48: </a></span>
 <span class="nocode"><a name="49"> 49: </a></span>	@Override
 <span class="nocode"><a name="50"> 50: </a></span>	public void mouseEntered(MouseEvent e) {}
@@ -97,7 +105,7 @@ bierse.view.DefaultInfoViewMouseListener
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1158434697524404911.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree652268098270985341.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -115,7 +123,7 @@ bierse.view.DefaultInfoViewMouseListener
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10113
+<li>process_communication_port: 16286
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

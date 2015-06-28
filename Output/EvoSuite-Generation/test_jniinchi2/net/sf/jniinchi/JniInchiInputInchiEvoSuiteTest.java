@@ -7,7 +7,6 @@ package net.sf.jniinchi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.LinkedList;
 import java.util.List;
 import net.sf.jniinchi.JniInchiException;
 import net.sf.jniinchi.JniInchiInputInchi;
@@ -22,10 +21,9 @@ public class JniInchiInputInchiEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      LinkedList<String> linkedList0 = new LinkedList<String>();
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi("", (List) linkedList0);
+        jniInchiInputInchi0 = new JniInchiInputInchi("", (List) null);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -43,7 +41,7 @@ public class JniInchiInputInchiEvoSuiteTest {
   public void test1()  throws Throwable  {
       JniInchiInputInchi jniInchiInputInchi0 = null;
       try {
-        jniInchiInputInchi0 = new JniInchiInputInchi("", "");
+        jniInchiInputInchi0 = new JniInchiInputInchi("F", "F");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*

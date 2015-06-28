@@ -21,6 +21,6 @@ public class PauseEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Pause pause0 = new Pause();
-      pause0.sleep(0L);
+      pause0.sleep(1L);
   }
 }

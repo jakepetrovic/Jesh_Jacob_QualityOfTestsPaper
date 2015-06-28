@@ -19,10 +19,10 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
+      C_ICMS c_ICMS0 = C_ICMS._203;
       String string0 = c_ICMS0.toString();
+      assertEquals("203", string0);
       assertNotNull(string0);
-      assertEquals("300", string0);
   }
 
   //Test case number: 1
@@ -33,8 +33,8 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
-      boolean boolean0 = c_ICMS0.isRequiredTag("300");
+      C_ICMS c_ICMS0 = C_ICMS._203;
+      boolean boolean0 = c_ICMS0.isRequiredTag("");
       assertEquals(false, boolean0);
   }
 
@@ -45,7 +45,7 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
+      C_ICMS c_ICMS0 = C_ICMS._203;
       boolean boolean0 = c_ICMS0.isST();
       assertEquals(false, boolean0);
   }
@@ -57,9 +57,9 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
+      C_ICMS c_ICMS0 = C_ICMS._20;
       String string0 = c_ICMS0.getGroup();
-      assertEquals("SN102", string0);
+      assertEquals("20", string0);
   }
 
   //Test case number: 4
@@ -69,7 +69,7 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
+      C_ICMS c_ICMS0 = C_ICMS._203;
       boolean boolean0 = c_ICMS0.isSimplesNacional();
       assertEquals(false, boolean0);
   }
@@ -82,8 +82,8 @@ public class C_ICMSEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      C_ICMS c_ICMS0 = C_ICMS._300;
+      C_ICMS c_ICMS0 = C_ICMS._20;
       boolean boolean0 = c_ICMS0.isIsento();
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 }

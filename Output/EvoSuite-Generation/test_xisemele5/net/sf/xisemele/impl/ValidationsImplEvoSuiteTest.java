@@ -25,7 +25,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      Object[] objectArray0 = new Object[2];
+      Object[] objectArray0 = new Object[3];
       objectArray0[1] = (Object) validationsImpl0;
       validationsImpl0.assertNotNull(objectArray0);
   }
@@ -39,7 +39,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      Object[] objectArray0 = new Object[5];
+      Object[] objectArray0 = new Object[4];
       try {
         validationsImpl0.assertNotNull(objectArray0);
         fail("Expecting exception: NullPointerException");
@@ -55,7 +55,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      validationsImpl0.assertValidName("net.sf.xisemele.null.pointer.exception");
+      validationsImpl0.assertValidName("DeZ");
   }
 
   //Test case number: 3
@@ -86,25 +86,24 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      String[] stringArray0 = new String[7];
-      Object object0 = validationsImpl0.getFirstNotNull((Object[]) stringArray0);
+      Object[] objectArray0 = new Object[3];
+      Object object0 = validationsImpl0.getFirstNotNull(objectArray0);
       assertNull(object0);
   }
 
   //Test case number: 5
   /*
-   * 4 covered goals:
+   * 3 covered goals:
    * 1 net.sf.xisemele.impl.ValidationsImpl.getFirstNotNull([Ljava/lang/Object;)Ljava/lang/Object;: I22 Branch 5 IFNULL L65 - false
    * 2 net.sf.xisemele.impl.ValidationsImpl.<init>(Lnet/sf/xisemele/impl/Factory;)V: root-Branch
    * 3 net.sf.xisemele.impl.ValidationsImpl.getFirstNotNull([Ljava/lang/Object;)Ljava/lang/Object;: I14 Branch 4 IF_ICMPGE L64 - false
-   * 4 net.sf.xisemele.impl.ValidationsImpl.getFirstNotNull([Ljava/lang/Object;)Ljava/lang/Object;: I22 Branch 5 IFNULL L65 - true
    */
   @Test
   public void test5()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      Object[] objectArray0 = new Object[5];
-      objectArray0[1] = (Object) validationsImpl0;
-      ValidationsImpl validationsImpl1 = (ValidationsImpl)validationsImpl0.getFirstNotNull(objectArray0);
-      assertSame(validationsImpl1, validationsImpl0);
+      String[] stringArray0 = new String[7];
+      stringArray0[0] = "DeZ";
+      String string0 = validationsImpl0.getFirstNotNull(stringArray0);
+      assertEquals("DeZ", string0);
   }
 }

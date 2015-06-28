@@ -19,8 +19,8 @@ public class TpVeiculoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpVeiculo tpVeiculo0 = TpVeiculo.REBOQUE;
+      TpVeiculo tpVeiculo0 = TpVeiculo.VEICULO;
       char char0 = tpVeiculo0.getValue();
-      assertEquals('R', char0);
+      assertEquals('V', char0);
   }
 }

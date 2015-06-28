@@ -22,83 +22,84 @@ org.jsecurity.crypto.hash.AbstractHash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.AbstractHash: 100.00%</ul><ul>
-<li>5500 fitness evaluations, 111 generations, 49804 statements, 3748 tests.
-<li>Time: 0:00:36(Search: 0:00:34, minimization: 0:00:01)
+<li>1200 fitness evaluations, 25 generations, 12619 statements, 957 tests.
+<li>Time: 0:00:13(Search: 0:00:11, minimization: 0:00:02)
 <li>Coverage: 12/12 branches, 15/15 methods, 22/22 total goals
-<li>Mutation score: 70%
+<li>Mutation score: 73%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>int int0 = sha384Hash0.hashCode();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  sha512Hash0.hashCode();
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash((Object) &quot;\uFFFD\u0000\u0000H\u0000\u0000\u0000\u0000\u0000&quot;, (Object) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(sha1Hash0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;1de59200452a6b7c57f256586352369234e31b61&quot;, sha1Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;6mtO7R5bB2gqcu9YklVEpA==&quot;, (Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(md5Hash0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Hh8mDP+Cdr5bMQN+NrqbQQ==&quot;, md5Hash0.toBase64());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String(&quot;)&quot;);
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[9];
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = sha1Hash0.hash(byteArray0, byteArray0);
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = sha256Hash0.hash(byteArray0, byteArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
 <span class="nocode"><a name="5">  5: </a></span>assertNotNull(byteArray1);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[8];
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = md5Hash0.hash(byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(byteArray1);
-<span class="nocode"><a name="5">  5: </a></span>assertNotSame(byteArray0, byteArray1);
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;SHA-512&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(sha512Hash0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="5">  5: </a></span>byte[] byteArray1 = sha512Hash0.hash(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;M/Y7w3T0KPWX1/e6fMHiGgtLRPqnJ/fAUsWtCxqlMDiE6lkZpTwNMrVZH03tOB2ha2f2ohcNgQWNfpuyrUohWw==&quot;, sha512Hash0.toBase64());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;33f63bc374f428f597d7f7ba7cc1e21a0b4b44faa727f7c052c5ad0b1aa5303884ea5919a53c0d32b5591f4ded381da16b67f6a2170d81058d7e9bb2ad4a215b&quot;, sha512Hash0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;MD2&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;CYSbs4GppDI+WSajQrm0OuZS0sFbNEPNbjozkXASF2bs9Up/F1iBDc4dMVK2Q3vRamAGUOIGzzFspBHtDrDuvA==&quot;, sha512Hash0.toBase64());
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(sha512Hash0);
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = sha384Hash0.toString();
+<span class="nocode"><a name="3">  3: </a></span>String string1 = sha384Hash0.toString();
+<span class="nocode"><a name="4">  4: </a></span>assertSame(string1, string0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;&quot;, string1);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, 653);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;7470a4eba8361b651ba1f0f598281670e4804f3a26f88c92180042cb2ae4b620ebdfe120f5930b33238a7fbe085f4231f1c9d44c9dc070e2d9aadc79f2fc43f7&quot;, sha512Hash0.toString());
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(sha512Hash0);
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;UTF-8&quot;, (Object) &quot;SHA-384&quot;, 1711);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(md5Hash0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>String string0 = md5Hash0.toBase64();
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>String string1 = md5Hash0.toBase64();
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;6mtO7R5bB2gqcu9YklVEpA==&quot;, string1);
+<span class="nocode"><a name="9">  9: </a></span>assertSame(string1, string0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = md5Hash0.toHex();
-<span class="nocode"><a name="3">  3: </a></span>String string1 = md5Hash0.toString();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string1);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(string1, string0);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string1);
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;{b. g^wZPo&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = sha384Hash0.equals((Object) &quot;SHA-512&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = md5Hash0.toBase64();
-<span class="nocode"><a name="3">  3: </a></span>String string1 = md5Hash0.toBase64();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(string1, string0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, string1);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string1);
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = sha1Hash0.equals((Object) &quot;MD2&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = Sha1Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Md2Hash md2Hash0 = Md2Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = sha1Hash0.equals((Object) md2Hash0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>Sha1Hash sha1Hash0 = new Sha1Hash();
+<span class="nocode"><a name="2">  2: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;SHA-512&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(md2Hash0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = md2Hash0.equals((Object) sha1Hash0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;d19924bd0c212185fd872658c984aae7&quot;, md2Hash0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -385,7 +386,7 @@ org.jsecurity.crypto.hash.AbstractHash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -403,7 +404,7 @@ org.jsecurity.crypto.hash.AbstractHash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18239
+<li>process_communication_port: 3798
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -21,10 +21,10 @@ public class DeployResultImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "Ak&PXbw]]p");
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "d}fD");
       DeployResultStatus deployResultStatus1 = deployResultImpl0.getStatus();
-      assertEquals(DeployResultStatus.WARNING, deployResultStatus1);
+      assertEquals(DeployResultStatus.UNKNOWN, deployResultStatus1);
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, (String) null);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "d}fD");
       String string0 = deployResultImpl0.getStatusDetails();
-      assertNull(string0);
+      assertEquals("d}fD", string0);
   }
 }

@@ -22,47 +22,47 @@ br.com.jnfe.base.CST_COFINS
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: br.com.jnfe.base.CST_COFINS: 100.00%</ul><ul>
-<li>1100 fitness evaluations, 23 generations, 10275 statements, 890 tests.
-<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:01)
+<li>50 fitness evaluations, 2 generations, 2977 statements, 303 tests.
+<li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:01)
 <li>Coverage: 4/4 branches, 5/5 methods, 8/8 total goals
-<li>Mutation score: 42%
+<li>Mutation score: 40%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = cST_COFINS0.isIsento();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
 <span class="nocode"><a name="2">  2: </a></span>String string0 = cST_COFINS0.getDesc();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Al\u00EDquota por unidade de produto&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Al\u00EDquota diferenciada&quot;, string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
 <span class="nocode"><a name="2">  2: </a></span>String string0 = cST_COFINS0.getGroup();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Qtde&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Aliq&quot;, string0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_04;
 <span class="nocode"><a name="2">  2: </a></span>String string0 = cST_COFINS0.getValue();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;03&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;04&quot;, string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = cST_COFINS0.isRequiredTag(&quot;COFINS_04&quot;);
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = cST_COFINS0.isRequiredTag(&quot;COFINS_02&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_99;
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = cST_COFINS0.isRequiredTag(&quot;qBCProd&quot;);
+<span class="nocode"><a name="1">  1: </a></span>CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = cST_COFINS0.isRequiredTag(&quot;pCOFINS&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -191,7 +191,7 @@ br.com.jnfe.base.CST_COFINS
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7265367937148873017.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2561159035254289937.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -209,7 +209,7 @@ br.com.jnfe.base.CST_COFINS
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17256
+<li>process_communication_port: 8524
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

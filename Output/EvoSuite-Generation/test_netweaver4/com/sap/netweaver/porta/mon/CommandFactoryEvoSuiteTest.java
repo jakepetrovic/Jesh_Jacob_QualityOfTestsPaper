@@ -62,12 +62,12 @@ public class CommandFactoryEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 1 TABLESWITCH L29 Case 0 - false
-   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
+   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 9 TABLESWITCH L29 Case 8 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
-      assertNotNull(deployCommand0);
+      UndeployCommand undeployCommand0 = (UndeployCommand)CommandFactory.createCommand(8);
+      assertNotNull(undeployCommand0);
   }
 
   //Test case number: 3
@@ -139,12 +139,12 @@ public class CommandFactoryEvoSuiteTest {
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 9 TABLESWITCH L29 Case 8 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      UndeployCommand undeployCommand0 = (UndeployCommand)CommandFactory.createCommand(8);
-      assertNotNull(undeployCommand0);
+      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
+      assertNotNull(deployCommand0);
   }
 
   //Test case number: 10
@@ -202,11 +202,11 @@ public class CommandFactoryEvoSuiteTest {
   public void test13()  throws Throwable  {
       // Undeclared exception!
       try {
-        CommandFactory.createCommand(1708);
+        CommandFactory.createCommand((-1773));
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * command 1708 is not supported. 
+         * command -1773 is not supported. 
          */
       }
   }

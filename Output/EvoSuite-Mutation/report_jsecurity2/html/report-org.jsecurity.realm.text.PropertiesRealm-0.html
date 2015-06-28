@@ -22,9 +22,9 @@ org.jsecurity.realm.text.PropertiesRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.text.PropertiesRealm: 44.78%</ul><ul>
-<li>230 fitness evaluations, 6 generations, 3357 statements, 386 tests.
-<li>Time: 0:02:46(Search: 0:01:05, minimization: 0:01:41)
-<li>Coverage: 24/60 branches, 17/21 methods, 30/67 total goals
+<li>234 fitness evaluations, 6 generations, 3092 statements, 377 tests.
+<li>Time: 0:01:21(Search: 0:01:05, minimization: 0:00:16)
+<li>Coverage: 25/60 branches, 17/21 methods, 30/67 total goals
 <li>Mutation score: 55%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,7 +32,7 @@ org.jsecurity.realm.text.PropertiesRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm();
-<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.setResourcePath((String) null);
+<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.setReloadIntervalSeconds((-1526));
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_0&quot;, propertiesRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
@@ -40,32 +40,37 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="1">  1: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
 <span class="nocode"><a name="2">  2: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm((CacheManager) hashtableCacheManager0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(propertiesRealm0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>propertiesRealm0.run();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_9&quot;, propertiesRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm-0-authorization&quot;, propertiesRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_12&quot;, propertiesRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm();
-<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.setUseXmlFormat(true);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_110&quot;, propertiesRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  propertiesRealm0 = new PropertiesRealm((CacheManager) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * cacheManager argument cannot be null.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm();
-<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.startReloadThread();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_122&quot;, propertiesRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.destroy();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_123&quot;, propertiesRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="2">  2: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(propertiesRealm0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = propertiesRealm0.isUsername((String) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_150&quot;, propertiesRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm();
+<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.startReloadThread();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_134&quot;, propertiesRealm0.getName());
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>PropertiesRealm propertiesRealm0 = new PropertiesRealm();
+<span class="nocode"><a name="2">  2: </a></span>propertiesRealm0.run();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.text.PropertiesRealm_162&quot;, propertiesRealm0.getName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -192,7 +197,7 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="122">122: </a></span>
 <span class="nocode"><a name="123">123: </a></span>    public PropertiesRealm( CacheManager cacheManager ) {
 <span class="nocode"><a name="124">124: </a></span><span style="background-color: #ffffcc">        if ( cacheManager == null ) {</span>
-<span class="nocode"><a name="125">125: </a></span>            throw new IllegalArgumentException( &quot;cacheManager argument cannot be null.&quot; );
+<span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException( &quot;cacheManager argument cannot be null.&quot; );</span>
 <span class="nocode"><a name="126">126: </a></span>        }
 <span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">        setCacheManager(cacheManager);</span>
 <span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">        init();</span>
@@ -218,15 +223,15 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="148">148: </a></span>
 <span class="nocode"><a name="149">149: </a></span>    public void destroy() {
 <span class="nocode"><a name="150">150: </a></span>        try {
-<span class="nocode"><a name="151">151: </a></span>            if (scheduler != null) {
+<span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">            if (scheduler != null) {</span>
 <span class="nocode"><a name="152">152: </a></span>                scheduler.shutdown();
 <span class="nocode"><a name="153">153: </a></span>            }
 <span class="nocode"><a name="154">154: </a></span>        } catch (Exception e) {
 <span class="nocode"><a name="155">155: </a></span>            if (log.isInfoEnabled()) {
 <span class="nocode"><a name="156">156: </a></span>                log.info(&quot;Unable to cleanly shutdown Scheduler.  Ignoring (shutting down)...&quot;, e);
 <span class="nocode"><a name="157">157: </a></span>            }
-<span class="nocode"><a name="158">158: </a></span>        }
-<span class="nocode"><a name="159">159: </a></span>    }
+<span class="nocode"><a name="158">158: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="159">159: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="160">160: </a></span>
 <span class="nocode"><a name="161">161: </a></span>    protected void startReloadThread() {
 <span class="nocode"><a name="162">162: </a></span><span style="background-color: #ffffcc">        if (this.reloadIntervalSeconds &gt; 0) {</span>
@@ -256,8 +261,8 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="186">186: </a></span>     * @param useXmlFormat true to use XML or false to use the normal format.  Defaults to false.
 <span class="nocode"><a name="187">187: </a></span>     */
 <span class="nocode"><a name="188">188: </a></span>    public void setUseXmlFormat(boolean useXmlFormat) {
-<span class="nocode"><a name="189">189: </a></span><span style="background-color: #ffffcc">        this.useXmlFormat = useXmlFormat;</span>
-<span class="nocode"><a name="190">190: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="189">189: </a></span>        this.useXmlFormat = useXmlFormat;
+<span class="nocode"><a name="190">190: </a></span>    }
 <span class="nocode"><a name="191">191: </a></span>
 <span class="nocode"><a name="192">192: </a></span>    /**
 <span class="nocode"><a name="193">193: </a></span>     * Sets the path of the properties file to load user, role, and permission information from.  The properties
@@ -269,8 +274,8 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="199">199: </a></span>     * @param resourcePath the path to load the properties file from.  This is a required property.
 <span class="nocode"><a name="200">200: </a></span>     */
 <span class="nocode"><a name="201">201: </a></span>    public void setResourcePath(String resourcePath) {
-<span class="nocode"><a name="202">202: </a></span><span style="background-color: #ffffcc">        this.resourcePath = resourcePath;</span>
-<span class="nocode"><a name="203">203: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="202">202: </a></span>        this.resourcePath = resourcePath;
+<span class="nocode"><a name="203">203: </a></span>    }
 <span class="nocode"><a name="204">204: </a></span>
 <span class="nocode"><a name="205">205: </a></span>    /**
 <span class="nocode"><a name="206">206: </a></span>     * Sets the interval in seconds at which the property file will be checked for changes and reloaded.  If this is
@@ -281,8 +286,8 @@ org.jsecurity.realm.text.PropertiesRealm
 <span class="nocode"><a name="211">211: </a></span>     *                              If set to zero or less, reloading is disabled.
 <span class="nocode"><a name="212">212: </a></span>     */
 <span class="nocode"><a name="213">213: </a></span>    public void setReloadIntervalSeconds(int reloadIntervalSeconds) {
-<span class="nocode"><a name="214">214: </a></span>        this.reloadIntervalSeconds = reloadIntervalSeconds;
-<span class="nocode"><a name="215">215: </a></span>    }
+<span class="nocode"><a name="214">214: </a></span><span style="background-color: #ffffcc">        this.reloadIntervalSeconds = reloadIntervalSeconds;</span>
+<span class="nocode"><a name="215">215: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="216">216: </a></span>
 <span class="nocode"><a name="217">217: </a></span>    /*--------------------------------------------
 <span class="nocode"><a name="218">218: </a></span>    |               M E T H O D S               |
@@ -438,7 +443,7 @@ org.jsecurity.realm.text.PropertiesRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -456,7 +461,7 @@ org.jsecurity.realm.text.PropertiesRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20502
+<li>process_communication_port: 11264
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

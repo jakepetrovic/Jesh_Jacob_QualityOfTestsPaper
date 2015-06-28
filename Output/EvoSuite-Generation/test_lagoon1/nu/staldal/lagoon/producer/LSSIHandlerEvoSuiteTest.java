@@ -7,9 +7,8 @@ package nu.staldal.lagoon.producer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import nu.staldal.lagoon.core.SourceManager;
 import nu.staldal.lagoon.core.Target;
 import nu.staldal.lagoon.producer.LSSIHandler;
@@ -17,7 +16,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.ext.Attributes2Impl;
+import org.xml.sax.ext.Locator2Impl;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLFilterImpl;
 
@@ -32,11 +34,11 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      char[] charArray0 = new char[13];
-      lSSIHandler0.ignorableWhitespace(charArray0, (int) '\u0000', (int) '\u0000');
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+      TreeSet<Object> treeSet0 = new TreeSet<Object>();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) treeSet0);
+      char[] charArray0 = new char[6];
+      lSSIHandler0.ignorableWhitespace(charArray0, (int) 'N', (int) 'N');
   }
 
   //Test case number: 1
@@ -46,9 +48,8 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
       lSSIHandler0.endDocument();
   }
 
@@ -60,8 +61,7 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
       lSSIHandler0.startDocument();
   }
 
@@ -72,10 +72,9 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      LinkedHashSet<Integer> linkedHashSet0 = new LinkedHashSet<Integer>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) linkedHashSet0);
-      lSSIHandler0.endPrefixMapping("htY.0!UEcK8d3)KjG");
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      lSSIHandler0.endPrefixMapping("~/J|=5GLX8Zwn#auX`G");
   }
 
   //Test case number: 4
@@ -86,9 +85,8 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.skippedEntity("file:/home/eshkracht/");
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+      lSSIHandler0.skippedEntity("");
   }
 
   //Test case number: 5
@@ -98,10 +96,9 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.startPrefixMapping("file:/home/eshkracht/", "file:/home/eshkracht/");
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      lSSIHandler0.startPrefixMapping("<epwv(eMf-]Hw''S", "<epwv(eMf-]Hw''S");
   }
 
   //Test case number: 6
@@ -112,9 +109,10 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.setDocumentLocator((Locator) null);
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+      Locator2Impl locator2Impl0 = new Locator2Impl();
+      lSSIHandler0.setDocumentLocator((Locator) locator2Impl0);
+      assertNull(locator2Impl0.getPublicId());
   }
 
   //Test case number: 7
@@ -125,10 +123,9 @@ public class LSSIHandlerEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      char[] charArray0 = new char[13];
-      lSSIHandler0.characters(charArray0, (int) 'B', (int) '\u0000');
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      char[] charArray0 = new char[6];
+      lSSIHandler0.characters(charArray0, (int) '\u0000', (int) '\u0000');
   }
 
   //Test case number: 8
@@ -138,10 +135,9 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.processingInstruction("TargetThread", "TargetThread");
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+      lSSIHandler0.processingInstruction("", "");
   }
 
   //Test case number: 9
@@ -151,25 +147,59 @@ public class LSSIHandlerEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      lSSIHandler0.startElement("TargetThread", "TargetThread", "TargetThread", (Attributes) attributesImpl0);
-      assertEquals(0, attributesImpl0.getLength());
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+      lSSIHandler0.startElement("", "", "", (Attributes) null);
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
-   * 1 nu.staldal.lagoon.producer.LSSIHandler.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I5 Branch 13 IFLE L230 - true
-   * 2 nu.staldal.lagoon.producer.LSSIHandler.<init>(Lnu/staldal/lagoon/core/SourceManager;Lorg/xml/sax/ContentHandler;Lnu/staldal/lagoon/core/Target;Ljava/util/Set;)V: root-Branch
+   * 5 covered goals:
+   * 1 nu.staldal.lagoon.producer.LSSIHandler.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I5 Branch 1 IFLE L146 - false
+   * 2 nu.staldal.lagoon.producer.LSSIHandler.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I19 Branch 2 IFLE L150 - true
+   * 3 nu.staldal.lagoon.producer.LSSIHandler.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I99 Branch 4 IFLE L173 - true
+   * 4 nu.staldal.lagoon.producer.LSSIHandler.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I159 Branch 7 IFLE L185 - true
+   * 5 nu.staldal.lagoon.producer.LSSIHandler.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I268 Branch 12 IFLE L210 - true
    */
   @Test
   public void test10()  throws Throwable  {
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+      TreeSet<Object> treeSet0 = new TreeSet<Object>();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) treeSet0);
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      try {
+        lSSIHandler0.startElement("http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI", (Attributes) attributes2Impl0);
+        fail("Expecting exception: SAXParseException");
+      } catch(SAXParseException e) {
+        /*
+         * Unknown LSSI element: http://staldal.nu/Lagoon/LSSI
+         */
+      }
+  }
+
+  //Test case number: 11
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.lagoon.producer.LSSIHandler.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I5 Branch 13 IFLE L230 - true
+   */
+  @Test
+  public void test11()  throws Throwable  {
       DefaultHandler defaultHandler0 = new DefaultHandler();
-      HashSet<Object> hashSet0 = new HashSet<Object>();
-      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) hashSet0);
-      lSSIHandler0.endElement("TargetThread", "TargetThread", "TargetThread");
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+      lSSIHandler0.endElement("<epwv(eMf-]Hw''S", "<epwv(eMf-]Hw''S", "<epwv(eMf-]Hw''S");
+  }
+
+  //Test case number: 12
+  /*
+   * 2 covered goals:
+   * 1 nu.staldal.lagoon.producer.LSSIHandler.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I5 Branch 13 IFLE L230 - false
+   * 2 nu.staldal.lagoon.producer.LSSIHandler.<init>(Lnu/staldal/lagoon/core/SourceManager;Lorg/xml/sax/ContentHandler;Lnu/staldal/lagoon/core/Target;Ljava/util/Set;)V: root-Branch
+   */
+  @Test
+  public void test12()  throws Throwable  {
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl((XMLReader) null);
+      TreeSet<Object> treeSet0 = new TreeSet<Object>();
+      LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) treeSet0);
+      lSSIHandler0.endElement("http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI", "http://staldal.nu/Lagoon/LSSI");
   }
 }

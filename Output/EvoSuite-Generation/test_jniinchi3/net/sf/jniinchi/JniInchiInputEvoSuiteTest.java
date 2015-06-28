@@ -7,7 +7,6 @@ package net.sf.jniinchi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import net.sf.jniinchi.JniInchiException;
@@ -27,7 +26,7 @@ public class JniInchiInputEvoSuiteTest {
   public void test0()  throws Throwable  {
       JniInchiInput jniInchiInput0 = new JniInchiInput();
       JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0);
-      assertEquals(0, jniInchiInput1.getNumAtoms());
+      assertEquals(0, jniInchiInput1.getNumStereo0D());
   }
 
   //Test case number: 1
@@ -51,10 +50,9 @@ public class JniInchiInputEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       LinkedList<Integer> linkedList0 = new LinkedList<Integer>();
-      LinkedList<Object> linkedList1 = new LinkedList<Object>((Collection<?>) linkedList0);
       JniInchiInput jniInchiInput0 = null;
       try {
-        jniInchiInput0 = new JniInchiInput((List) linkedList1);
+        jniInchiInput0 = new JniInchiInput((List) linkedList0);
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -70,9 +68,10 @@ public class JniInchiInputEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
+      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       JniInchiInput jniInchiInput0 = null;
       try {
-        jniInchiInput0 = new JniInchiInput((JniInchiStructure) null, "");
+        jniInchiInput0 = new JniInchiInput(jniInchiStructure0, "");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*
@@ -89,6 +88,6 @@ public class JniInchiInputEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       JniInchiInput jniInchiInput0 = new JniInchiInput((String) null);
-      assertEquals(0, jniInchiInput0.getNumAtoms());
+      assertEquals(0, jniInchiInput0.getNumBonds());
   }
 }

@@ -8,9 +8,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Properties;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
+import javax.naming.ldap.Control;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 import org.jsecurity.realm.ldap.LdapUtils;
@@ -35,7 +39,9 @@ public class LdapUtilsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      InitialLdapContext initialLdapContext0 = new InitialLdapContext();
+      Properties properties0 = new Properties();
+      Control[] controlArray0 = new Control[18];
+      InitialLdapContext initialLdapContext0 = new InitialLdapContext((Hashtable<?, ?>) properties0, controlArray0);
       LdapUtils.closeContext((LdapContext) initialLdapContext0);
   }
 
@@ -47,9 +53,10 @@ public class LdapUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      BasicAttribute basicAttribute0 = new BasicAttribute("RsH1%+KxiG-", (Object) "\u4E2D\u6587 (\u4E2D\u56FD)", false);
+      BasicAttributes basicAttributes0 = new BasicAttributes(")6", (Object) "", true);
+      BasicAttribute basicAttribute0 = (BasicAttribute)basicAttributes0.get(")6");
       Collection<String> collection0 = LdapUtils.getAllAttributeValues((Attribute) basicAttribute0);
+      assertEquals(1, collection0.size());
       assertNotNull(collection0);
-      assertEquals(false, collection0.isEmpty());
   }
 }

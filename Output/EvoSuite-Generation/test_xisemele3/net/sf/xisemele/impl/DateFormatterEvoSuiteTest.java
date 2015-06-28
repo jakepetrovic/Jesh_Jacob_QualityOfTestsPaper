@@ -24,7 +24,7 @@ public class DateFormatterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
       Class<Date> class0 = dateFormatter0.type();
-      assertEquals(false, class0.isAnnotation());
+      assertEquals(1, class0.getModifiers());
   }
 
   //Test case number: 1
@@ -37,11 +37,11 @@ public class DateFormatterEvoSuiteTest {
       DateFormatter dateFormatter0 = new DateFormatter("");
       // Undeclared exception!
       try {
-        dateFormatter0.parse("");
+        dateFormatter0.parse("X^1[x]_<,pH|J");
         fail("Expecting exception: FormatterException");
       } catch(FormatterException e) {
         /*
-         * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \"java.util.Date\" para o valor \"\"
+         * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \"java.util.Date\" para o valor \"X^1[x]_<,pH|J\"
          */
       }
   }
@@ -58,6 +58,6 @@ public class DateFormatterEvoSuiteTest {
       Date date0 = new Date();
       String string0 = dateFormatter0.format(date0);
       assertNotNull(string0);
-      assertEquals(1398769877280L, date0.getTime());
+      assertEquals(1433854846090L, date0.getTime());
   }
 }

@@ -24,20 +24,20 @@ public class TokenEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Token token0 = new Token(1485, ")", 1485, 1485);
+      Token token0 = new Token(1, "", 1, 1);
       int int0 = token0.getTokenType();
-      assertEquals(1485, token0.getTokenEnd());
-      assertEquals(1485, token0.getTokenBegin());
-      assertEquals(1485, int0);
+      assertEquals(1, token0.getTokenBegin());
+      assertEquals(1, token0.getTokenEnd());
+      assertEquals(1, int0);
   }
 
   //Test case number: 1
   /*
    * 9 covered goals:
-   * 1 com.werken.saxpath.Token.getTokenText()Ljava/lang/String;: root-Branch
-   * 2 com.werken.saxpath.Token.toString()Ljava/lang/String;: root-Branch
-   * 3 com.werken.saxpath.Token.getTokenBegin()I: root-Branch
-   * 4 com.werken.saxpath.Token.getTokenEnd()I: root-Branch
+   * 1 com.werken.saxpath.Token.getTokenEnd()I: root-Branch
+   * 2 com.werken.saxpath.Token.getTokenText()Ljava/lang/String;: root-Branch
+   * 3 com.werken.saxpath.Token.toString()Ljava/lang/String;: root-Branch
+   * 4 com.werken.saxpath.Token.getTokenBegin()I: root-Branch
    * 5 com.werken.saxpath.Token.setTokenEnd(I)V: root-Branch
    * 6 com.werken.saxpath.Token.setParseText(Ljava/lang/String;)V: root-Branch
    * 7 com.werken.saxpath.Token.<init>(ILjava/lang/String;II)V: root-Branch
@@ -46,14 +46,14 @@ public class TokenEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Token token0 = new Token(1485, ")", 1485, 1485);
+      Token token0 = new Token(0, "p$.? Kop.98b4FR", (-658), 0);
       // Undeclared exception!
       try {
         token0.toString();
         fail("Expecting exception: StringIndexOutOfBoundsException");
       } catch(StringIndexOutOfBoundsException e) {
         /*
-         * String index out of range: 1485
+         * String index out of range: -658
          */
       }
   }

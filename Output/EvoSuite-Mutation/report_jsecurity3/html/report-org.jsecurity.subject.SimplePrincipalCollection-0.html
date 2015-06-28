@@ -22,50 +22,45 @@ org.jsecurity.subject.SimplePrincipalCollection
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.subject.SimplePrincipalCollection: 93.02%</ul><ul>
-<li>14480 fitness evaluations, 291 generations, 78485 statements, 9075 tests.
-<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>11816 fitness evaluations, 238 generations, 81237 statements, 7447 tests.
+<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:02)
 <li>Coverage: 76/82 branches, 19/19 methods, 80/86 total goals
-<li>Mutation score: 63%
+<li>Mutation score: 76%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simplePrincipalCollection1.equals((Object) simplePrincipalCollection0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Iterator&lt;Object&gt; iterator0 = simplePrincipalCollection0.iterator();
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(iterator0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, iterator0.hasNext());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>Iterator&lt;Object&gt; iterator0 = simplePrincipalCollection0.iterator();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, iterator0.hasNext());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Set&lt;Object&gt; set0 = simplePrincipalCollection0.asSet();
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Collection) set0, &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;);
+<span class="nocode"><a name="8">  8: </a></span>assertNotNull(simplePrincipalCollection1);
+<span class="nocode"><a name="9">  9: </a></span>
+<span class="nocode"><a name="10"> 10: </a></span>boolean boolean0 = simplePrincipalCollection0.equals((Object) simplePrincipalCollection1);
+<span class="nocode"><a name="11"> 11: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(false, simplePrincipalCollection1.isEmpty());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
-<span class="nocode"><a name="3">  3: </a></span>Collection&lt;SimplePrincipalCollection&gt; collection0 = simplePrincipalCollection0.byType((Class&lt;SimplePrincipalCollection&gt;) class0);
-<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Collection) collection0, &quot;principal argument cannot be null.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>Collection&lt;Set&lt;Set&lt;SimplePrincipalCollection&gt;&gt;&gt; collection0 = simplePrincipalCollection0.byType((Class&lt;Set&lt;Set&lt;SimplePrincipalCollection&gt;&gt;&gt;) class0);
+<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) collection0, &quot;%N]RD}?G08S-Caq&quot;);
 </pre>
 <h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>Collection&lt;Object&gt; collection0 = simplePrincipalCollection0.fromRealm(&quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = null;
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simplePrincipalCollection1 = new SimplePrincipalCollection((Object) collection0, &quot;[]&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * principals argument cannot be an empty collection.
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = null;
@@ -78,209 +73,210 @@ org.jsecurity.subject.SimplePrincipalCollection
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  simplePrincipalCollection0 = new SimplePrincipalCollection((Object) null, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * principal argument cannot be null.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;7v4x@&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Collection&lt;Object&gt; collection0 = simplePrincipalCollection0.getPrincipalsLazy(&quot;[]&quot;);
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = null;
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  simplePrincipalCollection0.add((Object) null, &quot;7v4x@&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  simplePrincipalCollection1 = new SimplePrincipalCollection((Collection) collection0, (String) null);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * principal argument cannot be null.
+<span class="nocode"><a name="11"> 11: </a></span>   * realmName argument cannot be null.
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>List&lt;Object&gt; list0 = simplePrincipalCollection0.asList();
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = null;
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simplePrincipalCollection1 = new SimplePrincipalCollection((Collection) list0, (String) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * realmName argument cannot be null.
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) null, &quot;L&gt;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * principals argument cannot be null.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  simplePrincipalCollection0.addAll((Collection) null, &quot;realmName argument cannot be null&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * principals argument cannot be null.
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotSame(simplePrincipalCollection1, simplePrincipalCollection0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) simplePrincipalCollection0, &quot;principal argument cannot be null.&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
-<span class="nocode"><a name="6">  6: </a></span>Collection&lt;SimplePrincipalCollection&gt; collection0 = simplePrincipalCollection1.byType((Class&lt;SimplePrincipalCollection&gt;) class0);
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(collection0);
-<span class="nocode"><a name="8">  8: </a></span>
-<span class="nocode"><a name="9">  9: </a></span>SimplePrincipalCollection simplePrincipalCollection2 = new SimplePrincipalCollection((Collection) collection0, &quot;principal argument cannot be null.&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>assertTrue(simplePrincipalCollection2.equals(simplePrincipalCollection1));
-<span class="nocode"><a name="11"> 11: </a></span>assertNotNull(simplePrincipalCollection2);
+<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = simplePrincipalCollection0.oneByType((Class&lt;SimplePrincipalCollection&gt;) class0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(simplePrincipalCollection1);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.add((Object) simplePrincipalCollection0, &quot;qGlMDvD&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simplePrincipalCollection0.addAll((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: StackOverflowError&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(StackOverflowError e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>Set&lt;Collection&lt;Integer&gt;&gt; set0 = simplePrincipalCollection0.oneByType((Class&lt;Set&lt;Collection&lt;Integer&gt;&gt;&gt;) class0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="7">  7: </a></span>assertNull(set0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.addAll((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>simplePrincipalCollection0.add((Object) simplePrincipalCollection0, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="6">  6: </a></span>Set&lt;Collection&lt;Integer&gt;&gt; set0 = simplePrincipalCollection0.oneByType((Class&lt;Set&lt;Collection&lt;Integer&gt;&gt;&gt;) class0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="8">  8: </a></span>assertNotNull(set0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
-<span class="nocode"><a name="3">  3: </a></span>Collection&lt;Collection&lt;SimplePrincipalCollection&gt;&gt; collection0 = simplePrincipalCollection0.oneByType((Class&lt;Collection&lt;Collection&lt;SimplePrincipalCollection&gt;&gt;&gt;) class0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(collection0);
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>Collection&lt;Integer&gt; collection0 = simplePrincipalCollection0.byType((Class&lt;Integer&gt;) class0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(collection0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(0, collection0.size());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;7v4x@&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>Class&lt;?&gt; class0 = Class.class;
-<span class="nocode"><a name="6">  6: </a></span>Object object1 = simplePrincipalCollection0.oneByType((Class&lt;Object&gt;) class0);
-<span class="nocode"><a name="7">  7: </a></span>assertNull(object1);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="6">  6: </a></span>assertTrue(simplePrincipalCollection0.equals(simplePrincipalCollection1));
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(simplePrincipalCollection1);
+<span class="nocode"><a name="8">  8: </a></span>
+<span class="nocode"><a name="9">  9: </a></span>simplePrincipalCollection0.add((Object) simplePrincipalCollection1, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>assertFalse(simplePrincipalCollection0.equals(simplePrincipalCollection1));
+<span class="nocode"><a name="11"> 11: </a></span>
+<span class="nocode"><a name="12"> 12: </a></span>Collection&lt;Integer&gt; collection0 = simplePrincipalCollection0.byType((Class&lt;Integer&gt;) class0);
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(1, collection0.size());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = SimplePrincipalCollection.class;
-<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.add((Object) simplePrincipalCollection0, &quot;qGlMDvD&quot;);
-<span class="nocode"><a name="4">  4: </a></span>simplePrincipalCollection0.oneByType((Class&lt;Set&lt;Integer&gt;&gt;) class0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>List&lt;Object&gt; list0 = simplePrincipalCollection0.asList();
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, list0.size());
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) simplePrincipalCollection0, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>Class&lt;?&gt; class0 = Comparator.class;
-<span class="nocode"><a name="6">  6: </a></span>Collection&lt;SimplePrincipalCollection&gt; collection0 = simplePrincipalCollection1.byType((Class&lt;SimplePrincipalCollection&gt;) class0);
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(collection0);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, simplePrincipalCollection1.isEmpty());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(0, collection0.size());
+<span class="nocode"><a name="5">  5: </a></span>simplePrincipalCollection0.clear();
+<span class="nocode"><a name="6">  6: </a></span>simplePrincipalCollection0.asList();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;SimplePrincipalCollection&gt; hashSet0 = new HashSet&lt;SimplePrincipalCollection&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.add((Object) hashSet0, &quot;kiol`f~u&quot;);
-<span class="nocode"><a name="4">  4: </a></span>List&lt;Object&gt; list0 = simplePrincipalCollection0.asList();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, list0.size());
+<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.asSet();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.asList();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>Collection&lt;Object&gt; collection0 = simplePrincipalCollection0.fromRealm((String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, collection0.size());
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.fromRealm((String) null);
+<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.fromRealm(&quot;%N]RD}?G08S-Caq&quot;);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = simplePrincipalCollection0.isEmpty();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;b/[51l8Z|J&lt;!m{4_ICR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simplePrincipalCollection0.fromRealm(&quot;b/[51l8Z|J&lt;!m{4_ICR&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) simplePrincipalCollection0, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simplePrincipalCollection1.isEmpty();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = simplePrincipalCollection0.isEmpty();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.clear();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simplePrincipalCollection0.isEmpty();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
+<span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;+&lt;Nh &gt;E3rrF-_B7*j7p&quot;, &quot;b/[51lKZ|J&lt;!m{4_-CR&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>simplePrincipalCollection0.clear();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="6">  6: </a></span>simplePrincipalCollection0.clear();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;7v4x@&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simplePrincipalCollection0.equals((Object) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Set&lt;String&gt;&gt; linkedList0 = new LinkedList&lt;Set&lt;String&gt;&gt;();
+<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.push((Set&lt;String&gt;) treeSet0);
+<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(simplePrincipalCollection0);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>int int0 = linkedList0.indexOf((Object) simplePrincipalCollection0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals((-1), int0);
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = simplePrincipalCollection0.equals((Object) simplePrincipalCollection0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simplePrincipalCollection1.equals((Object) simplePrincipalCollection0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 25</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>simplePrincipalCollection1.getPrincipalsLazy(&quot;GJ$EeM]&quot;);
-<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = simplePrincipalCollection1.equals((Object) simplePrincipalCollection0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, simplePrincipalCollection1.isEmpty());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>simplePrincipalCollection0.getPrincipalsLazy(&quot;b/[51l8Z|J&lt;!m{4_ICR&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection();
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simplePrincipalCollection1.equals((Object) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((Object) &quot;[]&quot;, &quot;[]&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simplePrincipalCollection1);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simplePrincipalCollection0.equals((Object) simplePrincipalCollection1);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, simplePrincipalCollection1.isEmpty());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="8">  8: </a></span>assertFalse(simplePrincipalCollection1.equals(simplePrincipalCollection0));
+<span class="nocode"><a name="2">  2: </a></span>int int0 = simplePrincipalCollection0.hashCode();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(1917620533, int0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -378,7 +374,7 @@ org.jsecurity.subject.SimplePrincipalCollection
 <span class="nocode"><a name="93"> 93: </a></span><span style="background-color: #ffffcc">            for (String realmName : principals.getRealmNames()) {</span>
 <span class="nocode"><a name="94"> 94: </a></span><span style="background-color: #ffffcc">                for (Object principal : principals.fromRealm(realmName)) {</span>
 <span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">                    add(principal, realmName);</span>
-<span class="nocode"><a name="96"> 96: </a></span>                }
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">                }</span>
 <span class="nocode"><a name="97"> 97: </a></span><span style="background-color: #ffffcc">            }</span>
 <span class="nocode"><a name="98"> 98: </a></span>        }
 <span class="nocode"><a name="99"> 99: </a></span><span style="background-color: #ffffcc">    }</span>
@@ -476,7 +472,7 @@ org.jsecurity.subject.SimplePrincipalCollection
 <span class="nocode"><a name="191">191: </a></span>
 <span class="nocode"><a name="192">192: </a></span>    public boolean equals(Object o) {
 <span class="nocode"><a name="193">193: </a></span><span style="background-color: #ffffcc">        if (o == this) {</span>
-<span class="nocode"><a name="194">194: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="194">194: </a></span>            return true;
 <span class="nocode"><a name="195">195: </a></span>        }
 <span class="nocode"><a name="196">196: </a></span><span style="background-color: #ffffcc">        if (o instanceof SimplePrincipalCollection) {</span>
 <span class="nocode"><a name="197">197: </a></span><span style="background-color: #ffffcc">            SimplePrincipalCollection other = (SimplePrincipalCollection) o;</span>
@@ -496,7 +492,7 @@ org.jsecurity.subject.SimplePrincipalCollection
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -514,7 +510,7 @@ org.jsecurity.subject.SimplePrincipalCollection
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20407
+<li>process_communication_port: 3379
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

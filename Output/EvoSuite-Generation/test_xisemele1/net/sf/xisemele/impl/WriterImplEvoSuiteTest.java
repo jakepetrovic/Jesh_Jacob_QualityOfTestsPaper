@@ -29,10 +29,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Date date0 = new Date();
+      Date date0 = new Date((-253L));
       // Undeclared exception!
       try {
-        writerImpl0.attribute("AW@", date0, "AW@");
+        writerImpl0.attribute("net.sf.xisemele.invalid.name", date0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -48,7 +48,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("");
+        writerImpl0.element("Of");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -112,7 +112,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.element("`UR+I$BZ", (Object) null);
+        writerImpl0.element("h\f+,\"Wt28#dWMW", "Wed Dec 31 17:00:00 MST 1969");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -126,10 +126,10 @@ public class WriterImplEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
-      Date date0 = new Date(410L);
+      Date date0 = new Date((-823L));
       // Undeclared exception!
       try {
-        writerImpl0.element("OR?3NhlT_", date0, "OR?3NhlT_");
+        writerImpl0.element("1 @B_M#(,[H(5", date0, "1 @B_M#(,[H(5");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -178,7 +178,7 @@ public class WriterImplEvoSuiteTest {
       WriterImpl writerImpl0 = new WriterImpl((WriterEditor) null);
       // Undeclared exception!
       try {
-        writerImpl0.attribute("net.sf.xisemele.invalid.name", "net.sf.xisemele.invalid.name");
+        writerImpl0.attribute("", (Object) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

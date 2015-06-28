@@ -22,10 +22,10 @@ net.sf.lavalamp.device.DeviceProperties
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.device.DeviceProperties: 100.00%</ul><ul>
-<li>1550 fitness evaluations, 32 generations, 20171 statements, 1252 tests.
-<li>Time: 0:00:11(Search: 0:00:09, minimization: 0:00:02)
+<li>3400 fitness evaluations, 69 generations, 32384 statements, 2343 tests.
+<li>Time: 0:00:18(Search: 0:00:15, minimization: 0:00:02)
 <li>Coverage: 6/6 branches, 17/17 methods, 22/22 total goals
-<li>Mutation score: 43%
+<li>Mutation score: 42%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -52,9 +52,8 @@ net.sf.lavalamp.device.DeviceProperties
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="2">  2: </a></span>Off off0 = new Off();
-<span class="nocode"><a name="3">  3: </a></span>deviceProperties0.setOff(off0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
+<span class="nocode"><a name="2">  2: </a></span>deviceProperties0.setOff((Off) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=null, onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -68,7 +67,6 @@ net.sf.lavalamp.device.DeviceProperties
 <span class="nocode"><a name="2">  2: </a></span>Off off0 = deviceProperties0.getOff();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(off0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, deviceProperties0.isOnWhenSuccessful());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -80,25 +78,22 @@ net.sf.lavalamp.device.DeviceProperties
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, deviceProperties0.isOnWhenSuccessful());
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>deviceProperties0.setOnWhenSuccessful(true);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, deviceProperties0.isOnWhenSuccessful());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=true, path=nullnull&quot;, deviceProperties0.toString());
+<span class="nocode"><a name="2">  2: </a></span>deviceProperties0.setOnWhenSuccessful(false);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="2">  2: </a></span>OnError onError0 = OnError.BLINK;
+<span class="nocode"><a name="2">  2: </a></span>OnError onError0 = OnError.STATUSQUO;
 <span class="nocode"><a name="3">  3: </a></span>deviceProperties0.setOnError(onError0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=STATUSQUO, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, deviceProperties0.isOnWhenSuccessful());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
 <span class="nocode"><a name="2">  2: </a></span>deviceProperties0.getClassName();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=nullnull&quot;, deviceProperties0.toString());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, deviceProperties0.isOnWhenSuccessful());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -109,7 +104,7 @@ net.sf.lavalamp.device.DeviceProperties
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="2">  2: </a></span>deviceProperties0.setIdentity(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>deviceProperties0.setIdentity(&quot;\n\tdevice=&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  deviceProperties0.check();
@@ -129,6 +124,21 @@ net.sf.lavalamp.device.DeviceProperties
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
+<span class="nocode"><a name="2">  2: </a></span>BuildProperties[] buildPropertiesArray0 = new BuildProperties[3];
+<span class="nocode"><a name="3">  3: </a></span>deviceProperties0.setBuildProperties(buildPropertiesArray0);
+<span class="nocode"><a name="4">  4: </a></span>BuildProperties buildProperties0 = new BuildProperties();
+<span class="nocode"><a name="5">  5: </a></span>buildPropertiesArray0[0] = buildProperties0;
+<span class="nocode"><a name="6">  6: </a></span>buildPropertiesArray0[2] = buildPropertiesArray0[0];
+<span class="nocode"><a name="7">  7: </a></span>buildPropertiesArray0[1] = buildProperties0;
+<span class="nocode"><a name="8">  8: </a></span>deviceProperties0.setIdentity(&quot;\n\tdevice=&quot;);
+<span class="nocode"><a name="9">  9: </a></span>buildPropertiesArray0[1].setBuild(&quot;\n\tdevice=&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>deviceProperties0.setClassName(&quot;\n\tdevice=&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>deviceProperties0.check();
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(&quot;\n\tdevice=\n\tdevice=, className=\n\tdevice=,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=null[\n\t\tbuildId=\n\tdevice=,  null, \n\t\tbuildId=\n\tdevice=,  null, \n\t\tbuildId=\n\tdevice=,  null]&quot;, deviceProperties0.toString());
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  deviceProperties0.check();
@@ -139,21 +149,17 @@ net.sf.lavalamp.device.DeviceProperties
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 15</h3>
+<h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="2">  2: </a></span>BuildProperties[] buildPropertiesArray0 = new BuildProperties[4];
-<span class="nocode"><a name="3">  3: </a></span>BuildProperties buildProperties0 = new BuildProperties();
-<span class="nocode"><a name="4">  4: </a></span>buildPropertiesArray0[0] = buildProperties0;
-<span class="nocode"><a name="5">  5: </a></span>buildPropertiesArray0[0].setBuild(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>buildPropertiesArray0[1] = buildPropertiesArray0[0];
-<span class="nocode"><a name="7">  7: </a></span>deviceProperties0.setClassName(&quot;&quot;);
-<span class="nocode"><a name="8">  8: </a></span>deviceProperties0.setBuildProperties(buildPropertiesArray0);
-<span class="nocode"><a name="9">  9: </a></span>deviceProperties0.setIdentity(&quot;&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>buildPropertiesArray0[2] = buildProperties0;
-<span class="nocode"><a name="11"> 11: </a></span>buildPropertiesArray0[3] = buildProperties0;
-<span class="nocode"><a name="12"> 12: </a></span>deviceProperties0.check();
-<span class="nocode"><a name="13"> 13: </a></span>assertEquals(&quot;\n\tdevice=, className=,  off=[start=00:00, end=00:00], onError=BLINK, onWhenSuccessful=false, path=null[\n\t\tbuildId=,  null, \n\t\tbuildId=,  null, \n\t\tbuildId=,  null, \n\t\tbuildId=,  null]&quot;, deviceProperties0.toString());
+<span class="nocode"><a name="2">  2: </a></span>deviceProperties0.setIdentity(&quot;\n\tdevice=&quot;);
+<span class="nocode"><a name="3">  3: </a></span>deviceProperties0.setClassName(&quot;\n\tdevice=&quot;);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  deviceProperties0.check();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -259,7 +265,7 @@ net.sf.lavalamp.device.DeviceProperties
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3656635714330023642.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1615131319000466248.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -277,7 +283,7 @@ net.sf.lavalamp.device.DeviceProperties
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4701
+<li>process_communication_port: 19732
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

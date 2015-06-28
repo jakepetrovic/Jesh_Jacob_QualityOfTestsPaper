@@ -22,9 +22,9 @@ public class DeployResultImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, (String) null);
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "UOg!M/l%");
       DeployResultStatus deployResultStatus1 = deployResultImpl0.getStatus();
-      assertEquals(DeployResultStatus.UNKNOWN, deployResultStatus1);
+      assertEquals(0, deployResultStatus1.ordinal());
   }
 
   //Test case number: 1
@@ -36,8 +36,8 @@ public class DeployResultImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, (String) null);
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "");
       String string0 = deployResultImpl0.getStatusDetails();
-      assertNull(string0);
+      assertEquals("", string0);
   }
 }

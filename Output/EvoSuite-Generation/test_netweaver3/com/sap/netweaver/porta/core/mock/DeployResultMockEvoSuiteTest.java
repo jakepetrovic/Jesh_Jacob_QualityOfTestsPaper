@@ -22,9 +22,9 @@ public class DeployResultMockEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "Ll9bQ");
       DeployResultStatus deployResultStatus1 = deployResultMock0.getStatus();
-      assertSame(deployResultStatus1, deployResultStatus0);
+      assertEquals("ERROR", deployResultStatus1.name());
   }
 
   //Test case number: 1
@@ -36,8 +36,8 @@ public class DeployResultMockEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.ERROR;
-      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, (String) null);
+      DeployResultMock deployResultMock0 = new DeployResultMock(deployResultStatus0, "Ll9bQ");
       String string0 = deployResultMock0.getStatusDetails();
-      assertNull(string0);
+      assertEquals("Ll9bQ", string0);
   }
 }

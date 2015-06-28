@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.LagoonProcessor: 11.81%</ul><ul>
-<li>6618 fitness evaluations, 134 generations, 24712 statements, 4448 tests.
+<li>7470 fitness evaluations, 151 generations, 28667 statements, 4986 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 15/116 branches, 2/24 methods, 15/127 total goals
 <li>Mutation score: 0%
@@ -31,33 +31,33 @@ nu.staldal.lagoon.core.LagoonProcessor
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1295, 1295);
-<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>LagoonProcessor lagoonProcessor0 = null;
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;&quot;, element0, file0, &quot;&quot;, (PrintWriter) null, (PrintWriter) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(LagoonException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * root element must be &lt;sitemap&gt;
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Unable to create directory: &quot;, &quot;Unable to create directory: &quot;);
-<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;Unable to create directory: &quot;, &quot;Unable to create directory: &quot;);
-<span class="nocode"><a name="3">  3: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="4">  4: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, true);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(331);
+<span class="nocode"><a name="3">  3: </a></span>PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0, false);
+<span class="nocode"><a name="4">  4: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>LagoonProcessor lagoonProcessor0 = null;
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;Unable to create directory: &quot;, element0, file0, &quot;Unable to create directory: &quot;, printWriter0, printWriter0);
+<span class="nocode"><a name="7">  7: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;&quot;, element0, file0, &quot;&quot;, printWriter0, printWriter0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(LagoonException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * sourceDir must be an existing directory: Unable to create directory: /Unable to create directory: 
+<span class="nocode"><a name="11"> 11: </a></span>   * root element must be &lt;sitemap&gt;
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;New asyatarget: &quot;, &quot;New asyatarget: &quot;);
+<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;New asyatarget: &quot;);
+<span class="nocode"><a name="3">  3: </a></span>LagoonProcessor lagoonProcessor0 = null;
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  lagoonProcessor0 = new LagoonProcessor(&quot;New asyatarget: &quot;, element0, file0, &quot;New asyatarget: &quot;, (PrintWriter) null, (PrintWriter) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: LagoonException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(LagoonException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * sourceDir must be an existing directory: New asyatarget: 
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -794,7 +794,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -812,7 +812,7 @@ nu.staldal.lagoon.core.LagoonProcessor
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5374
+<li>process_communication_port: 10037
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

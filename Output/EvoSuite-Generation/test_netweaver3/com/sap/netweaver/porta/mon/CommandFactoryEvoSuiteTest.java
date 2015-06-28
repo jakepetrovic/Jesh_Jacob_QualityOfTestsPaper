@@ -62,12 +62,12 @@ public class CommandFactoryEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 1 TABLESWITCH L29 Case 0 - false
-   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
+   * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 12 TABLESWITCH L29 Case 11 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
-      assertNotNull(deployCommand0);
+      StopAppCommand stopAppCommand0 = (StopAppCommand)CommandFactory.createCommand(11);
+      assertNotNull(stopAppCommand0);
   }
 
   //Test case number: 3
@@ -139,46 +139,46 @@ public class CommandFactoryEvoSuiteTest {
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 9 TABLESWITCH L29 Case 8 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 8 TABLESWITCH L29 Case 7 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      UndeployCommand undeployCommand0 = (UndeployCommand)CommandFactory.createCommand(8);
-      assertNotNull(undeployCommand0);
+      DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
+      assertNotNull(deployCommand0);
   }
 
   //Test case number: 10
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 10 TABLESWITCH L29 Case 9 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 9 TABLESWITCH L29 Case 8 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      ListAppsCommand listAppsCommand0 = (ListAppsCommand)CommandFactory.createCommand(9);
-      assertNotNull(listAppsCommand0);
+      UndeployCommand undeployCommand0 = (UndeployCommand)CommandFactory.createCommand(8);
+      assertNotNull(undeployCommand0);
   }
 
   //Test case number: 11
   /*
    * 1 covered goal:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 11 TABLESWITCH L29 Case 10 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 10 TABLESWITCH L29 Case 9 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      StartAppCommand startAppCommand0 = (StartAppCommand)CommandFactory.createCommand(10);
-      assertNotNull(startAppCommand0);
+      ListAppsCommand listAppsCommand0 = (ListAppsCommand)CommandFactory.createCommand(9);
+      assertNotNull(listAppsCommand0);
   }
 
   //Test case number: 12
   /*
    * 2 covered goals:
-   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 12 TABLESWITCH L29 Case 11 - true
+   * 1 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 11 TABLESWITCH L29 Case 10 - true
    * 2 com.sap.netweaver.porta.mon.CommandFactory.createCommand(I)Lcom/sap/netweaver/porta/mon/Command;: I3 Branch 13 TABLESWITCH L29 Default-Case - false
    */
   @Test
   public void test12()  throws Throwable  {
-      StopAppCommand stopAppCommand0 = (StopAppCommand)CommandFactory.createCommand(11);
-      assertNotNull(stopAppCommand0);
+      StartAppCommand startAppCommand0 = (StartAppCommand)CommandFactory.createCommand(10);
+      assertNotNull(startAppCommand0);
   }
 
   //Test case number: 13
@@ -202,11 +202,11 @@ public class CommandFactoryEvoSuiteTest {
   public void test13()  throws Throwable  {
       // Undeclared exception!
       try {
-        CommandFactory.createCommand((-1166));
+        CommandFactory.createCommand((-21));
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * command -1166 is not supported. 
+         * command -21 is not supported. 
          */
       }
   }

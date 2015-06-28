@@ -21,11 +21,11 @@ net.sf.xisemele.impl.FactoryImpl
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.xisemele.impl.FactoryImpl: 92.00%</ul><ul>
-<li>8218 fitness evaluations, 166 generations, 43964 statements, 5315 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 5/6 branches, 21/22 methods, 23/25 total goals
-<li>Mutation score: 54%
+<ul><li>Target class: net.sf.xisemele.impl.FactoryImpl: 96.00%</ul><ul>
+<li>6286 fitness evaluations, 127 generations, 31239 statements, 4071 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 6/6 branches, 21/22 methods, 24/25 total goals
+<li>Mutation score: 59%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,7 +33,8 @@ net.sf.xisemele.impl.FactoryImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>StringWriter stringWriter0 = factoryImpl0.createStringWriter();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, stringWriter0.toString());
+<span class="nocode"><a name="3">  3: </a></span>StreamResult streamResult0 = factoryImpl0.createStreamResult((Writer) stringWriter0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(streamResult0.getSystemId());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -48,110 +49,112 @@ net.sf.xisemele.impl.FactoryImpl
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>PipedWriter pipedWriter0 = new PipedWriter();
-<span class="nocode"><a name="3">  3: </a></span>StreamResult streamResult0 = factoryImpl0.createStreamResult((Writer) pipedWriter0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(streamResult0.getSystemId());
+<span class="nocode"><a name="2">  2: </a></span>DocumentBuilderImpl documentBuilderImpl0 = (DocumentBuilderImpl)factoryImpl0.createDocumentBuilder();
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(documentBuilderImpl0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, documentBuilderImpl0.isValidating());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, documentBuilderImpl0.isNamespaceAware());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>DocumentBuilderImpl documentBuilderImpl0 = (DocumentBuilderImpl)factoryImpl0.createDocumentBuilder();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, documentBuilderImpl0.isNamespaceAware());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(documentBuilderImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, documentBuilderImpl0.isValidating());
+<span class="nocode"><a name="2">  2: </a></span>DOMSource dOMSource0 = factoryImpl0.createDOMSource((Document) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(dOMSource0.getSystemId());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>DOMSource dOMSource0 = factoryImpl0.createDOMSource((Document) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(dOMSource0.getSystemId());
+<span class="nocode"><a name="2">  2: </a></span>Formatter&lt;Date&gt; formatter0 = factoryImpl0.createDateFormatter(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(formatter0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  factoryImpl0.createDateFormatter(&quot;{,&gt;^qAl$P|P$gN{r_&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Illegal pattern character 'q'
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  factoryImpl0.createWriter((Document) null, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  factoryImpl0.createWriter((Document) null, &quot;fileName&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>Value value0 = factoryImpl0.createNullValue();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(value0.asString());
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>TransformerImpl transformerImpl0 = (TransformerImpl)factoryImpl0.createTransformer();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, transformerImpl0.useServicesMechnism());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, transformerImpl0.isIdentity());
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
+<span class="nocode"><a name="2">  2: </a></span>Value value0 = factoryImpl0.createValue(&quot;GOj%GC]7GZR&gt;93&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(value0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>Value value0 = factoryImpl0.createValue(&quot;{,&gt;^qAl$P|P$gN{r_&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(value0);
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
 <span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.addFirst((Node) iIOMetadataNode0);
 <span class="nocode"><a name="5">  5: </a></span>List&lt;Element&gt; list0 = factoryImpl0.createElements((List&lt;Node&gt;) linkedList0);
 <span class="nocode"><a name="6">  6: </a></span>assertNotNull(list0);
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(1, list0.size());
 </pre>
-<h3>Test case 12</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;sp4tP&quot;, &quot;sp4tP&quot;);
+<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  factoryImpl0.createPrintWriter(file0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XisemeleIOException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(XisemeleIOException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Erro ao tentar ler ou escrever o arquivo \&quot;sp4tP\&quot;
+<span class="nocode"><a name="9">  9: </a></span>   * Erro ao tentar ler ou escrever o arquivo \&quot;\&quot;
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
-<h3>Test case 13</h3>
+<h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>Reader reader0 = factoryImpl0.createReader((Document) null);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(reader0);
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
 <span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.addFirst((Node) iIOMetadataNode0);
 <span class="nocode"><a name="5">  5: </a></span>factoryImpl0.createAttributes((List&lt;Node&gt;) linkedList0);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(1, linkedList0.size());
 </pre>
-<h3>Test case 15</h3>
+<h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
 <span class="nocode"><a name="3">  3: </a></span>ValueList valueList0 = factoryImpl0.createValueList((List&lt;Node&gt;) linkedList0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(valueList0);
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
+<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.addFirst((Node) iIOMetadataNode0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  factoryImpl0.createValueList((List&lt;Node&gt;) linkedList0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: DOMException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(DOMException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Method not supported
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -356,7 +359,7 @@ net.sf.xisemele.impl.FactoryImpl
 <span class="nocode"><a name="200">200: </a></span>   public ValueList createValueList(List&lt;Node&gt; nodes) {
 <span class="nocode"><a name="201">201: </a></span><span style="background-color: #ffffcc">      ArrayList&lt;Value&gt; values = new ArrayList&lt;Value&gt;();</span>
 <span class="nocode"><a name="202">202: </a></span><span style="background-color: #ffffcc">      for (Node node : nodes) {</span>
-<span class="nocode"><a name="203">203: </a></span>         values.add(createValue(node.getTextContent()));
+<span class="nocode"><a name="203">203: </a></span><span style="background-color: #ffffcc">         values.add(createValue(node.getTextContent()));</span>
 <span class="nocode"><a name="204">204: </a></span>      }
 <span class="nocode"><a name="205">205: </a></span><span style="background-color: #ffffcc">      return new ValueListImpl(values);</span>
 <span class="nocode"><a name="206">206: </a></span>   }
@@ -393,7 +396,7 @@ net.sf.xisemele.impl.FactoryImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3917768113174710678.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8252444774209989484.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -411,7 +414,7 @@ net.sf.xisemele.impl.FactoryImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13232
+<li>process_communication_port: 12867
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

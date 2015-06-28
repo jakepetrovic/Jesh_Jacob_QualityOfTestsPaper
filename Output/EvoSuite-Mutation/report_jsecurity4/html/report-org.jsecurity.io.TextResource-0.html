@@ -21,10 +21,10 @@ org.jsecurity.io.TextResource
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.io.TextResource: 42.11%</ul><ul>
-<li>318 fitness evaluations, 8 generations, 2016 statements, 434 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 4/10 branches, 7/12 methods, 8/19 total goals
+<ul><li>Target class: org.jsecurity.io.TextResource: 47.37%</ul><ul>
+<li>104 fitness evaluations, 4 generations, 992 statements, 282 tests.
+<li>Time: 0:01:07(Search: 0:01:06, minimization: 0:00:00)
+<li>Coverage: 5/10 branches, 7/12 methods, 9/19 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,15 +33,34 @@ org.jsecurity.io.TextResource
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;XMTS0Cp/rxpHVvuMqVy&quot;, &quot;XMTS0Cp/rxpHVvuMqVy&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [XMTS0Cp/rxpHVvuMqVy]
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path []
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource((InputStream) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load data from input stream [null].
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>PipedReader pipedReader0 = new PipedReader();
+<span class="nocode"><a name="2">  2: </a></span>BufferedReader bufferedReader0 = new BufferedReader((Reader) pipedReader0);
+<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((Reader) bufferedReader0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
+</pre>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -53,12 +72,15 @@ org.jsecurity.io.TextResource
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 3</h3>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
-<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
-<span class="nocode"><a name="3">  3: </a></span>iniResource0.load((InputStream) pipedInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, pipedInputStream0.available());
+<span class="nocode"><a name="2">  2: </a></span>iniResource0.setCharsetName(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  iniResource0.doLoad((InputStream) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -146,19 +168,19 @@ org.jsecurity.io.TextResource
 <span class="nocode"><a name="83"> 83: </a></span>        InputStreamReader isr;
 <span class="nocode"><a name="84"> 84: </a></span><span style="background-color: #ffffcc">        String charsetName = getCharsetName();</span>
 <span class="nocode"><a name="85"> 85: </a></span><span style="background-color: #ffffcc">        if (charsetName != null) {</span>
-<span class="nocode"><a name="86"> 86: </a></span>            isr = new InputStreamReader(is, charsetName);
+<span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">            isr = new InputStreamReader(is, charsetName);</span>
 <span class="nocode"><a name="87"> 87: </a></span>        } else {
 <span class="nocode"><a name="88"> 88: </a></span><span style="background-color: #ffffcc">            isr = new InputStreamReader(is);</span>
 <span class="nocode"><a name="89"> 89: </a></span>        }
-<span class="nocode"><a name="90"> 90: </a></span><span style="background-color: #ffffcc">        load(isr);</span>
-<span class="nocode"><a name="91"> 91: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="90"> 90: </a></span>        load(isr);
+<span class="nocode"><a name="91"> 91: </a></span>    }
 <span class="nocode"><a name="92"> 92: </a></span>
 <span class="nocode"><a name="93"> 93: </a></span>    public void load(Reader reader) {
 <span class="nocode"><a name="94"> 94: </a></span>        BufferedReader br;
 <span class="nocode"><a name="95"> 95: </a></span><span style="background-color: #ffffcc">        if (reader instanceof BufferedReader) {</span>
-<span class="nocode"><a name="96"> 96: </a></span>            br = (BufferedReader) reader;
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">            br = (BufferedReader) reader;</span>
 <span class="nocode"><a name="97"> 97: </a></span>        } else {
-<span class="nocode"><a name="98"> 98: </a></span><span style="background-color: #ffffcc">            br = new BufferedReader(reader);</span>
+<span class="nocode"><a name="98"> 98: </a></span>            br = new BufferedReader(reader);
 <span class="nocode"><a name="99"> 99: </a></span>        }
 <span class="nocode"><a name="100">100: </a></span>        try {
 <span class="nocode"><a name="101">101: </a></span><span style="background-color: #ffffcc">            doLoad(br);</span>
@@ -189,7 +211,7 @@ org.jsecurity.io.TextResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -207,7 +229,7 @@ org.jsecurity.io.TextResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3189
+<li>process_communication_port: 12843
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

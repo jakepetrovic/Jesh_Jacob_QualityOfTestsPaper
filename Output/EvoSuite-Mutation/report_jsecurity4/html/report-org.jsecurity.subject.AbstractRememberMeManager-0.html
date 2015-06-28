@@ -21,18 +21,18 @@ org.jsecurity.subject.AbstractRememberMeManager
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.subject.AbstractRememberMeManager: 75.00%</ul><ul>
-<li>9416 fitness evaluations, 190 generations, 95753 statements, 6043 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 13/26 branches, 31/33 methods, 39/52 total goals
-<li>Mutation score: 11%
+<ul><li>Target class: org.jsecurity.subject.AbstractRememberMeManager: 71.15%</ul><ul>
+<li>9950 fitness evaluations, 200 generations, 89699 statements, 6424 tests.
+<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>Coverage: 11/26 branches, 31/33 methods, 37/52 total goals
+<li>Mutation score: 10%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[20];
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
 <span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
@@ -47,13 +47,176 @@ org.jsecurity.subject.AbstractRememberMeManager
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[8];
-<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, false, (InetAddress) inet4Address0);
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) usernamePasswordToken0, (Object) &quot;127.0.0.1&quot;, &quot;127.0.0.1&quot;);
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.rememberIdentity((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setEncryptionCipherKeyBase64(&quot;DzM&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = webRememberMeManager0.getCipherKey();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(byteArray0);
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setDecryptionCipherKeyBase64(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipher((Cipher) null);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray1 = webRememberMeManager0.decrypt(byteArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertSame(byteArray1, byteArray0);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setEncryptionCipherKeyHex(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[14];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.deserialize(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SerializationException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SerializationException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unable to deserialze argument byte array.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.setDecryptionCipherKeyHex(&quot;[8qJeLve&lt;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipherKeyBase64(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>DefaultSerializer defaultSerializer0 = (DefaultSerializer)webRememberMeManager0.getSerializer();
+<span class="nocode"><a name="3">  3: </a></span>webRememberMeManager0.setSerializer((Serializer) defaultSerializer0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, webRememberMeManager0.isCookieSecure());
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.decrypt(byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unable to crypt bytes with cipher [javax.crypto.Cipher@674ba361].
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.setCipherKeyHex(&quot;\&quot;cufz&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, true);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;[8qJeLve&lt;&quot;, &quot;[8qJeLve&lt;&quot;, false);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;RememberMeAuthenticationToken&gt; hashSet0 = new HashSet&lt;RememberMeAuthenticationToken&gt;();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((RememberMeAuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="5">  5: </a></span>webRememberMeManager0.setCipher((Cipher) null);
+<span class="nocode"><a name="6">  6: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) hashSet0, &quot;oz8eCz&quot;);
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  webRememberMeManager0.rememberIdentity((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="12"> 12: </a></span>  /*
+<span class="nocode"><a name="13"> 13: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
+<span class="nocode"><a name="14"> 14: </a></span>   */
+<span class="nocode"><a name="15"> 15: </a></span>}
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;RememberMeAuthenticationToken&gt; hashSet0 = new HashSet&lt;RememberMeAuthenticationToken&gt;();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((RememberMeAuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) hashSet0, &quot;oz8eCz&quot;);
 <span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
 <span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  webRememberMeManager0.rememberIdentity((AuthenticationToken) null, (AuthenticationInfo) simpleAccount0);
+<span class="nocode"><a name="8">  8: </a></span>  webRememberMeManager0.rememberIdentity((PrincipalCollection) simplePrincipalCollection0);
 <span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
 <span class="nocode"><a name="10"> 10: </a></span>} catch(NoClassDefFoundError e) {
 <span class="nocode"><a name="11"> 11: </a></span>  /*
@@ -61,128 +224,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="13"> 13: </a></span>   */
 <span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setEncryptionCipherKeyBase64(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipherKeyBase64(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, webRememberMeManager0.isCookieSecure());
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = webRememberMeManager0.getCipherKey();
-<span class="nocode"><a name="3">  3: </a></span>assertNull(byteArray0);
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setDecryptionCipherKeyBase64(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipher((Cipher) null);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;rememberMe&quot;, &quot;rememberMe&quot;);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  webRememberMeManager0.rememberIdentity((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setEncryptionCipherKeyHex(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(webRememberMeManager0.getCookiePath());
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  webRememberMeManager0.deserialize((byte[]) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * argument cannot be null.
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setDecryptionCipherKeyHex(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, webRememberMeManager0.isCookieSecure());
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;8 zQ$trdC5W&quot;, &quot;8 zQ$trdC5W&quot;, false);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) usernamePasswordToken0, &quot;8 zQ$trdC5W&quot;);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  webRememberMeManager0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 12</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>DefaultSerializer defaultSerializer0 = (DefaultSerializer)webRememberMeManager0.getSerializer();
-<span class="nocode"><a name="3">  3: </a></span>webRememberMeManager0.setSerializer((Serializer) defaultSerializer0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;rememberMe&quot;, webRememberMeManager0.getCookieName());
-</pre>
-<h3>Test case 13</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipherKeyHex(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(94608000, webRememberMeManager0.getCookieMaxAge());
-</pre>
-<h3>Test case 14</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;, true);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 16</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;, (InetAddress) inet4Address0);
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = webRememberMeManager0.isRememberMe((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 17</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection(object0, &quot;I@&gt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>webRememberMeManager0.rememberIdentity((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, webRememberMeManager0.isCookieSecure());
-</pre>
-<h3>Test case 18</h3>
+<h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -194,36 +236,6 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="8">  8: </a></span>   * Could not initialize class org.jsecurity.web.WebUtils
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 19</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipher((Cipher) null);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = new byte[10];
-<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray1 = webRememberMeManager0.encrypt(byteArray0);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(byteArray0, byteArray1);
-</pre>
-<h3>Test case 20</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>webRememberMeManager0.setCipher((Cipher) null);
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = new byte[2];
-<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray1 = webRememberMeManager0.decrypt(byteArray0);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(byteArray1, byteArray0);
-</pre>
-<h3>Test case 21</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WebRememberMeManager webRememberMeManager0 = new WebRememberMeManager();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[6];
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  webRememberMeManager0.decrypt(byteArray0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalStateException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Unable to crypt bytes with cipher [javax.crypto.Cipher@384e2825].
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -328,7 +340,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="100">100: </a></span>
 <span class="nocode"><a name="101">101: </a></span>    public void setDecryptionCipherKeyHex(String hex) {
 <span class="nocode"><a name="102">102: </a></span><span style="background-color: #ffffcc">        setDecryptionCipherKey(Hex.decode(hex));</span>
-<span class="nocode"><a name="103">103: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="103">103: </a></span>    }
 <span class="nocode"><a name="104">104: </a></span>
 <span class="nocode"><a name="105">105: </a></span>    public void setDecryptionCipherKeyBase64(String base64) {
 <span class="nocode"><a name="106">106: </a></span><span style="background-color: #ffffcc">        setDecryptionCipherKey(Base64.decode(base64));</span>
@@ -349,7 +361,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="121">121: </a></span>
 <span class="nocode"><a name="122">122: </a></span>    public void setCipherKeyHex(String hex) {
 <span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">        setCipherKey(Hex.decode(hex));</span>
-<span class="nocode"><a name="124">124: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="124">124: </a></span>    }
 <span class="nocode"><a name="125">125: </a></span>
 <span class="nocode"><a name="126">126: </a></span>    public void setCipherKeyBase64(String base64) {
 <span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">        setCipherKey(Base64.decode(base64));</span>
@@ -389,7 +401,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="161">161: </a></span>
 <span class="nocode"><a name="162">162: </a></span>    public void rememberIdentity(AuthenticationInfo successfullyAuthenticated) {
 <span class="nocode"><a name="163">163: </a></span><span style="background-color: #ffffcc">        PrincipalCollection principals = getIdentityToRemember(successfullyAuthenticated);</span>
-<span class="nocode"><a name="164">164: </a></span><span style="background-color: #ffffcc">        rememberIdentity(principals);</span>
+<span class="nocode"><a name="164">164: </a></span>        rememberIdentity(principals);
 <span class="nocode"><a name="165">165: </a></span>    }
 <span class="nocode"><a name="166">166: </a></span>
 <span class="nocode"><a name="167">167: </a></span>    protected PrincipalCollection getIdentityToRemember(AuthenticationInfo info) {
@@ -403,15 +415,15 @@ org.jsecurity.subject.AbstractRememberMeManager
 <span class="nocode"><a name="175">175: </a></span><span style="background-color: #ffffcc">                bytes = encrypt(bytes);</span>
 <span class="nocode"><a name="176">176: </a></span>            }
 <span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">            rememberSerializedIdentity(bytes);</span>
-<span class="nocode"><a name="178">178: </a></span><span style="background-color: #ffffcc">        } catch (SerializationException se) {</span>
-<span class="nocode"><a name="179">179: </a></span><span style="background-color: #ffffcc">            if (log.isWarnEnabled()) {</span>
-<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">                log.warn(&quot;Unable to serialize account principals [&quot; + accountPrincipals + &quot;].  Identity &quot; +</span>
+<span class="nocode"><a name="178">178: </a></span>        } catch (SerializationException se) {
+<span class="nocode"><a name="179">179: </a></span>            if (log.isWarnEnabled()) {
+<span class="nocode"><a name="180">180: </a></span>                log.warn(&quot;Unable to serialize account principals [&quot; + accountPrincipals + &quot;].  Identity &quot; +
 <span class="nocode"><a name="181">181: </a></span>                        &quot;cannot be remembered!  This is a non fatal exception as RememberMe identity services &quot; +
 <span class="nocode"><a name="182">182: </a></span>                        &quot;are not considered critical and execution can continue as normal.  But please &quot; +
 <span class="nocode"><a name="183">183: </a></span>                        &quot;investigate and resolve to prevent seeing this message again.&quot;, se);
 <span class="nocode"><a name="184">184: </a></span>            }
 <span class="nocode"><a name="185">185: </a></span>        }
-<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="186">186: </a></span>    }
 <span class="nocode"><a name="187">187: </a></span>
 <span class="nocode"><a name="188">188: </a></span>    public PrincipalCollection getRememberedPrincipals() {
 <span class="nocode"><a name="189">189: </a></span>        try {
@@ -506,7 +518,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -524,7 +536,7 @@ org.jsecurity.subject.AbstractRememberMeManager
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19790
+<li>process_communication_port: 16634
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

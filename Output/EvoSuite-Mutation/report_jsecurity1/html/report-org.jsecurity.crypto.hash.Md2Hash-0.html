@@ -21,28 +21,33 @@ org.jsecurity.crypto.hash.Md2Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Md2Hash: 71.43%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3668 statements, 277 tests.
+<ul><li>Target class: org.jsecurity.crypto.hash.Md2Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3533 statements, 280 tests.
 <li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 5/7 methods, 5/7 total goals
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
 <li>Mutation score: 56%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = Md2Hash.fromBase64String(&quot;] to byte array using &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;tobytearrayusing&quot;, md2Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;02b82e99e9ed7e8adbcad79ca27bdeaec8a89dc6a79e8b5b7a7ba500&quot;, (Object) &quot;UTF-8&quot;, 994);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD2&quot;, md2Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = Md2Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, md2Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = Md2Hash.fromBase64String(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, md2Hash0.toBase64());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;b686f2b5e6abadacaeb229e0&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = Md2Hash.fromHexString(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD2&quot;, md2Hash0.getAlgorithmName());
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Md2Hash md2Hash0 = new Md2Hash((Object) &quot;e985836d78bc893792099cddf01d4e7d&quot;, (Object) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;10a07b1417ddce986a7bb2f734d020e0&quot;, md2Hash0.toHex());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -89,15 +94,15 @@ org.jsecurity.crypto.hash.Md2Hash
 <span class="nocode"><a name="42"> 42: </a></span>
 <span class="nocode"><a name="43"> 43: </a></span>    public Md2Hash(Object source) {
 <span class="nocode"><a name="44"> 44: </a></span>        super(source);
-<span class="nocode"><a name="45"> 45: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="45"> 45: </a></span>    }
 <span class="nocode"><a name="46"> 46: </a></span>
 <span class="nocode"><a name="47"> 47: </a></span>    public Md2Hash(Object source, Object salt) {
 <span class="nocode"><a name="48"> 48: </a></span>        super(source, salt);
-<span class="nocode"><a name="49"> 49: </a></span>    }
+<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="50"> 50: </a></span>
 <span class="nocode"><a name="51"> 51: </a></span>    public Md2Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="52"> 52: </a></span>        super(source, salt, hashIterations);
-<span class="nocode"><a name="53"> 53: </a></span>    }
+<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="54"> 54: </a></span>
 <span class="nocode"><a name="55"> 55: </a></span>    protected String getAlgorithmName() {
 <span class="nocode"><a name="56"> 56: </a></span><span style="background-color: #ffffcc">        return ALGORITHM_NAME;</span>
@@ -119,7 +124,7 @@ org.jsecurity.crypto.hash.Md2Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -137,7 +142,7 @@ org.jsecurity.crypto.hash.Md2Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20613
+<li>process_communication_port: 12143
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.lavalamp.device.Action;
 import net.sf.lavalamp.device.Actions;
-import net.sf.lavalamp.device.TurnOn;
+import net.sf.lavalamp.device.StatusQuo;
 
 public class ActionsEvoSuiteTest {
 
@@ -22,10 +22,10 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TurnOn turnOn0 = new TurnOn();
-      Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-      TurnOn turnOn1 = (TurnOn)actions0.getSuccessAction();
-      assertSame(turnOn0, turnOn1);
+      StatusQuo statusQuo0 = new StatusQuo();
+      Actions actions0 = new Actions((Action) statusQuo0, (Action) statusQuo0, (Action) statusQuo0);
+      StatusQuo statusQuo1 = (StatusQuo)actions0.getSuccessAction();
+      assertSame(statusQuo1, statusQuo0);
   }
 
   //Test case number: 1
@@ -35,10 +35,9 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TurnOn turnOn0 = new TurnOn();
-      Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-      TurnOn turnOn1 = (TurnOn)actions0.getErrorAction();
-      assertSame(turnOn1, turnOn0);
+      Actions actions0 = new Actions((Action) null, (Action) null, (Action) null);
+      Action action0 = actions0.getErrorAction();
+      assertNull(action0);
   }
 
   //Test case number: 2
@@ -49,9 +48,8 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      TurnOn turnOn0 = new TurnOn();
-      Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-      TurnOn turnOn1 = (TurnOn)actions0.getFailureAction();
-      assertSame(turnOn1, turnOn0);
+      Actions actions0 = new Actions((Action) null, (Action) null, (Action) null);
+      Action action0 = actions0.getFailureAction();
+      assertNull(action0);
   }
 }

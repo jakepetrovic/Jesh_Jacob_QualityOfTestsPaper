@@ -23,10 +23,10 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "");
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI_PREFIX;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
       String string0 = jniInchiOutputKey0.getKey();
-      assertEquals("", string0);
+      assertNull(string0);
   }
 
   //Test case number: 1
@@ -37,10 +37,10 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
-      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, "");
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_INCHI_PREFIX;
+      JniInchiOutputKey jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
       INCHI_KEY iNCHI_KEY1 = jniInchiOutputKey0.getReturnStatus();
-      assertEquals(INCHI_KEY.INVALID_STD_INCHI, iNCHI_KEY1);
+      assertEquals("INVALID_INCHI_PREFIX", iNCHI_KEY1.toString());
   }
 
   //Test case number: 2
@@ -65,7 +65,7 @@ public class JniInchiOutputKeyEvoSuiteTest {
   public void test3()  throws Throwable  {
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
-        jniInchiOutputKey0 = new JniInchiOutputKey((-1), "%O;D");
+        jniInchiOutputKey0 = new JniInchiOutputKey((-470), "0M=&i'7jE");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*
@@ -83,10 +83,9 @@ public class JniInchiOutputKeyEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.OK;
       JniInchiOutputKey jniInchiOutputKey0 = null;
       try {
-        jniInchiOutputKey0 = new JniInchiOutputKey(iNCHI_KEY0, (String) null);
+        jniInchiOutputKey0 = new JniInchiOutputKey(0, (String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*

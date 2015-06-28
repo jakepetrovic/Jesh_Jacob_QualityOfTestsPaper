@@ -21,11 +21,11 @@ com.allenstudio.ir.ui.NoteList
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.ui.NoteList: 28.95%</ul><ul>
-<li>658 fitness evaluations, 15 generations, 7211 statements, 657 tests.
-<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:03)
-<li>Coverage: 6/26 branches, 9/23 methods, 11/38 total goals
-<li>Mutation score: 34%
+<ul><li>Target class: com.allenstudio.ir.ui.NoteList: 23.68%</ul><ul>
+<li>330 fitness evaluations, 8 generations, 4929 statements, 451 tests.
+<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>Coverage: 6/26 branches, 7/23 methods, 9/38 total goals
+<li>Mutation score: 32%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,49 +34,31 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  noteList0.select(277, false);
+<span class="nocode"><a name="4">  4: </a></span>  noteList0.select((-1750), true);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * No such child: 277
+<span class="nocode"><a name="8">  8: </a></span>   * No such child: -1750
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = noteList0.getScrollableTracksViewportWidth();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(5, noteList0.getCellCount());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, noteList0.getSelectedIndex());
+<span class="nocode"><a name="2">  2: </a></span>DefaultTreeCellRenderer defaultTreeCellRenderer0 = new DefaultTreeCellRenderer();
+<span class="nocode"><a name="3">  3: </a></span>Rectangle rectangle0 = defaultTreeCellRenderer0.getBounds((Rectangle) null);
+<span class="nocode"><a name="4">  4: </a></span>noteList0.getScrollableUnitIncrement(rectangle0, 0, 0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, noteList0.getSelectedIndex());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(5, noteList0.getCellCount());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>Dimension dimension0 = noteList0.getPreferredScrollableViewportSize();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(5, noteList0.getCellCount());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, noteList0.getSelectedIndex());
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(dimension0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(387, dimension0.width);
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  noteList0.getScrollableBlockIncrement((Rectangle) null, 0, 628);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = noteList0.getScrollableTracksViewportHeight();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(5, noteList0.getCellCount());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, noteList0.getSelectedIndex());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, noteList0.getSelectedIndex());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(5, noteList0.getCellCount());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -197,14 +179,14 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="115">115: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="116">116: </a></span>    
 <span class="nocode"><a name="117">117: </a></span>    public Dimension getPreferredScrollableViewportSize() {
-<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">        return getPreferredSize();</span>
+<span class="nocode"><a name="118">118: </a></span>        return getPreferredSize();
 <span class="nocode"><a name="119">119: </a></span>    }
 <span class="nocode"><a name="120">120: </a></span>
 <span class="nocode"><a name="121">121: </a></span>    public int getScrollableUnitIncrement(Rectangle visibleRect,
 <span class="nocode"><a name="122">122: </a></span>            int orientation, int direction) {
-<span class="nocode"><a name="123">123: </a></span>        if (getComponentCount() &gt; 0) {
-<span class="nocode"><a name="124">124: </a></span>            Component c = getComponent(0);
-<span class="nocode"><a name="125">125: </a></span>            return c.getHeight();
+<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">        if (getComponentCount() &gt; 0) {</span>
+<span class="nocode"><a name="124">124: </a></span><span style="background-color: #ffffcc">            Component c = getComponent(0);</span>
+<span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">            return c.getHeight();</span>
 <span class="nocode"><a name="126">126: </a></span>        }
 <span class="nocode"><a name="127">127: </a></span>        else {
 <span class="nocode"><a name="128">128: </a></span>            return 0;
@@ -213,12 +195,12 @@ com.allenstudio.ir.ui.NoteList
 <span class="nocode"><a name="131">131: </a></span>
 <span class="nocode"><a name="132">132: </a></span>    public int getScrollableBlockIncrement(Rectangle visibleRect,
 <span class="nocode"><a name="133">133: </a></span>            int orientation, int direction) {
-<span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">        return orientation == SwingConstants.HORIZONTAL ? visibleRect.width</span>
+<span class="nocode"><a name="134">134: </a></span>        return orientation == SwingConstants.HORIZONTAL ? visibleRect.width
 <span class="nocode"><a name="135">135: </a></span>                : visibleRect.height;
 <span class="nocode"><a name="136">136: </a></span>    }
 <span class="nocode"><a name="137">137: </a></span>
 <span class="nocode"><a name="138">138: </a></span>    public boolean getScrollableTracksViewportWidth() {
-<span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">        return true;</span>
+<span class="nocode"><a name="139">139: </a></span>        return true;
 <span class="nocode"><a name="140">140: </a></span>    }
 <span class="nocode"><a name="141">141: </a></span>
 <span class="nocode"><a name="142">142: </a></span>    public boolean getScrollableTracksViewportHeight() {
@@ -323,7 +305,7 @@ com.allenstudio.ir.ui.NoteList
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8484984744530070644.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree742537213929819977.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -341,7 +323,7 @@ com.allenstudio.ir.ui.NoteList
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12658
+<li>process_communication_port: 14992
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

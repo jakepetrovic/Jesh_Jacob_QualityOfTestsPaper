@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.lavalamp.site.Build;
 import net.sf.lavalamp.site.BuildSite;
-import net.sf.lavalamp.site.impl.Hudson;
 
 public class BuildEvoSuiteTest {
 
@@ -24,8 +23,8 @@ public class BuildEvoSuiteTest {
   public void test0()  throws Throwable  {
       Build build0 = new Build("");
       String string0 = build0.getIdentity();
-      assertNotNull(string0);
       assertEquals(true, build0.isSuccessful());
+      assertNotNull(string0);
       assertEquals("<font color='green'> build  successful (null)</font>", build0.toString());
   }
 
@@ -60,8 +59,9 @@ public class BuildEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Build build0 = new Build("");
-      Hudson hudson0 = new Hudson();
-      build0.setBuildSite((BuildSite) hudson0);
+      build0.setBuildSite((BuildSite) null);
+      assertEquals("<font color='green'> build  successful (null)</font>", build0.toString());
+      assertEquals(true, build0.isSuccessful());
   }
 
   //Test case number: 4

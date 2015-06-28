@@ -22,9 +22,9 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      applicationProperties0.setPort(9);
-      assertEquals("debug=false, port=9, runInterval=30000, null", applicationProperties0.toString());
-      assertEquals(9, applicationProperties0.getPort());
+      applicationProperties0.setPort(753);
+      assertEquals(753, applicationProperties0.getPort());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 1
@@ -37,6 +37,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       applicationProperties0.getDeviceProperties();
       assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 2
@@ -101,6 +102,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       applicationProperties0.setRunInterval(30000);
       assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 7

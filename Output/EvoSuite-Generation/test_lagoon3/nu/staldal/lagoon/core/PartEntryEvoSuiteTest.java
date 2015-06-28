@@ -13,7 +13,6 @@ import nu.staldal.lagoon.core.LagoonProcessor;
 import nu.staldal.lagoon.core.PartEntry;
 import nu.staldal.lagoon.core.Sitemap;
 import nu.staldal.lagoon.core.XMLStreamProducer;
-import nu.staldal.lagoon.producer.LSSITransformer;
 
 public class PartEntryEvoSuiteTest {
 
@@ -26,24 +25,8 @@ public class PartEntryEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
-      LSSITransformer lSSITransformer0 = new LSSITransformer();
-      partEntry0.setMyProducer((XMLStreamProducer) lSSITransformer0);
-      assertNull(lSSITransformer0.getEntryName());
-  }
-
-  //Test case number: 1
-  /*
-   * 2 covered goals:
-   * 1 nu.staldal.lagoon.core.PartEntry.getXMLProducer()Lnu/staldal/lagoon/core/XMLStreamProducer;: root-Branch
-   * 2 nu.staldal.lagoon.core.PartEntry.<init>(Lnu/staldal/lagoon/core/LagoonProcessor;Lnu/staldal/lagoon/core/Sitemap;Ljava/lang/String;Ljava/io/File;)V: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
-      XMLStreamProducer xMLStreamProducer0 = partEntry0.getXMLProducer();
-      assertNull(xMLStreamProducer0);
+      File file0 = new File("YF'8XS: d3Vpb8u");
+      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "YF'8XS: d3Vpb8u", file0);
+      partEntry0.setMyProducer((XMLStreamProducer) null);
   }
 }

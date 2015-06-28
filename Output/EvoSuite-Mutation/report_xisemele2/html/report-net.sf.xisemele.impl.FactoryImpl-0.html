@@ -21,11 +21,11 @@ net.sf.xisemele.impl.FactoryImpl
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.xisemele.impl.FactoryImpl: 88.00%</ul><ul>
-<li>7908 fitness evaluations, 160 generations, 41812 statements, 5114 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 4/6 branches, 21/22 methods, 22/25 total goals
-<li>Mutation score: 41%
+<ul><li>Target class: net.sf.xisemele.impl.FactoryImpl: 96.00%</ul><ul>
+<li>6536 fitness evaluations, 132 generations, 33851 statements, 4259 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 6/6 branches, 21/22 methods, 24/25 total goals
+<li>Mutation score: 59%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -55,9 +55,9 @@ net.sf.xisemele.impl.FactoryImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>DocumentBuilderImpl documentBuilderImpl0 = (DocumentBuilderImpl)factoryImpl0.createDocumentBuilder();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, documentBuilderImpl0.isNamespaceAware());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(documentBuilderImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, documentBuilderImpl0.isValidating());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, documentBuilderImpl0.isValidating());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, documentBuilderImpl0.isNamespaceAware());
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(documentBuilderImpl0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -76,7 +76,7 @@ net.sf.xisemele.impl.FactoryImpl
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  factoryImpl0.createWriter((Document) null, (String) null);
+<span class="nocode"><a name="4">  4: </a></span>  factoryImpl0.createWriter((Document) null, &quot;rK1=Z}b[\&quot;Wo_@6r?Lx&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -91,36 +91,38 @@ net.sf.xisemele.impl.FactoryImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
 <span class="nocode"><a name="2">  2: </a></span>TransformerImpl transformerImpl0 = (TransformerImpl)factoryImpl0.createTransformer();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, transformerImpl0.isIdentity());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, transformerImpl0.isSecureProcessing());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>Value value0 = factoryImpl0.createValue(&quot;_j^i&lt;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Value value0 = factoryImpl0.createValue(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(value0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Node) null);
-<span class="nocode"><a name="4">  4: </a></span>List&lt;Element&gt; list0 = factoryImpl0.createElements((List&lt;Node&gt;) linkedList0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(list0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, list0.size());
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
+<span class="nocode"><a name="5">  5: </a></span>List&lt;Element&gt; list0 = factoryImpl0.createElements((List&lt;Node&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, list0.size());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>File file0 = new File(&quot;6 2%8&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  factoryImpl0.createPrintWriter(file0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XisemeleIOException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(XisemeleIOException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Erro ao tentar ler ou escrever o arquivo \&quot;6 2%8\&quot;
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>String string0 = &quot;`,e'3m'x.\\8I.s!&quot;;
+<span class="nocode"><a name="3">  3: </a></span>File file0 = new File(string0, string0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  factoryImpl0.createPrintWriter(file0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: XisemeleIOException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(XisemeleIOException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Erro ao tentar ler ou escrever o arquivo \&quot;`,e'3m'x.\\8I.s!\&quot;
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -131,9 +133,11 @@ net.sf.xisemele.impl.FactoryImpl
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
-<span class="nocode"><a name="3">  3: </a></span>List&lt;Attribute&gt; list0 = factoryImpl0.createAttributes((List&lt;Node&gt;) linkedList0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, list0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
+<span class="nocode"><a name="5">  5: </a></span>factoryImpl0.createAttributes((List&lt;Node&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, linkedList0.size());
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -141,6 +145,22 @@ net.sf.xisemele.impl.FactoryImpl
 <span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
 <span class="nocode"><a name="3">  3: </a></span>ValueList valueList0 = factoryImpl0.createValueList((List&lt;Node&gt;) linkedList0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(valueList0);
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>FactoryImpl factoryImpl0 = new FactoryImpl((FormatterProvider) null);
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Node&gt; linkedList0 = new LinkedList&lt;Node&gt;();
+<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Node) iIOMetadataNode0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  factoryImpl0.createValueList((List&lt;Node&gt;) linkedList0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: DOMException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(DOMException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Method not supported
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -211,8 +231,8 @@ net.sf.xisemele.impl.FactoryImpl
 <span class="nocode"><a name="66"> 66: </a></span>   public List&lt;Attribute&gt; createAttributes(List&lt;Node&gt; nodes) {
 <span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">      List&lt;Attribute&gt; attributes = new ArrayList&lt;Attribute&gt;();</span>
 <span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">      for (Node node : nodes) {</span>
-<span class="nocode"><a name="69"> 69: </a></span>         attributes.add(new AttributeImpl(node.getNodeName(), new ValueImpl(this, formatterProvider, node.getNodeValue())));
-<span class="nocode"><a name="70"> 70: </a></span>      }
+<span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">         attributes.add(new AttributeImpl(node.getNodeName(), new ValueImpl(this, formatterProvider, node.getNodeValue())));</span>
+<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">      }</span>
 <span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">      return attributes;</span>
 <span class="nocode"><a name="72"> 72: </a></span>   }
 <span class="nocode"><a name="73"> 73: </a></span>
@@ -345,7 +365,7 @@ net.sf.xisemele.impl.FactoryImpl
 <span class="nocode"><a name="200">200: </a></span>   public ValueList createValueList(List&lt;Node&gt; nodes) {
 <span class="nocode"><a name="201">201: </a></span><span style="background-color: #ffffcc">      ArrayList&lt;Value&gt; values = new ArrayList&lt;Value&gt;();</span>
 <span class="nocode"><a name="202">202: </a></span><span style="background-color: #ffffcc">      for (Node node : nodes) {</span>
-<span class="nocode"><a name="203">203: </a></span>         values.add(createValue(node.getTextContent()));
+<span class="nocode"><a name="203">203: </a></span><span style="background-color: #ffffcc">         values.add(createValue(node.getTextContent()));</span>
 <span class="nocode"><a name="204">204: </a></span>      }
 <span class="nocode"><a name="205">205: </a></span><span style="background-color: #ffffcc">      return new ValueListImpl(values);</span>
 <span class="nocode"><a name="206">206: </a></span>   }
@@ -382,7 +402,7 @@ net.sf.xisemele.impl.FactoryImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2357005916874755376.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5751899662695784620.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -400,7 +420,7 @@ net.sf.xisemele.impl.FactoryImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6680
+<li>process_communication_port: 8438
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

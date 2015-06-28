@@ -22,10 +22,10 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.DefaultNoteListModel: 96.88%</ul><ul>
-<li>4374 fitness evaluations, 89 generations, 12913 statements, 2974 tests.
+<li>5996 fitness evaluations, 121 generations, 17232 statements, 3908 tests.
 <li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
 <li>Coverage: 1/2 branches, 31/31 methods, 31/32 total goals
-<li>Mutation score: 14%
+<li>Mutation score: 11%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -35,7 +35,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.insertElementAt((AbstractNote) commonNote0, 0);
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.addElement((AbstractNote) commonNote0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -58,11 +58,11 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.getElementAt((-1628));
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.getElementAt(0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * -1628
+<span class="nocode"><a name="8">  8: </a></span>   * 0 &gt;= 0
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -71,10 +71,13 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireContentChanged((Object) true, 1680);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireContentChanged((Object) null, (-4));
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * null source
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -85,153 +88,156 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.insertElementAt((AbstractNote) null, 12);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * 12 &gt; 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>String string0 = defaultNoteListModel0.toString();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;[]&quot;, string0);
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals((-1), int0);
 </pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.elementAt((-1));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * -1
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.get(0);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.elementAt((-334));
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * 0 &gt;= 0
+<span class="nocode"><a name="8">  8: </a></span>   * -334
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, defaultNoteListModel0.size());
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.get(1905);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * 1905 &gt;= 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.remove(0);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * 0 &gt;= 0
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, defaultNoteListModel0.size());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="3">  3: </a></span>int int0 = defaultNoteListModel0.indexOf((AbstractNote) commonNote0, 93);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals((-1), int0);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.remove((-1685));
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * -1685
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.indexOf((AbstractNote) commonNote0, (-429));
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * -429
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = defaultNoteListModel0.getSize();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
-<h3>Test case 15</h3>
+<h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>AbstractNote[] abstractNoteArray0 = defaultNoteListModel0.toArray();
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(abstractNoteArray0);
 </pre>
-<h3>Test case 16</h3>
+<h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = defaultNoteListModel0.contains((AbstractNote) commonNote0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
-<h3>Test case 17</h3>
+<h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, 1);
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, 1850);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * 1 &gt;= 0
+<span class="nocode"><a name="9">  9: </a></span>   * 1850 &gt;= 0
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 18</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.removeNoteListDataListener();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, defaultNoteListModel0.isEmpty());
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+<span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.removeNoteListDataListener();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(10, defaultNoteListModel0.capacity());
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.removeElementAt(15);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.removeElementAt((-706));
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * 15 &gt;= 0
+<span class="nocode"><a name="8">  8: </a></span>   * Array index out of range: -706
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 20</h3>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
+<span class="nocode"><a name="2">  2: </a></span>int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) null, (-334));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals((-1), int0);
+</pre>
+<h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0, 1);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(IndexOutOfBoundsException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * 1 &gt;= 0
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 21</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.addElement((AbstractNote) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 22</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.add(0, (AbstractNote) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.add(0, (AbstractNote) commonNote0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -254,7 +260,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireItemRemoved((Object) &quot;ToolTipText&quot;, (-1));
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireItemRemoved((Object) &quot;borderPainted&quot;, 1905);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -264,11 +270,11 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.set((-1), (AbstractNote) null);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.set(0, (AbstractNote) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * -1
+<span class="nocode"><a name="8">  8: </a></span>   * 0 &gt;= 0
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -553,7 +559,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="262">262: </a></span>     */
 <span class="nocode"><a name="263">263: </a></span>    public void insertElementAt(AbstractNote obj, int index) {
 <span class="nocode"><a name="264">264: </a></span><span style="background-color: #ffffcc">        delegate.insertElementAt(obj, index);</span>
-<span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        fireItemAdded(this, index);</span>
+<span class="nocode"><a name="265">265: </a></span>        fireItemAdded(this, index);
 <span class="nocode"><a name="266">266: </a></span>    }
 <span class="nocode"><a name="267">267: </a></span>
 <span class="nocode"><a name="268">268: </a></span>    /**
@@ -743,7 +749,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2170945897173101075.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5277402201953676720.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -761,7 +767,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12991
+<li>process_communication_port: 12920
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

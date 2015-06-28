@@ -22,54 +22,53 @@ net.sf.lavalamp.site.Build
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.site.Build: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 5831 statements, 271 tests.
-<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 4696 statements, 223 tests.
+<li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 7/7 methods, 8/8 total goals
-<li>Mutation score: 81%
+<li>Mutation score: 86%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;U-&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;build site %s&quot;);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = build0.getIdentity();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, build0.isSuccessful());
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&lt;font color='green'&gt; build U- successful (null)&lt;/font&gt;&quot;, build0.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&lt;font color='green'&gt; build build site %s successful (null)&lt;/font&gt;&quot;, build0.toString());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;U-&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build((String) null);
 <span class="nocode"><a name="2">  2: </a></span>build0.getBuildSite();
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;U-&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build((String) null);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = build0.isSuccessful();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;U-&quot;);
-<span class="nocode"><a name="2">  2: </a></span>build0.setBuildSite((BuildSite) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, build0.isSuccessful());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&lt;font color='green'&gt; build U- successful (null)&lt;/font&gt;&quot;, build0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build((String) null);
+<span class="nocode"><a name="2">  2: </a></span>BambooRestApi bambooRestApi0 = new BambooRestApi();
+<span class="nocode"><a name="3">  3: </a></span>build0.setBuildSite((BuildSite) bambooRestApi0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;U-&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;build site %s&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, build0.isSuccessful());
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>build0.setSuccessful(false);
 <span class="nocode"><a name="5">  5: </a></span>String string0 = build0.toString();
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(false, build0.isSuccessful());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;&lt;font color='red'&gt; build U- failed (null)&lt;/font&gt;&quot;, string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;&lt;font color='red'&gt; build build site %s failed (null)&lt;/font&gt;&quot;, string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;damRM\&quot;cb@a#&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Build build0 = new Build(&quot;build site %s&quot;);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = build0.toString();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, build0.isSuccessful());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&lt;font color='green'&gt; build build site %s successful (null)&lt;/font&gt;&quot;, string0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -120,7 +119,7 @@ net.sf.lavalamp.site.Build
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1263865295215324801.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7350236331166270419.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -138,7 +137,7 @@ net.sf.lavalamp.site.Build
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18561
+<li>process_communication_port: 16141
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

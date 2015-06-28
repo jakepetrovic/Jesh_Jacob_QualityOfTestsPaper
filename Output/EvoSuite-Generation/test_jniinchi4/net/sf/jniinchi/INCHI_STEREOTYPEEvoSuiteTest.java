@@ -19,9 +19,9 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.ALLENE;
       int int0 = iNCHI_STEREOTYPE0.getIndx();
-      assertEquals(1, int0);
+      assertEquals(3, int0);
   }
 
   //Test case number: 1
@@ -43,35 +43,35 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 1 TABLESWITCH L68 Case 0 - false
-   * 2 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 2 TABLESWITCH L68 Case 1 - true
+   * 2 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 4 TABLESWITCH L68 Case 3 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(1);
-      assertEquals(INCHI_STEREOTYPE.DOUBLEBOND, iNCHI_STEREOTYPE0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(3);
+      assertEquals(INCHI_STEREOTYPE.ALLENE, iNCHI_STEREOTYPE0);
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 3 TABLESWITCH L68 Case 2 - true
+   * 1 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 2 TABLESWITCH L68 Case 1 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(2);
-      assertEquals(INCHI_STEREOTYPE.TETRAHEDRAL, iNCHI_STEREOTYPE0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(1);
+      assertEquals(INCHI_STEREOTYPE.DOUBLEBOND, iNCHI_STEREOTYPE0);
   }
 
   //Test case number: 4
   /*
    * 2 covered goals:
-   * 1 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 4 TABLESWITCH L68 Case 3 - true
+   * 1 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 3 TABLESWITCH L68 Case 2 - true
    * 2 net.sf.jniinchi.INCHI_STEREOTYPE.getValue(I)Lnet/sf/jniinchi/INCHI_STEREOTYPE;: I3 Branch 5 TABLESWITCH L68 Default-Case - false
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(3);
-      assertEquals(INCHI_STEREOTYPE.ALLENE, iNCHI_STEREOTYPE0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.getValue(2);
+      assertEquals(INCHI_STEREOTYPE.TETRAHEDRAL, iNCHI_STEREOTYPE0);
   }
 
   //Test case number: 5
@@ -85,6 +85,6 @@ public class INCHI_STEREOTYPEEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_STEREOTYPE.getValue(1295);
+      INCHI_STEREOTYPE.getValue(2018);
   }
 }

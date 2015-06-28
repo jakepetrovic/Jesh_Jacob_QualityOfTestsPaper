@@ -21,10 +21,10 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.ui.calendar.MonthlyCalendar: 26.67%</ul><ul>
-<li>810 fitness evaluations, 18 generations, 7629 statements, 717 tests.
+<ul><li>Target class: com.allenstudio.ir.ui.calendar.MonthlyCalendar: 22.67%</ul><ul>
+<li>684 fitness evaluations, 15 generations, 6242 statements, 615 tests.
 <li>Time: 0:01:08(Search: 0:01:01, minimization: 0:00:07)
-<li>Coverage: 31/120 branches, 20/50 methods, 40/150 total goals
+<li>Coverage: 28/120 branches, 18/50 methods, 34/150 total goals
 <li>Mutation score: 8%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -35,125 +35,94 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = monthlyCalendar0.getWeekStartOnSunday();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(6, monthlyCalendar0.getMonth());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.setWeekStartOnSunday(false);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
+<span class="nocode"><a name="4">  4: </a></span>JFormattedTextField jFormattedTextField0 = new JFormattedTextField();
+<span class="nocode"><a name="5">  5: </a></span>BorderUIResource.CompoundBorderUIResource borderUIResource_CompoundBorderUIResource0 = (BorderUIResource.CompoundBorderUIResource)jFormattedTextField0.getBorder();
+<span class="nocode"><a name="6">  6: </a></span>monthlyCalendar0.setBorder((Border) borderUIResource_CompoundBorderUIResource0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(6, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Color color0 = monthlyCalendar0.getHighlightBackground();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="9">  9: </a></span>assertNotNull(color0);
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="11"> 11: </a></span>assertEquals(227, color0.getBlue());
+<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.setHeaderForeground((Color) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(6, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Color color0 = Color.lightGray;
-<span class="nocode"><a name="5">  5: </a></span>monthlyCalendar0.setDateForeground(color0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
+<span class="nocode"><a name="4">  4: </a></span>Color color0 = monthlyCalendar0.getDateBackground();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(6, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(255, color0.getGreen());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>SoftBevelBorder softBevelBorder0 = new SoftBevelBorder(0);
-<span class="nocode"><a name="6">  6: </a></span>monthlyCalendar0.setBorder((Border) softBevelBorder0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.setHeaderBackground((Color) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(6, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Color color0 = monthlyCalendar0.getHighlightForeground();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(255, color0.getBlue());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  monthlyCalendar0.setMonth(1061);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Invalid month specified!
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.getHeaderComponent();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, monthlyCalendar0.getWeekStartOnSunday());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="4">  4: </a></span>JSeparator jSeparator0 = new JSeparator();
+<span class="nocode"><a name="5">  5: </a></span>Dimension dimension0 = jSeparator0.getPreferredSize();
+<span class="nocode"><a name="6">  6: </a></span>monthlyCalendar0.setCellDimension(dimension0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=0,height=14]]&quot;, monthlyCalendar0.toString());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Font font0 = monthlyCalendar0.getHeaderFont();
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(font0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;java.awt.Font[family=Dialog,name=Dialog,style=plain,size=11]&quot;, font0.toString());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
+<span class="nocode"><a name="4">  4: </a></span>JRadioButtonMenuItem jRadioButtonMenuItem0 = new JRadioButtonMenuItem(&quot;&lt;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>monthlyCalendar0.setHeaderComponent((JComponent) jRadioButtonMenuItem0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, monthlyCalendar0.countComponents());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(2015, monthlyCalendar0.getYear());
 </pre>
 <h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.setMouseListeningEnabled(false);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, monthlyCalendar0.getMouseListeningEnabled());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>JToolBar jToolBar0 = new JToolBar();
-<span class="nocode"><a name="5">  5: </a></span>Dimension dimension0 = jToolBar0.getMaximumSize();
-<span class="nocode"><a name="6">  6: </a></span>monthlyCalendar0.setCellDimension(dimension0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=126,height=28]]&quot;, monthlyCalendar0.toString());
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>JToolTip jToolTip0 = new JToolTip();
-<span class="nocode"><a name="5">  5: </a></span>monthlyCalendar0.setHeaderComponent((JComponent) jToolTip0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(2, jToolTip0.getHeight());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-</pre>
-<h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
@@ -165,25 +134,47 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 13</h3>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>monthlyCalendar0.getSelectedDate();
+<span class="nocode"><a name="4">  4: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)monthlyCalendar0.getSelectedDate();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(30, monthlyCalendar0.getSelectedDay());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1435729631143L, gregorianCalendar0.getTimeInMillis());
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>MouseEvent mouseEvent0 = new MouseEvent((Component) monthlyCalendar0, 20, 1L, 0, 0, 0, 0, 1508, 0, true, 0);
-<span class="nocode"><a name="5">  5: </a></span>monthlyCalendar0.mouseDragged(mouseEvent0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;java.awt.event.MouseEvent[unknown type,(0,0),absolute(0,1508),button=0,clickCount=0] on com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, mouseEvent0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(2014, monthlyCalendar0.getYear());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(4, monthlyCalendar0.getMonth());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;com.allenstudio.ir.ui.calendar.MonthlyCalendar[,0,0,0x0,invalid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,preferredSize=java.awt.Dimension[width=189,height=140]]&quot;, monthlyCalendar0.toString());
+<span class="nocode"><a name="4">  4: </a></span>MouseWheelEvent mouseWheelEvent0 = new MouseWheelEvent((Component) monthlyCalendar0, (-96), 0L, (-96), (-96), 30, 0, (-96), (-96), true, 0, 842, 227);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  monthlyCalendar0.mouseClicked((MouseEvent) mouseWheelEvent0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * -3
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>MonthlyCalendar monthlyCalendar0 = new MonthlyCalendar();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(monthlyCalendar0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>JRadioButtonMenuItem jRadioButtonMenuItem0 = new JRadioButtonMenuItem(&quot;&lt;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>MouseEvent mouseEvent0 = new MouseEvent((Component) jRadioButtonMenuItem0, 134, (-1675L), 134, 134, 134, 134, false);
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  monthlyCalendar0.mouseMoved(mouseEvent0);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(RuntimeException e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * You are not supposed to install 'this' mouse motion handler to any component other than itself.
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -364,9 +355,9 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="176">176: </a></span><span style="background-color: #ffffcc">        if (b &amp;&amp; !isListening) {</span>
 <span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">            addMouseListener(this);</span>
 <span class="nocode"><a name="178">178: </a></span><span style="background-color: #ffffcc">            addMouseMotionListener(this);</span>
-<span class="nocode"><a name="179">179: </a></span><span style="background-color: #ffffcc">        } else if (!b &amp;&amp; isListening) {</span>
-<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">            removeMouseListener(this);</span>
-<span class="nocode"><a name="181">181: </a></span><span style="background-color: #ffffcc">            removeMouseMotionListener(this);</span>
+<span class="nocode"><a name="179">179: </a></span>        } else if (!b &amp;&amp; isListening) {
+<span class="nocode"><a name="180">180: </a></span>            removeMouseListener(this);
+<span class="nocode"><a name="181">181: </a></span>            removeMouseMotionListener(this);
 <span class="nocode"><a name="182">182: </a></span>        }
 <span class="nocode"><a name="183">183: </a></span><span style="background-color: #ffffcc">        isListening = b;</span>
 <span class="nocode"><a name="184">184: </a></span><span style="background-color: #ffffcc">    }</span>
@@ -401,8 +392,8 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="213">213: </a></span>    
 <span class="nocode"><a name="214">214: </a></span>    /** Bean method */
 <span class="nocode"><a name="215">215: </a></span>    public void setMonth(int month) {
-<span class="nocode"><a name="216">216: </a></span>        if (month &lt; 1 || month &gt; 12)
-<span class="nocode"><a name="217">217: </a></span>            throw new IllegalArgumentException(&quot;Invalid month specified!&quot;);
+<span class="nocode"><a name="216">216: </a></span><span style="background-color: #ffffcc">        if (month &lt; 1 || month &gt; 12)</span>
+<span class="nocode"><a name="217">217: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(&quot;Invalid month specified!&quot;);</span>
 <span class="nocode"><a name="218">218: </a></span>        if (year != -1)
 <span class="nocode"><a name="219">219: </a></span>            setYearMonth(year, month);
 <span class="nocode"><a name="220">220: </a></span>        else
@@ -463,8 +454,8 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="275">275: </a></span>    
 <span class="nocode"><a name="276">276: </a></span>    /** Bean method */
 <span class="nocode"><a name="277">277: </a></span>    public void setWeekStartOnSunday(boolean b) {
-<span class="nocode"><a name="278">278: </a></span><span style="background-color: #ffffcc">        startOnSunday = b;</span>
-<span class="nocode"><a name="279">279: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="278">278: </a></span>        startOnSunday = b;
+<span class="nocode"><a name="279">279: </a></span>    }
 <span class="nocode"><a name="280">280: </a></span>    
 <span class="nocode"><a name="281">281: </a></span>    /**
 <span class="nocode"><a name="282">282: </a></span>     * Marks a certain date. By default, this date's font
@@ -491,13 +482,13 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="303">303: </a></span>    
 <span class="nocode"><a name="304">304: </a></span>    /** Bean method */
 <span class="nocode"><a name="305">305: </a></span>    public Font getHeaderFont() {
-<span class="nocode"><a name="306">306: </a></span><span style="background-color: #ffffcc">        return headerFont;</span>
+<span class="nocode"><a name="306">306: </a></span>        return headerFont;
 <span class="nocode"><a name="307">307: </a></span>    }
 <span class="nocode"><a name="308">308: </a></span>        
 <span class="nocode"><a name="309">309: </a></span>    /** Bean method */
 <span class="nocode"><a name="310">310: </a></span>    public void setHeaderBackground(Color c) {
-<span class="nocode"><a name="311">311: </a></span>        headerBg = c;
-<span class="nocode"><a name="312">312: </a></span>    }
+<span class="nocode"><a name="311">311: </a></span><span style="background-color: #ffffcc">        headerBg = c;</span>
+<span class="nocode"><a name="312">312: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="313">313: </a></span>    
 <span class="nocode"><a name="314">314: </a></span>    /** Bean method */
 <span class="nocode"><a name="315">315: </a></span>    public Color getHeaderBackground() {
@@ -506,8 +497,8 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="318">318: </a></span>    
 <span class="nocode"><a name="319">319: </a></span>    /** Bean method */
 <span class="nocode"><a name="320">320: </a></span>    public void setHeaderForeground(Color c) {
-<span class="nocode"><a name="321">321: </a></span>        headerFg = c;
-<span class="nocode"><a name="322">322: </a></span>    }
+<span class="nocode"><a name="321">321: </a></span><span style="background-color: #ffffcc">        headerFg = c;</span>
+<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="323">323: </a></span>    
 <span class="nocode"><a name="324">324: </a></span>    /** Bean method */
 <span class="nocode"><a name="325">325: </a></span>    public Color getHeaderForeground() {
@@ -521,13 +512,13 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="333">333: </a></span>    
 <span class="nocode"><a name="334">334: </a></span>    /** Bean method */
 <span class="nocode"><a name="335">335: </a></span>    public Color getDateBackground() {
-<span class="nocode"><a name="336">336: </a></span>        return dateBg;
+<span class="nocode"><a name="336">336: </a></span><span style="background-color: #ffffcc">        return dateBg;</span>
 <span class="nocode"><a name="337">337: </a></span>    }
 <span class="nocode"><a name="338">338: </a></span>    
 <span class="nocode"><a name="339">339: </a></span>    /** Bean method */
 <span class="nocode"><a name="340">340: </a></span>    public void setDateForeground(Color c) {
-<span class="nocode"><a name="341">341: </a></span><span style="background-color: #ffffcc">        dateFg = c;</span>
-<span class="nocode"><a name="342">342: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="341">341: </a></span>        dateFg = c;
+<span class="nocode"><a name="342">342: </a></span>    }
 <span class="nocode"><a name="343">343: </a></span>    
 <span class="nocode"><a name="344">344: </a></span>    /** Bean method */
 <span class="nocode"><a name="345">345: </a></span>    public Color getDateForeground() {
@@ -541,7 +532,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="353">353: </a></span>    
 <span class="nocode"><a name="354">354: </a></span>    /** Bean method */
 <span class="nocode"><a name="355">355: </a></span>    public Color getHighlightBackground() {
-<span class="nocode"><a name="356">356: </a></span><span style="background-color: #ffffcc">        return highBg;</span>
+<span class="nocode"><a name="356">356: </a></span>        return highBg;
 <span class="nocode"><a name="357">357: </a></span>    }
 <span class="nocode"><a name="358">358: </a></span>    
 <span class="nocode"><a name="359">359: </a></span>    /** Bean method */
@@ -551,7 +542,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="363">363: </a></span>    
 <span class="nocode"><a name="364">364: </a></span>    /** Bean method */
 <span class="nocode"><a name="365">365: </a></span>    public Color getHighlightForeground() {
-<span class="nocode"><a name="366">366: </a></span><span style="background-color: #ffffcc">        return highFg;</span>
+<span class="nocode"><a name="366">366: </a></span>        return highFg;
 <span class="nocode"><a name="367">367: </a></span>    }
 <span class="nocode"><a name="368">368: </a></span>    
 <span class="nocode"><a name="369">369: </a></span>    /** 
@@ -632,7 +623,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="444">444: </a></span>    
 <span class="nocode"><a name="445">445: </a></span>    /** Bean method */
 <span class="nocode"><a name="446">446: </a></span>    public JComponent getHeaderComponent() {
-<span class="nocode"><a name="447">447: </a></span><span style="background-color: #ffffcc">        return headerComponent;</span>
+<span class="nocode"><a name="447">447: </a></span>        return headerComponent;
 <span class="nocode"><a name="448">448: </a></span>    }
 <span class="nocode"><a name="449">449: </a></span>    
 <span class="nocode"><a name="450">450: </a></span>    /** 
@@ -787,17 +778,17 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="599">599: </a></span>     * Method is finalized to prevent subclass overriding.
 <span class="nocode"><a name="600">600: </a></span>     */
 <span class="nocode"><a name="601">601: </a></span>    public final void mouseClicked(MouseEvent e) {
-<span class="nocode"><a name="602">602: </a></span>        if (e.getSource() != this) {
+<span class="nocode"><a name="602">602: </a></span><span style="background-color: #ffffcc">        if (e.getSource() != this) {</span>
 <span class="nocode"><a name="603">603: </a></span>            throw new RuntimeException(&quot;You are not supposed to install 'this' &quot;
 <span class="nocode"><a name="604">604: </a></span>                        + &quot;mouse handler to any component other than itself.&quot;);
 <span class="nocode"><a name="605">605: </a></span>        }
 <span class="nocode"><a name="606">606: </a></span>        // get selected date
-<span class="nocode"><a name="607">607: </a></span>        int x = e.getX();
-<span class="nocode"><a name="608">608: </a></span>        int y = e.getY();
-<span class="nocode"><a name="609">609: </a></span>        int i = x / cellWidth;
-<span class="nocode"><a name="610">610: </a></span>        int j = y / cellHeight;
-<span class="nocode"><a name="611">611: </a></span>        j--;
-<span class="nocode"><a name="612">612: </a></span>        if (j &gt;= 0 &amp;&amp; dateData[j*7+i] != -1) {
+<span class="nocode"><a name="607">607: </a></span><span style="background-color: #ffffcc">        int x = e.getX();</span>
+<span class="nocode"><a name="608">608: </a></span><span style="background-color: #ffffcc">        int y = e.getY();</span>
+<span class="nocode"><a name="609">609: </a></span><span style="background-color: #ffffcc">        int i = x / cellWidth;</span>
+<span class="nocode"><a name="610">610: </a></span><span style="background-color: #ffffcc">        int j = y / cellHeight;</span>
+<span class="nocode"><a name="611">611: </a></span><span style="background-color: #ffffcc">        j--;</span>
+<span class="nocode"><a name="612">612: </a></span><span style="background-color: #ffffcc">        if (j &gt;= 0 &amp;&amp; dateData[j*7+i] != -1) {</span>
 <span class="nocode"><a name="613">613: </a></span>            model.setSelectedDate(dateData[j*7+i]);
 <span class="nocode"><a name="614">614: </a></span>            dateSelected();
 <span class="nocode"><a name="615">615: </a></span>            repaint();
@@ -837,8 +828,8 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="649">649: </a></span>     * Method is finalized to prevent subclass overriding.
 <span class="nocode"><a name="650">650: </a></span>     */
 <span class="nocode"><a name="651">651: </a></span>    public final void mouseMoved(MouseEvent e) {
-<span class="nocode"><a name="652">652: </a></span>        if (e.getSource() != this) {
-<span class="nocode"><a name="653">653: </a></span>            throw new RuntimeException(&quot;You are not supposed to install 'this' &quot;
+<span class="nocode"><a name="652">652: </a></span><span style="background-color: #ffffcc">        if (e.getSource() != this) {</span>
+<span class="nocode"><a name="653">653: </a></span><span style="background-color: #ffffcc">            throw new RuntimeException(&quot;You are not supposed to install 'this' &quot;</span>
 <span class="nocode"><a name="654">654: </a></span>                        + &quot;mouse motion handler to any component other than itself.&quot;);
 <span class="nocode"><a name="655">655: </a></span>        }
 <span class="nocode"><a name="656">656: </a></span>        mousePositionChanged(e);
@@ -850,25 +841,25 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <span class="nocode"><a name="662">662: </a></span>     * Method is finalized to prevent subclass overriding.
 <span class="nocode"><a name="663">663: </a></span>     */
 <span class="nocode"><a name="664">664: </a></span>    public final void mouseDragged(MouseEvent e) {
-<span class="nocode"><a name="665">665: </a></span><span style="background-color: #ffffcc">        if (e.getSource() != this) {</span>
+<span class="nocode"><a name="665">665: </a></span>        if (e.getSource() != this) {
 <span class="nocode"><a name="666">666: </a></span>            throw new RuntimeException(&quot;You are not supposed to install 'this' &quot;
 <span class="nocode"><a name="667">667: </a></span>                        + &quot;mouse motion handler to any component other than itself.&quot;);
 <span class="nocode"><a name="668">668: </a></span>        }
-<span class="nocode"><a name="669">669: </a></span><span style="background-color: #ffffcc">        mousePositionChanged(e);</span>
-<span class="nocode"><a name="670">670: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="669">669: </a></span>        mousePositionChanged(e);
+<span class="nocode"><a name="670">670: </a></span>    }
 <span class="nocode"><a name="671">671: </a></span>    
 <span class="nocode"><a name="672">672: </a></span>    /** Called by mouseDragged and mouseMoved method */
 <span class="nocode"><a name="673">673: </a></span>    private void mousePositionChanged(MouseEvent e) {
-<span class="nocode"><a name="674">674: </a></span><span style="background-color: #ffffcc">        int x = e.getX() - basex;</span>
-<span class="nocode"><a name="675">675: </a></span><span style="background-color: #ffffcc">        int y = e.getY() - basey - cellHeight;</span>
-<span class="nocode"><a name="676">676: </a></span><span style="background-color: #ffffcc">        int width = cellWidth * 7;</span>
-<span class="nocode"><a name="677">677: </a></span><span style="background-color: #ffffcc">        int height = cellHeight * 6;</span>
-<span class="nocode"><a name="678">678: </a></span><span style="background-color: #ffffcc">        if (x &lt; 0 || x &gt;= width || y &lt; 0 || y &gt;= height) {</span>
-<span class="nocode"><a name="679">679: </a></span><span style="background-color: #ffffcc">            if (hindex != -1) {</span>
+<span class="nocode"><a name="674">674: </a></span>        int x = e.getX() - basex;
+<span class="nocode"><a name="675">675: </a></span>        int y = e.getY() - basey - cellHeight;
+<span class="nocode"><a name="676">676: </a></span>        int width = cellWidth * 7;
+<span class="nocode"><a name="677">677: </a></span>        int height = cellHeight * 6;
+<span class="nocode"><a name="678">678: </a></span>        if (x &lt; 0 || x &gt;= width || y &lt; 0 || y &gt;= height) {
+<span class="nocode"><a name="679">679: </a></span>            if (hindex != -1) {
 <span class="nocode"><a name="680">680: </a></span>                hindex = -1;
 <span class="nocode"><a name="681">681: </a></span>                repaint();
 <span class="nocode"><a name="682">682: </a></span>            }
-<span class="nocode"><a name="683">683: </a></span><span style="background-color: #ffffcc">            return;</span>
+<span class="nocode"><a name="683">683: </a></span>            return;
 <span class="nocode"><a name="684">684: </a></span>        }
 <span class="nocode"><a name="685">685: </a></span>        int i = x / cellWidth;
 <span class="nocode"><a name="686">686: </a></span>        int j = y / cellHeight;
@@ -910,7 +901,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7918876993634896220.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6838871411300775452.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -928,7 +919,7 @@ com.allenstudio.ir.ui.calendar.MonthlyCalendar
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21555
+<li>process_communication_port: 17451
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

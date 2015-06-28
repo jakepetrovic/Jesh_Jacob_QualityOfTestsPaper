@@ -7,6 +7,8 @@ package org.jsecurity.realm.ldap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import org.jsecurity.cache.CacheManager;
+import org.jsecurity.cache.HashtableCacheManager;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
 import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
 import org.jsecurity.realm.ldap.LdapContextFactory;
@@ -23,7 +25,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setUrl("");
+      activeDirectoryRealm0.setUrl("2`v*PbXx&E");
       assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
   }
 
@@ -35,8 +37,8 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSearchBase("\"");
-      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+      activeDirectoryRealm0.setSearchBase((String) null);
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_1", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 2
@@ -47,8 +49,8 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSystemPassword((String) null);
-      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+      activeDirectoryRealm0.setSystemPassword("2`v*PbXx&E");
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_2", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 3
@@ -59,7 +61,7 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setPrincipalSuffix("N#=BA~FQ*0l~Dh8");
+      activeDirectoryRealm0.setPrincipalSuffix("Zw7V\u0007ia");
       assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
   }
 
@@ -71,8 +73,8 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.setSystemUsername("N#=BA~FQ*0l~Dh8");
-      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+      activeDirectoryRealm0.setSystemUsername("Y=MS[:3f~");
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_4", activeDirectoryRealm0.getName());
   }
 
   //Test case number: 5
@@ -85,7 +87,7 @@ public class AbstractLdapRealmEvoSuiteTest {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       activeDirectoryRealm0.setLdapContextFactory((LdapContextFactory) defaultLdapContextFactory0);
-      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_5", activeDirectoryRealm0.getName());
+      assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
   }
 
   //Test case number: 6
@@ -99,8 +101,10 @@ public class AbstractLdapRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      activeDirectoryRealm0.afterAuthorizationCacheSet();
-      activeDirectoryRealm0.afterAuthorizationCacheSet();
+      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+      activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+      activeDirectoryRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6", activeDirectoryRealm0.getName());
+      assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm-0-authorization", activeDirectoryRealm0.getAuthorizationCacheName());
   }
 }

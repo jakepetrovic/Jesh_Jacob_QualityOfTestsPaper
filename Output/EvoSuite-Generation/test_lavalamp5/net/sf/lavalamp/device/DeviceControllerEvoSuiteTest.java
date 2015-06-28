@@ -30,9 +30,10 @@ public class DeviceControllerEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeviceController deviceController0 = new DeviceController((List<Device>) null);
+      LinkedList<Device> linkedList0 = new LinkedList<Device>();
+      DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       List<Device> list0 = deviceController0.getDevices();
-      assertNull(list0);
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 1
@@ -46,11 +47,11 @@ public class DeviceControllerEvoSuiteTest {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       try {
-        deviceController0.setStatusForBuild((String) null, false);
+        deviceController0.setStatusForBuild("", false);
         fail("Expecting exception: MissingBuildException");
       } catch(MissingBuildException e) {
         /*
-         * null not found
+         *  not found
          */
       }
   }
@@ -64,23 +65,24 @@ public class DeviceControllerEvoSuiteTest {
   public void test2()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      LavaLogger lavaLogger0 = new LavaLogger();
-      deviceController0.setLogger(lavaLogger0);
+      deviceController0.setLogger((LavaLogger) null);
   }
 
   //Test case number: 3
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 net.sf.lavalamp.device.DeviceController.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 1 IFEQ L34 - false
+   * 2 net.sf.lavalamp.device.DeviceController.setStatusForBuild(Ljava/lang/String;Z)V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
-      linkedList0.add((Device) null);
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
+      DummyDevice dummyDevice0 = new DummyDevice();
+      linkedList0.add((Device) dummyDevice0);
       // Undeclared exception!
       try {
-        deviceController0.getBuild("");
+        deviceController0.setStatusForBuild("6", true);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -88,55 +90,45 @@ public class DeviceControllerEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - true
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.device.DeviceController.turnOffOrOn(Ljava/util/List;Lnet/sf/lavalamp/site/Builds;Lnet/sf/lavalamp/device/Device;)V: I4 Branch 4 IFEQ L82 - false
+   * 2 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - true
    */
   @Test
   public void test4()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      List<String> list0 = deviceController0.switchDevices((Calendar) null);
-      assertEquals(0, list0.size());
-  }
-
-  //Test case number: 5
-  /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.DeviceController.switchDevice(Ljava/util/Calendar;Ljava/util/List;Lnet/sf/lavalamp/device/Device;)V: I23 Branch 3 IFEQ L73 - true
-   * 2 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      LinkedList<Device> linkedList0 = new LinkedList<Device>();
-      DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      DummyDevice dummyDevice0 = new DummyDevice();
-      linkedList0.add((Device) dummyDevice0);
       GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
-      DeviceProperties deviceProperties0 = new DeviceProperties();
-      dummyDevice0.setProperties(deviceProperties0);
+      List<String> list0 = deviceController0.switchDevices((Calendar) gregorianCalendar0);
+      DummyDevice dummyDevice0 = new DummyDevice();
+      Builds builds0 = new Builds();
       // Undeclared exception!
       try {
-        deviceController0.switchDevices((Calendar) gregorianCalendar0);
+        deviceController0.turnOffOrOn(list0, builds0, (Device) dummyDevice0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 6
+  //Test case number: 5
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.DeviceController.turnOffOrOn(Ljava/util/List;Lnet/sf/lavalamp/site/Builds;Lnet/sf/lavalamp/device/Device;)V: I4 Branch 4 IFEQ L82 - false
+   * 3 covered goals:
+   * 1 net.sf.lavalamp.device.DeviceController.switchDevice(Ljava/util/Calendar;Ljava/util/List;Lnet/sf/lavalamp/device/Device;)V: I23 Branch 3 IFEQ L73 - true
    * 2 net.sf.lavalamp.device.DeviceController.<init>(Ljava/util/List;)V: root-Branch
+   * 3 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
    */
   @Test
-  public void test6()  throws Throwable  {
-      DeviceController deviceController0 = new DeviceController((List<Device>) null);
-      LinkedList<String> linkedList0 = new LinkedList<String>();
-      Builds builds0 = new Builds();
+  public void test5()  throws Throwable  {
+      LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DummyDevice dummyDevice0 = new DummyDevice();
+      linkedList0.add((Device) dummyDevice0);
+      DeviceProperties deviceProperties0 = new DeviceProperties();
+      dummyDevice0.setProperties(deviceProperties0);
+      DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
       // Undeclared exception!
       try {
-        deviceController0.turnOffOrOn((List<String>) linkedList0, builds0, (Device) dummyDevice0);
+        deviceController0.switchDevices((Calendar) gregorianCalendar0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -21,14 +21,6 @@ public class WildcardPermissionResolverEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
-      // Undeclared exception!
-      try {
-        wildcardPermissionResolver0.resolvePermission("");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.
-         */
-      }
+      wildcardPermissionResolver0.resolvePermission("e_sb_mKTP_'i");
   }
 }

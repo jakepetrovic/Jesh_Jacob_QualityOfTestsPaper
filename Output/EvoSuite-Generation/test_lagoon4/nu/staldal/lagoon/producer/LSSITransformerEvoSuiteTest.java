@@ -13,7 +13,7 @@ import nu.staldal.lagoon.core.Target;
 import nu.staldal.lagoon.producer.LSSITransformer;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.XMLFilterImpl;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class LSSITransformerEvoSuiteTest {
 
@@ -40,10 +40,10 @@ public class LSSITransformerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       LSSITransformer lSSITransformer0 = new LSSITransformer();
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      DefaultHandler defaultHandler0 = new DefaultHandler();
       // Undeclared exception!
       try {
-        lSSITransformer0.start((ContentHandler) xMLFilterImpl0, (Target) null);
+        lSSITransformer0.start((ContentHandler) defaultHandler0, (Target) null);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*

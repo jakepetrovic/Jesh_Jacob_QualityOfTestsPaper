@@ -20,9 +20,9 @@ public class CredentialsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Credentials credentials0 = new Credentials("R_", "R_");
+      Credentials credentials0 = new Credentials("Iab[H`/", "Iab[H`/");
       String string0 = credentials0.getPassword();
-      assertEquals("R_", string0);
+      assertEquals("Iab[H`/", string0);
   }
 
   //Test case number: 1
@@ -33,8 +33,8 @@ public class CredentialsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Credentials credentials0 = new Credentials("R_", "R_");
+      Credentials credentials0 = new Credentials("Iab[H`/", "Iab[H`/");
       String string0 = credentials0.getUser();
-      assertEquals("R_", string0);
+      assertEquals("Iab[H`/", string0);
   }
 }

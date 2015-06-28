@@ -24,7 +24,7 @@ public class ApplicationPropertiesLoaderEvoSuiteTest {
       ApplicationPropertiesLoader applicationPropertiesLoader0 = new ApplicationPropertiesLoader();
       // Undeclared exception!
       try {
-        applicationPropertiesLoader0.load("00:00");
+        applicationPropertiesLoader0.load("$-*dw|)|Tz\"Ham7");
         fail("Expecting exception: NoClassDefFoundError");
       } catch(NoClassDefFoundError e) {
         /*

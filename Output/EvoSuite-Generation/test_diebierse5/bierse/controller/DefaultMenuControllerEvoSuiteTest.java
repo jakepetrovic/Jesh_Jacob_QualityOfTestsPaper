@@ -25,8 +25,8 @@ public class DefaultMenuControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "HORIZONTAL_SCROLLBAR", 1616, "HORIZONTAL_SCROLLBAR");
+      ActionEvent actionEvent0 = new ActionEvent((Object) "lineLimit", (-1472), "M|-`iyR<}\"_j");
       defaultMenuController0.actionPerformed(actionEvent0);
-      assertEquals(1616, actionEvent0.getID());
+      assertEquals(0L, actionEvent0.getWhen());
   }
 }

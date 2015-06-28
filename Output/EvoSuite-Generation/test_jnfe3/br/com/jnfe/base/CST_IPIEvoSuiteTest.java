@@ -19,9 +19,9 @@ public class CST_IPIEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_IPI cST_IPI0 = CST_IPI.IPI_99;
+      CST_IPI cST_IPI0 = CST_IPI.IPI_53;
       String string0 = cST_IPI0.getValue();
-      assertEquals("99", string0);
+      assertEquals("53", string0);
   }
 
   //Test case number: 1
@@ -31,9 +31,9 @@ public class CST_IPIEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_IPI cST_IPI0 = CST_IPI.IPI_99;
+      CST_IPI cST_IPI0 = CST_IPI.IPI_53;
       String string0 = cST_IPI0.getDesc();
-      assertEquals("Outras sa\u00EDdas", string0);
+      assertEquals("Sa\u00EDda n\u00E3o-tributada", string0);
   }
 
   //Test case number: 2
@@ -43,9 +43,9 @@ public class CST_IPIEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_IPI cST_IPI0 = CST_IPI.IPI_99;
+      CST_IPI cST_IPI0 = CST_IPI.IPI_53;
       boolean boolean0 = cST_IPI0.isIsento();
-      assertEquals(false, boolean0);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 3
@@ -55,8 +55,8 @@ public class CST_IPIEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_IPI cST_IPI0 = CST_IPI.IPI_99;
+      CST_IPI cST_IPI0 = CST_IPI.IPI_53;
       String string0 = cST_IPI0.getGroup();
-      assertEquals("Trib", string0);
+      assertEquals("NT", string0);
   }
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authc.credential.Sha1CredentialsMatcher;
+import org.jsecurity.codec.CodecException;
 import org.jsecurity.crypto.hash.Sha1Hash;
 
 public class Sha1CredentialsMatcherEvoSuiteTest {
@@ -22,8 +23,16 @@ public class Sha1CredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Sha1CredentialsMatcher sha1CredentialsMatcher0 = new Sha1CredentialsMatcher();
-      Sha1Hash sha1Hash0 = (Sha1Hash)sha1CredentialsMatcher0.hashProvidedCredentials((Object) "[]", (Object) "localhost", 1);
-      assertEquals("Nf8muaSdcoLOZu6VpYtUHiEUBM8=", sha1Hash0.toBase64());
+      Object object0 = new Object();
+      // Undeclared exception!
+      try {
+        sha1CredentialsMatcher0.hashProvidedCredentials(object0, object0, (-1075));
+        fail("Expecting exception: CodecException");
+      } catch(CodecException e) {
+        /*
+         * The org.jsecurity.crypto.hash.Sha1Hash implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.crypto.hash.Sha1Hash and override the objectToBytes(Object o) method.
+         */
+      }
   }
 
   //Test case number: 1

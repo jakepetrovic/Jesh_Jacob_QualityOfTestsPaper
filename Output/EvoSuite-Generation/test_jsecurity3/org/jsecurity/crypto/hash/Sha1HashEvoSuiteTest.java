@@ -31,8 +31,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "\u0001\uFFFD\u0001\u0001\u0000\uFFFDI\uFFFD\u001B\uFFFD");
-      assertEquals("PAYyNj6rNMFX70/qDDSQve4Il9s=", sha1Hash0.toBase64());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "SHA-1");
+      assertEquals("SHA-1", sha1Hash0.getAlgorithmName());
   }
 
   //Test case number: 2
@@ -43,15 +43,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      // Undeclared exception!
-      try {
-        Sha1Hash.fromHexString("] to byte array using ");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal hexadecimal charcter ] at index 0
-         */
-      }
+      Sha1Hash sha1Hash0 = Sha1Hash.fromHexString("");
+      assertEquals("", sha1Hash0.toHex());
   }
 
   //Test case number: 3
@@ -62,8 +55,8 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("Unable to convert byte array to String with encoding '");
-      assertEquals("52769b95eb687289ef7abb5bcad79aaeb6b2b684adae29e0c22b617a77287629e0", sha1Hash0.toString());
+      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("");
+      assertEquals("", sha1Hash0.toHex());
   }
 
   //Test case number: 4
@@ -74,7 +67,7 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "argument is of type [", (Object) null, 0);
-      assertEquals("24d15616ef5c2bcdf253b3069085fac9ece4db4e", sha1Hash0.toString());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "\uFFFD", (Object) "SHA-1", (int) (byte) (-64));
+      assertEquals("9fb84bdd9f493b7385eb181dee08608d37c4a6d7", sha1Hash0.toString());
   }
 }

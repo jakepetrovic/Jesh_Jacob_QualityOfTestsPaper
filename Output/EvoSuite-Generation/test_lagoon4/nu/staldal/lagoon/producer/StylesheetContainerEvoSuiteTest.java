@@ -19,8 +19,8 @@ public class StylesheetContainerEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      StylesheetContainer stylesheetContainer0 = new StylesheetContainer(true);
-      assertEquals(true, stylesheetContainer0.executeDynamic);
+      StylesheetContainer stylesheetContainer0 = new StylesheetContainer(false);
+      assertEquals(false, stylesheetContainer0.executeDynamic);
       assertEquals(false, stylesheetContainer0.compileDynamic);
   }
 }

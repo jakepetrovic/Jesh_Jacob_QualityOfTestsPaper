@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import net.sf.lavalamp.device.Crash;
 import net.sf.lavalamp.device.Device;
-import net.sf.lavalamp.device.DummyDevice;
 
 public class CrashEvoSuiteTest {
 
@@ -26,10 +25,9 @@ public class CrashEvoSuiteTest {
   public void test0()  throws Throwable  {
       Crash crash0 = new Crash();
       LinkedList<String> linkedList0 = new LinkedList<String>();
-      DummyDevice dummyDevice0 = new DummyDevice();
       // Undeclared exception!
       try {
-        crash0.perform((List<String>) linkedList0, (Device) dummyDevice0);
+        crash0.perform((List<String>) linkedList0, (Device) null);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*

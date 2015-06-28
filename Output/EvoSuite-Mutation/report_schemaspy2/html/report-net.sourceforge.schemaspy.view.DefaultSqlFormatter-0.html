@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+net.sourceforge.schemaspy.view.DefaultSqlFormatter
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: net.sourceforge.schemaspy.view.DefaultSqlFormatter: 22.86%</ul><ul>
+<li>5698 fitness evaluations, 115 generations, 24816 statements, 3865 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 7/34 branches, 6/6 methods, 8/35 total goals
+<li>Mutation score: 10%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultSqlFormatter defaultSqlFormatter0 = new DefaultSqlFormatter();
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;Table&gt; linkedHashSet0 = new LinkedHashSet&lt;Table&gt;();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  defaultSqlFormatter0.format(&quot;-bon.&quot;, (Database) null, (Set&lt;Table&gt;) linkedHashSet0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultSqlFormatter defaultSqlFormatter0 = new DefaultSqlFormatter();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultSqlFormatter0.getReferencedTables(&quot;hW69&gt;Til&quot;, (Database) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultSqlFormatter defaultSqlFormatter0 = new DefaultSqlFormatter();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Table&gt; hashSet0 = new HashSet&lt;Table&gt;();
+<span class="nocode"><a name="3">  3: </a></span>Map&lt;String, Table&gt; map0 = defaultSqlFormatter0.getTableMap((Collection&lt;?&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, map0.isEmpty());
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultSqlFormatter defaultSqlFormatter0 = new DefaultSqlFormatter();
+<span class="nocode"><a name="2">  2: </a></span>Set&lt;String&gt; set0 = defaultSqlFormatter0.getKeywords((DatabaseMetaData) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>Set&lt;String&gt; set1 = defaultSqlFormatter0.getKeywords((DatabaseMetaData) null);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(227, set1.size());
+<span class="nocode"><a name="7">  7: </a></span>assertSame(set1, set0);
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> * This file is a part of the SchemaSpy project (http://schemaspy.sourceforge.net).
+<span class="nocode"><a name="3">  3: </a></span> * Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 John Currier
+<span class="nocode"><a name="4">  4: </a></span> *
+<span class="nocode"><a name="5">  5: </a></span> * SchemaSpy is free software; you can redistribute it and/or
+<span class="nocode"><a name="6">  6: </a></span> * modify it under the terms of the GNU Lesser General Public
+<span class="nocode"><a name="7">  7: </a></span> * License as published by the Free Software Foundation; either
+<span class="nocode"><a name="8">  8: </a></span> * version 2.1 of the License, or (at your option) any later version.
+<span class="nocode"><a name="9">  9: </a></span> *
+<span class="nocode"><a name="10"> 10: </a></span> * SchemaSpy is distributed in the hope that it will be useful,
+<span class="nocode"><a name="11"> 11: </a></span> * but WITHOUT ANY WARRANTY; without even the implied warranty of
+<span class="nocode"><a name="12"> 12: </a></span> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+<span class="nocode"><a name="13"> 13: </a></span> * Lesser General Public License for more details.
+<span class="nocode"><a name="14"> 14: </a></span> *
+<span class="nocode"><a name="15"> 15: </a></span> * You should have received a copy of the GNU Lesser General Public
+<span class="nocode"><a name="16"> 16: </a></span> * License along with this library; if not, write to the Free Software
+<span class="nocode"><a name="17"> 17: </a></span> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+<span class="nocode"><a name="18"> 18: </a></span> */
+<span class="nocode"><a name="19"> 19: </a></span>package net.sourceforge.schemaspy.view;
+<span class="nocode"><a name="20"> 20: </a></span>
+<span class="nocode"><a name="21"> 21: </a></span>import java.sql.DatabaseMetaData;
+<span class="nocode"><a name="22"> 22: </a></span>import java.util.Arrays;
+<span class="nocode"><a name="23"> 23: </a></span>import java.util.Collection;
+<span class="nocode"><a name="24"> 24: </a></span>import java.util.HashSet;
+<span class="nocode"><a name="25"> 25: </a></span>import java.util.Map;
+<span class="nocode"><a name="26"> 26: </a></span>import java.util.Set;
+<span class="nocode"><a name="27"> 27: </a></span>import java.util.StringTokenizer;
+<span class="nocode"><a name="28"> 28: </a></span>import net.sourceforge.schemaspy.model.Database;
+<span class="nocode"><a name="29"> 29: </a></span>import net.sourceforge.schemaspy.model.Table;
+<span class="nocode"><a name="30"> 30: </a></span>import net.sourceforge.schemaspy.util.CaseInsensitiveMap;
+<span class="nocode"><a name="31"> 31: </a></span>import net.sourceforge.schemaspy.util.HtmlEncoder;
+<span class="nocode"><a name="32"> 32: </a></span>
+<span class="nocode"><a name="33"> 33: </a></span>/**
+<span class="nocode"><a name="34"> 34: </a></span> * Default implementation of {@link SqlFormatter}
+<span class="nocode"><a name="35"> 35: </a></span> *
+<span class="nocode"><a name="36"> 36: </a></span> * @author John Currier
+<span class="nocode"><a name="37"> 37: </a></span> */
+<span class="nocode"><a name="38"> 38: </a></span>public class DefaultSqlFormatter implements SqlFormatter {
+<span class="nocode"><a name="39"> 39: </a></span>    private Set&lt;String&gt; keywords;
+<span class="nocode"><a name="40"> 40: </a></span>    private Map&lt;String, Table&gt; tablesByPossibleNames;
+<span class="nocode"><a name="41"> 41: </a></span>    private static String TOKENS = &quot; \t\n\r\f()&lt;&gt;|,&quot;;
+<span class="nocode"><a name="42"> 42: </a></span>
+<span class="nocode"><a name="43"> 43: </a></span>    /**
+<span class="nocode"><a name="44"> 44: </a></span>     * Return a HTML-formatted representation of the specified SQL.
+<span class="nocode"><a name="45"> 45: </a></span>     *
+<span class="nocode"><a name="46"> 46: </a></span>     * @param sql SQL to be formatted
+<span class="nocode"><a name="47"> 47: </a></span>     * @param db Database
+<span class="nocode"><a name="48"> 48: </a></span>     * @return HTML-formatted representation of the specified SQL
+<span class="nocode"><a name="49"> 49: </a></span>     */
+<span class="nocode"><a name="50"> 50: </a></span>    public String format(String sql, Database db, Set&lt;Table&gt; references) {
+<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">        StringBuilder formatted = new StringBuilder(sql.length() * 2);</span>
+<span class="nocode"><a name="52"> 52: </a></span>
+<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">        boolean alreadyFormatted = sql.contains(&quot;\n&quot;) || sql.contains(&quot;\r&quot;);</span>
+<span class="nocode"><a name="54"> 54: </a></span><span style="background-color: #ffffcc">        if (alreadyFormatted)</span>
+<span class="nocode"><a name="55"> 55: </a></span>        {
+<span class="nocode"><a name="56"> 56: </a></span>            // apparently already formatted, so dump it as is
+<span class="nocode"><a name="57"> 57: </a></span>            formatted.append(&quot;&lt;div class='viewDefinition preFormatted'&gt;&quot;);
+<span class="nocode"><a name="58"> 58: </a></span>
+<span class="nocode"><a name="59"> 59: </a></span>            int len = sql.length();
+<span class="nocode"><a name="60"> 60: </a></span>            for (int i = 0; i &lt; len; i++) {
+<span class="nocode"><a name="61"> 61: </a></span>                char ch = sql.charAt(i);
+<span class="nocode"><a name="62"> 62: </a></span>
+<span class="nocode"><a name="63"> 63: </a></span>                // encode everything except whitespace
+<span class="nocode"><a name="64"> 64: </a></span>                if (Character.isWhitespace(ch)) {
+<span class="nocode"><a name="65"> 65: </a></span>                    formatted.append(ch);
+<span class="nocode"><a name="66"> 66: </a></span>                } else {
+<span class="nocode"><a name="67"> 67: </a></span>                    formatted.append(HtmlEncoder.encodeToken(ch));
+<span class="nocode"><a name="68"> 68: </a></span>                }
+<span class="nocode"><a name="69"> 69: </a></span>            }
+<span class="nocode"><a name="70"> 70: </a></span>        }
+<span class="nocode"><a name="71"> 71: </a></span>        else
+<span class="nocode"><a name="72"> 72: </a></span>        {
+<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">            formatted.append(&quot;  &lt;div class='viewDefinition'&gt;&quot;);</span>
+<span class="nocode"><a name="74"> 74: </a></span>            @SuppressWarnings(&quot;hiding&quot;)
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">            Set&lt;String&gt; keywords = getKeywords(db.getMetaData());</span>
+<span class="nocode"><a name="76"> 76: </a></span>            StringTokenizer tokenizer = new StringTokenizer(sql, TOKENS, true);
+<span class="nocode"><a name="77"> 77: </a></span>            while (tokenizer.hasMoreTokens()) {
+<span class="nocode"><a name="78"> 78: </a></span>                String token = tokenizer.nextToken();
+<span class="nocode"><a name="79"> 79: </a></span>                if (keywords.contains(token.toUpperCase())) {
+<span class="nocode"><a name="80"> 80: </a></span>                    formatted.append(&quot;&lt;b&gt;&quot;);
+<span class="nocode"><a name="81"> 81: </a></span>                    formatted.append(token);
+<span class="nocode"><a name="82"> 82: </a></span>                    formatted.append(&quot;&lt;/b&gt;&quot;);
+<span class="nocode"><a name="83"> 83: </a></span>                } else {
+<span class="nocode"><a name="84"> 84: </a></span>                    formatted.append(HtmlEncoder.encodeToken(token));
+<span class="nocode"><a name="85"> 85: </a></span>                }
+<span class="nocode"><a name="86"> 86: </a></span>            }
+<span class="nocode"><a name="87"> 87: </a></span>        }
+<span class="nocode"><a name="88"> 88: </a></span>
+<span class="nocode"><a name="89"> 89: </a></span>        formatted.append(&quot;&lt;/div&gt;&quot;);
+<span class="nocode"><a name="90"> 90: </a></span>
+<span class="nocode"><a name="91"> 91: </a></span>        references.addAll(getReferencedTables(sql, db));
+<span class="nocode"><a name="92"> 92: </a></span>
+<span class="nocode"><a name="93"> 93: </a></span>        return formatted.toString();
+<span class="nocode"><a name="94"> 94: </a></span>    }
+<span class="nocode"><a name="95"> 95: </a></span>
+<span class="nocode"><a name="96"> 96: </a></span>    /**
+<span class="nocode"><a name="97"> 97: </a></span>     * Returns a {@link Set} of tables/views that are possibly referenced
+<span class="nocode"><a name="98"> 98: </a></span>     * by the specified SQL.
+<span class="nocode"><a name="99"> 99: </a></span>     *
+<span class="nocode"><a name="100">100: </a></span>     * @param sql
+<span class="nocode"><a name="101">101: </a></span>     * @param db
+<span class="nocode"><a name="102">102: </a></span>     * @return
+<span class="nocode"><a name="103">103: </a></span>     */
+<span class="nocode"><a name="104">104: </a></span>    protected Set&lt;Table&gt; getReferencedTables(String sql, Database db) {
+<span class="nocode"><a name="105">105: </a></span><span style="background-color: #ffffcc">        Set&lt;Table&gt; referenced = new HashSet&lt;Table&gt;();</span>
+<span class="nocode"><a name="106">106: </a></span>
+<span class="nocode"><a name="107">107: </a></span><span style="background-color: #ffffcc">        Map&lt;String, Table&gt; tables = getTableMap(db);</span>
+<span class="nocode"><a name="108">108: </a></span>        @SuppressWarnings(&quot;hiding&quot;)
+<span class="nocode"><a name="109">109: </a></span>        Set&lt;String&gt; keywords = getKeywords(db.getMetaData());
+<span class="nocode"><a name="110">110: </a></span>
+<span class="nocode"><a name="111">111: </a></span>        StringTokenizer tokenizer = new StringTokenizer(sql, TOKENS, true);
+<span class="nocode"><a name="112">112: </a></span>        while (tokenizer.hasMoreTokens()) {
+<span class="nocode"><a name="113">113: </a></span>            String token = tokenizer.nextToken();
+<span class="nocode"><a name="114">114: </a></span>            if (!keywords.contains(token.toUpperCase())) {
+<span class="nocode"><a name="115">115: </a></span>                Table t = tables.get(token);
+<span class="nocode"><a name="116">116: </a></span>
+<span class="nocode"><a name="117">117: </a></span>                if (t == null) {
+<span class="nocode"><a name="118">118: </a></span>                    int lastDot = token.lastIndexOf('.');
+<span class="nocode"><a name="119">119: </a></span>                    if (lastDot != -1) {
+<span class="nocode"><a name="120">120: </a></span>                        t = tables.get(token.substring(0, lastDot));
+<span class="nocode"><a name="121">121: </a></span>                    }
+<span class="nocode"><a name="122">122: </a></span>                }
+<span class="nocode"><a name="123">123: </a></span>
+<span class="nocode"><a name="124">124: </a></span>                if (t != null) {
+<span class="nocode"><a name="125">125: </a></span>                    referenced.add(t);
+<span class="nocode"><a name="126">126: </a></span>                }
+<span class="nocode"><a name="127">127: </a></span>            }
+<span class="nocode"><a name="128">128: </a></span>        }
+<span class="nocode"><a name="129">129: </a></span>
+<span class="nocode"><a name="130">130: </a></span>        return referenced;
+<span class="nocode"><a name="131">131: </a></span>    }
+<span class="nocode"><a name="132">132: </a></span>
+<span class="nocode"><a name="133">133: </a></span>    /**
+<span class="nocode"><a name="134">134: </a></span>     * Returns a {@link Map} of all tables/views in the database
+<span class="nocode"><a name="135">135: </a></span>     * keyed by several possible ways to refer to the table.
+<span class="nocode"><a name="136">136: </a></span>     *
+<span class="nocode"><a name="137">137: </a></span>     * @param db
+<span class="nocode"><a name="138">138: </a></span>     * @return
+<span class="nocode"><a name="139">139: </a></span>     */
+<span class="nocode"><a name="140">140: </a></span>    protected Map&lt;String, Table&gt; getTableMap(Database db)
+<span class="nocode"><a name="141">141: </a></span>    {
+<span class="nocode"><a name="142">142: </a></span><span style="background-color: #ffffcc">        if (tablesByPossibleNames == null)</span>
+<span class="nocode"><a name="143">143: </a></span>        {
+<span class="nocode"><a name="144">144: </a></span><span style="background-color: #ffffcc">            tablesByPossibleNames = new CaseInsensitiveMap&lt;Table&gt;();</span>
+<span class="nocode"><a name="145">145: </a></span>
+<span class="nocode"><a name="146">146: </a></span><span style="background-color: #ffffcc">            tablesByPossibleNames.putAll(getTableMap(db.getTables()));</span>
+<span class="nocode"><a name="147">147: </a></span>            tablesByPossibleNames.putAll(getTableMap(db.getViews()));
+<span class="nocode"><a name="148">148: </a></span>        }
+<span class="nocode"><a name="149">149: </a></span>
+<span class="nocode"><a name="150">150: </a></span>        return tablesByPossibleNames;
+<span class="nocode"><a name="151">151: </a></span>    }
+<span class="nocode"><a name="152">152: </a></span>
+<span class="nocode"><a name="153">153: </a></span>    /**
+<span class="nocode"><a name="154">154: </a></span>     * Returns a {@link Map} of the specified tables/views
+<span class="nocode"><a name="155">155: </a></span>     * keyed by several possible ways to refer to the table.
+<span class="nocode"><a name="156">156: </a></span>     *
+<span class="nocode"><a name="157">157: </a></span>     * @param tables
+<span class="nocode"><a name="158">158: </a></span>     * @param dbName
+<span class="nocode"><a name="159">159: </a></span>     * @return
+<span class="nocode"><a name="160">160: </a></span>     */
+<span class="nocode"><a name="161">161: </a></span>    protected Map&lt;String, Table&gt; getTableMap(Collection&lt;? extends Table&gt; tables) {
+<span class="nocode"><a name="162">162: </a></span><span style="background-color: #ffffcc">        Map&lt;String, Table&gt; map = new CaseInsensitiveMap&lt;Table&gt;();</span>
+<span class="nocode"><a name="163">163: </a></span><span style="background-color: #ffffcc">        for (Table t : tables) {</span>
+<span class="nocode"><a name="164">164: </a></span>            String name = t.getName();
+<span class="nocode"><a name="165">165: </a></span>            String container = t.getContainer();
+<span class="nocode"><a name="166">166: </a></span>
+<span class="nocode"><a name="167">167: </a></span>            map.put(name, t);
+<span class="nocode"><a name="168">168: </a></span>            map.put(&quot;`&quot; + name + &quot;`&quot;, t);
+<span class="nocode"><a name="169">169: </a></span>            map.put(&quot;'&quot; + name + &quot;'&quot;, t);
+<span class="nocode"><a name="170">170: </a></span>            map.put(&quot;\&quot;&quot; + name + &quot;\&quot;&quot;, t);
+<span class="nocode"><a name="171">171: </a></span>            map.put(container + &quot;.&quot; + name, t);
+<span class="nocode"><a name="172">172: </a></span>            map.put(&quot;`&quot; + container + &quot;`.`&quot; + name + &quot;`&quot;, t);
+<span class="nocode"><a name="173">173: </a></span>            map.put(&quot;'&quot; + container + &quot;'.'&quot; + name + &quot;'&quot;, t);
+<span class="nocode"><a name="174">174: </a></span>            map.put(&quot;\&quot;&quot; + container + &quot;\&quot;.\&quot;&quot; + name + &quot;\&quot;&quot;, t);
+<span class="nocode"><a name="175">175: </a></span>            map.put(&quot;`&quot; + container + '.' + name + &quot;`&quot;, t);
+<span class="nocode"><a name="176">176: </a></span>            map.put(&quot;'&quot; + container + '.' + name + &quot;'&quot;, t);
+<span class="nocode"><a name="177">177: </a></span>            map.put(&quot;\&quot;&quot; + container + '.' + name + &quot;\&quot;&quot;, t);
+<span class="nocode"><a name="178">178: </a></span>        }
+<span class="nocode"><a name="179">179: </a></span>
+<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">        return map;</span>
+<span class="nocode"><a name="181">181: </a></span>    }
+<span class="nocode"><a name="182">182: </a></span>
+<span class="nocode"><a name="183">183: </a></span>    /**
+<span class="nocode"><a name="184">184: </a></span>     * @param meta
+<span class="nocode"><a name="185">185: </a></span>     * @return
+<span class="nocode"><a name="186">186: </a></span>     */
+<span class="nocode"><a name="187">187: </a></span>    public Set&lt;String&gt; getKeywords(DatabaseMetaData meta) {
+<span class="nocode"><a name="188">188: </a></span><span style="background-color: #ffffcc">        if (keywords == null) {</span>
+<span class="nocode"><a name="189">189: </a></span><span style="background-color: #ffffcc">            keywords = new HashSet&lt;String&gt;(Arrays.asList(new String[] {</span>
+<span class="nocode"><a name="190">190: </a></span>                &quot;ABSOLUTE&quot;, &quot;ACTION&quot;, &quot;ADD&quot;, &quot;ALL&quot;, &quot;ALLOCATE&quot;, &quot;ALTER&quot;, &quot;AND&quot;,
+<span class="nocode"><a name="191">191: </a></span>                &quot;ANY&quot;, &quot;ARE&quot;, &quot;AS&quot;, &quot;ASC&quot;, &quot;ASSERTION&quot;, &quot;AT&quot;, &quot;AUTHORIZATION&quot;, &quot;AVG&quot;,
+<span class="nocode"><a name="192">192: </a></span>                &quot;BEGIN&quot;, &quot;BETWEEN&quot;, &quot;BIT&quot;, &quot;BIT_LENGTH&quot;, &quot;BOTH&quot;, &quot;BY&quot;,
+<span class="nocode"><a name="193">193: </a></span>                &quot;CASCADE&quot;, &quot;CASCADED&quot;, &quot;CASE&quot;, &quot;CAST&quot;, &quot;CATALOG&quot;, &quot;CHAR&quot;, &quot;CHARACTER&quot;,
+<span class="nocode"><a name="194">194: </a></span>                &quot;CHAR_LENGTH&quot;, &quot;CHARACTER_LENGTH&quot;, &quot;CHECK&quot;, &quot;CLOSE&quot;, &quot;COALESCE&quot;,
+<span class="nocode"><a name="195">195: </a></span>                &quot;COLLATE&quot;, &quot;COLLATION&quot;, &quot;COLUMN&quot;, &quot;COMMIT&quot;, &quot;CONNECT&quot;, &quot;CONNECTION&quot;,
+<span class="nocode"><a name="196">196: </a></span>                &quot;CONSTRAINT&quot;, &quot;CONSTRAINTS&quot;, &quot;CONTINUE&quot;, &quot;CONVERT&quot;, &quot;CORRESPONDING&quot;,
+<span class="nocode"><a name="197">197: </a></span>                &quot;COUNT&quot;, &quot;CREATE&quot;, &quot;CROSS&quot;, &quot;CURRENT&quot;, &quot;CURRENT_DATE&quot;, &quot;CURRENT_TIME&quot;,
+<span class="nocode"><a name="198">198: </a></span>                &quot;CURRENT_TIMESTAMP&quot;, &quot;CURRENT_USER&quot;, &quot;CURSOR&quot;,
+<span class="nocode"><a name="199">199: </a></span>                &quot;DATE&quot;, &quot;DAY&quot;, &quot;DEALLOCATE&quot;, &quot;DEC&quot;, &quot;DECIMAL&quot;, &quot;DECLARE&quot;, &quot;DEFAULT&quot;,
+<span class="nocode"><a name="200">200: </a></span>                &quot;DEFERRABLE&quot;, &quot;DEFERRED&quot;, &quot;DELETE&quot;, &quot;DESC&quot;, &quot;DESCRIBE&quot;, &quot;DESCRIPTOR&quot;,
+<span class="nocode"><a name="201">201: </a></span>                &quot;DIAGNOSTICS&quot;, &quot;DISCONNECT&quot;, &quot;DISTINCT&quot;, &quot;DOMAIN&quot;, &quot;DOUBLE&quot;, &quot;DROP&quot;,
+<span class="nocode"><a name="202">202: </a></span>                &quot;ELSE&quot;, &quot;END&quot;, &quot;END - EXEC&quot;, &quot;ESCAPE&quot;, &quot;EXCEPT&quot;, &quot;EXCEPTION&quot;, &quot;EXEC&quot;,
+<span class="nocode"><a name="203">203: </a></span>                &quot;EXECUTE&quot;, &quot;EXISTS&quot;, &quot;EXTERNAL&quot;, &quot;EXTRACT&quot;,
+<span class="nocode"><a name="204">204: </a></span>                &quot;FALSE&quot;, &quot;FETCH&quot;, &quot;FIRST&quot;, &quot;FLOAT&quot;, &quot;FOR&quot;, &quot;FOREIGN&quot;, &quot;FOUND&quot;, &quot;FROM&quot;, &quot;FULL&quot;,
+<span class="nocode"><a name="205">205: </a></span>                &quot;GET&quot;, &quot;GLOBAL&quot;, &quot;GO&quot;, &quot;GOTO&quot;, &quot;GRANT&quot;, &quot;GROUP&quot;,
+<span class="nocode"><a name="206">206: </a></span>                &quot;HAVING&quot;, &quot;HOUR&quot;,
+<span class="nocode"><a name="207">207: </a></span>                &quot;IDENTITY&quot;, &quot;IMMEDIATE&quot;, &quot;IN&quot;, &quot;INDICATOR&quot;, &quot;INITIALLY&quot;, &quot;INNER&quot;, &quot;INPUT&quot;,
+<span class="nocode"><a name="208">208: </a></span>                &quot;INSENSITIVE&quot;, &quot;INSERT&quot;, &quot;INT&quot;, &quot;INTEGER&quot;, &quot;INTERSECT&quot;, &quot;INTERVAL&quot;, &quot;INTO&quot;,
+<span class="nocode"><a name="209">209: </a></span>                &quot;IS&quot;, &quot;ISOLATION&quot;,
+<span class="nocode"><a name="210">210: </a></span>                &quot;JOIN&quot;,
+<span class="nocode"><a name="211">211: </a></span>                &quot;KEY&quot;,
+<span class="nocode"><a name="212">212: </a></span>                &quot;LANGUAGE&quot;, &quot;LAST&quot;, &quot;LEADING&quot;, &quot;LEFT&quot;, &quot;LEVEL&quot;, &quot;LIKE&quot;, &quot;LOCAL&quot;, &quot;LOWER&quot;,
+<span class="nocode"><a name="213">213: </a></span>                &quot;MATCH&quot;, &quot;MAX&quot;, &quot;MIN&quot;, &quot;MINUTE&quot;, &quot;MODULE&quot;, &quot;MONTH&quot;,
+<span class="nocode"><a name="214">214: </a></span>                &quot;NAMES&quot;, &quot;NATIONAL&quot;, &quot;NATURAL&quot;, &quot;NCHAR&quot;, &quot;NEXT&quot;, &quot;NO&quot;, &quot;NOT&quot;, &quot;NULL&quot;,
+<span class="nocode"><a name="215">215: </a></span>                &quot;NULLIF&quot;, &quot;NUMERIC&quot;,
+<span class="nocode"><a name="216">216: </a></span>                &quot;OCTET_LENGTH&quot;, &quot;OF&quot;, &quot;ON&quot;, &quot;ONLY&quot;, &quot;OPEN&quot;, &quot;OPTION&quot;, &quot;OR&quot;, &quot;ORDER&quot;,
+<span class="nocode"><a name="217">217: </a></span>                &quot;OUTER&quot;, &quot;OUTPUT&quot;, &quot;OVERLAPS&quot;,
+<span class="nocode"><a name="218">218: </a></span>                &quot;PAD&quot;, &quot;PARTIAL&quot;, &quot;POSITION&quot;, &quot;PRECISION&quot;, &quot;PREPARE&quot;, &quot;PRESERVE&quot;, &quot;PRIMARY&quot;,
+<span class="nocode"><a name="219">219: </a></span>                &quot;PRIOR&quot;, &quot;PRIVILEGES&quot;, &quot;PROCEDURE&quot;, &quot;PUBLIC&quot;,
+<span class="nocode"><a name="220">220: </a></span>                &quot;READ&quot;, &quot;REAL&quot;, &quot;REFERENCES&quot;, &quot;RELATIVE&quot;, &quot;RESTRICT&quot;, &quot;REVOKE&quot;, &quot;RIGHT&quot;,
+<span class="nocode"><a name="221">221: </a></span>                &quot;ROLLBACK&quot;, &quot;ROWS&quot;,
+<span class="nocode"><a name="222">222: </a></span>                &quot;SCHEMA&quot;, &quot;SCROLL&quot;, &quot;SECOND&quot;, &quot;SECTION&quot;, &quot;SELECT&quot;, &quot;SESSION&quot;, &quot;SESSION_USER&quot;,
+<span class="nocode"><a name="223">223: </a></span>                &quot;SET&quot;, &quot;SIZE&quot;, &quot;SMALLINT&quot;, &quot;SOME&quot;, &quot;SPACE&quot;, &quot;SQL&quot;, &quot;SQLCODE&quot;, &quot;SQLERROR&quot;,
+<span class="nocode"><a name="224">224: </a></span>                &quot;SQLSTATE&quot;, &quot;SUBSTRING&quot;, &quot;SUM&quot;, &quot;SYSTEM_USER&quot;,
+<span class="nocode"><a name="225">225: </a></span>                &quot;TABLE&quot;, &quot;TEMPORARY&quot;, &quot;THEN&quot;, &quot;TIME&quot;, &quot;TIMESTAMP&quot;, &quot;TIMEZONE_HOUR&quot;,
+<span class="nocode"><a name="226">226: </a></span>                &quot;TIMEZONE_MINUTE&quot;, &quot;TO&quot;, &quot;TRAILING&quot;, &quot;TRANSACTION&quot;, &quot;TRANSLATE&quot;,
+<span class="nocode"><a name="227">227: </a></span>                &quot;TRANSLATION&quot;, &quot;TRIM&quot;, &quot;TRUE&quot;,
+<span class="nocode"><a name="228">228: </a></span>                &quot;UNION&quot;, &quot;UNIQUE&quot;, &quot;UNKNOWN&quot;, &quot;UPDATE&quot;, &quot;UPPER&quot;, &quot;USAGE&quot;, &quot;USER&quot;, &quot;USING&quot;,
+<span class="nocode"><a name="229">229: </a></span>                &quot;VALUE&quot;, &quot;VALUES&quot;, &quot;VARCHAR&quot;, &quot;VARYING&quot;, &quot;VIEW&quot;,
+<span class="nocode"><a name="230">230: </a></span>                &quot;WHEN&quot;, &quot;WHENEVER&quot;, &quot;WHERE&quot;, &quot;WITH&quot;, &quot;WORK&quot;, &quot;WRITE&quot;,
+<span class="nocode"><a name="231">231: </a></span>                &quot;YEAR&quot;,
+<span class="nocode"><a name="232">232: </a></span>                &quot;ZONE&quot;
+<span class="nocode"><a name="233">233: </a></span>            }));
+<span class="nocode"><a name="234">234: </a></span>
+<span class="nocode"><a name="235">235: </a></span>            try {
+<span class="nocode"><a name="236">236: </a></span><span style="background-color: #ffffcc">                String keywordsArray[] = new String[] {</span>
+<span class="nocode"><a name="237">237: </a></span>                    meta.getSQLKeywords(),
+<span class="nocode"><a name="238">238: </a></span>                    meta.getSystemFunctions(),
+<span class="nocode"><a name="239">239: </a></span>                    meta.getNumericFunctions(),
+<span class="nocode"><a name="240">240: </a></span>                    meta.getStringFunctions(),
+<span class="nocode"><a name="241">241: </a></span>                    meta.getTimeDateFunctions()
+<span class="nocode"><a name="242">242: </a></span>                };
+<span class="nocode"><a name="243">243: </a></span>                for (int i = 0; i &lt; keywordsArray.length; ++i) {
+<span class="nocode"><a name="244">244: </a></span>                    StringTokenizer tokenizer = new StringTokenizer(keywordsArray[i].toUpperCase(), &quot;,&quot;);
+<span class="nocode"><a name="245">245: </a></span>
+<span class="nocode"><a name="246">246: </a></span>                    while (tokenizer.hasMoreTokens()) {
+<span class="nocode"><a name="247">247: </a></span>                        keywords.add(tokenizer.nextToken().trim());
+<span class="nocode"><a name="248">248: </a></span>                    }
+<span class="nocode"><a name="249">249: </a></span>                }
+<span class="nocode"><a name="250">250: </a></span><span style="background-color: #ffffcc">            } catch (Exception exc) {</span>
+<span class="nocode"><a name="251">251: </a></span>                // don't totally fail just because we can't extract these details...
+<span class="nocode"><a name="252">252: </a></span><span style="background-color: #ffffcc">                System.err.println(exc);</span>
+<span class="nocode"><a name="253">253: </a></span>            }
+<span class="nocode"><a name="254">254: </a></span>        }
+<span class="nocode"><a name="255">255: </a></span>
+<span class="nocode"><a name="256">256: </a></span><span style="background-color: #ffffcc">        return keywords;</span>
+<span class="nocode"><a name="257">257: </a></span>    }
+<span class="nocode"><a name="258">258: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree5161463726520088203.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 17362
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: net
+<li>TARGET_CLASS: net.sourceforge.schemaspy.view.DefaultSqlFormatter
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/36_schemaspy/schemaspy.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

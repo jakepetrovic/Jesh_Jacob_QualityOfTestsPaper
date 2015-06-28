@@ -23,7 +23,7 @@ public class DummyRestGetterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DummyRestGetter dummyRestGetter0 = new DummyRestGetter();
-      char[] charArray0 = new char[8];
+      char[] charArray0 = new char[7];
       dummyRestGetter0.get("os_authType=basic", charArray0);
   }
 
@@ -36,7 +36,7 @@ public class DummyRestGetterEvoSuiteTest {
   public void test1()  throws Throwable  {
       DummyRestGetter dummyRestGetter0 = new DummyRestGetter();
       try {
-        dummyRestGetter0.get("<auth>auth12345</auth>");
+        dummyRestGetter0.get("");
         fail("Expecting exception: LoginRequiredException");
       } catch(LoginRequiredException e) {
       }

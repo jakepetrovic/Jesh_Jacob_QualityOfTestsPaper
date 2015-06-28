@@ -22,40 +22,42 @@ org.jsecurity.crypto.BlowfishCipher
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.BlowfishCipher: 60.00%</ul><ul>
-<li>18932 fitness evaluations, 380 generations, 85672 statements, 11913 tests.
+<li>17818 fitness evaluations, 358 generations, 98535 statements, 11850 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/12 branches, 11/11 methods, 12/20 total goals
-<li>Mutation score: 28%
+<li>Mutation score: 34%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BlowfishCipher blowfishCipher0 = new BlowfishCipher();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  blowfishCipher0.decrypt((byte[]) null, (byte[]) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalStateException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Unable to crypt bytes with cipher [javax.crypto.Cipher@d5e225c].
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = new byte[9];
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  blowfishCipher0.decrypt(byteArray0, byteArray1);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Unable to crypt bytes with cipher [javax.crypto.Cipher@20b51411].
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BlowfishCipher blowfishCipher0 = new BlowfishCipher();
-<span class="nocode"><a name="2">  2: </a></span>SecretKeySpec secretKeySpec0 = (SecretKeySpec)BlowfishCipher.generateNewKey();
-<span class="nocode"><a name="3">  3: </a></span>blowfishCipher0.setKey((Key) secretKeySpec0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Blowfish&quot;, secretKeySpec0.getAlgorithm());
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = blowfishCipher0.encrypt(byteArray0, (byte[]) null);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="5">  5: </a></span>assertNotSame(byteArray1, byteArray0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BlowfishCipher blowfishCipher0 = new BlowfishCipher();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[4];
-<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray1 = blowfishCipher0.encrypt(byteArray0, byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotSame(byteArray0, byteArray1);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="2">  2: </a></span>SecretKeySpec secretKeySpec0 = (SecretKeySpec)BlowfishCipher.generateNewKey();
+<span class="nocode"><a name="3">  3: </a></span>blowfishCipher0.setKey((Key) secretKeySpec0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;RAW&quot;, secretKeySpec0.getFormat());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -338,7 +340,7 @@ org.jsecurity.crypto.BlowfishCipher
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -356,7 +358,7 @@ org.jsecurity.crypto.BlowfishCipher
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4578
+<li>process_communication_port: 5910
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

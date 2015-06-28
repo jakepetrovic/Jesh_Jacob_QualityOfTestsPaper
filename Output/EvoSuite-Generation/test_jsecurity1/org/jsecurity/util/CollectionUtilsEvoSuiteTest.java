@@ -25,9 +25,9 @@ public class CollectionUtilsEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       String[] stringArray0 = new String[1];
-      List<Object> list0 = CollectionUtils.asList((Object[]) stringArray0);
-      assertNotNull(list0);
+      List<String> list0 = CollectionUtils.asList(stringArray0);
       assertEquals(1, list0.size());
+      assertNotNull(list0);
   }
 
   //Test case number: 1
@@ -48,8 +48,8 @@ public class CollectionUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Class<?> class0 = Class.class;
-      Collection<String> collection0 = CollectionUtils.emptyCollection((Class<String>) class0);
+      Class<?> class0 = CollectionUtils.class;
+      Collection<Object> collection0 = CollectionUtils.emptyCollection((Class<Object>) class0);
       assertEquals(0, collection0.size());
   }
 
@@ -60,8 +60,8 @@ public class CollectionUtilsEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Set<String> set0 = CollectionUtils.asSet((String[]) null);
-      assertEquals(true, set0.isEmpty());
+      Set<Object> set0 = CollectionUtils.asSet((Object[]) null);
+      assertEquals(0, set0.size());
   }
 
   //Test case number: 4
@@ -74,8 +74,8 @@ public class CollectionUtilsEvoSuiteTest {
   public void test4()  throws Throwable  {
       String[] stringArray0 = new String[1];
       Set<String> set0 = CollectionUtils.asSet(stringArray0);
-      assertEquals(false, set0.isEmpty());
       assertNotNull(set0);
+      assertEquals(1, set0.size());
   }
 
   //Test case number: 5
@@ -85,7 +85,7 @@ public class CollectionUtilsEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      List<String> list0 = CollectionUtils.asList((String[]) null);
+      List<Object> list0 = CollectionUtils.asList((Object[]) null);
       assertEquals(true, list0.isEmpty());
   }
 }

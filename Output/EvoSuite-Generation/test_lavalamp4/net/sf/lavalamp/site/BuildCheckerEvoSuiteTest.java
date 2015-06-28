@@ -13,6 +13,7 @@ import net.sf.lavalamp.site.BuildChecker;
 import net.sf.lavalamp.site.BuildSite;
 import net.sf.lavalamp.site.Console;
 import net.sf.lavalamp.site.LoginFailedException;
+import net.sf.lavalamp.site.impl.Bamboo3RestApi;
 import org.evosuite.testcase.CodeUnderTestException;
 
 public class BuildCheckerEvoSuiteTest {
@@ -27,7 +28,8 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("%s/rest/api/latest/build/%s/latest%s");
+      Build build0 = new Build("?");
+      Bamboo3RestApi bamboo3RestApi0 = new Bamboo3RestApi();
   }
 
   //Test case number: 1
@@ -39,7 +41,7 @@ public class BuildCheckerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       BuildChecker buildChecker0 = new BuildChecker();
-      Build build0 = new Build("%s%s/%s/lastSuccessfulBuild/buildNumber");
+      Build build0 = new Build("~j1`xWo4IQjuG=F");
       Console console0 = new Console();
   }
 }

@@ -8,9 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.SimpleTimeZone;
-import java.util.TimeZone;
 import net.sf.lavalamp.device.Actions;
 import net.sf.lavalamp.device.DeviceProperties;
 import net.sf.lavalamp.device.DummyDevice;
@@ -80,11 +77,9 @@ public class AbstractDeviceEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      SimpleTimeZone simpleTimeZone0 = new SimpleTimeZone(181, "");
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((TimeZone) simpleTimeZone0);
       // Undeclared exception!
       try {
-        dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
+        dummyDevice0.isAlwaysOff((Calendar) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -128,7 +123,7 @@ public class AbstractDeviceEvoSuiteTest {
       DeviceProperties deviceProperties0 = new DeviceProperties();
       deviceProperties0.setOnWhenSuccessful(true);
       dummyDevice0.setProperties(deviceProperties0);
-      assertNull(deviceProperties0.getClassName());
+      assertEquals(true, deviceProperties0.isOnWhenSuccessful());
   }
 
   //Test case number: 8
@@ -147,6 +142,6 @@ public class AbstractDeviceEvoSuiteTest {
       OnError onError0 = OnError.STATUSQUO;
       deviceProperties0.setOnError(onError0);
       dummyDevice0.setProperties(deviceProperties0);
-      assertEquals("\n\tdevice=null, className=null,  off=[start=00:00, end=00:00], onError=STATUSQUO, onWhenSuccessful=false, path=nullnull", deviceProperties0.toString());
+      assertEquals(OnError.STATUSQUO, deviceProperties0.getOnError());
   }
 }

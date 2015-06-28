@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import com.sap.netweaver.porta.core.AuthenticationCallback;
 import com.sap.netweaver.porta.core.CoreException;
+import com.sap.netweaver.porta.core.NotAuthorizedException;
 import com.sap.netweaver.porta.core.nw7.DeployManagerImpl;
 import com.sap.netweaver.porta.core.snippets.SnippetUseDeployManager;
 
@@ -23,7 +24,7 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("!", (-24));
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("/SCowol.cg}", (-668));
       SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
       deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
       assertEquals(false, deployManagerImpl0.initialized());
@@ -37,14 +38,13 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("!", (-24));
-      // Undeclared exception!
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("/SCowol.cg}", (-668));
       try {
-        deployManagerImpl0.checkInitialized();
-        fail("Expecting exception: NoClassDefFoundError");
-      } catch(NoClassDefFoundError e) {
+        deployManagerImpl0.getApplications();
+        fail("Expecting exception: CoreException");
+      } catch(CoreException e) {
         /*
-         * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
+         * java.net.MalformedURLException: Invalid port number :-16787
          */
       }
   }

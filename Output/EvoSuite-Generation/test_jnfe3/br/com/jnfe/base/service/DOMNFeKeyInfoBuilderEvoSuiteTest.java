@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import br.com.jnfe.base.service.DOMNFeKeyInfoBuilder;
 import java.security.cert.Certificate;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
+import org.jcp.xml.dsig.internal.dom.DOMXMLSignatureFactory;
 
 public class DOMNFeKeyInfoBuilderEvoSuiteTest {
 
@@ -23,7 +24,9 @@ public class DOMNFeKeyInfoBuilderEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeKeyInfoBuilder dOMNFeKeyInfoBuilder0 = new DOMNFeKeyInfoBuilder();
-      dOMNFeKeyInfoBuilder0.setXMLSignatureFactory((XMLSignatureFactory) null);
+      DOMXMLSignatureFactory dOMXMLSignatureFactory0 = (DOMXMLSignatureFactory)XMLSignatureFactory.getInstance();
+      dOMNFeKeyInfoBuilder0.setXMLSignatureFactory((XMLSignatureFactory) dOMXMLSignatureFactory0);
+      assertEquals("DOM", dOMXMLSignatureFactory0.getMechanismType());
   }
 
   //Test case number: 1

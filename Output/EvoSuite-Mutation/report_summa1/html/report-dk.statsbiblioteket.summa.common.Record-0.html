@@ -1,0 +1,1787 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>
+dk.statsbiblioteket.summa.common.Record
+</title>
+<link href="files/prettify.css" type="text/css" rel="stylesheet" />
+<link href="files/style.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="files/prettify.js"></script>
+<script type="text/javascript" src="files/jquery.js"></script>
+<script type="text/javascript" src="files/foldButton.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('H2#tests').foldButton();
+    $('H2#source').foldButton();
+    $('H2#parameters').foldButton();
+  });</script>
+<link href="files/foldButton.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="prettyPrint()">
+<div id="wrapper">
+<img src="files/evosuite.png" height="40"/>
+<br><br><h2 class=title>Summary</h2>
+<ul><li>Target class: dk.statsbiblioteket.summa.common.Record: 79.19%</ul><ul>
+<li>7896 fitness evaluations, 159 generations, 118763 statements, 5158 tests.
+<li>Time: 0:01:09(Search: 0:01:01, minimization: 0:00:08)
+<li>Coverage: 110/146 branches, 59/59 methods, 137/173 total goals
+<li>Mutation score: 81%
+</ul>
+<div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
+<div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = record0.isModified();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987629915L, record0.getCreationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;lLk&gt;\&quot;{}f,sU@`.&quot;, &quot;lLk&gt;\&quot;{}f,sU@`.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Record.ValidationState record_ValidationState0 = Record.ValidationState.fromString(&quot;lLk&gt;\&quot;{}f,sU@`.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  record0.compareTo((Object) record_ValidationState0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ClassCastException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(ClassCastException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * dk.statsbiblioteket.summa.common.Record$ValidationState cannot be cast to dk.statsbiblioteket.summa.common.Record
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.addMeta(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>String string0 = record0.getMeta(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987631217L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, string0);
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="5">  5: </a></span>byteArray0[1] = (byte)61;
+<span class="nocode"><a name="6">  6: </a></span>StringMap stringMap0 = StringMap.fromFormal(byteArray0);
+<span class="nocode"><a name="7">  7: </a></span>record0.setMeta(stringMap0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(1433987633263L, record0.getModificationTime());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(1433987633263L, record0.getCreationTime());
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;invalid&quot;, &quot;invalid&quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>String string0 = record0.toString(true);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987633384L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;Record [id(invalid), base(invalid), deleted(false), indexable(true), data-length(4), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0), creationTime(2015-06-10 19:53:53), modificationTime(2015-06-10 19:53:53), parentIds(), childIds(), meta()]&quot;, string0);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>String string0 = record0.toString();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987635195L, record0.getCreationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;Record [id(null), base(null), deleted(false), indexable(true), data-length(0), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, string0);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="3">  3: </a></span>Record record0 = new Record(&quot;[ENV] No system property found for property &quot;, &quot;[ENV] No system property found for property &quot;, true, true, byteArray0, (long) (byte)50, 0L, (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>record0.compressContent();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;Record [id([ENV] No system property found for property ), base([ENV] No system property found for property ), deleted(true), indexable(true), data-length(4), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, record0.toString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, record0.isHasRelations());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, record0.isDeleted());
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, record0.isContentCompressed());
+<span class="nocode"><a name="11"> 11: </a></span>assertEquals(true, record0.isIndexable());
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(0L, record0.getLastModified());
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(50L, record0.getCreationTime());
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;[ENV] No system property found for property &quot;, &quot;[ENV] No system property found for property &quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = record0.isContentCompressed();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987637480L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = record0.isHasRelations();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987639143L, record0.getModificationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;A;\&quot;.,*.,D&quot;, &quot;A;\&quot;.,*.,D&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.setHasRelations(false);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987639263L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987639263L, record0.getCreationTime());
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;a0N&quot;, &quot;a0N&quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>long long0 = record0.getLastModified();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987639775L, long0);
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  record0.getContentAsUTF8();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;s$uL&quot;, &quot;s$uL&quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>record0.touch();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987640899L, record0.getModificationTime());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987640899L, record0.getLastModified());
+</pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record.ValidationState record_ValidationState0 = Record.ValidationState.fromString(&quot;notValidated&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(Record.ValidationState.notValidated, record_ValidationState0);
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[7];
+<span class="nocode"><a name="5">  5: </a></span>byteArray0[1] = (byte)61;
+<span class="nocode"><a name="6">  6: </a></span>StringMap stringMap0 = StringMap.fromFormal(byteArray0);
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  record0.init((String) null, (String) null, false, false, byteArray0, (-1L), (-1344L), (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, true);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="12"> 12: </a></span>  /*
+<span class="nocode"><a name="13"> 13: </a></span>   * ID must be specified
+<span class="nocode"><a name="14"> 14: </a></span>   */
+<span class="nocode"><a name="15"> 15: </a></span>}
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = null;
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  record0 = new Record(&quot;&quot;, &quot;&quot;, byteArray0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * ID must not be the empty string
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = null;
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  record0 = new Record(&quot;_i9KE2O&gt;9vJ82/_&quot;, (String) null, byteArray0, 1340L);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * base must be specified for record '_i9KE2O&gt;9vJ82/_'
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="2">  2: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="3">  3: </a></span>Record record0 = null;
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  record0 = new Record(&quot;J&lt;6&amp;r4&quot;, &quot;&quot;, true, false, byteArray0, 0L, (long) (byte)103, (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, false);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * base must not be the empty string for record 'J&lt;6&amp;r4'
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[8];
+<span class="nocode"><a name="2">  2: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot;w;[ompo&gt;i&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="6">  6: </a></span>Record record0 = new Record(&quot;w;[ompo&gt;i&quot;, &quot;w;[ompo&gt;i&quot;, true, true, byteArray0, (long) (byte)0, 0L, list0, list0, stringMap0, true);
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="8">  8: </a></span>
+<span class="nocode"><a name="9">  9: </a></span>// Undeclared exception!
+<span class="nocode"><a name="10"> 10: </a></span>try {
+<span class="nocode"><a name="11"> 11: </a></span>  record0.getContent();
+<span class="nocode"><a name="12"> 12: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="13"> 13: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="14"> 14: </a></span>  /*
+<span class="nocode"><a name="15"> 15: </a></span>   * dk/statsbiblioteket/util/Zips
+<span class="nocode"><a name="16"> 16: </a></span>   */
+<span class="nocode"><a name="17"> 17: </a></span>}
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="2">  2: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="3">  3: </a></span>Record record0 = new Record(&quot;[ENV] No system property found for property &quot;, &quot;[ENV] No system property found for property &quot;, true, true, byteArray0, (long) (byte)50, (long) (byte)106, (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>byte[] byteArray1 = record0.getContent(false);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(50L, record0.getCreationTime());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, record0.isIndexable());
+<span class="nocode"><a name="9">  9: </a></span>assertNotNull(byteArray1);
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(false, record0.isHasRelations());
+<span class="nocode"><a name="11"> 11: </a></span>assertEquals(true, record0.isDeleted());
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(true, record0.isContentCompressed());
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(106L, record0.getModificationTime());
+<span class="nocode"><a name="14"> 14: </a></span>assertEquals(&quot;Record [id([ENV] No system property found for property ), base([ENV] No system property found for property ), deleted(true), indexable(true), data-length(6), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, record0.toString());
+<span class="nocode"><a name="15"> 15: </a></span>assertEquals(106L, record0.getLastModified());
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.unCompressContent();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987645508L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, record0.isIndexable());
+</pre>
+<h3>Test case 22</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;A;\&quot;.,*.,D&quot;, &quot;A;\&quot;.,*.,D&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="5">  5: </a></span>record0.setContent(byteArray0, false);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(10L, record0.getLength());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987645612L, record0.getLastModified());
+</pre>
+<h3>Test case 23</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;P;fan]&quot;, &quot;P;fan]&quot;, byteArray0, 0L);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  record0.setContent(byteArray0, true);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * dk/statsbiblioteket/util/Zips
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 24</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record(&quot;s$uL&quot;, &quot;s$uL&quot;, (byte[]) null, (long) (byte)39);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, record0.isIndexable());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Record [id(s$uL), base(s$uL), deleted(false), indexable(true), data-length(0), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, record0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, record0.isContentCompressed());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0L, record0.getCreationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(39L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(false, record0.isHasRelations());
+</pre>
+<h3>Test case 25</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;lLk&gt;\&quot;{}f,sU@`.&quot;, &quot;lLk&gt;\&quot;{}f,sU@`.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Record&gt; linkedList0 = new LinkedList&lt;Record&gt;();
+<span class="nocode"><a name="5">  5: </a></span>record0.setParents((List&lt;Record&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987647285L, record0.getModificationTime());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987647285L, record0.getCreationTime());
+</pre>
+<h3>Test case 26</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>record0.setChildIds(list0);
+<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = record0.equals((Object) record0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, record0.hasChildren());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;lLk&gt;\&quot;{}f,sU@`.&quot;, &quot;lLk&gt;\&quot;{}f,sU@`.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Record&gt; linkedList0 = new LinkedList&lt;Record&gt;();
+<span class="nocode"><a name="5">  5: </a></span>record0.setChildren((List&lt;Record&gt;) linkedList0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987651748L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987651748L, record0.getCreationTime());
+</pre>
+<h3>Test case 28</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.getChildren();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987652645L, record0.getCreationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987652645L, record0.getLastModified());
+</pre>
+<h3>Test case 29</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.setParents((List&lt;Record&gt;) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987652755L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987652755L, record0.getCreationTime());
+</pre>
+<h3>Test case 30</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;lLk&gt;\&quot;{}f,sU@`.&quot;, &quot;lLk&gt;\&quot;{}f,sU@`.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.getParents();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987652856L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987652856L, record0.getCreationTime());
+</pre>
+<h3>Test case 31</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;s$uL&quot;, &quot;s$uL&quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = record0.hasParents();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987653383L, record0.getLastModified());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 32</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="2">  2: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot;WA&lt;!Phd~5S=&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="6">  6: </a></span>Record record0 = new Record(&quot;WA&lt;!Phd~5S=&quot;, &quot;WA&lt;!Phd~5S=&quot;, false, true, byteArray0, 0L, 1L, list0, list0, stringMap0, false);
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="8">  8: </a></span>
+<span class="nocode"><a name="9">  9: </a></span>boolean boolean0 = record0.hasParents();
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="11"> 11: </a></span>assertEquals(&quot;Record [id(WA&lt;!Phd~5S=), base(WA&lt;!Phd~5S=), deleted(false), indexable(true), data-length(5), num-childrenIDs(1), num-parentsIDs(1), num-childRecords(0), num-parentRecords(0))]&quot;, record0.toString());
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(0L, record0.getCreationTime());
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(true, record0.isIndexable());
+<span class="nocode"><a name="14"> 14: </a></span>assertEquals(false, record0.isContentCompressed());
+<span class="nocode"><a name="15"> 15: </a></span>assertEquals(1L, record0.getLastModified());
+</pre>
+<h3>Test case 33</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = record0.hasChildren();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987656076L, record0.getCreationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 34</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="3">  3: </a></span>Record record0 = new Record(&quot;[ENV] No system property found for property &quot;, &quot;[ENV] No system property found for property &quot;, true, true, byteArray0, (long) (byte)50, 0L, (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>boolean boolean0 = record0.isModified();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, record0.isHasRelations());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;Record [id([ENV] No system property found for property ), base([ENV] No system property found for property ), deleted(true), indexable(true), data-length(4), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, record0.toString());
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, record0.isIndexable());
+<span class="nocode"><a name="11"> 11: </a></span>assertEquals(0L, record0.getLastModified());
+<span class="nocode"><a name="12"> 12: </a></span>assertEquals(true, record0.isDeleted());
+<span class="nocode"><a name="13"> 13: </a></span>assertEquals(true, record0.isContentCompressed());
+<span class="nocode"><a name="14"> 14: </a></span>assertEquals(50L, record0.getCreationTime());
+</pre>
+<h3>Test case 35</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.getMeta();
+<span class="nocode"><a name="5">  5: </a></span>record0.addMeta(&quot;Record [id(null), base(null), deleted(false), indexable(true), data-length(0), num-childrenIDs(0), num-parentsIDs(0), num-childRecords(0), num-parentRecords(0))]&quot;, &quot;3E?xZ(tD@A:8U}.&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, record0.hasMeta());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987658005L, record0.getLastModified());
+</pre>
+<h3>Test case 36</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.getMeta(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987658329L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987658329L, record0.getCreationTime());
+</pre>
+<h3>Test case 37</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>int int0 = record0.hashCode();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987658419L, record0.getModificationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals((-246035090), int0);
+</pre>
+<h3>Test case 38</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[3];
+<span class="nocode"><a name="2">  2: </a></span>Record record0 = new Record(&quot;s$uL&quot;, &quot;s$uL&quot;, byteArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>int int0 = record0.hashCode();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1433987659019L, record0.getCreationTime());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals((-242510187), int0);
+</pre>
+<h3>Test case 39</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = new Record();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = record0.equals((Object) &quot;64&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987659767L, record0.getModificationTime());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 40</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>byte[] byteArray0 = new byte[10];
+<span class="nocode"><a name="5">  5: </a></span>Record record1 = new Record(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, byteArray0);
+<span class="nocode"><a name="6">  6: </a></span>record0.equals((Object) record1);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1433987659852L, record0.getModificationTime());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(1433987659852L, record0.getCreationTime());
+</pre>
+<h3>Test case 41</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot;J1/&quot;, &quot;J1/&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = record0.equals((Object) record0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433987663509L, record0.getLastModified());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 42</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>record0.addMeta(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = record0.equals((Object) record0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, record0.hasMeta());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 43</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Record record0 = Record.createDeletedRecord(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, &quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>record0.setChildIds(list0);
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  record0.toString(true);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * dk/statsbiblioteket/util/Logs
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
+</pre>
+<h3>Test case 44</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[4];
+<span class="nocode"><a name="2">  2: </a></span>StringMap stringMap0 = new StringMap();
+<span class="nocode"><a name="3">  3: </a></span>Record record0 = new Record(&quot;[ENV] No system property found for property &quot;, &quot;[ENV] No system property found for property &quot;, true, true, byteArray0, (long) (byte)50, 0L, (List&lt;String&gt;) null, (List&lt;String&gt;) null, stringMap0, true);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(record0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  record0.toString(true);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * dk/statsbiblioteket/util/Logs
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
+</pre>
+<h3>Test case 45</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>List&lt;String&gt; list0 = Record.idStringToList((String) null);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(list0);
+</pre>
+<h3>Test case 46</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(list0);
+</pre>
+<h3>Test case 47</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Record.idListToString((List&lt;String&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
+</pre>
+<h3>Test case 48</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>List&lt;String&gt; list0 = Record.idStringToList(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>String string0 = Record.idListToString(list0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot; implements LogFactory but was loaded by an incompatible classloader.&quot;, string0);
+</pre>
+<h3>Test case 49</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="2">  2: </a></span>String string0 = Record.idListToString((List&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(string0);
+</pre>
+</div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
+<div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
+<span class="nocode"><a name="2">  2: </a></span> *  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+<span class="nocode"><a name="3">  3: </a></span> *  you may not use this file except in compliance with the License.
+<span class="nocode"><a name="4">  4: </a></span> *  You may obtain a copy of the License at
+<span class="nocode"><a name="5">  5: </a></span> *
+<span class="nocode"><a name="6">  6: </a></span> *      http://www.apache.org/licenses/LICENSE-2.0
+<span class="nocode"><a name="7">  7: </a></span> *
+<span class="nocode"><a name="8">  8: </a></span> *  Unless required by applicable law or agreed to in writing, software
+<span class="nocode"><a name="9">  9: </a></span> *  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+<span class="nocode"><a name="10"> 10: </a></span> *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class="nocode"><a name="11"> 11: </a></span> *  See the License for the specific language governing permissions and
+<span class="nocode"><a name="12"> 12: </a></span> *  limitations under the License.
+<span class="nocode"><a name="13"> 13: </a></span> *
+<span class="nocode"><a name="14"> 14: </a></span> */
+<span class="nocode"><a name="15"> 15: </a></span>package dk.statsbiblioteket.summa.common;
+<span class="nocode"><a name="16"> 16: </a></span>
+<span class="nocode"><a name="17"> 17: </a></span>import dk.statsbiblioteket.summa.common.util.StringMap;
+<span class="nocode"><a name="18"> 18: </a></span>import dk.statsbiblioteket.util.Logs;
+<span class="nocode"><a name="19"> 19: </a></span>import dk.statsbiblioteket.util.Zips;
+<span class="nocode"><a name="20"> 20: </a></span>import dk.statsbiblioteket.util.qa.QAInfo;
+<span class="nocode"><a name="21"> 21: </a></span>import org.apache.commons.logging.Log;
+<span class="nocode"><a name="22"> 22: </a></span>import org.apache.commons.logging.LogFactory;
+<span class="nocode"><a name="23"> 23: </a></span>
+<span class="nocode"><a name="24"> 24: </a></span>import java.io.Serializable;
+<span class="nocode"><a name="25"> 25: </a></span>import java.io.StringWriter;
+<span class="nocode"><a name="26"> 26: </a></span>import java.io.UnsupportedEncodingException;
+<span class="nocode"><a name="27"> 27: </a></span>import java.util.*;
+<span class="nocode"><a name="28"> 28: </a></span>
+<span class="nocode"><a name="29"> 29: </a></span>/**
+<span class="nocode"><a name="30"> 30: </a></span> * A Record is the atom data unit in Summa. Is is used for ingesting to the
+<span class="nocode"><a name="31"> 31: </a></span> * Storage as well as extracting from it.
+<span class="nocode"><a name="32"> 32: </a></span> * &lt;p/&gt;
+<span class="nocode"><a name="33"> 33: </a></span> * The records may optionally have their content payload GZip compressed, in
+<span class="nocode"><a name="34"> 34: </a></span> * which case it will be unzipped lazily on the first call to
+<span class="nocode"><a name="35"> 35: </a></span> * {@link #getContent} or {@link #getContentAsUTF8()}
+<span class="nocode"><a name="36"> 36: </a></span> */
+<span class="nocode"><a name="37"> 37: </a></span>@QAInfo(level = QAInfo.Level.NORMAL,
+<span class="nocode"><a name="38"> 38: </a></span>        state = QAInfo.State.QA_NEEDED,
+<span class="nocode"><a name="39"> 39: </a></span>        author = &quot;hal, te, mke&quot;)
+<span class="nocode"><a name="40"> 40: </a></span>public class Record implements Serializable, Comparable {
+<span class="nocode"><a name="41"> 41: </a></span>    /**
+<span class="nocode"><a name="42"> 42: </a></span>     * The serial Version UID.
+<span class="nocode"><a name="43"> 43: </a></span>     */
+<span class="nocode"><a name="44"> 44: </a></span>    public static final long serialVersionUID = 35848318186L;
+<span class="nocode"><a name="45"> 45: </a></span>    /**
+<span class="nocode"><a name="46"> 46: </a></span>     * Private logger.
+<span class="nocode"><a name="47"> 47: </a></span>     */
+<span class="nocode"><a name="48"> 48: </a></span>    private static Log log = LogFactory.getLog(Record.class);
+<span class="nocode"><a name="49"> 49: </a></span>    /**
+<span class="nocode"><a name="50"> 50: </a></span>     * Empty content for empty records.
+<span class="nocode"><a name="51"> 51: </a></span>     */
+<span class="nocode"><a name="52"> 52: </a></span>    private static final byte[] EMPTY_CONTENT = new byte[0];
+<span class="nocode"><a name="53"> 53: </a></span>
+<span class="nocode"><a name="54"> 54: </a></span>    /**
+<span class="nocode"><a name="55"> 55: </a></span>     * The validation-state can only be stored indirectly using the map
+<span class="nocode"><a name="56"> 56: </a></span>     * provided by getMeta().
+<span class="nocode"><a name="57"> 57: </a></span>     */
+<span class="nocode"><a name="58"> 58: </a></span>    public enum ValidationState {
+<span class="nocode"><a name="59"> 59: </a></span>        /**
+<span class="nocode"><a name="60"> 60: </a></span>         * The three states notValidated, valid and invalid.
+<span class="nocode"><a name="61"> 61: </a></span>         */
+<span class="nocode"><a name="62"> 62: </a></span>        notValidated, valid, invalid;
+<span class="nocode"><a name="63"> 63: </a></span>
+<span class="nocode"><a name="64"> 64: </a></span>        /**
+<span class="nocode"><a name="65"> 65: </a></span>         * From a given string, return the corresponding state.
+<span class="nocode"><a name="66"> 66: </a></span>         *
+<span class="nocode"><a name="67"> 67: </a></span>         * @param in The string representation of the wanted state.
+<span class="nocode"><a name="68"> 68: </a></span>         * @return The state or {@link #notValidated}.
+<span class="nocode"><a name="69"> 69: </a></span>         */
+<span class="nocode"><a name="70"> 70: </a></span>        public static ValidationState fromString(String in) {
+<span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">            if (&quot;notValidated&quot;.equals(in)) {</span>
+<span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">                return notValidated;</span>
+<span class="nocode"><a name="73"> 73: </a></span><span style="background-color: #ffffcc">            } else if (&quot;valid&quot;.equals(in)) {</span>
+<span class="nocode"><a name="74"> 74: </a></span>                return valid;
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">            } else if (&quot;invalid&quot;.equals(in)) {</span>
+<span class="nocode"><a name="76"> 76: </a></span>                return invalid;
+<span class="nocode"><a name="77"> 77: </a></span>            } else {
+<span class="nocode"><a name="78"> 78: </a></span><span style="background-color: #ffffcc">                log.warn(&quot;Unknown state: '&quot; + in + &quot;' in ValidationState.fromString. Returning &quot; + notValidated);</span>
+<span class="nocode"><a name="79"> 79: </a></span><span style="background-color: #ffffcc">                return notValidated;</span>
+<span class="nocode"><a name="80"> 80: </a></span>            }
+<span class="nocode"><a name="81"> 81: </a></span>        }
+<span class="nocode"><a name="82"> 82: </a></span>    }
+<span class="nocode"><a name="83"> 83: </a></span>
+<span class="nocode"><a name="84"> 84: </a></span>    /**
+<span class="nocode"><a name="85"> 85: </a></span>     * The Meta validation state.
+<span class="nocode"><a name="86"> 86: </a></span>     */
+<span class="nocode"><a name="87"> 87: </a></span>    public static final String META_VALIDATION_STATE = &quot;ValidationState&quot;;
+<span class="nocode"><a name="88"> 88: </a></span>
+<span class="nocode"><a name="89"> 89: </a></span>    /**
+<span class="nocode"><a name="90"> 90: </a></span>     * Delimiter between Id's.
+<span class="nocode"><a name="91"> 91: </a></span>     */
+<span class="nocode"><a name="92"> 92: </a></span>    public static final String ID_DELIMITER = &quot;;&quot;;
+<span class="nocode"><a name="93"> 93: </a></span>
+<span class="nocode"><a name="94"> 94: </a></span>    /**
+<span class="nocode"><a name="95"> 95: </a></span>     * The id is a persistent unique identifier for the Record. This is normally
+<span class="nocode"><a name="96"> 96: </a></span>     * provided by the target. All Records must have an id.
+<span class="nocode"><a name="97"> 97: </a></span>     */
+<span class="nocode"><a name="98"> 98: </a></span>    private String id;
+<span class="nocode"><a name="99"> 99: </a></span>    /**
+<span class="nocode"><a name="100">100: </a></span>     * The base designates the target that this Record belongs to. Examples are
+<span class="nocode"><a name="101">101: </a></span>     * horizon, fagref and nat. All Records must have a base.
+<span class="nocode"><a name="102">102: </a></span>     */
+<span class="nocode"><a name="103">103: </a></span>    private String base;
+<span class="nocode"><a name="104">104: </a></span>    /**
+<span class="nocode"><a name="105">105: </a></span>     * If true, the Record is/is to be marked as deleted in the Storage.
+<span class="nocode"><a name="106">106: </a></span>     * Deleted records should not be indexed, but they can be viewed.
+<span class="nocode"><a name="107">107: </a></span>     */
+<span class="nocode"><a name="108">108: </a></span><span style="background-color: #ffffcc">    private boolean deleted = false;</span>
+<span class="nocode"><a name="109">109: </a></span>    /**
+<span class="nocode"><a name="110">110: </a></span>     * If true, the Record should be indexed by the indexer. This is normally
+<span class="nocode"><a name="111">111: </a></span>     * controlled by the Storage when it scans for multi-volumes.
+<span class="nocode"><a name="112">112: </a></span>     */
+<span class="nocode"><a name="113">113: </a></span><span style="background-color: #ffffcc">    private boolean indexable = true;</span>
+<span class="nocode"><a name="114">114: </a></span>    /**
+<span class="nocode"><a name="115">115: </a></span>     * The target-specific content of the Record. All Records must have data.
+<span class="nocode"><a name="116">116: </a></span>     */
+<span class="nocode"><a name="117">117: </a></span>    private byte[] data;
+<span class="nocode"><a name="118">118: </a></span>    /**
+<span class="nocode"><a name="119">119: </a></span>     * Creation-time for the content that the Record encapsulates.
+<span class="nocode"><a name="120">120: </a></span>     * The format is that of System.currentTimeMillis.
+<span class="nocode"><a name="121">121: </a></span>     */
+<span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">    private long creationTime = System.currentTimeMillis();</span>
+<span class="nocode"><a name="123">123: </a></span>    /**
+<span class="nocode"><a name="124">124: </a></span>     * Last modification-time for the content that the Record encapsulates.
+<span class="nocode"><a name="125">125: </a></span>     * The format is that of System.currentTimeMillis.
+<span class="nocode"><a name="126">126: </a></span>     */
+<span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">    private long modificationTime = creationTime;</span>
+<span class="nocode"><a name="128">128: </a></span>    /**
+<span class="nocode"><a name="129">129: </a></span>     * The id of the parent-record for this record, if any. If there is no
+<span class="nocode"><a name="130">130: </a></span>     * parent-record, this must be null. If a parent-record is present,
+<span class="nocode"><a name="131">131: </a></span>     * {@link #indexable} will normally be false.
+<span class="nocode"><a name="132">132: </a></span>     */
+<span class="nocode"><a name="133">133: </a></span>
+<span class="nocode"><a name="134">134: </a></span>    /**
+<span class="nocode"><a name="135">135: </a></span>     * Will be true if parents or children exists for the record.
+<span class="nocode"><a name="136">136: </a></span>     */
+<span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">    private boolean hasRelations = false;</span>
+<span class="nocode"><a name="138">138: </a></span>
+<span class="nocode"><a name="139">139: </a></span>    private LinkedHashSet&lt;String&gt; parentIds;
+<span class="nocode"><a name="140">140: </a></span>    /**
+<span class="nocode"><a name="141">141: </a></span>     * A list of Record instances representing the parents of this record.
+<span class="nocode"><a name="142">142: </a></span>     */
+<span class="nocode"><a name="143">143: </a></span>    private LinkedHashSet&lt;Record&gt; parents;
+<span class="nocode"><a name="144">144: </a></span>    /**
+<span class="nocode"><a name="145">145: </a></span>     * The ids of the children-records for this record, if any. If there are
+<span class="nocode"><a name="146">146: </a></span>     * no children-records, this must be null.
+<span class="nocode"><a name="147">147: </a></span>     */
+<span class="nocode"><a name="148">148: </a></span>    private LinkedHashSet&lt;String&gt; childIds;
+<span class="nocode"><a name="149">149: </a></span>    /**
+<span class="nocode"><a name="150">150: </a></span>     * A list of Record instances representing the children of this record.
+<span class="nocode"><a name="151">151: </a></span>     */
+<span class="nocode"><a name="152">152: </a></span>    private LinkedHashSet&lt;Record&gt; children;
+<span class="nocode"><a name="153">153: </a></span>
+<span class="nocode"><a name="154">154: </a></span>    /**
+<span class="nocode"><a name="155">155: </a></span>     * Meta-data for the Record, such as validation-state. Used for filter-
+<span class="nocode"><a name="156">156: </a></span>     * specific data. The map can be accessed by {@link #getMeta}. It does
+<span class="nocode"><a name="157">157: </a></span>     * not permit null - neither as key, nor value.
+<span class="nocode"><a name="158">158: </a></span>     */
+<span class="nocode"><a name="159">159: </a></span>    private StringMap meta;
+<span class="nocode"><a name="160">160: </a></span>
+<span class="nocode"><a name="161">161: </a></span>    /**
+<span class="nocode"><a name="162">162: </a></span>     * Indicates whether the bytes stored in {@link #data} is GZip compressed.
+<span class="nocode"><a name="163">163: </a></span>     * If it is a call to {@link #getContent} should uncompress it before
+<span class="nocode"><a name="164">164: </a></span>     * returning the data and set this value to {@code false}.
+<span class="nocode"><a name="165">165: </a></span>     */
+<span class="nocode"><a name="166">166: </a></span>    private boolean contentCompressed;
+<span class="nocode"><a name="167">167: </a></span>
+<span class="nocode"><a name="168">168: </a></span>    /**
+<span class="nocode"><a name="169">169: </a></span>     * Create a Record without content. The state of the Record is not
+<span class="nocode"><a name="170">170: </a></span>     * guaranteed to be consistent.
+<span class="nocode"><a name="171">171: </a></span>     */
+<span class="nocode"><a name="172">172: </a></span>    protected Record() {
+<span class="nocode"><a name="173">173: </a></span><span style="background-color: #ffffcc">        log.trace(&quot;Creating empty record&quot;);</span>
+<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="175">175: </a></span>
+<span class="nocode"><a name="176">176: </a></span>    /**
+<span class="nocode"><a name="177">177: </a></span>     * Create a Record with minimal values and mark is as not modified (new).
+<span class="nocode"><a name="178">178: </a></span>     *
+<span class="nocode"><a name="179">179: </a></span>     * @param id   {@link #id}.
+<span class="nocode"><a name="180">180: </a></span>     * @param base {@link #base}.
+<span class="nocode"><a name="181">181: </a></span>     * @param data {@link #data}.
+<span class="nocode"><a name="182">182: </a></span>     */
+<span class="nocode"><a name="183">183: </a></span>    public Record(String id, String base, byte[] data) {
+<span class="nocode"><a name="184">184: </a></span><span style="background-color: #ffffcc">        long now = System.currentTimeMillis();</span>
+<span class="nocode"><a name="185">185: </a></span><span style="background-color: #ffffcc">        init(id, base, false, true, data, now, now, null, null, null, false);</span>
+<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="187">187: </a></span>
+<span class="nocode"><a name="188">188: </a></span>    /**
+<span class="nocode"><a name="189">189: </a></span>     * Create a Record with minimal values and mark it as modified with the
+<span class="nocode"><a name="190">190: </a></span>     * supplied lastModified time. The {@link #creationTime} will be 0.
+<span class="nocode"><a name="191">191: </a></span>     *
+<span class="nocode"><a name="192">192: </a></span>     * @param id           {@link #id}.
+<span class="nocode"><a name="193">193: </a></span>     * @param base         {@link #base}.
+<span class="nocode"><a name="194">194: </a></span>     * @param data         {@link #data}.
+<span class="nocode"><a name="195">195: </a></span>     * @param lastModified {@link #modificationTime}.
+<span class="nocode"><a name="196">196: </a></span>     */
+<span class="nocode"><a name="197">197: </a></span>    public Record(String id, String base, byte[] data, long lastModified) {
+<span class="nocode"><a name="198">198: </a></span><span style="background-color: #ffffcc">        init(id, base, false, true, data, 0, lastModified, null, null, null, false);</span>
+<span class="nocode"><a name="199">199: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="200">200: </a></span>
+<span class="nocode"><a name="201">201: </a></span>    /**
+<span class="nocode"><a name="202">202: </a></span>     * Create a Record with all parts explicitly specified.
+<span class="nocode"><a name="203">203: </a></span>     *
+<span class="nocode"><a name="204">204: </a></span>     * @param id                The ID of the Record. {@link #id}.
+<span class="nocode"><a name="205">205: </a></span>     * @param base              The base that the Record comes from. {@link #base}.
+<span class="nocode"><a name="206">206: </a></span>     * @param deleted           True if the Record is deleted. {@link #deleted}.
+<span class="nocode"><a name="207">207: </a></span>     * @param indexable         True if the Record should be indexed.
+<span class="nocode"><a name="208">208: </a></span>     *                          {@link #indexable}.
+<span class="nocode"><a name="209">209: </a></span>     * @param data              The data for the Record. {@link #data}.
+<span class="nocode"><a name="210">210: </a></span>     * @param creationTime      The time that the Record elements were created.
+<span class="nocode"><a name="211">211: </a></span>     *                          {@link #creationTime}.
+<span class="nocode"><a name="212">212: </a></span>     * @param lastModified      The last time that the Record elements were modified.
+<span class="nocode"><a name="213">213: </a></span>     *                          {@link #modificationTime}.
+<span class="nocode"><a name="214">214: </a></span>     * @param parentIds         the ID for the parent record. {@link #parentIds}.
+<span class="nocode"><a name="215">215: </a></span>     * @param childIds          The ID's for the children records. {@link #childIds}.
+<span class="nocode"><a name="216">216: </a></span>     * @param meta              Metadata for the Record.
+<span class="nocode"><a name="217">217: </a></span>     * @param contentCompressed Whether the contents of the {@code data}
+<span class="nocode"><a name="218">218: </a></span>     *                          argument id GZip compressed. If this argument is
+<span class="nocode"><a name="219">219: </a></span>     *                          {@code true} the first call to
+<span class="nocode"><a name="220">220: </a></span>     *                          {@link #getContent} or
+<span class="nocode"><a name="221">221: </a></span>     *                          {@link #getContentAsUTF8()} will unzip the data
+<span class="nocode"><a name="222">222: </a></span>     */
+<span class="nocode"><a name="223">223: </a></span>    public Record(String id, String base, boolean deleted, boolean indexable, byte[] data, long creationTime, 
+<span class="nocode"><a name="224">224: </a></span>                  long lastModified, List&lt;String&gt; parentIds, List&lt;String&gt; childIds, StringMap meta, 
+<span class="nocode"><a name="225">225: </a></span>                  boolean contentCompressed) {
+<span class="nocode"><a name="226">226: </a></span><span style="background-color: #ffffcc">        init(id, base, deleted, indexable, data, creationTime, lastModified, parentIds, childIds, meta, </span>
+<span class="nocode"><a name="227">227: </a></span>             contentCompressed);
+<span class="nocode"><a name="228">228: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="229">229: </a></span>
+<span class="nocode"><a name="230">230: </a></span>    /**
+<span class="nocode"><a name="231">231: </a></span>     * Initialize a Record with all parts explicitly specified.
+<span class="nocode"><a name="232">232: </a></span>     *
+<span class="nocode"><a name="233">233: </a></span>     * @param id                The ID of the Record. {@link #id}.
+<span class="nocode"><a name="234">234: </a></span>     * @param base              The base that the Record comes from. {@link #base}.
+<span class="nocode"><a name="235">235: </a></span>     * @param deleted           True if the Record is deleted. {@link #deleted}.
+<span class="nocode"><a name="236">236: </a></span>     * @param indexable         True if the Record should be indexed.
+<span class="nocode"><a name="237">237: </a></span>     *                          {@link #indexable}.
+<span class="nocode"><a name="238">238: </a></span>     * @param data              The data for the Record. {@link #data}.
+<span class="nocode"><a name="239">239: </a></span>     * @param creationTime      The time that the Record elements were created.
+<span class="nocode"><a name="240">240: </a></span>     *                          {@link #creationTime}.
+<span class="nocode"><a name="241">241: </a></span>     * @param lastModified      The last time that the Record elements were modified.
+<span class="nocode"><a name="242">242: </a></span>     *                          {@link #modificationTime}.
+<span class="nocode"><a name="243">243: </a></span>     * @param parents           The ID for the parent record. {@link #parentIds}.
+<span class="nocode"><a name="244">244: </a></span>     * @param children          The ID's for the children records. {@link #childIds}.
+<span class="nocode"><a name="245">245: </a></span>     * @param meta              Metadata for the Record.
+<span class="nocode"><a name="246">246: </a></span>     * @param contentCompressed If true, content is GZipped.
+<span class="nocode"><a name="247">247: </a></span>     */
+<span class="nocode"><a name="248">248: </a></span>    @SuppressWarnings({&quot;DuplicateStringLiteralInspection&quot;})
+<span class="nocode"><a name="249">249: </a></span>    public void init(String id, String base, boolean deleted, boolean indexable, byte[] data, long creationTime, 
+<span class="nocode"><a name="250">250: </a></span>                     long lastModified, List&lt;String&gt; parents, List&lt;String&gt; children, StringMap meta, 
+<span class="nocode"><a name="251">251: </a></span>                     boolean contentCompressed) {
+<span class="nocode"><a name="252">252: </a></span><span style="background-color: #ffffcc">        setId(id);</span>
+<span class="nocode"><a name="253">253: </a></span><span style="background-color: #ffffcc">        setBase(base);</span>
+<span class="nocode"><a name="254">254: </a></span><span style="background-color: #ffffcc">        setDeleted(deleted);</span>
+<span class="nocode"><a name="255">255: </a></span><span style="background-color: #ffffcc">        setIndexable(indexable);</span>
+<span class="nocode"><a name="256">256: </a></span><span style="background-color: #ffffcc">        setRawContent(data);</span>
+<span class="nocode"><a name="257">257: </a></span><span style="background-color: #ffffcc">        setCreationTime(creationTime);</span>
+<span class="nocode"><a name="258">258: </a></span><span style="background-color: #ffffcc">        setModificationTime(lastModified);</span>
+<span class="nocode"><a name="259">259: </a></span><span style="background-color: #ffffcc">        setParentIds(parents);</span>
+<span class="nocode"><a name="260">260: </a></span><span style="background-color: #ffffcc">        setChildIds(children);</span>
+<span class="nocode"><a name="261">261: </a></span><span style="background-color: #ffffcc">        setChildren(null);</span>
+<span class="nocode"><a name="262">262: </a></span><span style="background-color: #ffffcc">        this.contentCompressed = contentCompressed;</span>
+<span class="nocode"><a name="263">263: </a></span><span style="background-color: #ffffcc">        this.meta = meta;</span>
+<span class="nocode"><a name="264">264: </a></span>
+<span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        if (log.isTraceEnabled()) {</span>
+<span class="nocode"><a name="266">266: </a></span>            log.trace(&quot;Created &quot; + toString(true));
+<span class="nocode"><a name="267">267: </a></span>        }
+<span class="nocode"><a name="268">268: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="269">269: </a></span>
+<span class="nocode"><a name="270">270: </a></span>
+<span class="nocode"><a name="271">271: </a></span>    /***************** Mutators &amp; accessors ***********************/
+<span class="nocode"><a name="272">272: </a></span>
+<span class="nocode"><a name="273">273: </a></span>    /**
+<span class="nocode"><a name="274">274: </a></span>     * Return the ID.
+<span class="nocode"><a name="275">275: </a></span>     *
+<span class="nocode"><a name="276">276: </a></span>     * @return The ID.
+<span class="nocode"><a name="277">277: </a></span>     */
+<span class="nocode"><a name="278">278: </a></span>    public String getId() {
+<span class="nocode"><a name="279">279: </a></span><span style="background-color: #ffffcc">        return id;</span>
+<span class="nocode"><a name="280">280: </a></span>    }
+<span class="nocode"><a name="281">281: </a></span>
+<span class="nocode"><a name="282">282: </a></span>    /**
+<span class="nocode"><a name="283">283: </a></span>     * Override the record id. The new id should not be null and differ from the
+<span class="nocode"><a name="284">284: </a></span>     * empty string.
+<span class="nocode"><a name="285">285: </a></span>     *
+<span class="nocode"><a name="286">286: </a></span>     * @param id New id.
+<span class="nocode"><a name="287">287: </a></span>     */
+<span class="nocode"><a name="288">288: </a></span>    public void setId(String id) {
+<span class="nocode"><a name="289">289: </a></span><span style="background-color: #ffffcc">        if (id == null) {</span>
+<span class="nocode"><a name="290">290: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(&quot;ID must be specified&quot;);</span>
+<span class="nocode"><a name="291">291: </a></span>        }
+<span class="nocode"><a name="292">292: </a></span><span style="background-color: #ffffcc">        if (&quot;&quot;.equals(id)) {</span>
+<span class="nocode"><a name="293">293: </a></span>            //noinspection DuplicateStringLiteralInspection
+<span class="nocode"><a name="294">294: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(&quot;ID must not be the empty string&quot;);</span>
+<span class="nocode"><a name="295">295: </a></span>        }
+<span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">        this.id = id;</span>
+<span class="nocode"><a name="297">297: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="298">298: </a></span>
+<span class="nocode"><a name="299">299: </a></span>    /**
+<span class="nocode"><a name="300">300: </a></span>     * Return the record base.
+<span class="nocode"><a name="301">301: </a></span>     *
+<span class="nocode"><a name="302">302: </a></span>     * @return Record base.
+<span class="nocode"><a name="303">303: </a></span>     */
+<span class="nocode"><a name="304">304: </a></span>    public String getBase() {
+<span class="nocode"><a name="305">305: </a></span><span style="background-color: #ffffcc">        return base;</span>
+<span class="nocode"><a name="306">306: </a></span>    }
+<span class="nocode"><a name="307">307: </a></span>
+<span class="nocode"><a name="308">308: </a></span>    /**
+<span class="nocode"><a name="309">309: </a></span>     * Set the record base for this record. The new base should not be null and
+<span class="nocode"><a name="310">310: </a></span>     * differ from the empty string.
+<span class="nocode"><a name="311">311: </a></span>     *
+<span class="nocode"><a name="312">312: </a></span>     * @param base New record base.
+<span class="nocode"><a name="313">313: </a></span>     */
+<span class="nocode"><a name="314">314: </a></span>    public void setBase(String base) {
+<span class="nocode"><a name="315">315: </a></span><span style="background-color: #ffffcc">        if (base == null) {</span>
+<span class="nocode"><a name="316">316: </a></span>            //noinspection DuplicateStringLiteralInspection
+<span class="nocode"><a name="317">317: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(&quot;base must be specified for record '&quot; + getId() + &quot;'&quot;);</span>
+<span class="nocode"><a name="318">318: </a></span>        }
+<span class="nocode"><a name="319">319: </a></span><span style="background-color: #ffffcc">        if (&quot;&quot;.equals(base)) {</span>
+<span class="nocode"><a name="320">320: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(&quot;base must not be the empty string for record '&quot; + getId() + &quot;'&quot;);</span>
+<span class="nocode"><a name="321">321: </a></span>        }
+<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">        this.base = base;</span>
+<span class="nocode"><a name="323">323: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="324">324: </a></span>
+<span class="nocode"><a name="325">325: </a></span>    /**
+<span class="nocode"><a name="326">326: </a></span>     * Return if this record is deleted.
+<span class="nocode"><a name="327">327: </a></span>     *
+<span class="nocode"><a name="328">328: </a></span>     * @return The delete state of this record.
+<span class="nocode"><a name="329">329: </a></span>     */
+<span class="nocode"><a name="330">330: </a></span>    public boolean isDeleted() {
+<span class="nocode"><a name="331">331: </a></span><span style="background-color: #ffffcc">        return deleted;</span>
+<span class="nocode"><a name="332">332: </a></span>    }
+<span class="nocode"><a name="333">333: </a></span>
+<span class="nocode"><a name="334">334: </a></span>    /**
+<span class="nocode"><a name="335">335: </a></span>     * Sets the deleted state of this record.
+<span class="nocode"><a name="336">336: </a></span>     *
+<span class="nocode"><a name="337">337: </a></span>     * @param isDeleted New deleted state.
+<span class="nocode"><a name="338">338: </a></span>     */
+<span class="nocode"><a name="339">339: </a></span>    public void setDeleted(boolean isDeleted) {
+<span class="nocode"><a name="340">340: </a></span><span style="background-color: #ffffcc">        deleted = isDeleted;</span>
+<span class="nocode"><a name="341">341: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="342">342: </a></span>
+<span class="nocode"><a name="343">343: </a></span>
+<span class="nocode"><a name="344">344: </a></span>    public boolean isHasRelations() {
+<span class="nocode"><a name="345">345: </a></span><span style="background-color: #ffffcc">        return hasRelations;</span>
+<span class="nocode"><a name="346">346: </a></span>    }
+<span class="nocode"><a name="347">347: </a></span>
+<span class="nocode"><a name="348">348: </a></span>    public void setHasRelations(boolean hasRelations) {
+<span class="nocode"><a name="349">349: </a></span><span style="background-color: #ffffcc">        this.hasRelations = hasRelations;</span>
+<span class="nocode"><a name="350">350: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="351">351: </a></span>
+<span class="nocode"><a name="352">352: </a></span>    /**
+<span class="nocode"><a name="353">353: </a></span>     * Returns if this record is indexable.
+<span class="nocode"><a name="354">354: </a></span>     *
+<span class="nocode"><a name="355">355: </a></span>     * @return The indexable state of this record.
+<span class="nocode"><a name="356">356: </a></span>     */
+<span class="nocode"><a name="357">357: </a></span>    public boolean isIndexable() {
+<span class="nocode"><a name="358">358: </a></span><span style="background-color: #ffffcc">        return indexable;</span>
+<span class="nocode"><a name="359">359: </a></span>    }
+<span class="nocode"><a name="360">360: </a></span>
+<span class="nocode"><a name="361">361: </a></span>    /**
+<span class="nocode"><a name="362">362: </a></span>     * Update the indexable state of this record.
+<span class="nocode"><a name="363">363: </a></span>     *
+<span class="nocode"><a name="364">364: </a></span>     * @param isIndexable New indexable state of this record.
+<span class="nocode"><a name="365">365: </a></span>     */
+<span class="nocode"><a name="366">366: </a></span>    public void setIndexable(boolean isIndexable) {
+<span class="nocode"><a name="367">367: </a></span><span style="background-color: #ffffcc">        indexable = isIndexable;</span>
+<span class="nocode"><a name="368">368: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="369">369: </a></span>
+<span class="nocode"><a name="370">370: </a></span>    /**
+<span class="nocode"><a name="371">371: </a></span>     * Get the content in uncompressed form, no matter if it is internally
+<span class="nocode"><a name="372">372: </a></span>     * compressed or not.
+<span class="nocode"><a name="373">373: </a></span>     *
+<span class="nocode"><a name="374">374: </a></span>     * @return Uncompressed content.
+<span class="nocode"><a name="375">375: </a></span>     */
+<span class="nocode"><a name="376">376: </a></span>    public byte[] getContent() {
+<span class="nocode"><a name="377">377: </a></span><span style="background-color: #ffffcc">        return getContent(true);</span>
+<span class="nocode"><a name="378">378: </a></span>    }
+<span class="nocode"><a name="379">379: </a></span>
+<span class="nocode"><a name="380">380: </a></span>    /**
+<span class="nocode"><a name="381">381: </a></span>     * Get the content in internal form or uncompressed form, depending on
+<span class="nocode"><a name="382">382: </a></span>     * the autoUncompress value.
+<span class="nocode"><a name="383">383: </a></span>     *
+<span class="nocode"><a name="384">384: </a></span>     * @param autoUncompress if true, the content is always returned in
+<span class="nocode"><a name="385">385: </a></span>     *                       uncompressed form. If false, the content is
+<span class="nocode"><a name="386">386: </a></span>     *                       returned directly: If it is compressed, it will
+<span class="nocode"><a name="387">387: </a></span>     *                       be returned compressed.
+<span class="nocode"><a name="388">388: </a></span>     * @return the content in compressed or uncompressed form, depending on
+<span class="nocode"><a name="389">389: </a></span>     *         internal structure and the autoUncompress value.
+<span class="nocode"><a name="390">390: </a></span>     */
+<span class="nocode"><a name="391">391: </a></span>    public byte[] getContent(boolean autoUncompress) {
+<span class="nocode"><a name="392">392: </a></span><span style="background-color: #ffffcc">        if (contentCompressed &amp;&amp; autoUncompress) {</span>
+<span class="nocode"><a name="393">393: </a></span><span style="background-color: #ffffcc">            return Zips.gunzipBuffer(data);</span>
+<span class="nocode"><a name="394">394: </a></span>        }
+<span class="nocode"><a name="395">395: </a></span><span style="background-color: #ffffcc">        return data;</span>
+<span class="nocode"><a name="396">396: </a></span>    }
+<span class="nocode"><a name="397">397: </a></span>
+<span class="nocode"><a name="398">398: </a></span>    /**
+<span class="nocode"><a name="399">399: </a></span>     * If the content is compressed, uncompress it.
+<span class="nocode"><a name="400">400: </a></span>     */
+<span class="nocode"><a name="401">401: </a></span>    public void unCompressContent() {
+<span class="nocode"><a name="402">402: </a></span><span style="background-color: #ffffcc">        if (contentCompressed) {</span>
+<span class="nocode"><a name="403">403: </a></span>            // this call also sets contentCompressed = false
+<span class="nocode"><a name="404">404: </a></span>            setRawContent(Zips.gunzipBuffer(data));
+<span class="nocode"><a name="405">405: </a></span>        }
+<span class="nocode"><a name="406">406: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="407">407: </a></span>
+<span class="nocode"><a name="408">408: </a></span>    /**
+<span class="nocode"><a name="409">409: </a></span>     * If the content is uncompressed, compress it.
+<span class="nocode"><a name="410">410: </a></span>     */
+<span class="nocode"><a name="411">411: </a></span>    public void compressContent() {
+<span class="nocode"><a name="412">412: </a></span><span style="background-color: #ffffcc">        if (!contentCompressed) {</span>
+<span class="nocode"><a name="413">413: </a></span>            // this call also sets contentCompressed = false
+<span class="nocode"><a name="414">414: </a></span><span style="background-color: #ffffcc">            setRawContent(Zips.gzipBuffer(data), true);</span>
+<span class="nocode"><a name="415">415: </a></span>        }
+<span class="nocode"><a name="416">416: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="417">417: </a></span>
+<span class="nocode"><a name="418">418: </a></span>    /**
+<span class="nocode"><a name="419">419: </a></span>     * Store {@code content} as the data payload of this record. Be aware that
+<span class="nocode"><a name="420">420: </a></span>     * the content should be uncompressed, to avoid unclear semantics and
+<span class="nocode"><a name="421">421: </a></span>     * potential double-compression.
+<span class="nocode"><a name="422">422: </a></span>     *
+<span class="nocode"><a name="423">423: </a></span>     * @param content    Raw payload to use as record data.
+<span class="nocode"><a name="424">424: </a></span>     * @param doCompress If {@code true}, the  {@code content} will be
+<span class="nocode"><a name="425">425: </a></span>     *                   compressed upon storing.
+<span class="nocode"><a name="426">426: </a></span>     */
+<span class="nocode"><a name="427">427: </a></span>    public void setContent(byte[] content, boolean doCompress) {
+<span class="nocode"><a name="428">428: </a></span><span style="background-color: #ffffcc">        setRawContent(content, false);</span>
+<span class="nocode"><a name="429">429: </a></span><span style="background-color: #ffffcc">        if (doCompress) {</span>
+<span class="nocode"><a name="430">430: </a></span><span style="background-color: #ffffcc">            compressContent();</span>
+<span class="nocode"><a name="431">431: </a></span>        }
+<span class="nocode"><a name="432">432: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="433">433: </a></span>
+<span class="nocode"><a name="434">434: </a></span>    /**
+<span class="nocode"><a name="435">435: </a></span>     * Set the content payload of this record. use this method to store
+<span class="nocode"><a name="436">436: </a></span>     * raw uncompressed data on the record. If you want to store compressed
+<span class="nocode"><a name="437">437: </a></span>     * data in the record (and have it transparently uncompressed on access)
+<span class="nocode"><a name="438">438: </a></span>     * use {@link #setRawContent(byte[], boolean)} instead.
+<span class="nocode"><a name="439">439: </a></span>     *
+<span class="nocode"><a name="440">440: </a></span>     * @param content raw payload to use as record data.
+<span class="nocode"><a name="441">441: </a></span>     */
+<span class="nocode"><a name="442">442: </a></span>    public void setRawContent(byte[] content) {
+<span class="nocode"><a name="443">443: </a></span><span style="background-color: #ffffcc">        setRawContent(content, false);</span>
+<span class="nocode"><a name="444">444: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="445">445: </a></span>
+<span class="nocode"><a name="446">446: </a></span>
+<span class="nocode"><a name="447">447: </a></span>    /**
+<span class="nocode"><a name="448">448: </a></span>     * Store {@code content} as the data payload of this record. If
+<span class="nocode"><a name="449">449: </a></span>     * {@code contentCompressed == true} the content will be uncompressed
+<span class="nocode"><a name="450">450: </a></span>     * lazily (with GZip) on the first request to {@link #getContent()} or
+<span class="nocode"><a name="451">451: </a></span>     * {@link #getContentAsUTF8()}.
+<span class="nocode"><a name="452">452: </a></span>     *
+<span class="nocode"><a name="453">453: </a></span>     * @param content           Raw payload to use as record data.
+<span class="nocode"><a name="454">454: </a></span>     * @param contentCompressed If {@code true} {@code content} will be
+<span class="nocode"><a name="455">455: </a></span>     *                          uncompressed using GZipwhen read.
+<span class="nocode"><a name="456">456: </a></span>     */
+<span class="nocode"><a name="457">457: </a></span>    public void setRawContent(byte[] content, boolean contentCompressed) {
+<span class="nocode"><a name="458">458: </a></span><span style="background-color: #ffffcc">        if (content == null) {</span>
+<span class="nocode"><a name="459">459: </a></span><span style="background-color: #ffffcc">            content = EMPTY_CONTENT;</span>
+<span class="nocode"><a name="460">460: </a></span><span style="background-color: #ffffcc">            log.trace(&quot;setRawContent(null, ...) was called. Assigning byte-array of length 0 as content&quot;);</span>
+<span class="nocode"><a name="461">461: </a></span>            //noinspection DuplicateStringLiteralInspection
+<span class="nocode"><a name="462">462: </a></span>/*            throw new IllegalArgumentException(&quot;data must be specified for &quot;
+<span class="nocode"><a name="463">463: </a></span>                                               + &quot;record '&quot; + getId()
+<span class="nocode"><a name="464">464: </a></span>                                               + &quot;' from base '&quot; + getBase()
+<span class="nocode"><a name="465">465: </a></span>                                               + &quot;'&quot;);*/
+<span class="nocode"><a name="466">466: </a></span>        }
+<span class="nocode"><a name="467">467: </a></span><span style="background-color: #ffffcc">        data = content;</span>
+<span class="nocode"><a name="468">468: </a></span><span style="background-color: #ffffcc">        this.contentCompressed = contentCompressed;</span>
+<span class="nocode"><a name="469">469: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="470">470: </a></span>
+<span class="nocode"><a name="471">471: </a></span>    /**
+<span class="nocode"><a name="472">472: </a></span>     * Return content encoded as UTF8.
+<span class="nocode"><a name="473">473: </a></span>     *
+<span class="nocode"><a name="474">474: </a></span>     * @return content encoded as UTF8.
+<span class="nocode"><a name="475">475: </a></span>     */
+<span class="nocode"><a name="476">476: </a></span>    public String getContentAsUTF8() {
+<span class="nocode"><a name="477">477: </a></span>        try {
+<span class="nocode"><a name="478">478: </a></span><span style="background-color: #ffffcc">            return new String(getContent(), &quot;utf-8&quot;);</span>
+<span class="nocode"><a name="479">479: </a></span>        } catch (UnsupportedEncodingException e) {
+<span class="nocode"><a name="480">480: </a></span>            throw new RuntimeException(&quot;Could not convert uning utf-8&quot;, e);
+<span class="nocode"><a name="481">481: </a></span>        }
+<span class="nocode"><a name="482">482: </a></span>    }
+<span class="nocode"><a name="483">483: </a></span>
+<span class="nocode"><a name="484">484: </a></span>    /**
+<span class="nocode"><a name="485">485: </a></span>     * Return the creation time for this record.
+<span class="nocode"><a name="486">486: </a></span>     *
+<span class="nocode"><a name="487">487: </a></span>     * @return The creation time.
+<span class="nocode"><a name="488">488: </a></span>     */
+<span class="nocode"><a name="489">489: </a></span>    public long getCreationTime() {
+<span class="nocode"><a name="490">490: </a></span><span style="background-color: #ffffcc">        return creationTime;</span>
+<span class="nocode"><a name="491">491: </a></span>    }
+<span class="nocode"><a name="492">492: </a></span>
+<span class="nocode"><a name="493">493: </a></span>    /**
+<span class="nocode"><a name="494">494: </a></span>     * Overrides the creation time for this record.
+<span class="nocode"><a name="495">495: </a></span>     *
+<span class="nocode"><a name="496">496: </a></span>     * @param creationTime New creation time.
+<span class="nocode"><a name="497">497: </a></span>     */
+<span class="nocode"><a name="498">498: </a></span>    public void setCreationTime(long creationTime) {
+<span class="nocode"><a name="499">499: </a></span><span style="background-color: #ffffcc">        this.creationTime = creationTime;</span>
+<span class="nocode"><a name="500">500: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="501">501: </a></span>
+<span class="nocode"><a name="502">502: </a></span>    /**
+<span class="nocode"><a name="503">503: </a></span>     * Return latest modification time for this record.
+<span class="nocode"><a name="504">504: </a></span>     *
+<span class="nocode"><a name="505">505: </a></span>     * @return Latest modification time.
+<span class="nocode"><a name="506">506: </a></span>     */
+<span class="nocode"><a name="507">507: </a></span>    public long getModificationTime() {
+<span class="nocode"><a name="508">508: </a></span><span style="background-color: #ffffcc">        return modificationTime;</span>
+<span class="nocode"><a name="509">509: </a></span>    }
+<span class="nocode"><a name="510">510: </a></span>
+<span class="nocode"><a name="511">511: </a></span>    /**
+<span class="nocode"><a name="512">512: </a></span>     * Override latest modification time for record.
+<span class="nocode"><a name="513">513: </a></span>     *
+<span class="nocode"><a name="514">514: </a></span>     * @param modificationTime New modification time.
+<span class="nocode"><a name="515">515: </a></span>     */
+<span class="nocode"><a name="516">516: </a></span>    public void setModificationTime(long modificationTime) {
+<span class="nocode"><a name="517">517: </a></span><span style="background-color: #ffffcc">        this.modificationTime = modificationTime;</span>
+<span class="nocode"><a name="518">518: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="519">519: </a></span>
+<span class="nocode"><a name="520">520: </a></span>    /**
+<span class="nocode"><a name="521">521: </a></span>     * If this record has any parents, these record id's are returned in a list.
+<span class="nocode"><a name="522">522: </a></span>     *
+<span class="nocode"><a name="523">523: </a></span>     * @return List of parent id's.
+<span class="nocode"><a name="524">524: </a></span>     */
+<span class="nocode"><a name="525">525: </a></span>    public List&lt;String&gt; getParentIds() {
+<span class="nocode"><a name="526">526: </a></span><span style="background-color: #ffffcc">        return parentIds == null ? null : new ArrayList&lt;String&gt;(parentIds);</span>
+<span class="nocode"><a name="527">527: </a></span>    }
+<span class="nocode"><a name="528">528: </a></span>
+<span class="nocode"><a name="529">529: </a></span>    /**
+<span class="nocode"><a name="530">530: </a></span>     * Sets the parent-IDs for this Record. This copies the content of the
+<span class="nocode"><a name="531">531: </a></span>     * given parentIDs to the Record, so callers are free to clear the given
+<span class="nocode"><a name="532">532: </a></span>     * list after this method is called.
+<span class="nocode"><a name="533">533: </a></span>     * &lt;/p&gt;&lt;p&gt;
+<span class="nocode"><a name="534">534: </a></span>     * Note: Duplicates are removed as part of the copy.
+<span class="nocode"><a name="535">535: </a></span>     * &lt;/p&gt;&lt;p&gt;
+<span class="nocode"><a name="536">536: </a></span>     * Note 2: Object-references to parents are cleared as part of this to
+<span class="nocode"><a name="537">537: </a></span>     * ensure consistence.
+<span class="nocode"><a name="538">538: </a></span>     *
+<span class="nocode"><a name="539">539: </a></span>     * @param parentIds The IDs to assign to the Record.
+<span class="nocode"><a name="540">540: </a></span>     */
+<span class="nocode"><a name="541">541: </a></span>    public void setParentIds(List&lt;String&gt; parentIds) {
+<span class="nocode"><a name="542">542: </a></span><span style="background-color: #ffffcc">        if (parentIds == null) {</span>
+<span class="nocode"><a name="543">543: </a></span><span style="background-color: #ffffcc">            this.parentIds = null;</span>
+<span class="nocode"><a name="544">544: </a></span><span style="background-color: #ffffcc">        } else if (parentIds.isEmpty()) {</span>
+<span class="nocode"><a name="545">545: </a></span>            //noinspection DuplicateStringLiteralInspection
+<span class="nocode"><a name="546">546: </a></span><span style="background-color: #ffffcc">            log.warn(&quot;The non-existence of a parentId should be stated by null, not the empty list. Problematic Record &quot;</span>
+<span class="nocode"><a name="547">547: </a></span>                     + &quot;with id '&quot; + getId() + &quot;' from base '&quot; + getBase() + &quot;'. Continuing creation&quot;);
+<span class="nocode"><a name="548">548: </a></span>            //noinspection AssignmentToNull
+<span class="nocode"><a name="549">549: </a></span><span style="background-color: #ffffcc">            this.parentIds = null;</span>
+<span class="nocode"><a name="550">550: </a></span>        } else {
+<span class="nocode"><a name="551">551: </a></span><span style="background-color: #ffffcc">            this.parentIds = new LinkedHashSet&lt;String&gt;(parentIds);</span>
+<span class="nocode"><a name="552">552: </a></span>        }
+<span class="nocode"><a name="553">553: </a></span>
+<span class="nocode"><a name="554">554: </a></span><span style="background-color: #ffffcc">        parents = null;</span>
+<span class="nocode"><a name="555">555: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="556">556: </a></span>
+<span class="nocode"><a name="557">557: </a></span>    /**
+<span class="nocode"><a name="558">558: </a></span>     * Return a list of all children's id's.
+<span class="nocode"><a name="559">559: </a></span>     *
+<span class="nocode"><a name="560">560: </a></span>     * @return a list of children id's
+<span class="nocode"><a name="561">561: </a></span>     */
+<span class="nocode"><a name="562">562: </a></span>    public List&lt;String&gt; getChildIds() {
+<span class="nocode"><a name="563">563: </a></span><span style="background-color: #ffffcc">        return childIds == null ? null : new ArrayList&lt;String&gt;(childIds);</span>
+<span class="nocode"><a name="564">564: </a></span>    }
+<span class="nocode"><a name="565">565: </a></span>
+<span class="nocode"><a name="566">566: </a></span>    /**
+<span class="nocode"><a name="567">567: </a></span>     * Set the child IDs listed as children of this record. This will reset
+<span class="nocode"><a name="568">568: </a></span>     * any children registered with {@link #setChildren(List)}. Note that this
+<span class="nocode"><a name="569">569: </a></span>     * method copies the content of the given list, so callers are free to
+<span class="nocode"><a name="570">570: </a></span>     * clear the list after calling.
+<span class="nocode"><a name="571">571: </a></span>     * Note 2: Object-references to children are cleared as part of this to
+<span class="nocode"><a name="572">572: </a></span>     * ensure consistence.
+<span class="nocode"><a name="573">573: </a></span>     *
+<span class="nocode"><a name="574">574: </a></span>     * @param childIds List of record IDs for the record's children.
+<span class="nocode"><a name="575">575: </a></span>     */
+<span class="nocode"><a name="576">576: </a></span>    public void setChildIds(List&lt;String&gt; childIds) {
+<span class="nocode"><a name="577">577: </a></span><span style="background-color: #ffffcc">        if (childIds == null) {</span>
+<span class="nocode"><a name="578">578: </a></span><span style="background-color: #ffffcc">            this.childIds = null;</span>
+<span class="nocode"><a name="579">579: </a></span><span style="background-color: #ffffcc">            return;</span>
+<span class="nocode"><a name="580">580: </a></span><span style="background-color: #ffffcc">        } else if (childIds.isEmpty()) {</span>
+<span class="nocode"><a name="581">581: </a></span>            //noinspection DuplicateStringLiteralInspection
+<span class="nocode"><a name="582">582: </a></span><span style="background-color: #ffffcc">            log.warn(&quot;No childIds should be stated by null, not the empty list. Problematic Record with id '&quot;</span>
+<span class="nocode"><a name="583">583: </a></span>                     + getId() + &quot;' from base '&quot; + getBase() + &quot;'. Continuing creation&quot;);
+<span class="nocode"><a name="584">584: </a></span>            //noinspection AssignmentToNull
+<span class="nocode"><a name="585">585: </a></span><span style="background-color: #ffffcc">            this.childIds = null;</span>
+<span class="nocode"><a name="586">586: </a></span>        } else {
+<span class="nocode"><a name="587">587: </a></span><span style="background-color: #ffffcc">            this.childIds = new LinkedHashSet&lt;String&gt;(childIds);</span>
+<span class="nocode"><a name="588">588: </a></span>        }
+<span class="nocode"><a name="589">589: </a></span>
+<span class="nocode"><a name="590">590: </a></span><span style="background-color: #ffffcc">        children = null;</span>
+<span class="nocode"><a name="591">591: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="592">592: </a></span>
+<span class="nocode"><a name="593">593: </a></span>    /**
+<span class="nocode"><a name="594">594: </a></span>     * Set child {@code Record} instances of this record. This will also call
+<span class="nocode"><a name="595">595: </a></span>     * {@link #setChildIds} with the ids of the child records.
+<span class="nocode"><a name="596">596: </a></span>     *
+<span class="nocode"><a name="597">597: </a></span>     * @param children List of record instances to register as children.
+<span class="nocode"><a name="598">598: </a></span>     */
+<span class="nocode"><a name="599">599: </a></span>    public void setChildren(List&lt;Record&gt; children) {
+<span class="nocode"><a name="600">600: </a></span><span style="background-color: #ffffcc">        if (children == null) {</span>
+<span class="nocode"><a name="601">601: </a></span><span style="background-color: #ffffcc">            this.children = null;</span>
+<span class="nocode"><a name="602">602: </a></span><span style="background-color: #ffffcc">            return;</span>
+<span class="nocode"><a name="603">603: </a></span>        }
+<span class="nocode"><a name="604">604: </a></span>
+<span class="nocode"><a name="605">605: </a></span><span style="background-color: #ffffcc">        List&lt;String&gt; newChildIds = new ArrayList&lt;String&gt;(children.size());</span>
+<span class="nocode"><a name="606">606: </a></span><span style="background-color: #ffffcc">        for (Record child : children) {</span>
+<span class="nocode"><a name="607">607: </a></span>            newChildIds.add(child.getId());
+<span class="nocode"><a name="608">608: </a></span>        }
+<span class="nocode"><a name="609">609: </a></span>
+<span class="nocode"><a name="610">610: </a></span><span style="background-color: #ffffcc">        setChildIds(newChildIds);</span>
+<span class="nocode"><a name="611">611: </a></span><span style="background-color: #ffffcc">        this.children = new LinkedHashSet&lt;Record&gt;(children);</span>
+<span class="nocode"><a name="612">612: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="613">613: </a></span>
+<span class="nocode"><a name="614">614: </a></span>    /**
+<span class="nocode"><a name="615">615: </a></span>     * Get the list of resolved child records. If the record was constructed
+<span class="nocode"><a name="616">616: </a></span>     * without child id resolution or {@link #setChildren} has never been
+<span class="nocode"><a name="617">617: </a></span>     * called this method will return {@code null}.
+<span class="nocode"><a name="618">618: </a></span>     *
+<span class="nocode"><a name="619">619: </a></span>     * @return A list of {@code Record} instances representing the children
+<span class="nocode"><a name="620">620: </a></span>     *         of this record, or {@code null} if the child ids has never been
+<span class="nocode"><a name="621">621: </a></span>     *         resolved.
+<span class="nocode"><a name="622">622: </a></span>     */
+<span class="nocode"><a name="623">623: </a></span>    public List&lt;Record&gt; getChildren() {
+<span class="nocode"><a name="624">624: </a></span><span style="background-color: #ffffcc">        return children == null ? null : new ArrayList&lt;Record&gt;(children);</span>
+<span class="nocode"><a name="625">625: </a></span>    }
+<span class="nocode"><a name="626">626: </a></span>
+<span class="nocode"><a name="627">627: </a></span>    /**
+<span class="nocode"><a name="628">628: </a></span>     * Set parent {@code Record} instances of this record. This will also call
+<span class="nocode"><a name="629">629: </a></span>     * {@link #setParentIds} with the ids of the parent records.
+<span class="nocode"><a name="630">630: </a></span>     *
+<span class="nocode"><a name="631">631: </a></span>     * @param parents List of record instances to register as parents.
+<span class="nocode"><a name="632">632: </a></span>     */
+<span class="nocode"><a name="633">633: </a></span>    public void setParents(List&lt;Record&gt; parents) {
+<span class="nocode"><a name="634">634: </a></span><span style="background-color: #ffffcc">        if (parents == null) {</span>
+<span class="nocode"><a name="635">635: </a></span><span style="background-color: #ffffcc">            this.parents = null;</span>
+<span class="nocode"><a name="636">636: </a></span><span style="background-color: #ffffcc">            return;</span>
+<span class="nocode"><a name="637">637: </a></span>        }
+<span class="nocode"><a name="638">638: </a></span>
+<span class="nocode"><a name="639">639: </a></span><span style="background-color: #ffffcc">        List&lt;String&gt; newParentIds = new ArrayList&lt;String&gt;(parents.size());</span>
+<span class="nocode"><a name="640">640: </a></span><span style="background-color: #ffffcc">        for (Record parent : parents) {</span>
+<span class="nocode"><a name="641">641: </a></span>            newParentIds.add(parent.getId());
+<span class="nocode"><a name="642">642: </a></span>        }
+<span class="nocode"><a name="643">643: </a></span>
+<span class="nocode"><a name="644">644: </a></span><span style="background-color: #ffffcc">        setParentIds(newParentIds);</span>
+<span class="nocode"><a name="645">645: </a></span><span style="background-color: #ffffcc">        this.parents = new LinkedHashSet&lt;Record&gt;(parents);</span>
+<span class="nocode"><a name="646">646: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="647">647: </a></span>
+<span class="nocode"><a name="648">648: </a></span>    /**
+<span class="nocode"><a name="649">649: </a></span>     * Get the list of resolved parent records. If the record was constructed
+<span class="nocode"><a name="650">650: </a></span>     * without parent id resolution or {@link #setParents} has never been
+<span class="nocode"><a name="651">651: </a></span>     * called this method will return {@code null}.
+<span class="nocode"><a name="652">652: </a></span>     *
+<span class="nocode"><a name="653">653: </a></span>     * @return A list of {@code Record} instances representing the parents
+<span class="nocode"><a name="654">654: </a></span>     *         of this record, or {@code null} if the parent ids has never been
+<span class="nocode"><a name="655">655: </a></span>     *         resolved.
+<span class="nocode"><a name="656">656: </a></span>     */
+<span class="nocode"><a name="657">657: </a></span>    public List&lt;Record&gt; getParents() {
+<span class="nocode"><a name="658">658: </a></span><span style="background-color: #ffffcc">        return parents == null ? null : new ArrayList&lt;Record&gt;(parents);</span>
+<span class="nocode"><a name="659">659: </a></span>    }
+<span class="nocode"><a name="660">660: </a></span>
+<span class="nocode"><a name="661">661: </a></span>    /**
+<span class="nocode"><a name="662">662: </a></span>     * Return whether or not the record has any listed parents.
+<span class="nocode"><a name="663">663: </a></span>     *
+<span class="nocode"><a name="664">664: </a></span>     * @return Whether or not the record has any listed parents.
+<span class="nocode"><a name="665">665: </a></span>     */
+<span class="nocode"><a name="666">666: </a></span>    public boolean hasParents() {
+<span class="nocode"><a name="667">667: </a></span><span style="background-color: #ffffcc">        return parentIds != null;</span>
+<span class="nocode"><a name="668">668: </a></span>    }
+<span class="nocode"><a name="669">669: </a></span>
+<span class="nocode"><a name="670">670: </a></span>    /**
+<span class="nocode"><a name="671">671: </a></span>     * Return whether or not the record has any listed children.
+<span class="nocode"><a name="672">672: </a></span>     *
+<span class="nocode"><a name="673">673: </a></span>     * @return Whether or not the record has any listed children.
+<span class="nocode"><a name="674">674: </a></span>     */
+<span class="nocode"><a name="675">675: </a></span>    public boolean hasChildren() {
+<span class="nocode"><a name="676">676: </a></span><span style="background-color: #ffffcc">        return childIds != null;</span>
+<span class="nocode"><a name="677">677: </a></span>    }
+<span class="nocode"><a name="678">678: </a></span>
+<span class="nocode"><a name="679">679: </a></span>    /**
+<span class="nocode"><a name="680">680: </a></span>     * Return the last modification time.
+<span class="nocode"><a name="681">681: </a></span>     *
+<span class="nocode"><a name="682">682: </a></span>     * @return The last modification time.
+<span class="nocode"><a name="683">683: </a></span>     */
+<span class="nocode"><a name="684">684: </a></span>    public long getLastModified() {
+<span class="nocode"><a name="685">685: </a></span><span style="background-color: #ffffcc">        return getModificationTime();</span>
+<span class="nocode"><a name="686">686: </a></span>    }
+<span class="nocode"><a name="687">687: </a></span>
+<span class="nocode"><a name="688">688: </a></span>    /**
+<span class="nocode"><a name="689">689: </a></span>     * Get length of content ({@link #data}) of the Record.
+<span class="nocode"><a name="690">690: </a></span>     *
+<span class="nocode"><a name="691">691: </a></span>     * @return Length of content/data.
+<span class="nocode"><a name="692">692: </a></span>     */
+<span class="nocode"><a name="693">693: </a></span>    public long getLength() {
+<span class="nocode"><a name="694">694: </a></span><span style="background-color: #ffffcc">        return data == null ? 0 : data.length;</span>
+<span class="nocode"><a name="695">695: </a></span>    }
+<span class="nocode"><a name="696">696: </a></span>
+<span class="nocode"><a name="697">697: </a></span>    /**
+<span class="nocode"><a name="698">698: </a></span>     * Tells if this record is new. {@link #getModificationTime()} differs from
+<span class="nocode"><a name="699">699: </a></span>     * {@link #getCreationTime()}.
+<span class="nocode"><a name="700">700: </a></span>     *
+<span class="nocode"><a name="701">701: </a></span>     * @return True if the Record is new.
+<span class="nocode"><a name="702">702: </a></span>     */
+<span class="nocode"><a name="703">703: </a></span>    public boolean isNew() {
+<span class="nocode"><a name="704">704: </a></span><span style="background-color: #ffffcc">        return getModificationTime() == getCreationTime();</span>
+<span class="nocode"><a name="705">705: </a></span>    }
+<span class="nocode"><a name="706">706: </a></span>
+<span class="nocode"><a name="707">707: </a></span>    /**
+<span class="nocode"><a name="708">708: </a></span>     * Tells if this record has been modified.
+<span class="nocode"><a name="709">709: </a></span>     *
+<span class="nocode"><a name="710">710: </a></span>     * @return True if the Record is modified.
+<span class="nocode"><a name="711">711: </a></span>     */
+<span class="nocode"><a name="712">712: </a></span>    public boolean isModified() {
+<span class="nocode"><a name="713">713: </a></span><span style="background-color: #ffffcc">        return !isNew();</span>
+<span class="nocode"><a name="714">714: </a></span>    }
+<span class="nocode"><a name="715">715: </a></span>
+<span class="nocode"><a name="716">716: </a></span>    /**
+<span class="nocode"><a name="717">717: </a></span>     * Update {@link #modificationTime} to the current time, thereby marking the
+<span class="nocode"><a name="718">718: </a></span>     * record as modified.
+<span class="nocode"><a name="719">719: </a></span>     * &lt;/p&gt;&lt;p&gt;
+<span class="nocode"><a name="720">720: </a></span>     * Note: The granularity of this is in milliseconds, so if touch is called
+<span class="nocode"><a name="721">721: </a></span>     * imm.
+<span class="nocode"><a name="722">722: </a></span>     */
+<span class="nocode"><a name="723">723: </a></span>    public void touch() {
+<span class="nocode"><a name="724">724: </a></span><span style="background-color: #ffffcc">        setModificationTime(System.currentTimeMillis());</span>
+<span class="nocode"><a name="725">725: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="726">726: </a></span>
+<span class="nocode"><a name="727">727: </a></span>    /**
+<span class="nocode"><a name="728">728: </a></span>     * There is always a meta-map for each Record, but it is created lazily if
+<span class="nocode"><a name="729">729: </a></span>     * it has no values. Use {@link #getMeta(String)} for fast look-up of values
+<span class="nocode"><a name="730">730: </a></span>     * where it is expected that the map is empty, as it will never create a
+<span class="nocode"><a name="731">731: </a></span>     * new map.
+<span class="nocode"><a name="732">732: </a></span>     *
+<span class="nocode"><a name="733">733: </a></span>     * @return The meta-map for this Record.
+<span class="nocode"><a name="734">734: </a></span>     */
+<span class="nocode"><a name="735">735: </a></span>    public StringMap getMeta() {
+<span class="nocode"><a name="736">736: </a></span><span style="background-color: #ffffcc">        if (meta == null) {</span>
+<span class="nocode"><a name="737">737: </a></span><span style="background-color: #ffffcc">            meta = new StringMap(10);</span>
+<span class="nocode"><a name="738">738: </a></span>        }
+<span class="nocode"><a name="739">739: </a></span><span style="background-color: #ffffcc">        return meta;</span>
+<span class="nocode"><a name="740">740: </a></span>    }
+<span class="nocode"><a name="741">741: </a></span>
+<span class="nocode"><a name="742">742: </a></span>    /**
+<span class="nocode"><a name="743">743: </a></span>     * Request a meta-value for the given key. This method is more efficient
+<span class="nocode"><a name="744">744: </a></span>     * than requesting the full map with {@link #getMeta()}, as it never
+<span class="nocode"><a name="745">745: </a></span>     * creates a new map.
+<span class="nocode"><a name="746">746: </a></span>     *
+<span class="nocode"><a name="747">747: </a></span>     * @param key The key for the value.
+<span class="nocode"><a name="748">748: </a></span>     * @return The value for the key, or null if the key is not in the map.
+<span class="nocode"><a name="749">749: </a></span>     */
+<span class="nocode"><a name="750">750: </a></span>    public String getMeta(String key) {
+<span class="nocode"><a name="751">751: </a></span><span style="background-color: #ffffcc">        return meta == null ? null : meta.get(key);</span>
+<span class="nocode"><a name="752">752: </a></span>    }
+<span class="nocode"><a name="753">753: </a></span>
+<span class="nocode"><a name="754">754: </a></span>    /**
+<span class="nocode"><a name="755">755: </a></span>     * Gives a whole map, to override the existing meta data.
+<span class="nocode"><a name="756">756: </a></span>     *
+<span class="nocode"><a name="757">757: </a></span>     * @param meta A map of meta data.
+<span class="nocode"><a name="758">758: </a></span>     */
+<span class="nocode"><a name="759">759: </a></span>    public void setMeta(StringMap meta) {
+<span class="nocode"><a name="760">760: </a></span><span style="background-color: #ffffcc">        this.meta = meta;</span>
+<span class="nocode"><a name="761">761: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="762">762: </a></span>
+<span class="nocode"><a name="763">763: </a></span>    /**
+<span class="nocode"><a name="764">764: </a></span>     * Add a key, value pair to the meta data.
+<span class="nocode"><a name="765">765: </a></span>     *
+<span class="nocode"><a name="766">766: </a></span>     * @param key   The key.
+<span class="nocode"><a name="767">767: </a></span>     * @param value The value.
+<span class="nocode"><a name="768">768: </a></span>     */
+<span class="nocode"><a name="769">769: </a></span>    public void addMeta(String key, String value) {
+<span class="nocode"><a name="770">770: </a></span><span style="background-color: #ffffcc">        getMeta().put(key, value);</span>
+<span class="nocode"><a name="771">771: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="772">772: </a></span>
+<span class="nocode"><a name="773">773: </a></span>    /**
+<span class="nocode"><a name="774">774: </a></span>     * Tells if this record has meta data or not.
+<span class="nocode"><a name="775">775: </a></span>     *
+<span class="nocode"><a name="776">776: </a></span>     * @return true If a meta-map has been created. Used for time/space
+<span class="nocode"><a name="777">777: </a></span>     *         optimization.
+<span class="nocode"><a name="778">778: </a></span>     */
+<span class="nocode"><a name="779">779: </a></span>    public boolean hasMeta() {
+<span class="nocode"><a name="780">780: </a></span><span style="background-color: #ffffcc">        return meta != null;</span>
+<span class="nocode"><a name="781">781: </a></span>    }
+<span class="nocode"><a name="782">782: </a></span>
+<span class="nocode"><a name="783">783: </a></span>    /**
+<span class="nocode"><a name="784">784: </a></span>     * Returns a hash code value for the record.
+<span class="nocode"><a name="785">785: </a></span>     *
+<span class="nocode"><a name="786">786: </a></span>     * @return A hash code value.
+<span class="nocode"><a name="787">787: </a></span>     */
+<span class="nocode"><a name="788">788: </a></span>    @Override
+<span class="nocode"><a name="789">789: </a></span>    @QAInfo(level = QAInfo.Level.FINE,
+<span class="nocode"><a name="790">790: </a></span>            state = QAInfo.State.QA_NEEDED,
+<span class="nocode"><a name="791">791: </a></span>            comment = &quot;Hans made the hash-function, so no present persons know how it works (or if)&quot;)
+<span class="nocode"><a name="792">792: </a></span>    public int hashCode() {
+<span class="nocode"><a name="793">793: </a></span>        int result;
+<span class="nocode"><a name="794">794: </a></span><span style="background-color: #ffffcc">        result = (int) (modificationTime ^ modificationTime &gt;&gt;&gt; 32);</span>
+<span class="nocode"><a name="795">795: </a></span><span style="background-color: #ffffcc">        result = 29 * result + (int) (getLength() ^ getLength() &gt;&gt;&gt; 32);</span>
+<span class="nocode"><a name="796">796: </a></span><span style="background-color: #ffffcc">        result = 29 * result + (id != null ? id.hashCode() : 0);</span>
+<span class="nocode"><a name="797">797: </a></span><span style="background-color: #ffffcc">        return result;</span>
+<span class="nocode"><a name="798">798: </a></span>    }
+<span class="nocode"><a name="799">799: </a></span>
+<span class="nocode"><a name="800">800: </a></span>    /**
+<span class="nocode"><a name="801">801: </a></span>     * Compares this Record with the specified Record for order.
+<span class="nocode"><a name="802">802: </a></span>     * The natural ordering on records is defined to be lexicographical by id.
+<span class="nocode"><a name="803">803: </a></span>     *
+<span class="nocode"><a name="804">804: </a></span>     * @param o Parameter object to be compared to this record.
+<span class="nocode"><a name="805">805: </a></span>     * @return A negative integer, zero, or a positive integer as the name of
+<span class="nocode"><a name="806">806: </a></span>     *         this record is.
+<span class="nocode"><a name="807">807: </a></span>     *         Lexicographically less than, equal to, or greater than the name
+<span class="nocode"><a name="808">808: </a></span>     *         of the record argument.
+<span class="nocode"><a name="809">809: </a></span>     * @throws ClassCastException If o is not a Record.
+<span class="nocode"><a name="810">810: </a></span>     */
+<span class="nocode"><a name="811">811: </a></span>    @Override
+<span class="nocode"><a name="812">812: </a></span>    public int compareTo(Object o) {
+<span class="nocode"><a name="813">813: </a></span><span style="background-color: #ffffcc">        return getId().compareTo(((Record) o).getId());</span>
+<span class="nocode"><a name="814">814: </a></span>    }
+<span class="nocode"><a name="815">815: </a></span>
+<span class="nocode"><a name="816">816: </a></span>    @Override
+<span class="nocode"><a name="817">817: </a></span>    @SuppressWarnings(&quot;UnnecessaryParentheses&quot;)
+<span class="nocode"><a name="818">818: </a></span>    @QAInfo(level = QAInfo.Level.PEDANTIC,
+<span class="nocode"><a name="819">819: </a></span>            state = QAInfo.State.IN_DEVELOPMENT,
+<span class="nocode"><a name="820">820: </a></span>            author = &quot;te&quot;,
+<span class="nocode"><a name="821">821: </a></span>            comment = &quot;Tripple-check childIds and meta&quot;)
+<span class="nocode"><a name="822">822: </a></span>    public boolean equals(Object o) {
+<span class="nocode"><a name="823">823: </a></span><span style="background-color: #ffffcc">        if (!(o instanceof Record)) {</span>
+<span class="nocode"><a name="824">824: </a></span><span style="background-color: #ffffcc">            return false;</span>
+<span class="nocode"><a name="825">825: </a></span>        }
+<span class="nocode"><a name="826">826: </a></span><span style="background-color: #ffffcc">        Record other = (Record) o;</span>
+<span class="nocode"><a name="827">827: </a></span>
+<span class="nocode"><a name="828">828: </a></span>        try {
+<span class="nocode"><a name="829">829: </a></span><span style="background-color: #ffffcc">            return id.equals(other.getId()) &amp;&amp; base.equals(other.getBase())</span>
+<span class="nocode"><a name="830">830: </a></span>                   // Semantically we compare only the record content, storage
+<span class="nocode"><a name="831">831: </a></span>                   // context, such as not timestamps:
+<span class="nocode"><a name="832">832: </a></span>                   //&amp;&amp; timeEquals(creationTime, other.getCreationTime())
+<span class="nocode"><a name="833">833: </a></span>                   //&amp;&amp; timeEquals(modificationTime,
+<span class="nocode"><a name="834">834: </a></span>                   //              other.getModificationTime())
+<span class="nocode"><a name="835">835: </a></span>                   &amp;&amp; deleted == other.isDeleted() &amp;&amp; indexable == other.isIndexable() &amp;&amp; (
+<span class="nocode"><a name="836">836: </a></span>                    (parentIds == null &amp;&amp; other.getParentIds() == null) || (parentIds != null
+<span class="nocode"><a name="837">837: </a></span>                                                                            &amp;&amp; deepEquals(parentIds, 
+<span class="nocode"><a name="838">838: </a></span>                                                                                          other.getParentIds())))
+<span class="nocode"><a name="839">839: </a></span>                   &amp;&amp; Arrays.equals(getContent(), other.getContent()) &amp;&amp; (
+<span class="nocode"><a name="840">840: </a></span>                    (childIds == null &amp;&amp; other.getChildIds() == null)
+<span class="nocode"><a name="841">841: </a></span>                    || (childIds != null) &amp;&amp; deepEquals(childIds, other.getChildIds())) &amp;&amp; (
+<span class="nocode"><a name="842">842: </a></span>                           (!hasMeta() == !other.hasMeta()) || (hasMeta() &amp;&amp; getMeta().equals(other.getMeta())));
+<span class="nocode"><a name="843">843: </a></span>        } catch (Exception e) {
+<span class="nocode"><a name="844">844: </a></span>            log.error(&quot;Error calling equals for &quot; + this + &quot; and &quot; + other + &quot;. Returning false&quot;, e);
+<span class="nocode"><a name="845">845: </a></span>            return false;
+<span class="nocode"><a name="846">846: </a></span>        }
+<span class="nocode"><a name="847">847: </a></span>    }
+<span class="nocode"><a name="848">848: </a></span>
+<span class="nocode"><a name="849">849: </a></span>    /**
+<span class="nocode"><a name="850">850: </a></span>     * Pretty print the record.
+<span class="nocode"><a name="851">851: </a></span>     *
+<span class="nocode"><a name="852">852: </a></span>     * @return A human-readable single line version of Record.
+<span class="nocode"><a name="853">853: </a></span>     */
+<span class="nocode"><a name="854">854: </a></span>    @Override
+<span class="nocode"><a name="855">855: </a></span>    public String toString() {
+<span class="nocode"><a name="856">856: </a></span><span style="background-color: #ffffcc">        return toString(false);</span>
+<span class="nocode"><a name="857">857: </a></span>    }
+<span class="nocode"><a name="858">858: </a></span>
+<span class="nocode"><a name="859">859: </a></span>    /**
+<span class="nocode"><a name="860">860: </a></span>     * Pretty print the Record.
+<span class="nocode"><a name="861">861: </a></span>     *
+<span class="nocode"><a name="862">862: </a></span>     * @param verbose If true, a verbose description is returned.
+<span class="nocode"><a name="863">863: </a></span>     * @return A human-readable single line version of Record.
+<span class="nocode"><a name="864">864: </a></span>     *         Note: The verbose option uses Calendar to output timestamps and is thus
+<span class="nocode"><a name="865">865: </a></span>     *         expensive.
+<span class="nocode"><a name="866">866: </a></span>     */
+<span class="nocode"><a name="867">867: </a></span>    public String toString(boolean verbose) {
+<span class="nocode"><a name="868">868: </a></span><span style="background-color: #ffffcc">        return &quot;Record [id(&quot; + getId() + &quot;), base(&quot; + getBase() + &quot;), deleted(&quot; + isDeleted() + &quot;), indexable(&quot;</span>
+<span class="nocode"><a name="869">869: </a></span>               + isIndexable() + &quot;), data-length(&quot; + getLength() + &quot;), num-childrenIDs(&quot;
+<span class="nocode"><a name="870">870: </a></span>               + (childIds == null ? 0 : childIds.size())
+<span class="nocode"><a name="871">871: </a></span>               + &quot;), num-parentsIDs(&quot; + (parentIds == null ? 0 : parentIds.size()) + &quot;), num-childRecords(&quot; + (
+<span class="nocode"><a name="872">872: </a></span>                children == null ? 0 : children.size()) + &quot;), num-parentRecords(&quot; 
+<span class="nocode"><a name="873">873: </a></span>               + (parents == null ? 0 : parents.size()) + &quot;)&quot; 
+<span class="nocode"><a name="874">874: </a></span>               + (verbose ? &quot;, creationTime(&quot; + timeToString(getCreationTime()) + &quot;), modificationTime(&quot;
+<span class="nocode"><a name="875">875: </a></span>                            + timeToString(getModificationTime()) + &quot;), parentIds(&quot; 
+<span class="nocode"><a name="876">876: </a></span>                            + (parentIds == null ? &quot;&quot; : Logs.expand(new ArrayList&lt;String&gt;(parentIds), 5)) 
+<span class="nocode"><a name="877">877: </a></span>                            + &quot;), childIds(&quot; + (childIds == null ? &quot;&quot; : Logs.expand(new ArrayList&lt;String&gt;(childIds), 5))
+<span class="nocode"><a name="878">878: </a></span>                            + &quot;), meta(&quot; 
+<span class="nocode"><a name="879">879: </a></span>                            + (meta == null ? &quot;&quot; : Logs.expand(Arrays.asList(meta.keySet().toArray()), 5)) : &quot;&quot;)
+<span class="nocode"><a name="880">880: </a></span>               + &quot;)]&quot;;
+<span class="nocode"><a name="881">881: </a></span>    }
+<span class="nocode"><a name="882">882: </a></span>
+<span class="nocode"><a name="883">883: </a></span>    /**
+<span class="nocode"><a name="884">884: </a></span>     * Simple conversion of milliseconds to ISO-standard date-time display.
+<span class="nocode"><a name="885">885: </a></span>     *
+<span class="nocode"><a name="886">886: </a></span>     * @param timestamp Milliseconds since 1972-01-01.
+<span class="nocode"><a name="887">887: </a></span>     * @return A human readable timestamp.
+<span class="nocode"><a name="888">888: </a></span>     */
+<span class="nocode"><a name="889">889: </a></span>    private String timeToString(long timestamp) {
+<span class="nocode"><a name="890">890: </a></span><span style="background-color: #ffffcc">        if (timestamp == 0) {</span>
+<span class="nocode"><a name="891">891: </a></span><span style="background-color: #ffffcc">            return &quot;NA&quot;;</span>
+<span class="nocode"><a name="892">892: </a></span>        }
+<span class="nocode"><a name="893">893: </a></span><span style="background-color: #ffffcc">        Calendar calendar = Calendar.getInstance();</span>
+<span class="nocode"><a name="894">894: </a></span><span style="background-color: #ffffcc">        calendar.setTimeInMillis(timestamp);</span>
+<span class="nocode"><a name="895">895: </a></span><span style="background-color: #ffffcc">        return String.format(&quot;%1$tF %1$tT&quot;, calendar);</span>
+<span class="nocode"><a name="896">896: </a></span>    }
+<span class="nocode"><a name="897">897: </a></span>
+<span class="nocode"><a name="898">898: </a></span>    /**
+<span class="nocode"><a name="899">899: </a></span>     * Converts a String-encoded list of record-ID's to a proper list.
+<span class="nocode"><a name="900">900: </a></span>     * The String-encoded list is the ID's delimited by ';'.
+<span class="nocode"><a name="901">901: </a></span>     *
+<span class="nocode"><a name="902">902: </a></span>     * @param ids A ';'-delimited string with children-ID's.
+<span class="nocode"><a name="903">903: </a></span>     * @return A list with the children-ID's. If the input-string is null or
+<span class="nocode"><a name="904">904: </a></span>     *         of length 0, null is returned.
+<span class="nocode"><a name="905">905: </a></span>     */
+<span class="nocode"><a name="906">906: </a></span>    public static List&lt;String&gt; idStringToList(String ids) {
+<span class="nocode"><a name="907">907: </a></span><span style="background-color: #ffffcc">        if (ids == null || &quot;&quot;.equals(ids)) {</span>
+<span class="nocode"><a name="908">908: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="909">909: </a></span>        }
+<span class="nocode"><a name="910">910: </a></span><span style="background-color: #ffffcc">        String[] stringChildren = ids.split(ID_DELIMITER);</span>
+<span class="nocode"><a name="911">911: </a></span><span style="background-color: #ffffcc">        return Arrays.asList(stringChildren);</span>
+<span class="nocode"><a name="912">912: </a></span>    }
+<span class="nocode"><a name="913">913: </a></span>
+<span class="nocode"><a name="914">914: </a></span>    /**
+<span class="nocode"><a name="915">915: </a></span>     * Converts a proper list of record-ID's to a String-encoded list.
+<span class="nocode"><a name="916">916: </a></span>     * The String-encoded list is the ID's delimited by ';'.
+<span class="nocode"><a name="917">917: </a></span>     *
+<span class="nocode"><a name="918">918: </a></span>     * @param ids As a proper list of children-ID's.
+<span class="nocode"><a name="919">919: </a></span>     * @return A ';'-delimited string with children-ID's. If the input-list is
+<span class="nocode"><a name="920">920: </a></span>     *         null or of length 0, null is returned.
+<span class="nocode"><a name="921">921: </a></span>     */
+<span class="nocode"><a name="922">922: </a></span>    public static String idListToString(List&lt;String&gt; ids) {
+<span class="nocode"><a name="923">923: </a></span><span style="background-color: #ffffcc">        if (ids == null || ids.isEmpty()) {</span>
+<span class="nocode"><a name="924">924: </a></span><span style="background-color: #ffffcc">            return null;</span>
+<span class="nocode"><a name="925">925: </a></span>        }
+<span class="nocode"><a name="926">926: </a></span><span style="background-color: #ffffcc">        StringWriter sw = new StringWriter(ids.size() * 256);</span>
+<span class="nocode"><a name="927">927: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; ids.size(); i++) {</span>
+<span class="nocode"><a name="928">928: </a></span><span style="background-color: #ffffcc">            sw.append(ids.get(i));</span>
+<span class="nocode"><a name="929">929: </a></span><span style="background-color: #ffffcc">            if (i &lt; ids.size() - 1) {</span>
+<span class="nocode"><a name="930">930: </a></span>                sw.append(ID_DELIMITER);
+<span class="nocode"><a name="931">931: </a></span>            }
+<span class="nocode"><a name="932">932: </a></span>        }
+<span class="nocode"><a name="933">933: </a></span><span style="background-color: #ffffcc">        return sw.toString();</span>
+<span class="nocode"><a name="934">934: </a></span>    }
+<span class="nocode"><a name="935">935: </a></span>
+<span class="nocode"><a name="936">936: </a></span>    /**
+<span class="nocode"><a name="937">937: </a></span>     * Helper-method for creating a pseudo-Record which represents a deleted
+<span class="nocode"><a name="938">938: </a></span>     * Record.
+<span class="nocode"><a name="939">939: </a></span>     *
+<span class="nocode"><a name="940">940: </a></span>     * @param id   {@link #id}
+<span class="nocode"><a name="941">941: </a></span>     * @param base {@link #base}
+<span class="nocode"><a name="942">942: </a></span>     * @return A record marked as deleted.
+<span class="nocode"><a name="943">943: </a></span>     */
+<span class="nocode"><a name="944">944: </a></span>    public static Record createDeletedRecord(String id, String base) {
+<span class="nocode"><a name="945">945: </a></span><span style="background-color: #ffffcc">        Record record = new Record();</span>
+<span class="nocode"><a name="946">946: </a></span><span style="background-color: #ffffcc">        record.setId(id);</span>
+<span class="nocode"><a name="947">947: </a></span><span style="background-color: #ffffcc">        record.setBase(base);</span>
+<span class="nocode"><a name="948">948: </a></span><span style="background-color: #ffffcc">        record.setDeleted(true);</span>
+<span class="nocode"><a name="949">949: </a></span><span style="background-color: #ffffcc">        record.setIndexable(false);</span>
+<span class="nocode"><a name="950">950: </a></span><span style="background-color: #ffffcc">        return record;</span>
+<span class="nocode"><a name="951">951: </a></span>    }
+<span class="nocode"><a name="952">952: </a></span>
+<span class="nocode"><a name="953">953: </a></span>    /**
+<span class="nocode"><a name="954">954: </a></span>     * Deep equality check of iterables. Used to check equality of parentIds
+<span class="nocode"><a name="955">955: </a></span>     * and childrenIds lists
+<span class="nocode"><a name="956">956: </a></span>     *
+<span class="nocode"><a name="957">957: </a></span>     * @param a First iterable to compare.
+<span class="nocode"><a name="958">958: </a></span>     * @param b Second iterable to compare.
+<span class="nocode"><a name="959">959: </a></span>     * @return True iff a and b has the same number of elements and all elements
+<span class="nocode"><a name="960">960: </a></span>     *         respond true to and equals().
+<span class="nocode"><a name="961">961: </a></span>     */
+<span class="nocode"><a name="962">962: </a></span>    private static &lt;E extends Comparable&gt; boolean deepEquals(Iterable&lt;E&gt; a, Iterable&lt;E&gt; b) {
+<span class="nocode"><a name="963">963: </a></span><span style="background-color: #ffffcc">        Iterator&lt;? extends Comparable&gt; ia = a.iterator();</span>
+<span class="nocode"><a name="964">964: </a></span><span style="background-color: #ffffcc">        Iterator&lt;? extends Comparable&gt; ib = b.iterator();</span>
+<span class="nocode"><a name="965">965: </a></span>
+<span class="nocode"><a name="966">966: </a></span><span style="background-color: #ffffcc">        while (ia.hasNext()) {</span>
+<span class="nocode"><a name="967">967: </a></span><span style="background-color: #ffffcc">            if (!ib.hasNext()) {</span>
+<span class="nocode"><a name="968">968: </a></span>                return false;
+<span class="nocode"><a name="969">969: </a></span>            }
+<span class="nocode"><a name="970">970: </a></span><span style="background-color: #ffffcc">            if (!ia.next().equals(ib.next())) {</span>
+<span class="nocode"><a name="971">971: </a></span>                return false;
+<span class="nocode"><a name="972">972: </a></span>            }
+<span class="nocode"><a name="973">973: </a></span>        }
+<span class="nocode"><a name="974">974: </a></span><span style="background-color: #ffffcc">        return !ib.hasNext();</span>
+<span class="nocode"><a name="975">975: </a></span>    }
+<span class="nocode"><a name="976">976: </a></span>
+<span class="nocode"><a name="977">977: </a></span>    /**
+<span class="nocode"><a name="978">978: </a></span>     * Return true if content is compressed. False otherwise.
+<span class="nocode"><a name="979">979: </a></span>     *
+<span class="nocode"><a name="980">980: </a></span>     * @return true if content is compressed, false otherwise.
+<span class="nocode"><a name="981">981: </a></span>     */
+<span class="nocode"><a name="982">982: </a></span>    public boolean isContentCompressed() {
+<span class="nocode"><a name="983">983: </a></span><span style="background-color: #ffffcc">        return contentCompressed;</span>
+<span class="nocode"><a name="984">984: </a></span>    }
+<span class="nocode"><a name="985">985: </a></span>}
+</pre>
+</p></div>
+</div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
+<div class=statistics><ul>
+<li>inheritance_file: /tmp/ES_inheritancetree4098483269810002146.xml.gz
+<li>client_on_thread: false
+<li>alternative_fitness_range: 100.0
+<li>starve_by_fitness: true
+<li>dynamic_pool_size: 50
+<li>old_statistics: true
+<li>test_includes: test.includes
+<li>TT_stack: 10
+<li>dynamic_pool: 0.5
+<li>minimization_timeout: 600
+<li>kincompensation: 1.0
+<li>max_generic_depth: 1
+<li>local_search_rate: -1
+<li>target_method: 
+<li>selection_function: RANK
+<li>ctg_schedule: SIMPLE
+<li>assertion_strategy: MUTATION
+<li>tt_scope: ALL
+<li>process_communication_port: 11086
+<li>TT: false
+<li>chromosome_length: 40
+<li>adaptive_local_search_dse: false
+<li>UI_BACKGROUND_COVERAGE_DELAY: -1
+<li>random_perturbation: 0.2
+<li>test_factory: RANDOM
+<li>enable_alternative_fitness_calculation: false
+<li>debug: false
+<li>plot: false
+<li>log_goals: false
+<li>alternative_fitness_calculation_mode: SUM
+<li>inline: true
+<li>crossover_function: SINGLEPOINTRELATIVE
+<li>local_search_budget: 100
+<li>static_hack: false
+<li>OUTPUT_DIR: evosuite-files
+<li>dse_keep_all_tests: false
+<li>junit_extend: 
+<li>junit_prefix: 
+<li>hierarchy_data: hierarchy.xml
+<li>num_tests: 2
+<li>max_size: 100
+<li>statistics_backend: CSV
+<li>max_length: 0
+<li>mutation_generations: 10
+<li>rank_bias: 1.7
+<li>primitive_reuse_probability: 0.5
+<li>num_random_tests: 20
+<li>filter_assertions: true
+<li>global_timeout: 600
+<li>log.level: null
+<li>new_statistics: false
+<li>assertions: true
+<li>object_pool: 0.0
+<li>timeline_interval: 60000
+<li>concolic_timeout: 15000
+<li>crossover_rate: 0.75
+<li>recycle_chromosomes: false
+<li>assertion_timeout: 600
+<li>serialize_result: false
+<li>string_length: 20
+<li>testability_transformation: false
+<li>p_special_type_call: 0.05
+<li>filter_sandbox_tests: false
+<li>connection_data: connection.xml
+<li>dse_budget: 1
+<li>show_progress: true
+<li>ctg_cores: 1
+<li>p_test_delete: 0.3333333333333333
+<li>local_search_references: true
+<li>dse_rate: -1
+<li>primitive_pool: 0.5
+<li>object_reuse_probability: 0.9
+<li>shuffle_goals: true
+<li>use_deprecated: false
+<li>max_coverage_depth: -1
+<li>penalize_overwriting_definitions_flat: false
+<li>max_attempts: 1000
+<li>print_current_goals: false
+<li>PROJECT_PREFIX: dk
+<li>TARGET_CLASS: dk.statsbiblioteket.summa.common.Record
+<li>p_test_insertion: 0.1
+<li>make_accessible: false
+<li>population: 50
+<li>check_best_length: true
+<li>seed_types: true
+<li>PROJECT_DIR: null
+<li>skip_covered: true
+<li>check_contracts: false
+<li>write_cfg: false
+<li>minimize: true
+<li>seed_clone: 0.2
+<li>target_method_prefix: 
+<li>mutation_timeouts: 3
+<li>instrument_parent: false
+<li>junit_tests: true
+<li>coverage: true
+<li>sandbox: true
+<li>randomize_difficulty: true
+<li>break_on_exception: true
+<li>html: true
+<li>CP: SF110/44_summa/summa.jar
+<li>search_budget: 60
+<li>max_replace_mutants: 100
+<li>check_contracts_end: false
+<li>log.target: null
+<li>array_limit: 1000000
+<li>minimize_values: false
+<li>secondary_objectives: totallength
+<li>log_timeout: false
+<li>p_test_change: 0.3333333333333333
+<li>restricted_read: false
+<li>null_probability: 0.1
+<li>configuration_id: null
+<li>save_all_data: true
+<li>branch_eval: false
+<li>remote_testing: false
+<li>dse_adaptive_rate: 2.0
+<li>local_search_budget_type: STATEMENTS
+<li>branch_statement: false
+<li>check_parents_length: false
+<li>dse_constraint_solver_timeout_millis: 0
+<li>elite: 1
+<li>local_search_probes: 10
+<li>enable_asserts_for_sut: true
+<li>output_granularity: MERGED
+<li>criterion: BRANCH
+<li>restrict_pool: false
+<li>shutdown_timeout: 1000
+<li>output_variables: null
+<li>structured_tests: false
+<li>random_tests: 0
+<li>initially_enforced_randomness: 0.4
+<li>selected_junit: null
+<li>p_change_parameter: 0.1
+<li>port: 1044
+<li>defuse_aliases: true
+<li>dse_constraint_length: 100000
+<li>reuse_budget: true
+<li>test_dir: evosuite-tests
+<li>replace_calls: false
+<li>max_initial_tests: 10
+<li>TARGET_CLASS_PREFIX: 
+<li>dse_adaptive_probability: 0.0
+<li>algorithm: STEADYSTATEGA
+<li>report_dir: evosuite-report
+<li>target_method_list: 
+<li>local_search_arrays: true
+<li>dse_constant_probability: 0.5
+<li>max_int: 2048
+<li>error_branches: false
+<li>stopping_condition: MAXTIME
+<li>local_search_primitives: true
+<li>minimize_old: false
+<li>max_mutants_per_method: 700
+<li>adaptive_local_search: OFF
+<li>replacement_function: DEFAULT
+<li>number_of_mutations: 1
+<li>test_comments: true
+<li>defuse_debug_mode: false
+<li>shutdown_hook: true
+<li>bloat_factor: 2
+<li>dse_variable_resets: 2
+<li>test_format: JUNIT4
+<li>penalize_overwriting_definitions_linearly: false
+<li>max_stalled_threads: 10
+<li>insertion_score_object: 1
+<li>instrumentation_skip_debug: false
+<li>sandbox_mode: RECOMMENDED
+<li>call_probability: 0.0
+<li>check_max_length: true
+<li>max_recursion: 10
+<li>usage_rate: 0.5
+<li>max_mutants: 100
+<li>p_statement_insertion: 0.5
+<li>usage_models: 
+<li>test_carving: false
+<li>evosuite_use_uispec: false
+<li>instrument_context: false
+<li>ctg_time: 2
+<li>ctg_memory: 1000
+<li>classpath: 
+<li>max_array: 10
+<li>dse_negate_all_conditions: false
+<li>seed_mutations: 2
+<li>tournament_size: 10
+<li>dse_budget_type: INDIVIDUALS
+<li>dse_rank_branch_conditions: false
+<li>concolic_mutation: 0.0
+<li>stop_zero: true
+<li>parent_check: true
+<li>insertion_score_parameter: 1
+<li>junit_suffix: EvoSuiteTest
+<li>min_initial_tests: 1
+<li>max_delta: 20
+<li>cpu_timeout: false
+<li>dynamic_limit: false
+<li>min_free_mem: 50000000
+<li>test_excludes: test.excludes
+<li>write_pool: false
+<li>epsilon: 0.001
+<li>enable_asserts_for_evosuite: false
+<li>analysis_criteria: 
+<li>junit_strict: false
+<li>print_to_system: false
+<li>virtual_fs: false
+<li>sandbox_folder: evosuite-sandbox
+<li>strategy: EVOSUITE
+<li>enable_alternative_suite_fitness: false
+<li>max_mutants_per_test: 100
+<li>stopping_port: -1
+<li>insertion_score_uut: 1
+<li>sourcepath: 
+<li>print_covered_goals: false
+<li>extra_timeout: 120
+<li>string_replacement: true
+<li>cluster_recursion: 10
+<li>population_limit: INDIVIDUALS
+<li>p_test_insert: 0.3333333333333333
+<li>constraint_solution_attempts: 3
+<li>timeout: 5000
+</ul></div>
+</div><p><br><a href="../report-generation.html">Back to Overview</a></p>
+</div>
+</body>
+</html>

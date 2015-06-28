@@ -22,36 +22,41 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.calendar.DateChooser: 64.00%</ul><ul>
-<li>810 fitness evaluations, 18 generations, 6984 statements, 744 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 4/8 branches, 14/21 methods, 16/25 total goals
-<li>Mutation score: 26%
+<li>588 fitness evaluations, 13 generations, 6468 statements, 631 tests.
+<li>Time: 0:01:06(Search: 0:01:01, minimization: 0:00:05)
+<li>Coverage: 5/8 branches, 14/21 methods, 16/25 total goals
+<li>Mutation score: 62%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>dateChooser0.addDateChooserListener((DateChooserListener) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, dateChooser0.isShowing());
+<span class="nocode"><a name="2">  2: </a></span>DateChooserListener dateChooserListener0 = dateChooser0.getDateChooserListener();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(dateChooserListener0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>DateChooserListener dateChooserListener0 = dateChooser0.getDateChooserListener();
-<span class="nocode"><a name="3">  3: </a></span>assertNull(dateChooserListener0);
+<span class="nocode"><a name="2">  2: </a></span>dateChooser0.removeDateChooserListener();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(Component.BaselineResizeBehavior.OTHER, dateChooser0.getBaselineResizeBehavior());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>dateChooser0.removeDateChooserListener();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, dateChooser0.isFocusOwner());
+<span class="nocode"><a name="2">  2: </a></span>dateChooser0.monthChanged();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, dateChooser0.getY());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>dateChooser0.monthChanged();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, dateChooser0.isDoubleBuffered());
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(dateChooser0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>Locale locale0 = Locale.GERMAN;
+<span class="nocode"><a name="5">  5: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance(locale0);
+<span class="nocode"><a name="6">  6: </a></span>dateChooser0.fireDateChanged((Object) &quot;DISPLAY&quot;, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;java.util.GregorianCalendar[time=1433731033230,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\&quot;America/Denver\&quot;,offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=2,minimalDaysInFirstWeek=4,ERA=1,YEAR=2015,MONTH=5,WEEK_OF_YEAR=23,WEEK_OF_MONTH=1,DAY_OF_MONTH=7,DAY_OF_YEAR=158,DAY_OF_WEEK=1,DAY_OF_WEEK_IN_MONTH=1,AM_PM=1,HOUR=8,HOUR_OF_DAY=20,MINUTE=37,SECOND=13,MILLISECOND=230,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]&quot;, gregorianCalendar0.toString());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(1433731033230L, gregorianCalendar0.getTimeInMillis());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -227,10 +232,10 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <span class="nocode"><a name="171">171: </a></span>    
 <span class="nocode"><a name="172">172: </a></span>    protected void fireDateChanged(Object source, Calendar oldValue,
 <span class="nocode"><a name="173">173: </a></span>            Calendar newValue) {
-<span class="nocode"><a name="174">174: </a></span>        if (listener != null) {
+<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">        if (listener != null) {</span>
 <span class="nocode"><a name="175">175: </a></span>            listener.dateChanged(new DateChooserEvent(source, oldValue, newValue));
 <span class="nocode"><a name="176">176: </a></span>        }
-<span class="nocode"><a name="177">177: </a></span>    }
+<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="178">178: </a></span>    
 <span class="nocode"><a name="179">179: </a></span>    /**
 <span class="nocode"><a name="180">180: </a></span>     * Updates the &lt;code&gt;current&lt;/code&gt; variable
@@ -271,8 +276,8 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <span class="nocode"><a name="215">215: </a></span>    }
 <span class="nocode"><a name="216">216: </a></span>
 <span class="nocode"><a name="217">217: </a></span>    public void addDateChooserListener(DateChooserListener listener) {
-<span class="nocode"><a name="218">218: </a></span><span style="background-color: #ffffcc">        this.listener = listener;</span>
-<span class="nocode"><a name="219">219: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="218">218: </a></span>        this.listener = listener;
+<span class="nocode"><a name="219">219: </a></span>    }
 <span class="nocode"><a name="220">220: </a></span>    
 <span class="nocode"><a name="221">221: </a></span>    public void removeDateChooserListener() {
 <span class="nocode"><a name="222">222: </a></span><span style="background-color: #ffffcc">        this.listener = null;</span>
@@ -286,7 +291,7 @@ com.allenstudio.ir.ui.calendar.DateChooser
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2600668293651662920.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2698611089344433590.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -304,7 +309,7 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10979
+<li>process_communication_port: 7668
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

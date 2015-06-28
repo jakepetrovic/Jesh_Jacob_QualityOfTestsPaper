@@ -21,10 +21,10 @@ nu.staldal.lagoon.TextAreaWriter
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.TextAreaWriter: 100.00%</ul><ul>
-<li>6550 fitness evaluations, 132 generations, 25966 statements, 4487 tests.
-<li>Time: 0:00:53(Search: 0:00:53, minimization: 0:00:00)
-<li>Coverage: 2/2 branches, 5/5 methods, 6/6 total goals
+<ul><li>Target class: nu.staldal.lagoon.TextAreaWriter: 83.33%</ul><ul>
+<li>7478 fitness evaluations, 151 generations, 26189 statements, 5193 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 1/2 branches, 5/5 methods, 5/6 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,38 +32,14 @@ nu.staldal.lagoon.TextAreaWriter
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>textAreaWriter0.write(13);
-<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write(13);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  textAreaWriter0.close();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[6];
-<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write(charArray0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  textAreaWriter0.close();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  textAreaWriter0.close();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(StringIndexOutOfBoundsException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * String index out of range: -2
-<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="3">  3: </a></span>textAreaWriter0.write(14);
+<span class="nocode"><a name="4">  4: </a></span>textAreaWriter0.write(charArray0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  textAreaWriter0.close();
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -72,7 +48,7 @@ nu.staldal.lagoon.TextAreaWriter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -90,7 +66,7 @@ nu.staldal.lagoon.TextAreaWriter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6664
+<li>process_communication_port: 20408
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

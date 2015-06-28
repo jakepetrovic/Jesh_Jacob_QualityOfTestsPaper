@@ -21,14 +21,21 @@ bierse.controller.DefaultSettingsController
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: bierse.controller.DefaultSettingsController: 0.00%</ul><ul>
-<li>3150 fitness evaluations, 64 generations, 918 statements, 2023 tests.
+<ul><li>Target class: bierse.controller.DefaultSettingsController: 18.52%</ul><ul>
+<li>1618 fitness evaluations, 34 generations, 2511 statements, 1232 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 0/26 branches, 0/3 methods, 0/27 total goals
-<li>Mutation score: 100%
+<li>Coverage: 4/26 branches, 2/3 methods, 5/27 total goals
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultSettingsController defaultSettingsController0 = new DefaultSettingsController((Model) null, (ISettingsView) null, (IDrinkSettingsView) null);
+<span class="nocode"><a name="2">  2: </a></span>ActionEvent actionEvent0 = new ActionEvent((Object) &quot;ON_OR_INSERT&quot;, 0, &quot;ON_OR_INSERT&quot;);
+<span class="nocode"><a name="3">  3: </a></span>defaultSettingsController0.actionPerformed(actionEvent0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0L, actionEvent0.getWhen());
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.controller;
 <span class="nocode"><a name="2">  2: </a></span>
@@ -53,14 +60,14 @@ bierse.controller.DefaultSettingsController
 <span class="nocode"><a name="21"> 21: </a></span>	
 <span class="nocode"><a name="22"> 22: </a></span>	
 <span class="nocode"><a name="23"> 23: </a></span>	public DefaultSettingsController(Model model, ISettingsView view, IDrinkSettingsView drinkSettingsView) {
-<span class="nocode"><a name="24"> 24: </a></span>		this.model = model;
-<span class="nocode"><a name="25"> 25: </a></span>		this.view = view;
-<span class="nocode"><a name="26"> 26: </a></span>		this.dsView = drinkSettingsView;
-<span class="nocode"><a name="27"> 27: </a></span>	}
+<span class="nocode"><a name="24"> 24: </a></span><span style="background-color: #ffffcc">		this.model = model;</span>
+<span class="nocode"><a name="25"> 25: </a></span><span style="background-color: #ffffcc">		this.view = view;</span>
+<span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">		this.dsView = drinkSettingsView;</span>
+<span class="nocode"><a name="27"> 27: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="28"> 28: </a></span>	
 <span class="nocode"><a name="29"> 29: </a></span>	@Override
 <span class="nocode"><a name="30"> 30: </a></span>	public void actionPerformed(ActionEvent e) {
-<span class="nocode"><a name="31"> 31: </a></span>		if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_OK)) {
+<span class="nocode"><a name="31"> 31: </a></span><span style="background-color: #ffffcc">		if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_OK)) {</span>
 <span class="nocode"><a name="32"> 32: </a></span>			model.getSettings().setTimeInterval(view.getTimeInterval());
 <span class="nocode"><a name="33"> 33: </a></span>			model.getSettings().setPriceSteps(view.getPriceSteps());
 <span class="nocode"><a name="34"> 34: </a></span>			model.getSettings().setCurrency(view.getCurrency());
@@ -78,9 +85,9 @@ bierse.controller.DefaultSettingsController
 <span class="nocode"><a name="46"> 46: </a></span>			model.informModelChangedListeners(Model.EVENT_SETTINGS_CHANGED);
 <span class="nocode"><a name="47"> 47: </a></span>			model.informModelChangedListeners(Model.EVENT_DRINK_LIST_CHANGED);
 <span class="nocode"><a name="48"> 48: </a></span>			view.close();
-<span class="nocode"><a name="49"> 49: </a></span>		} else if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_CANCEL)) {
+<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">		} else if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_CANCEL)) {</span>
 <span class="nocode"><a name="50"> 50: </a></span>			view.close();
-<span class="nocode"><a name="51"> 51: </a></span>		} else if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_DRINK_SELECTED)) {
+<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">		} else if(e.getActionCommand().equals(ISettingsView.SETTINGS_ACTION_DRINK_SELECTED)) {</span>
 <span class="nocode"><a name="52"> 52: </a></span>			JComboBox cb = (JComboBox)e.getSource();
 <span class="nocode"><a name="53"> 53: </a></span>			takeOverDrinkSettings();
 <span class="nocode"><a name="54"> 54: </a></span>			dsView.setDrink((Drink)cb.getSelectedItem());
@@ -97,7 +104,7 @@ bierse.controller.DefaultSettingsController
 <span class="nocode"><a name="65"> 65: </a></span>		      view.setBackgronudPicturePath(datei.getAbsolutePath());
 <span class="nocode"><a name="66"> 66: </a></span>		    }
 <span class="nocode"><a name="67"> 67: </a></span>		}
-<span class="nocode"><a name="68"> 68: </a></span>	}
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="69"> 69: </a></span>	
 <span class="nocode"><a name="70"> 70: </a></span>	private void takeOverDrinkSettings() {
 <span class="nocode"><a name="71"> 71: </a></span>		Drink drink = dsView.getDrink();
@@ -132,7 +139,7 @@ bierse.controller.DefaultSettingsController
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2615240860916547851.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1495754756185193124.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -150,7 +157,7 @@ bierse.controller.DefaultSettingsController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12574
+<li>process_communication_port: 15444
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

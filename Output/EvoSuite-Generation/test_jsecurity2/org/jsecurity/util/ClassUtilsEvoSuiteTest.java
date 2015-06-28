@@ -25,25 +25,16 @@ public class ClassUtilsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Class<?> class0 = Object.class;
-      Object[] objectArray0 = new Object[10];
+      Class<?> class0 = Constructor.class;
+      Object[] objectArray0 = new Object[1];
       objectArray0[0] = (Object) class0;
-      objectArray0[1] = (Object) class0;
-      objectArray0[2] = objectArray0[0];
-      objectArray0[3] = (Object) class0;
-      objectArray0[4] = (Object) class0;
-      objectArray0[5] = (Object) class0;
-      objectArray0[6] = (Object) class0;
-      objectArray0[7] = objectArray0[1];
-      objectArray0[8] = (Object) class0;
-      objectArray0[9] = (Object) class0;
       // Undeclared exception!
       try {
         ClassUtils.newInstance((Class) class0, objectArray0);
         fail("Expecting exception: IllegalStateException");
       } catch(IllegalStateException e) {
         /*
-         * java.lang.NoSuchMethodException: java.lang.Object.<init>(java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class, java.lang.Class)
+         * java.lang.NoSuchMethodException: java.lang.reflect.Constructor.<init>(java.lang.Class)
          */
       }
   }
@@ -61,14 +52,14 @@ public class ClassUtilsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Object[] objectArray0 = new Object[10];
+      Object[] objectArray0 = new Object[7];
       // Undeclared exception!
       try {
-        ClassUtils.newInstance("VB<4 #C!0B#L", objectArray0);
+        ClassUtils.newInstance("", objectArray0);
         fail("Expecting exception: UnknownClassException");
       } catch(UnknownClassException e) {
         /*
-         * Unable to load class named [VB<4 #C!0B#L] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+         * Unable to load class named [] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
          */
       }
   }
@@ -80,7 +71,7 @@ public class ClassUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Object[] objectArray0 = new Object[9];
+      Object[] objectArray0 = new Object[3];
       // Undeclared exception!
       try {
         ClassUtils.instantiate((Constructor) null, objectArray0);
@@ -94,35 +85,31 @@ public class ClassUtilsEvoSuiteTest {
 
   //Test case number: 3
   /*
-   * 4 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/String;)Ljava/lang/Object;: root-Branch
-   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - true
-   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - true
-   * 4 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - true
    */
   @Test
   public void test3()  throws Throwable  {
       // Undeclared exception!
       try {
-        ClassUtils.newInstance("org.apache.commons.logging.Log");
-        fail("Expecting exception: InstantiationException");
-      } catch(InstantiationException e) {
+        ClassUtils.newInstance("An error occurred while loading the factory class:");
+        fail("Expecting exception: UnknownClassException");
+      } catch(UnknownClassException e) {
         /*
-         * Unable to instantiate class [org.apache.commons.logging.Log]
+         * Unable to load class named [An error occurred while loading the factory class:] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
          */
       }
   }
 
   //Test case number: 4
   /*
-   * 7 covered goals:
+   * 6 covered goals:
    * 1 org.jsecurity.util.ClassUtils.isAvailable(Ljava/lang/String;)Z: root-Branch
-   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
-   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I29 Branch 9 IFEQ L102 - true
-   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - false
-   * 5 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I69 Branch 11 IFEQ L113 - true
-   * 6 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I106 Branch 12 IFEQ L121 - true
-   * 7 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - false
+   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I29 Branch 9 IFEQ L102 - true
+   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - false
+   * 4 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I69 Branch 11 IFEQ L113 - true
+   * 5 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I106 Branch 12 IFEQ L121 - true
+   * 6 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - false
    */
   @Test
   public void test4()  throws Throwable  {
@@ -132,14 +119,12 @@ public class ClassUtilsEvoSuiteTest {
 
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.util.ClassUtils.<init>()V: root-Branch
-   * 2 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      Class<?> class0 = ClassUtils.class;
-      ClassUtils classUtils0 = (ClassUtils)ClassUtils.newInstance(class0);
+      ClassUtils classUtils0 = new ClassUtils();
       assertNotNull(classUtils0);
   }
 
@@ -158,5 +143,30 @@ public class ClassUtilsEvoSuiteTest {
   public void test6()  throws Throwable  {
       InputStream inputStream0 = ClassUtils.getResourceAsStream("");
       assertNull(inputStream0);
+  }
+
+  //Test case number: 7
+  /*
+   * 3 covered goals:
+   * 1 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I47 Branch 10 IFNONNULL L108 - true
+   * 2 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I126 Branch 13 IFNONNULL L129 - true
+   * 3 org.jsecurity.util.ClassUtils.forName(Ljava/lang/String;)Ljava/lang/Class;: I12 Branch 8 IFNULL L98 - false
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      Class<Object> class0 = ClassUtils.forName("java.lang.Thread");
+      assertEquals(1, class0.getModifiers());
+  }
+
+  //Test case number: 8
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.util.ClassUtils.newInstance(Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 14 IFNONNULL L155 - true
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      Class<?> class0 = Object.class;
+      Object object0 = ClassUtils.newInstance(class0);
+      assertNotNull(object0);
   }
 }

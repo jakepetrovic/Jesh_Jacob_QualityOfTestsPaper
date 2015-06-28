@@ -22,7 +22,7 @@ org.jsecurity.crypto.hash.Sha512Hash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.Sha512Hash: 85.71%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 4090 statements, 297 tests.
+<li>50 fitness evaluations, 2 generations, 3685 statements, 284 tests.
 <li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
 <li>Mutation score: 44%
@@ -31,27 +31,30 @@ org.jsecurity.crypto.hash.Sha512Hash
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e&quot;, sha512Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;ce7ba9a82c602e57507185e7a749f9eb76bce2b0fb87e478e815ab868600be13199fbea902b996458e20ef3cf2d61219e5d1743a1d8a2deddc76bc90d1802ddf&quot;, sha512Hash0.toString());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;z-\uFFFD\u0000\uFFFD\u0000\uFFFD&quot;, (Object) &quot;33f63bc374f428f597d7f7ba7cc1e21a0b4b44faa727f7c052c5ad0b1aa5303884ea5919a53c0d32b5591f4ded381da16b67f6a2170d81058d7e9bb2ad4a215b&quot;, 0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-512&quot;, sha512Hash0.getAlgorithmName());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Sha512Hash.fromHexString(&quot; implementation only supports conversion to &quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter   at index 0
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha512Hash.fromHexString((String) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;ce7ba9a82c602e57507185e7a749f9eb76bce2b0fb87e478e815ab868600be13199fbea902b996458e20ef3cf2d61219e5d1743a1d8a2deddc76bc90d1802ddf&quot;, (Object) &quot;\u0000X\u0000\uFFFD\u0000\u0000\u0000&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-512&quot;, sha512Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha512Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String(&quot;82kRWw9s)u_nSDq&lt;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;f369115b0f6cba748300&quot;, sha512Hash0.toHex());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -104,11 +107,11 @@ org.jsecurity.crypto.hash.Sha512Hash
 <span class="nocode"><a name="48"> 48: </a></span>
 <span class="nocode"><a name="49"> 49: </a></span>    public Sha512Hash(Object source, Object salt) {
 <span class="nocode"><a name="50"> 50: </a></span>        super(source, salt);
-<span class="nocode"><a name="51"> 51: </a></span>    }
+<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="52"> 52: </a></span>
 <span class="nocode"><a name="53"> 53: </a></span>    public Sha512Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="54"> 54: </a></span>        super(source, salt, hashIterations);
-<span class="nocode"><a name="55"> 55: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="55"> 55: </a></span>    }
 <span class="nocode"><a name="56"> 56: </a></span>
 <span class="nocode"><a name="57"> 57: </a></span>    protected String getAlgorithmName() {
 <span class="nocode"><a name="58"> 58: </a></span><span style="background-color: #ffffcc">        return ALGORITHM_NAME;</span>
@@ -133,7 +136,7 @@ org.jsecurity.crypto.hash.Sha512Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -151,7 +154,7 @@ org.jsecurity.crypto.hash.Sha512Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5357
+<li>process_communication_port: 11550
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

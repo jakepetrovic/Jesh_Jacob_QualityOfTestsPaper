@@ -22,7 +22,7 @@ org.jsecurity.aop.AnnotationMethodInterceptor
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.aop.AnnotationMethodInterceptor: 44.44%</ul><ul>
-<li>34492 fitness evaluations, 691 generations, 84702 statements, 21758 tests.
+<li>34480 fitness evaluations, 691 generations, 85342 statements, 21955 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/6 branches, 4/5 methods, 4/9 total goals
 <li>Mutation score: 0%
@@ -31,16 +31,15 @@ org.jsecurity.aop.AnnotationMethodInterceptor
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>UserAnnotationMethodInterceptor userAnnotationMethodInterceptor0 = new UserAnnotationMethodInterceptor();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  userAnnotationMethodInterceptor0.assertAuthorized((MethodInvocation) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * method argument cannot be null
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>GuestAnnotationMethodInterceptor guestAnnotationMethodInterceptor0 = new GuestAnnotationMethodInterceptor();
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  guestAnnotationMethodInterceptor0.invoke((MethodInvocation) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * method argument cannot be null
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -144,7 +143,7 @@ org.jsecurity.aop.AnnotationMethodInterceptor
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -162,7 +161,7 @@ org.jsecurity.aop.AnnotationMethodInterceptor
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16621
+<li>process_communication_port: 11090
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

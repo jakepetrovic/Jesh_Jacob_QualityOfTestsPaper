@@ -7,7 +7,11 @@ package nu.staldal.lagoon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.io.File;
 import nu.staldal.lagoon.BuildSitemap;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 public class BuildSitemapEvoSuiteTest {
 
@@ -21,5 +25,46 @@ public class BuildSitemapEvoSuiteTest {
   public void test0()  throws Throwable  {
       BuildSitemap buildSitemap0 = new BuildSitemap();
       assertNotNull(buildSitemap0);
+  }
+
+  //Test case number: 1
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I3 Branch 1 IFNONNULL L108 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      // Undeclared exception!
+      try {
+        BuildSitemap.processDirectory((File) null, (ContentHandler) xMLFilterImpl0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 2
+  /*
+   * 12 covered goals:
+   * 1 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I28 Branch 2 IF_ICMPGE L110 - true
+   * 2 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I28 Branch 2 IF_ICMPGE L110 - false
+   * 3 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I42 Branch 3 IFNONNULL L113 - true
+   * 4 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I64 Branch 4 IFEQ L116 - true
+   * 5 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I64 Branch 4 IFEQ L116 - false
+   * 6 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I75 Branch 5 IFEQ L120 - false
+   * 7 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I119 Branch 6 IFGT L130 - true
+   * 8 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I119 Branch 6 IFGT L130 - false
+   * 9 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I123 Branch 7 IFLE L130 - true
+   * 10 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I179 Branch 8 IFLE L141 - true
+   * 11 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I179 Branch 8 IFLE L141 - false
+   * 12 nu.staldal.lagoon.BuildSitemap.processDirectory(Ljava/io/File;Lorg/xml/sax/ContentHandler;)V: I3 Branch 1 IFNONNULL L108 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      File file0 = new File("//home/jeshkracht/Major/lagoon_codepro/mutants.log.html");
+      File file1 = file0.getParentFile();
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      BuildSitemap.processDirectory(file1, (ContentHandler) xMLFilterImpl0);
+      assertEquals(1399841414000L, file1.lastModified());
   }
 }

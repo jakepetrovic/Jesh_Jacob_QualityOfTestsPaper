@@ -7,14 +7,46 @@ package org.jsecurity.authc.pam;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.jsecurity.authc.AuthenticationException;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
+
+  private static ExecutorService executor; 
+
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
 
 
   //Test case number: 0
@@ -26,16 +58,27 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
-      try {
-        atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
-        fail("Expecting exception: AuthenticationException");
-      } catch(AuthenticationException e) {
-        /*
-         * Authentication token of type [class org.jsecurity.authc.UsernamePasswordToken] could not be authenticated by any configured realms.  Please ensure that at least one realm can authenticate these tokens.
-         */
-      }
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+        try {
+          AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
+          char[] charArray0 = new char[8];
+          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("}S}uu@umqHVhg", charArray0, (InetAddress) inet4Address0);
+          try {
+            atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+            fail("Expecting exception: AuthenticationException");
+          } catch(AuthenticationException e) {
+            /*
+             * Authentication token of type [class org.jsecurity.authc.UsernamePasswordToken] could not be authenticated by any configured realms.  Please ensure that at least one realm can authenticate these tokens.
+             */
+          }
+        } catch(Throwable t) {
+            // Need to catch declared exceptions
+        }
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
   }
 
   //Test case number: 1
@@ -48,8 +91,8 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "\u0001\u0000#\uFFFD\uFFFD\u0000\u0000(\uFFFD\uFFFD", (Object) null, "");
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "[]", (Object) "UTF-8", "UTF-8");
       SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
       assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
   }
@@ -65,8 +108,8 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      char[] charArray0 = new char[9];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
+      char[] charArray0 = new char[3];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(".NhXiK", charArray0, false);
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       try {
         atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import org.jsecurity.io.ResourceUtils;
@@ -18,22 +19,17 @@ public class ResourceUtilsEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - false
-   * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I53 Branch 11 IFNONNULL L133 - false
-   * 4 org.jsecurity.io.ResourceUtils.loadFromClassPath(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 14 IFEQ L160 - true
+   * 2 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
+   * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - false
+   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I53 Branch 11 IFNONNULL L133 - false
+   * 5 org.jsecurity.io.ResourceUtils.loadFromClassPath(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 14 IFEQ L160 - true
    */
   @Test
   public void test0()  throws Throwable  {
-      try {
-        ResourceUtils.getInputStreamForPath("classpath:`- ");
-        fail("Expecting exception: IOException");
-      } catch(IOException e) {
-        /*
-         * Resource [classpath:`- ] could not be found.
-         */
-      }
+      boolean boolean0 = ResourceUtils.resourceExists("classpath: 6>/d");
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 1
@@ -55,7 +51,7 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("classpath:~%?Ur(QW&JpKz");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("classpath: 6>/d");
       assertEquals(true, boolean0);
   }
 
@@ -68,7 +64,7 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("a,F\"yah");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("[LOOKUP] Properties file has no entry specifying LogFactory subclass.");
       assertEquals(false, boolean0);
   }
 
@@ -79,7 +75,7 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("url:[CUSTOM LOG FACTORY] LinkageError thrown whilst trying to determine whether the compatibility was caused by a classloader conflict: ");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("url:&6K6/U^ep+");
       assertEquals(true, boolean0);
   }
 
@@ -93,32 +89,17 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.hasResourcePrefix("file:due to bad log hierarchy. ");
+      boolean boolean0 = ResourceUtils.hasResourcePrefix("file:90Z}%)<E5");
       assertEquals(true, boolean0);
   }
 
   //Test case number: 6
   /*
-   * 5 covered goals:
-   * 1 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
-   * 2 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
-   * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
-   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - true
-   * 5 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("a,F\"yah");
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 7
-  /*
    * 1 covered goal:
    * 1 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I63 Branch 7 IFNULL L96 - true
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test6()  throws Throwable  {
       // Undeclared exception!
       try {
         ResourceUtils.resourceExists((String) null);
@@ -127,31 +108,51 @@ public class ResourceUtilsEvoSuiteTest {
       }
   }
 
+  //Test case number: 7
+  /*
+   * 4 covered goals:
+   * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
+   * 2 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
+   * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - false
+   * 4 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      try {
+        ResourceUtils.getInputStreamForPath("file:90Z}%)<E5");
+        fail("Expecting exception: FileNotFoundException");
+      } catch(FileNotFoundException e) {
+        /*
+         * 90Z}%)<E5 (No such file or directory)
+         */
+      }
+  }
+
   //Test case number: 8
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - false
    * 2 org.jsecurity.io.ResourceUtils.loadFromUrl(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 13 IFEQ L151 - true
+   * 3 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("url:[CUSTOM LOG FACTORY] LinkageError thrown whilst trying to determine whether the compatibility was caused by a classloader conflict: ");
+      boolean boolean0 = ResourceUtils.resourceExists("url:&6K6/U^ep+");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 9
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - false
-   * 2 org.jsecurity.io.ResourceUtils.stripPrefix(Ljava/lang/String;)Ljava/lang/String;: root-Branch
-   * 3 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
-   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
-   * 5 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
-   * 6 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
+   * 5 covered goals:
+   * 1 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I36 Branch 10 IFLE L126 - true
+   * 2 org.jsecurity.io.ResourceUtils.loadFromFile(Ljava/lang/String;)Ljava/io/InputStream;: I4 Branch 12 IFEQ L142 - true
+   * 3 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I6 Branch 8 IFLE L120 - true
+   * 4 org.jsecurity.io.ResourceUtils.getInputStreamForPath(Ljava/lang/String;)Ljava/io/InputStream;: I21 Branch 9 IFLE L123 - true
+   * 5 org.jsecurity.io.ResourceUtils.resourceExists(Ljava/lang/String;)Z: I44 Branch 6 IFNULL L96 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      boolean boolean0 = ResourceUtils.resourceExists("file:due to bad log hierarchy. ");
+      boolean boolean0 = ResourceUtils.resourceExists("A*]");
       assertEquals(false, boolean0);
   }
 
@@ -172,7 +173,7 @@ public class ResourceUtilsEvoSuiteTest {
    */
   @Test
   public void test11()  throws Throwable  {
-      FileDescriptor fileDescriptor0 = FileDescriptor.out;
+      FileDescriptor fileDescriptor0 = FileDescriptor.err;
       FileInputStream fileInputStream0 = new FileInputStream(fileDescriptor0);
       ResourceUtils.close((InputStream) fileInputStream0);
       assertEquals(false, fileInputStream0.markSupported());

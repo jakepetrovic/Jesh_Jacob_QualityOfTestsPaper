@@ -9,8 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.lavalamp.device.Action;
 import net.sf.lavalamp.device.Actions;
-import net.sf.lavalamp.device.TurnOff;
-import net.sf.lavalamp.device.TurnOn;
+import net.sf.lavalamp.device.Crash;
 
 public class ActionsEvoSuiteTest {
 
@@ -23,10 +22,10 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TurnOff turnOff0 = new TurnOff();
-      Actions actions0 = new Actions((Action) turnOff0, (Action) turnOff0, (Action) turnOff0);
-      TurnOff turnOff1 = (TurnOff)actions0.getSuccessAction();
-      assertSame(turnOff0, turnOff1);
+      Crash crash0 = new Crash();
+      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+      Crash crash1 = (Crash)actions0.getSuccessAction();
+      assertSame(crash1, crash0);
   }
 
   //Test case number: 1
@@ -36,10 +35,10 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TurnOn turnOn0 = new TurnOn();
-      Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-      TurnOn turnOn1 = (TurnOn)actions0.getErrorAction();
-      assertSame(turnOn1, turnOn0);
+      Crash crash0 = new Crash();
+      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+      Crash crash1 = (Crash)actions0.getErrorAction();
+      assertSame(crash1, crash0);
   }
 
   //Test case number: 2
@@ -50,9 +49,9 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      TurnOn turnOn0 = new TurnOn();
-      Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-      TurnOn turnOn1 = (TurnOn)actions0.getFailureAction();
-      assertSame(turnOn1, turnOn0);
+      Crash crash0 = new Crash();
+      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
+      Crash crash1 = (Crash)actions0.getFailureAction();
+      assertSame(crash1, crash0);
   }
 }

@@ -82,7 +82,7 @@ public class NullValueEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
-      Date date0 = nullValue0.asDate((String) null);
+      Date date0 = nullValue0.asDate("H=a~q9Lg7KDN");
       assertNull(date0);
   }
 
@@ -95,8 +95,7 @@ public class NullValueEvoSuiteTest {
   public void test6()  throws Throwable  {
       NullValue nullValue0 = NullValue.INSTANCE;
       Class<?> class0 = NullValue.class;
-      Object object0 = nullValue0.asType((Class<Object>) class0);
-      assertNull(object0);
+      nullValue0.asType((Class<Integer>) class0);
   }
 
   //Test case number: 7

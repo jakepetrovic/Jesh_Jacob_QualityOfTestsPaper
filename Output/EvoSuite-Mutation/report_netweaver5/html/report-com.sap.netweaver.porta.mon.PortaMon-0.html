@@ -21,14 +21,24 @@ com.sap.netweaver.porta.mon.PortaMon
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.sap.netweaver.porta.mon.PortaMon: 0.00%</ul><ul>
-<li>2 fitness evaluations, 2 generations, 10 statements, 14 tests.
-<li>Time: 0:03:02(Search: 0:01:24, minimization: 0:01:38)
-<li>Coverage: 0/10 branches, 0/13 methods, 0/21 total goals
-<li>Mutation score: 100%
+<ul><li>Target class: com.sap.netweaver.porta.mon.PortaMon: 9.52%</ul><ul>
+<li>2 fitness evaluations, 2 generations, 2 statements, 11 tests.
+<li>Time: 0:01:52(Search: 0:01:10, minimization: 0:00:42)
+<li>Coverage: 0/10 branches, 2/13 methods, 2/21 total goals
+<li>Mutation score: 1%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Properties properties0 = PortaMon.getServerProps();
+<span class="nocode"><a name="2">  2: </a></span>assertNull(properties0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>PortaMon portaMon0 = new PortaMon();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(portaMon0);
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*******************************************************************************
 <span class="nocode"><a name="2">  2: </a></span> * Copyright (c) 2009, 2010 SAP AG.
@@ -73,11 +83,11 @@ com.sap.netweaver.porta.mon.PortaMon
 <span class="nocode"><a name="41"> 41: </a></span>	private String status;
 <span class="nocode"><a name="42"> 42: </a></span>
 <span class="nocode"><a name="43"> 43: </a></span>	public PortaMon() {
-<span class="nocode"><a name="44"> 44: </a></span>		in = new BufferedReader(new InputStreamReader(System.in));
-<span class="nocode"><a name="45"> 45: </a></span>		out = System.out;
-<span class="nocode"><a name="46"> 46: </a></span>		lmac = new LifecycleManagerAuthenticationCallback();
-<span class="nocode"><a name="47"> 47: </a></span>		dmac = new DeployManagerAuthenticationCallback();
-<span class="nocode"><a name="48"> 48: </a></span>	}
+<span class="nocode"><a name="44"> 44: </a></span><span style="background-color: #ffffcc">		in = new BufferedReader(new InputStreamReader(System.in));</span>
+<span class="nocode"><a name="45"> 45: </a></span><span style="background-color: #ffffcc">		out = System.out;</span>
+<span class="nocode"><a name="46"> 46: </a></span><span style="background-color: #ffffcc">		lmac = new LifecycleManagerAuthenticationCallback();</span>
+<span class="nocode"><a name="47"> 47: </a></span><span style="background-color: #ffffcc">		dmac = new DeployManagerAuthenticationCallback();</span>
+<span class="nocode"><a name="48"> 48: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="49"> 49: </a></span>
 <span class="nocode"><a name="50"> 50: </a></span>	public void go() throws IOException {
 <span class="nocode"><a name="51"> 51: </a></span>		printInfo();
@@ -98,7 +108,7 @@ com.sap.netweaver.porta.mon.PortaMon
 <span class="nocode"><a name="66"> 66: </a></span>	}
 <span class="nocode"><a name="67"> 67: </a></span>
 <span class="nocode"><a name="68"> 68: </a></span>	public static Properties getServerProps() {
-<span class="nocode"><a name="69"> 69: </a></span>		return serverProps;
+<span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">		return serverProps;</span>
 <span class="nocode"><a name="70"> 70: </a></span>	}
 <span class="nocode"><a name="71"> 71: </a></span>
 <span class="nocode"><a name="72"> 72: </a></span>	public static LifecycleManagerAuthenticationCallback getLifecycleManagerAuthenticationCallback() {
@@ -209,7 +219,7 @@ com.sap.netweaver.porta.mon.PortaMon
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree6193030351188358440.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4591700833138539953.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -227,7 +237,7 @@ com.sap.netweaver.porta.mon.PortaMon
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10443
+<li>process_communication_port: 4885
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

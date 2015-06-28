@@ -21,10 +21,10 @@ nu.staldal.lagoon.producer.BasicSplit
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.producer.BasicSplit: 40.38%</ul><ul>
-<li>14998 fitness evaluations, 301 generations, 85063 statements, 9401 tests.
+<ul><li>Target class: nu.staldal.lagoon.producer.BasicSplit: 42.31%</ul><ul>
+<li>12382 fitness evaluations, 249 generations, 77744 statements, 8056 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 14/44 branches, 17/20 methods, 21/52 total goals
+<li>Coverage: 15/44 branches, 17/20 methods, 22/52 total goals
 <li>Mutation score: 1%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -42,46 +42,27 @@ nu.staldal.lagoon.producer.BasicSplit
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.setDocumentLocator((Locator) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(basicSplit0.getEntryName());
+<span class="nocode"><a name="2">  2: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
+<span class="nocode"><a name="3">  3: </a></span>basicSplit0.setDocumentLocator((Locator) locator2Impl0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, basicSplit0.getPosition());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.start((ContentHandler) xMLFilterImpl0, (Target) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: SAXException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(SAXException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>basicSplit0.start((ContentHandler) basicSplit0, (Target) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.endDocument();
+<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.hasBeenUpdated(209L);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.hasBeenUpdated(13L);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.startDocument();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
-</pre>
-<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -94,25 +75,45 @@ nu.staldal.lagoon.producer.BasicSplit
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 8</h3>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
+<span class="nocode"><a name="2">  2: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.start((ContentHandler) xMLFilterImpl0, (Target) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: SAXException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(SAXException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
 <span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>basicSplit0.startElement(&quot;`u7mNXX9!kbq}}jfq&quot;, &quot;`u7mNXX9!kbq}}jfq&quot;, &quot;`u7mNXX9!kbq}}jfq&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="3">  3: </a></span>basicSplit0.startElement(&quot;G[t^'hqU}sp&quot;, &quot;G[t^'hqU}sp&quot;, &quot;G[t^'hqU}sp&quot;, (Attributes) attributesImpl0);
 <span class="nocode"><a name="4">  4: </a></span>assertNull(basicSplit0.getEntryName());
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
+<span class="nocode"><a name="2">  2: </a></span>basicSplit0.endElement(&quot;ZG&quot;, &quot;ZG&quot;, &quot;ZG&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(basicSplit0.getEntryName());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.endElement(&quot;(&quot;, &quot;(&quot;, &quot;(&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.startPrefixMapping((String) null, (String) null);
+<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.endPrefixMapping(&quot;ZG&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -120,38 +121,28 @@ nu.staldal.lagoon.producer.BasicSplit
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  basicSplit0.endPrefixMapping(&quot;`u7mNXX9!kbq}}jfq&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="3">  3: </a></span>basicSplit0.characters(charArray0, (int) '\u0000', (int) '\u0000');
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, basicSplit0.getPosition());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
-<span class="nocode"><a name="3">  3: </a></span>basicSplit0.characters(charArray0, (int) '4', (int) '\u0000');
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, basicSplit0.getPosition());
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[23];
+<span class="nocode"><a name="3">  3: </a></span>basicSplit0.ignorableWhitespace(charArray0, (int) '\u0000', (int) 'R');
+<span class="nocode"><a name="4">  4: </a></span>assertNull(basicSplit0.getEntryName());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
-<span class="nocode"><a name="3">  3: </a></span>basicSplit0.ignorableWhitespace(charArray0, (int) 'U', (int) '^');
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, basicSplit0.getPosition());
+<span class="nocode"><a name="2">  2: </a></span>basicSplit0.processingInstruction(&quot;G[t^'hqU}sp&quot;, &quot;G[t^'hqU}sp&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(basicSplit0.getEntryName());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.processingInstruction(&quot;`u7mNXX9!kbq}}jfq&quot;, &quot;`u7mNXX9!kbq}}jfq&quot;);
+<span class="nocode"><a name="2">  2: </a></span>basicSplit0.skippedEntity(&quot;f&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.skippedEntity(&quot;(&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(basicSplit0.getEntryName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -286,7 +277,7 @@ nu.staldal.lagoon.producer.BasicSplit
 <span class="nocode"><a name="130">130: </a></span>			else
 <span class="nocode"><a name="131">131: </a></span><span style="background-color: #ffffcc">				throw new SAXException(myException);</span>
 <span class="nocode"><a name="132">132: </a></span>		}
-<span class="nocode"><a name="133">133: </a></span>	}
+<span class="nocode"><a name="133">133: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="134">134: </a></span>
 <span class="nocode"><a name="135">135: </a></span>    public boolean hasBeenUpdated(long when)
 <span class="nocode"><a name="136">136: </a></span>        throws LagoonException, IOException
@@ -327,7 +318,7 @@ nu.staldal.lagoon.producer.BasicSplit
 <span class="nocode"><a name="171">171: </a></span>    public void endDocument()
 <span class="nocode"><a name="172">172: </a></span>    {
 <span class="nocode"><a name="173">173: </a></span><span style="background-color: #ffffcc">        mainThread.interrupt();</span>
-<span class="nocode"><a name="174">174: </a></span>    }
+<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="175">175: </a></span>
 <span class="nocode"><a name="176">176: </a></span>    public void startElement(String namespaceURI, String localName,
 <span class="nocode"><a name="177">177: </a></span>        String qName, Attributes atts)
@@ -456,7 +447,7 @@ nu.staldal.lagoon.producer.BasicSplit
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -474,7 +465,7 @@ nu.staldal.lagoon.producer.BasicSplit
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11996
+<li>process_communication_port: 7079
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

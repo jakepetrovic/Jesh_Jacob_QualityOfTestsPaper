@@ -22,24 +22,24 @@ net.sf.xisemele.impl.ValidationsImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.ValidationsImpl: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 2773 statements, 259 tests.
+<li>50 fitness evaluations, 2 generations, 3336 statements, 318 tests.
 <li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:01)
 <li>Coverage: 10/10 branches, 4/4 methods, 11/11 total goals
-<li>Mutation score: 19%
+<li>Mutation score: 23%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[2];
+<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[3];
 <span class="nocode"><a name="3">  3: </a></span>objectArray0[1] = (Object) validationsImpl0;
 <span class="nocode"><a name="4">  4: </a></span>validationsImpl0.assertNotNull(objectArray0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[5];
+<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[4];
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  validationsImpl0.assertNotNull(objectArray0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
@@ -49,7 +49,7 @@ net.sf.xisemele.impl.ValidationsImpl
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-<span class="nocode"><a name="2">  2: </a></span>validationsImpl0.assertValidName(&quot;net.sf.xisemele.null.pointer.exception&quot;);
+<span class="nocode"><a name="2">  2: </a></span>validationsImpl0.assertValidName(&quot;DeZ&quot;);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -67,17 +67,17 @@ net.sf.xisemele.impl.ValidationsImpl
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-<span class="nocode"><a name="2">  2: </a></span>String[] stringArray0 = new String[7];
-<span class="nocode"><a name="3">  3: </a></span>Object object0 = validationsImpl0.getFirstNotNull((Object[]) stringArray0);
+<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[3];
+<span class="nocode"><a name="3">  3: </a></span>Object object0 = validationsImpl0.getFirstNotNull(objectArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertNull(object0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[5];
-<span class="nocode"><a name="3">  3: </a></span>objectArray0[1] = (Object) validationsImpl0;
-<span class="nocode"><a name="4">  4: </a></span>ValidationsImpl validationsImpl1 = (ValidationsImpl)validationsImpl0.getFirstNotNull(objectArray0);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(validationsImpl1, validationsImpl0);
+<span class="nocode"><a name="2">  2: </a></span>String[] stringArray0 = new String[7];
+<span class="nocode"><a name="3">  3: </a></span>stringArray0[0] = &quot;DeZ&quot;;
+<span class="nocode"><a name="4">  4: </a></span>String string0 = validationsImpl0.getFirstNotNull(stringArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;DeZ&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -155,7 +155,7 @@ net.sf.xisemele.impl.ValidationsImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3704626444237955745.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3203091113678245375.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -173,7 +173,7 @@ net.sf.xisemele.impl.ValidationsImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14908
+<li>process_communication_port: 10788
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

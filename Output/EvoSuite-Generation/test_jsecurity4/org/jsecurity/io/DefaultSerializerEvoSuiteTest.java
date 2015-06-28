@@ -28,7 +28,7 @@ public class DefaultSerializerEvoSuiteTest {
         fail("Expecting exception: SerializationException");
       } catch(SerializationException e) {
         /*
-         * Unable to serialize object [java.lang.Object@43ae8a4].  In order for the DefaultSerializer to serialize this object, the [java.lang.Object] class must implement java.io.Serializable.
+         * Unable to serialize object [java.lang.Object@101bdd40].  In order for the DefaultSerializer to serialize this object, the [java.lang.Object] class must implement java.io.Serializable.
          */
       }
   }
@@ -60,7 +60,7 @@ public class DefaultSerializerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DefaultSerializer defaultSerializer0 = new DefaultSerializer();
-      byte[] byteArray0 = new byte[4];
+      byte[] byteArray0 = new byte[1];
       try {
         defaultSerializer0.deserialize(byteArray0);
         fail("Expecting exception: SerializationException");

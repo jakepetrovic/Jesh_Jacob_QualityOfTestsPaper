@@ -22,37 +22,44 @@ org.jsecurity.crypto.hash.Sha384Hash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.Sha384Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3357 statements, 249 tests.
+<li>50 fitness evaluations, 2 generations, 4200 statements, 284 tests.
 <li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
-<li>Mutation score: 56%
+<li>Mutation score: 44%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;08ddafea8e4b457d5d9a7dd777b898219ccf1ac2ae6be48e358b3598df1e0688c5c504c964460f134c3633dcd6f9dd57&quot;, (Object) &quot;\u0000\uFFFD\u0000\uFFFD\u0000\u0000\uFFFD&quot;, (int) (byte)0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;5edf4598df6dd358365813a10b04486cfed77faee9377b27a7e3fa530b96e22955e4163975e0a6bbb2399d6893e4efcb&quot;, sha384Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;SHA-384&quot;, (Object) &quot;SHA-384&quot;, 1288);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;f6f2b3cf77e078ba56f6f14281e82fb0293805b99bb4670a629824c0c3694644b08b7dbd2e4363036642aeffe8dd51f0&quot;, sha384Hash0.toHex());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha384Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;' MessageDigest instance available on the current JVM.&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;31eb2c6a07838a07acb629ecb5a9dc79abda8a569b95ea27b6179cbabade9ed25500&quot;, sha384Hash0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;] to byte array using &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-384&quot;, sha384Hash0.getAlgorithmName());
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;\uFFFD\t&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;d374b1ea405dec6c732aeba552916a11897fd1a316aef327304602d78172c5578c67785477f78d2fa9b6a90f973d82b1&quot;, sha384Hash0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromHexString(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha384Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Sha384Hash.fromHexString(&quot;]VxMPkJs&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Odd number of characters.
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;&quot;, (Object) &quot;SHA-384&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;hvBSozjLlOaVtvauuj2hx9xBjysJNBnP3l1X/QJebNjNrXAtFDX5LNTdBOR1ap+x&quot;, sha384Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;UTF-8&quot;, (Object) &quot;d374b1ea405dec6c732aeba552916a11897fd1a316aef327304602d78172c5578c67785477f78d2fa9b6a90f973d82b1&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;oVFjc3FranZ08CLL5ceQ3hSF4nNQKuDL3FnbdFh6rRWo2+RjHr99AKbrH+FYizsB&quot;, sha384Hash0.toBase64());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -118,7 +125,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 <span class="nocode"><a name="61"> 61: </a></span>    public static Sha384Hash fromHexString(String hex) {
 <span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">        Sha384Hash hash = new Sha384Hash();</span>
 <span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">        hash.setBytes(Hex.decode(hex));</span>
-<span class="nocode"><a name="64"> 64: </a></span><span style="background-color: #ffffcc">        return hash;</span>
+<span class="nocode"><a name="64"> 64: </a></span>        return hash;
 <span class="nocode"><a name="65"> 65: </a></span>    }
 <span class="nocode"><a name="66"> 66: </a></span>
 <span class="nocode"><a name="67"> 67: </a></span>    public static Sha384Hash fromBase64String(String base64) {
@@ -133,7 +140,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -151,7 +158,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17140
+<li>process_communication_port: 8756
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -98,6 +98,6 @@ public class INCHI_BOND_TYPEEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_BOND_TYPE.getValue(462649718);
+      INCHI_BOND_TYPE.getValue(655);
   }
 }

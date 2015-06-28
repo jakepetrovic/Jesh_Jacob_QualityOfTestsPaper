@@ -22,9 +22,15 @@ public class Md2CredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
-      Md2Hash md2Hash0 = (Md2Hash)md2CredentialsMatcher0.hashProvidedCredentials((Object) "[LOOKUP] Properties file has no entry specifying LogFactory subclass.", (Object) null, (int) 'u');
-      assertNotNull(md2Hash0);
-      assertEquals("c9028503b070516fd7365445e21c429d", md2Hash0.toHex());
+      // Undeclared exception!
+      try {
+        md2CredentialsMatcher0.hashProvidedCredentials((Object) null, (Object) "UTF-8", 491);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Argument for byte conversion cannot be null.
+         */
+      }
   }
 
   //Test case number: 1

@@ -22,21 +22,35 @@ org.jsecurity.io.TextResource
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.TextResource: 42.11%</ul><ul>
-<li>872 fitness evaluations, 19 generations, 3229 statements, 746 tests.
-<li>Time: 0:01:04(Search: 0:01:04, minimization: 0:00:00)
+<li>374 fitness evaluations, 9 generations, 2109 statements, 448 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/10 branches, 7/12 methods, 8/19 total goals
-<li>Mutation score: 4%
+<li>Mutation score: 2%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(1054);
-<span class="nocode"><a name="2">  2: </a></span>PushbackInputStream pushbackInputStream0 = new PushbackInputStream((InputStream) pipedInputStream0);
-<span class="nocode"><a name="3">  3: </a></span>IniResource iniResource0 = new IniResource((InputStream) pushbackInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(iniResource0.getCharsetName());
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;specifying the standard LogFactory from the command line. &quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [specifying the standard LogFactory from the command line. ]
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>StringReader stringReader0 = new StringReader(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>IniResource iniResource0 = new IniResource((Reader) stringReader0);
+<span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = new byte[6];
+<span class="nocode"><a name="4">  4: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0, 1422, (-1234));
+<span class="nocode"><a name="5">  5: </a></span>iniResource0.load((InputStream) byteArrayInputStream0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1416, byteArrayInputStream0.available());
+</pre>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -45,18 +59,6 @@ org.jsecurity.io.TextResource
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
 <span class="nocode"><a name="7">  7: </a></span>   * 'resourcePath' argument cannot be null.
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;$qT&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [$qT]
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -189,7 +191,7 @@ org.jsecurity.io.TextResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -207,7 +209,7 @@ org.jsecurity.io.TextResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14755
+<li>process_communication_port: 13016
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

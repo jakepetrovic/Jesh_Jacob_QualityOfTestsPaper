@@ -20,8 +20,8 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "\u0000\u0000\u0002\u0000\uFFFD\u0000\uFFFD\u0000\u0000", (Object) "SHA-512");
-      assertEquals("114918427cd1bed36c282d6121957db1f6030a3cdd9ee581578e10f5c8aebc592ceed6ff7c54b96cd5340679da01ab972e1cf70d89dd81b67ab7ad07aa4af12f", sha512Hash0.toString());
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "Q\uFFFDi\uFFFD", (Object) "0cRbAAA=");
+      assertEquals("beecde30ef3b702ca5eeec5d44edaa025c0cfb06c84ebefa69c06b3c53bddc74757e2261cfd25e47459658c435a42f484275cdb73fcf92372a47e191edc895be", sha512Hash0.toHex());
   }
 
   //Test case number: 1
@@ -31,7 +31,7 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "10c3fb");
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "cf1a8d1a9a11e0d94f83ea8347e668dcb4cf4669c850e58a7ba7bf0752680f0f776bc3634ed133da5b2a1d53c41b6afe84f8ca686010f2f8cf700b48040b54ac");
       assertEquals("SHA-512", sha512Hash0.getAlgorithmName());
   }
 
@@ -43,8 +43,8 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "G", (Object) "114918427cd1bed36c282d6121957db1f6030a3cdd9ee581578e10f5c8aebc592ceed6ff7c54b96cd5340679da01ab972e1cf70d89dd81b67ab7ad07aa4af12f", (-1980));
-      assertEquals("LiE5iT34cB1qH9dUNNa+xyAeUYKCHRqD3HFGP7TtLpAVEL9ATFaXawtL3f2eNG8f+lIVPGruYQoreMr63YYlVw==", sha512Hash0.toBase64());
+      Sha512Hash sha512Hash0 = new Sha512Hash((Object) "beecde30ef3b702ca5eeec5d44edaa025c0cfb06c84ebefa69c06b3c53bddc74757e2261cfd25e47459658c435a42f484275cdb73fcf92372a47e191edc895be", (Object) "SHA-512", (int) (byte) (-3));
+      assertEquals("SHA-512", sha512Hash0.getAlgorithmName());
   }
 
   //Test case number: 3
@@ -57,11 +57,11 @@ public class Sha512HashEvoSuiteTest {
   public void test3()  throws Throwable  {
       // Undeclared exception!
       try {
-        Sha512Hash.fromHexString("]P");
+        Sha512Hash.fromHexString("_CMTzFj:85brszJ:");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * Illegal hexadecimal charcter ] at index 0
+         * Odd number of characters.
          */
       }
   }
@@ -74,7 +74,7 @@ public class Sha512HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("EM #P7");
-      assertEquals("EMP7", sha512Hash0.toBase64());
+      Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String("@0c@Rb`7@g");
+      assertEquals("d1c45b0000", sha512Hash0.toString());
   }
 }

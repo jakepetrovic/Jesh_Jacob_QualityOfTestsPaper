@@ -21,42 +21,33 @@ org.jsecurity.crypto.hash.Sha256Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Sha256Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3381 statements, 258 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
-<li>Mutation score: 44%
+<ul><li>Target class: org.jsecurity.crypto.hash.Sha256Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3398 statements, 261 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
+<li>Mutation score: 56%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;, (Object) &quot;\uFFFD\uFFFD\u0000\u0000&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;9d4d4565d16e81ab0b87ea0889d8d5a4891a012953e57ba16989f0e9b7639f56&quot;, sha256Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha256Hash0.toHex());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha256Hash.fromHexString((String) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;&quot;, (Object) &quot;\u0014\u0000\u0000\uFFFD\u0000\uFFFDO&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;129f11fb5603be89434642b46d8996448da58660784e65db0fa5f762387be8f9&quot;, sha256Hash0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;No native '&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;Nonative&quot;, sha256Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromHexString(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha256Hash0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;\uFFFD\uFFFD\u0000\u0000&quot;, (Object) &quot;u9B8T8AsmblxJP6/Qse2O1ARwN8o1An7tIa1qdLmFeo=&quot;, (-1));
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;f6edc2d1809c62db69b7387aa52906c94fed952c88b34868198292c259d5cd92&quot;, sha256Hash0.toHex());
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea&quot;, sha256Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=&quot;, sha256Hash0.toBase64());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -113,7 +104,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <span class="nocode"><a name="52"> 52: </a></span>
 <span class="nocode"><a name="53"> 53: </a></span>    public Sha256Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="54"> 54: </a></span>        super(source, salt, hashIterations);
-<span class="nocode"><a name="55"> 55: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="55"> 55: </a></span>    }
 <span class="nocode"><a name="56"> 56: </a></span>
 <span class="nocode"><a name="57"> 57: </a></span>    protected String getAlgorithmName() {
 <span class="nocode"><a name="58"> 58: </a></span><span style="background-color: #ffffcc">        return ALGORITHM_NAME;</span>
@@ -122,7 +113,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <span class="nocode"><a name="61"> 61: </a></span>    public static Sha256Hash fromHexString(String hex) {
 <span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">        Sha256Hash hash = new Sha256Hash();</span>
 <span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">        hash.setBytes(Hex.decode(hex));</span>
-<span class="nocode"><a name="64"> 64: </a></span>        return hash;
+<span class="nocode"><a name="64"> 64: </a></span><span style="background-color: #ffffcc">        return hash;</span>
 <span class="nocode"><a name="65"> 65: </a></span>    }
 <span class="nocode"><a name="66"> 66: </a></span>
 <span class="nocode"><a name="67"> 67: </a></span>    public static Sha256Hash fromBase64String(String base64) {
@@ -137,7 +128,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -155,7 +146,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7899
+<li>process_communication_port: 21391
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

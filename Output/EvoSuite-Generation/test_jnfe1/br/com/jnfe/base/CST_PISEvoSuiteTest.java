@@ -31,9 +31,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_07;
       boolean boolean0 = cST_PIS0.isIsento();
-      assertEquals(false, boolean0);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 2
@@ -43,9 +43,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_09;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_07;
       String string0 = cST_PIS0.getDesc();
-      assertEquals("Com suspens\u00E3o da contribui\u00E7\u00E3o", string0);
+      assertEquals("Isento da contribui\u00E7\u00E3o", string0);
   }
 
   //Test case number: 3
@@ -55,9 +55,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_07;
       String string0 = cST_PIS0.getValue();
-      assertEquals("01", string0);
+      assertEquals("07", string0);
   }
 
   //Test case number: 4
@@ -69,8 +69,8 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
-      boolean boolean0 = cST_PIS0.isRequiredTag("gw4a%@gO");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
+      boolean boolean0 = cST_PIS0.isRequiredTag("pPIS");
       assertEquals(false, boolean0);
   }
 
@@ -84,7 +84,7 @@ public class CST_PISEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       CST_PIS cST_PIS0 = CST_PIS.PIS_01;
-      boolean boolean0 = cST_PIS0.isRequiredTag("pPIS");
+      boolean boolean0 = cST_PIS0.isRequiredTag("vPIS");
       assertEquals(true, boolean0);
   }
 }

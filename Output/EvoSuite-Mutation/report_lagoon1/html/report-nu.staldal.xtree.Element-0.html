@@ -21,22 +21,27 @@ nu.staldal.xtree.Element
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xtree.Element: 60.00%</ul><ul>
-<li>3494 fitness evaluations, 71 generations, 16096 statements, 2238 tests.
-<li>Time: 0:01:13(Search: 0:01:01, minimization: 0:00:12)
-<li>Coverage: 48/86 branches, 34/36 methods, 60/100 total goals
-<li>Mutation score: 12%
+<ul><li>Target class: nu.staldal.xtree.Element: 76.00%</ul><ul>
+<li>8076 fitness evaluations, 163 generations, 49743 statements, 5299 tests.
+<li>Time: 0:01:11(Search: 0:01:01, minimization: 0:00:10)
+<li>Coverage: 62/86 branches, 36/36 methods, 76/100 total goals
+<li>Mutation score: 18%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;%R|&quot;, &quot;%R|&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.getInheritedAttribute(&quot;J+D*&quot;, &quot;J+D*&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;%R|&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  element0.getAttrValue((String) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Attribute null expected
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -44,93 +49,91 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getNamespaceMapping((-1099));
+<span class="nocode"><a name="5">  5: </a></span>  element0.getNamespaceMapping((int) ' ');
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * -1099
+<span class="nocode"><a name="9">  9: </a></span>   * 32 &gt;= 0
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;6,SK'&quot;, &quot;6,SK'&quot;, (-1416));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 40, 1038);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.getAttributeLocalName((-1));
+<span class="nocode"><a name="4">  4: </a></span>element0.setNamespaceMappings(element0.namespaceURIs, element0.attrName);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;6,SK'&quot;, element0.getNamespaceURI());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;k&amp;IC|iwl&quot;, &quot;k&amp;IC|iwl&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
-<span class="nocode"><a name="5">  5: </a></span>Element element1 = element0.getFirstChildElement(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>Element element1 = element0.getFirstChildElementOrNull(&quot;k&amp;IC|iwl&quot;, &quot;k&amp;IC|iwl&quot;);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element1.xmlSpaceAttribute);
 <span class="nocode"><a name="7">  7: </a></span>assertNotNull(element1);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;EPement expeced&quot;, &quot;EPement expeced&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.removeAttribute(1993);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="5">  5: </a></span>  element0.getAttrValue(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * 1993 &gt;= 0
+<span class="nocode"><a name="9">  9: </a></span>   * Attribute {E7eoiwWBYQ}E7eoiwWBYQ expected
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;@ g,?JfR*y!u `EtdoF&quot;, &quot;@ g,?JfR*y!u `EtdoF&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;2jobl&gt;v&amp;j&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 40, 1038);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.addNamespaceMapping(&quot;Vbhc?M 'vP{&quot;, &quot;Vbhc?M 'vP{&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfNamespaceMappings());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  element0.removeAttribute(1038);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * 1038 &gt;= 0
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;EPement expeced&quot;, &quot;6,SK'&quot;, (-16), 306);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>element0.numberOfNamespaceMappings();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;EPement expeced&quot;, element0.getNamespaceURI());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;A- fBm419LHJ&amp;7S&quot;, &quot;A- fBm419LHJ&amp;7S&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getAttrValue(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Attribute  expected
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;%R|&quot;, &quot;%R|&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>element0.numberOfAttributes();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;%R|&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;E7eoiwWBYQ&quot;, element0.getNamespaceURI());
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.setBaseURI((URL) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;anj[BuM2l30oGQd&quot;, element0.getNamespaceURI());
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Element element0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0 = new Element((String) null, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>  element0 = new Element((String) null, (String) null, (-1));
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -140,86 +143,119 @@ nu.staldal.xtree.Element
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;`P3QZ#wf&quot;, &quot;`P3QZ#wf&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.addAttribute(&quot;`P3QZ#wf&quot;, &quot;`P3QZ#wf&quot;, &quot;`P3QZ#wf&quot;, &quot;`P3QZ#wf&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfAttributes());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="4">  4: </a></span>element0.addAttribute(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="5">  5: </a></span>String string0 = element0.getAttrValue(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, element0.numberOfAttributes());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;E7eoiwWBYQ&quot;, string0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;b([q=#/cuCiIA&quot;, &quot;b([q=#/cuCiIA&quot;, 1272, (-1241));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;2jobl&gt;v&amp;j&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 40, 1038);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeNamespaceURI((-1241));
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * -1241
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>element0.addAttribute(&quot;http://www.w3.org/XML/1998/namespace&quot;, &quot;http://www.w3.org/XML/1998/namespace&quot;, &quot;2jobl&gt;v&amp;j&quot;, &quot;2jobl&gt;v&amp;j&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, element0.numberOfAttributes());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;ajUZ;'/]E&quot;, &quot;ajUZ;'/]E&quot;, (-1139));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeLocalName((-1507));
+<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeNamespaceURI(1);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * -1507
+<span class="nocode"><a name="9">  9: </a></span>   * 1 &gt;= 0
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element {&quot;, &quot;Element {&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeType(0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * 0 &gt;= 0
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>element0.getAttributeNamespaceURI((-1));
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;\&quot;/Az^Nt5*X}oP&gt;C)^&gt;&quot;, &quot;\&quot;/Az^Nt5*X}oP&gt;C)^&gt;&quot;, (-388));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>String string0 = element0.lookupNamespaceURI(&quot;Element expected&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertNull(string0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;\&quot;/Az^Nt5*X}oP&gt;C)^&gt;&quot;, element0.getNamespaceURI());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeLocalName(18);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * 18 &gt;= 0
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1061, 403);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;~J$1yKHd++@jR&quot;, &quot;~J$1yKHd++@jR&quot;, (-1), (-1));
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.getAttributeLocalName((-1));
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;~J$1yKHd++@jR&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;vdzG&gt;)n}?m,mR&quot;, &quot;vdzG&gt;)n}?m,mR&quot;, 0, 0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  element0.getAttributeType((-1101));
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;d[^Qq7kV'^zB^f+1&quot;, &quot;d[^Qq7kV'^zB^f+1&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>String string0 = element0.lookupNamespaceURI(&quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;d[^Qq7kV'^zB^f+1&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  element0.lookupNamespaceURI(&quot;&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  element0.lookupNamespaceURI(&quot;anj[BuM2l30oGQd&quot;);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: StackOverflowError&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(StackOverflowError e) {
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 17</h3>
+<h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element expected&quot;, &quot;Element expected&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;~J$1yKHd++@jR&quot;, &quot;~J$1yKHd++@jR&quot;, (-1), (-1));
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>String string0 = element0.lookupNamespaceURI(&quot;~J$1yKHd++@jR&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="6">  6: </a></span>assertNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;~J$1yKHd++@jR&quot;, element0.getNamespaceURI());
+</pre>
+<h3>Test case 21</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;space&quot;, &quot;space&quot;, 1, 1);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  element0.lookupNamespacePrefix(&quot;Element expected&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  element0.lookupNamespacePrefix(&quot;space&quot;);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
@@ -227,87 +263,148 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 18</h3>
+<h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;ajUZ;'/]E&quot;, &quot;~vkmUQ[K!&quot;, (-2003), 1814);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>String string0 = element0.lookupNamespacePrefix(&quot;~vkmUQ[K!&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;ajUZ;'/]E&quot;, element0.getNamespaceURI());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="7">  7: </a></span>assertNull(string0);
+<span class="nocode"><a name="4">  4: </a></span>String string0 = element0.lookupNamespacePrefix(&quot;%C`&gt;l3[xMTs%&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;anj[BuM2l30oGQd&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="6">  6: </a></span>assertNull(string0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
 </pre>
-<h3>Test case 19</h3>
+<h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;6,SK'&quot;, &quot;6,SK'&quot;, (-1416));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>element0.getBaseURI();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;6,SK'&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;anj[BuM2l30oGQd&quot;, element0.getNamespaceURI());
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
 </pre>
-<h3>Test case 20</h3>
+<h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;6,SK'&quot;, &quot;6,SK'&quot;, (-1416));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  element0.getBaseURI();
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: StackOverflowError&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(StackOverflowError e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 25</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = element0.getPreserveSpace();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;6,SK'&quot;, element0.getNamespaceURI());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
 </pre>
-<h3>Test case 21</h3>
+<h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element {&quot;, &quot;Element {&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;~J$1yKHd++@jR&quot;, &quot;~J$1yKHd++@jR&quot;, (-1), (-1));
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.getInheritedAttribute(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;~J$1yKHd++@jR&quot;, element0.getNamespaceURI());
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.addNamespaceMapping(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="5">  5: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="6">  6: </a></span>element0.toSAX((ContentHandler) defaultHandler0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, element0.numberOfNamespaceMappings());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+</pre>
+<h3>Test case 28</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.addAttribute(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
+<span class="nocode"><a name="5">  5: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="6">  6: </a></span>element0.toSAX((ContentHandler) defaultHandler0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, element0.numberOfAttributes());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
+</pre>
+<h3>Test case 29</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;~J$1yKHd++@jR&quot;, &quot;~J$1yKHd++@jR&quot;, (-1), (-1));
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="5">  5: </a></span>element0.toSAX((ContentHandler) xMLFilterImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;Element {&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="5">  5: </a></span>element0.insertChild((Node) element0, 0);
+<span class="nocode"><a name="6">  6: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  element0.toSAX((ContentHandler) xMLReaderAdapter0);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: StackOverflowError&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(StackOverflowError e) {
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 22</h3>
+<h3>Test case 30</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Attribute &quot;, &quot;Attribute &quot;, 0, 479);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getAttrValue(&quot;Attribute &quot;, &quot;Attribute &quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Attribute {Attribute }Attribute  expected
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  element0.getTextContent();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(SAXParseException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * No text content
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 23</h3>
+<h3>Test case 31</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;%R|&quot;, &quot;%R|&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;E7eoiwWBYQ&quot;, &quot;E7eoiwWBYQ&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>String string0 = element0.getTextContent();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(' ', element0.xmlSpaceAttribute);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;&quot;, string0);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;%R|&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;E7eoiwWBYQ&quot;, element0.getNamespaceURI());
+<span class="nocode"><a name="7">  7: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
-<h3>Test case 24</h3>
+<h3>Test case 32</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;`P3QZ#wf&quot;, &quot;`P3QZ#wf&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  element0.getFirstChildElement((String) null, &quot;`P3QZ#wf&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Element {null}`P3QZ#wf expected
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  element0.getFirstChildElement(&quot;L&amp;IC|iwl&quot;, &quot;L&amp;IC|iwl&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(SAXParseException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Element {L&amp;IC|iwl}L&amp;IC|iwl expected
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 25</h3>
+<h3>Test case 33</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;EPement expeced&quot;, &quot;6,SK'&quot;, (-16), 306);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;anj[BuM2l30oGQd&quot;, &quot;%C`&gt;l3[xMTs%&quot;, 0);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
+<span class="nocode"><a name="5">  5: </a></span>Element element1 = element0.getFirstChildElementOrNull();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;anj[BuM2l30oGQd&quot;, element1.getNamespaceURI());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element1.xmlSpaceAttribute);
+<span class="nocode"><a name="8">  8: </a></span>assertNotNull(element1);
+</pre>
+<h3>Test case 34</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;[&quot;, &quot;[&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>try {
@@ -318,16 +415,6 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="9">  9: </a></span>   * Element expected
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 26</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1061, 403);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.addChild((Node) element0);
-<span class="nocode"><a name="5">  5: </a></span>Element element1 = element0.getFirstChildElement();
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(element1);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(' ', element1.xmlSpaceAttribute);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -626,15 +713,15 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="294">294: </a></span>        throws IndexOutOfBoundsException
 <span class="nocode"><a name="295">295: </a></span>	{
 <span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">        if (index == -1) return null;</span>
-<span class="nocode"><a name="297">297: </a></span>		return (String)attrValue.elementAt(index);
+<span class="nocode"><a name="297">297: </a></span><span style="background-color: #ffffcc">		return (String)attrValue.elementAt(index);</span>
 <span class="nocode"><a name="298">298: </a></span>	}
 <span class="nocode"><a name="299">299: </a></span>
 <span class="nocode"><a name="300">300: </a></span>
 <span class="nocode"><a name="301">301: </a></span>	void setNamespaceMappings(Vector prefixes, Vector URIs)
 <span class="nocode"><a name="302">302: </a></span>	{
-<span class="nocode"><a name="303">303: </a></span>		namespacePrefixes = prefixes;
-<span class="nocode"><a name="304">304: </a></span>		namespaceURIs = URIs;
-<span class="nocode"><a name="305">305: </a></span>	}
+<span class="nocode"><a name="303">303: </a></span><span style="background-color: #ffffcc">		namespacePrefixes = prefixes;</span>
+<span class="nocode"><a name="304">304: </a></span><span style="background-color: #ffffcc">		namespaceURIs = URIs;</span>
+<span class="nocode"><a name="305">305: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="306">306: </a></span>
 <span class="nocode"><a name="307">307: </a></span>
 <span class="nocode"><a name="308">308: </a></span>	/**
@@ -686,7 +773,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="354">354: </a></span>			{
 <span class="nocode"><a name="355">355: </a></span><span style="background-color: #ffffcc">				if (prefix.length() == 0)</span>
 <span class="nocode"><a name="356">356: </a></span>				{
-<span class="nocode"><a name="357">357: </a></span>					return &quot;&quot;;
+<span class="nocode"><a name="357">357: </a></span><span style="background-color: #ffffcc">					return &quot;&quot;;</span>
 <span class="nocode"><a name="358">358: </a></span>				}
 <span class="nocode"><a name="359">359: </a></span>				else
 <span class="nocode"><a name="360">360: </a></span>				{
@@ -736,8 +823,8 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="404">404: </a></span>	 */
 <span class="nocode"><a name="405">405: </a></span>	public void setBaseURI(URL URI)
 <span class="nocode"><a name="406">406: </a></span>	{
-<span class="nocode"><a name="407">407: </a></span>		baseURI = URI;
-<span class="nocode"><a name="408">408: </a></span>	}
+<span class="nocode"><a name="407">407: </a></span><span style="background-color: #ffffcc">		baseURI = URI;</span>
+<span class="nocode"><a name="408">408: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="409">409: </a></span>
 <span class="nocode"><a name="410">410: </a></span>	
 <span class="nocode"><a name="411">411: </a></span>	public URL getBaseURI()
@@ -750,7 +837,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="418">418: </a></span>		{
 <span class="nocode"><a name="419">419: </a></span><span style="background-color: #ffffcc">			if (parent != null)</span>
 <span class="nocode"><a name="420">420: </a></span>			{
-<span class="nocode"><a name="421">421: </a></span>				return parent.getBaseURI();
+<span class="nocode"><a name="421">421: </a></span><span style="background-color: #ffffcc">				return parent.getBaseURI();</span>
 <span class="nocode"><a name="422">422: </a></span>			}
 <span class="nocode"><a name="423">423: </a></span>			else
 <span class="nocode"><a name="424">424: </a></span>			{
@@ -805,18 +892,18 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="473">473: </a></span>	{
 <span class="nocode"><a name="474">474: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i &lt; namespacePrefixes.size(); i++)</span>
 <span class="nocode"><a name="475">475: </a></span>		{
-<span class="nocode"><a name="476">476: </a></span>			sax.startPrefixMapping((String)namespacePrefixes.elementAt(i),
+<span class="nocode"><a name="476">476: </a></span><span style="background-color: #ffffcc">			sax.startPrefixMapping((String)namespacePrefixes.elementAt(i),</span>
 <span class="nocode"><a name="477">477: </a></span>								   (String)namespaceURIs.elementAt(i));
 <span class="nocode"><a name="478">478: </a></span>		}
 <span class="nocode"><a name="479">479: </a></span>
 <span class="nocode"><a name="480">480: </a></span><span style="background-color: #ffffcc">		AttributesImpl atts = new AttributesImpl();</span>
 <span class="nocode"><a name="481">481: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i &lt; attrName.size(); i++)</span>
 <span class="nocode"><a name="482">482: </a></span>		{
-<span class="nocode"><a name="483">483: </a></span>			String s = (String)attrName.elementAt(i);
-<span class="nocode"><a name="484">484: </a></span>			String URI = s.substring(s.indexOf('^')+1);
-<span class="nocode"><a name="485">485: </a></span>			String local = s.substring(0, s.indexOf('^'));
+<span class="nocode"><a name="483">483: </a></span><span style="background-color: #ffffcc">			String s = (String)attrName.elementAt(i);</span>
+<span class="nocode"><a name="484">484: </a></span><span style="background-color: #ffffcc">			String URI = s.substring(s.indexOf('^')+1);</span>
+<span class="nocode"><a name="485">485: </a></span><span style="background-color: #ffffcc">			String local = s.substring(0, s.indexOf('^'));</span>
 <span class="nocode"><a name="486">486: </a></span>
-<span class="nocode"><a name="487">487: </a></span>			atts.addAttribute(URI, local, &quot;&quot;, (String)attrType.elementAt(i),
+<span class="nocode"><a name="487">487: </a></span><span style="background-color: #ffffcc">			atts.addAttribute(URI, local, &quot;&quot;, (String)attrType.elementAt(i),</span>
 <span class="nocode"><a name="488">488: </a></span>				(String)attrValue.elementAt(i));
 <span class="nocode"><a name="489">489: </a></span>		}
 <span class="nocode"><a name="490">490: </a></span><span style="background-color: #ffffcc">		sax.startElement(namespaceURI, localName, &quot;&quot;, atts);</span>
@@ -834,7 +921,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="502">502: </a></span>
 <span class="nocode"><a name="503">503: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i &lt; namespacePrefixes.size(); i++)</span>
 <span class="nocode"><a name="504">504: </a></span>		{
-<span class="nocode"><a name="505">505: </a></span>			sax.endPrefixMapping((String)namespacePrefixes.elementAt(i));
+<span class="nocode"><a name="505">505: </a></span><span style="background-color: #ffffcc">			sax.endPrefixMapping((String)namespacePrefixes.elementAt(i));</span>
 <span class="nocode"><a name="506">506: </a></span>		}
 <span class="nocode"><a name="507">507: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="508">508: </a></span>
@@ -846,7 +933,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="514">514: </a></span>
 <span class="nocode"><a name="515">515: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i &lt; numberOfChildren(); i++)</span>
 <span class="nocode"><a name="516">516: </a></span>		{
-<span class="nocode"><a name="517">517: </a></span>			getChild(i).toSAX(sax);
+<span class="nocode"><a name="517">517: </a></span><span style="background-color: #ffffcc">			getChild(i).toSAX(sax);</span>
 <span class="nocode"><a name="518">518: </a></span>		}
 <span class="nocode"><a name="519">519: </a></span>
 <span class="nocode"><a name="520">520: </a></span><span style="background-color: #ffffcc">		outputEndElement(sax);</span>
@@ -911,7 +998,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="579">579: </a></span><span style="background-color: #ffffcc">		if (v == null)</span>
 <span class="nocode"><a name="580">580: </a></span><span style="background-color: #ffffcc">			throw new SAXParseException(&quot;Attribute {&quot; + namespaceURI + &quot;}&quot; + localName + &quot; expected&quot;, this);</span>
 <span class="nocode"><a name="581">581: </a></span>		else
-<span class="nocode"><a name="582">582: </a></span>			return v;
+<span class="nocode"><a name="582">582: </a></span><span style="background-color: #ffffcc">			return v;</span>
 <span class="nocode"><a name="583">583: </a></span>	}
 <span class="nocode"><a name="584">584: </a></span>
 <span class="nocode"><a name="585">585: </a></span>
@@ -929,15 +1016,15 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="597">597: </a></span>        {
 <span class="nocode"><a name="598">598: </a></span><span style="background-color: #ffffcc">            return &quot;&quot;;</span>
 <span class="nocode"><a name="599">599: </a></span>        }
-<span class="nocode"><a name="600">600: </a></span>        else if (numberOfChildren() &gt; 1)
+<span class="nocode"><a name="600">600: </a></span><span style="background-color: #ffffcc">        else if (numberOfChildren() &gt; 1)</span>
 <span class="nocode"><a name="601">601: </a></span>        {
 <span class="nocode"><a name="602">602: </a></span>			return null;
 <span class="nocode"><a name="603">603: </a></span>        }
 <span class="nocode"><a name="604">604: </a></span>        else
 <span class="nocode"><a name="605">605: </a></span>        {
-<span class="nocode"><a name="606">606: </a></span>            Node node = getChild(0);
-<span class="nocode"><a name="607">607: </a></span>            if (!(node instanceof Text))
-<span class="nocode"><a name="608">608: </a></span>				return null;
+<span class="nocode"><a name="606">606: </a></span><span style="background-color: #ffffcc">            Node node = getChild(0);</span>
+<span class="nocode"><a name="607">607: </a></span><span style="background-color: #ffffcc">            if (!(node instanceof Text))</span>
+<span class="nocode"><a name="608">608: </a></span><span style="background-color: #ffffcc">				return null;</span>
 <span class="nocode"><a name="609">609: </a></span>
 <span class="nocode"><a name="610">610: </a></span>            return ((Text)node).getValue();
 <span class="nocode"><a name="611">611: </a></span>        }
@@ -959,7 +1046,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="627">627: </a></span><span style="background-color: #ffffcc">		String s = getTextContentOrNull();</span>
 <span class="nocode"><a name="628">628: </a></span>		
 <span class="nocode"><a name="629">629: </a></span><span style="background-color: #ffffcc">		if (s == null)</span>
-<span class="nocode"><a name="630">630: </a></span>			throw new SAXParseException(&quot;No text content&quot;, this);
+<span class="nocode"><a name="630">630: </a></span><span style="background-color: #ffffcc">			throw new SAXParseException(&quot;No text content&quot;, this);</span>
 <span class="nocode"><a name="631">631: </a></span>		else
 <span class="nocode"><a name="632">632: </a></span><span style="background-color: #ffffcc">			return s;</span>
 <span class="nocode"><a name="633">633: </a></span>    }
@@ -1007,7 +1094,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="675">675: </a></span><span style="background-color: #ffffcc">			throw new SAXParseException(</span>
 <span class="nocode"><a name="676">676: </a></span>				&quot;Element {&quot; + namespaceURI + &quot;}&quot; + localName + &quot; expected&quot;, this);
 <span class="nocode"><a name="677">677: </a></span>		else
-<span class="nocode"><a name="678">678: </a></span><span style="background-color: #ffffcc">			return e;</span>
+<span class="nocode"><a name="678">678: </a></span>			return e;
 <span class="nocode"><a name="679">679: </a></span>	}
 <span class="nocode"><a name="680">680: </a></span>
 <span class="nocode"><a name="681">681: </a></span>	
@@ -1046,7 +1133,7 @@ nu.staldal.xtree.Element
 <span class="nocode"><a name="714">714: </a></span><span style="background-color: #ffffcc">			throw new SAXParseException(</span>
 <span class="nocode"><a name="715">715: </a></span>				&quot;Element expected&quot;, this);
 <span class="nocode"><a name="716">716: </a></span>		else
-<span class="nocode"><a name="717">717: </a></span><span style="background-color: #ffffcc">			return e;</span>
+<span class="nocode"><a name="717">717: </a></span>			return e;
 <span class="nocode"><a name="718">718: </a></span>    }
 <span class="nocode"><a name="719">719: </a></span>}
 <span class="nocode"><a name="720">720: </a></span>
@@ -1054,7 +1141,7 @@ nu.staldal.xtree.Element
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -1072,7 +1159,7 @@ nu.staldal.xtree.Element
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10277
+<li>process_communication_port: 2024
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

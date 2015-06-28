@@ -21,10 +21,10 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.filestorage.SSHFileStorage: 38.64%</ul><ul>
-<li>7192 fitness evaluations, 145 generations, 16693 statements, 4760 tests.
+<ul><li>Target class: nu.staldal.lagoon.filestorage.SSHFileStorage: 45.45%</ul><ul>
+<li>4238 fitness evaluations, 86 generations, 12349 statements, 2858 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 9/36 branches, 11/11 methods, 17/44 total goals
+<li>Coverage: 12/36 branches, 11/11 methods, 20/44 total goals
 <li>Mutation score: 1%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -40,7 +40,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.deleteFile(&quot;wnPjvofw&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.deleteFile(&quot;:Z{hg`P3ocG&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -64,68 +64,81 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;&quot;, (Process) null, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  sSHFileStorage_SSHOutputHandler0.commit();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;-V=k7Wre~b&quot;, (Process) null, (OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  sSHFileStorage_SSHOutputHandler0.commit();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(1350);
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(320);
 <span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler((String) null, (Process) null, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  sSHFileStorage_SSHOutputHandler0.discard();
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>PrintStream printStream0 = new PrintStream((OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="5">  5: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;k?pH:-f[=&quot;, (Process) null, (OutputStream) printStream0);
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  sSHFileStorage_SSHOutputHandler0.discard();
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;ssh://d&quot;, (LagoonContext) null, &quot;ssh://d&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * ssh://d
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.open(&quot;ssh://@r&quot;, (LagoonContext) null, &quot;ssh://@r&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(StringIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * String index out of range: -8
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;|&quot;, (LagoonContext) null, &quot;|&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;8_.aLiW@(3v).&gt;`f&quot;, (LagoonContext) null, &quot;8_.aLiW@(3v).&gt;`f&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * |
+<span class="nocode"><a name="7">  7: </a></span>   * 8_.aLiW@(3v).&gt;`f
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;80&lt;5_'/k&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;ssh://X/r&quot;, (LagoonContext) null, &quot;ssh://X/r&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * ssh://X/r
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;9[&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;ss:/Xr&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -258,15 +271,15 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="125">125: </a></span><span style="background-color: #ffffcc">		int hostPos = url.lastIndexOf('@');</span>
 <span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">		if (hostPos &lt; 0)</span>
 <span class="nocode"><a name="127">127: </a></span><span style="background-color: #ffffcc">			throw new MalformedURLException(url);</span>
-<span class="nocode"><a name="128">128: </a></span>		int portPos = url.indexOf(':', hostPos+1);
-<span class="nocode"><a name="129">129: </a></span>		int pathPos = url.indexOf('/', ((portPos&lt;0) ? hostPos : portPos)+1);
+<span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">		int portPos = url.indexOf(':', hostPos+1);</span>
+<span class="nocode"><a name="129">129: </a></span><span style="background-color: #ffffcc">		int pathPos = url.indexOf('/', ((portPos&lt;0) ? hostPos : portPos)+1);</span>
 <span class="nocode"><a name="130">130: </a></span>
 <span class="nocode"><a name="131">131: </a></span>		String path;
 <span class="nocode"><a name="132">132: </a></span>
 <span class="nocode"><a name="133">133: </a></span>		try
 <span class="nocode"><a name="134">134: </a></span>		{
-<span class="nocode"><a name="135">135: </a></span>			username = url.substring(userPos+1,hostPos);
-<span class="nocode"><a name="136">136: </a></span>			host = url.substring(hostPos+1,(portPos&lt;0) ? pathPos : portPos);
+<span class="nocode"><a name="135">135: </a></span><span style="background-color: #ffffcc">			username = url.substring(userPos+1,hostPos);</span>
+<span class="nocode"><a name="136">136: </a></span><span style="background-color: #ffffcc">			host = url.substring(hostPos+1,(portPos&lt;0) ? pathPos : portPos);</span>
 <span class="nocode"><a name="137">137: </a></span>			port = (portPos&lt;0) ? 0 :
 <span class="nocode"><a name="138">138: </a></span>                Integer.parseInt(url.substring(portPos+1,pathPos));
 <span class="nocode"><a name="139">139: </a></span>			path = url.substring(pathPos+1);
@@ -376,7 +389,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="243">243: </a></span>		{
 <span class="nocode"><a name="244">244: </a></span><span style="background-color: #ffffcc">			out.close();</span>
 <span class="nocode"><a name="245">245: </a></span>			try {
-<span class="nocode"><a name="246">246: </a></span><span style="background-color: #ffffcc">				currentProc.waitFor();</span>
+<span class="nocode"><a name="246">246: </a></span>				currentProc.waitFor();
 <span class="nocode"><a name="247">247: </a></span>			}
 <span class="nocode"><a name="248">248: </a></span>			catch (InterruptedException e) {}
 <span class="nocode"><a name="249">249: </a></span>
@@ -409,7 +422,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -427,7 +440,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18537
+<li>process_communication_port: 20815
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -21,9 +21,9 @@ nu.staldal.lagoon.producer.LSSIHandler
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.producer.LSSIHandler: 50,00%</ul><ul>
-<li>11110 fitness evaluations, 224 generations, 126987 statements, 7226 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<ul><li>Target class: nu.staldal.lagoon.producer.LSSIHandler: 50.00%</ul><ul>
+<li>8244 fitness evaluations, 166 generations, 85021 statements, 5467 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 8/26 branches, 12/12 methods, 18/36 total goals
 <li>Mutation score: 0%
 </ul>
@@ -31,122 +31,103 @@ nu.staldal.lagoon.producer.LSSIHandler
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.JAPAN;
-<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleAttributes();
-<span class="nocode"><a name="4">  4: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
-<span class="nocode"><a name="5">  5: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
-<span class="nocode"><a name="6">  6: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="7">  7: </a></span>lSSIHandler0.ignorableWhitespace(charArray0, 0, 0);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[3];
+<span class="nocode"><a name="4">  4: </a></span>lSSIHandler0.ignorableWhitespace(charArray0, (int) '\u0000', (int) '\u008B');
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.JAPAN;
-<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleAttributes();
-<span class="nocode"><a name="4">  4: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
-<span class="nocode"><a name="5">  5: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
-<span class="nocode"><a name="6">  6: </a></span>lSSIHandler0.endDocument();
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.endDocument();
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Integer&gt; hashSet0 = new HashSet&lt;Integer&gt;();
-<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) null, (Target) null, (Set) hashSet0);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
 <span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.startDocument();
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Integer&gt; hashSet0 = new HashSet&lt;Integer&gt;();
-<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) null, (Target) null, (Set) hashSet0);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  lSSIHandler0.endPrefixMapping(&quot;inc!d,&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.endPrefixMapping(&quot;Waiting for TargetThread...&quot;);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SourceManager sourceManager0 = null;
-<span class="nocode"><a name="2">  2: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="3">  3: </a></span>Target target0 = null;
-<span class="nocode"><a name="4">  4: </a></span>String string0 = &quot;h4kqw3=K3YvJ$&quot;;
-<span class="nocode"><a name="5">  5: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="6">  6: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler(sourceManager0, (ContentHandler) defaultHandler0, target0, (Set) linkedHashSet0);
-<span class="nocode"><a name="7">  7: </a></span>lSSIHandler0.skippedEntity(string0);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.ROOT;
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleKeys();
+<span class="nocode"><a name="4">  4: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+<span class="nocode"><a name="5">  5: </a></span>lSSIHandler0.skippedEntity(&quot;'&quot;);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
-<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.startPrefixMapping((String) null, (String) null);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.startPrefixMapping(&quot;Waiting for TargetThread...&quot;, &quot;Waiting for TargetThread...&quot;);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.JAPAN;
-<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleAttributes();
-<span class="nocode"><a name="4">  4: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
-<span class="nocode"><a name="5">  5: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
-<span class="nocode"><a name="6">  6: </a></span>lSSIHandler0.setDocumentLocator((Locator) null);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.CANADA;
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;Character&gt; set0 = locale0.getExtensionKeys();
+<span class="nocode"><a name="4">  4: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+<span class="nocode"><a name="5">  5: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
+<span class="nocode"><a name="6">  6: </a></span>lSSIHandler0.setDocumentLocator((Locator) locator2Impl0);
+<span class="nocode"><a name="7">  7: </a></span>assertNull(locator2Impl0.getXMLVersion());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.JAPAN;
-<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleAttributes();
-<span class="nocode"><a name="4">  4: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
-<span class="nocode"><a name="5">  5: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
-<span class="nocode"><a name="6">  6: </a></span>char[] charArray0 = new char[6];
-<span class="nocode"><a name="7">  7: </a></span>lSSIHandler0.characters(charArray0, 0, 424);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.CANADA;
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;Character&gt; set0 = locale0.getExtensionKeys();
+<span class="nocode"><a name="4">  4: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+<span class="nocode"><a name="5">  5: </a></span>char[] charArray0 = new char[20];
+<span class="nocode"><a name="6">  6: </a></span>lSSIHandler0.characters(charArray0, (int) '3', 692);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SourceManager sourceManager0 = null;
-<span class="nocode"><a name="2">  2: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="3">  3: </a></span>Target target0 = null;
-<span class="nocode"><a name="4">  4: </a></span>String string0 = &quot;h4kqw3=K3YvJ$&quot;;
-<span class="nocode"><a name="5">  5: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="6">  6: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler(sourceManager0, (ContentHandler) defaultHandler0, target0, (Set) linkedHashSet0);
-<span class="nocode"><a name="7">  7: </a></span>lSSIHandler0.processingInstruction(string0, string0);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.ROOT;
+<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleKeys();
+<span class="nocode"><a name="4">  4: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) set0);
+<span class="nocode"><a name="5">  5: </a></span>lSSIHandler0.processingInstruction(&quot;'&quot;, &quot;'&quot;);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>lSSIHandler0.startElement(&quot;Output etry &quot;, &quot;Output etry &quot;, &quot;Output etry &quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributesImpl0.getLength());
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>lSSIHandler0.startElement(&quot;Waiting for TargetThread...&quot;, &quot;Waiting for TargetThread...&quot;, &quot;Waiting for TargetThread...&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.JAPAN;
-<span class="nocode"><a name="3">  3: </a></span>Set&lt;String&gt; set0 = locale0.getUnicodeLocaleAttributes();
-<span class="nocode"><a name="4">  4: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter((XMLReader) xMLFilterImpl0);
-<span class="nocode"><a name="5">  5: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) set0);
-<span class="nocode"><a name="6">  6: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  lSSIHandler0.startElement(&quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;http://staldal.nu/Lagoon/LSSI&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(SAXParseException e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * Unknown LSSI element: http://staldal.nu/Lagoon/LSSI
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  lSSIHandler0.startElement(&quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(SAXParseException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unknown LSSI element: 
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
-<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
-<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.endElement(&quot;Output etry &quot;, &quot;Output etry &quot;, &quot;Output etry &quot;);
+<span class="nocode"><a name="1">  1: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) defaultHandler0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.endElement(&quot;Waiting for TargetThread...&quot;, &quot;Waiting for TargetThread...&quot;, &quot;Waiting for TargetThread...&quot;);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Object&gt; hashSet0 = new HashSet&lt;Object&gt;();
-<span class="nocode"><a name="3">  3: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLReaderAdapter0, (Target) null, (Set) hashSet0);
-<span class="nocode"><a name="4">  4: </a></span>lSSIHandler0.endElement(&quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;http://staldal.nu/Lagoon/LSSI&quot;);
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>LSSIHandler lSSIHandler0 = new LSSIHandler((SourceManager) null, (ContentHandler) xMLFilterImpl0, (Target) null, (Set) null);
+<span class="nocode"><a name="3">  3: </a></span>lSSIHandler0.endElement(&quot;http://staldal.nu/Lagoon/LSSI&quot;, &quot;&quot;, &quot;&quot;);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>No source found for nu.staldal.lagoon.producer.LSSIHandler
@@ -154,7 +135,7 @@ nu.staldal.lagoon.producer.LSSIHandler
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -172,7 +153,7 @@ nu.staldal.lagoon.producer.LSSIHandler
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2101
+<li>process_communication_port: 13631
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

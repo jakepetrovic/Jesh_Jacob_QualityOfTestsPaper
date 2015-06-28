@@ -21,7 +21,7 @@ public class ModeloNFeEvoSuiteTest {
   public void test0()  throws Throwable  {
       ModeloNFe modeloNFe0 = ModeloNFe._2D;
       String string0 = modeloNFe0.toString();
-      assertNotNull(string0);
       assertEquals("2D", string0);
+      assertNotNull(string0);
   }
 }

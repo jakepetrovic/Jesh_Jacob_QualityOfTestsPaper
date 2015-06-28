@@ -19,8 +19,8 @@ public class MotDesICMSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      MotDesICMS motDesICMS0 = MotDesICMS.TAXI;
+      MotDesICMS motDesICMS0 = MotDesICMS.NA;
       char char0 = motDesICMS0.getValue();
-      assertEquals('1', char0);
+      assertEquals(' ', char0);
   }
 }

@@ -24,7 +24,7 @@ public class ConsoleEvoSuiteTest {
       Object[] objectArray0 = new Object[5];
       // Undeclared exception!
       try {
-        console0.readLine("UJ.V", objectArray0);
+        console0.readLine((String) null, objectArray0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -39,10 +39,10 @@ public class ConsoleEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Console console0 = new Console();
-      Object[] objectArray0 = new Object[5];
+      Object[] objectArray0 = new Object[6];
       // Undeclared exception!
       try {
-        console0.readPassword("%ZT8", objectArray0);
+        console0.readPassword("", objectArray0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

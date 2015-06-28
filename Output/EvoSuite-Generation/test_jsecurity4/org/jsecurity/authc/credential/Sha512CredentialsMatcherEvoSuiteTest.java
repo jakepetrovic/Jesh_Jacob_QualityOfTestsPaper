@@ -35,7 +35,7 @@ public class Sha512CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
-      Sha512Hash sha512Hash0 = (Sha512Hash)sha512CredentialsMatcher0.hashProvidedCredentials((Object) "u\u0000", (Object) "u\u0000", (int) (byte)117);
-      assertEquals("4f82511b68d3da9218bba41c41ddd9697f5074a6093dfb252380c47e2d85263fc8dabf9f1e717e3cf2cafa61da02ae61f77ffa5cacb23d22fb78d086648746b8", sha512Hash0.toHex());
+      Sha512Hash sha512Hash0 = (Sha512Hash)sha512CredentialsMatcher0.hashProvidedCredentials((Object) "org.jsecurity.subject.SimplePrincipalCollection@0", (Object) "lo", 0);
+      assertEquals("390dc0f3ea164a07267601e1813b4fbca154411aef9be2ca88373397f6ad96f826cbdfc88055f98eabb1aed19993df8fe4363556424ee54aca05764696cf032b", sha512Hash0.toString());
   }
 }

@@ -19,9 +19,9 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      UF uF0 = UF.TO;
+      UF uF0 = UF.RO;
       String string0 = uF0.getNomeUF();
-      assertEquals("Tocantins", string0);
+      assertEquals("Rond\u00F4nia", string0);
   }
 
   //Test case number: 1
@@ -34,20 +34,19 @@ public class UFEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      UF.getUF("S\u00E3o Paulo");
+      UF.getUF("");
   }
 
   //Test case number: 2
   /*
-   * 4 covered goals:
+   * 3 covered goals:
    * 1 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I25 Branch 2 IFLE L95 - false
    * 2 br.com.jnfe.base.UF.getCUF()Ljava/lang/String;: root-Branch
    * 3 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I14 Branch 1 IF_ICMPGE L94 - false
-   * 4 br.com.jnfe.base.UF.getUF(Ljava/lang/String;)Lbr/com/jnfe/base/UF;: I25 Branch 2 IFLE L95 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      UF uF0 = UF.getUF("42");
-      assertEquals(UF.SC, uF0);
+      UF uF0 = UF.getUF("11");
+      assertEquals(UF.RO, uF0);
   }
 }

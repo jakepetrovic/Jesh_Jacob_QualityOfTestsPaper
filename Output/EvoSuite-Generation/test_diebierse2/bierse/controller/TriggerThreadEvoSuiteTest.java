@@ -20,7 +20,7 @@ public class TriggerThreadEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TriggerThread triggerThread0 = new TriggerThread("N92<}I|pkq#7brI6P", (Model) null);
-      assertEquals(1, triggerThread0.activeCount());
+      TriggerThread triggerThread0 = new TriggerThread("Q|", (Model) null);
+      assertEquals(0, triggerThread0.countStackFrames());
   }
 }

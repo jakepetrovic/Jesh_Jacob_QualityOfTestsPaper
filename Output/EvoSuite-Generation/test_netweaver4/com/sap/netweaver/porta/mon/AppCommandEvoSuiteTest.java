@@ -22,10 +22,10 @@ public class AppCommandEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      UndeployCommand undeployCommand0 = new UndeployCommand();
+      StartAppCommand startAppCommand0 = new StartAppCommand();
       // Undeclared exception!
       try {
-        undeployCommand0.readAppName();
+        startAppCommand0.readAppName();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -39,10 +39,10 @@ public class AppCommandEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      StartAppCommand startAppCommand0 = new StartAppCommand();
+      UndeployCommand undeployCommand0 = new UndeployCommand();
       // Undeclared exception!
       try {
-        startAppCommand0.readAppVendor();
+        undeployCommand0.readAppVendor();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

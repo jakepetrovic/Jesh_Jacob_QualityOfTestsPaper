@@ -20,7 +20,7 @@ public class DebugSessionInfoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("O*.h)jK|{NnN", 0);
+      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("", 0);
       int int0 = debugSessionInfo0.getPort();
       assertEquals(0, int0);
   }
@@ -33,9 +33,9 @@ public class DebugSessionInfoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("O*.h)jK|{NnN", 0);
+      DebugSessionInfo debugSessionInfo0 = new DebugSessionInfo("", 0);
       String string0 = debugSessionInfo0.getKey();
-      assertEquals(0, debugSessionInfo0.getPort());
       assertNotNull(string0);
+      assertEquals(0, debugSessionInfo0.getPort());
   }
 }

@@ -21,10 +21,10 @@ public class ConsoleEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Console console0 = new Console();
-      Object[] objectArray0 = new Object[4];
+      Object[] objectArray0 = new Object[1];
       // Undeclared exception!
       try {
-        console0.readLine("", objectArray0);
+        console0.readLine("62X;v+i[BB31b0odLu", objectArray0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -39,10 +39,10 @@ public class ConsoleEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Console console0 = new Console();
-      Object[] objectArray0 = new Object[4];
+      Object[] objectArray0 = new Object[5];
       // Undeclared exception!
       try {
-        console0.readPassword("FOJ)e6", objectArray0);
+        console0.readPassword((String) null, objectArray0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -26,7 +26,7 @@ public class FileReadEvoSuiteTest {
       FileRead fileRead0 = new FileRead();
       // Undeclared exception!
       try {
-        fileRead0.hasBeenUpdated(22L);
+        fileRead0.hasBeenUpdated((long) 0);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*
@@ -45,6 +45,6 @@ public class FileReadEvoSuiteTest {
   public void test1()  throws Throwable  {
       FileRead fileRead0 = new FileRead();
       fileRead0.init();
-      assertEquals(0, fileRead0.getPosition());
+      assertNull(fileRead0.getEntryName());
   }
 }

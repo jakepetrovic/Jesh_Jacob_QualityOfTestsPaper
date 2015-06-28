@@ -9,17 +9,19 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
-import org.jsecurity.authc.AuthenticationException;
+import javax.naming.NamingException;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authz.SimpleAuthorizationInfo;
 import org.jsecurity.realm.activedirectory.ActiveDirectoryRealm;
+import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
+import org.jsecurity.realm.ldap.LdapContextFactory;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
 
@@ -35,12 +37,17 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", "");
+      char[] charArray0 = new char[11];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("[LOOKUP] Properties file specifies LoJFactory sublass '", charArray0, false);
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) defaultLdapContextFactory0);
+        fail("Expecting exception: IllegalStateException");
+      } catch(IllegalStateException e) {
+        /*
+         * A search base must be specified.
+         */
       }
   }
 
@@ -55,7 +62,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, "]&)|G;UA");
+        activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, "Unable to conve#t byte nrray to String with encoding '");
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -69,8 +76,7 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) linkedHashSet0);
+      SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set<String>) null);
       assertNotNull(simpleAuthorizationInfo0);
   }
 
@@ -82,8 +88,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      char[] charArray0 = new char[1];
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("Q", charArray0);
+      char[] charArray0 = new char[4];
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo("-zNg", charArray0);
       assertNotNull(simpleAuthenticationInfo0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_12", activeDirectoryRealm0.getName());
   }
@@ -96,8 +102,8 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      LinkedHashSet<String> linkedHashSet0 = new LinkedHashSet<String>();
-      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) linkedHashSet0);
+      HashSet<String> hashSet0 = new HashSet<String>();
+      activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) hashSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_14", activeDirectoryRealm0.getName());
   }
 
@@ -113,10 +119,10 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
-      treeSet0.add("");
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      treeSet0.add("");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_18", activeDirectoryRealm0.getName());
   }
@@ -137,11 +143,11 @@ public class ActiveDirectoryRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-      TreeSet<String> treeSet0 = new TreeSet<String>();
       HashMap<String, String> hashMap0 = new HashMap<String, String>();
-      treeSet0.add("");
-      hashMap0.put("", "");
       activeDirectoryRealm0.setGroupRolesMap((Map<String, String>) hashMap0);
+      TreeSet<String> treeSet0 = new TreeSet<String>();
+      treeSet0.add("Unable to conve#t byte nrray to String with encoding '");
+      hashMap0.put("Unable to conve#t byte nrray to String with encoding '", "Unable to conve#t byte nrray to String with encoding '");
       activeDirectoryRealm0.getRoleNamesForGroups((Collection<String>) treeSet0);
       assertEquals("org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_30", activeDirectoryRealm0.getName());
   }

@@ -39,7 +39,8 @@ public class Sha256CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha256CredentialsMatcher sha256CredentialsMatcher0 = new Sha256CredentialsMatcher();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", "", true);
+      char[] charArray0 = new char[1];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("q=7", charArray0, true);
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       // Undeclared exception!
       try {

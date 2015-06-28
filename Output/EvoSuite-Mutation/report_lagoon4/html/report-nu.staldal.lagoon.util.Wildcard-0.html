@@ -22,61 +22,65 @@ nu.staldal.lagoon.util.Wildcard
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.util.Wildcard: 100.00%</ul><ul>
-<li>200 fitness evaluations, 5 generations, 3607 statements, 354 tests.
+<li>150 fitness evaluations, 4 generations, 3608 statements, 372 tests.
 <li>Time: 0:00:04(Search: 0:00:02, minimization: 0:00:01)
 <li>Coverage: 16/16 branches, 3/3 methods, 16/16 total goals
-<li>Mutation score: 75%
+<li>Mutation score: 69%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = Wildcard.isWildcard(&quot;*0u'+&quot;);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = Wildcard.isWildcard(&quot;q3|jQH*3R?$2Y&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = Wildcard.isWildcard(&quot;0j.;jbIGpQwU&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = Wildcard.isWildcard(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = Wildcard.isWildcard(&quot;:uU#8oU,+b;&gt;Pp&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+</pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;B$n&lt;RG5*&quot;, &quot;B$n&lt;RG5*&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;*&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;q3|jQH*3R?$2YLf*@sA&amp;F==oW*&gt;4+{&quot;, &quot;q3|jQH*3R?$2Y&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;k^+2W&gt;|v&quot;, &quot;k^+2W&gt;|v&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, string0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;/u!A|oGJqH|,{C!q&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;7*yd;Se9!IJ([2&quot;, &quot;k^+2W&gt;|v&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;UMkp3jd%%o2,&quot;, &quot;UMkp3jd%%o2,&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;*0u'+&quot;, &quot;pxs0 &lt;\&quot;Uvt,&quot;);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;&gt;*&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(string0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.instantiateWildcard(&quot;*&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.matchWildcard(&quot;*Lf*@sA&amp;F==oW*&gt;4+{&quot;, &quot;*Lf*@sA&amp;F==oW*&gt;4+{&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;*&quot;, string0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.instantiateWildcard(&quot;0j.;jbIGpQwU&quot;, (String) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;0j.;jbIGpQwU&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.instantiateWildcard(&quot;*Lf*@sA&amp;F==oW*&gt;4+{&quot;, &quot;q3|jQH*3R?$2Y&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;q3|jQH*3R?$2YLf*@sA&amp;F==oW*&gt;4+{&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>String string0 = Wildcard.instantiateWildcard(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -210,7 +214,7 @@ nu.staldal.lagoon.util.Wildcard
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -228,7 +232,7 @@ nu.staldal.lagoon.util.Wildcard
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9561
+<li>process_communication_port: 20976
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

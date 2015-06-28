@@ -23,7 +23,7 @@ public class DummyRemoteGetterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
-      char[] charArray0 = new char[7];
+      char[] charArray0 = new char[6];
       dummyRemoteGetter0.get("<error>User not authenticated", charArray0);
   }
 
@@ -35,7 +35,7 @@ public class DummyRemoteGetterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
-      dummyRemoteGetter0.get("<buildState>Successful</buildState>");
+      dummyRemoteGetter0.get("");
   }
 
   //Test case number: 2

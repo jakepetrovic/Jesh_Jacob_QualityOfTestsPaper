@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.AllowAllCredentialsMatcher;
 
@@ -25,10 +25,10 @@ public class AllowAllCredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       AllowAllCredentialsMatcher allowAllCredentialsMatcher0 = new AllowAllCredentialsMatcher();
-      char[] charArray0 = new char[8];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, false);
-      SimpleAccount simpleAccount0 = new SimpleAccount();
-      boolean boolean0 = allowAllCredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
+      char[] charArray0 = new char[2];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("W6N5p2)1D@Q-u<@>/:A", charArray0);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      boolean boolean0 = allowAllCredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
       assertEquals(true, boolean0);
   }
 }

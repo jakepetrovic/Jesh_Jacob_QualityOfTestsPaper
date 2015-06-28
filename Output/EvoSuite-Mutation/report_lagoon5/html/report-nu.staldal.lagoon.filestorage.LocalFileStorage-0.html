@@ -21,10 +21,10 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.filestorage.LocalFileStorage: 52.94%</ul><ul>
-<li>8848 fitness evaluations, 178 generations, 31976 statements, 5778 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 12/28 branches, 11/11 methods, 18/34 total goals
+<ul><li>Target class: nu.staldal.lagoon.filestorage.LocalFileStorage: 55.88%</ul><ul>
+<li>7730 fitness evaluations, 156 generations, 26119 statements, 5120 tests.
+<li>Time: 0:01:04(Search: 0:01:03, minimization: 0:00:00)
+<li>Coverage: 13/28 branches, 11/11 methods, 19/34 total goals
 <li>Mutation score: 2%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,7 +33,7 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>localFileStorage0.close();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, localFileStorage0.isReentrant());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, localFileStorage0.needPassword());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -49,26 +49,25 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) null);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  localFileStorage_LocalOutputHandler0.commit();
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler((File) null, (OutputStream) null);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  localFileStorage_LocalOutputHandler0.commit();
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.open(&quot;A&quot;, (LagoonContext) null, &quot;A&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.open(&quot;&quot;, (LagoonContext) null, &quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;A\&quot; \&quot;write\&quot;)
-<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;\&quot; \&quot;write\&quot;)
+<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="10"> 10: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
 <span class="nocode"><a name="11"> 11: </a></span>   * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
 <span class="nocode"><a name="12"> 12: </a></span>   * java.io.File.mkdir(File.java:1305)
@@ -84,20 +83,20 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="22"> 22: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
 <span class="nocode"><a name="23"> 23: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 <span class="nocode"><a name="24"> 24: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="25"> 25: </a></span>   * java.lang.Thread.run(Thread.java:744)
+<span class="nocode"><a name="25"> 25: </a></span>   * java.lang.Thread.run(Thread.java:745)
 <span class="nocode"><a name="26"> 26: </a></span>   */
 <span class="nocode"><a name="27"> 27: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>long long0 = localFileStorage0.fileLastModified(&quot;N`:0EZY/,&quot;);
+<span class="nocode"><a name="2">  2: </a></span>long long0 = localFileStorage0.fileLastModified(&quot;pt*/@)&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0L, long0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>long long0 = localFileStorage0.fileLastModified(&quot;f0&quot;);
+<span class="nocode"><a name="2">  2: </a></span>long long0 = localFileStorage0.fileLastModified(&quot;]g~cm^:cu]KXkQ4&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0L, long0);
 </pre>
 <h3>Test case 8</h3>
@@ -105,17 +104,17 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.createFile(&quot;s/L&amp;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.createFile(&quot;pt*/@)&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;\&quot; \&quot;write\&quot;)
-<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;t*\&quot; \&quot;write\&quot;)
+<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="10"> 10: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
 <span class="nocode"><a name="11"> 11: </a></span>   * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
 <span class="nocode"><a name="12"> 12: </a></span>   * java.io.File.mkdir(File.java:1305)
 <span class="nocode"><a name="13"> 13: </a></span>   * nu.staldal.lagoon.filestorage.LocalFileStorage.createFile(LocalFileStorage.java:148)
-<span class="nocode"><a name="14"> 14: </a></span>   * sun.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+<span class="nocode"><a name="14"> 14: </a></span>   * sun.reflect.GeneratedMethodAccessor9.invoke(Unknown Source)
 <span class="nocode"><a name="15"> 15: </a></span>   * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 <span class="nocode"><a name="16"> 16: </a></span>   * java.lang.reflect.Method.invoke(Method.java:606)
 <span class="nocode"><a name="17"> 17: </a></span>   * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
@@ -126,7 +125,7 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="22"> 22: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
 <span class="nocode"><a name="23"> 23: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 <span class="nocode"><a name="24"> 24: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="25"> 25: </a></span>   * java.lang.Thread.run(Thread.java:744)
+<span class="nocode"><a name="25"> 25: </a></span>   * java.lang.Thread.run(Thread.java:745)
 <span class="nocode"><a name="26"> 26: </a></span>   */
 <span class="nocode"><a name="27"> 27: </a></span>}
 </pre>
@@ -135,18 +134,18 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.createFile(&quot;f0&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  localFileStorage0.createFile(&quot; &quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(SecurityException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;0\&quot; \&quot;write\&quot;)
-<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
+<span class="nocode"><a name="8">  8: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;\&quot; \&quot;write\&quot;)
+<span class="nocode"><a name="9">  9: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
 <span class="nocode"><a name="10"> 10: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
 <span class="nocode"><a name="11"> 11: </a></span>   * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
 <span class="nocode"><a name="12"> 12: </a></span>   * java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:209)
 <span class="nocode"><a name="13"> 13: </a></span>   * java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:171)
 <span class="nocode"><a name="14"> 14: </a></span>   * nu.staldal.lagoon.filestorage.LocalFileStorage.createFile(LocalFileStorage.java:155)
-<span class="nocode"><a name="15"> 15: </a></span>   * sun.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+<span class="nocode"><a name="15"> 15: </a></span>   * sun.reflect.GeneratedMethodAccessor9.invoke(Unknown Source)
 <span class="nocode"><a name="16"> 16: </a></span>   * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 <span class="nocode"><a name="17"> 17: </a></span>   * java.lang.reflect.Method.invoke(Method.java:606)
 <span class="nocode"><a name="18"> 18: </a></span>   * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
@@ -157,25 +156,58 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="23"> 23: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
 <span class="nocode"><a name="24"> 24: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 <span class="nocode"><a name="25"> 25: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="26"> 26: </a></span>   * java.lang.Thread.run(Thread.java:744)
+<span class="nocode"><a name="26"> 26: </a></span>   * java.lang.Thread.run(Thread.java:745)
 <span class="nocode"><a name="27"> 27: </a></span>   */
 <span class="nocode"><a name="28"> 28: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>localFileStorage0.deleteFile(&quot;http://www.w3.org/XML/1998namespace&quot;);
+<span class="nocode"><a name="2">  2: </a></span>localFileStorage0.deleteFile(&quot;pt*/@)&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, localFileStorage0.isReentrant());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LocalFileStorage localFileStorage0 = new LocalFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>localFileStorage0.deleteFile(&quot;f0&quot;);
+<span class="nocode"><a name="2">  2: </a></span>localFileStorage0.deleteFile(&quot;]g~cm^:cu]KXkQ4&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, localFileStorage0.needPassword());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(1);
+<span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  localFileStorage_LocalOutputHandler0.discard();
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(SecurityException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;/\&quot; \&quot;delete\&quot;)
+<span class="nocode"><a name="12"> 12: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
+<span class="nocode"><a name="13"> 13: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
+<span class="nocode"><a name="14"> 14: </a></span>   * java.lang.SecurityManager.checkDelete(SecurityManager.java:1007)
+<span class="nocode"><a name="15"> 15: </a></span>   * java.io.File.delete(File.java:1030)
+<span class="nocode"><a name="16"> 16: </a></span>   * nu.staldal.lagoon.filestorage.LocalFileStorage$LocalOutputHandler.discard(LocalFileStorage.java:216)
+<span class="nocode"><a name="17"> 17: </a></span>   * sun.reflect.GeneratedMethodAccessor19.invoke(Unknown Source)
+<span class="nocode"><a name="18"> 18: </a></span>   * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<span class="nocode"><a name="19"> 19: </a></span>   * java.lang.reflect.Method.invoke(Method.java:606)
+<span class="nocode"><a name="20"> 20: </a></span>   * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
+<span class="nocode"><a name="21"> 21: </a></span>   * org.evosuite.testcase.AbstractStatement.exceptionHandler(AbstractStatement.java:142)
+<span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.MethodStatement.execute(MethodStatement.java:217)
+<span class="nocode"><a name="23"> 23: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:291)
+<span class="nocode"><a name="24"> 24: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:44)
+<span class="nocode"><a name="25"> 25: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
+<span class="nocode"><a name="26"> 26: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+<span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+<span class="nocode"><a name="28"> 28: </a></span>   * java.lang.Thread.run(Thread.java:745)
+<span class="nocode"><a name="29"> 29: </a></span>   */
+<span class="nocode"><a name="30"> 30: </a></span>}
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;1;O&quot;, &quot;1;O&quot;);
 <span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
 <span class="nocode"><a name="3">  3: </a></span>LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) pipedOutputStream0);
 <span class="nocode"><a name="4">  4: </a></span>localFileStorage_LocalOutputHandler0.discard();
@@ -396,7 +428,7 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <span class="nocode"><a name="213">213: </a></span>		{
 <span class="nocode"><a name="214">214: </a></span><span style="background-color: #ffffcc">			out.close();</span>
 <span class="nocode"><a name="215">215: </a></span><span style="background-color: #ffffcc">			if (!currentFile.exists()) return;</span>
-<span class="nocode"><a name="216">216: </a></span>			if (currentFile.delete())
+<span class="nocode"><a name="216">216: </a></span><span style="background-color: #ffffcc">			if (currentFile.delete())</span>
 <span class="nocode"><a name="217">217: </a></span>			{
 <span class="nocode"><a name="218">218: </a></span>				return;
 <span class="nocode"><a name="219">219: </a></span>			}
@@ -411,7 +443,7 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -429,7 +461,7 @@ nu.staldal.lagoon.filestorage.LocalFileStorage
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20305
+<li>process_communication_port: 13348
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

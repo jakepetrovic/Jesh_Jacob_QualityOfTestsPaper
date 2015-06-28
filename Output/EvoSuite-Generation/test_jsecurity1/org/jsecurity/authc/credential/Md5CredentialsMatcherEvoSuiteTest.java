@@ -9,10 +9,12 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
+import org.jsecurity.authc.SimpleAccount;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Md5CredentialsMatcher;
 import org.jsecurity.crypto.hash.Md5Hash;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class Md5CredentialsMatcherEvoSuiteTest {
 
@@ -39,16 +41,17 @@ public class Md5CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-      char[] charArray0 = new char[1];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("XrX)o+-W.k>", charArray0, false);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+      char[] charArray0 = new char[9];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("@h\"NKlI'`", charArray0, true);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) "[]");
       // Undeclared exception!
       try {
-        md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+        md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * Argument for byte conversion cannot be null.
+         * Illegal hexadecimal charcter [ at index 0
          */
       }
   }

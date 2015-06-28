@@ -44,21 +44,21 @@ public class AxisEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       String string0 = Axis.lookup(1);
-      assertEquals("child", string0);
       assertNotNull(string0);
+      assertEquals("child", string0);
   }
 
   //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 1 TABLESWITCH L115 Case 1 - false
-   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 11 TABLESWITCH L115 Case 11 - true
+   * 2 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 12 TABLESWITCH L115 Case 12 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Axis.lookup(11);
+      String string0 = Axis.lookup(12);
       assertNotNull(string0);
-      assertEquals("self", string0);
+      assertEquals("descendant-or-self", string0);
   }
 
   //Test case number: 3
@@ -69,8 +69,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       String string0 = Axis.lookup(2);
-      assertNotNull(string0);
       assertEquals("descendant", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 4
@@ -93,8 +93,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       String string0 = Axis.lookup(4);
-      assertEquals("ancestor", string0);
       assertNotNull(string0);
+      assertEquals("ancestor", string0);
   }
 
   //Test case number: 6
@@ -105,8 +105,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       String string0 = Axis.lookup(5);
-      assertNotNull(string0);
       assertEquals("following-sibling", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 7
@@ -129,8 +129,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       String string0 = Axis.lookup(7);
-      assertNotNull(string0);
       assertEquals("following", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 9
@@ -141,8 +141,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       String string0 = Axis.lookup(8);
-      assertEquals("preceding", string0);
       assertNotNull(string0);
+      assertEquals("preceding", string0);
   }
 
   //Test case number: 10
@@ -153,8 +153,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       String string0 = Axis.lookup(9);
-      assertEquals("attribute", string0);
       assertNotNull(string0);
+      assertEquals("attribute", string0);
   }
 
   //Test case number: 11
@@ -172,13 +172,13 @@ public class AxisEvoSuiteTest {
   //Test case number: 12
   /*
    * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 12 TABLESWITCH L115 Case 12 - true
+   * 1 org.saxpath.Axis.lookup(I)Ljava/lang/String;: I3 Branch 11 TABLESWITCH L115 Case 11 - true
    */
   @Test
   public void test12()  throws Throwable  {
-      String string0 = Axis.lookup(12);
-      assertEquals("descendant-or-self", string0);
+      String string0 = Axis.lookup(11);
       assertNotNull(string0);
+      assertEquals("self", string0);
   }
 
   //Test case number: 13
@@ -214,23 +214,31 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test14()  throws Throwable  {
-      String string0 = Axis.lookup(0);
+      String string0 = Axis.lookup(886);
       assertNull(string0);
   }
 
   //Test case number: 15
   /*
-   * 5 covered goals:
+   * 13 covered goals:
    * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I5 Branch 15 IFLE L162 - true
    * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I15 Branch 16 IFLE L167 - true
    * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I25 Branch 17 IFLE L172 - true
    * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I35 Branch 18 IFLE L177 - true
-   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - false
+   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - true
+   * 6 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I55 Branch 20 IFLE L187 - true
+   * 7 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I65 Branch 21 IFLE L192 - true
+   * 8 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - true
+   * 9 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I85 Branch 23 IFLE L202 - true
+   * 10 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - true
+   * 11 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I105 Branch 25 IFLE L212 - true
+   * 12 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I115 Branch 26 IFLE L217 - true
+   * 13 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I125 Branch 27 IFLE L222 - true
    */
   @Test
   public void test15()  throws Throwable  {
-      int int0 = Axis.lookup("following-sibling");
-      assertEquals(5, int0);
+      int int0 = Axis.lookup((String) null);
+      assertEquals(0, int0);
   }
 
   //Test case number: 16
@@ -279,18 +287,13 @@ public class AxisEvoSuiteTest {
 
   //Test case number: 20
   /*
-   * 6 covered goals:
-   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - true
-   * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I55 Branch 20 IFLE L187 - true
-   * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I65 Branch 21 IFLE L192 - true
-   * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - true
-   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I85 Branch 23 IFLE L202 - true
-   * 6 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - false
+   * 1 covered goal:
+   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - false
    */
   @Test
   public void test20()  throws Throwable  {
-      int int0 = Axis.lookup("namespace");
-      assertEquals(10, int0);
+      int int0 = Axis.lookup("following-sibling");
+      assertEquals(5, int0);
   }
 
   //Test case number: 21
@@ -339,16 +342,13 @@ public class AxisEvoSuiteTest {
 
   //Test case number: 25
   /*
-   * 4 covered goals:
-   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - true
-   * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I105 Branch 25 IFLE L212 - true
-   * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I115 Branch 26 IFLE L217 - true
-   * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I125 Branch 27 IFLE L222 - true
+   * 1 covered goal:
+   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - false
    */
   @Test
   public void test25()  throws Throwable  {
-      int int0 = Axis.lookup("wW_'cg_(");
-      assertEquals(0, int0);
+      int int0 = Axis.lookup("namespace");
+      assertEquals(10, int0);
   }
 
   //Test case number: 26

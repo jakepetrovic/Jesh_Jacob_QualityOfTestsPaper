@@ -24,6 +24,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       applicationProperties0.setPort(0);
       assertEquals("debug=false, port=0, runInterval=30000, null", applicationProperties0.toString());
+      assertEquals(30000, applicationProperties0.getRunInterval());
   }
 
   //Test case number: 1
@@ -73,8 +74,8 @@ public class ApplicationPropertiesEvoSuiteTest {
   public void test4()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
       String string0 = applicationProperties0.toString();
-      assertNotNull(string0);
       assertEquals("debug=false, port=0, runInterval=30000, null", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 5
@@ -89,7 +90,7 @@ public class ApplicationPropertiesEvoSuiteTest {
       
       applicationProperties0.setDebug(true);
       assertEquals(true, applicationProperties0.isDebug());
-      assertEquals(30000, applicationProperties0.getRunInterval());
+      assertEquals("debug=true, port=0, runInterval=30000, null", applicationProperties0.toString());
   }
 
   //Test case number: 6
@@ -129,7 +130,7 @@ public class ApplicationPropertiesEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       ApplicationProperties applicationProperties0 = new ApplicationProperties();
-      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[2];
+      DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[1];
       applicationProperties0.setDeviceProperties(devicePropertiesArray0);
       // Undeclared exception!
       try {

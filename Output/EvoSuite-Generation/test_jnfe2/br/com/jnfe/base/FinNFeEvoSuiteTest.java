@@ -19,8 +19,8 @@ public class FinNFeEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      FinNFe finNFe0 = FinNFe.COMPLEMENTAR;
+      FinNFe finNFe0 = FinNFe.NORMAL;
       char char0 = finNFe0.getValue();
-      assertEquals('2', char0);
+      assertEquals('1', char0);
   }
 }

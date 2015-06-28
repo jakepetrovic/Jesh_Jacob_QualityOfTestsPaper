@@ -17,122 +17,135 @@ public class JniInchiBondEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiBond.getOriginAtom()Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;Lnet/sf/jniinchi/INCHI_BOND_STEREO;)V: root-Branch
+   * 2 covered goals:
+   * 1 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;Lnet/sf/jniinchi/INCHI_BOND_STEREO;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("kjp%/tcfO#)e&ipV&3");
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
-      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0);
-      JniInchiAtom jniInchiAtom1 = jniInchiBond0.getOriginAtom();
-      assertEquals(0, jniInchiAtom1.getImplicitProtium());
+      JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, (-1371), (-1371));
+      assertNull(jniInchiBond0.getBondStereo());
   }
 
   //Test case number: 1
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiBond.getTargetAtom()Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
+   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom(":4ecfiH");
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
-      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-      JniInchiAtom jniInchiAtom1 = jniInchiBond0.getTargetAtom();
-      assertEquals(0, jniInchiAtom1.getIsotopicMass());
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+      JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+      JniInchiAtom jniInchiAtom0 = jniInchiBond0.getTargetAtom();
+      assertNull(jniInchiAtom0);
   }
 
   //Test case number: 2
   /*
-   * 2 covered goals:
-   * 1 net.sf.jniinchi.JniInchiBond.debug()V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiBond.getDebugString()Ljava/lang/String;: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.jniinchi.JniInchiBond.getOriginAtom()Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2DOWN;
-      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-      jniInchiBond0.debug();
-      assertEquals("InChI Bond: - // Type: ALTERN // Stereo: SINGLE_2DOWN", jniInchiBond0.getDebugString());
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+      JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+      JniInchiAtom jniInchiAtom0 = jniInchiBond0.getOriginAtom();
+      assertNull(jniInchiAtom0);
   }
 
   //Test case number: 3
+  /*
+   * 3 covered goals:
+   * 1 net.sf.jniinchi.JniInchiBond.debug()V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiBond.getDebugString()Ljava/lang/String;: root-Branch
+   * 3 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;)V: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+      JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+      // Undeclared exception!
+      try {
+        jniInchiBond0.debug();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 4
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiBond.setStereoDefinition(Lnet/sf/jniinchi/INCHI_BOND_STEREO;)V: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test4()  throws Throwable  {
       JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2DOWN;
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
       JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
       jniInchiBond0.setStereoDefinition(iNCHI_BOND_STEREO0);
-      assertEquals(INCHI_BOND_STEREO.SINGLE_2DOWN, jniInchiBond0.getBondStereo());
-  }
-
-  //Test case number: 4
-  /*
-   * 2 covered goals:
-   * 1 net.sf.jniinchi.JniInchiBond.getBondStereo()Lnet/sf/jniinchi/INCHI_BOND_STEREO;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
-   */
-  @Test
-  public void test4()  throws Throwable  {
-      JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, 0, 0);
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = jniInchiBond0.getBondStereo();
-      assertEquals(0, iNCHI_BOND_STEREO0.ordinal());
+      assertEquals(4, jniInchiBond0.getInchiBondType());
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiBond.getBondType()Lnet/sf/jniinchi/INCHI_BOND_TYPE;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiBond.getBondStereo()Lnet/sf/jniinchi/INCHI_BOND_STEREO;: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom(":4ecfiH");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("%fI");
       INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2EITHER;
       JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE1 = jniInchiBond0.getBondType();
-      assertSame(iNCHI_BOND_TYPE0, iNCHI_BOND_TYPE1);
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO1 = jniInchiBond0.getBondStereo();
+      assertEquals("SINGLE_2EITHER", iNCHI_BOND_STEREO1.name());
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiBond.getInchiBondStereo()I: root-Branch
+   * 1 net.sf.jniinchi.JniInchiBond.getBondType()Lnet/sf/jniinchi/INCHI_BOND_TYPE;: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom(":4ecfiH");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("%fI");
       INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2EITHER;
       JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-      int int0 = jniInchiBond0.getInchiBondStereo();
-      assertEquals(3, int0);
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE1 = jniInchiBond0.getBondType();
+      assertEquals("NONE", iNCHI_BOND_TYPE1.toString());
   }
 
   //Test case number: 7
   /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiBond.getInchiBondType()I: root-Branch
-   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;Lnet/sf/jniinchi/INCHI_BOND_STEREO;)V: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.jniinchi.JniInchiBond.getInchiBondStereo()I: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("kjp%/tcfO#)e&ipV&3");
-      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
-      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
+      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
+      int int0 = jniInchiBond0.getInchiBondStereo();
+      assertEquals(6, int0);
+  }
+
+  //Test case number: 8
+  /*
+   * 2 covered goals:
+   * 1 net.sf.jniinchi.JniInchiBond.getInchiBondType()I: root-Branch
+   * 2 net.sf.jniinchi.JniInchiBond.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_BOND_TYPE;Lnet/sf/jniinchi/INCHI_BOND_STEREO;)V: root-Branch
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
+      INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
+      JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
       int int0 = jniInchiBond0.getInchiBondType();
-      assertEquals(2, int0);
+      assertEquals(4, int0);
   }
 }

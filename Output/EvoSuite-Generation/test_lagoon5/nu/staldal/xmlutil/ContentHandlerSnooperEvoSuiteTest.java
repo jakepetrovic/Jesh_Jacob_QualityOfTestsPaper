@@ -7,12 +7,9 @@ package nu.staldal.xmlutil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PipedReader;
-import java.io.PipedWriter;
+import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -23,8 +20,9 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
 import org.xml.sax.ext.DefaultHandler2;
+import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.LocatorImpl;
-import org.xml.sax.helpers.XMLReaderAdapter;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 public class ContentHandlerSnooperEvoSuiteTest {
 
@@ -37,12 +35,11 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      PipedReader pipedReader0 = new PipedReader();
-      PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-      PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0, false);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
-      contentHandlerSnooper0.skippedEntity(",k)m^=p");
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
+      contentHandlerSnooper0.skippedEntity("");
   }
 
   //Test case number: 1
@@ -52,14 +49,11 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0, 936);
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0);
-      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
-      contentHandlerSnooper0.processingInstruction("pJ#,>3o8~", "pJ#,>3o8~");
-      assertEquals(69, byteArrayOutputStream0.size());
-      assertEquals("New ContentHandlerSnooper\nprocessingInstruction(pJ#,>3o8~,pJ#,>3o8~)\n", byteArrayOutputStream0.toString());
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
+      contentHandlerSnooper0.processingInstruction("", "");
   }
 
   //Test case number: 2
@@ -69,13 +63,12 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      PipedReader pipedReader0 = new PipedReader();
-      PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-      PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0, false);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
-      char[] charArray0 = new char[8];
-      contentHandlerSnooper0.ignorableWhitespace(charArray0, (int) '4', (int) '\u0000');
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
+      char[] charArray0 = new char[1];
+      contentHandlerSnooper0.ignorableWhitespace(charArray0, (int) ',', (-258));
   }
 
   //Test case number: 3
@@ -85,11 +78,10 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      PipedReader pipedReader0 = new PipedReader();
-      PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-      PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0, false);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       contentHandlerSnooper0.endDocument();
   }
 
@@ -100,13 +92,13 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      StringWriter stringWriter0 = new StringWriter();
-      PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       LocatorImpl locatorImpl0 = new LocatorImpl();
       contentHandlerSnooper0.setDocumentLocator((Locator) locatorImpl0);
-      assertEquals("New ContentHandlerSnooper\n", stringWriter0.toString());
+      assertEquals(true, printWriter0.checkError());
   }
 
   //Test case number: 5
@@ -116,14 +108,11 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0, 936);
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0);
-      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       contentHandlerSnooper0.startDocument();
-      assertEquals(40, byteArrayOutputStream0.size());
-      assertEquals("New ContentHandlerSnooper\nstartDocument\n", byteArrayOutputStream0.toString());
   }
 
   //Test case number: 6
@@ -135,10 +124,10 @@ public class ContentHandlerSnooperEvoSuiteTest {
   public void test6()  throws Throwable  {
       DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
       StringWriter stringWriter0 = new StringWriter();
-      PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0);
+      PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0, true);
       ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
-      contentHandlerSnooper0.endElement("", "", "");
-      assertEquals("New ContentHandlerSnooper\nendElement(,,)\n", stringWriter0.toString());
+      contentHandlerSnooper0.endElement("xlN[R=x", "xlN[R=x", "xlN[R=x");
+      assertEquals("New ContentHandlerSnooper\nendElement(xlN[R=x,xlN[R=x,xlN[R=x)\n", stringWriter0.toString());
   }
 
   //Test case number: 7
@@ -148,13 +137,13 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      PipedReader pipedReader0 = new PipedReader();
-      PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-      PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0, false);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      contentHandlerSnooper0.startElement("%` lO1]letUg?", "%` lO1]letUg?", "%` lO1]letUg?", (Attributes) attributes2Impl0);
+      contentHandlerSnooper0.startElement("", "", "", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
   }
 
   //Test case number: 8
@@ -164,77 +153,42 @@ public class ContentHandlerSnooperEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      PipedReader pipedReader0 = new PipedReader();
-      PipedWriter pipedWriter0 = new PipedWriter(pipedReader0);
-      PrintWriter printWriter0 = new PrintWriter((Writer) pipedWriter0, false);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
-      char[] charArray0 = new char[6];
-      contentHandlerSnooper0.characters(charArray0, (-801), (-801));
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) byteArrayOutputStream0);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLFilterImpl0, printWriter0);
+      char[] charArray0 = new char[7];
+      contentHandlerSnooper0.characters(charArray0, (-1735), (-358));
+      assertEquals("New ContentHandlerSnooper\ncharacters\n", byteArrayOutputStream0.toString());
+      assertEquals(37, byteArrayOutputStream0.size());
   }
 
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xmlutil.ContentHandlerSnooper.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I11 Branch 1 IFNE L121 - true
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0, 936);
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0);
-      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
-      contentHandlerSnooper0.startPrefixMapping("pJ#,>3o8~", "pJ#,>3o8~");
-      assertEquals("New ContentHandlerSnooper\nstartPrefixMapping(pJ#,>3o8~,pJ#,>3o8~)\n", byteArrayOutputStream0.toString());
-      assertEquals(66, byteArrayOutputStream0.size());
-  }
-
-  //Test case number: 10
-  /*
-   * 1 covered goal:
    * 1 nu.staldal.xmlutil.ContentHandlerSnooper.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I11 Branch 1 IFNE L121 - false
    */
   @Test
-  public void test10()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      StringWriter stringWriter0 = new StringWriter();
-      PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+  public void test9()  throws Throwable  {
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       contentHandlerSnooper0.startPrefixMapping("", "");
-      assertEquals("New ContentHandlerSnooper\nstartPrefixMapping(<default>,)\n", stringWriter0.toString());
   }
 
-  //Test case number: 11
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.xmlutil.ContentHandlerSnooper.endPrefixMapping(Ljava/lang/String;)V: I11 Branch 2 IFNE L130 - true
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-      BufferedOutputStream bufferedOutputStream0 = new BufferedOutputStream((OutputStream) byteArrayOutputStream0, 936);
-      PrintWriter printWriter0 = new PrintWriter((OutputStream) bufferedOutputStream0);
-      XMLReaderAdapter xMLReaderAdapter0 = new XMLReaderAdapter();
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) xMLReaderAdapter0, printWriter0);
-      contentHandlerSnooper0.endPrefixMapping("pJ#,>3o8~");
-      assertEquals("New ContentHandlerSnooper\nendPrefixMapping(pJ#,>3o8~)\n", byteArrayOutputStream0.toString());
-      assertEquals(54, byteArrayOutputStream0.size());
-  }
-
-  //Test case number: 12
+  //Test case number: 10
   /*
    * 2 covered goals:
    * 1 nu.staldal.xmlutil.ContentHandlerSnooper.endPrefixMapping(Ljava/lang/String;)V: I11 Branch 2 IFNE L130 - false
    * 2 nu.staldal.xmlutil.ContentHandlerSnooper.<init>(Lorg/xml/sax/ContentHandler;Ljava/io/PrintWriter;)V: root-Branch
    */
   @Test
-  public void test12()  throws Throwable  {
-      DefaultHandler2 defaultHandler2_0 = new DefaultHandler2();
-      StringWriter stringWriter0 = new StringWriter();
-      PrintWriter printWriter0 = new PrintWriter((Writer) stringWriter0);
-      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler2_0, printWriter0);
+  public void test10()  throws Throwable  {
+      DefaultHandler defaultHandler0 = new DefaultHandler();
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      PrintWriter printWriter0 = new PrintWriter((OutputStream) pipedOutputStream0, true);
+      ContentHandlerSnooper contentHandlerSnooper0 = new ContentHandlerSnooper((ContentHandler) defaultHandler0, printWriter0);
       contentHandlerSnooper0.endPrefixMapping("");
-      assertEquals("New ContentHandlerSnooper\nendPrefixMapping(<default>)\n", stringWriter0.toString());
   }
 }

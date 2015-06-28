@@ -20,10 +20,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay((-273), (-846));
       Integer integer0 = timeOfDay0.getHours();
-      assertEquals("0:0", timeOfDay0.toString());
-      assertEquals(0, (int)integer0);
+      assertEquals("-273:-846", timeOfDay0.toString());
+      assertEquals((-273), (int)integer0);
   }
 
   //Test case number: 1
@@ -33,10 +33,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay((-1), 328);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1182, 1);
       Integer integer0 = timeOfDay0.getMinutes();
-      assertEquals("-1:328", timeOfDay0.toString());
-      assertEquals(328, (int)integer0);
+      assertEquals("1182:1", timeOfDay0.toString());
+      assertEquals(1, (int)integer0);
   }
 
   //Test case number: 2
@@ -46,10 +46,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1182, 1);
       String string0 = timeOfDay0.toString();
       assertNotNull(string0);
-      assertEquals("0:0", string0);
+      assertEquals("1182:1", string0);
   }
 
   //Test case number: 3
@@ -59,10 +59,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay((-273), (-846));
       int int0 = timeOfDay0.hashCode();
-      assertEquals("0:0", timeOfDay0.toString());
-      assertEquals(0, int0);
+      assertEquals("-273:-846", timeOfDay0.toString());
+      assertEquals((-28146), int0);
   }
 
   //Test case number: 4
@@ -74,11 +74,11 @@ public class TimeOfDayEvoSuiteTest {
   public void test4()  throws Throwable  {
       TimeOfDay timeOfDay0 = null;
       try {
-        timeOfDay0 = new TimeOfDay("7.}iv");
+        timeOfDay0 = new TimeOfDay("n0");
         fail("Expecting exception: NumberFormatException");
       } catch(NumberFormatException e) {
         /*
-         * For input string: \"7.\"
+         * For input string: \"n0\"
          */
       }
   }
@@ -90,10 +90,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay((-273), (-846));
       int int0 = timeOfDay0.compareTo(timeOfDay0);
       assertEquals(0, int0);
-      assertEquals("0:0", timeOfDay0.toString());
+      assertEquals("-273:-846", timeOfDay0.toString());
   }
 
   //Test case number: 6
@@ -103,29 +103,29 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-      TimeOfDay timeOfDay1 = new TimeOfDay((-246), 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(575, 575);
+      TimeOfDay timeOfDay1 = new TimeOfDay((-1836), 100);
       int int0 = timeOfDay0.compareTo(timeOfDay1);
       assertEquals(1, int0);
-      assertEquals("-246:0", timeOfDay1.toString());
+      assertEquals("-1836:100", timeOfDay1.toString());
   }
 
   //Test case number: 7
   /*
-   * 5 covered goals:
+   * 4 covered goals:
    * 1 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I4 Branch 2 IF_ACMPNE L52 - true
    * 2 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I12 Branch 3 IFNONNULL L54 - true
    * 3 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I23 Branch 4 IF_ACMPEQ L56 - true
-   * 4 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I40 Branch 5 IFNE L59 - true
-   * 5 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I52 Branch 6 IFNE L61 - false
+   * 4 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I40 Branch 5 IFNE L59 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-      TimeOfDay timeOfDay1 = new TimeOfDay(0, (-761));
+      TimeOfDay timeOfDay0 = new TimeOfDay(1, 1);
+      TimeOfDay timeOfDay1 = new TimeOfDay(0, 1);
       boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
+      assertEquals("0:1", timeOfDay1.toString());
       assertEquals(false, boolean0);
-      assertEquals("0:-761", timeOfDay1.toString());
+      assertEquals("1:1", timeOfDay0.toString());
   }
 
   //Test case number: 8
@@ -135,10 +135,10 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(1182, 1);
       boolean boolean0 = timeOfDay0.equals((Object) null);
-      assertEquals("0:0", timeOfDay0.toString());
       assertEquals(false, boolean0);
+      assertEquals("1182:1", timeOfDay0.toString());
   }
 
   //Test case number: 9
@@ -148,43 +148,45 @@ public class TimeOfDayEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(100, 100);
-      boolean boolean0 = timeOfDay0.equals((Object) "18");
-      assertEquals("100:100", timeOfDay0.toString());
+      TimeOfDay timeOfDay0 = new TimeOfDay(575, 575);
+      Integer integer0 = Integer.getInteger("i.`oG??&'Sm1", 1467);
+      boolean boolean0 = timeOfDay0.equals((Object) integer0);
       assertEquals(false, boolean0);
+      assertEquals("575:575", timeOfDay0.toString());
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I40 Branch 5 IFNE L59 - false
-   * 2 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I4 Branch 2 IF_ACMPNE L52 - true
+   * 3 covered goals:
+   * 1 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I40 Branch 5 IFNE L59 - true
+   * 2 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I52 Branch 6 IFNE L61 - true
+   * 3 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I4 Branch 2 IF_ACMPNE L52 - false
    */
   @Test
   public void test10()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-      TimeOfDay timeOfDay1 = new TimeOfDay((-246), 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay((-273), (-846));
+      TimeOfDay timeOfDay1 = new TimeOfDay((-273), (-846));
       boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
-      assertEquals(false, boolean0);
-      assertEquals("-246:0", timeOfDay1.toString());
+      assertEquals("-273:-846", timeOfDay1.toString());
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 11
   /*
    * 6 covered goals:
-   * 1 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I52 Branch 6 IFNE L61 - true
+   * 1 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I52 Branch 6 IFNE L61 - false
    * 2 net.sf.lavalamp.device.TimeOfDay.<init>(II)V: root-Branch
-   * 3 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I4 Branch 2 IF_ACMPNE L52 - false
+   * 3 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I4 Branch 2 IF_ACMPNE L52 - true
    * 4 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I12 Branch 3 IFNONNULL L54 - true
    * 5 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I23 Branch 4 IF_ACMPEQ L56 - true
    * 6 net.sf.lavalamp.device.TimeOfDay.equals(Ljava/lang/Object;)Z: I40 Branch 5 IFNE L59 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-      TimeOfDay timeOfDay1 = new TimeOfDay(0, 0);
+      TimeOfDay timeOfDay0 = new TimeOfDay(575, 575);
+      TimeOfDay timeOfDay1 = new TimeOfDay(575, 100);
       boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
-      assertEquals("0:0", timeOfDay1.toString());
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
+      assertEquals("575:100", timeOfDay1.toString());
   }
 }

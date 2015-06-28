@@ -19,9 +19,9 @@ public class INCHI_KEY_STATUSEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.INVALID_VERSION;
+      INCHI_KEY_STATUS iNCHI_KEY_STATUS0 = INCHI_KEY_STATUS.INVALID_LAYOUT;
       int int0 = iNCHI_KEY_STATUS0.getIndx();
-      assertEquals(3, int0);
+      assertEquals(2, int0);
   }
 
   //Test case number: 1
@@ -48,7 +48,7 @@ public class INCHI_KEY_STATUSEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_KEY_STATUS.getValue(1750);
+      INCHI_KEY_STATUS.getValue(1549);
   }
 
   //Test case number: 3

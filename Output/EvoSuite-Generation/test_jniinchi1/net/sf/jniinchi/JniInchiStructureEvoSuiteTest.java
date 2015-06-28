@@ -38,9 +38,12 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getStereo0D((-461));
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
+        jniInchiStructure0.getStereo0D(266);
+        fail("Expecting exception: IndexOutOfBoundsException");
+      } catch(IndexOutOfBoundsException e) {
+        /*
+         * Index: 266, Size: 0
+         */
       }
   }
 
@@ -65,7 +68,7 @@ public class JniInchiStructureEvoSuiteTest {
   public void test3()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       jniInchiStructure0.setStructure(jniInchiStructure0);
-      assertEquals(0, jniInchiStructure0.getNumBonds());
+      assertEquals(0, jniInchiStructure0.getNumAtoms());
   }
 
   //Test case number: 4
@@ -102,9 +105,12 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getAtom((-1230));
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
+        jniInchiStructure0.getAtom(0);
+        fail("Expecting exception: IndexOutOfBoundsException");
+      } catch(IndexOutOfBoundsException e) {
+        /*
+         * Index: 0, Size: 0
+         */
       }
   }
 
@@ -128,7 +134,7 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("^3gDthQ<x_\"o6Z;");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), (-1.0), (-1.0), "sp}HB>gc.:");
       int int0 = jniInchiStructure0.getAtomIndex(jniInchiAtom0);
       assertEquals((-1), int0);
   }
@@ -143,11 +149,11 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getBond(2044);
+        jniInchiStructure0.getBond(0);
         fail("Expecting exception: IndexOutOfBoundsException");
       } catch(IndexOutOfBoundsException e) {
         /*
-         * Index: 2044, Size: 0
+         * Index: 0, Size: 0
          */
       }
   }
@@ -162,9 +168,9 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[4];
+      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[5];
       jniInchiStructure0.addAtoms(jniInchiAtomArray0);
-      assertEquals(4, jniInchiStructure0.getNumAtoms());
+      assertEquals(5, jniInchiStructure0.getNumAtoms());
   }
 
   //Test case number: 11
@@ -178,8 +184,8 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[7];
+      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[10];
       jniInchiStructure0.addBonds(jniInchiBondArray0);
-      assertEquals(7, jniInchiStructure0.getNumBonds());
+      assertEquals(10, jniInchiStructure0.getNumBonds());
   }
 }

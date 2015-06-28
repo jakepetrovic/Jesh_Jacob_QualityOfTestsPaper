@@ -21,8 +21,8 @@ public class DeviceBuildsFactoryEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeviceBuildsFactory deviceBuildsFactory0 = new DeviceBuildsFactory();
       DeviceProperties deviceProperties0 = new DeviceProperties();
+      DeviceBuildsFactory deviceBuildsFactory0 = new DeviceBuildsFactory();
       // Undeclared exception!
       try {
         deviceBuildsFactory0.make(deviceProperties0);

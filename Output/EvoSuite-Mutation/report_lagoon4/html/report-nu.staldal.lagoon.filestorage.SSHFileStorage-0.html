@@ -22,7 +22,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.filestorage.SSHFileStorage: 38.64%</ul><ul>
-<li>12898 fitness evaluations, 259 generations, 25996 statements, 8137 tests.
+<li>11040 fitness evaluations, 222 generations, 24621 statements, 7071 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 9/36 branches, 11/11 methods, 17/44 total goals
 <li>Mutation score: 1%
@@ -40,7 +40,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.deleteFile(&quot;S|&amp;+oYsu-y+&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.deleteFile(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -64,36 +64,34 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler((String) null, (Process) null, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  sSHFileStorage_SSHOutputHandler0.commit();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;Qte,+d[#rGXN)RHCr?&quot;, (Process) null, (OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  sSHFileStorage_SSHOutputHandler0.commit();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;&quot;, (Process) null, (OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  sSHFileStorage_SSHOutputHandler0.discard();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SSHFileStorage.SSHOutputHandler sSHFileStorage_SSHOutputHandler0 = sSHFileStorage0.new SSHOutputHandler(&quot;&quot;, (Process) null, (OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  sSHFileStorage_SSHOutputHandler0.discard();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;ssh://ransf eorm&quot;, (LagoonContext) null, &quot;ssh://ransf eorm&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;ssh://nu.staldal.lagoon.core.&quot;, (LagoonContext) null, &quot;ssh://nu.staldal.lagoon.core.&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * ssh://ransf eorm
+<span class="nocode"><a name="7">  7: </a></span>   * ssh://nu.staldal.lagoon.core.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -101,11 +99,11 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;bMbVq/Bh%y\r.dx&gt;hT&quot;, (LagoonContext) null, &quot;bMbVq/Bh%y\r.dx&gt;hT&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  sSHFileStorage0.open(&quot;!WR3r`A*&quot;, (LagoonContext) null, &quot;!WR3r`A*&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * bMbVq/Bh%y\r.dx&gt;hT
+<span class="nocode"><a name="7">  7: </a></span>   * !WR3r`A*
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -114,7 +112,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;ssh://4x+R!+M=;AF$%D&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;ssFM+//1%1?&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -124,7 +122,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="1">  1: </a></span>SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sSHFileStorage0.createFile(&quot;9&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -375,7 +373,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="243">243: </a></span>		{
 <span class="nocode"><a name="244">244: </a></span><span style="background-color: #ffffcc">			out.close();</span>
 <span class="nocode"><a name="245">245: </a></span>			try {
-<span class="nocode"><a name="246">246: </a></span><span style="background-color: #ffffcc">				currentProc.waitFor();</span>
+<span class="nocode"><a name="246">246: </a></span>				currentProc.waitFor();
 <span class="nocode"><a name="247">247: </a></span>			}
 <span class="nocode"><a name="248">248: </a></span>			catch (InterruptedException e) {}
 <span class="nocode"><a name="249">249: </a></span>
@@ -387,7 +385,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <span class="nocode"><a name="255">255: </a></span>		{
 <span class="nocode"><a name="256">256: </a></span><span style="background-color: #ffffcc">			out.close();</span>
 <span class="nocode"><a name="257">257: </a></span>			try {
-<span class="nocode"><a name="258">258: </a></span><span style="background-color: #ffffcc">				currentProc.waitFor();</span>
+<span class="nocode"><a name="258">258: </a></span>				currentProc.waitFor();
 <span class="nocode"><a name="259">259: </a></span>			}
 <span class="nocode"><a name="260">260: </a></span>			catch (InterruptedException e) {}
 <span class="nocode"><a name="261">261: </a></span>	
@@ -408,7 +406,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -426,7 +424,7 @@ nu.staldal.lagoon.filestorage.SSHFileStorage
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19611
+<li>process_communication_port: 12240
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

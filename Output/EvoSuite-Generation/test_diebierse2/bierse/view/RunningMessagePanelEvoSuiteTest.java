@@ -21,11 +21,11 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", 1);
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("|:]d(Ug*x26)ZD", (-966));
       assertNotNull(runningMessagePanel0);
       
       int int0 = runningMessagePanel0.getStringHeight();
-      assertEquals(0, runningMessagePanel0.getStringWidth());
+      assertEquals(180, runningMessagePanel0.getStringWidth());
       assertEquals(24, int0);
   }
 
@@ -36,18 +36,12 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", 570);
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("y@Ze", 0);
       assertNotNull(runningMessagePanel0);
       
-      // Undeclared exception!
-      try {
-        runningMessagePanel0.setSpeed((-1052));
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Invalid delay: -1052
-         */
-      }
+      runningMessagePanel0.setSpeed(0);
+      assertEquals(24, runningMessagePanel0.getStringHeight());
+      assertEquals(48, runningMessagePanel0.getStringWidth());
   }
 
   //Test case number: 2
@@ -57,11 +51,11 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", (-1248));
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("Monospaced", 0);
       assertNotNull(runningMessagePanel0);
       
-      runningMessagePanel0.setMessage("");
-      assertEquals(0, runningMessagePanel0.getStringWidth());
+      runningMessagePanel0.setMessage("kQK)}r-K?+n=%");
+      assertEquals(168, runningMessagePanel0.getStringWidth());
       assertEquals(24, runningMessagePanel0.getStringHeight());
   }
 
@@ -72,12 +66,12 @@ public class RunningMessagePanelEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", (-1936));
+      RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("y@Ze", 0);
       assertNotNull(runningMessagePanel0);
       
       int int0 = runningMessagePanel0.getStringWidth();
+      assertEquals(48, int0);
       assertEquals(24, runningMessagePanel0.getStringHeight());
-      assertEquals(0, int0);
   }
 
   //Test case number: 4
@@ -91,9 +85,8 @@ public class RunningMessagePanelEvoSuiteTest {
       RunningMessagePanel runningMessagePanel0 = new RunningMessagePanel("", 0);
       assertNotNull(runningMessagePanel0);
       
-      ActionEvent actionEvent0 = new ActionEvent((Object) "", 162, "");
+      ActionEvent actionEvent0 = new ActionEvent((Object) runningMessagePanel0, (-1994), "", (long) (-1994), 0);
       runningMessagePanel0.actionPerformed(actionEvent0);
       assertEquals(24, runningMessagePanel0.getStringHeight());
-      assertEquals(0, runningMessagePanel0.getStringWidth());
   }
 }

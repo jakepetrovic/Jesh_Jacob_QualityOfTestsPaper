@@ -24,9 +24,9 @@ public class JniInchiInputEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiInput jniInchiInput0 = new JniInchiInput(jniInchiStructure0);
-      assertEquals(0, jniInchiInput0.getNumBonds());
+      JniInchiInput jniInchiInput0 = new JniInchiInput();
+      JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0);
+      assertNotSame(jniInchiInput0, jniInchiInput1);
   }
 
   //Test case number: 1
@@ -37,9 +37,12 @@ public class JniInchiInputEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiInput jniInchiInput0 = new JniInchiInput(jniInchiStructure0, (String) null);
-      assertEquals(0, jniInchiInput0.getNumAtoms());
+      JniInchiInput jniInchiInput0 = null;
+      try {
+        jniInchiInput0 = new JniInchiInput((JniInchiStructure) null, (String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 2

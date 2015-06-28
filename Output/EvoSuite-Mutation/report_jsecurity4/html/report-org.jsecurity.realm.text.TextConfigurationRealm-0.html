@@ -22,7 +22,7 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.text.TextConfigurationRealm: 83.33%</ul><ul>
-<li>14796 fitness evaluations, 297 generations, 93756 statements, 9311 tests.
+<li>15106 fitness evaluations, 304 generations, 78230 statements, 9663 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 27/34 branches, 12/12 methods, 35/42 total goals
 <li>Mutation score: 99%
@@ -32,56 +32,45 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_0&quot;, textConfigurationRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot; with priority &quot;);
+<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="4">  4: </a></span>HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache(&quot; with priority &quot;);
+<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.setAuthorizationCache((Cache) hashtableCache0);
+<span class="nocode"><a name="6">  6: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_0&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot; does noPt extend '&quot;);
-<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_19&quot;, textConfigurationRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_60&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot; does noPt extend '&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, &quot;UTF-8&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAccount0.getPrincipals();
+<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertNull(textConfigurationRealm0.getUserDefinitions());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.onLogout((PrincipalCollection) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(textConfigurationRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;Warning: the context classloade is an ancestor of the classloader that loaded LogFactoryImpl; it should be the same or a descendant. The application using commons-logging should ensure the context classloader is used corrctly.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_81&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="4">  4: </a></span>HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.setAuthorizationCache((Cache) hashtableCache0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_116&quot;, textConfigurationRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_136&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;Log class '&quot;);
-<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="4">  4: </a></span>HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.setAuthorizationCache((Cache) hashtableCache0);
-<span class="nocode"><a name="6">  6: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_136&quot;, textConfigurationRealm0.getName());
-</pre>
-<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Map&lt;String, String&gt; map0 = TextConfigurationRealm.toMap((Collection&lt;String&gt;) null);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(map0);
@@ -310,7 +299,7 @@ org.jsecurity.realm.text.TextConfigurationRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -328,7 +317,7 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16257
+<li>process_communication_port: 10160
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

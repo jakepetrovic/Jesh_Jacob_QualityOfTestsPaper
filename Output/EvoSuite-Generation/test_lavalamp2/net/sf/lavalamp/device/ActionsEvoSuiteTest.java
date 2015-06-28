@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.lavalamp.device.Action;
 import net.sf.lavalamp.device.Actions;
-import net.sf.lavalamp.device.Crash;
+import net.sf.lavalamp.device.Blink;
 
 public class ActionsEvoSuiteTest {
 
@@ -22,10 +22,10 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Crash crash0 = new Crash();
-      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
-      Crash crash1 = (Crash)actions0.getSuccessAction();
-      assertSame(crash1, crash0);
+      Blink blink0 = new Blink();
+      Actions actions0 = new Actions((Action) blink0, (Action) blink0, (Action) blink0);
+      Blink blink1 = (Blink)actions0.getSuccessAction();
+      assertSame(blink0, blink1);
   }
 
   //Test case number: 1
@@ -35,10 +35,10 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Crash crash0 = new Crash();
-      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
-      Crash crash1 = (Crash)actions0.getErrorAction();
-      assertSame(crash1, crash0);
+      Blink blink0 = new Blink();
+      Actions actions0 = new Actions((Action) blink0, (Action) blink0, (Action) blink0);
+      Blink blink1 = (Blink)actions0.getErrorAction();
+      assertSame(blink0, blink1);
   }
 
   //Test case number: 2
@@ -49,9 +49,9 @@ public class ActionsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Crash crash0 = new Crash();
-      Actions actions0 = new Actions((Action) crash0, (Action) crash0, (Action) crash0);
-      Crash crash1 = (Crash)actions0.getFailureAction();
-      assertSame(crash1, crash0);
+      Blink blink0 = new Blink();
+      Actions actions0 = new Actions((Action) blink0, (Action) blink0, (Action) blink0);
+      Blink blink1 = (Blink)actions0.getFailureAction();
+      assertSame(blink1, blink0);
   }
 }

@@ -22,10 +22,10 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.DefaultNoteListModel: 96.88%</ul><ul>
-<li>5654 fitness evaluations, 115 generations, 15377 statements, 3657 tests.
-<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>4830 fitness evaluations, 98 generations, 11909 statements, 3166 tests.
+<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:03)
 <li>Coverage: 1/2 branches, 31/31 methods, 31/32 total goals
-<li>Mutation score: 14%
+<li>Mutation score: 11%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -35,7 +35,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.addElement((AbstractNote) commonNote0);
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.add(0, (AbstractNote) commonNote0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -43,8 +43,9 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = defaultNoteListModel0.removeElement((AbstractNote) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = defaultNoteListModel0.removeElement((AbstractNote) commonNote0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -57,11 +58,11 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.getElementAt((-739));
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.getElementAt((-835));
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * -739
+<span class="nocode"><a name="8">  8: </a></span>   * -835
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -70,13 +71,10 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireContentChanged((Object) null, (-18));
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * null source
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireContentChanged((Object) &quot;toggle popup&quot;, 290);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -87,13 +85,15 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.insertElementAt((AbstractNote) commonNote0, 0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.insertElementAt((AbstractNote) null, 2);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * 2 &gt; 0
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -113,11 +113,11 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.elementAt(1309);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.elementAt(372);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * 1309 &gt;= 0
+<span class="nocode"><a name="8">  8: </a></span>   * 372 &gt;= 0
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -126,11 +126,11 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.get(0);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.get(1041);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * 0 &gt;= 0
+<span class="nocode"><a name="8">  8: </a></span>   * 1041 &gt;= 0
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -138,7 +138,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.addNoteListDataListener((NoteListDataListener) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(10, defaultNoteListModel0.capacity());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;[]&quot;, defaultNoteListModel0.toString());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -157,7 +157,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="3">  3: </a></span>int int0 = defaultNoteListModel0.indexOf((AbstractNote) commonNote0, 0);
+<span class="nocode"><a name="3">  3: </a></span>int int0 = defaultNoteListModel0.indexOf((AbstractNote) commonNote0, 1553);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals((-1), int0);
 </pre>
 <h3>Test case 15</h3>
@@ -182,22 +182,21 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.setElementAt((AbstractNote) commonNote0, (-1659));
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * -1659
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.setElementAt((AbstractNote) null, (-617));
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * -617
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>defaultNoteListModel0.removeNoteListDataListener();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, defaultNoteListModel0.getSize());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(10, defaultNoteListModel0.capacity());
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -216,18 +215,26 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="3">  3: </a></span>int int0 = defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0, (-18));
-<span class="nocode"><a name="4">  4: </a></span>assertEquals((-1), int0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.lastIndexOf((AbstractNote) commonNote0, 2);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IndexOutOfBoundsException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * 2 &gt;= 0
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.add(0, (AbstractNote) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>CommonNote commonNote0 = new CommonNote();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  defaultNoteListModel0.addElement((AbstractNote) commonNote0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -250,7 +257,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="1">  1: </a></span>DefaultNoteListModel defaultNoteListModel0 = new DefaultNoteListModel();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireItemRemoved((Object) &quot;java.awt.event.TextEvent[unknown type] on 0.0.0.0&quot;, 1498);
+<span class="nocode"><a name="4">  4: </a></span>  defaultNoteListModel0.fireItemRemoved((Object) &quot;multiple-document-handling&quot;, 1622);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -550,7 +557,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <span class="nocode"><a name="262">262: </a></span>     */
 <span class="nocode"><a name="263">263: </a></span>    public void insertElementAt(AbstractNote obj, int index) {
 <span class="nocode"><a name="264">264: </a></span><span style="background-color: #ffffcc">        delegate.insertElementAt(obj, index);</span>
-<span class="nocode"><a name="265">265: </a></span><span style="background-color: #ffffcc">        fireItemAdded(this, index);</span>
+<span class="nocode"><a name="265">265: </a></span>        fireItemAdded(this, index);
 <span class="nocode"><a name="266">266: </a></span>    }
 <span class="nocode"><a name="267">267: </a></span>
 <span class="nocode"><a name="268">268: </a></span>    /**
@@ -740,7 +747,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2600668293651662920.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2698611089344433590.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -758,7 +765,7 @@ com.allenstudio.ir.ui.DefaultNoteListModel
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20859
+<li>process_communication_port: 9644
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

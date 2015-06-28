@@ -21,41 +21,45 @@ org.jsecurity.util.ClassUtils
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.util.ClassUtils: 69.44%</ul><ul>
-<li>4442 fitness evaluations, 90 generations, 19575 statements, 3168 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 19/30 branches, 10/10 methods, 25/36 total goals
-<li>Mutation score: 3%
+<ul><li>Target class: org.jsecurity.util.ClassUtils: 63.89%</ul><ul>
+<li>4008 fitness evaluations, 82 generations, 19649 statements, 2825 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 17/30 branches, 10/10 methods, 23/36 total goals
+<li>Mutation score: 4%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = ClassUtils.class;
-<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[2];
+<span class="nocode"><a name="2">  2: </a></span>Object[] objectArray0 = new Object[6];
 <span class="nocode"><a name="3">  3: </a></span>objectArray0[0] = (Object) class0;
 <span class="nocode"><a name="4">  4: </a></span>objectArray0[1] = (Object) class0;
-<span class="nocode"><a name="5">  5: </a></span>ClassUtils.newInstance((Class) class0, objectArray0);
+<span class="nocode"><a name="5">  5: </a></span>objectArray0[2] = (Object) class0;
+<span class="nocode"><a name="6">  6: </a></span>objectArray0[3] = (Object) class0;
+<span class="nocode"><a name="7">  7: </a></span>objectArray0[4] = (Object) class0;
+<span class="nocode"><a name="8">  8: </a></span>objectArray0[5] = objectArray0[4];
+<span class="nocode"><a name="9">  9: </a></span>ClassUtils.newInstance((Class) class0, objectArray0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[1];
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt;[] classArray0 = (Class&lt;?&gt;[]) Array.newInstance(Class.class, 8);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  ClassUtils.newInstance(&quot;&quot;, objectArray0);
+<span class="nocode"><a name="4">  4: </a></span>  ClassUtils.newInstance(&quot; overrides file at '&quot;, (Object[]) classArray0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: UnknownClassException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(UnknownClassException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Unable to load class named [] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+<span class="nocode"><a name="8">  8: </a></span>   * Unable to load class named [ overrides file at '] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt;[] classArray0 = (Class&lt;?&gt;[]) Array.newInstance(Class.class, 2);
+<span class="nocode"><a name="1">  1: </a></span>Object[] objectArray0 = new Object[2];
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  ClassUtils.instantiate((Constructor) null, (Object[]) classArray0);
+<span class="nocode"><a name="4">  4: </a></span>  ClassUtils.instantiate((Constructor) null, objectArray0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: InstantiationException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(InstantiationException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
@@ -67,18 +71,18 @@ org.jsecurity.util.ClassUtils
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  ClassUtils.newInstance(&quot;o,rI-vuOp7Sd7[h&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  ClassUtils.newInstance(&quot;gUcOaqT&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: UnknownClassException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(UnknownClassException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load class named [o,rI-vuOp7Sd7[h] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load class named [gUcOaqT] from the thread context, current, or system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ClassUtils.isAvailable(&quot;org.apache.commons.logging.impl.Log4JLogger&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>boolean boolean0 = ClassUtils.isAvailable(&quot;=4.*Jbs2L&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -88,7 +92,7 @@ org.jsecurity.util.ClassUtils
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>InputStream inputStream0 = ClassUtils.getResourceAsStream(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>InputStream inputStream0 = ClassUtils.getResourceAsStream(&quot;=&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(inputStream0);
 </pre>
 <h3>Test case 8</h3>
@@ -209,7 +213,7 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="103">103: </a></span>                    log.trace(&quot;Unable to load class named [&quot; + fqcn +
 <span class="nocode"><a name="104">104: </a></span>                            &quot;] from the thread context ClassLoader.  Trying the current ClassLoader...&quot;);
 <span class="nocode"><a name="105">105: </a></span>                }
-<span class="nocode"><a name="106">106: </a></span><span style="background-color: #ffffcc">            }</span>
+<span class="nocode"><a name="106">106: </a></span>            }
 <span class="nocode"><a name="107">107: </a></span>        }
 <span class="nocode"><a name="108">108: </a></span><span style="background-color: #ffffcc">        if (clazz == null) {</span>
 <span class="nocode"><a name="109">109: </a></span><span style="background-color: #ffffcc">            cl = ClassUtils.class.getClassLoader();</span>
@@ -237,15 +241,15 @@ org.jsecurity.util.ClassUtils
 <span class="nocode"><a name="131">131: </a></span>                    &quot;system/application ClassLoaders.  All heuristics have been exausted.  Class could not be found.&quot;;
 <span class="nocode"><a name="132">132: </a></span><span style="background-color: #ffffcc">            throw new UnknownClassException(msg);</span>
 <span class="nocode"><a name="133">133: </a></span>        }
-<span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">        return clazz;</span>
+<span class="nocode"><a name="134">134: </a></span>        return clazz;
 <span class="nocode"><a name="135">135: </a></span>    }
 <span class="nocode"><a name="136">136: </a></span>
 <span class="nocode"><a name="137">137: </a></span>    public static boolean isAvailable(String fullyQualifiedClassName) {
 <span class="nocode"><a name="138">138: </a></span>        try {
 <span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">            forName(fullyQualifiedClassName);</span>
-<span class="nocode"><a name="140">140: </a></span><span style="background-color: #ffffcc">            return true;</span>
-<span class="nocode"><a name="141">141: </a></span>        } catch (UnknownClassException e) {
-<span class="nocode"><a name="142">142: </a></span>            return false;
+<span class="nocode"><a name="140">140: </a></span>            return true;
+<span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">        } catch (UnknownClassException e) {</span>
+<span class="nocode"><a name="142">142: </a></span><span style="background-color: #ffffcc">            return false;</span>
 <span class="nocode"><a name="143">143: </a></span>        }
 <span class="nocode"><a name="144">144: </a></span>    }
 <span class="nocode"><a name="145">145: </a></span>
@@ -302,7 +306,7 @@ org.jsecurity.util.ClassUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -320,7 +324,7 @@ org.jsecurity.util.ClassUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6937
+<li>process_communication_port: 7227
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

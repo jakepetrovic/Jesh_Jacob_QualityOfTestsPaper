@@ -22,19 +22,19 @@ net.sf.lavalamp.device.TimeOfDay
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.device.TimeOfDay: 100.00%</ul><ul>
-<li>1950 fitness evaluations, 40 generations, 12058 statements, 1489 tests.
-<li>Time: 0:00:13(Search: 0:00:12, minimization: 0:00:01)
+<li>1850 fitness evaluations, 38 generations, 10600 statements, 1422 tests.
+<li>Time: 0:00:13(Search: 0:00:11, minimization: 0:00:01)
 <li>Coverage: 12/12 branches, 8/8 methods, 18/18 total goals
-<li>Mutation score: 49%
+<li>Mutation score: 45%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-1773), (-1773));
 <span class="nocode"><a name="2">  2: </a></span>Integer integer0 = timeOfDay0.getHours();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, (int)integer0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;-1773:-1773&quot;, timeOfDay0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals((-1773), (int)integer0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -45,78 +45,82 @@ net.sf.lavalamp.device.TimeOfDay
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(1, 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = timeOfDay0.toString();
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;1:0&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;0:0&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
 <span class="nocode"><a name="2">  2: </a></span>int int0 = timeOfDay0.hashCode();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = timeOfDay0.equals((Object) int0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  timeOfDay0 = new TimeOfDay(&quot;:&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(StringIndexOutOfBoundsException e) {
+<span class="nocode"><a name="3">  3: </a></span>  timeOfDay0 = new TimeOfDay(&quot;KvY-X A{olI8K&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NumberFormatException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NumberFormatException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * String index out of range: 2
+<span class="nocode"><a name="7">  7: </a></span>   * For input string: \&quot;Kv\&quot;
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-1330), (-1330));
 <span class="nocode"><a name="2">  2: </a></span>int int0 = timeOfDay0.compareTo(timeOfDay0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;-1330:-1330&quot;, timeOfDay0.toString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(1, 0);
-<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay(0, 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-1773), (-1773));
+<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay((-1105), 829);
 <span class="nocode"><a name="3">  3: </a></span>int int0 = timeOfDay0.compareTo(timeOfDay1);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, int0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;1:0&quot;, timeOfDay0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;-1105:829&quot;, timeOfDay1.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals((-1), int0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay((-1371), 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-1773), (-1773));
+<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay((-1105), 829);
 <span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;-1371:0&quot;, timeOfDay1.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;-1105:829&quot;, timeOfDay1.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay((-1), (-1));
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = timeOfDay0.equals((Object) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;-1:-1&quot;, timeOfDay0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(0, 0);
-<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay(0, 68);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;0:68&quot;, timeOfDay1.toString());
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = timeOfDay0.equals((Object) &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;0:0&quot;, timeOfDay0.toString());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(1, 0);
-<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay(1, 0);
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(1706, 1706);
+<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay(1706, 1706);
 <span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;1:0&quot;, timeOfDay0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;1706:1706&quot;, timeOfDay1.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
+</pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TimeOfDay timeOfDay0 = new TimeOfDay(1865, 1865);
+<span class="nocode"><a name="2">  2: </a></span>TimeOfDay timeOfDay1 = new TimeOfDay(1865, (-1691));
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = timeOfDay0.equals((Object) timeOfDay1);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;1865:-1691&quot;, timeOfDay1.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -189,7 +193,7 @@ net.sf.lavalamp.device.TimeOfDay
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1302785138356621139.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6991366955262283980.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -207,7 +211,7 @@ net.sf.lavalamp.device.TimeOfDay
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3893
+<li>process_communication_port: 4293
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

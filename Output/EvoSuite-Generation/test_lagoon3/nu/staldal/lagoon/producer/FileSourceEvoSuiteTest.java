@@ -14,7 +14,7 @@ import nu.staldal.lagoon.core.Target;
 import nu.staldal.lagoon.producer.FileSource;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.XMLFilterImpl;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class FileSourceEvoSuiteTest {
 
@@ -40,10 +40,10 @@ public class FileSourceEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       FileSource fileSource0 = new FileSource();
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      DefaultHandler defaultHandler0 = new DefaultHandler();
       // Undeclared exception!
       try {
-        fileSource0.start((ContentHandler) xMLFilterImpl0, (Target) null);
+        fileSource0.start((ContentHandler) defaultHandler0, (Target) null);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*
@@ -63,7 +63,7 @@ public class FileSourceEvoSuiteTest {
       FileSource fileSource0 = new FileSource();
       // Undeclared exception!
       try {
-        fileSource0.hasBeenUpdated(471L);
+        fileSource0.hasBeenUpdated(0L);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*

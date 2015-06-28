@@ -23,8 +23,8 @@ public class MonthlyCalendarModelEvoSuiteTest {
       MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
       assertNotNull(monthlyCalendarModel0);
       
-      monthlyCalendarModel0.setSelectedDate(0);
-      assertEquals(0, monthlyCalendarModel0.getSelectedDate());
+      monthlyCalendarModel0.setSelectedDate(18);
+      assertEquals(18, monthlyCalendarModel0.getSelectedDate());
   }
 
   //Test case number: 1
@@ -49,15 +49,8 @@ public class MonthlyCalendarModelEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
-      // Undeclared exception!
-      try {
-        monthlyCalendarModel0.isMarked(0);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-        /*
-         * -1
-         */
-      }
+      boolean boolean0 = monthlyCalendarModel0.isMarked(18);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 3
@@ -69,7 +62,7 @@ public class MonthlyCalendarModelEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       MonthlyCalendarModel monthlyCalendarModel0 = new MonthlyCalendarModel();
-      monthlyCalendarModel0.setMarked(11, false);
+      monthlyCalendarModel0.setMarked(18, false);
       assertEquals(0, monthlyCalendarModel0.getSelectedDate());
   }
 }

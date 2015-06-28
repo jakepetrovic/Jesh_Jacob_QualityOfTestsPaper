@@ -60,9 +60,8 @@ public class BuildPropertiesEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
-      SiteProperties siteProperties0 = new SiteProperties();
-      buildProperties0.setSiteProperties(siteProperties0);
-      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
+      buildProperties0.setSiteProperties((SiteProperties) null);
+      assertEquals("\n\t\tbuildId=null,  null", buildProperties0.toString());
   }
 
   //Test case number: 4
@@ -74,9 +73,9 @@ public class BuildPropertiesEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       BuildProperties buildProperties0 = new BuildProperties();
-      buildProperties0.setBuild("K");
+      buildProperties0.setBuild("\n\t\tbuildId=null,  null");
       buildProperties0.check();
-      assertEquals("K", buildProperties0.getBuild());
+      assertEquals("\n\t\tbuildId=\n\t\tbuildId=null,  null,  null", buildProperties0.toString());
   }
 
   //Test case number: 5

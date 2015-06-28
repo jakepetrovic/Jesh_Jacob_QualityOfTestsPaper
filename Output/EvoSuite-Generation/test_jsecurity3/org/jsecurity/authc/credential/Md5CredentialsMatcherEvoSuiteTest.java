@@ -7,10 +7,6 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import org.jsecurity.authc.AuthenticationInfo;
-import org.jsecurity.authc.AuthenticationToken;
-import org.jsecurity.authc.SimpleAuthenticationInfo;
-import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Md5CredentialsMatcher;
 import org.jsecurity.crypto.hash.Md5Hash;
 
@@ -39,17 +35,7 @@ public class Md5CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-      char[] charArray0 = new char[1];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("XrX)o+-W.k>", charArray0, false);
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-      // Undeclared exception!
-      try {
-        md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Argument for byte conversion cannot be null.
-         */
-      }
+      Md5Hash md5Hash0 = (Md5Hash)md5CredentialsMatcher0.hashProvidedCredentials((Object) "[]", (Object) "AD<-kx`", 0);
+      assertEquals("a8746d5016f85ed6539e9aafd7bd2969", md5Hash0.toHex());
   }
 }

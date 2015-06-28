@@ -21,10 +21,10 @@ net.sf.lavalamp.LavaLogger
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.lavalamp.LavaLogger: 64,29%</ul><ul>
-<li>3328 fitness evaluations, 68 generations, 12751 statements, 2365 tests.
+<ul><li>Target class: net.sf.lavalamp.LavaLogger: 64.29%</ul><ul>
+<li>6474 fitness evaluations, 131 generations, 24598 statements, 4268 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 1/4 branches, 10/12 methods, 9/14 total goals
+<li>Coverage: 1/4 branches, 9/12 methods, 9/14 total goals
 <li>Mutation score: 16%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -38,7 +38,7 @@ net.sf.lavalamp.LavaLogger
 <span class="nocode"><a name="1">  1: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lavaLogger0.debug(&quot;-ojD+/Az&lt;QSHE+&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  lavaLogger0.info(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -46,24 +46,18 @@ net.sf.lavalamp.LavaLogger
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lavaLogger0.error((Throwable) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>lavaLogger0.debug(&quot;-&quot;);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
-<span class="nocode"><a name="2">  2: </a></span>Locale locale0 = Locale.PRC;
-<span class="nocode"><a name="3">  3: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar(locale0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  lavaLogger0.error((Calendar) gregorianCalendar0, &quot;R851\&quot;2`1A$jb&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  lavaLogger0.error((Calendar) gregorianCalendar0, &quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -71,13 +65,7 @@ net.sf.lavalamp.LavaLogger
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LavaLogger lavaLogger0 = new LavaLogger();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lavaLogger0.info(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>LavaLogger.setDebug(false);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp;
@@ -103,11 +91,11 @@ net.sf.lavalamp.LavaLogger
 <span class="nocode"><a name="21"> 21: </a></span>	}
 <span class="nocode"><a name="22"> 22: </a></span>	
 <span class="nocode"><a name="23"> 23: </a></span>	public void error( Throwable e) {
-<span class="nocode"><a name="24"> 24: </a></span><span style="background-color: #ffffcc">		error(Calendar.getInstance(), e);</span>
+<span class="nocode"><a name="24"> 24: </a></span>		error(Calendar.getInstance(), e);
 <span class="nocode"><a name="25"> 25: </a></span>	}
 <span class="nocode"><a name="26"> 26: </a></span>
 <span class="nocode"><a name="27"> 27: </a></span>	public void error(Calendar calendar, Throwable e) {
-<span class="nocode"><a name="28"> 28: </a></span><span style="background-color: #ffffcc">		error(calendar, e.getMessage());</span>
+<span class="nocode"><a name="28"> 28: </a></span>		error(calendar, e.getMessage());
 <span class="nocode"><a name="29"> 29: </a></span>		for (StackTraceElement element : e.getStackTrace()) {
 <span class="nocode"><a name="30"> 30: </a></span>			err.println(element);
 <span class="nocode"><a name="31"> 31: </a></span>		}
@@ -122,17 +110,17 @@ net.sf.lavalamp.LavaLogger
 <span class="nocode"><a name="40"> 40: </a></span>
 <span class="nocode"><a name="41"> 41: </a></span>	public void debug(String message) {
 <span class="nocode"><a name="42"> 42: </a></span><span style="background-color: #ffffcc">		debug(Calendar.getInstance(), message);</span>
-<span class="nocode"><a name="43"> 43: </a></span>	}
+<span class="nocode"><a name="43"> 43: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="44"> 44: </a></span>	
 <span class="nocode"><a name="45"> 45: </a></span>	public void debug(Calendar calendar, String message) {
 <span class="nocode"><a name="46"> 46: </a></span><span style="background-color: #ffffcc">		if (debug) {</span>
-<span class="nocode"><a name="47"> 47: </a></span><span style="background-color: #ffffcc">			info(calendar, message);</span>
+<span class="nocode"><a name="47"> 47: </a></span>			info(calendar, message);
 <span class="nocode"><a name="48"> 48: </a></span>		}
-<span class="nocode"><a name="49"> 49: </a></span>	}
+<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="50"> 50: </a></span>
 <span class="nocode"><a name="51"> 51: </a></span>	public static void setDebug(boolean debug) {
-<span class="nocode"><a name="52"> 52: </a></span>		LavaLogger.debug = debug;
-<span class="nocode"><a name="53"> 53: </a></span>	}
+<span class="nocode"><a name="52"> 52: </a></span><span style="background-color: #ffffcc">		LavaLogger.debug = debug;</span>
+<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="54"> 54: </a></span>
 <span class="nocode"><a name="55"> 55: </a></span>	public static void setOut(PrintStream out) {
 <span class="nocode"><a name="56"> 56: </a></span><span style="background-color: #ffffcc">		LavaLogger.out = out;</span>
@@ -147,7 +135,7 @@ net.sf.lavalamp.LavaLogger
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1263865295215324801.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7350236331166270419.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -165,7 +153,7 @@ net.sf.lavalamp.LavaLogger
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2949
+<li>process_communication_port: 4677
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

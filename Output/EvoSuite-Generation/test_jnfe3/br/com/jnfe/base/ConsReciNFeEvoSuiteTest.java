@@ -57,8 +57,8 @@ public class ConsReciNFeEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       ConsReciNFe consReciNFe0 = new ConsReciNFe();
-      consReciNFe0.setNRec((String) null);
-      assertNull(consReciNFe0.getVersao());
+      consReciNFe0.setNRec("");
+      assertEquals("", consReciNFe0.getNRec());
   }
 
   //Test case number: 4
@@ -70,7 +70,7 @@ public class ConsReciNFeEvoSuiteTest {
   public void test4()  throws Throwable  {
       ConsReciNFe consReciNFe0 = new ConsReciNFe();
       consReciNFe0.setVersao((String) null);
-      assertNull(consReciNFe0.getNRec());
+      assertNull(consReciNFe0.getTpAmb());
   }
 
   //Test case number: 5
@@ -82,7 +82,7 @@ public class ConsReciNFeEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ConsReciNFe consReciNFe0 = new ConsReciNFe();
-      consReciNFe0.setTpAmb((String) null);
-      assertNull(consReciNFe0.getVersao());
+      consReciNFe0.setTpAmb("/4Ddo0]");
+      assertNull(consReciNFe0.getNRec());
   }
 }

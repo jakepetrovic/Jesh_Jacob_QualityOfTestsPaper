@@ -7,7 +7,6 @@ package net.sf.xisemele.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.util.Date;
 import net.sf.xisemele.api.Formatter;
 import net.sf.xisemele.impl.FormatterProviderImpl;
 
@@ -23,7 +22,7 @@ public class FormatterProviderImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       FormatterProviderImpl formatterProviderImpl0 = new FormatterProviderImpl();
-      Class<?> class0 = Date.class;
+      Class<?> class0 = FormatterProviderImpl.class;
       formatterProviderImpl0.setFormatter(class0, (Formatter<?>) null);
   }
 
@@ -36,8 +35,8 @@ public class FormatterProviderImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       FormatterProviderImpl formatterProviderImpl0 = new FormatterProviderImpl();
-      Class<?> class0 = Date.class;
-      Formatter<String> formatter0 = formatterProviderImpl0.getFormatter(class0);
+      Class<?> class0 = FormatterProviderImpl.class;
+      Formatter<Formatter<String>> formatter0 = formatterProviderImpl0.getFormatter(class0);
       assertNull(formatter0);
   }
 }

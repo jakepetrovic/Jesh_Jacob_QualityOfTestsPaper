@@ -21,20 +21,31 @@ net.sf.lavalamp.device.Actions
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.lavalamp.device.Actions: 50.00%</ul><ul>
-<li>64 fitness evaluations, 3 generations, 1542 statements, 298 tests.
-<li>Time: 0:01:03(Search: 0:01:03, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 2/4 methods, 2/4 total goals
-<li>Mutation score: 11%
+<ul><li>Target class: net.sf.lavalamp.device.Actions: 100.00%</ul><ul>
+<li>250 fitness evaluations, 6 generations, 1960 statements, 384 tests.
+<li>Time: 0:00:27(Search: 0:00:27, minimization: 0:00:00)
+<li>Coverage: 0/0 branches, 4/4 methods, 4/4 total goals
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TurnOn turnOn0 = new TurnOn();
-<span class="nocode"><a name="2">  2: </a></span>Actions actions0 = new Actions((Action) turnOn0, (Action) turnOn0, (Action) turnOn0);
-<span class="nocode"><a name="3">  3: </a></span>TurnOn turnOn1 = (TurnOn)actions0.getErrorAction();
-<span class="nocode"><a name="4">  4: </a></span>assertSame(turnOn0, turnOn1);
+<span class="nocode"><a name="1">  1: </a></span>Actions actions0 = new Actions((Action) null, (Action) null, (Action) null);
+<span class="nocode"><a name="2">  2: </a></span>Action action0 = actions0.getSuccessAction();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(action0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Actions actions0 = new Actions((Action) null, (Action) null, (Action) null);
+<span class="nocode"><a name="2">  2: </a></span>Action action0 = actions0.getErrorAction();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(action0);
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Actions actions0 = new Actions((Action) null, (Action) null, (Action) null);
+<span class="nocode"><a name="2">  2: </a></span>Action action0 = actions0.getFailureAction();
+<span class="nocode"><a name="3">  3: </a></span>assertNull(action0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -55,11 +66,11 @@ net.sf.lavalamp.device.Actions
 <span class="nocode"><a name="16"> 16: </a></span>
 <span class="nocode"><a name="17"> 17: </a></span>
 <span class="nocode"><a name="18"> 18: </a></span>	public Action getSuccessAction() {
-<span class="nocode"><a name="19"> 19: </a></span>		return successAction;
+<span class="nocode"><a name="19"> 19: </a></span><span style="background-color: #ffffcc">		return successAction;</span>
 <span class="nocode"><a name="20"> 20: </a></span>	}
 <span class="nocode"><a name="21"> 21: </a></span>
 <span class="nocode"><a name="22"> 22: </a></span>	public Action getFailureAction() {
-<span class="nocode"><a name="23"> 23: </a></span>		return failureAction;
+<span class="nocode"><a name="23"> 23: </a></span><span style="background-color: #ffffcc">		return failureAction;</span>
 <span class="nocode"><a name="24"> 24: </a></span>	}
 <span class="nocode"><a name="25"> 25: </a></span>
 <span class="nocode"><a name="26"> 26: </a></span>	public Action getErrorAction() {
@@ -71,7 +82,7 @@ net.sf.lavalamp.device.Actions
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3215396051626286958.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1185868961603558104.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -89,7 +100,7 @@ net.sf.lavalamp.device.Actions
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11059
+<li>process_communication_port: 6848
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

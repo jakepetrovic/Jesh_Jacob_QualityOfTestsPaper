@@ -24,7 +24,7 @@ public class DateFormatterEvoSuiteTest {
   public void test0()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
       Class<Date> class0 = dateFormatter0.type();
-      assertEquals(false, class0.isAnonymousClass());
+      assertEquals(false, class0.isLocalClass());
   }
 
   //Test case number: 1
@@ -55,9 +55,8 @@ public class DateFormatterEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       DateFormatter dateFormatter0 = new DateFormatter("");
-      Date date0 = new Date();
+      Date date0 = new Date(1307L);
       String string0 = dateFormatter0.format(date0);
-      assertNotNull(string0);
-      assertEquals(1398773714789L, date0.getTime());
+      assertEquals("", string0);
   }
 }

@@ -21,20 +21,20 @@ com.allenstudio.ir.util.XmlIO
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.util.XmlIO: 69.05%</ul><ul>
-<li>3944 fitness evaluations, 80 generations, 20960 statements, 2751 tests.
-<li>Time: 0:01:07(Search: 0:01:05, minimization: 0:00:01)
-<li>Coverage: 15/28 branches, 18/18 methods, 29/42 total goals
+<ul><li>Target class: com.allenstudio.ir.util.XmlIO: 78.57%</ul><ul>
+<li>4900 fitness evaluations, 99 generations, 22893 statements, 3314 tests.
+<li>Time: 0:01:07(Search: 0:01:04, minimization: 0:00:02)
+<li>Coverage: 19/28 branches, 18/18 methods, 33/42 total goals
 <li>Mutation score: 3%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
+<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO((URL) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.endElement(&quot;kzOgr$&quot;, &quot;8~[7C#k]&quot;, &quot;8~[7C#k]&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -44,7 +44,7 @@ com.allenstudio.ir.util.XmlIO
 <span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.errorDialog(&quot;&amp;E_4uu&lt;@^&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.errorDialog(&quot;Z:A%&gt;Zl(zd&gt;&lt;y~&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: HeadlessException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(HeadlessException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -62,27 +62,29 @@ com.allenstudio.ir.util.XmlIO
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
 <span class="nocode"><a name="2">  2: </a></span>XmlElement xmlElement0 = xmlIO0.getRoot();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;__INSPIRENTO_XML_TREE_TOP__&quot;, xmlElement0.getName());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, xmlElement0.hasChanged());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.infoDialog(&quot;pkV~&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.infoDialog(&quot;vj1Qp}mt.&lt;-p:&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: HeadlessException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(HeadlessException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.load();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Hashtable&lt;String, String&gt; hashtable0 = new Hashtable&lt;String, String&gt;();
+<span class="nocode"><a name="2">  2: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;F*!&quot;, hashtable0);
+<span class="nocode"><a name="3">  3: </a></span>XmlIO xmlIO0 = new XmlIO(xmlElement0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xmlIO0.load();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -91,58 +93,64 @@ com.allenstudio.ir.util.XmlIO
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO((URL) null);
-<span class="nocode"><a name="2">  2: </a></span>PushbackInputStream pushbackInputStream0 = new PushbackInputStream((InputStream) null, (int) ')');
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = xmlIO0.load((InputStream) pushbackInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.warningDialog(&quot;!/`R6&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xmlIO0.warningDialog(&quot; &quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: HeadlessException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(HeadlessException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 10</h3>
+<h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO((URL) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[7];
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xmlIO0.characters(charArray0, (int) ')', (int) 'l');
+<span class="nocode"><a name="5">  5: </a></span>  xmlIO0.characters(charArray0, (int) ',', (int) ',');
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(IndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
-<h3>Test case 11</h3>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
 <span class="nocode"><a name="2">  2: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="3">  3: </a></span>xmlIO0.startElement(&quot;&gt;&quot;, &quot;&gt;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="3">  3: </a></span>xmlIO0.startElement(&quot; &quot;, &quot; &quot;, &quot; &quot;, (Attributes) attributes2Impl0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(0, attributes2Impl0.getLength());
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="3">  3: </a></span>xmlIO0.load((InputStream) pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="5">  5: </a></span>xmlIO0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlIO xmlIO0 = new XmlIO();
-<span class="nocode"><a name="2">  2: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="3">  3: </a></span>xmlIO0.startElement(&quot;&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, attributesImpl0.getLength());
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;Z:A%&gt;Zl(zd&gt;&lt;y~&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xmlElement0.setData(&quot;Z:A%&gt;Zl(zd&gt;&lt;y~&quot;);
+<span class="nocode"><a name="3">  3: </a></span>XmlIO xmlIO0 = new XmlIO(xmlElement0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(xmlIO0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="7">  7: </a></span>xmlIO0.write((OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;\n&quot;, byteArrayOutputStream0.toString());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(39, byteArrayOutputStream0.size());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;&gt;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>XmlIO xmlIO0 = new XmlIO(xmlElement0);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(xmlIO0);
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>xmlElement0.addSubElement(&quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="7">  7: </a></span>DataOutputStream dataOutputStream0 = new DataOutputStream((OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="8">  8: </a></span>PrintStream printStream0 = new PrintStream((OutputStream) dataOutputStream0);
-<span class="nocode"><a name="9">  9: </a></span>xmlIO0.write((OutputStream) printStream0);
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, printStream0.checkError());
+<span class="nocode"><a name="1">  1: </a></span>XmlElement xmlElement0 = new XmlElement(&quot;Z:A%&gt;Zl(zd&gt;&lt;y~&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xmlElement0.addSubElement(&quot;Z:A%&gt;Zl(zd&gt;&lt;y~&quot;);
+<span class="nocode"><a name="3">  3: </a></span>XmlIO xmlIO0 = new XmlIO(xmlElement0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(xmlIO0);
+<span class="nocode"><a name="5">  5: </a></span>
+<span class="nocode"><a name="6">  6: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="7">  7: </a></span>xmlIO0.write((OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(39, byteArrayOutputStream0.size());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;\n&quot;, byteArrayOutputStream0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -370,10 +378,10 @@ com.allenstudio.ir.util.XmlIO
 <span class="nocode"><a name="223">223: </a></span><span style="background-color: #ffffcc">          XmlElement p = currentElement;</span>
 <span class="nocode"><a name="224">224: </a></span>
 <span class="nocode"><a name="225">225: </a></span><span style="background-color: #ffffcc">          currentElement = currentElement.addSubElement(name);</span>
-<span class="nocode"><a name="226">226: </a></span>          currentElement.setParent(p);
+<span class="nocode"><a name="226">226: </a></span><span style="background-color: #ffffcc">          currentElement.setParent(p);</span>
 <span class="nocode"><a name="227">227: </a></span>
-<span class="nocode"><a name="228">228: </a></span>          if (attrs != null) {
-<span class="nocode"><a name="229">229: </a></span>              for (int i = 0; i &lt; attrs.getLength(); i++) {
+<span class="nocode"><a name="228">228: </a></span><span style="background-color: #ffffcc">          if (attrs != null) {</span>
+<span class="nocode"><a name="229">229: </a></span><span style="background-color: #ffffcc">              for (int i = 0; i &lt; attrs.getLength(); i++) {</span>
 <span class="nocode"><a name="230">230: </a></span>                  String aName = attrs.getLocalName(i); // Attr name
 <span class="nocode"><a name="231">231: </a></span>
 <span class="nocode"><a name="232">232: </a></span>                  if (aName.equals(&quot;&quot;)) {
@@ -387,7 +395,7 @@ com.allenstudio.ir.util.XmlIO
 <span class="nocode"><a name="240">240: </a></span><span style="background-color: #ffffcc">          LOG.severe(&quot;Null!!!&quot;);</span>
 <span class="nocode"><a name="241">241: </a></span><span style="background-color: #ffffcc">          LOG.severe(ex.toString());</span>
 <span class="nocode"><a name="242">242: </a></span><span style="background-color: #ffffcc">          ex.printStackTrace();</span>
-<span class="nocode"><a name="243">243: </a></span>      }
+<span class="nocode"><a name="243">243: </a></span><span style="background-color: #ffffcc">      }</span>
 <span class="nocode"><a name="244">244: </a></span><span style="background-color: #ffffcc">  }</span>
 <span class="nocode"><a name="245">245: </a></span>
 <span class="nocode"><a name="246">246: </a></span>  @Override
@@ -468,12 +476,12 @@ com.allenstudio.ir.util.XmlIO
 <span class="nocode"><a name="321">321: </a></span><span style="background-color: #ffffcc">      String data = element.getData();</span>
 <span class="nocode"><a name="322">322: </a></span>
 <span class="nocode"><a name="323">323: </a></span><span style="background-color: #ffffcc">      if ((data != null) &amp;&amp; !data.equals(&quot;&quot;)) {</span>
-<span class="nocode"><a name="324">324: </a></span>          if (data.length() &gt; maxOneLineData) {
+<span class="nocode"><a name="324">324: </a></span><span style="background-color: #ffffcc">          if (data.length() &gt; maxOneLineData) {</span>
 <span class="nocode"><a name="325">325: </a></span>              out.write(&quot;\n&quot;);
 <span class="nocode"><a name="326">326: </a></span>              _writeSpace(out, indent + writeIndent);
 <span class="nocode"><a name="327">327: </a></span>          }
 <span class="nocode"><a name="328">328: </a></span>
-<span class="nocode"><a name="329">329: </a></span>          out.write(InspirentoUtilities.escapeText(data));
+<span class="nocode"><a name="329">329: </a></span><span style="background-color: #ffffcc">          out.write(InspirentoUtilities.escapeText(data));</span>
 <span class="nocode"><a name="330">330: </a></span>      }
 <span class="nocode"><a name="331">331: </a></span>
 <span class="nocode"><a name="332">332: </a></span><span style="background-color: #ffffcc">      List subElements = element.getElements();</span>
@@ -517,7 +525,7 @@ com.allenstudio.ir.util.XmlIO
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2170945897173101075.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5277402201953676720.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -535,7 +543,7 @@ com.allenstudio.ir.util.XmlIO
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15907
+<li>process_communication_port: 10674
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

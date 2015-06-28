@@ -19,9 +19,9 @@ public class INCHI_KEYEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.NOT_ENOUGH_MEMORY;
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.EMPTY_INPUT;
       int int0 = iNCHI_KEY0.getIndx();
-      assertEquals(4, int0);
+      assertEquals(2, int0);
   }
 
   //Test case number: 1
@@ -61,11 +61,12 @@ public class INCHI_KEYEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 1 TABLESWITCH L71 Case 0 - false
-   * 2 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 17 TABLESWITCH L71 Case 16 - true
+   * 2 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 3 TABLESWITCH L71 Case 2 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_KEY.getValue(16);
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(2);
+      assertEquals(INCHI_KEY.EMPTY_INPUT, iNCHI_KEY0);
   }
 
   //Test case number: 3
@@ -82,140 +83,119 @@ public class INCHI_KEYEvoSuiteTest {
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 3 TABLESWITCH L71 Case 2 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 4 TABLESWITCH L71 Case 3 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(2);
-      assertEquals(INCHI_KEY.EMPTY_INPUT, iNCHI_KEY0);
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(3);
+      assertEquals(INCHI_KEY.INVALID_INCHI_PREFIX, iNCHI_KEY0);
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 4 TABLESWITCH L71 Case 3 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 5 TABLESWITCH L71 Case 4 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(3);
-      assertEquals(INCHI_KEY.INVALID_INCHI_PREFIX, iNCHI_KEY0);
+      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(4);
+      assertEquals(INCHI_KEY.NOT_ENOUGH_MEMORY, iNCHI_KEY0);
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 5 TABLESWITCH L71 Case 4 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 7 TABLESWITCH L71 Case 6 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(4);
-      assertEquals(INCHI_KEY.NOT_ENOUGH_MEMORY, iNCHI_KEY0);
+      INCHI_KEY.getValue(6);
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 7 TABLESWITCH L71 Case 6 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 8 TABLESWITCH L71 Case 7 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      INCHI_KEY.getValue(6);
+      INCHI_KEY.getValue(7);
   }
 
   //Test case number: 8
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 8 TABLESWITCH L71 Case 7 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 11 TABLESWITCH L71 Case 10 - true
    */
   @Test
   public void test8()  throws Throwable  {
-      INCHI_KEY.getValue(7);
+      INCHI_KEY.getValue(10);
   }
 
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 10 TABLESWITCH L71 Case 9 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 14 TABLESWITCH L71 Case 13 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      INCHI_KEY.getValue(9);
+      INCHI_KEY.getValue(13);
   }
 
   //Test case number: 10
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 11 TABLESWITCH L71 Case 10 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 15 TABLESWITCH L71 Case 14 - true
    */
   @Test
   public void test10()  throws Throwable  {
-      INCHI_KEY.getValue(10);
+      INCHI_KEY.getValue(14);
   }
 
   //Test case number: 11
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 12 TABLESWITCH L71 Case 11 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 17 TABLESWITCH L71 Case 16 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      INCHI_KEY.getValue(11);
+      INCHI_KEY.getValue(16);
   }
 
   //Test case number: 12
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 13 TABLESWITCH L71 Case 12 - true
+   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 20 TABLESWITCH L71 Case 19 - true
    */
   @Test
   public void test12()  throws Throwable  {
-      INCHI_KEY.getValue(12);
+      INCHI_KEY.getValue(19);
   }
 
   //Test case number: 13
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 15 TABLESWITCH L71 Case 14 - true
-   */
-  @Test
-  public void test13()  throws Throwable  {
-      INCHI_KEY.getValue(14);
-  }
-
-  //Test case number: 14
-  /*
-   * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 20 TABLESWITCH L71 Case 19 - true
-   */
-  @Test
-  public void test14()  throws Throwable  {
-      INCHI_KEY.getValue(19);
-  }
-
-  //Test case number: 15
-  /*
-   * 1 covered goal:
    * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 21 TABLESWITCH L71 Case 20 - true
    */
   @Test
-  public void test15()  throws Throwable  {
+  public void test13()  throws Throwable  {
       INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(20);
       assertEquals(INCHI_KEY.INVALID_INCHI, iNCHI_KEY0);
   }
 
-  //Test case number: 16
+  //Test case number: 14
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 22 TABLESWITCH L71 Case 21 - true
    * 2 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 23 TABLESWITCH L71 Default-Case - false
    */
   @Test
-  public void test16()  throws Throwable  {
+  public void test14()  throws Throwable  {
       INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(21);
       assertEquals(INCHI_KEY.INVALID_STD_INCHI, iNCHI_KEY0);
   }
 
-  //Test case number: 17
+  //Test case number: 15
   /*
    * 23 covered goals:
    * 1 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 23 TABLESWITCH L71 Default-Case - true
@@ -243,7 +223,7 @@ public class INCHI_KEYEvoSuiteTest {
    * 23 net.sf.jniinchi.INCHI_KEY.getValue(I)Lnet/sf/jniinchi/INCHI_KEY;: I3 Branch 22 TABLESWITCH L71 Case 21 - false
    */
   @Test
-  public void test17()  throws Throwable  {
-      INCHI_KEY.getValue((-7));
+  public void test15()  throws Throwable  {
+      INCHI_KEY.getValue(738112285);
   }
 }

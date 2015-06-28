@@ -19,10 +19,10 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       String string0 = cST_Grupo0.getGroup();
       assertNotNull(string0);
-      assertEquals("00", string0);
+      assertEquals("10", string0);
   }
 
   //Test case number: 1
@@ -32,7 +32,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -44,9 +44,9 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isST();
-      assertEquals(false, boolean0);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 3
@@ -56,7 +56,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isSimplesNacional();
       assertEquals(false, boolean0);
   }
@@ -70,8 +70,8 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
-      boolean boolean0 = cST_Grupo0.isRequiredTag("_00");
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
+      boolean boolean0 = cST_Grupo0.isRequiredTag("Part");
       assertEquals(false, boolean0);
   }
 
@@ -84,7 +84,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isRequiredTag("modBC");
       assertEquals(true, boolean0);
   }

@@ -25,9 +25,10 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      String[] stringArray0 = new String[3];
-      stringArray0[1] = "}V[8=>WN(LIHnx7DCc";
-      validationsImpl0.assertNotNull((Object[]) stringArray0);
+      Object[] objectArray0 = new Object[3];
+      objectArray0[0] = (Object) validationsImpl0;
+      objectArray0[1] = objectArray0[0];
+      validationsImpl0.assertNotNull(objectArray0);
   }
 
   //Test case number: 1
@@ -39,7 +40,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      Object[] objectArray0 = new Object[6];
+      Object[] objectArray0 = new Object[10];
       try {
         validationsImpl0.assertNotNull(objectArray0);
         fail("Expecting exception: NullPointerException");
@@ -55,7 +56,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      validationsImpl0.assertValidName("net.sf.xisemele.null.pointer.exception");
+      validationsImpl0.assertValidName("QdXHTF");
   }
 
   //Test case number: 3
@@ -67,11 +68,11 @@ public class ValidationsImplEvoSuiteTest {
   public void test3()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
       try {
-        validationsImpl0.assertValidName("");
+        validationsImpl0.assertValidName("?QZY");
         fail("Expecting exception: InvalidNameException");
       } catch(InvalidNameException e) {
         /*
-         * O nome \"\" n\u00E3o \u00E9 v\u00E1lido
+         * O nome \"?QZY\" n\u00E3o \u00E9 v\u00E1lido
          */
       }
   }
@@ -86,7 +87,7 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      Object[] objectArray0 = new Object[1];
+      Object[] objectArray0 = new Object[3];
       Object object0 = validationsImpl0.getFirstNotNull(objectArray0);
       assertNull(object0);
   }
@@ -101,9 +102,9 @@ public class ValidationsImplEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       ValidationsImpl validationsImpl0 = new ValidationsImpl((Factory) null);
-      String[] stringArray0 = new String[8];
-      stringArray0[0] = "";
-      String string0 = validationsImpl0.getFirstNotNull(stringArray0);
-      assertEquals("", string0);
+      Object[] objectArray0 = new Object[8];
+      objectArray0[0] = (Object) validationsImpl0;
+      ValidationsImpl validationsImpl1 = (ValidationsImpl)validationsImpl0.getFirstNotNull(objectArray0);
+      assertSame(validationsImpl1, validationsImpl0);
   }
 }

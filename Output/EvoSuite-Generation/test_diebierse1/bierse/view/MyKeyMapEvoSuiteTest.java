@@ -21,9 +21,9 @@ public class MyKeyMapEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      MyKeyMap myKeyMap0 = new MyKeyMap("", 0);
+      MyKeyMap myKeyMap0 = new MyKeyMap("", 2042);
       String string0 = myKeyMap0.toString();
-      assertEquals(0, myKeyMap0.getCode());
+      assertEquals(2042, myKeyMap0.getCode());
       assertNotNull(string0);
   }
 
@@ -35,8 +35,8 @@ public class MyKeyMapEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      MyKeyMap myKeyMap0 = new MyKeyMap("", 0);
+      MyKeyMap myKeyMap0 = new MyKeyMap("", 2042);
       int int0 = myKeyMap0.getCode();
-      assertEquals(0, int0);
+      assertEquals(2042, int0);
   }
 }

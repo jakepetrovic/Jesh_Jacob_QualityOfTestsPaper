@@ -22,8 +22,8 @@ nu.staldal.xodus.XMLCharacterEncoder
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xodus.XMLCharacterEncoder: 52.08%</ul><ul>
-<li>4872 fitness evaluations, 99 generations, 30376 statements, 3323 tests.
-<li>Time: 0:01:05(Search: 0:01:04, minimization: 0:00:01)
+<li>9320 fitness evaluations, 188 generations, 56202 statements, 5925 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
 <li>Coverage: 21/44 branches, 14/14 methods, 25/48 total goals
 <li>Mutation score: 7%
 </ul>
@@ -43,8 +43,8 @@ nu.staldal.xodus.XMLCharacterEncoder
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
+<span class="nocode"><a name="1">  1: </a></span>StringWriter stringWriter0 = new StringWriter(0);
+<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) stringWriter0);
 <span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.disableEscaping();
 </pre>
 <h3>Test case 3</h3>
@@ -52,57 +52,57 @@ nu.staldal.xodus.XMLCharacterEncoder
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.write(256);
+<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.write(289);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.write((int) 'o');
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, charArrayWriter0.size());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;o&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="1">  1: </a></span>StringWriter stringWriter0 = new StringWriter(0);
+<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) stringWriter0);
+<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.append('{');
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;{&quot;, stringWriter0.toString());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[18];
+<span class="nocode"><a name="1">  1: </a></span>StringWriter stringWriter0 = new StringWriter();
+<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) stringWriter0);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[8];
 <span class="nocode"><a name="4">  4: </a></span>xMLCharacterEncoder0.write(charArray0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(18, charArrayWriter0.size());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, stringWriter0.toString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[3];
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xMLCharacterEncoder0.write(charArray0, (int) 'Q', (-1));
+<span class="nocode"><a name="5">  5: </a></span>  xMLCharacterEncoder0.write(charArray0, (int) ',', (int) ',');
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(IndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[18];
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  xMLCharacterEncoder0.write(charArray0, 256, (-95));
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(IndexOutOfBoundsException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>PipedWriter pipedWriter0 = new PipedWriter();
+<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) pipedWriter0);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[13];
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  xMLCharacterEncoder0.write(charArray0, (int) 'R', (int) '\u0000');
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IOException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(IOException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Pipe not connected
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.write((String) null);
+<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.append((CharSequence) &quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -111,16 +111,16 @@ nu.staldal.xodus.XMLCharacterEncoder
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
 <span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.write(&quot; in context where escaping is not possible&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(42, charArrayWriter0.size());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot; in context where escaping is not possible&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.append((CharSequence) &quot;German (Germany)&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;German (Germany)&quot;, charArrayWriter0.toString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(16, charArrayWriter0.size());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.write(&quot;yL#]qM#_/G&quot;, 0, 0);
+<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.write(&quot;encoding name is illegal: &quot;, 0, 1);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -131,11 +131,11 @@ nu.staldal.xodus.XMLCharacterEncoder
 <span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xMLCharacterEncoder0.write(&quot; in context where escaping is not possible&quot;, (-42), 0);
+<span class="nocode"><a name="5">  5: </a></span>  xMLCharacterEncoder0.write(&quot;xD*je}$4}U&quot;, (-870), (-870));
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: StringIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(StringIndexOutOfBoundsException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * String index out of range: -42
+<span class="nocode"><a name="9">  9: </a></span>   * String index out of range: -870
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
@@ -154,35 +154,29 @@ nu.staldal.xodus.XMLCharacterEncoder
 <span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
 <span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
 <span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.finish();
+<span class="nocode"><a name="4">  4: </a></span>xMLCharacterEncoder0.finish();
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
 <span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.close();
-<span class="nocode"><a name="4">  4: </a></span>xMLCharacterEncoder0.finish();
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>CharArrayWriter charArrayWriter0 = new CharArrayWriter();
-<span class="nocode"><a name="2">  2: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) charArrayWriter0);
-<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.close();
+<span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.finish();
 <span class="nocode"><a name="4">  4: </a></span>xMLCharacterEncoder0.close();
 </pre>
-<h3>Test case 16</h3>
+<h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.close();
+<span class="nocode"><a name="4">  4: </a></span>  xMLCharacterEncoder0.finish();
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 17</h3>
+<h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLCharacterEncoder xMLCharacterEncoder0 = new XMLCharacterEncoder((Writer) null);
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[10];
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[6];
 <span class="nocode"><a name="3">  3: </a></span>xMLCharacterEncoder0.enableEscaping();
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
@@ -585,7 +579,7 @@ nu.staldal.xodus.XMLCharacterEncoder
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -603,7 +597,7 @@ nu.staldal.xodus.XMLCharacterEncoder
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8667
+<li>process_communication_port: 20708
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

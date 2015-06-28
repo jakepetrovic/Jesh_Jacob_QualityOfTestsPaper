@@ -22,8 +22,8 @@ com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback: 47.62%</ul><ul>
-<li>20782 fitness evaluations, 417 generations, 66077 statements, 14148 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>21182 fitness evaluations, 425 generations, 66236 statements, 14366 tests.
+<li>Time: 0:01:01(Search: 0:01:00, minimization: 0:00:00)
 <li>Coverage: 9/18 branches, 2/6 methods, 10/21 total goals
 <li>Mutation score: 0%
 </ul>
@@ -31,26 +31,26 @@ com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(false, &quot;[u&quot;);
-<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(false, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
 <span class="nocode"><a name="3">  3: </a></span>authCallback0.getCredentials(authenticationReason0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(true, &quot;os&quot;);
-<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
+<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(true, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
 <span class="nocode"><a name="3">  3: </a></span>authCallback0.getCredentials(authenticationReason0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
-<span class="nocode"><a name="2">  2: </a></span>AuthCallback authCallback0 = new AuthCallback(true, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(false, &quot;%gk-9Z&quot;);
+<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
 <span class="nocode"><a name="3">  3: </a></span>authCallback0.getCredentials(authenticationReason0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AuthCallback authCallback0 = new AuthCallback(true, &quot;cKJqR/|Tha&quot;);
-<span class="nocode"><a name="2">  2: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+<span class="nocode"><a name="1">  1: </a></span>AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+<span class="nocode"><a name="2">  2: </a></span>AuthCallback authCallback0 = new AuthCallback(false, &quot;xFt%hOzzG3#zp$6aN&quot;);
 <span class="nocode"><a name="3">  3: </a></span>authCallback0.getCredentials(authenticationReason0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -171,7 +171,7 @@ com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4086536237158660057.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4236573649718441842.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -189,7 +189,7 @@ com.sap.netweaver.porta.ide.eclipse.server.control.AuthCallback
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11230
+<li>process_communication_port: 10684
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

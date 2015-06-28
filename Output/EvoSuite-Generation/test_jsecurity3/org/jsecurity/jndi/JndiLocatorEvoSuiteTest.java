@@ -7,7 +7,7 @@ package org.jsecurity.jndi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import java.nio.CharBuffer;
+import java.io.ObjectInputValidation;
 import java.util.Properties;
 import javax.naming.NamingException;
 import javax.naming.NoInitialContextException;
@@ -44,7 +44,7 @@ public class JndiLocatorEvoSuiteTest {
   public void test1()  throws Throwable  {
       JndiLocator jndiLocator0 = new JndiLocator();
       try {
-        jndiLocator0.lookup(" jt~P<$D%_");
+        jndiLocator0.lookup("2Y:!Nzl9G");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -55,13 +55,12 @@ public class JndiLocatorEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I36 Branch 3 IFGT L147 - false
-   * 2 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I41 Branch 4 IFEQ L149 - true
-   * 3 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I4 Branch 6 IFEQ L176 - false
-   * 4 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - false
-   * 5 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I14 Branch 8 IF_ICMPNE L176 - false
-   * 6 org.jsecurity.jndi.JndiLocator.setResourceRef(Z)V: root-Branch
+   * 5 covered goals:
+   * 1 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I14 Branch 8 IF_ICMPNE L176 - true
+   * 2 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I36 Branch 3 IFGT L147 - true
+   * 3 org.jsecurity.jndi.JndiLocator.setResourceRef(Z)V: root-Branch
+   * 4 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I4 Branch 6 IFEQ L176 - false
+   * 5 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - false
    */
   @Test
   public void test2()  throws Throwable  {
@@ -70,7 +69,7 @@ public class JndiLocatorEvoSuiteTest {
       
       jndiLocator0.setResourceRef(true);
       try {
-        jndiLocator0.lookup(" jt~P<$D%_");
+        jndiLocator0.lookup("2Y:!Nzl9G");
         fail("Expecting exception: NoInitialContextException");
       } catch(NoInitialContextException e) {
         /*
@@ -87,8 +86,7 @@ public class JndiLocatorEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       JndiLocator jndiLocator0 = new JndiLocator();
-      Properties properties0 = new Properties();
-      jndiLocator0.setJndiEnvironment(properties0);
+      jndiLocator0.setJndiEnvironment((Properties) null);
       assertEquals(false, jndiLocator0.isResourceRef());
   }
 
@@ -127,7 +125,7 @@ public class JndiLocatorEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       JndiLocator jndiLocator0 = new JndiLocator();
-      Class<?> class0 = CharBuffer.class;
+      Class<?> class0 = ObjectInputValidation.class;
       // Undeclared exception!
       try {
         jndiLocator0.lookup((String) null, (Class) class0);
@@ -141,8 +139,15 @@ public class JndiLocatorEvoSuiteTest {
 
   //Test case number: 7
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - true
+   * 8 covered goals:
+   * 1 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I36 Branch 3 IFGT L147 - false
+   * 2 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I41 Branch 4 IFEQ L149 - true
+   * 3 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I4 Branch 6 IFEQ L176 - false
+   * 4 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - false
+   * 5 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I14 Branch 8 IF_ICMPNE L176 - false
+   * 6 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;)Ljava/lang/Object;: root-Branch
+   * 7 org.jsecurity.jndi.JndiLocator.getJndiTemplate()Lorg/jsecurity/jndi/JndiTemplate;: root-Branch
+   * 8 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L138 - true
    */
   @Test
   public void test7()  throws Throwable  {
@@ -150,24 +155,24 @@ public class JndiLocatorEvoSuiteTest {
       assertEquals(false, jndiLocator0.isResourceRef());
       
       jndiLocator0.setResourceRef(true);
-      String string0 = jndiLocator0.convertJndiName("java:comp/env/' found.");
-      assertEquals(true, jndiLocator0.isResourceRef());
-      assertEquals("java:comp/env/' found.", string0);
+      try {
+        jndiLocator0.lookup(" the one loaded from classloader ");
+        fail("Expecting exception: NoInitialContextException");
+      } catch(NoInitialContextException e) {
+        /*
+         * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
+         */
+      }
   }
 
   //Test case number: 8
   /*
-   * 10 covered goals:
-   * 1 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I14 Branch 8 IF_ICMPNE L176 - true
+   * 5 covered goals:
+   * 1 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - true
    * 2 org.jsecurity.jndi.JndiLocator.<init>()V: root-Branch
-   * 3 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;)Ljava/lang/Object;: root-Branch
-   * 4 org.jsecurity.jndi.JndiLocator.setResourceRef(Z)V: root-Branch
-   * 5 org.jsecurity.jndi.JndiLocator.getJndiTemplate()Lorg/jsecurity/jndi/JndiTemplate;: root-Branch
-   * 6 org.jsecurity.jndi.JndiLocator.isResourceRef()Z: root-Branch
-   * 7 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I3 Branch 2 IFNONNULL L138 - true
-   * 8 org.jsecurity.jndi.JndiLocator.lookup(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;: I36 Branch 3 IFGT L147 - true
-   * 9 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I4 Branch 6 IFEQ L176 - false
-   * 10 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I9 Branch 7 IFGT L176 - false
+   * 3 org.jsecurity.jndi.JndiLocator.setResourceRef(Z)V: root-Branch
+   * 4 org.jsecurity.jndi.JndiLocator.isResourceRef()Z: root-Branch
+   * 5 org.jsecurity.jndi.JndiLocator.convertJndiName(Ljava/lang/String;)Ljava/lang/String;: I4 Branch 6 IFEQ L176 - false
    */
   @Test
   public void test8()  throws Throwable  {
@@ -175,13 +180,8 @@ public class JndiLocatorEvoSuiteTest {
       assertEquals(false, jndiLocator0.isResourceRef());
       
       jndiLocator0.setResourceRef(true);
-      try {
-        jndiLocator0.lookup("V=JA2htTq&?b=$H3:V");
-        fail("Expecting exception: NoInitialContextException");
-      } catch(NoInitialContextException e) {
-        /*
-         * Need to specify class name in environment or system property, or as an applet parameter, or in an application resource file:  java.naming.factory.initial
-         */
-      }
+      String string0 = jndiLocator0.convertJndiName("java:comp/env/RNl9-cZG");
+      assertEquals(true, jndiLocator0.isResourceRef());
+      assertEquals("java:comp/env/RNl9-cZG", string0);
   }
 }

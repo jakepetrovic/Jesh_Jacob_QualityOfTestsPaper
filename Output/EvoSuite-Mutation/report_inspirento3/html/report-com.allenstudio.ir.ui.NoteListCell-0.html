@@ -21,11 +21,11 @@ com.allenstudio.ir.ui.NoteListCell
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.ui.NoteListCell: 28.89%</ul><ul>
-<li>1074 fitness evaluations, 23 generations, 10504 statements, 917 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 3/28 branches, 12/25 methods, 13/45 total goals
-<li>Mutation score: 32%
+<ul><li>Target class: com.allenstudio.ir.ui.NoteListCell: 31.11%</ul><ul>
+<li>1004 fitness evaluations, 22 generations, 8320 statements, 811 tests.
+<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:03)
+<li>Coverage: 3/28 branches, 13/25 methods, 14/45 total goals
+<li>Mutation score: 33%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,10 +34,9 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="1">  1: </a></span>CommonNote commonNote0 = new CommonNote();
 <span class="nocode"><a name="2">  2: </a></span>NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
-<span class="nocode"><a name="5">  5: </a></span>
-<span class="nocode"><a name="6">  6: </a></span>noteListCell0.setIndexInList(1);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, noteListCell0.getIndexInList());
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>noteListCell0.setIndexInList(1696);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1696, noteListCell0.getIndexInList());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -47,11 +46,11 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>Dimension dimension0 = noteListCell0.getMaximumSize();
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(true, noteListCell0.isOpaque());
-<span class="nocode"><a name="7">  7: </a></span>assertNotNull(dimension0);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
 <span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;java.awt.Dimension[width=2147483647,height=55]&quot;, dimension0.toString());
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
-<span class="nocode"><a name="11"> 11: </a></span>assertEquals(3, noteListCell0.getComponentCount());
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(3, noteListCell0.getComponentCount());
+<span class="nocode"><a name="11"> 11: </a></span>assertNotNull(dimension0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -60,10 +59,10 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
 <span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>int int0 = noteListCell0.getIndexInList();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, noteListCell0.isOpaque());
 <span class="nocode"><a name="7">  7: </a></span>assertEquals((-1), int0);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, noteListCell0.isOpaque());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(3, noteListCell0.countComponents());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(3, noteListCell0.getComponentCount());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -71,13 +70,11 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="2">  2: </a></span>NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>noteListCell0.setSelected(false);
+<span class="nocode"><a name="5">  5: </a></span>noteListCell0.isSelected();
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(true, noteListCell0.isOpaque());
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(3, noteListCell0.countComponents());
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(false, noteListCell0.isSelected());
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
-<span class="nocode"><a name="11"> 11: </a></span>assertEquals(3, noteListCell0.getComponentCount());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(3, noteListCell0.countComponents());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -85,8 +82,22 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="2">  2: </a></span>NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
 <span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>noteListCell0.setSelected(false);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, noteListCell0.isSelected());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(3, noteListCell0.getComponentCount());
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(-1, noteListCell0.getIndexInList());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, noteListCell0.isBackgroundSet());
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(3, noteListCell0.countComponents());
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>CommonNote commonNote0 = new CommonNote();
+<span class="nocode"><a name="2">  2: </a></span>NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
+<span class="nocode"><a name="4">  4: </a></span>
 <span class="nocode"><a name="5">  5: </a></span>noteListCell0.setSelected(true);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(true, noteListCell0.isSelected());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(3, noteListCell0.countComponents());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -305,7 +316,7 @@ com.allenstudio.ir.ui.NoteListCell
 <span class="nocode"><a name="214">214: </a></span>     * @return true if selected, otherwise false
 <span class="nocode"><a name="215">215: </a></span>     */
 <span class="nocode"><a name="216">216: </a></span>    public boolean isSelected() {
-<span class="nocode"><a name="217">217: </a></span>        return this.isSelected;
+<span class="nocode"><a name="217">217: </a></span><span style="background-color: #ffffcc">        return this.isSelected;</span>
 <span class="nocode"><a name="218">218: </a></span>    }
 <span class="nocode"><a name="219">219: </a></span>    
 <span class="nocode"><a name="220">220: </a></span>    void initComponents() {
@@ -394,7 +405,7 @@ com.allenstudio.ir.ui.NoteListCell
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2170945897173101075.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5277402201953676720.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -412,7 +423,7 @@ com.allenstudio.ir.ui.NoteListCell
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9569
+<li>process_communication_port: 6527
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

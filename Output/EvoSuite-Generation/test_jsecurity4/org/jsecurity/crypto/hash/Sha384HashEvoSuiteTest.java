@@ -20,8 +20,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "86f052a338cb94e695b6f6aeba3da1c7dc418f2b093419cfde5d57fd025e6cd8cdad702d1435f92cd4dd04e4756a9fb1", (Object) "SHA-384", (-1254));
-      assertEquals("13939dfd14fd2059f2644f96c77eda8e86dfdb11015fb6713f40be074b6070d1d7fae02caf0dac257db26ef7ce6f0afd", sha384Hash0.toHex());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384", (Object) "J;5I\u0001\uFFFD\uFFFD", (int) (byte)1);
+      assertEquals("SHA-384", sha384Hash0.getAlgorithmName());
   }
 
   //Test case number: 1
@@ -32,8 +32,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String ");
-      assertEquals("b618ac6ab82e99e9edb72a5eb6869bcad7b2a2e71a9f57289ef7abb6d85e6ab82e99e9edb6869bcad79c85aae8ad2b6b000000", sha384Hash0.toHex());
+      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("qMT");
+      assertEquals("000000", sha384Hash0.toHex());
   }
 
   //Test case number: 2
@@ -43,8 +43,8 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384");
-      assertEquals("hvBSozjLlOaVtvauuj2hx9xBjysJNBnP3l1X/QJebNjNrXAtFDX5LNTdBOR1ap+x", sha384Hash0.toBase64());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "\u0000\u0000");
+      assertEquals("1dd6f7b457ad880d840d41c961283bab688e94e4b59359ea45686581e90feccea3c624b1226113f824f315eb60ae0a7c", sha384Hash0.toHex());
   }
 
   //Test case number: 3
@@ -55,8 +55,15 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromHexString("");
-      assertEquals("", sha384Hash0.toBase64());
+      // Undeclared exception!
+      try {
+        Sha384Hash.fromHexString("] to byte array using ");
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Illegal hexadecimal charcter ] at index 0
+         */
+      }
   }
 
   //Test case number: 4
@@ -67,7 +74,7 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "", (Object) "");
-      assertEquals("38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b", sha384Hash0.toHex());
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "UTF-8", (Object) "UTF-8");
+      assertEquals("8d90623a6c38bd034b95e38e6234ef762f0f5406264889585e66c63fec3ffb309795940375462b51c067412794c8fec9", sha384Hash0.toString());
   }
 }

@@ -34,9 +34,9 @@ public class SitePropertiesEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
-      siteProperties0.setClassName("q\"bxeUESL*74S");
-      assertEquals("\n\t\t\tserver=q\"bxeUESL*74S, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
+      siteProperties0.setClassName("0BJ7");
       assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
+      assertEquals("\n\t\t\tserver=0BJ7, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
   }
 
   //Test case number: 2
@@ -73,8 +73,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test4()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       siteProperties0.getUrl();
-      assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
       assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
+      assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
   }
 
   //Test case number: 5
@@ -99,8 +99,8 @@ public class SitePropertiesEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
-      siteProperties0.setUrl("");
+      siteProperties0.setUrl((String) null);
+      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
       assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
-      assertEquals("\n\t\t\tserver=null, url= getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
   }
 }

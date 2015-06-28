@@ -22,10 +22,10 @@ org.saxpath.conformance.ConformanceXPathHandler
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.saxpath.conformance.ConformanceXPathHandler: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 6075 statements, 292 tests.
-<li>Time: 0:00:07(Search: 0:00:01, minimization: 0:00:05)
+<li>250 fitness evaluations, 6 generations, 8254 statements, 392 tests.
+<li>Time: 0:00:09(Search: 0:00:02, minimization: 0:00:06)
 <li>Coverage: 4/4 branches, 48/48 methods, 50/50 total goals
-<li>Mutation score: 84%
+<li>Mutation score: 85%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -51,7 +51,10 @@ org.saxpath.conformance.ConformanceXPathHandler
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
 <span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endAllNodeStep();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endAllNodeStep()\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="3">  3: </a></span>String string0 = conformanceXPathHandler0.toString();
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;(0) endAllNodeStep()\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;(0) endAllNodeStep()\n&quot;, string0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -62,8 +65,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.variableReference(&quot;gc}U:&quot;, &quot;gc}U:&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) variableReference(\&quot;gc}U::gc}U:\&quot;)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.variableReference(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) variableReference(\&quot;:\&quot;)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -74,14 +77,14 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endMultiplicativeExpr(1347);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endMultiplicativeExpr(1347)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endMultiplicativeExpr((-1550));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endMultiplicativeExpr(-1550)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.literal((String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) literal(\&quot;null\&quot;)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.literal(&quot;&gt;W&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) literal(\&quot;&gt;W\&quot;)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -110,14 +113,14 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startTextNodeStep(1328);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startTextNodeStep(1328)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startTextNodeStep(1792);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startTextNodeStep(1792)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endUnaryExpr(1524);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endUnaryExpr(1524)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endUnaryExpr(1224);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endUnaryExpr(1224)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -128,8 +131,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startProcessingInstructionNodeStep(1803, &quot;+4ODfc@x@/;\fu!;9'V&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startProcessingInstructionNodeStep(1803, \&quot;+4ODfc@x@/;\fu!;9'V\&quot;)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startProcessingInstructionNodeStep(479, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startProcessingInstructionNodeStep(479, \&quot;\&quot;)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -141,10 +144,7 @@ org.saxpath.conformance.ConformanceXPathHandler
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
 <span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endNameStep();
-<span class="nocode"><a name="3">  3: </a></span>String string0 = conformanceXPathHandler0.toString();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;(0) endNameStep()\n&quot;, conformanceXPathHandler0.toString());
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;(0) endNameStep()\n&quot;, string0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endNameStep()\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -167,8 +167,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startNameStep(0, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startNameStep(0, \&quot;\&quot;, \&quot;\&quot;)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startNameStep(0, &quot;startProcessingInstructionNodeStep(&quot;, &quot;startProcessingInstructionNodeStep(&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startNameStep(0, \&quot;startProcessingInstructionNodeStep(\&quot;, \&quot;startProcessingInstructionNodeStep(\&quot;)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -179,14 +179,14 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 25</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endAdditiveExpr(1);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endAdditiveExpr(1)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endAdditiveExpr((-12));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endAdditiveExpr(-12)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endEqualityExpr(1577);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endEqualityExpr(1577)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endEqualityExpr((-1));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endEqualityExpr(-1)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 27</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -197,8 +197,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 28</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endRelationalExpr(0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endRelationalExpr(0)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.endRelationalExpr((-1550));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) endRelationalExpr(-1550)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 29</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -227,8 +227,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 33</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startFunction(&quot;+4ODfc@x@/;\fu!;9'V&quot;, &quot;+4ODfc@x@/;\fu!;9'V&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startFunction(\&quot;+4ODfc@x@/;\fu!;9'V:+4ODfc@x@/;\fu!;9'V\&quot;)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startFunction(&quot;&gt;W&quot;, &quot;,d}O#]\f* D+&amp;?p+&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startFunction(\&quot;&gt;W:,d}O#]\f* D+&amp;?p+\&quot;)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 34</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -251,8 +251,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 37</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.number((double) 853);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) number(853.0)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.number((-1.0));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) number(-1.0)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 38</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -275,8 +275,8 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 41</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startCommentNodeStep(1803);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startCommentNodeStep(1803)\n&quot;, conformanceXPathHandler0.toString());
+<span class="nocode"><a name="2">  2: </a></span>conformanceXPathHandler0.startCommentNodeStep(0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;(0) startCommentNodeStep(0)\n&quot;, conformanceXPathHandler0.toString());
 </pre>
 <h3>Test case 42</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -299,7 +299,7 @@ org.saxpath.conformance.ConformanceXPathHandler
 <h3>Test case 45</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConformanceXPathHandler conformanceXPathHandler0 = new ConformanceXPathHandler();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = conformanceXPathHandler0.equals((Object) &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = conformanceXPathHandler0.equals((Object) &quot;(0) startAbsoluteLocationPath()\n(1) endRelativeLocationPath()\n(2) startProcessingInstructionNodeStep(479, \&quot;\&quot;)\n(3) variableReference(\&quot;:\&quot;)\n(4) startPredicate()\n(5) startPredicate()\n(6) startXPath()\n(7) endAndExpr(true)\n&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 46</h3>
@@ -320,7 +320,7 @@ org.saxpath.conformance.ConformanceXPathHandler
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4399348071473267917.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6446833260403929533.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -338,7 +338,7 @@ org.saxpath.conformance.ConformanceXPathHandler
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21207
+<li>process_communication_port: 13847
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

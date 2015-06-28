@@ -16,16 +16,16 @@ public class JniInchiOutputEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutput.toString()Ljava/lang/String;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.getReturnStatus()Lnet/sf/jniinchi/INCHI_RET;: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "", "");
-      String string0 = jniInchiOutput0.toString();
-      assertEquals("InChI_Output: BUSY////", string0);
-      assertNotNull(string0);
+      INCHI_RET iNCHI_RET0 = INCHI_RET.ERROR;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "K&H", "K&H", "UNKNOWN", "UNKNOWN");
+      jniInchiOutput0.getReturnStatus();
+      assertEquals("InChI_Output: ERROR/K&H/K&H/UNKNOWN/UNKNOWN", jniInchiOutput0.toString());
+      assertEquals("K&H", jniInchiOutput0.getAuxInfo());
   }
 
   //Test case number: 1
@@ -36,9 +36,9 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
       String string0 = jniInchiOutput0.getMessage();
-      assertEquals("~V<Mr<eElH={~y7&-AD", string0);
+      assertEquals("S", string0);
   }
 
   //Test case number: 2
@@ -48,32 +48,36 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "&ZFtb", "&ZFtb", "&ZFtb", "&ZFtb");
       String string0 = jniInchiOutput0.getAuxInfo();
-      assertEquals("~V<Mr<eElH={~y7&-AD", string0);
+      assertEquals("&ZFtb", string0);
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.getLog()Ljava/lang/String;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.toString()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
-      String string0 = jniInchiOutput0.getLog();
-      assertEquals("~V<Mr<eElH={~y7&-AD", string0);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
+      String string0 = jniInchiOutput0.toString();
+      assertEquals("InChI_Output: null/S/S/S/S", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.getReturnStatus()Lnet/sf/jniinchi/INCHI_RET;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.getLog()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
-      jniInchiOutput0.getReturnStatus();
+      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "&ZFtb", "&ZFtb", "&ZFtb", "&ZFtb");
+      String string0 = jniInchiOutput0.getLog();
+      assertEquals("&ZFtb", string0);
   }
 
   //Test case number: 5
@@ -83,10 +87,10 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "", "");
-      jniInchiOutput0.setInchi((String) null);
-      assertEquals("InChI_Output: BUSY/null///", jniInchiOutput0.toString());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "&ZFtb", "&ZFtb", "&ZFtb", "&ZFtb");
+      jniInchiOutput0.setInchi("&ZFtb");
+      assertEquals(INCHI_RET.OKAY, jniInchiOutput0.getReturnStatus());
   }
 
   //Test case number: 6
@@ -96,8 +100,8 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
-      jniInchiOutput0.setLog("InChI_Output: ");
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
+      jniInchiOutput0.setLog("A|;8$8FrX\".yt_IEBM");
       assertNull(jniInchiOutput0.getReturnStatus());
   }
 
@@ -108,23 +112,22 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
-      jniInchiOutput0.setAuxInfo("InChI_Output: ");
-      assertNull(jniInchiOutput0.getReturnStatus());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
+      jniInchiOutput0.setAuxInfo("{*d?4Q- 9AYE");
+      assertEquals("{*d?4Q- 9AYE", jniInchiOutput0.getAuxInfo());
   }
 
   //Test case number: 8
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutput.setRetStatus(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.WARNING;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(81, "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD", "~V<Mr<eElH={~y7&-AD");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "&ZFtb", "&ZFtb", "&ZFtb", "&ZFtb");
       jniInchiOutput0.setRetStatus(iNCHI_RET0);
-      assertEquals("~V<Mr<eElH={~y7&-AD", jniInchiOutput0.getAuxInfo());
+      assertEquals("&ZFtb", jniInchiOutput0.getInchi());
   }
 
   //Test case number: 9
@@ -134,23 +137,22 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "", "");
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
       String string0 = jniInchiOutput0.getInchi();
-      assertEquals("", string0);
+      assertEquals("S", string0);
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutput.setMessage(Ljava/lang/String;)V: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "", "");
-      jniInchiOutput0.setMessage("K");
-      assertEquals("", jniInchiOutput0.getAuxInfo());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(83, "S", "S", "S", "S");
+      jniInchiOutput0.setMessage("SOJ<QY(.\"Uc*=n");
+      assertEquals("InChI_Output: null/S/S/SOJ<QY(.\"Uc*=n/S", jniInchiOutput0.toString());
   }
 }

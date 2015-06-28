@@ -34,9 +34,9 @@ public class SitePropertiesEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
-      siteProperties0.setClassName("");
-      assertEquals("\n\t\t\tserver=, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
+      siteProperties0.setClassName((String) null);
       assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
+      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
   }
 
   //Test case number: 2
@@ -47,8 +47,8 @@ public class SitePropertiesEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
-      siteProperties0.setGetterClass("");
-      assertEquals("\n\t\t\tserver=null, url=null getter=", siteProperties0.toString());
+      siteProperties0.setGetterClass((String) null);
+      assertNull(siteProperties0.getUrl());
   }
 
   //Test case number: 3
@@ -86,8 +86,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test5()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       String string0 = siteProperties0.toString();
-      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", string0);
       assertNotNull(string0);
+      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", string0);
   }
 
   //Test case number: 6
@@ -99,8 +99,8 @@ public class SitePropertiesEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
-      siteProperties0.setUrl("cU4A:@.wF51Ec# HUk");
+      siteProperties0.setUrl(" getter=");
+      assertEquals("\n\t\t\tserver=null, url= getter= getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
       assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
-      assertEquals("\n\t\t\tserver=null, url=cU4A:@.wF51Ec# HUk getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
   }
 }

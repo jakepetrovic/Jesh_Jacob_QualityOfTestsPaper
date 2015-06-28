@@ -22,88 +22,80 @@ org.jsecurity.codec.CodecSupport
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.codec.CodecSupport: 92.59%</ul><ul>
-<li>13230 fitness evaluations, 266 generations, 102689 statements, 8534 tests.
+<li>14950 fitness evaluations, 300 generations, 117094 statements, 9752 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 14/16 branches, 13/13 methods, 25/27 total goals
-<li>Mutation score: 29%
+<li>Mutation score: 24%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;^&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(md5Hash0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="5">  5: </a></span>String string0 = md5Hash0.toString(object0);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;&quot;, md5Hash0.toBase64());
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;&quot;, md5Hash0.toHex());
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5CredentialsMatcher md5CredentialsMatcher0 = new Md5CredentialsMatcher();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[3];
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;gI8&quot;, charArray0, true);
-<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="1">  1: </a></span>Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;UTF-8&quot;, charArray0);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, &quot;UTF-8&quot;);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  md5CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="7">  7: </a></span>  md2CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
 <span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="9">  9: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Argument for byte conversion cannot be null.
+<span class="nocode"><a name="11"> 11: </a></span>   * Odd number of characters.
 <span class="nocode"><a name="12"> 12: </a></span>   */
 <span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = CodecSupport.toBytes(charArray0, &quot;UTF-8&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(byteArray0);
+</pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[9];
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="2">  2: </a></span>Sha256Hash sha256Hash0 = null;
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  CodecSupport.toBytes(charArray0, &quot;x&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  sha256Hash0 = new Sha256Hash((Object) &quot;java.lang.Object@7ea325d&quot;, object0);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: CodecException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(CodecException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Unable to convert source [\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000] to byte array using encoding 'x'
+<span class="nocode"><a name="8">  8: </a></span>   * The org.jsecurity.crypto.hash.Sha256Hash implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.crypto.hash.Sha256Hash and override the objectToBytes(Object o) method.
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Object object0 = new Object();
-<span class="nocode"><a name="2">  2: </a></span>Md5Hash md5Hash0 = null;
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  md5Hash0 = new Md5Hash(object0);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: CodecException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(CodecException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * The org.jsecurity.crypto.hash.Md5Hash implementation only supports conversion to byte[] if the source is of type byte[], char[] or String.  The instance provided as a method argument is of type [java.lang.Object].  If you would like to convert this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String yourself and then use that as the method argument or 2) subclass org.jsecurity.crypto.hash.Md5Hash and override the objectToBytes(Object o) method.
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[2];
+<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[1];
 <span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = CodecSupport.toChars(byteArray0);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(charArray0);
 </pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash();
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>String string0 = md5Hash0.toString(object0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+</pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;&quot;, (Object) &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(sha384Hash0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>String string0 = sha384Hash0.toString((Object) &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b&quot;, sha384Hash0.toHex());
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb&quot;, sha384Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha512CredentialsMatcher sha512CredentialsMatcher0 = new Sha512CredentialsMatcher();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  sha512CredentialsMatcher0.toBytes((Object) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Argument for byte conversion cannot be null.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
+<span class="nocode"><a name="1">  1: </a></span>Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  sha384CredentialsMatcher0.toString((Object) null);
+<span class="nocode"><a name="4">  4: </a></span>  md2CredentialsMatcher0.toString((Object) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
@@ -113,10 +105,22 @@ org.jsecurity.codec.CodecSupport
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>byte[] byteArray0 = new byte[2];
-<span class="nocode"><a name="2">  2: </a></span>Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
-<span class="nocode"><a name="3">  3: </a></span>String string0 = md2CredentialsMatcher0.toString((Object) byteArray0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;\u0000\u0000&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;UTF-8&quot;, charArray0);
+<span class="nocode"><a name="3">  3: </a></span>Object object0 = usernamePasswordToken0.getCredentials();
+<span class="nocode"><a name="4">  4: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash(object0, object0, 1691);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(sha256Hash0);
+<span class="nocode"><a name="6">  6: </a></span>
+<span class="nocode"><a name="7">  7: </a></span>String string0 = sha256Hash0.toString(object0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;1qwFF6fhc3EjGxM74TGlExjyEKkwIo8jqd6bZWHDQfc=&quot;, sha256Hash0.toBase64());
+<span class="nocode"><a name="9">  9: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="10"> 10: </a></span>assertEquals(&quot;d6ac0517a7e17371231b133be131a51318f210a930228f23a9de9b6561c341f7&quot;, sha256Hash0.toHex());
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Md2CredentialsMatcher md2CredentialsMatcher0 = new Md2CredentialsMatcher();
+<span class="nocode"><a name="2">  2: </a></span>String string0 = md2CredentialsMatcher0.toString((Object) &quot;MD5&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;MD5&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -209,10 +213,10 @@ org.jsecurity.codec.CodecSupport
 <span class="nocode"><a name="88"> 88: </a></span>    public static byte[] toBytes(String source, String encoding) throws CodecException {
 <span class="nocode"><a name="89"> 89: </a></span>        try {
 <span class="nocode"><a name="90"> 90: </a></span><span style="background-color: #ffffcc">            return source.getBytes(encoding);</span>
-<span class="nocode"><a name="91"> 91: </a></span><span style="background-color: #ffffcc">        } catch (UnsupportedEncodingException e) {</span>
-<span class="nocode"><a name="92"> 92: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Unable to convert source [&quot; + source + &quot;] to byte array using &quot; +</span>
+<span class="nocode"><a name="91"> 91: </a></span>        } catch (UnsupportedEncodingException e) {
+<span class="nocode"><a name="92"> 92: </a></span>            String msg = &quot;Unable to convert source [&quot; + source + &quot;] to byte array using &quot; +
 <span class="nocode"><a name="93"> 93: </a></span>                    &quot;encoding '&quot; + encoding + &quot;'&quot;;
-<span class="nocode"><a name="94"> 94: </a></span><span style="background-color: #ffffcc">            throw new CodecException(msg, e);</span>
+<span class="nocode"><a name="94"> 94: </a></span>            throw new CodecException(msg, e);
 <span class="nocode"><a name="95"> 95: </a></span>        }
 <span class="nocode"><a name="96"> 96: </a></span>    }
 <span class="nocode"><a name="97"> 97: </a></span>
@@ -311,9 +315,9 @@ org.jsecurity.codec.CodecSupport
 <span class="nocode"><a name="190">190: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(msg);</span>
 <span class="nocode"><a name="191">191: </a></span>        }
 <span class="nocode"><a name="192">192: </a></span><span style="background-color: #ffffcc">        if (o instanceof byte[]) {</span>
-<span class="nocode"><a name="193">193: </a></span><span style="background-color: #ffffcc">            return toString((byte[]) o);</span>
+<span class="nocode"><a name="193">193: </a></span>            return toString((byte[]) o);
 <span class="nocode"><a name="194">194: </a></span><span style="background-color: #ffffcc">        } else if (o instanceof char[]) {</span>
-<span class="nocode"><a name="195">195: </a></span>            return new String((char[]) o);
+<span class="nocode"><a name="195">195: </a></span><span style="background-color: #ffffcc">            return new String((char[]) o);</span>
 <span class="nocode"><a name="196">196: </a></span><span style="background-color: #ffffcc">        } else if (o instanceof String) {</span>
 <span class="nocode"><a name="197">197: </a></span><span style="background-color: #ffffcc">            return (String) o;</span>
 <span class="nocode"><a name="198">198: </a></span>        } else {
@@ -354,7 +358,7 @@ org.jsecurity.codec.CodecSupport
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -372,7 +376,7 @@ org.jsecurity.codec.CodecSupport
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15702
+<li>process_communication_port: 21298
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

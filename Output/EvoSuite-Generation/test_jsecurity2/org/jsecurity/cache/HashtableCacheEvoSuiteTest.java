@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Set;
+import java.util.TreeSet;
 import org.jsecurity.cache.CacheException;
 import org.jsecurity.cache.HashtableCache;
 
@@ -47,9 +48,9 @@ public class HashtableCacheEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       HashtableCache hashtableCache0 = new HashtableCache("");
-      Object object0 = new Object();
-      Object object1 = hashtableCache0.get(object0);
-      assertNull(object1);
+      TreeSet<Integer> treeSet0 = new TreeSet<Integer>();
+      Object object0 = hashtableCache0.get((Object) treeSet0);
+      assertNull(object0);
   }
 
   //Test case number: 3
@@ -60,9 +61,8 @@ public class HashtableCacheEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       HashtableCache hashtableCache0 = new HashtableCache("");
-      Object object0 = new Object();
-      hashtableCache0.remove(object0);
-      assertEquals(0, hashtableCache0.size());
+      hashtableCache0.remove((Object) "");
+      assertEquals("HashtableCache []", hashtableCache0.toString());
   }
 
   //Test case number: 4
@@ -74,8 +74,8 @@ public class HashtableCacheEvoSuiteTest {
   public void test4()  throws Throwable  {
       HashtableCache hashtableCache0 = new HashtableCache("");
       String string0 = hashtableCache0.toString();
-      assertEquals("HashtableCache []", string0);
       assertNotNull(string0);
+      assertEquals("HashtableCache []", string0);
   }
 
   //Test case number: 5
@@ -87,11 +87,9 @@ public class HashtableCacheEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       HashtableCache hashtableCache0 = new HashtableCache("");
-      Object object0 = new Object();
-      hashtableCache0.put(object0, object0);
-      Set<Object> set0 = hashtableCache0.keys();
+      hashtableCache0.put((Object) "HashtableCache []", (Object) "HashtableCache []");
+      hashtableCache0.keys();
       assertEquals(1, hashtableCache0.size());
-      assertEquals(false, set0.isEmpty());
   }
 
   //Test case number: 6
@@ -129,9 +127,9 @@ public class HashtableCacheEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       HashtableCache hashtableCache0 = new HashtableCache("");
-      Object object0 = new Object();
-      hashtableCache0.put(object0, object0);
-      hashtableCache0.values();
+      hashtableCache0.put((Object) "HashtableCache []", (Object) "HashtableCache []");
+      Set<Object> set0 = hashtableCache0.values();
       assertEquals(1, hashtableCache0.size());
+      assertEquals(false, set0.isEmpty());
   }
 }

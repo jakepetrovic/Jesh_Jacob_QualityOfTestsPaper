@@ -7,8 +7,16 @@ package org.jsecurity.authc.credential;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.Set;
+import org.jsecurity.authc.AuthenticationInfo;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.SimpleAccount;
+import org.jsecurity.authc.SimpleAuthenticationInfo;
+import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.credential.Sha384CredentialsMatcher;
 import org.jsecurity.crypto.hash.Sha384Hash;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class Sha384CredentialsMatcherEvoSuiteTest {
 
@@ -35,13 +43,17 @@ public class Sha384CredentialsMatcherEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Sha384CredentialsMatcher sha384CredentialsMatcher0 = new Sha384CredentialsMatcher();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("\uFFFD\u0000", "\uFFFD\u0000", false);
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "\uFFFD\u0000", (Object) "UTF-8", "\uFFFD\u0000");
+      SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
+      SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) "org.jsecurity.authc.UsernamePasswordToken - \uFFFD\u0000, rememberMe=false", (Set<String>) null);
       // Undeclared exception!
       try {
-        sha384CredentialsMatcher0.hashProvidedCredentials((Object) null, (Object) null, 10);
+        sha384CredentialsMatcher0.doCredentialsMatch((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * Argument for byte conversion cannot be null.
+         * Illegal hexadecimal charcter o at index 0
          */
       }
   }

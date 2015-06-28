@@ -16,11 +16,11 @@ public class JavaEnvironmentEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 org.jsecurity.util.JavaEnvironment.getMajorVersion()I: root-Branch
-   * 2 org.jsecurity.util.JavaEnvironment.isAtLeastVersion15()Z: I4 Branch 2 IF_ICMPLT L149 - false
+   * 2 org.jsecurity.util.JavaEnvironment.isAtLeastVersion14()Z: I4 Branch 1 IF_ICMPLT L135 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      boolean boolean0 = JavaEnvironment.isAtLeastVersion15();
+      boolean boolean0 = JavaEnvironment.isAtLeastVersion14();
       assertEquals(true, boolean0);
   }
 
@@ -32,18 +32,18 @@ public class JavaEnvironmentEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       String string0 = JavaEnvironment.getVersion();
-      assertEquals("1.7.0_51", string0);
+      assertEquals("1.7.0_79", string0);
   }
 
   //Test case number: 2
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.util.JavaEnvironment.isAtLeastVersion14()Z: I4 Branch 1 IF_ICMPLT L135 - false
+   * 1 org.jsecurity.util.JavaEnvironment.isAtLeastVersion15()Z: I4 Branch 2 IF_ICMPLT L149 - false
    * 2 org.jsecurity.util.JavaEnvironment.getMajorVersion()I: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      boolean boolean0 = JavaEnvironment.isAtLeastVersion14();
+      boolean boolean0 = JavaEnvironment.isAtLeastVersion15();
       assertEquals(true, boolean0);
   }
 }

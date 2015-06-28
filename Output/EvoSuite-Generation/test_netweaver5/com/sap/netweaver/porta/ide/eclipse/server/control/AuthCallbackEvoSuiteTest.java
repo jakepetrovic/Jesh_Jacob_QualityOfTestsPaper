@@ -27,7 +27,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, (String) null);
+      AuthCallback authCallback0 = new AuthCallback(false, "#;6AP6;L");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {
@@ -48,7 +48,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "Authorization required");
+      AuthCallback authCallback0 = new AuthCallback(false, "%");
       AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
       // Undeclared exception!
       try {
@@ -94,7 +94,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "");
+      AuthCallback authCallback0 = new AuthCallback(true, "INVALID_CREDE8RZNTA-");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {

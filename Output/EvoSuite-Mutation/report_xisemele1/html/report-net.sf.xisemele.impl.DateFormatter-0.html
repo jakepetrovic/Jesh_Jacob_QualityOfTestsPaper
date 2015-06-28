@@ -22,8 +22,8 @@ net.sf.xisemele.impl.DateFormatter
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.DateFormatter: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 597 statements, 248 tests.
-<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 795 statements, 293 tests.
+<li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 4/4 methods, 4/4 total goals
 <li>Mutation score: 50%
 </ul>
@@ -33,27 +33,25 @@ net.sf.xisemele.impl.DateFormatter
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>Class&lt;Date&gt; class0 = dateFormatter0.type();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, class0.isArray());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, class0.isAnonymousClass());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;msS&quot;);
+<span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  dateFormatter0.parse(&quot;msS&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: FormatterException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(FormatterException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * N\u00E3o foi poss\u00EDvel criar uma inst\u00E2ncia de \&quot;java.util.Date\&quot; para o valor \&quot;msS\&quot;
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  dateFormatter0.parse((String) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateFormatter dateFormatter0 = new DateFormatter(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date((-102L));
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = new Date();
 <span class="nocode"><a name="3">  3: </a></span>String string0 = dateFormatter0.format(date0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1433850828726L, date0.getTime());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.xisemele.impl;
@@ -106,8 +104,8 @@ net.sf.xisemele.impl.DateFormatter
 <span class="nocode"><a name="48"> 48: </a></span>   public Date parse(String text) {
 <span class="nocode"><a name="49"> 49: </a></span>      try {
 <span class="nocode"><a name="50"> 50: </a></span><span style="background-color: #ffffcc">         return sdf.parse(text);</span>
-<span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">      } catch (ParseException e) {</span>
-<span class="nocode"><a name="52"> 52: </a></span><span style="background-color: #ffffcc">         throw new FormatterException(Date.class, text, e);</span>
+<span class="nocode"><a name="51"> 51: </a></span>      } catch (ParseException e) {
+<span class="nocode"><a name="52"> 52: </a></span>         throw new FormatterException(Date.class, text, e);
 <span class="nocode"><a name="53"> 53: </a></span>      }
 <span class="nocode"><a name="54"> 54: </a></span>   }
 <span class="nocode"><a name="55"> 55: </a></span>
@@ -122,7 +120,7 @@ net.sf.xisemele.impl.DateFormatter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5217558598097753761.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7563696726542208450.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -140,7 +138,7 @@ net.sf.xisemele.impl.DateFormatter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 5101
+<li>process_communication_port: 5607
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

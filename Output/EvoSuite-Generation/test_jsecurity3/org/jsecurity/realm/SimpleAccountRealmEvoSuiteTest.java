@@ -7,11 +7,16 @@ package org.jsecurity.realm;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import org.jsecurity.authz.Permission;
-import org.jsecurity.cache.CacheManager;
-import org.jsecurity.cache.HashtableCacheManager;
+import org.jsecurity.authc.AuthenticationException;
+import org.jsecurity.authc.AuthenticationToken;
+import org.jsecurity.authc.UsernamePasswordToken;
+import org.jsecurity.authz.SimpleAuthorizingAccount;
+import org.jsecurity.cache.Cache;
+import org.jsecurity.cache.HashtableCache;
 import org.jsecurity.realm.SimpleAccountRealm;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
@@ -21,149 +26,125 @@ public class SimpleAccountRealmEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
-   * 2 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.realm.SimpleAccountRealm.<init>(Ljava/lang/String;)V: root-Branch
+   * 7 covered goals:
+   * 1 org.jsecurity.realm.SimpleAccountRealm.roleExists(Ljava/lang/String;)Z: I5 Branch 3 IFNULL L108 - true
+   * 2 org.jsecurity.realm.SimpleAccountRealm.afterRoleCacheSet()V: root-Branch
+   * 3 org.jsecurity.realm.SimpleAccountRealm.afterAuthorizationCacheSet()V: root-Branch
+   * 4 org.jsecurity.realm.SimpleAccountRealm.getRole(Ljava/lang/String;)Lorg/jsecurity/authz/SimpleRole;: root-Branch
+   * 5 org.jsecurity.realm.SimpleAccountRealm.<init>(Ljava/lang/String;)V: root-Branch
+   * 6 org.jsecurity.realm.SimpleAccountRealm.accountAndRoleCachesCreated()V: root-Branch
+   * 7 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
-      // Undeclared exception!
-      try {
-        simpleAccountRealm0.addAccount((String) null, "");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * principal argument cannot be null.
-         */
-      }
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("7b0u4-gaKaUAhqS");
+      simpleAccountRealm0.afterAuthorizationCacheSet();
+      boolean boolean0 = simpleAccountRealm0.roleExists(" is ");
+      assertEquals("7b0u4-gaKaUAhqS", simpleAccountRealm0.getName());
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 1
   /*
-   * 7 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.accountExists(Ljava/lang/String;)Z: I5 Branch 2 IFNULL L85 - true
-   * 2 org.jsecurity.realm.SimpleAccountRealm.afterRoleCacheSet()V: root-Branch
-   * 3 org.jsecurity.realm.SimpleAccountRealm.afterAuthorizationCacheSet()V: root-Branch
-   * 4 org.jsecurity.realm.SimpleAccountRealm.<init>()V: root-Branch
-   * 5 org.jsecurity.realm.SimpleAccountRealm.getUser(Ljava/lang/String;)Lorg/jsecurity/authc/SimpleAccount;: root-Branch
-   * 6 org.jsecurity.realm.SimpleAccountRealm.accountAndRoleCachesCreated()V: root-Branch
-   * 7 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - true
+   * 3 covered goals:
+   * 1 org.jsecurity.realm.SimpleAccountRealm.doGetAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: root-Branch
+   * 2 org.jsecurity.realm.SimpleAccountRealm.<init>()V: root-Branch
+   * 3 org.jsecurity.realm.SimpleAccountRealm.getAuthorizationCacheKey(Lorg/jsecurity/subject/PrincipalCollection;)Ljava/lang/Object;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-      boolean boolean0 = simpleAccountRealm0.accountExists("Class '");
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm-0-authorization", simpleAccountRealm0.getAuthorizationCacheName());
-      assertEquals(false, boolean0);
-  }
-
-  //Test case number: 2
-  /*
-   * 2 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.doGetAuthorizationInfo(Lorg/jsecurity/subject/PrincipalCollection;)Lorg/jsecurity/authz/AuthorizationInfo;: root-Branch
-   * 2 org.jsecurity.realm.SimpleAccountRealm.getAuthorizationCacheKey(Lorg/jsecurity/subject/PrincipalCollection;)Ljava/lang/Object;: root-Branch
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      LinkedList<String> linkedList0 = new LinkedList<String>();
       // Undeclared exception!
       try {
-        simpleAccountRealm0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (Permission) null);
+        simpleAccountRealm0.hasRoles((PrincipalCollection) simplePrincipalCollection0, (List<String>) linkedList0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
   }
 
-  //Test case number: 3
+  //Test case number: 2
   /*
    * 3 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.roleExists(Ljava/lang/String;)Z: I5 Branch 3 IFNULL L108 - true
-   * 2 org.jsecurity.realm.SimpleAccountRealm.getRole(Ljava/lang/String;)Lorg/jsecurity/authz/SimpleRole;: root-Branch
-   * 3 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - false
+   * 1 org.jsecurity.realm.SimpleAccountRealm.accountExists(Ljava/lang/String;)Z: I5 Branch 2 IFNULL L85 - true
+   * 2 org.jsecurity.realm.SimpleAccountRealm.getUser(Ljava/lang/String;)Lorg/jsecurity/authc/SimpleAccount;: root-Branch
+   * 3 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("7b0u4-gaKaUAhqS");
+      HashtableCache hashtableCache0 = new HashtableCache(" implement# LogFactory but'was loaded by an incompatible classloader.");
+      simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
+      boolean boolean0 = simpleAccountRealm0.accountExists("HashtableCache [ implement# LogFactory but'was loaded by an incompatible classloader.]");
+      assertEquals("7b0u4-gaKaUAhqS", simpleAccountRealm0.getName());
+      assertEquals(false, boolean0);
+  }
+
+  //Test case number: 3
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.realm.SimpleAccountRealm.accountExists(Ljava/lang/String;)Z: I5 Branch 2 IFNULL L85 - false
+   * 2 org.jsecurity.realm.SimpleAccountRealm.getUser(Ljava/lang/String;)Lorg/jsecurity/authc/SimpleAccount;: root-Branch
+   * 3 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 4 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V: root-Branch
+   * 5 org.jsecurity.realm.SimpleAccountRealm.add(Lorg/jsecurity/authc/SimpleAccount;)V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      simpleAccountRealm0.afterAuthorizationCacheSet();
-      boolean boolean0 = simpleAccountRealm0.roleExists("r9d/$,2Z%pqka2");
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_30", simpleAccountRealm0.getName());
-      assertEquals(false, boolean0);
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("7b0u4-gaKaUAhqS");
+      HashtableCache hashtableCache0 = new HashtableCache(" implement# LogFactory but'was loaded by an incompatible classloader.");
+      simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
+      simpleAccountRealm0.addAccount(" is ", " is ");
+      boolean boolean0 = simpleAccountRealm0.accountExists(" is ");
+      assertEquals(true, boolean0);
+      assertEquals("7b0u4-gaKaUAhqS", simpleAccountRealm0.getName());
   }
 
   //Test case number: 4
   /*
    * 6 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.accountExists(Ljava/lang/String;)Z: I5 Branch 2 IFNULL L85 - false
-   * 2 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.realm.SimpleAccountRealm.getUser(Ljava/lang/String;)Lorg/jsecurity/authc/SimpleAccount;: root-Branch
-   * 4 org.jsecurity.realm.SimpleAccountRealm.add(Lorg/jsecurity/authc/SimpleAccount;)V: root-Branch
-   * 5 org.jsecurity.realm.SimpleAccountRealm.getAuthorizationCacheKey(Lorg/jsecurity/subject/PrincipalCollection;)Ljava/lang/Object;: root-Branch
-   * 6 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - true
+   * 1 org.jsecurity.realm.SimpleAccountRealm.roleExists(Ljava/lang/String;)Z: I5 Branch 3 IFNULL L108 - false
+   * 2 org.jsecurity.realm.SimpleAccountRealm.add(Lorg/jsecurity/authz/SimpleRole;)V: root-Branch
+   * 3 org.jsecurity.realm.SimpleAccountRealm.getRole(Ljava/lang/String;)Lorg/jsecurity/authz/SimpleRole;: root-Branch
+   * 4 org.jsecurity.realm.SimpleAccountRealm.<init>()V: root-Branch
+   * 5 org.jsecurity.realm.SimpleAccountRealm.addRole(Ljava/lang/String;)V: root-Branch
+   * 6 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - false
    */
   @Test
   public void test4()  throws Throwable  {
       SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      String[] stringArray0 = new String[9];
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-      simpleAccountRealm0.addAccount("", "", stringArray0);
-      boolean boolean0 = simpleAccountRealm0.accountExists("");
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm-12-authorization", simpleAccountRealm0.getAuthorizationCacheName());
+      simpleAccountRealm0.afterAuthorizationCacheSet();
+      simpleAccountRealm0.addRole(" overrides file at '");
+      boolean boolean0 = simpleAccountRealm0.roleExists(" overrides file at '");
+      assertEquals("org.jsecurity.realm.SimpleAccountRealm_64", simpleAccountRealm0.getName());
       assertEquals(true, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 9 covered goals:
-   * 1 org.jsecurity.realm.SimpleAccountRealm.roleExists(Ljava/lang/String;)Z: I5 Branch 3 IFNULL L108 - false
-   * 2 org.jsecurity.realm.SimpleAccountRealm.afterRoleCacheSet()V: root-Branch
-   * 3 org.jsecurity.realm.SimpleAccountRealm.add(Lorg/jsecurity/authz/SimpleRole;)V: root-Branch
-   * 4 org.jsecurity.realm.SimpleAccountRealm.afterAuthorizationCacheSet()V: root-Branch
-   * 5 org.jsecurity.realm.SimpleAccountRealm.getRole(Ljava/lang/String;)Lorg/jsecurity/authz/SimpleRole;: root-Branch
-   * 6 org.jsecurity.realm.SimpleAccountRealm.<init>()V: root-Branch
-   * 7 org.jsecurity.realm.SimpleAccountRealm.addRole(Ljava/lang/String;)V: root-Branch
-   * 8 org.jsecurity.realm.SimpleAccountRealm.accountAndRoleCachesCreated()V: root-Branch
-   * 9 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - false
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-      simpleAccountRealm0.afterAuthorizationCacheSet();
-      simpleAccountRealm0.addRole("r9d/$,2Z%pqka2");
-      boolean boolean0 = simpleAccountRealm0.roleExists("r9d/$,2Z%pqka2");
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm_68", simpleAccountRealm0.getName());
-      assertEquals(true, boolean0);
-  }
-
-  //Test case number: 6
-  /*
    * 1 covered goal:
    * 1 org.jsecurity.realm.SimpleAccountRealm.toSet(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;: I3 Branch 4 IFNULL L120 - true
    */
   @Test
-  public void test6()  throws Throwable  {
+  public void test5()  throws Throwable  {
       Set<String> set0 = SimpleAccountRealm.toSet((String) null, (String) null);
       assertNull(set0);
   }
 
-  //Test case number: 7
+  //Test case number: 6
   /*
    * 2 covered goals:
    * 1 org.jsecurity.realm.SimpleAccountRealm.toSet(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;: I3 Branch 4 IFNULL L120 - false
    * 2 org.jsecurity.realm.SimpleAccountRealm.toSet(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;: I8 Branch 5 IFLE L120 - false
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test6()  throws Throwable  {
       Set<String> set0 = SimpleAccountRealm.toSet("", "");
       assertNull(set0);
   }
 
-  //Test case number: 8
+  //Test case number: 7
   /*
    * 6 covered goals:
    * 1 org.jsecurity.realm.SimpleAccountRealm.toSet(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;: I8 Branch 5 IFLE L120 - true
@@ -174,9 +155,36 @@ public class SimpleAccountRealmEvoSuiteTest {
    * 6 org.jsecurity.realm.SimpleAccountRealm.toSet(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Set;: I3 Branch 4 IFNULL L120 - false
    */
   @Test
-  public void test8()  throws Throwable  {
-      Set<String> set0 = SimpleAccountRealm.toSet("H{l!GoRY", "JS*5, Nz#j TjA0e*A|");
-      assertEquals(9, set0.size());
+  public void test7()  throws Throwable  {
+      Set<String> set0 = SimpleAccountRealm.toSet("|t", "|t");
       assertNotNull(set0);
+      assertEquals(2, set0.size());
+  }
+
+  //Test case number: 8
+  /*
+   * 11 covered goals:
+   * 1 org.jsecurity.realm.SimpleAccountRealm.doGetAuthenticationInfo(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I18 Branch 8 IFEQ L143 - true
+   * 2 org.jsecurity.realm.SimpleAccountRealm.doGetAuthenticationInfo(Lorg/jsecurity/authc/AuthenticationToken;)Lorg/jsecurity/authc/AuthenticationInfo;: I39 Branch 9 IFEQ L146 - true
+   * 3 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 4 org.jsecurity.realm.SimpleAccountRealm.afterRoleCacheSet()V: root-Branch
+   * 5 org.jsecurity.realm.SimpleAccountRealm.addAccount(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V: root-Branch
+   * 6 org.jsecurity.realm.SimpleAccountRealm.afterAuthorizationCacheSet()V: root-Branch
+   * 7 org.jsecurity.realm.SimpleAccountRealm.<init>(Ljava/lang/String;)V: root-Branch
+   * 8 org.jsecurity.realm.SimpleAccountRealm.add(Lorg/jsecurity/authc/SimpleAccount;)V: root-Branch
+   * 9 org.jsecurity.realm.SimpleAccountRealm.getAuthorizationCacheKey(Lorg/jsecurity/subject/PrincipalCollection;)Ljava/lang/Object;: root-Branch
+   * 10 org.jsecurity.realm.SimpleAccountRealm.accountAndRoleCachesCreated()V: root-Branch
+   * 11 org.jsecurity.realm.SimpleAccountRealm.initRoleCache()V: I4 Branch 1 IFNONNULL L72 - true
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("7b0u4-gaKaUAhqS");
+      HashtableCache hashtableCache0 = new HashtableCache(" implement# LogFactory but'was loaded by an incompatible classloader.");
+      simpleAccountRealm0.setAuthorizationCache((Cache) hashtableCache0);
+      simpleAccountRealm0.addAccount(" is ", " is ");
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(" is ", " is ", false);
+      SimpleAuthorizingAccount simpleAuthorizingAccount0 = (SimpleAuthorizingAccount)simpleAccountRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+      assertNotNull(simpleAuthorizingAccount0);
+      assertEquals("7b0u4-gaKaUAhqS", simpleAccountRealm0.getName());
   }
 }

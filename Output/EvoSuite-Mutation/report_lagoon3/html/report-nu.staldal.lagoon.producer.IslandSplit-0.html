@@ -22,8 +22,8 @@ nu.staldal.lagoon.producer.IslandSplit
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.producer.IslandSplit: 48.39%</ul><ul>
-<li>11600 fitness evaluations, 233 generations, 46345 statements, 7395 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>10066 fitness evaluations, 203 generations, 33978 statements, 6511 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 4/20 branches, 13/15 methods, 15/31 total goals
 <li>Mutation score: 0%
 </ul>
@@ -32,10 +32,10 @@ nu.staldal.lagoon.producer.IslandSplit
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[6];
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.characters(charArray0, (-623), 0);
+<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.characters(charArray0, (int) '#', (int) '\u0000');
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -45,7 +45,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.skippedEntity(&quot;B |&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.skippedEntity(&quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -63,7 +63,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
-<span class="nocode"><a name="2">  2: </a></span>islandSplit0.endPrefixMapping(&quot;user.home&quot;);
+<span class="nocode"><a name="2">  2: </a></span>islandSplit0.endPrefixMapping(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(islandSplit0.getEntryName());
 </pre>
 <h3>Test case 5</h3>
@@ -71,7 +71,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.processingInstruction(&quot;$gs/OSR\&quot;g&quot;, &quot;$gs/OSR\&quot;g&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.processingInstruction(&quot;&quot;, &quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -79,10 +79,10 @@ nu.staldal.lagoon.producer.IslandSplit
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.ignorableWhitespace(charArray0, (int) '\u0000', (int) 'i');
+<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.ignorableWhitespace(charArray0, (int) '\u0000', (int) '\u0000');
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -92,7 +92,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.startPrefixMapping(&quot;H}&lt;!H+'Q}K1`&quot;, &quot;H}&lt;!H+'Q}K1`&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.startPrefixMapping(&quot;o/$A;8*|HE~E&quot;, &quot;o/$A;8*|HE~E&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -102,7 +102,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.hasBeenUpdated(828L);
+<span class="nocode"><a name="4">  4: </a></span>  islandSplit0.hasBeenUpdated(0L);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -120,10 +120,10 @@ nu.staldal.lagoon.producer.IslandSplit
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
-<span class="nocode"><a name="2">  2: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
+<span class="nocode"><a name="2">  2: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.setDocumentLocator((Locator) locatorImpl0);
+<span class="nocode"><a name="5">  5: </a></span>  islandSplit0.setDocumentLocator((Locator) locator2Impl0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -135,7 +135,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <span class="nocode"><a name="3">  3: </a></span>islandSplit0.init();
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  islandSplit0.startElement(&quot;a0R4P}&quot;, &quot;a0R4P}&quot;, &quot;a0R4P}&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>  islandSplit0.startElement(&quot;(&quot;, &quot;(&quot;, &quot;(&quot;, (Attributes) attributes2Impl0);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="9">  9: </a></span>}
@@ -395,7 +395,7 @@ nu.staldal.lagoon.producer.IslandSplit
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -413,7 +413,7 @@ nu.staldal.lagoon.producer.IslandSplit
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3636
+<li>process_communication_port: 18642
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

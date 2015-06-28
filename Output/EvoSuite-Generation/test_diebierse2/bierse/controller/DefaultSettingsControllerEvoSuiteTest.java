@@ -28,8 +28,8 @@ public class DefaultSettingsControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultSettingsController defaultSettingsController0 = new DefaultSettingsController((Model) null, (ISettingsView) null, (IDrinkSettingsView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "LOWER_LEFT_CORNER", 1821, "LOWER_LEFT_CORNER", (long) 1821, 1821);
+      ActionEvent actionEvent0 = new ActionEvent((Object) "SORT_ORDER_CHANGED", (-1611), "SORT_ORDER_CHANGED", 0);
       defaultSettingsController0.actionPerformed(actionEvent0);
-      assertEquals("unknown type,cmd=LOWER_LEFT_CORNER,when=1821,modifiers=Meta+Alt+Shift+Button1", actionEvent0.paramString());
+      assertEquals(0, actionEvent0.getModifiers());
   }
 }

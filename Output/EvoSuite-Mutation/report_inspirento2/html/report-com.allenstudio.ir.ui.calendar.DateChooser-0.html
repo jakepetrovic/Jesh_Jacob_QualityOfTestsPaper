@@ -22,9 +22,9 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.calendar.DateChooser: 64.00%</ul><ul>
-<li>720 fitness evaluations, 16 generations, 8219 statements, 698 tests.
+<li>566 fitness evaluations, 13 generations, 6342 statements, 673 tests.
 <li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
-<li>Coverage: 5/8 branches, 14/21 methods, 16/25 total goals
+<li>Coverage: 4/8 branches, 14/21 methods, 16/25 total goals
 <li>Mutation score: 26%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,7 +33,7 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
 <span class="nocode"><a name="2">  2: </a></span>dateChooser0.addDateChooserListener((DateChooserListener) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(2, dateChooser0.getComponentCount());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, dateChooser0.getFocusTraversalKeysEnabled());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -44,15 +44,14 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>dateChooser0.monthChanged();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, dateChooser0.isForegroundSet());
+<span class="nocode"><a name="2">  2: </a></span>dateChooser0.removeDateChooserListener();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, dateChooser0.isPreferredSizeSet());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DateChooser dateChooser0 = new DateChooser();
-<span class="nocode"><a name="2">  2: </a></span>GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-1), (-1), (-1), (-1), 1819);
-<span class="nocode"><a name="3">  3: </a></span>dateChooser0.fireDateChanged((Object) &quot;DialogInput&quot;, (Calendar) gregorianCalendar0, (Calendar) gregorianCalendar0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(dateChooser0.getToolTipText());
+<span class="nocode"><a name="2">  2: </a></span>dateChooser0.monthChanged();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, dateChooser0.requestFocusInWindow());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -228,10 +227,10 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <span class="nocode"><a name="171">171: </a></span>    
 <span class="nocode"><a name="172">172: </a></span>    protected void fireDateChanged(Object source, Calendar oldValue,
 <span class="nocode"><a name="173">173: </a></span>            Calendar newValue) {
-<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">        if (listener != null) {</span>
+<span class="nocode"><a name="174">174: </a></span>        if (listener != null) {
 <span class="nocode"><a name="175">175: </a></span>            listener.dateChanged(new DateChooserEvent(source, oldValue, newValue));
 <span class="nocode"><a name="176">176: </a></span>        }
-<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="177">177: </a></span>    }
 <span class="nocode"><a name="178">178: </a></span>    
 <span class="nocode"><a name="179">179: </a></span>    /**
 <span class="nocode"><a name="180">180: </a></span>     * Updates the &lt;code&gt;current&lt;/code&gt; variable
@@ -276,8 +275,8 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <span class="nocode"><a name="219">219: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="220">220: </a></span>    
 <span class="nocode"><a name="221">221: </a></span>    public void removeDateChooserListener() {
-<span class="nocode"><a name="222">222: </a></span>        this.listener = null;
-<span class="nocode"><a name="223">223: </a></span>    }
+<span class="nocode"><a name="222">222: </a></span><span style="background-color: #ffffcc">        this.listener = null;</span>
+<span class="nocode"><a name="223">223: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="224">224: </a></span>
 <span class="nocode"><a name="225">225: </a></span>    public Calendar getCurrent() {
 <span class="nocode"><a name="226">226: </a></span><span style="background-color: #ffffcc">        return current;</span>
@@ -287,7 +286,7 @@ com.allenstudio.ir.ui.calendar.DateChooser
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree6057856422558169358.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2467805706289619364.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -305,7 +304,7 @@ com.allenstudio.ir.ui.calendar.DateChooser
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14626
+<li>process_communication_port: 12799
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

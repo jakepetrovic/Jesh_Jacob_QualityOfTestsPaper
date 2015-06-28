@@ -13,7 +13,6 @@ import nu.staldal.lagoon.core.Target;
 import nu.staldal.lagoon.producer.XSLTransformer;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.XMLFilterImpl;
 
 public class XSLTransformerEvoSuiteTest {
 
@@ -58,7 +57,7 @@ public class XSLTransformerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       XSLTransformer xSLTransformer0 = new XSLTransformer();
-      boolean boolean0 = xSLTransformer0.hasBeenUpdated(1922L);
+      boolean boolean0 = xSLTransformer0.hasBeenUpdated((-268L));
       assertEquals(true, boolean0);
   }
 
@@ -71,10 +70,9 @@ public class XSLTransformerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       XSLTransformer xSLTransformer0 = new XSLTransformer();
-      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
       // Undeclared exception!
       try {
-        xSLTransformer0.start((ContentHandler) xMLFilterImpl0, (Target) null);
+        xSLTransformer0.start((ContentHandler) null, (Target) null);
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*

@@ -21,10 +21,10 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.authc.pam.ModularRealmAuthenticator: 84.21%</ul><ul>
-<li>13882 fitness evaluations, 279 generations, 98699 statements, 8917 tests.
+<ul><li>Target class: org.jsecurity.authc.pam.ModularRealmAuthenticator: 81.58%</ul><ul>
+<li>16330 fitness evaluations, 328 generations, 97640 statements, 10516 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 24/30 branches, 13/13 methods, 32/38 total goals
+<li>Coverage: 23/30 branches, 13/13 methods, 31/38 total goals
 <li>Mutation score: 40%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,40 +33,11 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="5">  5: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="6">  6: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
-<span class="nocode"><a name="8">  8: </a></span>try {
-<span class="nocode"><a name="9">  9: </a></span>  modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="11"> 11: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.setRealm((Realm) null);
-<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;|F&quot;);
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[3];
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;|F&quot;, charArray0);
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthenticator0.authenticate((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(AuthenticationException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - |F, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
-</pre>
-<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -78,86 +49,91 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) linkedList0);
-<span class="nocode"><a name="5">  5: </a></span>linkedList0.removeFirst();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) linkedList0);
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  modularRealmAuthenticator0.assertRealmsConfigured();
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authentication attempt.
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;_$YT\&quot;?G-&amp;G--Q[&quot;, &quot;_$YT\&quot;?G-&amp;G--Q[&quot;, false, (InetAddress) inet4Address0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthenticator0.assertRealmsConfigured();
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(IllegalStateException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Configuration error:  No realms have been configured!  One or more realms must be present to execute an authentication attempt.
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
+<span class="nocode"><a name="7">  7: </a></span>  modularRealmAuthenticator0.doAuthenticate((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&amp;$6LAEq&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthenticator0.doSingleRealmAuthentication((Realm) simpleAccountRealm0, (AuthenticationToken) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: UnsupportedTokenException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(UnsupportedTokenException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@2c7c04e0] does not support authentication token [null].  Please ensure that the appropriate Realm implementation is configured correctly or that the realm accepts AuthenticationTokens of this type.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) null);
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[15];
-<span class="nocode"><a name="4">  4: </a></span>Class&lt;?&gt; class0 = List.class;
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.setAuthenticationTokenClass(class0);
-<span class="nocode"><a name="6">  6: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;6% 9_lBPpcxv$J}~^W&quot;, charArray0);
-<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
-<span class="nocode"><a name="8">  8: </a></span>try {
-<span class="nocode"><a name="9">  9: </a></span>  modularRealmAuthenticator0.doSingleRealmAuthentication((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: UnsupportedTokenException&quot;);
-<span class="nocode"><a name="11"> 11: </a></span>} catch(UnsupportedTokenException e) {
-<span class="nocode"><a name="12"> 12: </a></span>  /*
-<span class="nocode"><a name="13"> 13: </a></span>   * Realm [org.jsecurity.realm.SimpleAccountRealm@48093ee5] does not support authentication token [org.jsecurity.authc.UsernamePasswordToken - 6% 9_lBPpcxv$J}~^W, rememberMe=false].  Please ensure that the appropriate Realm implementation is configured correctly or that the realm accepts AuthenticationTokens of this type.
-<span class="nocode"><a name="14"> 14: </a></span>   */
-<span class="nocode"><a name="15"> 15: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  modularRealmAuthenticator0.doMultiRealmAuthentication((Collection&lt;Realm&gt;) hashSet0, (AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(AuthenticationException e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * Unable to acquire account data from realm [org.jsecurity.realm.SimpleAccountRealm@46034d20].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy implementation requires all configured realm(s) to operate successfully for a successful authentication.
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;]&quot;, &quot;]&quot;);
-<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  modularRealmAuthenticator0.doMultiRealmAuthentication((Collection&lt;Realm&gt;) linkedList0, (AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(AuthenticationException e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * Unable to acquire account data from realm [org.jsecurity.realm.SimpleAccountRealm@17d89926].  The [org.jsecurity.authc.pam.AllSuccessfulModularAuthenticationStrategy implementation requires all configured realm(s) to operate successfully for a successful authentication.
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Realm&gt; hashSet0 = new HashSet&lt;Realm&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="5">  5: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)modularRealmAuthenticator0.doMultiRealmAuthentication((Collection&lt;Realm&gt;) hashSet0, (AuthenticationToken) null);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAuthenticationInfo0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;:/w:F&quot;);
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="5">  5: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)modularRealmAuthenticator0.doMultiRealmAuthentication((Collection&lt;Realm&gt;) linkedList0, (AuthenticationToken) null);
-<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAuthenticationInfo0);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) null);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;127.0.0.1&quot;, &quot;6% 9_lBPpcxv$J}~^W&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) null);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) linkedList0);
-<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>linkedList0.add((Realm) simpleAccountRealm0);
-<span class="nocode"><a name="4">  4: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) linkedList0);
-<span class="nocode"><a name="5">  5: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;\u0000\u0000\u0000\u0000\u0000\u0000&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -464,7 +440,7 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 <span class="nocode"><a name="302">302: </a></span><span style="background-color: #ffffcc">        if (realms.size() == 1) {</span>
 <span class="nocode"><a name="303">303: </a></span><span style="background-color: #ffffcc">            return doSingleRealmAuthentication(realms.iterator().next(), authenticationToken);</span>
 <span class="nocode"><a name="304">304: </a></span>        } else {
-<span class="nocode"><a name="305">305: </a></span><span style="background-color: #ffffcc">            return doMultiRealmAuthentication(realms, authenticationToken);</span>
+<span class="nocode"><a name="305">305: </a></span>            return doMultiRealmAuthentication(realms, authenticationToken);
 <span class="nocode"><a name="306">306: </a></span>        }
 <span class="nocode"><a name="307">307: </a></span>    }
 <span class="nocode"><a name="308">308: </a></span>
@@ -495,7 +471,7 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -513,7 +489,7 @@ org.jsecurity.authc.pam.ModularRealmAuthenticator
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17728
+<li>process_communication_port: 10923
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

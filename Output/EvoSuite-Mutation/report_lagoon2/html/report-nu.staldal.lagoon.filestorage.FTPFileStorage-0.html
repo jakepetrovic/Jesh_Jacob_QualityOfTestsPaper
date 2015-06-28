@@ -22,8 +22,8 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.filestorage.FTPFileStorage: 100.00%</ul><ul>
-<li>250 fitness evaluations, 6 generations, 1305 statements, 416 tests.
-<li>Time: 0:00:06(Search: 0:00:06, minimization: 0:00:00)
+<li>950 fitness evaluations, 20 generations, 2672 statements, 821 tests.
+<li>Time: 0:00:10(Search: 0:00:09, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 10/10 methods, 10/10 total goals
 <li>Mutation score: 8%
 </ul>
@@ -43,11 +43,11 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  fTPFileStorage0.open(&quot;&quot;, (LagoonContext) null, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  fTPFileStorage0.open(&quot;V&amp;B*L_&quot;, (LagoonContext) null, &quot;V&amp;B*L_&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MalformedURLException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(MalformedURLException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 
+<span class="nocode"><a name="7">  7: </a></span>   * V&amp;B*L_
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -56,7 +56,7 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <span class="nocode"><a name="1">  1: </a></span>FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fTPFileStorage0.createFile(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fTPFileStorage0.createFile((String) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -86,14 +86,13 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
-<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler(&quot;^x]&lt;uY&quot;, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  fTPFileStorage_FTPOutputHandler0.discard();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>FTPFileStorage.FTPOutputHandler fTPFileStorage_FTPOutputHandler0 = fTPFileStorage0.new FTPOutputHandler(&quot;-`{Cmn|75jZN#$&quot;, (OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  fTPFileStorage_FTPOutputHandler0.discard();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -270,7 +269,7 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <span class="nocode"><a name="172">172: </a></span>			throws java.io.IOException
 <span class="nocode"><a name="173">173: </a></span>		{
 <span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">			out.close();</span>
-<span class="nocode"><a name="175">175: </a></span><span style="background-color: #ffffcc">			fileModified(currentPathname);</span>
+<span class="nocode"><a name="175">175: </a></span>			fileModified(currentPathname);
 <span class="nocode"><a name="176">176: </a></span>		}
 <span class="nocode"><a name="177">177: </a></span>		
 <span class="nocode"><a name="178">178: </a></span>
@@ -296,7 +295,7 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -314,7 +313,7 @@ nu.staldal.lagoon.filestorage.FTPFileStorage
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19819
+<li>process_communication_port: 7237
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

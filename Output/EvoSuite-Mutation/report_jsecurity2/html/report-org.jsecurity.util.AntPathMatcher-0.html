@@ -21,86 +21,83 @@ org.jsecurity.util.AntPathMatcher
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.util.AntPathMatcher: 80.00%</ul><ul>
-<li>8552 fitness evaluations, 173 generations, 114161 statements, 5449 tests.
+<ul><li>Target class: org.jsecurity.util.AntPathMatcher: 73.53%</ul><ul>
+<li>8486 fitness evaluations, 171 generations, 101394 statements, 5644 tests.
 <li>Time: 0:01:05(Search: 0:01:01, minimization: 0:00:04)
-<li>Coverage: 132/166 branches, 9/9 methods, 136/170 total goals
-<li>Mutation score: 63%
+<li>Coverage: 121/166 branches, 9/9 methods, 125/170 total goals
+<li>Mutation score: 62%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;*4Mh|&lt;O&amp;&quot;, &quot;\&quot;}m\&quot;fC17&amp;F^(?V\&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;**&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator((String) null);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;s:)qJz?[ybYslU&quot;, &quot;s:)qJz?[ybYslU&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;#:h*?k_j9V`s'q&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;/#:h*?k_j9V`s'q&quot;, &quot;/#:h*?k_j9V`s'q&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator((String) null);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;#:h*?k_j9V`s'q&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;Unable to determine Key/Value pair from line [/du`S~db+)?u?dm*M2&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;s&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;] to form a key/value pair.&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;2t]}I')Aw?ez&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.isPattern(&quot;s:)qJz?[ybYslU&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;0rs2zbnQJ3 6t&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;0rs2zbnQJ3 6t&quot;, &quot;**&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;s:)qJz?[ybYslU&quot;, &quot;/s:)qJz?[ybYslU&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;**&quot;, &quot;&quot;, true);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;**&quot;, &quot;**&quot;, true);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;**&quot;, &quot;Gb2g&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;Z%|fg8=%s\&quot;T*_}G+W{&quot;, &quot;C/&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;**&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;Xh#{Dt4/&amp;m?:'29&quot;, &quot;Xh#{Dt4/&amp;m?:'29**&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;*&quot;, &quot;x)d`rTF(,GJ(A:xR/&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;**&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;*&quot;, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;*/Unable to determine Key/Value pair from line [No valid key could be found in line [&quot;, &quot;*4xB-F4BSzVD=r.*&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;Unable to determine Key/Value pair from line [/du`S~db+)?u?dm*M2&quot;, &quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 13</h3>
@@ -119,113 +116,98 @@ org.jsecurity.util.AntPathMatcher
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;&quot;, &quot;**&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;&quot;, &quot;V+mjr 9E&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;**&quot;, &quot;**&quot;, true);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;**&quot;, &quot;**&quot;, false);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;V&quot;, &quot;Xh#{Dt4/&amp;m?:&quot;, false);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;].  There is no space from &quot;, &quot;]*Dka&gt;P(jVgl}|E#'&quot;, false);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;Xh#{Dt4/&amp;m?:'29&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;u.Dpw@d&quot;, &quot;**&quot;, false);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;,nr0r.&quot;, &quot;,|Fd[a&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;#:h*?k_j9V`s'q&quot;, &quot;#:h*?k_j9V`s'q&quot;, true);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;/=PPi*NR:`X?\&quot;b]3w%&quot;, &quot;/=PPi*NR:`X?\&quot;b]3w%&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;/Xh#{Dt4/&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;, &quot;/&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;Unable to determine Key/Value pair from line [/du`S~db+)?u?dm*M2&quot;, &quot;Unable to determine Key/Value pair from line [/du`S~db+)?u?dm*M2&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;Xh#{Dt4/&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;, &quot;Xh#{Dt4/&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;]*Dka&gt;P(jVgl}|E#'&quot;, &quot;].  There is no space from &quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;#:h*?k_j9V`s'q&quot;, &quot;BU?,$&quot;, true);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;****&quot;, &quot;]&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;AI2Z{[=*&quot;, &quot;AI2Z{[=&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;*])*//&quot;, &quot;*])*//&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matchStart(&quot;*4xBOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=SF4BOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=SzVOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=S.*&quot;, &quot;OQ^-I&amp;DgqfcpriDW2/-YgQk@sc=S&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.match(&quot;*])*&quot;, &quot;No valid key could be found in line [&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 25</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.matches(&quot;*4xB-F4BSzVD=r.*&quot;, &quot;*4xB-F4BSzVD=r.*&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;*&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
 <h3>Test case 26</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = antPathMatcher0.doMatch(&quot;*4xB-F4BSzVD=r.*&quot;, &quot;*4Mh|&lt;O&amp;&quot;, false);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;|GFTO=}kZ_A`jz&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;/=PPi*NR:`X?\&quot;b]3w%&quot;, &quot;/=PPi*NR:`X?\&quot;b]3w%&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;PPi*NR:|GFTO=}kZ_A`jzX?\&quot;b]3w%&quot;, string0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 27</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;Xh#{Dt4/&amp;m?:&quot;, &quot;V&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;/s:)qJz?[ybYslU&quot;, &quot;s:)qJz?[ybYslU&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;s:)qJz?[ybYslU&quot;, string0);
 </pre>
 <h3>Test case 28</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;Xh#{Dt4/&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;, &quot;Xh#{Dt4/&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&amp;m?:'29Xh#{Dt4/&amp;m?:'29**&quot;, string0);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;**&quot;, &quot;Ct^/pN`Pz=@Q_l?xDS&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;/Ct^/pN`Pz=@Q_l?xDS&quot;, string0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
 </pre>
 <h3>Test case 29</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;AI2Z{[=&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;AI2Z{[=*&quot;, &quot;AI2Z{[=*&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;*&quot;, string0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
-</pre>
-<h3>Test case 30</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;&amp;m?:&quot;, &quot;Xh#{Dt4/&amp;m?:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;&quot;, &quot;Unable to determine Key/Value pair from line [&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;/Xh#{Dt4/&amp;m?:&quot;, string0);
-</pre>
-<h3>Test case 31</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AntPathMatcher antPathMatcher0 = new AntPathMatcher();
-<span class="nocode"><a name="2">  2: </a></span>antPathMatcher0.setPathSeparator(&quot;OQ^-I&amp;DgqfcpriDW2/-YgQk@sc=S&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = antPathMatcher0.extractPathWithinPattern(&quot;OQ^-I&amp;DgqfcpriDW2/-YgQk@sc=S&quot;, &quot;*4xB-F4BSzVD=r.*&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;*4xBOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=SF4BOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=SzVOQ^-I&amp;DgqfcpriDW2/-YgQk@sc=S.*&quot;, string0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Unable to determine Key/Value pair from line [&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -526,12 +508,12 @@ org.jsecurity.util.AntPathMatcher
 <span class="nocode"><a name="296">296: </a></span><span style="background-color: #ffffcc">        if (strIdxStart &gt; strIdxEnd) {</span>
 <span class="nocode"><a name="297">297: </a></span>            // All characters in the string are used. Check if only '*'s are
 <span class="nocode"><a name="298">298: </a></span>            // left in the pattern. If so, we succeeded. Otherwise failure.
-<span class="nocode"><a name="299">299: </a></span><span style="background-color: #ffffcc">            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {</span>
-<span class="nocode"><a name="300">300: </a></span><span style="background-color: #ffffcc">                if (patArr[i] != '*') {</span>
-<span class="nocode"><a name="301">301: </a></span><span style="background-color: #ffffcc">                    return false;</span>
+<span class="nocode"><a name="299">299: </a></span>            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {
+<span class="nocode"><a name="300">300: </a></span>                if (patArr[i] != '*') {
+<span class="nocode"><a name="301">301: </a></span>                    return false;
 <span class="nocode"><a name="302">302: </a></span>                }
 <span class="nocode"><a name="303">303: </a></span>            }
-<span class="nocode"><a name="304">304: </a></span><span style="background-color: #ffffcc">            return true;</span>
+<span class="nocode"><a name="304">304: </a></span>            return true;
 <span class="nocode"><a name="305">305: </a></span>        }
 <span class="nocode"><a name="306">306: </a></span>
 <span class="nocode"><a name="307">307: </a></span>        // Process characters after last star
@@ -547,9 +529,9 @@ org.jsecurity.util.AntPathMatcher
 <span class="nocode"><a name="317">317: </a></span><span style="background-color: #ffffcc">        if (strIdxStart &gt; strIdxEnd) {</span>
 <span class="nocode"><a name="318">318: </a></span>            // All characters in the string are used. Check if only '*'s are
 <span class="nocode"><a name="319">319: </a></span>            // left in the pattern. If so, we succeeded. Otherwise failure.
-<span class="nocode"><a name="320">320: </a></span><span style="background-color: #ffffcc">            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {</span>
-<span class="nocode"><a name="321">321: </a></span><span style="background-color: #ffffcc">                if (patArr[i] != '*') {</span>
-<span class="nocode"><a name="322">322: </a></span><span style="background-color: #ffffcc">                    return false;</span>
+<span class="nocode"><a name="320">320: </a></span>            for (int i = patIdxStart; i &lt;= patIdxEnd; i++) {
+<span class="nocode"><a name="321">321: </a></span>                if (patArr[i] != '*') {
+<span class="nocode"><a name="322">322: </a></span>                    return false;
 <span class="nocode"><a name="323">323: </a></span>                }
 <span class="nocode"><a name="324">324: </a></span>            }
 <span class="nocode"><a name="325">325: </a></span>            return true;
@@ -660,7 +642,7 @@ org.jsecurity.util.AntPathMatcher
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -678,7 +660,7 @@ org.jsecurity.util.AntPathMatcher
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21010
+<li>process_communication_port: 18814
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

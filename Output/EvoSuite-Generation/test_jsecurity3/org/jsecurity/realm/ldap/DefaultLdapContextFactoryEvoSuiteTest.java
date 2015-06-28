@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
+import javax.naming.ConfigurationException;
 import javax.naming.NamingException;
 import org.jsecurity.realm.ldap.DefaultLdapContextFactory;
 
@@ -17,13 +18,48 @@ public class DefaultLdapContextFactoryEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getSystemLdapContext()Ljavax/naming/ldap/LdapContext;: root-Branch
-   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - false
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.<init>()V: root-Branch
+   * 16 covered goals:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - false
+   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I30 Branch 4 IFNULL L210 - true
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - false
+   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - false
+   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I114 Branch 9 IFLE L228 - false
+   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSystemUsername(Ljava/lang/String;)V: root-Branch
+   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getSystemLdapContext()Ljavax/naming/ldap/LdapContext;: root-Branch
+   * 8 org.jsecurity.realm.ldap.DefaultLdapContextFactory.<init>()V: root-Branch
+   * 9 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setUrl(Ljava/lang/String;)V: root-Branch
+   * 10 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSearchBase(Ljava/lang/String;)V: root-Branch
+   * 11 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - true
+   * 12 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - true
+   * 13 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - true
+   * 14 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I107 Branch 7 IFEQ L228 - false
+   * 15 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - true
+   * 16 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I137 Branch 11 IFEQ L237 - true
    */
   @Test
   public void test0()  throws Throwable  {
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+      defaultLdapContextFactory0.setSystemUsername("");
+      defaultLdapContextFactory0.setUrl("");
+      defaultLdapContextFactory0.setSearchBase("");
+      try {
+        defaultLdapContextFactory0.getSystemLdapContext();
+        fail("Expecting exception: ConfigurationException");
+      } catch(ConfigurationException e) {
+        /*
+         * java.naming.provider.url property does not contain a URL
+         */
+      }
+  }
+
+  //Test case number: 1
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getSystemLdapContext()Ljavax/naming/ldap/LdapContext;: root-Branch
+   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       // Undeclared exception!
       try {
@@ -36,50 +72,139 @@ public class DefaultLdapContextFactoryEvoSuiteTest {
       }
   }
 
-  //Test case number: 1
+  //Test case number: 2
+  /*
+   * 1 covered goal:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSystemPassword(Ljava/lang/String;)V: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+      defaultLdapContextFactory0.setSystemPassword("!");
+  }
+
+  //Test case number: 3
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I30 Branch 4 IFNULL L210 - false
+   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - false
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I114 Branch 9 IFLE L228 - true
+   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setPrincipalSuffix(Ljava/lang/String;)V: root-Branch
+   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - false
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+      defaultLdapContextFactory0.setPrincipalSuffix("");
+      defaultLdapContextFactory0.setSearchBase("");
+      defaultLdapContextFactory0.setUrl("");
+      try {
+        defaultLdapContextFactory0.getLdapContext("", "");
+        fail("Expecting exception: ConfigurationException");
+      } catch(ConfigurationException e) {
+        /*
+         * java.naming.provider.url property does not contain a URL
+         */
+      }
+  }
+
+  //Test case number: 4
   /*
    * 1 covered goal:
    * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setAuthentication(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test4()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setAuthentication(" ,B?(f7M");
+      defaultLdapContextFactory0.setAuthentication("0_{xcoD]`F");
   }
 
-  //Test case number: 2
+  //Test case number: 5
   /*
    * 1 covered goal:
    * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setReferral(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
+  public void test5()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
       defaultLdapContextFactory0.setReferral("");
   }
 
-  //Test case number: 3
+  //Test case number: 6
   /*
    * 1 covered goal:
    * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setContextFactoryClassName(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test3()  throws Throwable  {
+  public void test6()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setContextFactoryClassName(" ,B?(f7M");
+      defaultLdapContextFactory0.setContextFactoryClassName("");
   }
 
-  //Test case number: 4
+  //Test case number: 7
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - false
+   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setAdditionalEnvironment(Ljava/util/Map;)V: root-Branch
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - true
+   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - true
+   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - true
+   */
+  @Test
+  public void test7()  throws Throwable  {
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+      HashMap<String, String> hashMap0 = new HashMap<String, String>();
+      defaultLdapContextFactory0.setAdditionalEnvironment((Map<String, String>) hashMap0);
+      defaultLdapContextFactory0.setUrl("");
+      defaultLdapContextFactory0.setSearchBase("");
+      try {
+        defaultLdapContextFactory0.getSystemLdapContext();
+        fail("Expecting exception: ConfigurationException");
+      } catch(ConfigurationException e) {
+        /*
+         * java.naming.provider.url property does not contain a URL
+         */
+      }
+  }
+
+  //Test case number: 8
+  /*
+   * 8 covered goals:
+   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - true
+   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - true
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - true
+   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - true
+   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I107 Branch 7 IFEQ L228 - false
+   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - true
+   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - true
+   * 8 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I137 Branch 11 IFEQ L237 - true
+   */
+  @Test
+  public void test8()  throws Throwable  {
+      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+      defaultLdapContextFactory0.setUrl("");
+      defaultLdapContextFactory0.setSearchBase("");
+      try {
+        defaultLdapContextFactory0.getSystemLdapContext();
+        fail("Expecting exception: ConfigurationException");
+      } catch(ConfigurationException e) {
+        /*
+         * java.naming.provider.url property does not contain a URL
+         */
+      }
+  }
+
+  //Test case number: 9
   /*
    * 3 covered goals:
    * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - true
    * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - false
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSearchBase(Ljava/lang/String;)V: root-Branch
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getSystemLdapContext()Ljavax/naming/ldap/LdapContext;: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test9()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setSearchBase(" ,B?(f7M");
+      defaultLdapContextFactory0.setSearchBase("");
       // Undeclared exception!
       try {
         defaultLdapContextFactory0.getSystemLdapContext();
@@ -91,145 +216,35 @@ public class DefaultLdapContextFactoryEvoSuiteTest {
       }
   }
 
-  //Test case number: 5
+  //Test case number: 10
   /*
-   * 12 covered goals:
-   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - false
-   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I30 Branch 4 IFNULL L210 - true
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - false
-   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - false
-   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I114 Branch 9 IFLE L228 - false
-   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSystemUsername(Ljava/lang/String;)V: root-Branch
-   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setUrl(Ljava/lang/String;)V: root-Branch
-   * 8 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - true
-   * 9 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - true
-   * 10 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I107 Branch 7 IFEQ L228 - false
-   * 11 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - true
-   * 12 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I137 Branch 11 IFEQ L237 - true
-   */
-  @Test
-  public void test5()  throws Throwable  {
-      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setSystemUsername("org.apache.mmons.logging.diagnostics.dest");
-      defaultLdapContextFactory0.setSearchBase("v)tw>");
-      defaultLdapContextFactory0.setUrl("Wf=jzkr!");
-      try {
-        defaultLdapContextFactory0.getSystemLdapContext();
-        fail("Expecting exception: NamingException");
-      } catch(NamingException e) {
-        /*
-         * Cannot parse url: Wf=jzkr!
-         */
-      }
-  }
-
-  //Test case number: 6
-  /*
-   * 7 covered goals:
-   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I30 Branch 4 IFNULL L210 - false
-   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I114 Branch 9 IFLE L228 - true
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSystemUsername(Ljava/lang/String;)V: root-Branch
-   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setPrincipalSuffix(Ljava/lang/String;)V: root-Branch
-   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - false
-   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - false
-   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - false
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setSystemUsername("org.apache.mmons.logging.diagnostics.dest");
-      defaultLdapContextFactory0.setSearchBase("v)tw>");
-      defaultLdapContextFactory0.setUrl("Wf=jzkr!");
-      defaultLdapContextFactory0.setPrincipalSuffix("org.apache.mmons.logging.diagnostics.dest");
-      try {
-        defaultLdapContextFactory0.getSystemLdapContext();
-        fail("Expecting exception: NamingException");
-      } catch(NamingException e) {
-        /*
-         * Cannot parse url: Wf=jzkr!
-         */
-      }
-  }
-
-  //Test case number: 7
-  /*
-   * 5 covered goals:
-   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - false
-   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSystemPassword(Ljava/lang/String;)V: root-Branch
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - true
-   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - true
-   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - true
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setUrl(" ,B?(f7M");
-      defaultLdapContextFactory0.setSystemPassword(" ,B?(f7M");
-      defaultLdapContextFactory0.setSearchBase(" ,B?(f7M");
-      try {
-        defaultLdapContextFactory0.getSystemLdapContext();
-        fail("Expecting exception: NamingException");
-      } catch(NamingException e) {
-        /*
-         * Cannot parse url: ,B?(f7M
-         */
-      }
-  }
-
-  //Test case number: 8
-  /*
-   * 3 covered goals:
+   * 13 covered goals:
    * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I107 Branch 7 IFEQ L228 - true
    * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setUsePooling(Z)V: root-Branch
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - true
+   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.<init>()V: root-Branch
+   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setUrl(Ljava/lang/String;)V: root-Branch
+   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSearchBase(Ljava/lang/String;)V: root-Branch
+   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - true
+   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - true
+   * 8 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - false
+   * 9 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I30 Branch 4 IFNULL L210 - true
+   * 10 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - false
+   * 11 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - false
+   * 12 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - true
+   * 13 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I137 Branch 11 IFEQ L237 - true
    */
   @Test
-  public void test8()  throws Throwable  {
+  public void test10()  throws Throwable  {
       DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setUrl(" ,B?(f7M");
-      defaultLdapContextFactory0.setSearchBase(" ,B?(f7M");
+      defaultLdapContextFactory0.setSearchBase("0_{xcoD]`F");
+      defaultLdapContextFactory0.setUrl("0_{xcoD]`F");
       defaultLdapContextFactory0.setUsePooling(false);
       try {
-        defaultLdapContextFactory0.getSystemLdapContext();
+        defaultLdapContextFactory0.getLdapContext("0_{xcoD]`F", "0_{xcoD]`F");
         fail("Expecting exception: NamingException");
       } catch(NamingException e) {
         /*
-         * Cannot parse url: ,B?(f7M
-         */
-      }
-  }
-
-  //Test case number: 9
-  /*
-   * 14 covered goals:
-   * 1 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I126 Branch 10 IFNULL L233 - false
-   * 2 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getSystemLdapContext()Ljavax/naming/ldap/LdapContext;: root-Branch
-   * 3 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setAdditionalEnvironment(Ljava/util/Map;)V: root-Branch
-   * 4 org.jsecurity.realm.ldap.DefaultLdapContextFactory.<init>()V: root-Branch
-   * 5 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setUrl(Ljava/lang/String;)V: root-Branch
-   * 6 org.jsecurity.realm.ldap.DefaultLdapContextFactory.setSearchBase(Ljava/lang/String;)V: root-Branch
-   * 7 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I4 Branch 1 IFNONNULL L203 - true
-   * 8 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I16 Branch 2 IFNONNULL L206 - true
-   * 9 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I27 Branch 3 IFNULL L210 - true
-   * 10 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I60 Branch 5 IFNULL L217 - true
-   * 11 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I71 Branch 6 IFNULL L220 - true
-   * 12 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I107 Branch 7 IFEQ L228 - false
-   * 13 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I109 Branch 8 IFNULL L228 - true
-   * 14 org.jsecurity.realm.ldap.DefaultLdapContextFactory.getLdapContext(Ljava/lang/String;Ljava/lang/String;)Ljavax/naming/ldap/LdapContext;: I137 Branch 11 IFEQ L237 - true
-   */
-  @Test
-  public void test9()  throws Throwable  {
-      DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-      defaultLdapContextFactory0.setUrl(" ,B?(f7M");
-      defaultLdapContextFactory0.setSearchBase(" ,B?(f7M");
-      HashMap<String, String> hashMap0 = new HashMap<String, String>();
-      defaultLdapContextFactory0.setAdditionalEnvironment((Map<String, String>) hashMap0);
-      try {
-        defaultLdapContextFactory0.getSystemLdapContext();
-        fail("Expecting exception: NamingException");
-      } catch(NamingException e) {
-        /*
-         * Cannot parse url: ,B?(f7M
+         * Cannot parse url: 0_{xcoD]`F
          */
       }
   }

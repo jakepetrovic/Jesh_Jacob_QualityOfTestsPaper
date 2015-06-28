@@ -19,9 +19,9 @@ public class TpDetEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpDet tpDet0 = TpDet.SERVICO;
+      TpDet tpDet0 = TpDet.PRODUTO;
       char char0 = tpDet0.getValue();
-      assertEquals('S', char0);
+      assertEquals('P', char0);
   }
 
   //Test case number: 1
@@ -31,8 +31,8 @@ public class TpDetEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TpDet tpDet0 = TpDet.SERVICO;
+      TpDet tpDet0 = TpDet.PRODUTO;
       boolean boolean0 = tpDet0.isServico();
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 }

@@ -21,14 +21,23 @@ bierse.controller.DrinkSellController
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: bierse.controller.DrinkSellController: 0.00%</ul><ul>
-<li>0 fitness evaluations, 2 generations, 0 statements, 0 tests.
-<li>Time: 0:01:18(Search: 0:01:15, minimization: 0:00:03)
-<li>Coverage: 0/8 branches, 0/4 methods, 0/11 total goals
-<li>Mutation score: 100%
+<ul><li>Target class: bierse.controller.DrinkSellController: 18.18%</ul><ul>
+<li>26 fitness evaluations, 2 generations, 73 statements, 136 tests.
+<li>Time: 0:01:04(Search: 0:01:04, minimization: 0:00:00)
+<li>Coverage: 0/8 branches, 2/4 methods, 2/11 total goals
+<li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DrinkSellController drinkSellController0 = new DrinkSellController((Model) null, (IDrinkSellView) null);
+<span class="nocode"><a name="2">  2: </a></span>JSeparator jSeparator0 = new JSeparator();
+<span class="nocode"><a name="3">  3: </a></span>JToolTip jToolTip0 = jSeparator0.createToolTip();
+<span class="nocode"><a name="4">  4: </a></span>KeyEvent keyEvent0 = new KeyEvent((Component) jToolTip0, 0, 46L, 770, 1306, 'a');
+<span class="nocode"><a name="5">  5: </a></span>drinkSellController0.keyTyped(keyEvent0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, keyEvent0.getID());
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.controller;
 <span class="nocode"><a name="2">  2: </a></span>
@@ -45,9 +54,9 @@ bierse.controller.DrinkSellController
 <span class="nocode"><a name="13"> 13: </a></span>	IDrinkSellView view;
 <span class="nocode"><a name="14"> 14: </a></span>	
 <span class="nocode"><a name="15"> 15: </a></span>	public DrinkSellController(Model m, IDrinkSellView v) {
-<span class="nocode"><a name="16"> 16: </a></span>		model = m;
-<span class="nocode"><a name="17"> 17: </a></span>		view = v;
-<span class="nocode"><a name="18"> 18: </a></span>	}
+<span class="nocode"><a name="16"> 16: </a></span><span style="background-color: #ffffcc">		model = m;</span>
+<span class="nocode"><a name="17"> 17: </a></span><span style="background-color: #ffffcc">		view = v;</span>
+<span class="nocode"><a name="18"> 18: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="19"> 19: </a></span>	
 <span class="nocode"><a name="20"> 20: </a></span>	@Override
 <span class="nocode"><a name="21"> 21: </a></span>	public void keyPressed(KeyEvent e) {
@@ -82,14 +91,14 @@ bierse.controller.DrinkSellController
 <span class="nocode"><a name="50"> 50: </a></span>	@Override
 <span class="nocode"><a name="51"> 51: </a></span>	public void keyTyped(KeyEvent e) {
 <span class="nocode"><a name="52"> 52: </a></span>
-<span class="nocode"><a name="53"> 53: </a></span>	}
+<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="54"> 54: </a></span>
 <span class="nocode"><a name="55"> 55: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1504249547501241532.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree373797381070652894.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -107,7 +116,7 @@ bierse.controller.DrinkSellController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18610
+<li>process_communication_port: 17541
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

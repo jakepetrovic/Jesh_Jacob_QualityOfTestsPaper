@@ -19,9 +19,9 @@ public class FaultReasonsEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      FaultReasons faultReasons0 = FaultReasons.FAULT_INVALID_CREDENTIALS;
+      FaultReasons faultReasons0 = FaultReasons.FAULT_END_DEBUG_SESSION_WRONG_STATE;
       String string0 = faultReasons0.getFaultReason();
-      assertEquals("Invalid Credentials", string0);
+      assertEquals("JsfEndDebugSession failed: wrong state for operation", string0);
   }
 
   //Test case number: 1
@@ -31,8 +31,8 @@ public class FaultReasonsEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      FaultReasons faultReasons0 = FaultReasons.FAULT_INVALID_CREDENTIALS;
+      FaultReasons faultReasons0 = FaultReasons.FAULT_END_DEBUG_SESSION_WRONG_STATE;
       String string0 = faultReasons0.toString();
-      assertEquals("Invalid Credentials", string0);
+      assertEquals("JsfEndDebugSession failed: wrong state for operation", string0);
   }
 }

@@ -21,21 +21,21 @@ net.sf.xisemele.impl.OperationsImpl
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.xisemele.impl.OperationsImpl: 42.86%</ul><ul>
-<li>3132 fitness evaluations, 64 generations, 12298 statements, 2235 tests.
-<li>Time: 0:01:08(Search: 0:01:01, minimization: 0:00:07)
-<li>Coverage: 8/28 branches, 11/18 methods, 15/35 total goals
-<li>Mutation score: 28%
+<ul><li>Target class: net.sf.xisemele.impl.OperationsImpl: 37.14%</ul><ul>
+<li>5636 fitness evaluations, 114 generations, 21955 statements, 3820 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 6/28 branches, 11/18 methods, 13/35 total goals
+<li>Mutation score: 21%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;D:;R+#`tk(,nr|Jb&quot;);
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, &quot;D:;R+#`tk(,nr|Jb&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, &quot;&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -43,7 +43,7 @@ net.sf.xisemele.impl.OperationsImpl
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.numberOfChildren((Node) iIOMetadataNode0);
@@ -57,7 +57,7 @@ net.sf.xisemele.impl.OperationsImpl
 <span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.children((Node) iIOMetadataNode0, &quot;mnNr`|&lt;s&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.children((Node) iIOMetadataNode0, &quot;J.i2&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -67,7 +67,7 @@ net.sf.xisemele.impl.OperationsImpl
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  operationsImpl0.attributeValue((Node) null, &quot;messages&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  operationsImpl0.attributeValue((Node) null, &quot;K&gt;Znc&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -75,12 +75,13 @@ net.sf.xisemele.impl.OperationsImpl
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  operationsImpl0.child((Node) null, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;gt$&amp;FEULxr&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  operationsImpl0.child((Node) iIOMetadataNode0, &quot;gt$&amp;FEULxr&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -96,22 +97,20 @@ net.sf.xisemele.impl.OperationsImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
 <span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="3">  3: </a></span>iIOMetadataNode0.setAttribute(&quot;&quot;, (String) null);
-<span class="nocode"><a name="4">  4: </a></span>List&lt;Node&gt; list0 = operationsImpl0.attributes((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(list0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, list0.isEmpty());
+<span class="nocode"><a name="3">  3: </a></span>List&lt;Node&gt; list0 = operationsImpl0.attributes((Node) iIOMetadataNode0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, list0.size());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
 <span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, &quot;@&quot;);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;w-QT/7 %b286E/{0kI&quot;);
+<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = operationsImpl0.containsAttributes((Node) iIOMetadataNode0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
@@ -119,18 +118,10 @@ net.sf.xisemele.impl.OperationsImpl
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
 <span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-<span class="nocode"><a name="3">  3: </a></span>iIOMetadataNode0.setAttribute(&quot;&quot;, (String) null);
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = operationsImpl0.containsAttributes((Node) iIOMetadataNode0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-<span class="nocode"><a name="2">  2: </a></span>IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode1 = (IIOMetadataNode)iIOMetadataNode0.cloneNode(true);
+<span class="nocode"><a name="3">  3: </a></span>IIOMetadataNode iIOMetadataNode1 = new IIOMetadataNode(&quot;t}Vy(L_Z2N.hx9/t(B&quot;);
 <span class="nocode"><a name="4">  4: </a></span>IIOMetadataNode iIOMetadataNode2 = (IIOMetadataNode)iIOMetadataNode0.insertBefore((Node) iIOMetadataNode1, (Node) iIOMetadataNode1);
 <span class="nocode"><a name="5">  5: </a></span>String string0 = operationsImpl0.path((Node) iIOMetadataNode2);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;/&quot;, string0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;null/t}Vy(L_Z2N.hx9/t(B&quot;, string0);
 <span class="nocode"><a name="7">  7: </a></span>assertNotNull(string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -186,7 +177,7 @@ net.sf.xisemele.impl.OperationsImpl
 <span class="nocode"><a name="50"> 50: </a></span><span style="background-color: #ffffcc">      ArrayList&lt;Node&gt; attributes = new ArrayList&lt;Node&gt;();</span>
 <span class="nocode"><a name="51"> 51: </a></span><span style="background-color: #ffffcc">      NamedNodeMap namedNodeMap = node.getAttributes();</span>
 <span class="nocode"><a name="52"> 52: </a></span><span style="background-color: #ffffcc">      for (int index = 0; index &lt; namedNodeMap.getLength(); index++) {</span>
-<span class="nocode"><a name="53"> 53: </a></span><span style="background-color: #ffffcc">         attributes.add(namedNodeMap.item(index));</span>
+<span class="nocode"><a name="53"> 53: </a></span>         attributes.add(namedNodeMap.item(index));
 <span class="nocode"><a name="54"> 54: </a></span>      }
 <span class="nocode"><a name="55"> 55: </a></span><span style="background-color: #ffffcc">      return attributes;</span>
 <span class="nocode"><a name="56"> 56: </a></span>   }
@@ -314,7 +305,7 @@ net.sf.xisemele.impl.OperationsImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5217558598097753761.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7563696726542208450.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -332,7 +323,7 @@ net.sf.xisemele.impl.OperationsImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8221
+<li>process_communication_port: 17164
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

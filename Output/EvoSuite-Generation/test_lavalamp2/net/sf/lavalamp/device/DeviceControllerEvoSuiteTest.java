@@ -14,6 +14,7 @@ import java.util.List;
 import net.sf.lavalamp.LavaLogger;
 import net.sf.lavalamp.device.Device;
 import net.sf.lavalamp.device.DeviceController;
+import net.sf.lavalamp.device.DeviceProperties;
 import net.sf.lavalamp.device.DummyDevice;
 import net.sf.lavalamp.site.Builds;
 import net.sf.lavalamp.site.MissingBuildException;
@@ -32,7 +33,7 @@ public class DeviceControllerEvoSuiteTest {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       List<Device> list0 = deviceController0.getDevices();
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 1
@@ -46,11 +47,11 @@ public class DeviceControllerEvoSuiteTest {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       try {
-        deviceController0.setStatusForBuild("-5-O0@'0Z6z6@3IwRFT", true);
+        deviceController0.setStatusForBuild("4", true);
         fail("Expecting exception: MissingBuildException");
       } catch(MissingBuildException e) {
         /*
-         * -5-O0@'0Z6z6@3IwRFT not found
+         * 4 not found
          */
       }
   }
@@ -62,10 +63,8 @@ public class DeviceControllerEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      LinkedList<Device> linkedList0 = new LinkedList<Device>();
-      DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      LavaLogger lavaLogger0 = new LavaLogger();
-      deviceController0.setLogger(lavaLogger0);
+      DeviceController deviceController0 = new DeviceController((List<Device>) null);
+      deviceController0.setLogger((LavaLogger) null);
   }
 
   //Test case number: 3
@@ -78,10 +77,11 @@ public class DeviceControllerEvoSuiteTest {
   public void test3()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      linkedList0.add((Device) null);
+      DummyDevice dummyDevice0 = new DummyDevice();
+      linkedList0.add((Device) dummyDevice0);
       // Undeclared exception!
       try {
-        deviceController0.setStatusForBuild("-5-O0@'0Z6z6@3IwRFT", true);
+        deviceController0.setStatusForBuild("4", true);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -96,26 +96,28 @@ public class DeviceControllerEvoSuiteTest {
   public void test4()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
-      GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
-      deviceController0.switchDevices((Calendar) gregorianCalendar0);
-      assertEquals(1398574537379L, gregorianCalendar0.getTimeInMillis());
-      assertEquals("java.util.GregorianCalendar[time=1398574537379,areFieldsSet=true,areAllFieldsSet=true,lenient=true,zone=sun.util.calendar.ZoneInfo[id=\"America/Denver\",offset=-25200000,dstSavings=3600000,useDaylight=true,transitions=157,lastRule=java.util.SimpleTimeZone[id=America/Denver,offset=-25200000,dstSavings=3600000,useDaylight=true,startYear=0,startMode=3,startMonth=2,startDay=8,startDayOfWeek=1,startTime=7200000,startTimeMode=0,endMode=3,endMonth=10,endDay=1,endDayOfWeek=1,endTime=7200000,endTimeMode=0]],firstDayOfWeek=1,minimalDaysInFirstWeek=1,ERA=1,YEAR=2014,MONTH=3,WEEK_OF_YEAR=17,WEEK_OF_MONTH=4,DAY_OF_MONTH=26,DAY_OF_YEAR=116,DAY_OF_WEEK=7,DAY_OF_WEEK_IN_MONTH=4,AM_PM=1,HOUR=10,HOUR_OF_DAY=22,MINUTE=55,SECOND=37,MILLISECOND=379,ZONE_OFFSET=-25200000,DST_OFFSET=3600000]", gregorianCalendar0.toString());
+      List<String> list0 = deviceController0.switchDevices((Calendar) null);
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 5
   /*
-   * 1 covered goal:
-   * 1 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.device.DeviceController.switchDevice(Ljava/util/Calendar;Ljava/util/List;Lnet/sf/lavalamp/device/Device;)V: I23 Branch 3 IFEQ L73 - true
+   * 2 net.sf.lavalamp.device.DeviceController.switchDevices(Ljava/util/Calendar;)Ljava/util/List;: I21 Branch 2 IFEQ L62 - false
    */
   @Test
   public void test5()  throws Throwable  {
       LinkedList<Device> linkedList0 = new LinkedList<Device>();
       DeviceController deviceController0 = new DeviceController((List<Device>) linkedList0);
       DummyDevice dummyDevice0 = new DummyDevice();
-      linkedList0.add((Device) dummyDevice0);
+      DeviceProperties deviceProperties0 = new DeviceProperties();
+      dummyDevice0.setProperties(deviceProperties0);
+      linkedList0.addFirst((Device) dummyDevice0);
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar((-936), (-936), (-936), (-936), (-936), (-936));
       // Undeclared exception!
       try {
-        deviceController0.switchDevices((Calendar) null);
+        deviceController0.switchDevices((Calendar) gregorianCalendar0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -22,7 +22,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.activedirectory.ActiveDirectoryRealm: 50.00%</ul><ul>
-<li>15342 fitness evaluations, 308 generations, 94179 statements, 9786 tests.
+<li>17640 fitness evaluations, 354 generations, 108591 statements, 11236 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 9/24 branches, 7/8 methods, 15/30 total goals
 <li>Mutation score: 44%
@@ -32,13 +32,18 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  activeDirectoryRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[11];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;[LOOKUP] Properties file specifies LoJFactory sublass '&quot;, charArray0, false);
+<span class="nocode"><a name="4">  4: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  activeDirectoryRealm0.queryForAuthenticationInfo((AuthenticationToken) usernamePasswordToken0, (LdapContextFactory) defaultLdapContextFactory0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: IllegalStateException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(IllegalStateException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * A search base must be specified.
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -46,7 +51,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, &quot;]&amp;)|G;UA&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, &quot;Unable to conve#t byte nrray to String with encoding '&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NoSuchElementException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -54,43 +59,42 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set&lt;String&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(simpleAuthorizationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set&lt;String&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simpleAuthorizationInfo0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo(&quot;Q&quot;, charArray0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[4];
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo(&quot;-zNg&quot;, charArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(simpleAuthenticationInfo0);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_12&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) hashSet0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_14&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>treeSet0.add(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="5">  5: </a></span>treeSet0.add(&quot;&quot;);
 <span class="nocode"><a name="6">  6: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) treeSet0);
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_18&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>treeSet0.add(&quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>hashMap0.put(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="5">  5: </a></span>treeSet0.add(&quot;Unable to conve#t byte nrray to String with encoding '&quot;);
+<span class="nocode"><a name="6">  6: </a></span>hashMap0.put(&quot;Unable to conve#t byte nrray to String with encoding '&quot;, &quot;Unable to conve#t byte nrray to String with encoding '&quot;);
 <span class="nocode"><a name="7">  7: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) treeSet0);
 <span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_30&quot;, activeDirectoryRealm0.getName());
 </pre>
@@ -338,7 +342,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -356,7 +360,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12689
+<li>process_communication_port: 13729
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

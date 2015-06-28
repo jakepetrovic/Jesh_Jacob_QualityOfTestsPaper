@@ -22,7 +22,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.ldap.AbstractLdapRealm: 66.67%</ul><ul>
-<li>19044 fitness evaluations, 382 generations, 112017 statements, 12233 tests.
+<li>17306 fitness evaluations, 348 generations, 95931 statements, 11090 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 3/8 branches, 8/10 methods, 10/15 total goals
 <li>Mutation score: 38%
@@ -32,32 +32,32 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setUrl(&quot;2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setUrl(&quot;Y?H!lL\&quot;c|e&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_0&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase(&quot;4|{AQwW&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSearchBase(&quot;p{!?:D1i D]:q|[&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_1&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword(&quot;2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemPassword(&quot;Y?H!lL\&quot;c|e&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_2&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;2&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_3&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setPrincipalSuffix(&quot;]. ; &quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;4|{AQwW&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(activeDirectoryRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.setSystemUsername(&quot;q#==&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_4&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -69,11 +69,9 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="3">  3: </a></span>HashtableCache hashtableCache0 = (HashtableCache)hashtableCacheManager0.getCache(&quot;91IhRNd?6}`qeKY:|t &quot;);
-<span class="nocode"><a name="4">  4: </a></span>activeDirectoryRealm0.setAuthorizationCache((Cache) hashtableCache0);
-<span class="nocode"><a name="5">  5: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.afterAuthorizationCacheSet();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_6&quot;, activeDirectoryRealm0.getName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -320,7 +318,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -338,7 +336,7 @@ org.jsecurity.realm.ldap.AbstractLdapRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19999
+<li>process_communication_port: 13983
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

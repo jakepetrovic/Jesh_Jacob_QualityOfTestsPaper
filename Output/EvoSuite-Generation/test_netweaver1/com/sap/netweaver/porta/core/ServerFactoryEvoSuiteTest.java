@@ -73,7 +73,7 @@ public class ServerFactoryEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Properties properties0 = new Properties();
-      properties0.setProperty("server.type", "server.type");
+      properties0.put((Object) "server.type", (Object) "server.type");
       // Undeclared exception!
       try {
         ServerFactory.createServer(properties0);

@@ -7,8 +7,8 @@ package com.sap.netweaver.porta.mon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import com.sap.netweaver.porta.mon.StartAppCommand;
 import com.sap.netweaver.porta.mon.StopAppCommand;
+import com.sap.netweaver.porta.mon.UndeployCommand;
 import java.io.IOException;
 
 public class AppCommandEvoSuiteTest {
@@ -39,10 +39,10 @@ public class AppCommandEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      StartAppCommand startAppCommand0 = new StartAppCommand();
+      UndeployCommand undeployCommand0 = new UndeployCommand();
       // Undeclared exception!
       try {
-        startAppCommand0.readAppVendor();
+        undeployCommand0.readAppVendor();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -21,10 +21,10 @@ net.sf.jniinchi.JniInchiInput
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.jniinchi.JniInchiInput: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 797 statements, 308 tests.
+<ul><li>Target class: net.sf.jniinchi.JniInchiInput: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 796 statements, 273 tests.
 <li>Time: 0:00:07(Search: 0:00:05, minimization: 0:00:01)
-<li>Coverage: 2/2 branches, 6/6 methods, 7/7 total goals
+<li>Coverage: 2/2 branches, 5/6 methods, 6/7 total goals
 <li>Mutation score: 67%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,23 +33,17 @@ net.sf.jniinchi.JniInchiInput
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput();
 <span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0);
-<span class="nocode"><a name="3">  3: </a></span>assertFalse(jniInchiInput1.equals(jniInchiInput0));
+<span class="nocode"><a name="3">  3: </a></span>assertNotSame(jniInchiInput0, jniInchiInput1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0, (String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, jniInchiInput1.getNumAtoms());
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput();
+<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput((String) null);
 <span class="nocode"><a name="2">  2: </a></span>String string0 = jniInchiInput0.getOptions();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, string0);
 </pre>
-<h3>Test case 4</h3>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;Integer&gt; linkedList0 = new LinkedList&lt;Integer&gt;();
+<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
 <span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput0 = null;
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  jniInchiInput0 = new JniInchiInput((List) linkedList0);
@@ -60,12 +54,12 @@ net.sf.jniinchi.JniInchiInput
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput0 = null;
+<span class="nocode"><a name="1">  1: </a></span>JniInchiInput jniInchiInput0 = new JniInchiInput();
+<span class="nocode"><a name="2">  2: </a></span>JniInchiInput jniInchiInput1 = null;
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jniInchiInput0 = new JniInchiInput(jniInchiStructure0, &quot;R@NE1R@[da{^'&amp;I:v&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  jniInchiInput1 = new JniInchiInput((JniInchiStructure) jniInchiInput0, &quot;&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
@@ -148,8 +142,8 @@ net.sf.jniinchi.JniInchiInput
 <span class="nocode"><a name="72"> 72: </a></span>     */
 <span class="nocode"><a name="73"> 73: </a></span>    public JniInchiInput(JniInchiStructure struct, String opts) throws JniInchiException {
 <span class="nocode"><a name="74"> 74: </a></span>        this(opts);
-<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        setStructure(struct);</span>
-<span class="nocode"><a name="76"> 76: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="75"> 75: </a></span>        setStructure(struct);
+<span class="nocode"><a name="76"> 76: </a></span>    }
 <span class="nocode"><a name="77"> 77: </a></span>
 <span class="nocode"><a name="78"> 78: </a></span>    /**
 <span class="nocode"><a name="79"> 79: </a></span>     * Returns options string.
@@ -163,7 +157,7 @@ net.sf.jniinchi.JniInchiInput
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5542642508050318785.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1811122286631443384.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -181,7 +175,7 @@ net.sf.jniinchi.JniInchiInput
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20729
+<li>process_communication_port: 6865
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

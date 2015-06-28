@@ -31,7 +31,7 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       boolean boolean0 = cST_PIS0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -55,9 +55,9 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_08;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
       String string0 = cST_PIS0.getValue();
-      assertEquals("08", string0);
+      assertEquals("01", string0);
   }
 
   //Test case number: 4
@@ -69,21 +69,22 @@ public class CST_PISEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
       boolean boolean0 = cST_PIS0.isRequiredTag("");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 br.com.jnfe.base.CST_PIS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - false
    * 2 br.com.jnfe.base.CST_PIS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - false
+   * 3 br.com.jnfe.base.CST_PIS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_PIS cST_PIS0 = CST_PIS.PIS_03;
-      boolean boolean0 = cST_PIS0.isRequiredTag("qBCProd");
+      CST_PIS cST_PIS0 = CST_PIS.PIS_01;
+      boolean boolean0 = cST_PIS0.isRequiredTag("pPIS");
       assertEquals(true, boolean0);
   }
 }

@@ -24,12 +24,13 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       applicationMock0.setName("");
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054916.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001333.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("7.1003.20150608001333.0000", applicationMock0.getVersion());
   }
 
   //Test case number: 1
@@ -44,7 +45,8 @@ public class ApplicationMockEvoSuiteTest {
       assertNotNull(applicationMock0);
       
       applicationMock0.getStatus();
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054917.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001334.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("SAP AG", applicationMock0.getLocation());
   }
 
   //Test case number: 2
@@ -54,13 +56,14 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("[9(DDAt`", "[9(DDAt`");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.getName();
       assertNotNull(string0);
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054918.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: '[9(DDAt`', vendor: 'sap.com'|[9(DDAt`|sap.com|7.1003.20150608001335.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("[9(DDAt`", string0);
   }
 
   //Test case number: 3
@@ -70,29 +73,30 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      File file0 = new File("XFX(bVP#");
+      File file0 = new File("");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.getLocation();
-      assertEquals("name: 'XFX(bVP#', vendor: 'sap.com'|XFX(bVP#|sap.com|7.1003.20140427054918.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001335.0000|SAP AG|started", applicationMock0.toString());
       assertEquals("SAP AG", string0);
   }
 
   //Test case number: 4
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.sap.netweaver.porta.core.mock.ApplicationMock.setVendor(Ljava/lang/String;)V: root-Branch
+   * 2 com.sap.netweaver.porta.core.mock.ApplicationMock.getAppName(Ljava/io/File;)Ljava/lang/String;: I15 Branch 1 IF_ICMPEQ L101 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("b,>92U.a#3m{k6~e", "b,>92U.a#3m{k6~e");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
-      applicationMock0.setVendor("");
-      assertEquals("name: '', vendor: 'sap.com'|||7.1003.20140427054919.0000|SAP AG|started", applicationMock0.toString());
-      assertEquals("name: '', vendor: 'sap.com'", applicationMock0.getId());
+      applicationMock0.setVendor("b,>92U.a#3m{k6~e");
+      assertEquals("name: 'b,>92U', vendor: 'sap.com'|b,>92U|b,>92U.a#3m{k6~e|7.1003.20150608001336.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: 'b,>92U', vendor: 'sap.com'", applicationMock0.getId());
   }
 
   //Test case number: 5
@@ -106,9 +110,8 @@ public class ApplicationMockEvoSuiteTest {
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
-      applicationMock0.setVersion("");
-      assertEquals("name: '', vendor: 'sap.com'||sap.com||SAP AG|started", applicationMock0.toString());
-      assertEquals("name: '', vendor: 'sap.com'", applicationMock0.getId());
+      applicationMock0.setVersion("/");
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|/|SAP AG|started", applicationMock0.toString());
   }
 
   //Test case number: 6
@@ -118,13 +121,13 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       int int0 = applicationMock0.hashCode();
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001337.0000|SAP AG|started", applicationMock0.toString());
       assertEquals((-132277850), int0);
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054920.0000|SAP AG|started", applicationMock0.toString());
   }
 
   //Test case number: 7
@@ -134,13 +137,14 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
-      ApplicationStatus applicationStatus0 = ApplicationStatus.NOT_SUPPORTED;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.STOPPING;
       applicationMock0.setStatus(applicationStatus0);
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054921.0000|SAP AG|not supported", applicationMock0.toString());
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001337.0000|SAP AG|stopping", applicationMock0.toString());
+      assertEquals("name: '', vendor: 'sap.com'", applicationMock0.getId());
   }
 
   //Test case number: 8
@@ -150,14 +154,13 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("[9(DDAt`", "[9(DDAt`");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.getVersion();
-      assertNotNull(string0);
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054922.0000|SAP AG|started", applicationMock0.toString());
-      assertEquals("7.1003.20140427054922.0000", string0);
+      assertEquals("name: '[9(DDAt`', vendor: 'sap.com'|[9(DDAt`|sap.com|7.1003.20150608001338.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("7.1003.20150608001338.0000", string0);
   }
 
   //Test case number: 9
@@ -167,13 +170,12 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      File file0 = new File("XFX(bVP#");
+      File file0 = new File("b,>92U.a#3m{k6~e", "b,>92U.a#3m{k6~e");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
-      applicationMock0.setId("XFX(bVP#");
-      assertEquals("XFX(bVP#|XFX(bVP#|sap.com|7.1003.20140427054922.0000|SAP AG|started", applicationMock0.toString());
-      assertEquals("7.1003.20140427054922.0000", applicationMock0.getVersion());
+      applicationMock0.setId("b,>92U.a#3m{k6~e");
+      assertEquals("b,>92U.a#3m{k6~e|b,>92U|sap.com|7.1003.20150608001339.0000|SAP AG|started", applicationMock0.toString());
   }
 
   //Test case number: 10
@@ -183,28 +185,36 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test10()  throws Throwable  {
-      File file0 = new File("XFX(bVP#");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
+      assertEquals("SAP AG", applicationMock0.getLocation());
       
-      applicationMock0.setLocation("SAP AG");
-      assertEquals("name: 'XFX(bVP#', vendor: 'sap.com'|XFX(bVP#|sap.com|7.1003.20140427054923.0000|SAP AG|started", applicationMock0.toString());
+      applicationMock0.setLocation("");
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001340.0000||started", applicationMock0.toString());
   }
 
   //Test case number: 11
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.sap.netweaver.porta.core.mock.ApplicationMock.equals(Ljava/lang/Object;)Z: root-Branch
+   * 2 com.sap.netweaver.porta.core.mock.ApplicationMock.getAppName(Ljava/io/File;)Ljava/lang/String;: I15 Branch 1 IF_ICMPEQ L101 - false
    */
   @Test
   public void test11()  throws Throwable  {
-      File file0 = new File("udP'G~q#gh&M|i\"Uqd", "udP'G~q#gh&M|i\"Uqd");
+      File file0 = new File("b,>92U.a#3m{k6~e", "b,>92U.a#3m{k6~e");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
-      boolean boolean0 = applicationMock0.equals((Object) applicationMock0);
-      assertEquals("name: 'udP'G~q#gh&M|i\"Uqd', vendor: 'sap.com'|udP'G~q#gh&M|i\"Uqd|sap.com|7.1003.20140427054924.0000|SAP AG|started", applicationMock0.toString());
-      assertEquals(true, boolean0);
+      // Undeclared exception!
+      try {
+        applicationMock0.equals((Object) "A!hc,Kd");
+        fail("Expecting exception: ClassCastException");
+      } catch(ClassCastException e) {
+        /*
+         * java.lang.String cannot be cast to com.sap.netweaver.porta.core.mock.ApplicationMock
+         */
+      }
   }
 
   //Test case number: 12
@@ -214,13 +224,13 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test12()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.toString();
-      assertEquals("7.1003.20140427054924.0000", applicationMock0.getVersion());
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054924.0000|SAP AG|started", string0);
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001341.0000|SAP AG|started", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 13
@@ -230,45 +240,33 @@ public class ApplicationMockEvoSuiteTest {
    */
   @Test
   public void test13()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("[9(DDAt`", "[9(DDAt`");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.getId();
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054925.0000|SAP AG|started", applicationMock0.toString());
-      assertEquals("name: '', vendor: 'sap.com'", string0);
+      assertNotNull(string0);
+      assertEquals("name: '[9(DDAt`', vendor: 'sap.com'|[9(DDAt`|sap.com|7.1003.20150608001342.0000|SAP AG|started", applicationMock0.toString());
+      assertEquals("name: '[9(DDAt`', vendor: 'sap.com'", string0);
   }
 
   //Test case number: 14
   /*
-   * 2 covered goals:
+   * 4 covered goals:
    * 1 com.sap.netweaver.porta.core.mock.ApplicationMock.getVendor()Ljava/lang/String;: root-Branch
-   * 2 com.sap.netweaver.porta.core.mock.ApplicationMock.getAppName(Ljava/io/File;)Ljava/lang/String;: I15 Branch 1 IF_ICMPEQ L101 - true
+   * 2 com.sap.netweaver.porta.core.mock.ApplicationMock.<init>(Ljava/io/File;)V: root-Branch
+   * 3 com.sap.netweaver.porta.core.mock.ApplicationMock.getTimeStamp()Ljava/lang/String;: root-Branch
+   * 4 com.sap.netweaver.porta.core.mock.ApplicationMock.getAppName(Ljava/io/File;)Ljava/lang/String;: I15 Branch 1 IF_ICMPEQ L101 - true
    */
   @Test
   public void test14()  throws Throwable  {
-      File file0 = new File("");
+      File file0 = new File("", "");
       ApplicationMock applicationMock0 = new ApplicationMock(file0);
       assertNotNull(applicationMock0);
       
       String string0 = applicationMock0.getVendor();
-      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20140427054926.0000|SAP AG|started", applicationMock0.toString());
       assertNotNull(string0);
+      assertEquals("name: '', vendor: 'sap.com'||sap.com|7.1003.20150608001342.0000|SAP AG|started", applicationMock0.toString());
       assertEquals("sap.com", string0);
-  }
-
-  //Test case number: 15
-  /*
-   * 3 covered goals:
-   * 1 com.sap.netweaver.porta.core.mock.ApplicationMock.getAppName(Ljava/io/File;)Ljava/lang/String;: I15 Branch 1 IF_ICMPEQ L101 - false
-   * 2 com.sap.netweaver.porta.core.mock.ApplicationMock.<init>(Ljava/io/File;)V: root-Branch
-   * 3 com.sap.netweaver.porta.core.mock.ApplicationMock.getTimeStamp()Ljava/lang/String;: root-Branch
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      File file0 = new File("~)<j!NYG0Kl.(UYd4j", "~)<j!NYG0Kl.(UYd4j");
-      ApplicationMock applicationMock0 = new ApplicationMock(file0);
-      assertNotNull(applicationMock0);
-      assertEquals("name: '~)<j!NYG0Kl', vendor: 'sap.com'|~)<j!NYG0Kl|sap.com|7.1003.20140427054926.0000|SAP AG|started", applicationMock0.toString());
   }
 }

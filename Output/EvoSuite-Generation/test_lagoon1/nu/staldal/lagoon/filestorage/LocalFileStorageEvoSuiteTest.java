@@ -7,10 +7,12 @@ package nu.staldal.lagoon.filestorage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PipedOutputStream;
+import java.io.PrintStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -26,6 +28,26 @@ public class LocalFileStorageEvoSuiteTest {
 
   private static ExecutorService executor; 
 
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
+
   //Test case number: 0
   /*
    * 2 covered goals:
@@ -36,7 +58,7 @@ public class LocalFileStorageEvoSuiteTest {
   public void test0()  throws Throwable  {
       LocalFileStorage localFileStorage0 = new LocalFileStorage();
       localFileStorage0.close();
-      assertEquals(false, localFileStorage0.needPassword());
+      assertEquals(true, localFileStorage0.isReentrant());
   }
 
   //Test case number: 1
@@ -71,10 +93,14 @@ public class LocalFileStorageEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      File file0 = new File("na/V!y [5!P");
-      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-      LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) pipedOutputStream0);
-      localFileStorage_LocalOutputHandler0.commit();
+      File file0 = new File("}W", "}W");
+      LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) null);
+      // Undeclared exception!
+      try {
+        localFileStorage_LocalOutputHandler0.commit();
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 
   //Test case number: 4
@@ -90,12 +116,12 @@ public class LocalFileStorageEvoSuiteTest {
           LocalFileStorage localFileStorage0 = new LocalFileStorage();
           // Undeclared exception!
           try {
-            localFileStorage0.open("Error in Sitemap, unexpected element: ", (LagoonContext) null, "Error in Sitemap, unexpected element: ");
+            localFileStorage0.open("Xqi@YmC. %j{$}j#|[0", (LagoonContext) null, "Xqi@YmC. %j{$}j#|[0");
             fail("Expecting exception: SecurityException");
           } catch(SecurityException e) {
             /*
-             * Security manager blocks (\"java.io.FilePermission\" \"Error in Sitemap, unexpected element: \" \"write\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * Security manager blocks (\"java.io.FilePermission\" \"Xqi@YmC. %j{$}j#|[0\" \"write\")
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
              * java.io.File.mkdir(File.java:1305)
@@ -112,7 +138,7 @@ public class LocalFileStorageEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
         } catch(Throwable t) {
@@ -132,7 +158,7 @@ public class LocalFileStorageEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       LocalFileStorage localFileStorage0 = new LocalFileStorage();
-      long long0 = localFileStorage0.fileLastModified("7 OET6/");
+      long long0 = localFileStorage0.fileLastModified("8/?~?WVCC");
       assertEquals(0L, long0);
   }
 
@@ -144,7 +170,7 @@ public class LocalFileStorageEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       LocalFileStorage localFileStorage0 = new LocalFileStorage();
-      long long0 = localFileStorage0.fileLastModified("0KTn.\r Z\\B");
+      long long0 = localFileStorage0.fileLastModified("Xqi@YmC. %j{$}j#|[0");
       assertEquals(0L, long0);
   }
 
@@ -162,17 +188,17 @@ public class LocalFileStorageEvoSuiteTest {
           LocalFileStorage localFileStorage0 = new LocalFileStorage();
           // Undeclared exception!
           try {
-            localFileStorage0.createFile("7 OET6/");
+            localFileStorage0.createFile("/nu/staldal/lagoon/filestorage/FileStorage");
             fail("Expecting exception: SecurityException");
           } catch(SecurityException e) {
             /*
-             * Security manager blocks (\"java.io.FilePermission\" \" OET6\" \"write\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * Security manager blocks (\"java.io.FilePermission\" \"nu\" \"write\")
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
              * java.io.File.mkdir(File.java:1305)
              * nu.staldal.lagoon.filestorage.LocalFileStorage.createFile(LocalFileStorage.java:148)
-             * sun.reflect.GeneratedMethodAccessor33.invoke(Unknown Source)
+             * sun.reflect.GeneratedMethodAccessor28.invoke(Unknown Source)
              * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
              * java.lang.reflect.Method.invoke(Method.java:606)
              * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
@@ -183,7 +209,7 @@ public class LocalFileStorageEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
         } catch(Throwable t) {
@@ -207,18 +233,18 @@ public class LocalFileStorageEvoSuiteTest {
           LocalFileStorage localFileStorage0 = new LocalFileStorage();
           // Undeclared exception!
           try {
-            localFileStorage0.createFile("}");
+            localFileStorage0.createFile("^JM");
             fail("Expecting exception: SecurityException");
           } catch(SecurityException e) {
             /*
-             * Security manager blocks (\"java.io.FilePermission\" \"\" \"write\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * Security manager blocks (\"java.io.FilePermission\" \"JM\" \"write\")
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkWrite(SecurityManager.java:979)
              * java.io.FileOutputStream.<init>(FileOutputStream.java:209)
              * java.io.FileOutputStream.<init>(FileOutputStream.java:171)
              * nu.staldal.lagoon.filestorage.LocalFileStorage.createFile(LocalFileStorage.java:155)
-             * sun.reflect.GeneratedMethodAccessor33.invoke(Unknown Source)
+             * sun.reflect.GeneratedMethodAccessor28.invoke(Unknown Source)
              * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
              * java.lang.reflect.Method.invoke(Method.java:606)
              * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
@@ -229,7 +255,7 @@ public class LocalFileStorageEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
         } catch(Throwable t) {
@@ -249,7 +275,7 @@ public class LocalFileStorageEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       LocalFileStorage localFileStorage0 = new LocalFileStorage();
-      localFileStorage0.deleteFile("yA!v*Z/z(jLe^tBb/{-");
+      localFileStorage0.deleteFile("M$^qFE^$C/\"7$l1qQ`");
       assertEquals(false, localFileStorage0.needPassword());
   }
 
@@ -263,8 +289,8 @@ public class LocalFileStorageEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       LocalFileStorage localFileStorage0 = new LocalFileStorage();
-      localFileStorage0.deleteFile("}");
-      assertEquals(true, localFileStorage0.isReentrant());
+      localFileStorage0.deleteFile("Xqi@YmC. %j{$}j#|[0");
+      assertEquals(false, localFileStorage0.needPassword());
   }
 
   //Test case number: 11
@@ -277,18 +303,18 @@ public class LocalFileStorageEvoSuiteTest {
     Future<?> future = executor.submit(new Runnable(){ 
             public void run() { 
         try {
-          File file0 = new File("");
-          File file1 = file0.getCanonicalFile();
-          PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-          LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file1, (OutputStream) pipedOutputStream0);
+          File file0 = new File("", "");
+          ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(54);
+          PrintStream printStream0 = new PrintStream((OutputStream) byteArrayOutputStream0, true);
+          LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) printStream0);
           // Undeclared exception!
           try {
             localFileStorage_LocalOutputHandler0.discard();
             fail("Expecting exception: SecurityException");
           } catch(SecurityException e) {
             /*
-             * Security manager blocks (\"java.io.FilePermission\" \"/home/jeshkracht\" \"delete\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * Security manager blocks (\"java.io.FilePermission\" \"/\" \"delete\")
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkDelete(SecurityManager.java:1007)
              * java.io.File.delete(File.java:1030)
@@ -305,7 +331,7 @@ public class LocalFileStorageEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
         } catch(Throwable t) {
@@ -324,7 +350,7 @@ public class LocalFileStorageEvoSuiteTest {
    */
   @Test
   public void test12()  throws Throwable  {
-      File file0 = new File("na/V!y [5!P");
+      File file0 = new File("Unable to instantiate file storage class (illegal access): ", "Unable to instantiate file storage class (illegal access): ");
       PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
       LocalFileStorage.LocalOutputHandler localFileStorage_LocalOutputHandler0 = new LocalFileStorage.LocalOutputHandler(file0, (OutputStream) pipedOutputStream0);
       localFileStorage_LocalOutputHandler0.discard();

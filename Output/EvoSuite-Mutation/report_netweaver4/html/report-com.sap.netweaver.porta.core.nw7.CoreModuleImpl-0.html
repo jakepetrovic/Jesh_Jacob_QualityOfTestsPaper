@@ -22,7 +22,7 @@ com.sap.netweaver.porta.core.nw7.CoreModuleImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.core.nw7.CoreModuleImpl: 75.00%</ul><ul>
-<li>12616 fitness evaluations, 254 generations, 35499 statements, 8239 tests.
+<li>12812 fitness evaluations, 258 generations, 36834 statements, 8329 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 3/3 methods, 3/4 total goals
 <li>Mutation score: 0%
@@ -31,21 +31,21 @@ com.sap.netweaver.porta.core.nw7.CoreModuleImpl
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl(&quot;A&quot;, (-20));
+<span class="nocode"><a name="1">  1: </a></span>DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl(&quot;&quot;, (-1887));
 <span class="nocode"><a name="2">  2: </a></span>SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
 <span class="nocode"><a name="3">  3: </a></span>deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, deployManagerImpl0.initialized());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl(&quot;A&quot;, (-20));
+<span class="nocode"><a name="1">  1: </a></span>DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl(&quot;&quot;, (-1887));
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  deployManagerImpl0.checkInitialized();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: CoreException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(CoreException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
+<span class="nocode"><a name="8">  8: </a></span>   * java.net.MalformedURLException: Invalid port number :-138687
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
@@ -97,7 +97,7 @@ com.sap.netweaver.porta.core.nw7.CoreModuleImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5677244099060051759.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5222150457902357586.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -115,7 +115,7 @@ com.sap.netweaver.porta.core.nw7.CoreModuleImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6786
+<li>process_communication_port: 10839
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

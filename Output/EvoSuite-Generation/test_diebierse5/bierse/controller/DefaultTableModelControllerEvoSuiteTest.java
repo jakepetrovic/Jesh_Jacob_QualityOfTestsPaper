@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 import bierse.controller.DefaultTableModelController;
 import bierse.model.Model;
 import bierse.view.IDrinkSellView;
-import java.util.Vector;
+import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -27,10 +27,11 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel((Vector) null, 4);
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-2022), 4);
+      JTable jTable0 = new JTable();
+      DefaultTableModel defaultTableModel0 = (DefaultTableModel)jTable0.getModel();
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-764), (-764));
       defaultTableModelController0.tableChanged(tableModelEvent0);
-      assertEquals(0, tableModelEvent0.getType());
+      assertEquals(-1, tableModelEvent0.getColumn());
   }
 
   //Test case number: 1
@@ -42,15 +43,16 @@ public class DefaultTableModelControllerEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-      DefaultTableModel defaultTableModel0 = new DefaultTableModel((Vector) null, 4);
-      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 4, 4, 4, 4);
+      Object[][] objectArray0 = new Object[9][2];
+      DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[8]);
+      TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, 285);
       // Undeclared exception!
       try {
         defaultTableModelController0.tableChanged(tableModelEvent0);
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
         /*
-         * 4 >= 4
+         * 285 >= 9
          */
       }
   }

@@ -19,8 +19,8 @@ public class TpImpEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpImp tpImp0 = TpImp.RETRATO;
+      TpImp tpImp0 = TpImp.PAISAGEM;
       char char0 = tpImp0.getValue();
-      assertEquals('1', char0);
+      assertEquals('2', char0);
   }
 }

@@ -22,14 +22,29 @@ org.jsecurity.realm.ldap.DefaultLdapContextFactory
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.ldap.DefaultLdapContextFactory: 91.67%</ul><ul>
-<li>7302 fitness evaluations, 148 generations, 48800 statements, 4756 tests.
-<li>Time: 0:01:03(Search: 0:01:01, minimization: 0:00:02)
+<li>11224 fitness evaluations, 226 generations, 58503 statements, 6941 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 21/24 branches, 13/13 methods, 33/36 total goals
 <li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSystemUsername(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * java.naming.provider.url property does not contain a URL
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
+</pre>
+<h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -42,25 +57,75 @@ org.jsecurity.realm.ldap.DefaultLdapContextFactory
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setAuthentication(&quot; ,B?(f7M&quot;);
-</pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setReferral(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSystemPassword(&quot;!&quot;);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setContextFactoryClassName(&quot; ,B?(f7M&quot;);
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setPrincipalSuffix(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getLdapContext(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * java.naming.provider.url property does not contain a URL
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSearchBase(&quot; ,B?(f7M&quot;);
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setAuthentication(&quot;0_{xcoD]`F&quot;);
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setReferral(&quot;&quot;);
+</pre>
+<h3>Test case 7</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setContextFactoryClassName(&quot;&quot;);
+</pre>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setAdditionalEnvironment((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * java.naming.provider.url property does not contain a URL
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setUrl(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * java.naming.provider.url property does not contain a URL
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
@@ -71,82 +136,20 @@ org.jsecurity.realm.ldap.DefaultLdapContextFactory
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
-<h3>Test case 6</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSystemUsername(&quot;org.apache.mmons.logging.diagnostics.dest&quot;);
-<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;v)tw&gt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setUrl(&quot;Wf=jzkr!&quot;);
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NamingException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NamingException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Cannot parse url: Wf=jzkr!
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSystemUsername(&quot;org.apache.mmons.logging.diagnostics.dest&quot;);
-<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;v)tw&gt;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setUrl(&quot;Wf=jzkr!&quot;);
-<span class="nocode"><a name="5">  5: </a></span>defaultLdapContextFactory0.setPrincipalSuffix(&quot;org.apache.mmons.logging.diagnostics.dest&quot;);
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NamingException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NamingException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Cannot parse url: Wf=jzkr!
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setUrl(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSystemPassword(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setSearchBase(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NamingException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NamingException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Cannot parse url: ,B?(f7M
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setUrl(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot; ,B?(f7M&quot;);
+<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setSearchBase(&quot;0_{xcoD]`F&quot;);
+<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setUrl(&quot;0_{xcoD]`F&quot;);
 <span class="nocode"><a name="4">  4: </a></span>defaultLdapContextFactory0.setUsePooling(false);
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
+<span class="nocode"><a name="6">  6: </a></span>  defaultLdapContextFactory0.getLdapContext(&quot;0_{xcoD]`F&quot;, &quot;0_{xcoD]`F&quot;);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NamingException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(NamingException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Cannot parse url: ,B?(f7M
+<span class="nocode"><a name="10"> 10: </a></span>   * Cannot parse url: 0_{xcoD]`F
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultLdapContextFactory defaultLdapContextFactory0 = new DefaultLdapContextFactory();
-<span class="nocode"><a name="2">  2: </a></span>defaultLdapContextFactory0.setUrl(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="3">  3: </a></span>defaultLdapContextFactory0.setSearchBase(&quot; ,B?(f7M&quot;);
-<span class="nocode"><a name="4">  4: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>defaultLdapContextFactory0.setAdditionalEnvironment((Map&lt;String, String&gt;) hashMap0);
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  defaultLdapContextFactory0.getSystemLdapContext();
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NamingException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NamingException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * Cannot parse url: ,B?(f7M
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -397,7 +400,7 @@ org.jsecurity.realm.ldap.DefaultLdapContextFactory
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -415,7 +418,7 @@ org.jsecurity.realm.ldap.DefaultLdapContextFactory
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15517
+<li>process_communication_port: 17554
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

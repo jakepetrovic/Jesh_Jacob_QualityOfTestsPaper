@@ -8,8 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
+import java.net.MalformedURLException;
 import nu.staldal.xtree.Element;
 import nu.staldal.xtree.ElementHandler;
 import nu.staldal.xtree.SequentialTreeBuilder;
@@ -18,33 +17,28 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-import org.xml.sax.ext.Attributes2Impl;
+import org.xml.sax.ext.Locator2Impl;
 import org.xml.sax.helpers.AttributesImpl;
-import org.xml.sax.helpers.LocatorImpl;
 
 public class SequentialTreeBuilderEvoSuiteTest {
 
 
   //Test case number: 0
   /*
-   * 6 covered goals:
+   * 3 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.parseXMLSequential(Lorg/xml/sax/InputSource;ZLnu/staldal/xtree/ElementHandler;)Lnu/staldal/xtree/Element;: root-Branch
-   * 2 nu.staldal.xtree.SequentialTreeBuilder.startDocument()V: root-Branch
-   * 3 nu.staldal.xtree.SequentialTreeBuilder.<init>(Lnu/staldal/xtree/ElementHandler;)V: root-Branch
-   * 4 nu.staldal.xtree.SequentialTreeBuilder.fatalError(Lorg/xml/sax/SAXParseException;)V: root-Branch
-   * 5 nu.staldal.xtree.SequentialTreeBuilder.<init>(Lnu/staldal/xtree/ElementHandler;Ljava/net/URL;)V: root-Branch
-   * 6 nu.staldal.xtree.SequentialTreeBuilder.setDocumentLocator(Lorg/xml/sax/Locator;)V: root-Branch
+   * 2 nu.staldal.xtree.SequentialTreeBuilder.<init>(Lnu/staldal/xtree/ElementHandler;)V: root-Branch
+   * 3 nu.staldal.xtree.SequentialTreeBuilder.<init>(Lnu/staldal/xtree/ElementHandler;Ljava/net/URL;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      StringReader stringReader0 = new StringReader("");
-      InputSource inputSource0 = new InputSource((Reader) stringReader0);
+      InputSource inputSource0 = new InputSource("<$`pxcJ#^");
       try {
-        SequentialTreeBuilder.parseXMLSequential(inputSource0, false, (ElementHandler) null);
-        fail("Expecting exception: SAXParseException");
-      } catch(SAXParseException e) {
+        SequentialTreeBuilder.parseXMLSequential(inputSource0, true, (ElementHandler) null);
+        fail("Expecting exception: MalformedURLException");
+      } catch(MalformedURLException e) {
         /*
-         * Premature end of file.
+         * no protocol: <$`pxcJ#^
          */
       }
   }
@@ -63,21 +57,48 @@ public class SequentialTreeBuilderEvoSuiteTest {
   //Test case number: 2
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.endDocument()V: root-Branch
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.startDocument()V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.endDocument();
+      sequentialTreeBuilder0.startDocument();
   }
 
   //Test case number: 3
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.error(Lorg/xml/sax/SAXParseException;)V: root-Branch
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.endDocument()V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
+      SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
+      sequentialTreeBuilder0.endDocument();
+  }
+
+  //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.fatalError(Lorg/xml/sax/SAXParseException;)V: root-Branch
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
+      // Undeclared exception!
+      try {
+        sequentialTreeBuilder0.fatalError((SAXParseException) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 5
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.error(Lorg/xml/sax/SAXParseException;)V: root-Branch
+   */
+  @Test
+  public void test5()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
       // Undeclared exception!
       try {
@@ -87,18 +108,18 @@ public class SequentialTreeBuilderEvoSuiteTest {
       }
   }
 
-  //Test case number: 4
+  //Test case number: 6
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.endPrefixMapping(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test4()  throws Throwable  {
+  public void test6()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.endPrefixMapping((String) null);
+      sequentialTreeBuilder0.endPrefixMapping("<$`pxcJ#^");
   }
 
-  //Test case number: 5
+  //Test case number: 7
   /*
    * 6 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.getRootElement()Lnu/staldal/xtree/Element;: I4 Branch 1 IFNONNULL L155 - true
@@ -109,21 +130,23 @@ public class SequentialTreeBuilderEvoSuiteTest {
    * 6 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I134 Branch 8 IFNULL L217 - true
    */
   @Test
-  public void test5()  throws Throwable  {
+  public void test7()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      sequentialTreeBuilder0.startElement("No text content", "No text content", "", (Attributes) attributesImpl0);
       Element element0 = sequentialTreeBuilder0.getRootElement();
-      assertEquals("", element0.getTextContentOrNull());
+      assertEquals("No text content", element0.getNamespaceURI());
+      assertEquals("No text content", element0.getLocalName());
+      assertNotNull(element0);
   }
 
-  //Test case number: 6
+  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.getRootElement()Lnu/staldal/xtree/Element;: I4 Branch 1 IFNONNULL L155 - false
    */
   @Test
-  public void test6()  throws Throwable  {
+  public void test8()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
       try {
         sequentialTreeBuilder0.getRootElement();
@@ -135,7 +158,7 @@ public class SequentialTreeBuilderEvoSuiteTest {
       }
   }
 
-  //Test case number: 7
+  //Test case number: 9
   /*
    * 3 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 9 IFLE L236 - false
@@ -143,51 +166,36 @@ public class SequentialTreeBuilderEvoSuiteTest {
    * 3 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I4 Branch 2 IFNONNULL L189 - true
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test9()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      sequentialTreeBuilder0.startElement("", "", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      sequentialTreeBuilder0.startElement("No text content", "No text content", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
       // Undeclared exception!
       try {
-        sequentialTreeBuilder0.endElement("", "", "");
+        sequentialTreeBuilder0.endElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 8
+  //Test case number: 10
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I20 Branch 3 IFNULL L192 - false
    * 2 nu.staldal.xtree.SequentialTreeBuilder.setDocumentLocator(Lorg/xml/sax/Locator;)V: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
-      SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      LocatorImpl locatorImpl0 = new LocatorImpl();
-      sequentialTreeBuilder0.setDocumentLocator((Locator) locatorImpl0);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      assertEquals(0, attributes2Impl0.getLength());
-  }
-
-  //Test case number: 9
-  /*
-   * 2 covered goals:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I63 Branch 5 IF_ICMPGE L199 - false
-   * 2 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I88 Branch 6 IFLE L203 - true
-   */
-  @Test
-  public void test9()  throws Throwable  {
+  public void test10()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
       AttributesImpl attributesImpl0 = new AttributesImpl();
-      attributesImpl0.addAttribute(")rP", ")rP", ")rP", ")rP", ")rP");
-      sequentialTreeBuilder0.startElement(")rP", ")rP", ")rP", (Attributes) attributesImpl0);
-      assertEquals(1, attributesImpl0.getLength());
+      Locator2Impl locator2Impl0 = new Locator2Impl();
+      sequentialTreeBuilder0.setDocumentLocator((Locator) locator2Impl0);
+      sequentialTreeBuilder0.startElement((String) null, "", "", (Attributes) attributesImpl0);
+      assertEquals(0, attributesImpl0.getLength());
   }
 
-  //Test case number: 10
+  //Test case number: 11
   /*
    * 3 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I134 Branch 8 IFNULL L217 - false
@@ -195,55 +203,55 @@ public class SequentialTreeBuilderEvoSuiteTest {
    * 3 nu.staldal.xtree.SequentialTreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I9 Branch 12 IFNONNULL L265 - false
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test11()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.startPrefixMapping("", "");
+      sequentialTreeBuilder0.startPrefixMapping((String) null, "");
       AttributesImpl attributesImpl0 = new AttributesImpl();
-      sequentialTreeBuilder0.startElement("", "", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
       assertEquals(0, attributesImpl0.getLength());
   }
 
-  //Test case number: 11
+  //Test case number: 12
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 9 IFLE L236 - true
    */
   @Test
-  public void test11()  throws Throwable  {
+  public void test12()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.endElement("` bo4;<Y%", "` bo4;<Y%", "` bo4;<Y%");
+      sequentialTreeBuilder0.endElement("", "", "");
   }
 
-  //Test case number: 12
+  //Test case number: 13
   /*
    * 2 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I18 Branch 10 IF_ICMPNE L240 - true
    * 2 nu.staldal.xtree.SequentialTreeBuilder.endElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 9 IFLE L236 - false
    */
   @Test
-  public void test12()  throws Throwable  {
+  public void test13()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
       AttributesImpl attributesImpl0 = new AttributesImpl();
-      sequentialTreeBuilder0.startElement("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.startElement("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.startElement("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", "-AR RP\"k@g1#d=)}b", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.endElement("X2@Bhj%}uUClO)8[[", (String) null, "");
+      sequentialTreeBuilder0.startElement("No text content", "No text content", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.endElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "");
   }
 
-  //Test case number: 13
+  //Test case number: 14
   /*
    * 1 covered goal:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 11 IFNONNULL L263 - true
    */
   @Test
-  public void test13()  throws Throwable  {
+  public void test14()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
       AttributesImpl attributesImpl0 = new AttributesImpl();
-      sequentialTreeBuilder0.startElement(")rP", ")rP", ")rP", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.startPrefixMapping(")rP", ")rP");
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startPrefixMapping("8_RX/uiW<|nwx", "");
   }
 
-  //Test case number: 14
+  //Test case number: 15
   /*
    * 3 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I9 Branch 12 IFNONNULL L265 - true
@@ -251,42 +259,22 @@ public class SequentialTreeBuilderEvoSuiteTest {
    * 3 nu.staldal.xtree.SequentialTreeBuilder.startPrefixMapping(Ljava/lang/String;Ljava/lang/String;)V: I9 Branch 12 IFNONNULL L265 - false
    */
   @Test
-  public void test14()  throws Throwable  {
-      SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.startPrefixMapping("", "");
-      sequentialTreeBuilder0.startPrefixMapping("k}]/Cn*xf;*R7T}h(", "k}]/Cn*xf;*R7T}h(");
-  }
-
-  //Test case number: 15
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.characters([CII)V: I4 Branch 13 IFLE L291 - true
-   */
-  @Test
   public void test15()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      char[] charArray0 = new char[4];
-      sequentialTreeBuilder0.characters(charArray0, 0, (int) '$');
+      sequentialTreeBuilder0.startPrefixMapping((String) null, (String) null);
+      sequentialTreeBuilder0.startPrefixMapping("}Ok", "}Ok");
   }
 
   //Test case number: 16
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.characters([CII)V: I4 Branch 13 IFLE L291 - false
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.characters([CII)V: I4 Branch 13 IFLE L291 - true
    */
   @Test
   public void test16()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      sequentialTreeBuilder0.startElement("", "", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      char[] charArray0 = new char[7];
-      // Undeclared exception!
-      try {
-        sequentialTreeBuilder0.characters(charArray0, (int) 'd', 100);
-        fail("Expecting exception: ArrayIndexOutOfBoundsException");
-      } catch(ArrayIndexOutOfBoundsException e) {
-      }
+      char[] charArray0 = new char[10];
+      sequentialTreeBuilder0.characters(charArray0, (int) 'U', 1);
   }
 
   //Test case number: 17
@@ -297,62 +285,47 @@ public class SequentialTreeBuilderEvoSuiteTest {
   @Test
   public void test17()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      char[] charArray0 = new char[1];
-      sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) '*', 173);
+      char[] charArray0 = new char[6];
+      sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) 'S', (int) '\u0000');
   }
 
   //Test case number: 18
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.ignorableWhitespace([CII)V: I4 Branch 14 IFLE L298 - false
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 15 IFLE L305 - true
    */
   @Test
   public void test18()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      sequentialTreeBuilder0.startElement("", "", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      char[] charArray0 = new char[7];
-      sequentialTreeBuilder0.ignorableWhitespace(charArray0, (int) 'd', (int) 'd');
+      sequentialTreeBuilder0.processingInstruction("", "");
   }
 
   //Test case number: 19
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 15 IFLE L305 - true
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 15 IFLE L305 - false
    */
   @Test
   public void test19()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.processingInstruction("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[");
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      sequentialTreeBuilder0.startElement("No text content", "No text content", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.processingInstruction("", "");
   }
 
   //Test case number: 20
   /*
    * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.processingInstruction(Ljava/lang/String;Ljava/lang/String;)V: I4 Branch 15 IFLE L305 - false
+   * 1 nu.staldal.xtree.SequentialTreeBuilder.skippedEntity(Ljava/lang/String;)V: I4 Branch 16 IFLE L312 - true
    */
   @Test
   public void test20()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      AttributesImpl attributesImpl0 = new AttributesImpl();
-      sequentialTreeBuilder0.startElement("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.startElement("X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", "X2@Bhj%}uUClO)8[[", (Attributes) attributesImpl0);
-      sequentialTreeBuilder0.processingInstruction((String) null, (String) null);
+      sequentialTreeBuilder0.skippedEntity("}Ok");
   }
 
   //Test case number: 21
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.SequentialTreeBuilder.skippedEntity(Ljava/lang/String;)V: I4 Branch 16 IFLE L312 - true
-   */
-  @Test
-  public void test21()  throws Throwable  {
-      SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      sequentialTreeBuilder0.skippedEntity("http://xml.org/sax/features/validation");
-  }
-
-  //Test case number: 22
   /*
    * 9 covered goals:
    * 1 nu.staldal.xtree.SequentialTreeBuilder.skippedEntity(Ljava/lang/String;)V: I4 Branch 16 IFLE L312 - false
@@ -366,11 +339,11 @@ public class SequentialTreeBuilderEvoSuiteTest {
    * 9 nu.staldal.xtree.SequentialTreeBuilder.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I134 Branch 8 IFNULL L217 - true
    */
   @Test
-  public void test22()  throws Throwable  {
+  public void test21()  throws Throwable  {
       SequentialTreeBuilder sequentialTreeBuilder0 = new SequentialTreeBuilder((ElementHandler) null);
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      sequentialTreeBuilder0.startElement("!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      sequentialTreeBuilder0.startElement("", "", "!oXg<vN6_uPk}i", (Attributes) attributes2Impl0);
-      sequentialTreeBuilder0.skippedEntity("");
+      AttributesImpl attributesImpl0 = new AttributesImpl();
+      sequentialTreeBuilder0.startElement("No text content", "No text content", "", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.startElement("bj|I/[3^!h&}6,Jx*", "bj|I/[3^!h&}6,Jx*", "8_RX/uiW<|nwx", (Attributes) attributesImpl0);
+      sequentialTreeBuilder0.skippedEntity("bj|I/[3^!h&}6,Jx*");
   }
 }

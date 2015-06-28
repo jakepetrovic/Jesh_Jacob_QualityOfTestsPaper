@@ -8,12 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import nu.staldal.lagoon.core.AuthenticationException;
-import nu.staldal.lagoon.core.AuthenticationMissingException;
 import nu.staldal.lagoon.core.LagoonException;
 import nu.staldal.lagoon.core.LagoonProcessor;
+import nu.staldal.lagoon.core.Sitemap;
 import nu.staldal.xtree.Element;
 
 public class SitemapEvoSuiteTest {
@@ -26,11 +23,11 @@ public class SitemapEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Element element0 = new Element("", "");
-      File file0 = new File("");
-      LagoonProcessor lagoonProcessor0 = null;
+      Element element0 = new Element("pat-tern", "pat-tern", 1253);
+      File file0 = new File("pat-tern");
+      Sitemap sitemap0 = null;
       try {
-        lagoonProcessor0 = new LagoonProcessor("", element0, file0, "", (PrintWriter) null, (PrintWriter) null);
+        sitemap0 = new Sitemap((LagoonProcessor) null, element0, file0);
         fail("Expecting exception: LagoonException");
       } catch(LagoonException e) {
         /*

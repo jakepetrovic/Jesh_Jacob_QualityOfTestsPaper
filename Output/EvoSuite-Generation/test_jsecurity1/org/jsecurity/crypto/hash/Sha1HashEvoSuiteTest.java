@@ -20,31 +20,47 @@ public class Sha1HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "");
-      assertEquals("2jmj7l5rSw0yVb/vlWAYkK/YBwk=", sha1Hash0.toBase64());
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "\uFFFD");
+      assertEquals("m9t3J2wYUuH7BnggRygS/PYIQCQ=", sha1Hash0.toBase64());
   }
 
   //Test case number: 1
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>()V: root-Branch
-   * 2 org.jsecurity.crypto.hash.Sha1Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha1Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Sha1Hash sha1Hash0 = Sha1Hash.fromHexString("");
-      assertEquals("", sha1Hash0.toString());
+      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("cCp2` ap!+$$r #kl");
+      assertEquals("702a766a9fab0000", sha1Hash0.toHex());
   }
 
   //Test case number: 2
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.crypto.hash.Sha1Hash.fromBase64String(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
+   * 1 org.jsecurity.crypto.hash.Sha1Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha1Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha1Hash.<init>()V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      Sha1Hash sha1Hash0 = Sha1Hash.fromBase64String("");
-      assertEquals("", sha1Hash0.toString());
+      // Undeclared exception!
+      try {
+        Sha1Hash.fromHexString((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 3
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Sha1Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;I)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha1Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      Sha1Hash sha1Hash0 = new Sha1Hash((Object) "", (Object) "SHA-1", 0);
+      assertEquals("xXG4ZUnkm/Ijz2SDiMRiiMIkG1o=", sha1Hash0.toBase64());
   }
 }

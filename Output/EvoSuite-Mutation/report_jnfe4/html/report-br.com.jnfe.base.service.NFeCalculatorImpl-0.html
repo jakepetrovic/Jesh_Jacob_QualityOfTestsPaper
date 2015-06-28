@@ -22,10 +22,10 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: br.com.jnfe.base.service.NFeCalculatorImpl: 44.44%</ul><ul>
-<li>6446 fitness evaluations, 130 generations, 28694 statements, 4222 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>4160 fitness evaluations, 85 generations, 18346 statements, 2916 tests.
+<li>Time: 0:01:12(Search: 0:01:12, minimization: 0:00:00)
 <li>Coverage: 4/14 branches, 6/9 methods, 8/18 total goals
-<li>Mutation score: 4%
+<li>Mutation score: 9%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -52,16 +52,17 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.ZERO;
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.TEN;
 <span class="nocode"><a name="3">  3: </a></span>BigDecimal bigDecimal1 = nFeCalculatorImpl0.internalCalculate(bigDecimal0, bigDecimal0);
-<span class="nocode"><a name="4">  4: </a></span>assertSame(bigDecimal0, bigDecimal1);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(bigDecimal1);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1, bigDecimal1.intValueExact());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.ONE;
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.TEN;
 <span class="nocode"><a name="3">  3: </a></span>nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1, bigDecimal0.signum());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(10, bigDecimal0.intValue());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -79,7 +80,7 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.ZERO;
+<span class="nocode"><a name="2">  2: </a></span>BigDecimal bigDecimal0 = BigDecimal.TEN;
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);
@@ -216,7 +217,7 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree6685684925842543699.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5932116168243305726.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -234,7 +235,7 @@ br.com.jnfe.base.service.NFeCalculatorImpl
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16997
+<li>process_communication_port: 21284
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

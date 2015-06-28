@@ -36,7 +36,7 @@ public class FormatterProviderImplEvoSuiteTest {
   public void test1()  throws Throwable  {
       FormatterProviderImpl formatterProviderImpl0 = new FormatterProviderImpl();
       Class<?> class0 = FormatterProviderImpl.class;
-      Formatter<String> formatter0 = formatterProviderImpl0.getFormatter(class0);
+      Formatter<Formatter<Formatter<Integer>>> formatter0 = formatterProviderImpl0.getFormatter(class0);
       assertNull(formatter0);
   }
 }

@@ -22,7 +22,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.realm.activedirectory.ActiveDirectoryRealm: 50.00%</ul><ul>
-<li>18962 fitness evaluations, 381 generations, 106162 statements, 11773 tests.
+<li>17460 fitness evaluations, 351 generations, 121487 statements, 10934 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 9/24 branches, 7/8 methods, 15/30 total goals
 <li>Mutation score: 43%
@@ -44,10 +44,10 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  activeDirectoryRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>  activeDirectoryRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NoSuchElementException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -55,44 +55,46 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set&lt;String&gt;) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(simpleAuthorizationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = (SimpleAuthorizationInfo)activeDirectoryRealm0.buildAuthorizationInfo((Set&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(simpleAuthorizationInfo0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[2];
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo(&quot;&quot;, charArray0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)activeDirectoryRealm0.buildAuthenticationInfo(&quot;UPd%u@?q5xn-[Q&quot;, charArray0);
 <span class="nocode"><a name="4">  4: </a></span>assertNotNull(simpleAuthenticationInfo0);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_11&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) treeSet0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_13&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
-<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>hashSet0.add(&quot;nZ$9qZzQBdI(q&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>hashSet0.add(&quot;/;::?&quot;);
+<span class="nocode"><a name="4">  4: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="5">  5: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
 <span class="nocode"><a name="6">  6: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) hashSet0);
 <span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_17&quot;, activeDirectoryRealm0.getName());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ActiveDirectoryRealm activeDirectoryRealm0 = new ActiveDirectoryRealm();
-<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(&quot;nZ$9qZzQBdI(q&quot;, &quot;nZ$9qZzQBdI(q&quot;);
-<span class="nocode"><a name="4">  4: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
-<span class="nocode"><a name="5">  5: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="6">  6: </a></span>hashSet0.add(&quot;nZ$9qZzQBdI(q&quot;);
-<span class="nocode"><a name="7">  7: </a></span>activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) hashSet0);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>hashSet0.add(&quot;/;::?&quot;);
+<span class="nocode"><a name="4">  4: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="5">  5: </a></span>activeDirectoryRealm0.setGroupRolesMap((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="6">  6: </a></span>hashMap0.put(&quot;/;::?&quot;, &quot;/;::?&quot;);
+<span class="nocode"><a name="7">  7: </a></span>Collection&lt;String&gt; collection0 = activeDirectoryRealm0.getRoleNamesForGroups((Collection&lt;String&gt;) hashSet0);
 <span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;org.jsecurity.realm.activedirectory.ActiveDirectoryRealm_29&quot;, activeDirectoryRealm0.getName());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(1, collection0.size());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -338,7 +340,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -356,7 +358,7 @@ org.jsecurity.realm.activedirectory.ActiveDirectoryRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20890
+<li>process_communication_port: 16030
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

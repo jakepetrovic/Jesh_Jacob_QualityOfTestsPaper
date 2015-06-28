@@ -11,7 +11,6 @@ import br.com.jnfe.base.ICMSExt;
 import br.com.jnfe.base.ICMSST;
 import br.com.jnfe.base.service.NFeCalculatorImpl;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class NFeCalculatorImplEvoSuiteTest {
 
@@ -57,9 +56,10 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ZERO;
+      BigDecimal bigDecimal0 = new BigDecimal((-1338));
       BigDecimal bigDecimal1 = nFeCalculatorImpl0.internalCalculate(bigDecimal0, bigDecimal0);
-      assertEquals(0, bigDecimal1.signum());
+      assertNotNull(bigDecimal1);
+      assertEquals(17902, bigDecimal1.intValue());
   }
 
   //Test case number: 3
@@ -71,9 +71,9 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigDecimal bigDecimal0 = BigDecimal.ZERO;
+      BigDecimal bigDecimal0 = new BigDecimal((-1338));
       nFeCalculatorImpl0.validate(bigDecimal0, bigDecimal0);
-      assertEquals(0.0F, bigDecimal0.floatValue(), 0.01F);
+      assertEquals("-1338", bigDecimal0.toString());
   }
 
   //Test case number: 4
@@ -105,8 +105,7 @@ public class NFeCalculatorImplEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       NFeCalculatorImpl nFeCalculatorImpl0 = new NFeCalculatorImpl();
-      BigInteger bigInteger0 = BigInteger.ZERO;
-      BigDecimal bigDecimal0 = new BigDecimal(bigInteger0);
+      BigDecimal bigDecimal0 = new BigDecimal(1500);
       // Undeclared exception!
       try {
         nFeCalculatorImpl0.validate(bigDecimal0, (BigDecimal) null);

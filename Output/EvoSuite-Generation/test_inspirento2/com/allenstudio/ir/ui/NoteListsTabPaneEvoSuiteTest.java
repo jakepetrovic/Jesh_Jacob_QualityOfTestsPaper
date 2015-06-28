@@ -21,6 +21,26 @@ public class NoteListsTabPaneEvoSuiteTest {
 
   private static ExecutorService executor; 
 
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
+
   //Test case number: 0
   /*
    * 2 covered goals:
@@ -38,7 +58,7 @@ public class NoteListsTabPaneEvoSuiteTest {
           } catch(SecurityException e) {
             /*
              * Security manager blocks (\"java.lang.RuntimePermission\" \"exitVM.-6\")
-             * java.lang.Thread.getStackTrace(Thread.java:1588)
+             * java.lang.Thread.getStackTrace(Thread.java:1589)
              * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
              * java.lang.SecurityManager.checkExit(SecurityManager.java:761)
              * java.lang.Runtime.exit(Runtime.java:107)
@@ -59,7 +79,7 @@ public class NoteListsTabPaneEvoSuiteTest {
              * java.util.concurrent.FutureTask.run(FutureTask.java:262)
              * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
              * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-             * java.lang.Thread.run(Thread.java:744)
+             * java.lang.Thread.run(Thread.java:745)
              */
           }
       } 

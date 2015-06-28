@@ -25,7 +25,7 @@ public class BuildsEvoSuiteTest {
   public void test0()  throws Throwable  {
       Builds builds0 = new Builds();
       List<Build> list0 = builds0.getBuilds();
-      assertEquals(0, list0.size());
+      assertEquals(true, list0.isEmpty());
   }
 
   //Test case number: 1
@@ -39,7 +39,7 @@ public class BuildsEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
+      Build build0 = new Build("uQ*yq");
       builds0.add(build0);
       boolean boolean0 = builds0.allSuccessful();
       assertEquals(true, boolean0);
@@ -66,7 +66,7 @@ public class BuildsEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
+      Build build0 = new Build("uQ*yq");
       builds0.add(build0);
       build0.setSuccessful(false);
       boolean boolean0 = builds0.allSuccessful();
@@ -76,40 +76,40 @@ public class BuildsEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
-   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
-   * 3 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
+   * 2 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - false
    */
   @Test
   public void test4()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("");
+      Build build0 = new Build("uQ*yq");
       builds0.add(build0);
-      try {
-        builds0.getBuild("FQmH4?A>S");
-        fail("Expecting exception: MissingBuildException");
-      } catch(MissingBuildException e) {
-        /*
-         * FQmH4?A>S not found
-         */
-      }
+      Build build1 = builds0.getBuild("uQ*yq");
+      assertEquals("uQ*yq", build1.getIdentity());
   }
 
   //Test case number: 5
   /*
-   * 4 covered goals:
-   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - false
+   * 5 covered goals:
+   * 1 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I20 Branch 4 IFLE L40 - true
    * 2 net.sf.lavalamp.site.Builds.<init>()V: root-Branch
    * 3 net.sf.lavalamp.site.Builds.add(Lnet/sf/lavalamp/site/Build;)V: root-Branch
-   * 4 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
+   * 4 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - true
+   * 5 net.sf.lavalamp.site.Builds.getBuild(Ljava/lang/String;)Lnet/sf/lavalamp/site/Build;: I9 Branch 3 IFEQ L39 - false
    */
   @Test
   public void test5()  throws Throwable  {
       Builds builds0 = new Builds();
-      Build build0 = new Build("FQmH4?A>S");
+      Build build0 = new Build("uQ*yq");
       builds0.add(build0);
-      Build build1 = builds0.getBuild("FQmH4?A>S");
-      assertEquals(true, build1.isSuccessful());
+      try {
+        builds0.getBuild("?[v7kU]RKYXaK");
+        fail("Expecting exception: MissingBuildException");
+      } catch(MissingBuildException e) {
+        /*
+         * ?[v7kU]RKYXaK not found
+         */
+      }
   }
 }

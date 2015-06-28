@@ -47,7 +47,7 @@ public class LdapUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      BasicAttribute basicAttribute0 = new BasicAttribute("", "");
+      BasicAttribute basicAttribute0 = new BasicAttribute(";T+5`J", (Object) null);
       Collection<String> collection0 = LdapUtils.getAllAttributeValues((Attribute) basicAttribute0);
       assertNotNull(collection0);
       assertEquals(false, collection0.isEmpty());

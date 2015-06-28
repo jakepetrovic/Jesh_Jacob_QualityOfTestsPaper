@@ -22,8 +22,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test0()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       String string0 = siteProperties0.getGetterClass();
-      assertNotNull(string0);
       assertEquals("net.sf.lavalamp.site.UrlGetter", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 1
@@ -60,8 +60,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test3()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       siteProperties0.getClassName();
-      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
       assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
+      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
   }
 
   //Test case number: 4
@@ -73,8 +73,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test4()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       siteProperties0.getUrl();
-      assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
       assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", siteProperties0.toString());
+      assertEquals("net.sf.lavalamp.site.UrlGetter", siteProperties0.getGetterClass());
   }
 
   //Test case number: 5
@@ -86,8 +86,8 @@ public class SitePropertiesEvoSuiteTest {
   public void test5()  throws Throwable  {
       SiteProperties siteProperties0 = new SiteProperties();
       String string0 = siteProperties0.toString();
-      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", string0);
       assertNotNull(string0);
+      assertEquals("\n\t\t\tserver=null, url=null getter=net.sf.lavalamp.site.UrlGetter", string0);
   }
 
   //Test case number: 6

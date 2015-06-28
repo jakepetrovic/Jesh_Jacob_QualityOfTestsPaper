@@ -39,9 +39,9 @@ public class PermissionUtilsEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
-      Set<Permission> set0 = PermissionUtils.resolveDelimitedPermissions("#!e^V", (PermissionResolver) wildcardPermissionResolver0);
-      assertEquals(false, set0.isEmpty());
+      Set<Permission> set0 = PermissionUtils.resolveDelimitedPermissions(";end*p=", (PermissionResolver) wildcardPermissionResolver0);
       assertNotNull(set0);
+      assertEquals(1, set0.size());
   }
 
   //Test case number: 2
@@ -51,7 +51,7 @@ public class PermissionUtilsEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      Set<String> set0 = PermissionUtils.toPermissionStrings("");
+      Set<String> set0 = PermissionUtils.toPermissionStrings((String) null);
       assertNull(set0);
   }
 }

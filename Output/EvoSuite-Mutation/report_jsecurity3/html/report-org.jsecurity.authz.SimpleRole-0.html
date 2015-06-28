@@ -22,125 +22,129 @@ org.jsecurity.authz.SimpleRole
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authz.SimpleRole: 100.00%</ul><ul>
-<li>950 fitness evaluations, 20 generations, 12347 statements, 819 tests.
-<li>Time: 0:00:12(Search: 0:00:08, minimization: 0:00:03)
+<li>1250 fitness evaluations, 26 generations, 15318 statements, 1039 tests.
+<li>Time: 0:00:12(Search: 0:00:09, minimization: 0:00:03)
 <li>Coverage: 26/26 branches, 13/13 methods, 34/34 total goals
-<li>Mutation score: 55%
+<li>Mutation score: 52%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>int int0 = simpleRole0.hashCode();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot; ,|Hb.Sf~cWH*&lt;p&quot;);
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot; ,|Hb.Sf~cWH*&lt;p&quot;, false);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="4">  4: </a></span>linkedHashSet0.add((Permission) allPermission0);
-<span class="nocode"><a name="5">  5: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;&quot;, simpleRole0.toString());
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = simpleRole0.toString();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;K0-l'?N&quot;, string0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = simpleRole0.toString();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="4">  4: </a></span>simpleRole0.setPermissions((Set&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>simpleRole0.add((Permission) wildcardPermission0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;K0-l'?N&quot;, simpleRole0.toString());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(simpleRole0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simpleRole0.add((Permission) wildcardPermission0);
-<span class="nocode"><a name="4">  4: </a></span>simpleRole0.add((Permission) wildcardPermission0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;663vG[kv?woRv3I)7&quot;, simpleRole0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;K0-l'?N&quot;, simpleRole0.toString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.&quot;, (Set&lt;Permission&gt;) treeSet0);
-<span class="nocode"><a name="3">  3: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) null);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;Wildcard string cannot be null or empty. Make sure permission strings are properly formatted.&quot;, simpleRole0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Permission) wildcardPermission0);
+<span class="nocode"><a name="5">  5: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;K0-l'?N&quot;, simpleRole0.getName());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, linkedHashSet0.size());
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="4">  4: </a></span>hashSet0.add((Permission) wildcardPermission0);
+<span class="nocode"><a name="5">  5: </a></span>simpleRole0.setPermissions((Set&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="6">  6: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;K0-l'?N&quot;, simpleRole0.getName());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="3">  3: </a></span>linkedHashSet0.add((Permission) allPermission0);
-<span class="nocode"><a name="4">  4: </a></span>SimpleRole simpleRole0 = new SimpleRole((String) null);
-<span class="nocode"><a name="5">  5: </a></span>simpleRole0.addAll((Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(simpleRole0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="4">  4: </a></span>simpleRole0.setPermissions((Set&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;Wildcard string cannot contain only dividers. Make sure permission strings are properly formatted.&quot;, (Set&lt;Permission&gt;) hashSet0);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) null);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;K0-l'?N&quot;);
+<span class="nocode"><a name="3">  3: </a></span>hashSet0.add((Permission) wildcardPermission0);
+<span class="nocode"><a name="4">  4: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;K0-l'?N&quot;, (Set&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;663vG[kv?woRv3I)7&quot;);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;Tm#%mIVKv/gK&lt;#!mK&quot;);
 <span class="nocode"><a name="3">  3: </a></span>simpleRole0.add((Permission) wildcardPermission0);
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 11</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="3">  3: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(&quot;$&quot;, true);
-<span class="nocode"><a name="4">  4: </a></span>simpleRole0.add((Permission) wildcardPermission1);
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission0);
+<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(&quot;Wildcard string cannot contain parts with only dividers. Make sure permission strings are properly formatted.&quot;);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleRole0.isPermitted((Permission) wildcardPermission1);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
-<h3>Test case 12</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = simpleRole0.hashCode();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
+<h3>Test case 12</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
+<span class="nocode"><a name="2">  2: </a></span>simpleRole0.setName(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>int int0 = simpleRole0.hashCode();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, int0);
+</pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;, (Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.equals((Object) &quot;[]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
+<span class="nocode"><a name="2">  2: </a></span>simpleRole0.setName(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleRole simpleRole1 = new SimpleRole();
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleRole0.equals((Object) simpleRole1);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole1 = new SimpleRole();
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole1.equals((Object) simpleRole0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;Tm#%mIVKv/gK&lt;#!mK&quot;);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.equals((Object) wildcardPermission0);
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertTrue(simpleRole0.equals(simpleRole1));
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole1 = new SimpleRole(&quot;663vG[kv?woRv3I)7&quot;);
-<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole1.equals((Object) simpleRole0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleRole simpleRole0 = new SimpleRole();
+<span class="nocode"><a name="2">  2: </a></span>SimpleRole simpleRole1 = new SimpleRole(&quot;7?#P5~J&amp;wS0Y~R&quot;);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleRole0.equals((Object) simpleRole1);
+<span class="nocode"><a name="4">  4: </a></span>assertTrue(simpleRole1.equals(simpleRole0));
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -271,7 +275,7 @@ org.jsecurity.authz.SimpleRole
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -289,7 +293,7 @@ org.jsecurity.authz.SimpleRole
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7905
+<li>process_communication_port: 15031
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

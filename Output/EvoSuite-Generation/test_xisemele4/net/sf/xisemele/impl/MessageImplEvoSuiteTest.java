@@ -7,6 +7,7 @@ package net.sf.xisemele.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.util.MissingResourceException;
 import net.sf.xisemele.impl.MessageImpl;
 
 public class MessageImplEvoSuiteTest {
@@ -21,12 +22,15 @@ public class MessageImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       MessageImpl messageImpl0 = new MessageImpl();
-      Object[] objectArray0 = new Object[8];
+      Object[] objectArray0 = new Object[2];
       // Undeclared exception!
       try {
-        messageImpl0.getMessage((String) null, objectArray0);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
+        messageImpl0.getMessage("6y87{-K@@F0kR=A!r", objectArray0);
+        fail("Expecting exception: MissingResourceException");
+      } catch(MissingResourceException e) {
+        /*
+         * Can't find resource for bundle java.util.PropertyResourceBundle, key 6y87{-K@@F0kR=A!r
+         */
       }
   }
 }

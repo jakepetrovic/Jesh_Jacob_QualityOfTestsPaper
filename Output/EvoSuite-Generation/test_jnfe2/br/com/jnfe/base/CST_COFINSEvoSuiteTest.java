@@ -55,35 +55,34 @@ public class CST_COFINSEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_09;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_06;
       String string0 = cST_COFINS0.getValue();
-      assertEquals("09", string0);
+      assertEquals("06", string0);
   }
 
   //Test case number: 4
   /*
-   * 3 covered goals:
-   * 1 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - false
-   * 2 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - true
-   * 3 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - true
+   * 1 covered goal:
+   * 1 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_03;
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_06;
       boolean boolean0 = cST_COFINS0.isRequiredTag("");
       assertEquals(false, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 2 covered goals:
-   * 1 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - false
-   * 2 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - false
+   * 3 covered goals:
+   * 1 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I15 Branch 1 IF_ICMPGE L113 - false
+   * 2 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - true
+   * 3 br.com.jnfe.base.CST_COFINS.isRequiredTag(Ljava/lang/String;)Z: I25 Branch 2 IFLE L114 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_01;
-      boolean boolean0 = cST_COFINS0.isRequiredTag("vBC");
+      CST_COFINS cST_COFINS0 = CST_COFINS.COFINS_02;
+      boolean boolean0 = cST_COFINS0.isRequiredTag("vCOFINS");
       assertEquals(true, boolean0);
   }
 }

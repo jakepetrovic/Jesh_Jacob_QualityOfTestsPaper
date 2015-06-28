@@ -23,24 +23,23 @@ public class TextAreaWriterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      TextAreaWriter textAreaWriter1 = (TextAreaWriter)textAreaWriter0.append('\u000E');
-      assertSame(textAreaWriter1, textAreaWriter0);
+      TextAreaWriter textAreaWriter1 = (TextAreaWriter)textAreaWriter0.append('\u0000');
+      assertSame(textAreaWriter0, textAreaWriter1);
   }
 
   //Test case number: 1
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 nu.staldal.lagoon.TextAreaWriter.flush()V: I11 Branch 1 IF_ICMPNE L664 - true
    * 2 nu.staldal.lagoon.TextAreaWriter.write([CII)V: root-Branch
-   * 3 nu.staldal.lagoon.TextAreaWriter.close()V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       TextAreaWriter textAreaWriter0 = new TextAreaWriter((TextArea) null);
-      textAreaWriter0.append((CharSequence) "select-word");
+      textAreaWriter0.write("xskLO/3Nv$XBS");
       // Undeclared exception!
       try {
-        textAreaWriter0.close();
+        textAreaWriter0.flush();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

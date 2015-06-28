@@ -21,10 +21,10 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.realm.text.TextConfigurationRealm: 83.33%</ul><ul>
-<li>17782 fitness evaluations, 357 generations, 87257 statements, 10790 tests.
+<ul><li>Target class: org.jsecurity.realm.text.TextConfigurationRealm: 92.86%</ul><ul>
+<li>14096 fitness evaluations, 283 generations, 73920 statements, 8768 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 27/34 branches, 12/12 methods, 35/42 total goals
+<li>Coverage: 31/34 branches, 12/12 methods, 39/42 total goals
 <li>Mutation score: 99%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,17 +32,18 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;No ekthentication information found fvr submittel authentication token [&quot;);
-<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_0&quot;, textConfigurationRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;Terminating logginc f this7context &quot;);
+<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm-0-authorization&quot;, textConfigurationRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_0&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
 <span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.processDefinitions();
+<span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.processRoleDefinitions();
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_60&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
@@ -54,21 +55,29 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
-<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;No ekthentication information found fvr submittel authentication token [&quot;);
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setRoleDefinitions(&quot;Terminaxing loggi,g for this context &quot;);
 <span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
 <span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_80&quot;, textConfigurationRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm-60-authorization&quot;, textConfigurationRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_75&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
 <span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>textConfigurationRealm0.processDefinitions();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_135&quot;, textConfigurationRealm0.getName());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_130&quot;, textConfigurationRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>TextConfigurationRealm textConfigurationRealm0 = new TextConfigurationRealm();
+<span class="nocode"><a name="2">  2: </a></span>textConfigurationRealm0.setUserDefinitions(&quot;Terminaxing loggi,g for this context &quot;);
+<span class="nocode"><a name="3">  3: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="4">  4: </a></span>textConfigurationRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="5">  5: </a></span>textConfigurationRealm0.accountAndRoleCachesCreated();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.text.TextConfigurationRealm_149&quot;, textConfigurationRealm0.getName());
+</pre>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>Map&lt;String, String&gt; map0 = TextConfigurationRealm.toMap((Collection&lt;String&gt;) null);
 <span class="nocode"><a name="2">  2: </a></span>assertNull(map0);
@@ -249,12 +258,12 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <span class="nocode"><a name="173">173: </a></span><span style="background-color: #ffffcc">            account.setCredentials(password);</span>
 <span class="nocode"><a name="174">174: </a></span>
 <span class="nocode"><a name="175">175: </a></span><span style="background-color: #ffffcc">            if (passwordAndRolesArray.length &gt; 1) {</span>
-<span class="nocode"><a name="176">176: </a></span>                for (int i = 1; i &lt; passwordAndRolesArray.length; i++) {
-<span class="nocode"><a name="177">177: </a></span>                    String rolename = passwordAndRolesArray[i];
-<span class="nocode"><a name="178">178: </a></span>                    account.addRole(rolename);
+<span class="nocode"><a name="176">176: </a></span><span style="background-color: #ffffcc">                for (int i = 1; i &lt; passwordAndRolesArray.length; i++) {</span>
+<span class="nocode"><a name="177">177: </a></span><span style="background-color: #ffffcc">                    String rolename = passwordAndRolesArray[i];</span>
+<span class="nocode"><a name="178">178: </a></span><span style="background-color: #ffffcc">                    account.addRole(rolename);</span>
 <span class="nocode"><a name="179">179: </a></span>
-<span class="nocode"><a name="180">180: </a></span>                    SimpleRole role = getRole(rolename);
-<span class="nocode"><a name="181">181: </a></span>                    if (role != null) {
+<span class="nocode"><a name="180">180: </a></span><span style="background-color: #ffffcc">                    SimpleRole role = getRole(rolename);</span>
+<span class="nocode"><a name="181">181: </a></span><span style="background-color: #ffffcc">                    if (role != null) {</span>
 <span class="nocode"><a name="182">182: </a></span>                        account.addObjectPermissions(role.getPermissions());
 <span class="nocode"><a name="183">183: </a></span>                    }
 <span class="nocode"><a name="184">184: </a></span>                }
@@ -297,7 +306,7 @@ org.jsecurity.realm.text.TextConfigurationRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -315,7 +324,7 @@ org.jsecurity.realm.text.TextConfigurationRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21923
+<li>process_communication_port: 15176
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

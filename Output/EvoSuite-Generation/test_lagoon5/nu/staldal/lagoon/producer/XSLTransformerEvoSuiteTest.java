@@ -46,7 +46,7 @@ public class XSLTransformerEvoSuiteTest {
   public void test1()  throws Throwable  {
       XSLTransformer xSLTransformer0 = new XSLTransformer();
       xSLTransformer0.afterBuild();
-      assertEquals(0, xSLTransformer0.getPosition());
+      assertNull(xSLTransformer0.getEntryName());
   }
 
   //Test case number: 2
@@ -58,7 +58,7 @@ public class XSLTransformerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       XSLTransformer xSLTransformer0 = new XSLTransformer();
-      boolean boolean0 = xSLTransformer0.hasBeenUpdated(1922L);
+      boolean boolean0 = xSLTransformer0.hasBeenUpdated((-1L));
       assertEquals(true, boolean0);
   }
 

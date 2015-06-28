@@ -20,9 +20,9 @@ public class MyKeyMapEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      MyKeyMap myKeyMap0 = new MyKeyMap("", 1);
+      MyKeyMap myKeyMap0 = new MyKeyMap("R?g50~]6(Be~C/!S", 0);
       int int0 = myKeyMap0.getCode();
-      assertEquals(1, int0);
+      assertEquals(0, int0);
   }
 
   //Test case number: 1
@@ -34,9 +34,9 @@ public class MyKeyMapEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      MyKeyMap myKeyMap0 = new MyKeyMap("", 1);
+      MyKeyMap myKeyMap0 = new MyKeyMap("R?g50~]6(Be~C/!S", 0);
       String string0 = myKeyMap0.toString();
+      assertEquals(0, myKeyMap0.getCode());
       assertNotNull(string0);
-      assertEquals(1, myKeyMap0.getCode());
   }
 }

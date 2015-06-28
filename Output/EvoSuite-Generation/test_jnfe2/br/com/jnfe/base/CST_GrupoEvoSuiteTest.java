@@ -19,10 +19,10 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._SN102;
+      CST_Grupo cST_Grupo0 = CST_Grupo._40;
       String string0 = cST_Grupo0.getGroup();
+      assertEquals("40", string0);
       assertNotNull(string0);
-      assertEquals("SN102", string0);
   }
 
   //Test case number: 1
@@ -32,7 +32,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._SN102;
+      CST_Grupo cST_Grupo0 = CST_Grupo._40;
       boolean boolean0 = cST_Grupo0.isIsento();
       assertEquals(true, boolean0);
   }
@@ -70,8 +70,8 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._SN102;
-      boolean boolean0 = cST_Grupo0.isRequiredTag("C^IOWa");
+      CST_Grupo cST_Grupo0 = CST_Grupo._40;
+      boolean boolean0 = cST_Grupo0.isRequiredTag("_40");
       assertEquals(false, boolean0);
   }
 
@@ -84,8 +84,8 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._00;
-      boolean boolean0 = cST_Grupo0.isRequiredTag("vBC");
+      CST_Grupo cST_Grupo0 = CST_Grupo._40;
+      boolean boolean0 = cST_Grupo0.isRequiredTag("vICMS");
       assertEquals(true, boolean0);
   }
 }

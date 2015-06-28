@@ -19,8 +19,8 @@ public class CRTEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CRT cRT0 = CRT.SIMPLES_NACIONAL_ESRB;
+      CRT cRT0 = CRT.SIMPLES_NACIONAL;
       char char0 = cRT0.getValue();
-      assertEquals('2', char0);
+      assertEquals('1', char0);
   }
 }

@@ -15,42 +15,44 @@ public class JniInchiOutputEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutput.getAuxInfo()Ljava/lang/String;: root-Branch
+   * 3 covered goals:
+   * 1 net.sf.jniinchi.JniInchiOutput.getMessage()Ljava/lang/String;: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.ERROR;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "4[,SR", "4[,SR", "4[,SR", "4[,SR");
-      String string0 = jniInchiOutput0.getAuxInfo();
-      assertEquals("4[,SR", string0);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      String string0 = jniInchiOutput0.getMessage();
+      assertNotNull(string0);
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertEquals("K", string0);
   }
 
   //Test case number: 1
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.getMessage()Ljava/lang/String;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.getAuxInfo()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM");
-      String string0 = jniInchiOutput0.getMessage();
-      assertEquals("Ubw]8/Sk#3@MM", string0);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      String string0 = jniInchiOutput0.getAuxInfo();
+      assertNotNull(string0);
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertEquals("K", string0);
   }
 
   //Test case number: 2
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutput.toString()Ljava/lang/String;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1750, (String) null, (String) null, (String) null, (String) null);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1167, "", "", "", "");
       String string0 = jniInchiOutput0.toString();
-      assertEquals("InChI_Output: null/null/null/null/null", string0);
+      assertEquals("InChI_Output: null////", string0);
       assertNotNull(string0);
   }
 
@@ -61,9 +63,11 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1750, (String) null, (String) null, (String) null, (String) null);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
       String string0 = jniInchiOutput0.getLog();
-      assertNull(string0);
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertNotNull(string0);
+      assertEquals("", string0);
   }
 
   //Test case number: 4
@@ -73,10 +77,10 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.ERROR;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "4[,SR", "4[,SR", "4[,SR", "4[,SR");
-      INCHI_RET iNCHI_RET1 = jniInchiOutput0.getReturnStatus();
-      assertEquals(INCHI_RET.ERROR, iNCHI_RET1);
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      jniInchiOutput0.getReturnStatus();
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertEquals("", jniInchiOutput0.getLog());
   }
 
   //Test case number: 5
@@ -86,10 +90,10 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM");
-      jniInchiOutput0.setInchi("6ZtQAEEa");
-      assertEquals("InChI_Output: OKAY/6ZtQAEEa/Ubw]8/Sk#3@MM/Ubw]8/Sk#3@MM/Ubw]8/Sk#3@MM", jniInchiOutput0.toString());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      jniInchiOutput0.setInchi("K");
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertEquals("", jniInchiOutput0.getLog());
   }
 
   //Test case number: 6
@@ -99,10 +103,11 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM");
-      jniInchiOutput0.setLog("6ZtQAEEa");
-      assertEquals("Ubw]8/Sk#3@MM", jniInchiOutput0.getInchi());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      
+      jniInchiOutput0.setLog("K");
+      assertEquals("K", jniInchiOutput0.getMessage());
   }
 
   //Test case number: 7
@@ -112,24 +117,24 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM");
-      jniInchiOutput0.setAuxInfo("Ubw]8/Sk#3@MM");
-      assertEquals("Ubw]8/Sk#3@MM", jniInchiOutput0.getLog());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
+      assertEquals("K", jniInchiOutput0.getAuxInfo());
+      
+      jniInchiOutput0.setAuxInfo("");
+      assertEquals("", jniInchiOutput0.getLog());
   }
 
   //Test case number: 8
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiOutput.setRetStatus(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1750, (String) null, (String) null, (String) null, (String) null);
-      INCHI_RET iNCHI_RET0 = INCHI_RET.BUSY;
+      INCHI_RET iNCHI_RET0 = INCHI_RET.FATAL;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
       jniInchiOutput0.setRetStatus(iNCHI_RET0);
-      assertNull(jniInchiOutput0.getInchi());
+      assertEquals("InChI_Output: FATAL/K/K/K/", jniInchiOutput0.toString());
   }
 
   //Test case number: 9
@@ -139,23 +144,24 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM", "Ubw]8/Sk#3@MM");
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-1158), "K", "K", "K", "");
       String string0 = jniInchiOutput0.getInchi();
-      assertEquals("Ubw]8/Sk#3@MM", string0);
+      assertEquals("InChI_Output: null/K/K/K/", jniInchiOutput0.toString());
+      assertNotNull(string0);
+      assertEquals("K", string0);
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutput.setMessage(Ljava/lang/String;)V: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "mA3:w", "mA3:w", "mA3:w", "mA3:w");
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(1167, "", "", "", "");
       jniInchiOutput0.setMessage("");
-      assertEquals("mA3:w", jniInchiOutput0.getAuxInfo());
+      assertEquals("", jniInchiOutput0.getAuxInfo());
   }
 }

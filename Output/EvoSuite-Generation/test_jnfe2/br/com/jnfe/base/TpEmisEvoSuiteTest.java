@@ -19,8 +19,8 @@ public class TpEmisEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpEmis tpEmis0 = TpEmis.CONTINGENCIA_FSDA;
+      TpEmis tpEmis0 = TpEmis.CONTINGENCIA_SCAN;
       char char0 = tpEmis0.getValue();
-      assertEquals('5', char0);
+      assertEquals('3', char0);
   }
 }

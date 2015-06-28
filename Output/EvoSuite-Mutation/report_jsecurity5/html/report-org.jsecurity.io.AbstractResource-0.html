@@ -22,8 +22,8 @@ org.jsecurity.io.AbstractResource
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.AbstractResource: 57.14%</ul><ul>
-<li>526 fitness evaluations, 12 generations, 1923 statements, 588 tests.
-<li>Time: 0:01:03(Search: 0:01:03, minimization: 0:00:00)
+<li>274 fitness evaluations, 7 generations, 1569 statements, 417 tests.
+<li>Time: 0:01:02(Search: 0:01:02, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 4/6 methods, 4/7 total goals
 <li>Mutation score: 5%
 </ul>
@@ -31,27 +31,25 @@ org.jsecurity.io.AbstractResource
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;^3&gt;]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [^3&gt;]]
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
+<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[5];
+<span class="nocode"><a name="3">  3: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>iniResource0.load((InputStream) byteArrayInputStream0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, byteArrayInputStream0.read());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, byteArrayInputStream0.available());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource((InputStream) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load data from input stream [null].
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  iniResource0.load(&quot;-gt{7?.L8YZw{|89_#&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ResourceException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Unable to load text resource from the resource path [-gt{7?.L8YZw{|89_#]
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -117,11 +115,11 @@ org.jsecurity.io.AbstractResource
 <span class="nocode"><a name="61"> 61: </a></span>    public void load(InputStream is) throws ResourceException {
 <span class="nocode"><a name="62"> 62: </a></span>        try {
 <span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">            doLoad(is);</span>
-<span class="nocode"><a name="64"> 64: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
-<span class="nocode"><a name="65"> 65: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Unable to load data from input stream [&quot; + is + &quot;].&quot;;</span>
-<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">            throw new ResourceException(msg, e);</span>
-<span class="nocode"><a name="67"> 67: </a></span>        }
-<span class="nocode"><a name="68"> 68: </a></span>    }
+<span class="nocode"><a name="64"> 64: </a></span>        } catch (Exception e) {
+<span class="nocode"><a name="65"> 65: </a></span>            String msg = &quot;Unable to load data from input stream [&quot; + is + &quot;].&quot;;
+<span class="nocode"><a name="66"> 66: </a></span>            throw new ResourceException(msg, e);
+<span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="69"> 69: </a></span>
 <span class="nocode"><a name="70"> 70: </a></span>    protected abstract void doLoad(InputStream is) throws Exception;
 <span class="nocode"><a name="71"> 71: </a></span>}
@@ -129,7 +127,7 @@ org.jsecurity.io.AbstractResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -147,7 +145,7 @@ org.jsecurity.io.AbstractResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13778
+<li>process_communication_port: 17789
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

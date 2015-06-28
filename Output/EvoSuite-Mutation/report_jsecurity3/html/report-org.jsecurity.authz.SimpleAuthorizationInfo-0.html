@@ -22,8 +22,8 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authz.SimpleAuthorizationInfo: 100.00%</ul><ul>
-<li>550 fitness evaluations, 12 generations, 5620 statements, 573 tests.
-<li>Time: 0:00:06(Search: 0:00:04, minimization: 0:00:02)
+<li>250 fitness evaluations, 6 generations, 3774 statements, 402 tests.
+<li>Time: 0:00:05(Search: 0:00:03, minimization: 0:00:02)
 <li>Coverage: 12/12 branches, 14/14 methods, 20/20 total goals
 <li>Mutation score: 0%
 </ul>
@@ -32,9 +32,7 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.setObjectPermissions((Set&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;[]&quot;, linkedHashSet0.toString());
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.setObjectPermissions((Set&lt;Permission&gt;) null);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -45,20 +43,21 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.setStringPermissions((Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, hashSet0.size());
+<span class="nocode"><a name="2">  2: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.setStringPermissions((Set&lt;String&gt;) treeSet0);
+<span class="nocode"><a name="4">  4: </a></span>simpleAuthorizationInfo0.addStringPermissions((Collection&lt;String&gt;) treeSet0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, treeSet0.isEmpty());
 </pre>
 <h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set&lt;String&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.setRoles((Set&lt;String&gt;) null);
+</pre>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
 <span class="nocode"><a name="2">  2: </a></span>Set&lt;String&gt; set0 = (Set&lt;String&gt;)simpleAuthorizationInfo0.getRoles();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(set0);
-</pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set&lt;String&gt;) null);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAuthorizationInfo0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -69,76 +68,64 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.setRoles((Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="4">  4: </a></span>simpleAuthorizationInfo0.addRole(&quot;5XphQ8+c?2'TPs(%Lvq&quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addRoles((Collection&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="4">  4: </a></span>simpleAuthorizationInfo0.addRole(&quot;Wildcard string cannot contain parts with only dividers. Make sure permission strings are properly formatted.&quot;);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addRole(&quot;8%0cW&quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addRole(&quot;&quot;);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.setRoles((Set&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="4">  4: </a></span>simpleAuthorizationInfo0.addRoles((Collection&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, hashSet0.size());
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addRoles((Collection&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  simpleAuthorizationInfo0.addRoles((Collection&lt;String&gt;) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addRoles((Collection&lt;String&gt;) hashSet0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, hashSet0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addStringPermission(&quot;U&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addStringPermission(&quot;&quot;);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addStringPermission(&quot;8%0cW&quot;);
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addStringPermission(&quot;8%0cW&quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addStringPermissions((Collection&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, linkedHashSet0.isEmpty());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addStringPermission(&quot;8%0cW&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simpleAuthorizationInfo0.addStringPermissions((Collection&lt;String&gt;) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;(Z&amp;eS'bOfz(&quot;);
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addObjectPermission((Permission) wildcardPermission0);
+<span class="nocode"><a name="4">  4: </a></span>simpleAuthorizationInfo0.addObjectPermission((Permission) wildcardPermission0);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  simpleAuthorizationInfo0.addStringPermissions((Collection&lt;String&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>simpleAuthorizationInfo0.addObjectPermission((Permission) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  simpleAuthorizationInfo0.addObjectPermissions((Collection&lt;Permission&gt;) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addObjectPermissions((Collection&lt;Permission&gt;) linkedHashSet0);
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;5XphQ8+c?2'TPs(%Lvq&quot;);
-<span class="nocode"><a name="5">  5: </a></span>simpleAuthorizationInfo0.addObjectPermission((Permission) wildcardPermission0);
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="2">  2: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;*rWpK$5\&quot;0z&quot;, true);
-<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addObjectPermission((Permission) wildcardPermission0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  simpleAuthorizationInfo0.addObjectPermissions((Collection&lt;Permission&gt;) null);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set&lt;String&gt;) null);
+<span class="nocode"><a name="2">  2: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAuthorizationInfo0.addObjectPermissions((Collection&lt;Permission&gt;) hashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, hashSet0.size());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -278,7 +265,7 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <span class="nocode"><a name="135">135: </a></span><span style="background-color: #ffffcc">            this.stringPermissions = new HashSet&lt;String&gt;();</span>
 <span class="nocode"><a name="136">136: </a></span>        }
 <span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">        this.stringPermissions.addAll(permissions);</span>
-<span class="nocode"><a name="138">138: </a></span>    }
+<span class="nocode"><a name="138">138: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="139">139: </a></span>
 <span class="nocode"><a name="140">140: </a></span>    public Set&lt;Permission&gt; getObjectPermissions() {
 <span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">        return objectPermissions;</span>
@@ -324,7 +311,7 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -342,7 +329,7 @@ org.jsecurity.authz.SimpleAuthorizationInfo
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 13633
+<li>process_communication_port: 4722
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

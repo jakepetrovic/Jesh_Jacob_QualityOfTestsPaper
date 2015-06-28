@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import net.sf.jniinchi.INCHI_PARITY;
+import net.sf.jniinchi.INCHI_STEREOTYPE;
 import net.sf.jniinchi.JniInchiAtom;
 import net.sf.jniinchi.JniInchiBond;
 import net.sf.jniinchi.JniInchiStereo0D;
@@ -25,9 +26,10 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("EVEN");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
       INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       int int0 = jniInchiStructure0.getStereo0DIndex(jniInchiStereo0D0);
       assertEquals((-1), int0);
   }
@@ -42,7 +44,7 @@ public class JniInchiStructureEvoSuiteTest {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getStereo0D((-1));
+        jniInchiStructure0.getStereo0D((-224));
         fail("Expecting exception: ArrayIndexOutOfBoundsException");
       } catch(ArrayIndexOutOfBoundsException e) {
       }
@@ -56,71 +58,57 @@ public class JniInchiStructureEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("EVEN");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
       INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       jniInchiStructure0.addStereo0D(jniInchiStereo0D0);
       assertEquals(1, jniInchiStructure0.getNumStereo0D());
   }
 
   //Test case number: 3
   /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiStructure.addBond(Lnet/sf/jniinchi/JniInchiBond;)Lnet/sf/jniinchi/JniInchiBond;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiStructure.addBonds([Lnet/sf/jniinchi/JniInchiBond;)V: I14 Branch 2 IF_ICMPGE L108 - true
-   * 3 net.sf.jniinchi.JniInchiStructure.addBonds([Lnet/sf/jniinchi/JniInchiBond;)V: I14 Branch 2 IF_ICMPGE L108 - false
+   * 1 covered goal:
+   * 1 net.sf.jniinchi.JniInchiStructure.setStructure(Lnet/sf/jniinchi/JniInchiStructure;)V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[7];
-      jniInchiStructure0.addBonds(jniInchiBondArray0);
-      assertEquals(7, jniInchiStructure0.getNumBonds());
+      jniInchiStructure0.setStructure(jniInchiStructure0);
+      assertEquals(0, jniInchiStructure0.getNumStereo0D());
   }
 
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiStructure.setStructure(Lnet/sf/jniinchi/JniInchiStructure;)V: root-Branch
+   * 1 net.sf.jniinchi.JniInchiStructure.getNumAtoms()I: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      jniInchiStructure0.setStructure(jniInchiStructure0);
-      assertEquals(0, jniInchiStructure0.getNumAtoms());
+      int int0 = jniInchiStructure0.getNumAtoms();
+      assertEquals(0, int0);
   }
 
   //Test case number: 5
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiStructure.getNumAtoms()I: root-Branch
+   * 1 net.sf.jniinchi.JniInchiStructure.getNumBonds()I: root-Branch
    */
   @Test
   public void test5()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      int int0 = jniInchiStructure0.getNumAtoms();
+      int int0 = jniInchiStructure0.getNumBonds();
       assertEquals(0, int0);
   }
 
   //Test case number: 6
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiStructure.getNumBonds()I: root-Branch
-   */
-  @Test
-  public void test6()  throws Throwable  {
-      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      int int0 = jniInchiStructure0.getNumBonds();
-      assertEquals(0, int0);
-  }
-
-  //Test case number: 7
-  /*
-   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiStructure.getAtom(I)Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
    */
   @Test
-  public void test7()  throws Throwable  {
+  public void test6()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
@@ -133,63 +121,75 @@ public class JniInchiStructureEvoSuiteTest {
       }
   }
 
-  //Test case number: 8
+  //Test case number: 7
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiStructure.getNumStereo0D()I: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
+  public void test7()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       int int0 = jniInchiStructure0.getNumStereo0D();
       assertEquals(0, int0);
   }
 
-  //Test case number: 9
+  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiStructure.getAtomIndex(Lnet/sf/jniinchi/JniInchiAtom;)I: root-Branch
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("EVEN");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       int int0 = jniInchiStructure0.getAtomIndex(jniInchiAtom0);
       assertEquals((-1), int0);
   }
 
-  //Test case number: 10
+  //Test case number: 9
   /*
    * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiStructure.getBond(I)Lnet/sf/jniinchi/JniInchiBond;: root-Branch
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test9()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
       // Undeclared exception!
       try {
-        jniInchiStructure0.getBond(1);
-        fail("Expecting exception: IndexOutOfBoundsException");
-      } catch(IndexOutOfBoundsException e) {
-        /*
-         * Index: 1, Size: 0
-         */
+        jniInchiStructure0.getBond((-1364));
+        fail("Expecting exception: ArrayIndexOutOfBoundsException");
+      } catch(ArrayIndexOutOfBoundsException e) {
       }
+  }
+
+  //Test case number: 10
+  /*
+   * 3 covered goals:
+   * 1 net.sf.jniinchi.JniInchiStructure.addAtoms([Lnet/sf/jniinchi/JniInchiAtom;)V: I14 Branch 1 IF_ICMPGE L86 - true
+   * 2 net.sf.jniinchi.JniInchiStructure.addAtoms([Lnet/sf/jniinchi/JniInchiAtom;)V: I14 Branch 1 IF_ICMPGE L86 - false
+   * 3 net.sf.jniinchi.JniInchiStructure.addAtom(Lnet/sf/jniinchi/JniInchiAtom;)Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
+   */
+  @Test
+  public void test10()  throws Throwable  {
+      JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
+      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[1];
+      jniInchiStructure0.addAtoms(jniInchiAtomArray0);
+      assertEquals(1, jniInchiStructure0.getNumAtoms());
   }
 
   //Test case number: 11
   /*
    * 4 covered goals:
-   * 1 net.sf.jniinchi.JniInchiStructure.addAtoms([Lnet/sf/jniinchi/JniInchiAtom;)V: I14 Branch 1 IF_ICMPGE L86 - true
-   * 2 net.sf.jniinchi.JniInchiStructure.addAtoms([Lnet/sf/jniinchi/JniInchiAtom;)V: I14 Branch 1 IF_ICMPGE L86 - false
+   * 1 net.sf.jniinchi.JniInchiStructure.addBonds([Lnet/sf/jniinchi/JniInchiBond;)V: I14 Branch 2 IF_ICMPGE L108 - true
+   * 2 net.sf.jniinchi.JniInchiStructure.addBonds([Lnet/sf/jniinchi/JniInchiBond;)V: I14 Branch 2 IF_ICMPGE L108 - false
    * 3 net.sf.jniinchi.JniInchiStructure.<init>()V: root-Branch
-   * 4 net.sf.jniinchi.JniInchiStructure.addAtom(Lnet/sf/jniinchi/JniInchiAtom;)Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
+   * 4 net.sf.jniinchi.JniInchiStructure.addBond(Lnet/sf/jniinchi/JniInchiBond;)Lnet/sf/jniinchi/JniInchiBond;: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
       JniInchiStructure jniInchiStructure0 = new JniInchiStructure();
-      JniInchiAtom[] jniInchiAtomArray0 = new JniInchiAtom[4];
-      jniInchiStructure0.addAtoms(jniInchiAtomArray0);
-      assertEquals(4, jniInchiStructure0.getNumAtoms());
+      JniInchiBond[] jniInchiBondArray0 = new JniInchiBond[2];
+      jniInchiStructure0.addBonds(jniInchiBondArray0);
+      assertEquals(2, jniInchiStructure0.getNumBonds());
   }
 }

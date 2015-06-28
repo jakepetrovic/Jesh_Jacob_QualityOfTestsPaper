@@ -20,10 +20,9 @@ public class NoteListDataEventEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Object object0 = new Object();
-      NoteListDataEvent noteListDataEvent0 = new NoteListDataEvent(object0, 1110);
+      NoteListDataEvent noteListDataEvent0 = new NoteListDataEvent((Object) "}9#]^J}xXnVYt", 0);
       int int0 = noteListDataEvent0.getType();
-      assertEquals(1110, noteListDataEvent0.getIndex());
+      assertEquals(0, noteListDataEvent0.getIndex());
       assertEquals(0, int0);
   }
 
@@ -35,9 +34,8 @@ public class NoteListDataEventEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Object object0 = new Object();
-      NoteListDataEvent noteListDataEvent0 = new NoteListDataEvent(object0, 1110);
+      NoteListDataEvent noteListDataEvent0 = new NoteListDataEvent((Object) "}9#]^J}xXnVYt", 0);
       int int0 = noteListDataEvent0.getIndex();
-      assertEquals(1110, int0);
+      assertEquals(0, int0);
   }
 }

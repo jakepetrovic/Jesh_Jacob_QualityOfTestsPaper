@@ -22,8 +22,8 @@ public class AbstractNoteEvoSuiteTest {
   public void test0()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
       String string0 = commonNote0.getFeature();
-      assertNotNull(string0);
       assertEquals("C:\\boot.ini", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 1
@@ -35,7 +35,7 @@ public class AbstractNoteEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
-      commonNote0.setFeature("'u`lmRN04}2W999t");
-      assertEquals("'u`lmRN04}2W999t", commonNote0.getFeature());
+      commonNote0.setFeature("[#!");
+      assertEquals("[#!", commonNote0.getFeature());
   }
 }

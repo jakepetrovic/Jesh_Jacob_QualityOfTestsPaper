@@ -7,7 +7,79 @@ package com.sap.netweaver.porta.mon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import com.sap.netweaver.porta.mon.DeployManagerAuthenticationCallback;
+import com.sap.netweaver.porta.mon.LifecycleManagerAuthenticationCallback;
+import com.sap.netweaver.porta.mon.PortaMon;
+import java.io.BufferedReader;
+import java.io.PrintStream;
+import java.util.Properties;
 
 public class PortaMonEvoSuiteTest {
 
+
+  //Test case number: 0
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.getServerProps()Ljava/util/Properties;: root-Branch
+   */
+  @Test
+  public void test0()  throws Throwable  {
+      Properties properties0 = PortaMon.getServerProps();
+      assertNull(properties0);
+  }
+
+  //Test case number: 1
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.getDeployManagerAuthenticationCallback()Lcom/sap/netweaver/porta/mon/DeployManagerAuthenticationCallback;: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      DeployManagerAuthenticationCallback deployManagerAuthenticationCallback0 = PortaMon.getDeployManagerAuthenticationCallback();
+      assertNull(deployManagerAuthenticationCallback0);
+  }
+
+  //Test case number: 2
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.getIn()Ljava/io/BufferedReader;: root-Branch
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      BufferedReader bufferedReader0 = PortaMon.getIn();
+      assertNull(bufferedReader0);
+  }
+
+  //Test case number: 3
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.<init>()V: root-Branch
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      PortaMon portaMon0 = new PortaMon();
+      assertNotNull(portaMon0);
+  }
+
+  //Test case number: 4
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.getLifecycleManagerAuthenticationCallback()Lcom/sap/netweaver/porta/mon/LifecycleManagerAuthenticationCallback;: root-Branch
+   */
+  @Test
+  public void test4()  throws Throwable  {
+      LifecycleManagerAuthenticationCallback lifecycleManagerAuthenticationCallback0 = PortaMon.getLifecycleManagerAuthenticationCallback();
+      assertNotNull(lifecycleManagerAuthenticationCallback0);
+  }
+
+  //Test case number: 5
+  /*
+   * 1 covered goal:
+   * 1 com.sap.netweaver.porta.mon.PortaMon.getOut()Ljava/io/PrintStream;: root-Branch
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      PrintStream printStream0 = PortaMon.getOut();
+      assertNull(printStream0);
+  }
 }

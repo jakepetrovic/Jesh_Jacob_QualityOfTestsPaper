@@ -7,7 +7,7 @@ package com.sap.netweaver.porta.mon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import com.sap.netweaver.porta.mon.EnableDebuggingCommand;
+import com.sap.netweaver.porta.mon.ExitCommand;
 
 public class CommandEvoSuiteTest {
 
@@ -19,6 +19,6 @@ public class CommandEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      EnableDebuggingCommand enableDebuggingCommand0 = new EnableDebuggingCommand();
+      ExitCommand exitCommand0 = new ExitCommand();
   }
 }

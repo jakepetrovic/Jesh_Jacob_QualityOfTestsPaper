@@ -44,8 +44,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       String string0 = Axis.lookup(1);
-      assertEquals("child", string0);
       assertNotNull(string0);
+      assertEquals("child", string0);
   }
 
   //Test case number: 2
@@ -56,7 +56,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Axis.lookup(0);
+      String string0 = Axis.lookup((-658));
       assertNull(string0);
   }
 
@@ -92,8 +92,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       String string0 = Axis.lookup(4);
-      assertNotNull(string0);
       assertEquals("ancestor", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 6
@@ -104,8 +104,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       String string0 = Axis.lookup(5);
-      assertNotNull(string0);
       assertEquals("following-sibling", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 7
@@ -116,8 +116,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test7()  throws Throwable  {
       String string0 = Axis.lookup(6);
-      assertNotNull(string0);
       assertEquals("preceding-sibling", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 8
@@ -128,8 +128,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       String string0 = Axis.lookup(7);
-      assertNotNull(string0);
       assertEquals("following", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 9
@@ -152,8 +152,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       String string0 = Axis.lookup(9);
-      assertNotNull(string0);
       assertEquals("attribute", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 11
@@ -164,8 +164,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       String string0 = Axis.lookup(10);
-      assertNotNull(string0);
       assertEquals("namespace", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 12
@@ -176,8 +176,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       String string0 = Axis.lookup(11);
-      assertNotNull(string0);
       assertEquals("self", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 13
@@ -189,8 +189,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       String string0 = Axis.lookup(12);
-      assertEquals("descendant-or-self", string0);
       assertNotNull(string0);
+      assertEquals("descendant-or-self", string0);
   }
 
   //Test case number: 14
@@ -220,17 +220,20 @@ public class AxisEvoSuiteTest {
 
   //Test case number: 15
   /*
-   * 5 covered goals:
+   * 8 covered goals:
    * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I5 Branch 15 IFLE L162 - true
    * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I15 Branch 16 IFLE L167 - true
    * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I25 Branch 17 IFLE L172 - true
    * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I35 Branch 18 IFLE L177 - true
-   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - false
+   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - true
+   * 6 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I55 Branch 20 IFLE L187 - true
+   * 7 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I65 Branch 21 IFLE L192 - true
+   * 8 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - false
    */
   @Test
   public void test15()  throws Throwable  {
-      int int0 = Axis.lookup("following-sibling");
-      assertEquals(5, int0);
+      int int0 = Axis.lookup("preceding");
+      assertEquals(8, int0);
   }
 
   //Test case number: 16
@@ -279,21 +282,13 @@ public class AxisEvoSuiteTest {
 
   //Test case number: 20
   /*
-   * 9 covered goals:
-   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - true
-   * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I55 Branch 20 IFLE L187 - true
-   * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I65 Branch 21 IFLE L192 - true
-   * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - true
-   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I85 Branch 23 IFLE L202 - true
-   * 6 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - true
-   * 7 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I105 Branch 25 IFLE L212 - true
-   * 8 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I115 Branch 26 IFLE L217 - true
-   * 9 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I125 Branch 27 IFLE L222 - true
+   * 1 covered goal:
+   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I45 Branch 19 IFLE L182 - false
    */
   @Test
   public void test20()  throws Throwable  {
-      int int0 = Axis.lookup("");
-      assertEquals(0, int0);
+      int int0 = Axis.lookup("following-sibling");
+      assertEquals(5, int0);
   }
 
   //Test case number: 21
@@ -320,13 +315,18 @@ public class AxisEvoSuiteTest {
 
   //Test case number: 23
   /*
-   * 1 covered goal:
-   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - false
+   * 6 covered goals:
+   * 1 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I75 Branch 22 IFLE L197 - true
+   * 2 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I85 Branch 23 IFLE L202 - true
+   * 3 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I95 Branch 24 IFLE L207 - true
+   * 4 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I105 Branch 25 IFLE L212 - true
+   * 5 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I115 Branch 26 IFLE L217 - true
+   * 6 org.saxpath.Axis.lookup(Ljava/lang/String;)I: I125 Branch 27 IFLE L222 - true
    */
   @Test
   public void test23()  throws Throwable  {
-      int int0 = Axis.lookup("preceding");
-      assertEquals(8, int0);
+      int int0 = Axis.lookup((String) null);
+      assertEquals(0, int0);
   }
 
   //Test case number: 24

@@ -22,10 +22,10 @@ org.jsecurity.io.XmlSerializer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.XmlSerializer: 100.00%</ul><ul>
-<li>900 fitness evaluations, 19 generations, 10066 statements, 852 tests.
+<li>800 fitness evaluations, 17 generations, 8850 statements, 769 tests.
 <li>Time: 0:00:08(Search: 0:00:08, minimization: 0:00:00)
 <li>Coverage: 4/4 branches, 3/3 methods, 5/5 total goals
-<li>Mutation score: 22%
+<li>Mutation score: 67%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,7 +34,8 @@ org.jsecurity.io.XmlSerializer
 <span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
 <span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
 <span class="nocode"><a name="3">  3: </a></span>byte[] byteArray0 = xmlSerializer0.serialize(object0);
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(byteArray0);
+<span class="nocode"><a name="4">  4: </a></span>Object object1 = xmlSerializer0.deserialize(byteArray0);
+<span class="nocode"><a name="5">  5: </a></span>assertFalse(object1.equals(object0));
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -50,20 +51,6 @@ org.jsecurity.io.XmlSerializer
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[2];
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xmlSerializer0.deserialize(byteArray0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * 0
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
-</pre>
-<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XmlSerializer xmlSerializer0 = new XmlSerializer();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -153,15 +140,15 @@ org.jsecurity.io.XmlSerializer
 <span class="nocode"><a name="74"> 74: </a></span><span style="background-color: #ffffcc">        ByteArrayInputStream bis = new ByteArrayInputStream(serialized);</span>
 <span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">        XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(bis));</span>
 <span class="nocode"><a name="76"> 76: </a></span><span style="background-color: #ffffcc">        Object o = decoder.readObject();</span>
-<span class="nocode"><a name="77"> 77: </a></span>        decoder.close();
-<span class="nocode"><a name="78"> 78: </a></span>        return o;
+<span class="nocode"><a name="77"> 77: </a></span><span style="background-color: #ffffcc">        decoder.close();</span>
+<span class="nocode"><a name="78"> 78: </a></span><span style="background-color: #ffffcc">        return o;</span>
 <span class="nocode"><a name="79"> 79: </a></span>    }
 <span class="nocode"><a name="80"> 80: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -179,7 +166,7 @@ org.jsecurity.io.XmlSerializer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15139
+<li>process_communication_port: 13423
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

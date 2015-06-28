@@ -23,7 +23,7 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("A", (-20));
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("", (-1887));
       SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
       deployManagerImpl0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
       assertEquals(false, deployManagerImpl0.initialized());
@@ -37,14 +37,13 @@ public class CoreModuleImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("A", (-20));
-      // Undeclared exception!
+      DeployManagerImpl deployManagerImpl0 = new DeployManagerImpl("", (-1887));
       try {
         deployManagerImpl0.checkInitialized();
-        fail("Expecting exception: NoClassDefFoundError");
-      } catch(NoClassDefFoundError e) {
+        fail("Expecting exception: CoreException");
+      } catch(CoreException e) {
         /*
-         * com/sap/managementconsole/soap/axis/sapcontrol/SAPControl_ServiceLocator
+         * java.net.MalformedURLException: Invalid port number :-138687
          */
       }
   }

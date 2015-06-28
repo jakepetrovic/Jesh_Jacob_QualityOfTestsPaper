@@ -22,8 +22,8 @@ org.jsecurity.crypto.hash.Sha512Hash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.Sha512Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3382 statements, 264 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:01)
+<li>50 fitness evaluations, 2 generations, 3035 statements, 265 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
 <li>Mutation score: 44%
 </ul>
@@ -31,35 +31,35 @@ org.jsecurity.crypto.hash.Sha512Hash
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;\u0000\u0000\u0002\u0000\uFFFD\u0000\uFFFD\u0000\u0000&quot;, (Object) &quot;SHA-512&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;114918427cd1bed36c282d6121957db1f6030a3cdd9ee581578e10f5c8aebc592ceed6ff7c54b96cd5340679da01ab972e1cf70d89dd81b67ab7ad07aa4af12f&quot;, sha512Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;Q\uFFFDi\uFFFD&quot;, (Object) &quot;0cRbAAA=&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;beecde30ef3b702ca5eeec5d44edaa025c0cfb06c84ebefa69c06b3c53bddc74757e2261cfd25e47459658c435a42f484275cdb73fcf92372a47e191edc895be&quot;, sha512Hash0.toHex());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;10c3fb&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;cf1a8d1a9a11e0d94f83ea8347e668dcb4cf4669c850e58a7ba7bf0752680f0f776bc3634ed133da5b2a1d53c41b6afe84f8ca686010f2f8cf700b48040b54ac&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-512&quot;, sha512Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;G&quot;, (Object) &quot;114918427cd1bed36c282d6121957db1f6030a3cdd9ee581578e10f5c8aebc592ceed6ff7c54b96cd5340679da01ab972e1cf70d89dd81b67ab7ad07aa4af12f&quot;, (-1980));
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;LiE5iT34cB1qH9dUNNa+xyAeUYKCHRqD3HFGP7TtLpAVEL9ATFaXawtL3f2eNG8f+lIVPGruYQoreMr63YYlVw==&quot;, sha512Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = new Sha512Hash((Object) &quot;beecde30ef3b702ca5eeec5d44edaa025c0cfb06c84ebefa69c06b3c53bddc74757e2261cfd25e47459658c435a42f484275cdb73fcf92372a47e191edc895be&quot;, (Object) &quot;SHA-512&quot;, (int) (byte) (-3));
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-512&quot;, sha512Hash0.getAlgorithmName());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha512Hash.fromHexString(&quot;]P&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  Sha512Hash.fromHexString(&quot;_CMTzFj:85brszJ:&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter ] at index 0
+<span class="nocode"><a name="7">  7: </a></span>   * Odd number of characters.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String(&quot;EM #P7&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;EMP7&quot;, sha512Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha512Hash sha512Hash0 = Sha512Hash.fromBase64String(&quot;@0c@Rb`7@g&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;d1c45b0000&quot;, sha512Hash0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -141,7 +141,7 @@ org.jsecurity.crypto.hash.Sha512Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -159,7 +159,7 @@ org.jsecurity.crypto.hash.Sha512Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7539
+<li>process_communication_port: 8528
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -22,8 +22,8 @@ net.sf.jniinchi.JniInchiInputInchi
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiInputInchi: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 959 statements, 301 tests.
-<li>Time: 0:00:08(Search: 0:00:06, minimization: 0:00:01)
+<li>50 fitness evaluations, 2 generations, 879 statements, 301 tests.
+<li>Time: 0:00:06(Search: 0:00:05, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 5/5 methods, 5/5 total goals
 <li>Mutation score: 67%
 </ul>
@@ -31,22 +31,21 @@ net.sf.jniinchi.JniInchiInputInchi
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="2">  2: </a></span>JniInchiInputInchi jniInchiInputInchi0 = null;
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  jniInchiInputInchi0 = new JniInchiInputInchi(&quot;&quot;, (List) linkedList0);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * net/sf/jnati/NativeCodeException
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>JniInchiInputInchi jniInchiInputInchi0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  jniInchiInputInchi0 = new JniInchiInputInchi(&quot;&quot;, (List) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * net/sf/jnati/NativeCodeException
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiInputInchi jniInchiInputInchi0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  jniInchiInputInchi0 = new JniInchiInputInchi(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  jniInchiInputInchi0 = new JniInchiInputInchi(&quot;F&quot;, &quot;F&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(NoClassDefFoundError e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -155,7 +154,7 @@ net.sf.jniinchi.JniInchiInputInchi
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5034463556166388697.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6324447127036984710.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -173,7 +172,7 @@ net.sf.jniinchi.JniInchiInputInchi
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4377
+<li>process_communication_port: 12864
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

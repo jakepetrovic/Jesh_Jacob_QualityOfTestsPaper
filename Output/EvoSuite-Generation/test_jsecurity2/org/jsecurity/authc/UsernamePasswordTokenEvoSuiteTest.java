@@ -24,6 +24,26 @@ public class UsernamePasswordTokenEvoSuiteTest {
 
   private static ExecutorService executor; 
 
+  @BeforeClass 
+  public static void initEvoSuiteFramework(){ 
+    org.evosuite.Properties.REPLACE_CALLS = false; 
+    executor = Executors.newCachedThreadPool(); 
+  } 
+
+  @AfterClass 
+  public static void clearEvoSuiteFramework(){ 
+    executor.shutdownNow(); 
+  } 
+
+  @Before 
+  public void initTestCase(){ 
+  } 
+
+  @After 
+  public void doneWithTestCase(){ 
+  } 
+
+
   //Test case number: 0
   /*
    * 3 covered goals:
@@ -33,13 +53,11 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      char[] charArray0 = new char[2];
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, true, (InetAddress) inet4Address0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("p8cG8|=F`*", (String) null, (InetAddress) null);
       String string0 = (String)usernamePasswordToken0.getPrincipal();
-      assertEquals(true, usernamePasswordToken0.isRememberMe());
       assertNotNull(string0);
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=true (localhost/127.0.0.1)", usernamePasswordToken0.toString());
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - p8cG8|=F`*, rememberMe=false", usernamePasswordToken0.toString());
+      assertEquals(false, usernamePasswordToken0.isRememberMe());
   }
 
   //Test case number: 1
@@ -49,12 +67,11 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName((String) null);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null, (InetAddress) inet4Address0);
-      char[] charArray0 = new char[10];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("p8cG8|=F`*", (String) null, (InetAddress) null);
+      char[] charArray0 = new char[5];
       usernamePasswordToken0.setPassword(charArray0);
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - p8cG8|=F`*, rememberMe=false", usernamePasswordToken0.toString());
       assertEquals(false, usernamePasswordToken0.isRememberMe());
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false (localhost/127.0.0.1)", usernamePasswordToken0.toString());
   }
 
   //Test case number: 2
@@ -64,42 +81,36 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      char[] charArray0 = new char[4];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, true);
-      assertEquals(true, usernamePasswordToken0.isRememberMe());
+      char[] charArray0 = new char[3];
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0, false);
+      assertEquals(false, usernamePasswordToken0.isRememberMe());
   }
 
   //Test case number: 3
   /*
-   * 1 covered goal:
+   * 3 covered goals:
    * 1 org.jsecurity.authc.UsernamePasswordToken.<init>(Ljava/lang/String;[CLjava/net/InetAddress;)V: root-Branch
+   * 2 org.jsecurity.authc.UsernamePasswordToken.getInetAddress()Ljava/net/InetAddress;: root-Branch
+   * 3 org.jsecurity.authc.UsernamePasswordToken.<init>()V: root-Branch
    */
   @Test
   public void test3()  throws Throwable  {
-    Future<?> future = executor.submit(new Runnable(){ 
-            public void run() { 
-        try {
-          char[] charArray0 = new char[4];
-          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
-          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, (InetAddress) inet4Address0);
-          assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false (localhost/127.0.0.1)", usernamePasswordToken0.toString());
-        } catch(Throwable t) {
-            // Need to catch declared exceptions
-        }
-      } 
-    }); 
-    future.get(6000, TimeUnit.MILLISECONDS); 
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+      char[] charArray0 = new char[2];
+      InetAddress inetAddress0 = usernamePasswordToken0.getInetAddress();
+      UsernamePasswordToken usernamePasswordToken1 = new UsernamePasswordToken(")", charArray0, inetAddress0);
+      assertEquals(false, usernamePasswordToken1.isRememberMe());
+      assertEquals(false, usernamePasswordToken0.isRememberMe());
   }
 
   //Test case number: 4
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.UsernamePasswordToken.isRememberMe()Z: root-Branch
-   * 2 org.jsecurity.authc.UsernamePasswordToken.<init>()V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", (String) null);
       boolean boolean0 = usernamePasswordToken0.isRememberMe();
       assertEquals(false, boolean0);
   }
@@ -111,12 +122,10 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false", usernamePasswordToken0.toString());
-      
-      usernamePasswordToken0.setRememberMe(true);
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=true", usernamePasswordToken0.toString());
-      assertEquals(true, usernamePasswordToken0.isRememberMe());
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("p8cG8|=F`*", (String) null, (InetAddress) null);
+      usernamePasswordToken0.setRememberMe(false);
+      assertEquals(false, usernamePasswordToken0.isRememberMe());
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - p8cG8|=F`*, rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 6
@@ -127,11 +136,10 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName((String) null);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null, (InetAddress) inet4Address0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", (String) null);
       usernamePasswordToken0.getCredentials();
       assertEquals(false, usernamePasswordToken0.isRememberMe());
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false (localhost/127.0.0.1)", usernamePasswordToken0.toString());
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 7
@@ -141,68 +149,59 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      char[] charArray0 = new char[2];
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, true, (InetAddress) inet4Address0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", (String) null);
       usernamePasswordToken0.setUsername("");
-      assertEquals(true, usernamePasswordToken0.isRememberMe());
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=true (localhost/127.0.0.1)", usernamePasswordToken0.toString());
+      assertEquals(false, usernamePasswordToken0.isRememberMe());
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 8
   /*
    * 1 covered goal:
-   * 1 org.jsecurity.authc.UsernamePasswordToken.getInetAddress()Ljava/net/InetAddress;: root-Branch
+   * 1 org.jsecurity.authc.UsernamePasswordToken.setInetAddress(Ljava/net/InetAddress;)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-      usernamePasswordToken0.getInetAddress();
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false", usernamePasswordToken0.toString());
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("p8cG8|=F`*", (String) null, (InetAddress) null);
+      usernamePasswordToken0.setInetAddress((InetAddress) null);
       assertEquals(false, usernamePasswordToken0.isRememberMe());
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - p8cG8|=F`*, rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 9
   /*
-   * 2 covered goals:
-   * 1 org.jsecurity.authc.UsernamePasswordToken.setInetAddress(Ljava/net/InetAddress;)V: root-Branch
-   * 2 org.jsecurity.authc.UsernamePasswordToken.<init>(Ljava/lang/String;[C)V: root-Branch
+   * 1 covered goal:
+   * 1 org.jsecurity.authc.UsernamePasswordToken.<init>(Ljava/lang/String;[C)V: root-Branch
    */
   @Test
   public void test9()  throws Throwable  {
-      char[] charArray0 = new char[1];
+      char[] charArray0 = new char[3];
       UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
-      usernamePasswordToken0.setInetAddress((InetAddress) null);
-      assertEquals(false, usernamePasswordToken0.isRememberMe());
       assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 10
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.authc.UsernamePasswordToken.clear()V: I19 Branch 5 IFNULL L340 - true
-   * 2 org.jsecurity.authc.UsernamePasswordToken.<init>()V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", (String) null);
       usernamePasswordToken0.clear();
-      assertEquals(false, usernamePasswordToken0.isRememberMe());
       assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false", usernamePasswordToken0.toString());
   }
 
   //Test case number: 11
   /*
-   * 4 covered goals:
+   * 3 covered goals:
    * 1 org.jsecurity.authc.UsernamePasswordToken.clear()V: I19 Branch 5 IFNULL L340 - false
    * 2 org.jsecurity.authc.UsernamePasswordToken.clear()V: I29 Branch 6 IF_ICMPGE L341 - true
    * 3 org.jsecurity.authc.UsernamePasswordToken.clear()V: I29 Branch 6 IF_ICMPGE L341 - false
-   * 4 org.jsecurity.authc.UsernamePasswordToken.<init>(Ljava/lang/String;[C)V: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
-      char[] charArray0 = new char[4];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("p8cG8|=F`*", "p8cG8|=F`*", false, (InetAddress) null);
       usernamePasswordToken0.clear();
       assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false", usernamePasswordToken0.toString());
       assertEquals(false, usernamePasswordToken0.isRememberMe());
@@ -215,10 +214,10 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test12()  throws Throwable  {
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", (String) null);
       String string0 = usernamePasswordToken0.toString();
+      assertEquals("org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false", string0);
       assertNotNull(string0);
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false", string0);
   }
 
   //Test case number: 13
@@ -229,10 +228,21 @@ public class UsernamePasswordTokenEvoSuiteTest {
    */
   @Test
   public void test13()  throws Throwable  {
-      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getByName((String) null);
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null, (InetAddress) inet4Address0);
-      String string0 = usernamePasswordToken0.toString();
-      assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false (localhost/127.0.0.1)", string0);
-      assertNotNull(string0);
+    Future<?> future = executor.submit(new Runnable(){ 
+            public void run() { 
+        try {
+          char[] charArray0 = new char[3];
+          Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+          UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, charArray0, true, (InetAddress) inet4Address0);
+          String string0 = usernamePasswordToken0.toString();
+          assertNotNull(string0);
+          assertEquals("org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=true (localhost/127.0.0.1)", string0);
+          assertEquals(true, usernamePasswordToken0.isRememberMe());
+        } catch(Throwable t) {
+            // Need to catch declared exceptions
+        }
+      } 
+    }); 
+    future.get(6000, TimeUnit.MILLISECONDS); 
   }
 }

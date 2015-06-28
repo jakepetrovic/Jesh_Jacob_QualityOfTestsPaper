@@ -19,7 +19,7 @@ public class WildcardEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      boolean boolean0 = Wildcard.isWildcard("*");
+      boolean boolean0 = Wildcard.isWildcard("q3|jQH*3R?$2Y");
       assertEquals(true, boolean0);
   }
 
@@ -31,7 +31,7 @@ public class WildcardEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      boolean boolean0 = Wildcard.isWildcard(") :lc");
+      boolean boolean0 = Wildcard.isWildcard("");
       assertEquals(false, boolean0);
   }
 
@@ -43,21 +43,22 @@ public class WildcardEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      boolean boolean0 = Wildcard.isWildcard("[;T-Z``gcue/=");
+      boolean boolean0 = Wildcard.isWildcard(":uU#8oU,+b;>Pp");
       assertEquals(true, boolean0);
   }
 
   //Test case number: 3
   /*
-   * 4 covered goals:
-   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - true
-   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - false
-   * 3 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - true
-   * 4 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - false
+   * 5 covered goals:
+   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - false
+   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - true
+   * 3 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - true
+   * 4 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I58 Branch 7 IFGT L96 - false
+   * 5 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      String string0 = Wildcard.matchWildcard(" 1nK>u^ 1nK>u^*8\"[xY|B!p*L8\"[xY|B!p*L", " 1nK>u^*8\"[xY|B!p*L");
+      String string0 = Wildcard.matchWildcard("q3|jQH*3R?$2YLf*@sA&F==oW*>4+{", "q3|jQH*3R?$2Y");
       assertNull(string0);
   }
 
@@ -65,53 +66,52 @@ public class WildcardEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - false
-   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I33 Branch 5 IFLE L89 - false
+   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I33 Branch 5 IFLE L89 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      String string0 = Wildcard.matchWildcard(".McZe=}An[#", ".McZe=}An[#");
-      assertNotNull(string0);
-      assertEquals("", string0);
+      String string0 = Wildcard.matchWildcard("/u!A|oGJqH|,{C!q", "");
+      assertNull(string0);
   }
 
   //Test case number: 5
   /*
    * 2 covered goals:
-   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I33 Branch 5 IFLE L89 - true
+   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I33 Branch 5 IFLE L89 - false
    * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - false
    */
   @Test
   public void test5()  throws Throwable  {
-      String string0 = Wildcard.matchWildcard(") :lc", "");
-      assertNull(string0);
+      String string0 = Wildcard.matchWildcard("UMkp3jd%%o2,", "UMkp3jd%%o2,");
+      assertEquals("", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 6
   /*
    * 2 covered goals:
-   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - true
-   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I58 Branch 7 IFGT L96 - true
+   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - false
+   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - true
    */
   @Test
   public void test6()  throws Throwable  {
-      String string0 = Wildcard.matchWildcard(" 1nK>u^*8\"[xY|B!p*L", " 1nK>u^*8\"[xY|B!p*L");
-      assertNotNull(string0);
-      assertEquals("*", string0);
+      String string0 = Wildcard.matchWildcard(">*", "");
+      assertNull(string0);
   }
 
   //Test case number: 7
   /*
-   * 5 covered goals:
-   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I58 Branch 7 IFGT L96 - false
-   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - true
-   * 3 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - false
-   * 4 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - true
-   * 5 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - true
+   * 4 covered goals:
+   * 1 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I58 Branch 7 IFGT L96 - true
+   * 2 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I12 Branch 3 IFEQ L82 - false
+   * 3 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I27 Branch 4 IFGE L87 - true
+   * 4 nu.staldal.lagoon.util.Wildcard.matchWildcard(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;: I45 Branch 6 IFGT L93 - true
    */
   @Test
   public void test7()  throws Throwable  {
-      String string0 = Wildcard.matchWildcard("*4mAkcp,[.$'^:y", ") :lc");
-      assertNull(string0);
+      String string0 = Wildcard.matchWildcard("*Lf*@sA&F==oW*>4+{", "*Lf*@sA&F==oW*>4+{");
+      assertNotNull(string0);
+      assertEquals("*", string0);
   }
 
   //Test case number: 8
@@ -121,8 +121,8 @@ public class WildcardEvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      String string0 = Wildcard.instantiateWildcard(" 1nK>u^*8\"[xY|B!p*L", " 1nK>u^*8\"[xY|B!p*L");
-      assertEquals(" 1nK>u^ 1nK>u^*8\"[xY|B!p*L8\"[xY|B!p*L", string0);
+      String string0 = Wildcard.instantiateWildcard("*Lf*@sA&F==oW*>4+{", "q3|jQH*3R?$2Y");
+      assertEquals("q3|jQH*3R?$2YLf*@sA&F==oW*>4+{", string0);
       assertNotNull(string0);
   }
 

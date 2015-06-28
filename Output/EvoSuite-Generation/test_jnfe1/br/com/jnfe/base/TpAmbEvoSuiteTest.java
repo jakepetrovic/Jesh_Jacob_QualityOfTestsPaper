@@ -19,10 +19,10 @@ public class TpAmbEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      TpAmb tpAmb0 = TpAmb.HOMOLOGACAO;
+      TpAmb tpAmb0 = TpAmb.PRODUCAO;
       String string0 = tpAmb0.getValueAsString();
       assertNotNull(string0);
-      assertEquals("2", string0);
+      assertEquals("1", string0);
   }
 
   //Test case number: 1
@@ -32,8 +32,8 @@ public class TpAmbEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      TpAmb tpAmb0 = TpAmb.HOMOLOGACAO;
+      TpAmb tpAmb0 = TpAmb.PRODUCAO;
       char char0 = tpAmb0.getValue();
-      assertEquals('2', char0);
+      assertEquals('1', char0);
   }
 }

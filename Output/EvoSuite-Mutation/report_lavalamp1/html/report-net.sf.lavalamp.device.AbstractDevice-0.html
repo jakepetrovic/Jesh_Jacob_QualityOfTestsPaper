@@ -21,10 +21,10 @@ net.sf.lavalamp.device.AbstractDevice
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: net.sf.lavalamp.device.AbstractDevice: 93.75%</ul><ul>
-<li>12436 fitness evaluations, 250 generations, 100122 statements, 7780 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 6/6 branches, 11/12 methods, 15/16 total goals
+<ul><li>Target class: net.sf.lavalamp.device.AbstractDevice: 87.50%</ul><ul>
+<li>12550 fitness evaluations, 252 generations, 63889 statements, 7547 tests.
+<li>Time: 0:01:01(Search: 0:01:00, minimization: 0:00:00)
+<li>Coverage: 5/6 branches, 11/12 methods, 14/16 total goals
 <li>Mutation score: 4%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -57,15 +57,13 @@ net.sf.lavalamp.device.AbstractDevice
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>SimpleTimeZone simpleTimeZone0 = new SimpleTimeZone((-1106), &quot;?}P(oFx&quot;);
-<span class="nocode"><a name="3">  3: </a></span>Locale locale0 = Locale.ROOT;
-<span class="nocode"><a name="4">  4: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance((TimeZone) simpleTimeZone0, locale0);
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -91,19 +89,10 @@ net.sf.lavalamp.device.AbstractDevice
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
 <span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
-<span class="nocode"><a name="3">  3: </a></span>OnError onError0 = OnError.CRASH;
-<span class="nocode"><a name="4">  4: </a></span>deviceProperties0.setOnError(onError0);
-<span class="nocode"><a name="5">  5: </a></span>dummyDevice0.setProperties(deviceProperties0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, deviceProperties0.isOnWhenSuccessful());
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DummyDevice dummyDevice0 = new DummyDevice();
-<span class="nocode"><a name="2">  2: </a></span>DeviceProperties deviceProperties0 = new DeviceProperties();
 <span class="nocode"><a name="3">  3: </a></span>OnError onError0 = OnError.STATUSQUO;
 <span class="nocode"><a name="4">  4: </a></span>deviceProperties0.setOnError(onError0);
 <span class="nocode"><a name="5">  5: </a></span>dummyDevice0.setProperties(deviceProperties0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(OnError.STATUSQUO, deviceProperties0.getOnError());
+<span class="nocode"><a name="6">  6: </a></span>assertNull(deviceProperties0.getIdentity());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package net.sf.lavalamp.device;
@@ -175,7 +164,7 @@ net.sf.lavalamp.device.AbstractDevice
 <span class="nocode"><a name="67"> 67: </a></span>		Action errorAction;
 <span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">		OnError onError = properties.getOnError();</span>
 <span class="nocode"><a name="69"> 69: </a></span><span style="background-color: #ffffcc">		if (onError.equals(OnError.CRASH)) {</span>
-<span class="nocode"><a name="70"> 70: </a></span><span style="background-color: #ffffcc">			errorAction = new Crash();</span>
+<span class="nocode"><a name="70"> 70: </a></span>			errorAction = new Crash();
 <span class="nocode"><a name="71"> 71: </a></span><span style="background-color: #ffffcc">		} else if (onError.equals(OnError.STATUSQUO)) {</span>
 <span class="nocode"><a name="72"> 72: </a></span><span style="background-color: #ffffcc">			errorAction = new StatusQuo();</span>
 <span class="nocode"><a name="73"> 73: </a></span>		} else {
@@ -210,7 +199,7 @@ net.sf.lavalamp.device.AbstractDevice
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1263865295215324801.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7350236331166270419.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -228,7 +217,7 @@ net.sf.lavalamp.device.AbstractDevice
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3787
+<li>process_communication_port: 13129
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -19,10 +19,10 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._Part;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       String string0 = cST_Grupo0.getGroup();
+      assertEquals("10", string0);
       assertNotNull(string0);
-      assertEquals("Part", string0);
   }
 
   //Test case number: 1
@@ -32,7 +32,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._51;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isIsento();
       assertEquals(false, boolean0);
   }
@@ -44,9 +44,9 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._51;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isST();
-      assertEquals(false, boolean0);
+      assertEquals(true, boolean0);
   }
 
   //Test case number: 3
@@ -56,7 +56,7 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._51;
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
       boolean boolean0 = cST_Grupo0.isSimplesNacional();
       assertEquals(false, boolean0);
   }
@@ -70,8 +70,8 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._51;
-      boolean boolean0 = cST_Grupo0.isRequiredTag("<9aBfp!Bwmqhpl^P0");
+      CST_Grupo cST_Grupo0 = CST_Grupo._10;
+      boolean boolean0 = cST_Grupo0.isRequiredTag("_10");
       assertEquals(false, boolean0);
   }
 
@@ -84,8 +84,8 @@ public class CST_GrupoEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      CST_Grupo cST_Grupo0 = CST_Grupo._51;
-      boolean boolean0 = cST_Grupo0.isRequiredTag("pRedBC");
+      CST_Grupo cST_Grupo0 = CST_Grupo._SN500;
+      boolean boolean0 = cST_Grupo0.isRequiredTag("vICMSSTRet");
       assertEquals(true, boolean0);
   }
 }

@@ -21,11 +21,11 @@ org.jsecurity.realm.AuthorizingRealm
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.realm.AuthorizingRealm: 58.86%</ul><ul>
-<li>8846 fitness evaluations, 178 generations, 82776 statements, 5448 tests.
-<li>Time: 0:01:07(Search: 0:01:01, minimization: 0:00:06)
-<li>Coverage: 85/152 branches, 38/44 methods, 103/175 total goals
-<li>Mutation score: 58%
+<ul><li>Target class: org.jsecurity.realm.AuthorizingRealm: 55.43%</ul><ul>
+<li>7694 fitness evaluations, 155 generations, 70260 statements, 4930 tests.
+<li>Time: 0:01:06(Search: 0:01:01, minimization: 0:00:05)
+<li>Coverage: 79/152 branches, 38/44 methods, 97/175 total goals
+<li>Mutation score: 49%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,35 +34,37 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.isPermitted((PrincipalCollection) null, &quot;huC&quot;);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.isPermitted((PrincipalCollection) null, &quot;5&quot;);
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = (WildcardPermissionResolver)simpleAccountRealm0.getPermissionResolver();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_32&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.setPermissionResolver((PermissionResolver) wildcardPermissionResolver0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;].  &quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.onLogout((PrincipalCollection) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(simpleAccountRealm0.getAuthorizationCacheName());
+</pre>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
 <span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.init();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_46&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.onLogout((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(simpleAccountRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  simpleAccountRealm0.hasRole((PrincipalCollection) simplePrincipalCollection0, (String) null);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(NoSuchElementException e) {
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -70,345 +72,259 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>String[] stringArray0 = new String[1];
-<span class="nocode"><a name="5">  5: </a></span>stringArray0[0] = &quot;'...&quot;;
+<span class="nocode"><a name="5">  5: </a></span>stringArray0[0] = &quot;OtE &quot;;
 <span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.isPermitted((PrincipalCollection) null, stringArray0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_105&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_113&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.hasRole((PrincipalCollection) null, &quot;'...&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_178&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.hasRole((PrincipalCollection) null, (String) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm((String) null);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, (Collection&lt;Permission&gt;) linkedList0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;TuEz&quot;);
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  simpleAccountRealm0.checkRole((PrincipalCollection) null, &quot;TuEz&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(UnauthorizedException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * User does not have role [TuEz]
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.checkPermissions((PrincipalCollection) null, (Collection&lt;Permission&gt;) linkedList0);
+<span class="nocode"><a name="4">  4: </a></span>assertNull(simpleAccountRealm0.getAuthorizationCacheName());
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.checkRoles((PrincipalCollection) null, (Collection&lt;String&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;].  &quot;, simpleAccountRealm0.getName());
+</pre>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.checkRoles((PrincipalCollection) null, (Collection&lt;String&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_217&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;Attempting to retrieve the AuthorizationIfno from cache.&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>String[] stringArray0 = new String[3];
-<span class="nocode"><a name="4">  4: </a></span>stringArray0[0] = &quot;Attempting to retrieve the AuthorizationIfno from cache.&quot;;
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, stringArray0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;*3\&quot;O&amp;.!nWiK&quot;);
-<span class="nocode"><a name="2">  2: </a></span>simpleAccountRealm0.setAuthorizationCache((Cache) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(simpleAccountRealm0.getAuthorizationCacheName());
+<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="5">  5: </a></span>String[] stringArray0 = new String[10];
+<span class="nocode"><a name="6">  6: </a></span>stringArray0[0] = &quot;BOOT&quot;;
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection0, stringArray0);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(NoSuchElementException e) {
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.afterCacheManagerSet();
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_294&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.setAuthorizationCache((Cache) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_318&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 12</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;lYzzv)T?C&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="5">  5: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
-<span class="nocode"><a name="8">  8: </a></span>try {
-<span class="nocode"><a name="9">  9: </a></span>  simpleAccountRealm0.checkRole((PrincipalCollection) simplePrincipalCollection0, &quot;lYzzv)T?C&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="11"> 11: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.clearCachedAuthorizationInfo((PrincipalCollection) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_389&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.setAuthorizationCacheName(&quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
+<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_333&quot;, simpleAccountRealm0.getName());
+</pre>
+<h3>Test case 13</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) &quot;\u0000\u0000T\rdT\uFFFD\uFFFD&quot;, (Object) null, &quot;\u0000\u0000T\rdT\uFFFD\uFFFD&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthenticationInfo0.getPrincipals();
+<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.clearCachedAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;'...&quot;, true);
-<span class="nocode"><a name="5">  5: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  simpleAccountRealm0.checkPermission((Permission) wildcardPermission0, (AuthorizationInfo) simpleAuthorizationInfo0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(UnauthorizedException e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * User is not permitted [org.jsecurity.authz.permission.WildcardPermission@7b08efff]
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Object&gt; treeSet0 = new TreeSet&lt;Object&gt;();
+<span class="nocode"><a name="5">  5: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="6">  6: </a></span>treeSet0.add((Object) &quot;[]&quot;);
+<span class="nocode"><a name="7">  7: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;[]&quot;, true);
+<span class="nocode"><a name="8">  8: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Collection) treeSet0, &quot;[]&quot;);
+<span class="nocode"><a name="9">  9: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) null, (Set&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="10"> 10: </a></span>// Undeclared exception!
+<span class="nocode"><a name="11"> 11: </a></span>try {
+<span class="nocode"><a name="12"> 12: </a></span>  simpleAccountRealm0.checkPermission((Permission) wildcardPermission0, (AuthorizationInfo) simpleAccount0);
+<span class="nocode"><a name="13"> 13: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
+<span class="nocode"><a name="14"> 14: </a></span>} catch(UnauthorizedException e) {
+<span class="nocode"><a name="15"> 15: </a></span>  /*
+<span class="nocode"><a name="16"> 16: </a></span>   * User is not permitted [org.jsecurity.authz.permission.WildcardPermission@419de584]
+<span class="nocode"><a name="17"> 17: </a></span>   */
+<span class="nocode"><a name="18"> 18: </a></span>}
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount();
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.isPermitted((List&lt;Permission&gt;) linkedList0, (AuthorizationInfo) simpleAuthorizingAccount0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_441&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
+<span class="nocode"><a name="3">  3: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
+<span class="nocode"><a name="4">  4: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.isPermitted((List&lt;Permission&gt;) linkedList0, (AuthorizationInfo) simpleAuthorizationInfo0);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(booleanArray0);
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.isPermitted((List&lt;Permission&gt;) null, (AuthorizationInfo) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_456&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;?Tf&lt;UdZvaz[qr(@.TL&quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;\u0000\uFFFD\n\u0000\&quot;\uFFFD\u0000&quot;, &quot;\u0000\uFFFD\n\u0000\&quot;\uFFFD\u0000&quot;);
+<span class="nocode"><a name="3">  3: </a></span>String[] stringArray0 = new String[2];
+<span class="nocode"><a name="4">  4: </a></span>stringArray0[0] = &quot;\u0000\uFFFD\n\u0000\&quot;\uFFFD\u0000&quot;;
+<span class="nocode"><a name="5">  5: </a></span>stringArray0[1] = &quot;\u0000\uFFFD\n\u0000\&quot;\uFFFD\u0000&quot;;
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  simpleAccountRealm0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, stringArray0);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(NoSuchElementException e) {
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.isPermitted((List&lt;Permission&gt;) linkedList0, (AuthorizationInfo) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_472&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((PrincipalCollection) null, (Collection&lt;Permission&gt;) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_478&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;z921&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
-<span class="nocode"><a name="3">  3: </a></span>String[] stringArray0 = new String[1];
-<span class="nocode"><a name="4">  4: </a></span>stringArray0[0] = &quot;z921&quot;;
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  simpleAccountRealm0.isPermittedAll((PrincipalCollection) simplePrincipalCollection0, stringArray0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NoSuchElementException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(NoSuchElementException e) {
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection&lt;Permission&gt;) null, (AuthorizationInfo) simpleAuthorizationInfo0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((PrincipalCollection) null, (Collection&lt;Permission&gt;) linkedList0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_540&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;Permission&gt; linkedHashSet0 = new LinkedHashSet&lt;Permission&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;\u0000\u0636\u0001\u0000\u0000\uFFFD.K&quot;, (Set&lt;String&gt;) null);
+<span class="nocode"><a name="7">  7: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection&lt;Permission&gt;) linkedHashSet0, (AuthorizationInfo) simpleAccount0);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_511&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="9">  9: </a></span>assertEquals(true, boolean0);
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection&lt;Permission&gt;) linkedList0, (AuthorizationInfo) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_557&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.checkPermissions((Collection&lt;Permission&gt;) null, (AuthorizationInfo) simpleAuthorizationInfo0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;].  &quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;d\u0018&lt;.\u0000\u0000\u0000&quot;, &quot;d\u0018&lt;.\u0000\u0000\u0000&quot;);
-<span class="nocode"><a name="6">  6: </a></span>TreeSet&lt;String&gt; treeSet0 = new TreeSet&lt;String&gt;();
-<span class="nocode"><a name="7">  7: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((PrincipalCollection) simplePrincipalCollection0, (Object) &quot;org.jsecurity.authc.UsernamePasswordToken - d\u0018&lt;.\u0000\u0000\u0000, rememberMe=false (localhost/127.0.0.1)&quot;, &quot;uER2e,_ssNCBR@~&quot;, (Set&lt;String&gt;) treeSet0, (Set&lt;Permission&gt;) null);
-<span class="nocode"><a name="8">  8: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection&lt;Permission&gt;) linkedList0, (AuthorizationInfo) simpleAuthorizingAccount0);
-<span class="nocode"><a name="9">  9: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_577&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="10"> 10: </a></span>assertEquals(true, boolean0);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = simpleAccountRealm0.hasRole((String) null, (AuthorizationInfo) simpleAuthorizingAccount0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set&lt;String&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = simpleAccountRealm0.isPermittedAll((Collection&lt;Permission&gt;) null, (AuthorizationInfo) simpleAuthorizationInfo0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_592&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(true, boolean0);
-</pre>
-<h3>Test case 23</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;D)&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, &quot;D)&quot;);
-<span class="nocode"><a name="3">  3: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = (SimplePrincipalCollection)simpleAuthorizingAccount0.getPrincipals();
-<span class="nocode"><a name="4">  4: </a></span>SimplePrincipalCollection simplePrincipalCollection1 = new SimplePrincipalCollection((PrincipalCollection) simplePrincipalCollection0);
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.checkPermissions((PrincipalCollection) simplePrincipalCollection1, (String[]) null);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(simpleAccountRealm0.getAuthorizationCacheName());
-</pre>
-<h3>Test case 24</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.checkPermissions((Collection&lt;Permission&gt;) linkedList0, (AuthorizationInfo) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_622&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 25</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;Permission&gt; linkedList0 = new LinkedList&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>WildcardPermissionResolver wildcardPermissionResolver0 = new WildcardPermissionResolver();
-<span class="nocode"><a name="6">  6: </a></span>WildcardPermission wildcardPermission0 = (WildcardPermission)wildcardPermissionResolver0.resolvePermission(&quot;Log adapter '&quot;);
-<span class="nocode"><a name="7">  7: </a></span>linkedList0.add((Permission) wildcardPermission0);
-<span class="nocode"><a name="8">  8: </a></span>// Undeclared exception!
-<span class="nocode"><a name="9">  9: </a></span>try {
-<span class="nocode"><a name="10"> 10: </a></span>  simpleAccountRealm0.checkPermissions((Collection&lt;Permission&gt;) linkedList0, (AuthorizationInfo) null);
-<span class="nocode"><a name="11"> 11: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
-<span class="nocode"><a name="12"> 12: </a></span>} catch(UnauthorizedException e) {
-<span class="nocode"><a name="13"> 13: </a></span>  /*
-<span class="nocode"><a name="14"> 14: </a></span>   * User is not permitted [org.jsecurity.authz.permission.WildcardPermission@6993dede]
-<span class="nocode"><a name="15"> 15: </a></span>   */
-<span class="nocode"><a name="16"> 16: </a></span>}
-</pre>
-<h3>Test case 26</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_686&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 27</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) linkedList0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_704&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 28</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;*3\&quot;O&amp;.!nWiK&quot;);
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
-<span class="nocode"><a name="4">  4: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List&lt;String&gt;) linkedList0, (AuthorizationInfo) simpleAuthorizationInfo0);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(booleanArray0);
-</pre>
-<h3>Test case 29</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount();
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.hasRoles((List&lt;String&gt;) linkedList0, (AuthorizationInfo) simpleAuthorizingAccount0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_742&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 30</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>simpleAccountRealm0.hasRoles((List&lt;String&gt;) null, (AuthorizationInfo) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_757&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 31</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>linkedList0.add(&quot;uvQ,&quot;);
-<span class="nocode"><a name="6">  6: </a></span>simpleAccountRealm0.hasRoles((List&lt;String&gt;) linkedList0, (AuthorizationInfo) null);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_773&quot;, simpleAccountRealm0.getName());
-</pre>
-<h3>Test case 32</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.hasAllRoles((PrincipalCollection) null, (Collection&lt;String&gt;) null);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_810&quot;, simpleAccountRealm0.getName());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 33</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;UTF-8&quot;, (Object) null, &quot;UTF-8&quot;);
-<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
-<span class="nocode"><a name="6">  6: </a></span>try {
-<span class="nocode"><a name="7">  7: </a></span>  simpleAccountRealm0.checkRole(&quot;63di}v!.PL]MAd*ry)&quot;, (AuthorizationInfo) simpleAccount0);
-<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
-<span class="nocode"><a name="9">  9: </a></span>} catch(UnauthorizedException e) {
-<span class="nocode"><a name="10"> 10: </a></span>  /*
-<span class="nocode"><a name="11"> 11: </a></span>   * User does not have role [63di}v!.PL]MAd*ry)]
-<span class="nocode"><a name="12"> 12: </a></span>   */
-<span class="nocode"><a name="13"> 13: </a></span>}
-</pre>
-<h3>Test case 34</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;D)&quot;);
-<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizingAccount simpleAuthorizingAccount0 = new SimpleAuthorizingAccount((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, &quot;D)&quot;);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;].  &quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  simpleAccountRealm0.checkRole(&quot;UTF-8&quot;, (AuthorizationInfo) simpleAuthorizingAccount0);
+<span class="nocode"><a name="5">  5: </a></span>  simpleAccountRealm0.checkRole(&quot;[]&quot;, (AuthorizationInfo) simpleAuthorizationInfo0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(UnauthorizedException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * User does not have role [UTF-8]
+<span class="nocode"><a name="9">  9: </a></span>   * User does not have role [[]]
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
-<h3>Test case 35</h3>
+<h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>simpleAccountRealm0.checkRoles((Collection&lt;String&gt;) hashSet0, (AuthorizationInfo) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_870&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;String&gt; linkedHashSet0 = new LinkedHashSet&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>SimpleAuthorizationInfo simpleAuthorizationInfo0 = new SimpleAuthorizationInfo((Set&lt;String&gt;) linkedHashSet0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  simpleAccountRealm0.checkRole(&quot;&quot;, (AuthorizationInfo) simpleAuthorizationInfo0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(UnauthorizedException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * User does not have role []
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 36</h3>
+<h3>Test case 24</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((PrincipalCollection) null, (List&lt;String&gt;) linkedList0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 25</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List&lt;String&gt;) linkedList0, (AuthorizationInfo) null);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 26</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;@2Pmx&lt;5:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="3">  3: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List&lt;String&gt;) null, (AuthorizationInfo) simpleAccount0);
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 27</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.addFirst((String) null);
+<span class="nocode"><a name="4">  4: </a></span>boolean[] booleanArray0 = simpleAccountRealm0.hasRoles((List&lt;String&gt;) linkedList0, (AuthorizationInfo) null);
+<span class="nocode"><a name="5">  5: </a></span>assertNotNull(booleanArray0);
+</pre>
+<h3>Test case 28</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;@2Pmx&lt;5:&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(simpleAccountRealm0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
-<span class="nocode"><a name="5">  5: </a></span>linkedList0.add(&quot;uvQ,&quot;);
-<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  simpleAccountRealm0.checkRoles((PrincipalCollection) null, (Collection&lt;String&gt;) linkedList0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(UnauthorizedException e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * User does not have role [uvQ,]
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = simpleAccountRealm0.hasAllRoles((PrincipalCollection) null, (Collection&lt;String&gt;) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 29</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>simpleAccountRealm0.checkRoles((Collection&lt;String&gt;) linkedList0, (AuthorizationInfo) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;b7q&lt;D &quot;, simpleAccountRealm0.getName());
+</pre>
+<h3>Test case 30</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm(&quot;b7q&lt;D &quot;);
+<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;String&gt; linkedList0 = new LinkedList&lt;String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>linkedList0.addFirst((String) null);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  simpleAccountRealm0.checkRoles((Collection&lt;String&gt;) linkedList0, (AuthorizationInfo) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: UnauthorizedException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(UnauthorizedException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * User does not have role [null]
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -816,7 +732,7 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="403">403: </a></span>    protected boolean[] isPermitted(List&lt;Permission&gt; permissions, AuthorizationInfo info) {
 <span class="nocode"><a name="404">404: </a></span>        //todo Remove this once AuthorizingAccount class is deleted
 <span class="nocode"><a name="405">405: </a></span><span style="background-color: #ffffcc">        if (info instanceof AuthorizingAccount) {</span>
-<span class="nocode"><a name="406">406: </a></span><span style="background-color: #ffffcc">            return ((AuthorizingAccount) info).isPermitted(permissions);</span>
+<span class="nocode"><a name="406">406: </a></span>            return ((AuthorizingAccount) info).isPermitted(permissions);
 <span class="nocode"><a name="407">407: </a></span>        }
 <span class="nocode"><a name="408">408: </a></span>
 <span class="nocode"><a name="409">409: </a></span>        boolean[] result;
@@ -853,7 +769,7 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="440">440: </a></span>    protected boolean isPermittedAll(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
 <span class="nocode"><a name="441">441: </a></span>        //todo Remove this once AuthorizingAccount class is deleted
 <span class="nocode"><a name="442">442: </a></span><span style="background-color: #ffffcc">        if (info instanceof AuthorizingAccount) {</span>
-<span class="nocode"><a name="443">443: </a></span><span style="background-color: #ffffcc">            return ((AuthorizingAccount) info).isPermittedAll(permissions);</span>
+<span class="nocode"><a name="443">443: </a></span>            return ((AuthorizingAccount) info).isPermittedAll(permissions);
 <span class="nocode"><a name="444">444: </a></span>        }
 <span class="nocode"><a name="445">445: </a></span>
 <span class="nocode"><a name="446">446: </a></span><span style="background-color: #ffffcc">        if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
@@ -895,12 +811,12 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="482">482: </a></span><span style="background-color: #ffffcc">                checkPermission(subjectIdentifier, permString);</span>
 <span class="nocode"><a name="483">483: </a></span>            }
 <span class="nocode"><a name="484">484: </a></span>        }
-<span class="nocode"><a name="485">485: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="485">485: </a></span>    }
 <span class="nocode"><a name="486">486: </a></span>
 <span class="nocode"><a name="487">487: </a></span>    public void checkPermissions(PrincipalCollection principal, Collection&lt;Permission&gt; permissions) throws AuthorizationException {
 <span class="nocode"><a name="488">488: </a></span><span style="background-color: #ffffcc">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
-<span class="nocode"><a name="489">489: </a></span>        checkPermissions(permissions, info);
-<span class="nocode"><a name="490">490: </a></span>    }
+<span class="nocode"><a name="489">489: </a></span><span style="background-color: #ffffcc">        checkPermissions(permissions, info);</span>
+<span class="nocode"><a name="490">490: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="491">491: </a></span>
 <span class="nocode"><a name="492">492: </a></span>    @SuppressWarnings(&quot;deprecation&quot;)
 <span class="nocode"><a name="493">493: </a></span>    protected void checkPermissions(Collection&lt;Permission&gt; permissions, AuthorizationInfo info) {
@@ -909,8 +825,8 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="496">496: </a></span>            ((AuthorizingAccount) info).checkPermissions(permissions);
 <span class="nocode"><a name="497">497: </a></span>        } else {
 <span class="nocode"><a name="498">498: </a></span><span style="background-color: #ffffcc">            if (permissions != null &amp;&amp; !permissions.isEmpty()) {</span>
-<span class="nocode"><a name="499">499: </a></span><span style="background-color: #ffffcc">                for (Permission p : permissions) {</span>
-<span class="nocode"><a name="500">500: </a></span><span style="background-color: #ffffcc">                    checkPermission(p, info);</span>
+<span class="nocode"><a name="499">499: </a></span>                for (Permission p : permissions) {
+<span class="nocode"><a name="500">500: </a></span>                    checkPermission(p, info);
 <span class="nocode"><a name="501">501: </a></span>                }
 <span class="nocode"><a name="502">502: </a></span>            }
 <span class="nocode"><a name="503">503: </a></span>        }
@@ -925,7 +841,7 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="512">512: </a></span>    protected boolean hasRole(String roleIdentifier, AuthorizationInfo info) {
 <span class="nocode"><a name="513">513: </a></span>        //todo Remove this once AuthorizingAccount class is deleted
 <span class="nocode"><a name="514">514: </a></span><span style="background-color: #ffffcc">        if (info instanceof AuthorizingAccount) {</span>
-<span class="nocode"><a name="515">515: </a></span>            return ((AuthorizingAccount) info).hasRole(roleIdentifier);
+<span class="nocode"><a name="515">515: </a></span><span style="background-color: #ffffcc">            return ((AuthorizingAccount) info).hasRole(roleIdentifier);</span>
 <span class="nocode"><a name="516">516: </a></span>        }
 <span class="nocode"><a name="517">517: </a></span><span style="background-color: #ffffcc">        return info != null &amp;&amp; info.getRoles() != null &amp;&amp; info.getRoles().contains(roleIdentifier);</span>
 <span class="nocode"><a name="518">518: </a></span>    }
@@ -943,7 +859,7 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="530">530: </a></span>    protected boolean[] hasRoles(List&lt;String&gt; roleIdentifiers, AuthorizationInfo info) {
 <span class="nocode"><a name="531">531: </a></span>        //todo Remove this once AuthorizingAccount class is deleted
 <span class="nocode"><a name="532">532: </a></span><span style="background-color: #ffffcc">        if (info instanceof AuthorizingAccount) {</span>
-<span class="nocode"><a name="533">533: </a></span><span style="background-color: #ffffcc">            return ((AuthorizingAccount) info).hasRoles(roleIdentifiers);</span>
+<span class="nocode"><a name="533">533: </a></span>            return ((AuthorizingAccount) info).hasRoles(roleIdentifiers);
 <span class="nocode"><a name="534">534: </a></span>        }
 <span class="nocode"><a name="535">535: </a></span>
 <span class="nocode"><a name="536">536: </a></span>        boolean[] result;
@@ -984,14 +900,14 @@ org.jsecurity.realm.AuthorizingRealm
 <span class="nocode"><a name="571">571: </a></span>
 <span class="nocode"><a name="572">572: </a></span>    public void checkRole(PrincipalCollection principal, String role) throws AuthorizationException {
 <span class="nocode"><a name="573">573: </a></span><span style="background-color: #ffffcc">        AuthorizationInfo info = getAuthorizationInfo(principal);</span>
-<span class="nocode"><a name="574">574: </a></span>        checkRole(role, info);
+<span class="nocode"><a name="574">574: </a></span><span style="background-color: #ffffcc">        checkRole(role, info);</span>
 <span class="nocode"><a name="575">575: </a></span>    }
 <span class="nocode"><a name="576">576: </a></span>
 <span class="nocode"><a name="577">577: </a></span>    @SuppressWarnings(&quot;deprecation&quot;)
 <span class="nocode"><a name="578">578: </a></span>    protected void checkRole(String role, AuthorizationInfo info) {
 <span class="nocode"><a name="579">579: </a></span>        //todo Remove this once AuthorizingAccount class is deleted
 <span class="nocode"><a name="580">580: </a></span><span style="background-color: #ffffcc">        if (info instanceof AuthorizingAccount) {</span>
-<span class="nocode"><a name="581">581: </a></span><span style="background-color: #ffffcc">            ((AuthorizingAccount) info).checkRole(role);</span>
+<span class="nocode"><a name="581">581: </a></span>            ((AuthorizingAccount) info).checkRole(role);
 <span class="nocode"><a name="582">582: </a></span>        } else {
 <span class="nocode"><a name="583">583: </a></span><span style="background-color: #ffffcc">            if (!hasRole(role, info)) {</span>
 <span class="nocode"><a name="584">584: </a></span><span style="background-color: #ffffcc">                String msg = &quot;User does not have role [&quot; + role + &quot;]&quot;;</span>
@@ -1034,7 +950,7 @@ org.jsecurity.realm.AuthorizingRealm
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -1052,7 +968,7 @@ org.jsecurity.realm.AuthorizingRealm
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2774
+<li>process_communication_port: 16920
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

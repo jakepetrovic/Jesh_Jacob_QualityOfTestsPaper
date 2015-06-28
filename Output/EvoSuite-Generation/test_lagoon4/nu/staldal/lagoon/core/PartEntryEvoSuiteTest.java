@@ -13,7 +13,7 @@ import nu.staldal.lagoon.core.LagoonProcessor;
 import nu.staldal.lagoon.core.PartEntry;
 import nu.staldal.lagoon.core.Sitemap;
 import nu.staldal.lagoon.core.XMLStreamProducer;
-import nu.staldal.lagoon.producer.LSSITransformer;
+import nu.staldal.lagoon.producer.XSLTransformer;
 
 public class PartEntryEvoSuiteTest {
 
@@ -26,11 +26,10 @@ public class PartEntryEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
-      LSSITransformer lSSITransformer0 = new LSSITransformer();
-      partEntry0.setMyProducer((XMLStreamProducer) lSSITransformer0);
-      assertNull(lSSITransformer0.getEntryName());
+      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "[%{priority}]: %{message}\n%{throwable}", (File) null);
+      XSLTransformer xSLTransformer0 = new XSLTransformer();
+      partEntry0.setMyProducer((XMLStreamProducer) xSLTransformer0);
+      assertEquals(0, xSLTransformer0.getPosition());
   }
 
   //Test case number: 1
@@ -41,8 +40,7 @@ public class PartEntryEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
+      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "Illegal FileStorage config file: ", (File) null);
       XMLStreamProducer xMLStreamProducer0 = partEntry0.getXMLProducer();
       assertNull(xMLStreamProducer0);
   }

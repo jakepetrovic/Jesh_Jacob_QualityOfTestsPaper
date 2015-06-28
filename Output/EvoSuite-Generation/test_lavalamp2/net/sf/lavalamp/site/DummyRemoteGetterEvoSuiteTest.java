@@ -23,8 +23,8 @@ public class DummyRemoteGetterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
-      char[] charArray0 = new char[8];
-      dummyRemoteGetter0.get("nJY^-rjD:7*Lm`", charArray0);
+      char[] charArray0 = new char[1];
+      dummyRemoteGetter0.get("", charArray0);
   }
 
   //Test case number: 1
@@ -35,7 +35,7 @@ public class DummyRemoteGetterEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DummyRemoteGetter dummyRemoteGetter0 = new DummyRemoteGetter();
-      dummyRemoteGetter0.get("@!eMYvt3TCaCPK^QjeY");
+      dummyRemoteGetter0.get("");
   }
 
   //Test case number: 2

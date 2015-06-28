@@ -19,9 +19,9 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.STOPPING;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.MARKED_FOR_REMOVAL;
       String string0 = applicationStatus0.toString();
-      assertEquals("stopping", string0);
+      assertEquals("marked for removal", string0);
   }
 
   //Test case number: 1
@@ -35,9 +35,12 @@ public class ApplicationStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        ApplicationStatus.getByName((String) null);
+        ApplicationStatus.getByName("MARKED_FOR_REMOVAL");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
+        /*
+         * MARKED_FOR_REMOVAL
+         */
       }
   }
 
@@ -50,7 +53,7 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("implicit stopped");
-      assertEquals(ApplicationStatus.IMPLICIT_STOPPED, applicationStatus0);
+      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("marked for removal");
+      assertEquals(ApplicationStatus.MARKED_FOR_REMOVAL, applicationStatus0);
   }
 }

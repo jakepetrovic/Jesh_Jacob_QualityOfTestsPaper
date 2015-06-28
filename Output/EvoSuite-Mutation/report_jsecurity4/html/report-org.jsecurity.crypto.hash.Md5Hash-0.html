@@ -22,41 +22,32 @@ org.jsecurity.crypto.hash.Md5Hash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.Md5Hash: 85.71%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 4131 statements, 293 tests.
+<li>50 fitness evaluations, 2 generations, 3609 statements, 276 tests.
 <li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
-<li>Mutation score: 44%
+<li>Mutation score: 56%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;@]&quot;);
-<span class="nocode"><a name="2">  2: </a></span>String string0 = md5Hash0.getAlgorithmName();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;MD5&quot;, string0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, md5Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;MD5&quot;, (Object) &quot;UTF-8&quot;, 1);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;YY1aj1bEIBQvlt/OCtZsHg==&quot;, md5Hash0.toBase64());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;UTF-8&quot;, (Object) &quot;MD5&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;a6349962308de048032c78173d5366b6&quot;, md5Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromBase64String(&quot;KdsxQ,\&quot;(1s)jNy3',#&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;29db31435b23000000&quot;, md5Hash0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;\u0001\u0000\u0000&quot;, (Object) &quot;\u0001\u0000\u0000&quot;, (int) (byte)0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;327bb4fd06bc4bd378caa77b376579ab&quot;, md5Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = new Md5Hash((Object) &quot;UTF-8&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;rjs9+ZcLSbZSPmCHWbyVfQ==&quot;, md5Hash0.toBase64());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Md5Hash.fromHexString(&quot;this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String &quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter t at index 0
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Md5Hash md5Hash0 = Md5Hash.fromHexString(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;MD5&quot;, md5Hash0.getAlgorithmName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -103,11 +94,11 @@ org.jsecurity.crypto.hash.Md5Hash
 <span class="nocode"><a name="42"> 42: </a></span>
 <span class="nocode"><a name="43"> 43: </a></span>    public Md5Hash(Object source) {
 <span class="nocode"><a name="44"> 44: </a></span>        super(source);
-<span class="nocode"><a name="45"> 45: </a></span>    }
+<span class="nocode"><a name="45"> 45: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="46"> 46: </a></span>
 <span class="nocode"><a name="47"> 47: </a></span>    public Md5Hash(Object source, Object salt) {
 <span class="nocode"><a name="48"> 48: </a></span>        super(source, salt);
-<span class="nocode"><a name="49"> 49: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="49"> 49: </a></span>    }
 <span class="nocode"><a name="50"> 50: </a></span>
 <span class="nocode"><a name="51"> 51: </a></span>    public Md5Hash(Object source, Object salt, int hashIterations) {
 <span class="nocode"><a name="52"> 52: </a></span>        super(source, salt, hashIterations);
@@ -120,7 +111,7 @@ org.jsecurity.crypto.hash.Md5Hash
 <span class="nocode"><a name="59"> 59: </a></span>    public static Md5Hash fromHexString(String hex) {
 <span class="nocode"><a name="60"> 60: </a></span><span style="background-color: #ffffcc">        Md5Hash hash = new Md5Hash();</span>
 <span class="nocode"><a name="61"> 61: </a></span><span style="background-color: #ffffcc">        hash.setBytes(Hex.decode(hex));</span>
-<span class="nocode"><a name="62"> 62: </a></span>        return hash;
+<span class="nocode"><a name="62"> 62: </a></span><span style="background-color: #ffffcc">        return hash;</span>
 <span class="nocode"><a name="63"> 63: </a></span>    }
 <span class="nocode"><a name="64"> 64: </a></span>
 <span class="nocode"><a name="65"> 65: </a></span>    public static Md5Hash fromBase64String(String base64) {
@@ -133,7 +124,7 @@ org.jsecurity.crypto.hash.Md5Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -151,7 +142,7 @@ org.jsecurity.crypto.hash.Md5Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20187
+<li>process_communication_port: 14644
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

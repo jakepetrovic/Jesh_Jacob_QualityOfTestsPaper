@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.FileEntry
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.FileEntry: 3.67%</ul><ul>
-<li>3626 fitness evaluations, 74 generations, 11223 statements, 2478 tests.
+<li>2656 fitness evaluations, 55 generations, 9318 statements, 1976 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/94 branches, 3/27 methods, 4/109 total goals
 <li>Mutation score: 0%
@@ -31,53 +31,51 @@ nu.staldal.lagoon.core.FileEntry
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;g(lc.7/GL9i=&quot;);
-<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>PrintStream printStream0 = new PrintStream((OutputStream) pipedOutputStream0, true);
-<span class="nocode"><a name="4">  4: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) printStream0);
-<span class="nocode"><a name="5">  5: </a></span>fileEntry_TempOutputHandler0.discard();
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;property name missing&quot;);
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream(1733);
+<span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="5">  5: </a></span>fileEntry_TempOutputHandler0.commit();
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler((File) null, (OutputStream) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fileEntry_TempOutputHandler0.commit();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>File file1 = file0.getCanonicalFile();
+<span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+<span class="nocode"><a name="4">  4: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file1, (OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  fileEntry_TempOutputHandler0.discard();
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(SecurityException e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;/home/jeshkracht\&quot; \&quot;delete\&quot;)
+<span class="nocode"><a name="12"> 12: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1589)
+<span class="nocode"><a name="13"> 13: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
+<span class="nocode"><a name="14"> 14: </a></span>   * java.lang.SecurityManager.checkDelete(SecurityManager.java:1007)
+<span class="nocode"><a name="15"> 15: </a></span>   * java.io.File.delete(File.java:1030)
+<span class="nocode"><a name="16"> 16: </a></span>   * nu.staldal.lagoon.core.FileEntry$TempOutputHandler.discard(FileEntry.java:619)
+<span class="nocode"><a name="17"> 17: </a></span>   * sun.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+<span class="nocode"><a name="18"> 18: </a></span>   * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+<span class="nocode"><a name="19"> 19: </a></span>   * java.lang.reflect.Method.invoke(Method.java:606)
+<span class="nocode"><a name="20"> 20: </a></span>   * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
+<span class="nocode"><a name="21"> 21: </a></span>   * org.evosuite.testcase.AbstractStatement.exceptionHandler(AbstractStatement.java:142)
+<span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.MethodStatement.execute(MethodStatement.java:217)
+<span class="nocode"><a name="23"> 23: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:291)
+<span class="nocode"><a name="24"> 24: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:44)
+<span class="nocode"><a name="25"> 25: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
+<span class="nocode"><a name="26"> 26: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+<span class="nocode"><a name="27"> 27: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+<span class="nocode"><a name="28"> 28: </a></span>   * java.lang.Thread.run(Thread.java:745)
+<span class="nocode"><a name="29"> 29: </a></span>   */
+<span class="nocode"><a name="30"> 30: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;a7%*t$@(Q1GJRYwSH=Z&quot;);
 <span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
 <span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  fileEntry_TempOutputHandler0.discard();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: SecurityException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(SecurityException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Security manager blocks (\&quot;java.io.FilePermission\&quot; \&quot;/\&quot; \&quot;delete\&quot;)
-<span class="nocode"><a name="11"> 11: </a></span>   * java.lang.Thread.getStackTrace(Thread.java:1588)
-<span class="nocode"><a name="12"> 12: </a></span>   * org.evosuite.sandbox.MSecurityManager.checkPermission(MSecurityManager.java:303)
-<span class="nocode"><a name="13"> 13: </a></span>   * java.lang.SecurityManager.checkDelete(SecurityManager.java:1007)
-<span class="nocode"><a name="14"> 14: </a></span>   * java.io.File.delete(File.java:1030)
-<span class="nocode"><a name="15"> 15: </a></span>   * nu.staldal.lagoon.core.FileEntry$TempOutputHandler.discard(FileEntry.java:619)
-<span class="nocode"><a name="16"> 16: </a></span>   * sun.reflect.GeneratedMethodAccessor12.invoke(Unknown Source)
-<span class="nocode"><a name="17"> 17: </a></span>   * sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-<span class="nocode"><a name="18"> 18: </a></span>   * java.lang.reflect.Method.invoke(Method.java:606)
-<span class="nocode"><a name="19"> 19: </a></span>   * org.evosuite.testcase.MethodStatement$1.execute(MethodStatement.java:262)
-<span class="nocode"><a name="20"> 20: </a></span>   * org.evosuite.testcase.AbstractStatement.exceptionHandler(AbstractStatement.java:142)
-<span class="nocode"><a name="21"> 21: </a></span>   * org.evosuite.testcase.MethodStatement.execute(MethodStatement.java:217)
-<span class="nocode"><a name="22"> 22: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:291)
-<span class="nocode"><a name="23"> 23: </a></span>   * org.evosuite.testcase.TestRunnable.call(TestRunnable.java:44)
-<span class="nocode"><a name="24"> 24: </a></span>   * java.util.concurrent.FutureTask.run(FutureTask.java:262)
-<span class="nocode"><a name="25"> 25: </a></span>   * java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
-<span class="nocode"><a name="26"> 26: </a></span>   * java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
-<span class="nocode"><a name="27"> 27: </a></span>   * java.lang.Thread.run(Thread.java:744)
-<span class="nocode"><a name="28"> 28: </a></span>   */
-<span class="nocode"><a name="29"> 29: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>fileEntry_TempOutputHandler0.discard();
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -691,7 +689,7 @@ nu.staldal.lagoon.core.FileEntry
 <span class="nocode"><a name="609">609: </a></span>			throws java.io.IOException
 <span class="nocode"><a name="610">610: </a></span>		{
 <span class="nocode"><a name="611">611: </a></span><span style="background-color: #ffffcc">			out.close();</span>
-<span class="nocode"><a name="612">612: </a></span>		}
+<span class="nocode"><a name="612">612: </a></span><span style="background-color: #ffffcc">		}</span>
 <span class="nocode"><a name="613">613: </a></span>
 <span class="nocode"><a name="614">614: </a></span>		public void discard()
 <span class="nocode"><a name="615">615: </a></span>			throws java.io.IOException
@@ -715,7 +713,7 @@ nu.staldal.lagoon.core.FileEntry
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3103228397393204518.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2418928702736172712.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -733,7 +731,7 @@ nu.staldal.lagoon.core.FileEntry
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15941
+<li>process_communication_port: 15509
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

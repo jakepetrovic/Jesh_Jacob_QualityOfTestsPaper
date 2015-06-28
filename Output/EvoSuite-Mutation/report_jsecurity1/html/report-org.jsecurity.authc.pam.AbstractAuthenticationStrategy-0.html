@@ -21,50 +21,73 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.authc.pam.AbstractAuthenticationStrategy: 90.00%</ul><ul>
-<li>13142 fitness evaluations, 264 generations, 140250 statements, 8610 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 5/6 branches, 6/6 methods, 9/10 total goals
+<ul><li>Target class: org.jsecurity.authc.pam.AbstractAuthenticationStrategy: 100.00%</ul><ul>
+<li>4200 fitness evaluations, 85 generations, 46780 statements, 2636 tests.
+<li>Time: 0:00:29(Search: 0:00:28, minimization: 0:00:01)
+<li>Coverage: 6/6 branches, 6/6 methods, 10/10 total goals
 <li>Mutation score: 89%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)allSuccessfulModularAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) linkedList0, (AuthenticationToken) null);
-<span class="nocode"><a name="4">  4: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="6">  6: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.beforeAttempt((Realm) null, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="7">  7: </a></span>assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
+<span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
+<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, true);
+<span class="nocode"><a name="5">  5: </a></span>AuthenticationInfo authenticationInfo0 = atLeastOneSuccessfulModularAuthenticationStrategy0.beforeAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+<span class="nocode"><a name="6">  6: </a></span>assertNull(authenticationInfo0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>AuthenticationInfo authenticationInfo0 = allSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) null, (AuthenticationInfo) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(authenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;[]&quot;, &quot;[]&quot;, (InetAddress) inet4Address0);
+<span class="nocode"><a name="4">  4: </a></span>AuthenticationInfo authenticationInfo0 = allSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
+<span class="nocode"><a name="5">  5: </a></span>assertNull(authenticationInfo0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;Realm&gt; linkedList0 = new LinkedList&lt;Realm&gt;();
-<span class="nocode"><a name="3">  3: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)allSuccessfulModularAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) linkedList0, (AuthenticationToken) null);
-<span class="nocode"><a name="4">  4: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
-<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="6">  6: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)firstSuccessfulAuthenticationStrategy0.afterAttempt((Realm) null, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0, (AuthenticationInfo) simpleAuthenticationInfo0, (Throwable) null);
-<span class="nocode"><a name="7">  7: </a></span>assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
+<span class="nocode"><a name="2">  2: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;[]&quot;, &quot;[]&quot;, (InetAddress) inet4Address0);
+<span class="nocode"><a name="4">  4: </a></span>LinkedHashSet&lt;Realm&gt; linkedHashSet0 = new LinkedHashSet&lt;Realm&gt;();
+<span class="nocode"><a name="5">  5: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = (SimpleAuthenticationInfo)allSuccessfulModularAuthenticationStrategy0.beforeAllAttempts((Collection&lt;?&gt;) linkedHashSet0, (AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="6">  6: </a></span>assertNotNull(simpleAuthenticationInfo0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[5];
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;`yhiWXEn:E&quot;, charArray0, true);
-<span class="nocode"><a name="5">  5: </a></span>atLeastOneSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null, (AuthenticationInfo) null, (Throwable) null);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[9];
+<span class="nocode"><a name="3">  3: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, (InetAddress) inet4Address0);
+<span class="nocode"><a name="5">  5: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
+<span class="nocode"><a name="8">  8: </a></span>try {
+<span class="nocode"><a name="9">  9: </a></span>  atLeastOneSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0, (Throwable) null);
+<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="11"> 11: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[1];
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, true);
+<span class="nocode"><a name="4">  4: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
+<span class="nocode"><a name="5">  5: </a></span>firstSuccessfulAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null, (AuthenticationInfo) null, (Throwable) null);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_14&quot;, simpleAccountRealm0.getName());
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>FirstSuccessfulAuthenticationStrategy firstSuccessfulAuthenticationStrategy0 = new FirstSuccessfulAuthenticationStrategy();
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;JfUAa}k=Ld] rt?NHv&quot;, &quot;JfUAa}k=Ld] rt?NHv&quot;);
+<span class="nocode"><a name="3">  3: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount();
+<span class="nocode"><a name="4">  4: </a></span>SimpleAccount simpleAccount1 = (SimpleAccount)firstSuccessfulAuthenticationStrategy0.afterAttempt((Realm) null, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0, (AuthenticationInfo) null, (Throwable) null);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(false, simpleAccount1.isLocked());
+</pre>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>AllSuccessfulModularAuthenticationStrategy allSuccessfulModularAuthenticationStrategy0 = new AllSuccessfulModularAuthenticationStrategy();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -76,17 +99,6 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 <span class="nocode"><a name="8">  8: </a></span>   * Attempt to merge authentication info from multiple realms, but aggreagate AuthenticationInfo is not of type MergableAuthenticationInfo.
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-<span class="nocode"><a name="2">  2: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[9];
-<span class="nocode"><a name="4">  4: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, charArray0, false);
-<span class="nocode"><a name="5">  5: </a></span>HashSet&lt;Permission&gt; hashSet0 = new HashSet&lt;Permission&gt;();
-<span class="nocode"><a name="6">  6: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;UTF-8&quot;, (Object) &quot;UTF-8&quot;, &quot;UTF-8&quot;, (Set&lt;String&gt;) null, (Set&lt;Permission&gt;) hashSet0);
-<span class="nocode"><a name="7">  7: </a></span>atLeastOneSuccessfulModularAuthenticationStrategy0.afterAttempt((Realm) simpleAccountRealm0, (AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0, (AuthenticationInfo) simpleAccount0, (Throwable) null);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_6&quot;, simpleAccountRealm0.getName());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -149,7 +161,7 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 <span class="nocode"><a name="58"> 58: </a></span><span style="background-color: #ffffcc">            info = aggregateInfo;</span>
 <span class="nocode"><a name="59"> 59: </a></span>        } else {
 <span class="nocode"><a name="60"> 60: </a></span><span style="background-color: #ffffcc">            if (aggregateInfo == null) {</span>
-<span class="nocode"><a name="61"> 61: </a></span>                info = singleRealmInfo;
+<span class="nocode"><a name="61"> 61: </a></span><span style="background-color: #ffffcc">                info = singleRealmInfo;</span>
 <span class="nocode"><a name="62"> 62: </a></span>            } else {
 <span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">                info = merge(singleRealmInfo, aggregateInfo);</span>
 <span class="nocode"><a name="64"> 64: </a></span>            }
@@ -172,7 +184,7 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 <span class="nocode"><a name="81"> 81: </a></span>    protected AuthenticationInfo merge(AuthenticationInfo info, AuthenticationInfo aggregate) {
 <span class="nocode"><a name="82"> 82: </a></span><span style="background-color: #ffffcc">        if( aggregate instanceof MergableAuthenticationInfo ) {</span>
 <span class="nocode"><a name="83"> 83: </a></span><span style="background-color: #ffffcc">            ((MergableAuthenticationInfo)aggregate).merge(info);</span>
-<span class="nocode"><a name="84"> 84: </a></span><span style="background-color: #ffffcc">            return aggregate;</span>
+<span class="nocode"><a name="84"> 84: </a></span>            return aggregate;
 <span class="nocode"><a name="85"> 85: </a></span>        } else {
 <span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException( &quot;Attempt to merge authentication info from multiple realms, but aggreagate &quot; +</span>
 <span class="nocode"><a name="87"> 87: </a></span>                      &quot;AuthenticationInfo is not of type MergableAuthenticationInfo.&quot; );
@@ -190,7 +202,7 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -208,7 +220,7 @@ org.jsecurity.authc.pam.AbstractAuthenticationStrategy
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4222
+<li>process_communication_port: 7387
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -19,9 +19,9 @@ public class INCHI_PARITYEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
       int int0 = iNCHI_PARITY0.getIndx();
-      assertEquals(2, int0);
+      assertEquals(4, int0);
   }
 
   //Test case number: 1
@@ -44,12 +44,12 @@ public class INCHI_PARITYEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 1 TABLESWITCH L72 Case 0 - false
-   * 2 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 4 TABLESWITCH L72 Case 3 - true
+   * 2 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 5 TABLESWITCH L72 Case 4 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
-      assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(4);
+      assertEquals(INCHI_PARITY.UNDEFINED, iNCHI_PARITY0);
   }
 
   //Test case number: 3
@@ -77,13 +77,13 @@ public class INCHI_PARITYEvoSuiteTest {
   //Test case number: 5
   /*
    * 2 covered goals:
-   * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 5 TABLESWITCH L72 Case 4 - true
+   * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 4 TABLESWITCH L72 Case 3 - true
    * 2 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 6 TABLESWITCH L72 Default-Case - false
    */
   @Test
   public void test5()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(4);
-      assertEquals(INCHI_PARITY.UNDEFINED, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
+      assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
   }
 
   //Test case number: 6
@@ -98,6 +98,6 @@ public class INCHI_PARITYEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_PARITY.getValue((-1962));
+      INCHI_PARITY.getValue(1706);
   }
 }

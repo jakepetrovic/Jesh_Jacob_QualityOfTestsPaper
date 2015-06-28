@@ -22,7 +22,7 @@ com.sap.netweaver.porta.core.mock.LifecycleManagerMock
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.core.mock.LifecycleManagerMock: 20.00%</ul><ul>
-<li>26400 fitness evaluations, 529 generations, 43173 statements, 14872 tests.
+<li>26300 fitness evaluations, 527 generations, 47402 statements, 15098 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/22 branches, 6/13 methods, 6/30 total goals
 <li>Mutation score: 0%
@@ -39,12 +39,12 @@ com.sap.netweaver.porta.core.mock.LifecycleManagerMock
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LifecycleManagerMock lifecycleManagerMock0 = new LifecycleManagerMock();
 <span class="nocode"><a name="2">  2: </a></span>ServerState serverState0 = lifecycleManagerMock0.getState();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, serverState0.ordinal());
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(ServerState.STOPPED, serverState0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>LifecycleManagerMock lifecycleManagerMock0 = new LifecycleManagerMock();
-<span class="nocode"><a name="2">  2: </a></span>lifecycleManagerMock0.disableDebugging(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>lifecycleManagerMock0.disableDebugging(&quot;*.8Df,O}A)]sYsV-*Nm&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(ServerState.STOPPED, lifecycleManagerMock0.getState());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -181,7 +181,7 @@ com.sap.netweaver.porta.core.mock.LifecycleManagerMock
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4792024402461155010.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6407999222306312146.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -199,7 +199,7 @@ com.sap.netweaver.porta.core.mock.LifecycleManagerMock
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19166
+<li>process_communication_port: 19492
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

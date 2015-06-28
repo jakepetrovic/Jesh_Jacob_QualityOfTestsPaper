@@ -19,8 +19,8 @@ public class ProcEmiEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ProcEmi procEmi0 = ProcEmi.AVULSA_FISCO;
+      ProcEmi procEmi0 = ProcEmi.APLICATIVO_FISCO;
       char char0 = procEmi0.getValue();
-      assertEquals('1', char0);
+      assertEquals('3', char0);
   }
 }

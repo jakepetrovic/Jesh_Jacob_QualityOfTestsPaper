@@ -20,6 +20,6 @@ public class ConfigurationManagerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
-      assertEquals("{}", configurationManager0.toString());
+      assertEquals(true, configurationManager0.isEmpty());
   }
 }

@@ -21,10 +21,10 @@ nu.staldal.lagoon.BuildSitemap
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.BuildSitemap: 70.59%</ul><ul>
-<li>3794 fitness evaluations, 77 generations, 9448 statements, 2390 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 11/16 branches, 2/2 methods, 12/17 total goals
+<ul><li>Target class: nu.staldal.lagoon.BuildSitemap: 5.88%</ul><ul>
+<li>3992 fitness evaluations, 81 generations, 7143 statements, 2534 tests.
+<li>Time: 0:01:18(Search: 0:01:06, minimization: 0:00:12)
+<li>Coverage: 0/16 branches, 1/2 methods, 1/17 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -33,26 +33,6 @@ nu.staldal.lagoon.BuildSitemap
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>BuildSitemap buildSitemap0 = new BuildSitemap();
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(buildSitemap0);
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = BuildSitemap.baseDir;
-<span class="nocode"><a name="2">  2: </a></span>DefaultHandler defaultHandler0 = new DefaultHandler();
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  BuildSitemap.processDirectory(file0, (ContentHandler) defaultHandler0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  BuildSitemap.processDirectory((File) null, (ContentHandler) null);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -162,29 +142,29 @@ nu.staldal.lagoon.BuildSitemap
 <span class="nocode"><a name="105">105: </a></span>	public static void processDirectory(File dir, ContentHandler ch)
 <span class="nocode"><a name="106">106: </a></span>		throws SAXException
 <span class="nocode"><a name="107">107: </a></span>	{
-<span class="nocode"><a name="108">108: </a></span><span style="background-color: #ffffcc">		File thisDir = (dir == null) ? baseDir : new File(baseDir, dir.getPath());</span>
-<span class="nocode"><a name="109">109: </a></span><span style="background-color: #ffffcc">		String[] dirList = thisDir.list();</span>
-<span class="nocode"><a name="110">110: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i&lt;dirList.length; i++)</span>
+<span class="nocode"><a name="108">108: </a></span>		File thisDir = (dir == null) ? baseDir : new File(baseDir, dir.getPath());
+<span class="nocode"><a name="109">109: </a></span>		String[] dirList = thisDir.list();
+<span class="nocode"><a name="110">110: </a></span>		for (int i = 0; i&lt;dirList.length; i++)
 <span class="nocode"><a name="111">111: </a></span>		{
-<span class="nocode"><a name="112">112: </a></span><span style="background-color: #ffffcc">			File ent = new File(thisDir, dirList[i]);</span>
-<span class="nocode"><a name="113">113: </a></span><span style="background-color: #ffffcc">			File thisEnt = (dir == null) </span>
+<span class="nocode"><a name="112">112: </a></span>			File ent = new File(thisDir, dirList[i]);
+<span class="nocode"><a name="113">113: </a></span>			File thisEnt = (dir == null) 
 <span class="nocode"><a name="114">114: </a></span>									? new File(dirList[i])
 <span class="nocode"><a name="115">115: </a></span>									: new File(dir, dirList[i]);
-<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">			if (ent.isDirectory())</span>
+<span class="nocode"><a name="116">116: </a></span>			if (ent.isDirectory())
 <span class="nocode"><a name="117">117: </a></span>			{
-<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">				processDirectory(thisEnt, ch);</span>
+<span class="nocode"><a name="118">118: </a></span>				processDirectory(thisEnt, ch);
 <span class="nocode"><a name="119">119: </a></span>			}
-<span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">			else if (ent.isFile())</span>
+<span class="nocode"><a name="120">120: </a></span>			else if (ent.isFile())
 <span class="nocode"><a name="121">121: </a></span>			{
-<span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">				AttributesImpl atts = new AttributesImpl();</span>
-<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">                String url = &quot;/&quot; + thisEnt.getPath().replace(</span>
+<span class="nocode"><a name="122">122: </a></span>				AttributesImpl atts = new AttributesImpl();
+<span class="nocode"><a name="123">123: </a></span>                String url = &quot;/&quot; + thisEnt.getPath().replace(
 <span class="nocode"><a name="124">124: </a></span>                    File.separatorChar, '/');
 <span class="nocode"><a name="125">125: </a></span>
-<span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">				atts.addAttribute(&quot;&quot;,&quot;target&quot;,&quot;&quot;,&quot;CDATA&quot;, url);</span>
+<span class="nocode"><a name="126">126: </a></span>				atts.addAttribute(&quot;&quot;,&quot;target&quot;,&quot;&quot;,&quot;CDATA&quot;, url);
 <span class="nocode"><a name="127">127: </a></span>
-<span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">				ch.startElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;, atts);</span>
+<span class="nocode"><a name="128">128: </a></span>				ch.startElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;, atts);
 <span class="nocode"><a name="129">129: </a></span>
-<span class="nocode"><a name="130">130: </a></span><span style="background-color: #ffffcc">                if (url.endsWith(&quot;.html&quot;) || url.endsWith(&quot;.htm&quot;))</span>
+<span class="nocode"><a name="130">130: </a></span>                if (url.endsWith(&quot;.html&quot;) || url.endsWith(&quot;.htm&quot;))
 <span class="nocode"><a name="131">131: </a></span>                {
 <span class="nocode"><a name="132">132: </a></span>    				AttributesImpl formatAtts = new AttributesImpl();
 <span class="nocode"><a name="133">133: </a></span>
@@ -195,7 +175,7 @@ nu.staldal.lagoon.BuildSitemap
 <span class="nocode"><a name="138">138: </a></span>	    			ch.endElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;);
 <span class="nocode"><a name="139">139: </a></span>                    ch.endElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;);
 <span class="nocode"><a name="140">140: </a></span>                }
-<span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">                else if (url.endsWith(&quot;.xml&quot;))</span>
+<span class="nocode"><a name="141">141: </a></span>                else if (url.endsWith(&quot;.xml&quot;))
 <span class="nocode"><a name="142">142: </a></span>                {
 <span class="nocode"><a name="143">143: </a></span>    				AttributesImpl formatAtts = new AttributesImpl();
 <span class="nocode"><a name="144">144: </a></span>
@@ -208,21 +188,21 @@ nu.staldal.lagoon.BuildSitemap
 <span class="nocode"><a name="151">151: </a></span>                }
 <span class="nocode"><a name="152">152: </a></span>                else
 <span class="nocode"><a name="153">153: </a></span>                {
-<span class="nocode"><a name="154">154: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;, new AttributesImpl());</span>
-<span class="nocode"><a name="155">155: </a></span><span style="background-color: #ffffcc">	    			ch.endElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="154">154: </a></span>                    ch.startElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;, new AttributesImpl());
+<span class="nocode"><a name="155">155: </a></span>	    			ch.endElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;);
 <span class="nocode"><a name="156">156: </a></span>                }
 <span class="nocode"><a name="157">157: </a></span>
-<span class="nocode"><a name="158">158: </a></span><span style="background-color: #ffffcc">				ch.endElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="158">158: </a></span>				ch.endElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;);
 <span class="nocode"><a name="159">159: </a></span>			}
 <span class="nocode"><a name="160">160: </a></span>		}
-<span class="nocode"><a name="161">161: </a></span><span style="background-color: #ffffcc">	}</span>
+<span class="nocode"><a name="161">161: </a></span>	}
 <span class="nocode"><a name="162">162: </a></span>
 <span class="nocode"><a name="163">163: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -240,7 +220,7 @@ nu.staldal.lagoon.BuildSitemap
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7621
+<li>process_communication_port: 10708
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

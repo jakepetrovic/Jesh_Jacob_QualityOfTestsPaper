@@ -22,77 +22,76 @@ net.sf.jniinchi.JniInchiAtom
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiAtom: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 4749 statements, 266 tests.
-<li>Time: 0:00:05(Search: 0:00:01, minimization: 0:00:03)
+<li>50 fitness evaluations, 2 generations, 6233 statements, 324 tests.
+<li>Time: 0:00:05(Search: 0:00:02, minimization: 0:00:03)
 <li>Coverage: 2/2 branches, 25/25 methods, 26/26 total goals
-<li>Mutation score: 61%
+<li>Mutation score: 63%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;NONE&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getImplicitTritium();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: NONE [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, int0);
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;U]&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>INCHI_RADICAL iNCHI_RADICAL0 = jniInchiAtom0.getRadical();
-<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setRadical(iNCHI_RADICAL0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom: U] [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(-1, jniInchiAtom0.getImplicitH());
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getImplicitTritium();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;x1g]yPCeWGL]n&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>INCHI_RADICAL iNCHI_RADICAL0 = INCHI_RADICAL.NONE;
+<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setRadical(iNCHI_RADICAL0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom: x1g]yPCeWGL]n [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(1.0, (-1855.106068424748), (-738.3079160918986), &quot;Charge:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
+<span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>double double0 = jniInchiAtom0.getY();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0.0, double0, 0.01D);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: Charge: [1.0,-1855.106068424748,-738.3079160918986] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals((-1855.106068424748), double0, 0.01D);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(-1, jniInchiAtom0.getImplicitH());
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setImplicitH(0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, jniInchiAtom0.getImplicitH());
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(0, jniInchiAtom0.getImplicitDeuterium());
+<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setImplicitH(1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, jniInchiAtom0.getImplicitH());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setImplicitProtium(210);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(210, jniInchiAtom0.getImplicitProtium());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0.0, jniInchiAtom0.getY(), 0.01D);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, jniInchiAtom0.getImplicitProtium());
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(jniInchiAtom0);
+<span class="nocode"><a name="4">  4: </a></span>
+<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setImplicitProtium(1);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(1, jniInchiAtom0.getImplicitProtium());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:1 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;U?e&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="4">  4: </a></span>
-<span class="nocode"><a name="5">  5: </a></span>jniInchiAtom0.setInchiRadical(458);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, jniInchiAtom0.getImplicitTritium());
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setInchiRadical(0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: U?e [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getImplicitDeuterium();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(0, int0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -100,44 +99,45 @@ net.sf.jniinchi.JniInchiAtom
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getCharge();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getIsotopicMass();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;x1g]yPCeWGL]n&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setCharge(210);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:210 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(210, jniInchiAtom0.getCharge());
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setCharge(1245);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1245, jniInchiAtom0.getCharge());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, jniInchiAtom0.getImplicitProtium());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;U?e&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setIsotopicMass(210);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(210, jniInchiAtom0.getIsotopicMass());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:210 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setIsotopicMass(0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: U?e [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, jniInchiAtom0.getImplicitH());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>String string0 = jniInchiAtom0.getElementType();
 <span class="nocode"><a name="5">  5: </a></span>assertNotNull(string0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="7">  7: </a></span>assertEquals(0, jniInchiAtom0.getImplicitTritium());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -153,17 +153,17 @@ net.sf.jniinchi.JniInchiAtom
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setImplicitDeuterium(0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0.0, jniInchiAtom0.getZ(), 0.01D);
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setImplicitDeuterium(1344);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1344, jniInchiAtom0.getImplicitDeuterium());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:1344 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;x1g]yPCeWGL]n&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.getInchiRadical();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: x1g]yPCeWGL]n [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -171,44 +171,43 @@ net.sf.jniinchi.JniInchiAtom
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>double double0 = jniInchiAtom0.getZ();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0.0, double0, 0.01D);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0.0, double0, 0.01D);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getImplicitProtium();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, int0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, int0);
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setImplicitTritium(210);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(210, jniInchiAtom0.getImplicitTritium());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:210 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setImplicitTritium(0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-939.6002607979124), 0.0, (-1.0), &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(268.43033488542295, 268.43033488542295, (-963.6117707857684), &quot;+|,96k\&quot;+yKB|&gt;;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiAtom0.getImplicitH();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals((-1), int0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [-939.6002607979124,0.0,-1.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom: +|,96k\&quot;+yKB|&gt;; [268.43033488542295,268.43033488542295,-963.6117707857684] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals((-1), int0);
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setIsotopicMassShift(458);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(10458, jniInchiAtom0.getIsotopicMass());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, jniInchiAtom0.getImplicitTritium());
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.setIsotopicMassShift(1);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(10001, jniInchiAtom0.getIsotopicMass());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:10001 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -219,6 +218,14 @@ net.sf.jniinchi.JniInchiAtom
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
 </pre>
 <h3>Test case 22</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(jniInchiAtom0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>jniInchiAtom0.getRadical();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;InChI Atom:  [0.0,0.0,0.0] Charge:0 // Iso Mass:0 // Implicit H:-1 P:0 D:0 T:0 // Radical: NONE&quot;, jniInchiAtom0.getDebugString());
+</pre>
+<h3>Test case 23</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -560,7 +567,7 @@ net.sf.jniinchi.JniInchiAtom
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5034463556166388697.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6324447127036984710.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -578,7 +585,7 @@ net.sf.jniinchi.JniInchiAtom
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8076
+<li>process_communication_port: 21041
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

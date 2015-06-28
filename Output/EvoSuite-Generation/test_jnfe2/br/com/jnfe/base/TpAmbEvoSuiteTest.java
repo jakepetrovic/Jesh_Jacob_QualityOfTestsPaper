@@ -21,8 +21,8 @@ public class TpAmbEvoSuiteTest {
   public void test0()  throws Throwable  {
       TpAmb tpAmb0 = TpAmb.PRODUCAO;
       String string0 = tpAmb0.getValueAsString();
-      assertNotNull(string0);
       assertEquals("1", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 1

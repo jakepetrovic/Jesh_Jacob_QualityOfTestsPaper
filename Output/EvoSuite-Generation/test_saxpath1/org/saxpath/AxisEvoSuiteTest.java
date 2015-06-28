@@ -56,7 +56,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Axis.lookup((-16));
+      String string0 = Axis.lookup((-1));
       assertNull(string0);
   }
 
@@ -68,8 +68,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       String string0 = Axis.lookup(2);
-      assertEquals("descendant", string0);
       assertNotNull(string0);
+      assertEquals("descendant", string0);
   }
 
   //Test case number: 4
@@ -92,8 +92,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       String string0 = Axis.lookup(4);
-      assertEquals("ancestor", string0);
       assertNotNull(string0);
+      assertEquals("ancestor", string0);
   }
 
   //Test case number: 6
@@ -128,8 +128,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test8()  throws Throwable  {
       String string0 = Axis.lookup(7);
-      assertEquals("following", string0);
       assertNotNull(string0);
+      assertEquals("following", string0);
   }
 
   //Test case number: 9
@@ -140,8 +140,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       String string0 = Axis.lookup(8);
-      assertNotNull(string0);
       assertEquals("preceding", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 10
@@ -164,8 +164,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       String string0 = Axis.lookup(10);
-      assertNotNull(string0);
       assertEquals("namespace", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 12
@@ -189,8 +189,8 @@ public class AxisEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       String string0 = Axis.lookup(12);
-      assertNotNull(string0);
       assertEquals("descendant-or-self", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 14
@@ -237,7 +237,7 @@ public class AxisEvoSuiteTest {
    */
   @Test
   public void test15()  throws Throwable  {
-      int int0 = Axis.lookup("8");
+      int int0 = Axis.lookup("Q&H#W&O,*6l[>He");
       assertEquals(0, int0);
   }
 

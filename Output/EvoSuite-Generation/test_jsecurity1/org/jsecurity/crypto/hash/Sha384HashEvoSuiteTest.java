@@ -20,38 +20,47 @@ public class Sha384HashEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("gK\u0002lzW;@r8>1y ");
-      assertEquals("80a9735abf3500", sha384Hash0.toString());
+      Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String("");
+      assertEquals("", sha384Hash0.toBase64());
   }
 
   //Test case number: 1
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;)V: root-Branch
+   * 2 org.jsecurity.crypto.hash.Sha384Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "\uFFFD\u00013\u0001/\uFFFD");
+      assertEquals("43cad8deb5c4fbd3180960e85e4ae8f6c1f2e02d89cd26afa6425f6200f1ef1eec92d1dcb83a2da9e30aa3f9f0a3ac06", sha384Hash0.toString());
+  }
+
+  //Test case number: 2
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha384Hash.fromHexString(Ljava/lang/String;)Lorg/jsecurity/crypto/hash/Sha384Hash;: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha384Hash.<init>()V: root-Branch
    */
   @Test
-  public void test1()  throws Throwable  {
+  public void test2()  throws Throwable  {
       // Undeclared exception!
       try {
-        Sha384Hash.fromHexString("Argument for byte conversion cannot be null.");
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Illegal hexadecimal charcter r at index 1
-         */
+        Sha384Hash.fromHexString((String) null);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
       }
   }
 
-  //Test case number: 2
+  //Test case number: 3
   /*
    * 2 covered goals:
    * 1 org.jsecurity.crypto.hash.Sha384Hash.<init>(Ljava/lang/Object;Ljava/lang/Object;)V: root-Branch
    * 2 org.jsecurity.crypto.hash.Sha384Hash.getAlgorithmName()Ljava/lang/String;: root-Branch
    */
   @Test
-  public void test2()  throws Throwable  {
-      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "80ada5cd6afc0000", (Object) "UTF-8");
-      assertEquals("8f893ec10c3ff7395eb2901e48e6b5b30e9e2eafd053023fb4be9810f60b4d5a10b0e1e0659fea79fff835106c2f8945", sha384Hash0.toString());
+  public void test3()  throws Throwable  {
+      Sha384Hash sha384Hash0 = new Sha384Hash((Object) "SHA-384", (Object) "a26632");
+      assertEquals("3c5b360716834184ea4b3c6d49c875accbc2c100d037edbe0822f50eb1d463d840df09bff137026fb3a01ca938738e4d", sha384Hash0.toHex());
   }
 }

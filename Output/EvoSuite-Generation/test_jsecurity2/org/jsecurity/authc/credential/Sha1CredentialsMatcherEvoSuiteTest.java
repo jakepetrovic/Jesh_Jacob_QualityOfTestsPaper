@@ -22,8 +22,8 @@ public class Sha1CredentialsMatcherEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       Sha1CredentialsMatcher sha1CredentialsMatcher0 = new Sha1CredentialsMatcher();
-      Sha1Hash sha1Hash0 = (Sha1Hash)sha1CredentialsMatcher0.hashProvidedCredentials((Object) "[]", (Object) "localhost", 1);
-      assertEquals("Nf8muaSdcoLOZu6VpYtUHiEUBM8=", sha1Hash0.toBase64());
+      Sha1Hash sha1Hash0 = (Sha1Hash)sha1CredentialsMatcher0.hashProvidedCredentials((Object) "localhost/127.0.0.1", (Object) "localhost", (-262));
+      assertEquals("67ee5f52f8c63d575a31032030d51937f36d378d", sha1Hash0.toHex());
   }
 
   //Test case number: 1

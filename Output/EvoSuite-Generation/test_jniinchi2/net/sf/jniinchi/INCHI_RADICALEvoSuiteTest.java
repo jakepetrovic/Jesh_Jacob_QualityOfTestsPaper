@@ -47,7 +47,7 @@ public class INCHI_RADICALEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_RADICAL.getValue((-919));
+      INCHI_RADICAL.getValue(1309);
   }
 
   //Test case number: 3

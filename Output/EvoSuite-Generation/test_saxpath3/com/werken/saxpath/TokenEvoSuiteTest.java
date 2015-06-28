@@ -24,36 +24,36 @@ public class TokenEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      Token token0 = new Token(0, "", (-560), 0);
+      Token token0 = new Token(0, "", 0, 0);
       int int0 = token0.getTokenType();
       assertEquals(0, token0.getTokenEnd());
+      assertEquals(0, token0.getTokenBegin());
       assertEquals(0, int0);
-      assertEquals(-560, token0.getTokenBegin());
   }
 
   //Test case number: 1
   /*
    * 9 covered goals:
-   * 1 com.werken.saxpath.Token.toString()Ljava/lang/String;: root-Branch
-   * 2 com.werken.saxpath.Token.getTokenEnd()I: root-Branch
-   * 3 com.werken.saxpath.Token.setTokenEnd(I)V: root-Branch
-   * 4 com.werken.saxpath.Token.getTokenText()Ljava/lang/String;: root-Branch
-   * 5 com.werken.saxpath.Token.setParseText(Ljava/lang/String;)V: root-Branch
-   * 6 com.werken.saxpath.Token.<init>(ILjava/lang/String;II)V: root-Branch
-   * 7 com.werken.saxpath.Token.setTokenType(I)V: root-Branch
-   * 8 com.werken.saxpath.Token.setTokenBegin(I)V: root-Branch
-   * 9 com.werken.saxpath.Token.getTokenBegin()I: root-Branch
+   * 1 com.werken.saxpath.Token.getTokenEnd()I: root-Branch
+   * 2 com.werken.saxpath.Token.getTokenText()Ljava/lang/String;: root-Branch
+   * 3 com.werken.saxpath.Token.toString()Ljava/lang/String;: root-Branch
+   * 4 com.werken.saxpath.Token.getTokenBegin()I: root-Branch
+   * 5 com.werken.saxpath.Token.setTokenEnd(I)V: root-Branch
+   * 6 com.werken.saxpath.Token.setParseText(Ljava/lang/String;)V: root-Branch
+   * 7 com.werken.saxpath.Token.<init>(ILjava/lang/String;II)V: root-Branch
+   * 8 com.werken.saxpath.Token.setTokenType(I)V: root-Branch
+   * 9 com.werken.saxpath.Token.setTokenBegin(I)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
-      Token token0 = new Token(0, "", (-560), 0);
+      Token token0 = new Token(0, "kqzttk[j8>aBD=+pf&", 0, 615);
       // Undeclared exception!
       try {
         token0.toString();
         fail("Expecting exception: StringIndexOutOfBoundsException");
       } catch(StringIndexOutOfBoundsException e) {
         /*
-         * String index out of range: -560
+         * String index out of range: 615
          */
       }
   }

@@ -7,12 +7,16 @@ package org.jsecurity.authc.pam;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import org.jsecurity.authc.AuthenticationException;
 import org.jsecurity.authc.AuthenticationInfo;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.SimpleAuthenticationInfo;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authc.pam.AtLeastOneSuccessfulModularAuthenticationStrategy;
+import org.jsecurity.subject.PrincipalCollection;
+import org.jsecurity.subject.SimplePrincipalCollection;
 
 public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
 
@@ -27,7 +31,9 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
+      char[] charArray0 = new char[3];
+      Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLoopbackAddress();
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, (InetAddress) inet4Address0);
       try {
         atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) null);
         fail("Expecting exception: AuthenticationException");
@@ -48,9 +54,9 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("?2/", "?2/");
-      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((Object) "\u0001\u0000#\uFFFD\uFFFD\u0000\u0000(\uFFFD\uFFFD", (Object) null, "");
-      SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+      SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
+      SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo((PrincipalCollection) simplePrincipalCollection0, (Object) "UTF-8");
+      SimpleAuthenticationInfo simpleAuthenticationInfo1 = (SimpleAuthenticationInfo)atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) null, (AuthenticationInfo) simpleAuthenticationInfo0);
       assertSame(simpleAuthenticationInfo1, simpleAuthenticationInfo0);
   }
 
@@ -65,8 +71,7 @@ public class AtLeastOneSuccessfulModularAuthenticationStrategyEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       AtLeastOneSuccessfulModularAuthenticationStrategy atLeastOneSuccessfulModularAuthenticationStrategy0 = new AtLeastOneSuccessfulModularAuthenticationStrategy();
-      char[] charArray0 = new char[9];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken((String) null, (String) null, false, (InetAddress) null);
       SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
       try {
         atLeastOneSuccessfulModularAuthenticationStrategy0.afterAllAttempts((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);

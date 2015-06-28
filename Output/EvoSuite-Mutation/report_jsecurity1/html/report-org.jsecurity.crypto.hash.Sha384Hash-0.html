@@ -21,35 +21,37 @@ org.jsecurity.crypto.hash.Sha384Hash
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.crypto.hash.Sha384Hash: 71.43%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3817 statements, 304 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
-<li>Coverage: 0/0 branches, 5/7 methods, 5/7 total goals
+<ul><li>Target class: org.jsecurity.crypto.hash.Sha384Hash: 85.71%</ul><ul>
+<li>50 fitness evaluations, 2 generations, 3694 statements, 273 tests.
+<li>Time: 0:00:02(Search: 0:00:01, minimization: 0:00:00)
+<li>Coverage: 0/0 branches, 6/7 methods, 6/7 total goals
 <li>Mutation score: 44%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;gK\u0002lzW;@r8&gt;1y &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;80a9735abf3500&quot;, sha384Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = Sha384Hash.fromBase64String(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;&quot;, sha384Hash0.toBase64());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
-<span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha384Hash.fromHexString(&quot;Argument for byte conversion cannot be null.&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Illegal hexadecimal charcter r at index 1
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;\uFFFD\u00013\u0001/\uFFFD&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;43cad8deb5c4fbd3180960e85e4ae8f6c1f2e02d89cd26afa6425f6200f1ef1eec92d1dcb83a2da9e30aa3f9f0a3ac06&quot;, sha384Hash0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;80ada5cd6afc0000&quot;, (Object) &quot;UTF-8&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;8f893ec10c3ff7395eb2901e48e6b5b30e9e2eafd053023fb4be9810f60b4d5a10b0e1e0659fea79fff835106c2f8945&quot;, sha384Hash0.toString());
+<span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  Sha384Hash.fromHexString((String) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="6">  6: </a></span>}
+</pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Sha384Hash sha384Hash0 = new Sha384Hash((Object) &quot;SHA-384&quot;, (Object) &quot;a26632&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;3c5b360716834184ea4b3c6d49c875accbc2c100d037edbe0822f50eb1d463d840df09bff137026fb3a01ca938738e4d&quot;, sha384Hash0.toHex());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -98,7 +100,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 <span class="nocode"><a name="44"> 44: </a></span>
 <span class="nocode"><a name="45"> 45: </a></span>    public Sha384Hash(Object source) {
 <span class="nocode"><a name="46"> 46: </a></span>        super(source);
-<span class="nocode"><a name="47"> 47: </a></span>    }
+<span class="nocode"><a name="47"> 47: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="48"> 48: </a></span>
 <span class="nocode"><a name="49"> 49: </a></span>    public Sha384Hash(Object source, Object salt) {
 <span class="nocode"><a name="50"> 50: </a></span>        super(source, salt);
@@ -130,7 +132,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -148,7 +150,7 @@ org.jsecurity.crypto.hash.Sha384Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7651
+<li>process_communication_port: 7736
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

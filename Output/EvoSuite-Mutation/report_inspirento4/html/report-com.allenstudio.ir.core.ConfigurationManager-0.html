@@ -21,10 +21,10 @@ com.allenstudio.ir.core.ConfigurationManager
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.core.ConfigurationManager: 5.88%</ul><ul>
-<li>17 fitness evaluations, 2 generations, 441 statements, 103 tests.
-<li>Time: 0:01:57(Search: 0:01:15, minimization: 0:00:42)
-<li>Coverage: 1/12 branches, 1/10 methods, 1/17 total goals
+<ul><li>Target class: com.allenstudio.ir.core.ConfigurationManager: 23.53%</ul><ul>
+<li>714 fitness evaluations, 16 generations, 3716 statements, 691 tests.
+<li>Time: 0:01:20(Search: 0:01:05, minimization: 0:00:14)
+<li>Coverage: 2/12 branches, 4/10 methods, 4/17 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,7 +32,24 @@ com.allenstudio.ir.core.ConfigurationManager
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;{}&quot;, configurationManager0.toString());
+<span class="nocode"><a name="2">  2: </a></span>configurationManager0.writeBack();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;{}&quot;, configurationManager0.toString());
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  configurationManager0.setProperty(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ConfigurationManager configurationManager0 = ConfigurationManager.getInstance();
+<span class="nocode"><a name="2">  2: </a></span>configurationManager0.readIn();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;{}&quot;, configurationManager0.toString());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -109,11 +126,11 @@ com.allenstudio.ir.core.ConfigurationManager
 <span class="nocode"><a name="72"> 72: </a></span>    
 <span class="nocode"><a name="73"> 73: </a></span>    public void readIn() {
 <span class="nocode"><a name="74"> 74: </a></span>        try {
-<span class="nocode"><a name="75"> 75: </a></span>            File configFile = new File(
+<span class="nocode"><a name="75"> 75: </a></span><span style="background-color: #ffffcc">            File configFile = new File(</span>
 <span class="nocode"><a name="76"> 76: </a></span>                    CONFIG_DIRECTORY + 
 <span class="nocode"><a name="77"> 77: </a></span>                    System.getProperty(&quot;file.separator&quot;) + 
 <span class="nocode"><a name="78"> 78: </a></span>                    CONFIG_FILE);//$NON-NLS-1$
-<span class="nocode"><a name="79"> 79: </a></span>            if (configFile.exists()) {
+<span class="nocode"><a name="79"> 79: </a></span><span style="background-color: #ffffcc">            if (configFile.exists()) {</span>
 <span class="nocode"><a name="80"> 80: </a></span>                FileInputStream configStream = new FileInputStream(configFile);
 <span class="nocode"><a name="81"> 81: </a></span>                xmlIO = new XmlIO();
 <span class="nocode"><a name="82"> 82: </a></span>                xmlIO.load(configStream);
@@ -125,23 +142,23 @@ com.allenstudio.ir.core.ConfigurationManager
 <span class="nocode"><a name="88"> 88: </a></span>                    &quot;\nDefault settings will be stored as the replacement.&quot;);//$NON-NLS-1$
 <span class="nocode"><a name="89"> 89: </a></span>            writeDefaultsToFile();
 <span class="nocode"><a name="90"> 90: </a></span>            e.printStackTrace();
-<span class="nocode"><a name="91"> 91: </a></span>        }
-<span class="nocode"><a name="92"> 92: </a></span>    }
+<span class="nocode"><a name="91"> 91: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="92"> 92: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="93"> 93: </a></span>    
 <span class="nocode"><a name="94"> 94: </a></span>    public void writeBack() {
 <span class="nocode"><a name="95"> 95: </a></span>        try {
-<span class="nocode"><a name="96"> 96: </a></span>            FileOutputStream configFile = new FileOutputStream(
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">            FileOutputStream configFile = new FileOutputStream(</span>
 <span class="nocode"><a name="97"> 97: </a></span>                    CONFIG_DIRECTORY + 
 <span class="nocode"><a name="98"> 98: </a></span>                    System.getProperty(&quot;file.separator&quot;) + 
 <span class="nocode"><a name="99"> 99: </a></span>                    CONFIG_FILE);
 <span class="nocode"><a name="100">100: </a></span>            xmlIO.write(configFile);
 <span class="nocode"><a name="101">101: </a></span>            configFile.close();
-<span class="nocode"><a name="102">102: </a></span>        } catch (Exception e) {
-<span class="nocode"><a name="103">103: </a></span>            System.out.println(&quot;Cannot write configuration file&quot; +
+<span class="nocode"><a name="102">102: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
+<span class="nocode"><a name="103">103: </a></span><span style="background-color: #ffffcc">            System.out.println(&quot;Cannot write configuration file&quot; +</span>
 <span class="nocode"><a name="104">104: </a></span>                    &quot; to \&quot;config\\config.xml\&quot;&quot;);//$NON-NLS-1$
-<span class="nocode"><a name="105">105: </a></span>            e.printStackTrace();
+<span class="nocode"><a name="105">105: </a></span><span style="background-color: #ffffcc">            e.printStackTrace();</span>
 <span class="nocode"><a name="106">106: </a></span>        }
-<span class="nocode"><a name="107">107: </a></span>    }
+<span class="nocode"><a name="107">107: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="108">108: </a></span>    
 <span class="nocode"><a name="109">109: </a></span>    /**
 <span class="nocode"><a name="110">110: </a></span>     * Uses XML parser to get the specified property.
@@ -170,7 +187,7 @@ com.allenstudio.ir.core.ConfigurationManager
 <span class="nocode"><a name="133">133: </a></span>        
 <span class="nocode"><a name="134">134: </a></span>    @Override
 <span class="nocode"><a name="135">135: </a></span>    public synchronized Object setProperty(String key, String value) {
-<span class="nocode"><a name="136">136: </a></span>        xmlIO.getRoot().getElement(Constants.PROJECT_NAME +
+<span class="nocode"><a name="136">136: </a></span><span style="background-color: #ffffcc">        xmlIO.getRoot().getElement(Constants.PROJECT_NAME +</span>
 <span class="nocode"><a name="137">137: </a></span>                &quot;.&quot; + getPath(key)[0]).addAttribute(getPath(key)[1], value);
 <span class="nocode"><a name="138">138: </a></span>        
 <span class="nocode"><a name="139">139: </a></span>        return value;
@@ -258,7 +275,7 @@ com.allenstudio.ir.core.ConfigurationManager
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree8484984744530070644.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree742537213929819977.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -276,7 +293,7 @@ com.allenstudio.ir.core.ConfigurationManager
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 6651
+<li>process_communication_port: 2305
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -25,52 +25,16 @@ public class HexEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 3 covered goals:
+   * 5 covered goals:
    * 1 org.jsecurity.codec.Hex.decode([B)[B: root-Branch
    * 2 org.jsecurity.codec.Hex.decode(Ljava/lang/String;)[B: root-Branch
-   * 3 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - false
+   * 3 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - true
+   * 4 org.jsecurity.codec.Hex.decode([C)[B: I35 Branch 3 IF_ICMPGE L135 - false
+   * 5 org.jsecurity.codec.Hex.toDigit(CI)I: I10 Branch 4 IF_ICMPNE L156 - false
    */
   @Test
   public void test1()  throws Throwable  {
-      byte[] byteArray0 = new byte[9];
-      try {
-        Hex.decode(byteArray0);
-        fail("Expecting exception: IllegalArgumentException");
-      } catch(IllegalArgumentException e) {
-        /*
-         * Odd number of characters.
-         */
-      }
-  }
-
-  //Test case number: 2
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.Hex.encodeToString([B)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.codec.Hex.encode([B)[C: I22 Branch 1 IF_ICMPGE L72 - true
-   * 3 org.jsecurity.codec.Hex.encode([B)[C: I22 Branch 1 IF_ICMPGE L72 - false
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      byte[] byteArray0 = new byte[8];
-      String string0 = Hex.encodeToString(byteArray0);
-      assertNotNull(string0);
-      assertEquals("0000000000000000", string0);
-  }
-
-  //Test case number: 3
-  /*
-   * 4 covered goals:
-   * 1 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - true
-   * 2 org.jsecurity.codec.Hex.decode([C)[B: I35 Branch 3 IF_ICMPGE L135 - false
-   * 3 org.jsecurity.codec.Hex.toDigit(CI)I: I10 Branch 4 IF_ICMPNE L156 - false
-   * 4 org.jsecurity.codec.Hex.decode([B)[B: root-Branch
-   */
-  @Test
-  public void test3()  throws Throwable  {
-      byte[] byteArray0 = new byte[9];
-      byteArray0[6] = (byte) (-60);
-      byteArray0[7] = (byte) (-113);
+      byte[] byteArray0 = new byte[10];
       try {
         Hex.decode(byteArray0);
         fail("Expecting exception: IllegalArgumentException");
@@ -81,17 +45,51 @@ public class HexEvoSuiteTest {
       }
   }
 
+  //Test case number: 2
+  /*
+   * 5 covered goals:
+   * 1 org.jsecurity.codec.Hex.encodeToString([B)Ljava/lang/String;: root-Branch
+   * 2 org.jsecurity.codec.Hex.encode([B)[C: I22 Branch 1 IF_ICMPGE L72 - true
+   * 3 org.jsecurity.codec.Hex.decode([C)[B: I35 Branch 3 IF_ICMPGE L135 - true
+   * 4 org.jsecurity.codec.Hex.decode(Ljava/lang/String;)[B: root-Branch
+   * 5 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - true
+   */
+  @Test
+  public void test2()  throws Throwable  {
+      byte[] byteArray0 = Hex.decode("");
+      String string0 = Hex.encodeToString(byteArray0);
+      assertEquals("", string0);
+  }
+
+  //Test case number: 3
+  /*
+   * 2 covered goals:
+   * 1 org.jsecurity.codec.Hex.encode([B)[C: I22 Branch 1 IF_ICMPGE L72 - false
+   * 2 org.jsecurity.codec.Hex.encode([B)[C: I22 Branch 1 IF_ICMPGE L72 - true
+   */
+  @Test
+  public void test3()  throws Throwable  {
+      byte[] byteArray0 = new byte[9];
+      char[] charArray0 = Hex.encode(byteArray0);
+      assertNotNull(charArray0);
+  }
+
   //Test case number: 4
   /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.Hex.decode([C)[B: I35 Branch 3 IF_ICMPGE L135 - true
-   * 2 org.jsecurity.codec.Hex.decode(Ljava/lang/String;)[B: root-Branch
-   * 3 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - true
+   * 1 covered goal:
+   * 1 org.jsecurity.codec.Hex.decode([C)[B: I10 Branch 2 IFEQ L128 - false
    */
   @Test
   public void test4()  throws Throwable  {
-      byte[] byteArray0 = Hex.decode("");
-      assertNotNull(byteArray0);
+      char[] charArray0 = new char[1];
+      try {
+        Hex.decode(charArray0);
+        fail("Expecting exception: IllegalArgumentException");
+      } catch(IllegalArgumentException e) {
+        /*
+         * Odd number of characters.
+         */
+      }
   }
 
   //Test case number: 5
@@ -101,7 +99,7 @@ public class HexEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      int int0 = Hex.toDigit('A', (-1543));
-      assertEquals(10, int0);
+      int int0 = Hex.toDigit('6', '6');
+      assertEquals(6, int0);
   }
 }

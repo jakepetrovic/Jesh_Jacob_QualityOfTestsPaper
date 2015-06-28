@@ -21,10 +21,10 @@ org.jsecurity.config.IniConfiguration
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.config.IniConfiguration: 47.83%</ul><ul>
-<li>1984 fitness evaluations, 41 generations, 5630 statements, 1415 tests.
-<li>Time: 0:01:05(Search: 0:01:04, minimization: 0:00:00)
-<li>Coverage: 8/32 branches, 17/17 methods, 22/46 total goals
+<ul><li>Target class: org.jsecurity.config.IniConfiguration: 56.52%</ul><ul>
+<li>1940 fitness evaluations, 40 generations, 5154 statements, 1414 tests.
+<li>Time: 0:01:06(Search: 0:01:05, minimization: 0:00:00)
+<li>Coverage: 12/32 branches, 17/17 methods, 26/46 total goals
 <li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,9 +32,15 @@ org.jsecurity.config.IniConfiguration
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>Scanner scanner0 = new Scanner(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>iniConfiguration0.load(scanner0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, scanner0.hasNextLong());
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  iniConfiguration0.load((Scanner) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * java.lang.NullPointerException
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -57,48 +63,49 @@ org.jsecurity.config.IniConfiguration
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setConfigUrl(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, iniConfiguration0.getConfigUrl());
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="3">  3: </a></span>SequenceInputStream sequenceInputStream0 = new SequenceInputStream((InputStream) pipedInputStream0, (InputStream) pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>iniConfiguration0.load((InputStream) sequenceInputStream0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, sequenceInputStream0.read());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
+<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setConfigUrl(&quot;&amp;JZhd7z!fiN3nDLCl&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  iniConfiguration0.init();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * JSecurity resource [&amp;JZhd7z!fiN3nDLCl] specified as a 'configUrl' cannot be found.  If you want to fall back on default configuration specified via the 'config' parameter, then set 'ignoreResourceNotFound' to true.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniConfiguration0 = new IniConfiguration(&quot;a80v58&gt;#]pkBt`.&quot;, &quot;a80v58&gt;#]pkBt`.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniConfiguration0 = new IniConfiguration((String) null, (String) null);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ConfigurationException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * org.jsecurity.io.ResourceException: Unable to load text resource from the resource path [a80v58&gt;#]pkBt`.]
+<span class="nocode"><a name="7">  7: </a></span>   * java.lang.IllegalArgumentException: 'resourcePath' argument cannot be null.
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 6</h3>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
 <span class="nocode"><a name="2">  2: </a></span>String string0 = iniConfiguration0.getConfigUrl();
 <span class="nocode"><a name="3">  3: </a></span>assertNull(string0);
 </pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  iniConfiguration0.load((InputStream) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(ConfigurationException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * org.jsecurity.io.ResourceException: Unable to load data from input stream [null].
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
-</pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[3];
-<span class="nocode"><a name="3">  3: </a></span>CharArrayReader charArrayReader0 = new CharArrayReader(charArray0, 1, 927);
-<span class="nocode"><a name="4">  4: </a></span>LineNumberReader lineNumberReader0 = new LineNumberReader((Reader) charArrayReader0, 927);
-<span class="nocode"><a name="5">  5: </a></span>iniConfiguration0.load((Reader) lineNumberReader0);
-<span class="nocode"><a name="6">  6: </a></span>assertNull(iniConfiguration0.getConfigUrl());
+<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setConfig(&quot; D7#AfI8B=*&quot;);
+<span class="nocode"><a name="3">  3: </a></span>iniConfiguration0.init();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot; D7#AfI8B=*&quot;, iniConfiguration0.getConfig());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -187,16 +194,16 @@ org.jsecurity.config.IniConfiguration
 <span class="nocode"><a name="84"> 84: </a></span>    public void init() throws JSecurityException {
 <span class="nocode"><a name="85"> 85: </a></span>
 <span class="nocode"><a name="86"> 86: </a></span><span style="background-color: #ffffcc">        if (configUrl != null) {</span>
-<span class="nocode"><a name="87"> 87: </a></span>            if (ResourceUtils.resourceExists(configUrl)) {
+<span class="nocode"><a name="87"> 87: </a></span><span style="background-color: #ffffcc">            if (ResourceUtils.resourceExists(configUrl)) {</span>
 <span class="nocode"><a name="88"> 88: </a></span>                load(configUrl);
 <span class="nocode"><a name="89"> 89: </a></span>            } else {
-<span class="nocode"><a name="90"> 90: </a></span>                if (ignoreResourceNotFound) {
+<span class="nocode"><a name="90"> 90: </a></span><span style="background-color: #ffffcc">                if (ignoreResourceNotFound) {</span>
 <span class="nocode"><a name="91"> 91: </a></span>                    if (log.isDebugEnabled()) {
 <span class="nocode"><a name="92"> 92: </a></span>                        log.debug(&quot;JSecurity resource [&quot; + configUrl + &quot;] not found.  Ignoring since &quot; +
 <span class="nocode"><a name="93"> 93: </a></span>                                &quot;'ignoreResourceNotFound' is set to true.&quot;);
 <span class="nocode"><a name="94"> 94: </a></span>                    }
 <span class="nocode"><a name="95"> 95: </a></span>                } else {
-<span class="nocode"><a name="96"> 96: </a></span>                    throw new ConfigurationException(&quot;JSecurity resource [&quot; + configUrl + &quot;] specified as a 'configUrl' &quot; +
+<span class="nocode"><a name="96"> 96: </a></span><span style="background-color: #ffffcc">                    throw new ConfigurationException(&quot;JSecurity resource [&quot; + configUrl + &quot;] specified as a 'configUrl' &quot; +</span>
 <span class="nocode"><a name="97"> 97: </a></span>                            &quot;cannot be found.  If you want to fall back on default configuration specified &quot; +
 <span class="nocode"><a name="98"> 98: </a></span>                            &quot;via the 'config' parameter, then set 'ignoreResourceNotFound' to true.&quot;);
 <span class="nocode"><a name="99"> 99: </a></span>                }
@@ -231,11 +238,11 @@ org.jsecurity.config.IniConfiguration
 <span class="nocode"><a name="128">128: </a></span>    protected void load(Scanner s) throws ConfigurationException {
 <span class="nocode"><a name="129">129: </a></span>        try {
 <span class="nocode"><a name="130">130: </a></span><span style="background-color: #ffffcc">            this.iniResource = new IniResource(s);</span>
-<span class="nocode"><a name="131">131: </a></span><span style="background-color: #ffffcc">            process(this.iniResource);</span>
-<span class="nocode"><a name="132">132: </a></span>        } catch (Exception e) {
-<span class="nocode"><a name="133">133: </a></span>            throw new ConfigurationException(e);
-<span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">        }</span>
-<span class="nocode"><a name="135">135: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="131">131: </a></span>            process(this.iniResource);
+<span class="nocode"><a name="132">132: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
+<span class="nocode"><a name="133">133: </a></span><span style="background-color: #ffffcc">            throw new ConfigurationException(e);</span>
+<span class="nocode"><a name="134">134: </a></span>        }
+<span class="nocode"><a name="135">135: </a></span>    }
 <span class="nocode"><a name="136">136: </a></span>
 <span class="nocode"><a name="137">137: </a></span>    public void load(String path) throws ConfigurationException {
 <span class="nocode"><a name="138">138: </a></span>        try {
@@ -249,11 +256,11 @@ org.jsecurity.config.IniConfiguration
 <span class="nocode"><a name="146">146: </a></span>    public void load(InputStream is) throws ConfigurationException {
 <span class="nocode"><a name="147">147: </a></span>        try {
 <span class="nocode"><a name="148">148: </a></span><span style="background-color: #ffffcc">            this.iniResource = new IniResource(is);</span>
-<span class="nocode"><a name="149">149: </a></span>            process(this.iniResource);
-<span class="nocode"><a name="150">150: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
-<span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">            throw new ConfigurationException(e);</span>
-<span class="nocode"><a name="152">152: </a></span>        }
-<span class="nocode"><a name="153">153: </a></span>    }
+<span class="nocode"><a name="149">149: </a></span><span style="background-color: #ffffcc">            process(this.iniResource);</span>
+<span class="nocode"><a name="150">150: </a></span>        } catch (Exception e) {
+<span class="nocode"><a name="151">151: </a></span>            throw new ConfigurationException(e);
+<span class="nocode"><a name="152">152: </a></span><span style="background-color: #ffffcc">        }</span>
+<span class="nocode"><a name="153">153: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="154">154: </a></span>
 <span class="nocode"><a name="155">155: </a></span>    protected void process(IniResource ini) {
 <span class="nocode"><a name="156">156: </a></span><span style="background-color: #ffffcc">        processIni(ini.getSections());</span>
@@ -344,7 +351,7 @@ org.jsecurity.config.IniConfiguration
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7046598619536010513.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8995755209806528241.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -362,7 +369,7 @@ org.jsecurity.config.IniConfiguration
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2385
+<li>process_communication_port: 19221
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

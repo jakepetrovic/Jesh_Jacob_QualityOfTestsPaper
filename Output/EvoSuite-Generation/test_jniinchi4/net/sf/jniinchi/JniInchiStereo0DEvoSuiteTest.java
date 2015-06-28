@@ -17,17 +17,19 @@ public class JniInchiStereo0DEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiStereo0D.createNewDoublebondStereo0D(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_PARITY;)Lnet/sf/jniinchi/JniInchiStereo0D;: root-Branch
    * 2 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_STEREOTYPE;Lnet/sf/jniinchi/INCHI_PARITY;)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiStereo0D.getCentralAtom()Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
-      assertNotNull(jniInchiStereo0D0);
-      assertEquals("InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:UNKNOWN", jniInchiStereo0D0.getDebugString());
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      JniInchiAtom jniInchiAtom0 = jniInchiStereo0D0.getCentralAtom();
+      JniInchiStereo0D jniInchiStereo0D1 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+      assertNotSame(jniInchiStereo0D0, jniInchiStereo0D1);
   }
 
   //Test case number: 1
@@ -38,11 +40,13 @@ public class JniInchiStereo0DEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.NONE;
+      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+      assertNotNull(jniInchiStereo0D0);
+      
       JniInchiAtom jniInchiAtom1 = jniInchiStereo0D0.getNeighbor(0);
-      assertEquals(0, jniInchiAtom1.getImplicitTritium());
+      assertEquals("InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:NONE", jniInchiStereo0D0.getDebugString());
+      assertNotNull(jniInchiAtom1);
   }
 
   //Test case number: 2
@@ -52,46 +56,46 @@ public class JniInchiStereo0DEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       INCHI_STEREOTYPE iNCHI_STEREOTYPE1 = jniInchiStereo0D0.getStereoType();
-      assertEquals(1, iNCHI_STEREOTYPE1.getIndx());
+      assertEquals(0, iNCHI_STEREOTYPE1.getIndx());
   }
 
   //Test case number: 3
   /*
    * 3 covered goals:
    * 1 net.sf.jniinchi.JniInchiStereo0D.debug()V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiStereo0D.getDebugString()Ljava/lang/String;: I9 Branch 1 IFNONNULL L150 - true
-   * 3 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiStereo0D.createNewTetrahedralStereo0D(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_PARITY;)Lnet/sf/jniinchi/JniInchiStereo0D;: root-Branch
+   * 3 net.sf.jniinchi.JniInchiStereo0D.getDebugString()Ljava/lang/String;: I9 Branch 1 IFNONNULL L150 - true
    */
   @Test
   public void test3()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1352.1781168741293), (-833.7524641894333), 0.0, "");
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, 0, 0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("xYC");
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.EVEN;
+      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
       assertNotNull(jniInchiStereo0D0);
       
       jniInchiStereo0D0.debug();
-      assertEquals("InChI Stereo0D:  [,,,] Type::NONE // Parity:NONE", jniInchiStereo0D0.getDebugString());
+      assertEquals("InChI Stereo0D: xYC [xYC,xYC,xYC,xYC] Type::TETRAHEDRAL // Parity:EVEN", jniInchiStereo0D0.getDebugString());
   }
 
   //Test case number: 4
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiStereo0D.getNeighbors()[Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
-   * 2 net.sf.jniinchi.JniInchiStereo0D.createNewTetrahedralStereo0D(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_PARITY;)Lnet/sf/jniinchi/JniInchiStereo0D;: root-Branch
+   * 2 net.sf.jniinchi.JniInchiStereo0D.createNewDoublebondStereo0D(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_PARITY;)Lnet/sf/jniinchi/JniInchiStereo0D;: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1.0), (-1.0), (-1.0), "");
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
       INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.NONE;
-      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
+      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewDoublebondStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_PARITY0);
       assertNotNull(jniInchiStereo0D0);
       
       JniInchiAtom[] jniInchiAtomArray0 = jniInchiStereo0D0.getNeighbors();
-      assertEquals("InChI Stereo0D:  [,,,] Type::TETRAHEDRAL // Parity:NONE", jniInchiStereo0D0.getDebugString());
+      assertEquals("InChI Stereo0D: - [,,,] Type::DOUBLEBOND // Parity:NONE", jniInchiStereo0D0.getDebugString());
       assertNotNull(jniInchiAtomArray0);
   }
 
@@ -102,29 +106,27 @@ public class JniInchiStereo0DEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("");
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.DOUBLEBOND;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       INCHI_PARITY iNCHI_PARITY1 = jniInchiStereo0D0.getDisconnectedParity();
-      assertEquals(INCHI_PARITY.NONE, iNCHI_PARITY1);
+      assertEquals(0, iNCHI_PARITY1.ordinal());
   }
 
   //Test case number: 6
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiStereo0D.getInchiParity()I: root-Branch
+   * 2 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("Ue)kmN[v@)");
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1274.4653109282442), (-1500.7956833665091), (-1274.4653109282442), " // Radical: ");
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, jniInchiAtom0, 1, 1);
       assertNotNull(jniInchiStereo0D0);
       
       int int0 = jniInchiStereo0D0.getInchiParity();
-      assertEquals(3, int0);
+      assertEquals(1, int0);
   }
 
   //Test case number: 7
@@ -134,22 +136,23 @@ public class JniInchiStereo0DEvoSuiteTest {
    */
   @Test
   public void test7()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1352.1781168741293), (-833.7524641894333), 0.0, "");
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, 0, 0);
-      INCHI_PARITY iNCHI_PARITY0 = jniInchiStereo0D0.getParity();
-      assertEquals(INCHI_PARITY.NONE, iNCHI_PARITY0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY1 = jniInchiStereo0D0.getParity();
+      assertSame(iNCHI_PARITY1, iNCHI_PARITY0);
   }
 
   //Test case number: 8
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 net.sf.jniinchi.JniInchiStereo0D.getInchiStereoType()I: root-Branch
-   * 2 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom((-1352.1781168741293), (-833.7524641894333), 0.0, "");
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, 0, 0);
+      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       int int0 = jniInchiStereo0D0.getInchiStereoType();
       assertEquals(0, int0);
   }
@@ -161,43 +164,28 @@ public class JniInchiStereo0DEvoSuiteTest {
    */
   @Test
   public void test9()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("Ue)kmN[v@)");
       INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNDEFINED;
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
       jniInchiStereo0D0.setDisconnectedParity(iNCHI_PARITY0);
-      assertEquals(0, jniInchiStereo0D0.getInchiStereoType());
+      assertEquals(INCHI_STEREOTYPE.NONE, jniInchiStereo0D0.getStereoType());
   }
 
   //Test case number: 10
   /*
-   * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiStereo0D.getCentralAtom()Lnet/sf/jniinchi/JniInchiAtom;: root-Branch
+   * 4 covered goals:
+   * 1 net.sf.jniinchi.JniInchiStereo0D.getDebugString()Ljava/lang/String;: I9 Branch 1 IFNONNULL L150 - false
+   * 2 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;II)V: root-Branch
+   * 3 net.sf.jniinchi.JniInchiStereo0D.debug()V: root-Branch
+   * 4 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_STEREOTYPE;Lnet/sf/jniinchi/INCHI_PARITY;)V: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("Ue)kmN[v@)");
-      INCHI_STEREOTYPE iNCHI_STEREOTYPE0 = INCHI_STEREOTYPE.NONE;
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.UNKNOWN;
-      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D(jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, iNCHI_STEREOTYPE0, iNCHI_PARITY0);
-      JniInchiAtom jniInchiAtom1 = jniInchiStereo0D0.getCentralAtom();
-      assertEquals(0.0, jniInchiAtom1.getY(), 0.01D);
-  }
-
-  //Test case number: 11
-  /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiStereo0D.getDebugString()Ljava/lang/String;: I9 Branch 1 IFNONNULL L150 - false
-   * 2 net.sf.jniinchi.JniInchiStereo0D.<init>(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_STEREOTYPE;Lnet/sf/jniinchi/INCHI_PARITY;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiStereo0D.createNewTetrahedralStereo0D(Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/JniInchiAtom;Lnet/sf/jniinchi/INCHI_PARITY;)Lnet/sf/jniinchi/JniInchiStereo0D;: root-Branch
-   */
-  @Test
-  public void test11()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.NONE;
-      JniInchiStereo0D jniInchiStereo0D0 = JniInchiStereo0D.createNewTetrahedralStereo0D((JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, (JniInchiAtom) null, iNCHI_PARITY0);
+      JniInchiAtom jniInchiAtom0 = new JniInchiAtom("xYC");
+      JniInchiStereo0D jniInchiStereo0D0 = new JniInchiStereo0D((JniInchiAtom) null, (JniInchiAtom) null, jniInchiAtom0, jniInchiAtom0, jniInchiAtom0, (-106), (-106));
       // Undeclared exception!
       try {
-        jniInchiStereo0D0.getDebugString();
+        jniInchiStereo0D0.debug();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

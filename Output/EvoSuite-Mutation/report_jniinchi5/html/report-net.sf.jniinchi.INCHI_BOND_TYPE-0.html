@@ -22,18 +22,18 @@ net.sf.jniinchi.INCHI_BOND_TYPE
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_BOND_TYPE: 100.00%</ul><ul>
-<li>750 fitness evaluations, 16 generations, 6672 statements, 680 tests.
-<li>Time: 0:00:08(Search: 0:00:06, minimization: 0:00:01)
+<li>1000 fitness evaluations, 21 generations, 8694 statements, 854 tests.
+<li>Time: 0:00:09(Search: 0:00:08, minimization: 0:00:01)
 <li>Coverage: 12/12 branches, 2/2 methods, 13/13 total goals
-<li>Mutation score: 69%
+<li>Mutation score: 74%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
 <span class="nocode"><a name="2">  2: </a></span>int int0 = iNCHI_BOND_TYPE0.getIndx();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(4, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -42,18 +42,18 @@ net.sf.jniinchi.INCHI_BOND_TYPE
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(1);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.SINGLE, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(3);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.TRIPLE, iNCHI_BOND_TYPE0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(2);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.DOUBLE, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(1);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.SINGLE, iNCHI_BOND_TYPE0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(3);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.TRIPLE, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.getValue(2);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_BOND_TYPE.DOUBLE, iNCHI_BOND_TYPE0);
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -62,7 +62,7 @@ net.sf.jniinchi.INCHI_BOND_TYPE
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE.getValue(532);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE.getValue((-1697));
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -155,7 +155,7 @@ net.sf.jniinchi.INCHI_BOND_TYPE
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4616975842868433290.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4439697650519299526.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -173,7 +173,7 @@ net.sf.jniinchi.INCHI_BOND_TYPE
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21948
+<li>process_communication_port: 8661
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

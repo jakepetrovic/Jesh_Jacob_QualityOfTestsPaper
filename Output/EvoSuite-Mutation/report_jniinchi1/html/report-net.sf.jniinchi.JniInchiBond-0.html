@@ -22,79 +22,82 @@ net.sf.jniinchi.JniInchiBond
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.JniInchiBond: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 5047 statements, 310 tests.
-<li>Time: 0:00:04(Search: 0:00:03, minimization: 0:00:01)
+<li>50 fitness evaluations, 2 generations, 4139 statements, 237 tests.
+<li>Time: 0:00:04(Search: 0:00:02, minimization: 0:00:01)
 <li>Coverage: 0/0 branches, 12/12 methods, 12/12 total goals
-<li>Mutation score: 35%
+<li>Mutation score: 6%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;kjp%/tcfO#)e&amp;ipV&amp;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0);
-<span class="nocode"><a name="4">  4: </a></span>JniInchiAtom jniInchiAtom1 = jniInchiBond0.getOriginAtom();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, jniInchiAtom1.getImplicitProtium());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, (-1371), (-1371));
+<span class="nocode"><a name="2">  2: </a></span>assertNull(jniInchiBond0.getBondStereo());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;:4ecfiH&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
-<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="5">  5: </a></span>JniInchiAtom jniInchiAtom1 = jniInchiBond0.getTargetAtom();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, jniInchiAtom1.getIsotopicMass());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="3">  3: </a></span>JniInchiAtom jniInchiAtom0 = jniInchiBond0.getTargetAtom();
+<span class="nocode"><a name="4">  4: </a></span>assertNull(jniInchiAtom0);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
-<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2DOWN;
-<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="5">  5: </a></span>jniInchiBond0.debug();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;InChI Bond: - // Type: ALTERN // Stereo: SINGLE_2DOWN&quot;, jniInchiBond0.getDebugString());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="3">  3: </a></span>JniInchiAtom jniInchiAtom0 = jniInchiBond0.getOriginAtom();
+<span class="nocode"><a name="4">  4: </a></span>assertNull(jniInchiAtom0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
-<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2DOWN;
-<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="5">  5: </a></span>jniInchiBond0.setStereoDefinition(iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(INCHI_BOND_STEREO.SINGLE_2DOWN, jniInchiBond0.getBondStereo());
+<span class="nocode"><a name="1">  1: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
+<span class="nocode"><a name="2">  2: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, iNCHI_BOND_TYPE0);
+<span class="nocode"><a name="3">  3: </a></span>jniInchiBond0.debug();
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond((JniInchiAtom) null, (JniInchiAtom) null, 0, 0);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = jniInchiBond0.getBondStereo();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, iNCHI_BOND_STEREO0.ordinal());
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
+<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
+<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
+<span class="nocode"><a name="5">  5: </a></span>jniInchiBond0.setStereoDefinition(iNCHI_BOND_STEREO0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(4, jniInchiBond0.getInchiBondType());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;:4ecfiH&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;%fI&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
+<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2EITHER;
 <span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="5">  5: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE1 = jniInchiBond0.getBondType();
-<span class="nocode"><a name="6">  6: </a></span>assertSame(iNCHI_BOND_TYPE0, iNCHI_BOND_TYPE1);
+<span class="nocode"><a name="5">  5: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO1 = jniInchiBond0.getBondStereo();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;SINGLE_2EITHER&quot;, iNCHI_BOND_STEREO1.name());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;:4ecfiH&quot;);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;%fI&quot;);
 <span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.NONE;
-<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.DOUBLE_EITHER;
+<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_2EITHER;
 <span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
-<span class="nocode"><a name="5">  5: </a></span>int int0 = jniInchiBond0.getInchiBondStereo();
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(3, int0);
+<span class="nocode"><a name="5">  5: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE1 = jniInchiBond0.getBondType();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;NONE&quot;, iNCHI_BOND_TYPE1.toString());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;kjp%/tcfO#)e&amp;ipV&amp;3&quot;);
-<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.DOUBLE;
-<span class="nocode"><a name="3">  3: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0);
-<span class="nocode"><a name="4">  4: </a></span>int int0 = jniInchiBond0.getInchiBondType();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(2, int0);
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
+<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
+<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
+<span class="nocode"><a name="5">  5: </a></span>int int0 = jniInchiBond0.getInchiBondStereo();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(6, int0);
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>JniInchiAtom jniInchiAtom0 = new JniInchiAtom(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>INCHI_BOND_TYPE iNCHI_BOND_TYPE0 = INCHI_BOND_TYPE.ALTERN;
+<span class="nocode"><a name="3">  3: </a></span>INCHI_BOND_STEREO iNCHI_BOND_STEREO0 = INCHI_BOND_STEREO.SINGLE_1DOWN;
+<span class="nocode"><a name="4">  4: </a></span>JniInchiBond jniInchiBond0 = new JniInchiBond(jniInchiAtom0, jniInchiAtom0, iNCHI_BOND_TYPE0, iNCHI_BOND_STEREO0);
+<span class="nocode"><a name="5">  5: </a></span>int int0 = jniInchiBond0.getInchiBondType();
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(4, int0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -239,7 +242,7 @@ net.sf.jniinchi.JniInchiBond
 <span class="nocode"><a name="140">140: </a></span>     */
 <span class="nocode"><a name="141">141: </a></span>    public void debug() {
 <span class="nocode"><a name="142">142: </a></span><span style="background-color: #ffffcc">        System.out.println(getDebugString());</span>
-<span class="nocode"><a name="143">143: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="143">143: </a></span>    }
 <span class="nocode"><a name="144">144: </a></span>    
 <span class="nocode"><a name="145">145: </a></span>    int getInchiBondType() {
 <span class="nocode"><a name="146">146: </a></span><span style="background-color: #ffffcc">    	return type.getIndx();</span>
@@ -254,7 +257,7 @@ net.sf.jniinchi.JniInchiBond
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2966106683360006431.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7807429960142163071.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -272,7 +275,7 @@ net.sf.jniinchi.JniInchiBond
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 21939
+<li>process_communication_port: 20172
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

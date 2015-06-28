@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.FileEntry
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.FileEntry: 2.75%</ul><ul>
-<li>4664 fitness evaluations, 95 generations, 16704 statements, 3159 tests.
+<li>3660 fitness evaluations, 75 generations, 12671 statements, 2537 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/94 branches, 3/27 methods, 3/109 total goals
 <li>Mutation score: 0%
@@ -31,16 +31,21 @@ nu.staldal.lagoon.core.FileEntry
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;]*m%$^4B&quot;, &quot;]*m%$^4B&quot;);
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(1);
-<span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="4">  4: </a></span>fileEntry_TempOutputHandler0.discard();
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;)ukvNTx&quot;);
+<span class="nocode"><a name="2">  2: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) null);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  fileEntry_TempOutputHandler0.commit();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
-<span class="nocode"><a name="2">  2: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler((File) null, (OutputStream) pipedOutputStream0);
-<span class="nocode"><a name="3">  3: </a></span>fileEntry_TempOutputHandler0.commit();
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;J&gt;u-OP68&amp;S~U{&quot;);
+<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="4">  4: </a></span>fileEntry_TempOutputHandler0.discard();
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -654,7 +659,7 @@ nu.staldal.lagoon.core.FileEntry
 <span class="nocode"><a name="609">609: </a></span>			throws java.io.IOException
 <span class="nocode"><a name="610">610: </a></span>		{
 <span class="nocode"><a name="611">611: </a></span><span style="background-color: #ffffcc">			out.close();</span>
-<span class="nocode"><a name="612">612: </a></span><span style="background-color: #ffffcc">		}</span>
+<span class="nocode"><a name="612">612: </a></span>		}
 <span class="nocode"><a name="613">613: </a></span>
 <span class="nocode"><a name="614">614: </a></span>		public void discard()
 <span class="nocode"><a name="615">615: </a></span>			throws java.io.IOException
@@ -678,7 +683,7 @@ nu.staldal.lagoon.core.FileEntry
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2009578713391512469.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7128545582838277460.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -696,7 +701,7 @@ nu.staldal.lagoon.core.FileEntry
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 17094
+<li>process_communication_port: 4134
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

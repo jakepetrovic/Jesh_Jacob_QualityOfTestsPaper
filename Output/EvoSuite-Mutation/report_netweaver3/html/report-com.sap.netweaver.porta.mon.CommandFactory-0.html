@@ -22,8 +22,8 @@ com.sap.netweaver.porta.mon.CommandFactory
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.sap.netweaver.porta.mon.CommandFactory: 100.00%</ul><ul>
-<li>1200 fitness evaluations, 25 generations, 5904 statements, 1003 tests.
-<li>Time: 0:00:19(Search: 0:00:17, minimization: 0:00:01)
+<li>1250 fitness evaluations, 26 generations, 5345 statements, 1028 tests.
+<li>Time: 0:00:16(Search: 0:00:14, minimization: 0:00:02)
 <li>Coverage: 26/26 branches, 2/2 methods, 27/27 total goals
 <li>Mutation score: 30%
 </ul>
@@ -41,8 +41,8 @@ com.sap.netweaver.porta.mon.CommandFactory
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(deployCommand0);
+<span class="nocode"><a name="1">  1: </a></span>StopAppCommand stopAppCommand0 = (StopAppCommand)CommandFactory.createCommand(11);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stopAppCommand0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -76,33 +76,33 @@ com.sap.netweaver.porta.mon.CommandFactory
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DeployCommand deployCommand0 = (DeployCommand)CommandFactory.createCommand(7);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(deployCommand0);
+</pre>
+<h3>Test case 11</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>UndeployCommand undeployCommand0 = (UndeployCommand)CommandFactory.createCommand(8);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(undeployCommand0);
 </pre>
-<h3>Test case 11</h3>
+<h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ListAppsCommand listAppsCommand0 = (ListAppsCommand)CommandFactory.createCommand(9);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(listAppsCommand0);
 </pre>
-<h3>Test case 12</h3>
+<h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>StartAppCommand startAppCommand0 = (StartAppCommand)CommandFactory.createCommand(10);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(startAppCommand0);
-</pre>
-<h3>Test case 13</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>StopAppCommand stopAppCommand0 = (StopAppCommand)CommandFactory.createCommand(11);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(stopAppCommand0);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  CommandFactory.createCommand((-1166));
+<span class="nocode"><a name="3">  3: </a></span>  CommandFactory.createCommand((-21));
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * command -1166 is not supported. 
+<span class="nocode"><a name="7">  7: </a></span>   * command -21 is not supported. 
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -182,7 +182,7 @@ com.sap.netweaver.porta.mon.CommandFactory
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4086536237158660057.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4236573649718441842.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -200,7 +200,7 @@ com.sap.netweaver.porta.mon.CommandFactory
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4583
+<li>process_communication_port: 13311
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

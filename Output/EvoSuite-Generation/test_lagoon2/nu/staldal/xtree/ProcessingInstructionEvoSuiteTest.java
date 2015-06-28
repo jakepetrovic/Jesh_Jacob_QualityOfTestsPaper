@@ -17,32 +17,32 @@ public class ProcessingInstructionEvoSuiteTest {
   //Test case number: 0
   /*
    * 2 covered goals:
-   * 1 nu.staldal.xtree.ProcessingInstruction.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   * 1 nu.staldal.xtree.ProcessingInstruction.getTarget()Ljava/lang/String;: root-Branch
    * 2 nu.staldal.xtree.ProcessingInstruction.<init>(Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("lqb", "lqb");
+      String string0 = processingInstruction0.getTarget();
+      assertEquals("lqb", string0);
+      assertEquals("lqb", processingInstruction0.getValue());
+      assertNotNull(string0);
+  }
+
+  //Test case number: 1
+  /*
+   * 1 covered goal:
+   * 1 nu.staldal.xtree.ProcessingInstruction.toSAX(Lorg/xml/sax/ContentHandler;)V: root-Branch
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("}lj:p|x4/E 56hy7", "}lj:p|x4/E 56hy7");
       // Undeclared exception!
       try {
         processingInstruction0.toSAX((ContentHandler) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
-  }
-
-  //Test case number: 1
-  /*
-   * 1 covered goal:
-   * 1 nu.staldal.xtree.ProcessingInstruction.getTarget()Ljava/lang/String;: root-Branch
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
-      String string0 = processingInstruction0.getTarget();
-      assertNotNull(string0);
-      assertEquals("$?{dV55I[FyN}$ S t", processingInstruction0.getValue());
-      assertEquals("$?{dV55I[FyN}$ S t", string0);
   }
 
   //Test case number: 2
@@ -53,10 +53,10 @@ public class ProcessingInstructionEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("9g\"s%?Oy0C?G{f", ":~fp&iW }uv");
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("lqb", "lqb");
       String string0 = processingInstruction0.getValue();
-      assertEquals("9g\"s%?Oy0C?G{f", processingInstruction0.getTarget());
+      assertEquals("lqb", processingInstruction0.getTarget());
+      assertEquals("lqb", string0);
       assertNotNull(string0);
-      assertEquals(":~fp&iW }uv", string0);
   }
 }

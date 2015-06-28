@@ -38,21 +38,4 @@ public class XPathReaderFactoryEvoSuiteTest {
       XPathReader xPathReader0 = (XPathReader)XPathReaderFactory.createReader();
       assertNotNull(xPathReader0);
   }
-
-  //Test case number: 2
-  /*
-   * 1 covered goal:
-   * 1 org.saxpath.helpers.XPathReaderFactory.createReader(Ljava/lang/String;)Lorg/saxpath/XPathReader;: I21 Branch 5 IFNE L171 - false
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      try {
-        XPathReaderFactory.createReader("[C");
-        fail("Expecting exception: SAXPathException");
-      } catch(SAXPathException e) {
-        /*
-         * Class [[C] does not implement the org.saxpath.XPathReader interface.
-         */
-      }
-  }
 }

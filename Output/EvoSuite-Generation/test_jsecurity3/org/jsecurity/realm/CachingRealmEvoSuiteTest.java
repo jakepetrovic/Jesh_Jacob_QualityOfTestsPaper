@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import org.jsecurity.cache.CacheManager;
-import org.jsecurity.cache.HashtableCacheManager;
 import org.jsecurity.realm.SimpleAccountRealm;
 
 public class CachingRealmEvoSuiteTest {
@@ -24,9 +23,9 @@ public class CachingRealmEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("pb}#N:DR??+i");
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
       String string0 = simpleAccountRealm0.getName();
-      assertEquals("pb}#N:DR??+i", string0);
+      assertEquals("", string0);
   }
 
   //Test case number: 1
@@ -39,11 +38,8 @@ public class CachingRealmEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("pb}#N:DR??+i");
-      assertNotNull(simpleAccountRealm0);
-      
-      HashtableCacheManager hashtableCacheManager0 = new HashtableCacheManager();
-      simpleAccountRealm0.setCacheManager((CacheManager) hashtableCacheManager0);
-      assertEquals("org.jsecurity.realm.SimpleAccountRealm-0-authorization", simpleAccountRealm0.getAuthorizationCacheName());
+      SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm("");
+      simpleAccountRealm0.setCacheManager((CacheManager) null);
+      assertEquals("", simpleAccountRealm0.getName());
   }
 }

@@ -21,145 +21,145 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xmlutil.DocumentHandlerAdapter: 88.14%</ul><ul>
-<li>13870 fitness evaluations, 279 generations, 153665 statements, 8878 tests.
+<ul><li>Target class: nu.staldal.xmlutil.DocumentHandlerAdapter: 81.36%</ul><ul>
+<li>13838 fitness evaluations, 278 generations, 151452 statements, 9016 tests.
 <li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 43/50 branches, 12/12 methods, 52/59 total goals
+<li>Coverage: 39/50 branches, 12/12 methods, 48/59 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) null);
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  documentHandlerAdapter0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
+<span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.endPrefixMapping(&quot;Gg[hk:xYx8_@!,zh7&quot;);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.endPrefixMapping(&quot;4*Gf;O.{&lt;Hi?&quot;);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.processingInstruction(&quot;;y[rh&quot;, &quot;;y[rh&quot;);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.processingInstruction(&quot;xmlns:&quot;, &quot;3hacH^M?@{O9Ulx*&quot;);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.skippedEntity(&quot;Ep-Zs]B-(.)&quot;);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.skippedEntity(&quot;V[^(:Iv{UnkJj&quot;);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startDocument();
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startDocument();
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[8];
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.characters(charArray0, (int) '\u0000', (int) '\u0000');
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[3];
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.characters(charArray0, (-1), (int) '0');
+<span class="nocode"><a name="3">  3: </a></span>LocatorImpl locatorImpl0 = new LocatorImpl();
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.setDocumentLocator((Locator) locatorImpl0);
+<span class="nocode"><a name="5">  5: </a></span>assertNull(locatorImpl0.getSystemId());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>Locator2Impl locator2Impl0 = new Locator2Impl();
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.setDocumentLocator((Locator) locator2Impl0);
-<span class="nocode"><a name="5">  5: </a></span>assertNull(locator2Impl0.getPublicId());
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[8];
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.ignorableWhitespace(charArray0, (int) '\u0000', (int) '[');
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[1];
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.ignorableWhitespace(charArray0, (-1009), (-1009));
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.endDocument();
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.endDocument();
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  documentHandlerAdapter0.startElement(&quot;Gg[hk:xYx8_@!,zh7&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(Error e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * no prefix for 'Gg[hk:xYx8_@!,zh7'
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;.2e\&quot;7&lt;Sv&lt;,EalR|&quot;);
-<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
-<span class="nocode"><a name="7">  7: </a></span>try {
-<span class="nocode"><a name="8">  8: </a></span>  documentHandlerAdapter0.startElement(&quot;k&gt;v W(&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: Error&quot;);
-<span class="nocode"><a name="10"> 10: </a></span>} catch(Error e) {
-<span class="nocode"><a name="11"> 11: </a></span>  /*
-<span class="nocode"><a name="12"> 12: </a></span>   * no prefix for 'k&gt;v W('
-<span class="nocode"><a name="13"> 13: </a></span>   */
-<span class="nocode"><a name="14"> 14: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;&quot;, (String) null, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;8^&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-<span class="nocode"><a name="5">  5: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;8^&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
+<span class="nocode"><a name="3">  3: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;&quot;, &quot;no pref)ix for '&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  documentHandlerAdapter0.startElement(&quot;3hacH^M?@{O9Ulx*&quot;, &quot;3hacH^M?@{O9Ulx*&quot;, &quot;&quot;, (Attributes) attributesImpl0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: Error&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(Error e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * no prefix for '3hacH^M?@{O9Ulx*'
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;Gg[hk:xYx8_@!,zh7&quot;, &quot;Gg[hk:xYx8_@!,zh7&quot;);
+<span class="nocode"><a name="4">  4: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+<span class="nocode"><a name="5">  5: </a></span>documentHandlerAdapter0.startElement(&quot;Gg[hk:xYx8_@!,zh7&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributes2Impl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributes2Impl0.getLength());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;&quot;, &quot;xmlns&quot;, &quot;xmlns&quot;, &quot;V'^:Iv{nkJj&quot;, &quot;xmlns&quot;);
-<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;&quot;, &quot;xmlns&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, attributes2Impl0.getLength());
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;;y[rh&quot;);
+<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  documentHandlerAdapter0.startElement(&quot;m&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(Error e) {
+<span class="nocode"><a name="10"> 10: </a></span>  /*
+<span class="nocode"><a name="11"> 11: </a></span>   * no prefix for 'm'
+<span class="nocode"><a name="12"> 12: </a></span>   */
+<span class="nocode"><a name="13"> 13: </a></span>}
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="4">  4: </a></span>attributesImpl0.addAttribute(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;xmlns:&quot;);
-<span class="nocode"><a name="5">  5: </a></span>Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;&quot;, &quot;xmlns:&quot;, (Attributes) attributes2Impl0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(1, attributes2Impl0.getLength());
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;cm&quot;);
+<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
+<span class="nocode"><a name="5">  5: </a></span>documentHandlerAdapter0.startElement(&quot;cm&quot;, &quot;&quot;, &quot;&quot;, (Attributes) attributesImpl0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>AttributesImpl attributesImpl0 = new AttributesImpl();
-<span class="nocode"><a name="5">  5: </a></span>documentHandlerAdapter0.startElement(&quot;&quot;, &quot;&quot;, (String) null, (Attributes) attributesImpl0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(0, attributesImpl0.getLength());
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;^Sk^!(I&quot;, (String) null, (String) null);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(Error e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * no prefix for '^Sk^!(I'
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -167,9 +167,9 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement((String) null, (String) null, (String) null);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;uCW~Rh !H:C3;~3Es&quot;, &quot;uCW~Rh !H:C3;~3Es&quot;, &quot;uCW~Rh !H:C3;~3Es&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 17</h3>
@@ -178,17 +178,20 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;4*Gf;O.{&lt;Hi?&quot;, &quot;z_rxz:G.lO 8'{&quot;, &quot;4*Gf;O.{&lt;Hi?&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
+<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;;y[rh&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(Error e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * no prefix for ';y[rh'
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 18</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;v&amp;;\&quot;~=Fn3HVmv&quot;, &quot;v&amp;;\&quot;~=Fn3HVmv&quot;);
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.endElement(&quot;v&amp;;\&quot;~=Fn3HVmv&quot;, &quot;v&amp;;\&quot;~=Fn3HVmv&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;xmlns:&quot;, &quot;&quot;);
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -196,42 +199,39 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;xmlns&quot;, &quot;no attribute prefix for '&quot;, &quot;&quot;);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: Error&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(Error e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * no prefix for 'xmlns'
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="5">  5: </a></span>  documentHandlerAdapter0.endElement(&quot;&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: EmptyStackException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(EmptyStackException e) {
+<span class="nocode"><a name="8">  8: </a></span>}
 </pre>
 <h3>Test case 20</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;V'^:Iv{nkJj&quot;);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  documentHandlerAdapter0.endElement(&quot;xmlns&quot;, &quot;no attribute prefix for '&quot;, &quot;&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: Error&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(Error e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * no prefix for 'xmlns'
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;;y[rh&quot;);
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.endElement(&quot;;y[rh&quot;, &quot;&quot;, &quot;&quot;);
 </pre>
 <h3>Test case 21</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
-<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;V[^(:Iv{UnkJj&quot;);
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.endElement(&quot;V[^(:Iv{UnkJj&quot;, &quot;no attribute prefix for '&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;;y[rh&quot;);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  documentHandlerAdapter0.endElement(&quot;cm&quot;, &quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: Error&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(Error e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * no prefix for 'cm'
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 22</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>HandlerBase handlerBase0 = new HandlerBase();
 <span class="nocode"><a name="2">  2: </a></span>DocumentHandlerAdapter documentHandlerAdapter0 = new DocumentHandlerAdapter((DocumentHandler) handlerBase0);
 <span class="nocode"><a name="3">  3: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;&quot;, &quot;V'^:Iv{nkJj&quot;);
+<span class="nocode"><a name="4">  4: </a></span>documentHandlerAdapter0.startPrefixMapping(&quot;Gg[hk:xYx8_@!,zh7&quot;, &quot;Gg[hk:xYx8_@!,zh7&quot;);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -357,7 +357,7 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="121">121: </a></span>				{
 <span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">					String defaultURI = nsSup.getURI(&quot;&quot;);</span>
 <span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">	                if ((defaultURI != null) &amp;&amp; defaultURI.equals(namespaceURI))</span>
-<span class="nocode"><a name="124">124: </a></span>	                    prefix = &quot;&quot;; // default namespace
+<span class="nocode"><a name="124">124: </a></span><span style="background-color: #ffffcc">	                    prefix = &quot;&quot;; // default namespace</span>
 <span class="nocode"><a name="125">125: </a></span>	                else
 <span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">	                    throw new Error(&quot;no prefix for \'&quot; + namespaceURI +</span>
 <span class="nocode"><a name="127">127: </a></span>	                    	'\'');
@@ -369,14 +369,14 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="133">133: </a></span><span style="background-color: #ffffcc">        AttributeListImpl al = new AttributeListImpl();</span>
 <span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">        for (int i = 0; i &lt; atts.getLength(); i++)</span>
 <span class="nocode"><a name="135">135: </a></span>        {
-<span class="nocode"><a name="136">136: </a></span><span style="background-color: #ffffcc">            String aname = atts.getQName(i);</span>
-<span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">            if ((aname == null) || (aname.length() == 0))</span>
+<span class="nocode"><a name="136">136: </a></span>            String aname = atts.getQName(i);
+<span class="nocode"><a name="137">137: </a></span>            if ((aname == null) || (aname.length() == 0))
 <span class="nocode"><a name="138">138: </a></span>            {
-<span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">                String uri = atts.getURI(i);</span>
-<span class="nocode"><a name="140">140: </a></span><span style="background-color: #ffffcc">                String alocalName = atts.getLocalName(i);</span>
-<span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">                if (uri.length() == 0)</span>
+<span class="nocode"><a name="139">139: </a></span>                String uri = atts.getURI(i);
+<span class="nocode"><a name="140">140: </a></span>                String alocalName = atts.getLocalName(i);
+<span class="nocode"><a name="141">141: </a></span>                if (uri.length() == 0)
 <span class="nocode"><a name="142">142: </a></span>                {
-<span class="nocode"><a name="143">143: </a></span><span style="background-color: #ffffcc">                    aname = alocalName;</span>
+<span class="nocode"><a name="143">143: </a></span>                    aname = alocalName;
 <span class="nocode"><a name="144">144: </a></span>                }
 <span class="nocode"><a name="145">145: </a></span>                else
 <span class="nocode"><a name="146">146: </a></span>                {
@@ -387,7 +387,7 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <span class="nocode"><a name="151">151: </a></span>                    aname = prefix + ':' + alocalName;
 <span class="nocode"><a name="152">152: </a></span>                }
 <span class="nocode"><a name="153">153: </a></span>            }
-<span class="nocode"><a name="154">154: </a></span><span style="background-color: #ffffcc">            al.addAttribute(aname, atts.getType(i), atts.getValue(i));</span>
+<span class="nocode"><a name="154">154: </a></span>            al.addAttribute(aname, atts.getType(i), atts.getValue(i));
 <span class="nocode"><a name="155">155: </a></span>        }
 <span class="nocode"><a name="156">156: </a></span>
 <span class="nocode"><a name="157">157: </a></span><span style="background-color: #ffffcc">        for (Enumeration e = nsSup.getDeclaredPrefixes(); e.hasMoreElements(); )</span>
@@ -502,7 +502,7 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -520,7 +520,7 @@ nu.staldal.xmlutil.DocumentHandlerAdapter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20708
+<li>process_communication_port: 11385
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

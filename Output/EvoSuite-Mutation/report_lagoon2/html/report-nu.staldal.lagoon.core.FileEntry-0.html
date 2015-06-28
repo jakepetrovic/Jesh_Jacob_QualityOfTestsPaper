@@ -22,7 +22,7 @@ nu.staldal.lagoon.core.FileEntry
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.FileEntry: 2.75%</ul><ul>
-<li>4542 fitness evaluations, 92 generations, 12003 statements, 3085 tests.
+<li>3922 fitness evaluations, 80 generations, 11599 statements, 2751 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/94 branches, 3/27 methods, 3/109 total goals
 <li>Mutation score: 0%
@@ -31,15 +31,16 @@ nu.staldal.lagoon.core.FileEntry
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="2">  2: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler((File) null, (OutputStream) byteArrayOutputStream0);
-<span class="nocode"><a name="3">  3: </a></span>fileEntry_TempOutputHandler0.commit();
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;Twi72:.MpU_#dD&quot;);
+<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) pipedOutputStream0);
+<span class="nocode"><a name="4">  4: </a></span>fileEntry_TempOutputHandler0.commit();
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;&gt;?yformat&quot;, &quot;&gt;?yformat&quot;);
-<span class="nocode"><a name="2">  2: </a></span>ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream();
-<span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) byteArrayOutputStream0);
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;Twi72:.MpU_#dD&quot;);
+<span class="nocode"><a name="2">  2: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+<span class="nocode"><a name="3">  3: </a></span>FileEntry.TempOutputHandler fileEntry_TempOutputHandler0 = new FileEntry.TempOutputHandler(file0, (OutputStream) pipedOutputStream0);
 <span class="nocode"><a name="4">  4: </a></span>fileEntry_TempOutputHandler0.discard();
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -678,7 +679,7 @@ nu.staldal.lagoon.core.FileEntry
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -696,7 +697,7 @@ nu.staldal.lagoon.core.FileEntry
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 14509
+<li>process_communication_port: 2289
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

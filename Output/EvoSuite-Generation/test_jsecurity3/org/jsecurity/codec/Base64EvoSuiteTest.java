@@ -25,98 +25,115 @@ public class Base64EvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 14 covered goals:
-   * 1 org.jsecurity.codec.Base64.encodeToString([B)Ljava/lang/String;: root-Branch
-   * 2 org.jsecurity.codec.Base64.encode([B)[B: root-Branch
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - false
-   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - true
-   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I89 Branch 16 IFLE L291 - true
-   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - true
-   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - false
-   * 8 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - false
-   * 9 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - false
-   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - false
-   * 11 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - true
-   * 12 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - false
-   * 13 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - false
-   * 14 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - true
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      byte[] byteArray0 = new byte[1];
-      byte[] byteArray1 = Base64.encode(byteArray0);
-      assertNotNull(byteArray1);
-      
-      String string0 = Base64.encodeToString(byteArray1);
-      assertEquals("QUE9PQ==", string0);
-      assertNotNull(string0);
-  }
-
-  //Test case number: 2
-  /*
-   * 20 covered goals:
+   * 19 covered goals:
    * 1 org.jsecurity.codec.Base64.decodeToString([B)Ljava/lang/String;: root-Branch
    * 2 org.jsecurity.codec.Base64.decodeToString(Ljava/lang/String;)Ljava/lang/String;: root-Branch
    * 3 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - true
    * 4 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - false
    * 5 org.jsecurity.codec.Base64.isBase64(B)Z: I12 Branch 2 IFLT L164 - false
    * 6 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - true
-   * 7 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - false
-   * 8 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - true
-   * 9 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - true
-   * 10 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - true
-   * 11 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - false
-   * 12 org.jsecurity.codec.Base64.decode([B)[B: I136 Branch 34 IF_ICMPEQ L460 - false
-   * 13 org.jsecurity.codec.Base64.decode([B)[B: I139 Branch 35 IF_ICMPEQ L460 - true
-   * 14 org.jsecurity.codec.Base64.decode([B)[B: I139 Branch 35 IF_ICMPEQ L460 - false
-   * 15 org.jsecurity.codec.Base64.decode([B)[B: I202 Branch 36 IF_ICMPNE L468 - true
-   * 16 org.jsecurity.codec.Base64.decode([B)[B: I221 Branch 37 IF_ICMPNE L471 - false
+   * 7 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - true
+   * 8 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - true
+   * 9 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - false
+   * 10 org.jsecurity.codec.Base64.decode([B)[B: I71 Branch 32 IFNE L445 - true
+   * 11 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - true
+   * 12 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - false
+   * 13 org.jsecurity.codec.Base64.decode([B)[B: I136 Branch 34 IF_ICMPEQ L460 - true
+   * 14 org.jsecurity.codec.Base64.decode([B)[B: I136 Branch 34 IF_ICMPEQ L460 - false
+   * 15 org.jsecurity.codec.Base64.decode([B)[B: I139 Branch 35 IF_ICMPEQ L460 - false
+   * 16 org.jsecurity.codec.Base64.decode([B)[B: I202 Branch 36 IF_ICMPNE L468 - false
    * 17 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - true
    * 18 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - false
-   * 19 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - true
-   * 20 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - false
+   * 19 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - false
+   */
+  @Test
+  public void test1()  throws Throwable  {
+      String string0 = Base64.decodeToString("AAAAAA==");
+      assertEquals("\u0000\u0000\u0000\u0000", string0);
+      assertNotNull(string0);
+  }
+
+  //Test case number: 2
+  /*
+   * 26 covered goals:
+   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - false
+   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - true
+   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - true
+   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - true
+   * 5 org.jsecurity.codec.Base64.encodeChunked([B)[B: root-Branch
+   * 6 org.jsecurity.codec.Base64.decode(Ljava/lang/String;)[B: root-Branch
+   * 7 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - false
+   * 8 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - true
+   * 9 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - true
+   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - false
+   * 11 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - false
+   * 12 org.jsecurity.codec.Base64.encode([BZ)[B: I61 Branch 15 IFNE L286 - true
+   * 13 org.jsecurity.codec.Base64.encode([BZ)[B: I89 Branch 16 IFLE L291 - true
+   * 14 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - true
+   * 15 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - false
+   * 16 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - false
+   * 17 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - false
+   * 18 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - false
+   * 19 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - false
+   * 20 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - true
+   * 21 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - true
+   * 22 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - false
+   * 23 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - false
+   * 24 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - true
+   * 25 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - false
+   * 26 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - false
    */
   @Test
   public void test2()  throws Throwable  {
-      String string0 = Base64.decodeToString("lTTGG7p!5a\"+P&=uAWi");
-      assertNotNull(string0);
-      assertEquals("\uFFFD4\uFFFD\u001B\uFFFDyk\uFFFD\u0000\uFFFD\u0005\uFFFD", string0);
+      byte[] byteArray0 = Base64.decode("this argument type to a byte[], you can 1) convert the argument to a byte[], char[] or String ");
+      byte[] byteArray1 = Base64.encodeChunked(byteArray0);
+      byte[] byteArray2 = Base64.encode(byteArray1, true);
+      assertNotSame(byteArray2, byteArray1);
   }
 
   //Test case number: 3
   /*
    * 2 covered goals:
-   * 1 org.jsecurity.codec.Base64.decode(Ljava/lang/String;)[B: root-Branch
+   * 1 org.jsecurity.codec.Base64.isBase64(B)Z: I12 Branch 2 IFLT L164 - true
    * 2 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - false
    */
   @Test
   public void test3()  throws Throwable  {
-      byte[] byteArray0 = Base64.decode("");
-      assertNotNull(byteArray0);
+      byte[] byteArray0 = new byte[5];
+      byteArray0[3] = (byte) (-123);
+      byte[] byteArray1 = Base64.decode(byteArray0);
+      assertNotSame(byteArray0, byteArray1);
   }
 
   //Test case number: 4
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.codec.Base64.isBase64(B)Z: I12 Branch 2 IFLT L164 - true
+   * 10 covered goals:
+   * 1 org.jsecurity.codec.Base64.isBase64([B)Z: I13 Branch 4 IFNE L183 - true
+   * 2 org.jsecurity.codec.Base64.isBase64([B)Z: I25 Branch 5 IF_ICMPGE L188 - false
+   * 3 org.jsecurity.codec.Base64.isBase64([B)Z: I32 Branch 6 IFNE L189 - false
+   * 4 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I24 Branch 7 IF_ICMPGE L206 - true
+   * 5 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I24 Branch 7 IF_ICMPGE L206 - false
+   * 6 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 8 LOOKUPSWITCH L207 Case 9 - false
+   * 7 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 9 LOOKUPSWITCH L207 Case 10 - false
+   * 8 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 10 LOOKUPSWITCH L207 Case 13 - false
+   * 9 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 11 LOOKUPSWITCH L207 Case 32 - false
+   * 10 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 12 LOOKUPSWITCH L207 Default-Case - true
    */
   @Test
   public void test4()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[0] = (byte) (-95);
-      byte[] byteArray1 = Base64.decode(byteArray0);
-      assertFalse(byteArray1.equals(byteArray0));
+      byte[] byteArray0 = new byte[7];
+      boolean boolean0 = Base64.isBase64(byteArray0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 5
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.codec.Base64.isBase64([B)Z: I13 Branch 4 IFNE L183 - false
-   * 2 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I24 Branch 7 IF_ICMPGE L206 - true
    */
   @Test
   public void test5()  throws Throwable  {
-      byte[] byteArray0 = new byte[1];
+      byte[] byteArray0 = new byte[7];
       byte[] byteArray1 = Base64.discardNonBase64(byteArray0);
       assertNotNull(byteArray1);
       
@@ -126,51 +143,42 @@ public class Base64EvoSuiteTest {
 
   //Test case number: 6
   /*
-   * 19 covered goals:
+   * 12 covered goals:
    * 1 org.jsecurity.codec.Base64.isBase64([B)Z: I25 Branch 5 IF_ICMPGE L188 - true
    * 2 org.jsecurity.codec.Base64.isBase64([B)Z: I32 Branch 6 IFNE L189 - true
    * 3 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 9 LOOKUPSWITCH L207 Case 10 - true
    * 4 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 10 LOOKUPSWITCH L207 Case 13 - true
    * 5 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 12 LOOKUPSWITCH L207 Default-Case - false
-   * 6 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I24 Branch 7 IF_ICMPGE L206 - false
-   * 7 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 8 LOOKUPSWITCH L207 Case 9 - false
-   * 8 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 9 LOOKUPSWITCH L207 Case 10 - false
-   * 9 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 10 LOOKUPSWITCH L207 Case 13 - false
-   * 10 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 11 LOOKUPSWITCH L207 Case 32 - false
-   * 11 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 12 LOOKUPSWITCH L207 Default-Case - true
-   * 12 org.jsecurity.codec.Base64.isBase64([B)Z: I13 Branch 4 IFNE L183 - true
-   * 13 org.jsecurity.codec.Base64.isBase64([B)Z: I25 Branch 5 IF_ICMPGE L188 - false
-   * 14 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - false
-   * 15 org.jsecurity.codec.Base64.encode([BZ)[B: I61 Branch 15 IFNE L286 - true
-   * 16 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - false
-   * 17 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - true
-   * 18 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - false
-   * 19 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - false
+   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - false
+   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - false
+   * 8 org.jsecurity.codec.Base64.isBase64([B)Z: I13 Branch 4 IFNE L183 - true
+   * 9 org.jsecurity.codec.Base64.isBase64([B)Z: I25 Branch 5 IF_ICMPGE L188 - false
+   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - false
+   * 11 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - true
+   * 12 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - false
    */
   @Test
   public void test6()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
+      byte[] byteArray0 = new byte[7];
       byte[] byteArray1 = Base64.encode(byteArray0, true);
       assertNotNull(byteArray1);
       
       boolean boolean0 = Base64.isBase64(byteArray1);
-      assertEquals(true, boolean0);
+      assertEquals(false, boolean0);
   }
 
   //Test case number: 7
   /*
-   * 4 covered goals:
+   * 1 covered goal:
    * 1 org.jsecurity.codec.Base64.discardWhitespace([B)[B: I32 Branch 8 LOOKUPSWITCH L207 Case 9 - true
-   * 2 org.jsecurity.codec.Base64.isBase64([B)Z: I13 Branch 4 IFNE L183 - true
-   * 3 org.jsecurity.codec.Base64.isBase64([B)Z: I25 Branch 5 IF_ICMPGE L188 - false
-   * 4 org.jsecurity.codec.Base64.isBase64([B)Z: I32 Branch 6 IFNE L189 - false
    */
   @Test
   public void test7()  throws Throwable  {
-      byte[] byteArray0 = new byte[10];
-      byteArray0[1] = (byte)9;
-      boolean boolean0 = Base64.isBase64(byteArray0);
-      assertEquals(false, boolean0);
+      byte[] byteArray0 = new byte[3];
+      byteArray0[2] = (byte)9;
+      byte[] byteArray1 = Base64.discardWhitespace(byteArray0);
+      assertNotSame(byteArray0, byteArray1);
+      assertNotNull(byteArray1);
   }
 
   //Test case number: 8
@@ -188,8 +196,8 @@ public class Base64EvoSuiteTest {
    */
   @Test
   public void test8()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[3] = (byte)32;
+      byte[] byteArray0 = new byte[7];
+      byteArray0[5] = (byte)32;
       byte[] byteArray1 = Base64.discardWhitespace(byteArray0);
       assertNotSame(byteArray0, byteArray1);
       assertNotNull(byteArray1);
@@ -197,182 +205,128 @@ public class Base64EvoSuiteTest {
 
   //Test case number: 9
   /*
-   * 6 covered goals:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - true
-   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - true
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - true
-   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - true
-   * 5 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - false
-   * 6 org.jsecurity.codec.Base64.encodeChunked([B)[B: root-Branch
+   * 5 covered goals:
+   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - true
+   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - false
+   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - true
+   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - true
+   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - true
    */
   @Test
   public void test9()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byte[] byteArray1 = Base64.decode(byteArray0);
-      byte[] byteArray2 = Base64.encodeChunked(byteArray1);
-      assertFalse(byteArray2.equals(byteArray0));
+      byte[] byteArray0 = new byte[7];
+      byteArray0[6] = (byte) (-1);
+      byte[] byteArray1 = Base64.encode(byteArray0, false);
+      assertNotSame(byteArray1, byteArray0);
   }
 
   //Test case number: 10
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - true
+   * 5 covered goals:
+   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I473 Branch 26 IFNE L364 - true
+   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I493 Branch 27 IFNE L365 - false
+   * 3 org.jsecurity.codec.Base64.encodeToString([B)Ljava/lang/String;: root-Branch
+   * 4 org.jsecurity.codec.Base64.encode([B)[B: root-Branch
+   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - false
    */
   @Test
   public void test10()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[0] = (byte) (-95);
-      byte[] byteArray1 = Base64.encode(byteArray0, true);
-      assertFalse(byteArray1.equals(byteArray0));
+      byte[] byteArray0 = new byte[5];
+      byteArray0[3] = (byte) (-123);
+      String string0 = Base64.encodeToString(byteArray0);
+      assertNotNull(string0);
+      assertEquals("AAAAhQA=", string0);
   }
 
   //Test case number: 11
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - true
+   * 13 covered goals:
+   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I493 Branch 27 IFNE L365 - true
+   * 2 org.jsecurity.codec.Base64.encodeToString([B)Ljava/lang/String;: root-Branch
+   * 3 org.jsecurity.codec.Base64.encode([B)[B: root-Branch
+   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - false
+   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - true
+   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - false
+   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - false
+   * 8 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - false
+   * 9 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - false
+   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - true
+   * 11 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - false
+   * 12 org.jsecurity.codec.Base64.encode([BZ)[B: I473 Branch 26 IFNE L364 - false
+   * 13 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - true
    */
   @Test
   public void test11()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[1] = (byte) (-1);
-      byte[] byteArray1 = Base64.encode(byteArray0, true);
-      assertFalse(byteArray1.equals(byteArray0));
+      byte[] byteArray0 = new byte[5];
+      byteArray0[4] = (byte) (-123);
+      String string0 = Base64.encodeToString(byteArray0);
+      assertEquals("AAAAAIU=", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 12
   /*
-   * 1 covered goal:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - true
+   * 10 covered goals:
+   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - true
+   * 2 org.jsecurity.codec.Base64.encodeChunked([B)[B: root-Branch
+   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - true
+   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - false
+   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I61 Branch 15 IFNE L286 - true
+   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I89 Branch 16 IFLE L291 - true
+   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - true
+   * 8 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - true
+   * 9 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - true
+   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - false
    */
   @Test
   public void test12()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[2] = (byte) (-1);
-      byte[] byteArray1 = Base64.encode(byteArray0, true);
-      assertFalse(byteArray1.equals(byteArray0));
+      byte[] byteArray0 = new byte[7];
+      byte[] byteArray1 = Base64.discardNonBase64(byteArray0);
+      byte[] byteArray2 = Base64.encodeChunked(byteArray1);
+      assertNotSame(byteArray1, byteArray2);
   }
 
   //Test case number: 13
   /*
-   * 4 covered goals:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - false
-   * 2 org.jsecurity.codec.Base64.encodeChunked([B)[B: root-Branch
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - true
-   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - true
+   * 3 covered goals:
+   * 1 org.jsecurity.codec.Base64.decode([B)[B: I71 Branch 32 IFNE L445 - false
+   * 2 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - false
+   * 3 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - true
    */
   @Test
   public void test13()  throws Throwable  {
-      byte[] byteArray0 = new byte[48];
-      byte[] byteArray1 = Base64.encodeChunked(byteArray0);
-      byte[] byteArray2 = Base64.encodeChunked(byteArray1);
-      assertFalse(byteArray2.equals(byteArray0));
+      byte[] byteArray0 = new byte[8];
+      byteArray0[0] = (byte)61;
+      byte[] byteArray1 = Base64.decode(byteArray0);
+      assertNotSame(byteArray1, byteArray0);
   }
 
   //Test case number: 14
   /*
-   * 7 covered goals:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - true
-   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - false
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I61 Branch 15 IFNE L286 - true
-   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - false
-   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I314 Branch 22 IF_ICMPNE L335 - true
-   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - false
-   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I558 Branch 29 IF_ICMPGE L375 - false
+   * 19 covered goals:
+   * 1 org.jsecurity.codec.Base64.decode([B)[B: I139 Branch 35 IF_ICMPEQ L460 - true
+   * 2 org.jsecurity.codec.Base64.decode([B)[B: I202 Branch 36 IF_ICMPNE L468 - true
+   * 3 org.jsecurity.codec.Base64.decode([B)[B: I221 Branch 37 IF_ICMPNE L471 - false
+   * 4 org.jsecurity.codec.Base64.decode(Ljava/lang/String;)[B: root-Branch
+   * 5 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - true
+   * 6 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - false
+   * 7 org.jsecurity.codec.Base64.isBase64(B)Z: I12 Branch 2 IFLT L164 - false
+   * 8 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - true
+   * 9 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - true
+   * 10 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - false
+   * 11 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - false
+   * 12 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - true
+   * 13 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - true
+   * 14 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - false
+   * 15 org.jsecurity.codec.Base64.decode([B)[B: I71 Branch 32 IFNE L445 - true
+   * 16 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - true
+   * 17 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - false
+   * 18 org.jsecurity.codec.Base64.decode([B)[B: I136 Branch 34 IF_ICMPEQ L460 - false
+   * 19 org.jsecurity.codec.Base64.decode([B)[B: I139 Branch 35 IF_ICMPEQ L460 - false
    */
   @Test
   public void test14()  throws Throwable  {
-      byte[] byteArray0 = new byte[4];
-      byteArray0[3] = (byte) (-95);
-      byte[] byteArray1 = Base64.encode(byteArray0, true);
-      assertFalse(byteArray0.equals(byteArray1));
-  }
-
-  //Test case number: 15
-  /*
-   * 3 covered goals:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I473 Branch 26 IFNE L364 - true
-   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I493 Branch 27 IFNE L365 - false
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - false
-   */
-  @Test
-  public void test15()  throws Throwable  {
-      byte[] byteArray0 = new byte[5];
-      byteArray0[3] = (byte) (-63);
-      byte[] byteArray1 = Base64.encode(byteArray0, false);
-      assertFalse(byteArray1.equals(byteArray0));
-  }
-
-  //Test case number: 16
-  /*
-   * 9 covered goals:
-   * 1 org.jsecurity.codec.Base64.encode([BZ)[B: I493 Branch 27 IFNE L365 - true
-   * 2 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - false
-   * 3 org.jsecurity.codec.Base64.encode([BZ)[B: I200 Branch 18 IFNE L318 - false
-   * 4 org.jsecurity.codec.Base64.encode([BZ)[B: I220 Branch 19 IFNE L319 - false
-   * 5 org.jsecurity.codec.Base64.encode([BZ)[B: I240 Branch 20 IFNE L320 - false
-   * 6 org.jsecurity.codec.Base64.encode([BZ)[B: I309 Branch 21 IFEQ L333 - true
-   * 7 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - true
-   * 8 org.jsecurity.codec.Base64.encode([BZ)[B: I439 Branch 25 IFNE L357 - false
-   * 9 org.jsecurity.codec.Base64.encode([BZ)[B: I473 Branch 26 IFNE L364 - false
-   */
-  @Test
-  public void test16()  throws Throwable  {
-      byte[] byteArray0 = new byte[5];
-      byteArray0[4] = (byte) (-64);
-      byte[] byteArray1 = Base64.encode(byteArray0);
-      assertFalse(byteArray0.equals(byteArray1));
-  }
-
-  //Test case number: 17
-  /*
-   * 16 covered goals:
-   * 1 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - false
-   * 2 org.jsecurity.codec.Base64.decode([B)[B: I71 Branch 32 IFNE L445 - true
-   * 3 org.jsecurity.codec.Base64.decode([B)[B: I136 Branch 34 IF_ICMPEQ L460 - true
-   * 4 org.jsecurity.codec.Base64.decode([B)[B: I202 Branch 36 IF_ICMPNE L468 - false
-   * 5 org.jsecurity.codec.Base64.encode([B)[B: root-Branch
-   * 6 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - true
-   * 7 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - true
-   * 8 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - true
-   * 9 org.jsecurity.codec.Base64.decode([B)[B: I91 Branch 33 IF_ICMPGE L452 - false
-   * 10 org.jsecurity.codec.Base64.encode([BZ)[B: I37 Branch 13 IFEQ L273 - false
-   * 11 org.jsecurity.codec.Base64.encode([BZ)[B: I56 Branch 14 IFEQ L284 - true
-   * 12 org.jsecurity.codec.Base64.encode([BZ)[B: I89 Branch 16 IFLE L291 - true
-   * 13 org.jsecurity.codec.Base64.encode([BZ)[B: I152 Branch 17 IFGE L307 - true
-   * 14 org.jsecurity.codec.Base64.encode([BZ)[B: I362 Branch 23 IFNE L347 - false
-   * 15 org.jsecurity.codec.Base64.encode([BZ)[B: I381 Branch 24 IFNE L352 - false
-   * 16 org.jsecurity.codec.Base64.encode([BZ)[B: I553 Branch 28 IFEQ L373 - true
-   */
-  @Test
-  public void test17()  throws Throwable  {
-      byte[] byteArray0 = new byte[1];
-      byte[] byteArray1 = Base64.encode(byteArray0);
-      byte[] byteArray2 = Base64.decode(byteArray1);
-      assertFalse(byteArray2.equals(byteArray1));
-  }
-
-  //Test case number: 18
-  /*
-   * 12 covered goals:
-   * 1 org.jsecurity.codec.Base64.decode([B)[B: I71 Branch 32 IFNE L445 - false
-   * 2 org.jsecurity.codec.Base64.decodeToString([B)Ljava/lang/String;: root-Branch
-   * 3 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - true
-   * 4 org.jsecurity.codec.Base64.isBase64(B)Z: I4 Branch 1 IF_ICMPNE L162 - false
-   * 5 org.jsecurity.codec.Base64.isBase64(B)Z: I12 Branch 2 IFLT L164 - false
-   * 6 org.jsecurity.codec.Base64.isBase64(B)Z: I17 Branch 3 IF_ICMPNE L164 - false
-   * 7 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - true
-   * 8 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I24 Branch 38 IF_ICMPGE L493 - false
-   * 9 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - true
-   * 10 org.jsecurity.codec.Base64.discardNonBase64([B)[B: I33 Branch 39 IFEQ L494 - false
-   * 11 org.jsecurity.codec.Base64.decode([B)[B: I9 Branch 30 IFNE L428 - true
-   * 12 org.jsecurity.codec.Base64.decode([B)[B: I66 Branch 31 IF_ICMPNE L444 - false
-   */
-  @Test
-  public void test18()  throws Throwable  {
-      byte[] byteArray0 = new byte[8];
-      byteArray0[0] = (byte)61;
-      String string0 = Base64.decodeToString(byteArray0);
-      assertEquals("", string0);
-      assertNotNull(string0);
+      byte[] byteArray0 = Base64.decode("AAAAhYU=");
+      assertNotNull(byteArray0);
   }
 }

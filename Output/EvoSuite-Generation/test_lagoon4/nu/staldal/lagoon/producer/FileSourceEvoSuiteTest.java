@@ -63,7 +63,7 @@ public class FileSourceEvoSuiteTest {
       FileSource fileSource0 = new FileSource();
       // Undeclared exception!
       try {
-        fileSource0.hasBeenUpdated(471L);
+        fileSource0.hasBeenUpdated((-1599L));
         fail("Expecting exception: RuntimeException");
       } catch(RuntimeException e) {
         /*

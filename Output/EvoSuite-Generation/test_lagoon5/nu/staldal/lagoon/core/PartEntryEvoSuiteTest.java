@@ -26,11 +26,11 @@ public class PartEntryEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
+      File file0 = new File("http://javax.xml.transform.stream.StreamSource/feature");
+      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://javax.xml.transform.stream.StreamSource/feature", file0);
       LSSITransformer lSSITransformer0 = new LSSITransformer();
       partEntry0.setMyProducer((XMLStreamProducer) lSSITransformer0);
-      assertNull(lSSITransformer0.getEntryName());
+      assertEquals(0, lSSITransformer0.getPosition());
   }
 
   //Test case number: 1
@@ -41,8 +41,8 @@ public class PartEntryEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      File file0 = new File("http://www.w3.org/2000/svg", "http://www.w3.org/2000/svg");
-      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://www.w3.org/2000/svg", file0);
+      File file0 = new File("http://javax.xml.transform.stream.StreamSource/feature");
+      PartEntry partEntry0 = new PartEntry((LagoonProcessor) null, (Sitemap) null, "http://javax.xml.transform.stream.StreamSource/feature", file0);
       XMLStreamProducer xMLStreamProducer0 = partEntry0.getXMLProducer();
       assertNull(xMLStreamProducer0);
   }

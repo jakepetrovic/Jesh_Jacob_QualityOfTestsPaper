@@ -21,102 +21,79 @@ org.jsecurity.config.ReflectionBuilder
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: org.jsecurity.config.ReflectionBuilder: 80.00%</ul><ul>
-<li>8470 fitness evaluations, 171 generations, 34934 statements, 5378 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 39/50 branches, 14/14 methods, 44/55 total goals
-<li>Mutation score: 8%
+<ul><li>Target class: org.jsecurity.config.ReflectionBuilder: 72.73%</ul><ul>
+<li>7292 fitness evaluations, 147 generations, 28957 statements, 4726 tests.
+<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:03)
+<li>Coverage: 35/50 branches, 14/14 methods, 40/55 total goals
+<li>Mutation score: 7%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>Map&lt;Object, Object&gt; map0 = reflectionBuilder0.getObjects();
-<span class="nocode"><a name="3">  3: </a></span>reflectionBuilder0.applyGlobalProperty((Map) map0, &quot;]&quot;, &quot;]&quot;);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(true, map0.isEmpty());
+<span class="nocode"><a name="2">  2: </a></span>Map&lt;Object, Object&gt; map0 = reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, map0.isEmpty());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>AbstractMap.SimpleEntry&lt;ReflectionBuilder, ReflectionBuilder&gt; abstractMap_SimpleEntry0 = new AbstractMap.SimpleEntry&lt;ReflectionBuilder, ReflectionBuilder&gt;(reflectionBuilder0, reflectionBuilder0);
-<span class="nocode"><a name="3">  3: </a></span>AbstractMap.SimpleImmutableEntry&lt;ReflectionBuilder, ReflectionBuilder&gt; abstractMap_SimpleImmutableEntry0 = new AbstractMap.SimpleImmutableEntry&lt;ReflectionBuilder, ReflectionBuilder&gt;((Map.Entry&lt;?, ?&gt;) abstractMap_SimpleEntry0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.applyProperty((Object) abstractMap_SimpleImmutableEntry0, &quot;$&quot;, &quot;$&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: UnresolveableReferenceException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(UnresolveableReferenceException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * The object with id [] has not yet been defined and therefore cannot be referenced.  Please ensure objects are defined in the order in which they should be created and made avaialable for future reference.
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;ReflectionBuilder, Integer&gt; hashMap0 = new HashMap&lt;ReflectionBuilder, Integer&gt;();
+<span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  reflectionBuilder0.applyProperty((Object) hashMap0, &quot;Q.&lt;ImL#)&quot;, &quot;$u5$rJ/&quot;);
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: UnresolveableReferenceException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(UnresolveableReferenceException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * The object with id [u5$rJ/] has not yet been defined and therefore cannot be referenced.  Please ensure objects are defined in the order in which they should be created and made avaialable for future reference.
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;Object, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;Object, ReflectionBuilder&gt;();
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;ReflectionBuilder, Integer&gt; hashMap0 = new HashMap&lt;ReflectionBuilder, Integer&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) hashMap0);
-<span class="nocode"><a name="3">  3: </a></span>HashMap&lt;String, String&gt; hashMap1 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>HashMap&lt;String, String&gt; hashMap1 = new HashMap&lt;String, String&gt;(0);
 <span class="nocode"><a name="4">  4: </a></span>Map&lt;Object, Object&gt; map0 = reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) hashMap1);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, map0.isEmpty());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, map0.size());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>Map&lt;Object, Object&gt; map0 = reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, map0.size());
+<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(&quot;Q&quot;, &quot;Q&quot;);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) hashMap0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(ConfigurationException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Unable to instantiate class [Q] for object named 'Q'.  Please ensure you've specified the fully qualified class name correctly.
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
 <span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(&quot;$. It is bound to a Log interface which is not&quot;, &quot;$. It is bound to a Log interface which is not&quot;);
+<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(&quot;6r_%L.*Hu5$rJ/&quot;, (String) null);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
 <span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) hashMap0);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Configuration error.  Specified object [$] with property [ It is bound to a Log interface which is not] without first defining that object's class.  Please first specify the class property first, e.g. myObject.class = fully_qualified_class_name and then define additional properties.
+<span class="nocode"><a name="10"> 10: </a></span>   * Configuration error.  Specified object [6r_%L] with property [*Hu5$rJ/] without first defining that object's class.  Please first specify the class property first, e.g. myObject.class = fully_qualified_class_name and then define additional properties.
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(&quot;{}&quot;, &quot;{}&quot;);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.buildObjects((Map&lt;String, String&gt;) hashMap0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(ConfigurationException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Unable to instantiate class [{}] for object named '{}'.  Please ensure you've specified the fully qualified class name correctly.
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;Object, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;Object, ReflectionBuilder&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put((Object) null, reflectionBuilder0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.createNewInstance((Map) hashMap0, (String) null, (String) null);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: ConfigurationException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(ConfigurationException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Unable to instantiate class [null] for object named 'null'.  Please ensure you've specified the fully qualified class name correctly.
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 8</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, String&gt; hashMap0 = new HashMap&lt;String, String&gt;();
+<span class="nocode"><a name="2">  2: </a></span>Map&lt;Object, Object&gt; map0 = reflectionBuilder0.getObjects();
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  reflectionBuilder0.applyProperty(&quot; &quot;, (String) null, (Map) hashMap0);
+<span class="nocode"><a name="5">  5: </a></span>  reflectionBuilder0.applyProperty(&quot;)f-eir;\&quot;7p2G8@H&quot;, &quot;)f-eir;\&quot;7p2G8@H&quot;, (Map) map0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
@@ -124,68 +101,66 @@ org.jsecurity.config.ReflectionBuilder
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
-<h3>Test case 9</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;String, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;String, ReflectionBuilder&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) hashMap0);
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put((String) null, reflectionBuilder0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.applyGlobalProperty((Map) hashMap0, &quot;@$?=z&quot;, &quot;@$?=z&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * org/apache/commons/beanutils/PropertyUtils
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 10</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;Object, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;Object, ReflectionBuilder&gt;();
-<span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) hashMap0);
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put((Object) &quot;?&lt;G+HA#RRP&quot;, reflectionBuilder0);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.applySingleProperty((Map) hashMap0, &quot;?&lt;G+HA#RRP&quot;, &quot;?&lt;G+HA#RRP&quot;, &quot;?&lt;G+HA#RRP&quot;);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(NoClassDefFoundError e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * org/apache/commons/beanutils/BeanUtils
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 11</h3>
+<h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = reflectionBuilder0.isReference((String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>HashMap&lt;String, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;String, ReflectionBuilder&gt;();
+<span class="nocode"><a name="3">  3: </a></span>reflectionBuilder0.applyGlobalProperty((Map) hashMap0, &quot;WWW-Authenticate&quot;, &quot;WWW-Authenticate&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;{}&quot;, hashMap0.toString());
 </pre>
-<h3>Test case 12</h3>
+<h3>Test case 8</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  reflectionBuilder0.applyProperty((Object) reflectionBuilder0, (String) null, (String) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NoClassDefFoundError&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NoClassDefFoundError e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * org/apache/commons/beanutils/BeanUtils
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
+</pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;ReflectionBuilder, Integer&gt; hashMap0 = new HashMap&lt;ReflectionBuilder, Integer&gt;();
+<span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) hashMap0);
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = reflectionBuilder0.isReference(&quot;]t@%|G._*-dk&quot;);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  reflectionBuilder0.getReferencedObject(&quot;[CUSTOM LOG FACTORY] was loaded by the boot classloader&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  reflectionBuilder0.getReferencedObject((String) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: UnresolveableReferenceException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(UnresolveableReferenceException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * The object with id [[CUSTOM LOG FACTORY] was loaded by the boot classloader] has not yet been defined and therefore cannot be referenced.  Please ensure objects are defined in the order in which they should be created and made avaialable for future reference.
+<span class="nocode"><a name="8">  8: </a></span>   * The object with id [null] has not yet been defined and therefore cannot be referenced.  Please ensure objects are defined in the order in which they should be created and made avaialable for future reference.
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
-<h3>Test case 13</h3>
+<h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;String, ReflectionBuilder&gt; hashMap0 = new HashMap&lt;String, ReflectionBuilder&gt;();
+<span class="nocode"><a name="1">  1: </a></span>HashMap&lt;ReflectionBuilder, Integer&gt; hashMap0 = new HashMap&lt;ReflectionBuilder, Integer&gt;();
 <span class="nocode"><a name="2">  2: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder((Map) hashMap0);
-<span class="nocode"><a name="3">  3: </a></span>hashMap0.put((String) null, reflectionBuilder0);
-<span class="nocode"><a name="4">  4: </a></span>ReflectionBuilder reflectionBuilder1 = (ReflectionBuilder)reflectionBuilder0.getReferencedObject((String) null);
-<span class="nocode"><a name="5">  5: </a></span>assertSame(reflectionBuilder1, reflectionBuilder0);
+<span class="nocode"><a name="3">  3: </a></span>hashMap0.put(reflectionBuilder0, (Integer) null);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  reflectionBuilder0.getReferencedObject(&quot;]t@%|G._*-dk&quot;);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: UnresolveableReferenceException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(UnresolveableReferenceException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * The object with id []t@%|G._*-dk] has not yet been defined and therefore cannot be referenced.  Please ensure objects are defined in the order in which they should be created and made avaialable for future reference.
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ReflectionBuilder reflectionBuilder0 = new ReflectionBuilder();
-<span class="nocode"><a name="2">  2: </a></span>String string0 = reflectionBuilder0.unescapeIfNecessary((String) null);
-<span class="nocode"><a name="3">  3: </a></span>assertNull(string0);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = reflectionBuilder0.unescapeIfNecessary(&quot;Yp:#6*&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Yp:#6*&quot;, string0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -292,7 +267,7 @@ org.jsecurity.config.ReflectionBuilder
 <span class="nocode"><a name="102">102: </a></span>
 <span class="nocode"><a name="103">103: </a></span><span style="background-color: #ffffcc">        Object currentInstance = objects.get(name);</span>
 <span class="nocode"><a name="104">104: </a></span><span style="background-color: #ffffcc">        if (currentInstance != null) {</span>
-<span class="nocode"><a name="105">105: </a></span><span style="background-color: #ffffcc">            log.info(&quot;An instance with name [&quot; + name + &quot;] already exists.  &quot; +</span>
+<span class="nocode"><a name="105">105: </a></span>            log.info(&quot;An instance with name [&quot; + name + &quot;] already exists.  &quot; +
 <span class="nocode"><a name="106">106: </a></span>                    &quot;Redefining this object as a new instance of type [&quot; + value + &quot;].&quot;);
 <span class="nocode"><a name="107">107: </a></span>        }
 <span class="nocode"><a name="108">108: </a></span>
@@ -334,7 +309,7 @@ org.jsecurity.config.ReflectionBuilder
 <span class="nocode"><a name="144">144: </a></span>    protected void applyGlobalProperty(Map objects, String property, String value) {
 <span class="nocode"><a name="145">145: </a></span><span style="background-color: #ffffcc">        for (Object instance : objects.values()) {</span>
 <span class="nocode"><a name="146">146: </a></span>            try {
-<span class="nocode"><a name="147">147: </a></span><span style="background-color: #ffffcc">                PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(instance, property);</span>
+<span class="nocode"><a name="147">147: </a></span>                PropertyDescriptor pd = PropertyUtils.getPropertyDescriptor(instance, property);
 <span class="nocode"><a name="148">148: </a></span>                if (pd != null) {
 <span class="nocode"><a name="149">149: </a></span>                    applyProperty(instance, property, value);
 <span class="nocode"><a name="150">150: </a></span>                }
@@ -361,7 +336,7 @@ org.jsecurity.config.ReflectionBuilder
 <span class="nocode"><a name="171">171: </a></span><span style="background-color: #ffffcc">            throw new IllegalArgumentException(msg);</span>
 <span class="nocode"><a name="172">172: </a></span>
 <span class="nocode"><a name="173">173: </a></span>        } else {
-<span class="nocode"><a name="174">174: </a></span><span style="background-color: #ffffcc">            applyProperty(instance, property, value);</span>
+<span class="nocode"><a name="174">174: </a></span>            applyProperty(instance, property, value);
 <span class="nocode"><a name="175">175: </a></span>        }
 <span class="nocode"><a name="176">176: </a></span>    }
 <span class="nocode"><a name="177">177: </a></span>
@@ -381,7 +356,7 @@ org.jsecurity.config.ReflectionBuilder
 <span class="nocode"><a name="191">191: </a></span>                    &quot;created and made avaialable for future reference.&quot;;
 <span class="nocode"><a name="192">192: </a></span><span style="background-color: #ffffcc">            throw new UnresolveableReferenceException(msg);</span>
 <span class="nocode"><a name="193">193: </a></span>        }
-<span class="nocode"><a name="194">194: </a></span><span style="background-color: #ffffcc">        return o;</span>
+<span class="nocode"><a name="194">194: </a></span>        return o;
 <span class="nocode"><a name="195">195: </a></span>    }
 <span class="nocode"><a name="196">196: </a></span>
 <span class="nocode"><a name="197">197: </a></span>    protected String unescapeIfNecessary(String value) {
@@ -426,7 +401,7 @@ org.jsecurity.config.ReflectionBuilder
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1714394569155933658.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1438817879449249666.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -444,7 +419,7 @@ org.jsecurity.config.ReflectionBuilder
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 3230
+<li>process_communication_port: 5662
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

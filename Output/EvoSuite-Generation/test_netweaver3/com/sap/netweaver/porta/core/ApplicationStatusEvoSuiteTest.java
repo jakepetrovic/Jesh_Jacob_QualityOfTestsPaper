@@ -19,9 +19,9 @@ public class ApplicationStatusEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.NOT_SUPPORTED;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.STARTING;
       String string0 = applicationStatus0.toString();
-      assertEquals("not supported", string0);
+      assertEquals("starting", string0);
   }
 
   //Test case number: 1
@@ -35,11 +35,11 @@ public class ApplicationStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        ApplicationStatus.getByName("NOT_SUPPORTED");
+        ApplicationStatus.getByName("");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * NOT_SUPPORTED
+         * 
          */
       }
   }

@@ -24,7 +24,7 @@ public class XMLParseEvoSuiteTest {
   public void test0()  throws Throwable  {
       XMLParse xMLParse0 = new XMLParse();
       xMLParse0.init();
-      assertEquals(0, xMLParse0.getPosition());
+      assertNull(xMLParse0.getEntryName());
   }
 
   //Test case number: 1
@@ -54,7 +54,7 @@ public class XMLParseEvoSuiteTest {
       XMLParse xMLParse0 = new XMLParse();
       // Undeclared exception!
       try {
-        xMLParse0.hasBeenUpdated((-1853L));
+        xMLParse0.hasBeenUpdated(1886L);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

@@ -35,7 +35,7 @@ public class CoreModuleMockEvoSuiteTest {
       CoreModuleMock coreModuleMock0 = new CoreModuleMock();
       SnippetUseDeployManager snippetUseDeployManager0 = new SnippetUseDeployManager();
       coreModuleMock0.setAuthenticationCallback((AuthenticationCallback) snippetUseDeployManager0);
-      AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
+      AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
       coreModuleMock0.getCredentials(authenticationReason0);
       try {
         coreModuleMock0.checkCredentials();

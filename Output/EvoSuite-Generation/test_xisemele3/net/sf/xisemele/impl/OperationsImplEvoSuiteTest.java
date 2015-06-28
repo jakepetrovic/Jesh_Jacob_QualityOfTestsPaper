@@ -25,10 +25,9 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.numberOfChildren((Node) iIOMetadataNode0, "B.uUOtip");
+        operationsImpl0.numberOfChildren((Node) null, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -42,9 +41,10 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("kQl$?@bEX");
       // Undeclared exception!
       try {
-        operationsImpl0.numberOfChildren((Node) null);
+        operationsImpl0.numberOfChildren((Node) iIOMetadataNode0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -58,10 +58,10 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode((String) null);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.children((Node) iIOMetadataNode0, (String) null);
+        operationsImpl0.children((Node) iIOMetadataNode0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -75,10 +75,9 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.attributeValue((Node) iIOMetadataNode0, "D!<8ErYa#s=qjXT{");
+        operationsImpl0.attributeValue((Node) null, "hJL#]dkKC");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -92,10 +91,10 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("&p7dck(2 H=y");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
-        operationsImpl0.child((Node) iIOMetadataNode0, "");
+        operationsImpl0.child((Node) iIOMetadataNode0, "U'||UDf+h%5%K8P)`G");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -108,8 +107,8 @@ public class OperationsImplEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("ENU");
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       // Undeclared exception!
       try {
         operationsImpl0.children((Node) iIOMetadataNode0);
@@ -128,7 +127,7 @@ public class OperationsImplEvoSuiteTest {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       List<Node> list0 = operationsImpl0.attributes((Node) iIOMetadataNode0);
-      assertEquals(true, list0.isEmpty());
+      assertEquals(0, list0.size());
   }
 
   //Test case number: 7
@@ -140,7 +139,7 @@ public class OperationsImplEvoSuiteTest {
   public void test7()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
       IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
-      boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, "");
+      boolean boolean0 = operationsImpl0.containsAttribute((Node) iIOMetadataNode0, (String) null);
       assertEquals(false, boolean0);
   }
 
@@ -166,8 +165,8 @@ public class OperationsImplEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       OperationsImpl operationsImpl0 = new OperationsImpl((OperationsHelper) null);
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("kQl$?@bEX");
       String string0 = operationsImpl0.path((Node) iIOMetadataNode0);
-      assertEquals("", string0);
+      assertEquals("kQl$?@bEX", string0);
   }
 }

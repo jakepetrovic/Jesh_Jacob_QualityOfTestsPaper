@@ -15,16 +15,18 @@ public class JniInchiOutputEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 3 covered goals:
+   * 2 covered goals:
    * 1 net.sf.jniinchi.JniInchiOutput.getMessage()Ljava/lang/String;: root-Branch
    * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
       String string0 = jniInchiOutput0.getMessage();
-      assertEquals(",QF$o^x", string0);
+      assertNotNull(string0);
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
+      assertEquals("rs4f", string0);
   }
 
   //Test case number: 1
@@ -34,11 +36,12 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-755), "qNo", "qNo", "ERROR", "qNo");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
       String string0 = jniInchiOutput0.getAuxInfo();
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
       assertNotNull(string0);
-      assertEquals("InChI_Output: null/qNo/qNo/ERROR/qNo", jniInchiOutput0.toString());
-      assertEquals("qNo", string0);
+      assertEquals("", string0);
   }
 
   //Test case number: 2
@@ -48,10 +51,11 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
       String string0 = jniInchiOutput0.toString();
-      assertEquals("InChI_Output: OKAY/,QF$o^x/,QF$o^x/,QF$o^x/,QF$o^x", string0);
       assertNotNull(string0);
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", string0);
   }
 
   //Test case number: 3
@@ -61,9 +65,11 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "", "");
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
       String string0 = jniInchiOutput0.getLog();
+      assertNotNull(string0);
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
       assertEquals("", string0);
   }
 
@@ -74,9 +80,10 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test4()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      INCHI_RET iNCHI_RET0 = jniInchiOutput0.getReturnStatus();
-      assertEquals("OKAY", iNCHI_RET0.toString());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.getReturnStatus();
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
   }
 
   //Test case number: 5
@@ -86,9 +93,10 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test5()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      jniInchiOutput0.setInchi("!E25K$/9!\"M?Q.+0@");
-      assertEquals(",QF$o^x", jniInchiOutput0.getLog());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.setInchi("w!JOF'EC>?");
+      assertEquals("InChI_Output: UNKNOWN/w!JOF'EC>?//rs4f/", jniInchiOutput0.toString());
   }
 
   //Test case number: 6
@@ -98,62 +106,76 @@ public class JniInchiOutputEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      jniInchiOutput0.setLog("!E25K$/9!\"M?Q.+0@");
-      assertEquals("!E25K$/9!\"M?Q.+0@", jniInchiOutput0.getLog());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.setLog("OKAY");
+      assertEquals("InChI_Output: UNKNOWN///rs4f/OKAY", jniInchiOutput0.toString());
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.setAuxInfo(Ljava/lang/String;)V: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test7()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      jniInchiOutput0.setAuxInfo("]ak7epYcQ(*$c2]841");
-      assertEquals("InChI_Output: OKAY/,QF$o^x/]ak7epYcQ(*$c2]841/,QF$o^x/,QF$o^x", jniInchiOutput0.toString());
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput((-49), "", "", "", "");
+      assertEquals("InChI_Output: null////", jniInchiOutput0.toString());
   }
 
   //Test case number: 8
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.setRetStatus(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.setAuxInfo(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test8()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.OKAY;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      jniInchiOutput0.setRetStatus(iNCHI_RET0);
-      assertEquals("InChI_Output: OKAY/,QF$o^x/,QF$o^x/,QF$o^x/,QF$o^x", jniInchiOutput0.toString());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.setAuxInfo("=XAebjpwx");
+      assertEquals("InChI_Output: UNKNOWN//=XAebjpwx/rs4f/", jniInchiOutput0.toString());
   }
 
   //Test case number: 9
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.JniInchiOutput.getInchi()Ljava/lang/String;: root-Branch
+   * 1 net.sf.jniinchi.JniInchiOutput.setRetStatus(Lnet/sf/jniinchi/INCHI_RET;)V: root-Branch
    */
   @Test
   public void test9()  throws Throwable  {
-      INCHI_RET iNCHI_RET0 = INCHI_RET.SKIP;
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "kz{Q(rSZs%b", "", "kz{Q(rSZs%b");
-      String string0 = jniInchiOutput0.getInchi();
-      assertEquals("InChI_Output: SKIP//kz{Q(rSZs%b//kz{Q(rSZs%b", jniInchiOutput0.toString());
-      assertNotNull(string0);
-      assertEquals("", string0);
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.setRetStatus(iNCHI_RET0);
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
+      assertEquals("", jniInchiOutput0.getAuxInfo());
   }
 
   //Test case number: 10
   /*
-   * 3 covered goals:
-   * 1 net.sf.jniinchi.JniInchiOutput.setMessage(Ljava/lang/String;)V: root-Branch
-   * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
-   * 3 net.sf.jniinchi.JniInchiOutput.<init>(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.jniinchi.JniInchiOutput.getInchi()Ljava/lang/String;: root-Branch
    */
   @Test
   public void test10()  throws Throwable  {
-      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(0, ",QF$o^x", ",QF$o^x", ",QF$o^x", ",QF$o^x");
-      jniInchiOutput0.setMessage("InChI_Output: OKAY////]ak7epYcQ(*$c2]841");
-      assertEquals("InChI_Output: OKAY/,QF$o^x/,QF$o^x/InChI_Output: OKAY////]ak7epYcQ(*$c2]841/,QF$o^x", jniInchiOutput0.toString());
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      String string0 = jniInchiOutput0.getInchi();
+      assertNotNull(string0);
+      assertEquals("InChI_Output: UNKNOWN///rs4f/", jniInchiOutput0.toString());
+      assertEquals("", string0);
+  }
+
+  //Test case number: 11
+  /*
+   * 2 covered goals:
+   * 1 net.sf.jniinchi.JniInchiOutput.setMessage(Ljava/lang/String;)V: root-Branch
+   * 2 net.sf.jniinchi.JniInchiOutput.<init>(Lnet/sf/jniinchi/INCHI_RET;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V: root-Branch
+   */
+  @Test
+  public void test11()  throws Throwable  {
+      INCHI_RET iNCHI_RET0 = INCHI_RET.UNKNOWN;
+      JniInchiOutput jniInchiOutput0 = new JniInchiOutput(iNCHI_RET0, "", "", "rs4f", "");
+      jniInchiOutput0.setMessage("E\"h2WMxf;U]+v0O:xH}");
+      assertEquals("InChI_Output: UNKNOWN///E\"h2WMxf;U]+v0O:xH}/", jniInchiOutput0.toString());
   }
 }

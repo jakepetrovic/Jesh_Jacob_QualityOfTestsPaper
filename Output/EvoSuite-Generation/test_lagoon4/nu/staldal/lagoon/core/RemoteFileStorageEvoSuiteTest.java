@@ -25,7 +25,7 @@ public class RemoteFileStorageEvoSuiteTest {
       FTPFileStorage fTPFileStorage0 = new FTPFileStorage();
       // Undeclared exception!
       try {
-        fTPFileStorage0.close();
+        fTPFileStorage0.closeDateFile();
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -42,7 +42,7 @@ public class RemoteFileStorageEvoSuiteTest {
       SSHFileStorage sSHFileStorage0 = new SSHFileStorage();
       // Undeclared exception!
       try {
-        sSHFileStorage0.fileModified("user.home");
+        sSHFileStorage0.fileModified("_");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

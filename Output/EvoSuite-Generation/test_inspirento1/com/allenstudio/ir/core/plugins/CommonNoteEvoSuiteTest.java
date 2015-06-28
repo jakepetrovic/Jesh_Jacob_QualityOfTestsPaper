@@ -26,8 +26,8 @@ public class CommonNoteEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       NoteList noteList0 = new NoteList();
-      assertNotNull(noteList0);
       assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
+      assertNotNull(noteList0);
   }
 
   //Test case number: 1
@@ -39,8 +39,8 @@ public class CommonNoteEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       CommonNote commonNote0 = new CommonNote();
-      commonNote0.setOtherInfo("k~");
-      assertEquals("k~", commonNote0.getOtherInfo());
-      assertEquals("k~", commonNote0.getOtherInfoText());
+      commonNote0.setOtherInfo("N8!QEs{}J");
+      assertEquals("N8!QEs{}J", commonNote0.getOtherInfoText());
+      assertEquals("N8!QEs{}J", commonNote0.getOtherInfo());
   }
 }

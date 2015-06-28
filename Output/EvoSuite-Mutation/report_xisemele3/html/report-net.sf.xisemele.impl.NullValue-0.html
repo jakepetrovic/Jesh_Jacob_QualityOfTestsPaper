@@ -22,8 +22,8 @@ net.sf.xisemele.impl.NullValue
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.xisemele.impl.NullValue: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 4743 statements, 269 tests.
-<li>Time: 0:00:07(Search: 0:00:03, minimization: 0:00:03)
+<li>50 fitness evaluations, 2 generations, 5478 statements, 296 tests.
+<li>Time: 0:00:05(Search: 0:00:04, minimization: 0:00:01)
 <li>Coverage: 0/0 branches, 16/16 methods, 16/16 total goals
 <li>Mutation score: 100%
 </ul>
@@ -32,8 +32,9 @@ net.sf.xisemele.impl.NullValue
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NullValue nullValue0 = NullValue.INSTANCE;
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = nullValue0.equals((Object) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="2">  2: </a></span>Object object0 = new Object();
+<span class="nocode"><a name="3">  3: </a></span>boolean boolean0 = nullValue0.equals(object0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -60,15 +61,14 @@ net.sf.xisemele.impl.NullValue
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NullValue nullValue0 = NullValue.INSTANCE;
-<span class="nocode"><a name="2">  2: </a></span>Date date0 = nullValue0.asDate((String) null);
+<span class="nocode"><a name="2">  2: </a></span>Date date0 = nullValue0.asDate(&quot;&quot;);
 <span class="nocode"><a name="3">  3: </a></span>assertNull(date0);
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>NullValue nullValue0 = NullValue.INSTANCE;
 <span class="nocode"><a name="2">  2: </a></span>Class&lt;?&gt; class0 = NullValue.class;
-<span class="nocode"><a name="3">  3: </a></span>NullValue nullValue1 = nullValue0.asType((Class&lt;NullValue&gt;) class0);
-<span class="nocode"><a name="4">  4: </a></span>assertNull(nullValue1);
+<span class="nocode"><a name="3">  3: </a></span>nullValue0.asType((Class&lt;Integer&gt;) class0);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -316,7 +316,7 @@ net.sf.xisemele.impl.NullValue
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3917768113174710678.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8252444774209989484.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -334,7 +334,7 @@ net.sf.xisemele.impl.NullValue
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20655
+<li>process_communication_port: 3521
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -34,7 +34,7 @@ public class TemplateProcessorEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        TemplateProcessor.processTemplate('d', 'd', 'd', 'd', "G4KBZu>G}PH", (ExpressionEvaluator) null);
+        TemplateProcessor.processTemplate('!', '!', '!', '!', "(H", (ExpressionEvaluator) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
         /*

@@ -21,26 +21,29 @@ com.allenstudio.ir.core.plugins.CommonNote
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.allenstudio.ir.core.plugins.CommonNote: 90.00%</ul><ul>
-<li>1104 fitness evaluations, 24 generations, 9790 statements, 890 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
-<li>Coverage: 3/4 branches, 7/7 methods, 9/10 total goals
-<li>Mutation score: 53%
+<ul><li>Target class: com.allenstudio.ir.core.plugins.CommonNote: 70.00%</ul><ul>
+<li>944 fitness evaluations, 20 generations, 7431 statements, 793 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>Coverage: 1/4 branches, 7/7 methods, 7/10 total goals
+<li>Mutation score: 35%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>NoteList noteList0 = new NoteList();
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(0.498708F, noteList0.getAlignmentX(), 0.01F);
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteList0);
+<span class="nocode"><a name="1">  1: </a></span>CommonNote commonNote0 = new CommonNote();
+<span class="nocode"><a name="2">  2: </a></span>NoteListCell noteListCell0 = new NoteListCell((AbstractNote) commonNote0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(noteListCell0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;This is a testing description. \u00CF\u00A3\u00CD\u00FB\u00C4\u00E3\u00C4\u00DC\u00BF\u00B4\u00B5\u00BD\u00CB\u00FC\u00A1\u00A3&quot;, commonNote0.getDescription());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;Title&quot;, commonNote0.getTitle());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot; &quot;, commonNote0.getOtherInfoText());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>CommonNote commonNote0 = new CommonNote();
-<span class="nocode"><a name="2">  2: </a></span>commonNote0.setOtherInfo(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>String string0 = commonNote0.getOtherInfoText();
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot; &quot;, string0);
+<span class="nocode"><a name="2">  2: </a></span>commonNote0.setOtherInfo(&quot;3= yx4ac+6O%7I&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;3= yx4ac+6O%7I&quot;, commonNote0.getOtherInfoText());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;3= yx4ac+6O%7I&quot;, commonNote0.getOtherInfo());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -105,7 +108,7 @@ com.allenstudio.ir.core.plugins.CommonNote
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7918876993634896220.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6838871411300775452.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -123,7 +126,7 @@ com.allenstudio.ir.core.plugins.CommonNote
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 19627
+<li>process_communication_port: 13395
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

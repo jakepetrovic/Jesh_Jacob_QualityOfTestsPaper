@@ -58,7 +58,7 @@ public class XSLTransformerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       XSLTransformer xSLTransformer0 = new XSLTransformer();
-      boolean boolean0 = xSLTransformer0.hasBeenUpdated(1922L);
+      boolean boolean0 = xSLTransformer0.hasBeenUpdated((-2L));
       assertEquals(true, boolean0);
   }
 

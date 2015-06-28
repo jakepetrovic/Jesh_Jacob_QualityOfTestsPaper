@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import nu.staldal.xtree.ProcessingInstruction;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 public class ProcessingInstructionEvoSuiteTest {
 
@@ -22,13 +23,11 @@ public class ProcessingInstructionEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
-      // Undeclared exception!
-      try {
-        processingInstruction0.toSAX((ContentHandler) null);
-        fail("Expecting exception: NullPointerException");
-      } catch(NullPointerException e) {
-      }
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("@$kh%/0puJ*v8##", "@$kh%/0puJ*v8##");
+      XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+      processingInstruction0.toSAX((ContentHandler) xMLFilterImpl0);
+      assertEquals("@$kh%/0puJ*v8##", processingInstruction0.getValue());
+      assertEquals("@$kh%/0puJ*v8##", processingInstruction0.getTarget());
   }
 
   //Test case number: 1
@@ -38,11 +37,11 @@ public class ProcessingInstructionEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("$?{dV55I[FyN}$ S t", "$?{dV55I[FyN}$ S t");
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("@$kh%/0puJ*v8##", "@$kh%/0puJ*v8##");
       String string0 = processingInstruction0.getTarget();
       assertNotNull(string0);
-      assertEquals("$?{dV55I[FyN}$ S t", processingInstruction0.getValue());
-      assertEquals("$?{dV55I[FyN}$ S t", string0);
+      assertEquals("@$kh%/0puJ*v8##", string0);
+      assertEquals("@$kh%/0puJ*v8##", processingInstruction0.getValue());
   }
 
   //Test case number: 2
@@ -53,10 +52,10 @@ public class ProcessingInstructionEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("9g\"s%?Oy0C?G{f", ":~fp&iW }uv");
+      ProcessingInstruction processingInstruction0 = new ProcessingInstruction("@$kh%/0puJ*v8##", "@$kh%/0puJ*v8##");
       String string0 = processingInstruction0.getValue();
-      assertEquals("9g\"s%?Oy0C?G{f", processingInstruction0.getTarget());
+      assertEquals("@$kh%/0puJ*v8##", string0);
       assertNotNull(string0);
-      assertEquals(":~fp&iW }uv", string0);
+      assertEquals("@$kh%/0puJ*v8##", processingInstruction0.getTarget());
   }
 }

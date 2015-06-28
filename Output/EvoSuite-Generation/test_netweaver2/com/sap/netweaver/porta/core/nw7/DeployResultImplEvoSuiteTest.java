@@ -21,10 +21,10 @@ public class DeployResultImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, (String) null);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "");
       DeployResultStatus deployResultStatus1 = deployResultImpl0.getStatus();
-      assertSame(deployResultStatus1, deployResultStatus0);
+      assertEquals(0, deployResultStatus1.ordinal());
   }
 
   //Test case number: 1
@@ -35,9 +35,9 @@ public class DeployResultImplEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      DeployResultStatus deployResultStatus0 = DeployResultStatus.SUCCESS;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, (String) null);
+      DeployResultStatus deployResultStatus0 = DeployResultStatus.UNKNOWN;
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "");
       String string0 = deployResultImpl0.getStatusDetails();
-      assertNull(string0);
+      assertEquals("", string0);
   }
 }

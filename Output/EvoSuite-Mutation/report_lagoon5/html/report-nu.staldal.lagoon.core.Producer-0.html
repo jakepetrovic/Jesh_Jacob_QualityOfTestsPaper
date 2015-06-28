@@ -22,120 +22,124 @@ nu.staldal.lagoon.core.Producer
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.core.Producer: 88.46%</ul><ul>
-<li>13568 fitness evaluations, 273 generations, 48983 statements, 8291 tests.
-<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
+<li>13692 fitness evaluations, 275 generations, 55553 statements, 8496 tests.
+<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/4 branches, 23/23 methods, 23/26 total goals
-<li>Mutation score: 14%
+<li>Mutation score: 12%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
-<span class="nocode"><a name="2">  2: </a></span>fileSource0.getEntryName();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, fileSource0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
+<span class="nocode"><a name="2">  2: </a></span>basicSplit0.getEntryName();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DirSource dirSource0 = new DirSource();
-<span class="nocode"><a name="2">  2: </a></span>dirSource0.doBeforeBuild();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, dirSource0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
+<span class="nocode"><a name="2">  2: </a></span>fileSource0.doBeforeBuild();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, fileSource0.getPosition());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DirSource dirSource0 = new DirSource();
-<span class="nocode"><a name="2">  2: </a></span>dirSource0.setSourceManager((SourceManagerProvider) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, dirSource0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
+<span class="nocode"><a name="2">  2: </a></span>xMLParse0.setSourceManager((SourceManagerProvider) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
-<span class="nocode"><a name="2">  2: </a></span>xMLParse0.getParam(&quot;G*(&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  fileSource0.getParam((String) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>DirSource dirSource0 = new DirSource();
+<span class="nocode"><a name="2">  2: </a></span>dirSource0.doDestroy();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, dirSource0.getPosition());
+</pre>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FileRead fileRead0 = new FileRead();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fileRead0.getObjectFromRepository(&quot;f!J#&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  fileRead0.putObjectIntoRepository(&quot;&quot;, (Object) null);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
-<span class="nocode"><a name="2">  2: </a></span>fileSource0.doDestroy();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, fileSource0.getPosition());
 </pre>
 <h3>Test case 7</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>LSSITransformer lSSITransformer0 = new LSSITransformer();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  lSSITransformer0.putObjectIntoRepository(&quot;G*(&quot;, (Object) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DirSource dirSource0 = new DirSource();
 <span class="nocode"><a name="2">  2: </a></span>dirSource0.doAfterBuild();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, dirSource0.getPosition());
 </pre>
-<h3>Test case 9</h3>
+<h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
-<span class="nocode"><a name="2">  2: </a></span>xMLParse0.setEntryName(&quot;Mq/t{X1{&quot;);
+<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
+<span class="nocode"><a name="2">  2: </a></span>fileSource0.setEntryName(&quot;Bm`JB-&quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xMLParse0.storeFileInRepository(&quot;Mq/t{X1{&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fileSource0.getObjectFromRepository(&quot;Bm`JB-&quot;);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
 </pre>
+<h3>Test case 9</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
+<span class="nocode"><a name="2">  2: </a></span>xMLParse0.setProcessor((LagoonProcessor) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
+</pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.setProcessor((LagoonProcessor) null);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
+<span class="nocode"><a name="2">  2: </a></span>islandSplit0.setPosition(0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, islandSplit0.getPosition());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
-<span class="nocode"><a name="2">  2: </a></span>fileSource0.setPosition(1780);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(1780, fileSource0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>IslandSplit islandSplit0 = new IslandSplit();
+<span class="nocode"><a name="2">  2: </a></span>islandSplit0.addParam(&quot;Y&lt;|:t'R.,&quot;, &quot;Y&lt;|:t'R.,&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, islandSplit0.getPosition());
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>basicSplit0.addParam(&quot;G*(&quot;, &quot;G*(&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, basicSplit0.getPosition());
-</pre>
-<h3>Test case 13</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileRead fileRead0 = new FileRead();
+<span class="nocode"><a name="1">  1: </a></span>XMLFormatter xMLFormatter0 = new XMLFormatter();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fileRead0.readFileFromRepository(&quot;.class&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xMLFormatter0.readFileFromRepository(&quot;\&quot;ImA{:Z&lt;)l&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 14</h3>
+<h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
 <span class="nocode"><a name="2">  2: </a></span>int int0 = fileSource0.getPosition();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
 </pre>
+<h3>Test case 14</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
+<span class="nocode"><a name="2">  2: </a></span>Enumeration&lt;Object&gt; enumeration0 = xMLParse0.getParamNames();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, xMLParse0.getPosition());
+<span class="nocode"><a name="4">  4: </a></span>assertNotNull(enumeration0);
+</pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>BasicSplit basicSplit0 = new BasicSplit();
-<span class="nocode"><a name="2">  2: </a></span>Enumeration&lt;Object&gt; enumeration0 = basicSplit0.getParamNames();
-<span class="nocode"><a name="3">  3: </a></span>assertNotNull(enumeration0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, basicSplit0.getPosition());
+<span class="nocode"><a name="1">  1: </a></span>XMLParse xMLParse0 = new XMLParse();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  xMLParse0.storeFileInRepository((String) null);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -145,10 +149,10 @@ nu.staldal.lagoon.core.Producer
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>FileSource fileSource0 = new FileSource();
+<span class="nocode"><a name="1">  1: </a></span>DirSource dirSource0 = new DirSource();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  fileSource0.getSourceMan();
+<span class="nocode"><a name="4">  4: </a></span>  dirSource0.getSourceMan();
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: RuntimeException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(RuntimeException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
@@ -460,7 +464,7 @@ nu.staldal.lagoon.core.Producer
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2104387951772082405.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree4553568699286354912.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -478,7 +482,7 @@ nu.staldal.lagoon.core.Producer
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12028
+<li>process_communication_port: 4017
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

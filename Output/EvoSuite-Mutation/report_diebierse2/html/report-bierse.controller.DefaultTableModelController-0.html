@@ -22,7 +22,7 @@ bierse.controller.DefaultTableModelController
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: bierse.controller.DefaultTableModelController: 42.86%</ul><ul>
-<li>4638 fitness evaluations, 94 generations, 30639 statements, 3003 tests.
+<li>4564 fitness evaluations, 93 generations, 24956 statements, 3076 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 2/6 branches, 2/2 methods, 3/7 total goals
 <li>Mutation score: 0%
@@ -32,17 +32,17 @@ bierse.controller.DefaultTableModelController
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[][] objectArray0 = new Object[10][4];
-<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[4]);
-<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-817), (-817), (-817), (-817));
+<span class="nocode"><a name="2">  2: </a></span>JTable jTable0 = new JTable();
+<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = (DefaultTableModel)jTable0.getModel();
+<span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0, (-1377), (-1377), (-1377), (-1377));
 <span class="nocode"><a name="5">  5: </a></span>defaultTableModelController0.tableChanged(tableModelEvent0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-817, tableModelEvent0.getColumn());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1377, tableModelEvent0.getColumn());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultTableModelController defaultTableModelController0 = new DefaultTableModelController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>Object[][] objectArray0 = new Object[10][4];
-<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[4]);
+<span class="nocode"><a name="2">  2: </a></span>Object[][] objectArray0 = new Object[3][5];
+<span class="nocode"><a name="3">  3: </a></span>DefaultTableModel defaultTableModel0 = new DefaultTableModel(objectArray0, objectArray0[2]);
 <span class="nocode"><a name="4">  4: </a></span>TableModelEvent tableModelEvent0 = new TableModelEvent((TableModel) defaultTableModel0);
 <span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
 <span class="nocode"><a name="6">  6: </a></span>try {
@@ -91,7 +91,7 @@ bierse.controller.DefaultTableModelController
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1158434697524404911.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree652268098270985341.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -109,7 +109,7 @@ bierse.controller.DefaultTableModelController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10967
+<li>process_communication_port: 11986
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

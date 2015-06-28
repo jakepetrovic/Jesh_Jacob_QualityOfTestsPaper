@@ -21,7 +21,7 @@ public class INCHI_OPTIONEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      INCHI_OPTION.valueOfIgnoreCase("h7");
+      INCHI_OPTION.valueOfIgnoreCase("YK");
   }
 
   //Test case number: 1

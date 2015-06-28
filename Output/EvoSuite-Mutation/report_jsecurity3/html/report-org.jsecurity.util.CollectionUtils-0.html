@@ -22,7 +22,7 @@ org.jsecurity.util.CollectionUtils
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.util.CollectionUtils: 81.82%</ul><ul>
-<li>30896 fitness evaluations, 619 generations, 289975 statements, 19872 tests.
+<li>30222 fitness evaluations, 606 generations, 283903 statements, 19354 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 6/8 branches, 5/5 methods, 9/11 total goals
 <li>Mutation score: 23%
@@ -32,9 +32,9 @@ org.jsecurity.util.CollectionUtils
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = new String[1];
-<span class="nocode"><a name="2">  2: </a></span>List&lt;String&gt; list0 = CollectionUtils.asList(stringArray0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(1, list0.size());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="2">  2: </a></span>List&lt;Object&gt; list0 = CollectionUtils.asList((Object[]) stringArray0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(list0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, list0.isEmpty());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -43,21 +43,21 @@ org.jsecurity.util.CollectionUtils
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = Object.class;
-<span class="nocode"><a name="2">  2: </a></span>Collection&lt;String&gt; collection0 = CollectionUtils.emptyCollection((Class&lt;String&gt;) class0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, collection0.size());
+<span class="nocode"><a name="1">  1: </a></span>Class&lt;?&gt; class0 = CollectionUtils.class;
+<span class="nocode"><a name="2">  2: </a></span>Collection&lt;Object&gt; collection0 = CollectionUtils.emptyCollection((Class&lt;Object&gt;) class0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(true, collection0.isEmpty());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Set&lt;Object&gt; set0 = CollectionUtils.asSet((Object[]) null);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(true, set0.isEmpty());
+<span class="nocode"><a name="1">  1: </a></span>Set&lt;String&gt; set0 = CollectionUtils.asSet((String[]) null);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(0, set0.size());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>String[] stringArray0 = new String[1];
 <span class="nocode"><a name="2">  2: </a></span>Set&lt;String&gt; set0 = CollectionUtils.asSet(stringArray0);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, set0.isEmpty());
-<span class="nocode"><a name="4">  4: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="3">  3: </a></span>assertNotNull(set0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, set0.isEmpty());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -141,7 +141,7 @@ org.jsecurity.util.CollectionUtils
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -159,7 +159,7 @@ org.jsecurity.util.CollectionUtils
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 2422
+<li>process_communication_port: 16968
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

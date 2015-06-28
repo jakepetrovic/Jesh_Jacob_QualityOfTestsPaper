@@ -7,7 +7,6 @@ package net.sf.xisemele.impl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
-import javax.imageio.metadata.IIOMetadataNode;
 import net.sf.xisemele.impl.ElementImpl;
 import net.sf.xisemele.impl.Factory;
 import org.w3c.dom.Node;
@@ -22,10 +21,9 @@ public class ElementImplEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode();
       ElementImpl elementImpl0 = null;
       try {
-        elementImpl0 = new ElementImpl((Factory) null, (Node) iIOMetadataNode0);
+        elementImpl0 = new ElementImpl((Factory) null, (Node) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

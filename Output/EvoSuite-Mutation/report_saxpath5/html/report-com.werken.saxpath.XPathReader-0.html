@@ -21,10 +21,10 @@ com.werken.saxpath.XPathReader
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: com.werken.saxpath.XPathReader: 60.00%</ul><ul>
-<li>7140 fitness evaluations, 144 generations, 12518 statements, 4507 tests.
-<li>Time: 0:01:06(Search: 0:01:01, minimization: 0:00:05)
-<li>Coverage: 202/346 branches, 41/42 methods, 216/360 total goals
+<ul><li>Target class: com.werken.saxpath.XPathReader: 55.28%</ul><ul>
+<li>7840 fitness evaluations, 158 generations, 13426 statements, 5061 tests.
+<li>Time: 0:01:04(Search: 0:01:01, minimization: 0:00:03)
+<li>Coverage: 185/346 branches, 41/42 methods, 199/360 total goals
 <li>Mutation score: 1%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -34,37 +34,15 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.predicateExpr();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.parse(&quot;h[qZ_2Bc&gt;`&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(XPathSyntaxException e) {
+<span class="nocode"><a name="7">  7: </a></span>  /*
+<span class="nocode"><a name="8">  8: </a></span>   * Unexpected '`'
+<span class="nocode"><a name="9">  9: </a></span>   */
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;c&gt;@:`PrC*R&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.relationalExpr();
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.orExpr();
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(XPathSyntaxException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Unexpected ':'
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
-</pre>
-<h3>Test case 3</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.predicate();
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
-</pre>
-<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -74,21 +52,17 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 5</h3>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xPathReader0.axisSpecifier();
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(XPathSyntaxException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Expected valid axis name instead of [jd]
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.throwInvalidAxis(&quot;igv-*&amp;nN&quot;);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
 </pre>
-<h3>Test case 6</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
@@ -98,112 +72,151 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
+<h3>Test case 5</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;0=VF:6W*Z$Os!ZUe&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.predicateExpr();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
+</pre>
+<h3>Test case 6</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;Eeso6j5|z\&quot;l~UOvb&quot;);
+</pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.parse(&quot;_ezFXpFG/Yj@,4{s&quot;);
+<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.parse(&quot;.!p\&quot;rD_&quot;);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(XPathSyntaxException e) {
 <span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Unexpected '@'
+<span class="nocode"><a name="8">  8: </a></span>   * Unexpected '!'
 <span class="nocode"><a name="9">  9: </a></span>   */
 <span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.variableReference();
-<span class="nocode"><a name="4">  4: </a></span>xPathReader0.unaryExpr();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;b=(X_wEuvs1'J&quot;);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;Ap4m|/q?`)^ZWEx8P9&gt;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;]5&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  xPathReader0.relationalExpr();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(XPathSyntaxException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Unexpected ']'
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xPathReader0.parse(&quot;1+-Jmg(#/f@)c`~|&quot;);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(XPathSyntaxException e) {
-<span class="nocode"><a name="7">  7: </a></span>  /*
-<span class="nocode"><a name="8">  8: </a></span>   * Unexpected '#/f@)c`~|'
-<span class="nocode"><a name="9">  9: </a></span>   */
-<span class="nocode"><a name="10"> 10: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;0=VF:mW*Z$2s!2Ue&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.unionExpr();
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.predicateExpr();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(XPathSyntaxException e) {
+<span class="nocode"><a name="9">  9: </a></span>  /*
+<span class="nocode"><a name="10"> 10: </a></span>   * Unexpected '='
+<span class="nocode"><a name="11"> 11: </a></span>   */
+<span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.relationalExpr();
-<span class="nocode"><a name="4">  4: </a></span>xPathReader0.filterExpr();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;0=VF:mW*Z$2s!2Ue&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.predicateExpr();
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.predicate();
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.unionExpr();
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.locationPath(false);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(XPathSyntaxException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Unexpected 'hh+'
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;startFilterExpr()&quot;);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;c&gt;@:`PrC*R&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.absoluteLocationPath();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;Expected node-type&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.arguments();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>xPathReader0.variableReference();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;Expected node-type&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.andExpr();
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.relativeLocationPath();
+<span class="nocode"><a name="6">  6: </a></span>  xPathReader0.locationPath(true);
 <span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
 <span class="nocode"><a name="8">  8: </a></span>} catch(XPathSyntaxException e) {
 <span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Expected one of '.', '..', '@', '*', &lt;QName&gt;
+<span class="nocode"><a name="10"> 10: </a></span>   * Unexpected 'node-type'
 <span class="nocode"><a name="11"> 11: </a></span>   */
 <span class="nocode"><a name="12"> 12: </a></span>}
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;jd(2hh+&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  xPathReader0.relativeLocationPath();
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(XPathSyntaxException e) {
-<span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Expected node-type
-<span class="nocode"><a name="10"> 10: </a></span>   */
-<span class="nocode"><a name="11"> 11: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;Expected node-type&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.absoluteLocationPath();
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;BPa&lt;b`f!;Uv`Q$&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.steps();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
-<span class="nocode"><a name="2">  2: </a></span>xPathReader0.parse(&quot;b*F|-s#w&quot;);
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;1&quot;);
+<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
+<span class="nocode"><a name="4">  4: </a></span>try {
+<span class="nocode"><a name="5">  5: </a></span>  xPathReader0.steps();
+<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: XPathSyntaxException&quot;);
+<span class="nocode"><a name="7">  7: </a></span>} catch(XPathSyntaxException e) {
+<span class="nocode"><a name="8">  8: </a></span>  /*
+<span class="nocode"><a name="9">  9: </a></span>   * Expected one of '.', '..', '@', '*', &lt;QName&gt;
+<span class="nocode"><a name="10"> 10: </a></span>   */
+<span class="nocode"><a name="11"> 11: </a></span>}
+</pre>
+<h3>Test case 18</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;%&gt;}g+|/A&amp;WA3fR88 \&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.step(true);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
+</pre>
+<h3>Test case 19</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;1&quot;);
+<span class="nocode"><a name="3">  3: </a></span>int int0 = xPathReader0.axisSpecifier();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, int0);
+</pre>
+<h3>Test case 20</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XPathReader xPathReader0 = new XPathReader();
+<span class="nocode"><a name="2">  2: </a></span>xPathReader0.setUpParse(&quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>xPathReader0.abbrStep();
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, xPathReader0.axisSpecifier());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -390,8 +403,8 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="182">182: </a></span>            case SLASH:
 <span class="nocode"><a name="183">183: </a></span>            case DOUBLE_SLASH:
 <span class="nocode"><a name="184">184: </a></span>            {
-<span class="nocode"><a name="185">185: </a></span><span style="background-color: #ffffcc">                locationPath( true );</span>
-<span class="nocode"><a name="186">186: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="185">185: </a></span>                locationPath( true );
+<span class="nocode"><a name="186">186: </a></span>                break;
 <span class="nocode"><a name="187">187: </a></span>            }
 <span class="nocode"><a name="188">188: </a></span>            default:
 <span class="nocode"><a name="189">189: </a></span>            {
@@ -506,7 +519,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="298">298: </a></span>            }
 <span class="nocode"><a name="299">299: </a></span>            case DOLLAR:
 <span class="nocode"><a name="300">300: </a></span>            {
-<span class="nocode"><a name="301">301: </a></span>                variableReference();
+<span class="nocode"><a name="301">301: </a></span><span style="background-color: #ffffcc">                variableReference();</span>
 <span class="nocode"><a name="302">302: </a></span>                break;
 <span class="nocode"><a name="303">303: </a></span>            }
 <span class="nocode"><a name="304">304: </a></span>        }
@@ -535,9 +548,9 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="327">327: </a></span>
 <span class="nocode"><a name="328">328: </a></span><span style="background-color: #ffffcc">        variableName = match( IDENTIFIER ).getTokenText();</span>
 <span class="nocode"><a name="329">329: </a></span>
-<span class="nocode"><a name="330">330: </a></span><span style="background-color: #ffffcc">        getXPathHandler().variableReference( prefix,</span>
+<span class="nocode"><a name="330">330: </a></span>        getXPathHandler().variableReference( prefix,
 <span class="nocode"><a name="331">331: </a></span>                                             variableName );
-<span class="nocode"><a name="332">332: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="332">332: </a></span>    }
 <span class="nocode"><a name="333">333: </a></span>
 <span class="nocode"><a name="334">334: </a></span>    void locationPath(boolean isAbsolute) throws SAXPathException
 <span class="nocode"><a name="335">335: </a></span>    {
@@ -546,9 +559,9 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="338">338: </a></span>            case SLASH:
 <span class="nocode"><a name="339">339: </a></span>            case DOUBLE_SLASH:
 <span class="nocode"><a name="340">340: </a></span>            {
-<span class="nocode"><a name="341">341: </a></span><span style="background-color: #ffffcc">                if ( isAbsolute )</span>
+<span class="nocode"><a name="341">341: </a></span>                if ( isAbsolute )
 <span class="nocode"><a name="342">342: </a></span>                {
-<span class="nocode"><a name="343">343: </a></span><span style="background-color: #ffffcc">                    absoluteLocationPath();</span>
+<span class="nocode"><a name="343">343: </a></span>                    absoluteLocationPath();
 <span class="nocode"><a name="344">344: </a></span>                }
 <span class="nocode"><a name="345">345: </a></span>                else
 <span class="nocode"><a name="346">346: </a></span>                {
@@ -581,9 +594,9 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="373">373: </a></span>        {
 <span class="nocode"><a name="374">374: </a></span>            case SLASH:
 <span class="nocode"><a name="375">375: </a></span>            {
-<span class="nocode"><a name="376">376: </a></span><span style="background-color: #ffffcc">                match( SLASH );</span>
+<span class="nocode"><a name="376">376: </a></span>                match( SLASH );
 <span class="nocode"><a name="377">377: </a></span>
-<span class="nocode"><a name="378">378: </a></span><span style="background-color: #ffffcc">                switch ( LA(1) )</span>
+<span class="nocode"><a name="378">378: </a></span>                switch ( LA(1) )
 <span class="nocode"><a name="379">379: </a></span>                {
 <span class="nocode"><a name="380">380: </a></span>
 <span class="nocode"><a name="381">381: </a></span>                    case DOT:
@@ -592,15 +605,15 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="384">384: </a></span>                    case IDENTIFIER:
 <span class="nocode"><a name="385">385: </a></span>                    case STAR:
 <span class="nocode"><a name="386">386: </a></span>                    {
-<span class="nocode"><a name="387">387: </a></span><span style="background-color: #ffffcc">                        steps();</span>
-<span class="nocode"><a name="388">388: </a></span><span style="background-color: #ffffcc">                        break;</span>
+<span class="nocode"><a name="387">387: </a></span>                        steps();
+<span class="nocode"><a name="388">388: </a></span>                        break;
 <span class="nocode"><a name="389">389: </a></span>                    }
 <span class="nocode"><a name="390">390: </a></span>                    case EOF:
 <span class="nocode"><a name="391">391: </a></span>                    {
 <span class="nocode"><a name="392">392: </a></span>                        return;
 <span class="nocode"><a name="393">393: </a></span>                    }
 <span class="nocode"><a name="394">394: </a></span>                }
-<span class="nocode"><a name="395">395: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="395">395: </a></span>                break;
 <span class="nocode"><a name="396">396: </a></span>            }
 <span class="nocode"><a name="397">397: </a></span>            case DOUBLE_SLASH:
 <span class="nocode"><a name="398">398: </a></span>            {
@@ -672,7 +685,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="464">464: </a></span>            }
 <span class="nocode"><a name="465">465: </a></span>            case EOF:
 <span class="nocode"><a name="466">466: </a></span>            {
-<span class="nocode"><a name="467">467: </a></span>                return;
+<span class="nocode"><a name="467">467: </a></span><span style="background-color: #ffffcc">                return;</span>
 <span class="nocode"><a name="468">468: </a></span>            }
 <span class="nocode"><a name="469">469: </a></span>            default:
 <span class="nocode"><a name="470">470: </a></span>            {
@@ -687,12 +700,12 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="479">479: </a></span>                 ||
 <span class="nocode"><a name="480">480: </a></span>                 ( LA(1) == DOUBLE_SLASH ) )
 <span class="nocode"><a name="481">481: </a></span>            {
-<span class="nocode"><a name="482">482: </a></span><span style="background-color: #ffffcc">                switch ( LA(1) )</span>
+<span class="nocode"><a name="482">482: </a></span>                switch ( LA(1) )
 <span class="nocode"><a name="483">483: </a></span>                {
 <span class="nocode"><a name="484">484: </a></span>                    case SLASH:
 <span class="nocode"><a name="485">485: </a></span>                    {
-<span class="nocode"><a name="486">486: </a></span><span style="background-color: #ffffcc">                        match( SLASH );</span>
-<span class="nocode"><a name="487">487: </a></span><span style="background-color: #ffffcc">                        break;</span>
+<span class="nocode"><a name="486">486: </a></span>                        match( SLASH );
+<span class="nocode"><a name="487">487: </a></span>                        break;
 <span class="nocode"><a name="488">488: </a></span>                    }
 <span class="nocode"><a name="489">489: </a></span>                    case DOUBLE_SLASH:
 <span class="nocode"><a name="490">490: </a></span>                    {
@@ -700,7 +713,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="492">492: </a></span>                        getXPathHandler().endAllNodeStep();
 <span class="nocode"><a name="493">493: </a></span>
 <span class="nocode"><a name="494">494: </a></span>                        match( DOUBLE_SLASH );
-<span class="nocode"><a name="495">495: </a></span><span style="background-color: #ffffcc">                        break;</span>
+<span class="nocode"><a name="495">495: </a></span>                        break;
 <span class="nocode"><a name="496">496: </a></span>                    }
 <span class="nocode"><a name="497">497: </a></span>                }
 <span class="nocode"><a name="498">498: </a></span>            }
@@ -709,7 +722,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="501">501: </a></span><span style="background-color: #ffffcc">                return;</span>
 <span class="nocode"><a name="502">502: </a></span>            }
 <span class="nocode"><a name="503">503: </a></span>            
-<span class="nocode"><a name="504">504: </a></span><span style="background-color: #ffffcc">            switch ( LA(1) )</span>
+<span class="nocode"><a name="504">504: </a></span>            switch ( LA(1) )
 <span class="nocode"><a name="505">505: </a></span>            {
 <span class="nocode"><a name="506">506: </a></span>                case DOT:
 <span class="nocode"><a name="507">507: </a></span>                case DOT_DOT:
@@ -717,8 +730,8 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="509">509: </a></span>                case IDENTIFIER:
 <span class="nocode"><a name="510">510: </a></span>                case STAR:
 <span class="nocode"><a name="511">511: </a></span>                {
-<span class="nocode"><a name="512">512: </a></span><span style="background-color: #ffffcc">                    step( false );</span>
-<span class="nocode"><a name="513">513: </a></span><span style="background-color: #ffffcc">                    break;</span>
+<span class="nocode"><a name="512">512: </a></span>                    step( false );
+<span class="nocode"><a name="513">513: </a></span>                    break;
 <span class="nocode"><a name="514">514: </a></span>                }
 <span class="nocode"><a name="515">515: </a></span>                default:
 <span class="nocode"><a name="516">516: </a></span>                {
@@ -739,13 +752,13 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="531">531: </a></span>            case DOT:
 <span class="nocode"><a name="532">532: </a></span>            case DOT_DOT:
 <span class="nocode"><a name="533">533: </a></span>            {
-<span class="nocode"><a name="534">534: </a></span>                abbrStep();
-<span class="nocode"><a name="535">535: </a></span>                return;
+<span class="nocode"><a name="534">534: </a></span><span style="background-color: #ffffcc">                abbrStep();</span>
+<span class="nocode"><a name="535">535: </a></span><span style="background-color: #ffffcc">                return;</span>
 <span class="nocode"><a name="536">536: </a></span>            }
 <span class="nocode"><a name="537">537: </a></span>            case AT:
 <span class="nocode"><a name="538">538: </a></span>            {
-<span class="nocode"><a name="539">539: </a></span><span style="background-color: #ffffcc">                axis = axisSpecifier();</span>
-<span class="nocode"><a name="540">540: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="539">539: </a></span>                axis = axisSpecifier();
+<span class="nocode"><a name="540">540: </a></span>                break;
 <span class="nocode"><a name="541">541: </a></span>            }
 <span class="nocode"><a name="542">542: </a></span>            case IDENTIFIER:
 <span class="nocode"><a name="543">543: </a></span>            {
@@ -777,19 +790,19 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="569">569: </a></span>        {
 <span class="nocode"><a name="570">570: </a></span>            case AT:
 <span class="nocode"><a name="571">571: </a></span>            {
-<span class="nocode"><a name="572">572: </a></span><span style="background-color: #ffffcc">                match( AT );</span>
-<span class="nocode"><a name="573">573: </a></span><span style="background-color: #ffffcc">                axis = Axis.ATTRIBUTE;</span>
-<span class="nocode"><a name="574">574: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="572">572: </a></span>                match( AT );
+<span class="nocode"><a name="573">573: </a></span>                axis = Axis.ATTRIBUTE;
+<span class="nocode"><a name="574">574: </a></span>                break;
 <span class="nocode"><a name="575">575: </a></span>            }
 <span class="nocode"><a name="576">576: </a></span>            case IDENTIFIER:
 <span class="nocode"><a name="577">577: </a></span>            {
-<span class="nocode"><a name="578">578: </a></span><span style="background-color: #ffffcc">                Token token = LT( 1 );</span>
+<span class="nocode"><a name="578">578: </a></span>                Token token = LT( 1 );
 <span class="nocode"><a name="579">579: </a></span>
-<span class="nocode"><a name="580">580: </a></span><span style="background-color: #ffffcc">                axis = Axis.lookup( token.getTokenText() );</span>
+<span class="nocode"><a name="580">580: </a></span>                axis = Axis.lookup( token.getTokenText() );
 <span class="nocode"><a name="581">581: </a></span>
-<span class="nocode"><a name="582">582: </a></span><span style="background-color: #ffffcc">                if ( axis == Axis.INVALID_AXIS )</span>
+<span class="nocode"><a name="582">582: </a></span>                if ( axis == Axis.INVALID_AXIS )
 <span class="nocode"><a name="583">583: </a></span>                {
-<span class="nocode"><a name="584">584: </a></span><span style="background-color: #ffffcc">                    throwInvalidAxis( token.getTokenText() );</span>
+<span class="nocode"><a name="584">584: </a></span>                    throwInvalidAxis( token.getTokenText() );
 <span class="nocode"><a name="585">585: </a></span>                }
 <span class="nocode"><a name="586">586: </a></span>
 <span class="nocode"><a name="587">587: </a></span>                match( IDENTIFIER );
@@ -812,7 +825,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="604">604: </a></span>                {
 <span class="nocode"><a name="605">605: </a></span>                    case LEFT_PAREN:
 <span class="nocode"><a name="606">606: </a></span>                    {
-<span class="nocode"><a name="607">607: </a></span><span style="background-color: #ffffcc">                        nodeTypeTest( axis );</span>
+<span class="nocode"><a name="607">607: </a></span>                        nodeTypeTest( axis );
 <span class="nocode"><a name="608">608: </a></span>                        break;
 <span class="nocode"><a name="609">609: </a></span>                    }
 <span class="nocode"><a name="610">610: </a></span>                    default:
@@ -833,12 +846,12 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="625">625: </a></span>
 <span class="nocode"><a name="626">626: </a></span>    void nodeTypeTest(int axis) throws SAXPathException
 <span class="nocode"><a name="627">627: </a></span>    {
-<span class="nocode"><a name="628">628: </a></span><span style="background-color: #ffffcc">        Token  nodeTypeToken = match( IDENTIFIER );</span>
-<span class="nocode"><a name="629">629: </a></span><span style="background-color: #ffffcc">        String nodeType      = nodeTypeToken.getTokenText();</span>
+<span class="nocode"><a name="628">628: </a></span>        Token  nodeTypeToken = match( IDENTIFIER );
+<span class="nocode"><a name="629">629: </a></span>        String nodeType      = nodeTypeToken.getTokenText();
 <span class="nocode"><a name="630">630: </a></span>
-<span class="nocode"><a name="631">631: </a></span><span style="background-color: #ffffcc">        match( LEFT_PAREN );</span>
+<span class="nocode"><a name="631">631: </a></span>        match( LEFT_PAREN );
 <span class="nocode"><a name="632">632: </a></span>
-<span class="nocode"><a name="633">633: </a></span><span style="background-color: #ffffcc">        if ( &quot;processing-instruction&quot;.equals( nodeType ) )</span>
+<span class="nocode"><a name="633">633: </a></span>        if ( &quot;processing-instruction&quot;.equals( nodeType ) )
 <span class="nocode"><a name="634">634: </a></span>        {
 <span class="nocode"><a name="635">635: </a></span>            String piName = &quot;&quot;;
 <span class="nocode"><a name="636">636: </a></span>
@@ -856,7 +869,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="648">648: </a></span>
 <span class="nocode"><a name="649">649: </a></span>            getXPathHandler().endProcessingInstructionNodeStep();
 <span class="nocode"><a name="650">650: </a></span>        }
-<span class="nocode"><a name="651">651: </a></span><span style="background-color: #ffffcc">        else if ( &quot;node&quot;.equals( nodeType ) )</span>
+<span class="nocode"><a name="651">651: </a></span>        else if ( &quot;node&quot;.equals( nodeType ) )
 <span class="nocode"><a name="652">652: </a></span>        {
 <span class="nocode"><a name="653">653: </a></span>            match( RIGHT_PAREN );
 <span class="nocode"><a name="654">654: </a></span>
@@ -866,7 +879,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="658">658: </a></span>
 <span class="nocode"><a name="659">659: </a></span>            getXPathHandler().endAllNodeStep();
 <span class="nocode"><a name="660">660: </a></span>        }
-<span class="nocode"><a name="661">661: </a></span><span style="background-color: #ffffcc">        else if ( &quot;text&quot;.equals( nodeType ) )</span>
+<span class="nocode"><a name="661">661: </a></span>        else if ( &quot;text&quot;.equals( nodeType ) )
 <span class="nocode"><a name="662">662: </a></span>        {
 <span class="nocode"><a name="663">663: </a></span>            match( RIGHT_PAREN );
 <span class="nocode"><a name="664">664: </a></span>
@@ -876,7 +889,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="668">668: </a></span>
 <span class="nocode"><a name="669">669: </a></span>            getXPathHandler().endTextNodeStep();
 <span class="nocode"><a name="670">670: </a></span>        }
-<span class="nocode"><a name="671">671: </a></span><span style="background-color: #ffffcc">        else if ( &quot;comment&quot;.equals( nodeType ) )</span>
+<span class="nocode"><a name="671">671: </a></span>        else if ( &quot;comment&quot;.equals( nodeType ) )
 <span class="nocode"><a name="672">672: </a></span>        {
 <span class="nocode"><a name="673">673: </a></span>            match( RIGHT_PAREN );
 <span class="nocode"><a name="674">674: </a></span>
@@ -888,7 +901,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="680">680: </a></span>        }
 <span class="nocode"><a name="681">681: </a></span>        else
 <span class="nocode"><a name="682">682: </a></span>        {
-<span class="nocode"><a name="683">683: </a></span><span style="background-color: #ffffcc">            throwSyntaxException( &quot;Expected node-type&quot; );</span>
+<span class="nocode"><a name="683">683: </a></span>            throwSyntaxException( &quot;Expected node-type&quot; );
 <span class="nocode"><a name="684">684: </a></span>        }
 <span class="nocode"><a name="685">685: </a></span>    }
 <span class="nocode"><a name="686">686: </a></span>
@@ -901,12 +914,12 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="693">693: </a></span>        {
 <span class="nocode"><a name="694">694: </a></span>            case COLON:
 <span class="nocode"><a name="695">695: </a></span>            {
-<span class="nocode"><a name="696">696: </a></span>                switch ( LA(1) )
+<span class="nocode"><a name="696">696: </a></span><span style="background-color: #ffffcc">                switch ( LA(1) )</span>
 <span class="nocode"><a name="697">697: </a></span>                {
 <span class="nocode"><a name="698">698: </a></span>                    case IDENTIFIER:
 <span class="nocode"><a name="699">699: </a></span>                    {
-<span class="nocode"><a name="700">700: </a></span>                        prefix = match( IDENTIFIER ).getTokenText();
-<span class="nocode"><a name="701">701: </a></span>                        match( COLON );
+<span class="nocode"><a name="700">700: </a></span><span style="background-color: #ffffcc">                        prefix = match( IDENTIFIER ).getTokenText();</span>
+<span class="nocode"><a name="701">701: </a></span><span style="background-color: #ffffcc">                        match( COLON );</span>
 <span class="nocode"><a name="702">702: </a></span>                        break;
 <span class="nocode"><a name="703">703: </a></span>                    }
 <span class="nocode"><a name="704">704: </a></span>                }
@@ -945,15 +958,15 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="737">737: </a></span>
 <span class="nocode"><a name="738">738: </a></span>    void abbrStep() throws SAXPathException
 <span class="nocode"><a name="739">739: </a></span>    {
-<span class="nocode"><a name="740">740: </a></span>        switch ( LA(1) )
+<span class="nocode"><a name="740">740: </a></span><span style="background-color: #ffffcc">        switch ( LA(1) )</span>
 <span class="nocode"><a name="741">741: </a></span>        {
 <span class="nocode"><a name="742">742: </a></span>            case DOT:
 <span class="nocode"><a name="743">743: </a></span>            {
-<span class="nocode"><a name="744">744: </a></span>                match( DOT );
-<span class="nocode"><a name="745">745: </a></span>                getXPathHandler().startAllNodeStep( Axis.SELF );
-<span class="nocode"><a name="746">746: </a></span>                predicates();
-<span class="nocode"><a name="747">747: </a></span>                getXPathHandler().endAllNodeStep();
-<span class="nocode"><a name="748">748: </a></span>                break;
+<span class="nocode"><a name="744">744: </a></span><span style="background-color: #ffffcc">                match( DOT );</span>
+<span class="nocode"><a name="745">745: </a></span><span style="background-color: #ffffcc">                getXPathHandler().startAllNodeStep( Axis.SELF );</span>
+<span class="nocode"><a name="746">746: </a></span><span style="background-color: #ffffcc">                predicates();</span>
+<span class="nocode"><a name="747">747: </a></span><span style="background-color: #ffffcc">                getXPathHandler().endAllNodeStep();</span>
+<span class="nocode"><a name="748">748: </a></span><span style="background-color: #ffffcc">                break;</span>
 <span class="nocode"><a name="749">749: </a></span>            }
 <span class="nocode"><a name="750">750: </a></span>            case DOT_DOT:
 <span class="nocode"><a name="751">751: </a></span>            {
@@ -964,7 +977,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="756">756: </a></span>                break;
 <span class="nocode"><a name="757">757: </a></span>            }
 <span class="nocode"><a name="758">758: </a></span>        }
-<span class="nocode"><a name="759">759: </a></span>    }
+<span class="nocode"><a name="759">759: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="760">760: </a></span>
 <span class="nocode"><a name="761">761: </a></span>    void predicates() throws SAXPathException
 <span class="nocode"><a name="762">762: </a></span>    {
@@ -972,7 +985,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="764">764: </a></span>        {
 <span class="nocode"><a name="765">765: </a></span><span style="background-color: #ffffcc">            if ( LA(1) == LEFT_BRACKET )</span>
 <span class="nocode"><a name="766">766: </a></span>            {
-<span class="nocode"><a name="767">767: </a></span>                predicate();
+<span class="nocode"><a name="767">767: </a></span><span style="background-color: #ffffcc">                predicate();</span>
 <span class="nocode"><a name="768">768: </a></span>            }
 <span class="nocode"><a name="769">769: </a></span>            else
 <span class="nocode"><a name="770">770: </a></span>            {
@@ -987,7 +1000,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="779">779: </a></span>        
 <span class="nocode"><a name="780">780: </a></span><span style="background-color: #ffffcc">        match( LEFT_BRACKET );</span>
 <span class="nocode"><a name="781">781: </a></span>        
-<span class="nocode"><a name="782">782: </a></span>        predicateExpr();
+<span class="nocode"><a name="782">782: </a></span><span style="background-color: #ffffcc">        predicateExpr();</span>
 <span class="nocode"><a name="783">783: </a></span>
 <span class="nocode"><a name="784">784: </a></span>        match( RIGHT_BRACKET );
 <span class="nocode"><a name="785">785: </a></span>
@@ -997,7 +1010,7 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="789">789: </a></span>    void predicateExpr() throws SAXPathException
 <span class="nocode"><a name="790">790: </a></span>    {
 <span class="nocode"><a name="791">791: </a></span><span style="background-color: #ffffcc">        expr();</span>
-<span class="nocode"><a name="792">792: </a></span>    }
+<span class="nocode"><a name="792">792: </a></span><span style="background-color: #ffffcc">    }</span>
 <span class="nocode"><a name="793">793: </a></span>
 <span class="nocode"><a name="794">794: </a></span>    void expr() throws SAXPathException
 <span class="nocode"><a name="795">795: </a></span>    {
@@ -1060,10 +1073,10 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="852">852: </a></span>        {
 <span class="nocode"><a name="853">853: </a></span>            case EQUALS:
 <span class="nocode"><a name="854">854: </a></span>            {
-<span class="nocode"><a name="855">855: </a></span>                match( EQUALS );
-<span class="nocode"><a name="856">856: </a></span>                equalityExpr();
-<span class="nocode"><a name="857">857: </a></span>                operator = Operator.EQUALS;
-<span class="nocode"><a name="858">858: </a></span>                break;
+<span class="nocode"><a name="855">855: </a></span><span style="background-color: #ffffcc">                match( EQUALS );</span>
+<span class="nocode"><a name="856">856: </a></span><span style="background-color: #ffffcc">                equalityExpr();</span>
+<span class="nocode"><a name="857">857: </a></span><span style="background-color: #ffffcc">                operator = Operator.EQUALS;</span>
+<span class="nocode"><a name="858">858: </a></span><span style="background-color: #ffffcc">                break;</span>
 <span class="nocode"><a name="859">859: </a></span>            }
 <span class="nocode"><a name="860">860: </a></span>            case NOT_EQUALS:
 <span class="nocode"><a name="861">861: </a></span>            {
@@ -1089,17 +1102,17 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="881">881: </a></span>        {
 <span class="nocode"><a name="882">882: </a></span>            case LESS_THAN:
 <span class="nocode"><a name="883">883: </a></span>            {
-<span class="nocode"><a name="884">884: </a></span><span style="background-color: #ffffcc">                match( LESS_THAN );</span>
-<span class="nocode"><a name="885">885: </a></span><span style="background-color: #ffffcc">                relationalExpr();</span>
-<span class="nocode"><a name="886">886: </a></span><span style="background-color: #ffffcc">                operator = Operator.LESS_THAN;</span>
-<span class="nocode"><a name="887">887: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="884">884: </a></span>                match( LESS_THAN );
+<span class="nocode"><a name="885">885: </a></span>                relationalExpr();
+<span class="nocode"><a name="886">886: </a></span>                operator = Operator.LESS_THAN;
+<span class="nocode"><a name="887">887: </a></span>                break;
 <span class="nocode"><a name="888">888: </a></span>            }
 <span class="nocode"><a name="889">889: </a></span>            case GREATER_THAN:
 <span class="nocode"><a name="890">890: </a></span>            {
 <span class="nocode"><a name="891">891: </a></span><span style="background-color: #ffffcc">                match( GREATER_THAN );</span>
 <span class="nocode"><a name="892">892: </a></span><span style="background-color: #ffffcc">                relationalExpr();</span>
-<span class="nocode"><a name="893">893: </a></span><span style="background-color: #ffffcc">                operator = Operator.GREATER_THAN;</span>
-<span class="nocode"><a name="894">894: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="893">893: </a></span>                operator = Operator.GREATER_THAN;
+<span class="nocode"><a name="894">894: </a></span>                break;
 <span class="nocode"><a name="895">895: </a></span>            }
 <span class="nocode"><a name="896">896: </a></span>            case LESS_THAN_EQUALS:
 <span class="nocode"><a name="897">897: </a></span>            {
@@ -1132,9 +1145,9 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="924">924: </a></span>        {
 <span class="nocode"><a name="925">925: </a></span>            case PLUS:
 <span class="nocode"><a name="926">926: </a></span>            {
-<span class="nocode"><a name="927">927: </a></span><span style="background-color: #ffffcc">                match( PLUS );</span>
-<span class="nocode"><a name="928">928: </a></span><span style="background-color: #ffffcc">                operator = Operator.ADD;</span>
-<span class="nocode"><a name="929">929: </a></span><span style="background-color: #ffffcc">                additiveExpr();</span>
+<span class="nocode"><a name="927">927: </a></span>                match( PLUS );
+<span class="nocode"><a name="928">928: </a></span>                operator = Operator.ADD;
+<span class="nocode"><a name="929">929: </a></span>                additiveExpr();
 <span class="nocode"><a name="930">930: </a></span>                break;
 <span class="nocode"><a name="931">931: </a></span>            }
 <span class="nocode"><a name="932">932: </a></span>            case MINUS:
@@ -1195,10 +1208,10 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="987">987: </a></span>        {
 <span class="nocode"><a name="988">988: </a></span>            case MINUS:
 <span class="nocode"><a name="989">989: </a></span>            {
-<span class="nocode"><a name="990">990: </a></span><span style="background-color: #ffffcc">                match( MINUS );</span>
-<span class="nocode"><a name="991">991: </a></span><span style="background-color: #ffffcc">                operator = Operator.NEGATIVE;</span>
-<span class="nocode"><a name="992">992: </a></span><span style="background-color: #ffffcc">                unaryExpr();</span>
-<span class="nocode"><a name="993">993: </a></span><span style="background-color: #ffffcc">                break;</span>
+<span class="nocode"><a name="990">990: </a></span>                match( MINUS );
+<span class="nocode"><a name="991">991: </a></span>                operator = Operator.NEGATIVE;
+<span class="nocode"><a name="992">992: </a></span>                unaryExpr();
+<span class="nocode"><a name="993">993: </a></span>                break;
 <span class="nocode"><a name="994">994: </a></span>            }
 <span class="nocode"><a name="995">995: </a></span>            default:
 <span class="nocode"><a name="996">996: </a></span>            {
@@ -1298,11 +1311,11 @@ com.werken.saxpath.XPathReader
 <span class="nocode"><a name="1090">1090: </a></span>    void throwInvalidAxis(String invalidAxis) throws SAXPathException
 <span class="nocode"><a name="1091">1091: </a></span>    {
 <span class="nocode"><a name="1092">1092: </a></span><span style="background-color: #ffffcc">        String xpath    = this.lexer.getXPath();</span>
-<span class="nocode"><a name="1093">1093: </a></span><span style="background-color: #ffffcc">        int    position = LT(1).getTokenBegin();</span>
+<span class="nocode"><a name="1093">1093: </a></span>        int    position = LT(1).getTokenBegin();
 <span class="nocode"><a name="1094">1094: </a></span>
-<span class="nocode"><a name="1095">1095: </a></span><span style="background-color: #ffffcc">        String message  = &quot;Expected valid axis name instead of [&quot; + invalidAxis + &quot;]&quot;;</span>
+<span class="nocode"><a name="1095">1095: </a></span>        String message  = &quot;Expected valid axis name instead of [&quot; + invalidAxis + &quot;]&quot;;
 <span class="nocode"><a name="1096">1096: </a></span>
-<span class="nocode"><a name="1097">1097: </a></span><span style="background-color: #ffffcc">        throw new XPathSyntaxException( xpath,</span>
+<span class="nocode"><a name="1097">1097: </a></span>        throw new XPathSyntaxException( xpath,
 <span class="nocode"><a name="1098">1098: </a></span>                                        position,
 <span class="nocode"><a name="1099">1099: </a></span>                                        message );
 <span class="nocode"><a name="1100">1100: </a></span>    }
@@ -1316,7 +1329,7 @@ com.werken.saxpath.XPathReader
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree6658337380352375849.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3083807324380600767.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -1334,7 +1347,7 @@ com.werken.saxpath.XPathReader
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 12604
+<li>process_communication_port: 4480
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

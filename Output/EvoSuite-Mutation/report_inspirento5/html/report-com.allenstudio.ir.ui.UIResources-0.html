@@ -22,7 +22,7 @@ com.allenstudio.ir.ui.UIResources
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: com.allenstudio.ir.ui.UIResources: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 541 statements, 258 tests.
+<li>50 fitness evaluations, 2 generations, 575 statements, 277 tests.
 <li>Time: 0:00:01(Search: 0:00:01, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 2/2 methods, 2/2 total goals
 <li>Mutation score: 0%
@@ -33,13 +33,10 @@ com.allenstudio.ir.ui.UIResources
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  UIResources.getString(&quot;com.allenstudio.ir.ui.resources.Inspirento&quot;);
-<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: MissingResourceException&quot;);
-<span class="nocode"><a name="5">  5: </a></span>} catch(MissingResourceException e) {
-<span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Can't find resource for bundle java.util.PropertyResourceBundle, key com.allenstudio.ir.ui.resources.Inspirento
-<span class="nocode"><a name="8">  8: </a></span>   */
-<span class="nocode"><a name="9">  9: </a></span>}
+<span class="nocode"><a name="3">  3: </a></span>  UIResources.getString((String) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="6">  6: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -86,7 +83,7 @@ com.allenstudio.ir.ui.UIResources
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7918876993634896220.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree6838871411300775452.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -104,7 +101,7 @@ com.allenstudio.ir.ui.UIResources
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7395
+<li>process_communication_port: 21905
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

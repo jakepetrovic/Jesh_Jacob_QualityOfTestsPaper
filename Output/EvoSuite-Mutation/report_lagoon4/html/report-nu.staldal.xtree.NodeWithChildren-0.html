@@ -22,22 +22,22 @@ nu.staldal.xtree.NodeWithChildren
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.xtree.NodeWithChildren: 100.00%</ul><ul>
-<li>1050 fitness evaluations, 22 generations, 4716 statements, 882 tests.
-<li>Time: 0:00:09(Search: 0:00:08, minimization: 0:00:00)
+<li>1350 fitness evaluations, 28 generations, 6074 statements, 1063 tests.
+<li>Time: 0:00:09(Search: 0:00:09, minimization: 0:00:00)
 <li>Coverage: 2/2 branches, 7/7 methods, 8/8 total goals
-<li>Mutation score: 8%
+<li>Mutation score: 10%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1));
-<span class="nocode"><a name="2">  2: </a></span>int int0 = element0.numberOfChildren();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(0, int0);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;space&quot;, &quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Element element1 = element0.getFirstChildElementOrNull(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(element1);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, (-1));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;=EkG{y+qOm(]l'LmZ&quot;, &quot;=EkG{y+qOm(]l'LmZ&quot;, 747, 1);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(element0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
@@ -49,47 +49,47 @@ nu.staldal.xtree.NodeWithChildren
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element expected&quot;, &quot;Wg]Bbf2&quot;, (-454));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;WlDD&quot;, &quot;WlDD&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.getChild((-454));
+<span class="nocode"><a name="3">  3: </a></span>  element0.getChild(3);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * -454
+<span class="nocode"><a name="7">  7: </a></span>   * 3 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;}s^\&quot;X!Y2)[djGf*(G;&quot;, &quot;}s^\&quot;X!Y2)[djGf*(G;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;+2}Tm(Pc_UZY6M)*#&quot;, &quot;Element {&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, 0);
+<span class="nocode"><a name="3">  3: </a></span>  element0.replaceChild((Node) null, (-1870));
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * 0 &gt;= 0
+<span class="nocode"><a name="7">  7: </a></span>   * -1870
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;, 1);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;space&quot;, &quot;&quot;);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  element0.insertChild((Node) null, 1);
+<span class="nocode"><a name="4">  4: </a></span>  element0.insertChild((Node) null, 1123);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;_$1L( 0bF#:QaOr'&quot;, &quot;_$1L( 0bF#:QaOr'&quot;, 0, 0);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;r2AKT$&gt;8&amp;qzU-K=1WJ2&quot;, &quot;r2AKT$&gt;8&amp;qzU-K=1WJ2&quot;, 2043, 0);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild((-827));
+<span class="nocode"><a name="3">  3: </a></span>  element0.removeChild(0);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ArrayIndexOutOfBoundsException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ArrayIndexOutOfBoundsException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * -827
+<span class="nocode"><a name="7">  7: </a></span>   * 0 &gt;= 0
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
@@ -259,7 +259,7 @@ nu.staldal.xtree.NodeWithChildren
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -277,7 +277,7 @@ nu.staldal.xtree.NodeWithChildren
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16889
+<li>process_communication_port: 4190
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

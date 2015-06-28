@@ -22,10 +22,10 @@ org.jsecurity.io.AbstractResource
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.io.AbstractResource: 57.14%</ul><ul>
-<li>260 fitness evaluations, 7 generations, 1359 statements, 391 tests.
-<li>Time: 0:01:07(Search: 0:01:07, minimization: 0:00:00)
+<li>698 fitness evaluations, 15 generations, 2864 statements, 721 tests.
+<li>Time: 0:01:04(Search: 0:01:04, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 4/6 methods, 4/7 total goals
-<li>Mutation score: 0%
+<li>Mutation score: 5%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -33,20 +33,25 @@ org.jsecurity.io.AbstractResource
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;'resourcePath' argument cannot be null.&quot;, &quot;'resourcePath' argument cannot be null.&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource(&quot;R[(KG&quot;, &quot;'jPi&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path ['resourcePath' argument cannot be null.]
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load text resource from the resource path [R[(KG]
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = new IniResource();
-<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
-<span class="nocode"><a name="3">  3: </a></span>iniResource0.load((InputStream) pipedInputStream0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, pipedInputStream0.markSupported());
+<span class="nocode"><a name="1">  1: </a></span>IniResource iniResource0 = null;
+<span class="nocode"><a name="2">  2: </a></span>try {
+<span class="nocode"><a name="3">  3: </a></span>  iniResource0 = new IniResource((InputStream) null);
+<span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: ResourceException&quot;);
+<span class="nocode"><a name="5">  5: </a></span>} catch(ResourceException e) {
+<span class="nocode"><a name="6">  6: </a></span>  /*
+<span class="nocode"><a name="7">  7: </a></span>   * Unable to load data from input stream [null].
+<span class="nocode"><a name="8">  8: </a></span>   */
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -112,11 +117,11 @@ org.jsecurity.io.AbstractResource
 <span class="nocode"><a name="61"> 61: </a></span>    public void load(InputStream is) throws ResourceException {
 <span class="nocode"><a name="62"> 62: </a></span>        try {
 <span class="nocode"><a name="63"> 63: </a></span><span style="background-color: #ffffcc">            doLoad(is);</span>
-<span class="nocode"><a name="64"> 64: </a></span>        } catch (Exception e) {
-<span class="nocode"><a name="65"> 65: </a></span>            String msg = &quot;Unable to load data from input stream [&quot; + is + &quot;].&quot;;
-<span class="nocode"><a name="66"> 66: </a></span>            throw new ResourceException(msg, e);
-<span class="nocode"><a name="67"> 67: </a></span><span style="background-color: #ffffcc">        }</span>
-<span class="nocode"><a name="68"> 68: </a></span><span style="background-color: #ffffcc">    }</span>
+<span class="nocode"><a name="64"> 64: </a></span><span style="background-color: #ffffcc">        } catch (Exception e) {</span>
+<span class="nocode"><a name="65"> 65: </a></span><span style="background-color: #ffffcc">            String msg = &quot;Unable to load data from input stream [&quot; + is + &quot;].&quot;;</span>
+<span class="nocode"><a name="66"> 66: </a></span><span style="background-color: #ffffcc">            throw new ResourceException(msg, e);</span>
+<span class="nocode"><a name="67"> 67: </a></span>        }
+<span class="nocode"><a name="68"> 68: </a></span>    }
 <span class="nocode"><a name="69"> 69: </a></span>
 <span class="nocode"><a name="70"> 70: </a></span>    protected abstract void doLoad(InputStream is) throws Exception;
 <span class="nocode"><a name="71"> 71: </a></span>}
@@ -124,7 +129,7 @@ org.jsecurity.io.AbstractResource
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree7557630995174240047.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8677350314351900716.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -142,7 +147,7 @@ org.jsecurity.io.AbstractResource
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4041
+<li>process_communication_port: 21385
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

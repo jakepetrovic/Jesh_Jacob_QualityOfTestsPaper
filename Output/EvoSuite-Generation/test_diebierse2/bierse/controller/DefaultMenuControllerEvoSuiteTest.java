@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 import bierse.controller.DefaultMenuController;
 import bierse.model.Model;
 import bierse.view.IDrinkSellView;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 
 public class DefaultMenuControllerEvoSuiteTest {
@@ -18,36 +17,16 @@ public class DefaultMenuControllerEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 4 covered goals:
-   * 1 bierse.controller.DefaultMenuController.showSettingsView()V: root-Branch
-   * 2 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I6 Branch 1 IFLE L23 - true
-   * 3 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I18 Branch 2 IFLE L25 - false
-   * 4 bierse.controller.DefaultMenuController.<init>(Lbierse/model/Model;Lbierse/view/IDrinkSellView;)V: root-Branch
+   * 3 covered goals:
+   * 1 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I6 Branch 1 IFLE L23 - true
+   * 2 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I18 Branch 2 IFLE L25 - true
+   * 3 bierse.controller.DefaultMenuController.<init>(Lbierse/model/Model;Lbierse/view/IDrinkSellView;)V: root-Branch
    */
   @Test
   public void test0()  throws Throwable  {
       DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "MI_DISPLAY_SETTINGS_VIEW", 1881, "MI_DISPLAY_SETTINGS_VIEW");
-      // Undeclared exception!
-      try {
-        defaultMenuController0.actionPerformed(actionEvent0);
-        fail("Expecting exception: HeadlessException");
-      } catch(HeadlessException e) {
-      }
-  }
-
-  //Test case number: 1
-  /*
-   * 3 covered goals:
-   * 1 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I18 Branch 2 IFLE L25 - true
-   * 2 bierse.controller.DefaultMenuController.<init>(Lbierse/model/Model;Lbierse/view/IDrinkSellView;)V: root-Branch
-   * 3 bierse.controller.DefaultMenuController.actionPerformed(Ljava/awt/event/ActionEvent;)V: I6 Branch 1 IFLE L23 - true
-   */
-  @Test
-  public void test1()  throws Throwable  {
-      DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "MI_DISPLAY_SETTINGS_VIEW", 1881, "SETTINGS_ACTION_OK", (long) 1881, 1881);
+      ActionEvent actionEvent0 = new ActionEvent((Object) "ToolTipText", (-1004), "ToolTipText");
       defaultMenuController0.actionPerformed(actionEvent0);
-      assertEquals(1881, actionEvent0.getID());
+      assertEquals(0L, actionEvent0.getWhen());
   }
 }

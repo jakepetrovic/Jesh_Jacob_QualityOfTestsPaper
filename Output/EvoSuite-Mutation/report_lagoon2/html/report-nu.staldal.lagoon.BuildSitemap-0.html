@@ -21,14 +21,37 @@ nu.staldal.lagoon.BuildSitemap
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.lagoon.BuildSitemap: 0.00%</ul><ul>
-<li>3218 fitness evaluations, 66 generations, 7096 statements, 2162 tests.
-<li>Time: 0:01:16(Search: 0:01:04, minimization: 0:00:12)
-<li>Coverage: 0/16 branches, 0/2 methods, 0/17 total goals
-<li>Mutation score: 100%
+<ul><li>Target class: nu.staldal.lagoon.BuildSitemap: 82.35%</ul><ul>
+<li>2216 fitness evaluations, 46 generations, 6191 statements, 1588 tests.
+<li>Time: 0:01:45(Search: 0:01:01, minimization: 0:00:44)
+<li>Coverage: 13/16 branches, 2/2 methods, 14/17 total goals
+<li>Mutation score: 4%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
+<h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>BuildSitemap buildSitemap0 = new BuildSitemap();
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(buildSitemap0);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
+<span class="nocode"><a name="3">  3: </a></span>try {
+<span class="nocode"><a name="4">  4: </a></span>  BuildSitemap.processDirectory((File) null, (ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="7">  7: </a></span>}
+</pre>
+<h3>Test case 3</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>File file0 = new File(&quot;//home/jeshkracht/Major/lagoon_codepro/mutants.log.html&quot;);
+<span class="nocode"><a name="2">  2: </a></span>File file1 = file0.getParentFile();
+<span class="nocode"><a name="3">  3: </a></span>XMLFilterImpl xMLFilterImpl0 = new XMLFilterImpl();
+<span class="nocode"><a name="4">  4: </a></span>BuildSitemap.processDirectory(file1, (ContentHandler) xMLFilterImpl0);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(1399841414000L, file1.lastModified());
+</pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
 <span class="nocode"><a name="2">  2: </a></span> * Copyright (c) 2001, Mikael St�ldal
@@ -137,67 +160,67 @@ nu.staldal.lagoon.BuildSitemap
 <span class="nocode"><a name="105">105: </a></span>	public static void processDirectory(File dir, ContentHandler ch)
 <span class="nocode"><a name="106">106: </a></span>		throws SAXException
 <span class="nocode"><a name="107">107: </a></span>	{
-<span class="nocode"><a name="108">108: </a></span>		File thisDir = (dir == null) ? baseDir : new File(baseDir, dir.getPath());
-<span class="nocode"><a name="109">109: </a></span>		String[] dirList = thisDir.list();
-<span class="nocode"><a name="110">110: </a></span>		for (int i = 0; i&lt;dirList.length; i++)
+<span class="nocode"><a name="108">108: </a></span><span style="background-color: #ffffcc">		File thisDir = (dir == null) ? baseDir : new File(baseDir, dir.getPath());</span>
+<span class="nocode"><a name="109">109: </a></span><span style="background-color: #ffffcc">		String[] dirList = thisDir.list();</span>
+<span class="nocode"><a name="110">110: </a></span><span style="background-color: #ffffcc">		for (int i = 0; i&lt;dirList.length; i++)</span>
 <span class="nocode"><a name="111">111: </a></span>		{
-<span class="nocode"><a name="112">112: </a></span>			File ent = new File(thisDir, dirList[i]);
-<span class="nocode"><a name="113">113: </a></span>			File thisEnt = (dir == null) 
+<span class="nocode"><a name="112">112: </a></span><span style="background-color: #ffffcc">			File ent = new File(thisDir, dirList[i]);</span>
+<span class="nocode"><a name="113">113: </a></span><span style="background-color: #ffffcc">			File thisEnt = (dir == null) </span>
 <span class="nocode"><a name="114">114: </a></span>									? new File(dirList[i])
 <span class="nocode"><a name="115">115: </a></span>									: new File(dir, dirList[i]);
-<span class="nocode"><a name="116">116: </a></span>			if (ent.isDirectory())
+<span class="nocode"><a name="116">116: </a></span><span style="background-color: #ffffcc">			if (ent.isDirectory())</span>
 <span class="nocode"><a name="117">117: </a></span>			{
-<span class="nocode"><a name="118">118: </a></span>				processDirectory(thisEnt, ch);
+<span class="nocode"><a name="118">118: </a></span><span style="background-color: #ffffcc">				processDirectory(thisEnt, ch);</span>
 <span class="nocode"><a name="119">119: </a></span>			}
-<span class="nocode"><a name="120">120: </a></span>			else if (ent.isFile())
+<span class="nocode"><a name="120">120: </a></span><span style="background-color: #ffffcc">			else if (ent.isFile())</span>
 <span class="nocode"><a name="121">121: </a></span>			{
-<span class="nocode"><a name="122">122: </a></span>				AttributesImpl atts = new AttributesImpl();
-<span class="nocode"><a name="123">123: </a></span>                String url = &quot;/&quot; + thisEnt.getPath().replace(
+<span class="nocode"><a name="122">122: </a></span><span style="background-color: #ffffcc">				AttributesImpl atts = new AttributesImpl();</span>
+<span class="nocode"><a name="123">123: </a></span><span style="background-color: #ffffcc">                String url = &quot;/&quot; + thisEnt.getPath().replace(</span>
 <span class="nocode"><a name="124">124: </a></span>                    File.separatorChar, '/');
 <span class="nocode"><a name="125">125: </a></span>
-<span class="nocode"><a name="126">126: </a></span>				atts.addAttribute(&quot;&quot;,&quot;target&quot;,&quot;&quot;,&quot;CDATA&quot;, url);
+<span class="nocode"><a name="126">126: </a></span><span style="background-color: #ffffcc">				atts.addAttribute(&quot;&quot;,&quot;target&quot;,&quot;&quot;,&quot;CDATA&quot;, url);</span>
 <span class="nocode"><a name="127">127: </a></span>
-<span class="nocode"><a name="128">128: </a></span>				ch.startElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;, atts);
+<span class="nocode"><a name="128">128: </a></span><span style="background-color: #ffffcc">				ch.startElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;, atts);</span>
 <span class="nocode"><a name="129">129: </a></span>
-<span class="nocode"><a name="130">130: </a></span>                if (url.endsWith(&quot;.html&quot;) || url.endsWith(&quot;.htm&quot;))
+<span class="nocode"><a name="130">130: </a></span><span style="background-color: #ffffcc">                if (url.endsWith(&quot;.html&quot;) || url.endsWith(&quot;.htm&quot;))</span>
 <span class="nocode"><a name="131">131: </a></span>                {
-<span class="nocode"><a name="132">132: </a></span>    				AttributesImpl formatAtts = new AttributesImpl();
+<span class="nocode"><a name="132">132: </a></span><span style="background-color: #ffffcc">    				AttributesImpl formatAtts = new AttributesImpl();</span>
 <span class="nocode"><a name="133">133: </a></span>
-<span class="nocode"><a name="134">134: </a></span>				    formatAtts.addAttribute(&quot;&quot;,&quot;type&quot;,&quot;&quot;,&quot;CDATA&quot;, &quot;html&quot;);
+<span class="nocode"><a name="134">134: </a></span><span style="background-color: #ffffcc">				    formatAtts.addAttribute(&quot;&quot;,&quot;type&quot;,&quot;&quot;,&quot;CDATA&quot;, &quot;html&quot;);</span>
 <span class="nocode"><a name="135">135: </a></span>
-<span class="nocode"><a name="136">136: </a></span>                    ch.startElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;, formatAtts);
-<span class="nocode"><a name="137">137: </a></span>                    ch.startElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;, new AttributesImpl());
-<span class="nocode"><a name="138">138: </a></span>	    			ch.endElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;);
-<span class="nocode"><a name="139">139: </a></span>                    ch.endElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;);
-<span class="nocode"><a name="140">140: </a></span>                }
-<span class="nocode"><a name="141">141: </a></span>                else if (url.endsWith(&quot;.xml&quot;))
+<span class="nocode"><a name="136">136: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;, formatAtts);</span>
+<span class="nocode"><a name="137">137: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;, new AttributesImpl());</span>
+<span class="nocode"><a name="138">138: </a></span><span style="background-color: #ffffcc">	    			ch.endElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="139">139: </a></span><span style="background-color: #ffffcc">                    ch.endElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="140">140: </a></span><span style="background-color: #ffffcc">                }</span>
+<span class="nocode"><a name="141">141: </a></span><span style="background-color: #ffffcc">                else if (url.endsWith(&quot;.xml&quot;))</span>
 <span class="nocode"><a name="142">142: </a></span>                {
-<span class="nocode"><a name="143">143: </a></span>    				AttributesImpl formatAtts = new AttributesImpl();
+<span class="nocode"><a name="143">143: </a></span><span style="background-color: #ffffcc">    				AttributesImpl formatAtts = new AttributesImpl();</span>
 <span class="nocode"><a name="144">144: </a></span>
-<span class="nocode"><a name="145">145: </a></span>				    formatAtts.addAttribute(&quot;&quot;,&quot;type&quot;,&quot;&quot;,&quot;CDATA&quot;, &quot;xml&quot;);
+<span class="nocode"><a name="145">145: </a></span><span style="background-color: #ffffcc">				    formatAtts.addAttribute(&quot;&quot;,&quot;type&quot;,&quot;&quot;,&quot;CDATA&quot;, &quot;xml&quot;);</span>
 <span class="nocode"><a name="146">146: </a></span>
-<span class="nocode"><a name="147">147: </a></span>                    ch.startElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;, formatAtts);
-<span class="nocode"><a name="148">148: </a></span>                    ch.startElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;, new AttributesImpl());
-<span class="nocode"><a name="149">149: </a></span>	    			ch.endElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;);
-<span class="nocode"><a name="150">150: </a></span>                    ch.endElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;);
-<span class="nocode"><a name="151">151: </a></span>                }
+<span class="nocode"><a name="147">147: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;, formatAtts);</span>
+<span class="nocode"><a name="148">148: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;, new AttributesImpl());</span>
+<span class="nocode"><a name="149">149: </a></span><span style="background-color: #ffffcc">	    			ch.endElement(&quot;&quot;, &quot;source&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="150">150: </a></span><span style="background-color: #ffffcc">                    ch.endElement(&quot;&quot;, &quot;format&quot;, &quot;&quot;);</span>
+<span class="nocode"><a name="151">151: </a></span><span style="background-color: #ffffcc">                }</span>
 <span class="nocode"><a name="152">152: </a></span>                else
 <span class="nocode"><a name="153">153: </a></span>                {
-<span class="nocode"><a name="154">154: </a></span>                    ch.startElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;, new AttributesImpl());
-<span class="nocode"><a name="155">155: </a></span>	    			ch.endElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;);
+<span class="nocode"><a name="154">154: </a></span><span style="background-color: #ffffcc">                    ch.startElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;, new AttributesImpl());</span>
+<span class="nocode"><a name="155">155: </a></span><span style="background-color: #ffffcc">	    			ch.endElement(&quot;&quot;, &quot;read&quot;, &quot;&quot;);</span>
 <span class="nocode"><a name="156">156: </a></span>                }
 <span class="nocode"><a name="157">157: </a></span>
-<span class="nocode"><a name="158">158: </a></span>				ch.endElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;);
+<span class="nocode"><a name="158">158: </a></span><span style="background-color: #ffffcc">				ch.endElement(&quot;&quot;, &quot;file&quot;, &quot;&quot;);</span>
 <span class="nocode"><a name="159">159: </a></span>			}
 <span class="nocode"><a name="160">160: </a></span>		}
-<span class="nocode"><a name="161">161: </a></span>	}
+<span class="nocode"><a name="161">161: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="162">162: </a></span>
 <span class="nocode"><a name="163">163: </a></span>}
 </pre>
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5556991371216435935.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree3273211341135735144.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -215,7 +238,7 @@ nu.staldal.lagoon.BuildSitemap
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 15503
+<li>process_communication_port: 21245
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

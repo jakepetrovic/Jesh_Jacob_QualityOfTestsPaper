@@ -22,7 +22,7 @@ org.jsecurity.config.ResourceConfiguration
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.config.ResourceConfiguration: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 801 statements, 289 tests.
+<li>50 fitness evaluations, 2 generations, 938 statements, 257 tests.
 <li>Time: 0:00:17(Search: 0:00:17, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 3/3 methods, 3/3 total goals
 <li>Mutation score: 0%
@@ -38,11 +38,8 @@ org.jsecurity.config.ResourceConfiguration
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>IniConfiguration iniConfiguration0 = new IniConfiguration();
-<span class="nocode"><a name="2">  2: </a></span>byte[] byteArray0 = new byte[9];
-<span class="nocode"><a name="3">  3: </a></span>ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0, (int) (byte)0, 0);
-<span class="nocode"><a name="4">  4: </a></span>PushbackInputStream pushbackInputStream0 = new PushbackInputStream((InputStream) byteArrayInputStream0);
-<span class="nocode"><a name="5">  5: </a></span>iniConfiguration0.load((InputStream) pushbackInputStream0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, pushbackInputStream0.markSupported());
+<span class="nocode"><a name="2">  2: </a></span>iniConfiguration0.setSecurityManager((SecurityManager) null);
+<span class="nocode"><a name="3">  3: </a></span>assertNull(iniConfiguration0.getConfig());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -98,7 +95,7 @@ org.jsecurity.config.ResourceConfiguration
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -116,7 +113,7 @@ org.jsecurity.config.ResourceConfiguration
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 20939
+<li>process_communication_port: 16617
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

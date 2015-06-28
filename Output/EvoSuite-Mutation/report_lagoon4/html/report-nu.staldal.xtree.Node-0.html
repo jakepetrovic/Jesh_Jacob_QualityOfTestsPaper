@@ -21,17 +21,17 @@ nu.staldal.xtree.Node
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: nu.staldal.xtree.Node: 95.45%</ul><ul>
-<li>16404 fitness evaluations, 330 generations, 91724 statements, 10264 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 9/10 branches, 17/17 methods, 21/22 total goals
-<li>Mutation score: 40%
+<ul><li>Target class: nu.staldal.xtree.Node: 100.00%</ul><ul>
+<li>10950 fitness evaluations, 220 generations, 75507 statements, 6893 tests.
+<li>Time: 0:00:50(Search: 0:00:49, minimization: 0:00:01)
+<li>Coverage: 10/10 branches, 17/17 methods, 22/22 total goals
+<li>Mutation score: 42%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;z:&quot;, &quot;z:&quot;);
 <span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = processingInstruction0.isWhitespaceNode();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
@@ -39,128 +39,135 @@ nu.staldal.xtree.Node
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;, (-1018));
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;tt?Tv{Cm3@S&quot;, &quot;tt?Tv{Cm3@S&quot;);
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  element0.getFirstChildElement(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  element0.getFirstChildElement(&quot;tt?Tv{Cm3@S&quot;, &quot;tt?Tv{Cm3@S&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: SAXParseException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(SAXParseException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
-<span class="nocode"><a name="7">  7: </a></span>   * Element {iYt^&amp;}iYt^&amp; expected
+<span class="nocode"><a name="7">  7: </a></span>   * Element {tt?Tv{Cm3@S}tt?Tv{Cm3@S expected
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;]GT]]g3&quot;, &quot;]GT]]g3&quot;);
 <span class="nocode"><a name="2">  2: </a></span>processingInstruction0.getParent();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(-1, element0.getColumnNumber());
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>element0.setColumn(0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, element0.getColumnNumber());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, element0.getLineNumber());
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;]GT]]g3&quot;, &quot;]GT]]g3&quot;);
+<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.setColumn((-231));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-231, processingInstruction0.getColumnNumber());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.setPublicId(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;&quot;, processingInstruction0.getPublicId());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;]GT]]g3&quot;);
+<span class="nocode"><a name="2">  2: </a></span>text0.setPublicId((String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, text0.getLineNumber());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, text0.getColumnNumber());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;e?l*#p&quot;, &quot;e?l*#p&quot;, 961, 961);
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(&quot;e?l*#p&quot;);
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;-BzT]YH27%.=hr|}&quot;, &quot;-BzT]YH27%.=hr|}&quot;, 1885, 1885);
+<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(&quot;0y/zZ1k/.#k2&quot;);
 <span class="nocode"><a name="3">  3: </a></span>text0.setParent((NodeWithChildren) element0);
-<span class="nocode"><a name="4">  4: </a></span>text0.lookupNamespaceURI(&quot;e?l*#p&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getLineNumber());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, text0.getColumnNumber());
+<span class="nocode"><a name="4">  4: </a></span>text0.getInheritedAttribute(&quot;&quot;, &quot;LocalName may not be null&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getColumnNumber());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, text0.getLineNumber());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>processingInstruction0.setLine(0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(0, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;0y/zZ1k/.#k2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>text0.setLine((-190));
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-190, text0.getLineNumber());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, text0.getColumnNumber());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.setSystemId(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;&quot;, processingInstruction0.getSystemId());
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;0y/zZ1k/.#k2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>text0.setSystemId(&quot;0y/zZ1k/.#k2&quot;);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, text0.getColumnNumber());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, text0.getLineNumber());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(&quot;0y/zZ1k/.#k2&quot;, text0.getSystemId());
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.lookupNamespaceURI(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;z:&quot;, &quot;z:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;z:&quot;, &quot;z:&quot;, 8, 8);
+<span class="nocode"><a name="3">  3: </a></span>processingInstruction0.setParent((NodeWithChildren) element0);
+<span class="nocode"><a name="4">  4: </a></span>processingInstruction0.lookupNamespaceURI(&quot;z:&quot;);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.lookupNamespacePrefix(&quot;&quot;);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;0y/zZ1k/.#k2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>text0.lookupNamespaceURI((String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, text0.getLineNumber());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, text0.getColumnNumber());
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;e?l*#p&quot;, &quot;e?l*#p&quot;, 961, 961);
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(&quot;e?l*#p&quot;);
-<span class="nocode"><a name="3">  3: </a></span>text0.setParent((NodeWithChildren) element0);
-<span class="nocode"><a name="4">  4: </a></span>text0.getBaseURI();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getLineNumber());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, text0.getColumnNumber());
+<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;Element {&quot;, &quot;Element {&quot;, 0);
+<span class="nocode"><a name="2">  2: </a></span>char[] charArray0 = new char[5];
+<span class="nocode"><a name="3">  3: </a></span>Text text0 = new Text(charArray0, 1, 1, false);
+<span class="nocode"><a name="4">  4: </a></span>text0.setParent((NodeWithChildren) element0);
+<span class="nocode"><a name="5">  5: </a></span>// Undeclared exception!
+<span class="nocode"><a name="6">  6: </a></span>try {
+<span class="nocode"><a name="7">  7: </a></span>  text0.lookupNamespacePrefix((String) null);
+<span class="nocode"><a name="8">  8: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="9">  9: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="10"> 10: </a></span>}
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.getBaseURI();
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;]GT]]g3&quot;, &quot;]GT]]g3&quot;);
+<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.lookupNamespacePrefix((String) null);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Element element0 = new Element(&quot;e?l*#p&quot;, &quot;e?l*#p&quot;, 961, 961);
-<span class="nocode"><a name="2">  2: </a></span>Text text0 = new Text(&quot;e?l*#p&quot;);
-<span class="nocode"><a name="3">  3: </a></span>text0.setParent((NodeWithChildren) element0);
-<span class="nocode"><a name="4">  4: </a></span>text0.getPreserveSpace();
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getColumnNumber());
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, text0.getLineNumber());
-</pre>
-<h3>Test case 14</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;-o textcontent&quot;);
-<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = text0.getPreserveSpace();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, text0.getLineNumber());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, boolean0);
-<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getColumnNumber());
-</pre>
-<h3>Test case 15</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;, (-1018));
-<span class="nocode"><a name="3">  3: </a></span>element0.addChild((Node) processingInstruction0);
-<span class="nocode"><a name="4">  4: </a></span>processingInstruction0.getInheritedAttribute(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;z:&quot;, &quot;z:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;z:&quot;, &quot;z:&quot;, 8, 8);
+<span class="nocode"><a name="3">  3: </a></span>processingInstruction0.setParent((NodeWithChildren) element0);
+<span class="nocode"><a name="4">  4: </a></span>processingInstruction0.getBaseURI();
 <span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
 </pre>
-<h3>Test case 16</h3>
+<h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
-<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.getInheritedAttribute(&quot;iYt^&amp;&quot;, &quot;iYt^&amp;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;]GT]]g3&quot;, &quot;]GT]]g3&quot;);
+<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.getBaseURI();
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 <span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
+</pre>
+<h3>Test case 15</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;z:&quot;, &quot;z:&quot;);
+<span class="nocode"><a name="2">  2: </a></span>Element element0 = new Element(&quot;z:&quot;, &quot;z:&quot;, 8, 8);
+<span class="nocode"><a name="3">  3: </a></span>processingInstruction0.setParent((NodeWithChildren) element0);
+<span class="nocode"><a name="4">  4: </a></span>processingInstruction0.getPreserveSpace();
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
+</pre>
+<h3>Test case 16</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Text text0 = new Text(&quot;0y/zZ1k/.#k2&quot;);
+<span class="nocode"><a name="2">  2: </a></span>boolean boolean0 = text0.getPreserveSpace();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(false, boolean0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, text0.getLineNumber());
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(-1, text0.getColumnNumber());
+</pre>
+<h3>Test case 17</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ProcessingInstruction processingInstruction0 = new ProcessingInstruction(&quot;]GT]]g3&quot;, &quot;]GT]]g3&quot;);
+<span class="nocode"><a name="2">  2: </a></span>processingInstruction0.getInheritedAttribute((String) null, (String) null);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(-1, processingInstruction0.getLineNumber());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(-1, processingInstruction0.getColumnNumber());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -372,7 +379,7 @@ nu.staldal.xtree.Node
 <span class="nocode"><a name="207">207: </a></span><span style="background-color: #ffffcc">		if (parent == null)</span>
 <span class="nocode"><a name="208">208: </a></span><span style="background-color: #ffffcc">			return null;</span>
 <span class="nocode"><a name="209">209: </a></span>		else
-<span class="nocode"><a name="210">210: </a></span>			return parent.lookupNamespacePrefix(URI);
+<span class="nocode"><a name="210">210: </a></span><span style="background-color: #ffffcc">			return parent.lookupNamespacePrefix(URI);</span>
 <span class="nocode"><a name="211">211: </a></span>	}
 <span class="nocode"><a name="212">212: </a></span>
 <span class="nocode"><a name="213">213: </a></span>	
@@ -442,7 +449,7 @@ nu.staldal.xtree.Node
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -460,7 +467,7 @@ nu.staldal.xtree.Node
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 7594
+<li>process_communication_port: 6903
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

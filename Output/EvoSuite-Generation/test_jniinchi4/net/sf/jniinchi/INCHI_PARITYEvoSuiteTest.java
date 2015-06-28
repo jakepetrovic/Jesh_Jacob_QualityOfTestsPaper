@@ -44,12 +44,12 @@ public class INCHI_PARITYEvoSuiteTest {
   /*
    * 2 covered goals:
    * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 1 TABLESWITCH L72 Case 0 - false
-   * 2 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 3 TABLESWITCH L72 Case 2 - true
+   * 2 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 4 TABLESWITCH L72 Case 3 - true
    */
   @Test
   public void test2()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(2);
-      assertEquals(INCHI_PARITY.EVEN, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
+      assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
   }
 
   //Test case number: 3
@@ -66,12 +66,12 @@ public class INCHI_PARITYEvoSuiteTest {
   //Test case number: 4
   /*
    * 1 covered goal:
-   * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 4 TABLESWITCH L72 Case 3 - true
+   * 1 net.sf.jniinchi.INCHI_PARITY.getValue(I)Lnet/sf/jniinchi/INCHI_PARITY;: I3 Branch 3 TABLESWITCH L72 Case 2 - true
    */
   @Test
   public void test4()  throws Throwable  {
-      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(3);
-      assertEquals(INCHI_PARITY.UNKNOWN, iNCHI_PARITY0);
+      INCHI_PARITY iNCHI_PARITY0 = INCHI_PARITY.getValue(2);
+      assertEquals(INCHI_PARITY.EVEN, iNCHI_PARITY0);
   }
 
   //Test case number: 5
@@ -98,6 +98,6 @@ public class INCHI_PARITYEvoSuiteTest {
    */
   @Test
   public void test6()  throws Throwable  {
-      INCHI_PARITY.getValue(1261930721);
+      INCHI_PARITY.getValue(932);
   }
 }

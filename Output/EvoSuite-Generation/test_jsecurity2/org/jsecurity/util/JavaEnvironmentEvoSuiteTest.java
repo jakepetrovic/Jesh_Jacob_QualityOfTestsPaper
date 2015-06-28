@@ -32,7 +32,7 @@ public class JavaEnvironmentEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       String string0 = JavaEnvironment.getVersion();
-      assertEquals("1.7.0_51", string0);
+      assertEquals("1.7.0_79", string0);
   }
 
   //Test case number: 2

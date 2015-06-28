@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 import java.util.List;
 import net.sf.lavalamp.device.Device;
+import net.sf.lavalamp.device.DummyDevice;
 import net.sf.lavalamp.device.StatusQuo;
 
 public class StatusQuoEvoSuiteTest {
@@ -25,6 +26,7 @@ public class StatusQuoEvoSuiteTest {
   public void test0()  throws Throwable  {
       StatusQuo statusQuo0 = new StatusQuo();
       LinkedList<String> linkedList0 = new LinkedList<String>();
-      statusQuo0.perform((List<String>) linkedList0, (Device) null);
+      DummyDevice dummyDevice0 = new DummyDevice();
+      statusQuo0.perform((List<String>) linkedList0, (Device) dummyDevice0);
   }
 }

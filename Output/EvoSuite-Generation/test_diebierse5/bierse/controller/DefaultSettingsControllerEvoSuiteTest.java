@@ -28,8 +28,8 @@ public class DefaultSettingsControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultSettingsController defaultSettingsController0 = new DefaultSettingsController((Model) null, (ISettingsView) null, (IDrinkSettingsView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) "SORT_ORDER_CHANGED", 0, "SORT_ORDER_CHANGED");
+      ActionEvent actionEvent0 = new ActionEvent((Object) "West", 74, "West", (long) 74, 74);
       defaultSettingsController0.actionPerformed(actionEvent0);
-      assertEquals(0, actionEvent0.getModifiers());
+      assertEquals(74, actionEvent0.getID());
   }
 }

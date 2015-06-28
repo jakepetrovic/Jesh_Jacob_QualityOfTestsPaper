@@ -11,13 +11,14 @@ import com.allenstudio.ir.util.XmlElement;
 import com.allenstudio.ir.util.XmlIO;
 import java.awt.HeadlessException;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.SequenceInputStream;
+import java.io.PipedOutputStream;
 import java.net.URL;
-import java.util.Hashtable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.Attributes2Impl;
@@ -37,7 +38,7 @@ public class XmlIOEvoSuiteTest {
       XmlIO xmlIO0 = new XmlIO();
       // Undeclared exception!
       try {
-        xmlIO0.endElement("", "d(qMDOhF*7|Q", "");
+        xmlIO0.endElement((String) null, (String) null, (String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -53,7 +54,7 @@ public class XmlIOEvoSuiteTest {
       XmlIO xmlIO0 = new XmlIO();
       // Undeclared exception!
       try {
-        xmlIO0.errorDialog("HrwNDb0/z11CWi");
+        xmlIO0.errorDialog("]UAUXwn5ey}PL]");
         fail("Expecting exception: HeadlessException");
       } catch(HeadlessException e) {
       }
@@ -61,12 +62,14 @@ public class XmlIOEvoSuiteTest {
 
   //Test case number: 2
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.allenstudio.ir.util.XmlIO.save()V: root-Branch
+   * 2 com.allenstudio.ir.util.XmlIO.<init>(Lcom/allenstudio/ir/util/XmlElement;)V: root-Branch
    */
   @Test
   public void test2()  throws Throwable  {
-      XmlIO xmlIO0 = new XmlIO();
+      XmlElement xmlElement0 = new XmlElement();
+      XmlIO xmlIO0 = new XmlIO(xmlElement0);
       try {
         xmlIO0.save();
         fail("Expecting exception: NullPointerException");
@@ -83,23 +86,20 @@ public class XmlIOEvoSuiteTest {
   public void test3()  throws Throwable  {
       XmlIO xmlIO0 = new XmlIO();
       XmlElement xmlElement0 = xmlIO0.getRoot();
-      assertEquals("", xmlElement0.getData());
+      assertEquals("__INSPIRENTO_XML_TREE_TOP__", xmlElement0.getName());
   }
 
   //Test case number: 4
   /*
-   * 2 covered goals:
+   * 1 covered goal:
    * 1 com.allenstudio.ir.util.XmlIO.infoDialog(Ljava/lang/String;)V: root-Branch
-   * 2 com.allenstudio.ir.util.XmlIO.<init>(Lcom/allenstudio/ir/util/XmlElement;)V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
-      Hashtable<String, String> hashtable0 = new Hashtable<String, String>();
-      XmlElement xmlElement0 = new XmlElement("efiz]'<", hashtable0);
-      XmlIO xmlIO0 = new XmlIO(xmlElement0);
+      XmlIO xmlIO0 = new XmlIO();
       // Undeclared exception!
       try {
-        xmlIO0.infoDialog("efiz]'<");
+        xmlIO0.infoDialog("#p#\"/CpAY");
         fail("Expecting exception: HeadlessException");
       } catch(HeadlessException e) {
       }
@@ -124,66 +124,51 @@ public class XmlIOEvoSuiteTest {
 
   //Test case number: 6
   /*
-   * 1 covered goal:
+   * 2 covered goals:
    * 1 com.allenstudio.ir.util.XmlIO.setURL(Ljava/net/URL;)V: root-Branch
+   * 2 com.allenstudio.ir.util.XmlIO.<init>(Ljava/net/URL;)V: root-Branch
    */
   @Test
   public void test6()  throws Throwable  {
-      XmlIO xmlIO0 = new XmlIO();
+      XmlIO xmlIO0 = new XmlIO((URL) null);
       xmlIO0.setURL((URL) null);
   }
 
   //Test case number: 7
   /*
    * 1 covered goal:
-   * 1 com.allenstudio.ir.util.XmlIO.<init>(Ljava/net/URL;)V: root-Branch
-   */
-  @Test
-  public void test7()  throws Throwable  {
-      XmlIO xmlIO0 = new XmlIO((URL) null);
-      assertNotNull(xmlIO0);
-  }
-
-  //Test case number: 8
-  /*
-   * 1 covered goal:
    * 1 com.allenstudio.ir.util.XmlIO.warningDialog(Ljava/lang/String;)V: root-Branch
    */
   @Test
-  public void test8()  throws Throwable  {
+  public void test7()  throws Throwable  {
       XmlIO xmlIO0 = new XmlIO();
       // Undeclared exception!
       try {
-        xmlIO0.warningDialog("");
+        xmlIO0.warningDialog("i7;:\"V 3R");
         fail("Expecting exception: HeadlessException");
       } catch(HeadlessException e) {
       }
   }
 
-  //Test case number: 9
+  //Test case number: 8
   /*
    * 1 covered goal:
    * 1 com.allenstudio.ir.util.XmlIO.characters([CII)V: root-Branch
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       XmlIO xmlIO0 = new XmlIO();
-      char[] charArray0 = new char[5];
-      // Undeclared exception!
-      try {
-        xmlIO0.characters(charArray0, (-1760), (int) ';');
-        fail("Expecting exception: IndexOutOfBoundsException");
-      } catch(IndexOutOfBoundsException e) {
-      }
+      char[] charArray0 = new char[2];
+      xmlIO0.characters(charArray0, 0, 0);
   }
 
-  //Test case number: 10
+  //Test case number: 9
   /*
    * 1 covered goal:
    * 1 com.allenstudio.ir.util.XmlIO.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I14 Branch 1 IFLE L219 - false
    */
   @Test
-  public void test10()  throws Throwable  {
+  public void test9()  throws Throwable  {
       XmlIO xmlIO0 = new XmlIO();
       AttributesImpl attributesImpl0 = new AttributesImpl();
       Attributes2Impl attributes2Impl0 = new Attributes2Impl((Attributes) attributesImpl0);
@@ -191,87 +176,129 @@ public class XmlIOEvoSuiteTest {
       assertEquals(0, attributes2Impl0.getLength());
   }
 
-  //Test case number: 11
+  //Test case number: 10
   /*
-   * 5 covered goals:
+   * 4 covered goals:
    * 1 com.allenstudio.ir.util.XmlIO.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I41 Branch 2 IFNULL L228 - false
    * 2 com.allenstudio.ir.util.XmlIO.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I50 Branch 3 IF_ICMPGE L229 - true
-   * 3 com.allenstudio.ir.util.XmlIO.<init>()V: root-Branch
+   * 3 com.allenstudio.ir.util.XmlIO.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I14 Branch 1 IFLE L219 - true
    * 4 com.allenstudio.ir.util.XmlIO.load(Ljava/io/InputStream;)Z: root-Branch
-   * 5 com.allenstudio.ir.util.XmlIO.startElement(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lorg/xml/sax/Attributes;)V: I14 Branch 1 IFLE L219 - true
+   */
+  @Test
+  public void test10()  throws Throwable  {
+      XmlIO xmlIO0 = new XmlIO();
+      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
+      byte[] byteArray0 = new byte[6];
+      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0, 0, 1419);
+      xmlIO0.load((InputStream) byteArrayInputStream0);
+      xmlIO0.startElement("#p#\"/CpAY", "#p#\"/CpAY", "#p#\"/CpAY", (Attributes) attributes2Impl0);
+      assertEquals(0, attributes2Impl0.getLength());
+  }
+
+  //Test case number: 11
+  /*
+   * 3 covered goals:
+   * 1 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I22 Branch 5 IFLE L299 - true
+   * 2 com.allenstudio.ir.util.XmlIO.<init>()V: root-Branch
+   * 3 com.allenstudio.ir.util.XmlIO.load(Ljava/io/InputStream;)Z: root-Branch
    */
   @Test
   public void test11()  throws Throwable  {
       XmlIO xmlIO0 = new XmlIO();
-      Attributes2Impl attributes2Impl0 = new Attributes2Impl();
-      byte[] byteArray0 = new byte[6];
-      ByteArrayInputStream byteArrayInputStream0 = new ByteArrayInputStream(byteArray0);
-      SequenceInputStream sequenceInputStream0 = new SequenceInputStream((InputStream) byteArrayInputStream0, (InputStream) byteArrayInputStream0);
-      xmlIO0.load((InputStream) sequenceInputStream0);
-      xmlIO0.startElement("q", "<", "q", (Attributes) attributes2Impl0);
-      assertEquals(0, attributes2Impl0.getLength());
+      FileDescriptor fileDescriptor0 = new FileDescriptor();
+      FileInputStream fileInputStream0 = new FileInputStream(fileDescriptor0);
+      xmlIO0.load((InputStream) fileInputStream0);
+      PipedOutputStream pipedOutputStream0 = new PipedOutputStream();
+      try {
+        xmlIO0.write((OutputStream) pipedOutputStream0);
+        fail("Expecting exception: IOException");
+      } catch(IOException e) {
+        /*
+         * Pipe not connected
+         */
+      }
   }
 
   //Test case number: 12
   /*
-   * 7 covered goals:
-   * 1 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - false
-   * 2 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I110 Branch 11 IFLE L334 - true
-   * 3 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - true
-   * 4 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I69 Branch 8 IFNULL L323 - true
-   * 5 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I22 Branch 5 IFLE L299 - false
-   * 6 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - false
-   * 7 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - true
+   * 11 covered goals:
+   * 1 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I22 Branch 5 IFLE L299 - false
+   * 2 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - true
+   * 3 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - false
+   * 4 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - true
+   * 5 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I69 Branch 8 IFNULL L323 - false
+   * 6 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I73 Branch 9 IFGT L323 - false
+   * 7 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I80 Branch 10 IF_ICMPLE L324 - false
+   * 8 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I110 Branch 11 IFLE L334 - true
+   * 9 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I150 Branch 13 IF_ICMPLE L350 - false
+   * 10 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - true
+   * 11 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - false
    */
   @Test
   public void test12()  throws Throwable  {
-      Hashtable<String, String> hashtable0 = new Hashtable<String, String>();
-      XmlElement xmlElement0 = new XmlElement("efiz]'<", hashtable0);
+      XmlElement xmlElement0 = new XmlElement("I/O error while attempting to read XML file \n'", "I/O error while attempting to read XML file \n'");
       XmlIO xmlIO0 = new XmlIO(xmlElement0);
-      assertNotNull(xmlIO0);
-      
-      hashtable0.put("efiz]'<", "efiz]'<");
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(303);
+      FilterOutputStream filterOutputStream0 = new FilterOutputStream((OutputStream) null);
       // Undeclared exception!
       try {
-        xmlIO0.write((OutputStream) byteArrayOutputStream0);
+        xmlIO0.write((OutputStream) filterOutputStream0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
-      assertEquals(39, byteArrayOutputStream0.size());
-      assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", byteArrayOutputStream0.toString());
   }
 
   //Test case number: 13
   /*
-   * 9 covered goals:
-   * 1 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I110 Branch 11 IFLE L334 - false
-   * 2 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I124 Branch 12 IFEQ L337 - false
-   * 3 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - false
-   * 4 com.allenstudio.ir.util.XmlIO.<init>(Lcom/allenstudio/ir/util/XmlElement;)V: root-Branch
-   * 5 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - true
-   * 6 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I69 Branch 8 IFNULL L323 - true
-   * 7 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I22 Branch 5 IFLE L299 - false
-   * 8 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - false
-   * 9 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - true
+   * 3 covered goals:
+   * 1 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - false
+   * 2 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I80 Branch 10 IF_ICMPLE L324 - true
+   * 3 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I150 Branch 13 IF_ICMPLE L350 - true
    */
   @Test
   public void test13()  throws Throwable  {
-      Hashtable<String, String> hashtable0 = new Hashtable<String, String>();
-      XmlElement xmlElement0 = new XmlElement("efiz]'<", hashtable0);
+      XmlElement xmlElement0 = new XmlElement("]%{", "]%{");
+      xmlElement0.getAttribute("]%{", "]%{");
       XmlIO xmlIO0 = new XmlIO(xmlElement0);
-      assertNotNull(xmlIO0);
-      
-      XmlElement xmlElement1 = new XmlElement();
-      xmlElement0.addSubElement(xmlElement1);
-      ByteArrayOutputStream byteArrayOutputStream0 = new ByteArrayOutputStream(303);
+      FilterOutputStream filterOutputStream0 = new FilterOutputStream((OutputStream) null);
       // Undeclared exception!
       try {
-        xmlIO0.write((OutputStream) byteArrayOutputStream0);
+        xmlIO0.write((OutputStream) filterOutputStream0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
-      assertEquals(39, byteArrayOutputStream0.size());
-      assertEquals("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", byteArrayOutputStream0.toString());
+  }
+
+  //Test case number: 14
+  /*
+   * 16 covered goals:
+   * 1 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I73 Branch 9 IFGT L323 - true
+   * 2 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I110 Branch 11 IFLE L334 - false
+   * 3 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I124 Branch 12 IFEQ L337 - true
+   * 4 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I124 Branch 12 IFEQ L337 - false
+   * 5 com.allenstudio.ir.util.XmlIO.<init>(Lcom/allenstudio/ir/util/XmlElement;)V: root-Branch
+   * 6 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I25 Branch 7 IFEQ L314 - true
+   * 7 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I69 Branch 8 IFNULL L323 - false
+   * 8 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I73 Branch 9 IFGT L323 - false
+   * 9 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I80 Branch 10 IF_ICMPLE L324 - true
+   * 10 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I110 Branch 11 IFLE L334 - true
+   * 11 com.allenstudio.ir.util.XmlIO._writeSubNode(Ljava/io/Writer;Lcom/allenstudio/ir/util/XmlElement;I)V: I150 Branch 13 IF_ICMPLE L350 - true
+   * 12 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I22 Branch 5 IFLE L299 - false
+   * 13 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - true
+   * 14 com.allenstudio.ir.util.XmlIO.write(Ljava/io/OutputStream;)V: I33 Branch 6 IF_ICMPGE L300 - false
+   * 15 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - true
+   * 16 com.allenstudio.ir.util.XmlIO._writeSpace(Ljava/io/Writer;I)V: I7 Branch 14 IF_ICMPGE L360 - false
+   */
+  @Test
+  public void test14()  throws Throwable  {
+      XmlElement xmlElement0 = new XmlElement("]%{", "]%{");
+      xmlElement0.addSubElement("]%{");
+      XmlIO xmlIO0 = new XmlIO(xmlElement0);
+      FilterOutputStream filterOutputStream0 = new FilterOutputStream((OutputStream) null);
+      // Undeclared exception!
+      try {
+        xmlIO0.write((OutputStream) filterOutputStream0);
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
   }
 }

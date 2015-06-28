@@ -22,8 +22,8 @@ nu.staldal.lagoon.producer.XMLFormatter
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: nu.staldal.lagoon.producer.XMLFormatter: 23.40%</ul><ul>
-<li>21174 fitness evaluations, 425 generations, 50466 statements, 12697 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
+<li>6266 fitness evaluations, 127 generations, 17602 statements, 3928 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 8/44 branches, 4/4 methods, 11/47 total goals
 <li>Mutation score: 0%
 </ul>
@@ -34,7 +34,7 @@ nu.staldal.lagoon.producer.XMLFormatter
 <span class="nocode"><a name="1">  1: </a></span>XMLFormatter xMLFormatter0 = new XMLFormatter();
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLFormatter0.hasBeenUpdated(23L);
+<span class="nocode"><a name="4">  4: </a></span>  xMLFormatter0.hasBeenUpdated(0L);
 <span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="7">  7: </a></span>}
@@ -42,12 +42,14 @@ nu.staldal.lagoon.producer.XMLFormatter
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>XMLFormatter xMLFormatter0 = new XMLFormatter();
-<span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
-<span class="nocode"><a name="3">  3: </a></span>try {
-<span class="nocode"><a name="4">  4: </a></span>  xMLFormatter0.start((OutputStream) null, (Target) null);
-<span class="nocode"><a name="5">  5: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="6">  6: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="7">  7: </a></span>}
+<span class="nocode"><a name="2">  2: </a></span>PipedInputStream pipedInputStream0 = new PipedInputStream();
+<span class="nocode"><a name="3">  3: </a></span>PipedOutputStream pipedOutputStream0 = new PipedOutputStream(pipedInputStream0);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  xMLFormatter0.start((OutputStream) pipedOutputStream0, (Target) null);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -258,7 +260,7 @@ nu.staldal.lagoon.producer.XMLFormatter
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2521600698647272430.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree8809479908287793865.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -276,7 +278,7 @@ nu.staldal.lagoon.producer.XMLFormatter
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4032
+<li>process_communication_port: 5672
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

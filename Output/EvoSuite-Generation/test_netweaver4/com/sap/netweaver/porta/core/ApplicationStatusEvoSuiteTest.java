@@ -14,14 +14,18 @@ public class ApplicationStatusEvoSuiteTest {
 
   //Test case number: 0
   /*
-   * 1 covered goal:
+   * 4 covered goals:
    * 1 com.sap.netweaver.porta.core.ApplicationStatus.toString()Ljava/lang/String;: root-Branch
+   * 2 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I14 Branch 1 IF_ICMPGE L97 - false
+   * 3 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - true
+   * 4 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - false
    */
   @Test
   public void test0()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.STARTING;
+      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("not supported");
       String string0 = applicationStatus0.toString();
-      assertEquals("starting", string0);
+      assertEquals("not supported", string0);
+      assertNotNull(string0);
   }
 
   //Test case number: 1
@@ -35,25 +39,12 @@ public class ApplicationStatusEvoSuiteTest {
   public void test1()  throws Throwable  {
       // Undeclared exception!
       try {
-        ApplicationStatus.getByName("AM7;JKWu+Q");
+        ApplicationStatus.getByName("");
         fail("Expecting exception: IllegalArgumentException");
       } catch(IllegalArgumentException e) {
         /*
-         * AM7;JKWu+Q
+         * 
          */
       }
-  }
-
-  //Test case number: 2
-  /*
-   * 3 covered goals:
-   * 1 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - false
-   * 2 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I14 Branch 1 IF_ICMPGE L97 - false
-   * 3 com.sap.netweaver.porta.core.ApplicationStatus.getByName(Ljava/lang/String;)Lcom/sap/netweaver/porta/core/ApplicationStatus;: I25 Branch 2 IFLE L98 - true
-   */
-  @Test
-  public void test2()  throws Throwable  {
-      ApplicationStatus applicationStatus0 = ApplicationStatus.getByName("upgrading");
-      assertEquals(ApplicationStatus.UPGRADING, applicationStatus0);
   }
 }

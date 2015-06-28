@@ -27,7 +27,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, "");
+      AuthCallback authCallback0 = new AuthCallback(false, "_");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {
@@ -48,7 +48,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(false, "");
+      AuthCallback authCallback0 = new AuthCallback(false, "~Q");
       AuthenticationReason authenticationReason0 = AuthenticationReason.PERMISSION_DENIED;
       // Undeclared exception!
       try {
@@ -69,7 +69,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "ML<&3RFb");
+      AuthCallback authCallback0 = new AuthCallback(true, "7s[2SVcY4XfwQRI");
       AuthenticationReason authenticationReason0 = AuthenticationReason.INVALID_CREDENTIALS;
       // Undeclared exception!
       try {
@@ -94,7 +94,7 @@ public class AuthCallbackEvoSuiteTest {
    */
   @Test
   public void test3()  throws Throwable  {
-      AuthCallback authCallback0 = new AuthCallback(true, "");
+      AuthCallback authCallback0 = new AuthCallback(true, ";");
       AuthenticationReason authenticationReason0 = AuthenticationReason.AUTHORIZATION_REQUIRED;
       // Undeclared exception!
       try {

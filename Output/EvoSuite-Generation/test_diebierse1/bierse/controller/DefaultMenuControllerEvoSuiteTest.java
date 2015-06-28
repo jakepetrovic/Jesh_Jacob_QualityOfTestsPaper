@@ -25,8 +25,8 @@ public class DefaultMenuControllerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-      ActionEvent actionEvent0 = new ActionEvent((Object) defaultMenuController0, 0, "{8% |YP>qY'm6~vc", (long) 0, 0);
+      ActionEvent actionEvent0 = new ActionEvent((Object) "borderPainted", 0, "borderPainted");
       defaultMenuController0.actionPerformed(actionEvent0);
-      assertEquals(0, actionEvent0.getID());
+      assertEquals(0L, actionEvent0.getWhen());
   }
 }

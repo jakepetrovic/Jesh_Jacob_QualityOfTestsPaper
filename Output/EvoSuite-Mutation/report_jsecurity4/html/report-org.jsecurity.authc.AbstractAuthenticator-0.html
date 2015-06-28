@@ -22,25 +22,27 @@ org.jsecurity.authc.AbstractAuthenticator
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authc.AbstractAuthenticator: 67.86%</ul><ul>
-<li>16894 fitness evaluations, 339 generations, 90368 statements, 10606 tests.
+<li>15258 fitness evaluations, 307 generations, 117481 statements, 9977 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 15/24 branches, 9/9 methods, 19/28 total goals
-<li>Mutation score: 0%
+<li>Mutation score: 33%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) null);
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;);
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(false, simplePrincipalCollection0.isEmpty());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) null);
 <span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.add((AuthenticationListener) null);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthenticator0.notifyLogout((PrincipalCollection) null);
+<span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthenticator0.notifySuccess((AuthenticationToken) null, (AuthenticationInfo) null);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(NullPointerException e) {
 <span class="nocode"><a name="8">  8: </a></span>}
@@ -53,66 +55,73 @@ org.jsecurity.authc.AbstractAuthenticator
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>LinkedList&lt;AuthenticationListener&gt; linkedList0 = new LinkedList&lt;AuthenticationListener&gt;();
-<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.setAuthenticationListeners((Collection&lt;AuthenticationListener&gt;) linkedList0);
-<span class="nocode"><a name="4">  4: </a></span>linkedList0.add((AuthenticationListener) null);
-<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;/Q`;XD:28.55&quot;, &quot;/Q`;XD:28.55&quot;, true);
-<span class="nocode"><a name="6">  6: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
-<span class="nocode"><a name="7">  7: </a></span>// Undeclared exception!
-<span class="nocode"><a name="8">  8: </a></span>try {
-<span class="nocode"><a name="9">  9: </a></span>  modularRealmAuthenticator0.notifySuccess((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
-<span class="nocode"><a name="10"> 10: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
-<span class="nocode"><a name="11"> 11: </a></span>} catch(NullPointerException e) {
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) null);
+<span class="nocode"><a name="2">  2: </a></span>LinkedHashSet&lt;AuthenticationListener&gt; linkedHashSet0 = new LinkedHashSet&lt;AuthenticationListener&gt;();
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.setAuthenticationListeners((Collection&lt;AuthenticationListener&gt;) linkedHashSet0);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0, linkedHashSet0.size());
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.setAuthenticationListeners((Collection&lt;AuthenticationListener&gt;) null);
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.setAuthenticationListeners((Collection&lt;AuthenticationListener&gt;) null);
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;org.jsecurity.realm.SimpleAccountRealm_0&quot;, simpleAccountRealm0.getName());
 </pre>
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
-<span class="nocode"><a name="3">  3: </a></span>HashSet&lt;String&gt; hashSet0 = new HashSet&lt;String&gt;();
-<span class="nocode"><a name="4">  4: </a></span>TreeSet&lt;Permission&gt; treeSet0 = new TreeSet&lt;Permission&gt;();
-<span class="nocode"><a name="5">  5: </a></span>SimpleAccount simpleAccount0 = new SimpleAccount((Object) &quot;UTF-8&quot;, (Object) modularRealmAuthenticator0, &quot;)D~]]1NV'M1gl8x;y(F&quot;, (Set&lt;String&gt;) hashSet0, (Set&lt;Permission&gt;) treeSet0);
-<span class="nocode"><a name="6">  6: </a></span>modularRealmAuthenticator0.notifySuccess((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAccount0);
-<span class="nocode"><a name="7">  7: </a></span>assertEquals(&quot;org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false&quot;, usernamePasswordToken0.toString());
+<span class="nocode"><a name="2">  2: </a></span>Inet4Address inet4Address0 = (Inet4Address)InetAddress.getLocalHost();
+<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot; was loaBed via cl4ssloader &quot;, &quot; was loaBed via cl4ssloader &quot;, (InetAddress) inet4Address0);
+<span class="nocode"><a name="4">  4: </a></span>SimpleAuthenticationInfo simpleAuthenticationInfo0 = new SimpleAuthenticationInfo();
+<span class="nocode"><a name="5">  5: </a></span>modularRealmAuthenticator0.notifySuccess((AuthenticationToken) usernamePasswordToken0, (AuthenticationInfo) simpleAuthenticationInfo0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;org.jsecurity.authc.UsernamePasswordToken -  was loaBed via cl4ssloader , rememberMe=false (localhost/127.0.0.1)&quot;, usernamePasswordToken0.toString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) null);
+<span class="nocode"><a name="2">  2: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;@ &quot;, &quot;@ &quot;);
 <span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
 <span class="nocode"><a name="4">  4: </a></span>try {
 <span class="nocode"><a name="5">  5: </a></span>  modularRealmAuthenticator0.authenticate((AuthenticationToken) usernamePasswordToken0);
 <span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
 <span class="nocode"><a name="7">  7: </a></span>} catch(AuthenticationException e) {
 <span class="nocode"><a name="8">  8: </a></span>  /*
-<span class="nocode"><a name="9">  9: </a></span>   * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - null, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+<span class="nocode"><a name="9">  9: </a></span>   * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - @ , rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
 <span class="nocode"><a name="10"> 10: </a></span>   */
 <span class="nocode"><a name="11"> 11: </a></span>}
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
-<span class="nocode"><a name="2">  2: </a></span>modularRealmAuthenticator0.add((AuthenticationListener) null);
-<span class="nocode"><a name="3">  3: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;&quot;, &quot;&quot;);
-<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
-<span class="nocode"><a name="5">  5: </a></span>try {
-<span class="nocode"><a name="6">  6: </a></span>  modularRealmAuthenticator0.authenticate((AuthenticationToken) usernamePasswordToken0);
-<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
-<span class="nocode"><a name="8">  8: </a></span>} catch(AuthenticationException e) {
-<span class="nocode"><a name="9">  9: </a></span>  /*
-<span class="nocode"><a name="10"> 10: </a></span>   * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - , rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
-<span class="nocode"><a name="11"> 11: </a></span>   */
-<span class="nocode"><a name="12"> 12: </a></span>}
+<span class="nocode"><a name="1">  1: </a></span>SimpleAccountRealm simpleAccountRealm0 = new SimpleAccountRealm();
+<span class="nocode"><a name="2">  2: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((Realm) simpleAccountRealm0);
+<span class="nocode"><a name="3">  3: </a></span>char[] charArray0 = new char[7];
+<span class="nocode"><a name="4">  4: </a></span>modularRealmAuthenticator0.add((AuthenticationListener) null);
+<span class="nocode"><a name="5">  5: </a></span>UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken(&quot;[ENV] Application classpa%h (java.class.path): &quot;, charArray0, true);
+<span class="nocode"><a name="6">  6: </a></span>// Undeclared exception!
+<span class="nocode"><a name="7">  7: </a></span>try {
+<span class="nocode"><a name="8">  8: </a></span>  modularRealmAuthenticator0.authenticate((AuthenticationToken) usernamePasswordToken0);
+<span class="nocode"><a name="9">  9: </a></span>  fail(&quot;Expecting exception: AuthenticationException&quot;);
+<span class="nocode"><a name="10"> 10: </a></span>} catch(AuthenticationException e) {
+<span class="nocode"><a name="11"> 11: </a></span>  /*
+<span class="nocode"><a name="12"> 12: </a></span>   * Authentication failed for token submission [org.jsecurity.authc.UsernamePasswordToken - [ENV] Application classpa%h (java.class.path): , rememberMe=true].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+<span class="nocode"><a name="13"> 13: </a></span>   */
+<span class="nocode"><a name="14"> 14: </a></span>}
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator();
+<span class="nocode"><a name="2">  2: </a></span>SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection((Object) &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;, &quot;\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000&quot;);
+<span class="nocode"><a name="3">  3: </a></span>modularRealmAuthenticator0.add((AuthenticationListener) null);
+<span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
+<span class="nocode"><a name="5">  5: </a></span>try {
+<span class="nocode"><a name="6">  6: </a></span>  modularRealmAuthenticator0.onLogout((PrincipalCollection) simplePrincipalCollection0);
+<span class="nocode"><a name="7">  7: </a></span>  fail(&quot;Expecting exception: NullPointerException&quot;);
+<span class="nocode"><a name="8">  8: </a></span>} catch(NullPointerException e) {
+<span class="nocode"><a name="9">  9: </a></span>}
+</pre>
+<h3>Test case 10</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>ModularRealmAuthenticator modularRealmAuthenticator0 = new ModularRealmAuthenticator((List&lt;Realm&gt;) null);
 <span class="nocode"><a name="2">  2: </a></span>// Undeclared exception!
 <span class="nocode"><a name="3">  3: </a></span>try {
 <span class="nocode"><a name="4">  4: </a></span>  modularRealmAuthenticator0.authenticate((AuthenticationToken) null);
@@ -374,7 +383,7 @@ org.jsecurity.authc.AbstractAuthenticator
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree5673757273215843573.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree5108917922875876574.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -392,7 +401,7 @@ org.jsecurity.authc.AbstractAuthenticator
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 9872
+<li>process_communication_port: 20464
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

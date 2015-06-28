@@ -22,8 +22,8 @@ org.jsecurity.crypto.hash.Sha256Hash
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.crypto.hash.Sha256Hash: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 3362 statements, 254 tests.
-<li>Time: 0:00:03(Search: 0:00:02, minimization: 0:00:00)
+<li>50 fitness evaluations, 2 generations, 3790 statements, 288 tests.
+<li>Time: 0:00:02(Search: 0:00:02, minimization: 0:00:00)
 <li>Coverage: 0/0 branches, 7/7 methods, 7/7 total goals
 <li>Mutation score: 44%
 </ul>
@@ -31,24 +31,21 @@ org.jsecurity.crypto.hash.Sha256Hash
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;byte[] if the source is of type byte[], char[] or String.  The instance provided as a method &quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;6f2b5e89fb617aca2eadc7a2b287edca979bcad79c85aae8ad2b6b8a781385e8a7b2d6a771ea6ba2f89d79d6ac6a67ad000000&quot;, sha256Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = Sha256Hash.fromBase64String(&quot;&quot;);
+<span class="nocode"><a name="2">  2: </a></span>String string0 = sha256Hash0.getAlgorithmName();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;&quot;, sha256Hash0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(&quot;SHA-256&quot;, string0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea&quot;, sha256Hash0.toHex());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;, (Object) &quot;SHA-256&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;e68bb6d7aeab039e13e8a44dc54756a764e7f06181c99a07a623ba6c585480fb&quot;, sha256Hash0.toString());
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea&quot;, (Object) &quot;bbd07c4fc02c99b97124febf42c7b63b5011c0df28d409fbb486b5a9d2e615ea&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;46ac16ee114710f116d38093825a0133dc05b2f9c5bcb51595d9843107848814&quot;, sha256Hash0.toString());
-</pre>
-<h3>Test case 4</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>// Undeclared exception!
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  Sha256Hash.fromHexString(&quot;byte[] if the source is of type byte[], char[] or String.  The instance provided as a method &quot;);
+<span class="nocode"><a name="3">  3: </a></span>  Sha256Hash.fromHexString(&quot;%*;e[bY#{mo&gt;J{/KcGC&quot;);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -56,10 +53,15 @@ org.jsecurity.crypto.hash.Sha256Hash
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
+<h3>Test case 4</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;&quot;, (Object) &quot;SHA-256&quot;, (-355));
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;SHA-256&quot;, sha256Hash0.getAlgorithmName());
+</pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;46ac16ee114710f116d38093825a0133dc05b2f9c5bcb51595d9843107848814&quot;, (Object) &quot;SHA-256&quot;, 0);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;C8fmVkZeaAxv3LarjKnD7xj64ncFZy31ukJO4/a+IT8=&quot;, sha256Hash0.toBase64());
+<span class="nocode"><a name="1">  1: </a></span>Sha256Hash sha256Hash0 = new Sha256Hash((Object) &quot;SHA-256&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(&quot;u9B8T8AsmblxJP6/Qse2O1ARwN8o1An7tIa1qdLmFeo=&quot;, sha256Hash0.toBase64());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -140,7 +142,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -158,7 +160,7 @@ org.jsecurity.crypto.hash.Sha256Hash
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 4006
+<li>process_communication_port: 12337
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

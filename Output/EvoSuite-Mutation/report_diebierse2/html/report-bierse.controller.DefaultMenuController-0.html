@@ -21,10 +21,10 @@ bierse.controller.DefaultMenuController
 <div id="wrapper">
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
-<ul><li>Target class: bierse.controller.DefaultMenuController: 71.43%</ul><ul>
-<li>3080 fitness evaluations, 63 generations, 11146 statements, 2114 tests.
-<li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
-<li>Coverage: 3/4 branches, 3/4 methods, 5/7 total goals
+<ul><li>Target class: bierse.controller.DefaultMenuController: 42.86%</ul><ul>
+<li>1590 fitness evaluations, 33 generations, 2502 statements, 1157 tests.
+<li>Time: 0:01:02(Search: 0:01:01, minimization: 0:00:01)
+<li>Coverage: 2/4 branches, 2/4 methods, 3/7 total goals
 <li>Mutation score: 0%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
@@ -32,20 +32,9 @@ bierse.controller.DefaultMenuController
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>ActionEvent actionEvent0 = new ActionEvent((Object) &quot;MI_DISPLAY_SETTINGS_VIEW&quot;, 1881, &quot;MI_DISPLAY_SETTINGS_VIEW&quot;);
-<span class="nocode"><a name="3">  3: </a></span>// Undeclared exception!
-<span class="nocode"><a name="4">  4: </a></span>try {
-<span class="nocode"><a name="5">  5: </a></span>  defaultMenuController0.actionPerformed(actionEvent0);
-<span class="nocode"><a name="6">  6: </a></span>  fail(&quot;Expecting exception: HeadlessException&quot;);
-<span class="nocode"><a name="7">  7: </a></span>} catch(HeadlessException e) {
-<span class="nocode"><a name="8">  8: </a></span>}
-</pre>
-<h3>Test case 2</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>DefaultMenuController defaultMenuController0 = new DefaultMenuController((Model) null, (IDrinkSellView) null);
-<span class="nocode"><a name="2">  2: </a></span>ActionEvent actionEvent0 = new ActionEvent((Object) &quot;MI_DISPLAY_SETTINGS_VIEW&quot;, 1881, &quot;SETTINGS_ACTION_OK&quot;, (long) 1881, 1881);
+<span class="nocode"><a name="2">  2: </a></span>ActionEvent actionEvent0 = new ActionEvent((Object) &quot;ToolTipText&quot;, (-1004), &quot;ToolTipText&quot;);
 <span class="nocode"><a name="3">  3: </a></span>defaultMenuController0.actionPerformed(actionEvent0);
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1881, actionEvent0.getID());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(0L, actionEvent0.getWhen());
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>package bierse.controller;
@@ -73,7 +62,7 @@ bierse.controller.DefaultMenuController
 <span class="nocode"><a name="23"> 23: </a></span><span style="background-color: #ffffcc">		if(e.getActionCommand().equals(IDrinkSellView.MI_DISPLAY_INFO_VIEW)) {</span>
 <span class="nocode"><a name="24"> 24: </a></span>			showNewInfoView();
 <span class="nocode"><a name="25"> 25: </a></span><span style="background-color: #ffffcc">		} else if(e.getActionCommand().equals(IDrinkSellView.MI_DISPLAY_SETTINGS_VIEW)) {</span>
-<span class="nocode"><a name="26"> 26: </a></span><span style="background-color: #ffffcc">			showSettingsView();</span>
+<span class="nocode"><a name="26"> 26: </a></span>			showSettingsView();
 <span class="nocode"><a name="27"> 27: </a></span>		}
 <span class="nocode"><a name="28"> 28: </a></span><span style="background-color: #ffffcc">	}</span>
 <span class="nocode"><a name="29"> 29: </a></span>	
@@ -82,7 +71,7 @@ bierse.controller.DefaultMenuController
 <span class="nocode"><a name="32"> 32: </a></span>	}
 <span class="nocode"><a name="33"> 33: </a></span>
 <span class="nocode"><a name="34"> 34: </a></span>	private void showSettingsView() {
-<span class="nocode"><a name="35"> 35: </a></span><span style="background-color: #ffffcc">		DefaultSettingsView dsv = new DefaultSettingsView(model);</span>
+<span class="nocode"><a name="35"> 35: </a></span>		DefaultSettingsView dsv = new DefaultSettingsView(model);
 <span class="nocode"><a name="36"> 36: </a></span>		dsv.setSettingsController(new DefaultSettingsController(model, dsv, dsv));
 <span class="nocode"><a name="37"> 37: </a></span>	}
 <span class="nocode"><a name="38"> 38: </a></span>}
@@ -90,7 +79,7 @@ bierse.controller.DefaultMenuController
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree1158434697524404911.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree652268098270985341.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -108,7 +97,7 @@ bierse.controller.DefaultMenuController
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 16500
+<li>process_communication_port: 13441
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

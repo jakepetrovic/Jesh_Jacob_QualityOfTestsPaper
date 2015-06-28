@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.NoSuchElementException;
 import javax.sql.DataSource;
 import org.jsecurity.authc.AccountException;
@@ -19,7 +18,6 @@ import org.jsecurity.authc.AuthenticationException;
 import org.jsecurity.authc.AuthenticationToken;
 import org.jsecurity.authc.UsernamePasswordToken;
 import org.jsecurity.authz.AuthorizationException;
-import org.jsecurity.authz.Permission;
 import org.jsecurity.realm.jdbc.JdbcRealm;
 import org.jsecurity.subject.PrincipalCollection;
 import org.jsecurity.subject.SimplePrincipalCollection;
@@ -36,7 +34,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setUserRolesQuery("");
+      jdbcRealm0.setUserRolesQuery("xxNzP");
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_0", jdbcRealm0.getName());
   }
 
@@ -60,7 +58,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setPermissionsQuery("I");
+      jdbcRealm0.setPermissionsQuery("%Oyl8[kHM>N7s");
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_13", jdbcRealm0.getName());
   }
 
@@ -72,8 +70,8 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      char[] charArray0 = new char[10];
-      jdbcRealm0.buildAuthenticationInfo("$", charArray0);
+      char[] charArray0 = new char[5];
+      jdbcRealm0.buildAuthenticationInfo("", charArray0);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_18", jdbcRealm0.getName());
   }
 
@@ -97,7 +95,7 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      jdbcRealm0.setAuthenticationQuery("");
+      jdbcRealm0.setAuthenticationQuery("xxNzP");
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_29", jdbcRealm0.getName());
   }
 
@@ -109,11 +107,10 @@ public class JdbcRealmEvoSuiteTest {
   @Test
   public void test6()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
-      char[] charArray0 = new char[4];
-      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("", charArray0, true);
+      UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken("%Oyl8[kHM>N7s", "%Oyl8[kHM>N7s");
       // Undeclared exception!
       try {
-        jdbcRealm0.doGetAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+        jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -129,7 +126,7 @@ public class JdbcRealmEvoSuiteTest {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
       UsernamePasswordToken usernamePasswordToken0 = new UsernamePasswordToken();
       try {
-        jdbcRealm0.doGetAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
+        jdbcRealm0.getAuthenticationInfo((AuthenticationToken) usernamePasswordToken0);
         fail("Expecting exception: AccountException");
       } catch(AccountException e) {
         /*
@@ -149,7 +146,7 @@ public class JdbcRealmEvoSuiteTest {
       SimplePrincipalCollection simplePrincipalCollection0 = new SimplePrincipalCollection();
       // Undeclared exception!
       try {
-        jdbcRealm0.isPermitted((PrincipalCollection) simplePrincipalCollection0, (List<Permission>) null);
+        jdbcRealm0.getAuthorizationInfo((PrincipalCollection) simplePrincipalCollection0);
         fail("Expecting exception: NoSuchElementException");
       } catch(NoSuchElementException e) {
       }
@@ -183,7 +180,7 @@ public class JdbcRealmEvoSuiteTest {
   public void test10()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
       HashSet<String> hashSet0 = new HashSet<String>();
-      jdbcRealm0.getPermissions((Connection) null, "", (Collection<String>) hashSet0);
+      jdbcRealm0.getPermissions((Connection) null, (String) null, (Collection<String>) hashSet0);
       assertEquals("org.jsecurity.realm.jdbc.JdbcRealm_68", jdbcRealm0.getName());
   }
 
@@ -197,10 +194,10 @@ public class JdbcRealmEvoSuiteTest {
   public void test11()  throws Throwable  {
       JdbcRealm jdbcRealm0 = new JdbcRealm();
       HashSet<String> hashSet0 = new HashSet<String>();
-      hashSet0.add("1=-w+?1IU3t8h-/");
+      hashSet0.add((String) null);
       // Undeclared exception!
       try {
-        jdbcRealm0.getPermissions((Connection) null, "1=-w+?1IU3t8h-/", (Collection<String>) hashSet0);
+        jdbcRealm0.getPermissions((Connection) null, (String) null, (Collection<String>) hashSet0);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }

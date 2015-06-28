@@ -22,10 +22,10 @@ net.sf.lavalamp.application.ApplicationProperties
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.lavalamp.application.ApplicationProperties: 91.67%</ul><ul>
-<li>33946 fitness evaluations, 680 generations, 173744 statements, 20061 tests.
+<li>31406 fitness evaluations, 630 generations, 163449 statements, 19362 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 1/2 branches, 11/11 methods, 11/12 total goals
-<li>Mutation score: 54%
+<li>Mutation score: 56%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
@@ -34,6 +34,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
 <span class="nocode"><a name="2">  2: </a></span>applicationProperties0.setPort(0);
 <span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(30000, applicationProperties0.getRunInterval());
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -65,15 +66,18 @@ net.sf.lavalamp.application.ApplicationProperties
 <h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
-<span class="nocode"><a name="2">  2: </a></span>applicationProperties0.setDebug(false);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(false, applicationProperties0.isDebug());
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>applicationProperties0.setDebug(true);
+<span class="nocode"><a name="5">  5: </a></span>assertEquals(true, applicationProperties0.isDebug());
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(&quot;debug=true, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
-<span class="nocode"><a name="2">  2: </a></span>applicationProperties0.setRunInterval(1338);
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=1338, null&quot;, applicationProperties0.toString());
-<span class="nocode"><a name="4">  4: </a></span>assertEquals(1338, applicationProperties0.getRunInterval());
+<span class="nocode"><a name="2">  2: </a></span>applicationProperties0.setRunInterval(30000);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;debug=false, port=0, runInterval=30000, null&quot;, applicationProperties0.toString());
+<span class="nocode"><a name="4">  4: </a></span>assertEquals(30000, applicationProperties0.getRunInterval());
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -85,7 +89,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>ApplicationProperties applicationProperties0 = new ApplicationProperties();
-<span class="nocode"><a name="2">  2: </a></span>DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[9];
+<span class="nocode"><a name="2">  2: </a></span>DeviceProperties[] devicePropertiesArray0 = new DeviceProperties[8];
 <span class="nocode"><a name="3">  3: </a></span>applicationProperties0.setDeviceProperties(devicePropertiesArray0);
 <span class="nocode"><a name="4">  4: </a></span>// Undeclared exception!
 <span class="nocode"><a name="5">  5: </a></span>try {
@@ -160,7 +164,7 @@ net.sf.lavalamp.application.ApplicationProperties
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree3215396051626286958.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree1185868961603558104.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -178,7 +182,7 @@ net.sf.lavalamp.application.ApplicationProperties
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 8280
+<li>process_communication_port: 10955
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

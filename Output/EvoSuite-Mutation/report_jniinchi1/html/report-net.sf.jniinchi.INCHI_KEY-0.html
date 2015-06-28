@@ -22,7 +22,7 @@ net.sf.jniinchi.INCHI_KEY
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: net.sf.jniinchi.INCHI_KEY: 89.36%</ul><ul>
-<li>14702 fitness evaluations, 296 generations, 68091 statements, 9341 tests.
+<li>12592 fitness evaluations, 253 generations, 71478 statements, 7872 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 41/46 branches, 2/2 methods, 42/47 total goals
 <li>Mutation score: 81%
@@ -31,9 +31,9 @@ net.sf.jniinchi.INCHI_KEY
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.INVALID_STD_INCHI;
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.EMPTY_INPUT;
 <span class="nocode"><a name="2">  2: </a></span>int int0 = iNCHI_KEY0.getIndx();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(21, int0);
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(2, int0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -42,13 +42,13 @@ net.sf.jniinchi.INCHI_KEY
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(1);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY.UNKNOWN_ERROR, iNCHI_KEY0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(2);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY.EMPTY_INPUT, iNCHI_KEY0);
 </pre>
 <h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(2);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY.EMPTY_INPUT, iNCHI_KEY0);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY iNCHI_KEY0 = INCHI_KEY.getValue(1);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(INCHI_KEY.UNKNOWN_ERROR, iNCHI_KEY0);
 </pre>
 <h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -62,35 +62,35 @@ net.sf.jniinchi.INCHI_KEY
 </pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(5);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(6);
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(6);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(7);
 </pre>
 <h3>Test case 9</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(7);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(8);
 </pre>
 <h3>Test case 10</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(9);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(11);
 </pre>
 <h3>Test case 11</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(10);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(12);
 </pre>
 <h3>Test case 12</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(11);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(13);
 </pre>
 <h3>Test case 13</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(12);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(14);
 </pre>
 <h3>Test case 14</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(14);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(16);
 </pre>
 <h3>Test case 15</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -98,7 +98,7 @@ net.sf.jniinchi.INCHI_KEY
 </pre>
 <h3>Test case 16</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(19);
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue(18);
 </pre>
 <h3>Test case 17</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
@@ -112,7 +112,7 @@ net.sf.jniinchi.INCHI_KEY
 </pre>
 <h3>Test case 19</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue((-20));
+<span class="nocode"><a name="1">  1: </a></span>INCHI_KEY.getValue((-1924));
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/*
@@ -210,7 +210,7 @@ net.sf.jniinchi.INCHI_KEY
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2966106683360006431.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree7807429960142163071.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -228,7 +228,7 @@ net.sf.jniinchi.INCHI_KEY
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 11890
+<li>process_communication_port: 10715
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

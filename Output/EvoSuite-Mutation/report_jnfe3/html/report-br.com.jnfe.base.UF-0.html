@@ -22,8 +22,8 @@ br.com.jnfe.base.UF
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: br.com.jnfe.base.UF: 100.00%</ul><ul>
-<li>50 fitness evaluations, 2 generations, 2206 statements, 294 tests.
-<li>Time: 0:00:05(Search: 0:00:05, minimization: 0:00:00)
+<li>150 fitness evaluations, 4 generations, 3050 statements, 351 tests.
+<li>Time: 0:00:08(Search: 0:00:07, minimization: 0:00:01)
 <li>Coverage: 4/4 branches, 4/3 methods, 6/6 total goals
 <li>Mutation score: 37%
 </ul>
@@ -31,18 +31,18 @@ br.com.jnfe.base.UF
 <div class=tests>
 <h3>Test case 1</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>UF.getUF(&quot;bxq1&lt;+W\&quot;&quot;);
+<span class="nocode"><a name="1">  1: </a></span>UF uF0 = UF.SC;
+<span class="nocode"><a name="2">  2: </a></span>String string0 = uF0.getNomeUF();
+<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Santa Catarina&quot;, string0);
 </pre>
 <h3>Test case 2</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>UF uF0 = UF.AC;
-<span class="nocode"><a name="2">  2: </a></span>String string0 = uF0.getNomeUF();
-<span class="nocode"><a name="3">  3: </a></span>assertEquals(&quot;Acre&quot;, string0);
+<span class="nocode"><a name="1">  1: </a></span>UF.getUF(&quot;&quot;);
 </pre>
 <h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>UF uF0 = UF.getUF(&quot;31&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertEquals(UF.MG, uF0);
+<span class="nocode"><a name="1">  1: </a></span>UF uF0 = UF.getUF(&quot;41&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertEquals(UF.PR, uF0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
 <div class=source><p><pre class="prettyprint" style="border: 1px solid #888;padding: 2px"><span class="nocode"><a name="1">  1: </a></span>/* Copyright 2005 I Serv Consultoria Empresarial Ltda.
@@ -151,7 +151,7 @@ br.com.jnfe.base.UF
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree4728773757073111178.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree2315544340251876346.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -169,7 +169,7 @@ br.com.jnfe.base.UF
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 18261
+<li>process_communication_port: 6130
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.io.PrintStream;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import net.sf.lavalamp.LavaLogger;
 
 public class LavaLoggerEvoSuiteTest {
@@ -26,18 +27,17 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 1
   /*
-   * 2 covered goals:
+   * 3 covered goals:
    * 1 net.sf.lavalamp.LavaLogger.info(Ljava/util/Calendar;Ljava/lang/String;)V: root-Branch
    * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
+   * 3 net.sf.lavalamp.LavaLogger.info(Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test1()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
-      String string0 = "F\\RT8dfk!Z0U-J9Yi";
-      Calendar calendar0 = null;
       // Undeclared exception!
       try {
-        lavaLogger0.info(calendar0, string0);
+        lavaLogger0.info((String) null);
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -52,8 +52,7 @@ public class LavaLoggerEvoSuiteTest {
   @Test
   public void test2()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
-      String string0 = "F\\RT8dfk!Z0U-J9Yi";
-      lavaLogger0.debug(string0);
+      lavaLogger0.debug("14dDt.N_X41Cr*jY");
   }
 
   //Test case number: 3
@@ -74,16 +73,16 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 4
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/lang/String;)V: root-Branch
-   * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/util/Calendar;Ljava/lang/String;)V: root-Branch
    */
   @Test
   public void test4()  throws Throwable  {
       LavaLogger lavaLogger0 = new LavaLogger();
+      GregorianCalendar gregorianCalendar0 = new GregorianCalendar();
       // Undeclared exception!
       try {
-        lavaLogger0.error("+sF2pN|");
+        lavaLogger0.error((Calendar) gregorianCalendar0, "");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -91,11 +90,38 @@ public class LavaLoggerEvoSuiteTest {
 
   //Test case number: 5
   /*
+   * 2 covered goals:
+   * 1 net.sf.lavalamp.LavaLogger.error(Ljava/lang/String;)V: root-Branch
+   * 2 net.sf.lavalamp.LavaLogger.<init>()V: root-Branch
+   */
+  @Test
+  public void test5()  throws Throwable  {
+      LavaLogger lavaLogger0 = new LavaLogger();
+      // Undeclared exception!
+      try {
+        lavaLogger0.error(";");
+        fail("Expecting exception: NullPointerException");
+      } catch(NullPointerException e) {
+      }
+  }
+
+  //Test case number: 6
+  /*
+   * 1 covered goal:
+   * 1 net.sf.lavalamp.LavaLogger.setOut(Ljava/io/PrintStream;)V: root-Branch
+   */
+  @Test
+  public void test6()  throws Throwable  {
+      LavaLogger.setOut((PrintStream) null);
+  }
+
+  //Test case number: 7
+  /*
    * 1 covered goal:
    * 1 net.sf.lavalamp.LavaLogger.setDebug(Z)V: root-Branch
    */
   @Test
-  public void test5()  throws Throwable  {
+  public void test7()  throws Throwable  {
       LavaLogger.setDebug(false);
   }
 }

@@ -22,14 +22,34 @@ org.jsecurity.authz.permission.WildcardPermission
 <img src="files/evosuite.png" height="40"/>
 <br><br><h2 class=title>Summary</h2>
 <ul><li>Target class: org.jsecurity.authz.permission.WildcardPermission: 90.00%</ul><ul>
-<li>24478 fitness evaluations, 491 generations, 97582 statements, 15165 tests.
+<li>25416 fitness evaluations, 510 generations, 89913 statements, 16132 tests.
 <li>Time: 0:01:01(Search: 0:01:01, minimization: 0:00:00)
 <li>Coverage: 25/28 branches, 5/5 methods, 27/30 total goals
-<li>Mutation score: 56%
+<li>Mutation score: 58%
 </ul>
 <div id="page"><div id="page-bgtop"><div id="page-bgbtm"><div id="content"><div id="post"><h2 class=title id=tests>Test suite</h2>
 <div class=tests>
 <h3>Test case 1</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;*&quot;, true);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission0);
+<span class="nocode"><a name="5">  5: </a></span>String string0 = &quot;Fn`?:65s\\u&quot;;
+<span class="nocode"><a name="6">  6: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(string0, boolean0);
+<span class="nocode"><a name="7">  7: </a></span>boolean boolean1 = wildcardPermission0.implies((Permission) wildcardPermission1);
+<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, boolean1);
+</pre>
+<h3>Test case 2</h3>
+<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
+<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;X&quot;);
+<span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
+<span class="nocode"><a name="3">  3: </a></span>
+<span class="nocode"><a name="4">  4: </a></span>AllPermission allPermission0 = new AllPermission();
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) allPermission0);
+<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
+</pre>
+<h3>Test case 3</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -41,7 +61,7 @@ org.jsecurity.authz.permission.WildcardPermission
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 2</h3>
+<h3>Test case 4</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -53,11 +73,11 @@ org.jsecurity.authz.permission.WildcardPermission
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 3</h3>
+<h3>Test case 5</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
-<span class="nocode"><a name="3">  3: </a></span>  wildcardPermission0 = new WildcardPermission(&quot;,&quot;);
+<span class="nocode"><a name="3">  3: </a></span>  wildcardPermission0 = new WildcardPermission(&quot;,&quot;, false);
 <span class="nocode"><a name="4">  4: </a></span>  fail(&quot;Expecting exception: IllegalArgumentException&quot;);
 <span class="nocode"><a name="5">  5: </a></span>} catch(IllegalArgumentException e) {
 <span class="nocode"><a name="6">  6: </a></span>  /*
@@ -65,7 +85,7 @@ org.jsecurity.authz.permission.WildcardPermission
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 4</h3>
+<h3>Test case 6</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
 <span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = null;
 <span class="nocode"><a name="2">  2: </a></span>try {
@@ -77,29 +97,9 @@ org.jsecurity.authz.permission.WildcardPermission
 <span class="nocode"><a name="8">  8: </a></span>   */
 <span class="nocode"><a name="9">  9: </a></span>}
 </pre>
-<h3>Test case 5</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;6@NiiyF*Ko/A8gc&quot;);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>AllPermission allPermission0 = new AllPermission();
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) allPermission0);
-<span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
-</pre>
-<h3>Test case 6</h3>
-<pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;*&quot;, true);
-<span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
-<span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(&quot;-8.g:u$c&quot;);
-<span class="nocode"><a name="5">  5: </a></span>assertNotNull(wildcardPermission1);
-<span class="nocode"><a name="6">  6: </a></span>
-<span class="nocode"><a name="7">  7: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission1);
-<span class="nocode"><a name="8">  8: </a></span>assertEquals(true, boolean0);
-</pre>
 <h3>Test case 7</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;6@NiiyF*Ko/A8gc&quot;);
+<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;X&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
 <span class="nocode"><a name="3">  3: </a></span>
 <span class="nocode"><a name="4">  4: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission0);
@@ -107,11 +107,11 @@ org.jsecurity.authz.permission.WildcardPermission
 </pre>
 <h3>Test case 8</h3>
 <pre class="prettyprint" style="border: 1px solid #888;padding: 2px">
-<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;6@NiiyF*Ko/A8gc&quot;);
+<span class="nocode"><a name="1">  1: </a></span>WildcardPermission wildcardPermission0 = new WildcardPermission(&quot;X&quot;);
 <span class="nocode"><a name="2">  2: </a></span>assertNotNull(wildcardPermission0);
 <span class="nocode"><a name="3">  3: </a></span>
-<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(&quot;*&quot;);
-<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = wildcardPermission0.implies((Permission) wildcardPermission1);
+<span class="nocode"><a name="4">  4: </a></span>WildcardPermission wildcardPermission1 = new WildcardPermission(&quot;X&quot;, true);
+<span class="nocode"><a name="5">  5: </a></span>boolean boolean0 = wildcardPermission1.implies((Permission) wildcardPermission0);
 <span class="nocode"><a name="6">  6: </a></span>assertEquals(false, boolean0);
 </pre>
 </div></div><div id="post"></div><div id="post"><h2 class=title id=source>Source Code</h2>
@@ -338,7 +338,7 @@ org.jsecurity.authz.permission.WildcardPermission
 </p></div>
 </div><div id="post"><h2 id=parameters>EvoSuite Parameters</h2>
 <div class=statistics><ul>
-<li>inheritance_file: /tmp/ES_inheritancetree2029871533736116651.xml.gz
+<li>inheritance_file: /tmp/ES_inheritancetree947935580644087962.xml.gz
 <li>client_on_thread: false
 <li>alternative_fitness_range: 100.0
 <li>starve_by_fitness: true
@@ -356,7 +356,7 @@ org.jsecurity.authz.permission.WildcardPermission
 <li>ctg_schedule: SIMPLE
 <li>assertion_strategy: MUTATION
 <li>tt_scope: ALL
-<li>process_communication_port: 10104
+<li>process_communication_port: 8232
 <li>TT: false
 <li>chromosome_length: 40
 <li>adaptive_local_search_dse: false

@@ -77,7 +77,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test5()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.endAdditiveExpr(0);
+      defaultXPathHandler0.endAdditiveExpr(75);
   }
 
   //Test case number: 6
@@ -121,8 +121,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test9()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      String string0 = "@}\\u8={ e?Q2v<Ew=a";
-      defaultXPathHandler0.variableReference(string0, string0);
+      defaultXPathHandler0.variableReference("", "");
   }
 
   //Test case number: 10
@@ -133,8 +132,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test10()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      String string0 = "@}\\u8={ e?Q2v<Ew=a";
-      defaultXPathHandler0.literal(string0);
+      defaultXPathHandler0.literal((String) null);
   }
 
   //Test case number: 11
@@ -145,7 +143,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test11()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.endRelationalExpr((-1853));
+      defaultXPathHandler0.endRelationalExpr(0);
   }
 
   //Test case number: 12
@@ -156,7 +154,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test12()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.startNameStep((-1), "FX6X", "FX6X");
+      defaultXPathHandler0.startNameStep(184, (String) null, (String) null);
   }
 
   //Test case number: 13
@@ -167,7 +165,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test13()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.startFunction("$zP@xx[tc}r/ ZY O8", "$zP@xx[tc}r/ ZY O8");
+      defaultXPathHandler0.startFunction("{6&|", "{6&|");
   }
 
   //Test case number: 14
@@ -178,8 +176,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test14()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      boolean boolean0 = false;
-      defaultXPathHandler0.endUnionExpr(boolean0);
+      defaultXPathHandler0.endUnionExpr(false);
   }
 
   //Test case number: 15
@@ -201,8 +198,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test16()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      int int0 = 0;
-      defaultXPathHandler0.startTextNodeStep(int0);
+      defaultXPathHandler0.startTextNodeStep((-935));
   }
 
   //Test case number: 17
@@ -213,8 +209,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test17()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      int int0 = 0;
-      defaultXPathHandler0.endMultiplicativeExpr(int0);
+      defaultXPathHandler0.endMultiplicativeExpr(7);
   }
 
   //Test case number: 18
@@ -247,7 +242,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test20()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.endOrExpr(true);
+      defaultXPathHandler0.endOrExpr(false);
   }
 
   //Test case number: 21
@@ -280,7 +275,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test23()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.endUnaryExpr((-1772));
+      defaultXPathHandler0.endUnaryExpr(1911);
   }
 
   //Test case number: 24
@@ -379,8 +374,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test32()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      boolean boolean0 = false;
-      defaultXPathHandler0.endAndExpr(boolean0);
+      defaultXPathHandler0.endAndExpr(false);
   }
 
   //Test case number: 33
@@ -424,7 +418,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test36()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.startProcessingInstructionNodeStep(1936, "");
+      defaultXPathHandler0.startProcessingInstructionNodeStep(281, "7=e8j%+vZk9rn/{");
   }
 
   //Test case number: 37
@@ -446,7 +440,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test38()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.startAllNodeStep(0);
+      defaultXPathHandler0.startAllNodeStep(75);
   }
 
   //Test case number: 39
@@ -468,7 +462,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test40()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.number(0.0);
+      defaultXPathHandler0.number(1414.2391433665757);
   }
 
   //Test case number: 41
@@ -479,7 +473,7 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test41()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.endEqualityExpr(0);
+      defaultXPathHandler0.endEqualityExpr(75);
   }
 
   //Test case number: 42
@@ -502,6 +496,6 @@ public class DefaultXPathHandlerEvoSuiteTest {
   @Test
   public void test43()  throws Throwable  {
       DefaultXPathHandler defaultXPathHandler0 = new DefaultXPathHandler();
-      defaultXPathHandler0.number(936);
+      defaultXPathHandler0.number((-1862));
   }
 }

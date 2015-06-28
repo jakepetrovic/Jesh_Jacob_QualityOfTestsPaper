@@ -23,8 +23,8 @@ public class DummyRestGetterEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DummyRestGetter dummyRestGetter0 = new DummyRestGetter();
-      char[] charArray0 = new char[9];
-      dummyRestGetter0.get(">l)bd1Nd/%eg", charArray0);
+      char[] charArray0 = new char[10];
+      dummyRestGetter0.get("", charArray0);
   }
 
   //Test case number: 1
@@ -36,7 +36,7 @@ public class DummyRestGetterEvoSuiteTest {
   public void test1()  throws Throwable  {
       DummyRestGetter dummyRestGetter0 = new DummyRestGetter();
       try {
-        dummyRestGetter0.get(">l)bd1Nd/%eg");
+        dummyRestGetter0.get("+c $ENo_W%ZZN\"");
         fail("Expecting exception: LoginRequiredException");
       } catch(LoginRequiredException e) {
       }

@@ -20,9 +20,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test0()  throws Throwable  {
-      CStat cStat0 = CStat._405;
+      CStat cStat0 = CStat._257;
       SitNFe sitNFe0 = cStat0.getSitNFe();
-      assertEquals(false, sitNFe0.isReenviar());
+      assertEquals(4, sitNFe0.ordinal());
   }
 
   //Test case number: 1
@@ -32,9 +32,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test1()  throws Throwable  {
-      CStat cStat0 = CStat._405;
+      CStat cStat0 = CStat._257;
       String string0 = cStat0.getMotivo();
-      assertEquals("C\u00F3digo do pa\u00EDs do emitente: d\u00EDgito inv\u00E1lido", string0);
+      assertEquals("Solicitante n\u00E3o habilitado para emiss\u00E3o da NF-e", string0);
   }
 
   //Test case number: 2
@@ -44,9 +44,9 @@ public class CStatEvoSuiteTest {
    */
   @Test
   public void test2()  throws Throwable  {
-      CStat cStat0 = CStat._405;
+      CStat cStat0 = CStat._257;
       String string0 = cStat0.toString();
-      assertEquals("405", string0);
+      assertEquals("257", string0);
       assertNotNull(string0);
   }
 }

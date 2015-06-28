@@ -9,9 +9,6 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.SimpleTimeZone;
-import java.util.TimeZone;
 import net.sf.lavalamp.device.Actions;
 import net.sf.lavalamp.device.DeviceProperties;
 import net.sf.lavalamp.device.DummyDevice;
@@ -81,9 +78,7 @@ public class AbstractDeviceEvoSuiteTest {
   @Test
   public void test4()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
-      SimpleTimeZone simpleTimeZone0 = new SimpleTimeZone((-1106), "?}P(oFx");
-      Locale locale0 = Locale.ROOT;
-      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance((TimeZone) simpleTimeZone0, locale0);
+      GregorianCalendar gregorianCalendar0 = (GregorianCalendar)Calendar.getInstance();
       // Undeclared exception!
       try {
         dummyDevice0.isAlwaysOff((Calendar) gregorianCalendar0);
@@ -135,22 +130,6 @@ public class AbstractDeviceEvoSuiteTest {
 
   //Test case number: 8
   /*
-   * 2 covered goals:
-   * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - false
-   * 2 net.sf.lavalamp.device.AbstractDevice.makeActions()V: I17 Branch 1 IFEQ L54 - true
-   */
-  @Test
-  public void test8()  throws Throwable  {
-      DummyDevice dummyDevice0 = new DummyDevice();
-      DeviceProperties deviceProperties0 = new DeviceProperties();
-      OnError onError0 = OnError.CRASH;
-      deviceProperties0.setOnError(onError0);
-      dummyDevice0.setProperties(deviceProperties0);
-      assertEquals(false, deviceProperties0.isOnWhenSuccessful());
-  }
-
-  //Test case number: 9
-  /*
    * 5 covered goals:
    * 1 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I25 Branch 3 IFEQ L71 - false
    * 2 net.sf.lavalamp.device.AbstractDevice.<init>()V: root-Branch
@@ -159,12 +138,12 @@ public class AbstractDeviceEvoSuiteTest {
    * 5 net.sf.lavalamp.device.AbstractDevice.makeErrorAction()Lnet/sf/lavalamp/device/Action;: I11 Branch 2 IFEQ L69 - true
    */
   @Test
-  public void test9()  throws Throwable  {
+  public void test8()  throws Throwable  {
       DummyDevice dummyDevice0 = new DummyDevice();
       DeviceProperties deviceProperties0 = new DeviceProperties();
       OnError onError0 = OnError.STATUSQUO;
       deviceProperties0.setOnError(onError0);
       dummyDevice0.setProperties(deviceProperties0);
-      assertEquals(OnError.STATUSQUO, deviceProperties0.getOnError());
+      assertNull(deviceProperties0.getIdentity());
   }
 }

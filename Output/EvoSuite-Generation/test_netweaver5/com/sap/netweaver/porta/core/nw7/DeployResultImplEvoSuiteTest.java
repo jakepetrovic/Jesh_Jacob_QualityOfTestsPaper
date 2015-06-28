@@ -22,9 +22,9 @@ public class DeployResultImplEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, ",dFh![U`6RZ^%?");
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "{r?w;%4eb;VX%EJWqq ");
       DeployResultStatus deployResultStatus1 = deployResultImpl0.getStatus();
-      assertEquals("WARNING", deployResultStatus1.name());
+      assertSame(deployResultStatus0, deployResultStatus1);
   }
 
   //Test case number: 1
@@ -36,8 +36,8 @@ public class DeployResultImplEvoSuiteTest {
   @Test
   public void test1()  throws Throwable  {
       DeployResultStatus deployResultStatus0 = DeployResultStatus.WARNING;
-      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, ",dFh![U`6RZ^%?");
+      DeployResultImpl deployResultImpl0 = new DeployResultImpl(deployResultStatus0, "{r?w;%4eb;VX%EJWqq ");
       String string0 = deployResultImpl0.getStatusDetails();
-      assertEquals(",dFh![U`6RZ^%?", string0);
+      assertEquals("{r?w;%4eb;VX%EJWqq ", string0);
   }
 }

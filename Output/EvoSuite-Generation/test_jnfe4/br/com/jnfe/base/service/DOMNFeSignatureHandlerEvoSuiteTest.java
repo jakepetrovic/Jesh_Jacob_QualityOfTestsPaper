@@ -31,10 +31,10 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test0()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("SimpleRul\"Store ( ");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("+");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
       try {
-        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "SimpleRul\"Store ( ");
+        dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "+");
         fail("Expecting exception: NullPointerException");
       } catch(NullPointerException e) {
       }
@@ -72,8 +72,8 @@ public class DOMNFeSignatureHandlerEvoSuiteTest {
   @Test
   public void test3()  throws Throwable  {
       DOMNFeSignatureHandler dOMNFeSignatureHandler0 = new DOMNFeSignatureHandler();
-      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("(3dXd,\u0002w!bXE5'd5");
+      IIOMetadataNode iIOMetadataNode0 = new IIOMetadataNode("+");
       DOMStructure dOMStructure0 = new DOMStructure((Node) iIOMetadataNode0);
-      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "3Pcaoy~(JT\"[Y#:P1;");
+      dOMNFeSignatureHandler0.sign((XMLStructure) dOMStructure0, "");
   }
 }
