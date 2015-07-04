@@ -61,10 +61,10 @@ public class XmlElement extends Observable implements Cloneable {
      * Constructor
      *  
      */
-<span class="fc" id="L64">    public XmlElement() {</span>
-<span class="fc" id="L65">        subElements = new Vector&lt;XmlElement&gt;();</span>
-<span class="fc" id="L66">        this.attributes = new Hashtable&lt;String, String&gt;(10);</span>
-<span class="fc" id="L67">    }</span>
+<span class="nc" id="L64">    public XmlElement() {</span>
+<span class="nc" id="L65">        subElements = new Vector&lt;XmlElement&gt;();</span>
+<span class="nc" id="L66">        this.attributes = new Hashtable&lt;String, String&gt;(10);</span>
+<span class="nc" id="L67">    }</span>
 
     /**
      * **
@@ -75,12 +75,12 @@ public class XmlElement extends Observable implements Cloneable {
      *            Name
      *  
      */
-<span class="fc" id="L78">    public XmlElement(String name) {</span>
-<span class="fc" id="L79">        this.name = name;</span>
-<span class="fc" id="L80">        this.attributes = new Hashtable&lt;String, String&gt;(10);</span>
-<span class="fc" id="L81">        subElements = new Vector&lt;XmlElement&gt;();</span>
-<span class="fc" id="L82">        data = &quot;&quot;;</span>
-<span class="fc" id="L83">    }</span>
+<span class="nc" id="L78">    public XmlElement(String name) {</span>
+<span class="nc" id="L79">        this.name = name;</span>
+<span class="nc" id="L80">        this.attributes = new Hashtable&lt;String, String&gt;(10);</span>
+<span class="nc" id="L81">        subElements = new Vector&lt;XmlElement&gt;();</span>
+<span class="nc" id="L82">        data = &quot;&quot;;</span>
+<span class="nc" id="L83">    }</span>
 
     /**
      * **
@@ -146,7 +146,7 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public String getAttribute(String name) {
-<span class="fc" id="L149">        return ((String) attributes.get(name));</span>
+<span class="nc" id="L149">        return ((String) attributes.get(name));</span>
     }
 
     public String getAttribute(String name, String defaultValue) {
@@ -166,7 +166,7 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public Hashtable&lt;String, String&gt; getAttributes() {
-<span class="fc" id="L169">        return attributes;</span>
+<span class="nc" id="L169">        return attributes;</span>
     }
 
     /**
@@ -200,26 +200,26 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public boolean addElement(XmlElement e) {
-<span class="fc" id="L203">        e.setParent(this);</span>
+<span class="nc" id="L203">        e.setParent(this);</span>
 
-<span class="fc" id="L205">        return (subElements.add(e));</span>
+<span class="nc" id="L205">        return (subElements.add(e));</span>
     }
 
     public XmlElement removeElement(XmlElement e) {
-<span class="fc" id="L209">        XmlElement child = null;</span>
+<span class="nc" id="L209">        XmlElement child = null;</span>
 
-<span class="fc bfc" id="L211" title="All 2 branches covered.">        for (int i = 0; i &lt; subElements.size(); i++) {</span>
-<span class="fc" id="L212">            child = (XmlElement) subElements.get(i);</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        for (int i = 0; i &lt; subElements.size(); i++) {</span>
+<span class="nc" id="L212">            child = (XmlElement) subElements.get(i);</span>
 
             // FIXME -- This will most likely not work.
             //          You want the element removed if the contents are the same
             //          Not just if the element reference is the same.
-<span class="fc bfc" id="L217" title="All 2 branches covered.">            if (child == e) {</span>
-<span class="fc" id="L218">                subElements.remove(i);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            if (child == e) {</span>
+<span class="nc" id="L218">                subElements.remove(i);</span>
             }
         }
 
-<span class="fc" id="L222">        return (child);</span>
+<span class="nc" id="L222">        return (child);</span>
     }
 
     public XmlElement removeElement(int index) {
@@ -239,19 +239,19 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public void removeFromParent() {
-<span class="pc bpc" id="L242" title="1 of 2 branches missed.">        if (parent == null) {</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">        if (parent == null) {</span>
 <span class="nc" id="L243">            return;</span>
         }
 
-<span class="fc" id="L246">        parent.removeElement(this);</span>
-<span class="fc" id="L247">        parent = null;</span>
-<span class="fc" id="L248">    }</span>
+<span class="nc" id="L246">        parent.removeElement(this);</span>
+<span class="nc" id="L247">        parent = null;</span>
+<span class="nc" id="L248">    }</span>
 
     public void append(XmlElement e) {
-<span class="fc" id="L251">        e.removeFromParent();</span>
+<span class="nc" id="L251">        e.removeFromParent();</span>
 
-<span class="fc" id="L253">        addElement(e);</span>
-<span class="fc" id="L254">    }</span>
+<span class="nc" id="L253">        addElement(e);</span>
+<span class="nc" id="L254">    }</span>
 
     /**
      * 
@@ -339,11 +339,11 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public XmlElement addSubElement(String path) {
-<span class="fc" id="L342">        XmlElement parent = this;</span>
+<span class="nc" id="L342">        XmlElement parent = this;</span>
         XmlElement child;
         String name;
 
-<span class="pc bpc" id="L346" title="1 of 2 branches missed.">        while (path.indexOf('.') != -1) {</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">        while (path.indexOf('.') != -1) {</span>
 <span class="nc" id="L347">            name = path.substring(0, path.indexOf('.'));</span>
 <span class="nc" id="L348">            path = path.substring(path.indexOf('.') + 1);</span>
 
@@ -362,10 +362,10 @@ public class XmlElement extends Observable implements Cloneable {
 
         }
 
-<span class="fc" id="L365">        child = new XmlElement(path);</span>
-<span class="fc" id="L366">        parent.addElement(child);</span>
+<span class="nc" id="L365">        child = new XmlElement(path);</span>
+<span class="nc" id="L366">        parent.addElement(child);</span>
 
-<span class="fc" id="L368">        return child;</span>
+<span class="nc" id="L368">        return child;</span>
     }
 
     /**
@@ -377,10 +377,10 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public XmlElement addSubElement(XmlElement e) {
-<span class="fc" id="L380">        e.setParent(this);</span>
-<span class="fc" id="L381">        subElements.add(e);</span>
+<span class="nc" id="L380">        e.setParent(this);</span>
+<span class="nc" id="L381">        subElements.add(e);</span>
 
-<span class="fc" id="L383">        return e;</span>
+<span class="nc" id="L383">        return e;</span>
     }
 
     /**
@@ -393,12 +393,12 @@ public class XmlElement extends Observable implements Cloneable {
      *            String Data for this element
      */
     public XmlElement addSubElement(String name, String data) {
-<span class="fc" id="L396">        XmlElement e = new XmlElement(name);</span>
-<span class="fc" id="L397">        e.setData(data);</span>
-<span class="fc" id="L398">        e.setParent(this);</span>
-<span class="fc" id="L399">        subElements.add(e);</span>
+<span class="nc" id="L396">        XmlElement e = new XmlElement(name);</span>
+<span class="nc" id="L397">        e.setData(data);</span>
+<span class="nc" id="L398">        e.setParent(this);</span>
+<span class="nc" id="L399">        subElements.add(e);</span>
 
-<span class="fc" id="L401">        return e;</span>
+<span class="nc" id="L401">        return e;</span>
     }
 
     /**
@@ -409,8 +409,8 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public void setParent(XmlElement parent) {
-<span class="fc" id="L412">        this.parent = parent;</span>
-<span class="fc" id="L413">    }</span>
+<span class="nc" id="L412">        this.parent = parent;</span>
+<span class="nc" id="L413">    }</span>
 
     /**
      * Gives the XmlElement containing the current element
@@ -419,7 +419,7 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public XmlElement getParent() {
-<span class="fc" id="L422">        return parent;</span>
+<span class="nc" id="L422">        return parent;</span>
     }
 
     /**
@@ -430,8 +430,8 @@ public class XmlElement extends Observable implements Cloneable {
      *  
      */
     public void setData(String d) {
-<span class="fc" id="L433">        data = d;</span>
-<span class="fc" id="L434">    }</span>
+<span class="nc" id="L433">        data = d;</span>
+<span class="nc" id="L434">    }</span>
 
     /**
      * Returns the data associated with the current Xml element

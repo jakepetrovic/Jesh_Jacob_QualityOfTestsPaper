@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 /**
  * The class <code>TokenTypesTest</code> contains tests for the class <code>{@link TokenTypes}</code>.
  *
- * @generatedBy CodePro at 4/8/14 10:36 AM
- * @author Jeshua
+ * @generatedBy CodePro at 7/4/15 1:00 PM
+ * @author Jesh
  * @version $Revision: 1.0 $
  */
 public class TokenTypesTest {
@@ -17,7 +17,7 @@ public class TokenTypesTest {
 	 * @throws Exception
 	 *         if the initialization fails for some reason
 	 *
-	 * @generatedBy CodePro at 4/8/14 10:36 AM
+	 * @generatedBy CodePro at 7/4/15 1:00 PM
 	 */
 	@Before
 	public void setUp()
@@ -31,7 +31,7 @@ public class TokenTypesTest {
 	 * @throws Exception
 	 *         if the clean-up fails for some reason
 	 *
-	 * @generatedBy CodePro at 4/8/14 10:36 AM
+	 * @generatedBy CodePro at 7/4/15 1:00 PM
 	 */
 	@After
 	public void tearDown()
@@ -44,7 +44,7 @@ public class TokenTypesTest {
 	 *
 	 * @param args the command line arguments
 	 *
-	 * @generatedBy CodePro at 4/8/14 10:36 AM
+	 * @generatedBy CodePro at 7/4/15 1:00 PM
 	 */
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(TokenTypesTest.class);

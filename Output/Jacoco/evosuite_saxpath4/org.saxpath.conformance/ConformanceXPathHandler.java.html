@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConformanceXPathHandler.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Ant Example</a> &gt; <a href="index.source.html" class="el_package">org.saxpath.conformance</a> &gt; <span class="el_source">ConformanceXPathHandler.java</span></div><h1>ConformanceXPathHandler.java</h1><pre class="source lang-java linenums">/*
+ * $Header: /cvsroot/saxpath/saxpath/src/java/main/org/saxpath/conformance/ConformanceXPathHandler.java,v 1.8 2002/04/26 17:05:34 jstrachan Exp $
+ * $Revision: 1.8 $
+ * $Date: 2002/04/26 17:05:34 $
+ *
+ * ====================================================================
+ *
+ * Copyright (C) 2000-2002 werken digital.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions, and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions, and the disclaimer that follows 
+ *    these conditions in the documentation and/or other materials 
+ *    provided with the distribution.
+ *
+ * 3. The name &quot;SAXPath&quot; must not be used to endorse or promote products
+ *    derived from this software without prior written permission.  For
+ *    written permission, please contact license@saxpath.org.
+ * 
+ * 4. Products derived from this software may not be called &quot;SAXPath&quot;, nor
+ *    may &quot;SAXPath&quot; appear in their name, without prior written permission
+ *    from the SAXPath Project Management (pm@saxpath.org).
+ * 
+ * In addition, we request (but do not require) that you include in the 
+ * end-user documentation provided with the redistribution and/or in the 
+ * software itself an acknowledgement equivalent to the following:
+ *     &quot;This product includes software developed by the
+ *      SAXPath Project (http://www.saxpath.org/).&quot;
+ * Alternatively, the acknowledgment may be graphical using the logos 
+ * available at http://www.saxpath.org/
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE SAXPath AUTHORS OR THE PROJECT
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * ====================================================================
+ * This software consists of voluntary contributions made by many 
+ * individuals on behalf of the SAXPath Project and was originally 
+ * created by bob mcwhirter &lt;bob@werken.com&gt; and 
+ * James Strachan &lt;jstrachan@apache.org&gt;.  For more information on the 
+ * SAXPath Project, please see &lt;http://www.saxpath.org/&gt;.
+ * 
+ * $Id: ConformanceXPathHandler.java,v 1.8 2002/04/26 17:05:34 jstrachan Exp $
+ */
+
+
+
+package org.saxpath.conformance;
+
+import org.saxpath.XPathHandler;
+
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Iterator;
+
+public class ConformanceXPathHandler implements XPathHandler
+{
+    private List events;
+
+    public ConformanceXPathHandler()
+<span class="fc" id="L77">    {</span>
+<span class="fc" id="L78">        this.events = new LinkedList();</span>
+<span class="fc" id="L79">    }</span>
+
+    public void startXPath()
+    {
+<span class="fc" id="L83">        addEvent( &quot;startXPath()&quot; );</span>
+<span class="fc" id="L84">    }</span>
+
+    public void endXPath()
+    {
+<span class="fc" id="L88">        addEvent( &quot;endXPath()&quot; );</span>
+<span class="fc" id="L89">    }</span>
+
+    public void startPathExpr()
+    {
+<span class="fc" id="L93">        addEvent( &quot;startPathExpr()&quot; );</span>
+<span class="fc" id="L94">    }</span>
+
+    public void endPathExpr()
+    {
+<span class="fc" id="L98">        addEvent( &quot;endPathExpr()&quot; );</span>
+<span class="fc" id="L99">    }</span>
+
+    public void startAbsoluteLocationPath()
+    {
+<span class="fc" id="L103">        addEvent( &quot;startAbsoluteLocationPath()&quot; );</span>
+<span class="fc" id="L104">    }</span>
+    public void endAbsoluteLocationPath()
+    {
+<span class="fc" id="L107">        addEvent( &quot;endAbsoluteLocationPath()&quot; );</span>
+<span class="fc" id="L108">    }</span>
+
+    public void startRelativeLocationPath()
+    {
+<span class="fc" id="L112">        addEvent( &quot;startRelativeLocationPath()&quot; );</span>
+<span class="fc" id="L113">    }</span>
+
+    public void endRelativeLocationPath()
+    {
+<span class="fc" id="L117">        addEvent( &quot;endRelativeLocationPath()&quot; );</span>
+<span class="fc" id="L118">    }</span>
+
+    public void startNameStep(int axis,
+                              String prefix,
+                              String localName)
+    {
+<span class="fc" id="L124">        addEvent( &quot;startNameStep(&quot; + axis + &quot;, \&quot;&quot; + prefix + &quot;\&quot;, \&quot;&quot; + localName + &quot;\&quot;)&quot; );</span>
+<span class="fc" id="L125">    }</span>
+
+    public void endNameStep()
+    {
+<span class="fc" id="L129">        addEvent( &quot;endNameStep()&quot; );</span>
+<span class="fc" id="L130">    }</span>
+
+    public void startTextNodeStep(int axis)
+    {
+<span class="fc" id="L134">        addEvent( &quot;startTextNodeStep(&quot; + axis + &quot;)&quot; );</span>
+<span class="fc" id="L135">    }</span>
+    public void endTextNodeStep()
+    {
+<span class="fc" id="L138">        addEvent( &quot;endTextNodeStep()&quot; );</span>
+<span class="fc" id="L139">    }</span>
+
+    public void startCommentNodeStep(int axis)
+    {
+<span class="fc" id="L143">        addEvent( &quot;startCommentNodeStep(&quot; + axis + &quot;)&quot; );</span>
+<span class="fc" id="L144">    }</span>
+
+    public void endCommentNodeStep()
+    {
+<span class="fc" id="L148">        addEvent( &quot;endCommentNodeStep()&quot; );</span>
+<span class="fc" id="L149">    }</span>
+
+    public void startAllNodeStep(int axis)
+    {
+<span class="fc" id="L153">        addEvent( &quot;startAllNodeStep(&quot; + axis + &quot;)&quot; );</span>
+<span class="fc" id="L154">    }</span>
+
+    public void endAllNodeStep()
+    {
+<span class="fc" id="L158">        addEvent( &quot;endAllNodeStep()&quot; );</span>
+<span class="fc" id="L159">    }</span>
+
+    public void startProcessingInstructionNodeStep(int axis,
+                                                   String name)
+    {
+<span class="fc" id="L164">        addEvent( &quot;startProcessingInstructionNodeStep(&quot; + axis + &quot;, \&quot;&quot; + name + &quot;\&quot;)&quot; );</span>
+<span class="fc" id="L165">    }</span>
+    public void endProcessingInstructionNodeStep()
+    {
+<span class="fc" id="L168">        addEvent( &quot;endProcessingInstructionNodeStep()&quot; );</span>
+<span class="fc" id="L169">    }</span>
+
+    public void startPredicate()
+    {
+<span class="fc" id="L173">        addEvent( &quot;startPredicate()&quot; );</span>
+<span class="fc" id="L174">    }</span>
+
+    public void endPredicate()
+    {
+<span class="fc" id="L178">        addEvent( &quot;endPredicate()&quot; );</span>
+<span class="fc" id="L179">    }</span>
+
+    public void startFilterExpr()
+    {
+<span class="fc" id="L183">        addEvent( &quot;startFilterExpr()&quot; );</span>
+<span class="fc" id="L184">    }</span>
+
+    public void endFilterExpr()
+    {
+<span class="fc" id="L188">        addEvent( &quot;endFilterExpr()&quot; );</span>
+<span class="fc" id="L189">    }</span>
+
+    public void startOrExpr()
+    {
+<span class="fc" id="L193">        addEvent( &quot;startOrExpr()&quot; );</span>
+<span class="fc" id="L194">    }</span>
+
+    public void endOrExpr(boolean create)
+    {
+<span class="fc" id="L198">        addEvent( &quot;endOrExpr(&quot; + create + &quot;)&quot; );</span>
+<span class="fc" id="L199">    }</span>
+
+    public void startAndExpr()
+    {
+<span class="fc" id="L203">        addEvent( &quot;startAndExpr()&quot; );</span>
+<span class="fc" id="L204">    }</span>
+
+    public void endAndExpr(boolean create)
+    {
+<span class="fc" id="L208">        addEvent( &quot;endAndExpr(&quot; + create + &quot;)&quot; );</span>
+<span class="fc" id="L209">    }</span>
+
+    public void startEqualityExpr()
+    {
+<span class="fc" id="L213">        addEvent( &quot;startEqualityExpr()&quot; );</span>
+<span class="fc" id="L214">    }</span>
+
+    public void endEqualityExpr(int operator)
+    {
+<span class="fc" id="L218">        addEvent( &quot;endEqualityExpr(&quot; + operator + &quot;)&quot; );</span>
+<span class="fc" id="L219">    }</span>
+
+    public void startRelationalExpr()
+    {
+<span class="fc" id="L223">        addEvent( &quot;startRelationalExpr()&quot; );</span>
+<span class="fc" id="L224">    }</span>
+
+    public void endRelationalExpr(int operator)
+    {
+<span class="fc" id="L228">        addEvent( &quot;endRelationalExpr(&quot; + operator + &quot;)&quot; );</span>
+<span class="fc" id="L229">    }</span>
+
+    public void startAdditiveExpr()
+    {
+<span class="fc" id="L233">        addEvent( &quot;startAdditiveExpr()&quot; );</span>
+<span class="fc" id="L234">    }</span>
+
+    public void endAdditiveExpr(int operator)
+    {
+<span class="fc" id="L238">        addEvent( &quot;endAdditiveExpr(&quot; + operator + &quot;)&quot; );</span>
+<span class="fc" id="L239">    }</span>
+
+    public void startMultiplicativeExpr()
+    {
+<span class="fc" id="L243">        addEvent( &quot;startMultiplicativeExpr()&quot; );</span>
+<span class="fc" id="L244">    }</span>
+
+    public void endMultiplicativeExpr(int operator)
+    {
+<span class="fc" id="L248">        addEvent( &quot;endMultiplicativeExpr(&quot; + operator + &quot;)&quot; );</span>
+<span class="fc" id="L249">    }</span>
+
+    public void startUnaryExpr()
+    {
+<span class="fc" id="L253">        addEvent( &quot;startUnaryExpr()&quot; );</span>
+<span class="fc" id="L254">    }</span>
+
+    public void endUnaryExpr(int operator)
+    {
+<span class="fc" id="L258">        addEvent( &quot;endUnaryExpr(&quot; + operator + &quot;)&quot; );</span>
+<span class="fc" id="L259">    }</span>
+
+    public void startUnionExpr()
+    {
+<span class="fc" id="L263">        addEvent( &quot;startUnionExpr()&quot; );</span>
+<span class="fc" id="L264">    }</span>
+
+    public void endUnionExpr(boolean create)
+    {
+<span class="fc" id="L268">        addEvent( &quot;endUnionExpr(&quot; + create + &quot;)&quot; );</span>
+<span class="fc" id="L269">    }</span>
+
+    public void number(int number)
+    {
+<span class="fc" id="L273">        addEvent( &quot;number(&quot; + number + &quot;)&quot; );</span>
+<span class="fc" id="L274">    }</span>
+
+    public void number(double number)
+    {
+<span class="fc" id="L278">        addEvent( &quot;number(&quot; + number + &quot;)&quot; );</span>
+<span class="fc" id="L279">    }</span>
+
+    public void literal(String literal)
+    {
+<span class="fc" id="L283">        addEvent( &quot;literal(\&quot;&quot; + literal + &quot;\&quot;)&quot; );</span>
+<span class="fc" id="L284">    }</span>
+
+    public void variableReference(String prefix,
+                                  String variableName)
+    {
+<span class="fc" id="L289">        addEvent( &quot;variableReference(\&quot;&quot; + prefix + &quot;:&quot; + variableName + &quot;\&quot;)&quot; );</span>
+<span class="fc" id="L290">    }</span>
+
+    public void startFunction(String prefix,
+                              String functionName)
+    {
+<span class="fc" id="L295">        addEvent( &quot;startFunction(\&quot;&quot; + prefix + &quot;:&quot; + functionName + &quot;\&quot;)&quot; );</span>
+<span class="fc" id="L296">    }</span>
+
+    public void endFunction()
+    {
+<span class="fc" id="L300">        addEvent( &quot;endFunction()&quot; );</span>
+<span class="fc" id="L301">    }</span>
+
+    private void addEvent(String eventStr)
+    {
+<span class="fc" id="L305">        this.events.add( eventStr );</span>
+<span class="fc" id="L306">    }</span>
+
+    public boolean equals(Object thatObj)
+    {
+<span class="fc bfc" id="L310" title="All 2 branches covered.">        if ( thatObj instanceof ConformanceXPathHandler )</span>
+        {
+<span class="fc" id="L312">            ConformanceXPathHandler that = (ConformanceXPathHandler) thatObj;</span>
+
+<span class="fc" id="L314">            return ( this.events.equals( that.events ) );</span>
+        }
+
+<span class="fc" id="L317">        return false;</span>
+    }
+
+    public String toString()
+    {
+<span class="fc" id="L322">        Iterator eventIter = this.events.iterator();</span>
+<span class="fc" id="L323">        int      i = 0;</span>
+
+<span class="fc" id="L325">        StringBuffer buf = new StringBuffer();</span>
+
+<span class="fc bfc" id="L327" title="All 2 branches covered.">        while( eventIter.hasNext() )</span>
+        {
+<span class="fc" id="L329">            buf.append(&quot;(&quot;).append(i).append(&quot;) &quot;).append( eventIter.next().toString() ).append(&quot;\n&quot;);</span>
+<span class="fc" id="L330">            ++i;</span>
+        }
+
+<span class="fc" id="L333">        return buf.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201405220205</span></div></body></html>

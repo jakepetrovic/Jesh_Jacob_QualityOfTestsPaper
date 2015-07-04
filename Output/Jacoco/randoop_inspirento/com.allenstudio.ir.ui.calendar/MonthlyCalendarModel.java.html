@@ -26,21 +26,21 @@ package com.allenstudio.ir.ui.calendar;
 public class MonthlyCalendarModel implements IMonthlyCalendarModel {
 
     /**An array keeping track of cells whether or not be marked*/
-<span class="fc" id="L29">    private boolean[] mark = null;</span>
+<span class="nc" id="L29">    private boolean[] mark = null;</span>
     
     /**Selected date(1-based)*/
     private int selectedDate;
     
-<span class="fc" id="L34">    public MonthlyCalendarModel() {</span>
+<span class="nc" id="L34">    public MonthlyCalendarModel() {</span>
         //An array of length 31 is preserved in order
         //to archieve convenience, though
         //not every month in a year has 31 days.
-<span class="fc" id="L38">        mark = new boolean[31];</span>
-<span class="fc" id="L39">    }</span>
+<span class="nc" id="L38">        mark = new boolean[31];</span>
+<span class="nc" id="L39">    }</span>
     
     public boolean isMarked(int date) {
-<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (mark != null) {</span>
-<span class="fc" id="L43">            return mark[date - 1];</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (mark != null) {</span>
+<span class="nc" id="L43">            return mark[date - 1];</span>
         }
 <span class="nc" id="L45">        return false;</span>
     }
@@ -52,7 +52,7 @@ public class MonthlyCalendarModel implements IMonthlyCalendarModel {
 <span class="nc" id="L52">    }</span>
 
     public int getSelectedDate() {
-<span class="fc" id="L55">        return selectedDate;</span>
+<span class="nc" id="L55">        return selectedDate;</span>
     }
     
     public void setSelectedDate(int date) {

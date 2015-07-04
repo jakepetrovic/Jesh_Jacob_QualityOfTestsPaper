@@ -82,50 +82,50 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
     private XPathHandler handler;
 
     public XPathReader()
-<span class="nc" id="L85">    {</span>
-<span class="nc" id="L86">        setXPathHandler( DefaultXPathHandler.getInstance() ); </span>
-<span class="nc" id="L87">    }</span>
+<span class="fc" id="L85">    {</span>
+<span class="fc" id="L86">        setXPathHandler( DefaultXPathHandler.getInstance() ); </span>
+<span class="fc" id="L87">    }</span>
 
     public void setXPathHandler(XPathHandler handler)
     {
-<span class="nc" id="L91">        this.handler = handler;</span>
-<span class="nc" id="L92">    }</span>
+<span class="fc" id="L91">        this.handler = handler;</span>
+<span class="fc" id="L92">    }</span>
 
     public XPathHandler getXPathHandler()
     {
-<span class="nc" id="L96">        return this.handler;</span>
+<span class="fc" id="L96">        return this.handler;</span>
     }
 
     public void parse(String xpath) throws SAXPathException
     {
-<span class="nc" id="L101">        setUpParse( xpath );</span>
+<span class="fc" id="L101">        setUpParse( xpath );</span>
 
-<span class="nc" id="L103">        getXPathHandler().startXPath();</span>
+<span class="fc" id="L103">        getXPathHandler().startXPath();</span>
 
-<span class="nc" id="L105">        expr();</span>
+<span class="fc" id="L105">        expr();</span>
 
-<span class="nc" id="L107">        getXPathHandler().endXPath();</span>
+<span class="fc" id="L107">        getXPathHandler().endXPath();</span>
 
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        if ( LA(1) != EOF )</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if ( LA(1) != EOF )</span>
         {
 <span class="nc" id="L111">            throwUnexpected();</span>
         }
 
-<span class="nc" id="L114">        lexer  = null;</span>
-<span class="nc" id="L115">        tokens = null;</span>
-<span class="nc" id="L116">    }</span>
+<span class="fc" id="L114">        lexer  = null;</span>
+<span class="fc" id="L115">        tokens = null;</span>
+<span class="fc" id="L116">    }</span>
 
     void setUpParse(String xpath) 
     {
-<span class="nc" id="L120">        this.tokens = new LinkedList();</span>
-<span class="nc" id="L121">        this.lexer = new XPathLexer( xpath );</span>
-<span class="nc" id="L122">    }</span>
+<span class="fc" id="L120">        this.tokens = new LinkedList();</span>
+<span class="fc" id="L121">        this.lexer = new XPathLexer( xpath );</span>
+<span class="fc" id="L122">    }</span>
 
     void pathExpr() throws SAXPathException
     {
-<span class="nc" id="L126">        getXPathHandler().startPathExpr();</span>
+<span class="fc" id="L126">        getXPathHandler().startPathExpr();</span>
 
-<span class="nc bnc" id="L128" title="All 5 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L128" title="2 of 5 branches missed.">        switch ( LA(1) )</span>
         {
             case INTEGER:
             case DOUBLE:
@@ -133,9 +133,9 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             case LEFT_PAREN:
             case DOLLAR:
             {
-<span class="nc" id="L136">                filterExpr();</span>
+<span class="fc" id="L136">                filterExpr();</span>
 
-<span class="nc bnc" id="L138" title="All 4 branches missed.">                if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH )</span>
+<span class="pc bpc" id="L138" title="2 of 4 branches missed.">                if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH )</span>
                 {
 <span class="nc" id="L140">                    locationPath( false );</span>
                 }
@@ -148,7 +148,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                   //      &amp;&amp;
                   //      ( ! isNodeTypeName( LT(1) ) ) ) )
 
-<span class="nc bnc" id="L151" title="All 8 branches missed.">                if ( ( LA(2) == LEFT_PAREN</span>
+<span class="pc bpc" id="L151" title="2 of 8 branches missed.">                if ( ( LA(2) == LEFT_PAREN</span>
                      &amp;&amp;
                        ! isNodeTypeName( LT(1) ) )
                      ||
@@ -156,9 +156,9 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                       &amp;&amp;
                       LA(4) == LEFT_PAREN) ) 
                 {
-<span class="nc" id="L159">                    filterExpr();</span>
+<span class="fc" id="L159">                    filterExpr();</span>
                     
-<span class="nc bnc" id="L161" title="All 4 branches missed.">                    if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH)</span>
+<span class="pc bpc" id="L161" title="2 of 4 branches missed.">                    if ( LA(1) == SLASH || LA(1) == DOUBLE_SLASH)</span>
                     {
 <span class="nc" id="L163">                        locationPath( false );</span>
                     }
@@ -167,8 +167,8 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 }
                 else
                 {
-<span class="nc" id="L170">                    locationPath( false );</span>
-<span class="nc" id="L171">                    break;</span>
+<span class="fc" id="L170">                    locationPath( false );</span>
+<span class="fc" id="L171">                    break;</span>
                 }
             }
             case DOT:
@@ -176,8 +176,8 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             case STAR:
             case AT:
             {
-<span class="nc" id="L179">                locationPath( false );</span>
-<span class="nc" id="L180">                break;</span>
+<span class="fc" id="L179">                locationPath( false );</span>
+<span class="fc" id="L180">                break;</span>
             }
             case SLASH:
             case DOUBLE_SLASH:
@@ -192,8 +192,8 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L195">        getXPathHandler().endPathExpr();</span>
-<span class="nc" id="L196">    }</span>
+<span class="fc" id="L195">        getXPathHandler().endPathExpr();</span>
+<span class="fc" id="L196">    }</span>
 
     void numberDouble() throws SAXPathException
     {
@@ -204,10 +204,10 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void numberInteger() throws SAXPathException
     {
-<span class="nc" id="L207">        Token token = match( INTEGER );</span>
+<span class="fc" id="L207">        Token token = match( INTEGER );</span>
             
-<span class="nc" id="L209">        getXPathHandler().number( Integer.parseInt( token.getTokenText() ) );</span>
-<span class="nc" id="L210">    }</span>
+<span class="fc" id="L209">        getXPathHandler().number( Integer.parseInt( token.getTokenText() ) );</span>
+<span class="fc" id="L210">    }</span>
 
     void literal() throws SAXPathException
     {
@@ -218,40 +218,40 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void functionCall() throws SAXPathException
     {
-<span class="nc" id="L221">        String prefix       = null;</span>
-<span class="nc" id="L222">        String functionName = null;</span>
+<span class="fc" id="L221">        String prefix       = null;</span>
+<span class="fc" id="L222">        String functionName = null;</span>
 
-<span class="nc bnc" id="L224" title="All 2 branches missed.">        if ( LA(2) == COLON )</span>
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">        if ( LA(2) == COLON )</span>
         {
 <span class="nc" id="L226">            prefix = match( IDENTIFIER ).getTokenText();</span>
 <span class="nc" id="L227">            match( COLON );</span>
         }
         else
         {
-<span class="nc" id="L231">            prefix = &quot;&quot;;</span>
+<span class="fc" id="L231">            prefix = &quot;&quot;;</span>
         }
 
-<span class="nc" id="L234">        functionName = match( IDENTIFIER ).getTokenText();</span>
+<span class="fc" id="L234">        functionName = match( IDENTIFIER ).getTokenText();</span>
 
-<span class="nc" id="L236">        getXPathHandler().startFunction( prefix,</span>
+<span class="fc" id="L236">        getXPathHandler().startFunction( prefix,</span>
                                          functionName );
 
-<span class="nc" id="L239">        match ( LEFT_PAREN );</span>
+<span class="fc" id="L239">        match ( LEFT_PAREN );</span>
 
-<span class="nc" id="L241">        arguments();</span>
+<span class="fc" id="L241">        arguments();</span>
 
-<span class="nc" id="L243">        match ( RIGHT_PAREN );</span>
+<span class="fc" id="L243">        match ( RIGHT_PAREN );</span>
 
-<span class="nc" id="L245">        getXPathHandler().endFunction();</span>
-<span class="nc" id="L246">    }</span>
+<span class="fc" id="L245">        getXPathHandler().endFunction();</span>
+<span class="fc" id="L246">    }</span>
 
     void arguments() throws SAXPathException
     {
-<span class="nc bnc" id="L250" title="All 2 branches missed.">        while ( LA(1) != RIGHT_PAREN )</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        while ( LA(1) != RIGHT_PAREN )</span>
         {
-<span class="nc" id="L252">            expr();</span>
+<span class="fc" id="L252">            expr();</span>
 
-<span class="nc bnc" id="L254" title="All 2 branches missed.">            if ( LA(1) == COMMA )</span>
+<span class="pc bpc" id="L254" title="1 of 2 branches missed.">            if ( LA(1) == COMMA )</span>
             {
 <span class="nc" id="L256">                match( COMMA );</span>
             }
@@ -260,19 +260,19 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 break;
             }
         }
-<span class="nc" id="L263">    }</span>
+<span class="fc" id="L263">    }</span>
 
     void filterExpr() throws SAXPathException
     {
 
-<span class="nc" id="L268">        getXPathHandler().startFilterExpr();</span>
+<span class="fc" id="L268">        getXPathHandler().startFilterExpr();</span>
 
-<span class="nc bnc" id="L270" title="All 7 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L270" title="4 of 7 branches missed.">        switch ( LA(1) )</span>
         {
             case INTEGER:
             {
-<span class="nc" id="L274">                numberInteger();</span>
-<span class="nc" id="L275">                break;</span>
+<span class="fc" id="L274">                numberInteger();</span>
+<span class="fc" id="L275">                break;</span>
             }
             case DOUBLE:
             {
@@ -286,15 +286,15 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
             case LEFT_PAREN:
             {
-<span class="nc" id="L289">                match( LEFT_PAREN );</span>
-<span class="nc" id="L290">                expr();</span>
-<span class="nc" id="L291">                match( RIGHT_PAREN );</span>
-<span class="nc" id="L292">                break;</span>
+<span class="fc" id="L289">                match( LEFT_PAREN );</span>
+<span class="fc" id="L290">                expr();</span>
+<span class="fc" id="L291">                match( RIGHT_PAREN );</span>
+<span class="fc" id="L292">                break;</span>
             }
             case IDENTIFIER:
             {
-<span class="nc" id="L296">                functionCall();</span>
-<span class="nc" id="L297">                break;</span>
+<span class="fc" id="L296">                functionCall();</span>
+<span class="fc" id="L297">                break;</span>
             }
             case DOLLAR:
             {
@@ -303,26 +303,26 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L306">        predicates();</span>
+<span class="fc" id="L306">        predicates();</span>
 
-<span class="nc" id="L308">        getXPathHandler().endFilterExpr();</span>
-<span class="nc" id="L309">    }</span>
+<span class="fc" id="L308">        getXPathHandler().endFilterExpr();</span>
+<span class="fc" id="L309">    }</span>
 
     void variableReference() throws SAXPathException
     {
-<span class="nc" id="L313">        match( DOLLAR );</span>
+<span class="fc" id="L313">        match( DOLLAR );</span>
 
-<span class="nc" id="L315">        String prefix       = null;</span>
-<span class="nc" id="L316">        String variableName = null;</span>
+<span class="fc" id="L315">        String prefix       = null;</span>
+<span class="fc" id="L316">        String variableName = null;</span>
 
-<span class="nc bnc" id="L318" title="All 2 branches missed.">        if ( LA(2) == COLON )</span>
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">        if ( LA(2) == COLON )</span>
         {
 <span class="nc" id="L320">            prefix = match( IDENTIFIER ).getTokenText();</span>
 <span class="nc" id="L321">            match( COLON );</span>
         }
         else
         {
-<span class="nc" id="L325">            prefix = &quot;&quot;;</span>
+<span class="fc" id="L325">            prefix = &quot;&quot;;</span>
         }
 
 <span class="nc" id="L328">        variableName = match( IDENTIFIER ).getTokenText();</span>
@@ -333,7 +333,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void locationPath(boolean isAbsolute) throws SAXPathException
     {
-<span class="nc bnc" id="L336" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L336" title="2 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case SLASH:
             case DOUBLE_SLASH:
@@ -354,8 +354,8 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             case DOT_DOT:
             case STAR:
             {
-<span class="nc" id="L357">                relativeLocationPath();</span>
-<span class="nc" id="L358">                break;</span>
+<span class="fc" id="L357">                relativeLocationPath();</span>
+<span class="fc" id="L358">                break;</span>
             }
             default:
             {
@@ -363,13 +363,13 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 break;
             }
         }
-<span class="nc" id="L366">    }</span>
+<span class="fc" id="L366">    }</span>
 
     void absoluteLocationPath() throws SAXPathException
     {
-<span class="nc" id="L370">        getXPathHandler().startAbsoluteLocationPath();</span>
+<span class="fc" id="L370">        getXPathHandler().startAbsoluteLocationPath();</span>
 
-<span class="nc bnc" id="L372" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L372" title="2 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case SLASH:
             {
@@ -418,14 +418,14 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
         
-<span class="nc" id="L421">        getXPathHandler().endAbsoluteLocationPath();</span>
-<span class="nc" id="L422">    }</span>
+<span class="fc" id="L421">        getXPathHandler().endAbsoluteLocationPath();</span>
+<span class="fc" id="L422">    }</span>
 
     void relativeLocationPath() throws SAXPathException
     {
-<span class="nc" id="L426">        getXPathHandler().startRelativeLocationPath();</span>
+<span class="fc" id="L426">        getXPathHandler().startRelativeLocationPath();</span>
 
-<span class="nc bnc" id="L428" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L428" title="2 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case SLASH:
             {
@@ -443,14 +443,14 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L446">        steps();</span>
+<span class="fc" id="L446">        steps();</span>
 
-<span class="nc" id="L448">        getXPathHandler().endRelativeLocationPath();</span>
-<span class="nc" id="L449">    }</span>
+<span class="fc" id="L448">        getXPathHandler().endRelativeLocationPath();</span>
+<span class="fc" id="L449">    }</span>
 
     void steps() throws SAXPathException
     {
-<span class="nc bnc" id="L453" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L453" title="1 of 3 branches missed.">        switch ( LA(1) )</span>
         {
 
             case DOT:
@@ -459,12 +459,12 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             case IDENTIFIER:
             case STAR:
             {
-<span class="nc" id="L462">                step( true );</span>
-<span class="nc" id="L463">                break;</span>
+<span class="fc" id="L462">                step( true );</span>
+<span class="fc" id="L463">                break;</span>
             }
             case EOF:
             {
-<span class="nc" id="L467">                return;</span>
+<span class="fc" id="L467">                return;</span>
             }
             default:
             {
@@ -475,7 +475,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
         do
         {
-<span class="nc bnc" id="L478" title="All 4 branches missed.">            if ( ( LA(1) == SLASH)</span>
+<span class="pc bpc" id="L478" title="2 of 4 branches missed.">            if ( ( LA(1) == SLASH)</span>
                  ||
                  ( LA(1) == DOUBLE_SLASH ) )
             {
@@ -498,7 +498,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
             else
             {
-<span class="nc" id="L501">                return;</span>
+<span class="fc" id="L501">                return;</span>
             }
             
 <span class="nc bnc" id="L504" title="All 2 branches missed.">            switch ( LA(1) )</span>
@@ -524,15 +524,15 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void step(boolean first) throws SAXPathException
     {
-<span class="nc" id="L527">        int axis = 0;</span>
+<span class="fc" id="L527">        int axis = 0;</span>
 
-<span class="nc bnc" id="L529" title="All 5 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L529" title="2 of 5 branches missed.">        switch ( LA(1) )</span>
         {
             case DOT:
             case DOT_DOT:
             {
-<span class="nc" id="L534">                abbrStep();</span>
-<span class="nc" id="L535">                return;</span>
+<span class="fc" id="L534">                abbrStep();</span>
+<span class="fc" id="L535">                return;</span>
             }
             case AT:
             {
@@ -541,15 +541,15 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
             case IDENTIFIER:
             {
-<span class="nc bnc" id="L544" title="All 2 branches missed.">                if ( LA(2) == DOUBLE_COLON )</span>
+<span class="pc bpc" id="L544" title="1 of 2 branches missed.">                if ( LA(2) == DOUBLE_COLON )</span>
                 {
 <span class="nc" id="L546">                    axis = axisSpecifier();</span>
                 }
                 else
                 {
-<span class="nc" id="L550">                    axis = Axis.CHILD;</span>
+<span class="fc" id="L550">                    axis = Axis.CHILD;</span>
                 }
-<span class="nc" id="L552">                break;</span>
+<span class="fc" id="L552">                break;</span>
             }
             case STAR:
             {
@@ -558,14 +558,14 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L561">        nodeTest( axis );</span>
-<span class="nc" id="L562">    }</span>
+<span class="fc" id="L561">        nodeTest( axis );</span>
+<span class="fc" id="L562">    }</span>
 
     int axisSpecifier() throws SAXPathException
     {
-<span class="nc" id="L566">        int axis = 0;</span>
+<span class="fc" id="L566">        int axis = 0;</span>
 
-<span class="nc bnc" id="L568" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L568" title="2 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case AT:
             {
@@ -591,16 +591,16 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L594">        return axis;</span>
+<span class="fc" id="L594">        return axis;</span>
     }
 
     void nodeTest(int axis) throws SAXPathException
     {
-<span class="nc bnc" id="L599" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L599" title="1 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case IDENTIFIER:
             {
-<span class="nc bnc" id="L603" title="All 2 branches missed.">                switch ( LA(2) )</span>
+<span class="pc bpc" id="L603" title="1 of 2 branches missed.">                switch ( LA(2) )</span>
                 {
                     case LEFT_PAREN:
                     {
@@ -609,8 +609,8 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                     }
                     default:
                     {
-<span class="nc" id="L612">                        nameTest( axis );</span>
-<span class="nc" id="L613">                        break;</span>
+<span class="fc" id="L612">                        nameTest( axis );</span>
+<span class="fc" id="L613">                        break;</span>
                     }
                 }
                 break;
@@ -621,7 +621,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 break;
             }
         }
-<span class="nc" id="L624">    }</span>
+<span class="fc" id="L624">    }</span>
 
     void nodeTypeTest(int axis) throws SAXPathException
     {
@@ -686,19 +686,19 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void nameTest(int axis) throws SAXPathException
     {
-<span class="nc" id="L689">        String prefix    = null;</span>
-<span class="nc" id="L690">        String localName = null;</span>
+<span class="fc" id="L689">        String prefix    = null;</span>
+<span class="fc" id="L690">        String localName = null;</span>
 
-<span class="nc bnc" id="L692" title="All 2 branches missed.">        switch ( LA(2) )</span>
+<span class="fc bfc" id="L692" title="All 2 branches covered.">        switch ( LA(2) )</span>
         {
             case COLON:
             {
-<span class="nc bnc" id="L696" title="All 2 branches missed.">                switch ( LA(1) )</span>
+<span class="pc bpc" id="L696" title="1 of 2 branches missed.">                switch ( LA(1) )</span>
                 {
                     case IDENTIFIER:
                     {
-<span class="nc" id="L700">                        prefix = match( IDENTIFIER ).getTokenText();</span>
-<span class="nc" id="L701">                        match( COLON );</span>
+<span class="fc" id="L700">                        prefix = match( IDENTIFIER ).getTokenText();</span>
+<span class="fc" id="L701">                        match( COLON );</span>
                         break;
                     }
                 }
@@ -706,12 +706,12 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
         
-<span class="nc bnc" id="L709" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L709" title="1 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case IDENTIFIER:
             {
-<span class="nc" id="L713">                localName = match( IDENTIFIER ).getTokenText();</span>
-<span class="nc" id="L714">                break;</span>
+<span class="fc" id="L713">                localName = match( IDENTIFIER ).getTokenText();</span>
+<span class="fc" id="L714">                break;</span>
             }
             case STAR:
             {
@@ -721,31 +721,31 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc bnc" id="L724" title="All 2 branches missed.">        if ( prefix == null )</span>
+<span class="fc bfc" id="L724" title="All 2 branches covered.">        if ( prefix == null )</span>
         {
-<span class="nc" id="L726">            prefix = &quot;&quot;;</span>
+<span class="fc" id="L726">            prefix = &quot;&quot;;</span>
         }
         
-<span class="nc" id="L729">        getXPathHandler().startNameStep( axis,</span>
+<span class="fc" id="L729">        getXPathHandler().startNameStep( axis,</span>
                                          prefix,
                                          localName );
 
-<span class="nc" id="L733">        predicates();</span>
+<span class="fc" id="L733">        predicates();</span>
 
-<span class="nc" id="L735">        getXPathHandler().endNameStep();</span>
-<span class="nc" id="L736">    }</span>
+<span class="fc" id="L735">        getXPathHandler().endNameStep();</span>
+<span class="fc" id="L736">    }</span>
 
     void abbrStep() throws SAXPathException
     {
-<span class="nc bnc" id="L740" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L740" title="1 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case DOT:
             {
-<span class="nc" id="L744">                match( DOT );</span>
-<span class="nc" id="L745">                getXPathHandler().startAllNodeStep( Axis.SELF );</span>
-<span class="nc" id="L746">                predicates();</span>
-<span class="nc" id="L747">                getXPathHandler().endAllNodeStep();</span>
-<span class="nc" id="L748">                break;</span>
+<span class="fc" id="L744">                match( DOT );</span>
+<span class="fc" id="L745">                getXPathHandler().startAllNodeStep( Axis.SELF );</span>
+<span class="fc" id="L746">                predicates();</span>
+<span class="fc" id="L747">                getXPathHandler().endAllNodeStep();</span>
+<span class="fc" id="L748">                break;</span>
             }
             case DOT_DOT:
             {
@@ -756,13 +756,13 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 break;
             }
         }
-<span class="nc" id="L759">    }</span>
+<span class="fc" id="L759">    }</span>
 
     void predicates() throws SAXPathException
     {
         while (true )
         {
-<span class="nc bnc" id="L765" title="All 2 branches missed.">            if ( LA(1) == LEFT_BRACKET )</span>
+<span class="pc bpc" id="L765" title="1 of 2 branches missed.">            if ( LA(1) == LEFT_BRACKET )</span>
             {
 <span class="nc" id="L767">                predicate();</span>
             }
@@ -771,7 +771,7 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
                 break;
             }
         }
-<span class="nc" id="L774">    }</span>
+<span class="fc" id="L774">    }</span>
     
     void predicate() throws SAXPathException
     {
@@ -788,23 +788,23 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 
     void predicateExpr() throws SAXPathException
     {
-<span class="nc" id="L791">        expr();</span>
-<span class="nc" id="L792">    }</span>
+<span class="fc" id="L791">        expr();</span>
+<span class="fc" id="L792">    }</span>
 
     void expr() throws SAXPathException
     {
-<span class="nc" id="L796">        orExpr();</span>
-<span class="nc" id="L797">    }</span>
+<span class="fc" id="L796">        orExpr();</span>
+<span class="fc" id="L797">    }</span>
 
     void orExpr() throws SAXPathException
     {
-<span class="nc" id="L801">        getXPathHandler().startOrExpr();</span>
+<span class="fc" id="L801">        getXPathHandler().startOrExpr();</span>
         
-<span class="nc" id="L803">        andExpr();</span>
+<span class="fc" id="L803">        andExpr();</span>
 
-<span class="nc" id="L805">        boolean create = false;</span>
+<span class="fc" id="L805">        boolean create = false;</span>
 
-<span class="nc bnc" id="L807" title="All 2 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L807" title="1 of 2 branches missed.">        switch ( LA(1) )</span>
         {
             case OR:
             {
@@ -815,18 +815,18 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L818">        getXPathHandler().endOrExpr( create );</span>
-<span class="nc" id="L819">    }</span>
+<span class="fc" id="L818">        getXPathHandler().endOrExpr( create );</span>
+<span class="fc" id="L819">    }</span>
 
     void andExpr() throws SAXPathException
     {
-<span class="nc" id="L823">        getXPathHandler().startAndExpr();</span>
+<span class="fc" id="L823">        getXPathHandler().startAndExpr();</span>
 
-<span class="nc" id="L825">        equalityExpr();</span>
+<span class="fc" id="L825">        equalityExpr();</span>
 
-<span class="nc" id="L827">        boolean create = false;</span>
+<span class="fc" id="L827">        boolean create = false;</span>
 
-<span class="nc bnc" id="L829" title="All 2 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L829" title="1 of 2 branches missed.">        switch ( LA(1) )</span>
         {
             case AND:
             {
@@ -837,25 +837,25 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L840">        getXPathHandler().endAndExpr( create );</span>
-<span class="nc" id="L841">    }</span>
+<span class="fc" id="L840">        getXPathHandler().endAndExpr( create );</span>
+<span class="fc" id="L841">    }</span>
 
     void equalityExpr() throws SAXPathException
     {
-<span class="nc" id="L845">        getXPathHandler().startEqualityExpr();</span>
+<span class="fc" id="L845">        getXPathHandler().startEqualityExpr();</span>
 
-<span class="nc" id="L847">        relationalExpr();</span>
+<span class="fc" id="L847">        relationalExpr();</span>
 
-<span class="nc" id="L849">        int operator = Operator.NO_OP;</span>
+<span class="fc" id="L849">        int operator = Operator.NO_OP;</span>
 
-<span class="nc bnc" id="L851" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L851" title="1 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case EQUALS:
             {
-<span class="nc" id="L855">                match( EQUALS );</span>
-<span class="nc" id="L856">                equalityExpr();</span>
-<span class="nc" id="L857">                operator = Operator.EQUALS;</span>
-<span class="nc" id="L858">                break;</span>
+<span class="fc" id="L855">                match( EQUALS );</span>
+<span class="fc" id="L856">                equalityExpr();</span>
+<span class="fc" id="L857">                operator = Operator.EQUALS;</span>
+<span class="fc" id="L858">                break;</span>
             }
             case NOT_EQUALS:
             {
@@ -866,18 +866,18 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L869">        getXPathHandler().endEqualityExpr( operator );</span>
-<span class="nc" id="L870">    }</span>
+<span class="fc" id="L869">        getXPathHandler().endEqualityExpr( operator );</span>
+<span class="fc" id="L870">    }</span>
 
     void relationalExpr() throws SAXPathException
     {
-<span class="nc" id="L874">        getXPathHandler().startRelationalExpr();</span>
+<span class="fc" id="L874">        getXPathHandler().startRelationalExpr();</span>
 
-<span class="nc" id="L876">        additiveExpr();</span>
+<span class="fc" id="L876">        additiveExpr();</span>
 
-<span class="nc" id="L878">        int operator = Operator.NO_OP;</span>
+<span class="fc" id="L878">        int operator = Operator.NO_OP;</span>
 
-<span class="nc bnc" id="L880" title="All 5 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L880" title="4 of 5 branches missed.">        switch ( LA(1) )</span>
         {
             case LESS_THAN:
             {
@@ -909,18 +909,18 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L912">        getXPathHandler().endRelationalExpr( operator );</span>
-<span class="nc" id="L913">    }</span>
+<span class="fc" id="L912">        getXPathHandler().endRelationalExpr( operator );</span>
+<span class="fc" id="L913">    }</span>
 
     void additiveExpr() throws SAXPathException
     {
-<span class="nc" id="L917">        getXPathHandler().startAdditiveExpr();</span>
+<span class="fc" id="L917">        getXPathHandler().startAdditiveExpr();</span>
 
-<span class="nc" id="L919">        multiplicativeExpr();</span>
+<span class="fc" id="L919">        multiplicativeExpr();</span>
 
-<span class="nc" id="L921">        int operator = Operator.NO_OP;</span>
+<span class="fc" id="L921">        int operator = Operator.NO_OP;</span>
 
-<span class="nc bnc" id="L923" title="All 3 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L923" title="2 of 3 branches missed.">        switch ( LA(1) )</span>
         {
             case PLUS:
             {
@@ -938,25 +938,25 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L941">        getXPathHandler().endAdditiveExpr( operator );</span>
-<span class="nc" id="L942">    }</span>
+<span class="fc" id="L941">        getXPathHandler().endAdditiveExpr( operator );</span>
+<span class="fc" id="L942">    }</span>
 
     void multiplicativeExpr() throws SAXPathException
     {
-<span class="nc" id="L946">        getXPathHandler().startMultiplicativeExpr();</span>
+<span class="fc" id="L946">        getXPathHandler().startMultiplicativeExpr();</span>
 
-<span class="nc" id="L948">        unaryExpr();</span>
+<span class="fc" id="L948">        unaryExpr();</span>
 
-<span class="nc" id="L950">        int operator = Operator.NO_OP;</span>
+<span class="fc" id="L950">        int operator = Operator.NO_OP;</span>
 
-<span class="nc bnc" id="L952" title="All 4 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L952" title="2 of 4 branches missed.">        switch ( LA(1) )</span>
         {
             case STAR:
             {
-<span class="nc" id="L956">                match( STAR );</span>
-<span class="nc" id="L957">                multiplicativeExpr();</span>
-<span class="nc" id="L958">                operator = Operator.MULTIPLY;</span>
-<span class="nc" id="L959">                break;                </span>
+<span class="fc" id="L956">                match( STAR );</span>
+<span class="fc" id="L957">                multiplicativeExpr();</span>
+<span class="fc" id="L958">                operator = Operator.MULTIPLY;</span>
+<span class="fc" id="L959">                break;                </span>
             }
             case DIV:
             {
@@ -974,16 +974,16 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
         }
 
-<span class="nc" id="L977">        getXPathHandler().endMultiplicativeExpr( operator );</span>
-<span class="nc" id="L978">    }</span>
+<span class="fc" id="L977">        getXPathHandler().endMultiplicativeExpr( operator );</span>
+<span class="fc" id="L978">    }</span>
 
     void unaryExpr() throws SAXPathException
     {
-<span class="nc" id="L982">        getXPathHandler().startUnaryExpr();</span>
+<span class="fc" id="L982">        getXPathHandler().startUnaryExpr();</span>
 
-<span class="nc" id="L984">        int operator = Operator.NO_OP;</span>
+<span class="fc" id="L984">        int operator = Operator.NO_OP;</span>
 
-<span class="nc bnc" id="L986" title="All 2 branches missed.">        switch ( LA(1) )</span>
+<span class="pc bpc" id="L986" title="1 of 2 branches missed.">        switch ( LA(1) )</span>
         {
             case MINUS:
             {
@@ -994,76 +994,76 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
             }
             default:
             {
-<span class="nc" id="L997">                unionExpr();</span>
+<span class="fc" id="L997">                unionExpr();</span>
                 break;
             }
         }
 
-<span class="nc" id="L1002">        getXPathHandler().endUnaryExpr( operator );</span>
-<span class="nc" id="L1003">    }</span>
+<span class="fc" id="L1002">        getXPathHandler().endUnaryExpr( operator );</span>
+<span class="fc" id="L1003">    }</span>
 
     void unionExpr() throws SAXPathException
     {
-<span class="nc" id="L1007">        getXPathHandler().startUnionExpr();</span>
+<span class="fc" id="L1007">        getXPathHandler().startUnionExpr();</span>
 
-<span class="nc" id="L1009">        pathExpr();</span>
+<span class="fc" id="L1009">        pathExpr();</span>
 
-<span class="nc" id="L1011">        boolean create = false;</span>
+<span class="fc" id="L1011">        boolean create = false;</span>
 
-<span class="nc bnc" id="L1013" title="All 2 branches missed.">        switch ( LA(1) )</span>
+<span class="fc bfc" id="L1013" title="All 2 branches covered.">        switch ( LA(1) )</span>
         {
             case PIPE:
             {
-<span class="nc" id="L1017">                match( PIPE );</span>
-<span class="nc" id="L1018">                create = true;</span>
-<span class="nc" id="L1019">                expr();</span>
+<span class="fc" id="L1017">                match( PIPE );</span>
+<span class="fc" id="L1018">                create = true;</span>
+<span class="fc" id="L1019">                expr();</span>
                 break;
             }
         }
 
-<span class="nc" id="L1024">        getXPathHandler().endUnionExpr( create );</span>
-<span class="nc" id="L1025">    }</span>
+<span class="fc" id="L1024">        getXPathHandler().endUnionExpr( create );</span>
+<span class="fc" id="L1025">    }</span>
 
     Token match(int tokenType)
     {
-<span class="nc" id="L1029">        LT(1);</span>
+<span class="fc" id="L1029">        LT(1);</span>
 
-<span class="nc" id="L1031">        Token token = (Token) tokens.get( 0 );</span>
+<span class="fc" id="L1031">        Token token = (Token) tokens.get( 0 );</span>
 
-<span class="nc bnc" id="L1033" title="All 2 branches missed.">        if ( token.getTokenType() == tokenType )</span>
+<span class="fc bfc" id="L1033" title="All 2 branches covered.">        if ( token.getTokenType() == tokenType )</span>
         {
-<span class="nc" id="L1035">            tokens.removeFirst();</span>
-<span class="nc" id="L1036">            return token;</span>
+<span class="fc" id="L1035">            tokens.removeFirst();</span>
+<span class="fc" id="L1036">            return token;</span>
         }
 
         // throw an exception
 
-<span class="nc" id="L1041">        return null;</span>
+<span class="fc" id="L1041">        return null;</span>
     }
 
     int LA(int position)
     {
-<span class="nc" id="L1046">        return LT(position).getTokenType();</span>
+<span class="fc" id="L1046">        return LT(position).getTokenType();</span>
     }
 
     Token LT(int position)
     {
-<span class="nc bnc" id="L1051" title="All 2 branches missed.">        if ( tokens.size() &lt;= ( position - 1 ) )</span>
+<span class="fc bfc" id="L1051" title="All 2 branches covered.">        if ( tokens.size() &lt;= ( position - 1 ) )</span>
         {
-<span class="nc bnc" id="L1053" title="All 2 branches missed.">            for ( int i = 0 ; i &lt; position ; ++i )</span>
+<span class="fc bfc" id="L1053" title="All 2 branches covered.">            for ( int i = 0 ; i &lt; position ; ++i )</span>
             {
-<span class="nc" id="L1055">                tokens.add( lexer.nextToken() );</span>
+<span class="fc" id="L1055">                tokens.add( lexer.nextToken() );</span>
             }
         }
 
-<span class="nc" id="L1059">        return (Token) tokens.get( position - 1 );</span>
+<span class="fc" id="L1059">        return (Token) tokens.get( position - 1 );</span>
     }
 
     boolean isNodeTypeName(Token name)
     {
-<span class="nc" id="L1064">        String text = name.getTokenText();</span>
+<span class="fc" id="L1064">        String text = name.getTokenText();</span>
 
-<span class="nc bnc" id="L1066" title="All 8 branches missed.">        if ( &quot;node&quot;.equals( text )</span>
+<span class="pc bpc" id="L1066" title="4 of 8 branches missed.">        if ( &quot;node&quot;.equals( text )</span>
              ||
              &quot;comment&quot;.equals( text )
              ||
@@ -1074,15 +1074,15 @@ public class XPathReader implements org.saxpath.XPathReader, TokenTypes
 <span class="nc" id="L1074">            return true;</span>
         }
 
-<span class="nc" id="L1077">        return false;</span>
+<span class="fc" id="L1077">        return false;</span>
     }
 
     void throwSyntaxException(String message) throws SAXPathException
     {
-<span class="nc" id="L1082">        String xpath    = this.lexer.getXPath();</span>
-<span class="nc" id="L1083">        int    position = LT(1).getTokenBegin();</span>
+<span class="fc" id="L1082">        String xpath    = this.lexer.getXPath();</span>
+<span class="fc" id="L1083">        int    position = LT(1).getTokenBegin();</span>
 
-<span class="nc" id="L1085">        throw new XPathSyntaxException( xpath,</span>
+<span class="fc" id="L1085">        throw new XPathSyntaxException( xpath,</span>
                                         position,
                                         message );
     }
